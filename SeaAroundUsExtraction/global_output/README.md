@@ -30,13 +30,18 @@ For the frozen 2019 inputs:
 | Metric | Result |
 |---|---:|
 | Total catch | 99,115,685.26 tonnes |
-| Total PPR | 65,252,683,993.89 tonnes primary-production equivalent |
+| Total PPR (taxon-level, unbiased; `species.csv`) | 65,252,683,993.89 tonnes primary-production equivalent |
 | LME PPR | 57,876,694,349.93 |
 | High Seas PPR | 7,375,989,643.96 |
 | Catch-weighted TL coverage | 100% of positive catch |
 | Catch reconciliation failures | 0 |
-| Group/species PPR reconciliation failures | 0 |
-| Jensen-inequality violations | 0 |
+| `tl_coverage_complete` failures | 0 of 84 units |
+| `group_ppr_within_convexity_bound` failures | 0 of 84 units |
+
+Group PPR (`commercial.csv`, `functional.csv`) is a separate, Jensen-affected
+figure by design - see below. Recomputed directly from the migrated tables,
+summed across all 84 units, group PPR understates the taxon-level total above
+by 22.93% for commercial groups and 16.48% for functional groups.
 
 The largest regional PPR estimate is the South China Sea (`LME_036`) at
 8,070,990,713.09 tonnes primary-production equivalent (12.37% of the 84-unit
@@ -64,19 +69,27 @@ positive catch matched the 2020 supplement exactly and 53.31% matched the
 unit-specific Sea Around Us table exactly. No fallback or missing-TL assignment
 was required.
 
-## Correct and intentional Jensen-error calculations
+## Group PPR is Jensen-affected by design
 
-Species/taxon PPR is calculated first. Commercial and functional outputs then
-contain two parallel paths:
+Species/taxon PPR (`species.csv`) is calculated first and is the unbiased
+figure: each taxon's own trophic level is exponentiated, then multiplied by
+that taxon's catch. Commercial and functional group tables (`commercial.csv`,
+`functional.csv`) aggregate differently and deliberately: they take the
+catch-weighted mean TL of a group's matched taxa and exponentiate that mean
+once, then multiply by the group's matched catch.
 
-- **Correct:** sum member-taxon PPR, then derive group SPPR as
-  `PPR_correct / matched catch`.
-- **Intentional Jensen error:** calculate catch-weighted mean TL, transform it
-  to `SPPR_jensen`, then multiply by matched catch.
+Because `10 ** (TL - 1)` is convex, this catch-weighted-mean aggregation is a
+direct application of Jensen's inequality: group PPR can only ever be less
+than or equal to the sum of its member taxa's PPR, never more. The gap is the
+point - it is what makes the cost of moving from taxa to groups visible, which
+an Ecopath model cannot show on its own because it has no taxon level. The
+unbiased sum is always recoverable from `species.csv` with a `groupby`.
 
-Across all units, the Jensen shortcut underestimates correct PPR by 22.93% for
-commercial groups and 16.48% for functional groups. Each group file reports the
-difference, ratio, and percentage.
+`group_ppr_within_convexity_bound` (in `validation.csv`) asserts exactly this
+one-sided bound - group PPR minus taxon-summed PPR may not exceed floating-point
+noise - for every unit; it holds for all 84 units in this run.
+`tl_coverage_complete` asserts every taxon has a trophic level, which the group
+tables no longer report a coverage fraction for directly.
 
 ## Run or reproduce
 
@@ -124,7 +137,6 @@ global_output/
     global_summary.csv
     validation.csv
     tl_coverage.csv
-    jensen_comparison.csv
     ingestion_audit.csv
     year_availability.csv
     run_metadata.json
@@ -137,11 +149,11 @@ global_output/
       validation.csv
 ```
 
-The Excel species SPPR/PPR columns and both group aggregation paths contain live
-formulas. The corresponding CSV values are machine-readable. The executed
-`notebooks/global_validation.ipynb` report contains the ranking, catch
-reconciliation, matching coverage, Jensen comparisons, figures, and final
-assertions.
+The Excel species SPPR/PPR columns and the group aggregation contain live
+formulas. The corresponding CSV values are machine-readable. Once regenerated,
+the executed `notebooks/global_validation.ipynb` report contains the ranking,
+catch reconciliation, matching coverage, group-versus-taxon convexity checks,
+figures, and final assertions.
 
 `global_output/global_validation_executed.ipynb` and `notebooks/global_validation.ipynb`
 were removed from version control: both were executed against the pre-migration
@@ -160,8 +172,10 @@ The workflow validates:
 
 - archive structure and common-year availability;
 - raw filtered catch against standardized taxon catch;
-- species PPR against correct commercial and functional aggregation;
-- the Jensen inequality for every group;
+- every taxon has a trophic level (`tl_coverage_complete`);
+- group PPR never exceeds the taxon-summed PPR (`group_ppr_within_convexity_bound`),
+  the one-sided bound Jensen's inequality guarantees for the catch-weighted-mean-TL
+  group aggregation;
 - TL matching route, confidence, catch coverage, and missing taxa;
 - workbook formulas after reopening all 85 exported files;
 - polygon feature counts, CRS, and geometry validity.

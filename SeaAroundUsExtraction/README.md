@@ -2,7 +2,7 @@
 
 This extension retains **all 282 Sea Around Us EEZ units** and adds the earlier geographic selection rules as advisory flags. No EEZ is filtered out, and no LME is actually replaced. The previous TE=0.1 and TE=0.05 releases and the user-edited reference workbook remain unchanged.
 
-The completed analysis uses **2019**, the latest common year across all 366 EEZ/LME/High Seas archives. It contains 24,223 EEZ taxon rows, 100% catch-weighted TL matching coverage and no Jensen inequality violations. All EEZs have catch in the selected year. The sum across EEZ source units is 102,851,768.50 tonnes of catch and 66,442,175,603.65 tonnes of PPR equivalent; these are **not deduplicated world totals**.
+The completed analysis uses **2019**, the latest common year across all 366 EEZ/LME/High Seas archives. It contains 24,223 EEZ taxon rows and 100% catch-weighted TL matching coverage (`tl_coverage_complete` holds for all 282 units). The group-versus-taxon convexity bound (`group_ppr_within_convexity_bound`) also holds for all 282 units - see "PPR method and matching" below for what that check means. All EEZs have catch in the selected year. The sum across EEZ source units is 102,851,768.50 tonnes of catch and 66,442,175,603.65 tonnes of PPR equivalent; these are **not deduplicated world totals**.
 
 ## Open the results
 
@@ -51,9 +51,9 @@ TE is 0.1 throughout this release. The separate wet-weight-to-carbon divisor of 
 
 TL matching retains the existing documented hierarchy: exact 2020 supplement match; exact same-unit Sea Around Us exploited-organism match; supported genus mean; commercial-group fallback; functional-group fallback; otherwise unmatched. Source, method, confidence and reference taxon remain visible. Broad Sea Around Us taxa are not relabeled as species.
 
-For commercial and functional groups, correct PPR is the sum of matched taxon PPR, and group SPPR is that sum divided by matched catch. The deliberate Jensen shortcut uses catch-weighted mean TL before exponentiation, on the same matched-catch support. Unmatched catch is retained and reported, not treated as zero TL. Entirely unmatched groups have undefined PPR; matched taxa with zero catch have zero PPR but undefined SPPR/Jensen metrics.
+Taxon/species PPR (`species.csv`) is the unbiased figure: each taxon's own trophic level is exponentiated, then multiplied by that taxon's catch. Commercial and functional group tables (`commercial.csv`, `functional.csv`) aggregate differently and deliberately: group SPPR is the catch-weighted mean TL of the group's matched taxa, exponentiated once, then multiplied by the group's matched catch. Because `10 ** (TL - 1)` is convex, this is a direct application of Jensen's inequality - group PPR can only ever be less than or equal to the sum of its member taxa's PPR, never more - and the gap is the point: it is what the cost of moving from taxa to groups looks like, which an Ecopath model cannot show on its own because it has no taxon level. Unmatched catch is retained and reported, not treated as zero TL. Entirely unmatched groups have undefined PPR; matched taxa with zero catch have zero PPR but undefined SPPR.
 
-In this 2019 EEZ run, all matches use the exact 2020-supplement or exact same-unit Sea Around Us routes; no genus/group fallback is needed. Across EEZ source units, the Jensen shortcut underestimates correct PPR by **22.27% for commercial groups** and **14.44% for functional groups**, measured relative to correct PPR. These comparisons share the same overlapping-unit support and are not unique-world totals.
+`group_ppr_within_convexity_bound` (in `validation.csv`) asserts the one-sided bound above for every unit - group PPR minus taxon-summed PPR may not exceed floating-point noise - and it holds for all 282 units in this run. In this 2019 EEZ run, all matches use the exact 2020-supplement or exact same-unit Sea Around Us routes; no genus/group fallback is needed. Recomputed directly from the migrated tables, summed across EEZ source units, group PPR understates the taxon-summed total by **22.27% for commercial groups** and **14.44% for functional groups**. These comparisons share the same overlapping-unit support and are not unique-world totals.
 
 Catches retain all downloaded landings and discards, reported and unreported, across entities, sectors, gears and end uses. Original archives preserve every available year. The selected analysis year is the latest year common to all nonempty EEZ, LME and High Seas catch archives; empty official archives are explicitly audited and retained without constraining the year.
 
@@ -83,7 +83,7 @@ python tools/validate_eez_release.py
 python build_eez_notebook.py
 ```
 
-`--summary-only` and `--regions-only` support targeted workbook regeneration. `--resume` skips existing regional workbooks and is suitable only for resuming the same unchanged calculation; omit it after changing year, TE, source data or formulas. Run the independent validator after export. It checks catch totals, matching coverage, species and group equations, Jensen differences, every compact comparison row, spatial flag arithmetic and exported Excel cached values.
+`--summary-only` and `--regions-only` support targeted workbook regeneration. `--resume` skips existing regional workbooks and is suitable only for resuming the same unchanged calculation; omit it after changing year, TE, source data or formulas. Run the independent validator after export. It checks catch totals, matching coverage, species and group equations, the group-versus-taxon convexity bound, every compact comparison row, spatial flag arithmetic and exported Excel cached values.
 
 Regional exports may run in disjoint parallel batches using `--regions-only --shards=3 --shard=0`, then the same command with shard 1 and 2. Every batch is required; each writes its own audit. The default unsharded command still exports every region.
 
