@@ -50,7 +50,18 @@ def aggregate_groups(
     catch_column: str = "catch_tonnes",
     tl_column: str = "tl",
 ) -> pd.DataFrame:
-    """Aggregate species PPR correctly and with the intentional Jensen error."""
+    """Aggregate taxa to groups using the catch-weighted mean trophic level.
+
+    This is deliberately the Jensen-affected aggregation: the catch-weighted mean TL
+    is exponentiated once per group, rather than summing each taxon's PPR. Because
+    ``10 ** (TL - 1)`` is convex, the result understates the taxon-level sum whenever
+    a group spans more than one trophic level. That gap is the point - it is what
+    makes the cost of moving from taxa to groups visible, which an Ecopath model
+    cannot show on its own because it has no taxon level.
+
+    The correctly-aggregated value is not returned. It is exactly the sum of taxon
+    ``ppr`` within the group, recoverable from the taxon table with a ``groupby``.
+    """
 
     _validate_te(te)
     required = {group_column, catch_column, tl_column, "ppr"}
@@ -68,64 +79,34 @@ def aggregate_groups(
 
     output_columns = [
         group_column,
-        "taxon_count_total",
-        "taxon_count_matched",
-        "catch_tonnes_total",
         "catch_tonnes_matched",
-        "catch_tonnes_missing_tl",
-        "catch_coverage_fraction",
-        "sppr_correct",
-        "ppr_correct",
-        "tl_weighted_jensen",
-        "sppr_jensen",
-        "ppr_jensen",
-        "jensen_difference",
-        "jensen_ratio_correct_to_error",
-        "jensen_percent_difference",
+        "tl_weighted",
+        "sppr",
+        "ppr",
     ]
     rows: list[dict[str, Any]] = []
     for group, part in work.groupby(group_column, sort=True, dropna=False):
-        matched = part.loc[part["is_tl_matched"]].copy()
-        catch_total = float(part[catch_column].sum())
+        matched = part.loc[part["is_tl_matched"]]
         catch_matched = float(matched[catch_column].sum())
-        ppr_correct = float(matched["ppr"].sum()) if len(matched) else np.nan
 
         if catch_matched > 0:
             tl_weighted = float(
                 np.average(matched[tl_column].to_numpy(), weights=matched[catch_column].to_numpy())
             )
-            sppr_correct = ppr_correct / catch_matched
-            sppr_jensen = float(calculate_sppr(tl_weighted, te=te))
-            ppr_jensen = catch_matched * sppr_jensen
-            difference = ppr_correct - ppr_jensen
-            ratio = ppr_correct / ppr_jensen if ppr_jensen else np.nan
-            percent = difference / ppr_jensen if ppr_jensen else np.nan
+            sppr = float(calculate_sppr(tl_weighted, te=te))
+            ppr = catch_matched * sppr
         else:
             tl_weighted = np.nan
-            sppr_correct = np.nan
-            sppr_jensen = np.nan
-            ppr_jensen = np.nan
-            difference = np.nan
-            ratio = np.nan
-            percent = np.nan
+            sppr = np.nan
+            ppr = np.nan
 
         rows.append(
             {
                 group_column: group,
-                "taxon_count_total": int(len(part)),
-                "taxon_count_matched": int(len(matched)),
-                "catch_tonnes_total": catch_total,
                 "catch_tonnes_matched": catch_matched,
-                "catch_tonnes_missing_tl": catch_total - catch_matched,
-                "catch_coverage_fraction": catch_matched / catch_total if catch_total else np.nan,
-                "sppr_correct": sppr_correct,
-                "ppr_correct": ppr_correct,
-                "tl_weighted_jensen": tl_weighted,
-                "sppr_jensen": sppr_jensen,
-                "ppr_jensen": ppr_jensen,
-                "jensen_difference": difference,
-                "jensen_ratio_correct_to_error": ratio,
-                "jensen_percent_difference": percent,
+                "tl_weighted": tl_weighted,
+                "sppr": sppr,
+                "ppr": ppr,
             }
         )
     return pd.DataFrame(rows, columns=output_columns)
