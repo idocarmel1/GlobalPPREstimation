@@ -190,5 +190,36 @@ def test_summarize_pilot_ranks_units_and_calculates_pilot_fraction() -> None:
     assert summary.loc["A", "fraction_pilot_ppr"] == pytest.approx(1.0 / 11.0)
     assert summary.loc["B", "fraction_pilot_ppr"] == pytest.approx(10.0 / 11.0)
     assert summary.loc["A", "ppr_species"] == pytest.approx(
-        summary.loc["A", "ppr_commercial_correct"]
+        summary.loc["A", "ppr_commercial"]
     )
+
+
+def test_summary_has_no_corrected_or_jensen_suffixed_columns() -> None:
+    """The corrected aggregation and the _jensen suffix are both gone."""
+    species = add_species_ppr(
+        pd.DataFrame(
+            {
+                "commercial_group": ["C"],
+                "functional_group": ["F"],
+                "catch_tonnes": [10.0],
+                "tl": [2.0],
+            }
+        )
+    )
+    results = {
+        "A": {
+            "name": "A unit",
+            "region_type": "lme",
+            "year": 2019,
+            "species": species,
+            "commercial": aggregate_groups(species, "commercial_group"),
+            "functional": aggregate_groups(species, "functional_group"),
+        }
+    }
+    summary = summarize_units(results, scope_label="pilot")
+
+    assert "ppr_species" in summary.columns
+    assert "ppr_commercial" in summary.columns
+    assert "ppr_functional" in summary.columns
+    assert not [c for c in summary.columns if c.endswith("_correct")]
+    assert not [c for c in summary.columns if c.endswith("_jensen")]

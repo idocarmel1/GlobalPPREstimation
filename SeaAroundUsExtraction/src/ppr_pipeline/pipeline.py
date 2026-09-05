@@ -147,10 +147,10 @@ def summarize_units(
                 "taxa_count": int(len(species)),
                 "matched_taxa_count": int(species["tl"].notna().sum()),
                 "ppr_species": ppr_species,
-                "ppr_commercial_correct": float(commercial["ppr_correct"].sum()),
-                "ppr_functional_correct": float(functional["ppr_correct"].sum()),
-                "ppr_commercial_jensen": float(commercial["ppr_jensen"].sum()),
-                "ppr_functional_jensen": float(functional["ppr_jensen"].sum()),
+                # Group values use the catch-weighted mean TL, so they are the
+                # Jensen-affected aggregation. ppr_species is the taxon-level truth.
+                "ppr_commercial": float(commercial["ppr"].sum()),
+                "ppr_functional": float(functional["ppr"].sum()),
             }
         )
     summary = pd.DataFrame(rows)
@@ -373,16 +373,12 @@ def run_analysis(
     summary = summarize_units(results, scope_label=scope_label)
     validation_table = pd.concat(validations, ignore_index=True)
     coverage = _coverage_table(all_species)
-    commercial_all = _combined_group_table(results, "commercial")
-    functional_all = _combined_group_table(results, "functional")
-    jensen = pd.concat([commercial_all, functional_all], ignore_index=True)
 
     summary.to_csv(
         table_dir / f"{scope_label}_summary.csv", index=False, encoding="utf-8-sig"
     )
     validation_table.to_csv(table_dir / "validation.csv", index=False, encoding="utf-8-sig")
     coverage.to_csv(table_dir / "tl_coverage.csv", index=False, encoding="utf-8-sig")
-    jensen.to_csv(table_dir / "jensen_comparison.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(ingestion_audits).to_csv(
         table_dir / "ingestion_audit.csv", index=False, encoding="utf-8-sig"
     )
