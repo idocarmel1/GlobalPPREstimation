@@ -13,6 +13,14 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Named, rather than inlined as string literals in main(), so a test can assert
+# these are still checks that validate_region actually emits. When
+# ppr_pipeline.validation.validate_region's check names change, that test - not a
+# silently-narrowed pandas filter - is what should fail.
+BOOLEAN_CHECK_NAMES = ("catch_reconciled", "tl_coverage_complete")
+JENSEN_GAP_CHECK_NAMES = ("commercial_ppr_difference", "functional_ppr_difference")
+QUERIED_CHECK_NAMES = BOOLEAN_CHECK_NAMES + JENSEN_GAP_CHECK_NAMES
+
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -33,19 +41,20 @@ def main() -> None:
     summary = pd.read_csv(output / "tables" / f"{args.scope_label}_summary.csv")
     validation = pd.read_csv(output / "tables" / "validation.csv")
     boolean = validation.loc[
-        validation["check"].isin(
-            [
-                "catch_reconciled",
-                "commercial_ppr_reconciled",
-                "functional_ppr_reconciled",
-            ]
-        ),
+        validation["check"].isin(BOOLEAN_CHECK_NAMES),
         "value",
     ].astype(str).str.lower().isin(["true", "1", "1.0"])
-    violations = pd.to_numeric(
-        validation.loc[
-            validation["check"].str.endswith("jensen_violations"), "value"
-        ]
+    # commercial_ppr_difference / functional_ppr_difference are the group PPR minus
+    # the taxon-summed PPR (see ppr_pipeline.validation.validate_region). With the
+    # corrected group aggregation removed, these differences are the Jensen gap
+    # itself, so their sums are what is worth reporting here now - not a violation
+    # count against a comparison that no longer exists.
+    commercial_check, functional_check = JENSEN_GAP_CHECK_NAMES
+    commercial_ppr_gap = float(
+        pd.to_numeric(validation.loc[validation["check"] == commercial_check, "value"]).sum()
+    )
+    functional_ppr_gap = float(
+        pd.to_numeric(validation.loc[validation["check"] == functional_check, "value"]).sum()
     )
     files = []
     destination = output / "deliverable_manifest.json"
@@ -79,7 +88,8 @@ def main() -> None:
         ),
         "validation": {
             "reconciliation_failures": int((~boolean).sum()),
-            "jensen_violations": int(violations.sum()),
+            "total_commercial_ppr_difference": commercial_ppr_gap,
+            "total_functional_ppr_difference": functional_ppr_gap,
         },
         "workbook_count": sum(item["path"].endswith(".xlsx") for item in files),
         "files": files,
