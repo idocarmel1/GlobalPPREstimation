@@ -42,6 +42,7 @@
 | `SeaAroundUsExtraction/tests/test_annual_catch.py` | tests for the above | 10 |
 | `SeaAroundUsExtraction/tools/run_distillation.py` | batch-run distillation over every archive | 11 |
 | `skills/ewe-species-to-group-mapper/` | renamed skill source | 12 |
+| `skills/build_skill.py` | deterministic `.skill` builder (explicit membership, not exclusion globs) | 12 |
 | `skills/ewe-species-to-group-mapper.skill` | packaged zip | 12 |
 | `README.md` | root pipeline documentation | 13 |
 
@@ -120,6 +121,9 @@ __pycache__/
 # Excel lock files, created whenever a workbook anywhere in the tree is open
 ~$*
 
+# Subagent-driven-development scratch workspace
+.superpowers/
+
 # Note: PPREstimation/output/ is deliberately NOT ignored. Ecobase_models/ and
 # collected_PPRs.xlsx are tracked so a cloner receives them.
 ```
@@ -157,6 +161,7 @@ This is the safety net. The bulk directories are added in Task 11 after deletion
 ```bash
 git add -A
 git reset -q -- \
+  FishEstimationAI \
   SeaAroundUsExtraction/raw_data \
   SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04 \
   SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip \
@@ -165,10 +170,13 @@ git reset -q -- \
   SeaAroundUsExtraction/Global_history_TE010_2026-09-04.zip \
   SeaAroundUsExtraction/PPR_global_te005_results \
   SeaAroundUsExtraction/input/examples \
-  PPRAtlas/archive \
-  FishEstimationAI/graphify-out \
-  FishEstimationAI/real_models
+  PPRAtlas/archive
 git status --short | head -20
+# FishEstimationAI must NOT appear as staged. It holds a nested .git, so `git add -A`
+# stages it as a gitlink and a clone would contain none of its files. Task 4 collapses
+# that repo and commits the directory properly. Until then its own repo and the two
+# external clones are its safety net.
+git diff --cached --name-only | grep -c "^FishEstimationAI" && echo "FAIL: staged as gitlink" || echo "ok  FishEstimationAI correctly held back"
 git commit -m "Add code and small files as a pre-restructure safety net
 
 Nothing was committed before this point, so every subsequent deletion would have
@@ -176,6 +184,10 @@ been unrecoverable. Commits all source, config, tables, notebooks and docs.
 The bulk data directories are added in a later task, after the redundant
 archives have been removed, so 2.5 GB of soon-to-be-deleted zips never enter
 history.
+
+FishEstimationAI is held back deliberately: it contains a nested .git, so staging
+it here would record a gitlink and a clone would receive none of its files. Task 4
+removes that nested repo and commits the directory as ordinary files.
 
 Also anchors the stock Python gitignore rules. Unanchored 'downloads/' was
 matching PPRAtlas/research/downloads and would have silently excluded real
@@ -452,15 +464,46 @@ for r in rows:
     carried += 1
 print(f"carried up {carried} files unique to the old tree")
 
-# 2. remove the old top-level entries the release now supersedes
-for name in [p.name for p in ROOT.iterdir() if p.name != REL.name]:
-    target = ROOT / name
-    shutil.rmtree(target) if target.is_dir() else target.unlink()
-print("removed superseded old top-level entries")
+# 2. remove only the old top-level entries the release actually supersedes.
+#    Anything Task 3 deletes through its verification gate is preserved here, so the
+#    gate stays meaningful and every deletion remains attributable to one task.
+PRESERVE = {
+    REL.name,
+    "EEZ_TE010_release_2026-09-04_complete.zip",
+    "EEZ_TE010_release_2026-09-04_results.zip",
+    "EEZ_TE010_release_2026-09-04_delivery.json",
+    "Global_history_TE010_2026-09-04",
+    "Global_history_TE010_2026-09-04.zip",
+    "Global_history_TE010_2026-09-04.delivery.json",
+    "PPR_global_te005_results",
+}
+release_top = {child.name for child in REL.iterdir()}
+removed, kept = [], []
+for child in list(ROOT.iterdir()):
+    if child.name in PRESERVE:
+        kept.append(child.name)
+        continue
+    if child.name not in release_top:
+        # nothing in the release will replace this; leave it and report
+        kept.append(child.name)
+        continue
+    shutil.rmtree(child) if child.is_dir() else child.unlink()
+    removed.append(child.name)
+print(f"removed {len(removed)} superseded entries: {sorted(removed)}")
+print(f"preserved {len(kept)} entries: {sorted(kept)}")
 
 # 3. move release contents up one level
 for child in list(REL.iterdir()):
-    shutil.move(str(child), str(ROOT / child.name))
+    destination = ROOT / child.name
+    if destination.exists():
+        raise SystemExit(
+            f"refusing to overwrite {destination}: step 2 should have removed it. "
+            "Resolve manually rather than clobbering."
+        )
+    shutil.move(str(child), str(destination))
+leftovers = list(REL.iterdir())
+if leftovers:
+    raise SystemExit(f"release directory not empty: {[p.name for p in leftovers]}")
 REL.rmdir()
 print("release promoted; release directory removed")
 ```
@@ -1971,14 +2014,60 @@ own sources.
 
 Exclude the artifact-template and OpenAI scaffolding, which a Claude skill never reads. Both stay in the repository for the later GPT adaptation.
 
+Use Python's `zipfile`, not the `zip` CLI: the `zip` on this machine is a 2009
+Info-ZIP beta shipped by MiKTeX whose `-x` exclusion semantics are not dependable, and
+a silently-included `agents/openai.yaml` would ship OpenAI scaffolding inside a Claude
+skill. Explicit membership is verifiable; exclusion patterns are not.
+
+```python
+# save as skills/build_skill.py
+"""Build ewe-species-to-group-mapper.skill from the source directory."""
+from __future__ import annotations
+import zipfile
+from pathlib import Path
+
+SRC = Path(__file__).resolve().parent / "ewe-species-to-group-mapper"
+OUT = SRC.parent / "ewe-species-to-group-mapper.skill"
+
+# Excluded by design: artifact-template.json and agents/ are artifact-template and
+# OpenAI packaging scaffolding that a Claude skill never reads. They stay in the
+# repository for the later GPT adaptation.
+EXCLUDE_NAMES = {"artifact-template.json", ".DS_Store"}
+EXCLUDE_DIRS = {"agents", "__pycache__"}
+
+
+def included(path: Path) -> bool:
+    rel = path.relative_to(SRC)
+    if any(part in EXCLUDE_DIRS for part in rel.parts):
+        return False
+    if path.name in EXCLUDE_NAMES:
+        return False
+    if path.name.startswith("~$"):
+        return False
+    return path.is_file()
+
+
+def main() -> None:
+    files = sorted(p for p in SRC.rglob("*") if included(p))
+    if not files:
+        raise SystemExit(f"no files found under {SRC}")
+    OUT.unlink(missing_ok=True)
+    with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as zf:
+        for path in files:
+            arcname = Path(SRC.name) / path.relative_to(SRC)
+            zf.write(path, arcname.as_posix())
+    print(f"wrote {OUT.name} with {len(files)} files")
+    for path in files:
+        print("   ", (Path(SRC.name) / path.relative_to(SRC)).as_posix())
+
+
+if __name__ == "__main__":
+    main()
+```
+
 ```bash
 cd "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation/skills"
-rm -f ewe-species-to-group-mapper.skill
-zip -r ewe-species-to-group-mapper.skill ewe-species-to-group-mapper \
-  -x "ewe-species-to-group-mapper/artifact-template.json" \
-  -x "ewe-species-to-group-mapper/agents/*" \
-  -x "*/__pycache__/*" -x "*/.DS_Store" -x "*~\$*"
-unzip -l ewe-species-to-group-mapper.skill
+python build_skill.py
 ```
 
 - [ ] **Step 6: Verify the bundle**
