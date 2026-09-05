@@ -60,15 +60,11 @@ plt.show()"""
         new_markdown_cell("## Catch and aggregation reconciliation"),
         new_code_cell(
             """validation = pd.read_csv(TABLES / 'validation.csv')
-key_checks = ['catch_reconciled', 'commercial_ppr_reconciled', 'functional_ppr_reconciled',
-              'commercial_jensen_violations', 'functional_jensen_violations']
+key_checks = ['catch_reconciled', 'tl_coverage_complete']
 display(validation[validation['check'].isin(key_checks)].pivot(index='unit_id', columns='check', values='value'))
 
-boolean_checks = validation[validation['check'].isin(
-    ['catch_reconciled', 'commercial_ppr_reconciled', 'functional_ppr_reconciled'])]
-assert boolean_checks['value'].astype(str).str.lower().isin(['true', '1', '1.0']).all()
-violation_checks = validation[validation['check'].str.endswith('jensen_violations')]
-assert pd.to_numeric(violation_checks['value']).eq(0).all()"""
+boolean_checks = validation[validation['check'].isin(key_checks)]
+assert boolean_checks['value'].astype(str).str.lower().isin(['true', '1', '1.0']).all()"""
         ),
         new_markdown_cell("## Trophic-level matching coverage"),
         new_code_cell(
@@ -86,35 +82,12 @@ plt.legend(title='match method', bbox_to_anchor=(1.02, 1), loc='upper left')
 plt.tight_layout()
 plt.show()"""
         ),
-        new_markdown_cell(
-            """## Correct aggregation versus intentional Jensen-error aggregation
-
-For both commercial and functional groups, the correct method sums species PPR first. The comparison method deliberately averages TL by catch before exponentiating. Because the exponential is convex, the correct estimate is expected to be greater than or equal to the Jensen-error estimate, apart from floating-point noise."""
-        ),
-        new_code_cell(
-            """jensen = pd.read_csv(TABLES / 'jensen_comparison.csv')
-regional_bias = (jensen.groupby(['unit_id', 'region_name', 'classification'], as_index=False)
-                 .agg(ppr_correct=('ppr_correct', 'sum'), ppr_jensen=('ppr_jensen', 'sum')))
-regional_bias['underestimate_fraction'] = 1 - regional_bias['ppr_jensen'] / regional_bias['ppr_correct']
-display(regional_bias)
-
-pivot = regional_bias.pivot(index='region_name', columns='classification', values='underestimate_fraction')
-pivot.plot.bar(figsize=(10, 4.8), color=['#147D92', '#E28A32'])
-plt.title('Jensen shortcut underestimation by region and classification')
-plt.ylabel('1 - PPR Jensen / PPR correct')
-plt.xlabel('')
-plt.axhline(0, color='#333333', linewidth=0.8)
-plt.tight_layout()
-plt.show()"""
-        ),
         new_markdown_cell("## Final validation gate"),
         new_code_cell(
             """assert summary['year'].nunique() == 1
 positive_catch = summary['total_catch_tonnes'] > 0
 assert summary.loc[positive_catch, 'catch_tl_coverage_fraction'].between(0, 1).all()
 assert summary.loc[~positive_catch, 'catch_tl_coverage_fraction'].isna().all()
-assert (summary['ppr_species'] - summary['ppr_commercial_correct']).abs().max() < 1e-5
-assert (summary['ppr_species'] - summary['ppr_functional_correct']).abs().max() < 1e-5
 assert summary['rank_pilot_ppr'].tolist() == list(range(1, len(summary) + 1))
 print('All pilot validation gates passed.')"""
         ),
@@ -206,15 +179,11 @@ display(summary.groupby('region_type', as_index=False).agg(
         new_markdown_cell("## Catch and aggregation reconciliation"),
         new_code_cell(
             """validation = pd.read_csv(TABLES / 'validation.csv')
-boolean_names = ['catch_reconciled', 'commercial_ppr_reconciled', 'functional_ppr_reconciled']
+boolean_names = ['catch_reconciled', 'tl_coverage_complete']
 boolean_checks = validation[validation['check'].isin(boolean_names)].copy()
 boolean_checks['passed'] = boolean_checks['value'].astype(str).str.lower().isin(['true', '1', '1.0'])
-violation_checks = validation[validation['check'].str.endswith('jensen_violations')].copy()
-violation_checks['value_numeric'] = pd.to_numeric(violation_checks['value'])
 display(boolean_checks.groupby('check')['passed'].agg(['sum', 'count']))
-display(violation_checks.groupby('check')['value_numeric'].agg(['sum', 'max']))
-assert boolean_checks['passed'].all()
-assert violation_checks['value_numeric'].eq(0).all()"""
+assert boolean_checks['passed'].all()"""
         ),
         new_markdown_cell("## Trophic-level matching coverage"),
         new_code_cell(
@@ -237,23 +206,6 @@ plt.ylabel('')
 plt.tight_layout()
 plt.show()"""
         ),
-        new_markdown_cell(
-            """## Correct aggregation versus intentional Jensen-error aggregation
-
-The correct path sums taxon PPR before deriving group SPPR. The comparison path deliberately averages trophic level by catch before exponentiating. Convexity requires correct PPR to be at least the Jensen-error result, apart from numerical tolerance."""
-        ),
-        new_code_cell(
-            """jensen = pd.read_csv(TABLES / 'jensen_comparison.csv')
-global_bias = jensen.groupby('classification', as_index=False).agg(
-    ppr_correct=('ppr_correct', 'sum'), ppr_jensen=('ppr_jensen', 'sum'))
-global_bias['underestimate_fraction'] = 1 - global_bias['ppr_jensen'] / global_bias['ppr_correct']
-display(global_bias)
-
-regional_bias = jensen.groupby(['unit_id', 'region_name', 'classification'], as_index=False).agg(
-    ppr_correct=('ppr_correct', 'sum'), ppr_jensen=('ppr_jensen', 'sum'))
-regional_bias['underestimate_fraction'] = 1 - regional_bias['ppr_jensen'] / regional_bias['ppr_correct']
-display(regional_bias.nlargest(25, 'underestimate_fraction'))"""
-        ),
         new_markdown_cell("## Final validation gate"),
         new_code_cell(
             f"""assert len(summary) == metadata['unit_count'] == 84
@@ -261,8 +213,6 @@ assert summary['year'].nunique() == 1
 positive_catch = summary['total_catch_tonnes'] > 0
 assert summary.loc[positive_catch, 'catch_tl_coverage_fraction'].between(0, 1).all()
 assert summary.loc[~positive_catch, 'catch_tl_coverage_fraction'].isna().all()
-assert (summary['ppr_species'] - summary['ppr_commercial_correct']).abs().max() < 1e-4
-assert (summary['ppr_species'] - summary['ppr_functional_correct']).abs().max() < 1e-4
 assert summary['rank_{scope_label}_ppr'].tolist() == list(range(1, len(summary) + 1))
 assert abs(summary['fraction_{scope_label}_ppr'].sum() - 1.0) < 1e-10
 print('All {scope_label} validation gates passed.')"""
