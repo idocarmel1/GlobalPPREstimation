@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT.parent
-DESTINATION = PROJECT / "PPR_pipeline_global_complete.zip"
 
 
 def include(path: Path) -> bool:
@@ -24,10 +24,16 @@ def include(path: Path) -> bool:
 
 
 def main() -> None:
-    DESTINATION.unlink(missing_ok=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--destination", default="PPR_pipeline_global_complete.zip")
+    args = parser.parse_args()
+    if Path(args.destination).name != args.destination or not args.destination.endswith(".zip"):
+        raise ValueError("Destination must be a ZIP filename in the project directory.")
+    destination = PROJECT / args.destination
+    destination.unlink(missing_ok=True)
     count = 0
     with zipfile.ZipFile(
-        DESTINATION,
+        destination,
         "w",
         compression=zipfile.ZIP_DEFLATED,
         compresslevel=6,
@@ -38,7 +44,7 @@ def main() -> None:
                 continue
             archive.write(path, Path(ROOT.name) / path.relative_to(ROOT))
             count += 1
-    print(f"{DESTINATION} ({count} files)")
+    print(f"{destination} ({count} files)")
 
 
 if __name__ == "__main__":

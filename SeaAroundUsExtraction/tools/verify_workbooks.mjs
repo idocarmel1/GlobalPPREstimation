@@ -4,12 +4,13 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
+import { resolveReleaseArgs } from "./scope_args.mjs";
 
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const IS_GLOBAL = process.argv.includes("--global");
-const OUTPUT = path.join(ROOT, IS_GLOBAL ? "global_output" : "output");
-const SCOPE_LABEL = IS_GLOBAL ? "global" : "pilot";
+const RELEASE = resolveReleaseArgs(process.argv.slice(2));
+const OUTPUT = path.join(ROOT, RELEASE.outputDirectory);
+const SCOPE_LABEL = RELEASE.scopeLabel;
 const units = JSON.parse(await fs.readFile(path.join(OUTPUT, "tables", "units.json"), "utf8"));
 const files = [
   path.join(OUTPUT, `PPR_${SCOPE_LABEL}_summary.xlsx`),

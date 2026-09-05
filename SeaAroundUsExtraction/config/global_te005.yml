@@ -1,0 +1,31 @@
+scope:
+  name: global_te005
+  unit_index: spatial/spatial_units.csv
+  raw_directory: raw_data/SAU_downloads
+  output_directory: global_output_te005
+
+method:
+  transfer_efficiency: 0.05
+  apply_wet_weight_to_carbon_divisor: false
+
+analysis:
+  year: null
+  include_catch_types:
+    - Landings
+    - Discards
+  include_reporting_status:
+    - Reported
+    - Unreported
+  matching:
+    min_genus_species: 2
+    allow_commercial_group_fallback: true
+    allow_functional_group_fallback: true
+
+sea_around_us:
+  api_base_url: https://api.seaaroundus.org/api/v1
+  data_version_expected: "50.1"
+  catch_download:
+    measure: tonnage
+    dimension: taxon
+    limit: 10
+    scientific_names: false
