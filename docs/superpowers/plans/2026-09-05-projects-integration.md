@@ -30,7 +30,8 @@
 | File | Responsibility | Task |
 | --- | --- | --- |
 | `.gitignore` | root ignore rules, anchored so they cannot reach into project data | 1 |
-| `tools/verify_redundant.py` | prove a zip duplicates an on-disk directory before deletion | 3 |
+| `tools/verify_redundant.py` | prove a zip duplicates an on-disk directory before deletion | 1 |
+| `docs/superpowers/redundancy-verdicts.txt` | recorded pre-promotion proof that each zip is redundant | 1 |
 | `docs/superpowers/sau-promotion-manifest.csv` | per-path classification of the old vs release SeaAroundUs trees | 2 |
 | `SeaAroundUsExtraction/src/ppr_pipeline/calculations.py` | SPPR/PPR maths; `aggregate_groups` trimmed 15 → 5 columns | 5 |
 | `SeaAroundUsExtraction/src/ppr_pipeline/validation.py` | per-unit checks; drop Jensen violations, add TL-coverage assertion | 6 |
@@ -46,17 +47,24 @@
 
 ---
 
-### Task 1: Establish a safety net and fix `.gitignore`
+### Task 1: Establish a safety net, fix `.gitignore`, and verify redundancy
 
 Nothing is committed yet, so every later deletion would be unrecoverable. This task fixes the ignore rules and commits all code and small files *before* anything moves.
 
 **Files:**
 - Modify: `.gitignore`
 - Create: `docs/superpowers/baseline-tests.txt`
+- Create: `tools/verify_redundant.py`
+- Create: `docs/superpowers/redundancy-verdicts.txt`
 
 **Interfaces:**
 - Consumes: nothing.
-- Produces: a clean `.gitignore` that later tasks rely on; `docs/superpowers/baseline-tests.txt` recording pre-change test results for comparison in Task 15.
+- Produces: a clean `.gitignore` that later tasks rely on; `docs/superpowers/baseline-tests.txt` recording pre-change test results for comparison in Task 15; `docs/superpowers/redundancy-verdicts.txt`, which Task 3 reads before deleting anything.
+
+Redundancy is verified **here, before Task 2 promotes the release tree**. Every zip
+was created from the current layout, so their internal paths line up against the tree
+as it stands now. After promotion those paths would no longer match, and the
+`_complete.zip` in particular could not be checked at all.
 
 - [ ] **Step 1: Record the baseline test results**
 
@@ -172,6 +180,108 @@ history.
 Also anchors the stock Python gitignore rules. Unanchored 'downloads/' was
 matching PPRAtlas/research/downloads and would have silently excluded real
 research data from the first commit.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+```
+
+- [ ] **Step 8: Write the redundancy verifier**
+
+```python
+# save as tools/verify_redundant.py
+"""Prove a zip's contents already exist on disk before the zip is deleted."""
+from __future__ import annotations
+import sys, zipfile
+from pathlib import Path
+
+def verify(archive: str, directory: str, strip: int = 1) -> bool:
+    zpath, dpath = Path(archive), Path(directory)
+    if not zpath.exists():
+        print(f"SKIP  {zpath} does not exist"); return True
+    if not dpath.exists():
+        print(f"FAIL  {zpath}: directory {dpath} does not exist"); return False
+    missing, mismatched, checked = [], [], 0
+    with zipfile.ZipFile(zpath) as zf:
+        for info in zf.infolist():
+            if info.is_dir():
+                continue
+            parts = Path(info.filename).parts[strip:]
+            if not parts:
+                continue
+            on_disk = dpath.joinpath(*parts)
+            if not on_disk.exists():
+                missing.append(info.filename)
+            elif on_disk.stat().st_size != info.file_size:
+                mismatched.append((info.filename, info.file_size, on_disk.stat().st_size))
+            checked += 1
+    print(f"{zpath.name}: checked {checked} entries against {dpath}")
+    print(f"   missing on disk : {len(missing)}   {missing[:5]}")
+    print(f"   size mismatches : {len(mismatched)}   {mismatched[:5]}")
+    ok = checked > 0 and not missing and not mismatched
+    print("   VERDICT:", "REDUNDANT - safe to delete" if ok else "NOT REDUNDANT - keep")
+    return ok
+
+if __name__ == "__main__":
+    strip = int(sys.argv[3]) if len(sys.argv) > 3 else 1
+    sys.exit(0 if verify(sys.argv[1], sys.argv[2], strip) else 1)
+```
+
+Note `checked > 0` in the verdict: a zip whose entries all get stripped away would
+otherwise report REDUNDANT having compared nothing.
+
+- [ ] **Step 9: Determine the strip depth for each zip**
+
+`strip` is the number of leading path components inside the zip to drop before
+matching against the directory. Inspect each zip's first entries to choose it:
+
+```bash
+cd "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation"
+for z in PPRAtlas/archive/regions.zip \
+         SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip \
+         SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_results.zip \
+         SeaAroundUsExtraction/Global_history_TE010_2026-09-04.zip; do
+  echo "=== $z ==="
+  python -c "
+import zipfile
+with zipfile.ZipFile('$z') as zf:
+    for n in zf.namelist()[:4]:
+        print('   ', n)
+"
+done
+```
+
+If entries begin with a wrapping directory (for example `regions/LME_003/...`) use
+`strip 1`; if they begin at the content root (`LME_003/...`) use `strip 0`.
+
+- [ ] **Step 10: Verify all four zips against the pre-promotion tree and record the verdicts**
+
+Substitute the strip depths determined in Step 9.
+
+```bash
+cd "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation"
+{
+  echo "=== redundancy verdicts, recorded BEFORE the release promotion ==="
+  python tools/verify_redundant.py PPRAtlas/archive/regions.zip PPRAtlas/archive/regions 1
+  python tools/verify_redundant.py SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04 1
+  python tools/verify_redundant.py SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_results.zip SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04/eez_output 1
+  python tools/verify_redundant.py SeaAroundUsExtraction/Global_history_TE010_2026-09-04.zip SeaAroundUsExtraction/Global_history_TE010_2026-09-04 1
+} 2>&1 | tee docs/superpowers/redundancy-verdicts.txt
+```
+
+Expected: `VERDICT: REDUNDANT - safe to delete` for all four. Any zip that reports
+`NOT REDUNDANT` must not be deleted in Task 3 — report it instead.
+
+- [ ] **Step 11: Commit the verifier and the verdicts**
+
+```bash
+git add tools/verify_redundant.py docs/superpowers/redundancy-verdicts.txt
+git commit -m "Verify archive redundancy before restructuring
+
+Each zip is proven against the on-disk directory it duplicates. Recorded now,
+before the release promotion, because every zip was created from the current
+layout: afterwards their internal paths no longer line up, and
+EEZ_TE010_release_2026-09-04_complete.zip could not be checked at all.
+
+Task 3 deletes only what this recorded as REDUNDANT.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
@@ -398,95 +508,73 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 ### Task 3: Delete redundant archives and superseded outputs
 
+Redundancy was proven in Task 1, against the pre-promotion layout. This task acts on
+those recorded verdicts and deletes nothing that was not cleared there.
+
 **Files:**
-- Create: `tools/verify_redundant.py`
 - Delete: four zips, two superseded output directories, one stale graph directory
+- Read: `docs/superpowers/redundancy-verdicts.txt`
 
 **Interfaces:**
-- Consumes: the promoted tree from Task 2.
+- Consumes: `docs/superpowers/redundancy-verdicts.txt` from Task 1; the promoted tree from Task 2.
 - Produces: a tree roughly 3 GB smaller. No code depends on the deleted paths.
 
-- [ ] **Step 1: Write the redundancy verifier**
-
-```python
-# save as tools/verify_redundant.py
-"""Prove a zip's contents already exist on disk before the zip is deleted."""
-from __future__ import annotations
-import sys, zipfile
-from pathlib import Path
-
-def verify(archive: str, directory: str, strip: int = 1) -> bool:
-    zpath, dpath = Path(archive), Path(directory)
-    if not zpath.exists():
-        print(f"SKIP  {zpath} does not exist"); return True
-    if not dpath.exists():
-        print(f"FAIL  {zpath}: directory {dpath} does not exist"); return False
-    missing, mismatched, checked = [], [], 0
-    with zipfile.ZipFile(zpath) as zf:
-        for info in zf.infolist():
-            if info.is_dir():
-                continue
-            parts = Path(info.filename).parts[strip:]
-            if not parts:
-                continue
-            on_disk = dpath.joinpath(*parts)
-            if not on_disk.exists():
-                missing.append(info.filename)
-            elif on_disk.stat().st_size != info.file_size:
-                mismatched.append((info.filename, info.file_size, on_disk.stat().st_size))
-            checked += 1
-    print(f"{zpath.name}: checked {checked} entries against {dpath}")
-    print(f"   missing on disk : {len(missing)}   {missing[:5]}")
-    print(f"   size mismatches : {len(mismatched)}   {mismatched[:5]}")
-    ok = not missing and not mismatched
-    print("   VERDICT:", "REDUNDANT - safe to delete" if ok else "NOT REDUNDANT - keep")
-    return ok
-
-if __name__ == "__main__":
-    strip = int(sys.argv[3]) if len(sys.argv) > 3 else 1
-    sys.exit(0 if verify(sys.argv[1], sys.argv[2], strip) else 1)
-```
-
-- [ ] **Step 2: Verify each zip against the directory it duplicates**
-
-`strip` is the number of leading path components inside the zip to drop. Determine it per zip by inspecting the first entries, then run the verifier.
+- [ ] **Step 1: Re-read the recorded verdicts and refuse anything not cleared**
 
 ```bash
 cd "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation"
-for z in PPRAtlas/archive/regions.zip \
-         SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip \
-         SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_results.zip; do
-  echo "=== $z ==="; python -c "
-import zipfile,sys
-with zipfile.ZipFile('$z') as zf:
-    for n in zf.namelist()[:4]: print('   ', n)
-"
-done
+cat docs/superpowers/redundancy-verdicts.txt
+echo "--- gate ---"
+python - <<'PY'
+import pathlib, sys
+text = pathlib.Path("docs/superpowers/redundancy-verdicts.txt").read_text(encoding="utf-8")
+expected = {
+    "regions.zip",
+    "EEZ_TE010_release_2026-09-04_complete.zip",
+    "EEZ_TE010_release_2026-09-04_results.zip",
+    "Global_history_TE010_2026-09-04.zip",
+}
+blocks = {}
+current = None
+for line in text.splitlines():
+    if ": checked " in line:
+        current = line.split(":")[0].strip()
+    if "VERDICT:" in line and current:
+        blocks[current] = "REDUNDANT - safe to delete" in line
+        current = None
+missing = expected - set(blocks)
+notred = {k for k, v in blocks.items() if not v}
+for name in sorted(expected):
+    state = "cleared" if blocks.get(name) else ("NOT CLEARED" if name in blocks else "NO VERDICT")
+    print(f"  {state:12s} {name}")
+if missing or notred:
+    print("\nSTOP: do not delete. missing verdicts:", sorted(missing), " not redundant:", sorted(notred))
+    sys.exit(1)
+print("\nall four cleared - safe to proceed")
+PY
 ```
 
-Then verify each with the `strip` value that makes entries line up:
+Expected: `all four cleared - safe to proceed`. If the gate exits non-zero, stop and
+report; do not delete the uncleared zip.
+
+- [ ] **Step 2: Delete the verified-redundant zips**
 
 ```bash
-python tools/verify_redundant.py PPRAtlas/archive/regions.zip PPRAtlas/archive/regions 1
-python tools/verify_redundant.py SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip SeaAroundUsExtraction 1
-python tools/verify_redundant.py SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_results.zip SeaAroundUsExtraction/eez_output 1
-```
-
-Expected: `VERDICT: REDUNDANT - safe to delete` for each. If any reports `NOT REDUNDANT`, stop and report — do not delete that zip.
-
-Note the `_complete.zip` was made before promotion, so its paths are relative to the old release directory; after promotion those files sit directly under `SeaAroundUsExtraction/`. If `strip` cannot be made to line up, report rather than guessing.
-
-- [ ] **Step 3: Delete the verified-redundant zips**
-
-```bash
+cd "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation"
 rm -v PPRAtlas/archive/regions.zip
 rm -v SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip
 rm -v SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_results.zip
+rm -v SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_delivery.json
 ```
 
-- [ ] **Step 4: Delete the superseded outputs**
+The `_delivery.json` is the manifest describing the deleted `_complete.zip` and has
+no other referent.
 
-These are **not** recoverable from another on-disk copy. The user authorised each explicitly: they implement the 1995 SPPR/PPR method from `PPRCalculator`, which will be recomputed per LME later.
+- [ ] **Step 3: Delete the superseded outputs**
+
+These are **not** recoverable from another on-disk copy. The user authorised each
+explicitly: they implement the 1995 SPPR/PPR method from `PPRCalculator`, which will
+be recomputed per LME later.
 
 ```bash
 rm -rv SeaAroundUsExtraction/Global_history_TE010_2026-09-04
@@ -496,25 +584,30 @@ rm -rv SeaAroundUsExtraction/PPR_global_te005_results
 rm -rv FishEstimationAI/graphify-out
 ```
 
-- [ ] **Step 5: Confirm nothing in the code referenced the deleted paths**
+- [ ] **Step 4: Confirm nothing in the code referenced the deleted paths**
 
 ```bash
+cd "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation"
 grep -rn "Global_history\|te005\|graphify-out\|regions\.zip\|_complete\.zip\|_results\.zip" \
   --include="*.py" --include="*.yml" --include="*.yaml" --include="*.md" \
-  --exclude-dir=.git --exclude-dir=.venv --exclude-dir=docs . | grep -v "^./tools/verify_redundant.py" || echo "no live references (good)"
+  --exclude-dir=.git --exclude-dir=.venv --exclude-dir=docs . \
+  | grep -v "tools/verify_redundant.py" || echo "no live references (good)"
 ```
 
-Any hit outside `docs/` must be resolved before committing.
+Any hit outside `docs/` and the verifier must be resolved before committing. Note
+that `run_global_te005_pipeline.py` and `build_global_te005_notebook.py` were carried
+up by the promotion and are **kept** — they generate the te005 sensitivity run on
+demand. Only its stored *results* were deleted.
 
-- [ ] **Step 6: Report space reclaimed and commit**
+- [ ] **Step 5: Report space reclaimed and commit**
 
 ```bash
 du -sh SeaAroundUsExtraction PPRAtlas FishEstimationAI
 git add -A
 git commit -m "Delete redundant archives and superseded 1995-method outputs
 
-Verified-redundant zips, each proven against the on-disk directory it duplicates
-before deletion (tools/verify_redundant.py):
+Verified-redundant zips, each proven in Task 1 against the on-disk directory it
+duplicates, before the promotion moved those paths:
   PPRAtlas/archive/regions.zip                          579 MB
   EEZ_TE010_release_2026-09-04_complete.zip             1.7 GB
   EEZ_TE010_release_2026-09-04_results.zip               16 MB
@@ -523,6 +616,9 @@ Superseded outputs, authorised by the user because they implement the 1995
 SPPR/PPR method from PPRCalculator which will be recomputed per LME:
   Global_history_TE010_2026-09-04/ and its zip             470 MB
   PPR_global_te005_results/                                 13 MB
+
+The te005 and history pipeline scripts are kept - only their stored results are
+deleted, and both can be regenerated on demand.
 
 Stale partial knowledge graph, replaced later by a repo-wide one:
   FishEstimationAI/graphify-out/                            15 MB
@@ -2227,8 +2323,8 @@ If the user declines, stop here and leave the commits local.
 
 ## Self-Review
 
-**Spec coverage.** A1 → Task 2. A2, A3 → Task 3. A4 (keep both archive stores, keep raw_data) → Global Constraints, verified in Task 15. A5 rename → Task 4. A6 nested git → Task 4. A7 gitignore → Task 1. B calculations → Task 5. B validation → Task 6. B pipeline → Task 7. B notebook → Task 8. B data migration → Task 9. D probe/module/gate → Task 10. D full run → Task 11. F → Task 14. G → Task 13. H → Task 12. Verification and commit discipline → Task 15. No spec section is unimplemented.
+**Spec coverage.** A1 → Task 2. A2 verification → Task 1 (moved ahead of the promotion so every zip is checked against the layout it was built from); A2, A3 deletion → Task 3. A4 (keep both archive stores, keep raw_data) → Global Constraints, verified in Task 15. A5 rename → Task 4. A6 nested git → Task 4. A7 gitignore → Task 1. B calculations → Task 5. B validation → Task 6. B pipeline → Task 7. B notebook → Task 8. B data migration → Task 9. D probe/module/gate → Task 10. D full run → Task 11. F → Task 14. G → Task 13. H → Task 12. Verification and commit discipline → Task 15. No spec section is unimplemented.
 
-**Placeholder scan.** No `TBD`/`TODO`. Two deliberate placeholders remain and are both explicitly resolved by a preceding step: the `<verified count>` markers in the Task 13 README template, filled from Task 13 Step 1; and the `strip` argument in Task 3 Step 2, determined by inspecting each zip's entries in the same step. Task 8 was rewritten after reading `notebook.py`: there are **two** builders (`build_validation_notebook`, `build_scope_validation_notebook`), both carrying the section, and the existing test asserted `"Jensen" in text`, so it had to be updated rather than extended. Exact line numbers are given.
+**Placeholder scan.** No `TBD`/`TODO`. Two deliberate placeholders remain and are both explicitly resolved by a preceding step: the `<verified count>` markers in the Task 13 README template, filled from Task 13 Step 1; and the `strip` argument in Task 1 Step 10, determined by inspecting each zip's entries in Step 9. Task 8 was rewritten after reading `notebook.py`: there are **two** builders (`build_validation_notebook`, `build_scope_validation_notebook`), both carrying the section, and the existing test asserted `"Jensen" in text`, so it had to be updated rather than extended. Exact line numbers are given.
 
 **Type consistency.** `aggregate_groups` returns `[group_column, "catch_tonnes_matched", "tl_weighted", "sppr", "ppr"]` in Task 5; Task 6 `_sum_ppr` reads `ppr`; Task 7 sums `commercial["ppr"]`; Task 9 renames `ppr_jensen` → `ppr`. Consistent. `distill_archive` and `write_distilled` are defined in Task 10 with the exact signatures Task 11 calls. `COLUMNS` in Task 10 matches the assertion in Task 10's first test and the spec's column list.
