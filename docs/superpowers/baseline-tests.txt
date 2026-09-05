@@ -1,64 +1,9 @@
-=== baseline recorded before projects-integration work ===
+=== corrected baseline (system python + shapely/pypdf/olefile installed) ===
 --- SeaAroundUsExtraction ---
-src\ppr_pipeline\pipeline.py:21: in <module>
-    from .spatial import write_spatial_outputs
-src\ppr_pipeline\spatial.py:9: in <module>
-    from shapely import make_valid
-E   ModuleNotFoundError: No module named 'shapely'
-___________________ ERROR collecting tests/test_spatial.py ____________________
-ImportError while importing test module 'C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\SeaAroundUsExtraction\tests\test_spatial.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-C:\Users\idoca\miniconda3\Lib\importlib\__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-tests\test_spatial.py:6: in <module>
-    from shapely.geometry import shape
-E   ModuleNotFoundError: No module named 'shapely'
-=========================== short test summary info ===========================
-ERROR tests/test_pipeline.py
-ERROR tests/test_spatial.py
-!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
-2 errors in 6.13s
+...............................................                          [100%]
+47 passed in 4.83s
 --- PPRAtlas ---
-tests\test_archived_pdf.py:6: in <module>
-    from pypdf import PdfWriter
-E   ModuleNotFoundError: No module named 'pypdf'
-____________________ ERROR collecting tests/test_files.py _____________________
-ImportError while importing test module 'C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\PPRAtlas\tests\test_files.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-C:\Users\idoca\miniconda3\Lib\importlib\__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-tests\test_files.py:2: in <module>
-    from atlas.files import validate_bytes
-atlas\files.py:5: in <module>
-    from pypdf import PdfReader
-E   ModuleNotFoundError: No module named 'pypdf'
-=========================== short test summary info ===========================
-ERROR tests/test_archived_pdf.py
-ERROR tests/test_files.py
-!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
-2 errors in 1.18s
---- FishEstimationAI ---
-FAILED tests/test_create_pprs_excel.py::test_registry_holds_the_nineteen_specified_methods
-ERROR tests/test_diagnose_sppr.py::test_top_status_is_worst_section - FileNot...
-ERROR tests/test_diagnose_sppr.py::test_inv_te_is_one_over_the_te_matrix_in_use[GE]
-ERROR tests/test_diagnose_sppr.py::test_inv_te_is_one_over_the_te_matrix_in_use[With Egestion]
-ERROR tests/test_diagnose_sppr.py::test_inv_te_is_one_over_the_te_matrix_in_use[TE]
-ERROR tests/test_diagnose_sppr.py::test_trophic_levels_are_not_degenerate - F...
-ERROR tests/test_diagnose_sppr.py::test_tl_attribute_is_populated - FileNotFo...
-ERROR tests/test_diagnose_sppr.py::test_ee0_warning_names_the_groups - FileNo...
-ERROR tests/test_diagnose_sppr.py::test_black_sea_converges_but_fails - FileN...
-ERROR tests/test_diagnose_sppr.py::test_black_sea_footprint_reports_all_three_ppr_views
-ERROR tests/test_diagnose_sppr.py::test_ee_flags_are_reported - FileNotFoundE...
-ERROR tests/test_diagnose_sppr.py::test_model_balance_residuals_are_reported
-ERROR tests/test_diagnose_sppr.py::test_thresholds_override - FileNotFoundErr...
-ERROR tests/test_diagnose_sppr.py::test_flat_reports_concatenate_into_a_dataframe
-ERROR tests/test_diagnose_sppr.py::test_te_option_te_has_no_recycling_matrix
-ERROR tests/test_monte_carlo_sppr.py::test_method_kwargs_forwards_fix_EE_0_cases_to_the_solver
-ERROR tests/test_monte_carlo_sppr.py::test_exclude_diverged_rejects_draws_that_fail_the_divergence_grade
-ERROR tests/test_monte_carlo_sppr.py::test_exclude_diverged_never_accepts_a_draw_the_ungated_run_rejected
-ERROR tests/test_monte_carlo_sppr.py::test_all_draws_rejected_warns_and_returns_nan_instead_of_crashing
-1 failed, 76 passed, 18 errors in 265.76s (0:04:25)
+........                                                                 [100%]
+8 passed in 1.44s
+--- FishEstimationAI (18 errors = missing real_models/new_EwE_jsons fixture dir) ---
+1 failed, 76 passed, 18 errors  [recorded from full run; see ledger Ruling 8]
