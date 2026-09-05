@@ -1,0 +1,1783 @@
+Journal of Environmental Management 285 (2021) 112175
+Available online 16 February 2021
+0301-4797/© 2021 The Author(s). Published by Elsevier Ltd. This is an open access article under the CC BY-NC-ND license
+(http://creativecommons.org/licenses/by-nc-nd/4.0/).Modelling 
+ ecosystem dynamics to assess the effect of coastal fisheries on 
+cetacean species Oriol 
+ Giralt Paradella
+, b , * , 
+S ´everine Methiona
+, 
+ Emer Roganb
+, 
+ Bruno Díaz L ´opeza 
+a
+The 
+ Bottlenose Dolphin Research Institute – BDRI. Av Beiramar 192, 36980, O Grove, Pontevedra, Spain b
+School 
+ of Biological, Earth and Environmental Sciences, University College Cork. Address: Distillery Fields, North Mall, Cork, T23 N73K, Ireland   ARTICLE 
+ INFO  Keywords: 
+Ecopath with ecosim 
+North-west Spain 
+Ecological effects 
+Fisheries impact 
+Cetaceans 
+Food web interactions ABSTRACT  
+The 
+ expansion of fisheries and its increased efficiency are causing severe detrimental impacts on marine species 
+and ecosystems, that can be categorised into operational and ecological effects. While impacts directly caused by 
+fishing activities have been extensively documented, it is difficult to set an empirical link between fisheries and 
+changes in predator biomass and abundance. Therefore, exploring the functioning of ecosystems as a whole, the 
+interactions between the different species within them and the impact of human activities, is key to under -
+standing the ecological effects of fisheries on top predators and ecosystems, and to develop effective conservation 
+measures, while ensuring a more sustainable exploitation of fishing resources. For instance, mass balance models, 
+such as Ecopath with Ecosim, have proven to be a useful tool to develop more holistic fisheries management and 
+conservation strategies. In this study, Ecopath with Ecosim was used to investigate the temporal dynamics of the 
+Rías Baixas shelf ecosystem (North-West Spain) between 2005 and 2017. Additionally, nine 30-year forward 
+projecting simulations covering the period 2018 – 2047 were developed to examine the effects of differing fish -
+eries management strategies on common dolphins ( Delphinus delphis ), bottlenose dolphins ( Tursiops truncatus ) 
+and harbour porpoises ( Phocoena phocoena ). Results from these models suggest that when intense fishing in -
+creases it poses a major threat to the conservation of these top predators in the area, by reducing the variety of 
+their available prey and potentially enhancing competition amongst them. The study highlights the applicability 
+of Ecopath with Ecosim to develop cetacean conservation measures and despite its small spatial scale, it provides 
+a general framework that can be used to assess cetacean conservation in larger and impacted areas.   1.
+ Introduction 
+Technological improvements and the expansion of fisheries over the 
+second half of the 20th century have led to an increase in the detrimental 
+impacts of fishing activities on marine ecosystems ( Pauly et al., 2005 ; 
+Bell et al., 2017 ). This is particularly evident in marine mammals for 
+which fisheries impacts can be divided into operational effects and 
+ecological effects ( Northridge, 2009 ). Operational effects are direct 
+impacts from fisheries, that imply the dead, unintentional capture or the 
+injury of marine mammals as a result of a physical contact with fishing 
+gear ( Matthiopoulus et al., 2008 ), and have been extensively docu -
+mented ( Bearzi, 2002 ; Díaz L ´opez, 2006 ; Read et al., 2006 ; Rogan and 
+Mackey, 2007 ; Fern ´andez-Contreras et al., 2010 ; Breen et al., 2017 ). 
+Ecological effects include direct competition for the same resources, 
+indirect competition for different resources that are linked through food 
+web dynamics, behaviour alteration, and habitat modification, degra -
+dation and loss ( DeMaster, 2001 ; Bearzi, 2002 ; Plag ´anyi and Butter -
+worth, 2005 ; Díaz L ´opez et al., 2008 ; Matthiopoulus et al., 2008 ; 
+Northridge, 2009 ; Northridge et al., 2017 ; Díaz L ´opez, 2019 ). As 
+opposed to operational effects, ecological effects are more difficult to 
+detect and evaluate accurately mainly due to insufficient knowledge of 
+food-web dynamics of the affected ecosystems ( Matthiopoulus et al., 
+2008 ; Moore, 2013 ). Despite these difficulties, recent studies have 
+documented ecological effects of fisheries on a number of marine 
+mammal species and have predicted an increase of such impacts in the 
+future ( DeMaster, 2001 ; Piroddi et al., 2010 ; Morissette et al., 2012 ). 
+Owing to the indirect nature of ecological effects, it is crucial that studies 
+that aim to elucidate the interactions between marine mammals, fish -
+eries, shared resources and the ecosystem in general, include detailed 
+biological information of all the groups in a given ecosystem *
+ Corresponding author. The Bottlenose Dolphin Research Institute – BDRI. Av Beiramar 192, 36980, O Grove, Pontevedra, Spain. 
+E-mail addresses: oriol@thebdri.com , oriol@thebdri.com (O. Giralt Paradell), severine@thebdri.com (S. Methion), e.rogan@ucc.ie (E. Rogan), bruno@thebdri. 
+com (B. Díaz L ´opez).  
+Contents 
+ lists available at ScienceDirect Journal 
+ of Environmental Management journal 
+ homep age: http://w ww.elsevier. com/locate/je nvman 
+https://doi.org/10.1016/j.jenvman.2021.112175 
+Received 11 August 2020; Received in revised form 26 January 2021; Accepted 8 February 2021   
+Journal of Environmental Management 285 (2021) 112175
+2(
+ Matthiopoulus et al., 2008 ). 
+Mass-balance ecosystem modelling software packages, such as Eco -
+path with Ecosim (EwE), can be used to understand the nature of 
+ecological effects and their impact on marine mammals. By integrating 
+information from different sources, mass-balance ecosystem models 
+offer an opportunity to have a better understanding of complex 
+ecosystem dynamics ( Christensen and Walters, 2004 ). EwE, in partic -
+ular, combines information on the biomass and production of the 
+different trophic groups in an ecosystem (including fisheries), the flows 
+between them and the consumption among them ( Christensen and 
+Pauly, 1992 ), with dynamic, time-varying simulations of the 
+prey-predator relationships among the trophic groups ( Walters et al., 
+1997 ; Gascuel and Pauly, 2009 ). Due to these characteristics, it has been 
+successfully applied not only to assess the impact of fisheries on the 
+ecosystems under different fishing pressures ( S ´anchez and Olaso, 2004 ; 
+Coll et al., 2006 ; Gascuel et al., 2011 ; Gasche and Gascuel, 2013 ; Torres 
+et al., 2013 ; Bentorcha et al., 2017 ), but also to evaluate the impact of 
+fishing activities on particular trophic groups, such as marine mammals 
+and their prey, as well as the dynamics of top-down controls in the 
+food-web ( Díaz L ´opez et al., 2008 ; Piroddi et al., 2010 ; Lassalle et al., 
+2012 ; Morissette et al., 2012 ; Carlucci et al., 2020 ). 
+Several studies highlight that bycatch and interaction with fisheries 
+represent a high risk on marine megafauna, specially cetaceans, in Eu -
+ropean waters ( Díaz L ´opez, 2006 ; Rogan and Mackey, 2007 ; Fern ´an -
+dez-Contreras et al., 2010 ; Breen et al., 2017 ; Díaz L ´opez et al., 2019 ). As 
+a consequence, cetacean species such as the short-beaked common 
+dolphin ( Delphinus delphis , hereafter referred to as common dolphin), the 
+common bottlenose dolphin ( Tursiops truncatus , hereafter referred to as 
+bottlenose dolphin), and the harbour porpoise ( Phocoena phocoena ) may 
+suffer cumulative impacts derived from operational and ecological ef -
+fects ( Dolman et al., 2016 ; Murphy et al., 2019 ). This is particularly 
+relevant in areas with intense fishing activity, such as the continental 
+shelf off North-West Spain ( Surís-Regueiro and Santiago, 2014 ), where 
+the presence and distribution of these three cetacean species have been 
+documented ( Spyrakos et al., 2011 ; Díaz L ´opez and Methion, 2018 ; 
+Methion and Díaz L ´opez, 2018 ; Saavedra et al., 2018 ; Giralt Paradell 
+et al., 2019 ), result in the spatial and temporal overlap with different 
+fishing operations ( Díaz L ´opez et al., 2019 ). This overlap has been 
+suggested to be as a consequence of cetaceans and purse-seine and trawl 
+fisheries competing for the same resources ( Díaz L ´opez et al., 2019 ; 
+Giralt Paradell et al., 2020 ), and it can cause a dual impact on the 
+cetacean species. Common dolphins, bottlenose dolphins and harbour 
+porpoises are most frequently bycaught species in the region ( L ´opez 
+et al. 2002 , 2003 ; Fern ´andez-Contreras et al., 2010 ) and they are also 
+susceptible to competition for resources with fisheries ( Morissette et al., 
+2012 ). Even though operational effects on these species of cetaceans 
+have been studied in the area ( L ´opez et al. 2002 , 2003 ; Fern ´andez- -
+Contreras et al., 2010 ; Goetz et al., 2015 ), the scarce information on 
+ecosystem dynamics coupled with the difficulty in accurately detecting 
+ecological effects has led to a lack of knowledge on the ecological effects 
+of fisheries on dolphins and porpoises. Therefore, studies that combine 
+information on ecosystem functioning and dynamics with fisheries in -
+formation to better understand the ecological effects of fisheries on ce -
+taceans in the area are key to formulating and promoting conservation 
+strategies to help protect these vulnerable species. 
+This becomes increasingly important in areas where conservation 
+measures are already in place, as new information on the ecological 
+effects of fisheries on these species of cetaceans could result in im -
+provements to these measures. In Europe, the Natura 2000 network is 
+the largest coordinated network of protected areas and currently pro -
+tects around 6% of the European marine territory ( https://ec.europa.eu 
+/environment/nature/natura2000/index_en.htm , last visited on 
+February 18, 2020). This network is based on the Birds ( Council 
+Directive 79/409/EEC ) and Habitats ( Council Directive 92/43/EEC ) 
+Directives of the European Union, and aims to protect crucial areas for 
+the species and habitats listed in both Directives. Three Natura 2000 
+network sites are located in the study area (information from EUNIS: 
+https://eunis.eea.europa.eu/sites.jsp , last accessed on February 18th, 
+2020). 
+ In this regard, studies that combine different sources of infor -
+mation to better understand the ecological effects of fisheries on these 
+cetacean species could bring new perspectives to the conservation needs 
+of the species in the area and could be an additional tool to improve the 
+already existing protection measures. 
+The present work builds on previous studies that highlighted the 
+spatial and resource overlap between cetaceans and fisheries in the 
+coastal waters off North West Spain ( Díaz L ´opez and Methion, 2018 ; 
+Díaz L ´opez et al., 2019 ; Giralt Paradell et al. 2019 , 2020 ). Based on a 
+mass-balance model created to understand the Rías Baixas shelf 
+ecosystem ( Giralt Paradell et al., 2020 ), the present study develops dy -
+namic simulations between 2005 and 2017 to explore the ecological 
+effects of fisheries on common dolphins, bottlenose dolphins and 
+harbour porpoises. Additionally, 30-years forward projecting simula -
+tions covering the period 2018 – 2047 were developed to examine the 
+responses of the ecosystem, and more particularly these three species, to 
+different fishing pressures. In total, nine scenarios were developed and 
+divided into three categories: (1) two scenarios recreated the same trend 
+in fishing effort and landings between 2005 and 2017; (2) two further 
+scenarios recreated important fishing effort reductions, such as fishing at 
+maximum sustainable yield (MSY) or a 30-year total fishing ban; (3) five 
+scenarios recreated sustained annual increases in fishing effort between 
+5 and 25%. With these 30-year forward simulations the study aims to 
+better understand the ecological effects of fisheries on cetacean species 
+in the area. This better comprehension of the potential impacts caused 
+by fishing activities could lead to the improvement of already existing 
+conservation measures and management plans and to the proposal of 
+new ones with the ultimate aim of protecting, not only the cetacean 
+species present in these waters, but also the ecosystem they inhabit. 
+2. Methods 
+2.1. Study area, fisheries and period 
+The study area (hereafter referred to as “ Rías Baixas shelf 
+ecosystem ” , Giralt Paradell et al., 2020 ) is located in the continental 
+shelf waters west from the entrance of the Ría de Arousa (North-West 
+Spain), extending to the 300 m bathymetry line, and has a total area of 
+933.13 km2 
+(
+ Fig. 1 ). This coastal area exhibits a high marine primary 
+productivity because of the combination of two factors; the seasonal 
+upwelling events caused by northerly wind regimes that carry deep, 
+nutrient-rich waters masses to the photic layer, and the terrestrial runoff 
+caused by river discharge, that inputs nutrients into the coastal areas 
+( Torres et al., 2003 ). Additionally, the study area includes the Atlantic 
+Islands National Park, protecting an area of 75.82 km2 
+and 
+ three Natura 
+2000 sites. Two of these cover approximately 130 km2 
+of 
+ coastal marine 
+waters, protecting, among other species, bottlenose dolphins and 
+harbour porpoises. The third area covers 2219 km2 
+of 
+ marine coastal 
+waters and focuses exclusively on the protection of birds ( Fig. 1 ). 
+There are predominantly two types of fishing fleets operating within 
+the study area: (1) the artisanal fleet (88.87% of the total number of 
+fishing boats in Galicia in 2017) is a mixed-gear fleet that targets 
+different species depending on the season; (2) the coastal fleet (7.33% of 
+the total number of fishing boats in Galicia in 2017) is the second largest 
+fleet and uses several fishing techniques, such as trawling, purse-seine, 
+gill-net and long-line, targeting several fish species, such as blue whit -
+ing ( Micromesistius poutassou ), sardine ( Sardina pilchardus ), Atlantic 
+horse mackerel ( Trachurus trachurus ) and hake ( Merluccius merluccius ), 
+among others ( Surís-Regueiro et al., 2014 ; Xunta de Galicia, Consellería 
+do Mar 2020 ). For the purposes of this study, only the fishing boats 
+belonging to these two categories and that were registered in the fishing 
+harbour of Ribeira were incorporated into the model. With a total of 240 
+boats (5.6% of the entire Galician fishing fleet), Ribeira harbour is the 
+most important harbour in terms of landings, in the area ( Xunta de O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+3Galicia, 
+ Consellería do Mar, 2020 ). As seen in the rest of Galicia, the 
+fishing fleet in Ribeira harbour and its aggregated fishing power have 
+been steadily declining since 2005 ( Supplementary Material, 
+Figure SM1 ). Conversely, the volume of landings shows a positive trend 
+since 2005 ( Supplementary Material, Figure SM1 ). 
+The present study investigates the trophic dynamics in the Rías 
+Baixas shelf ecosystem between 2005 and 2017. Although historical 
+regional fisheries data would allow for a longer study period, a major oil 
+spill affected the Galician coast in November 2002, causing severe al -
+terations in all ecosystems ( Penela-Arenaz et al., 2009 ). Significant re -
+covery of shellfish, fish and marine birds were not reported until one to 
+three years after the disaster ( Martínez-G ´omez et al., 2009 ; Vi ˜nas et al., 
+2009 ; Moreno et al., 2011 ). Therefore, the period between 2005 and 
+2017 was chosen, as it was the longest time period available to study of 
+the trophic dynamics of the Rías Baixas shelf ecosystem, ruling out the 
+effects of the oil spill, and thus focussing on the trophic dynamics and 
+the effects of fisheries. 
+2.2. Modelling framework 
+Different components of the Ecopath with Ecosim (EwE) software 
+version 6.6.16540.0 ( www.ecopath.org ) were used to create a mass 
+balance representation of the Rías Baixas shelf ecosystem and to analyse 
+its temporal dynamics between 2005 and 2017. The resulting model was 
+then used to perform 30-years forward projecting simulations to analyse 
+the response of the ecosystem, and more particularly that of common 
+dolphins, bottlenose dolphins and harbour porpoises, to nine future 
+scenarios simulating different fishing pressures. 
+2.2.1. Mass-balance model 
+A “ Back to the Future ” approach ( Pitcher, 2001 ) was implemented to 
+create a new model of the Rías Baixas shelf ecosystem in 2005 based on 
+the mass balance model created to represent the state of the ecosystem in 
+2017 ( Giralt Paradell et al., 2020 ). The 2005 model was created with the 
+Ecopath module, that ensures the energy balance between the functional 
+groups by assuming that consumption of the functional group (i) equals 
+the sum of its production, its respiration and the unassimilated food 
+( Christensen and Walters, 2004 ). Ecopath takes into account several 
+parameters, such as the fishery catch rate (Yi
+), 
+ biomass (Bi
+), 
+ natural 
+predation rate (M2i
+), 
+ net migration rate (Ei
+), 
+ biomass accumulation rate 
+(BAi
+), 
+ ecotrophic efficiency (EEi
+), 
+ and other mortality (Pi 
+⋅ 
+ (1-EEi
+)) 
+ to 
+calculate the production rate (Pi
+) 
+ of each functional group (i) included in 
+the model: 
+Pi
+=
+ Yi
++
+ Bi
+⋅
+ M 2i
++
+ Ei
++
+ BAi
++
+ Pi
+⋅
+ ( 1   EEi
+)
+ (1) 
+This equation can be re-expressed as: 
+B ( P / B )i
+=
+∑n
+j = 1B
+j
+(
+ Q / B )j
+DC
+ij
++
+ Yi
++
+ Ei
++
+ BAj
++
+ Bi
+(
+ P / B )i
+(
+ 1   EEi
+)
+ (2)  
+where ( P / B )i 
+is 
+ the production by biomass ratio of (i), ( Q / B )j 
+is 
+ the 
+consumption by biomass ratio of (j), and DCij 
+is 
+ the fraction of prey (i) in 
+the average diet of a predator (j). From this second equation, a model -
+ling framework based on a series of linear functions, one for each 
+functional group, is developed and solved for one of the following pa -
+rameters, biomass, production by biomass ratio, consumption by 
+biomass ratio or ecotrophic efficiency ( Christensen and Walters, 2004 ). 
+The remaining three parameters need to be entered in the software for 
+each of the functional groups. Detailed information on the Ecopath 
+working procedures, capabilities and limitations has been extensively 
+documented ( Christensen and Pauly, 1992 ; Christensen and Walters, 
+2004 ; Plag ´anyi and Butterworth, 2004 ; Heymans et al., 2011 ). 
+Fig. 
+ 1. Map of the study area, showing the Rías Baixas shelf ecosystem selected to create the Ecopath model, the Atlantic Islands National Park and the three Natura 
+2000 protected sites (SCI Complexo Ons – O Grove, SCI Complexo humido de Corrubedo and SPA Espacio Marino de las Rías Baixas de Galicia. O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+4The 
+ 2005 Rías Baixas shelf ecosystem was formed by the same 23 
+functional groups that comprised the 2017 model from Giralt Paradell 
+et al., (2020) ( Table 1 ). The ecosystem was divided into the pelagic 
+domain and the non-pelagic domain and each functional group was 
+assigned to one of the domains. Species with similar ecological role were 
+aggregated in the same functional group. Biomass was only calculated 
+for the groups for which reliable information from the early 2000s was 
+available. For the rest of the groups, biomass was assumed to be the 
+same as in the 2017 model or was estimated by Ecopath ( Supplementary 
+material, Table SM1 ). Production by biomass ratio was calculated from 
+abundance estimates for common dolphin ( L ´opez et al., 2004 ) and 
+harbour porpoise ( Hammond et al., 2013 ). A precautionary approach 
+was used when no reliable information was available to calculate pro -
+duction by biomass or consumption by biomass ratios, and these were 
+assumed to be the same as in the 2017 model ( Supplementary material, 
+Table SM1 ). Information on landings, discards and fisheries was ob -
+tained using the same data sources and procedures as in the 2017 model 
+from Giralt Paradell et al., (2020) ( Supplementary material, Table SM2 ). 
+The artisanal and the coastal fleet were included into a single group to 
+better understand the combined effect of fisheries on the ecosystem. As 
+no major changes of species have been reported in the area, diet of the 
+different groups was also assumed to be the same as in 2017. 
+To assess the ecological role of the different functional groups, the 
+mixed trophic impact (MTI) routine and the keystoneness index were 
+calculated. By quantifying the direct and indirect effects of each func -
+tional group on the rest of functional groups, the MTI routine provides 
+information about the ecological role of each group within the 
+ecosystem ( Ulanowicz and Puccia, 1990 ). The keystoneness index 
+( Libralato et al., 2006 ) relates the overall effect of a functional group in 
+the food web to its biomass. This index was used to detect keystone 
+functional groups (groups that have a strong impact on the ecosystem 
+despite their small biomass ( Power et al., 1996 ) and structuring func -
+tional groups (groups that have a strong impact on the ecosystem and a 
+high biomass ( Libralato et al., 2006 )). Two methods were used to 
+calculate this index. The first one, proposed by Libralato et al. (2006) , is 
+based on the overall effect and biomass of each functional group and 
+focuses on finding the groups that have both low biomass and high ef -
+fect. The second method is based on the impact of each functional group 
+multiplied by the biomass in a descending order and focuses on high -
+lighting the importance of top predators as keystone species ( Valls et al., 
+2015 ). 
+A PREBAL ( Link, 2010 ) assessment was performed prior to the 
+balancing process to detect the groups where modelled biomass 
+diverged significantly from the expected biomass according to their 
+trophic level. To address the anomalies detected by this process, the 
+ecotrophic efficiency obtained in the 2017 model was used as an input 
+parameter instead of the biomass for the functional groups with a higher 
+than expected biomass. 
+2.2.2. Dynamic simulations 
+Once the 2005 model was balanced, the Ecosim module ( Walters 
+et al., 1997 ) of EwE was used to analyse and calibrate the temporal 
+dynamics of the Rías Baixas shelf ecosystem between 2005 and 2017. 
+Ecosim takes the static ecosystem model generated by Ecopath and 
+creates time-varying dynamic simulations of the same ecosystem ( Wal -
+ters et al. 1997 , 2000 ), based on a set of differential equations derived 
+from the Ecopath master equation (Equation (2) ) and can be expressed 
+as follows: 
+dBi
+/
+dt = ( P / Q )i
+∑
+j
+Q
+ji
+ 
+∑j
+Q
+ij
++
+ Ii
+ 
+ ( Mi
++
+ Fi
++
+ ei
+)
+ Bi
+(3)  
+where dBi
+/
+ dt is the change in biomass of group (i) over time, ( P / Q )i 
+is 
+the net growth efficiency, Mi 
+is 
+ the non-predation mortality rate, Fi 
+is 
+ the 
+fishing mortality rate, ei 
+is 
+ the emigration rate, Ii 
+is 
+ the immigration rate, 
+Bi 
+is 
+ the biomass of group (i), 
+∑j
+Q
+ji 
+is 
+ the total consumption rate by 
+group (i) and 
+∑j
+Q
+ij 
+is 
+ the predation by all predators on the same group 
+(i). These dynamic simulations assume that prey and predator biomasses 
+determine the flows between functional groups ( Walters et al., 2000 ). 
+This idea is based on the foraging arena theory ( Walters and Korman, 
+1999 ) that states that prey alternates between a vulnerable and an 
+invulnerable state with respect to predators. These concepts are incor -
+porated in the model through the consumption rates ( Qij
+), 
+ which can be 
+calculated as: 
+Qij
+=
+v
+ij
+⋅
+aij
+⋅
+ Bi
+⋅
+ Bj
+⋅
+ Ti
+⋅
+ Tj
+⋅
+ Sij
+⋅
+ Mij
+/
+Dj
+v
+ij
++
+ v′
+ij
+⋅
+ Ti
+⋅
+ Mij
++
+ aij
+⋅
+ Mij
+⋅
+ Bj
+⋅
+ Sij
+⋅
+ Tj
+/
+Dj
+(4)  
+where vij 
+is 
+ the rate at which prey move from the invulnerable to the 
+vulnerable state or vulnerability, aij 
+is 
+ the effective search rate for 
+predator j feeding on prey type i, Ti 
+and 
+ Tj 
+are 
+ the prey and predator 
+relative feeding times respectively, Sij 
+are 
+ the seasonal or long term 
+forcing effects, Mij 
+are 
+ the mediation forcing effects and Dj 
+are 
+ the effects 
+of handling time as a limit to consumption rate. The vulnerabilities 
+explain how a substantial increase of predator biomass impacts on the 
+predation mortality and they determine the mechanism that controls the 
+biomass of the different groups in the ecosystem ( Christensen et al., 
+2005 ). In this regard, bottom-up control is expressed by low vulnera -
+bility values ( vij
+=
+ 1), top-down control is represented by high vulner -
+ability values ( vij
+≫
+ 1), and mixed flow control is achieved when vij
+=
+ 2. 
+Detailed information on the Ecosim assumptions and working proced -
+ures has been documented extensively ( Walters et al. 1997 , 2000 ; 
+Christensen and Walters, 2004 ). 
+2.2.3. Time series data and fitting 
+To adjust the model to the ecosystem historical dynamics, a time 
+series on biomass, catches, fishing effort and mortality for different 
+functional groups were incorporated ( Supplementary material, 
+Table SM3 ). Partial biomass time series were calculated for common 
+dolphins, harbour porpoises and two groups of seabirds from relative 
+abundances derived from direct observations at sea ( BDRI 2018a , b ; 
+Giralt Paradell et al., 2020 ). Bottlenose dolphin was the only odontocete 
+species not included in the fitting process, as there are no reliable his -
+torical biomass data. Time series on absolute biomass, catches and 
+fishing mortalities for most fish groups, cephalopods and non-planktonic 
+crustaceans, were obtained by combining regional landing statistics 
+( Xunta de Galicia, Consellería do Mar, 2020 ) with information from 
+pelagic surveys ( ICES, 2018a , b , 2019a , b , c , d , e ). Aggregated engine 
+horsepower (expressed as HP) of the small-scale and coastal fleets Table 
+ 1 
+The 23 functional groups included in the 2005 model divided into pelagic and 
+non-pelagic domains. Further details on the group composition are included in 
+Supplementary material, Table SM1 and Tables SM5 to SM27 .  Pelagic 
+ domain Non-pelagic domain 
+Common dolphin ( Delphinus delphis ) 
+Harbour porpoise ( Phocoena 
+phocoena ) 
+Bottlenose dolphin ( Tursiops 
+truncatus ) 
+Baleen whales 
+Seabirds I, pursuit and plunge divers 
+Seabirds II, surface and aerial 
+feeders 
+Sardine ( Sardina pilchardus ) 
+Large piscivorous pelagic fish 
+Other piscivorous pelagic fish 
+Large planktivorous pelagic fish 
+Small planktivorous pelagic fish 
+Cephalopods 
+Zooplankton 
+Phytoplankton 
+Blue whiting ( Micromesistius poutassou ) 
+Atlantic horse mackerel ( Trachurus 
+trachurus ) 
+Benthopelagic fish 
+Bathydemersal piscivorous fish 
+Demersal piscivorous fish 
+Non-planktonic crustaceans 
+Macrobenthos 
+Detritus 
+Discards  
+O. Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+5operating 
+ in Ribeira harbour was obtained from regional statistics 
+( Xunta de Galicia, Consellería do Mar, 2020 ), and was used as a proxy 
+for fishing effort. To do so, the number of boats in 2005 was used to set 
+the starting relative fishing effort value (1). Then this value was changed 
+by calculating the percentage of variation in the number of fishing boats 
+from one year to the next. Daily time series on chlorophyll a concen -
+tration in waters above the Rías Baixas continental shelf ( Beca-Carretero 
+et al., 2019 ) were used as a proxy to recreate historical changes in pri -
+mary production in the area. 
+Once the time series data are included in the model, a measure of 
+goodness of fit consisting of a weighted sum of squared (SS) deviations of 
+log observed biomasses from log predicted biomasses is calculated for 
+each model run ( Christensen et al., 2005 ). Changes in fishing impact, 
+vulnerability settings, primary productivity, will alter the fit of the 
+model to the time series and thus several hypothetical models need to be 
+tested in order to find the best fit ( Heymans et al., 2016 ). To consider all 
+the possible hypothetical models, the “ fit to time series ” procedure 
+( Tomczak et al., 2012 ) was applied. This method consists of systemati -
+cally changing the number of vulnerabilities and primary productivity 
+anomalies (historical shifts in primary productivity that could impact 
+the biomasses across the ecosystem) used to fit the model to the time 
+series ( Tomczak et al., 2012 ). To reduce human error in this critical 
+process the automated “ stepwise fitting ” procedure of Ecosim was used 
+( Scott et al., 2016 ). Vulnerability parameters were searched by predator 
+for all iterations. Eight different groups of hypothetical models were 
+tested ( Table 3 ). The SS and the Akaike Information Criterion (AIC), 
+which penalises for overparameterisation ( Akaike, 1974 ), were used to 
+find the model with the best fit for each group of hypothetical models. In 
+this regard, the models with the lowest SS, AIC and AICc, which corrects 
+for small sample sizes ( Burnham et al., 2004 ), were considered the best 
+fits for each group of hypothetical models. 
+2.2.4. Assessing model uncertainty 
+Monte-Carlo simulations can be used to evaluate the uncertainty of 
+Ecopath input parameters on Ecosim simulations ( Heymans et al., 
+2016 ). The model that showed the best fit to the time series data after 
+the automated stepwise fitting procedure was used to run 100 
+Monte-Carlo simulations. Ecopath input parameters (biomass, produc -
+tion by biomass and consumption by biomass ratios and ecotrophic ef -
+ficiency) were randomly selected with a coefficient of variation of 0.1 
+around them giving 100 different outcomes. These results were used to 
+assess the uncertainty of the input data and to plot the 5th and 95th 
+percentile confidence intervals for the fitted biomass ( Corrales et al., 
+2017 ). 
+2.3. Future scenarios 
+The model with the best fit was used to perform the 30-year forward 
+projecting simulations after the time-series period to predict the impact 
+of fishing on the ecosystem in general, and, more particularly, on 
+common dolphins, bottlenose dolphins and harbour porpoises. To do so, 
+nine scenarios representing different plausible fishing effort levels were 
+examined and are detailed below. To prioritise the effects of fishing 
+pressure and minimize the influence of seasonal and annual primary 
+production fluctuations, the forcing function was left constant 
+throughout the 30-year forward projecting simulations.  
+a. Base scenario: This scenario was conceived to assess the impact of 
+fishing if the 2017 conditions were kept throughout the forward 
+simulation. To do so, the 2017 fishing effort and fishing mortalities 
+for the different functional groups were kept constant throughout the 
+30-year forward projecting simulation.  
+b. Same trend scenario: The times series used to fit the model showed a 
+2.6% annual decrease in fishing effort and a 3% increase in landings 
+between 2005 and 2017. This scenario reproduces those trends 
+throughout the 30 year forward simulation.  
+c. Fisheries ban scenario: A temporal 30-year fisheries closure was 
+considered in this scenario. To simulate this closure, both fishing 
+effort and fishing mortalities were set to 0 throughout the 30 year 
+forward simulation.  
+d. Fishing mortality at maximum sustainable yield (FMSY
+) 
+ scenario: 
+According to the United Nations Convention on the Law of the Sea, 
+coastal states should manage fisheries aiming to achieve maximum 
+sustainable yield ( UNCLOS, 1982 ). The Member States of the Euro -
+pean Union agreed to achieve this goal for all depleted stocks by 
+2015, at the World Summit on Sustainable Development held in 
+Johannesburg in 2002 ( WSSD, 2002 ). This agreement was then 
+further regulated within the Common Fisheries Policy (CFP) of the 
+European Union that extended the deadline to 2020 ( EC, 2013 ). The 
+fishing mortality at maximum sustainable yield (FMSY
+) 
+ for each 
+functional group was calculated for 2017 ( Supplementary Material, 
+Table SM3 ). Fishing effort was set at the same value as in 2017. Both 
+fishing mortalities at MSY and fishing effort were kept constant 
+throughout the forward simulation.  
+e. Increased fishing effort scenarios: Five additional scenarios (e1
+, 
+ e2
+, 
+e3
+, 
+ e4
+, 
+ e5
+) 
+ were conceived to evaluate the effects of a sustained 
+annual increase in fishing effort on the ecosystem. Five different 
+annual increases (e1 
+=
+ 5% increase, e2 
+=
+ 10% increase, e3 
+=
+ 15% 
+increase, e4 
+=
+ 20% increase and e5 
+=
+ 25% increase) were considered. 
+Fishing mortality was increased accordingly for each scenario. 
+3. Results 
+3.1. Balancing the mass-balance model 
+The Ecopath model resulting from the “ Back to the Future ” approach 
+had a pedigree index of 0.532, which was above the mean pedigree 
+index calculated for other studies ( Morissette et al., 2007 ; Coll ´eter et al., 
+2015 ). The model was unbalanced and had to be readjusted. Six groups, 
+including blue whiting, Atlantic horse mackerel, large piscivorous 
+pelagic fish, other piscivorous pelagic fish, small planktivorous pelagic 
+and demersal piscivorous fish, showed an ecotrophic efficiency higher 
+than one. The PREBAL assessment ( Supplementary material Figure SM2 ) 
+showed that these species had a biomass notably higher than the one 
+expected from a group of their trophic level. In addition, six groups 
+showed cannibalism within their diets, although this represented less 
+than 5% of their diets, except for the zooplankton. Although cannibalism 
+can constitute a problem, especially if it represents more than 10% of a 
+groups diet ( Christensen et al., 2005 ), no adjustments were made as 
+percentages for most groups were lower than 5% ( Heymans et al., 2016 ). 
+The same precautionary approach as in Giralt Paradell et al., (2020) was 
+applied to balance the model. The results of the balanced model are 
+shown in Table 2 . 
+Similar to what was found in the 2017 ecosystem model ( Giralt 
+Paradell et al., 2020 ), the method proposed by Libralato et al. (2006) 
+showed that the functional group with the highest keystoneness index 
+was small planktivorous pelagic fish ( Fig. 2 and Supplementary Material 
+Table SM4 ). Other groups such as zooplankton, phytoplankton and blue 
+whiting had a high keystoneness index, but they showed a higher 
+biomass, especially zooplankton. Hence, these groups could be consid -
+ered as important structuring groups of the ecosystem ( Libralato et al., 
+2006 ). Common dolphins and harbour porpoises had a lower key -
+stoneness index than bottlenose dolphins, suggesting that their impact 
+on the ecosystem was lower ( Fig. 2 and Supplementary Material, 
+Table SM4 ). The second method used to assess the keystone species 
+( Valls et al., 2015 ) ranked three species of top predators (large pisciv -
+orous pelagic fish, bathydemersal piscivorous fish and bottlenose dol -
+phin) and small planktivorous pelagic fish among the four functional 
+groups with a higher keystoneness. This method confirmed small 
+planktivorous pelagic fish as a key functional group, and highlighted the 
+importance of top predators in the Rias Baixas shelf ecosystem. In 
+contrast, both methods ranked other top predators such as common O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+6dolphins, 
+ harbour porpoise and both groups of seabirds among the 
+groups with lower keystoneness. 
+The MTI routine showed that the functional groups with high key -
+stoneness indices were also crucial groups in supporting the ecosystem 
+( Fig. 3 ). For instance, small pelagic fish, zooplankton and phytoplankton 
+had a positive impact on most functional groups, whereas blue whiting 
+had a negative impact. This highlights the importance of these groups in 
+the ecosystem, and suggests a mix of top-down and bottom-up 
+ecosystem control, as seen in the 2017 ecosystem model ( Giralt Parad -
+ell et al., 2020 ). Therefore, the 2005 Rías Baixas shelf ecosystem could 
+be described as a wasp-waist ecosystem ( Cury et al., 2000 ). Additionally, 
+small planktivorous pelagic fish, zooplankton and phytoplankton, 
+together with blue whiting, Atlantic horse mackerel and to a lesser 
+extent benthopelagic fish, had positive effects on common dolphins, 
+harbour porpoises and bottlenose dolphins. 
+The routine also allowed the identification of the impact of the 
+coastal fisheries on the different functional groups. The results show that 
+the largest negative impacts were exerted on demersal piscivorous fish 
+and large planktivorous fish. However, lower impacts were caused to 
+Atlantic horse mackerel, sardine and bathydemersal piscivorous fish. 
+These functional groups included species that are components of com -
+mon dolphin, harbour porpoise and bottlenose dolphin diet. In addition, 
+coastal fisheries showed an indirect impact on the three species of ce -
+taceans, in particular on common and bottlenose dolphins. 
+3.2. Fitting the model to time series 
+The automated stepwise fitting procedure analysed 398 hypothetical 
+models ( Table 3 ). This process was used to choose the model with the 
+lowest AICc and the lowest SS for each group of hypothetical models, 
+which corresponded to the best fit for that particular group. The model 
+with the best fit (lowest AICc = 16.6) was achieved when trophic effects 
+and forcing function were included in the stepwise fitting procedure. 
+This model included 11 trophic effects and 4 spline points in the envi -
+ronmental forcing function, and improved the fit by 58.7% compared to 
+the baseline model (AICc = 59). 
+The best model was used to fit the data to the time series covering the 
+period from 2005 to 2017. In general, the historical biomass trends for 
+most of the functional groups included in the time series were well 
+reproduced by the model ( Fig. 4 ). Comparing the observed biomass data 
+with the model predictions, the functional groups with the best fit were 
+sardine, Atlantic horse mackerel and bathydemersal piscivorous fish. 
+The uncertainty addressed with the Monte-Carlo simulations was lowest 
+for Atlantic horse mackerel, small planktivorous pelagic fish and bath -
+ydemersal piscivorous fish, which showed very narrow confidence in -
+tervals throughout the time series period, and highest for demersal 
+piscivorous fish ( Fig. 4 ). The best fitting model reproduced catch trends 
+differently depending on the functional group. For instance, benthope -
+lagic fish, bathydemersal piscivorous fish and cephalopods were the 
+functional groups for which the predicted catches better replicated the 
+observed trends, whereas catches were underestimated or overestimated 
+for other functional groups ( Supplementary material, Figure SM3 ). 
+3.3. Analysing the forward simulations 
+The results of the 30-year forward projecting simulations, created to 
+assess the impact of different fishing efforts on common dolphins, bot -
+tlenose dolphins and harbour porpoises, showed different results for the 
+different species. The evolution of the relative biomass over the 
+modelled period was assessed for these species under the nine scenarios 
+( Fig. 5 ). In general, all three species showed a decreasing biomass trend 
+in the simulations in which fishing effort was increased and a steady 
+increasing trend in the FMSY scenario. Some particularities were found 
+for each species. 
+3.3.1. Forward simulations for common dolphins 
+In general terms, the common dolphin ’ s biomass was predicted to 
+increase steadily in the base, same trend, no fishing and FMSY scenarios. 
+However, this increase was lower if conditions were kept at a similar Table 
+ 2 
+Results of the balanced Ecopath 2005 model using the “ Back to the Future ” 
+approach. Input parameters are shown in bold letters and stars show Ecotrophic 
+Efficiencies taken from the 2017 model to balance the model.  Group 
+ TL B P/B Q/B EE P/Q 
+Common dolphin 4.58 0.036 0.05 23 0 0 
+Harbour porpoise 4.37 0.001 0.11 28.08 0 0 
+Bottlenose dolphin 4.73 0.076 0.05 19.08 0 0 
+Baleen whales 3.52 0.061 0.06 6.46 0 0.01 
+Seabirds 1: Pursuit and 
+plunge divers 
+3.89 0.001 0.32 82.79 0 0 
+Seabirds 2: Surface and 
+aerial pursuit feeders 
+3.56 0.001 0.25 182.12 0 0 
+Blue whiting 3.46 29.892 1.06 6.52 0.99* 0.16 
+Sardine 2.96 78.695 0.58 8.8 0.24 0.07 
+Atlantic horse mackerel 3.37 27.434 0.64 6.47 0.80* 0.1 
+Large piscivorous 
+pelagic fish 
+4.68 0.502 0.82 7.8 0.45* 0.11 
+Other piscivorous 
+pelagic fish 
+4.3 2.357 0.82 6.5 0.43* 0.13 
+Large planktivorous 
+pelagic fish 
+3.57 9.349 1.14 6.28 0.85 0.18 
+Small planktivorous 
+pelagic fish 
+3.37 25.185 1.98 9.13 0.83* 0.22 
+Benthopelagic fish 2.72 4.868 0.68 3.62 0.71* 0.19 
+Bathydemersal 
+piscivorous fish 
+4.41 3.269 1.09 4.04 0.82* 0.27 
+Demersal piscivorous 
+fish 
+4.34 4.224 0.67 3.81 0.99* 0.18 
+Cephalopods 4.25 1.906 3.2 7.5 0.92* 0.43 
+Non-Planktonic 
+Crustaceans 
+3.24 21.849 2.35 6.33 0.02* 0.37 
+Macrobenthos 2.12 15.14 2.5 6.5 0.24* 0.38 
+Zooplankton 2.37 128.32 39.08 80 0.80* 0.49 
+Phytoplankton 1 47.246 158.04 0 0.83* 0 
+Discards 1 5.062 0 0 0 0 
+Detritus 1 70 0 0 0.34 0  Table 
+ 3 
+Results of the automated “ stepwise fitting ” procedure, showing the best fit for each of the eight groups of hypothetical models tested. The model with the best overall fit 
+is highlighted in bold letters. N shows the number of hypothetical models tested in each group. The number of parameters (K) equals the number of vulnerability 
+parameters (TE) plus the number of primary production spline points (PP). The fit improvement shows the percentage of reduction of SS compared to the baseline 
+hypothetical model.  Group 
+ Hypothetical models N TE PP K Min SS AICc Fit improvement 
+1 Baseline 1 0 0 0 323.4 59 – 
+2 Baseline + trophic effects 22 7 0 7 275 32.2 45.4% 
+3 Baseline + primary productivity anomalies 11 0 3 3 318.7 61.5   4.2% 
+4 Baseline þ trophic effects and primary productivity anomalies 165 11 4 15 240.4 16.6 58.7% 
+5 Fishing 1 0 0 0 339.9 71.9   21.9% 
+6 Fishing + trophic effects 22 6 0 6 292.5 45.8 22.4% 
+7 Fishing + primary productivity anomalies 11 0 2 2 339.9 75.9   28.6% 
+8 Fishing + trophic effects and primary productivity anomalies 165 6 2 8 266.5 26.4 55.3%  
+O. Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+7level 
+ to those found in 2017. Conversely, scenarios that simulated an 
+increase in fishing effort, predicted mostly a decrease in common dol -
+phin ’ s biomass throughout the 30-year forward projecting simulation. In 
+these cases, biomass was predicted to have halved by 2043 compared to 
+the start of the simulation. 
+3.3.2. Forward simulations for harbour porpoises 
+Predicted biomass trends for harbour porpoises showed a similar 
+pattern for most scenarios. With the exception of the FMSY scenario, 
+which exhibited a steady increase in biomass throughout the 30-year 
+forward projecting simulation, the predictions for this species showed 
+an increasing trend until 2025 – 2030 followed by a decrease until the 
+end of the forward simulation. Harbour porpoise relative biomass was 
+predicted to be less than 1 at the end of the forward simulation in all 
+scenarios except for the FMSY. The biggest decreases in biomass were 
+shown by the no fishing, the same trend scenarios and when fishing 
+effort was increased by at least 15%, for which relative biomass would 
+be lower than 0.5 by 2043. 
+Fig. 
+ 2. Results of the two methods used to calculate the Keystoneness (left, Libralato et al., 2006 ; right, Valls et al., 2015 ) of the 2005 Rías Baixas ecosystem model. 
+Circles on the left plot are scaled to the biomass of the group. Functional groups on the right are ranked according to their keystoneness in ascending order. The 
+functional groups are: 1: Common dolphin; 2: Harbour porpoise; 3: Bottlenose dolphin; 4: Baleen whales; 5: Seabirds 1; 6: Seabirds 2; 7: Blue whiting; 8: Sardine; 9: 
+Atlantic horse mackerel; 10: Large piscivorous pelagic fish; 11: Other piscivorous pelagic fish; 12: Large planktivorous pelagic fish; 13: Small planktivorous pelagic 
+fish; 14: Benthopelagic fish; 15: Bathydemersal piscivorous fish; 16: Demersal piscivorous fish; 17: Cephalopods; 18: Non-Planktonic crustaceans; 19: Macrobenthos; 
+20: Zooplankton; 21: Phytoplankton. 
+Fig. 
+ 3. Mixed Trophic Impact (MTI) plot of the 2005 Rías Baixas shelf ecosystem. The plot indicates the relative impacts caused by the impacting functional groups 
+(rows) on the impacted functional groups (columns). Blue boxes indicate positive impacts whereas red boxes show negative impacts. The size of the box shows the 
+degree of the impact with bigger boxes showing more important impacts. (For interpretation of the references to colour in this figure legend, the reader is referred to 
+the Web version of this article.) O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+83.3.3.
+ Forward simulations for bottlenose dolphins 
+Two contrasted general trends in bottlenose dolphin relative biomass 
+could be identified throughout the nine 30-year forward projecting 
+simulations. On the one hand, biomass was predicted to increase at 
+different rates in the four scenarios that simulated similar conditions to 
+2017 or a reduction in fishing effort. The most optimistic scenario, 
+predicted a 4-fold biomass increase by 2043. On the other hand, the 
+biomass was predicted to decrease in the scenarios with a more intense 
+fishing effort, dropping to less than half the biomass of 2005. 
+3.3.4. Changes in diet composition 
+When comparing the evolution of the predicted diet composition 
+between the different scenarios of common dolphin, harbour porpoise 
+and bottlenose dolphins, three main patterns could be identified ( Fig. 6 , 
+Table 4 and Supplementary material Figures SM4 – SM6 ). First, in those 
+scenarios that kept conditions similar to 2017 or that simulated a 
+decrease in fishing effort, the three species tended to show more diverse 
+diets. In these cases, the predominant group were predicted to be 
+demersal piscivorous fish for both dolphin species and Atlantic horse 
+mackerel for harbour porpoises, although they were never predicted to 
+exceed 60% of the diet composition. Secondly, diets tended to be less 
+varied when the fishing effort was increased. In the most extreme cases, 
+common and harbour porpoises were predicted to feed only on one 
+functional group. Thirdly, increasing the fishing effort resulted in 
+common dolphins and harbour porpoises, and to a lesser extent, bot -
+tlenose dolphins, feeding almost exclusively on small pelagic planktiv -
+orous fish. 
+Fig. 
+ 4. Biomass trends obtained for the Ecosim model prior to the automated stepwise fitting process (grey line) and the model with the lowest SS and lowest AICc 
+(orange line). The grey shaded area represents the 5th and 95th percentiles obtained during the Monte-Carlo simulations. Black dots show the observed biomass. (For 
+interpretation of the references to colour in this figure legend, the reader is referred to the Web version of this article.) O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+94.
+ Discussion 
+Food-web dynamics models can help elucidate the extent of opera -
+tional and ecological impacts of fisheries on cetaceans, as a first step 
+towards more effective ecosystem conservation and management plans. 
+In this regard, findings of this study provide insights on the ecological 
+effects of fisheries on common dolphins, bottlenose dolphins and 
+harbour porpoises in a coastal area, impacted by fishing activities, and 
+highlight the applicability of EwE models to cetacean conservation. This 
+work could serve as a starting point to develop comprehensive tools that 
+could be used to better realise an ecosystem approach to fisheries 
+management, while ensuring the conservation of top predators. 
+4.1. Assumptions and limitations of the model 
+The 2005 and 2017 Ecopath models and the time series used in this 
+study were built prioritising the best available local data. High resolu -
+tion abundance data were obtained for common dolphins, harbour 
+porpoises and both seabird functional groups for the last two years of the 
+simulation. However, a complete biomass time series for these species 
+could not be obtained due to the lack of regular biomass and population 
+trend assessments in the area prior to 2015. Similarly, bottlenose dol -
+phins were not included in the time series due to the lack of data on the 
+species abundance in the area between 2005 and 2017. Another limi -
+tation of the models was that 70% of the fish functional groups resulted 
+from aggregating several species with similar trophic ecology, which 
+could have led to an underrepresentation of species interactions ( Alex -
+ander et al., 2015 ). Additionally, biomass estimates and catches for the 
+fish and cephalopods functional groups were obtained from official 
+regional landing statistics, potentially leading to an underrepresentation 
+of the non-commercial species. However, commercial species comprised 
+98% and 90% of the demersal and pelagic fish communities ’ biomass, 
+respectively ( Fari ˜na et al., 1997 ; Santos et al., 2013 ), confirming the 
+representativeness of the fish and cephalopod functional groups used in 
+this study. A further potential side effect of using official landing sta -
+tistics is that they tend to underrepresent real catches ( Coll et al., 2014 ), 
+and therefore, findings for the fish and cephalopod functional groups 
+should be considered carefully. However, in the absence of more reliable 
+data, regional landing statistics were the best local available data to use 
+as input parameters for both Ecopath models and Ecosim time series. 
+Another constraint relates to the Ecosim dynamic simulations. These 
+simulations did not address the potential real diet variations over time. 
+However, since the dynamic simulations covered 13 years, local, 
+quantitative diet studies conducted in a similar time frame to the present 
+study were prioritised ( Giralt Paradell et al., 2020 ), and assumed to be 
+representative for the whole period. Despite these limitations and pit -
+falls, Ecopath with Ecosim proved to be a useful tool to represent the 
+time-dynamic variations of the Rías Baixas shelf ecosystem and to assess 
+the impact of fishing activities on marine top predators. 
+4.2. Time series fitting 
+The duration of the time series period was determined by the Prestige 
+oil spill, that occurred in November 2002. The starting point of the 
+dynamic simulations was set to 2005, to minimize the influence of the 
+oil spill in the ecosystem dynamics and to focus on the effects of fishing 
+activities on common and bottlenose dolphins, harbour porpoises and 
+the ecosystem. 
+The best model explained 59% of the variability of the data and 
+suggested that trophic interactions were the main driver influencing the 
+Rías Baixas shelf ecosystem. These results are in line with what have 
+been seen in other areas ( Coll et al., 2008 ; Corrales et al., 2017 ). The 
+trophodynamic model captured the overall biomass and catches varia -
+tions over time for most functional groups. However, it was unable to 
+reproduce the fluctuating biomass trend or the observed catches of small 
+and large planktivorous pelagic fish. This could be explained because 
+these functional groups included species such as the European anchovy 
+( Engraulis encrasicolus ) and the Atlantic mackerel ( Scomber scombrus ), 
+which may be subjected to migratory and seasonal patterns that extend 
+beyond the scope of the area studied here ( Uriarte et al., 1996 ; Murta 
+et al., 2008 ). Additionally, yearly fluctuations have been documented 
+for small pelagic fish in other areas ( Coll et al., 2006 ; Lindegren et al., 
+2013 ; Van Beveren et al., 2016 ). These have been linked to recruitment 
+variability determined by environmental factors such as upwelling in -
+tensity and density-dependent processes ( Borja et al., 2008 ; Lindegren 
+et al., 2013 ; Bakun et al., 2015 ), ultimately affecting fisheries ( Uriarte 
+et al., 1996 ; Van Beveren et al., 2016 ). The uncertainties addressed with 
+the Monte-Carlo simulations showed a narrow confidence interval 
+around the model predictions with a slight increase at the end of the 
+time series period for most groups, giving strength to the prediction 
+outcomes. 
+4.3. Analysing the scenarios 
+The 30-year forward projecting simulations highlighted the vulner -
+ability of common dolphins, bottlenose dolphins and harbour porpoises 
+to fishing activities. The model drew different general predictions for 
+harbour porpoises and both dolphin species, dividing the three cetacean 
+species into two groups. In this regard, harbour porpoise biomass was 
+predicted to decrease in all scenarios except when fishing effort was set 
+Fig. 
+ 5. Common dolphin, harbour porpoise and bottlenose dolphin relative biomass evolution between 2005 and 2043 under the nine future scenarios. The grey 
+vertical dashed line represents the end of the time series period and the start of the 30-year forward projecting simulations. The black line to the left of the grey 
+vertical dashed line represents the model with the best fit to the time series. The lines to the right of the dashed line represent the predicted relative biomasses under 
+the different scenarios. O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+10
+Fig. 
+ 6. Evolution of the contribution of the different functional groups in the diet of common dolphins, harbour porpoises and bottlenose dolphins for the base, no 
+fishing and increased fishing 25% scenarios. The black lines on the graphs above show the common dolphin ’ s relative biomass trends for each scenario. O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+11to 
+ ensure MSY, whereas common and bottlenose dolphins showed 
+increasing trends for all scenarios in which fishing effort was not 
+increased. This became especially apparent in the no fishing scenario, 
+which predicted a biomass increase for both dolphin species, but fore -
+casted the biggest decrease in harbour porpoise biomass. With no fishing 
+boats operating in the area and an increase in bottlenose dolphin 
+biomass, other mechanisms such as interference competition or trophic 
+competition between these species could take place ( Spitz et al., 2006 ; 
+Fern ´andez et al., 2013 ; M ´endez-Fernandez et al., 2013 ), despite the 
+spatial separation that both species show in the area ( Díaz L ´opez and 
+Methion, 2018 ), and cause the decrease of this small cetacean species. 
+Similarly, both same trend and base scenarios predicted an increase 
+in common and bottlenose dolphin biomass but a decrease for harbour 
+porpoise. Accurate data on fishing effort and catches in Galicia are 
+difficult to obtain ( Villasante et al., 2010 ). As a result of the CFP, the 
+European Union urged Member States to adjust their fishing capacity to 
+the fishing opportunities over time by decommissioning specific types of 
+fishing vessels ( EC, 2002 ). However, these measures have been proven 
+insufficient due to inadequate methods to calculate the real fishing effort 
+and capacity of the fleets, ineffective implementation of the measures to 
+reduce the fishing effort, and misreporting of fishing power ( European 
+Court of Auditors, 2011 ; European Union, 2019 ). These aspects could 
+explain inconsistencies found in the regional statistics ( Xunta de Galicia, 
+Conselleria do Mar, 2020 ) that showed an increasing trend for landings 
+between 2005 and 2017, while the number of boats and the fishing 
+power decreased steadily ( Supplementary Material, Figure SM1 ). 
+Additionally, illegal, unreported and unregulated (IUU) fishing has been 
+estimated at around 40% in North-West Spain ( Villasante et al., 2015 ), 
+hampering the understanding of the effects of fisheries on the ecosystem 
+( Coll et al., 2014 ). Since fishing effort and catches included in this study 
+come from official statistics, IUU fisheries were not accounted for, and as 
+a consequence, these two scenarios might be overly optimistic when 
+predicting cetacean biomass throughout the simulation(s). 
+Only the FMSY scenario suggested that achieving the CFP objective 
+of exploitation at MSY level would also benefit the small cetaceans in the 
+Rías Baixas shelf ecosystem. However, a number of assumptions were 
+made here. First, MSY was assumed to be constant throughout the 
+simulation and therefore, a constant fishing mortality value was applied 
+to this scenario, not accounting for probable future changes that may 
+occur as a result of fluctuating environmental conditions or management 
+decisions, which could result in substantially different results ( Serpetti 
+et al., 2017 ). Second, although it seems that adopting an MSY approach 
+to fisheries management would be a first step in the right direction, this 
+would not necessarily ensure the conservation of the species and the 
+ecosystem ( Moore, 2013 ; Prellezo and Curtin, 2015 ). Traditional MSY 
+approaches build on single stock fisheries management methods and aim 
+to obtain the maximum sustainable yield of different fish stocks. How -
+ever, they do not consider fish stocks as part of an ecosystem, failing to 
+capture the multispecific nature of ecosystems, and the relationships 
+among the different trophic groups ( Walters et al., 2005 ). Recently, 
+multispecies MSY approaches have been developed to account for the 
+interactions between different fish species in mixed fisheries ( St ¨abler 
+et al., 2016 ; Thorpe, 2019 ). However, these might not be sufficient to 
+ensure both sustainable fishing and ecosystem conservation ( Legovi ´c 
+et al., 2010 ; Smith et al., 2011 ). 
+4.4. Ecological effects of fisheries 
+Competition for resources between fisheries has been suggested to be 
+one of the main drivers of cetacean disappearance in some areas ( Bearzi 
+et al., 2008 ; Piroddi et al., 2011 ), and has been suggested to occur in the 
+North-East Atlantic ( Lassalle et al., 2012 ; Santos et al., 2014 ). Addi -
+tionally, spatial overlap between cetaceans and fishing activities tar -
+geting shared resources ( Díaz L ´opez and Methion, 2018 ; Díaz L ´opez 
+et al., 2019 ; Giralt Paradell et al., 2019 ) and operational effects ( L ´opez 
+et al. 2002 , 2003 ; Goetz et al., 2015 ) have been documented previously 
+in the Rías Baixas shelf ecosystem. However, resource overlap is not a 
+sufficient condition for interactions between cetaceans and fisheries, 
+unless negative or positive impacts can be proven ( Santos et al., 2014 ). 
+In this regard, the MTI routine showed that fisheries had negative im -
+pacts on common dolphins, harbour porpoise and bottlenose dolphins. 
+Fisheries also had a negative impact on functional groups that included 
+key components of the cetaceans ’ diet, such as demersal piscivorous fish, 
+large planktivorous pelagic fish and to a lesser extent, Atlantic horse 
+mackerel and sardine. These results would support the idea that, indeed 
+detrimental effects of fisheries on common dolphins, harbour porpoises 
+and bottlenose dolphins are occurring in the area, as has been reported 
+in other regions ( Piroddi et al., 2011 ). 
+Although the MTI routine refers to a specific moment in time (in this 
+case, the 2005 Rías Baixas shelf ecosystem, Valls et al., 2015 ), the sce -
+narios with increased fishing effort, further explored the effects of the 
+impacts of the fishing activities on the different cetacean species. These 
+analyses involved two main aspects, decreasing cetacean biomass trends 
+and a tendency towards less varied diets with increased fishing effort, 
+suggesting an indirect effect of fisheries on all three cetacean species 
+included in the model through their diet ( Walters et al., 2005 ). 
+The predicted generalised collapse of most fish stocks caused by 
+higher fishing effort would result in a trend towards less varied diets for 
+the three cetacean species, especially in the scenarios with higher fishing 
+effort. In these cases, their diet would be almost exclusively composed 
+by small pelagic planktivorous fish, which is one of the keystone func -
+tional groups of the Rías Baixas shelf ecosystem ( Giralt Paradell et al., 
+2020 ). Small pelagic fish are energy rich species, capable of meeting the 
+energetic requirements of common dolphins, harbour porpoises and 
+bottlenose dolphins ( Spitz et al., 2010 ). However, collapses in multiple 
+fish stocks could hinder the ability of generalist cetacean species, such as 
+the ones studied here, to switch to another prey if their preferred prey 
+becomes unavailable ( Jennings et al., 2001 ). As a result, they would Table 
+ 4 
+Percentage of contribution of the different functional groups (only the most relevant functional groups are shown) to the diet of common dolphin, harbour porpoise and 
+bottlenose dolphin at the end of each scenario. The group with a higher percentage is shown in bold letters. Abbreviations can be understood as follows: S : Sardine; 
+AHM : Atlantic horse mackerel; LPPF : Large piscivorous pelagic fish; OPP : Other piscivorous pelagic fish; LPLP : Large piscivorous pelagic fish; SPLP : Small piscivorous 
+pelagic fish; BP : Benthopelagic fish; BDP : Bathydemersal piscivorous fish; DP : Demersal piscivorous fish; C : Cephalopods.  Scenario 
+ Common dolphin Harbour porpoise Bottlenose dolphin 
+S OPP LPLP SPLP DP C S AHM SPLP BP C LPPF OPP LPLP SPLP BP DP C 
+Base 33.8 6.2 7.6 7.3 30.5 5.2 14.9 34.0 29.4 8.5 10.8 3.5 17.9 10.7 0.8 2.5 53.4 5.4 
+Same trend 0.0 10.3 1.0 22.4 48.4 15.0 0.0 1.6 63.4 12.4 21.7 6.0 19.9 0.9 1.7 2.8 57.6 10.3 
+No Fishing 0.0 0.8 16.6 2.7 75.9 2.0 0.0 38.4 37.9 2.5 14.4 3.1 1.4 13.9 0.2 0.1 79.3 1.3 
+FMSY 0.0 2.0 28.8 8.2 44.0 5.5 0.0 57.4 28.2 3.2 9.8 4.3 4.1 28.1 0.6 0.8 53.6 4.0 
+Increased Fishing 5 57.3 11.0 0.2 14.2 0.0 9.3 16.0 0.7 35.1 36.2 12.0 6.3 48.1 0.4 2.4 25.8 0.0 14.5 
+Increased Fishing 10 0.7 19.7 0.1 58.3 0.0 20.0 0.1 0.0 83.4 1.4 15.0 11.0 58.4 0.2 6.7 1.2 0.0 21.5 
+Increased Fishing 15 0.0 20.3 0.0 78.4 0.0 1.0 0.0 0.0 99.3 0.0 0.7 2.6 83.0 0.0 12.4 0.0 0.0 1.5 
+Increased Fishing 20 0.0 10.9 0.0 88.8 0.0 0.2 0.0 0.0 99.9 0.0 0.1 0.3 75.7 0.0 23.5 0.0 0.0 0.6 
+Increased Fishing 25 0.0 0.6 0.0 99.4 0.0 0.0 0.0 0.0 100.0 0.0 0.0 0.1 13.6 0.0 86.2 0.0 0.0 0.0  
+O. Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+12depend 
+ upon a reduced group of fish species the recruitment and 
+biomass of which have shown important fluctuations in the past, and are 
+highly determined by environmental changes that influence primary 
+production ( Cabrero et al., 2019 ). Indeed, climate change makes the 
+evolution of primary productivity in shelf waters off North-West Spain in 
+the coming years unclear, and some studies predict an important 
+decrease ( P ´erez et al., 2010 ), while others predict an increase ( Casabella 
+et al., 2014 ). Therefore, these fluctuations, which were not considered in 
+the 30-year forward projecting simulations, could strongly influence 
+small pelagic fish, ultimately determining the presence of common 
+dolphins, harbour porpoises and bottlenose dolphins in the area. 
+4.5. Fishing pressure, an additional threat on cetacean species 
+Currently, bycatch and marine traffic are major threats for cetacean 
+populations in Galicia ( Díaz L ´opez and Methion, 2018 ; Murphy et al., 
+2019 ). Bycatch, for instance, has been estimated to kill around 1623 
+dolphins annually in Galicia ( L ´opez et al., 2003 ). Of those, 3% are 
+bottlenose dolphins, and 97% are small cetaceans, mostly common 
+dolphins and, to a much lesser extent, harbour porpoises. These high 
+bycatch numbers are already likely to exceed the limits set to achieve 
+Good Environmental Status for common dolphins in Galician waters 
+( Fern ´andez-Contreras et al., 2010 ; Saavedra et al., 2018 ), and could 
+have a similar impact on bottlenose dolphins and harbour porpoises 
+( Llavona Vallina, 2018 ). Additionally, concerns raised about the in -
+crease in bycatch of common dolphins in the Bay of Biscay and adjacent 
+areas, suggest that real bycatch mortality could be underestimated 
+( Peltier et al., 2019 ; ICES, 2020 ), and led the European Commission to 
+urge Spain to implement effective bycatch control measures ( European 
+Commission, 2020 ). However, these previous studies focussed only on 
+the effects of bycatch and did not consider other aspects. Recently, 
+fisheries were found to target fish species of intermediate-high trophic 
+levels in the Rías Baixas shelf ecosystem, potentially altering ecosystem 
+functioning and ultimately affecting top predators ( Giralt Paradell et al., 
+2020 ). This aspect was further investigated in the present study, 
+showing that the ecological effects of fisheries on common dolphins, 
+bottlenose dolphins and harbour porpoises probably pose the major 
+threat to these species, adding to already existing threats and seriously 
+endangering their conservation. 
+The situation would be especially critical for harbour porpoise, as the 
+30-year forward projecting simulations predicted a decrease in the 
+species biomass in almost all scenarios. Harbour porpoises in the Iberian 
+coast form a distinct ecotype and population ( Fontaine et al., 2014 ). 
+Despite a significant gene flow, genetic characteristics and habitat 
+preferences differentiate the Iberian ecotype from other North-East 
+Atlantic populations ( Fontaine et al., 2014 ; Llavona Vallina, 2018 ). 
+Additionally, the seasonality and the relatively small extension of the 
+upwelling region along the Iberian coast, may reduce available food 
+resources for the species and trigger emigration from the area ( Fontaine 
+et al., 2014 ). Although no competition between bottlenose dolphins and 
+harbour porpoise has been reported in the Rías Baixas 
+( M ´endez-Fernandez et al., 2013 ; Díaz L ´opez and Methion, 2018 ), the 
+present study predicts a reduction in fish resources due to fishing ac -
+tivities, which could ultimately lead to competition for prey, particularly 
+among these two top predators. Harbour porpoise conservation status in 
+the area is already delicate due to their reduced population size and the 
+impact of boat traffic ( Díaz L ´opez and Methion, 2018 ). The combination 
+of previous findings with results of the present study pose a very 
+pessimistic future for the species, in which the cumulative effect of boat 
+traffic, intrinsic characteristics of the species, competition with other top 
+predators and ecological effects caused by fisheries seriously threaten 
+harbour porpoise conservation in the short term. 
+4.6. Implications for conservation and management 
+Several measures have been proposed to improve cetacean 
+conservation in Galicia, including seasonal closures, operational 
+changes, spatial redistribution of certain fisheries, the designation of 
+Special Areas of Conservation or the development of improved legisla -
+tive frameworks ( L ´opez et al., 2003 ; Fern ´andez-Contreras et al., 2010 ; 
+Díaz L ´opez et al., 2019 ; Giralt Paradell et al., 2019 ; Methion and Díaz 
+L ´opez, 2019 ; Methion, 2019 ). Most of these measures were suggested as 
+a response to one threat to a particular species, and the reduction of 
+fishing effort had never been seen as a priority. However, given the 
+global impact of fishing on the Rías Baixas shelf ecosystem and the cu -
+mulative nature of the impacts caused by human activities on cetaceans, 
+efforts to understand the functioning of ecosystems as a whole, the in -
+teractions between the different species within them and the impact of 
+human activities, should be prioritised to develop effective conservation 
+measures for both species and ecosystems ( Jennings and Rice, 2011 ). In 
+this regard, different measures are suggested to improve the conserva -
+tion of common dolphins, harbour porpoises and bottlenose dolphins in 
+the area. 
+First, this study shows that exploitation of fish resources is altering 
+the entire Rías Baixas shelf ecosystem in an unsustainable manner and 
+this is already threatening top predator conservation. Therefore, im -
+mediate action should be taken to reduce fishing effort in the area. This 
+could be done by developing methods to accurately calculate the real 
+fishing capacity of the fleet and by improving fishing effort monitoring 
+( McCluskey and Lewison, 2008 ). This would lead to a more accurate 
+estimation of the real fishing pressure exerted on the ecosystem and 
+could be used to better monitor and reduce the fishing effort where 
+needed. Second, the study highlights the need to go beyond single stock 
+management strategies in fisheries management. Fisheries play a major 
+role in ecosystem dynamics, directly affecting the exploited stocks, but 
+also indirectly impacting the rest of the species ( Pauly et al., 2005 ). 
+Therefore, future management strategies should focus on prioritising the 
+conservation of the ecosystem and the species within it while ensuring 
+the sustainability of fisheries. Understanding this also implies 
+acknowledging the fact that all affected parties should be involved in the 
+development of any management strategy or conservation measure in 
+order to ensure their effectiveness. Third, the use of ecosystem based 
+approaches, such as the one presented in this study, requires accurate 
+and extensive datasets on the different interacting actors within the 
+ecosystem ( Plag ´anyi and Butterwoth, 2004 ; Heymans et al., 2016 ). In 
+this regard, efforts should be focused on obtaining regular scientific data 
+on abundance and biomass of the different functional groups within an 
+ecosystem and on obtaining accurate, reliable, and objective fisheries 
+data, to develop comprehensive and effective conservation decisions 
+and management plans. Fourth, as proposed in other studies (e.g. 
+C ´amara and Santero-S ´anchez, 2019 ), a combination of compensation 
+schemes and legal enforcement measures should be applied by the 
+different administrations to help fishermen affected by any of the pro -
+posed measures and to encourage good practices in fishing activities. 
+Fifth, global measures, such as the expansion of the first two Natura 
+2000 network sites and the marine area of the National Park to protect 
+larger areas in coastal waters ( Giralt Paradell et al., 2019 ; Methion, 
+2019 ) and waters above the continental shelf, should be considered in 
+order to favour the protection of the ecosystem as a whole. Last, the 
+conservation measures suggested in this study should be considered as 
+an addition to the strategies already in place and to the ones proposed 
+previously. 
+5. Conclusions 
+Although this work is restricted to a relatively small area, it provides 
+a framework that could be extended to other impacted regions and 
+species. Additionally, the scientific understanding of ecosystem dy -
+namics has significantly improved due to the development of software 
+packages such as EwE, and these can be used to enhance management 
+and conservation decisions ( Coll et al., 2015 ; Villasante et al., 2016 ). For 
+instance, the present study is an example of how ecosystem information O. 
+ Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+13can 
+ be used to work towards cetacean conservation, and it provides a 
+general framework that can be extended to other species, trophic groups 
+or areas. However, extensive scientific data and accurate and reliable 
+fisheries data are not always available, although they are critical to the 
+understanding of ecosystem functioning, assessing the extent of the 
+impact of human activities on the different species and ecosystems, and 
+creating effective conservation and management frameworks. Findings 
+of the study also show that fishing probably poses the most critical threat 
+to common dolphins, bottlenose dolphins and especially harbour por -
+poises conservation in the Rías Baixas shelf ecosystem. The situation for 
+these three species is critical and urges the different affected parties to 
+find consensual global solutions to improve both ecosystem and species 
+conservation while developing real sustainable fisheries. 
+Author contribution 
+B.D.L. and O.G.P. conceived and designed this study. B.D.L., S.M. and 
+O.G.P. collected the data. O.G.P. developed the model with input from B. 
+D.L. and E.R. O.G.P. wrote the manuscript with significant input from B. 
+D.L., S.M. and E.R. All authors contributed critically to the manuscript 
+and gave final approval for publication 
+Declaration of competing interest 
+The authors of this study declare that they have no conflict of 
+interest. 
+Acknowledgements 
+This work has been carried out as part of a long-term study devel -
+oped and funded by the Bottlenose Dolphin Research Institute (BDRI). 
+The authors warmly thank all the BDRI interns and volunteers who have 
+been involved in data collection and transcription without whom this 
+work would not have been possible. Thanks are also extended to the 
+editor Dr Irene Petrosillo and the two anonymous reviewers for their 
+editing and their constructive comments that helped improve this 
+manuscript. Data collection was performed in agreement with the 
+Spanish laws, the country in which it was carried out. 
+Appendix A. Supplementary data 
+Supplementary data to this article can be found online at https://doi. 
+org/10.1016/j.jenvman.2021.112175 . 
+Funding 
+This research has been exclusively funded by the Bottlenose Dolphin 
+Research Institute (BDRI, www.thebdri.com ) and did not receive any 
+specific grant from funding agencies in the public, commercial or not- 
+for-profit sectors. 
+References Akaike, 
+ H., 1974. A new look at the statistical model identification. IEEE Trans. Automat. 
+Contr. 19, 716 – 723. https://doi.org/10.1109/TAC.1974.1100705 . 
+Alexander, K.A., Heymans, J.J., Magill, S., Tomczak, M.T., Holmes, S.J., Wilding, T.A., 
+2015. Investigating the recent decline in gadoid stocks in the west of Scotland shelf 
+ecosystem using a foodweb model. ICES J. Mar. Sci. 72, 436 – 449. https://doi.org/ 
+10.1093/icesjms/fsu149 . 
+Bakun, A., Black, B.A., Bograd, S.J., García -Reyes, M., Miller, A.J., Rykaczewski, R.R., 
+Sydeman, W.J., 2015. Anticipated effects of climate change on coastal upwelling 
+ecosystems. Curr. Clim. Change. Rep. 1, 85 – 93. https://doi.org/10.1007/s40641- 
+015-0008-4 . 
+Bearzi, G., 2002. Interactions between cetaceans and fisheries in the mediterranean sea. 
+In: Notarbartolo di Sciara, G. (Ed.), Cetaceans of the Mediterranean and Black Seas: 
+State of Knowledge and Conservation Strategies. ACCOBAMS, Monaco, pp. 9.1 – 9.20 . 
+Bearzi, G., Agazzi, S., Gonzalvo, J., Costa, M., Bonizzoni, S., Politi, E., Piroddi, C., 
+Reeves, R.R., 2008. Overfishing and the disappearance of short-beaked common 
+dolphins from western Greece. Endanger. Species Res. 5, 1 – 12. https://doi.org/ 
+10.3354/esr00103 . 
+Beca-Carretero, P.P., Otero, J., Land, P.E., Groom, S., 
+´
+Alvarez-Salgado, X.A., 2019. 
+Seasonal and inter-annual variability of net primary production in the NW Iberian 
+margin (1998 – 2016) in relation to wind stress and sea surface temperature. Prog. 
+Oceanogr. 178, 102135. https://doi.org/10.1016/j.pocean.2019.102135 . 
+Bell, J.D., Watson, R.A., Ye, Y., 2017. Global fishing capacity and fishing effort from 
+1950 to 2012. Fish Fish. 18, 489 – 505. https://doi.org/10.1111/faf.12187 . 
+Bentorcha, A., Gascuel, D., Gu ´enette, S., 2017. Using trophic models to assess the impact 
+of fishing in the Bay of Biscay and the Celtic Sea. Aquat. Living Resour. 30, 7. 
+https://doi.org/10.1051/alr/2017006 . 
+BDRI, 2018a. Marine Birds in Galician Waters in 2017. Report of the Bottlenose Dolphin 
+Research Institute, O Grove, Spain .  
+BDRI, 2018b. Cetacean Species in Galician Waters in 2017. Report of the Bottlenose 
+Dolphin Research Institute, O Grove, Spain .  
+Breen, P., Brown, S., Reid, D., Rogan, E., 2017. Where is the risk? Integrating a spatial 
+distribution model and a risk assessment to identify areas of cetacean interaction 
+with fisheries in the northeast Atlantic. Ocean Coast Manag. 136, 148 – 155. https:// 
+doi.org/10.1016/j.ocecoaman.2016.12.001 . 
+Borja, A., Font ´an, A., S ´aenz, J., Valencia, V., 2008. Climate, oceanography, and 
+recruitment: the case of the Bay of Biscay anchovy ( Engraulis encrasicolus ). Fish. 
+Oceanogr. 17, 477 – 493. https://doi.org/10.1111/j.1365-2419.2008.00494.x . 
+Burnham, K.P., Anderson, D.R., 2004. Multimodel inference. Socio. Methods Res. 33, 
+261 – 304. https://doi.org/10.1177/0049124104268644 . 
+Cabrero, 
+´
+A., Gonz ´alez-Nuevo, G., Gago, J., Cabanas, J.M., 2019. Study of sardine 
+( Sardina pilchardus ) regime shifts in the Iberian Atlantic shelf waters. Fish. Oceanogr. 
+28, 305 – 316. https://doi.org/10.1111/fog.12410 . 
+C ´amara, A., Santero-S ´anchez, R., 2019. Economic, social, and environmental impact of a 
+sustainable fisheries model in Spain. Sustainability 11, 6311. https://doi.org/ 
+10.3390/su11226311 . 
+Carlucci, R., Capezzuto, F., Cipriano, G., D ’ Onghia, G., Fanizza, C., Libralato, S., 
+Maglietta, R., Maiorano, P., Sion, L., Tursi, A., Ricci, P., 2020. Assessment of 
+cetacean – fishery interactions in the marine food web of the gulf of taranto (northern 
+ionian sea, central mediterranean sea). Rev. Fish Biol. Fish. 31, 135 – 156. https:// 
+doi.org/10.1007/s11160-020-09623-x . 
+Casabella, N., Lorenzo, M.N., Taboada, J.J., 2014. Trends of the Galician upwelling in the 
+context of climate change. J. Sea Res. 93, 23 – 27. https://doi.org/10.1016/j. 
+seares.2014.01.013 . 
+Christensen, V., Pauly, D., 1992. Ecopath II — a software for balancing steady-state 
+ecosystem models and calculating network characteristics. Ecol. Model. 61, 
+169 – 185. https://doi.org/10.1016/0304-3800(92)90016-8 . 
+Christensen, V., Walters, C.J., 2004. Ecopath with Ecosim: methods, capabilities and 
+limitations. Ecol. Model. 172, 109 – 139. https://doi.org/10.1016/j. 
+ecolmodel.2003.09.003 . 
+Christensen, V., Walters, C.J., Pauly, D., 2005. Ecopath with Ecosim: A User ’ s Guide. 
+Fisheries Centre. University of Columbia . 
+Coll, M., Palomera, I., Tudela, S., Sard `a, F., 2006. Trophic flows, ecosystem structure and 
+fishing impacts in the South Catalan Sea, Northwestern Mediterranean. J. Mar. Syst. 
+59, 63 – 96. https://doi.org/10.1016/j.jmarsys.2005.09.001 . 
+Coll, M., Palomera, I., Tudela, S., Dowd, M., 2008. Food-web dynamics in the south 
+Catalan sea ecosystem (NW mediterranean) for 1978-2003. Ecol. Model. 217, 
+95 – 116. https://doi.org/10.1016/j.ecolmodel.2008.06.013 . 
+Coll, M., Carreras, M., Cornax, M.J., Massutí, E., Morote, E., Pastor, X., Quetglas, A., 
+S ´aez, R., Silva, L., Sobrino, I., Torres, M.A., Tudela, S., Harper, S., Zeller, D., 
+Pauly, D., 2014. Closer to reality: reconstructing total removals in mixed fisheries 
+from Southern Europe. Fish. Res. 154, 179 – 194. https://doi.org/10.1016/j. 
+fishres.2014.01.013 . 
+Coll, M., Akoglu, E., Arreguín-S ´anchez, F., Fulton, E.A., Gascuel, D., Heymans, J.J., 
+Libralato, S., Mackinson, S., Palomera, I., Piroddi, C., Shannon, L.J., Steenbeek, J., 
+Villasante, S., Christensen, V., 2015. Modelling dynamic ecosystems: venturing 
+beyond boundaries with the Ecopath approach. Rev. Fish Biol. Fish. 25, 413 – 424. 
+https://doi.org/10.1007/s11160-015-9386-x . 
+Coll ´eter, M., Valls, A., Guitton, J., Gascuel, D., Pauly, D., Christensen, V., 2015. Global 
+overview of the applications of Ecopath with Ecosim modelling approach using the 
+EcoBase models repository. Ecol. Model. 302, 42 – 53. https://doi.org/10.1016/j. 
+ecolmodel.2015.01.025 . 
+Corrales, X., Coll, M., Ofir, E., Piroddi, C., Goren, M., Edelist, D., Heymans, J., 
+Steenbeek, J., Christensen, V., Gal, G., 2017. Hindcasting the dynamics of an Eastern 
+Mediterranean marine ecosystem under the impacts of multiple stressors. Mar. Ecol. 
+Prog. Ser. 580, 17 – 36. https://doi.org/10.3354/meps12271 . 
+Council Directive 79/409/EEC of 2 April 1979 on the conservation of wild birds. ( htt 
+ps://eur-lex.europa.eu/legal-content/EN/TXT/?uri = LEGISSUM3Al28046 ). 
+Council Directive 92/43/EEC of 21 May 1992 on the Conservation of Natural Habitats 
+and of Wild Fauna and Flora. Official Journal L206, 22/07/1992 0007-0050 (The 
+’ Habitats Directive ’ ). 
+Cury, P., Bakun, A., Crawford, R.J.M., Jarre, A., Qui ˜nones, R.A., Shannon, L.J., 
+Verheye, H.M., 2000. Small pelagics in upwelling systems: patterns of interaction 
+and structural changes in “ wasp-waist ” ecosystems. ICES J. Mar. Sci. 57, 603 – 618. 
+https://doi.org/10.1006/jmsc.2000.0712 . 
+DeMaster, D.P., Fowler, C.W., Perry, S.L., Richlen, M.F., 2001. Predation and 
+competition: the impact of fisheries on marine mammal populations over the next 
+one hundred years. J. Mammal. 82, 641 – 651. https://doi.org/10.1644/1545-1542 
+(2001)082 < 0641:PACTIO > 2.0.CO;2 . 
+Díaz L ´opez, B., 2006. Interactions between Mediterranean bottlenose dolphins ( Tursiops 
+truncatus ) and gillnets off Sardinia. Italy. J. Mar. Sci. 63, 946 – 951. https://doi.org/ 
+10.1016/j.icesjms.2005.06.012 . 
+O. Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+14Díaz 
+ L ´opez, B., 2019. “ Hot deals at sea ” : responses of a top predator (Bottlenose dolphin, 
+Tursiops truncatus ) to human-induced changes in the coastal ecosystem. Behav. Ecol. 
+30, 291 – 300. https://doi.org/10.1093/beheco/ary162 . 
+Díaz L ´opez, B., Methion, S., 2018. Does interspecific competition drive patterns of 
+habitat use and relative density in harbour porpoises? Mar. Biol. 165, 92. https:// 
+doi.org/10.1007/s00227-018-3345-8 . 
+Díaz L ´opez, B., Bunke, M., Bernal Shirai, J.A., 2008. Marine aquaculture off Sardinia 
+Island (Italy): ecosystem effects evaluated through a trophic mass-balance model. 
+Ecol. Model. 212, 292 – 303. https://doi.org/10.1016/j.ecolmodel.2007.10.028 . 
+Díaz L ´opez, B., Methion, S., Giralt Paradell, O., 2019. Living on the edge: overlap 
+between a marine predator ’ s habitat use and fisheries in the Northeast Atlantic 
+waters (NW Spain). Prog. Oceanogr. 175, 115 – 123. https://doi.org/10.1016/j. 
+pocean.2019.04.004 . 
+Dolman, S., Baulch, S., Evans, P.G.H., Read, F., Ritter, F., 2016. Towards an EU action 
+plan on cetacean bycatch. Mar. Pol. 72, 67 – 75. https://doi.org/10.1016/j. 
+marpol.2016.06.020 . 
+European Commission EC, 2013. Regulation (EU) No 1380/2013 of the European 
+Parliament and of the Council of 11 December 2013 on the Common Fisheries 
+Policy, Amending Council Regulations (EC) No 1954/2003 and (EC) No 1224/2009 
+and Repealing Council Regulations (EC) No 2371/2002 and (EC. off. J. Eur. Union 
+L354/22) . 
+European Commission EC, 2002. Council Regulation (EC) No 2371/2002 of 20 December 
+2002 on the Conservation and Sustainable Exploitation of Fisheries Resources under 
+the Common Fisheries Policy . 
+European Commission EC, 2020. July Infringements Package: Key Decisions. https://ec. 
+europa.eu/commission/presscorner/detail/en/inf_20_1212 . (Accessed 10 July 
+2020). 
+European Court of Auditors, 2011. Have EU Measures Contributed to Adapting the 
+Capacity of Fishing Fleets to Available Fishing Opportunities? Special Report No 12. 
+(Pursuant to Article 287(4), Second Subparagraph, TFEU). https://op.europa.eu/ 
+en/publication-detail/-/publication/480d6a76-fb7b-41b5-a2c2-5893a94b55f0 . 
+(Accessed 13 June 2020). 
+European Union, 2019. Study of Engine Power Verification by Member States. 
+Directorate-General for Maritime Affairs and Fisheries (European Commission); Roos 
+Diesel Analysis B.V. https://op.europa.eu/en/publication-detail/-/publication/a 
+867cbac-8e90-11e9-9369-01aa75ed71a1 . (Accessed 13 June 2020). 
+Fari ˜na, A.C., Freire, J., Gonz ´alez-Gurriar ´an, E., 1997. Demersal fish assemblages in the 
+Galician continental shelf and upper slope (NW Spain): spatial structure and long- 
+term changes. Estuar. Coast Shelf Sci. 44, 435 – 454. https://doi.org/10.1006/ 
+ecss.1996.0148 . 
+Fernandez-Contreras, M.M., Cardona, L., Lockyer, C.H., Aguilar, A., 2010. Incidental 
+bycatch of short-beaked common dolphins ( Delphinus delphis ) by pairtrawlers off 
+northwestern Spain. ICES J. Mar. Sci. 67, 1732 – 1738. https://doi.org/10.1093/ 
+icesjms/fsq077 . 
+Fern ´andez, R., MacLeod, C.D., Pierce, G.J., Covelo, P., L ´opez, A., Torres-Palenzuela, J., 
+Valavanis, V., Santos, M.B., 2013. Inter-specific and seasonal comparison of the 
+niches occupied by small cetaceans off north-west Iberia. Continent. Shelf Res. 64, 
+88 – 98. https://doi.org/10.1016/j.csr.2013.05.008 . 
+Fontaine, M.C., Roland, K., Calves, I., Austerlitz, F., Palstra, F.P., Tolley, K.A., Ryan, S., 
+Ferreira, M., Jauniaux, T., Llavona, A., 
+¨
+Oztürk, B., 
+¨
+Oztürk, A.A., Ridoux, V., 
+Rogan, E., Sequeira, M., Siebert, U., Vikingsson, G.A., Borrell, A., Michaux, J.R., 
+Aguilar, A., 2014. Postglacial climate changes and rise of three ecotypes of harbour 
+porpoises, Phocoena phocoena , in western Palearctic waters. Mol. Ecol. 23, 
+3306 – 3321. https://doi.org/10.1111/mec.12817 . 
+Gasche, L., Gascuel, D., 2013. EcoTroph: a simple model to assess fishery interactions and 
+their impacts on ecosystems. ICES J. Mar. Sci. 70, 498 – 510. https://doi.org/ 
+10.1093/icesjms/fst016 . 
+Gascuel, D., Pauly, D., 2009. EcoTroph: modelling marine ecosystem functioning and 
+impact of fishing. Ecol. Model. 220, 2885 – 2898. https://doi.org/10.1016/j. 
+ecolmodel.2009.07.031 . 
+Gascuel, D., Gu ´enette, S., Pauly, D., 2011. The trophic-level-based ecosystem modelling 
+approach: theoretical overview and practical uses. ICES J. Mar. Sci. 68, 1403 – 1416. 
+https://doi.org/10.1093/icesjms/fsr062 . 
+Giralt Paradell, O., Díaz L ´opez, B., Methion, S., 2019. Modelling common dolphin 
+( Delphinus delphis ) coastal distribution and habitat use: insights for conservation. 
+Ocean Coast Manag. 179, 104836. https://doi.org/10.1016/j. 
+ocecoaman.2019.104836 . 
+Giralt Paradell, O., Díaz L ´opez, B., Methion, S., Rogan, E., 2020. Food-web interactions in 
+a coastal ecosystem influenced by upwelling and terrestrial runoff off North-West 
+Spain. Mar. Environ. Res. 157, 104933. https://doi.org/10.1016/j. 
+marenvres.2020.104933 . 
+Goetz, S., Read, F.L., Ferreira, M., Portela, J.M., Santos, M.B., Vingada, J., Siebert, U., 
+Marçalo, A., Santos, J., Araújo, H., Monteiro, S., Caldas, M., Riera, M., Pierce, G.J., 
+2015. Cetacean occurrence, habitat preferences and potential for cetacean-fishery 
+interactions in Iberian Atlantic waters: results from cooperative research involving 
+local stakeholders. Aquat. Conserv. Mar. Freshw. Ecosyst. 25, 138 – 154. https://doi. 
+org/10.1002/aqc.2481 . 
+Hammond, P.S., Macleod, K., Berggren, P., Borchers, D.L., Burt, L., Ca ˜nadas, A., 
+Desportes, G., Donovan, G.P., Gilles, A., Gillespie, D., Gordon, J., Hiby, L., Kuklik, I., 
+Leaper, R., Lehnert, K., Leopold, M., Lovell, P., Ø ien, N., Paxton, C.G.M., Ridoux, V., 
+Rogan, E., Samarra, F., Scheidat, M., Sequeira, M., Siebert, U., Skov, H., Swift, R., 
+Tasker, M.L., Teilmann, J., Van Canneyt, O., V ´azquez, J.A., 2013. Cetacean 
+abundance and distribution in European Atlantic shelf waters to inform conservation 
+and management. Biol. Conserv. 164, 107 – 122. https://doi.org/10.1016/j. 
+biocon.2013.04.010 . 
+Heymans, J.J., Coll, M., Libralato, S., Christensen, V., 2011. Ecopath theory, modeling, 
+and application to coastal ecosystems. In: Wolanski, E., McLusky, D.S. (Eds.), 
+Treatise on Estuarine and Coastal Science. Elsevier, pp. 93 – 113. https://doi.org/ 
+10.1016/B978-0-12-374711-2.00905-0 . 
+Heymans, J.J., Coll, M., Link, J.S., Mackinson, S., Steenbeek, J., Walters, C., 
+Christensen, V., 2016. Best practice in Ecopath with Ecosim food-web models for 
+ecosystem-based management. Ecol. Model. 331, 173 – 184. https://doi.org/ 
+10.1016/j.ecolmodel.2015.12.007 . 
+ICES, 2018a. Sardine ( Sardina Pilchardus ) in Divisions 8.C and 9.a (Cantabrian Sea and 
+Atlantic Iberian Waters). https://doi.org/10.17895/ices.pub.4495 . 
+ICES, 2018b. Horse Mackerel ( Trachurus trachurus ) in Division 9.a (Atlantic Iberian 
+Waters). https://doi.org/10.17895/ices.pub.4496 . 
+ICES, 2019a. Blue Whiting ( Micromesistius Poutassou ) in Subareas 1-9, 12 and 14 
+(Northeast Atlantic and Adjacent Waters). https://doi.org/10.17895/ices.pub.4536 . 
+ICES, 2019b. Norway Special Request or Revised 2019 Advice on Mackerel ( Scomber 
+scombrus ) in Subareas 1-8 and 14 and in Division 9.a (The Northeast Atlantic and 
+Adjacent Waters). https://doi.org/10.17895/ices.advice.5252 . 
+ICES, 2019c. Anchovy ( Engraulis Encrasicolus ) in Division 9.a (Atlantic Iberian Waters). 
+https://doi.org/10.17895/ices.advice.5366 . 
+ICES, 2019d. Black-bellied Anglerfish ( Lophius Budegassa ) in Divisions 8.C and 9.a 
+(Cantabrian Sea, Atlantic Iberian Waters). https://doi.org/10.17895/ices. 
+advice.4756 . 
+ICES, 2019e. Hake ( Merluccius merluccius ) in Divisions 8.C and 9.a, Southern Stock 
+(Cantabrian Sea and Atlantic Iberian Waters). https://doi.org/10.17895/ices. 
+pub.4464 . 
+ICES, 2020. EU Request on Emergency Measures to Prevent Bycatch of Common Dolphin 
+(Delphinus delphis) and Baltic Proper Harbour Porpoise (Phocoena Phocoena) in the 
+Northeast Atlantic. ICES Special Request Advice. https://10.17895/ices.ad 
+vice.6023 . 
+Jennings, S., Kaiser, M.J., Reynolds, J.D., 2001. Marine Fisheries Ecology. Blackwell 
+Publishing, Lowestoft. United Kingdom .  
+Jennings, S., Rice, J., 2011. Towards an ecosystem approach to fisheries in Europe: a 
+perspective on existing progress and future directions. Fish Fish. 12, 125 – 137. 
+https://doi.org/10.1111/j.1467-2979.2011.00409.x . 
+Lassalle, G., Gascuel, D., Le Loc ’ h, F., Lobry, J., Pierce, G.J., Ridoux, V., Santos, M.B., 
+Spitz, J., Niquil, N., 2012. An ecosystem approach for the assessment of fisheries 
+impacts on marine top predators: the Bay of Biscay case study. ICES J. Mar. Sci. 69, 
+925 – 938. https://doi.org/10.1093/icesjms/fss049 . 
+Legovi ´c, T., Klanj ˇs ˇcek, J., Ge ˇcek, S., 2010. Maximum sustainable yield and species 
+extinction in ecosystems. Ecol. Model. 221, 1569 – 1574. https://doi.org/10.1016/j. 
+ecolmodel.2010.03.024 . 
+Libralato, S., Christensen, V., Pauly, D., 2006. A method for identifying keystone species 
+in food web models. Ecol. Model. 195, 153 – 171. https://doi.org/10.1016/j. 
+ecolmodel.2005.11.029 . 
+Lindegren, M., Checkley, D.M., Rouyer, T., MacCall, A.D., Stenseth, N.C., 2013. Climate, 
+fishing, and fluctuations of sardine and anchovy in the California Current. Proc. Natl. 
+Acad. Sci. Unit. States Am. 110, 13672 – 13677. https://doi.org/10.1073/ 
+pnas.1305733110 . 
+Link, J.S., 2010. Adding rigor to ecological network models by evaluating a set of pre- 
+balance diagnostics: a plea for PREBAL. Ecol. Model. 221, 1580 – 1591. https://doi. 
+org/10.1016/j.ecolmodel.2010.03.012 . 
+Llavona Vallina, A., 2018. Population parameters and genetic structure of the harbour 
+porpoise (Phocoena phocoena, L. 1758) in the Northwest Iberian Peninsula. Tese de 
+Doutor em Biologia. Universidade de Aveiro . 
+L ´opez, A., Santos, M.B., Pierce, G.J., Gonz ´alez, A.F., Valeiras, X., Guerra, A., 2002. 
+Trends in strandings and by-catch of marine mammals in north-west Spain during 
+the 1990s. J. Mar. Biol. Assoc. U. K. 82, 513 – 521. https://doi.org/10.1017/ 
+S0025315402005805 . 
+L ´opez, A., Pierce, G., Santos, M., Gracia, J., Guerra, A., 2003. Fishery by-catches of 
+marine mammals in Galician waters: results from on-board observations and an 
+interview survey of fishermen. Biol. Conserv. 111, 25 – 40. https://doi.org/10.1016/ 
+S0006-3207(02)00244-6 . 
+L ´opez, A., Pierce, G.J., Valeiras, X., Santos, M.B., Guerra, A., 2004. Distribution patterns 
+of small cetaceans in Galician waters. J. Mar. Biol. Assoc. U. K. 84, 283 – 294. https:// 
+doi.org/10.1017/S0025315404009166h . 
+Martínez-G ´omez, C., Fern ´andez, B., Vald ´es, J., Campillo, J.A., Benedicto, J., S ´anchez, F., 
+Vethaak, A.D., 2009. Evaluation of three-year monitoring with biomarkers in fish 
+following the Prestige oil spill (N Spain). Chemosphere 74, 613 – 620. https://doi. 
+org/10.1016/j.chemosphere.2008.10.052 . 
+Matthiopoulos, J., Smout, S., Winship, A.J., Thompson, D., Boyd, I.L., Harwood, J., 2008. 
+Getting beneath the surface of marine mammal – fisheries competition. Mamm Rev. 
+38, 167 – 188. https://doi.org/10.1111/j.1365-2907.2008.00123.x . 
+McCluskey, S.M., Lewison, R.L., 2008. Quantifying fishing effort: a synthesis of current 
+methods and their applications. Fish Fish. 9, 188 – 200. https://doi.org/10.1111/ 
+j.1467-2979.2008.00283.x . 
+M ´endez-Fernandez, P., Pierce, G.J., Bustamante, P., Chouvelon, T., Ferreira, M., 
+Gonz ´alez, A.F., L ´opez, A., Read, F.L., Santos, M.B., Spitz, J., Vingada, J.V., 
+Caurant, F., 2013. Ecological niche segregation among five toothed whale species off 
+the NW Iberian Peninsula using ecological tracers as multi-approach. Mar. Biol. 160, 
+2825 – 2840. https://doi.org/10.1007/s00227-013-2274-9 . 
+Methion, S., 2019. Ecology and Behaviour of Bottlenose Dolphins ( Tursiops truncatus ) in a 
+Coastal Area Subject to Shellfish Farming. Th `ese de doctorat. Universit ´e de 
+Bordeaux . 
+Methion, S., Díaz L ´opez, B., 2018. Abundance and demographic parameters of bottlenose 
+dolphins in a highly affected coastal ecosystem. Mar. Freshw. Res. 69, 1355. https:// 
+doi.org/10.1071/MF17346 . 
+O. Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+15Methion, 
+ S., Díaz L ´opez, B., 2019. Natural and anthropogenic drivers of foraging 
+behaviour in bottlenose dolphins: influence of shellfish aquaculture. Aquat. Conserv. 
+Mar. Freshw. Ecosyst. 29, 927 – 937. https://doi.org/10.1002/aqc.3116 . 
+Moore, J.E., 2013. Management reference points to account for direct and indirect 
+impacts of fishing on marine mammals. Mar. Mamm. Sci. 29, 446 – 473. https://doi. 
+org/10.1111/j.1748-7692.2012.00586.x . 
+Moreno, R., Jover, L., Diez, C., Sanpera, C., 2011. Seabird feathers as monitors of the 
+levels and persistence of heavy metal pollution after the Prestige oil spill. Environ. 
+Pollut. 159, 2454 – 2460. https://doi.org/10.1016/j.envpol.2011.06.033 . 
+Morissette, L., 2007. Complexity, Cost and Quality of Ecosystem Models and Their 
+Impact on Resilience: a Comparative Analysis, with Emphasis on Marine Mammals 
+and the Gulf of St. Lawrence. University of British Columbia. https://doi.org/ 
+10.14288/1.0074903 . 
+Morissette, L., Christensen, V., Pauly, D., 2012. Marine mammal impacts in exploited 
+ecosystems: would large scale culling benefit fisheries? PloS One 7, 1 – 18. https:// 
+doi.org/10.1371/journal.pone.0043966 . 
+Murphy, S., Evans, P.G.H., Pinn, E., Pierce, G.J., 2019. Conservation management of 
+common dolphins: lessons learned from the North-East Atlantic. Aquat. Conserv. 
+Mar. Freshw. Ecosyst. aqc. 3212 https://doi.org/10.1002/aqc.3212 . 
+Murta, A.G., Abaunza, P., Cardador, F., S ´anchez, F., 2008. Ontogenic migrations of horse 
+mackerel along the Iberian coast. Fish. Res. 89, 186 – 195. https://doi.org/10.1016/j. 
+fishres.2007.09.016 . 
+Northridge, S., 2009. Fishing industry, effects of. In: Perrin, W.F., Würsig, B., 
+Thewissen, J.G.M. (Eds.), Encyclopaedia of Marine Mammals. Academic Press, 
+pp. 443 – 447 . 
+Northridge, S., Coram, A., Kingston, A., Crawford, R., 2017. Disentangling the causes of 
+protected-species bycatch in gillnet fisheries. Conserv. Biol. 31, 686 – 695. https:// 
+doi.org/10.1111/cobi.12741 . 
+Pauly, D., Watson, R., Alder, J., 2005. Global trends in world fisheries: impacts on marine 
+ecosystems and food security. Philos. Trans. R. Soc. B Biol. Sci. 360, 5 – 12. https:// 
+doi.org/10.1098/rstb.2004.1574 . 
+Peltier, H., Authier, M., Caurant, F., Dabin, W., Dars, C., Demaret, F., Meheust, E., 
+Ridoux, V., Van Canneyt, O., Spitz, J., 2019. Etat des connaissances sur les captures 
+accidentelles de dauphins coumns dans le Golf de Gascogne - Synth `ese 2019. 
+Rapport scientifique dans le cadre de la convention avec le MTES. Observatoire 
+PELAGIS – UMS 3462. La Rochelle Universit ´e/CNRS, p. 23 . 
+Penela-Arenaz, M., Bellas, J., V ´azquez, E., 2009. Effects of the Prestige oil spill on the 
+biota of NW Spain: 5 years of learning. Adv. Mar. Biol. 56, 365 – 396. https://doi.org/ 
+10.1016/S0065-2881(09)56005-1 . 
+P ´erez, F.F., Padín, X.A., Pazos, Y., Gilcoto, M., Cabanas, M., Pardo, P.C., Doval, M.D., 
+Farina-Busto, L., 2010. Plankton response to weakening of the Iberian coastal 
+upwelling. Global Change Biol. 16, 1258 – 1267. https://doi.org/10.1111/j.1365- 
+2486.2009.02125.x . 
+Piroddi, C., Giovanni, B., Villy, C., 2010. Effects of local fisheries and ocean productivity 
+on the northeastern Ionian Sea ecosystem. Ecol. Model. 221, 1526 – 1544. https:// 
+doi.org/10.1016/j.ecolmodel.2010.03.002 . 
+Piroddi, C., Bearzi, G., Gonzalvo, J., Christensen, V., 2011. From common to rare: the 
+case of the Mediterranean common dolphin. Biol. Conserv. 144, 2490 – 2498. https:// 
+doi.org/10.1016/j.biocon.2011.07.003 . 
+Pitcher, T.J., 2001. Fisheries Managed to rebuild ecosystems? Reconstruting the past to 
+salvage the future. Ecol. Appl. 11, 601 – 617. https://doi.org/10.1890/1051-0761 
+(2001)011 . 
+Plag ´anyi, 
+´
+E.E., Butterworth, D.S., 2004. A critical look at the potential of Ecopath with 
+ecosim to assist in practical fisheries management. Afr. J. Mar. Sci. 26, 261 – 287. 
+https://doi.org/10.2989/18142320409504061 . 
+Plag ´anyi, E.E., Butterworth, D.S., 2005. Indirect fishery interactions. In: Reynolds III, J. 
+E., Perrin, W.F., Reeves, R.R., Montgomery, S., Ragen, T.J. (Eds.), Marine Mammal 
+Research: Conservation beyond Crisis. John Hopkins University Press, Baltimore, 
+MD, pp. 19 – 45 . 
+Power E, Mary, Tilman, David, Estes A, James, Menge A, Bruce, Bond J, William, Mills, L. 
+Scott, Daily, Gretchen, Castilla, Juan Carlos, Lubchenco, Jane, Paine T, Robert, 1996. 
+Challenges in the Quest for Keystones: Identifying keystone species is difficult — but 
+essential to understanding how loss of species will affect ecosystems. BioScience 46 
+(8), 609 – 620. https://doi.org/10.2307/1312990 . 
+Prellezo, R., Curtin, R., 2015. Confronting the implementation of marine ecosystem- 
+based management within the Common Fisheries Policy reform. Ocean Coast Manag. 
+117, 43 – 51. https://doi.org/10.1016/j.ocecoaman.2015.03.005 . 
+Read, A.J., Drinker, P., Northridge, S., 2006. Bycatch of marine mammals in U.S. And 
+global fisheries. Conserv. Biol. 20, 163 – 169. https://doi.org/10.1111/j.1523- 
+1739.2006.00338.x . 
+Rogan, E., Mackey, M., 2007. Megafauna bycatch in drift nets for albacore tuna ( Thunnus 
+alalunga ) in the NE Atlantic. Fish. Res. 86, 6 – 14. https://doi.org/10.1016/j. 
+fishres.2007.02.013 . 
+Saavedra, C., Gerrodette, T., Louzao, M., Valeiras, J., García, S., Cervi ˜no, S., Pierce, G.J., 
+Santos, M.B., 2018. Assessing the environmental status of the short-beaked common 
+dolphin ( Delphinus delphis ) in North-western Spanish waters using abundance trends 
+and safe removal limits. Prog. Oceanogr. 166, 66 – 75. https://doi.org/10.1016/j. 
+pocean.2017.08.006 . 
+S ´anchez, F., Olaso, I., 2004. Effects of fisheries on the Cantabrian Sea shelf ecosystem. 
+Ecol. Model. 172, 151 – 174. https://doi.org/10.1016/j.ecolmodel.2003.09.005 . 
+Santos, M.B., Gonz ´alez-Quir ´os, R., Riveiro, I., Iglesias, M., Louzao, M., Pierce, G.J., 2013. 
+Characterization of the pelagic fish community of the north-western and northern 
+Spanish shelf waters. J. Fish. Biol. 83 (4), 716 – 738. https://doi.org/10.1111/ 
+jfb.12107 n/a-n/a.  
+Santos, M.B., Saavedra, C., Pierce, G.J., 2014. Quantifying the predation on sardine and 
+hake by cetaceans in the Atlantic waters of the Iberian peninsula. Deep Sea Res. Part 
+II. 106, 232 – 244. https://doi.org/10.1016/j.dsr2.2013.09.040 . 
+Scott, E., Serpetti, N., Steenbeek, J., Heymans, J.J., 2016. A stepwise fitting procedure for 
+automated fitting of Ecopath with ecosim models. Software 5, 25 – 30. https://doi. 
+org/10.1016/j.softx.2016.02.002 . 
+Serpetti, N., Baudron, A.R., Burrows, M.T., Payne, B.L., Helaou ¨et, P., Fernandes, P.G., 
+Heymans, J.J., 2017. Impact of ocean warming on sustainable fisheries management 
+informs the Ecosystem Approach to Fisheries. Sci. Rep. 7, 13438. https://doi.org/ 
+10.1038/s41598-017-13220-7 . 
+Smith, A.D.M., Brown, C.J., Bulman, C.M., Fulton, E.A., Johnson, P., Kaplan, I.C., 
+Lozano-Montes, H., Mackinson, S., Marzloff, M., Shannon, L.J., Shin, Y.-J., Tam, J., 
+2011. Impacts of fishing low-trophic level species on marine ecosystems. Science 
+333, 1147 – 1150. https://doi.org/10.1126/science.1209395 . 
+Spitz, J., Mourocq, E., Leaut ´e, J.-P., Qu ´ero, J.-C., Ridoux, V., 2010. Prey selection by the 
+common dolphin: fulfilling high energy requirements with high quality food. J. Exp. 
+Mar. Biol. Ecol. 390, 73 – 77. https://doi.org/10.1016/j.jembe.2010.05.010 . 
+Spitz, J., Rousseau, Y., Ridoux, V., 2006. Diet overlap between harbour porpoise and 
+bottlenose dolphin: an argument in favour of interference competition for food? 
+Estuar. Coast Shelf Sci. 70, 259 – 270. https://doi.org/10.1016/j.ecss.2006.04.020 . 
+Spyrakos, E., Santos-Diniz, T.C., Martinez-Iglesias, G., Torres-Palenzuela, J.M., Pierce, G. 
+J., 2011. Spatiotemporal patterns of marine mammal distribution in coastal waters 
+of Galicia, NW Spain. Hydrobiologia 670, 87 – 109. https://doi.org/10.1007/s10750- 
+011-0722-4 . 
+St ¨abler, M., Kempf, A., Mackinson, S., Poos, J.J., Garcia, C., Temming, A., 2016. 
+Combining efforts to make maximum sustainable yields and good environmental 
+status match in a food-web model of the southern North Sea. Ecol. Model. 331, 
+17 – 30. https://doi.org/10.1016/j.ecolmodel.2016.01.020 . 
+Surís-Regueiro, J.C., Santiago, J.L., 2014. Characterization of fisheries dependence in 
+Galicia (Spain). Mar. Pol. 47, 99 – 109. https://doi.org/10.1016/j. 
+marpol.2014.02.006 . 
+Thorpe, R.B., 2019. What is multispecies MSY? A worked example from the North Sea. 
+J. Fish Biol. jfb 13967. https://doi.org/10.1111/jfb.13967 . 
+Tomczak, M.T., Niiranen, S., Hjerne, O., Blenckner, T., 2012. Ecosystem flow dynamics 
+in the Baltic Proper — using a multi-trophic dataset as a basis for food – web 
+modelling. Ecol. Model. 230, 123 – 147. https://doi.org/10.1016/j. 
+ecolmodel.2011.12.014 . 
+Torres, M.
+´
+A., Coll, M., Heymans, J.J., Christensen, V., Sobrino, I., 2013. Food-web 
+structure of and fishing impacts on the Gulf of Cadiz ecosystem (South-western 
+Spain). Ecol. Model. 265, 26 – 44. https://doi.org/10.1016/j.ecolmodel.2013.05.019 . 
+Torres, R., Barton, E.D., Miller, P., Fanjul, E., 2003. Spatial patterns of wind and sea 
+surface temperature in the Galician upwelling region. J. Geophys. Res. 108, 3130. 
+https://doi.org/10.1029/2002JC001361 . 
+Ulanowicz, R.E., Puccia, C.J., 1990. Mixed trophic impacts in ecosystems. Coenoses 5, 
+7 – 16 . 
+UNCLOS, 1982. United Nations Convention on the Law of the Sea last accessed May, 21st 
+2020). https://www.un.org/depts/los/convention_agreements/convention_overvie 
+w_convention.htm . 
+Uriarte, A., Prouzet, P., Villamor, B., 1996. Bay of Biscay and ibero atlantic anchovy 
+populations and their fisheries. Sci. Mar. 60, 237 – 255 . 
+Valls, A., Coll, M., Christensen, V., 2015. Keystone species: toward an operational 
+concept of marine biodiversity conservation. Ecol. Monogr. 85, 29 – 47. https://doi. 
+org/10.1890/14-0306.1 . 
+Van Beveren, E., Fromentin, J.-M., Rouyer, T., Bonhommeau, S., Brosset, P., Saraux, C., 
+2016. The fisheries history of small pelagics in the Northern Mediterranean. ICES J. 
+Mar. Sci. 73, 1474 – 1484. https://doi.org/10.1093/icesjms/fsw023 . 
+Villasante, S., Sumaila, R., Garcia-Negro, M.C., Rodríguez Rodriguez, G., 2010. 
+Reconstruction of Catches, Fisheries and Carrying Capacity of Galician (NW Spain) 
+Small-Scale Fisheries. Beijer Discussion Paper 223. Beijer Discusssion Paper Series . 
+Villasante, S., Macho, G., Gir ´aldez, J., Rivero Rodriguez, S., Isusu de Rivero, J., 
+Divovich, E., Harper, S., Zeller, D., Pauly, D., 2015. Estimates of Total Marine 
+Fisheries Removals from the Northwest of Spain 1950 – 2010. University of British 
+Columbia, Canada, p. 18. https://doi.org/10.13140/RG.2.1.2853.7688 . Working 
+Paper Series #51.  
+Villasante, S., Arreguín-S ´anchez, F., Heymans, J.J., Libralato, S., Piroddi, C., 
+Christensen, V., Coll, M., 2016. Modelling marine ecosystems using the Ecopath with 
+Ecosim food web approach: new insights to address complex dynamics after 30 years 
+of developments. Ecol. Model. 331, 1 – 4. https://doi.org/10.1016/j. 
+ecolmodel.2016.04.017 . 
+Vi ˜nas, L., Franco, M.A., Soriano, J.A., Gonz ´alez, J.J., Ortiz, L., Bayona, J.M., Albaig ´es, J., 
+2009. Accumulation trends of petroleum hydrocarbons in commercial shellfish from 
+the Galician coast (NW Spain) affected by the Prestige oil spill. Chemosphere 75, 
+534 – 541. https://doi.org/10.1016/j.chemosphere.2008.12.003 . 
+Walters, C., Pauly, D., Christensen, V., Kitchell, J.F., 2000. Representing density 
+dependent consequences of life history strategies in aquatic ecosystems: EcoSim II. 
+Ecosystems 3, 70 – 83. https://doi.org/10.1007/s100210000011 . 
+Walters, C.J., Christensen, V., Martell, S.J., Kitchell, J.F., 2005. Possible ecosystem 
+impacts of applying MSY policies from single-species assessment. ICES J. Mar. Sci. 
+62, 558 – 568. https://doi.org/10.1016/j.icesjms.2004.12.005 . 
+Walters, C.J., Korman, J., 1999. Linking recruitment to trophic factors: revisiting the 
+Beverton – Holt recruitment model from a life history and multispecies perspective. 
+Rev. Fish Biol. Fish. 9, 187 – 202. https://doi.org/10.1023/A:1008991021305 . 
+O. Giralt Paradell et al.                                                                                                                                                                                                                       
+Journal of Environmental Management 285 (2021) 112175
+16Walters, 
+ C.J., Villy, C., Pauly, D., 1997. Structuring dynamic models of exploited 
+ecosystems from trophic mass-balance assessments. Rev. Fish Biol. Fish. 7, 139–172. 
+https://doi.org/10.1023/a:1018479526149. 
+WSSD, 2002. Report of the World Summit for Sustainable Development. Johannesburg, 
+South Africa last accessed May 21st 2020). https://sustainabledevelopment.un. 
+org/milesstones/wssd.  
+Xunta de Galicia. Consellería do Mar. Online statistics. www.pescadegalicia.gal. 
+(Accessed 31 March 2020). 
+O. Giralt Paradell et al.                                                                                                                                                                                                                       

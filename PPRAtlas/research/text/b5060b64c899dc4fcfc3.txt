@@ -1,0 +1,925 @@
+An overview of the marine food web in Icelandic waters
+using Ecopath with Ecosim
+Joana P.C. Ribeiroa,∗, Bjarki Þ. Elvarssonb, Erla Sturludóttira, Gunnar
+Stefánssona
+aScience Institute, University of Iceland, Dunhagi 7, 107 Reykjavík, Iceland
+bMarine and Freshwater Research Institute, Skúlagata 4, 101 Reykjavík, Iceland
+Abstract
+Fishing activities have broad impacts that aﬀect, although not exclusively, the
+targeted stocks. These impacts aﬀect predators and prey of the harvested
+species, as well as the whole ecosystem it inhabits. Ecosystem models can
+be used to study the interactions that occur within a system, including those
+between diﬀerent organisms and those between ﬁsheries and targeted species.
+Trophic web models like Ecopath with Ecosim (EwE) can handle ﬁshing ﬂeets as
+a top predator, with top-down impact on harvested organisms. The aim of this
+study was to better understand the Icelandic marine ecosystem and the interac-
+tions within. This was done by constructing an EwE model of Icelandic waters.
+The model was run from 1984 to 2013 and was ﬁtted to time series of biomass
+estimates, landings data and mean annual temperature. The ﬁnal model was
+chosen by selecting the model with the lowest Akaike information criterion. A
+skill assessment was performed using the Pearson’s correlation coeﬃcient, the
+coeﬃcient of determination, the modelling eﬃciency and the reliability index to
+evaluate the model performance. The model performed satisfactorily when sim-
+ulating previously estimated biomass and known landings. Most of the groups
+with time series were estimated to have top-down control over their prey. These
+are harvested species with direct and/or indirect links to lower trophic levels and
+future ﬁshing policies should take this into account. This model could be used
+as a tool to investigate how such policies could impact the marine ecosystem in
+Icelandic waters.
+Keywords: Ecosystem dynamics, Trophic web, Ecopath with Ecosim,
+Icelandic waters
+1. Introduction
+Fisheries aﬀect targeted stocks, as well as the whole ecosystem. Fisheries
+can have negative eﬀects due to maximizing stock proﬁtability. These include
+∗Corresponding author
+Email address: pcrjoana@gmail.com (Joana P.C. Ribeiro)
+arXiv:1810.00613v2  [q-bio.PE]  1 Feb 2019
+damage to the habitat and impacts to predators and prey of the ﬁshed species
+(Pikitch et al., 2004). The need for ﬁsheries management arose from overex-
+ploitation of ﬁsh stocks. Since they were ﬁrst developed, diﬀerent measures of
+ﬁsheries management have been employed across systems and their eﬀectiveness
+has been previously studied (Stefansson and Rosenberg, 2005). Fishing policies,
+or lack thereof, have not always prevented overexploitation (Cook et al., 1997).
+Fisheries management strategies have had a tendency to focus on a single
+species and not on wider, more realistic multi species scenarios (Hanna, 1999;
+Pikitch et al., 2004). Ecosystems harbour diﬀerent species within them, which
+interact with each other and with their environment. The species in a given
+system are connected through trophic links and other types of ecological in-
+teractions. Ecosystem models can be used to gain better understanding of the
+underlying dynamics within a system. Trophic links in particular can be studied
+using food web models, also referred to as trophic models. When a system is
+harvested, the interaction between the targeted species and the ﬁshing ﬂeet is
+introduced in the system. In this case, ﬁshing ﬂeets can be handled by food web
+models as a top predator which interact with targeted stocks through top-down
+trophic control.
+A widely used food web model is Ecopath with Ecosim (EwE; Christensen
+and Pauly, 1992; Walters et al., 1997; Pauly et al., 2000; Walters et al., 2000).
+Typical uses of EwE include answering ecological questions, quantifying trophic
+ﬂows and studying the food-web structure and investigating potential impacts
+of ﬁsheries on ecosystems. EwE has also been used as a ﬁsheries management
+scenarios evaluation tool (for a complete overview on EwE capacities and limi-
+tations see Christensen and Walters, 2004).
+TwoEwEmodelsforIcelandicwatershadpreviouslybeenpublished(Buchary,
+E.A.; Mendy, A.N. and Buchary, E.A., in Guénette et al., 2001; Mendy, 1998).
+The earlier model (Buchary, E.A. and Mendy, A.N. in Guénette et al., 2001;
+Mendy, 1998) modelled the trophic web in Icelandic waters in the year 1997 and
+did not include Ecosim. The latter model (Buchary E.A. in Guénette et al.,
+2001) was a reconstruction of the food web in Icelandic waters in 1950 and
+included a dynamic component that simulated the trophic dynamics between
+1950 and 1997. These models did not cover more recent dynamics nor were
+they evaluated using a skill assessment. Other work on trophic interactions in
+Icelandic waters include speciﬁc predator-prey interactions (Stefansson et al.,
+1998), isotope analyses of organisms in the Icelandic sea (Petursdottir et al.,
+2012) and end to end modelling of the marine ecosystem (Sturludottir et al.,
+2018).
+The marine environment around Iceland has been exploited for centuries. In
+the 20th century, ﬁsheries were the main source of income in Iceland (Popescu
+and Poulsen, 2012). Economically important species include demersal ﬁsh such
+as cod (Gadus morhua), saithe (Pollachius virens), haddock (Melanogrammus
+aegleﬁnus), redﬁsh (Sebastes spp.) and Greenland halibut ( Rinhardtius hip-
+poglossoides), as well as pelagic species such as herring ( Clupea harengus),
+capelin (Mallotus villosus) and, in later years, blue whiting (Micromesistius
+poutassou; Astthorsson et al., 2007).
+2
+The aim of this study was to gain better understanding of the ecosystem in
+Icelandic waters by using EwE to model the trophic interactions between species
+in the ecosystem, as well as the interactions between ﬁsheries and targeted
+species. The aim was also to evaluate the performance of the model with a skill
+assessment.
+2. Methods
+2.1. Study area
+Iceland is an island located in the North Atlantic ocean, at the junction
+of the Middle Atlantic Ruidge and the Greenland-Scotland ridge (Astthorsson
+et al., 2007). Its exclusive economic zone (EEZ) spans an area of 758 000 km2
+(Popescu and Poulsen, 2012) (Figure 1). This area includes the continental shelf
+around Iceland.
+Figure 1: Icelandic EEZ with Iceland marked in black and highlighted continental shelf.
+The Icelandic waters harbour organisms ranging from phytoplankton to ma-
+rine mammals, as well as sea birds. Some of these are diﬀerently distributed
+along the ecosystem in Icelandic waters, due to diﬀerent water salinity and tem-
+perature between the southern and western areas and the northern and eastern
+parts (Astthorsson et al., 2007). The southern and western areas have warm
+and saline Atlantic water, while the water in northern and eastern areas is a mix
+of Atlantic, Arctic and Polar water (Malmberg and Jonsson, 1997; Jonsson and
+3
+Valdimarsson, 2005; Astthorsson et al., 2007). The diﬀerent habitats resulting
+from this diﬀerence in water composition is exploited by some species, includ-
+ing commercially important ﬁsh stocks. These spawn in southern and western
+waters and feed oﬀ northern and western waters (Astthorsson et al., 1994, 2007).
+2.2. Mass-balance model
+To study the marine ecosystem of Icelandic waters, EwE (Christensen and
+Pauly, 1992; Walters et al., 1997; Pauly et al., 2000; Walters et al., 2000) was
+chosen as a tool to give a simple overview of the entire system. EwE is composed
+of two modelling stages, Ecopath and Ecosim. Ecopath is the mass-balance part
+of EwE and its master equation is as follows:
+Bi
+(P
+B
+)
+i
+=
+∑
+j
+Bj
+(Q
+B
+)
+j
+DCij + Yi + Ei + BAi + Bi
+(P
+B
+)
+i
+(1− EEi) (1)
+Here, Bi is the biomass of functional groupi, (P/B)i is the production to
+biomass ratio, equivalent to total mortality (Z) in closed systems and corre-
+sponding to the sum of natural mortality (M) and ﬁshing mortality (F), Bj
+is the biomass of predator j, (Q/B)j is the consumption to biomass ratio of
+j, DCij is the proportion ofi found in the stomach ofj, Yi is the yield, Ei is
+the net migration,BAi is the biomass accumulation andEEi is the ecotrophic
+eﬃciency, which corresponds to the production ofi explained by the model.F
+is calculated in Ecopath as the ratioY /B.
+2.2.1. Functional groups
+The Icelandic Ecopath model was comprised of 35 functional groups, of
+which six contained two stanzas each. The most relevant species of phyto-
+plankton, zooplankton, invertebrates, ﬁsh, marine mammals and sea birds were
+included in the 35 functional groups used in the EwE model here presented (Ta-
+ble 1). Species were chosen as multi-stanza and/or individual functional groups
+depending on their economical importance and/or their role on the ecosystem
+and available biomass estimates and/or landings data. The aggregation of dif-
+ferent species in a single functional group was based on species type and habitat
+use (Table A.1).
+Commercial species were targeted by a single ﬁshing ﬂeet, without discrim-
+ination regarding ﬁshing gear.
+4
+Table 1: List of the functional groups for the Icelandic waters EwE model.
+Functional groups
+Seabirds Herring* (0-3) Commercial demersal
+Minke whale Herring* (4+) Other demersal
+Baleen whales Redﬁsh* (0-7) Cephalopod
+Tooth whales Redﬁsh* (8+) Mollusc
+Pinniped Greenland halibut* (0-5) Lobster
+Greenland shark Greenland halibut* (6+) Shrimp
+Dogshark Capelin Benthos
+Skate rays Blue whiting Jellyﬁsh
+Cod* (0-3) Mackerel Krill
+Cod* (4+) Sandeel Crustacean zooplankton
+Saithe* (0-3) Large pelagic Small zooplankton
+Saithe* (4+) Small pelagic Phytoplankton
+Haddock* (0-2) Flatﬁsh Detritus
+Haddock* (3+) Other codﬁsh
+*Multi-stanza group
+2.2.2. Initial parameters
+Ecopath balances the model by solving a series of linear equations (Eq. 1).
+For each equation there must be an unknown value. The four basic values in
+Ecopath are B, P/B, Q/B and EE. Ideally, B, P/B and Q/B should be input
+values. However, if estimates ofB are lacking, theEE can be used as an input
+value to estimate B. In multi-stanza groups, B, P/B and Q/B have to be
+inserted for the leading stanza, whereas onlyP/B needs to be inserted for all
+stanzas. Eventhough P/B and Q/B canbeestimated, itishighlyrecommended
+that both are part of the input. The assumption of a closed system was made
+when modelling the marine ecosystem in Iceland. In a closed system, there is
+no BA nor E, thus these values were set to 0.
+Ecopath was set up for the year 1984 and the input biomass and landings
+corresponded to estimates for this year or for the next year with available data.
+A comprehensive list of the literature used can be found in Table 2.
+5
+Table 2: Literature sources of biomass andQ/B estimates and of landings.
+Functional group Literature used
+Seabirds Lilliendahl and Solmundsson (1997)
+Dommasnes et al. (2001)
+Umhverﬁsstofnun (2016)
+Minke whale; Sigurjónsson and Víkingsson (1997)
+Baleen whales and Borchers et al. (2009)
+Tooth whales Pike et al. (2009)
+Víkingsson et al. (2009)
+Institute (2014)
+Pinniped Gunnarsson et al. (1998)
+Dommasnes et al. (2001)
+All ﬁsh groups Institute (2014)
+Froese and Pauly (2016)
+Greenland shark (Somniosus microcephalus; biomass) MacNeil et al. (2012)
+Cod (Q/B) Magnússon and Pálsson (1989)
+Mollusc; jellyﬁsh; benthos;
+Small zooplankton and crustacean zooplankton
+Phytoplankton Kleisner and Hoornaert (2016)
+No biomass was found for functional groups dogshark, skate rays, sandeel,
+large pelagic, small pelagic, ﬂatﬁsh, other demersal, lobster, shrimp, benthos,
+jellyﬁsh and both zooplankton groups. Since these were not harvested in Iceland
+in 1984, it was not possible to estimate biomass and as such theEE was used
+instead. The EE of dogshark and skate rays was set to 0.500. For all remaining
+groups, EE was set to 0.950. The choice of EE values was made based on
+recommendations in the literature (Heymans et al., 2016).
+2.2.3. Diet composition
+Stomach content data of most ﬁsh groups was provided by the MFRI (Insti-
+tute, 2014) and then transformed into diet composition using R (R Core Team,
+2016), to be later used in Ecopath. Diet composition of all other groups, as well
+as of small pelagic ﬁsh, other demersal ﬁsh and invertebrates was set according
+to the literature (Table 3).
+Table 3: Literature sources of diet composition.
+Functional group Literature used
+Seabirds Lilliendahl and Solmundsson (1997)
+Minke whale Vikingsson et al. (2014)
+Baleen whales Sigurjónsson and Víkingsson (1997)
+Tooth whales Canning et al. (2008)
+Sigurjónsson and Víkingsson (1997)
+Víkingsson et al. (2003)
+Pinnipeds Hauksson and Bogason (1997)
+Large pelagic ﬁsh Hutchings (2002)
+Small pelagic ﬁsh Tyler and Pearcy (1975)
+Other demersal ﬁsh Hutchings (2002)
+All inverebrate groups Gunnarsson et al. (1998)
+6
+2.2.4. Model balancing
+After initialising Ecopath for the ﬁrst time, two groups hadEE > 1. These
+were functional group herring 0-3 (EE = 1.201) and capelin (EE = 2.328). In
+order to balance the model,P/B of the herring 0-3 group was raised from 0.490
+to 0.570 and theEE was set to 0.950 for capelin. The latter decision was based
+on the hypothesis that capelin biomass has been underestimated in assessments
+(Magnússon and Pálsson, 1989). According to a study by Magnússon and Páls-
+son (1989), assessments of capelin biomass have to be approximately doubled
+to explain consumption by predators.
+2.3. Dynamic model
+Ecosim is the dynamic part of the EwE modelling suite (Walters et al.,
+1997, 2000; Christensen and Walters, 2004). Ecopath estimates are used as
+initial values in Ecosim, which runs a simulation for a user-deﬁned period. The
+Ecosim model presented here had a time span of 30 years. Ecosim uses a system
+of diﬀerential equations to give a time series of simulated biomass and landings:
+dBi
+dt = gi
+∑
+j
+Qji−
+∑
+j
+Qij + Ii− (M0i + Fi + ei)Bi (2)
+Here, dBi/dt represents the rate of change in biomass of functional groupi,
+described in terms of its biomass,Bi, gi is net growth eﬃciency (P/Q), Qji is
+the consumption ofj by i, Qij is the predation byj on i, M0i is the mortality
+not explained by the model,Fi is the ﬁshing mortality rate,ei is the emigration
+rate and Ii is the immigration rate.
+Consumption in Ecosim is calculated based on the foraging arena theory
+(Walters et al., 1997; Ahrens et al., 2012), in which the biomass of the prey is
+split into vulnerable and non-vulnerable pools. Consumption is computed as:
+Qij = vij·aij·Bi·Bj·Ti·Tj·Sij·Mij/Dj
+vij+vij·Ti·Mij+aij·MijBj·Sj·Tj/Dj
+(3)
+Here, vij is the vulnerability of preyi to predatorj, aij is the rate of eﬀective
+search of i by j, Ti is the relative feeding time ofi, Tj is the relative feeding
+time of j, Sij is the representation of seasonal or long-term forcing eﬀects,Mij
+represents mediation forcing eﬀects andDj is the impact of handling time as a
+limit to consumption.
+2.3.1. Model ﬁtting
+Ecosim beneﬁts from reference temporal data used to calibrate the model.
+This reference data includes biomass and/or landings. In addition, biomass,
+landings, F and environmental variables can be forced to drive the model. To
+calibrate the model, a time series of both forced and reference values was used
+(Table 4).
+7
+Table4: Descriptionofthetime-seriesusedtocalibrateEcosim. F-Fishingmortality(forced);
+FB - Forced biomass; RB - Reference biomass; RC - Reference landings; EV - Environmental
+variables.
+Type Group Period
+F Cod 4+; Saithe 4+; Haddock 3+; 1984-2013
+Herring 4+; Redﬁsh 8+; Capelin;
+Blue whiting; Flatﬁsh; Other codﬁsh;
+Mackerel; 2005-2013
+Commercial demersal; 1994-2013
+FB Mackerel; 1984-2013
+RB Cod 4+; Saithe 4+; Haddock 3+; 1984-2013
+Herring 4+; Redﬁsh 8+; Blue whiting;
+RC Cod 4+; Saithe 4+; Haddock 3+; 1984-2013
+Herring 4+; Redﬁsh 8+; Greenland halibut 6+;
+Capelin; Flatﬁsh; Blue whiting;
+Mackerel; 2005-2013
+Other codﬁsh; Commercial demmersal. 1984-2013
+EV Temperature 1984-2013
+Biomass forcing was used for mackerel. Numbers of mackerel have been in-
+creasing in Icelandic waters since around 2007 (Astthorsson et al., 2012). Initial
+biomass of mackerel was set to low values (0.200 t.km−2), as new functional
+groups cannot be introduced in Ecosim. The invasion by mackerel was then
+simulated by forcing its biomass from 2005 on. This was the chosen method to
+handle the increasing numbers of mackerel in the ecosystem as a method to sim-
+ulate species invasion in EwE. Average annual temperature was used as forcing
+function for PP. The time series was provided the MFRI (Institute, 2014).
+The model was ﬁtted to the time series by conducting anomaly and vulnera-
+bility searches. The former reduced the total sum of squares (SSQ) by adjusting
+theforcingfunctiononPP,whilethelatterreducedSSQbyadjustingvulnerabil-
+ity parameters. In EwE, the anomaly search uses spline regression to search for
+time series values of annual relative PP that could explain productivity shifts
+impacting biomass across the ecosystem (Christensen et al., 2008). Anomaly
+searches using 5, 10, 15 and 20 spline points were conducted and model selec-
+tion was done using the Akaike method (Akaike, 1974). The Akaike method
+for model selection uses the Akaike information criterion (AIC) as a measure of
+model how well the model ﬁts to the data considering the number of parameters
+and the lower the AIC, the better the model (Akaike, 1974).
+2.3.2. Skill assessment
+A skill assessment of the model was done using three measures suggested
+by Stow et al. (2009). These were the Pearson’s correlation coeﬃcient (r), the
+squared Pearson’s correlation coeﬃcient or determination coeﬃcient (R2), the
+modelling eﬃciency coeﬃcient (MEF; eq. 4) and the reliability index (RI; eq.
+8
+5). The model eﬃciency coeﬃcient and the reliability index are described as:
+M EF =
+(∑n
+i=1(Oi− ¯O)2−∑n
+i=1(Pi− Oi)2)
+∑n
+i=1(Oi− ¯O)2 (4)
+And:
+RI = exp
+√ 1
+n
+n∑
+i=1
+(
+log Oi
+Pi
+)2
+(5)
+Here, n is the number of observations,Oi is the ith of observation, ¯O is the
+average of the observations andPi is the ith prediction.
+The correlation coeﬃcient, r, can range from -1 to 1. An r value of 0
+indicates no correlation, whereas values of 1 indicate that the simulated and
+reference values variate with an equal trend. Negativer values indicate inverse
+variation between simulated and reference values. MEF can vary between−∞
+and 1. Negative values of MEF indicate that the model has a worse ﬁt to the
+data than an average through the time series;M EF = 0 indicates that the
+model has an equal ﬁt to an average through the time series; andM EF = 1
+indicates that the model perfectly ﬁts to the time series. Models with negative
+MEF can still be useful, if r is positive. Negative MEF values could be due
+to diﬀerences in magnitude between simulated and observed values, despite
+the simulations following the same trend as the observations. Finally, RI is a
+measure of the diﬀerence in magnitude between simulated and reference values.
+It varies between 1 to+∞ and a value of 1.5 would indicate that the model
+simulates the reference values with a 50% diﬀerence in magnitude.
+3. Results and Discussion
+3.1. Mass-balance model
+The estimated biomass for capelin in 1984 was 4 681 408 tonnes,2.4 times
+higher than MFRI estimates for that year (Institute, 2014). These results are
+consistent with a previous study by Magnússon and Pálsson (1989), in which the
+authors hypothesised that capelin biomass was being grossly underestimated in
+the assessments and should be approximately doubled in order to explain the
+amount of capelin that is being consumed by predators.
+The combined predation mortality of cod on capelin accounted for31% of M
+of capelin (M = 0.311; total M = 1.014). Blue whiting had the second highest
+eﬀect on capelinM, with its predation mortality on capelin accounting for22%
+of M (M = 0.224).
+9
+3.2. Dynamic model
+Overall, the Ecosim model performed in a satisfactory manner when repli-
+cating previously known dynamics (Table 6 and Figures 2 and 3). The anomaly
+search using 10 spline points resulted in the ﬁt with the lowest AIC Table 5.
+The anomaly search on the ﬁnal model was thus done using 10 spline points.
+When ﬁtting the model to the time series of biomass and landings by estimating
+the vulnerability parameters, the original ﬁt (SSQ = 84.80) was improved by
+4% (SSQ = 81.56). After the addition of temperature as a forcing function of
+PP to the time series of biomass,F and landings, the original ﬁt was improved
+by 16% (SSQ = 71.04). Considering these results, temperature was included in
+the ﬁnal model as a forcing function of PP.
+Table 5: Summary of SSQ and AIC using diﬀerent number of spline points.
+Spline points SSQ AIC
+0 75.52 -880.4
+5 75.01 -944.5
+10 71.04 -961.4
+15 72.17 -942.4
+20 68.53 -957.5
+The best ﬁt was achieved when annual temperature was included in the
+model, suggestingthatﬁsheriesalonecannotexplaintheIcelandicmarineecosys-
+tem. Temperature is considered to be one of the main determining factors in
+marine ﬁsh distribution (Sunday et al., 2012; Genner, 2016). Cod has been
+shown to change its habitat use in the southern North sea according to surface
+temperature (Freitas et al., 2016). Considering the fundamental role tempera-
+ture plays in ﬁsh ecology, it is not surprising that the addition of temperature
+to the model resulted in a better ﬁt.
+10
+Table 6: Skill assessment per group, where r is the Pearson’s correlation coeﬃcient, R2 is
+the determination coeﬃcient, MEF is the modelling eﬃciency and RI is the reliability index.
+Reference values for a good ﬁt:0.7 ≤ r ≤ 1; 0.5 ≤ R2 ≤ 1; 0 < M EF ≤ 1; 1 ≤ RI ≤ 1.5.
+Functional group Biomass Catches
+r R 2 MEF RI r R 2 MEF RI
+Cod 4+ 0.605 0.366 -1.079 1.291 0.810 0.656 0.172 1.291
+Saithe 4+ 0.750 0.563 0.599 1.242 0.844 0.712 0.479 1.242
+Haddock 3+ 0.768 0.590 0.635 1.241 0.623 0.388 0.471 1.241
+Herring 4+ 0.323 0.104 -0.223 1.398 0.577 0.333 0.047 1.398
+Redﬁsh 8+ 0.567 0.321 0.147 1.230 0.796 0.634 0.279 1.230
+Greenland halibut 6+ 0.188 0.035 -0.354 1.909
+Capelin 0.763 0.583 -0.419 2.006
+Blue whiting 0.535 0.286 -0.012 1.909 0.929 0.863 0.424 1.755
+Mackerel 1.000 1.000 1.000 1.000
+Flatﬁsh 0.778 0.605 0.391 1.238
+Other codﬁsh 0.754 0.568 0.506 1.251
+Comercial demmersal 0.687 0.472 -0.444 1.318
+The skill assessment had overall satisfactory results (0.7≤ r≤ 1; 0.5≤
+R2≤ 1; 0 < M EF≤ 1; 1≤ RI≤ 1.5; Table 6). There was a general tendency
+from the model to replicate the landings better than the biomass. With the
+exception of group haddock 3+, ﬁtted biomass had higher R2 values than ﬁtted
+landings (Table 6). These results are unsurprising, as the landings were actual
+observations, while the biomass used were previous estimates by the MFRI
+(Institute, 2014).
+There were three groups (cod 4+, herring 4+ and blue whiting) for which
+the model had a worse ﬁt for biomass than a straight line through the average
+of the reference values (M EF < 0; Table 6). The model performed poorly when
+predicting the landings of Greenland halibut 6+, capelin and commercial dem-
+ersal ﬁsh as well (M EF < 0; Table 6). The MEF is sensitive to the diﬀerence
+between the simulated and the reference values (Eq. 4) and can be negative
+even when the R2 is within reasonably good range (0.5≤ R2≤ 1), as was the
+case of capelin landings (Table 6). The model underestimated capelin landings
+with a diﬀerence in magnitude of approximately 100% (RI = 2.006; Table 6),
+which could account for the low MEF value.
+The model was calibrated using biomass estimates from single-species assess-
+ments, aswellas F calculatedusingthoseestimates. Thismethodwaschosen, as
+there were no biomass estimates from multi-species assessments available and
+because of how Ecopath internally computesF as Y /B. The use of biomass
+estimated by single species assessments in a multi-species context could have
+contributed to the poor skill assessments results observed for herring 4+ and
+redﬁsh 8+ biomass, as well as for Greenland halibut 6+ landings.
+11
+Figure 2: Biomass estimates by year for all groups and reference biomass time-series. Esti-
+mates by Ecosim are represented by a solid line and time-series reference data is represented
+by dots. Biomass is thousands of tonnes. Notice the diﬀerent scales.
+With the exception of mackerel, all groups hadRI > 1.2, which indicates
+that the simulated biomass and landings varied at least 20% in magnitude in
+relation to the reference biomass and landings (Table 6). However, none of these
+diﬀerences in magnitude were constant through the simulations, indicating that
+there were no systematic errors (Figures 2 and 3).
+The skill assessment of mackerel caches shows optimal results for all mea-
+sures (Table 6). These can be explained by the use of forced biomass for this
+group. Using forced biomass for mackerel in EwE can have consequences for
+the modelled trophic dynamics, as it could lead to over-ﬁtting. Over-ﬁtting
+the model can, in turn, lead to unnatural simulations of the groups with direct
+trophic links to this group. However, the use of ﬁsheries and temperature was
+not enough to satisfactorily simulate the invasion by mackerel.
+12
+Figure 3: Landings estimates by year for all groups and reference landings time-series. Esti-
+mates by Ecosim are represented by a solid line and time-series reference data is represented
+by dots. Catches are in thousands of tonnes. Notice the diﬀerent scales.
+3.2.1. Trophic ﬂows
+Ecosim uses a vulnerability scale of 1 to+∞, wherev = 2 represents mixed-
+trophic control, v < 2 represents bottom-up control and v > 2, represents
+top-down control (Christensen et al., 2008). The higher the vulnerability, the
+stronger top-down eﬀect a predator has on its prey, this being relevant for values
+up to v = 100.
+Of the groups with vulnerability parameters freed from default, only cod 4+
+had v < 2 (Table 7), suggesting that this group is aﬀected by the abundance
+and/or availability of their prey, as contrast to acting as a controlling force
+over them. The groups capelin, blue whiting and commercial demersal had
+v = 1.979, v = 2.156 and v = 2.000, respectively (Table 7), which suggests that
+these groups have mixed trophic control. The remaining groups hadv > 100,
+suggesting top-down control from these groups over their prey (Table 7). Only
+high TL predators (T L > 3; Figure 4) had their vulnerability parameters freed
+from default (Table 7), as these were the only groups with time-series of biomass
+and/or landings available, and these usually are linked to their prey through
+top-down control. As such, it is not possible to speculate about which type of
+trophic control dominates the Icelandic marine ecosystem from this model.
+13
+Figure 4: Flow diagram for the Ecopath model of Icelandic waters in 1984 showing the dis-
+tribution of the functional groups by trophic level. Larger nodes represent bigger stock sizes.
+The trophic level scale can be found on the left of the diagram.
+The vulnerability search was done by predator. When freeing vulnerabilities
+from default in this manner, it is assumed that how vulnerable a prey is to their
+predator depends mostly on the predator’s foraging behaviour (Christensen and
+Pauly, 1992). Conducting the vulnerability search by predator will thus lead to
+one vulnerability value for every predator-prey interaction of a given predator
+(Christensen and Pauly, 1992). Assuming that a predator’s foraging behaviour
+remains unchanged independently of the prey sought might not always depict
+reality. An example of this is cod, which was estimated to be aﬀected by bottom-
+up control (v < 2; Table 7) by this model. However, a previous study has
+shown that cod has top-down control over shrimp, but is aﬀected by bottom-up
+control by capelin (Stefansson et al., 1998). The vulnerability search method
+used prevents individual predator/prey pairs from having a unique vulnerability
+value. Thevulnerabilitysearchwasdoneinthismannerasitwastheonlyoption
+available to restrict it to the groups with time series.
+Table 7: Estimated vulnerabilities (v)for predator.
+Predator v Functional group v
+Cod 4+ 1.186 Capelin 1.979
+Saithe 4+ > 100 Blue whiting 2.156
+Haddock 3+ > 100 Mackerel > 100
+Herring 4+ > 100 Flatﬁsh > 100
+Redﬁsh 8+ > 100 Other codﬁsh > 100
+Greenland halibut 6+ > 100 Commercial demersal 2.000
+14
+3.3. Comparisson with other models
+There were two previously published Ecopath models describing the Ice-
+landic marine ecosystem in 1950 and 1997 (Buchary, E.A.; Mendy, A.N and
+Buchary, E.A., respectively, in Guénette et al., 2001; Mendy, 1998). The model
+for 1950 included an Ecosim simulation, ran from 1950 to 1997.
+In the 1950 study, the author constructed the model to be comparable to
+the Ecopath model for 1997 (Buchary, E.A. in Guénette et al., 2001). The
+1950 model Ecopath was an attempt to reconstruct the ecosystem for that
+year (Buchary, E.A. in Guénette et al., 2001; Mendy, 1998), by estimating the
+biomass for most functional groups. The author then used a time series of F
+and reference biomass (calculated as Y/F) of cod and herring to ﬁt the model
+(Buchary, E.A. in Guénette et al., 2001). No vulnerability search was done in
+this study and all vulnerabilities were set to 0.3 (Buchary, E.A. in Guénette
+et al., 2001). There were diﬀerences between the input biomass and landings
+of the 1997 model (Mendy, A.N and Buchary, E.A. in Guénette et al., 2001;
+Mendy, 1998) and the simulations by the present model for the same year for
+most groups. It is reasonable to think that these discrepancies were due to dif-
+ferent modelling assumptions such as modelled area and species density, as the
+diﬀerences are also found between the input data of the older model and the
+data sources for the current model.
+Both the 1950 and 1997 models used 25 functional groups each (Buchary,
+E.A.; Mendy, A.N and Buchary, E.A., respectively, in Guénette et al., 2001;
+Mendy, 1998) in contrast to the 35 functional groups of the here presented
+model. The current model was more complete than the 1950 and 1997 models,
+as it included more detailed functional groups, a more complete time series than
+the one used in the 1950 model and because of it being ﬁtted to the time series
+through vulnerability and anomaly searches. Furthermore, a skill assessment
+was carried out in the current model, which was not the case for the previous
+models.
+3.4. Final remarks
+It was estimated by this model that commercial ﬁshes like haddock, redﬁsh,
+Greenland halibut, ﬂatﬁsh and other codﬁsh have top-down control over their
+prey. These being predators implies that their more or less heavy removal from
+the system could have serious implications for the ecosystem dynamics and
+should be taken into account by ﬁsheries management authorities. Furthermore,
+mid trophic level species like herring and mackerel were also estimated to have
+top-down control over their prey. These species have a direct trophic link to
+lower trophic level organisms and their exploitation should surely take this into
+account.
+The use of EE to estimate biomass in Ecopath, might raise concerns, as
+it is inversely related to biomass. An alternative to using EE could be using
+species density from other EwE models in neighbouring areas. However, using
+this method would imply assuming that either the marine ecosystem in Ice-
+land would have the same physical, hydrological and biological dynamics as the
+15
+neighbouring areas or that species density is independent of these. This would
+be an assumption with potentially serious consequences, as the distribution of
+species in marine systems is thought to be linked to biotic and abiotic factors
+(Genner, 2016).
+This model provides insight on the marine trophic web in Iceland and it
+could be used as a tool to investigate how diﬀerent ﬁshing policies could impact
+the trophic web dynamics in Icelandic waters.
+4. Acknowledgements
+This study has received funding from the European Union’s Seventh Frame-
+work Programme for research, technological development and demonstration
+under grant agreement no. 613571 for the project MareFrame and from the Eu-
+ropean Commission’s Horizon 2020 Research and Innovation Programme under
+Grant Agreement No. 634495 for the project Science, Technology, and Society
+Initiative to minimize Unwanted Catches in European Fisheries (Minouw), as
+well as from the Icelandic Research Fund (Rannis, No. 152039051).
+Furthermore, the authors would like to acknowledge the MFRI for providing
+the data that made the work presented here possible, Maciej T. Tomczak, in pro-
+viding useful comments on an early version of the paper and Villy Christiansen
+for giving helpful input on the time series ﬁtting.
+References
+References
+Ahrens, R. N. M., Walters, C. J., Christensen, V., 2012. Foraging arena theory.
+Fish and Fisheries 13 (1), 41–59.
+URL <GotoISI>://WOS:000298740900004
+Akaike, H., 1974. New look at statistical-model identiﬁcation. Ieee Transactions
+on Automatic Control AC19 (6), 716–723.
+URL <GotoISI>://WOS:A1974U921700011
+Astthorsson, O. S., Gislason, A., Gudmundsdottir, A., 1994. Distribution, abun-
+dance and length of pelagic juvenile cod in icelandic waters in relation to en-
+vironmental conditions. In: ICES Marine Science Symposia. Vol. 198. Copen-
+hagen, Denmark: International Council for the Exploration of the Sea, 1991-,
+pp. 529–541.
+Astthorsson, O. S., Gislason, A., Jonsson, S., 2007. Climate variability and the
+icelandic marine ecosystem. Deep Sea Research Part II: Topical Studies in
+Oceanography 54 (23), 2456–2477.
+Astthorsson, O. S., Valdimarsson, H., Gudmundsdottir, A., Óskarsson, G. J.,
+2012. Climate-related variations in the occurrence and distribution of mack-
+erel (scomber scombrus) in icelandic waters. ICES Journal of Marine Science:
+Journal du Conseil 69 (7), 1289–1297.
+16
+Borchers, D. L., Pike, D. G., Gunnlaugsson, T., Víkingsson, G., 2009. Minke
+whale abundance estimation from the nass 1987 and 2001 aerial cue–counting
+surveys taking appropriate account of distance estimation errors. NAMMCO
+Scientiﬁc Publications 7, 95–110.
+Canning, S. J., Santos, M. B., Reid, R. J., Evans, P. G. H., Sabin, R. C., Bai-
+ley, N., Pierce, G. J., 2008. Seasonal distribution of white-beaked dolphins
+(lagenorhynchus albirostris) in uk waters with new information on diet and
+habitat use. Journal of the Marine Biological Association of the United King-
+dom 88 (6), 1159–1166.
+URL <GotoISI>://WOS:000259568300013
+Christensen, V., Pauly, D., 1992. Ecopath-ii - a software for balancing steady-
+state ecosystem models and calculating network characteristics. Ecological
+Modelling 61 (3-4), 169–185.
+URL <GotoISI>://WOS:A1992HZ63300002
+Christensen, V., Walters, C., Pauly, D., Forrest, R., 2008. Ecopath with ecosim
+version 6 user guide. Lenfest Ocean Futures Project, 235.
+Christensen, V., Walters, C. J., 2004. Ecopath with ecosim: methods, capabili-
+ties and limitations. Ecological Modelling 172 (2-4), 109–139.
+URL <GotoISI>://WOS:000189226500002
+Cook, R. M., Sinclair, A., Stefansson, G., 1997. Potential collapse of north sea
+cod stocks. Nature 385 (6616), 521–522.
+URL <GotoISI>://WOS:A1997WG23500043
+Dommasnes, A., Christensen, V., Ellertsen, B., Kvamme, C., Melle, W., Nottes-
+tad, L., Torstein, P., Tjelmeland, S., Zeller, D., 2001. An ecopath model for
+the norwegian sea and barents sea. Fish. Cent. Res. Rep. 9 (4), 213–240.
+Freitas, C., Olsen, E. M., Knutsen, H., Albretsen, J., Moland, E., 2016.
+Temperature-associated habitat selection in a cold-water marine ﬁsh. Journal
+of Animal Ecology 85 (3), 628–637.
+URL <GotoISI>://WOS:000375121400005
+Froese, R., Pauly, D., 2016. Fishbase.
+URL www.fishbase.org
+Genner, M. J., 2016. Staying out of the heat: how habitat use is determined by
+local temperature. Journal of Animal Ecology 85 (3), 611–613.
+URL <GotoISI>://WOS:000375121400001
+Guénette, S., Christensen, V., Pauly, D., 2001. Fisheries impacts on north at-
+lantic ecosystems: Models and analyses.
+URL https://open.library.ubc.ca/cIRcle/collections/52383/items/
+1.0348145
+17
+Gunnarsson, K., Jónsson, G., Pálsson, K., 1998. Sjávarnytjar við Ísland, mál og
+menning. Reykjavík (1998).
+Hanna, S. S., 1999. From single-species to biodiversity - making the transition
+in ﬁsheries management. Biodiversity and Conservation 8 (1), 45–54.
+URL <GotoISI>://WOS:000081404300005
+Hauksson, E., Bogason, V., 1997. Comparative feeding of grey (halichoerus
+grypus) and common seals (phoca vitulina) in coastal waters of iceland, with
+a note on the diet of hooded (cystophora cristata) and harp seals (phoca
+groenlandica). J. Northwest Atl. Fish. Sci 22, 125–135.
+Heymans, J. J., Coll, M., Link, J. S., Mackinson, S., Steenbeek, J., Walters, C.,
+Christensen, V., 2016. Best practice in ecopath with ecosim food-web models
+for ecosystem-based management. Ecological Modelling 331, 173–184.
+URL <GotoISI>://WOS:000376831700016
+Hutchings, J. A., 2002. Ecology and biodiversity of commercially unexploited
+marine ﬁshes in the northwest atlantic. Final Report, Dalhousie University,
+Halifax, Nova Scotia.
+Institute, M. F. R., 2014. State of marine stocks in icelandic waters 2013/2014
+- prospects for the quota year 2014/2015.
+Jonsson, S., Valdimarsson, H., 2005. Recent developments in oceanographic
+research in icelandic waters. In: Developments in Quaternary Sciences. Vol. 5.
+Elsevier, pp. 79–92.
+Kleisner, K., Hoornaert, C., 2016. Primary production.
+URL www.seaaroundus.org
+Lilliendahl, K., Solmundsson, J., 1997. An estimate of summer food consump-
+tion of six seabird species in iceland. Ices Journal of Marine Science 54 (4),
+624–630.
+URL <GotoISI>://WOS:A1997XU44800013
+MacNeil, M. A., McMeans, B. C., Hussey, N. E., Vecsei, P., Svavarsson, J.,
+Kovacs, K. M., Lydersen, C., Treble, M. A., Skomal, G. B., Ramsey, M.,
+Fisk, A. T., 2012. Biology of the greenland shark somniosus microcephalus.
+Journal of Fish Biology 80 (5), 991–1018.
+URL <GotoISI>://WOS:000302722800006
+Magnússon, K. G., Pálsson, l. K., 1989. Trophic ecological relationships of ice-
+landic cod. In: ICES Rapp. Proc.-Verb. Vol. 188. pp. 206–224.
+Malmberg, S., Jonsson, S., 1997. Timing of deep convection in the greenland
+and iceland seas. Ices Journal of Marine Science 54 (3), 300–309.
+URL <GotoISI>://WOS:A1997XG98100003
+18
+Mendy, A. N., 1998. Trophic modelling as a tool to evaluate and manage ice-
+land’s multispecies ﬁsheries.
+Pauly, D., Christensen, V., Walters, C., 2000. Ecopath, ecosim, and ecospace
+as tools for evaluating ecosystem impact of ﬁsheries. Ices Journal of Marine
+Science 57 (3), 697–706.
+URL <GotoISI>://WOS:000088880200026
+Petursdottir, H., Falk-Petersen, S., Gislason, A., 2012. Trophic interactions of
+meso- and macrozooplankton and ﬁsh in the iceland sea as evaluated by fatty
+acid and stable isotope analysis. Ices Journal of Marine Science 69 (7), 1277–
+1288.
+Pike, D. G., Paxton, C. G., Gunnlaugsson, T., Víkingsson, G., 2009. Trends in
+the distribution and abundance of cetaceans from aerial surveys in icelandic
+coastal waters, 1986-2001. NAMMCO Scientiﬁc Publications 7, 117–142.
+Pikitch, E. K., Santora, C., Babcock, E. A., Bakun, A., Bonﬁl, R., Conover,
+D. O., Dayton, P., Doukakis, P., Fluharty, D., Heneman, B., Houde, E. D.,
+Link, J., Livingston, P. A., Mangel, M., McAllister, M. K., Pope, J., Sains-
+bury, K. J., 2004. Ecosystem-based ﬁshery management. Science 305 (5682),
+346–347.
+URL <GotoISI>://WOS:000222662400022
+Popescu, I., Poulsen, K., 2012. Icelandic ﬁsheries: a review. Policy Department
+B: Structural and Cohesion Policies Fisheries Note, European Parliament.
+R Core Team, 2016. R: A Language and Environment for Statistical Computing.
+R Foundation for Statistical Computing, Vienna, Austria.
+URL https://www.R-project.org/
+Sigurjónsson, J., Víkingsson, G. A., 1997. Seasonal abundance of and estimated
+food consumption by cetaceans in icelandic and adjacent waters. Journal of
+Northwest Atlantic Fishery Science 22, 271–287.
+Stefansson, G., Rosenberg, A. A., 2005. Combining control measures for more
+eﬀective management of ﬁsheries under uncertainty: quotas, eﬀort limitation
+and protected areas. Philosophical Transactions of the Royal Society of Lon-
+don B: Biological Sciences 360 (1453), 133–146.
+Stefansson, G., Skuladottir, U., Steinarsson, B. A. E., 1998. Aspects of the
+ecology of a boreal system. Ices Journal of Marine Science 55, 859–862.
+Stow, C. A., Jolliﬀ, J., McGillicuddy, D. J., Doney, S. C., Allen, J. I., Friedrichs,
+M. A., Rose, K. A., Wallhead, P., 2009. Skill assessment for coupled biolog-
+ical/physical models of marine systems. Journal of Marine Systems 76 (1),
+4–15.
+19
+Sturludottir, E., Desjardins, C., Elvarsson, B., Fulton, E. A., Gorton, R., Loge-
+mann, K., Stefansson, G., 2018. End-to-end model of icelandic waters using
+the atlantis framework: Exploring system dynamics and model reliability.
+Fisheries Research 207, 9–24.
+Sunday, J. M., Bates, A. E., Dulvy, N. K., 2012. Thermal tolerance and the
+global redistribution of animals. Nature Climate Change 2 (9), 686–690.
+URL <GotoISI>://WOS:000309029100016
+Tyler, H. R., Pearcy, W. G., 1975. Feeding habits of 3 species of lanternﬁshes
+(family myctophidae) oﬀ oregon, usa. Marine Biology 32 (1), 7–11.
+URL <GotoISI>://WOS:A1975AS18300002
+Umhverﬁsstofnun, 2016. Veiditolur.
+URL http://ust.is/?PageId=2ab56cba-246d-11e4-93bd-00505695691b
+Vikingsson, G. A., Elvarsson, B. P., Olafsdottir, D., Sigurjonsson, J., Chosson,
+V., Galan, A., 2014. Recent changes in the diet composition of common minke
+whales (balaenoptera acutorostrata) in icelandic waters. a consequence of cli-
+mate change? Marine Biology Research 10 (2), 138–152.
+URL <GotoISI>://WOS:000324978700004
+Víkingsson, G., Pike, D. G., Desportes, G., Øien, N., Gunnlaugsson, T., Bloch,
+D., 2009. Distribution and abundance of ﬁn whales (balaenoptera physalus) in
+the northeast and central atlantic as inferred from the north atlantic sightings
+surveys 1987–2001. NAMMCO Sci. Publ 7, 49–72.
+Víkingsson, G. A., Ólafsdóttir, D., Sigurjónsson, J., 2003. Geographical, and
+seasonal variation in the diet of harbour porpoises (phocoena phocoena) in
+icelandic coastal waters. NAMMCO Scientiﬁc Publications 5, 243–270.
+Walters, C., Christensen, V., Pauly, D., 1997. Structuring dynamic models of
+exploited ecosystems from trophic mass-balance assessments. Reviews in Fish
+Biology and Fisheries 7 (2), 139–172.
+URL <GotoISI>://WOS:A1997XD41200001
+Walters, C., Pauly, D., Christensen, V., Kitchell, J. F., 2000. Representing den-
+sity dependent consequences of life history strategies in aquatic ecosystems:
+Ecosim ii. Ecosystems 3 (1), 70–83.
+URL <GotoISI>://WOS:000085509300011
+20
+Appendix A
+Table A.1: Description to the species level of the functional groups used in the EwE model
+for Icelandic waters.
+Type Functional Group Species
+Seabirds Seabirds Alca torda
+Fratercula arctica
+Fulmarus Glacialis
+Rissa tridactyla
+Uria aalge
+Uria lomvia
+Marine Mammals Minke whale Balaenoptera acutorostrata
+Baleen whales Balaenoptera borealis
+Balaenoptera musculus
+Balaenoptera physalus
+Megaptera novaeangliae
+Tooth whales Globicephala melas
+Hyperoodon ampullatus
+Lagenorhyncus acutus
+Lagenorhyncus albirostris
+Orcinus orca
+Phocoena phocoena
+Physeter macrocephalus
+Pinniped Halichoerus grypus
+Phoca vitulina
+Fish Greenland shark Somniosus microcephalus
+Dogshark Apristurus aphyodes
+Apristurus laurussonii
+Centroscyllium fabricii
+Etmopterus princeps
+Squalus acanthias
+Skate rays Raja sp.
+Cod* Gadus morhua
+Saithe* Pollachius virens
+Haddock* Melanogrammus aegleﬁnus
+Herring* Clupea harengus
+Redﬁsh* Sebastes norvegicus
+Sebastes mentella
+Sebastes viviparus
+Greenland halibut* Reinhardtius hippoglossoides
+Capelin Mallotus villosus
+Blue whiting Micromesistius poutassou
+Mackerel Scomber scombrus
+Sandeel Ammodytes sp.
+Large pelagic Magnisudis atlantica
+Serrivomer beanii
+Small pelagic Myctophidae
+Paralepididae
+Flatﬁsh Glyptocephalus cynoglossus
+Hippoglossoides platessoides
+Hippoglossus hippoglossus
+Limanda limanda
+Microstomus kitt
+Pleuronectes platessa
+Other codﬁsh Brosme brosme
+Merlangius merlangus
+21
+Type Functional Group Species
+Molva dipterygia
+Molva molva
+Commercial demersal Anarhicas sp.
+Cyclopterus lumpus
+Lophius piscatorius
+Other demersal Cottidae
+Lumpenidae
+Macroridae
+Zoarcinae
+Molluscs Cephalopod Octopoda
+Teuthida
+Sepiida
+Mollusc Arctica islandica
+Bivalvia
+Crustaceans Lobster Nephropidae
+Nephrops norvegicus
+Shrimp Caridea
+Pandalus sp.
+Benthos Benthos Anomura
+Brachyura
+Polichaeta
+Cnidarians Jellyﬁsh Scyphozoa
+Plankton Krill Euphasiidae
+Crustacean zooplankton Amphipoda
+Copepoda
+Ostracoda
+Small zooplankton Chaetognatha
+Ciliophora
+Phytoplankton Algae
+Detritus
+*Multi-stanza group
+22
+Table A.2: Input data for the balanced Ecopath model for Icelandic waters. Biomass and
+landings are given in thousands of tonnes.
+Functional group Biomass P/B Q/B EE Landings
+Seabirds 2.831 0.177 38.00 0.191
+Minke whale 81.65 0.042 6.340 0.985
+Baleen whale 189.5 0.060 4.000 5.449
+Tooth whale 26.84 0.063 15.00
+Pinniped 1.538 0.141 15.00 0.078
+Greenland shark 17.50 0.043 0.500 0.051
+Dogshark 0.320 4.834 0.500
+Skate rays 0.225 1.750 0.500 2.000
+Cod
+Cod 0-3 289.4 0.500 4.120 8.694
+Cod 4+ 914.0 0.520 1.850 282.0
+Saithe
+Saithe 0-3 116.9 0.500 9.687 0.088
+Saithe 4+ 287.0 0.520 4.760 63.00
+Haddock
+Haddock 0-2 119.9 0.900 9.794 0.872
+Haddock 3+ 147.8 0.900 4.960 48.00
+Herring
+Herring 0-3 953.2 0.570 10.82 0.723
+Herring 4+ 387.3 0.950 7.345 49.58
+Redﬁsh
+Redﬁsh 0-7 837.9 0.220 4.684
+Redﬁsh 8+ 883.6 0.380 2.800 109.0
+Greenland halibut
+Greenland halibut 0-5 110.9 0.300 2.557
+Greenland halibut 6+ 220.0 0.340 1.400 30.21
+Capelin 1.262 4.800 0.950 865.0
+Blue whiting 1159 0.780 9.060 7.077
+Mackerel 151.6 0.390 4.400
+Sandeel 0.640 6.700 0.950
+Large pelagic 0.555 5.700 0.950
+Small pelagic 0.785 9.800 0.950
+Flatﬁsh 0.326 3.420 0.950 13.57
+Other codﬁsh 0.577 2.300 0.950 9.856
+Commercial demersal 431.7 0.712 1.400 24.67
+Other demersal 0.265 3.100 0.950
+Cephalopod 1995 2.440 12.00
+Mollusc 1.500 5.000 0.950 15.58
+Lobster 0.354 5.850 0.950 2.459
+Shrimp 1.250 5.000 0.950 24.42
+Benthos 1.500 9.750 0.950
+Jellyﬁsh 3.000 10.00 0.950
+Krill 2.500 15.00 0.950
+Crustacean Zooplankton 4.000 15.00 0.950
+Small Zooplankton 13.00 25.00 0.950
+Phytoplankton 12151 117.6
+Detritus 0.027
+23
+Table A.3: Output for the Ecopath model for Icelandic waters. Biomass is given in
+thousands of tonnes.
+Functional group Trophic level Biomass EE Q/B
+Seabirds 4.160 2.831 0.379 0.005
+Minke whale 4.261 81.65 0.287 0.007
+Baleen whale 3.333 189.5 0.479 0.015
+Tooth whale 4.666 26.84 0.000 0.004
+Pinniped 4.934 1.538 0.360 0.009
+Greenland shark 4.778 17.50 0.068 0.086
+Dogshark 4.142 13.05 0.500 0.066
+Skate rays 3.897 220.30 0.500 0.129
+Cod
+Cod 0-3 4.036 289.4 0.752 0.121
+Cod 4+ 4.179 914.0 0.817 0.281
+Saithe
+Saithe 0-3 3.913 116.9 0.927 0.052
+Saithe 4+ 4.021 287.0 0.950 0.109
+Haddock
+Haddock 0-2 3.657 119.9 0.631 0.092
+Haddock 3+ 3.760 147.8 0.975 0.181
+Herring
+Herring 0-3 3.223 953.2 0.913 0.053
+Herring 4+ 3.250 387.3 0.948 0.129
+Redﬁsh
+Redﬁsh 0-7 3.481 837.9 0.577 0.047
+Redﬁsh 8+ 3.668 883.6 0.648 0.136
+Greenland halibut
+Greenland halibut 0-5 4.160 110.9 0.242 0.117
+Greenland halibut 6+ 4.370 220.0 0.404 0.243
+Capelin 3.250 4681 0.950 0.263
+Blue whiting 3.523 1159 0.220 0.086
+Mackerel 3.248 151.6 0.776 0.089
+Sandeel 3.250 3030 0.950 0.096
+Large pelagic 3.250 68.76 0.950 0.097
+Small pelagic 3.250 2193 0.950 0.080
+Flatﬁsh 4.118 279.1 0.950 0.095
+Other codﬁsh 4.235 470.2 0.950 0.251
+Commercial demersal 3.779 431.7 0.386 0.508
+Other demersal 3.416 2861 0.950 0.085
+Cephalopod 3.151 1995 0.420 0.203
+Mollusc 2.000 481.1 0.950 0.300
+Lobster 3.359 1784 0.950 0.060
+Shrimp 2.853 4217 0.950 0.250
+Benthos 2.248 38230 0.950 0.154
+Jellyﬁsh 3.150 22.48 0.950 0.300
+Krill 2.250 39521 0.950 0.167
+Crustacean Zooplankton 2.164 14741 0.950 0.267
+Small Zooplankton 2.000 16707 0.950 0.520
+Phytoplankton 1.000 12151 0.656
+Detritus 1.000 20466 0.471
+24

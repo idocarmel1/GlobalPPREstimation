@@ -1,0 +1,1540 @@
+Ecological indicators reveal historical
+regime shifts in the Black Sea ecosystem
+Ekin Akoglu
+Institute of Marine Sciences, Middle East Technical University, Erdemli, Mersin, Türkiye
+ABSTRACT
+Background: The Black Sea is one of the most anthropogenically disturbed marine
+ecosystems in the world because of introduced species, ﬁsheries overexploitation,
+nutrient enrichment via pollution through river discharge, and the impacts of climate
+change. It has undergone signi ﬁcant ecosystem transformations since the 1960s.
+The infamous anchovy and alien warty comb jelly Mnemiopsis leidyi shift that
+occurred in 1989 is the most well-known example of the drastic extent of
+anthropogenic disturbance in the Black Sea. Although a vast body of literature exists
+on the Black Sea ecosystem, a holistic look at the multidecadal changes in the Black
+Sea ecosystem using an ecosystem- and ecology-based approach is still lacking.
+Hence, this work is dedicated to ﬁlling this gap.
+Methods: First, a dynamic food web model of the Black Sea extending from 1960 to
+1999 was established and validated against time-series data. Next, an ecological
+network analysis was performed to calculate the time series of synthetic ecological
+indicators, and a regime shift analysis was performed on the time series of indicators.
+Results: The model successfully replicated the regime shifts observed in the Black
+Sea. The results showed that the Black Sea ecosystem experienced four regime shifts
+and was reorganized due to effects instigated by over ﬁshing in the 1960s,
+eutrophication and establishment of trophic dead-end organisms in the 1970s, and
+overﬁshing and intensifying interspecies trophic competition by the overpopulation
+of some r-selected organisms ( i.e., jellyﬁsh species) in the 1980s. Overall, these
+changes acted concomitantly to erode the structure and function of the ecosystem by
+manipulating the food web to reorganize itself through the introduction and selective
+removal of organisms and eutrophication. Basin-wide, cross-national management
+efforts, especially with regard to pollution and ﬁsheries, could have prevented the
+undesirable changes observed in the Black Sea ecosystem and should be immediately
+employed for management practices in the basin to prevent such drastic ecosystem
+ﬂuctuations in the future.
+Subjects Ecology, Ecosystem Science, Marine Biology, Environmental Impacts, Biological
+Oceanography
+Keywords Ecological modelling, Regime shifts, Ecopath with Ecosim, Black Sea, Fisheries, Marine
+food webs
+INTRODUCTION
+Globally, 35.6% of ﬁsh stocks in marine ecosystems are over ﬁshed, 57.3% are maximally
+sustainably ﬁshed in 2019, and the number of stocks ﬁshed at biologically sustainable levels
+is decreasing ( FAO, 2022). Over ﬁshing is the main instigator of ecological extinctions in
+How to cite this article Akoglu E. 2023. Ecological indicators reveal historical regime shifts in the Black Sea ecosystem. PeerJ 11:e15649
+DOI 10.7717/peerj.15649
+Submitted 21 March 2023
+Accepted 6 June 2023
+Published 11 July 2023
+Corresponding author
+Ekin Akoglu, eakoglu@metu.edu.tr
+Academic editor
+Federica Semprucci
+Additional Information and
+Declarations can be found on
+page 27
+DOI 10.7717/peerj.15649
+Copyright
+2023 Akoglu
+Distributed under
+Creative Commons CC-BY 4.0
+coastal ecosystems ( Jackson et al., 2001 ) and climate change is predicted to amplify
+biomass declines ( Lotze et al., 2019 ). Large marine ecosystems (LMEs), which have
+distinctive bathymetric and hydrographic characteristics ( Sherman & Duda, 1999 ) and
+host large ﬁsh populations with trophic (prey-predator) interactions ( Alexander, 1993 ),
+have also been impacted by overﬁshing (Coll et al., 2008; Link et al., 2020; Link, 2021). As of
+2019, 63.4% of ﬁsh stocks were ﬁshed at unsustainable levels in the Mediterranean and
+Black Sea large marine ecosystems ( FAO, 2022). The Black Sea, one of the sixty-four large
+marine ecosystems in the world ( Hempel & Sherman, 2003 ), has experienced multiple
+stressors from considerable ﬁsheries overexploitation ( Mee, 1992 ) to almost all of the
+documented anthropogenic stressors, such as marine litter ( Topçu & Öztürk, 2010 ;
+Ioakeimidis et al., 2014 ); pollution and related nutrient enrichment, eutrophication and
+hypoxia ( Pokazeev, Sovga & Chaplina, 2021 ); coastal abrasion and erosion ( Kosyan &
+Velikova, 2016 ; Tătui et al., 2019 ) and the introduction of alien invasive species ( Kideys,
+2002; Shalovenkov, 2019) since the 1960s.
+The Black Sea ecosystem has undergone a series of transformations since 1960 due to
+combinations of multiple stressors acting concomitantly and/or sequentially. In the 1960s,
+the Black Sea was in a quasi-pristine state characterized by high benthic and pelagic
+biodiversity, and its food web was dominated by apex predators such as Atlantic mackerel,
+blueﬁsh, and Atlantic bonito, which exerted top-down (predator) control in the food web.
+With the onset of the 1970s, intense nutrient enrichment through rivers and
+overexploitation of apex predators during the previous decade caused the ecosystem shift
+paradigm to become bottom-up (resource) controlled ( Oguz & Gilbert, 2007 ). During the
+1970s and the 1980s, the food web of the Black Sea was dominated by small pelagic ﬁsh,
+mainly anchovy, until the infamous collapse of the anchovy stock and the outburst of the
+alien warty comb jelly, Mnemiopsis leidyi (Agassiz, 1865), in 1989 ( Kideys, 2002). Fisheries
+yield, which reached 750 kilotonnes in the 1980s, abruptly declined to 200 kilotonnes in
+1989 (Oguz, Akoglu & Salihoglu, 2012 ). In the 1990s, the Black Sea ecosystem transitioned
+to a mesotrophic stage with alleviating eutrophic conditions due to protective measures
+(Dorofeev, 2009), and moderate levels of ﬁsheries yield have been realized ever since (Oguz,
+Akoglu & Salihoglu, 2012 ).
+Overﬁshing could be considered the major instigator of changes in the Black Sea;
+however, all of the aforementioned stressors deteriorated its ecosystem and biodiversity
+(Bakan & Büyükgüngör, 2000 ). This combination of multiple stressors acting in one large
+marine ecosystem and their related impacts make the Black Sea a natural laboratory to
+investigate ecosystem-wide changes of anthropogenic disturbances (Konovalov et al., 2006)
+and necessitate an ecosystem-based approach. Ecological and statistical models are useful
+tools for studying ecosystems and their changes holistically and for improving our
+understanding of disturbances in marine environments. Several authors have employed
+ecological and statistical models and analysis of long-term time-series data to investigate
+historical changes in the Black Sea. The collapse of anchovy stocks and the outburst of
+M. leidyi in 1989 have been attributed to over ﬁshing ( Gucu, 2002) or trophic cascades
+triggered by over ﬁshing (Daskalov, 2002 ; Daskalov et al., 2007 ). Based on the statistical
+models of time series of environmental variables and biomasses and catches of ﬁsh species,
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 2/33
+the multidecadal changes in the Black Sea were mainly attributed to the decreased
+resilience of the ecosystem by the removal of its apex predators which had a stabilizing role
+in the ecosystem through ﬁsheries (Llope et al., 2011 ; Daskalov et al., 2017 ). However, a
+more holistic assessment based on population dynamics and mass-balance models
+indicated that climate-induced forcings, increased resource competition with alien invasive
+and indigenous opportunistic species, and trophic cascades exerted by over ﬁshing had
+concomitant and sometimes sequential impacts on the multidecadal changes observed in
+the ecosystem (Oguz, Salihoglu & Fach, 2008; Akoglu et al., 2014). Thus far, research efforts
+have capitalized on linear statistical models that quanti ﬁed the effects and relationships
+between the drivers and the related changes but provided limited understanding ( Llope
+et al., 2011 ; Daskalov et al., 2017 ), a pelagic pooled ecosystem model that represented
+only a speci ﬁc part ( e.g., lower-trophic-level) of the food web and was coupled to a
+single-species population dynamics model ( Oguz, Salihoglu & Fach, 2008 ), static aggregate
+models that represented average conditions in different decades ( Örek, 2000; Gucu, 2002;
+Akoglu et al., 2014 ), or a temporal whole-of-ecosystem model that was not validated with
+time-series data ( Daskalov, 2002 ). The only validated temporal model of the historical
+Black Sea focused on the infamous anchovy- Mnemiopsis shift in 1989 and investigated the
+environmental consequences of the introduction of M. leidyi (Berdnikov et al., 1999 ).
+However, it lacked an ecosystem-based assessment, and the model validation was limited
+to small pelagic ﬁsh stocks. A modelling study also focused on the Black Sea ecosystem ’s
+status since the 2000s for developing ﬁsheries management advice ( Salihoglu et al., 2017 ).
+However, an assessment using ecological indicators that builds on the fundamentals of
+ecology sensu Odum (1969) to aid in the future ecosystem-based management approach by
+improving the understanding of these historical changes in the Black Sea is still missing,
+and a temporal whole-of-ecosystem model that focuses on the history of the Black Sea
+ecosystem and is validated against long-term time-series data is yet to be implemented.
+Our study is the ﬁrst whole-of-ecosystem time-dynamic model of the Black Sea that was
+validated against 40 years of available time series data for investigating multidecadal
+historical changes in the Black Sea ecosystem by employing ecological network analysis.
+We set up an Ecopath with Ecosim model to represent the quasi-pristine stage (the 1960s)
+of the Black Sea ecosystem and simulated multidecadal changes until 2000. Dynamical
+changes in the food web were investigated using time series of synthetic ecological
+indicators provided by the network analysis. We targeted to develop a holistic
+ecosystem-based understanding of historical changes in the Black Sea using the
+fundamental concepts of ecology sensu Odum (1969) and Ulanowicz (2000) . Speci ﬁcally,
+our aim was to: (i) develop a model of the Black Sea ecosystem representing the period
+from the quasi-pristine stage of the Black Sea (the 1960s) until the end of the 20 th century
+and validate it against time series of statistical and ﬁeld data until 2000, (ii) delineate the
+ecosystem structure and function in the Black Sea in the 1960s using the validated model,
+and ﬁnally (iii) understand the dynamical changes in the Black Sea using a series of
+ecological indicators that quantify the impacts of different drivers acting on the system and
+determine different regimes prevailed by considering the 1960s as a reference period.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 3/33
+MATERIALS AND METHODS
+Study area
+The Black Sea is the largest semi-enclosed meromictic basin in the world with a permanent
+anoxic layer below 100 –150 m ( Sabatino et al., 2020 , Fig. 1). The anoxic layer is
+characterized by signi ﬁcant H2S concentrations; therefore, benthic life is strictly con ﬁned
+to continental shelf regions. The upper layer, from the surface down to 50 m, is well-
+oxygenated, and a suboxic layer with oxygen concentrations below 10 µM lies between
+these two layers ( Murray, Top & Özsoy, 1991 ). Redox reactions occur in the
+suboxic-anoxic interface zone, which signi ﬁcantly inﬂuences the biogeochemistry of the
+Black Sea ( Murray et al., 2007 ). The only connection of the Black Sea is the narrow
+Bosphorus Strait, through which Mediterranean waters enter the basin at depth, and Black
+Sea waters ﬂow to the Marmara Sea at the surface. The catchment area of the basin is
+approximately 2 million km 2, and more than 340 km 3 of freshwater is carried into the
+Black Sea by major rivers, such as the Danube, Dnieper, Dniester, Bug, Sakarya, Carsamba,
+Kizilirmak, Yesilirmak, and Coruh, and their tributaries ( Vespremeanu & Golumbeanu,
+2018).
+The Black Sea is surrounded by six countries: Bulgaria, Romania, Ukraine, Russia,
+Georgia, and Turkey. Signiﬁcant anthropogenic activities take place in the basin; therefore,
+multiple stressors, including, but not limited to, eutrophication due to pollution,
+overﬁshing, the introduction of non-indigenous species (NIS), coastal erosion due to
+construction, and climate change, have acted on the Black Sea ecosystem since the 1960s.
+Furthermore, the catchment area of the Black Sea includes territories of 23 countries
+(Myroshnychenko et al., 2015 ), making it a perfect natural laboratory for studying
+anthropogenic impacts on marine ecosystems.
+The modelling approach
+One of the most widely used food web models, Ecopath with Ecosim (EwE, Christensen,
+Walters & Pauly, 2005) version 6.6.8, was used to set up a temporal model of the Black Sea
+between 1960–1999. First, Ecopath, the mass-balanced module of the EwE suite, was used
+to set up a model to represent the ecosystem conditions of the early 1960s in the Black Sea.
+Next, Ecosim, the temporal module of the EwE suite, was used to simulate the changes in
+the Black Sea ecosystem until 2000.
+The mass-balance module Ecopath capitalizes on two master equations. The ﬁrst
+equation ensures mass-balance as
+Bi /C3 P
+B
+/C18/C19
+i
+/C0
+Xn
+j¼1
+Bj /C3 Q
+B
+/C18/C19
+j
+/C3 DCji /C0 1 /C0 EEiðÞ /C3 Bi /C3 P
+B
+/C18/C19
+i
+/C0 Ei /C0 Yi /C0 BAi ¼ 0
+where Bi is the biomass of group i per unit area, (P/B)i is the annual production to biomass
+ratio of group i, Bj is the biomass of predator j per unit area, (Q/B)j is the annual
+consumption to biomass ratio of predator j, DCji is the relative proportion of prey i in the
+diet of predator j, EEi is the ecotrophic ef ﬁciency, Ei is the annual net migration rate, Yi is
+the annual catch rate and BAi is the annual biomass accumulation rate of group i. The ﬁrst
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 4/33
+multiplicative term calculates the production rate of group i, the second summation term
+calculates the total predation rate on group i, and the third multiplicative term is the other
+mortality rate of group i, which is due to old age, starvation, and/or diseases. Ecopath
+requires three of the four basic input parameters, Bi, (P/B)i, (Q/B)i, and EEi, and an
+additional relative diet composition matrix to be de ﬁned. The remaining missing
+parameter is calculated using the Ecopath algorithm.
+The second master equation of Ecopath ensures the energy balance of groups as
+Qi ¼ Pi þ Ri þ Ei
+where Qi, Pi, Ri, and Ei are the consumption, production, respiration, and egestion,
+respectively, of group i.
+The Ecopath with Ecosim model of the Black Sea is based on Akoglu (2013); however, it
+was modiﬁed and updated with recently available literature data for the modelling period
+to improve the model ’s representation of the Black Sea. The model includes 22 functional
+groups. Nine commercially important ﬁsh groups were included in the model: Atlantic
+bonito ( Sarda sarda, Bloch, 1793), blue ﬁsh (Pomatomus saltatrix , Linnaeus, 1766),
+Atlantic mackerel ( Scomber scombrus, Linnaeus, 1758), whiting ( Merlangius merlangus,
+Linnaeus, 1758), turbot ( Scophthalmus maximus, Linnaeus, 1758), red mullet ( Mullus
+barbatus, Linnaeus, 1758), spiny dog ﬁsh ( Squalus acanthias, Linnaeus, 1758),
+Mediterranean horse mackerel (( Trachurus mediterraneus , Steindachner, 1868),
+hereinafter referred to as “horse mackerel ”), Pontic shad (( Alosa immaculata, Bennett,
+1835), hereinafter referred to as “shad”), European sprat (( Sprattus sprattus, Linnaeus,
+1758), hereinafter referred to as sprat), and European anchovy (( Engraulis encrasicolus,
+Linnaeus, 1758), hereinafter referred to as anchovy) as a multi-stanza group as adults
+(1,1+), and eggs and larvae (0+,1). One marine mammal group (dolphins) was included to
+represent the dolphins and porpoises of the Black Sea: common dolphin ( Delphinus
+26°E 28°E 30°E 32°E 34°E 36°E 38°E 40°E 42°E
+40°N
+42°N
+44°N
+46°N
+48°N
+−50
+−50
+−50−50
+−50
+−50
+−200
+−200−200
+−200
+−200
+−20
+00 −2000
+−2000
+−2000
+−2000
+Longitude (degrees E)
+Latitude (degrees N)
+Figure 1 Modelling area: the Black Sea excluding the Azov Sea.
+Full-size DOI: 10.7717/peerj.15649/ ﬁg-1
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 5/33
+delphis, Linnaeus, 1758), bottlenose dolphin ( Tursiops truncatus, Montagu, 1821), and
+harbor porpoise ( Phocoena phocoena, Linnaeus, 1758). The model included one
+phytoplankton group as producer, one edible zooplankton group, one benthic invertebrate
+group, one heterotrophic dino ﬂagellate, Noctiluca scintillans ((Macartney) Kofoid &
+Swezy, 1921), that signi ﬁcantly grazes on edible zooplankton, and four jelly ﬁsh species:
+moon jelly Aurelia aurita (Linnaeus, 1758), the alien warty comb jelly Mnemiopsis leidyi
+(Agassiz, 1865), the alien brown comb jelly Beroe ovata (Bruguière, 1789), which is the
+predator of M. leidyi, and sea gooseberry Pleurobrachia pileus (Müller, 1776), being either
+trophic dead-end organisms, that is, not consumed by predators or having only specialized
+predators in the food web. Although the exact dates of the introductions of the alien species
+M. leidyi and B. ovata are uncertain, they did not exist in the Black Sea until the 1980s and
+the 1990s, respectively. In EwE models, it is not possible to introduce new state variables
+once the Ecopath model, which provides the initial conditions for the dynamic Ecosim
+model simulation, is set up. Therefore, these two introduced species were included in the
+1960s’ Black Sea Ecopath model, but their biomasses were set to values close to zero and
+forced to be equal to zero until their periods of introduction.
+For simplicity, only two ﬁshing ﬂeets, namely trawlers and purse seiners, were included
+in the model targeting demersal (red mullet, turbot, whiting, spiny dog ﬁsh) and pelagic
+(anchovy, sprat, shad, horse mackerel, blue ﬁsh, and bonito) ﬁsh groups, respectively.
+The marine mammals of the Black Sea were caught commercially until the ban on their
+ﬁsheries in 1966 in the USSR, Bulgaria, and Romania, and in 1983 in Turkey ( Birkun,
+2008). Purse seining and shooting were the main methods for dolphin ﬁsheries (Berkes,
+1977); therefore, an amount of catch was de ﬁned to purse seiners ﬂeet until 1983.
+The 1960s ’ mass-balance model of the Black Sea was parameterized to represent the
+general food web conditions of the inner Black Sea basin to avoid extreme variability of the
+northwestern shelf (NWS). The model domain represents an area of 150,000 km 2 where
+ﬁsheries operate intensively in the vicinity of the EEZs of the riparian countries ( Oguz,
+Salihoglu & Fach, 2008 ).
+In accordance with the laws of thermodynamics and mass conservation, an Ecopath
+model is considered balanced when: (i) all EEs of the groups are less than unity and
+respirations of groups are non-negative ( Christensen, Walters & Pauly, 2005 ); (ii) the
+production to consumption (P/Q) ratios, also known as gross food conversion ef ﬁciencies,
+are less than 0.5 (Piroddi et al., 2015); (iii) respiration to assimilation (R/A) and production
+to respiration ratios (P/R) of groups are lower than unity ( Darwall et al., 2010 ); and
+(iv) respiration to biomass (R/B) ratios of groups are between 1 –10 y−1 for ﬁsh and higher
+for lower-trophic-level groups ( Heymans et al., 2016 ). However, R/B ratios can
+occasionally be greater than 10 y −1 for marine mammals ( e.g., Blanchard, Pinnegar &
+Mackinson, 2002; Arreguín-Sánchez, Arcos & Chávez, 2002 ). We balanced the model to
+ensure mass and energy conservation and used pre-balance (PREBAL) diagnostics to
+increase the rigor of the ﬁnal model and assess input data quality ( Link, 2010). PREBAL
+diagnostics expect a linear positive slope from high to low trophic levels considering the
+Ecopath input parameters of B, P/B, Q/B and P/Q in line with general ecological principles.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 6/33
+Input parameters were collected from scholarly articles, technical reports, and books.
+For ﬁsh groups, Ecopath initial biomasses, catches, and production-to-biomass ratios,
+which are equal to total mortality (Z, y−1) under steady-state conditions (Allen, 1971), were
+obtained from published local studies. The consumption-to-biomass ratios of the ﬁsh
+groups were calculated using the empirical equation proposed by Palomares & Pauly
+(1998). For phytoplankton and zooplankton groups, biomasses were obtained from
+Nesterova et al. (2008) and Shiganova et al. (2008) , respectively, and primary production
+estimates were obtained from Yunev (2011). The detritus biomass was calculated using the
+empirical equation of Pauly, Soriano-Bartz & Palomares (1993) . Diet composition data
+were collected from the published literature, preferably for the Black Sea when available,
+and otherwise supplemented from adjacent ecosystems or using data for the same species
+from different ecosystems. The historical stomach content studies were limited in the Black
+Sea; therefore, we capitalized on literature information from all periods as well as recently
+available studies considering that the EwE model has a static diet speci ﬁcation in terms of
+prey items and does not take into account possible dietary changes with newly introduced
+or extinct species over time. The EwE model included three piscivorous ﬁsh species,
+namely Atlantic bonito, Atlantic mackerel and blueﬁsh, which migrate to the Marmara Sea
+located in the southwest of the Black Sea for wintering and return back to the Black Sea in
+summer for reproduction. Therefore, to represent the feeding of these species when they
+were outside the model domain, an import fraction was de ﬁned, following Gucu (2002).
+The details and sources of the basic input parameters (B, P/B, Q/B, and EE) and the relative
+diet composition matrix ( DC) are provided in Tables S1 and S2, respectively. The biomass
+and catch values in the literature were in tonnes and grammes of wet weights and
+converted to grammes carbon using conversion factors speci ﬁc for each group/species in
+the model following Akoglu et al. (2014) and references therein.
+The temporal Ecosim module of the EwE suite was used to simulate the changes in the
+Black Sea ecosystem from 1960 to 1999. For each functional group, Ecosim solves a set of
+ordinary differential equations of the form
+dBi
+dt ¼ P
+Q
+/C18/C19
+i
+/C3
+Xn
+j¼1
+Qji /C0
+Xn
+j¼1
+Qij þ Ii /C0 Mi þ Fi þ eiðÞ /C3 Bi
+where dBi/dt is the rate of change in the biomass of group i, (P/Q)i is the gross food
+conversion efﬁciency of group i, Qji is the consumption of group i of its prey j, Qij is the
+predation of group i by its predator j, Ii is the immigration rate of i, Mi and Fi are the
+natural and ﬁshing mortality rates, respectively, and ei is the emigration rate of group i.
+The consumption of groups, i.e., prey-predator interactions between groups, is formulated
+using the foraging arena approach ( Ahrens, Walters & Christensen, 2012 ), which separates
+prey biomass into two compartments: vulnerable and invulnerable to predators.
+The exchange between these two compartments occurs instantaneously at every time step
+at a rate de ﬁned by the vulnerability parameter. This parameter can range from unity, a
+resource-driven (bottom-up) interaction, to in ﬁnity, a predator-driven (top-down)
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 7/33
+interaction. The default value of the vulnerability parameter in Ecosim is set to two in the
+model, indicating a mixed type of interaction.
+Ecosim requires time series of primary productivity, ﬁshing effort or mortalities to run a
+basic simulation, and time series of biomasses and catches are required for model
+validation. In this study, the time series of ﬁshing mortalities obtained from Prodanov et al.
+(1997), Ivanov & Panayotova (2001) , Shlyakhov & Daskalov (2008) and The Scienti ﬁc,
+Technical and Economic Committee for Fisheries (STECF) report ( STECF-15-16, 2015)
+was used to force the model ’s ﬁsheries catches. However, the ﬁshing mortality time-series
+data for some species did not cover the entire modelling period. Therefore, the time series
+of ﬁshing mortalities were prepended back to 1960 and/or appended until 1999 with
+exponential smoothing state space model (ETS) following Hyndman & Athanasopoulos
+(2018) in R (R Core Team, 2022) using package “forecast” (Hyndman & Khandakar, 2008).
+Considering the productivity of primary producers, decadal averages of primary
+productivity in the Black Sea from Yunev et al. (2002) were used to force the productivity of
+the phytoplankton group. The forcing function data for the temporal Ecosim model are
+given in Fig. S1.
+A sequential ﬁtting approach, as per Tomczak et al. (2012) , was used to ﬁt the model by
+alternating different sets of parameters, i.e., vulnerabilities and primary production
+anomalies, to the time series of stock assessment derived biomasses and catches from
+Prodanov et al. (1997), Ivanov & Panayotova (2001), Shlyakhov & Daskalov (2008) and The
+Scientiﬁc, Technical and Economic Committee for Fisheries (STECF) report ( STECF-15-
+16, 2015 ) for ﬁsh groups, and time series of biomass values from Shiganova et al. (2008)
+and Nesterova et al. (2008) for fodder and gelatinous zooplankton, and phytoplankton
+groups, respectively. Considering the high uncertainty in the historical primary production
+estimates in the Black Sea, primary production anomalies were searched capitalizing on the
+decadal primary productivity estimates from Yunev et al. (2002) . Five spline points were
+used to estimate a primary productivity anomaly curve based on the historical decadal
+changes in the primary productivity of the Black Sea. The time-dynamic Ecosim Black Sea
+model was assessed by considering the biomass and catch dynamics, and ecological
+function of the Black Sea ecosystem documented in the literature ( Daskalov, 2002; Gucu,
+2002; Oguz, Salihoglu & Fach, 2008 ; Llope et al., 2011 ; Akoglu et al., 2014 ; Daskalov et al.,
+2017). The model skill was analyzed by comparing the time series of simulated biomasses
+and catches, the stock assessment derived biomasses and statistical catches for ﬁsh stocks
+and available ﬁeld-sampled data for other groups. The sum of squared deviations (SS) of
+log simulated data from log reference data ( Christensen, Walters & Pauly, 2005 ), Akaike
+Information Criterion ( Akaike, 1974) corrected for small sample sizes (AIC c) and Taylor
+diagrams (Taylor, 2001), which show the correlations, normalized standard deviations, and
+root mean squared distances (RMSD) of simulated values from reference data, were used
+to assess the model skill. The best model was selected on the basis of the AIC c value.
+Indicator-based ecosystem assessment approach
+The Ecopath model of the early 1960s was analyzed by capitalizing on ecological network
+analysis using a set of synthetic ecological indicators and ecosystem statistics. The maturity
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 8/33
+and developmental status of the Black Sea ecosystem were analyzed sensu Odum (1969) for
+the 1960s’ ecosystem.
+The statistical properties of the ﬂows in the food web and information indices were
+used to describe ecosystem characteristics. The total system throughput (TST), a
+macro-ecosystem indicator that is the sum of respiratory, consumption, export ﬂows, and
+ﬂows to detritus in the food web, was calculated to delineate the trophic size of the Black
+Sea food web. For instance, TST can increase with increasing productivity, e.g.,
+eutrophication, in an ecosystem, indicating ecosystem growth (Christensen, 1995). Further,
+net system production (total primary production minus total respiratory ﬂows) that is
+assumed to be close to zero in mature ecosystems ( Odum, 1969), system omnivory index
+(SOI) that indicates the breadth of feeding interactions in the food web, relative primary
+production required to sustain ﬁsheries catches (PPR c) that shows the ﬁsheries’ ecological
+footprint on the ecosystem, mean trophic level of the catches (mTL c) and community
+(mTLco) that indicates the exploitation status of ﬁsh populations ( Pauly et al., 1998 ), the
+ratio of total biomass to total system throughput that is assumed to be high in mature
+ecosystems, the ratio of total respiration to total biomass (R/B), also known as Schrödinger
+ratio that de ﬁnes the developmental status of ecosystems and is assumed to be low in
+highly-structured mature ecosystems ( Odum, 1969), and the ratio of total primary
+production to total respiration, which is expected to be close to unity for mature
+ecosystems, were calculated to assess the characteristics of the Black Sea food web.
+The mean transfer ef ﬁciency of ﬂows, which is the geometric mean of the transfer
+efﬁciencies from trophic level (TL) II to the highest trophic level, was also calculated to
+assess the relative amount of energy passing through the different trophic levels (TLs) in
+the food web.
+The indicators of relative throughput cycled in the food web, namely Finn ’s cycling
+index (FCI), which shows the material cycling in the food web; predatory cycling index
+(PCI), which shows the material cycling in the food web excluding the detritus
+compartment; and Finn’s mean path length (PL), which is the average path length of a unit
+of energy travels ( Finn, 1976), were calculated to assess the degree of material and energy
+cycling and the average number of TLs that a unit of energy travelled in the food web.
+These three indicators are expected to be high in resilient and healthy ecosystems ( Odum,
+1969).
+System ascendency, overhead, and developmental capacity were calculated as
+information indicators to investigate the immunity status of the ecosystem against stress
+and its organizational structure (Costanza & Mageau, 1999; Ulanowicz, 2000). Ascendency
+shows the organizational degree in an ecosystem or food web, and overhead (resilience) is
+the strength of an ecosystem against stress. Akin to a healthy organism, a healthy
+ecosystem is expected to have a balanced degree of resilience to maintain its structure and
+function under stress and ascendency to recover from perturbed conditions, i.e., regime
+shifts.
+Trophic ﬂows in the food web were investigated using Lindeman spines ( Lindeman,
+1942) by integrating the ﬂows into discrete TLs. Furthermore, mixed trophic impact
+analysis was used to assess the positive and negative interactions between the groups in the
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 9/33
+food web ( Ulanowicz & Puccia, 1990 ). Mixed trophic impact (MTI) analysis can be
+considered similar to sensitivity analysis and indicates what would happen to other groups
+if a group’s biomass in the food web changed. The MTI index scales between negative one,
+indicating a strong negative impact, and positive one, indicating a strong positive impact.
+Finally, keystoneness analysis was used to determine the groups that have a structuring
+role in the food web dynamics. Keystone species or groups are organisms that have
+relatively low biomass in the system; however, they can have a huge impact on the food
+web dynamics if their biomasses change ( Libralato, Christensen & Pauly, 2006 ).
+Ecological network analysis of time series of ecological indicators
+The time-dynamic Ecosim simulation of the Black Sea model was analyzed using
+time-series network analysis capitalizing on a set of ecological indicators produced by
+Ecosim Ecological Network Analysis (ENA). The time series of TST, relative ascendency
+(A/C), and relative overhead (O/C) were calculated as macro-ecosystem indicators.
+Indicators related to ecosystem function, i.e., PCI, FCI, PL, and the proportion of ﬂows to
+detritus (PFD), which is an indicator of energy not utilized at higher trophic levels but
+diverted back to detritus, were calculated. The system primary production (PP), total
+system biomass, total catches, mTL c, and ﬁshing in balance index (FiB), which is an
+indicator of the ecological balance of catches in terms of the trophic levels of the exploited
+species ( Pauly & Watson, 2005 ), were calculated. An increase/decrease in the FiB index
+may indicate technological and geographical expansion/collapse of the ﬁshery or the
+inclusion of new higher-trophic-level/lower-trophic-level species in the catches. If catches
+increase due to increased primary productivity, but the mTL c does not change or decrease,
+the FiB index increases. If catches decrease, the FiB index decreases. If a decrease in the
+mTLc is matched by a proportional increase in the catch, then FiB does not change.
+Furthermore, the loss in secondary production due to the ﬁsheries exports index (L-index),
+relative PPRc, and the probability of the ecosystem ’s being sustainably ﬁshed index (P sust)
+were calculated to quantify the impacts of ﬁshery exploitation on the ecosystem. The ratios
+of predatory ﬁsh biomass to forage ﬁsh biomass, demersal ﬁsh biomass to pelagic ﬁsh
+biomass, and ﬁsh biomass to invertebrate biomass were calculated to delineate the impact
+of ﬁsheries exploitation on the structure of the ecosystem, as all three indicators are
+expected to decrease with ongoing ﬁsheries exploitation. Considering the diversity in the
+food web, Shannon ’s diversity index, and the ratio of fodder zooplankton biomass to total
+zooplankton biomass, which can also be an important indicator of energy transfers in the
+food web, were calculated. First, the anomalies in the time series of the ecological indicators
+were calculated. Subsequently, possible regime shifts were investigated using Sequential
+T-test Analysis of Regime Shifts (STARS) analysis ( Rodionov, 2004). Because of the
+autocorrelation in the time series of network indicators produced by the time-dynamic
+model simulation, a pre-whitening procedure was applied to remove red noise from the
+time series of ecological indicators ’ anomalies using ordinary least-squares estimation for
+serial correlation. The Black Sea ecosystem is known to experience almost decadal shifts in
+its ecosystem structure ( Oguz & Gilbert, 2007 ). Therefore, a cut-off length of 5 years and a
+signiﬁcance level of p = 0.05 were used for regime shift detection, and regime shift indices
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 10/33
+(RSI) were estimated to detect abrupt changes, i.e., regime shifts, in the time series of
+indicators.
+The time series of synthetic ecological indicators ’ anomalies were also analyzed using
+principal component analysis (PCA) ( Abdi & Williams, 2010 ). PCA is a linear ordination
+method used to analyze high-dimensional data and visualize the variation in a number of
+reduced dimensions. PCA helps delineate the most in ﬂuential variables that signi ﬁcantly
+contribute to variability and identify variables that correlate together to explain the
+variability in the data. Using PCA, the time series of ecological indicators were also
+investigated based on historical decadal periods in the Black Sea. The number of principal
+components to retain was determined based on empirical Kaiser criterion ( Braeken & van
+Assen, 2017) using “EFA.dimensions” package (O’Connor, 2023)i nR( R Core Team, 2022).
+Finally, the effects of ﬁshing on the Black Sea ecosystem were analyzed using the time
+series of the L-index and calculated theoretical values of ecosystem-based maximum
+sustainable catches (EMSC p) for target L-index values ( Libralato et al., 2008 ), that is, the
+50% and 75% probabilities of the ecosystem being sustainably ﬁshed (P sust) and its
+corresponding L-index values, L 50% and L75%. The temporal variability in the L-index was
+used to assess the historical changes in the Black Sea ﬁsheries catch during the 40-year
+simulation period and the sustainability status of the ﬁsheries in the Black Sea.
+RESULTS
+The Black Sea model included 22 functional groups. Phytoplankton and detritus were the
+lowest trophic level groups (TL = 1), while turbot was the highest trophic level group with a
+trophic level of 4.64 ( Table 1, Fig. 2). The predatory ﬁsh species included Atlantic bonito
+(TL = 4.16) and blueﬁsh (TL = 4.14) as medium pelagic ﬁshes, and whiting (TL = 3.97) and
+spiny dogﬁsh (TL = 4.05) as demersal ﬁsh. The dolphins group had a trophic level of 4.22.
+Mass-balance model skill
+The calculated pedigree index for the Black Sea mass-balance model was 0.49, indicating a
+moderate level of data quality considering the model inputs (Table 2). PREBAL diagnostics
+indicated that the biomasses of blue ﬁsh, shad, Atlantic mackerel, red mullet, A. aurita,
+P. pileus and N. scintillans could be underestimated, and the biomasses of whiting, horse
+mackerel, sprat, anchovy, benthic invertebrates and zooplankton could be overestimated
+(Fig. S2). The P/B values mostly conformed to a linear positive slope from high to low
+trophic levels; however, the P/B values of B. ovata, M. leidyi and phytoplankton could be
+overestimated. The Q/B values also conformed to the linear slope, with possibly
+overestimated values for dolphins, B. ovata, M. leidyi , the anchovy 0,0+ group and
+zooplankton. Because gross growth ef ﬁciencies (P/Q) were calculated using P/B and Q/B
+values, P/Q values of dolphins, spiny dog ﬁsh, anchovy 0,0+ and benthic invertebrates
+could be underestimated, and P/Q values of B. ovata, M. leidyi , A. aurita and P. pileus
+could be overestimated.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 11/33
+Mass-balance model of the early 1960s ’ Black Sea
+The TST of the Black Sea ecosystem in the early 1960s was 200.7 gC m −2 y−1 and consisted
+of 48.9% consumption, 2.9% export, 28.6% respiration ﬂows, and 19.6% ﬂows to detritus
+(Table 2). The net system production was 5.5 gC m−2 y−1, and the total primary production
+to total respiration ratio was 1.1. The total biomass supported per unit of energy (total
+biomass-to-total system throughput ratio) was 0.02 gC m −2 y−1. The SOI, calculated using
+the omnivory indices of the individual species/groups, was 0.15. The values of mTL c and
+PPRc were 3.52 and 5.8%, respectively. The gross ef ﬁciency of the system, that is, the ratio
+of catches to net primary production, was 0.001, indicating a relatively low level of ﬁshery
+exploitation. However, a signi ﬁcant proportion of PPR c (>4%) consisted of catches from
+higher-trophic-level ﬁsh species in the ecosystem. The L-index was calculated as 0.012,
+indicating a high probability of sustainable ﬁshing in the ecosystem. Considering the
+information indices, the system ’s relative ascendency (A/C) and relative overhead (O/C)
+were 26.5% and 73.5%, respectively, indicating a highly resilient ecosystem. The details of
+the summary statistics of the system are presented in Table 2.
+The relative amount of throughput cycled in the system was 21.6%, and the FCI and
+FPL were 10.8% and 3.2, respectively, indicating a high degree of cycling in the ecosystem.
+The PCI was calculated 2.8%. The mean transfer ef ﬁciency of the food web was 13.4%.
+According to the Lindeman spine, the grazing food chain (from primary producers to
+higher trophic levels) dominated the ﬂows in the food web as the total consumption ﬂows
+Figure 2 Flow diagram of the 1960s ’ Black Sea model. Full-size DOI: 10.7717/peerj.15649/ﬁg-2
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 12/33
+originating from TL I (primary producers and detritus) to trophic level II consisted of
+57.6% of ﬂows from primary producers and 42.4% of ﬂows from detritus ( Fig. 3). The
+majority of exports occurred in TL III (0.037 gC m −2 y−1) and TL IV (0.025 gC m −2 y−1).
+The ﬂows to detritus from TL II, III and IV were 18.4, 3.1 and 0.5 gC m −2 y−1, respectively.
+The mixed trophic impact analysis revealed strong direct negative impacts of trawlers
+on the demersal species turbot and spiny dog ﬁsh (Fig. 4). Seiners had strong direct
+negative impacts on piscivorous ﬁsh, namely Atlantic bonito, blue ﬁsh and Atlantic
+mackerel, and both direct and indirect negative impacts on dolphins due to hunting and
+ﬁshing on prey species of dolphins, respectively. The heterotrophic dino ﬂagellate
+N. scintillans had a slightly negative impact on zooplankton. The majority of negative
+impacts on zooplankton were due to predation by anchovy and sprat. Zooplankton and
+phytoplankton positively impacted dolphins and all ﬁsh groups, except red mullet and
+benthic invertebrates due to indirect impacts that favored the predators of these two
+groups. Spiny dog ﬁsh negatively impacted dolphins due to direct predation and resource
+competition as they fed on similar species in the food web. Sprat positively impacted
+dolphins as a prey item; however, dolphins group was impacted negatively by adult
+Table 1 Inputs (bold) and outputs of the Black Sea mass-balance Ecopath model by functional groups.
+Group Trophic level Biomass (gC m −2) P/B (y −1) Q/B (y −1) EE P/Q Catch (gC m −2 y−1)
+Seiners Trawlers
+Dolphins 4.22 0.030 0.35 17.05 0.29 0.02 0.0002 –
+Atlantic bonito 4.16 0.059 0.82 7.55 0.97 0.11 0.0116 –
+Blueﬁsh 4.14 0.015 0.96 5.11 0.99 0.19 0.0087 –
+Atlantic mackerel 3.04 0.020 1.43 8.66 0.92 0.16 0.0058 –
+Whiting 3.97 0.223 0.92 5.07 0.99 0.18 – 0.0030
+Turbot 4.64 0.016 0.55 2.76 0.03 0.20 – 0.0003
+Red mullet 3.09 0.013 1.66 7.25 0.97 0.23 – 0.0012
+Spiny dog ﬁsh 4.05 0.059 0.16 2.87 0.03 0.06 – 0.0003
+Horse mackerel 3.30 0.191 1.71 7.38 0.95 0.23 0.0131 –
+Shad 3.33 0.008 1.28 6.40 0.96 0.20 0.0011 –
+Sprat 3.04 0.412 1.70 10.58 0.98 0.16 0.0033 –
+Anchovy 1,1+ 3.04 0.597 1.81 9.25 0.98 0.20 0.0151 –
+Anchovy 0,0+ 2.83 0.001 6.44 73.07 0.00 0.09 ––
+Benthic invertebrates 2.05 0.750 2.50 22.99 0.64 0.11 ––
+A. aurita 2.80 0.048 10.95 34.76 0.00 0.32 ––
+B. ovata 3.30 0.000 11.72 39.05 0.00 0.30 ––
+M. leidyi 2.84 0.000 20.10 55.68 0.11 0.36 ––
+P. pileus 2.05 0.010 10.95 29.20 0.00 0.38 ––
+N. scintillans 2.04 0.110 7.30 36.20 0.94 0.20 ––
+Zooplankton 2.04 0.400 38.00 152.00 0.94 0.25 ––
+Phytoplankton 1.00 0.600 105.00 – 0.73 –– –
+Detritus 1.00 5.926 –– 0.85 –– –
+Note:
+P/B denotes production/biomass; Q/B denotes consumption/biomass; EE denotes ecotrophic ef ﬁciency, and P/Q denotes production/consumption.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 13/33
+anchovy group due to its strong positive impact on dolphins ’ main competitor, i.e., spiny
+dogﬁsh, in the food web. Dolphins group impacted all bony ﬁsh groups negatively due to
+direct prey-predator relationships; however, anchovy, red mullet and horse mackerel were
+Table 2 Summary statistics for the 1960s ’ Black Sea mass-balance Ecopath model.
+Parameter Value Unit
+Sum of all consumption 98.1 gC m −2 y−1
+Sum of all exports 5.8 gC m −2 y−1
+Sum of all respiratory ﬂows 57.48 gC m −2 y−1
+Sum of all ﬂows into detritus 39.3 gC m −2 y−1
+Total system throughput (TST) 200.7 gC m −2 y−1
+Sum of all production 84 gC m −2 y−1
+Calculated total net primary production (TPP) 63 gC m −2 y−1
+Total primary production/total respiration 1.1 –
+Net system production 5.5 gC m −2 y−1
+Total primary production/total biomass 19.6 –
+Total biomass/total throughput 0.018 –
+Total biomass (excluding detritus) 3.56 gC m −2 y−1
+TE from primary producers 14.6 %
+TE from detritus 11.3 %
+TE total 13.4 %
+Mean TL of the community (mTL co) 1.58 –
+Mean TL of the community (TL ≥ 2) 2.77 –
+Marine Trophic Index (MTI) of community (TL ≥ 3.25) 3.81 –
+System omnivory index 0.15 –
+Shannon diversity index 2.24 –
+Pedigree index 0.49 –
+Total catch 0.064 gC m −2 y−1
+Mean TL of the catch (mTL c) 3.52 –
+Marine Trophic Index (MTI) of catch (TL ≥ 3.25) 3.83 –
+Gross efﬁciency (catch/net primary production) 0.001 –
+Loss of production index (L-index) 0.013 –
+Probability of sustainable ﬁshing (P sust) 0.89 –
+PPRc to sustain the ﬁshery/Total PP 5.8 %
+Throughput cycled (excluding detritus) 3.4 gC m −2 y−1
+Predatory cycling index (PCI) 2.8 %
+Throughput cycled (including detritus) 21.6 gC m −2 y−1
+Finn’s cycling index (FCI) 10.8 % of TST
+Finn’s mean path length (FPL) 3.2 –
+Ascendency (A) 26.5 %
+Overhead (O) 73.5 %
+Capacity (C) 795.4 Flowbits
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 14/33
+the only exceptions because of the indirect positive impacts of dolphins on these species
+due to the consumption of their predators.
+The keystone species in the system was spiny dogﬁsh, with an index value of −0.024, and
+was followed by the dolphins group with a keystone index value of −0.047 (Fig. 5). Spiny
+dogﬁsh also had a high relative total impact (1.0) on the food web, followed by dolphins
+(0.94). Zooplankton and phytoplankton also had the second ( −0.11) and third ( −0.15)
+highest keystone indices with relative total impact values of 0.92 and 0.89, respectively.
+The ﬁfth species with the highest keystone index value ( −0.19) was the adult anchovy
+group, with a relative total impact of 0.8.
+Time dynamic model skill
+The results of the ﬁtting procedure for the temporal model are listed in Table S3. The
+model with the lowest AICc score (83.1) was selected as the best ﬁt model. The comparison
+of the time series of the simulated biomasses and catches and the reference data is provided
+in Figs. S3 and S4, respectively.
+The simulated biomasses and catches of the state variables in the model were assessed
+using Taylor diagrams ( Fig. S5). All of the root mean square deviations (RMSD) of the
+simulated model results were lower than 1.5 for biomasses and 2.0 for catches. Considering
+RMSD, the time-dynamic model performed well in reproducing the temporal dynamics of
+biomasses and catches of all ﬁsh species, zooplankton and phytoplankton, except sprat and
+shad. However, in contrast to the shad, the correlation between the simulated sprat catches
+Figure 3 Lindeman spine depicting trophic ﬂows between integer trophic levels. TL denotes trophic levels, P denotes primary producers, D
+denotes detritus compartment, TST denotes total system throughput and TE denotes transfer ef ﬁciency.
+Full-size DOI: 10.7717/peerj.15649/ ﬁg-3
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 15/33
+and the reference catch values was high (~0.85). The model had the best skill in
+reproducing anchovy catches with a correlation coef ﬁcient of ~0.8 and RMSD distance
+close to 0.5. Considering biomasses, the model biases were low (<25%) for anchovy and
+zooplankton; moderate (25 –50%) for sprat, horse mackerel, shad, Atlantic mackerel and
+turbot; and high (50–100%) for shad, whiting and dog ﬁsh. Considering catches, the model
+biases were low for anchovy, horse mackerel, shad, whiting, Atlantic mackerel, turbot,
+Atlantic bonito, and blue ﬁsh; moderate for dog ﬁsh; and high for sprat.
+The regime shift analysis (1960 –1999)
+The STARS analysis detected shifts in all synthetic ecological and network indicators
+(Table 3, Fig. 6). The macro-ecosystem indicator TST showed four regimes with upward
+shifts in 1977, 1981 and a downward shift in 1994. Two upward shifts in 1970 and 1977,
+and one downward shift in 1983 were detected in structural indicator A/C. Similar shifts
+were observed in O/C, another structural indicator, but in opposite directions, and in
+addition, there was 1-year delay (1978) in the second shift, and additionally a fourth
+upward shift was detected in 1996.
+The STARS analysis also detected shifts in the food web (ecosystem function)
+indicators. The FCI showed three downward shifts in 1968, 1973 and 1977, as an indicator
+of decreasing material cycling in the food web, and an upward shift in 1996. Due to this
+DolphinsA. bonitoBluefish
+A. mackerel
+WhitingTurbot
+Red
+ mullet
+Spiny dogfishH. mackerel
+ShadSprat
+Anchovy 1,1+Anchovy 0,0+Bent. invert.
+Aurelia
+Pleurobrachia
+Noctiluca
+ZooplanktonPhytoplankton
+DetritusSeinersTrawlers
+Impacted Group
+Trawlers
+Seiners
+Detritus
+Phytoplankton
+Zooplankton
+Noctiluca
+Pleurobrachia
+Aurelia
+Bent. invert.
+Anchovy 0,0+
+Anchovy 1,1+
+Sprat
+Shad
+H. mackerel
+Spiny dogfish
+Red mullet
+Turbot
+Whiting
+A. mackerel
+Bluefish
+A. bonito
+Dolphins
+Impacting Group
+-1
+-0.8
+-0.6
+-0.4
+-0.2
+0
+0.2
+0.4
+0.6
+0.8
+1
+Figure 4 Mixed trophic impact (MTI) analysis of the 1960s ’ Black Sea Ecopath model. Red and blue
+colors signify negative and positive impacts, respectively. Full-size DOI: 10.7717/peerj.15649/ﬁg-4
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 16/33
+decreasing cycling, the PL also showed three downward shifts; however, with different
+timings in 1965, 1969 and 1976, and one upward shift in 1994. The PFD showed upward
+shifts in 1970 and 1978, and a ﬁnal downward shift in 1996, supporting the decreasing
+cycling detected in FCI and PL, and indicated a short-circuit of ﬂows back to detritus
+instead of being transferred to higher trophic levels in the food web. PCI, which also shows
+cycling in the food web but excludes the ﬂows through detritus, showed a downward shift
+in 1989 and an upward shift in 1996. Shannon ’s diversity index showed a downward shift
+in 1984 and an upward shift in 1996, indicating degraded and alleviated conditions,
+respectively, in the proportion of organisms in the Black Sea food web.
+Shifts in ﬁshery-related indicators, i.e., catch, mTL c, FiB, PPR c, L-index, and P sust, were
+also detected by the STARS algorithm. STARS detected upward shifts in catch in 1972 and
+1979 and a downward shift in 1984. Similarly, upward shifts were observed in the FiB in
+1967, 1972 and 1979, and a ﬁnal downward shift was detected in 1984. The PPR c index, an
+indicator of the ﬁsheries footprint on the ecosystem, showed a downward shift in 1964, an
+upward shift in 1979 and a ﬁnal downward shift in 1989. The mTL c showed downward
+shifts in 1964 and 1971, indicating a ﬁshing down the food web effect, and STARS did not
+detect any signi ﬁcant shifts thereafter. The L-index showed an upward shift in 1979, a
+downward shift in 1984 and ﬁnally an upward shift in 1996. The probability of the
+sustainable ﬁshing index, P sust, showed only one downward shift in 1997.
+0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
+Relative Total Impact
+-2.5
+-2
+-1.5
+-1
+-0.5
+0
+Keystone Index
+Dolphins
+A. bonito
+Bluefish
+A. mackerel
+Whiting
+Turbot
+Red mullet
+Spiny dogfish
+H. mackerel
+Shad
+Sprat
+Anchovy 1,1+
+Anchovy 0,0+
+Bent. invert.
+Aurelia
+Pleurobrachia
+Noctiluca
+ZooplanktonPhytoplankton
+Figure 5 The keystone index and the relative total impact values of the functional groups in the
+1960s’ Black Sea Ecopath model. Full-size DOI: 10.7717/peerj.15649/ ﬁg-5
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 17/33
+The ratio of fodder zooplankton biomass to total zooplankton biomass, an indicator of
+an increase in opportunistic species such as jelly ﬁsh, showed two downward shifts in 1973
+and 1981 and a ﬁnal upward shift in 1996. Similarly, the ratio of ﬁsh biomass to
+invertebrate biomass showed two downward shifts in 1967 and 1973. STARS detected a
+downward shift in 1965, an upward shift in 1980 and a ﬁnal downward shift in 1990 in the
+ratio of predatory ﬁsh biomass to forage ﬁsh biomass. The ratio of demersal ﬁsh biomass to
+forage ﬁsh biomass showed a downward shift in 1965 and an upward shift in 1984. STARS
+analysis detected two signi ﬁcant shifts in the system ’s primary production and biomass,
+upward shifts for both indicators in 1977 and downward shifts in 1994 and 1995,
+respectively.
+TST
+1960 1970 1980 1990 1999
+-200
+0
+200
+A/C
+1960 1970 1980 1990 1999
+-2
+0
+2
+4
+O/C
+1960 1970 1980 1990 1999
+-4
+-2
+0
+2
+PCI
+1960 1970 1980 1990 1999
+-0.5
+0
+0.5
+1
+FCI
+1960 1970 1980 1990 1999
+-10
+0
+10
+PL
+1960 1970 1980 1990 1999
+-0.5
+0
+0.5
+1
+PP
+1960 1970 1980 1990 1999
+-100
+0
+100
+Biomass
+1960 1970 1980 1990 1999
+-5
+0
+5
+Catch
+1960 1970 1980 1990 1999
+-0.2
+0
+0.2
+0.4
+PFD
+1960 1970 1980 1990 1999
+-0.1
+0
+0.1
+mTLc
+1960 1970 1980 1990 1999
+0
+0.1
+0.2
+Shannon's diversity index
+1960 1970 1980 1990 1999
+-0.2
+-0.1
+0
+0.1
+FiB
+1960 1970 1980 1990 1999
+-1
+0
+1
+L-index
+1960 1970 1980 1990 1999
+0
+0.05
+0.1
+PPRc
+1960 1970 1980 1990 1999
+0
+5
+10
+Psust
+1960 1970 1980 1990 1999
+-0.4
+-0.2
+0
+0.2
+Fodder zoopl. / total zoopl. B.
+1960 1970 1980 1990 1999
+-0.5
+0
+0.5
+Predatory / forage fish B.
+1960 1970 1980 1990 1999
+-0.1
+0
+0.1
+0.2
+Demersal / pelagic fish B.
+1960 1970 1980 1990 1999
+-0.02
+0
+0.02
+0.04
+Fish / invertebrates B.
+1960 1970 1980 1990 1999
+0
+2
+4
+Figure 6 Results of the STARS regime shift analysis on the anomalies of the synthetic ecological indicators from the Ecosim network analysis
+between 1960–1999. Bars represent time series of indicators’ anomaly values; blue solid lines represent different regimes detected by the regime shift
+analysis. TST, total system throughput; PCI, predatory cycling index; FCI, Finn ’s cycling index; PL, path length; PP, primary production; PFD,
+proportion of ﬂows to detritus; mTLc, mean trophic level of the catch; FiB, ﬁshing in balance index; L-index, loss of production index; PPR c, primary
+production required to sustain catches; P sust, the probability of sustainable ﬁshing index. Full-size DOI: 10.7717/peerj.15649/ ﬁg-6
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 18/33
+Two components were retained in the PCA analysis based on the empirical Kaiser
+criterion (Fig. S6). The ﬁrst two principal components of the PCA explained 51.8% (PC1)
+and 21.6% (PC2) of the variability in the time series of the indicator anomalies ( Fig. 7).
+PC1 mainly represented the variability in the food web-related indicators, i.e., PFD,
+FCI, PL, and the ratio of fodder zooplankton biomass to total zooplankton biomass;
+ﬁsheries-based indicators, i.e., the ratio of ﬁsh biomass to invertebrate biomass and FiB,
+and macro-ecosystem indicators, i.e., TST, PP and biomass. PC2 represented the
+variability in ﬁshery-related indicators, i.e., the L-index and P sust, and function-related
+indicator, PCI. According to the PCA groupings, the 1960s ecosystem was characterized by
+mTLc, Shannon’s diversity index, the ratio of fodder zooplankton biomass to total
+zooplankton biomass, FCI, PL, the ratio of ﬁsh biomass to invertebrate biomass and O/C.
+The 1980s was characterized by A/C, catch, PFD, TST, biomass, PP and FiB. The 1970s
+and the 1990s ecosystems were similarly grouped and characterized by the A/C, O/C and
+FiB indicators.
+The time series of the L-index and its reference levels that correspond to the 50% (L 50%)
+and 75% (L 75%) probabilities of sustainable ﬁshing showed that the probability of
+sustainable ﬁshing (Psust) oscillated between 50% and 75% throughout the 40-year period
+in the Black Sea, with occasional decreases below the 50% probability of sustainable ﬁshing
+Table 3 Timing and the directions (in parenthesis) of the shifts in the time series of ecological network indicators detected by the STARS
+algorithm.
+Indicator 1960s 1970s 1980s 1990s
+Total system throughput (TST) 1977 (+) 1981 (+) 1994 ( −)
+A/C 1970 (+), 1977 (+) 1983 ( −)
+O/C 1970 ( −), 1978 ( −) 1983 (+) 1996 (+)
+Predatory cycling index (PCI) 1989 ( −) 1996 (+)
+Finn’s cycling index (FCI) 1968 ( −) 1973 ( −), 1977 ( −) 1996 (+)
+Finn’s mean path length (PL) 1965 ( −), 1969 ( −) 1976 ( −) 1994 (+)
+Primary production (PP) 1977 (+) 1994 ( −)
+Biomass 1977 (+) 1995 ( −)
+Catch 1972 (+), 1979 (+) 1984 ( −)
+Proportion of ﬂows to detritus 1970 (+), 1978 (+) 1996 ( −)
+Mean trophic level of the catch (mTL c) 1964 ( −) 1971 ( −)
+Diversity 1984 ( −) 1996 (+)
+Fishing in balance index (FiB) 1967 (+) 1972 (+), 1979 (+) 1984 ( −)
+Loss of production index (L-index) 1979 (+) 1984 ( −) 1996 (+)
+Primary production required to sustain catches (PPR c) 1964 ( −) 1979 (+) 1989 ( −)
+The probability of sustainable ﬁshing (P sust) 1997 ( −)
+Ratio of fodder zooplankton to total zooplankton 1973 ( −) 1981 ( −) 1997 (+)
+Ratio of predatory ﬁsh to forage ﬁsh biomass 1965 ( −) 1980 (+) 1990 ( −)
+Ratio of demersal ﬁsh to pelagic ﬁsh biomass 1965 ( −) 1984 (+)
+Ratio of ﬁsh to invertebrate biomass 1967 ( −) 1973 ( −)
+Note:
+Positive signs denote an upward (increasing) shift, and negative signs denote a downward (decreasing) shift in the mean value of the indicators.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 19/33
+during the 1960s, 1980s and the late 1990s ( Fig. 8). The average ecosystem-based
+maximum sustainable catches corresponding to a 50% probability of sustainable ﬁshing
+(EMSC50%) were calculated as 264 ± 32 kilotonnes in the 1960s, 504 ± 179 kilotonnes in
+the 1970s, 1,108 ± 262 kilotonnes in the 1980s, and 702 ± 121 kilotonnes in the 1990s.
+The average ecosystem-based maximum sustainable catches corresponding to the 75%
+probability of sustainable ﬁshing (EMSC75%) were calculated as 103 ± 12 kilotonnes in the
+1960s, 196 ± 69 kilotonnes in the 1970s, 431 ± 102 kilotonnes in the 1980s and 273 ± 47
+kilotonnes in the 1990s.
+-0.4 -0.3 -0.2 -0.1 0 0.1 0.2 0.3 0.4
+PC 1 (51.8%)
+-0.4
+-0.3
+-0.2
+-0.1
+0
+0.1
+0.2
+0.3
+0.4
+PC 2 (21.6%)
+TST
+A/C
+O/C
+PCI
+FCI
+PL
+PP
+Biomass
+Catch
+PFD
+mTLc
+Diversity
+FiB
+L-indexPPRc
+Psust
+Fodder/Zoo
+Pred/Forage
+Dem/Pel
+Fish/Invert
+1960s
+1970s
+1980s
+1990s
+Figure 7 Results of the principal component analysis of ecological indicators from Ecosim time-dynamic simulation showing the ﬁrst (PC1)
+and second (PC2) standardized principal components and the factor loadings of the indicators. Groups denote the decadal periods of the 1960s,
+1970s, 1980s and 1990s in the 40-year simulation. TST, total system throughput; PCI, predatory cycling index; FCI, Finn ’s cycling index; PL, path
+length; PP, primary production; PFD, proportion of ﬂows to detritus; mTL c, mean trophic level of the catch; FiB, ﬁshing in balance index; L-index,
+loss of production index; PPR c, primary production required to sustain catches; P sust, the probability of sustainable ﬁshing index.
+Full-size DOI: 10.7717/peerj.15649/ ﬁg-7
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 20/33
+DISCUSSION
+Our study showed that: (i) the 1960s ’ ecosystem was characterized by top-down control
+exerted primarily by spiny dog ﬁsh and dolphins, as shown by the keystoneness analysis,
+and strong negative impacts of ﬁshing ﬂeets on these two top predators and predatory
+ﬁshes, as indicated by the MTI analysis; (ii) the regime shifts in the Black Sea ecosystem
+were re ﬂected by the time series of ecological indicators; and (iii) four different regimes
+were experienced in the Black Sea between 1960 and 1999. The ﬁrst regime ( circa
+1960–1968) was characterized by a resilient and healthy ecosystem with low levels of TST,
+biomass, catch, PFD and A/C, and high levels of O/C, FCI, PL and mTL c, but the
+ecosystem was on the brink of changes due to overexploitation of top predators by
+ﬁsheries, as indicated by the negative MTI on apex predators and high PPR c index.
+The second transitory regime ( circa 1969–1976) was mainly characterized by elevated
+eutrophic conditions with increasing values of TST, biomass, catch and A/C, and
+decreasing values of O/C, FCI, PL and mTL c, as also indicated by the increasing PP values.
+During the second regime, opportunistic zooplankton groups established their
+populations, and a signiﬁcant portion of the ﬂows in the food web was short-circuited back
+to detritus, as indicated by the increase in the PFD, due to the low utilization and low
+ecotrophic ef ﬁciencies of these opportunistic groups in the food web. The third regime
+(circa 1977–1989/1994) was characterized by the most stressed conditions in the ecosystem
+1960 1970 1980 1990 1999
+Years
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+0.12
+0.14
+0.16
+0.18
+0.2
+L-index
+L-index
+L50%
+L75%
+1960 1970 1980 1990 1999
+Years
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2Catch (gC m-2 y-1)
+Catch
+EMSC50%
+EMSC75%
+Figure 8 Time series of L-index calculated by the Ecosim network analysis routine between 1960-1999 and corresponding EMSC values. The
+dash-dotted and dashed lines denote corresponding L-index values for 50% and 75% probability of being sustainably ﬁshed, respectively. Right, time
+series of catches (solid black line) and corresponding ecosystem-based maximum sustainable catches (EMSC) for the 50% (dash-dotted line) and
+75% (dashed line) probability of being sustainably ﬁshed, respectively. Full-size DOI: 10.7717/peerj.15649/ ﬁg-8
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 21/33
+with the highest values of TST, biomass, catch and PP, and the lowest values of FCI and PL,
+and with a high footprint of ﬁsheries, as indicated by the L-index and PPRc, and decreasing
+diversity. The fourth and ﬁnal regime ( circa 1994–1999) was characterized by conditions
+similar to the 1970s ’ transitory regime; however, in the reverse direction with decreases in
+TST, biomass, catch, PPR c, L-index, A/C, and slight increases in O/C, FCI, PL and mTL c,
+indicating a limited alleviation of adverse conditions experienced in the third regime.
+Model skill
+The 1950s and the 1960s in the Black Sea lacked systematic scienti ﬁc studies, although a
+good deal of knowledge was collated afterwards ( e.g., Ivanov & Beverton, 1985 ; Prodanov
+et al., 1997 ; BSC, 2008). Therefore, the data quality of the initial conditions and input
+parameters could be hindered by insuf ﬁcient stock assessments and ﬁsheries biological
+data for certain modelled periods. However, according to Morissette (2007) , the pedigree
+index of 48% of the Ecopath models published ranged between 0.4 –0.599, included
+between 20 and 40 functional groups, and only 10% of the models had a pedigree index
+above 0.6. Therefore, the pedigree index of the Black Sea Ecopath model was considered
+satisfactory, indicating that the model had a moderate degree of data quality.
+The PREBAL analysis of the ﬁnal balanced Ecopath model indicated possibly
+overestimated P/B and Q/B ratios for jelly ﬁsh species, i.e., B. ovata and M. leidyi, and
+zooplankton and phytoplankton, considering their respective trophic levels. Jelly ﬁsh can
+attain signi ﬁcantly higher productivity rates ( Pitt et al., 2013 ) and can be considered
+outliers in this respect. The Ecopath model of the Black Sea was balanced by capitalizing on
+the pedigree values of the data sources for the parameters and initial conditions and
+calibrating from the most uncertain to the least uncertain parameter/initial condition
+values. Generally, the biomasses were the values with the highest uncertainty, considering
+that the majority of stock assessment studies and reliable catch statistics dated back to the
+early 1970s. Therefore, the biomasses of whiting, horse mackerel, sprat, anchovy,
+zooplankton, and phytoplankton were overestimated as a result of balancing the model.
+In the temporal Ecosim model of the Black Sea, the correlations of simulated catches
+and biomasses to the statistical catches and predicted biomasses by statistical stock
+assessments varied; however, the RMSDs were low, the simulated time series of catches and
+biomasses matched the trajectory of the reference values, and the biases were mostly low or
+moderate in the validated 40-year Ecosim model of the Black Sea ( Fig. S5 ). The model
+could reproduce the decadal changes in the time series of statistical catches and the
+statistical stock assessment predicted biomasses as well as the anchovy stock ’s collapse in
+1989 ( Figs. S3 and S4). It should be noted that the reference data used to validate the
+temporal model had high uncertainty because of the questionnaire-based collection of the
+statistical catches in the Black Sea, statistical stock assessment-based predictions that
+capitalized mostly on these statistical catches, and/or limited survey data, or extrapolation
+of catch-at-age information from other countries to the catches of riparian countries where
+no such data were available. Therefore, the model can be considered successful in
+reproducing the food web dynamics of the Black Sea from 1960 to 1999.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 22/33
+The state of the early 1960s ’ Black Sea ecosystem
+The early 1960s’ Black Sea ecosystem was highly resilient (73.5% O/C) to stressors and the
+transfer efﬁciency in the food web was high (Table 2). Shannon’s diversity index, which has
+an upper bound of approximately three considering the number of species represented in
+the model, indicated high diversity during this period, and the mTL co was also high.
+Net system production was above unity and showed that the Black Sea was in a
+developmental stage sensu Odum (1969). However, the gross production-to-community
+respiration ratio and the primary production-to-total respiration ratio were above but
+close to unity. Therefore, we hypothesized that the Black Sea was at a developmental stage
+in the 1960s; however, it was close to maturity. The SOI was low compared to the 2000s ’
+conditions in the Mediterranean Sea ( Piroddi et al., 2015 ; Coll et al., 2016 ) and the early
+1990s’ conditions in the North Sea ( Mackinson, 2014) and higher than the 1974 ’s
+conditions in the Baltic Sea ( Tomczak et al., 2012 ), and showed specialized feeding
+interactions in the food web. Although the FCI was high, the PCI was quite low compared
+to that of the Mediterranean Sea ( Piroddi et al., 2015 ); however, it was higher than that of
+the 1974’s Baltic Sea ecosystem (Tomczak et al., 2012). In terms of ﬁsheries footprint on the
+ecosystem, the L-index and the low PPR c value, which was slightly greater than 5%,
+indicated a sustainably ﬁshed ecosystem with a probability of approximately 89%
+compared to the 1963 ’s North Sea (62.6% PPR c and 6.4% P sust) or the 1974 ’s Baltic Sea
+(36.3% PPRc and %0 P sust)( Libralato et al., 2008 ). The low L-index value was due to
+ﬁshing, which mainly exploited higher-trophic-level species. However, the L-index
+considers the whole ﬁsheries catch and system ’s productivity and does not mean that
+sustainable ﬁshing occurs at individual stocks’ levels; therefore, it should be complemented
+by stock-by-stock evaluations ( Libralato et al., 2008 ). An interesting ﬁnding was that the
+gross ef ﬁciency of the Black Sea in the 1960s was comparable to that of the
+ecosystem-overﬁshed Baltic Sea in the 1970s ( Libralato et al., 2008 ; Tomczak et al., 2012 ),
+possibly because the Baltic Sea model was not forced by primary production anomalies.
+The keystoneness analysis of the quasi-pristine 1960s ’ mass-balance model of the Black
+Sea revealed that the ecosystem was under top-down (consumer/predator) control by apex
+predators, i.e., marine mammals and spiny dog ﬁsh (Fig. 5). The in ﬂuential roles of
+zooplankton and phytoplankton were also signi ﬁcant, because these two groups followed
+the two predators in terms of keystoneness. Top-down control during the 1960s in the
+Black Sea food web was also supported by previous studies; however, the consumer control
+was exerted by Atlantic mackerel, Atlantic bonito, blue ﬁsh and/or marine mammals
+(Daskalov et al., 2007 , 2017; Oguz, 2007; Llope et al., 2011 ). Contrary to previous ﬁndings,
+in our study, consumer control in the 1960s ’ food web was exerted primarily by spiny
+dogﬁsh and then marine mammals, and the impacts of Atlantic mackerel, Atlantic bonito,
+and blueﬁsh were relatively low in terms of their structuring roles and relative total impacts
+on the ecosystem (Fig. 5). The mixed trophic impact analysis indicated that predator ﬁshes,
+i.e., Atlantic bonito, blue ﬁsh and Atlantic mackerel, were under top-down regulation by
+marine mammals. The strong negative impacts of trawlers on turbot and spiny dog ﬁsh
+were alarming because spiny dog ﬁsh was one of the apex predators in the ecosystem with
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 23/33
+the highest keystoneness and relative total impact, and a small change in the biomass of
+spiny dog ﬁsh would be prone to signi ﬁcant changes in the ecosystem. Furthermore, the
+dolphins group was negatively impacted by seiners due to hunting, and after the whaling
+ban, intentional killings. Overall, the two most inﬂuential species/groups in the food web of
+the 1960s’ Black Sea were negatively impacted by ﬁsheries. The negative impacts of
+ﬁsheries on three predatory ﬁsh species, i.e., Atlantic bonito, Atlantic mackerel and
+blueﬁsh, were also signi ﬁcant. Considering the entire food web, the transfer ef ﬁciencies of
+energy through the trophic levels in the food web were high up to TL IV and close to the
+ecologically theoretical value of 10% at TL V. This indicated an ef ﬁciently functioning food
+web, although higher-trophic-level species/groups were overexploited by ﬁsheries.
+The regime shifts in the Black Sea were re ﬂected by the synthetic ecological indicators
+calculated by the ecological network analysis for the ﬁrst time. Overall, the Black Sea was
+characterized by four distinct regimes. Although the detected timings of shifts were
+different for different indicator groups (macro-ecosystem, food web, and ﬁshing
+indicators), the changes in their time series were similar. We hypothesized that the ﬁrst
+regime shift was instigated by ﬁsheries overexploitation of higher-trophic-level species, as
+indicated by keystoneness and MTI analysis for the 1960s and the temporal changes in the
+L-index and P sust values. The second regime was driven by increasing productivity due to
+eutrophication, as indicated by the PP. The third regime was realized by intensi ﬁed
+eutrophication due to a continuous increase in the primary productivity and a related
+increase in the opportunistic (r-selected) and trophic dead-end species, as shown by the
+decrease in the ratio of fodder zooplankton biomass to total zooplankton biomass.
+The ﬁnal regime was instigated by ﬁsh stocks’ collapse due to overexploitation and trophic
+competition, and settled with alleviated eutrophic conditions, as shown by the PP.
+From its quasi-pristine stage in the 1960s, the Black Sea ecosystem deteriorated
+continuously until the end of the 1980s. The mTL c decreased signiﬁcantly until the 1970s,
+and the effect of ﬁshing down the food web ( Pauly et al., 1998 ) was evident, as also shown
+by the L-index and PPR c. Similar conclusions were reached by long-term time-series data
+analysis of biomasses and catches ( Daskalov et al., 2007) and statistical modelling practices
+capitalizing on time series of ﬁeld data ( Llope et al., 2011 ; Daskalov et al., 2017 ), which
+underlined the removal of the stabilizing effect of apex predators in the Black Sea. Hence, a
+decrease in the ecosystem ’s resilience occurred because of overexploitation by ﬁsheries.
+However, the proportion of ﬂows to detritus was low after the removal of apex predators
+until the onset of eutrophication. This indicated that, although decreased, the resilience of
+the Black Sea ecosystem was preserved to a certain extent until the PFD increased because
+of the increased biomasses of trophic dead-end organisms such as jelly ﬁshes and
+heterotrophic dinoﬂagellates by the mid-1970s. The regime shift detected in the ratio of
+fodder zooplankton biomass to total zooplankton biomass after the onset of the 1970s also
+supported this conclusion. This change also coincided with the increased primary
+productivity due to eutrophic conditions (Oguz, Akoglu & Salihoglu, 2012). The changes in
+the FCI and PL indicators also aligned with the changes in the mTL c and PP indicators to a
+certain extent; however, sometimes with different time frames. Although somewhat
+contrasting with the results of the mass-balance Ecopath model, the high PPR c in the ﬁrst
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 24/33
+half of the 1960s indicated that the ﬁshery had a signi ﬁcant ecological footprint due to the
+exploitation of high-trophic-level species during this period, as also indicated by Llope
+et al. (2011) and Daskalov et al. (2017) . After the mid-1960s, the PPR c remained at low
+levels until the onset of the 1980s, when the ﬁshing ﬂeet’s capacity (FiB in Fig. 6) and
+catches reached their maxima. The increasing FiB index since the mid-1960s and the
+increasing catches until the mid-1980s re ﬂected the increased capacity of the ﬂeet and its
+enormous catches. However, the carrying capacity of the Black Sea ecosystem increased
+due to elevated primary productivity levels caused by intense eutrophication, as shown by
+the changes in the TST, PP and the total biomass supported by the system. Therefore, the
+L-index remained at levels corresponding to the 50% and 75% probability of sustainable
+ﬁshing in the ecosystem. The removal of higher-trophic-level species relieved the
+predatory (top-down) control on the medium- and lower-trophic-level ﬁsh species and,
+along with the increased carrying capacity due to bottom-up (resource-driven)
+mechanisms, large amounts of biomasses and ﬁsheries catches were possible during the
+late 1970s and the early 1980s.
+PCA analysis showed that the ecosystem conditions in the 1960s and the 1980s
+differentiated in adverse directions based on the time series of ecological indicators and
+could be considered “ecological opposites”. The 1960s was characterized by higher values
+of mTLc, diversity, FCI, PL, O/C, and higher ratios of fodder to total zooplankton and ﬁsh
+to invertebrate biomasses, whereas the 1980s was characterized by higher values of A/C,
+catch, PFD, TST, biomass, PP and FiB indicators. The 1970s and the 1990s were between
+these two opposite characteristics of the 1960s and the 1980s, and could be considered
+transitional periods, or moderate regimes/states based on productivity and ecosystem
+structure and functioning. The settling changes during the 1960s, the gradual
+overexploitation of higher-trophic-level species, as indicated by mTL c, and the ratio of
+predatory ﬁsh biomass to forage ﬁsh biomass differentiated the early 1960s from the rest of
+the decade. The 1980s was grouped closer together than the 1960s, and the 1970s and the
+1990s were grouped between these two decadal extremes of the Black Sea as they were an
+amalgamation of the characteristics of the two extremes.
+The average decadal ﬁshery catches in the Black Sea were 249, 460, 919, and 491
+kilotonnes in the 1960s, 1970s, 1980s, and the 1990s, respectively ( Pauly, Zeller &
+Palomares, 2020). Considering the calculated EMSC50% values, the average decadal catches
+were lower than, but close to, the calculated catch values, and the variability was high.
+Considering the calculated EMSC 75% values, the average decadal catches were much
+higher. Therefore, the time series of L-index values and the corresponding EMSC values
+indicated that unsustainable ﬁsheries in the Black Sea were highly probable during the 40
+years investigated in this study, which was also supported by another study that relied on
+the analysis of statistical catches for the period 1970 –2010 (Tsikliras et al., 2015 ).
+One exception could be the estimates of the temporal Black Sea model for the 1960s, as
+the mass-balance Black Sea model for the early 1960s indicated a low L-index value,
+contrary to that calculated by the temporal simulation. This discrepancy could be an
+artifact of the model ﬁtting by alternating primary production anomalies, as inferred from
+the comparison of decadal catches and calculated EMSC values for the 50% and 75%
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 25/33
+probability of sustainable ﬁshing; therefore, the ﬁsheries could be sustainable with a high
+probability during the early 1960s. However, it should be noted that the L-index and
+EMSC calculations relied on the assessment of total catches in the system and the carrying
+capacity of the ecosystem as per the algorithm of the indices. Therefore, the sustainability
+of ﬁsheries at the individual stocks ’ level cannot be inferred from the analysis, and our
+ﬁndings based on the L-index and EMSC should be tentatively evaluated.
+Limitations of the study and future considerations
+Although we did not conduct a formal uncertainty analysis regarding the model inputs, it
+was possible to infer the degree of uncertainty in the model outputs based on data
+availability. The data required to parameterize the 1960s ’ Black Sea Ecopath model relied
+on the historical literature. Most ﬁsh stock assessments related to the 1960s were
+conducted two decades or more after the period by collating various sources of data on the
+Black Sea. However, the systematic connectivity of the data was constrained by the limited
+presence of basin-wide harmonized efforts to collect standardized and comparable survey
+data in the Black Sea at the time. In addition, although we parameterized the Ecopath
+model using data from the 1960s of the Black Sea to the most possible extent, certain
+parameters for some species were lacking in this period, and we occasionally had to
+capitalize on data from earlier or later decades ( Table S1 ). Further, stock assessments of
+important predatory ﬁsh species were completely missing then and are still missing as of
+now. These factors may have caused uncertainty in the mass-balance model results, as
+indicated by the pedigree value used for assessing the input data quality.
+The lack of a time series of primary productivity measurements in the basin was another
+drawback of the modelling. The most comprehensive literature to date was by Yunev et al.
+(2002), who attempted to collate all literature information and inferred primary
+productivity estimates for the pre-satellite era in the Black Sea. However, his effort was at
+the level of calculating annual average primary productivity estimates on decadal scales.
+Therefore, we capitalized on these average primary productivity calculations and calibrated
+primary productivity anomalies in addition to trophic interaction parameters to ﬁt the
+model to the observations of biomasses, catches and ﬁeld-sampled data. Although this
+signiﬁcantly increased the skill of the temporal model, it may have created a degree of
+uncertainty in the simulated primary productivity levels. The impact of this exercise could
+be re ﬂected in the discrepancy between the L-index and P sust values calculated for the
+1960s in the temporal model simulation and the Ecopath model of the 1960s ’ Black Sea.
+However, this discrepancy did not hamper our results and related conclusions because we
+did not rely on a single or a few indicators in the study to assess the ecosystem structure
+and function but used a wide set of ecological indicators comparatively to develop an
+understanding of the historical changes in the Black Sea ecosystem. Future work should
+focus on improving the historical primary productivity estimates for the EwE model to
+decrease the source of uncertainty originating from phytoplankton dynamics, possibly by
+forcing the model by capitalizing on biogeochemical model products, if available.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 26/33
+CONCLUSIONS
+Black Sea studies lacked holistic ecological assessments of its whole ecosystem and were
+limited to a certain part of the food web or used data analysis with statistical models that
+provided a useful but limited understanding of its historical changes. Furthermore,
+mechanistic models developed for the Black Sea were either static or lacked temporal
+validation. Therefore, we aimed to provide an ecosystem-based understanding of the
+historical changes in the Black Sea ecosystem for the ﬁrst time with a validated long-term
+temporal model of the Black Sea ecosystem covering a 40-year period of its history in the
+second half of the 20 th century and to develop the ﬁrst holistic ecosystem approach to
+understand historical changes in the Black Sea using the fundamentals of ecology and
+related ecological indicators.
+The mass-balance model results showed that the 1960s ’ ecosystem was in ﬂuenced by
+top predators, i.e., spiny dog ﬁsh and dolphins. The impact of ﬁsheries on predatory ﬁsh
+species was already high, although ﬁsheries were most likely at sustainable levels.
+The temporal model results and related regime shift analysis indicated that four regimes
+were experienced over the course of 40 years of history in the Black Sea between 1960 and
+1999. The ﬁrst regime of the 1960s was characterized by high degrees of material cycling
+and a rich biodiversity, with a high mean trophic level of catches. With the onset of the
+1970s, the in ﬂuence of top predators in the ecosystem abated, and the opportunistic
+zooplankton community was established as eutrophication intensi ﬁed. Small pelagic ﬁsh
+species came into play during the decade as mediators of energy distribution in the food
+web. In the 1980s, eutrophication culminated in its peak, material cycling was at its lowest
+level, and the proportion of ﬂows diverted back to detritus deprived the higher trophic
+levels of the great productive capacity of the system. This lasted until the collapse of the
+ﬁshery in the late 1980s and alleviation of eutrophic conditions in the early 1990s, and a
+period similar to the early 1970s prevailed thereafter.
+Overall, our results showed that anthropogenic disturbances such as eutrophication and
+overﬁshing were the main instigators of the different regimes in the Black Sea, and the
+adverse ecosystem conditions were exacerbated by interspeci ﬁc competition in the food
+web. The immediate implementation of a basin-wide regulatory mechanism for human
+activities is crucial to prevent future catastrophic regime changes in the Black Sea,
+particularly under the increasing impact of climate change.
+ADDITIONAL INFORMATION AND DECLARATIONS
+Funding
+The author received no funding for this work.
+Competing Interests
+The author declares that they have no competing interests.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 27/33
+Author Contributions
+/C15 Ekin Akoglu conceived and designed the experiments, performed the experiments,
+analyzed the data, prepared ﬁgures and/or tables, authored or reviewed drafts of the
+article, and approved the ﬁnal draft.
+Data Availability
+The following information was supplied regarding data availability:
+The model input parameters and initial conditions as well as data used to validate the
+model simulation are available in the Supplemental Files.
+Supplemental Information
+Supplemental information for this article can be found online at http://dx.doi.org/10.7717/
+peerj.15649#supplemental-information.
+REFERENCES
+Abdi H, Williams LJ. 2010. Principal component analysis. WIREs Computational Statistics
+2(4):433–459 DOI 10.1002/wics.101 .
+Ahrens RN, Walters CJ, Christensen V. 2012. Foraging arena theory. Fish and Fisheries
+13(1):41–59 DOI 10.1111/j.1467-2979.2011.00432.x .
+Akaike H. 1974. A new look at the statistical model identi ﬁcation. IEEE Transactions on Automatic
+Control 19(6):716–723 DOI 10.1109/TAC.1974.1100705 .
+Akoglu E. 2013. Nonlinear dynamics of the Black Sea ecosystem and its response to anthropogenic
+and climate variations. Ph.D. Dissertation, Thesis. Mersin: Middle East Technical University,
+Institute of Marine Sciences.
+Akoglu E, Salihoglu B, Libralato S, Oguz T, Solidoro C. 2014. An indicator-based evaluation of
+Black Sea food web dynamics during 1960 –2000. Journal of Marine Systems 134(2):113–125
+DOI 10.1016/j.jmarsys.2014.02.010 .
+Alexander LM. 1993. Large marine ecosystems: a new focus for marine resources management.
+Marine Policy 17(3):186–198 DOI 10.1016/0308-597X(93)90076-F .
+Allen KR. 1971. Relation between production and biomass. Journal of the Fisheries Board of
+Canada 28(10):1573–1581 DOI 10.1139/f71-236 .
+Arreguín-Sánchez F, Arcos E, Chávez EA. 2002. Flows of biomass and structure in an exploited
+benthic ecosystem in the gulf of California, Mexico. Ecological Modelling 156(2–3):167–183
+DOI 10.1016/S0304-3800(02)00159-X .
+Bakan G, Büyükgüngör H. 2000. The Black Sea. Marine Pollution Bulletin 41(1–6):24–43
+DOI 10.1016/S0025-326X(00)00100-4 .
+Berdnikov SV, Selyutin VV, Vasilchenko VV, Caddy JF. 1999. Trophodynamic model of the
+Black and Azov Sea pelagic ecosystem: consequences of the comb jelly, Mnemiopsis leydei,
+invasion. Fisheries Research 42(3):261–289 DOI 10.1016/S0165-7836(99)00049-1 .
+Berkes F. 1977. Turkish dolphin ﬁsheries. Oryx 14(2):163–167 DOI 10.1017/S0030605300015222.
+Birkun A. 2008. The state of Cetacean populations. In: Oguz T, ed. State of the Environment of the
+Black Sea (2001 –2006/7), Publications of the Commission on the Protection of the Black Sea
+Against Pollution (BSC) 2008-3 . Istanbul, Turkey, 201 –246.
+Blanchard JL, Pinnegar JK, Mackinson S. 2002. Exploring marine mammal- ﬁshery interactions
+using ‘Ecopath with Ecosim ’: modelling the Barents Sea ecosystem . UK: CEFAS Lowestoft.
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 28/33
+Braeken J, van Assen MALM. 2017. An empirical Kaiser criterion. Psychological Methods
+22(3):450–466 DOI 10.1037/met0000074 .
+BSC. 2008. State of the environment of the Black Sea (2001 –2006/7). In: The Commission on the
+Protection of the Black Sea Against Pollution . Istanbul: Turkey, 448.
+Christensen V. 1995. Ecosystem maturity —towards quanti ﬁcation. Ecological Modelling
+77(1):3–32 DOI 10.1016/0304-3800(93)E0073-C .
+Christensen V, Walters CJ, Pauly D. 2005. Ecopath with Ecosim: a user ’s guide . Vancouver,
+Canada: Fisheries Centre, University of British Columbia, vol. 154.
+Coll M, Libralato S, Tudela S, Palomera I, Pranovi F. 2008. Ecosystem overﬁshing in the ocean.
+PLOS ONE 3:3881 DOI 10.1371/journal.pone.0003881 .
+Coll M, Steenbeek J, Sole J, Palomera I, Christensen V. 2016. Modelling the cumulative
+spatial-temporal effects of environmental drivers and ﬁshing in a NW Mediterranean marine
+ecosystem. Ecological Modelling 331:100–114 DOI 10.1016/j.ecolmodel.2016.03.020 .
+Costanza R, Mageau M. 1999. What is a healthy ecosystem? Aquatic Ecology 33:105–115
+DOI 10.1023/A:1009930313242 .
+Darwall WRT, Allison EH, Turner GF, Irvine K. 2010. Lake of ﬂies, or lake of ﬁsh? A trophic
+model of Lake Malawi. Ecological Modelling 221(4):713–727
+DOI 10.1016/j.ecolmodel.2009.11.001 .
+Daskalov GM. 2002. Overﬁshing drives a trophic cascade in the Black Sea. Marine Ecology Progress
+Series 225:53–63 DOI 10.3354/meps225053 .
+Daskalov GM, Boicenco L, Grishin AN, Lazar L, Mihneva V, Shlyakhov VA, Zengin M. 2017.
+Architecture of collapse: regime shift and recovery in an hierarchically structured marine
+ecosystem. Global Change Biology 23(4):1486–1498 DOI 10.1111/gcb.13508 .
+Daskalov GM, Grishin AN, Rodionov S, Mihneva V. 2007. Trophic cascades triggered by
+overﬁshing reveal possible mechanisms of ecosystem regime shifts. Proceedings of the National
+Academy of Sciences of the United States of America 104(25):10518–10523
+DOI 10.1073/pnas.0701100104 .
+Dorofeev VL. 2009. Modeling of decadal variations in the Black-Sea ecosystem. Physical
+Oceanography 19(6):400–409 DOI 10.1007/s11110-010-9062-6 .
+FAO. 2022. The state of world ﬁsheries and aquaculture. Rome: Food and Agriculture Organization
+of the United Nations.
+Finn JT. 1976. Measures of ecosystem structure and function derived from analysis of ﬂows.
+Journal of Theoretical Biology 56(2):363–380 DOI 10.1016/S0022-5193(76)80080-X .
+Gucu AC. 2002. Can over ﬁshing be responsible for the successful establishment of Mnemiopsis
+leidyi in the Black Sea? Estuarine, Coastal and Shelf Science 54(3):439–451
+DOI 10.1006/ecss.2000.0657 .
+Hempel G, Sherman K. 2003. Large marine ecosystems of the world: trends in exploitation,
+protection, and research . Amsterdam: Elsevier.
+Heymans JJ, Coll M, Link JS, Mackinson S, Steenbeek J, Walters C, Christensen V. 2016. Best
+practice in Ecopath with Ecosim food-web models for ecosystem-based management. Ecological
+Modelling 331:173–184 DOI 10.1016/j.ecolmodel.2015.12.007 .
+Hyndman RJ, Athanasopoulos G. 2018. Forecasting: principles and practice. Melbourne, Australia:
+OTexts.
+Hyndman RJ, Khandakar Y. 2008. Automatic time series forecasting: the forecast package for R.
+Journal of Statistical Software 26(3):1–22 DOI 10.18637/jss.v027.i03 .
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 29/33
+Ioakeimidis C, Zeri C, Kaberi H, Galatchi M, Antoniadis K, Streftaris N, Galgani F,
+Papathanassiou E, Papatheodorou G. 2014. A comparative study of marine litter on the
+seaﬂoor of coastal areas in the Eastern Mediterranean and Black Seas. Marine Pollution Bulletin
+89(1–2):296–304 DOI 10.1016/j.marpolbul.2014.09.044 .
+Ivanov L, Beverton RH. 1985. The ﬁsheries resources of the Mediterranean. Part two: Black Sea.
+G.F.C.M. Studies and Reviews . FAO: Rome, vol. 60, 135.
+Ivanov L, Panayotova M. 2001. Determination of the Black Sea anchovy stocks during the period
+1968–1993 by Ivanov ’s combined method. Proceedings of the Institute of Oceanology, Bulgarian
+Academy of Sciences 3:128–154.
+Jackson JB, Kirby MX, Berger WH, Bjorndal KA, Botsford LW, Bourque BJ, Bradbury RH,
+Cooke R, Erlandson J, Estes JA, Hughes TP. 2001. Historical over ﬁshing and the recent
+collapse of coastal ecosystems. Science 293(5530):629–637 DOI 10.1126/science.1059199 .
+Kideys AE. 2002. Fall and rise of the Black Sea ecosystem. Science 297(5586):1482–1484
+DOI 10.1126/science.1073002 .
+Konovalov SK, Murray JW, Luther GW, Tebo BM. 2006. Processes controlling the redox budget
+for the oxic/anoxic water column of the Black Sea. Deep Sea Research Part II: Topical Studies in
+Oceanography 53(17–19):1817–1841 DOI 10.1016/j.dsr2.2006.03.013 .
+Kosyan RD, Velikova VN. 2016. Coastal zone–Terra (and aqua) incognita–Integrated coastal zone
+management in the Black Sea. Estuarine, Coastal and Shelf Science 169(3):1–16
+DOI 10.1016/j.ecss.2015.11.016 .
+Libralato S, Christensen V, Pauly D. 2006. A method for identifying keystone species in food web
+models. Ecological Modelling 195(3–4):153–171 DOI 10.1016/j.ecolmodel.2005.11.029 .
+Libralato S, Coll M, Tudela S, Palomera I, Pranovi F. 2008. Novel index for quanti ﬁcation of
+ecosystem effects of ﬁshing as removal of secondary production. Marine Ecology Progress Series
+355:107–129 DOI 10.3354/meps07224 .
+Lindeman R. 1942. The trophic-dynamic aspect of ecology. Ecology 23(4):399–418
+DOI 10.2307/1930126 .
+Link JS. 2010. Adding rigor to ecological network models by evaluating a set of pre-balance
+diagnostics: a plea for PREBAL. Ecological Modelling 221(12):1580–1591
+DOI 10.1016/j.ecolmodel.2010.03.012 .
+Link JS. 2021. Evidence of ecosystem over ﬁshing in US large marine ecosystems. ICES Journal of
+Marine Science 78(9):3176–3201 DOI 10.1093/icesjms/fsab185 .
+Link JS, Watson RA, Pranovi F, Libralato S. 2020. Comparative production of ﬁsheries yields and
+ecosystem over ﬁshing in African Large Marine Ecosystems. Environmental Development
+36(7322):100529 DOI 10.1016/j.envdev.2020.100529 .
+Llope M, Daskalov GM, Rouyer TA, Mihneva V, Chan K-S, Grishin AN, NChr Stenseth. 2011.
+Overﬁshing of top predators eroded the resilience of the Black Sea system regardless of the
+climate and anthropogenic conditions. Global Change Biology 17(3):1251–1265
+DOI 10.1111/j.1365-2486.2010.02331.x .
+Lotze HK, Tittensor DP, Bryndum-Buchholz A, Eddy TD, Cheung WW, Galbraith ED,
+Barange M, Barrier N, Bianchi D, Blanchard JL, Bopp L. 2019. Global ensemble projections
+reveal trophic ampli ﬁcation of ocean biomass declines with climate change. Proceedings of the
+National Academy of Sciences of the United States of America 116(26):12907–12912
+DOI 10.1073/pnas.1900194116 .
+Mackinson S. 2014. Combined analyses reveal environmentally driven changes in the North Sea
+ecosystem and raise questions regarding what makes an ecosystem model ’s performance
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 30/33
+credible? Canadian Journal of Fisheries and Aquatic Sciences 71(1):31–46
+DOI 10.1139/cjfas-2013-0173 .
+Mee LD. 1992. The Black Sea in crisis: a need for concerted international action. Ambio
+21(4):278–286 DOI 10.2307/4313943 .
+Morissette L. 2007. Complexity, cost and quality of ecosystem models and their impact on resilience:
+a comparative analysis, with emphasis on marine mammals and the Gulf of St. Lawrence. PhD
+Thesis. Vancouver, Canada: University of British Columbia.
+Murray JW, Stewart K, Kassakian S, Krynytzky M, DiJulio D. 2007. Oxic, suboxic, and anoxic
+conditions in the Black Sea. In: Yanko-Hombach V, Gilbert AS, Panin N, Dolukhanov PM, eds.
+The Black Sea Flood Question: Changes in Coastline, Climate, and Human Settlement . Dordrecht:
+Springer, 1 –21.
+Murray JW, Top Z, Özsoy E. 1991. Hydrographic properties and ventilation of the Black Sea. Deep
+Sea Research Part A. Oceanographic Research Papers 38:663–689
+DOI 10.1016/S0198-0149(10)80003-2 .
+Myroshnychenko V, Ray N, Lehmann A, Giuliani G, Kideys A, Weller P, Teodor D. 2015.
+Environmental data gaps in Black Sea catchment countries: INSPIRE and GEOSS State of Play.
+Environmental Science & Policy 46(4):13–25 DOI 10.1016/j.envsci.2014.04.001 .
+Nesterova D, Moncheva S, Mikaelyan A, Vershinin A, Akatov V, Boicenco L, Aktan Y, Sahin F,
+Gvarishvili T. 2008. The state of phytoplankton. In: Oguz T, ed. State of the Environment of the
+Black Sea (2001 –2006/7). Publications of the Commission on the Protection of the Black Sea
+Against Pollution (BSC) 2008-3 . Istanbul, Turkey, 173 –200.
+O’Connor BP. 2023. EFA.dimensions: exploratory factor analysis functions for assessing
+dimensionality.
+Odum EP. 1969. The strategy of ecosystem development: an understanding of ecological
+succession provides a basis for resolving man ’s conﬂict with nature. Science 164(3877):262–270
+DOI 10.1126/science.164.3877.262 .
+Oguz T. 2007. Nonlinear response of Black Sea pelagic ﬁsh stocks to over-exploitation. Marine
+Ecology Progress Series 345:211–228 DOI 10.3354/meps06994 .
+Oguz T, Akoglu E, Salihoglu B. 2012. Current state of over ﬁshing and its regional differences in
+the Black Sea. Ocean & Coastal Management 58(1454):47–56
+DOI 10.1016/j.ocecoaman.2011.12.013 .
+Oguz T, Gilbert D. 2007. Abrupt transitions of the top-down controlled Black Sea pelagic
+ecosystem during 1960 –2000: evidence for regime-shifts under strong ﬁshery exploitation and
+nutrient enrichment modulated by climate-induced variations. Deep Sea Research Part I:
+Oceanographic Research Papers 54(2):220–242 DOI 10.1016/j.dsr.2006.09.010 .
+Oguz T, Salihoglu B, Fach B. 2008. A coupled plankton –anchovy population dynamics model
+assessing nonlinear controls of anchovy and gelatinous biomass in the Black Sea. Marine Ecology
+Progress Series 369:229–256 DOI 10.3354/meps07540 .
+Örek H. 2000. An application of mass balance ecopath model to the trophic structure in the Black
+Sea “after anchovy collapse ”. Master ’s Thesis. Ankara, Türkiye: Middle East Technical
+University.
+Palomares MLD, Pauly D. 1998. Predicting food consumption of ﬁsh populations as functions of
+mortality, food type, morphometrics, temperature and salinity. Marine and Freshwater Research
+49(5):447–453 DOI 10.1071/MF98015 .
+Pauly D, Christensen V, Dalsgaard J, Froese R, Torres F Jr. 1998. Fishing down marine food
+webs. Science 279(5352):860–863 DOI 10.1126/science.279.5352.860 .
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 31/33
+Pauly D, Soriano-Bartz ML, Palomares MLD. 1993. Improved construction, parametrization and
+interpretation of steady-state ecosystem models. In: Christensen V, Pauly D, eds. Trophic Models
+of Aquatic Ecosystems. ICLARM Conference Proceedings. Manila, Philippines: International
+Center for Living Aquatic Resources Management (ICLARM), Vol. 26 1 –13.
+Pauly D, Watson R. 2005. Background and interpretation of the ‘Marine Trophic Index ’ as a
+measure of biodiversity. Philosophical Transactions of the Royal Society B: Biological Sciences
+360(1454):415–423 DOI 10.1098/rstb.2004.1597 .
+Pauly D, Zeller D, Palomares MLD. 2020. Sea around us concepts, design and data. Available at
+https://www.seaaroundus.org/.
+Piroddi C, Coll M, Steenbeek J, Moy DM, Christensen V. 2015. Modelling the Mediterranean
+marine ecosystem as a whole: addressing the challenge of complexity. Marine Ecology Progress
+Series 533:47–65 DOI 10.3354/meps11387 .
+Pitt KA, Duarte CM, Lucas CH, Sutherland KR, Condon RH, Mianzan H, Purcell JE,
+Robinson KL, Uye SI. 2013. Jellyﬁsh body plans provide allometric advantages beyond low
+carbon content. PLOS ONE 8:72683 DOI 10.1371/journal.pone.0072683 .
+Pokazeev K, Sovga E, Chaplina T. 2021. Pollution in the Black Sea . Cham, Switzerland: Springer.
+Prodanov K, Mikhaylov K, Daskalov G, Maxim K, Ozdamar E, Shlyakhov V, Chashchin A,
+Arkhipov A. 1997. Environmental management of ﬁsh resources in the Black Sea and their
+rational exploitation. In: General Fisheries Commission for the Mediterranean Studies and
+Reviews FAO: Rome. Vol. 68178.
+R Core Team. 2022. R: a language and environment for statistical computing . Vienna, Austria: The
+R Foundation for Statistical Computing. Available at http://www.R-project.org/.
+Rodionov SN. 2004. A sequential algorithm for testing climate regime shifts. Geophysical Research
+Letters 31(9) DOI 10.1029/2004GL019448 .
+Sabatino R, Di Cesare A, Dzhembekova N, Fontaneto D, Eckert EM, Corno G, Moncheva S,
+Bertoni R, Callieri C. 2020. Spatial distribution of antibiotic and heavy metal resistance genes in
+the Black Sea. Marine Pollution Bulletin 160:111635 DOI 10.1016/j.marpolbul.2020.111635 .
+Salihoglu B, Arkin SS, Akoglu E, Fach BA. 2017. Evolution of Future Black Sea Fish Stocks under
+Changing Environmental and Climatic Conditions. Frontiers in Marine Science 4:1–19
+DOI 10.3389/fmars.2017.00339 .
+Shalovenkov N. 2019. Chapter 31 —alien species invasion: case study of the Black Sea.
+In: Wolanski E, Day JW, Elliott M, Ramachandran R, eds. Coasts and Estuaries . Amsterdam:
+Elsevier, 547 –568.
+Sherman K, Duda AM. 1999. Large marine ecosystems: an emerging paradigm for ﬁshery
+sustainability. Fisheries 24:15–26 DOI 10.1577/1548-8446(1999)024<0015:LME>2.0.CO;2 .
+Shiganova TA, Musaeva E, Arashkevich E, Kamburska L, Stefanova K, Mihneva M,
+Polishchuk L, Timofte F, Ustun F, Oguz T. 2008. The state of zooplankton. In: Oguz T, ed.
+State of the Environment of the Black Sea (2001 –2006/7). Publications of the Commission on the
+Protection of the Black Sea Against Pollution (BSC) 2008-3 . Istanbul, Turkey, 201 –246.
+Shlyakhov VA, Daskalov GM. 2008. The state of marine living resources. In: Oguz T, ed. State of
+the Environment of the Black Sea (2001 –2006/7). Publications of the Commission on the
+Protection of the Black Sea Against Pollution (BSC) 2008-3 . Istanbul, Turkey, 321 –364.
+STECF-15-16. 2015. Scientiﬁc, technical and economic committee for ﬁsheries (STECF)—Black Sea
+assessments. Luxembourg: Publications Of ﬁce of the European Union, 284.
+Tătui F, Pîrvan M, Popa M, Aydogan B, Ayat B, Görmü ș T, Korzinin D, V ăidianu N,
+Vespremeanu-Stroe A, Z ăinescu F, Kuznetsov S. 2019. The Black Sea coastline erosion:
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 32/33
+index-based sensitivity assessment and management-related issues. Ocean & Coastal
+Management 182:104949 DOI 10.1016/j.ocecoaman.2019.104949 .
+Taylor KE. 2001. Summarizing multiple aspects of model performance in a single diagram. Journal
+of Geophysical Research: Atmospheres 106:7183–7192 DOI 10.1029/2000JD900719 .
+Tomczak MT, Niiranen S, Hjerne O, Blenckner T. 2012. Ecosystem ﬂow dynamics in the Baltic
+Proper—using a multi-trophic dataset as a basis for food-web modelling. Ecological Modelling
+230:123–147 DOI 10.1016/j.ecolmodel.2011.12.014 .
+Topçu EN, Öztürk B. 2010. Abundance and composition of solid waste materials on the western
+part of the Turkish Black Sea seabed. Aquatic Ecosystem Health & Management 13:301–306
+DOI 10.1080/14634988.2010.503684 .
+Tsikliras AC, Dinouli A, Tsiros V-Z, Tsalkou E. 2015. The Mediterranean and Black Sea ﬁsheries
+at risk from overexploitation. PLOS ONE 10(3):e0121188 DOI 10.1371/journal.pone.0121188 .
+Ulanowicz RE. 2000. Ascendancy: a measure of ecosystem performance. In: Jorgensen SE,
+Mueller F, eds. Handbook of Ecosystem Theories and Management . Florida, USA: Lewis
+Publishers, 303 –315.
+Ulanowicz RE, Puccia CJ. 1990. Mixed trophic impacts in ecosystems. Coenoses 5(1):7–16.
+Vespremeanu E, Golumbeanu M. 2018. Catchment area of the Black Sea. In: The Black Sea. Cham:
+Springer, 15 –25.
+Yunev OA. 2011. Eutrophication and annual primary production of phytoplankton in the
+deep-water part of the Black Sea. Oceanology 51:616–625 DOI 10.1134/S0001437011040199 .
+Yunev OA, Vedernikov VI, Basturk O, Yilmaz A, Kideys AE, Moncheva S, Konovalov SK. 2002.
+Long-term variations of surface chlorophyll a and primary production in the open Black Sea.
+Marine Ecology Progress Series 230:11–28 DOI 10.3354/meps230011 .
+Akoglu (2023), PeerJ, DOI 10.7717/peerj.15649 33/33

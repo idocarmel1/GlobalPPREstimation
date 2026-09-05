@@ -1,0 +1,1083 @@
+Hindcasting the food-web dynamics of the tropical Indian Ocean pelagic ecosystem over 
+the last two decades 
+ 
+Roger Amate1, Maria José Juan-Jordá 2, Xavier Corrales1, Iker Zudaire3, Eider Andonegi1 
+ 
+SUMMARY 
+Tuna species are among the most widely harvested fish stocks globally, contributing approximately 
+6.8% of the global finfish catches. In the tropical Indian Ocean , tropical tuna fisheries alone 
+account for about  22% of the global tuna catches, however these fisheries  also interact with a 
+variety of non-targeted species, including vulnerable taxa . In the ecosystem, fisheries have the 
+same ecological role as a  high-trophic level predator,  therefore it is important to monitor h ow 
+their activity  may influence the food web -structure and functioning of the oceanic pelagic 
+ecosystem over time. In this study , we build upon the Ecopath model presented at the previous 
+meeting of the IOTC Working Party on Ecosystems and Bycatch (Amate et al., 2024) , updating 
+biomass and discards estimates, refining dietary information, and incorporating expert knowledge 
+review. Using this updated Ecopath model, we also developed and fitted a  temporally dynamic 
+Ecosim model to time series data from 2003 to 2022. The model reproduced satisfactorily observed 
+trends for several functional groups, particularly those with biomass time  series data available . 
+For some vulnerable species and mid- to lower-trophic level groups, data limitations constrain the 
+model’s capacity to fully capture the historical ecosystem dynamics . Trophic interactions and 
+fishing pressure emerge as key drivers of ecosystem change. Notably, results indicate a decline in 
+the mean trophic level of the catch and in the biomass of commercially important species  in line 
+with t hose of the stock assessment . This study contributes to a deeper understanding of the 
+dynamics of the tropical Indian Ocean pelagic ecosystem and marks a step forward in advancing 
+the operationalization of the ecosystem approach to fisheries management in the IOTC. 
+ 
+KEYWORDS 
+EAFM, Ecopath, Ecosim, food web model, tuna, ecosystem, bycatch, ecological indicators, 
+Indian Ocean 
+ 
+ 
+1. Introduction  
+Effective fisheries management is essential to ensure the long-term contribution of fisheries  to global 
+food security, livelihoods and the cultural identity of coastal communities and fishing nations closely tied 
+to tuna resources (Boyd et al., 2022, Robinson et al., 2022) . Among these fisheries, tunas and tuna-like 
+species are among the most extensively harvested fish stocks globally, with catches reaching 5.2 million 
+tonnes in 20 23 (ISSF, 2025). Among the seven principal market tuna species, 87 percent of their total 
+catches come from healthy stocks in terms of  abundance (ISSF, 2025). However, tuna and tuna -like 
+fisheries are not limited to catch the target species, they also interact with a variety of non-target species 
+that may be incidentally caught as bycatch, including vulnerable taxa such as sharks and sea turtles. The 
+ 
+Email address of corresponding author: ramate@azti.es 
+1AZTI, Marine Research Division, Txatxarramendi ugartea z/g, E-48395, Sukarrieta, Bizkaia, Spain.  
+2Instituto Español de Oceanografía, Sede Central, Calle del Corazón de María, 8, 28002 Madrid, Spain  
+3AZTI, Marine Research Division Herrera Kaia, Portualdea z/g, 20110 Pasaia, Gipuzkoa, Spain.  
+ 
+ 
+  
+  
+IOTC-2025-WPEB21(AS)-38 
+ 
+ 
+2 
+ 
+combined removal of targeted and bycatch species  may also influence the structure and functioning of 
+pelagic food  webs (Acevedo-Iglesias et al., 2025) . Furthermore, climate change is reshaping marine 
+ecosystems and fisheries through shifts in primary productivity, increasing acidification, and rising 
+temperatures (Doney et al., 2012) . These changes are already affecting marine species’ distributions, 
+phenology, and abundance, with direct impacts on fishing opportunities and dependent communities  
+(Erauskin-Extramiana et al., 2023).  
+The Indian Ocean is a major fishing ground for tuna fisheries, but the Indian Ocean Tuna Commission 
+(IOTC) faces significant challenges. The rapid expansion of both artisanal, semi-industrial and industrial 
+fisheries led to catches peaking at 1.7 million tonnes in 2006. Since then, catches have slightly declined 
+and have remained below that maximum (Murua et al., 2015). In the tropical Indian Ocean, bigeye tuna 
+(Thunnus obesus), yellowfin tuna (Thunnus albacares), skipjack tuna (Katsuwonus pelamis) and small 
+tunas (Euthynnus affinis, Auxis thazard, Auxis rochei) dominate the catch, of tuna and tuna-like fisheries. 
+However, the catches in tuna fisheries are rarely monospecific, and bycatch of vulnerable species such as 
+sharks and sea turtles is common (Huang and Liu, 2010, Ruiz et al., 2018, Elliott et al., 2024)  with the 
+bycatch species composition varying by fishing gear . Many of these bycatch species such as billfishes 
+and sharks, together with the tunas,  are top predators, playing key roles in regulating the structure and 
+functioning of oceanic ecosystems (Kiszka et al., 2022, Dedman et al., 2024). Ecosystem variability due 
+to the emerging pressure of climate change, incomplete catch and effort data reporting for some fisheries, 
+poor decision -making processes and weak compliance monitoring  are undermining the ability of the 
+IOTC to ensure the long-term sustainability of tuna and tuna-like stocks, as well as the ecological integrity 
+of the Indian Ocean pelagic ecosystem and the communities that depend on it  (Erauskin-Extramiana et 
+al., 2019, Welch et al., 2023).  
+IOTC have committed to operationalize the ecosystem approach to fisheries management (EAFM)  
+(Andonegi et al., 2019, Juan Jordá, 2019) . This holistic approach to fisheries management aims to 
+complement traditional single-species management advice by  incorporating bycatch, ecosystem and 
+climate considerations. Within this context, marine ecosystem models are powerful tools as they provide 
+a framework to integrate available information on ecosystem components, processes and anthropogenic 
+pressures (fishing and climate change), providing a framework to explore system  dynamics and inform 
+fisheries management  decisions (Geary et al., 2020) . The Ecopath with Ecosim (EwE) modelling 
+framework has been widely applied in both coastal and oceanic  ecosystems (Colléter et al., 2015)  
+including large-scale tuna fisheries (Olson and Watters, 2003, Forrestal and Ménard, 2016, Griffiths et 
+al., 2018). EwE models are valuable tools for assessing the impact of fishing on marine ecosystems, 
+evaluating the sustainability of resource exploitation, and exploring how environmental disturbances —
+such as climate change or species invasions —affect ecosystem dynamics.  They also help researchers 
+understand the structure and functioning of food  webs, identifying key species and energy flows that 
+maintain ecological balance (Corrales et al., 2017, Griffiths et al., 2018, Bornatowski et al., 2018). 
+This study presents the first Ecopath with Ecosim model developed specifically for the tropical Indian 
+Ocean pelagic ecosystem to support decision -making processes within the Indian Ocean Tuna 
+Commission (IOTC). Building on the static  Ecopath model previously presented at the IOTC Working 
+Party on Ecosystems and Bycatch  (Amate et al., 2024) , this study incorporates improved biomass and 
+discards estimates, updated dietary information, and expert knowledge review. The temporally dynamic 
+model Ecosim was then fitted to time series of data from 2003 to 2022, enabling simulation of ecosystem 
+responses over time. Using this EwE model, the objective of this study is to improve t he understanding 
+of the structure and the functioning of the Tropical Indian Ocean (TIO)  oceanic pelagic ecosystem, by 
+characterizing its key trophic interactions and its historical dynamics in response to fishing between 2003 
+and 2022. Subsequently, this model will be used to assess the cumulative impacts of fishing on tuna and 
+tuna-like species, as well as the broader ecosystem, under both historic and potential future fishing  and 
+climate change scenarios. Model outputs will include ecological indicators that connect the impacts of 
+fishing and climate change on species and ecosystem structure and functioning to fisheries management 
+advice. These outputs will directly  support the current development of EAFM products (e.g. regional 
+EcoCard and Ecosystem Fisheries Overviews ) within IOTC , providing managers with a broader 
+ecological context for managing tropical tuna species and associated ecosystems  in the tropical Indian 
+Ocean. 
+ 
+ 
+3 
+ 
+ 
+2. Methods 
+2.1. Ecopath model 
+The Tropical Indian Ocean (TIO) Ecopath model is a quantitative representation of trophic flows and 
+biomasses in the pelagic ecosystem. The model represents the mean state of the ecosystem between 2000 
+and 2003 and covers an area of over 21.7 million km2 between 0 and 500 m depth (Figure 1). The model 
+represents oceanic waters, excluding the continental shelf from the analysis (except for small islands and 
+archipelagos that extend within the study area), since it represents an area of minor importance for tropical 
+tuna fisheries and because including it would imply modelling the demersal/benthic ecosystem, as well 
+as the inclusion of other more artisanal and national fleets. In both cases, this would have an irrelevant 
+impact on the dynamics of the target species in ecological and fishery terms, while simultaneously adding 
+greater uncertainty to the model. 
+ 
+Figure 1. Practical model area (in blue). The theoretical area represents the same area of the tropical Indian Ocean, but without 
+including the continental shelf (except for small islands and archipelagos). 
+The model is composed of 35 functional groups (FG), ranging from primary producers to top predators. 
+Functional groups represent ontogenetic stages of a species (e.g., mature and immature), single species, 
+or groups of species that share ecological characteristics (e.g., diet)  (Christensen and Walters, 2004) . 
+Functional groups of the TIO model were defined according to the commercial importance of the species, 
+data availability, and the ecology of the species, such as diet or bathymetric distribution (Table 1). The 
+model includes ten groups of vulnerable species (one for seabirds, two for cetaceans, six for 
+elasmobranchs, and one for sea turtles). Main target species were modelled separately such as swordfish 
+(Xiphias gladius) or albacore tuna (Thunnus alalunga). In addition, the three tropical tuna species: bigeye 
+tuna (BET), yellowfin tuna (YFT), and skipjack tuna (SKJ) were separated into two ontogenetic groups 
+(i.e., matures and immatures) attaining their length at first maturity for fishery and ecological reasons. 
+The model also includes functional groups representing species with the highest incidental catch rates by 
+tuna fleets (e.g., silky shark, other sharks, mobulas). 
+Estimates of discards were obtained from the literature , except for the Spanish, French and Seychell ois 
+purse seine fleets. For these fleets, onboard observers’ data from AZTI and IRD was used to estimate the 
+discards in weight (t) of a species or functional group per 1000 tonnes of targeted tuna landed (BET, YFT, 
+SKJ). Regarding discard survival, two distinct periods were assumed for these fleets: a period  prior to 
+2014 when handling and release best practices were not yet implemented onboard tuna vessels and from 
+2014 onwards, when such best practices were being implemented (Jon Ruiz, pers. comm.). For the pre-
+2014 period, discard mortality was assumed to be 100%. In contrast, for the period  post-2014, discard 
+mortality was estimated based on empirical studies of at -haulback mortality and post -release survival 
+
+ 
+ 
+4 
+ 
+(Table 3). Then, for the remaining fleets, discard survival rates were calculated using published post -
+release and at-haulback mortality rates, which were applied consistently across the entire simulated 
+period. (Tables 2 and 3).  
+Table 1. Input data and outputs of the Ecopath TIO model. Parameters estimated by the model are highlighted in bold. B = final 
+biomass (t⋅km-2); P/B = production/biomass (year -1); Q/B = consumption/ biomass (year -1); P/Q = production/consumption 
+ratio; EE = ecotrophic efficiency; TL = trophic level; F = fishing mortality; F/Z=exploitation rate. 
+ Functional group B P/B Q/B P/Q EE TL F F/Z 
+1 Seabirds 0.0005 0.12 77.62 0.00 0.01 4.19 - - 
+2 Baleen whales 0.0152 0.04 3.98 0.01 0.48 3.86 0.017 0.447 
+3 Toothed whales 0.0460 0.06 8.16 0.01 0.43 4.28 0.004 0.077 
+4 Blue shark 0.0145 0.40 2.92 0.14 0.66 4.54 0.190 0.471 
+5 Silky shark 0.0200 0.44 4.45 0.10 0.30 4.09 0.115 0.259 
+6 Other sharks 0.0240 0.34 3.06 0.11 0.67 4.57 0.211 0.624 
+7 Whale shark 0.0430 0.04 1.57 0.03 0.50 3.42 0.020 0.469 
+8 Pelagic stingray 0.0176 0.59 6.57 0.09 0.30 3.80 0.002 0.004 
+9 Mobulas 0.0012 0.38 3.79 0.10 0.57 3.82 0.149 0.398 
+10 Sea turtles 0.0017 0.19 3.04 0.06 0.64 3.73 0.094 0.508 
+11 Other billfishes 0.0143 0.33 3.48 0.01 0.41 4.46 0.100 0.301 
+12 Swordfish 0.0103 0.31 2.57 0.12 0.35 4.30 0.098 0.317 
+13 Bigeye mature 0.0262 0.32 2.85 0.11 0.71 4.51 0.214 0.669 
+14 Bigeye immature 0.0127 0.52 4.84 0.11 0.74 4.45 0.142 0.273 
+15 Yellowfin mature 0.0795 0.41 3.68 0.11 0.41 4.26 0.157 0.385 
+16 Yellowfin immature 0.0306 0.60 5.45 0.11 0.66 3.97 0.121 0.202 
+17 Skipjack mature 0.0671 0.51 3.97 0.13 0.80 3.90 0.287 0.565 
+18 Skipjack immature 0.0023 1.05 8.76 0.12 0.89 3.86 0.268 0.254 
+19 Albacore 0.0027 0.66 4.25 0.16 0.51 4.15 0.096 0.144 
+20 Small tunas and bonitos 0.1836 0.79 6.12 0.13 0.70 3.75 0.085 0.107 
+21 Jacks, mackerels, runners, trevallies and scads 0.1609 1.01 7.76 0.13 0.80 3.61 0.002 0.002 
+22 Epipelagic fishes - I 0.1532 0.84 6.44 0.13 0.70 3.85 0.002 0.002 
+23 Epipelagic fishes - II 0.1929 0.95 6.79 0.14 0.80 3.57 0.000 0.000 
+24 Small epipelagic fishes 0.5532 2.09 12.24 0.17 0.73 3.26 0.000 0.000 
+25 Large mesopelagic fishes 0.2225 0.51 3.93 0.13 0.80 4.12 0.000 0.000 
+26 Small mesopelagic fishes 2.6816 2.71 13.96 0.19 0.68 2.75 -  
+26 Pelagic cephalopods 0.4732 2.43 15.87 0.15 0.90 3.57 - - 
+27 Pelagic crustaceans 0.8220 5.00 17.00 0.29 0.62 2.54 - - 
+29 Gelatinous plankton 0.5395 4.75 23.80 0.20 0.85 2.95 - - 
+30 Macrozooplankton 2.6720 17.75 62.86 0.28 0.24 2.73 - - 
+31 Mesozooplankton 4.7460 33.79 121.7 0.28 0.58 2.35 - - 
+32 Microzooplankton 7.0020 61.21 204.6 0.30 0.62 2.02 - - 
+33 Phytoplankton 11.658 204.8 - - 0.60 1.00 - - 
+34 Discards 0.0110 - - - 0.22 1.00 - - 
+35 Detritus 238.88 - - - 0.27 1.00 - - 
+ 
+Furthermore, the model includes 13 fleets defined by fishing gear, i.e., differentiating between purse 
+seine, longline, baitboat, gillnet, line, and other gears. Purse seine fishing was divided into two types: 
+purse seine fleets setting on free -schools (FSC) and purse seine  fleets setting on objects (FAD). This 
+distinction was made to capture differences in catch composition, although the same vessel can make 
+both types of sets. Furthermore, purse seine fleets were divided into four groups: Spain, France, 
+Seychelles, and Others due to the availability of data for these fleets. Others – purse seine fleets include 
+all other purse seine fleets operating in the study area excluding the mentioned flags. For a more detailed 
+description of the Ecopath TIO model, see Amate et al. (2024). 
+ 
+ 
+ 
+ 
+ 
+5 
+ 
+Table 2. References used to calculate the discard rate by fleet and functional group. 
+Functional group/Fleet Gillnet Longline Purse seine – FSC & FAD 
+(ESP, FRA, SYC) 
+Purse seine – FSC & FAD 
+(Others) 
+2. Baleen whales  (Garcia and Herrera, 2018) (Garcia and Herrera, 2018)   
+3. Toothed whales (Anderson et al., 2020) (Garcia and Herrera, 2018)   
+4. Blue Shark (Garcia and Herrera, 2018) (Garcia and Herrera, 2018) Observers’ data (Ruiz et al., 2018) 
+5. Silky shark (Garcia and Herrera, 2018) (Garcia and Herrera, 2018) Observers’ data (Ruiz et al., 2018) 
+6. Other sharks (Garcia and Herrera, 2018) (Garcia and Herrera, 2018) Observers’ data (Ruiz et al., 2018) 
+7. Whale shark (Garcia and Herrera, 2018)   (Garcia and Herrera, 2018) 
+8. Pelagic stingray (Garcia and Herrera, 2018) (Garcia and Herrera, 2018)   
+9. Mobulas (Garcia and Herrera, 2018) (Garcia and Herrera, 2018)   
+10. Sea turtles (Garcia and Herrera, 2018) (Garcia and Herrera, 2018)   
+11. Other billfishes  (Huang and Liu, 2010) Observers’ data (Ruiz et al., 2018) 
+12. Swordfish  (Huang and Liu, 2010) Observers’ data (Ruiz et al., 2018) 
+13. Bigeye mature  (Huang and Liu, 2010)   
+14. Bigeye immature  (Huang and Liu, 2010) Observers’ data (Ruiz et al., 2018) 
+15. Yellowfin mature     
+16. Yellowfin immature  (Huang and Liu, 2010) Observers’ data (Ruiz et al., 2018) 
+17. Skipjack mature     
+18. Skipjack immature   Observers’ data (Ruiz et al., 2018) 
+19. Albacore  (Huang and Liu, 2010) Observers’ data (Ruiz et al., 2018) 
+20. Small tunas and other bonitos   Observers’ data (Ruiz et al., 2018) 
+21. Jacks, mackerels, runners, 
+trevallies and scads (Shahifar, 2018)  Observers’ data (Ruiz et al., 2018) 
+22. Epipelagic fishes – I  (Shahifar, 2018)  Observers’ data (Ruiz et al., 2018) 
+23. Epipelagic fishes - II   Observers’ data (Ruiz et al., 2018) 
+24. Small epipelagic fishes   Observers’ data (Ruiz et al., 2018) 
+25. Large mesopelagic fishes   Observers’ data  
+ 
+Table 3. References used to calculate the discard mortality rate (DMR) by functional group and fleet based on estimates of post-
+release mortality rate (PRM), at-haulback mortality rate (AHM), and at-haulback survival rate (AHS). 
+Functional 
+group Fleet DMR PRMr PRM – Reference  AHM AHM – Reference  AHS 
+Seabirds Baitboat 0 0 (Miller et al., 2017) 0 (Miller et al., 2017) 1 
+Seabirds Gillnet 0 0 - 0 (Moazzam and Nawaz, 2014) 1 
+Baleen whales Purse seine (ESP, FRA, SYC) 0 0 - 0 (Ruiz et al., 2018) 1 
+Baleen whales Gillnet 1 0 - 1 (Moazzam and Nawaz, 2014) 0 
+Baleen whales Longline 0 0 - 0 (Sabarros et al., 2013) 1 
+Toothed whales Purse seine (ESP, FRA, SYC) 0 0 - 0 (Escalle et al., 2015) 1 
+Toothed whales Gillnet 1 0 - 1 (Moazzam and Nawaz, 2014) 0 
+Toothed whales Longline 0.09 0 - 0.09 (Sabarros et al., 2013) 0.91 
+Blue shark Purse seine (ESP, FRA, SYC) 0.57 0 - 0.57 (Clavareau et al., 2020) 0.43 
+Blue shark Longline 0.42 0.23 (Campana et al., 2009) 0.25 (Coelho et al., 2011) 0.75 
+Silky shark Purse seine (ESP, FRA, SYC) 0.62 0.41 (Grande et al., 2022) 0.35 (Clavareau et al., 2020) 0.65 
+Silky shark Baitboat 0.18 0 - 0.18 (Miller et al., 2017) 0.82 
+Silky shark Longline 0.79 0.2 (Musyl and Gilman, 2018) 0.74 (Coelho et al., 2011) 0.26 
+Other sharks Purse seine (ESP, FRA, SYC) 0.89 0.85 (Eddy et al., 2016) 0.28 (Clavareau et al., 2020) 0.72 
+Other sharks Longline 0.64 0.14 (Hutchinson et al., 2021) 0.58 (Coelho et al., 2011) 0.42 
+Whale shark Gillnet 0.20 0 - 0.20 (Moazzam and Nawaz, 2014) 0.80 
+Whale shark Purse seine (ESP, FRA, SYC) 0 0 (Grande et al., 2019) 0 (Capietto et al., 2014) 1 
+Pelagic stingray Purse seine (ESP, FRA, SYC) 0.64 0 - 0.64 (Clavareau et al., 2020) 0.36 
+Pelagic stingray Longline 0 0 - 0 (Coelho et al., 2011) 1 
+Mobulas Purse seine (ESP, FRA, SYC) 0.91 0.83 (Clavareau et al., 2020) 0.44 (Stewart et al., 2024) 0.56 
+Mobulas Longline 0 0 - 0 (Coelho et al., 2011) 1 
+Sea turtles Longline 0.69 0.28 (Swimmer et al., 2013) 0.57 (Huang and Liu, 2010) 0.43 
+Sea turtles Purse seine (ESP, FRA, SYC) 0.25 0.13 (Bourjea et al., 2014) 0.14 (Bourjea et al., 2014) 0.86 
+Sea turtles Gillnet 0.05 0 - 0.05 (Moazzam and Nawaz, 2014) 0.95 
+Other billfishes Purse seine (ESP, FRA, SYC) 0.93 0 - 0.93 (Amandè et al., 2008) 0.07 
+Other billfishes Longline 0.83 0.64 (West et al., 2012) 0.52 (Li et al., 2023) 0.48 
+Swordfish Longline 0.87 0.64 (West et al., 2012) 0.64 (Guo et al., 2022) 0.36 
+ 
+ 
+6 
+ 
+ 
+2.2. Ecosim model 
+The static Ecopath model was calibrated and fitted to available time series data from 2003 to 2022 using 
+Ecosim. Ecosim is the time-dynamic module of the EwE approach, built on a set of differential equations 
+that describe biomass dynamics over time  (Christensen and Walters, 2004, Walters et al., 1997) . These 
+equations are derived from the fundamental Ecopath production equation and are expressed as follow: 
+𝑑𝐵𝑖
+𝑑𝑡 = 𝑔𝑖 ∑ 𝑄𝑗𝑖 − ∑ 𝑄𝑖𝑗 + 𝐼𝑖 − (𝑀0𝑖 + 𝐹𝑖 + 𝑒𝑖) ×  𝐵𝑖 
+Where  
+𝑑𝐵𝑖
+𝑑𝑡   represents the rate of biomass change, Bi, of the functional group i during the time interval 
+dt. 𝑔𝑖 is the net growth efficiency, 𝑄𝑗𝑖 is the consumption rate of j by the functional group i, and 𝑄𝑖𝑗 is the 
+consumption rate on the functional group  i by the predator  j. 𝐼𝑖 is the immigration rate , while 𝑀0𝑖,
+𝐹𝑖,  𝑒𝑖 represent the natural mortality rate, fishing mortality rate, and emigration rate, respectively. When 
+multiplied by 𝐵𝑖, these yield the net rates of the three factors. 
+Consumption rates (𝑄) are estimated using the “foraging arena theory” (Ahrens et al., 2011). This theory 
+is based on the idea that organisms are not constantly exposed to predation risks, as they employ various 
+strategies to reduce it, such as hiding, schooling, or performing vertical migrations. The “foraging arena 
+theory” defines two states: vulnerable, when the prey is available to predators, and non-vulnerable, when 
+the prey is not accessible to predators. In the model this implies the division of the prey’s biomass between 
+a vulnerable and a non-vulnerable fraction, and the transfer rate or vulnerability (vij) between the two 
+fractions determines the trophic flow between the predator and the prey (Ahrens et al., 2011). This concept 
+of vulnerability incorporates density-dependent processes and reflects how close a species or functional 
+group is to its carrying capacity. Carrying capacity refers to the maximum population size that a species 
+or group can reach without negatively impacting itself due to the depletion of essential resources required 
+for its own development (Christensen and Walters, 2004, Christensen et al., 2008) . The default 
+vulnerability values (vij = 2) represents a mixed trophic flow. A low value (vij < 2) indicates a “bottom-
+up” flow and a situation close r to the carrying capacity, whereas a high value  (vij > 2) suggests a “top-
+down” flow and a condition further from the carrying capacity  (Ahrens et al., 2011). For each predator-
+prey interaction, the consumption rate is calculated as follows: 
+𝑄𝑖𝑗 = 𝑎𝑖𝑗 × 𝑣𝑖𝑗 × 𝐵𝑖 × 𝐵𝑗 × 𝑇𝑖 × 𝑇𝑗 × 𝑀𝑖𝑗 𝐷𝑗⁄
+𝑣𝑖𝑗 + 𝑣𝑖𝑗 × 𝑇𝑖 × 𝑀𝑖𝑗 + 𝑎𝑖𝑗 × 𝑀𝑖𝑗 × 𝐵𝑗 × 𝑇𝑗 𝐷𝑗⁄ × 𝑓(𝐸𝑛𝑣𝑓𝑢𝑛𝑐𝑡𝑖𝑜𝑛, 𝑡) 
+Where 𝑎𝑖𝑗 is the effective search rate of predator j on prey i, 𝑣𝑖𝑗 is the vulnerability of prey i by predation 
+of j, 𝐵𝑖 is the biomass of the prey, 𝐵𝑗 is the biomass of the predator, 𝑇𝑖 is the relative feeding time of the 
+prey, and 𝑇𝑗 is the relative feeding time of the predator. 𝑀𝑖𝑗 represents mediation effects, and 𝐷𝑗 denotes 
+the handling time of the prey by the predator, which limits the consumption rate. 𝑓(𝐸𝑛𝑣𝑓𝑢𝑛𝑐𝑡𝑖𝑜𝑛, 𝑡) is a 
+multiplier factor that accounts for the influence of environmental variables (e.g., temperature). This 
+multiplier ranges from 0 to 1 and is derived from the environmental response function, modifying the 
+consumption rate (𝑄𝑖𝑗) of the functional group. Specifically, the multiplier is calculated based on the 
+intersection between the response function to an environmental factor and the actual conditions of that 
+factor, with a maximum value of 1 and decreasing values as the environ mental condition deviates from 
+the optimal range for the functional group. 
+2.3. Time series 
+Time series of fishing effort, fishing mortality, and primary production (PP) were used to drive the model, 
+while time series of biomass and catches were used to calibrate the model, comparing model’s predictions 
+with observed data (Table 4). 
+ 
+ 
+7 
+ 
+Biomass time series for target ed species were obtained from fishery stock assessments conducted by 
+IOTC. Additionally, outputs from global ocean models were used to derive biomass time series for lower 
+trophic level functional groups ( Table 4). Catch time series were calculated based on the official IOTC 
+landings database. See Amate et al. (2024) for a more detailed description of the calculations.  
+Time series of fishing effort were calculated using the official IOTC catch and effort database or obtained 
+from published sources (Table 4, Table 5, Figure 2 – Supplementary material). For the free-school (FSC) 
+and setting on objects (FAD) purse seine fleets of Spain, France, and Seychelles, effort time series in sets 
+were extracted from published studies and for some years, by personal communication (Table 4). For the 
+“Others – FSC purse seine” and 'Others – FAD purse seine' fleets, where no fishing effort data were 
+available, effort time series in sets were estimated by weighting the effort of the other three purse seine 
+fleets in the model (Spain, France, and Seychelles) according to their total catches  to obtain two CPUE 
+time series. The effort  time series were obtained by  dividing the catches of each fleet by the ir 
+corresponding CPUE. For the rest of the fleets (defined by flag and gear type) included in the model —
+namely baitboat, others, line, gillnet, and longline—an analysis was conducted to assess the quality and 
+temporal coverage of effort data reported in the IOTC database. Fleets with the highest catch volumes 
+within each fleet  grouping included in the model and with the most reliable effort data were selected 
+(Table 5). For the baitboat fleet, 90% of the catches correspond to the Maldivian fleet (Table 5). The effort 
+trend of the baitboat fleet was assumed to follow the same pattern as that of the Maldivian baitboat fleet, 
+scaled according to total catches. Since the effort of the Maldivian baitboat fleet was reported in trips and 
+fishing days in the IOTC catch and effort database, trips  were converted  into fishing days using a 
+conversion factor of 1 trip = 1 fishing day (pers. comm .). Regarding the gillnet fleet, the two main 
+contributors are the Iranian and Sri Lankan fleets, which together account for nearly 80% of the gillnet 
+fleet catches in the model (Table 5). As both fleets report their effort in trips, a CPUE for each fleet was 
+calculated and then combined into a weighted CPUE based on their respective catches. Using the total 
+catches of the gillnet fleet and the combined CPUE, the data to estimate the effort time series were scaled. 
+For the longline fleet, the effort data from  the Chinese, Taiwanese, and Japanese fleets, which together 
+represent over 55% of the longline fleet catches in the model were combined. All three fleets report their 
+effort in hooks (Table 5). By combining their effort and catch data, a CPUE was derived, which was then 
+used to scale the total catches of the longline fleet to approximate its overall effort. For the line and other 
+fleets, no effort data were available to calculate their effort time series. Therefore, a relative change in 
+effort based on the variation in catches was assumed using the year 2003 as the reference point (Table 4). 
+Time series of exploitation rates (catch/biomass) were incorporated for species with available fishery 
+stock assessments to represent fishing impacts (Figure 2 – supplementary material).  
+In addition, the model includes a time series of primary production (PP) (Table 2; Figure 3 – 
+supplementary material), obtained from the Copernicus Global Ocean Biogeochemistry Hindcast product 
+(https://doi.org/10.48670/moi-00019), as changes in primary production can have a significant impact on 
+the ecosystem. 
+To fit the Ecosim model to the observed time series data from 2003 to 2022, we used the stepwise fitting 
+procedure described by Scott et al. (2016). In our model, t his procedure estimates various vulnerability 
+parameters to improve model calibration by comparing model predictions with observed data, using the 
+sum of squares (SS) statistic. The fitting procedure identifies the model that provides the best statistical 
+fit based on the Akaike Information Criterion (AIC), which penalizes model over -parameterization 
+(Heymans et al., 2016, Mackinson et al., 2009) . The maximum number of vulnerabilities that can be 
+estimated is k-1, where k is the number of observed time series (in this case 40 time series of biomass 
+and catch). Finally, to choose the best final model, we manually evaluated whether the parameterization 
+process produced credible and sensible behavior (Heymans et al., 2016). From the three models with the 
+best overall fit, the final model was chosen based on how well it reproduced observed values of the three 
+tropical tuna species. 
+Once the calibration was completed, changes in the biomass and catch of selected functional groups were 
+analysed, considering both their ecological and economic importance. To assess the correlation between 
+model outputs (biomass and catches) and time, the Spearman’s rank correlation coefficient was used. 
+Table 4. Time series used to drive, adjust and calibrate the TIO Ecosim model. ESP: Spain; FRA: France; SYC: Seychelles; BUM: Blue marlin; BLM: Black marlin; MLS: striped marlin; SF A: 
+Sailfish 
+  Data time series  Coverage References  Drive the 
+model 
+Adjust the 
+model 
+Compare 
+predicted 
+results 
+4. Blue shark 
+Absolute biomass 2003-2019 Stock assessment (IOTC, 2022c)  X X 
+Absolute catch 2003-2022 IOTC - Nominal Catch (accessed. 22-02-2024)   X X 
+Harvest rate (F) 2003-2019 Calculated X   
+2. Baleen whales; 3. Toothed whales; 5. Silky shark    
+6. Other sharks; 7. Whale shark; 8. Pelagic stingray  
+9. Mobulas; 10. Sea turtles 
+20. Small tunas and other bonitos  
+21. Jacks, mackerels, runners, trevallies and scads 
+22. Epipelagic fishes - I; 23. Epipelagic fishes - II      
+25. Large mesopelagic fishes 
+Absolute catch 2003-2022 IOTC - Nominal Catch (accessed. 22-02-2024), estimates from the 
+literature and onboard observers’ data. 
+ X X 
+11. Other billfishes 
+Absolute biomass 2003- 2019, 2020 and 2022 BUM - (Parker and Kerwath, 2022); BLM - (Chih-Yu et al., 2024);  
+MLS - (Yun-ju et al., 2024); SFA - (Parker and Espittia, 2022); 
+ X X 
+Absolute catch 2003-2022 IOTC - Nominal Catch (accessed. 22-02-2024)  X X 
+Harvest rate (F) 2003- 2019, 2020 and 2022 Calculated X   
+12. Swordfish 
+Absolute biomass 2003-2022 Stock assessment (IOTC, 2022d)  X X 
+Absolute catch 2003-2022 IOTC - Raised catch (accessed. 13-10-2023)  X X 
+Harvest rate (F) 2003-2022 Calculated X   
+13. Bigeye mature 
+14. Bigeye immature 
+Absolute biomass 2003-2022 Stock assessment (IOTC, 2022b)  X X 
+Absolute catch 2003-2022 IOTC - Raised catch (accessed. 13-10-2023)  X X 
+Harvest rate (F) 2003-2022 Calculated X   
+15. Yellowfin mature 
+16. Yellowfin immature 
+Absolute biomass 2003-2022 Stock assessment (IOTC, 2021)  X X 
+Absolute catch 2003-2022 IOTC - Raised catch (accessed. 13-10-2023)  X X 
+Harvest rate (F) 2003-2022 Calculated X   
+17. Skipjack mature 
+18. Skipjack immature 
+Absolute biomass 2003-2022 Stock assessment (IOTC, 2023)  X X 
+Absolute catch 2003-2022 IOTC - Raised catch (accessed. 13-10-2023)  X X 
+Harvest rate (F) 2003-2022 Calculated X   
+19. Albacore 
+Absolute biomass 2003-2022 Stock assessment (IOTC, 2022a)  X X 
+Absolute catch 2003-2022 IOTC - Raised catch (accessed. 13-10-2023)  X X 
+Harvest rate (F) 2003-2022 Calculated X   
+24. Small epipelagic fishes                                            
+26. Small mesopelagic fishes Absolute biomass 2003-2022 LMTL model (CMEMS - Copernicus) (Lehodey et al., 2015)   X X 
+30. Macrozooplankton; 31. Mesozooplankton 
+32. Microzooplankton Absolute biomass 2003-2022 COPEPOD database and (Wimalasiri et al., 2021)  X X 
+33. Phytoplankton Absolute biomass 2003-2022 Global Ocean Biogeochemistry Hindcast (CMEMS - Copernicus)  X X 
+ Relative fishing effort (ESP – Purse seine fleets) 2003-2019 (Báez et al., 2020) & IOTC - Catch & Effort (accessed. 02-04-2025) X   
+ Relative fishing effort (FRA – Purse seine fleets) 2003-2022 (Floc'h et al., 2021) & (Laurent Floc’h, pers. comm.)  X   
+ Relative fishing effort (SYC – Purse seine fleets) 2003-2022 (Assan et al.) & (Cindy Assan, pers. comm.) X   
+ Relative fishing effort (Others – Purse seine fleets) 2003-2022 Approximated using the effort of the other purse seine fleets  X   
+ Relative fishing effort (Baitboat, Gillnet and 
+Longline fleets) 2003-2022 IOTC - Catch & Effort (accessed. 14-10-2024) X   
+ Relative fishing effort (Line and Others fleets)  2003-2022 Follow the catch trends - IOTC - Raised catch (accessed. 13-10-2023) X   
+ Environmental variable – Primary production (PP) 2003-2022 Global Ocean Biogeochemistry Hindcast (CMEMS - Copernicus) X   
+Table 5. Information on the fleets used to calculate the effort time series for the baitboat, gillnet and longline fleets in the 
+model. The % of catches refer to the proportion of total catches by that flag relative to the total catches of the fleet between 
+2000 and 2003. TS units refer to the units used in the time series of the effort.   
+Fleet Flag Catches % Period Effort units TS units Dataset 
+Baitboat Maldives 90.1 2004-2012 TRIPS FDAYS IOTC-2024-WPB22-DATA05-CESurface 
+(https://iotc.org/data/datasets/latest/CE/Surface) 2013-2022 FDAYS 
+Gillnet 
+Iran 46.3 2007-2022 
+TRIPS TRIPS IOTC-2024-WPB22-DATA06-CEOther 
+(https://iotc.org/data/datasets/latest/CE/All) Sri Lanka 32.5 2000-2006 
+2014-2022 
+Longline 
+Taiwan 40.7 2000-2022 
+HOOKS HOOKS IOTC-2024-WPB22-DATA04-CELongline 
+(https://iotc.org/data/datasets/latest/CE/Longline) China 5.5 2000-2022 
+Japan 9.1 2000-2022 
+ 
+Finally, to evaluate the uncertainty in Ecopath  input parameters (biomass, production, consumption, 
+ecotrophic efficiency, and catches) on Ecosim outputs (biomass, catches, and ecological indicators), the 
+Monte Carlo (MC) simulation routine was applied. This routine modifies various Ecopath input 
+parameters within the confidence intervals previously defined in the pedigree and checks whether the 
+modified values meet the mass-balance criteria. If the criteria are met, the MC routine runs the Ecosim 
+model using the adjusted Ecopath configuration and the parameters established during the original model 
+calibration. The outputs from the various Ecosim simulations are then used to assess the range of possible 
+trajectories in biomass and catches of the functional groups, thereby determining the level of uncertainty. 
+Specifically, for this model, 250 Monte Carlo simulations were conducted based on the pedigree index 
+previously introduced in the Ecopath model of the TIO to determine the 5th and 95th confidence intervals 
+for the Ecosim results. 
+2.4. Ecological indicators 
+A selection of ecological indicators was used to describe ecological changes in the ecosystem over time. 
+To calculate these indicators, the ECOIND and the Ecological Network Analysis (ENA) plug-ins of EwE 
+were used (Coll and Steenbeek, 2017). The indicators selected for this analysis were: 
+(1) Predatory biomass (t·km⁻²): Biomass of all functional groups with a trophic level (TL) ≥ 3.95. 
+This indicator typically declines with increasing fishing pressure (Rochet and Trenkel, 2003). 
+ 
+(2) Commercial species biomass (t·km⁻²) : Biomass of all functional groups subject to catches in 
+the model. Biomass falling under certain levels may refer to overfished stocks. 
+ 
+(3) Mean trophic level of the community (mTLco) : Average TL of the entire ecosystem , widely 
+used to assess fishing impacts  (Rochet and Trenkel, 2003) . The mTLco typically decreases as 
+fishing pressure increases. 
+ 
+(4) Kempton’s Q index: A measure of biomass diversity in the ecosystem for organisms with TL ≥ 
+3. High values may indicate a healthy and balanced ecosystem, while declines may  signal 
+ecosystem degradation (Kempton and Taylor, 1976). 
+ 
+(5) Mean trophic level of the catch (mTLc): Average TL of the catches across all fleets combined. 
+Used to evaluate fishing strategies and their impacts  (Pauly et al., 1998) . mTLc falling under 
+certain levels may point to overexploitation of top predators  
+ 
+(6) Mean trophic level of the community > 2 (mTLco > 2): Average TL of all the functional groups 
+with a TL higher than 2 and lower than 3.25. Used to track changes in lower trophic levels of the 
+ecosystem (Rochet and Trenkel, 2003).  
+ 
+(7) Mean trophic level of the community > 3.25 (mTLco > 3.25): Average TL of all the functional 
+groups with a TL higher than 3.25 and lower than 4. Used to track changes in intermediate trophic 
+level species of the ecosystem (Rochet and Trenkel, 2003) 
+ 
+ 
+ 
+10 
+ 
+(8)  Mean trophic level of the community > 4 (mTLco > 4): Average TL of all the functional groups 
+with a TL larger than 4. Used to track changes of top predators (Rochet and Trenkel, 2003).  
+The uncertainty associated with the input parameters of Ecopath, as previously described, also enables 
+the assessment of uncertainty in ecological indicators (Coll and Steenbeek, 2017).  
+ 
+3. Preliminary results 
+3.1. Adjustment of the Ecosim model to the historical period (2003-2022) 
+The Ecosim model satisfactorily adjusted biomass predictions to the trends of observed values for most 
+target species ( Figure 2). The model has successfully reproduced the observed historical trends of the 
+biomass of the blue shark (FG. 4), other billfishes (FG. 11), bigeye mature (FG. 13), bigeye immature 
+(FG. 14), yellowfin mature (FG. 15), yellowfin immature (FG. 16), skipjack mature (FG. 17) and albacore 
+(FG. 19) as well as small epipelagic fishes (FG. 24). However, the model failed to adequately fit the trends 
+of observed biomass values for swordfish (FG. 12), skipjack immature (FG. 18) and small mesopelagic 
+fishes (FG. 26) (Figure 2).  
+The model predicts declining biomass trends for several functional groups targeted by fisheries (Figure 
+2). For example, the biomasses of mature and immature bigeye and yellowfin tuna, other billfishes and 
+albacore exhibit a negative trend during the simulated period. Additionally, other functional groups, such 
+as mature and immature skipjack tuna and blue shark, exhibit a negative trend at the beginning of the 
+simulated period, followed by a stable trend with a slight increase toward the end of the simulation. 
+(Figure 2). Similarly, the model predicts significant reductions in most functional groups of vulnerable 
+species, such as silky shark, other sharks, mobul as, sea turtles, baleen whales, toothed whales, whale 
+shark, and pelagic stingray. However, the uncertainty surrounding the predictions for these  vulnerable 
+functional groups is considerably higher (Figure 4 – supplementary material). On the contrary, the model 
+predicts stable or even increasing biomass trends for intermediate functional groups like, small tunas and 
+other bonitos, jacks, mackerel, runners, trevallies, and scads,  and epipelagic fishes – I, II (Figure 4 – 
+supplementary material).  
+For the 19 functional groups without time series of biomass observations, the model has also predicted 
+biomass trends throughout the entire historical period (Figure 4 – supplementary material). 
+The model accurately reproduces the biomass declines observed in the assessments of bigeye and 
+yellowfin tuna, reflecting the exploitation experienced by both species during the simulated period. It also 
+correctly reproduces the post-2008 stabilization of mature and immature skipjack tuna biomasses (Figure 
+2), indicating that their biomasses are approaching the targeted BMSY levels. Additionally, the model 
+shows a declining trend for silky shark, other sharks, and mobulas, as these are among the main non -
+target functional groups impacted by fishing in the area (Figure 4 – supplementary material).  
+Regarding catches, the model satisfactorily fitted most of the trends of observed values for most 
+functional groups (Figure 3 ), particularly those with available time series of fishing mortality . 
+Specifically, the model reproduced the declining trend in the catches of blue shark, mature and immature 
+bigeye tuna, mature yellowfin tuna, and albacore. It also shows an increase in the catches of other 
+billfishes, immature yellowfin tuna and mature and immature skipjack tuna (Figure 3). 
+Time series of observed catch values were available for 12 of the 19 groups without biomass observations. 
+Among these, the model was able to fit the catch time series for the silky shark (FG. 5), epipelagic fishes 
+– I (FG. 22) and small epipelagic fishes (FG . 24) (Figure 5 – supplementary material). By contrast, it 
+couldn’t fit the catch trends for the baleen whales (FG. 2), toothed whales (FG. 3), other sharks (FG. 6), 
+whale shark (FG. 7), pelagic stingray (FG. 8), mobulas (FG. 9), sea turtles (FG. 10), small tunas and other 
+bonitos (FG. 20), jacks, mackerels, runners, trevallies and scads (FG. 21), epipelagic fishes – II (FG. 23) 
+and large mesopelagic fishes (FG. 25) (Figure 5 – supplementary material). Overall, catch trends of non-
+targeted species show an increase in the area due to the general rise in fishing effort throughout the entire 
+period (Figure 1 & Figure 5 – supplementary material). 
+ 
+ 
+11 
+ 
+ 
+ 
+Figure 2. Predicted (solid line) versus observed (black dots) values of biomass (t/km2) of the functional groups with biomass 
+time series for the period 2003 – 2022 in the TIO model. Coloured areas around the prediction line represent the 5 th and 95th 
+percentiles obtained by the Monte Carlo routine. The p-value and rho are the results of the Spearman correlation test.   
+
+ 
+ 
+12 
+ 
+ 
+Figure 3. Predicted (solid line) versus observed (black dots) values of catch (t/km2·year) of the functional groups with catch time 
+series for the period 2003 – 2022 in the TIO model. Coloured areas around the prediction line represent the 5 th and 95 th 
+percentiles obtained by the Monte Carlo routine. The p-value and rho are the results of the Spearman correlation test.   
+3.2. Ecosystem indicators 
+The predatory biomass (Figure 4) exhibits a declining trend during the initial years of the simulation, and 
+then gradually increases toward the end of the simulation period, but it does not recover to its initial value, 
+remaining 8.7% lower (Table 6). The mean trophic level of the community (mTLco) and the mean trophic 
+level of the community with a trophic level larger than 3.25 (Figure 4), remain stable although it 
+experiences slight fluctuations throughout the simulation. Predictions for these three indicators display 
+considerable uncertainty, and the Spearman correlation test yields a non-significant p-value. Conversely, 
+the commercial species biomass (Figure 4) shows a negative trend throughout the simulated period, 
+decreasing by more than 30% by the end of the period compared to its initial value (p-value <0.05) (Table 
+6). Similarly, both the mean trophic level of catches (mTLc) (Figure 4) and the mean trophic level of the 
+community with a trophic level greater than 4 (mTLco>4) show a similar decline (p-value >0.05) (Figure 
+4). The mTLc decreases by 2.5% despite fluctuations, while the mTLco>4 show a more consistent decline 
+of nearly 1% (Table 6). The mean trophic level of the community with a trophic level larger than 2 (Figure 
+4) also shows a small but steady decline of almost 1% at the end of the simulated period (Table 6). Finally, 
+
+ 
+ 
+13 
+ 
+the Kempton's Q index (Figure 4) also shows a stable, significantly declining trend, decreasing by more 
+than 20% by the end of the simulation compared to its initial value (Table 6). 
+ 
+Figure 4. Predicted (black line) values of each indicator for the period 2003 – 2022 in the TIO model. Coloured area around the 
+prediction line represents the 5th and 95th percentiles obtained by the Monte Carlo routine. The p-value and rho are the results 
+of the Spearman correlation test. mTLco: mean trophic level of the community; mTLc: mean trophic level of the catch; mTLco>2: 
+mean trophic level of the community with a trophic level higher than 2 and lower than 3.25. mTLco>3.25: mean trophic level of 
+the community with a trophic level higher than 3.25 and lower than 4; mTLco>4: mean trophic level of the community with a 
+trophic level higher than 4. 
+Table 6. Values of the 8 selected indicators at the initial year (2003) and at the end of the simulated period (2022) and their 
+change in percentage. 
+Indicator Initial (2003) Final (2022) Change in % 
+Predatory biomass 0.57 0.52 -8.7 
+Commercial species biomass 0.49 0.34 -30.6 
+Mean trophic level of the catch (mTLc) 4.15 4.05 -2.5 
+Kempton’s Q 5.60 4.46 -20.4 
+Mean trophic level of the community (mTLco) 1.12 1.11 -0.9 
+Mean trophic level of the community with a TL >2 2.51 2.49 -0.8 
+Mean trophic level of the community with a TL >3.25 3.68 3.68 0 
+Mean trophic level of the community with a TL >4 4.22 4.18 -0.95 
+ 
+4. Discussion 
+This study provides the first comprehensive ecosystem model of the tropical Indian Ocean oceanic pelagic 
+ecosystem. Using the Ecopath with Ecosim approach, we integrated species interactions  and the 
+
+ 
+ 
+14 
+ 
+ecosystem dynamics with fishing impacts using historical data from 2003 to 2022. The model adequately 
+reproduced most observed time series of biomass and catches for most species and functional groups. For 
+the three tropical tuna species, the model performs particularly well for mature stages but is less accurate 
+for immature stages due to higher variability in the observed data. While other functional groups such as 
+albacore, other billfishes, and blue shark are generally well modelled, the swordfish trend is less 
+accurately captured. Catch predictions perform well for the ten functional groups with available fishing 
+mortality time series but show poorer alignment with catch data for those without such time series. 
+Results reveal significant declines in biomass for several top predatory species, in line with some of the 
+existing stock assessments. In contrast, species subject to lower fishing exploitation show more stable or 
+increasing trends, highlighting differential responses of the functional groups across the food web. These 
+findings suggest that human activities such as fishing along with environmental variability not only can 
+affect target species but al so cascade through the ecosystem  altering, trophic structure, ecosystem 
+functioning, and biodiversity.  
+By providing a holistic understanding of ecosystem dynamics and the cumulative effect of fishing on the 
+ecosystem within the last 20 years, this work offers critical information to form ecosystem-based advice 
+to support the management of tropical tuna species and associated ecosystems in the tropical Indian Ocean 
+and guide EAFM implementation.  
+Fishing has shaped the biomass trends of tuna and tuna -like species and their associated ecosystem 
+differently across the oceanic ecosystem of the tropical Indian Ocean. Species that have been overfished 
+in recent years (e.g., other billfishes) generally continue to decline in biomass. In contrast, species that 
+haven’t been overfished (maintained above their B MSY) (e.g., swordfish), or that have experienced a 
+reduction in fishing mortalities (e.g., blue shark, skipjack tuna) in recent years, show increasing biomass 
+trends in the final years of the simulation.  This pattern is attributed to moderate fishing pressure and 
+greater resource availability resulting from the decline in competitor abundance. These results seem to be 
+in line with those from the assessments probably due to the use of their outputs to fit the model. Vulnerable 
+species incidentally caught by various fleets (e.g., silky shark, other sharks, and mobulas) seem to exhibit 
+a marked decrease in biomass due to the high mortality rates associated with bycatch events. Overall, 
+these results suggest that the ecosystem may be negatively impacted by fishing, particularly at higher 
+trophic levels and with clear effects on certain species. However, with appropriate resource management, 
+population stability and recovery could be achievable.  
+Ecological indicators reflect further the impacts of fishing and trophic changes in the ecosystem. The 
+decline in the biomass of commercial species at higher trophic levels, as well as the decrease in the mean 
+trophic level of the catch may suggest an increasing proportion of immatures being caught relative to 
+matures, or a shift towards harvesting species from lower trophic levels. The slight decrease in the mean 
+trophic level of low-trophic-level species suggests a top-down trophic control—the decline of predators 
+allows for an increase in mid-trophic-level species, which in turn leads to a reduction in the trophic levels 
+immediately below. Furthermore, the pronounced decline in the Kempton’s Q index, suggest a sustained 
+reduction in species diversity within the ecosystem. These results coincide with those obtained for the 
+historical period in the Ecosim model of the Western Pacific Warm Pool Province (Griffiths et al., 2018) 
+revealing a reduction in species diversity at the higher trophic levels. Although in both cases the catches 
+of target species decrease, in the Pacific they are replaced by species of similar trophic level, whereas in 
+the Indian Ocean they are substituted by species of lower trophic level. However, in both scenarios, the 
+replacement species are of no commercial interest to the fishery at present.  
+Ecosystem models are limited by availability and quality of data, which is the principal factor introducing 
+uncertainty in model outcomes. Key challenges  on information gaps involved collecting biomass 
+estimates, catch and effort data and diet composition , which are basic  input data for the model.  This 
+highlights the lack of biological and fisheries data in oceanic regions, particularly within the study area, 
+and therefore, the need to increase their collection. 
+Biomass estimates are scarce across all trophic levels within the study area, particularly for species not 
+targeted by major fisheries. This includes apex predators as well as pelagic invertebrates, and it limits the 
+model’s ability to fit time series data. Therefore, future efforts should focus on estimating and monitoring 
+ 
+ 
+15 
+ 
+the biomass of key species or functional groups in the ecosystem, using methods such as acoustic 
+detection, pelagic fishing surveys, plankton sampling, or onboard observer programs.  Dietary 
+composition data were also insufficient  often based on limited samples  or highly localized studies in 
+specific areas and time periods, making the data unrepresentative of the species as a whole or the intended 
+temporal scope. This lack of high-quality biomass, catch and diet information becomes more pronounced 
+for specie s at intermediate and lower trophic levels  being generally poorly studied. To accurately 
+characterize ecosystem structure and interactions, studies on the trophic ecology of species are essential. 
+Given that stomach content analysis is complex and time-consuming, alternative methods such as DNA-
+based ana lysis of stomach contents may also offer a promising approach to deciphering the trophic 
+ecology of species (Gunther et al., 2021, Canals et al., 2024). 
+Model calibration, validation, and uncertainty analysis are essential to ensure reliable model performance 
+management, quality and relevance. The model developed in this study incorporates the best available 
+information and follows best practices for ecosystem model construction and calibration (Heymans et al., 
+2014). For the development of the Ecopath TIO model, the PREBAL analysis (Link, 2010) was applied 
+to ensure consistency of the basic input parameters with general ecological principles and to guide the 
+balancing process. Nevertheless, the model and its projections present certain limitations as previously 
+discussed. Although the model includes time series of biomass, catches, fishing mortality for key 
+predators, and fleet s’ fishing effort, some of these time series  have been derived based on significant 
+assumptions. For example, blue shark, swordfish, and albacore tuna are present within the modelled area 
+but their distribution ranges are broader and include the temperate zone of the Indian Ocean. Their 
+dynamics within the model may therefore represent the tropical component of their populations but may 
+not reflect the entire stock dynamics A further limitation concerns fishing effort data for multiple fleets. 
+Many fleets report effort inconsistently, only for certain years, in partial coverage or in  different effort 
+units and some do not report effort at all. These inconsistencies make it difficult to realistically estimate 
+trends and approximate the variation in fishing effort across fleets. In addition, the model does not include 
+a parameter to account for the unquantified variability in fishing efficiency over time due to the adoption 
+of various adjustments in fishing practices—commonly referred to as 'effort creep'. Failing to account for 
+this technological improvement may result in higher catch rates not being properly quantified, t hereby 
+compromising the reliability of the effort time series and the model’s outputs. 
+The model also faces limitations in estimating bycatch and its subsequent fate . Although, the IOTC 
+nominal catch database  is intended to include both landings and discards across all fleets, in practice, 
+most fleets report only their landings. Consequently, bycatch rates  had to be inferred from published 
+literature, and for a few fleets , estimated using onboard observers’ data. This approach presents several 
+limitations. The main limitation is that, in the absence of bycatch data , or in cases where there are 
+significant differences in data quality , the model fails to reflect the actual impacts of certain fleets on 
+vulnerable species and the ecosystem. This leads to a bias in the representation of bycatch effects, 
+disproportionately attributing greater impact to fleets that report bycatch more compreh ensively. This 
+issue is particularly rele vant in the case of purse seine fisheries using FADs, which have received 
+considerable attention due to concerns about their ecological impacts, have been extensively studied, and 
+for which bycatch data is largely available . However, it is essential to contextualize these concerns by 
+comparing bycatch rates across different fishing gears. Empirical data indicate that FAD-associated purse 
+seine fisheries often exhibit lower bycatch rates than other methods such as longline or driftnets (Garcia 
+& Herrera., 2018; Murua et al., 2021 ). Therefore, a comprehensive evaluation of fishing fleets impacts 
+should incorporate bycatch estimates within a reasonable level of uncertainty alongside catch efficiency 
+for target species. Another limitation of the approach is that the estimates are expressed as a proportion 
+of the target species catches for a specific fleet, year, or period. Applying these rates across the entire 
+simulated period requires the assumption that bycatch rates remain constant over time. Additionally, there 
+are limitations in estimating the discards’ fate. To address this, we calculated the proportion of discards 
+that results in mortality based on studies of at-haulback and post-release mortality. These studies ar e 
+scarce and typically cover specific fleets and time periods, with limited sample sizes. Therefore, we 
+assume that the proportion of bycatch mortality remains constant throughout the simulation, except for 
+the Spanish, French, and Seychellois fleets. This assumption holds despite the fact that the applied value 
+is representative of a specific period only, and notwithstanding ongoing efforts to enhance bycatch 
+ 
+ 
+16 
+ 
+survival through improved release practices. Assuming two distinct periods for discard survival rates —
+one prior to the implementation of best practices and another following it— with no transitional phase  
+introduces substantial variability in catch estimates for the Spanish, French, and Seychellois purse seine 
+fleets. This variability can reach orders of magnitude for functional groups whose catch time series rely 
+primarily or exclusively on discards (e.g.,  baleen whales, whale sharks, pelagic stingrays, mobulas) . 
+Consequently, for functional groups lacking a fishing mortality time series, particularly those for which 
+the adoption of best practices has significantly improved survival rates  (Grande et al., 2019, Grande et 
+al., 2022, Stewart et al., 2024), the model encounters difficulties in fitting the catch time series due to the 
+abrupt change in the data.  Nevertheless, for some functional groups such as the silky shark, the model 
+was able to fit their catch time series despite these concerns. 
+Updating and refining the model will improve its value for management and future ecosystem 
+assessments. As new information becomes available, the current EwE models can be updated and further 
+developed, thereby enhancing their quality and increasing their value as tools for understanding impacts 
+and exploring management options for the tropical Indian Ocean pelagic ecosystem.  In the SPC and 
+IATTC EwE models are being used to  explore alternative fishing strategies and to assess the combined 
+impacts of fishing and climate change on key species  (Griffiths et al., 2021, Allain et al., 2007) . These 
+models provide valuable ecosystem-level insights that complement traditional approaches and inform 
+discussions on sustainable fisheries governance. 
+ 
+5. Conclusions and future steps 
+Being able to model the tropical Indian Ocean ecosystem and its constituent organisms under the 
+influence of fishing over the past two decades represents a significant step towards providing ecosystem-
+based advice for supporting EAFM implementation in IOTC. This study has developed an Ecopath with 
+Ecosim model of the tropical Indian Ocean oceanic pelagic ecosystem to improve understanding of the 
+ecosystem’s dynamics, species interactions and the impact of fishing on the ecos ystem structure and 
+functioning. Results reveal variations in the biomass  of higher trophic level species, with the greatest 
+variations observed in those of highest commercial interest. The findings corroborate the results of the 
+assessments and the fact that implementing the scientific advice may lead to improvements in biomas s. 
+Moreover, the study also emphasizes the ecosystem’s complexity and the intricate trophic interactions 
+within it, reinforcing the need to incorporate these dynamics into marine resource management in IOTC. 
+Further development of the model will allow more realistic fits and projections under a wide range of 
+management scenarios. Future work could focus on incorporating technological advancements for each 
+fleet or fishing gear type to more accurately simulate fleet effort trends. Additionally, to better understand 
+the impacts of fishing fleets on vulnerable bycatch species, and in collaboration with the IOTC Secretariat, 
+efforts will be made to identify the species considered vulnerable in the Indian Ocean. This will enable 
+the development of indicators to assess the effects of fishing on vulnerable species and to certain taxa 
+groups. Moreover, work will be carried out to incorporate the effects of clim ate change allowing for 
+simulations of future scenarios under varying conditions of climate change, fishing pressure, and their 
+combined effects, and to analyse the responses at ecosystem and species -level. Finally, to expand the 
+range of scenarios and impacts that can be analysed, a time series will be developed to reflect the reduction 
+in bycatch of certain species resulting from the reduction in FAD numbers and improvements in their 
+design. These improvements will enhance the model’s capacity to produce more reali stic outcomes and 
+to simulate possible future management scenarios. This will make it a more relevant and reliable tool for 
+informing fisheries management, incorporating ecosystem considerations to guide EAFM 
+implementation within IOTC. 
+ 
+ 
+ 
+ 
+ 
+ 
+17 
+ 
+Acknowledgments 
+This work has been conducted within the project 'ECOTUN -II: Advancing knowledge of the marine 
+ecosystem dynamics in the Indian Ocean through improved understanding of the relationships between 
+its biotic and abiotic components', funded by OPAGAC (co-funded by FEMPA) and carried out by AZTI 
+and IEO-CSIC. We would like to specially acknowledge Jon Ruiz and Gorka Merino from AZTI, Miguel 
+Herrera from OPAGAC, and Evgeny Romanov from CITEB for the contribution with their expertise to 
+the success of this project.  We would also like to thank Cindy Assan and Laurent Floc’h for providing 
+some fishing effort data, thereby contributing to a more accurate parameterization of the model.  
+ 
+ 
+6. References 
+Acevedo-Iglesias, S., Herrera, M., Ramos, M. L., Báez, J. C., Ruiz, J., Rodríguez-Rodríguez, G., Rojo, V ., Pascual-
+Alayón, P. J. & Abascal,F. J. 2025. Bycatch trend and its fate of the Spanish-owned tuna purse seiners fleet 
+from the Atlantic and Indian oceans: Impacts of the implementation of good practices. Marine Policy, 177. 
+Ahrens, R. N. M., Walters, C. J. & Christensen, V . 2011. Foraging arena theory. Fish and Fisheries, 13, 41-59. 
+Allain, V ., Nicol, S., Essington, T., Okey, T., Olson, B. & Kirby, D. 2007. An Ecopath with Ecosim model of the 
+Western and Central Pacific Ocean warm pool pelagic ecosystem. Western and Central Pacific Fisheries 
+Commision (WCPFC). 
+Amandè, J., Ariz, J., Chassot, E., Chavance, P., Delgado, Gaertner, D., Murua, H., Pianet, R. & Ruiz, J. . 2008. By-
+catch and discards of the european purse seinetuna fishery in the Indian Ocean: estimation and 
+characteristics for the 2003-2007 period. Working Party on Ecosystems and Bycatch. IOTC-2008-WPEB-
+12.   
+Amate, R., Juan Jordá, M. J., Corrales, X., Zudaire, I. & Andonegi, E . 2024. Preliminary steps towards assessing 
+the ecosystem impacts of fishing in the Tropical Indian Ocean through a trophic modelling approach.  
+Working Party on Ecosystems and Bycatch. IOTC-2024-WPEB20(AS)-23_rev1. 
+Anderson, R. C., Herrera, M., Ilangakoon, A. D., Koya, K. M., Moazzam, M., Mustika, P. L. & Sutaria, D. N. 2020. 
+Cetacean bycatch in Indian Ocean tuna gillnet fisheries. Endangered Species Research, 41, 39-53. 
+Andonegi, E., Juan -Jordá, M. J., Murua, H., Ruiz, J., Ramos, M. L., Báez, J. C., Sabarros, P. S., Abascal, F. J. & 
+Bach, P. 2019. In support of the IOTC ecosystem report card: three ecosystem indicators to monitor the 
+ecological impacts of purse seine fisheries operating in the Indian ocean. Working Party on Ecosystems 
+and Bycatch. IOTC-2019-WPEB15-26_Rev1. 
+Assan, C., Lucas, J. & Chassot, E . Statistics of The Seychelles Purse Seine Fleet Targeting Tropical Tunas In The 
+Indian Ocean (2000-2018). Working Party on Tropical Tunas. IOTC-2019-WPTT21-14_Rev1. 
+Báez, J. C., Ramos, M. L., Gonzalez Carballo, M., Perez San Juan, A., Déniz, S. & Sierra, V . 2020. Updating the 
+statistics reported for the EU -Spain purse seine fishing fleet in the Indian Ocean (period 1984 -2019) and 
+the effects of the COVID-19 pandemic on the port sampling activity in Victoria (Seychelles). IOTC-2020-
+WPDCS16-13_Rev1. 
+Bornatowski, H., Angelini, R., Coll, M., Barreto, R. R. P. & Amorim, A. F . 2018. Ecological role and historical 
+trends of large pelagic predators in a subtropical marine ecosystem of the South Atlantic. Reviews in Fish 
+Biology and Fisheries, 28, 241-259. 
+Bourjea, J., Clermont, S., Delgado, A., Murua, H., Ruiz, J., Ciccione, S. & Chavance, P.  2014. Marine turtle 
+interaction with purse-seine fishery in the Atlantic and Indian oceans: Lessons for management. Biological 
+Conservation, 178, 74-87. 
+Boyd, C. E., Mcnevin, A. A. & Davis, R. P. 2022. The contribution of fisheries and aquaculture to the global protein 
+supply. Food Secur, 14, 805-827. 
+ 
+ 
+18 
+ 
+Campana, S. E., Joyce, W. & Manning, M. J . 2009. Bycatch and discard mortality in commercially caught blue 
+sharks Prionace glauca assessed using archival satellite pop-up tags. Marine Ecology Progress Series, 387, 
+241-253. 
+Canals, O., Lanzen, A., Mendibil, I., Bachiller, E., Corrales, X., Andonegi, E., Cotano, U. & Rodriguez -Ezpeleta, 
+N. 2024. Increasing marine trophic web knowledge through DNA analyses of fish stomach content: a step 
+towards an ecosystem-based approach to fisheries research. J Fish Biol, 105, 431-443. 
+Capietto, A., Escalle, L., Chavance, P., Dubroca, L., Molina, A. D. D., Murua, H., Floch, L., Damiano, A., Rowat, 
+D. R. L. & Mérigot, B. 2014. Mortality of marine megafauna induced by fisheries: Insights from the whale 
+shark, the world’s largest fish. Biological Conservation, 174, 147-151. 
+Chih-Yu, L., Sheng-Ping, W., Wen-Qi, X. & Y un-Ju, C. 2024. Stock assessment of black marlin (Makaira indica) in 
+the Indian Ocean using the JABBA. Working Party on Billfishes. IOTC–2024–WPB22–25_Rev2. 
+Christensen, V . & Walters, C. J.  2004. Ecopath with Ecosim: methods, capabilities and limitations. Ecological 
+Modelling, 172, 109-139. 
+Christensen, V ., Walters, C. J., Pauly, D. & Forrest, R . 2008. Ecopath with Ecosim version 6 user guide. Lenfest 
+Ocean Futures Project. 
+Clavareau, L., Sabarros, P. S., Escalle, L., Bach, P., Abascal, F. J., Lopez, J., Murua, H., Alayon, P. J. P., Ramos, M. 
+L., Ruiz, J. & Merigot, B . 2020. Elasmobranch bycatch distributions and mortality: Insights from the 
+European tropical tuna purse-seine fishery. Global Ecology and Conservation, 24, 12. 
+Coelho, R., Lino, P. G. & Santos, M. N. 2011 . At-haulback mortality of elasmobranchs caught on the Portuguese 
+longline swordfish fishery in the Indian Ocean.  Working Party on Ecosystems and Bycatch. IOTC–2011–
+WPEB07–31. 
+Coll, M. & Steenbeek, J . 2017. Standardized ecological indicators to assess aquatic food webs: The ECOIND 
+software plug-in for Ecopath with Ecosim models. Environmental Modelling & Software, 89, 120-130. 
+Colléter, M., Valls, A., Guitton, J., Gascuel, D., Pauly, D. & Christensen, V . 2015. Global overview of the 
+applications of the Ecopath with Ecosim modeling approach using the EcoBase models repository. 
+Ecological Modelling, 302, 42-53. 
+Corrales, X., Coll, M., Ofir, E., Piroddi, C., Goren, M., Edelist, D., Heymans, J. J., Steenbeek, J., Christensen, V . & 
+Gal, G. 2017. Hindcasting the dynamics of an Eastern Mediterranean marine ecosystem under the impacts 
+of multiple stressors. Marine Ecology Progress Series, 580, 17-36. 
+Dedman, S., Moxley, J. H., Papastamatiou, Y . P., Braccini, M., Caselle, J. E., Chapman, D. D., Cinner, J. E., Dillon, 
+E. M., Dulvy, N. K., Dunn, R. E., Espinoza, M., Harborne, A. R., Harvey, E. S., Heupel, M. R., Huveneers, 
+C., Graham, N. A. J., Ketchum, J. T., Klinard, N. V ., Kock, A. A., Lowe, C. G., Macneil, M. A., Madin, E. 
+M. P., Mccauley, D. J., Meekan, M. G., Meier, A. C., Simpfendorfer, C. A., Tinker, M. T., Winton, M., 
+Wirsing, A. J. & Heithaus, M. R.  2024. Ecological roles and importance of sharks  in the Anthropocene 
+Ocean. Science, 385, adl2362. 
+Doney, S. C., Ruckelshaus, M., Duffy, J. E., Barry, J. P ., Chan, F., English, C. A., Galindo, H. M., Grebmeier, J. M., 
+Hollowed, A. B., Knowlton, N., Polovina, J., Rabalais, N. N., Sydeman, W. J. & Talley, L. D. 2012. Climate 
+change impacts on marine ecosystems. Ann Rev Mar Sci, 4, 11-37. 
+Eddy, C., Brill, R. & Bernal, D. 2016. Rates of at -vessel mortality and post -release survival of pelagic sharks 
+captured with tuna purse seines around drifting fish aggregating devices (FADs) in the equatorial eastern 
+Pacific Ocean. Fisheries Research, 174, 109-117. 
+Elliott, B., Kiszka, J. J., Bonhommeau, S., Shahid, U., Lent, R., Nelson, L. & Read, A. J.  2024. Bycatch in drift 
+gillnet fisheries: A sink for Indian Ocean cetaceans. Conservation Letters, 17. 
+Erauskin-Extramiana, M., Arrizabalaga, H., Hobday, A. J., Cabre, A., Ibaibarriaga, L., Arregui, I., Murua, H. & 
+Chust, G. 2019. Large-scale distribution of tuna species in a warming ocean. Global Change Biology, 25, 
+2043-2060. 
+ 
+ 
+19 
+ 
+Erauskin-Extramiana, M., Chust, G., Arrizabalaga, H., Cheung, W. W. L., Santiago, J., Merino, G. & Fernandes -
+Salvador, J. A. 2023. Implications for the global tuna fishing industry of climate change-driven alterations 
+in productivity and body sizes. Global and Planetary Change, 222, 104055. 
+Escalle, L., Capietto, A., Chavance, P., Dubroca, L., Molina, A. D. D., Murua, H., Gaertner, D., Romanov, E. V ., 
+Spitz, J., Kiszka, J. J., Floch, L., Damiano, A. & Mérigot, B. 2015. Cetaceans and tuna purse seine fisheries 
+in the Atlantic and Indian Oceans: interactions but few mortalities. Marine Ecology Progress Series, 522, 
+255-268. 
+Floc'h, L., Duparc, A., Sabarros, P. S., Imzilen, T., Depetris, M., Fily, T., Mollier, E. & Lebranchu, J. 2021. Statistics 
+of the French purse seine fleet targeting tropical tunas in the Indian Ocean (1981-2021). Working Party on 
+Data Collection and Statistics. IOTC-2022-WPDCS18-22. 
+Forrestal, F. & Ménard, F.  2016. Preliminary model examining the effects of the tuna purse -seine fishery on the 
+ecosystem of the Gulf of Guinea. ICCAT-SCRS. 
+Garcia, A. & Herrera, M. 2018. Assessing the contribution of purse seine fisheries to overall levels of bycatch in the 
+Indian Ocean. Working Party on Data Collection and Statistics. IOTC-2018-WPDCS14-26. 
+Geary, W. L., Bode, M., Doherty, T. S., Fulton, E. A., Nimmo, D. G., Tulloch, A. I. T., Tulloch, V . J. D. & Ritchie, 
+E. G. 2020. A guide to ecosystem models and their environmental applications. Nat Ecol Evol,  4, 1459-
+1471. 
+Grande, M., Onandia, I., Galaz, J. M., Uranga, J., Lezama -Ochoa, N., Murua, J., Ruiz, J., Arregui, I., Murua, H. & 
+Santiago, J.  2022. Assessment on accidentally captured silky shark post -release survival in the Indian 
+Ocean tuna purse seine fishery. Working Group on F ADs. IOTC-2022-WGFAD03-09. 
+Grande, M., Ruiz, J., Murua, H., Murua, J., Goñi, N., Krug, I., Arregui, I., Salgado, A., Zudaire, I. & Santiago, J. 
+2019. Progress on the code of good practices on the tropical tuna purse seine fishery in the Indian Ocean. 
+Working Party on Ecosystems and Bycatch (IOTC). IOTC-2019-WPEB15-33. 
+Griffiths, S., Fuller, L., Valero, J., Minte-Vera, C., Xu, H. & Lennert -Cody, C. 2021. Using an updated ecosystem 
+model of the eastern tropical Pacific Ocean to explore potential impacts of increased fishing effort on 
+floating objects. SAC-12-13 – Ecosystem model of the EPO. 
+Griffiths, S. P., Allain, V ., Hoyle, S. D., Lawson, T. A. & Nicol, S. J. 2018. Just a FAD? Ecosystem impacts of tuna 
+purse-seine fishing associated with fish aggregating devices in the western Pacific Warm Pool Province. 
+Fisheries Oceanography, 28, 94-112. 
+Gunther, B., Fromentin, J. M., Metral, L. & Arnaud -Haond, S. 2021. Metabarcoding confirms the opportunistic 
+foraging behaviour of Atlantic bluefin tuna and reveals the importance of gelatinous prey. PeerJ, 9, e11757. 
+Guo, Y ., Wang, X., Li, X., Wu, F. & Zhu, J.-F. 2022. Analysis of At-Haulback Mortality and Influencing Factors of 
+Indian Ocean Swordfish (Xiphias gladius). Fishes,7, 5, 256. 
+Heymans, J. J., Coll, M., Libralato, S., Morissette, L. & Christensen, V . 2014. Global patterns in ecological 
+indicators of marine food webs: a modelling approach. PLoS One, 9, e95845. 
+Heymans, J. J., Coll, M., Link, J. S., Mackinson, S., Steenbeek, J., Walters, C. & Christensen, V . 2016. Best practice 
+in Ecopath with Ecosim food -web models for ecosystem-based management. Ecological Modelling, 331, 
+173-184. 
+Huang, H.-W. & Liu, K.-M. 2010. Bycatch and discards by Taiwanese large-scale tuna longline fleets in the Indian 
+Ocean. Fisheries Research, 106, 261-270. 
+Hutchinson, M., Siders, Z., Stahl, J. & Bigelow, K. 2021. Quantitative estimates of post -release survival rates of 
+sharks captured in Pacific tuna longline fisheries reveal handling and discard practices that improve 
+survivorship. PIFSC Data Report DR-21-001. 
+IOTC 2021. Executive summary: Yellowfin Tuna. Indian Ocean Tuna Comission. 
+IOTC 2022a. Executive summary: Albacore. Indian Ocean Tuna Comission. 
+IOTC 2022b. Executive summary: Bigeye Tuna. Indian Ocean Tuna Comission. 
+ 
+ 
+20 
+ 
+IOTC 2022c. Executive summary: Blue Shark. Indian Ocean Tuna Comission. 
+IOTC 2022d. Executive summary: Swordfish. Indian Ocean Tuna Comission. 
+IOTC 2023. Executive summary: Skipjack Tuna. Indian Ocean Tuna Comission. 
+ISSF 2025. Status of the world fisheries for tuna. International Seafood Sustainability Foundation, Pittsburgh, PA, 
+USA. 
+Juan Jordá, M. J. 2019. Support for the development of an ecosystem approach to fisheries management for Indian 
+Ocean tuna fisheries. Working Party on Ecosystems and Bycatch (IOTC). IOTC-2019-WPEB15-31. 
+Kempton, R. A. & Taylor, L. R. 1976. Models and statistics for species diversity. Nature, 262, 818-820. 
+Kiszka, J. J., Woodstock, M. S. & Heithaus, M. R.  2022. Functional Roles and Ecological Importance of Small 
+Cetaceans in Aquatic Ecosystems. Frontiers in Marine Science, 9. 
+Lehodey, P., Conchon, A., Senina, I., Domokos, R., Calmettes, B. & Jouanno, J.  2015. Optimization of a 
+micronekton model with acoustic data. ICES Journal of Marine Science, 72, 1399-1412. 
+Li, X., Wang, X., Guo, Y ., Wu, F. & Zhu, J. 2023. Factors influencing the at‐haulback mortality of striped marlin 
+Tetrapturus audax caught by tuna longline fishery in the western Indian Ocean. Aquatic Conservation: 
+Marine and Freshwater Ecosystems, 34, e4135. 
+Link, J. S. 2010. Adding rigor to ecological network models by evaluating a set of pre -balance diagnostics: A plea 
+for PREBAL. Ecological Modelling, 221, 1580-1591. 
+Mackinson, S., Daskalov, G., Heymans, J. J., Neira, S., Arancibia, H., Zetina -Rejón, M., Jiang, H., Cheng, H. Q., 
+Coll, M., Arreguin -Sanchez, F., Keeble, K. & Shannon, L . 2009. Which forcing factors fit? Using 
+ecosystem models to investigate the relative influence of fishing and changes in primary productivity on 
+the dynamics of marine ecosystems. Ecological Modelling, 220, 2972-2987. 
+Miller, K. I., Nadheeh, I., Jauharee, A. R., Anderson, R. C. & Adam, M. S . 2017. Bycatch in the Maldivian pole -
+and-line tuna fishery. Plos One, 12, 21. 
+Moazzam, M. S. & Nawaz, R.  2014. By-catch of tuna gillnet fisheries of Pakistan: A serious threat to non -target, 
+endangered and threatened species. Journal of the Marine Biological Association of India, 56, 85-90. 
+Murua, H., Eveson, J. P. & Marsac, F. 2015. The Indian Ocean Tuna Tagging Programme: Building better science 
+for more sustainability Preface. Fisheries Research, 163, 1-6. 
+Murua, H., Dagorn, L., Justel -Rubio, A., Moreno, G. and Restrepo, V . 2021. Questions and Answers about FADs 
+and Bycatch (Version 3). ISSF Technical Report 2021-11. International Seafood Sustainability Foundation, 
+Washington, D.C., USA. 
+Musyl, M. K. & Gilman, E. L . 2018. Post -release fishing mortality of blue (Prionace glauca) and silky shark 
+(Carcharhinus falciformes) from a Palauan -based commercial longline fishery. Reviews in Fish Biology 
+and Fisheries, 28, 567-586. 
+Olson, R. J. & Watters, G. M. 2003. A model of the pelagic ecosystem in the eastern tropical Pacific Ocean. La Jolla: 
+Inter-American Tropical Tuna Commission (IATTC). 22, 3, 135-2018. 
+Parker, D. & Espittia, J.  2022. Alternative methods to assess the data -limited Indo -Pacific sailfish (Istiophorus 
+platypterus) stock. Working Party on Billfishes (WPB). IOTC-2022-WPB20-15. 
+Parker, D. & Kerwath, S. 2022. Updated stock assessment of blue marlin ( Makaira nigricans) in the Indian ocean 
+using JABBA. Working Party on Billfishes (WPB). IOTC-2022-WPB20-12. 
+Pauly, D., Christensen, V ., Dalsgaard, J., Froese, R. & Torres, F. S. B.  1998. Fishing down marine food webs. 
+Science, 279 5352, 860-3. 
+Robinson, J. P. W., Nash, K. L., Blanchard, J. L., Jacobsen, N. S., Maire, E., Graham, N. A. J., Macneil, M. A., 
+Zamborain-Mason, J., Allison, E. H. & Hicks, C. C. 2022. Managing fisheries for maximum nutrient yield. 
+Fish Fish (Oxf), 23, 800-811. 
+ 
+ 
+21 
+ 
+Rochet, M.-J. & Trenkel, V . M. 2003. Which community indicators can measure the impact of fishing? A review 
+and proposals. Canadian Journal of Fisheries and Aquatic Sciences, 60, 86-99. 
+Ruiz, J., Abascal, F. J., Bach, P ., Baez, J. C., Cauquil, P., Grande, M., Krug, I., Lucas, J., Murua, H., Ramos Alonso, 
+M. L. & Sabarros, P. S. 2018. Bycatch of the european, and associated flag, purse-seine tuna fishery in the 
+indian ocean for the period 2008 -2017. Working Party on Ecosystems and Bycatch.  WD-IOTC-2018-
+WPEB14-15. 
+Sabarros, P. S., Romanov, E., Le Foulgoc, L., Richard, E., Lamoureux, J.-P. & Bach, P. 2013. Commercial catch and 
+discards of pelagic longline fishery of Reunion Island based on the self-reporting data collection program. 
+IOTC–2013–WPEB09–37 Rev_1. 
+Scott, E., Serpetti, N., Steenbeek, J. & Heymans, J. J.  2016. A Stepwise Fitting Procedure for automated fitting of 
+Ecopath with Ecosim models. SoftwareX, 5, 25-30. 
+Shahifar, R. 2018. Iran tuna fisheries Sharks by -catch in IOTC area of competence in 2017.  Working Party on 
+Ecosystems and Bycatch. IOTC-2018-WPEB14-17_Rev1. 
+Stewart, J. D., Cronin, M. R., Largacha, E., Lezama -Ochoa, N., Lopez, J., Hall, M., Hutchinson, M., Jones, E. G., 
+Francis, M., Grande, M., Murua, J., Rojo, V . & Jorgensen, S. J. 2024. Get them off the deck: 
+Straightforward interventions increase post -release survival rates of manta and devil rays in tuna purse 
+seine fisheries. Biological Conservation, 299. 
+Swimmer, Y ., Empey Campora, C., Mcnaughton, L., Musyl, M. & Parga, M. 2013. Post‐release mortality estimates 
+of loggerhead sea turtles (Caretta caretta) caught in pelagic longline fisheries based on satellite data and 
+hooking location. Aquatic Conservation: Marine and Freshwater Ecosystems, 24, 498-510. 
+Walters, C. J., Christensen, V . & Pauly, D. 1997. Structuring dynamic models of exploited ecosystems from trophic 
+mass-balance assessments. Reviews in Fish Biology and Fisheries, 7, 139-172. 
+Welch, H., Savoca, M. S., Brodie, S., Jacox, M. G., Muhling, B. A., Clay, T. A., Cimino, M. A., Benson, S. R., 
+Block, B. A., Conners, M. G., Costa, D. P., Jordan, F. D., Leising, A. W., Mikles, C. S., Palacios, D. M., 
+Shaffer, S. A., Thorne, L. H., Watson, J. T., Holser, R. R., Dewitt, L., Bograd, S. J. & Hazen, E. L.  2023. 
+Impacts of marine heatwaves on top predator distributions are variable but predictable. Nat Commun, 14, 
+5188. 
+West, W. M., Kerwath, S. E., Da Silva, C., Wilke, C. G. & Marsac, F. 2012. Horizontal and vertical movements of 
+swordfish tagged with pop up -satellite transmitters in the south -west Indian ocean, off south Africa.  
+Working Party on Billfish, IOTC-2012-WPB10, 16, 36. 
+Wimalasiri, H. B. U. G. M., Weerakoon, W. R. W. M. A. P ., Jayasinghe, R. P. P. K. & Dalpadado, P. 2021. Spatial 
+patterns and key drivers of zooplankton in the north central Indian Ocean. Marine Biology Research, 17, 
+415-433. 
+Yun-Ju, C., Sheng-Ping, W., Wen-Qi, X. & Chih-Y u, L. Stock assessment of Striped marlin (Tetrapturus audax) in 
+the Indian Ocean using the JABBA. Working Party on Billfishes (WPB). IOTC–2024–WPB22–24_Rev2. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+22 
+ 
+Suplementary material 
+ 
+ 
+Figure 1. Time series of relative fishing effort of each fleet inside the model area along the historical period (2003-20022) used 
+to drive the model. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+23 
+ 
+ 
+Figure 2. Time series of fishing mortality (catch/biomass) for the functional groups with available stock assessment. 
+ 
+               
+Figure 3. Time series of the relative variation of the primary production inside the model area along the historical period 
+(2003-20022). 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+24 
+ 
+ 
+ 
+Figure 5. Predictions (solid lines) versus observations (black dots) of biomass (t/km²) for all functional groups in the TIO model 
+during the historical period (2003 –2022). The blue shaded areas around the prediction lines represent the 5th and 95th 
+percentiles obtained using the Monte Carlo routine. The p-value and rho are the results of the Spearman correlation test. 
+
+ 
+ 
+25 
+ 
+ 
+Figure 6. Predictions (solid lines) versus observations (black dots) of catch (t/km2·año) for all functional groups in the TIO 
+model during the historical period (2003 –2022). The blue shaded areas around the prediction lines represent the 5th and 95th 
+percentiles obtained using the Monte Carlo routine. The p-value and rho are the results of the Spearman correlation test. 
+ 

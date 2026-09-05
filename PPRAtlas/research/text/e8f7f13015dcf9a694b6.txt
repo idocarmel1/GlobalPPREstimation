@@ -1,0 +1,1438 @@
+Ecological Modelling 335 (2016) 87–100
+Contents lists available at ScienceDirect
+Ecological Modelling
+journal homepage: www.elsevier.com/locate/ecolmodel
+Developing a high taxonomic resolution food web model to assess the
+functional
+ role of forage ﬁsh  in the California Current ecosystem
+Laura E. Koehna,∗, Timothy E. Essingtona, Kristin N. Marshalla, Isaac C. Kaplanb,
+William J. Sydemanc, Amber I. Szoboszlaic, Julie A. Thayerc
+a School of Aquatic and Fishery Sciences, University of Washington, Box 355020, Seattle, WA 98105-5020, USA
+b Conservation
+ Biology Division, Northwest Fisheries Science Center, National Marine Fisheries Service, NOAA, 2725 Montlake Blvd. E., Seattle, WA 98112,
+USA
+c Farallon Institute for Advanced Ecosystem Research, 101 H Street Suite Q, Petaluma, CA 94952, USA
+a r t i c l e i n f o
+Article history:
+Received
+ 14 January 2016
+Received
+ in revised form 17 May 2016
+Accepted
+ 20 May 2016
+Keywords:
+Forage
+ ﬁsh
+Food
+ web model
+California
+ Current
+a b s t r a c t
+Understanding the role of forage ﬁsh  in marine food webs is an important part of ecosystem-based
+ﬁsheries
+ management. Food web models are a common tool used to account for important characteristics
+of
+ forage ﬁsh  and their trophodynamics. One primary limitation of many existing food web models is that
+the
+ taxonomic resolution of forage ﬁsh  and their predators is overly simpliﬁed.  Here, we developed a food
+web
+ model with high taxonomic resolution of forage ﬁsh  and their predators in the California Current to
+more
+ comprehensively describe trophic linkages involving forage ﬁsh  and examine the ecological role
+of
+ forage ﬁsh  in this system. We parameterized a mass-balanced food web model (Ecopath) with 92
+living
+ functional groups, and used this to quantify diet dependency on forage ﬁsh,  determine the main
+predators
+ of forage ﬁsh,  identify the topological position of forage ﬁsh  in the food web, and calculate an
+index
+ that identiﬁes  forage species or species aggregations that have key ecological roles (Supportive
+Role
+ to Fishery ecosystem, SURF). Throughout, we characterized parameter uncertainty using a Monte
+Carlo
+ approach. Though diets revealed some predators had high diet dependencies on individual forage
+ﬁsh
+ species, most predators consumed multiple forage ﬁsh  and also had notable diet overlap with forage
+ﬁsh.
+ Consequently, no single forage ﬁsh  appeared to act as a vital nexus species that is characteristic of
+“wasp-waisted”
+ food webs in other upwelling regions. Additionally, no single forage ﬁsh  was identiﬁed
+as
+ “key”  by the SURF index, but if predators and ﬁsheries  view certain pairs of forage ﬁsh  as functionally
+equivalent,
+ some plausible pairs would be identiﬁed  as key assemblages. Speciﬁcally,  sardine & anchovy
+(Sardinops
+ sagax & Engraulis mordax) and herring & anchovy (Clupea pallasii & E. mordax) are key when
+predator
+ populations depend on the aggregate availability of these species. This food web model can
+be
+ used to support generalized equilibrium trade-off analysis or dynamic modeling to identify speciﬁc
+predators
+ that would be of conservation concern under conditions of future forage ﬁsh  depletion.
+©
+ 2016 Elsevier B.V. All rights reserved.
+1. Introduction
+Recently there has been movement in ﬁsheries  management
+away from a single-species management focus towards a more
+holistic, ecosystem management focus, known as ecosystem-based
+ﬁsheries  management. However, the empirical information needed
+∗ Corresponding author.
+E-mail
+ addresses: laura.koehn216@gmail.com (L.E. Koehn), essing@uw.edu
+(T.E. Essington), kmarsh2@uw.edu (K.N. Marshall), Isaac.kaplan@noaa.gov
+(I.C. Kaplan), wsydeman@faralloninstitute.org (W.J. Sydeman),
+ambo@faralloninstitute.org (A.I. Szoboszlai), jthayer@faralloninstitute.org
+(J.A. Thayer).
+to assess direct and indirect effects of ﬁshing  in an ecosystem con-
+text are lacking for many marine systems (Frid et al., 2006; Mace,
+2001). Therefore, models are commonly used as strategic, scientiﬁc
+tools for ecosystem-based ﬁsheries  management (Plagányi, 2007).
+In this capacity, ecosystem models are frequently used to evaluate
+harvest strategies (Fulton et al., 2014), to identify ecological risk
+and biological limits at which risk is ampliﬁed  (Smith et al., 2011),
+or to determine key data gaps or needs (Walters, 1986).
+One key ecosystem-based management issue in ﬁsheries  is the
+sustainability of forage ﬁsh  ﬁsheries;  particularly in regards to
+impacts these ﬁsheries  may have on predators. Fisheries on forage
+ﬁsh  comprise around 25–30%  of global ﬁsh  landings (FAO, 2015;
+data from 2011 to 2013). At the same time forage ﬁsh  (small, pelagic
+http://dx.doi.org/10.1016/j.ecolmodel.2016.05.010
+0304-3800/© 2016 Elsevier B.V. All rights reserved.
+88 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+schooling species) are a primary food source for a range of predators
+(Fréon et al., 2005; Furness, 2007; Brodeur et al., 2014), including
+many that are also targeted by ﬁsheries  (Pikitch et al., 2014). There-
+fore, forage ﬁsh  ﬁsheries  introduce potential trade-offs between the
+revenue generated by harvesting these species directly versus leav-
+ing them in the ocean and harvesting their predators. The shapes
+of these trade-off relationships can be difﬁcult  to anticipate and
+are commonly evaluated using food web models (Hannesson et al.,
+2009; Kaplan et al., 2013; May et al., 1979; Shin et al., 2004; Smith
+et al., 2011). However, Essington and Plagányi (2014) found that
+many available food web models did not incorporate several rele-
+vant characteristics of forage ﬁsh  or their predators, largely because
+the models used to evaluate impacts of forage ﬁsh  ﬁsheries  were not
+speciﬁcally  designed for that purpose. Thus, advances in ecological
+models are needed to better describe the relationships between for-
+age ﬁsh  and other species in food webs and ultimately to evaluate
+the species and ﬁsheries  most at risk from forage-ﬁsh  depletion.
+A common limitation of many food web models is poor tax-
+onomic resolution of forage ﬁsh  species and their predators.
+Aggregating many predators into a single group makes it difﬁcult
+to identify individual predator sensitivities to forage ﬁsh  depletion
+(Essington and Plagányi, 2014). The appropriate degree of aggre-
+gation of forage ﬁsh  species in a model depends on the ecosystem
+context and question addressed. For example, if a predator is a gen-
+eralist and can readily switch feeding among forage ﬁsh  species
+based on availability, then model predictions that represent forage
+ﬁsh  as a single functional group might be robust to this aggregation
+(Fulton et al., 2003 and references therein). Alternatively, if some
+ﬁsheries  and predators are specialists on individual forage species,
+models that aggregate forage ﬁsh  into a single functional group
+might not detect risk to predators that are dependent on individual
+species. Given that one rarely knows if any of these conditions are
+true a priori, there are likely beneﬁts  from starting model develop-
+ment at a high taxonomic resolution around species of interest, and
+evaluating the consequences of aggregation as needed.
+Sustainable management and trade-offs of forage ﬁsh  ﬁsheries
+is particularly relevant in the California Current ecosystem, an
+eastern boundary upwelling ecosystem that supports many for-
+age ﬁsh  species and a diversity of predators that feed upon them
+(Block et al., 2011). Forage ﬁsh  in the California Current are an
+important prey source for multiple predators (Ruzicka et al., 2012;
+Szoboszlai et al., 2015) including protected, threatened, and endan-
+gered seabirds (marbled murrelets, Brachyramphus marmoratus)
+and mammals (humpback whales, Megaptera novaeangliae). Forage
+ﬁsh  ﬁsheries  in the California Current are economically valuable as
+well. Paciﬁc  sardine (Sardinops sagax) catch on the U.S. West coast
+from 2004 to 2013 averaged over 82 000 mt yr−1 with an average
+ex-vessel revenue of $13.7 million USD, while northern anchovy
+(Engraulis mordax) catch was just over 7000 mt yr−1 with an aver-
+age revenue of $1 million (Paciﬁc  Fishery Management Council,
+2014a). Additionally, forage ﬁsh  are a main conservation issue in
+this region, exempliﬁed  by the recent initiative to prohibit the for-
+mation of ﬁsheries  on unmanaged forage species (Paciﬁc  Fishery
+Management Council, 2014b). Finally, multiple food web models
+already exist for the California Current ecosystem (see Field, 2004;
+Ruzicka et al., 2007; Kaplan et al., 2013), however these models
+possess many of the limitations discussed above with respect to
+aggregation (either forage ﬁsh  aggregation, predator aggregation,
+or both) because they were not constructed speciﬁcally  to address
+questions surrounding forage ﬁsh  and their ﬁsheries.
+Here, we constructed a food web model of the California Current
+with high taxonomic resolution of forage ﬁsh  and their predators
+to better describe the role of forage ﬁsh  in this system. Our spe-
+ciﬁc  objectives were to (1) collate all available food web data at
+a ﬁne  taxonomic scale and use these to develop a mass-balanced
+food web model; (2) describe the trophic linkages of individual for-
+age ﬁsh  species in this system; and (3) calculate food web metrics
+that are designed to identify “key”  forage ﬁsh  species in terms of
+ecological function. Throughout we consider the consequences of
+taxonomic resolution on model predictions, and explicitly consider
+consequences of parameter uncertainty. In addition to the increase
+in taxonomic resolution of forage ﬁsh  and forage ﬁsh  predators,
+this is to our knowledge, the ﬁrst  food web model for the entire
+California Current region (from British Columbia, Canada to Baja
+California, Mexico), capturing the full ranges of many forage ﬁsh
+and predators.
+2. Methods
+2.1. Food web model
+We constructed a food web model of the California Current
+ecosystem that focuses on forage ﬁsh  and their predators. For the
+food web model, we used the Ecopath framework (Christensen
+and Walters, 2004) because it is widely accepted, information
+required to populate the model is readily available, and the prop-
+erties of the model are well understood. An Ecopath model is
+a mass-balanced, instantaneous snapshot of an ecosystem at a
+given period of time (usually a year), representing trophic inter-
+actions between ecological guilds and accounting for ﬂows of
+biomass among food web compartments. Mass-balanced refers to
+all biomass production in the system equaling all biomass loss
+(through predation, ﬁshing,  etc.). Species or species groups are rep-
+resented as functional groups, or biomass pools, that are internally
+homogeneous. We assumed steady state conditions, and did not
+include migration. Under these assumptions, all energy entering a
+species compartment equals all outbound energy (including respi-
+ration and excretion), such that production of each biomass pool
+equals the biomass losses:
+Bi × PBi × EEi = Ci +
+n∑
+j=1
+Bj × QBj × DCji (1)
+where Bi and Bj are the biomass of group i or their consumer(s) j,
+respectively, PBi is the production to biomass ratio, Ci is the ﬁsh-
+eries catch of species i (including bycatch and discards), QBj is the
+consumption to biomass ratio, and DCji is the proportion of prey
+i in the diet of predator j. EEi is the ecotrophic efﬁciency,  which
+is the proportion of total production that is explicitly depleted by
+predator-prey interactions and ﬁsheries  in the model. Based on
+these parameters, the model has n linear equations for n func-
+tional groups. The model requires that three of the four parameters
+(Bi, PBi, EEi, QBi) be explicitly deﬁned  for each group (Table 1)
+and requires a diet matrix (DCji) (Appendix A in Supplementary
+material). The model then solves the system of equations to calcu-
+late the missing input parameter value for each functional group.
+Although we did not explicitly model migration, we accounted for
+feeding outside of our model domain by adjusting diet fractions in
+the “input  consumption”  category (see diet matrix and Appendix
+A in Supplementary material for more speciﬁcs).  The model and
+all subsequent models and analyses were run in R Studio (version
+0.98.501) and R version 3.1.2 (2014-10-31) (R Development Core
+Team, 2014).
+We focused our modeling efforts on forage ﬁsh,  speciﬁcally
+small, pelagic, schooling species, and their predators and intended
+to represent the most recent state of the ecosystem, averaged
+over 2000–2014.  Many forage ﬁsh  species were represented as
+species-speciﬁc  biomass pools including: Paciﬁc  sardine, north-
+ern anchovy, Paciﬁc  herring (Clupea pallasii), Paciﬁc  sand lance
+(Ammodytes hexapterus), and whitebait smelt (Allosmerus elonga-
+tus). We used an aggregate group for other smelt (Osmeridae spp.),
+which included night smelt, Spirinchus starksi; surf smelt, Hypome-
+L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100  89
+Table 1
+Parameters
+ –  biomass (B), production to biomass ratio (PB), consumption to biomass ratio (QB), ecotrophic efﬁciency  (EE, proportion of mortality included in the model),
+and
+ catch (C) –  for each functional group in the model. Parameters marked with “–”  are solved for by the model. Also included are the speciﬁed  coefﬁcients  of variation (CV)
+values
+ for each parameter based on data quality ranking in Table 2.
+Groups B B CV PB PB CV QB QB CV EE C C CV
+Phytoplankton –  0 120 0.1 0 0 0.40093 0 0
+Infauna
+ –  0 2.5 0.2 12 0.2 0.84010 0 0
+Amphipods
+ –  0 3.5 0.2 22 0.2 0.8 0 0
+Epibenthic
+ –  0 2 0.2 10 0.2 0.8 0 0
+Microzooplankton
+ –  0 100 0.2 300 0.2 0.8 0 0
+Copepods
+ –  0 14 0.1 70  0.2 0.8 0 0
+Euphausiids
+ –  0 8 0.2 40 0.2 0.8 0 0
+Carnivorous
+ zoop. –  0 2 0.2 10 0.2 0.8 0 0
+Small
+ jellies –  0 9 0.15 30 0.15 0.8 0 0
+Large
+ jellies –  0 3 0.15 12 0.15 0.8 0 0
+Pandalid
+ shrimp –  0 2 0.1 10 0.2 0.8 0.10558 0.1
+Benthic
+ shrimp –  0 2.5 0.2 12
+ 0.2 0.8 0.00010 0.1
+Dungeness crab –  0 0.75 0.1 3.8 0.15 0.64168 0.09198 0.1
+Tanner
+ crab –  0 0.3 0.15 1.5 0.15 0.8 0 0
+Mesopelagics
+ 9.93377 0.25 0.6 0.1 3 0.1 –  0 0
+Benthic
+ ﬁsh –  0 0.5 0.15
+ 2.5 0.15 0.8 0 0
+Surf perch –  0 1.3 0.1 6 0.15 0.8 0 0
+Other
+ cephalopod –  0 2 0.2 6 0.2 0.8 0 0
+Market
+ squid –  0 2.75 0.2 10 0.2 0.8 0.26699 0.1
+Sardine
+ 3.24050 0.15 0.515 0.05 5 0.2 –  0.48748 0.1
+Anchovy
+ 1.50173 0.25 1.09 0.1 6 0.2 –  0.03866 0.1
+Herring
+ 0.66225 0.35 1.6 0.15 7.489 0.15 –  0.00646 0.1
+Paciﬁc
+ Mackerel 0.49184 0.15 0.514
+ 0.05 6 0.15 –  0.02689 0.1
+Sand lance –  0 1 0.15 3.65 0.2 0.8 0 0
+Whitebait
+ smelt 0.08027 0.25 1.6 0.2 6 0.2 –  0 0
+Other
+ smelt –  0 1.5 0.2 6 0.2 0.8 0 0
+Saury
+ 1.14967 0.35 1.6 0.15 3.65 0.15 –  0 0
+Juvenile
+ rockﬁsh –  0 1.5 0.2  6 0.2 0.8 0 0
+Juvenile hake –  0 1.75022 0.28051 6.10087 0.08225 0.8 0 0
+Juvenile
+ ﬂatﬁsh –  0 1 0.2 4 0.2 0.8 0 0
+Juvenile
+ roundﬁsh  –  0 1.5 0.2 5.12501 0.2 0.8 0 0
+Juvenile
+ thornyhead –  0 0.5 0.2 2.5 0.2 0.8 0 0
+Yellowtail
+ Rockﬁsh  0.54516 0.2 0.146 0.1 1.7 0.05 –  0.01377 0.1
+Black
+ rockﬁsh  0.12420 0.04357 0.129 0.1 2.01 0.05 –  0.00315 0.1
+Nearshore
+ rockﬁsh 0.08012  0.02422 0.158 0.1 2.01 0.15 –  0.00169 0.1
+Yelloweye rockﬁsh  0.00898 0.2 0.0505 0.05 2.2 0.15 –  0.00004 0.1
+Greenstriped
+ rock. 0.09782 0.25 0.125 0.15 2.2 0.15 –  0.00013 0.1
+Shelf
+ rockﬁsh  0.43997 0.2 0.159 0.15 2.2 0.15 –  0.00153 0.1
+Shortbelly
+ rockﬁsh  0.36026 0.2 0.26 0.05 2.2 0.15 –  2.48E-08 0.1
+Petrale
+ sole 0.07856 0.2 0.32 0.1 1.7 0.05 –  0.00535 0.1
+Halibut
+ 0.18513 0.2 0.47 0.1 2.12 0.15 –  0.00319 0.1
+Hake
+ 8.04387 0.15 0.41
+ 0.05 1.95652 0.1 –  0.94690 0.1
+Lingcod 0.31246 0.15 0.295 0.1 2.4 0.05 –  0.00364 0.1
+Arrowtooth
+ 0.34408 0.2 0.264 0.1 2.12 0.15 –  0.03420 0.1
+Sableﬁsh
+ 0.89623 0.15 0.0984 0.1 2 0.05 –  0.02502 0.1
+Albacore
+ 0.09562 0.2 0.36 0.15 7.3 0.15 –  0.00364 0.1
+Salmon
+ 0.12464 0.25 1.76 0.1 5.3 0.15 –  0.02537 0.1
+Grenadiers
+ 0.36436 0.25 0.2 0.15 1 0.05 –  0.00036 0.1
+Dogﬁsh
+ 0.85909 0.2 0.0694 0.05 2.5 0.1 –  0.00474 0.1
+Canary
+ Rockﬁsh  0.07756 0.2 0.113 0.1 1.66 0.05 –  0.00218 0.1
+Paciﬁc
+ Ocean Perch 0.10093 0.25 0.0689 0.24646 2.07 0.05 –  0.00228 0.1
+Widow
+ Rockﬁsh  0.25945 0.2 0.1287 0.05 2.2 0.05 –  0.00509 0.1
+Splitnose
+ Rockﬁsh  0.33672 0.2 0.07478 0.1 1.91 0.15 –  0.00121 0.1
+Slope
+ rockﬁsh  0.23033 0.2 0.06465 0.1 1.91 0.15 –  0.00304 0.1
+Shortspine
+ thorny. 1.09813 0.2 0.0545 0.05 0.47 0.15 –  0.00350 0.1
+Longspine
+ thorny. 0.30880 0.2 0.1213 0.05 0.35 0.15 –  0.00308 0.1
+Flatﬁsh
+ 3.56936 0.2 0.35 0.15 2 0.2 –  0.04902 0.1
+Skates
+ 0.40242 0.25 0.2216 0.2 2 0.2 –  0.00394 0.1
+Sharks
+ –  0 0.18 0.15 2.8 0.15 0.75 0.00268 0.1
+Common
+ Murre 0.00327 0.1 0.08409 0.29063 169.5 0.05 –  0 0
+Cassin’s
+ auklet 0.00123 0.2 0.23388 0.04091 266.9 0.05 –  0 0
+Rhinoceros
+ auklet 0.00028 0.2 0.11898 0.10223 202.2 0.05 –  0 0
+Tufted
+ Pufﬁn  0.00018 0.2 0.06500 0.20688 181.1 0.05 –  0 0
+California
+ gull 0.00065 0.15 0.13529 0.29342 193.9 0.05 –  0 0
+Western
+ Gull 0.00096 0.2 0.13216 0.16087 168.65 0.05 –  0 0
+Kittiwake
+ 0.00013 0.2 0.09289 0.16396 216.2 0.05 –  0 0
+Albatross
+ 0.00075 0.1 0.04042 0.69947 124.25 0.05 –  0 0
+Northern
+ Fulmar 0.00024 0.15 0.04338 0.21067 199.7 0.05 –  0 0
+Shearwater
+ 0.00364 0.1
+ 0.07 0.25 182.75 0.05 –  0 0
+Leach’s storm petrel 0.00060 0.2 0.12404 0.37046 407.9 0.05 –  0 0
+Brandt’s
+ cormorant 0.00073 0.1 0.235 0.14498 138.1 0.05 –  0 0
+Double-crest
+ corm. 0.00036 0.05 0.15 0.05 147 0.05 –  0 0
+90 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+Table 1 (Continued)
+Groups B B CV PB PB CV QB QB CV EE C C CV
+Pelagic cormorant 0.00026 0.1 0.15 0.15 142.6 0.05 –  0 0
+Marbled
+ murrelet 0.00003 0.05 0.12077 0.30341 255.1 0.05 –  0 0
+Pigeon
+ Guillemot 0.00010 0.15 0.175  0.23716 205.9 0.05 –  0 0
+Caspian
+ tern 0.00009 0.2 0.10887 0.11189 189.9 0.05 –  0 0
+Brown
+ Pelican 0.00027 0.15 0.2 0.2 120.7 0.05 –  0 0
+Transient
+ Orcas 0.00267 0.15 0.02542 0.1 14.87591 0.05 –  0 0
+Resident
+ Orcas 0.00109 0.15 0.02542 0.15 14.87591 0.05 –  0 0
+Porpoises
+ 0.02651 0.33 0.07 0.33391 36.52 0.05 –  0 0
+Humpback
+ whale 0.24993 0.15 0.0377 0.15 7.58 0.05 –  0 0
+Minke
+ whale 0.00520 0.3 0.0511 0.1 8.69
+ 0.05 –  0 0
+Fin whale 0.14008 0.18 0.0377 0.2 6.51686 0.05 –  0 0
+Sperm
+ whale 0.01829 0.31 0.021 0.2 8.812 0.05 –  0 0
+Harbor
+ seals 0.01962 0.15 0.08265 0.1 24.594 0.05 –  0 0
+Sea
+ Lions 0.09872 0.15 0.076 0.1 15.1 0.15 –  0 0
+Juv.
+ N. Ele. seals 0.03795 0.15 0.31038 0.1 14.76 0.15 –  0 0
+Adult
+ N. Ele. seals 0.07750 0.15 0.22759 0.05 14.76 0.05 –  0 0
+Fur
+ seals 0.00787 0.15 0.091 0.1 52.04 0.05 –  0 0
+Blue
+ whale 0.63938 0.24 0.05 0.2 5.5 0.05 –  0 0
+Gray
+ whale 0.97349 0.15 0.037 0.2
+ 11.82933 0.05 –  0 0
+Dolphins 0.07128 0.33 0.07563 0.48877 32.33 0.05 –  0 0
+Detritus
+ 10 0 0 0 0 0 –  0 0
+sus pretiosus; and eulachon, Thaleichthys paciﬁcus , because little is
+known of these species individually in terms of biomass and diet.
+Other species in the model may be considered forage species, but
+we focused on the most common vertebrate species that are pelagic
+and schooling for the majority of their life. Upper trophic functional
+groups consisted mainly of forage ﬁsh  predators, including 27 pis-
+civorous ﬁsh
+ groups, 18 seabird groups, and 15 marine mammal
+groups. Of these groups, 43 were species-speciﬁc  biomass pools. A
+full list of all functional groups (including lower trophic groups not
+mentioned here), species included in each group, and full descrip-
+tions and references for parameters can be found in Appendix B in
+Supplementary material.
+The model spatial domain extended from the Northern end of
+Vancouver Island in British Columbia, Canada to Punta Eugenia
+in Baja California, Mexico, including the northern and southern
+extents of the upwelling system (Fig. 1) in order to cover the
+distributions of many forage ﬁsh  species and their predators in
+the California Current. The model is not spatially explicit, how-
+ever spatial structure is often implicit in the diet linkages (e.g. a
+northern-ranging species will not extensively consume a southern-
+ranging species). For example, albacore tuna (Thunnus alalunga)
+when in the model domain are usually found offshore in the
+Southern portion of the California Current (Kimura et al., 1997)
+and therefore, of the forage ﬁsh,  tuna mainly consume sardine
+(a offshore, southern forage ﬁsh  species, Zwolinski et al., 2012)
+and to a lesser extent anchovy and herring (more inshore and/or
+northerly). Additionally, if diet studies existed for multiple regions
+(Canada, Washington, Oregon, California, or Baja) for a single
+species, these diets were combined using a weighted average based
+on biomass of the species in each region. Offshore, the model
+extended to the 2000-m isobath, capturing the majority of the
+region where commercially important forage ﬁsh  are present and
+interact with predators. The model domain encompassed many
+important seabird breeding colonies near the northern end of Van-
+couver Island (speciﬁcally  Triangle Island) and important pinniped
+breeding rookeries on the Baja Peninsula. The total model domain
+area was 302 000 km2.
+2.2. Parameterization and uncertainty
+We provide an overview of the data sources we used, and note
+that more detailed documentation can be found in Appendix B in
+Supplementary material. Many estimates of ﬁsh  biomass and catch
+were derived from the most recent stock assessments available
+from the Paciﬁc  Fishery Management Council for the portion of the
+model domain within United States territorial waters. Total U.S.
+biomass was scaled up to the ecosystem scale based on the distri-
+bution of the ﬁsh  species and the ratio of area inside and outside U.S.
+waters. Catch data were collated for all ﬁsh  species managed by the
+Paciﬁc  Fishery Management Council in the U.S. (part of the ground-
+ﬁsh,  salmon,
+ highly migratory species, paciﬁc  halibut, and coastal
+pelagic species ﬁsheries  management plans), and for three inverte-
+brate groups: pandalid shrimp, benthic shrimp, and state-managed
+dungeness crab (Metacarcinus magister) (see individual references
+in Appendix B in Supplementary material). Canadian catch data
+came from the Fishery Operations System (FOS) maintained by
+Fisheries and Oceans Canada (DFO) for 2007–2014  and Mexican
+catch data came from the Comisión Nacional de Acuacultura y Pesca
+(CONAPESCA, 2015). Biomass or density of most forage ﬁsh  species
+(other than sardine) came from primary literature or was solved for
+by the model through top-down balancing. Because we assumed a
+steady state and forage ﬁsh  biomass ﬂuctuates widely, we used
+10-year averages of biomass for forage ﬁsh  species where we had
+biomass estimates and 10-year averages for catch. A similar 10-
+year average was used for Hake (Merluccius productus) biomass
+and catch and humpback whale biomass (Megaptera novaeangliae)
+because of trends in biomass (see Appendix B in Supplementary
+material).
+All marine mammal abundance estimates for United States
+waters were derived from the Marine Mammal Stock Assessment
+(Carretta et al., 2013), while estimates for Canada and Mexico
+came from various research studies. These abundance values were
+converted to biomass by scaling by individual body size, using
+values from Hunt et al. (2000). Most seabird abundance esti-
+mates came from sources that provided information for smaller
+regions (Canada, Washington, Oregon, California, Mexico) within
+the larger model domain, and were extrapolated to biomass based
+on individual-mass data from Hunt et al. (2000). Biomass values
+for lower trophic levels were solved for by the model through top-
+down balancing.
+Many estimates of production to biomass (PB) and consump-
+tion to biomass (QB) (Eq. (1)) came from the Field (2004) Ecopath
+model for the Northern California Current, particularly for lower
+trophic levels. Production to biomass ratios are equal to total mor-
+tality for a group in mass-balanced models (Allen, 1971), therefore
+PB values were updated as needed for ﬁsh  species based on natu-
+ral and ﬁshing  mortality estimates from stock assessments. Most
+seabird mortality rates came from studies compiled by Schreiber
+L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100  91
+Fig. 1. Map of the total area of the California Current that was used as the domain for the food web model, extending from Vancouver Island, B.C. to Punta Eugenia, Mexico
+(dark
+ grey). The white dotted region overlaid is two previous California Current Ecopath model domains (Field, 2004; Ruzicka et al., 2007) where the later stopped at 41.8◦
+North (Southern Oregon border).
+and Burger (2001). Marine mammal PB values were mainly taken
+from previous Ecopath models including Field (2004) and Aydin
+et al. (2007). For seabirds and marine mammals, QB values were
+calculated from daily energy consumption values and prey energy
+density values from Hunt et al. (2000), following equations speci-
+ﬁed  in Harvey et al. (2010). For most other functional groups (ﬁsh
+and invertebrates), QB values were taken from other Ecopath mod-
+els, mainly Field (2004) or other models for similar systems (largely
+Puget Sound, Hecate Strait, and Gulf of Alaska).
+Data for the majority of diets came from studies compiled in
+the California Current Predator Diet Database (Szoboszlai et al.,
+2015), which mainly incorporated data from primary literature.
+We also examined diets from government documents and theses
+to supplement information for functional groups for which primary
+literature was lacking, out-of-date, or non-existent. Forage ﬁsh  diet
+mainly came from Brodeur et al. (1987), Emmett et al. (2005), and
+Miller (2006). Diet information for lower trophic levels was taken
+from the Field (2004) Ecopath model.
+Because the inputs needed to parameterize the food web model
+are not known with complete precision, we used a Monte Carlo
+approach to generate plausible alternative parameterizations of the
+food web model that are consistent with the data available (similar
+to “Ecosense”  methods in Aydin et al., 2007). We assigned a coef-
+ﬁcient  of variation (CV) to each input parameter (B, QB, PB, and C)
+(Eq. (1)) using values provided or an assigned level of uncertainty
+based on data quality (see Table 1 for CV values). Wherever pos-
+sible we used the CV reported by our data sources, but this was
+rare. In most cases, we ranked data according to degree of con-
+ﬁdence  and assigned precision levels accordingly (Table 2). We
+arbitrarily selected CVs for each level of data quality ranking that
+produced Monte Carlo output that reﬂected our degree of certainty.
+Fish biomass values were given higher CVs than other biomass esti-
+mates (though the same data quality ranking was used) because
+92 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+Table 2
+Data
+ quality ranking used to assign coefﬁcient  of variation values (CVs) for biomass (for ﬁsh,  seabirds, and marine mammals separately), production to biomass (PB) values,
+and
+ consumption to biomass (QB) values.
+Data quality ranking criteria
+Fish biomass CV
+0.15
+ Recent (2000–2014)  stock assessment for the whole model domain (Canada, U.S., and Mexico)
+0.2
+ Recent (2000–2014)  assessment for the U.S., used conversion factor for Canada and/or Mexico
+0.25
+ Survey not assessment or assessment but incomplete info (spawning biomass only) or multiple sources for the U.S.
+0.3
+ Any stock assessment before 2000
+0.35
+ Information from before 2000 and not a stock assessment
+0.4
+ Value taken from another ecosystem model
+Seabird biomass CV
+0.05
+ Estimates for the entire domain (Canada, U.S., and Mexico) are from 2000 or later
+0.1
+ Majority (>75% and <100%) of estimates are from 2000 or later
+0.15
+ Estimates are from 2000 or later for 50% of the domain OR estimates are from 2000 or later but had to adjust (use a
+conversion
+ factor to scale to a larger domain)
+0.2
+ Some abundances from 2000 but majority are older (>75%)
+0.25
+ All estimates from before 2000
+Mammal biomass CV
+0.05
+ Estimates for the entire domain (Canada, U.S., and Mexico) are from 2000 or later
+0.1
+ Majority
+ (>75% and <100%) of estimates are from 2000 or later
+0.15 Most estimates from 2000 or later but adjusted amount for biomass outside of the 2000 m isobath or scaled for
+regions
+ without estimates
+0.2
+ All estimates from 1990–2000
+0.25
+ Estimates from before 1990
+PB CV
+0.05
+ Data used is from a recent source (recent stock assessment or research study) or is a well established estimate (natural
+mortality used in stock assessment is old but has been used for multiple years/assessments)
+0.1
+ Data from before 1990 OR estimated/calculated by Field (2004) with older information (past stock assessments) OR
+mortality
+ is an average for different ages/sexes OR calculated using Siler life history model
+0.15
+ Wrong region, but correct species OR similar species, correct region
+0.2
+ Generalization/assumption for large/multi-species functional group
+QB CV
+0.05
+ Uses recent data and uses established methods to calculate QB—a.k.a.  uses numbers at age data and Essington et al.
+(2001)
+ to calculate QB, OR uses data from Hunt et al. (2000) to calculate
+0.1
+ Calculated based on older data (before 1990) OR certain information was estimated but based on real data
+0.15
+ Wrong region, but correct species OR similar species, correct region OR wrong life history stage
+0.2
+ Generalization/assumption for large/multi-species functional group OR assumed growth efﬁciency
+these estimates are based on model ﬁtting  while other biomass
+estimates were derived from direct observations. Therefore, the
+range of possible CVs was 0.05–0.25  for QB, PB, and seabird/marine
+mammal biomass, but ranged from 0.15 to 0.4 for ﬁsh  biomass. Fish
+catch values (C) were assigned a CV of only 0.1 because these are
+extensively monitored. For any biomass, QB, or PB values where lit-
+erature cited a range of possible values (instead of a single value),
+we used that range and an assumed probability density function
+to specify the CV, such that the upper and lower bounds of the
+range correspond to the ﬁfth  and 95th percentiles of the distri-
+bution. Lognormal distributions with speciﬁed  CVs were used to
+represent each parameter (B, PB, QB, and C) and propagate uncer-
+tainty by setting the mean of the distribution equal to the nominal
+parameter value.
+For ecotrophic efﬁciency  (EE) (Eq. (1)), we characterized uncer-
+tainty using a uniform distribution. For consumers, we used ranges
+of 0.5–0.9,  and for producers we used ranges of 0.25–0.75.  The
+higher values of EE for consumers were used because species with
+considerable predation and ﬁsheries  pressure typically have higher
+EE values due to models accounting for this mortality. On the other
+hand, much of producer (phytoplankton) mortality comes from
+sources other than predation (die-offs in blooms) not represented
+in Ecopath-type models, leading to typically lower EE values in
+models.
+Characterizing diet uncertainty required a different approach
+because diet compositions are proportions that must sum to one,
+and therefore are better represented as a Dirichlet distribution. This
+distribution is a multivariate probability distribution (correspond-
+ing to individual diet fractions for a predator), so one CV alone
+cannot express the degree of conﬁdence  in the overall diet com-
+position. Instead, we used a scaling factor from 0 to 1 for the entire
+diet composition for a species to represent the most and least cer-
+tain estimates, respectively (Table 3). To generate draws from the
+Dirichlet distribution, we speciﬁed  a parameter ai for each prey
+type i in a predator’s diet, which was equal to the product of the
+baseline diet composition and a multiplier related to the scaling
+factor (Table 3). The Dirichlet distribution is then deﬁned  by the
+vector of ai’s. For each vector (each group’s diet) a new vector is
+pulled using the rdirichlet function in the R package ‘MCMCpack’
+(Martin et al., 2011). This procedure generated random diet pro-
+portions that adequately conveyed our degree of conﬁdence  in the
+input data and summed to one. For each functional group, data
+quality rankings and multipliers are listed in the last two rows of
+the diet matrix in Appendix A in Supplementary material.
+Using these speciﬁed  uncertainties and distributions for each
+functional group and each parameter, we drew all parameters
+simultaneously, and then determined if the resulting parameteriza-
+tion returned a model that was energetically balanced. Unbalanced
+models (where one or more functional groups had greater removal
+than production) were discarded. We repeated this procedure until
+500 balanced models were produced.
+2.3. Food web model analysis
+To assess the importance of forage ﬁsh  in the food web, we
+calculated the proportions of predator diets consisting of forage
+ﬁsh  and the fraction of total mortality exerted by different preda-
+tor groups on forage ﬁsh,  for each model generated by the Monte
+Carlo procedure. We did this for two distinct classiﬁcations  of for-
+age ﬁsh:  “managed”  forage ﬁsh  (sardine, anchovy and herring) that
+L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100  93
+Table 3
+Data
+ quality ranking criteria and relevant ranking scores for diet data for each functional group and the multiplier (related to the ranking score) needed to scale baseline diet
+compositions
+ when using the Dirichlet distribution to produce relevant variability in diet distributions. To reach higher than 0.6 in ranking, data must be of high quality in
+terms
+ of taxonomic information and life stage information.
+Diet quality ranking Data quality ranking criteria Dirichlet multiplier
+0 (worst) Generalization/assumption 150
+0.2
+ From a similar system (outside domain) or for a similar species not in the functional group 300
+0.4
+ All studies have sample sizes <25 500
+0.6
+ Majority (>50%) of data is older (1920s–1980s)  1000
+0.8
+ Recent data (1990s/2000s) but only for one region or one year 1500
+1
+ (best) Recent  data (1990s/2000s) for multiple regions and majority have good sample sizes 2000
+have established management plans, either by the Paciﬁc  Fishery
+Management Council or by state agencies, and “unmanaged”  forage
+ﬁsh  (sand lance, whitebait smelt, and other smelt species) that lack
+these plans. For each managed and unmanaged forage ﬁsh  species
+or functional group, we determined the proportion of each forage
+ﬁsh  in predator diets for each model (any diet fractions greater than
+zero). Additionally, for each forage ﬁsh,  we calculated the fraction
+of that species’ or group’s total mortality caused by each predator
+(predation mortality fractions). Diets of predators provide a view
+of potential bottom-up effects of forage ﬁsh  on predators, while
+mortality fractions show potential top-down effects by predators
+on forage ﬁsh.
+We used two graphical methods, one with all functional groups
+separate and another with aggregated broad groups, to better
+explore the position of sardine, anchovy, and herring in the Cal-
+ifornia Current food web, using the initial food web model (not
+including Monte Carlo draws). We ﬁrst  created topological graphs
+depicting the linkages between groups in the model based on diet
+fractions and the fraction of total mortality exerted by one group
+on another. We considered groups to be linked if either the preda-
+tor’s diet fraction of a prey or the prey’s mortality fraction caused
+by a predator, exceeded 5%. We explored the structure of linkages
+through network graphs, using the igraph package in R (Csárdi and
+Nepuzs, 2006) and the Fruchterman Reingold layout algorithm.
+These graphics are useful for understanding the position of each
+forage ﬁsh  in the food web (e.g. a “wasp–waist”  position would
+consist of forage ﬁsh  as a central node in the graph with many prey
+connected below and many predators above and very few connec-
+tions between predators/prey and other groups), but do not permit
+quantiﬁcation  of the strength of linkages. We therefore also gen-
+erated graphics that depicted the ﬂow of energy –  expressed as
+diet fraction for predators and mortality fraction for prey –  for each
+forage species and aggregated groups of forage ﬁsh  prey and preda-
+tors, in order to summarize complex trophic dynamics of the model
+(Essington and Munch, 2014). This method ﬁrst  identiﬁes  predators
+or prey of forage ﬁsh  based on a 5% threshold of prey diet fraction
+or fractions of total mortality from predation (similar to criteria
+for the topological graphs). Then we aggregated all species that are
+predators of forage ﬁsh  into a single biomass compartment (fol-
+lowing Gaichas et al., 2009), aggregated all forage ﬁsh  prey species
+into a single prey compartment, and calculated diet fractions and
+fractions of mortality for the aggregated groups. Once these three
+main groups (forage ﬁsh,  forage ﬁsh  predator, and forage ﬁsh  prey)
+were deﬁned,  we calculated the aggregate diet fraction and frac-
+tion of total mortality due to predation for each possible linkage
+in this condensed food web module. Linkages include: forage ﬁsh
+predator to forage ﬁsh  predator; forage ﬁsh  predator to forage
+ﬁsh;  forage ﬁsh  to forage ﬁsh  prey; forage ﬁsh  predator to forage
+ﬁsh  prey; forage ﬁsh  prey to forage ﬁsh  prey. Both the topologi-
+cal graphs and energy ﬂow graphs are meant to summarize energy
+ﬂow and topological structure for the main ecological interactions
+between forage ﬁsh  and predators or prey. Thus, the 5% thresholds
+removes linkages that likely represent ecologically insigniﬁcant  or
+anomalous interactions (e.g. the prey is not a frequent, consistent
+occurrence in the diet of a predator).
+2.4. Metrics of forage ﬁsh  importance
+We used a two-criteria method to identify functionally impor-
+tant forage ﬁsh  species or groups, as deﬁned  by (Plagányi and
+Essington, 2014). The ﬁrst  criterion calculated was the Supportive
+Role to Fishery ecosystem (SURF) index (Plagányi and Essington,
+2014):
+SURFi =
+∑S
+j=1DC2
+ij
+L (2)
+where
+ L is the total number of linkages (DCji > 0) in the food web.
+Higher SURF scores indicate a strong possibility for a dynamic
+model to predict indirect food web effects from ﬁshing  a forage
+ﬁsh  species, based on the diet dependence of predators on that
+species and both the number and strength of linkages between
+predators and the forage ﬁsh.  The second criterion used was the
+proportion of total consumer biomass (biomass of all heterotrophs;
+no primary producers) that each forage ﬁsh  comprises (based on
+Smith et al., 2011). Any SURF values that exceed 0.001 or propor-
+tion of total consumer biomass values that exceed 0.05 indicate
+that a dynamic food web model would likely predict substantial,
+widespread ecological consequences (indirect and direct) if this
+species was depleted (Smith et al., 2011; Plagányi and Essington,
+2014). Therefore, species or groups with SURF or proportion of
+total consumer biomass values above these thresholds are deter-
+mined to be ecologically “key”.  These threshold values came from
+Smith et al. (2011) and Plagányi and Essington (2014) by calculating
+either the proportion of total consumer biomass or SURF for multi-
+ple forage ﬁsh  from ecosystem models and ranking the ecological
+impact of depleting that forage ﬁsh,  where species with substantial
+impacts (70% or greater decline for one predator or 40–69%  decline
+for 10% or more of secondary consumers) had criteria values above
+0.05 and 0.001, respectively. We calculated SURF and the propor-
+tion of total consumer biomass for each individual forage species,
+and for selected pairs of forage ﬁsh  (sardine & anchovy; anchovy
+& herring; sardine & herring). The rationale behind grouping into
+pairs is that some predators (or ﬁsheries)  might view these pairs as
+being functionally equivalent. Speciﬁcally,  anchovy and sardine as
+well as herring and anchovy can commonly be found concurrently
+in predator diets (see diet matrix, Appendix A in Supplementary
+material) or switch-off in predator diet in different years (exam-
+ples: anchovy and sardine in brown pelican (Pelecanus occidentalis)
+diet, Velarde et al., 2013; anchovy and herring in Chinook salmon
+(Oncorhynchus tshawytscha) diet, Brodeur et al., 2014). Addition-
+ally, many of the diet studies used in this model came from a
+period when sardine were scarce, so pairing sardine with herring
+or anchovy may show functional equivalency for predators in times
+when sardine scarcity is high.
+94 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+3. Results
+3.1. Characterizing food web linkages
+The three managed forage ﬁsh  –  sardine, anchovy, and herring
+–  generally comprised a greater fraction of predator diets than the
+unmanaged forage ﬁsh  species (Fig. 2). Across all (N = 58) species
+that consumed the six managed and unmanaged forage ﬁsh,  22
+depended on a single managed forage ﬁsh  species for 10% or more
+of their diet (based on the median of Monte Carlo simulations). This
+included 12 predators on anchovy, 6 predators on herring, and 4
+predators on sardine. Unmanaged forage ﬁsh  (whitebait smelt, sand
+lance, and other smelts) constituted a smaller fraction of predator
+diet. Only 5 predators depended on a single unmanaged forage ﬁsh
+for 10% or more of their diet (based on the median of the Monte
+Carlo simulations), including one predator on “other  smelt”,  four
+predators on sandlance, and none on whitebait smelt. The predator
+with the largest diet fraction for each forage ﬁsh  varied across for-
+age ﬁsh  species, except brown pelican had the largest diet fraction
+for both anchovy and sardine (64% anchovy and 26% sardine). Gen-
+erally, the ranges of diet proportions across the 500 Monte Carlo
+models were small, indicating that narrow ranges of diet fractions
+were needed to produce balanced models.
+Fractions of total managed forage ﬁsh  mortality caused by
+predators were more equally spaced out across predators than for
+unmanaged forage ﬁsh,  with no single predator accounting for a
+large portion of managed forage ﬁsh  mortality (no single predator
+with a high predation mortality fraction; Fig. 3). Only two preda-
+tors each accounted for >10% of total mortality for managed forage
+ﬁsh,  while for unmanaged forage ﬁsh,  six predators each accounted
+for >10% of the total mortality. The proportion of mortality caused
+by a predator on each forage ﬁsh  varied more across model param-
+eterizations than predator diet fractions, which likely reﬂects the
+number of model inputs that contribute to calculating fractions of
+mortality caused by predators.
+Balanced models indicated strongly asymmetric predator-
+forage ﬁsh  interactions; in some cases, species with high diet
+fractions of forage ﬁsh  account for low proportions of forage ﬁsh
+mortality, and some predators with small diet fractions of forage
+ﬁsh  account for high proportions of forage ﬁsh  mortality. In other
+words, we saw no relationship between predator diet fractions and
+the fraction of mortality caused by each predator for both groups
+of forage ﬁsh  (managed and unmanaged). For each of the six forage
+ﬁsh  groups, we compared the top ﬁve  predators in terms of diet
+proportions with the top ﬁve  predators responsible for the highest
+fractions of mortality. There were only 12 out of 30 instances where
+a predator in the top ﬁve  for the highest diet proportions on a for-
+age ﬁsh,  was also among the top ﬁve  predators causing the highest
+predation mortality for that forage ﬁsh.  This asymmetry was par-
+ticularly pronounced for seabirds. These predators’ diets had some
+of the largest fractions of forage ﬁsh  (18 instances in the top 5), but
+rarely (N = 3) were among the top ﬁve  most important predators in
+terms of predation mortality fractions (Figs. 2 and 3), most likely
+because of the low density of seabirds.
+3.2. Food web model structure
+Analysis of topological graphs revealed differences in food web
+connections among the main managed forage ﬁsh  species (Fig. 4),
+but no single forage ﬁsh  was a clear central node in the food web. Of
+the three species, anchovy was the most connected in the food web,
+particularly in terms of numbers of predators. Of the 422 linkages
+that met our criteria, 29 involved anchovy, and most of these (25/30,
+83%) were predators. Herring was involved in 19 total linkages (37%
+less than anchovy). On the other hand, sardine was only involved
+in 13 linkages total, less than half of the amount for anchovy. Points
+representing functional groups in the topological graph are located
+in the same location for each forage ﬁsh,  showing that the three
+species also appear to be connected to different assemblages of
+predators, although there was some overlap. Of the 34 total preda-
+tors linked to the managed forage ﬁsh,  half (17 predators) were
+linked to two or more forage ﬁsh,  while the remaining 17 were only
+linked to one forage ﬁsh.  For prey, the three managed forage ﬁsh
+were connected to similar assemblages, with four out of six prey
+species linked to two or more forage ﬁsh.  None of the forage ﬁsh
+species appeared to be a central node in this food web, which we
+would expect to see if this was a wasp-waist food web (Cury et al.,
+2000). Instead, predators on forage ﬁsh  consumed multiple forage
+ﬁsh  and also consumed many other non-forage ﬁsh  prey including
+shared prey with forage ﬁsh.  In other words in Fig. 4, though each
+forage ﬁsh  (in red) is connected to multiple predators (dark blue)
+and multiple prey (gold), these predators and prey are also con-
+nected to many other functional groups (light blue), so the system
+is not wasp-waisted and there are multiple pathways for energy
+ﬂow.
+The complexity of food web structure is further emphasized via
+energy ﬂow diagrams (Fig. 4), showing a substantial degree of diet
+overlap between forage ﬁsh  and their predators. The total contribu-
+tion of each forage ﬁsh  to the combined predator diet ranged from
+3% to 8%, while the contribution of shared prey items ranged from
+14% to 51%, with the greatest diet overlap between herring and
+herring predators and sardine and sardine predators (both 51%).
+In other words, on aggregate, predators consumed roughly four
+times as much shared prey of forage ﬁsh  than they consumed of for-
+age ﬁsh  directly. Moreover, there was substantial self-consumption
+and self-inﬂicted mortality within each guild of forage ﬁsh  preda-
+tors and prey. For example, predators on herring also consumed
+other predators on herring, so an aggregate 26% of herring preda-
+tor mortality was derived from other herring predators. Mortality
+on anchovy predators from other anchovy predators was also high
+(30% of mortality). For both anchovy and sardine, forage ﬁsh  prey
+derived nearly all of their energy from consuming other forage ﬁsh
+prey. This is likely because both of these forage species consume
+both phytoplankton and zooplankton, the latter of which feeds on
+phytoplankton.
+3.3. Metrics of forage ﬁsh  importance
+No single forage ﬁsh  species was classiﬁed  as ecologically “key”
+based on the speciﬁed  thresholds of the two criteria we calculated
+–  proportion of consumer biomass and SURF –  but some forage
+ﬁsh  pairings led to criteria scores that exceeded thresholds (Fig. 5).
+Therefore, a dynamic food web model would likely not predict sub-
+stantial ecological consequences (indirect and direct) from ﬁshing
+one of the individual species, but would for ﬁshing  multiple for-
+age ﬁsh.  When sardine and anchovy and anchovy and herring were
+combined, the paired groups were key based on the SURF metric
+(SURF = 0.0012 and 0.0011, respectively). In contrast, when her-
+ring and sardine were aggregated as a paired group, this group
+was not key based on either metric (SURF = 0.0004, proportion of
+biomass = 0.03). No pairings of forage ﬁsh  were found to be crucial
+based on the proportion of consumer biomass criterion.
+4. Discussion
+We constructed a food web model with high taxonomic reso-
+lution of forage ﬁsh  and their predators to directly consider the
+ecological importance and interactions of forage ﬁsh  in the Cali-
+fornia Current ecosystem. We found that many predators feed on
+multiple forage ﬁsh  species rather than specializing on any sin-
+gle species, which implies that ecosystem-based management of
+L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100  95
+A.)
+B.)
+Fig. 2. Diet proportions of predators on forage ﬁsh  (point = median, inner 95% percentile range) across Monte Carlo draws for (A) managed forage ﬁsh  (anchovy, herring,
+sardine)
+ and (B) unmanaged forage ﬁsh  (whitebait smelt, other smelt, and sand lance).
+forage ﬁsh  could meet sustainability goals for many predators by
+considering guilds of forage ﬁsh  rather than individual species.
+Predator diets showed that most predators are not heavily reliant
+on a single forage ﬁsh  species and we saw a notable degree of
+shared prey between forage ﬁsh  and their predators. However,
+there were exceptions to this and some predators –  mainly pis-
+civorous seabirds –  relied heavily (>10%) on individual forage ﬁsh
+species in their diet. On the other hand, we did not ﬁnd  evidence
+that any single forage ﬁsh  was a key species (depletion would lead
+to widespread, substantial ecological consequences) based on two
+previously established criteria to determine ecological key species
+(the SURF index and proportion of total consumer biomass index),
+but some pairs of forage ﬁsh  (sardine & anchovy, anchovy & her-
+96 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+A.)
+B.)
+Fig. 3. Median (points and inner 95% percentile range) fractions of total mortality caused by different predators (predation mortality) across Monte Carlo draws on (A)
+managed
+ forage ﬁsh  (sardine, herring, anchovy) and (B) unmanaged forage ﬁsh  (whitebait smelt, other smelt, sand lance).
+ring) would be key if predators switched among them and these
+forage species had similar ecological function.
+Our model revealed that mainly piscivorous seabirds, some
+marine mammals, and some ﬁsh  might be sensitive to forage ﬁsh
+depletion based on diets. Common murres (Uria aalge), brown pel-
+icans, marbled murrelets, and tufted pufﬁns  (Fratercula cirrhata)
+have high fractions of forage ﬁsh  within their diets, particularly
+anchovy. Multiple species of seabirds that are dependent on for-
+age ﬁsh  currently receive or are candidates for protection under
+the U.S. Endangered Species Act. Marbled murrelets are listed as
+threatened (U.S. Fish and Wildlife, 1997), tufted pufﬁns  are being
+considered for listing (Hanson and Wiles, 2015), and brown pel-
+icans were previously listed (U.S. Fish and Wildlife, 2009). These
+species’ dependence on forage ﬁsh  might have been missed if we
+had aggregated these species with other seabirds (e.g. Cassin’s
+auklets (Ptychoramphus aleuticus) and pigeon guillemots (Cepphus
+L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100  97
+Fig. 4. Topological graphs (top) for each forage ﬁsh  (in red, same order as bottom graphs), forage ﬁsh  predators (blue), forage ﬁsh  prey (orange) and all other functional groups
+in
+ the model (light blue) for diet proportions and predation mortality fractions greater than 5%. Energy ﬂow diagrams (bottom) show diet fractions in blue and predation
+mortality proportions in red. Predators of forage ﬁsh  and prey of forage ﬁsh  were aggregated using methods similar to Gaichas et al. (2009) and only included for diet fractions
+and
+ predation mortality fractions greater than 5%.
+Fig. 5. Median values (with inner 95% percentile range) for two metrics of species importance –  proportion of consumer biomass (Smith et al., 2011) and SURF (Supportive
+Role
+ to Fishery ecosystem, Plagányi and Essington, 2014) –  for nine forage ﬁsh  functional groups, including individual species and pairs of forage ﬁsh  (anchovy & herring,
+sardine
+ & anchovy, and sardine & herring). Dotted lines are thresholds for each metric above which a species is considered “key”,  which equal 0.05 for proportion of consumer
+biomass
+ and 0.001 for SURF (values come from Smith et al., 2011 and Plagányi and Essington, 2014). No single species is key based on either metric but two pairs of forage
+ﬁsh
+ (anchovy & sardine and anchovy & herring) are key based on the SURF index.
+columba)) that are less dependent on forage ﬁsh,  as other models
+have (Field, 2004; Kaplan et al., 2013). These diet dependencies
+can translate into population responses of seabirds (lower repro-
+ductive success or survival) with reductions in prey abundance
+below threshold values (Furness, 2007; Cury et al., 2011; Robinson
+et al., 2015). Some marine mammals have high consumption of sar-
+dine, possibly because sardines are generally distributed further
+offshore than many other forage species (Zwolinski et al., 2012).
+In contrast, few ﬁsh  predators had large diet proportions of for-
+age ﬁsh  (exceptions were salmon (Oncorhynchus spp.), arrowtooth
+ﬂounder (Atheresthes stomias), halibut (Hippoglossus stenolepis and
+Paralichthys californicus), lingcod (Ophiodon elongatus), black rock-
+ﬁsh  (Sebastes melanops), and near-shore rockﬁsh  (Sebastes spp.)),
+which is consistent with the notion that many piscivorous ﬁsh
+tend to be generalist predators. However, it is unclear if marine ﬁsh
+exhibit prey switching responses with changes in prey availability
+(Rindorf et al., 2006).
+No single forage ﬁsh  species met either criteria for being a “key”
+species (SURF or proportion of consumer biomass); meaning that
+dynamic models would generally not predict widespread ecolog-
+ical effects from depleting individual forage ﬁsh  species. We note
+that the models used to generate threshold values for the crite-
+ria were never as taxonomically detailed as the model described
+here (see Plagányi and Essington, 2014), so additional testing of
+the criteria is needed to see if their predictions hold for more tax-
+onomically complex food web models. The absence of any single
+forage ﬁsh  being designated “key”  was likely due to the broad dis-
+tribution of predator feeding among many prey items. However,
+we did identify ecologically plausible forage ﬁsh  functional groups
+consisting of pairs of species that would be deemed “key”,  if the
+98 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+species were a single, combined functional group from the per-
+spective of predators (i.e. predators could readily switch between
+these species according to their relative abundance). We consid-
+ered groupings to be plausible if the two forage ﬁsh  had overlapping
+spatial distributions and if they co-occurred in predator diets (with
+spatial overlap, these may also be plausible pairings for ﬁsheries
+because of shared gears for these species). Among the three main
+forage ﬁsh  species, sardine & anchovy and anchovy & herring were
+the most plausible pairings. Sardine is the most offshore of the three
+species, anchovy are intermediate, and herring are the most near
+shore (Zwolinski et al., 2012). Additionally, herring are mainly con-
+centrated in the Northern half of the model domain (Zwolinski et al.,
+2012), anchovy occur in the full North-South range of the model
+(Checkley et al., 2008), and sardine occur in the full North-South
+range of the model; spawning in the South off of California and
+migrating North in summer, but being mainly concentrated in the
+Southern half in low population years (see Checkley et al., 2008).
+These distributional gradients are evident in the estimated diet
+fractions for predators, where some predators feed substantially
+on either sardine & anchovy (e.g. brown pelican, halibut, minke
+whales (Balaenoptera acutorostrata)) or anchovy & herring (e.g.,
+salmon, western gull/glaucous-winged gull Larus occidentalis and
+Larus glaucescens), but few predators have a high diet proportion of
+both sardine & herring.
+Though the above criteria of key species did not suggest large
+ecological effects of depletion of a single forage ﬁsh  species, other
+characteristics not captured adequately by these methods, could
+lead to ecosystem effects. For example, quality of food (e.g. size,
+energy content) has been linked to predator population dynam-
+ics through effects on vital rates, notably reproductive success
+(see review in Österblom et al., 2008). Also, many predators are
+central-place foragers (return to a central, home base, usually to
+feed young, between foraging trips), speciﬁcally  seabirds and some
+marine mammals. Because of this, abundance of forage ﬁsh  near
+breeding colonies or haul out sites at speciﬁc  times of the year
+can limit reproductive success (Furness and Birkhead, 1984; Lewis
+et al., 2001), and may be more important than the overall abun-
+dance used in these criteria. Therefore, certain forage ﬁsh  may
+have been identiﬁed  as key if smaller regions were considered (not
+the entire California Current), speciﬁcally  when considering forage
+ﬁsh  that are more localized to only part of our larger domain (i.e.
+higher concentrations of herring in Northern portion, speciﬁcally
+British Columbia). At a broader scale, distributional shifts of forage
+ﬁsh  in the South Benguela ecosystem have been linked to reduced
+survivorship of African penguins (Spheniscus demersus) (Robinson
+et al., 2015), and shifts have occurred for certain forage ﬁsh  in the
+California Current (Brodeur et al., 2006; Fiedler et al., 1986).
+The food web model revealed widespread intraguild predation
+(Polis et al., 1989) at multiple levels of the food web, showing
+this food web does not have structural characteristics of a “wasp-
+waisted”  system, which makes it difﬁcult  to predict impacts of
+forage ﬁsh  depletion. Intraguild predation, where species both
+consume and compete with their prey, was common. Forage ﬁsh
+predators both consumed forage ﬁsh  and shared prey of forage
+ﬁsh,  while forage ﬁsh  prey often predated on each other. Much
+of the overlap in diet between forage ﬁsh  and predators was due
+to consumption of euphausiids, while overlap between forage ﬁsh
+and prey was due to consumption on phytoplankton. Therefore,
+there are many pathways through which energy can ﬂow. This is
+in contrast to characterization of forage ﬁsh  in other upwelling
+systems (Cury et al., 2000), where food webs are “wasp-waisted”,
+whereby a small number of planktivorous forage ﬁsh  dominate the
+mid-trophic level of food webs and energy ﬂow to predators is
+concentrated through those species. However, models to describe
+these systems have not been taxonomically detailed (see Essington
+and Plagányi, 2014), and it has been suggested that no eastern
+boundary upwelling system is wasp-waisted (Fréon et al., 2009).
+Other studies of speciﬁcally  the Northern California Current food
+web also showed that this system does not appear to have structural
+characteristics of a wasp-waisted system and noted the importance
+of euphausiids as prey for multiple trophic levels (Miller et al., 2010;
+Ruzicka et al., 2012). Miller et al. (2010) characterized the system
+as having “bottom-up  omnivory”  (bottom-up control with organ-
+isms feeding at multiple trophic levels) and our results support this
+conclusion. Intraguild predation could lead to complex responses
+of components of the food web to forage ﬁsh  depletion and these
+indirect food web linkages make it difﬁcult  to predict the effects of
+species removal in complex food webs (Yodzis, 2000).
+Despite this complexity, we identiﬁed  speciﬁc  species that
+mainly have only direct linkages with forage ﬁsh.  Namely, pis-
+civorous birds were particularly dependent on forage ﬁsh,  are not
+preyed upon by other forage ﬁsh  predators, and do not have much
+overlapping diet preferences with forage ﬁsh.  Groups such as these
+might show more predictable negative responses to depletion of
+forage ﬁsh  because of these attributes.
+The model described here is the ﬁrst  Ecopath foodweb model
+for the entire spatial domain of the California Current Ecosystem
+(British Columbia, Canada to Baja California). Though other models
+have been constructed for the Northern U.S. portion (Field, 2004;
+Ruzicka et al., 2007), distributions of many species considered,
+including forage ﬁsh  and their predators, extend for the entire Cal-
+ifornia Current region, either for the entire year or through-out the
+year (i.e. migrations). For example, sardine spawn in the Southern
+portion of our model domain but adults migrate North in the sum-
+mer (Checkley et al., 2008). Additionally, many predator species
+migrate from one portion of the domain to another depending on
+season or expand their distribution when not breeding. For exam-
+ple, male California sea lions (Zalophus californianus), Paciﬁc  hake
+(Merluccius productus), and many seabirds undergo seasonal lati-
+tudinal migrations (Odell, 1981; Tyler et al., 1993; Agostini et al.,
+2006). Because this model integrates these spatio-temporal phe-
+nomenon, the model does not capture dependencies that occur at
+ﬁner  scales
+All models suffer from the limitations of data availability to
+parameterize them, and the model presented here is no exception.
+Predation on forage ﬁsh  can vary across space and time (Brodeur
+et al., 2014; Ainley et al., 1996; Thayer and Sydeman, 2007). Though
+we attempted to incorporate diet studies from multiple locations
+for all species, these data were not available for every species.
+Additionally, the abundance and availability of speciﬁc  forage ﬁsh
+species varies annually, seasonally, and on decadal scales (Brodeur
+et al., 2003; Litz et al., 2014) and many diet studies span only a sin-
+gle year and/or single season (usually summer) (Szoboszlai et al.,
+2015). Consequently, there may be seasonal dependencies that are
+not well resolved in this food web model. Our model also does
+not resolve the size structure of all feeding interactions between
+forage ﬁsh  and predators due to data limitations. Finally, many of
+the diet studies were conducted during time periods when sardine
+were relatively scarce but anchovies were abundant. We therefore
+may have underestimated the contribution of sardine (and overes-
+timated the contribution of anchovy) for those predators that could
+switch between the two, and potentially underestimated SURF for
+sardine (overestimated for anchovy) because SURF relies mainly on
+predator diet proportions (Plagányi and Essington, 2014).
+Model development requires trade-offs between model breadth
+and detail (Walters, 1986), leading to trade-offs in potential uses
+of the model. Here, we emphasized taxonomic resolution of for-
+age ﬁsh  and predators, but sacriﬁced  detail on spatial components
+of the model and temporal differences in parameters (speciﬁcally
+diet) at both yearly and seasonal time scales. We also sacriﬁced
+taxonomic resolution of lower trophic species (zooplankton and
+phytoplankton), which may have led to some amount of the
+L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100  99
+intraguild predation between forage ﬁsh  and their predators for
+similar prey. Additionally, environmental processes, such as cli-
+mate variability, are widely known to govern productivity of forage
+ﬁsh  species (Chavez et al., 2003; Schwartzlose et al., 1999) but are
+not accounted for in this model. Regardless of these limitations, this
+model overcomes speciﬁc  limitations that were previously identi-
+ﬁed  for other ecological models.
+Our food web model was conducive to describing the trophic
+interactions of forage ﬁsh  in this ecosystem, describing the diver-
+sity of predators that feed upon them, and for identifying species
+that are likely to be most sensitive to forage ﬁsh  depletion based
+on diets (namely piscivorous seabirds), due to the taxonomic rich-
+ness of forage ﬁsh  and predators in the model. By starting with
+high taxonomic breadth, we were able to analyze food web con-
+nections through individual species interactions, but also aggregate
+species in different combinations as needed for alternative per-
+spectives. Building a model with this level of breadth is data
+intensive, but allows for more thorough identiﬁcation  of preda-
+tors most dependent on forage ﬁsh  species. At the same time, high
+taxonomic breadth of individual forage ﬁsh  lowered the apparent
+“key-ness”  value of individual forage species compared to more
+aggregated models that combined multiple forage ﬁsh  into a sin-
+gle compartment Finally, because of the complexity in food web
+dynamics revealed here, such as intraguild predation and the lack
+of wasp-waisted structure, trade-offs between forage ﬁsh  ﬁsheries
+and predators are not clear and identiﬁcation  of these will require
+additional modeling or empirical study
+Role of the funding source
+The Pew Charitable Trusts (Ocean Science Division and the Pew
+Forage Fish Conservation Initiative) and National Fish and Wildlife
+Foundation and Marisla Foundation had no role in the study design,
+analysis of data, interpretation of data, or in writing the report. A
+requirement by the Pew Charitable Trusts was a paper submission
+for publication.
+Acknowledgements
+We thank the Pew Charitable Trusts (Ocean Science Division
+and the Pew Forage Fish Conservation Initiative) (LEK, TEE, WJS,
+AIS, JAT) and National Fish and Wildlife Foundation and Marisla
+Foundation (JAT, AIS, and WJS) for funding this research. Also,
+we thank scientists who contributed their expertise, knowledge,
+and data, especially Chris Harvey, Jim Ruzicka, Shawn Stephensen,
+Scott Pearson, Tom Good, and Eric Ward. For contributing magni-
+tudes of information from the original California Current Ecopath
+model and personal communication, we thank John Field. We also
+thank Fisheries and Oceans Canada, Science Branch for provision
+of data. Finally, we thank the anonymous reviewers for improving
+this manuscript.
+Appendix A. Supplementary data
+Supplementary data associated with this article can be found, in
+the online version, at http://dx.doi.org/10.1016/j.ecolmodel.2016.
+05.010.
+Data deposition: Data reported in this paper and R codes
+are available at https://github.com/koehnl/CalCurFoodWebModel
+ECOMOD.
+References
+Agostini, V.N., Francis, R.C., Hollowed, A.B., Pierce, S.D., Wilson, C., Hendrix, A.N.,
+2006. The relationship between Paciﬁc  hake (Merluccius productus)
+distribution and poleward subsurface ﬂow in the California Current System.
+Can. J. Fish. Aquat. Sci. 63, 2648–2659.
+Ainley, D.G., Spear, L.B., Allen, S.G., Ribic, C.A., 1996. Temporal and spatial patterns
+in the diet of the common murre in California waters. Condor 98, 691–705.
+Allen, K.R., 1971. Relation between production and biomass. J. Fish. Board Can. 28,
+1573–1581.
+Aydin, K., Gaichas, S., Ortiz, I., Kinzey, D., Friday, N., 2007. A Comparison of the
+Bering Sea, Gulf of Alaska, and Aleutian Islands Large Marine Ecosystems
+Through Food Web Modeling (NOAA Technical Memorandum
+NMFS-AFSC-178). National Oceanic and Atmospheric Adminstration, Seattle,
+WA.
+Block, B.A., Jonsen, I.D., Jorgensen, S.J., Winship, A.J., Shaffer, S.A., Bograd, S.J.,
+Hazen, E.L., Foley, D.G., Breed, G.A., Harrison, A.-L., 2011. Tracking apex marine
+predator movements in a dynamic ocean. Nature 475, 86–90.
+Brodeur, R.D., Lorz, H.V., Pearcy, W.G., 1987. Food Habits and Dietary Variability of
+Pelagic Nekton off Oregon and Washington, 1979–1984  (NOAA Technical
+Report
+ NMFS 57). US Department of Commerce, National Oceanic and
+Atmospheric Administration, National Marine Fisheries Service.
+Brodeur, R.D., Pearcy, W.G., Ralston, S., 2003. Abundance and distribution patterns
+of nekton and micronekton in the Northern California Current Transition Zone.
+J. Oceanogr. 59, 515–535.
+Brodeur, R.D., Ralston, S., Emmett, R.L., Trudel, M., Auth, T.D., Phillips, A.J., 2006.
+Anomalous pelagic nekton abundance, distribution, and apparent recruitment
+in the northern California Current in 2004 and 2005. Geophys. Res. Lett., 33,
+http://dx.doi.org/10.1029/2006GL026614.
+Brodeur, R.D., Buchanan, J.C., Emmett, R.L., 2014. Pelagic and demersal ﬁsh
+predators on juvenile and adult forage ﬁshes  in the Northern California
+Current: spatial and temporal variations. Calif. Coop. Ocean. Fish. Investig. Rep.
+55, 96–116.
+Carretta, J.V., Oleson, E., Weller, D.W., Lang, A.R., Forney, K.A., Baker, J., Hill, M.C.,
+2013. US Paciﬁc  Marine Mammal Stock Assessments: 2012 (NOAA Technical
+Memorandum NMFS-SWFSC 504). National Oceanic and Atmospheric
+Administration, La Jolla, CA.
+Chavez, F.P., Ryan, J., Lluch-Cota, S.E., ˜Niquen, M., 2003. From anchovies to sardines
+and back: multidecadal change in the Paciﬁc  Ocean. Science 299, 217–221.
+Checkley Jr., D.M., Ayon, P., Baumgartner, T.R., Bernal, M., Coetzee, J.C., Emmett, R.,
+Guevara-Carrasco, R., Hutching, L., Ibaibarriaga, L., Nakata, H., Oozeki, Y.,
+Planque, B., Schweigert, J., Stratoudakis, Y., van der Lingen, C.D., 2008. Habitats.
+In: Checkley, D.M., Alheit, J., Oozeki, Y., Roy, C. (Eds.), Climate Change and Small
+Pelagic
+ Fish. Cambridge University Press, Cambridge, UK, pp. 12–44  (Chapter
+3).
+Christensen, V., Walters, C.J., 2004. Ecopath with Ecosim: methods, capabilities and
+limitations. Ecol. Model. 172, 109–139.
+CONAPESCA (Comisión Nacional de Acuacultura y Pesca), 2015. Anuario estadistico
+de acuacultura y pesca (1980–2013).  Online at http://www.conapesca.sagarpa.
+gob.mx/wb/cona/consulta especiﬁca  por produccion (accessed 22.03.15.).
+Csárdi, G., Nepuzs, T., 2006. The igraph software package for complex network
+research. InterJ
+ Complex Syst. 1695.
+Cury, P., Bakun, A., Crawford, R.J., Jarre, A., Qui˜nones, R.A., Shannon, L.J., Verheye,
+H.M., 2000. Small pelagics in upwelling systems: patterns of interaction and
+structural changes in wasp-waist ecosystems. ICES J. Mar. Sci. 57, 603–618.
+Cury, P.M., Boyd, I.L., Bonhommeau, S., Anker-Nilssen, T., Crawford, R.J., Furness,
+R.W., Mills, J.A., Murphy, E.J., Österblom, H., Paleczny, M., Piatt, J.F., Roux, J.-P.,
+Shannon, L., Sydeman, W.J., 2011. Global seabird response to forage ﬁsh
+depletionÖone-third for the birds. Science 334, 1703–1706.
+Emmett, R.L., Brodeur, R.D., Miller, T.W., Pool, S.S., Bentley, P.J., Krutzikowsky, G.K.,
+McCrae, J., 2005. Paciﬁc  sardine (Sardinops sagax) abundance distribution, and
+ecological relationships in the Paciﬁc  Northwest. Calif. Coop. Ocean. Fish.
+Investig. Rep. 46, 122–143.
+Essington, T.E., Munch, S.B., 2014. Trade-offs between supportive and provisioning
+ecosystem services of forage species in marine food webs. Ecol. Appl. 24,
+1543–1557.
+Essington, T.E., Plagányi, É.E., 2014. Pitfalls and guidelines for recycling models for
+ecosystem-based ﬁsheries  management: evaluating model suitability for
+forage ﬁsh  ﬁsheries.  ICES J. Mar. Sci. 71, 118–127,  http://dx.doi.org/10.1093/
+icesjms/fst047.
+Essington, T.E., Kitchell, J.F., Walters, C.J., 2001. The von Bertalanffy growth
+function, bioenergetics, and the consumption rates of ﬁsh.  Can. J. Fish. Aquat.
+Sci. 58, 2129–2138.
+FAO, 2015. Fishery and Aquaculture Statistics [Capture production 1950–2013]
+(FishStatJ). FAO Fisheries and Aquaculture Department [online]. Rome
+[Released March 2015]. http://www.fao.org/ﬁshery/statistics/software/
+ﬁshstatj/ .
+Fiedler, P.C., Methot, R.D., Hewitt, R.P., 1986. Effects of California El Nino
+1982–1984  on the northern anchovy. J. Mar. Res. 44, 317–338.
+Field, J.C., 2004. Application of ecosystem-based ﬁshery  management approaches
+in the northern California Current. In: Dissertation Thesis. University of
+Washington, Seattle, WA.
+Fréon, P., Cury, P., Shannon, L., Roy, C., 2005. Sustainable exploitation of small
+pelagic ﬁsh  stocks challenged by environmental and ecosystem changes: a
+review. Bull. Mar. Sci. 76, 385–462.
+Fréon, P., Aristegui, J., Bertrand, A., Crawford, R.J., Field, J.C., Gibbons, M.J., Tam, J.,
+Hutchings, L., Masski, H., Mullon, C., Ramdani, M., Seret, B., Simieri, M., 2009.
+Functional group biodiversity in Eastern Boundary Upwelling Ecosystems
+questions the wasp-waist trophic structure. Prog. Oceanogr. 83, 97–106.
+100 L.E. Koehn et al. / Ecological Modelling 335 (2016) 87–100
+Frid, C.L., Paramor, O.A., Scott, C.L., 2006. Ecosystem-based management of
+ﬁsheries:  is science limiting? ICES J. Mar. Sci. 63, 1567–1572.
+Fulton, E.A., Smith, A.D., Johnson, C.R., 2003. Effect of complexity on marine
+ecosystem models. Mar. Ecol. Prog. Ser. 253, 1–16.
+Fulton, E.A., Smith, A.D., Smith, D.C., Johnson, P., 2014. An integrated approach is
+needed for Ecosystem Based Fisheries Management: insights from
+ecosystem-level management strategy evaluation. PLoS One 9, e84242, http://
+dx.doi.org/10.1371/journal.pone.0084242.
+Furness, R.W., 2007. Responses of seabirds to depletion of food ﬁsh  stocks. J.
+Ornithol. 148, 247–252.
+Furness, R.W., Birkhead, T.R., 1984. Seabird colony distributions suggest
+competition for food supplies during the breeding season. Nature 311,
+655–656.
+Gaichas, S., Skaret, G., Falk-Petersen, J., Link, J.S., Overholtz, W., Megrey, B.A.,
+Gjøsæter,
+ H., Stockhausen, W.T., Dommasnes, A., Friedland, K.D., 2009. A
+comparison of community and trophic structure in ﬁve  marine ecosystems
+based
+ on energy budgets and system metrics. Prog. Oceanogr. 81, 47–62.
+Hannesson, R., Herrick, S., Field, J., 2009. Ecological and economic considerations in
+the conservation and management of the Paciﬁc  sardine (Sardinops sagax). Can.
+J. Fish. Aquat. Sci. 66, 859–868.
+Hanson, T., Wiles, G.J., 2015. Washington State Status Report for the Tufted Pufﬁn.
+Washington Department of Fish and Wildlife, Olympia, Washington66.
+Harvey, C.J., Bartz, K.K., Davies, J., Francis, T.B., 2010. Mass-Balance Model for
+Evaluating
+ Food Web Structure and Community-Scale Indicators in the Central
+Basin of Puget Sound (NOAA Technical Memorandum NMFS-NWFSC-106).
+National Oceanic and Atmospheric Administration, Seattle, WA.
+Hunt, G.L., Kat¯o, H., McKinnell, S.M., 2000. Predation by Marine Birds and
+Mammals
+ in the Subarctic North Paciﬁc  Ocean (PICES Scientiﬁc  Report No. 14).
+North Paciﬁc  Marine Science Organization164.
+Kaplan, I.C., Brown, C.J., Fulton, E.A., Gray, I.A., Field, J.C., Smith, A.D., 2013. Impacts
+of depleting forage species in the California Current. Environ. Conserv. 40,
+380–393.
+Kimura, S., Nakai, M., Sugimoto, T., 1997. Migration of albacore tuna, Thunnus
+alalunga, in the North Paciﬁc  Ocean in relation to large oceanic phenomena.
+Fish. Oceanogr. 6, 51–57.
+Lewis, S., Sherratt, T.N., Hamer, K.C., Wanless, S., 2001. Evidence of intra-speciﬁc
+competition for food in a pelagic seabird. Nature 412, 816–819.
+Litz, M.N., Emmett, R.L., Bentley, P.J., Claiborne, A.M., Barceló, C., 2014. Biotic and
+abiotic factors inﬂuencing forage ﬁsh  and pelagic nekton community in the
+Columbia River
+ plume (USA) throughout the upwelling season 1999–2009.
+ICES J. Mar. Sci. 71, 5–18,  http://dx.doi.org/10.1093/icesjms/fst082.
+Mace, P.M., 2001. A new role for MSY in single-species and ecosystem approaches
+to ﬁsheries  stock assessment and management. Fish Fish. 2, 2–32.
+Martin, A.D., Quinn, K.M., Park, J.H., 2011. MCMCpack: Markov Chain Monte Carlo
+in R. J. Stat. Softw. 42, 1–21  http://www.jstatsoft.org/v42/i09/.
+May, R.M., Beddington, J.R., Clark, C.W., Holt, S.J., Laws, R.M., 1979. Management of
+multispecies ﬁsheries.  Science 205, 267–277.
+Miller, T.W.,
+ 2006. Trophic dynamics of marine nekton and zooplankton within the
+Northern California Current pelagic ecosystem. In: Dissertation Thesis. Oregon
+State University, Corvallis, OR.
+Miller, T.W., Brodeur, R.D., Raul, G., Omori, K., 2010. Prey dominance shapes trophic
+structure of the Northern California Current pelagic food web: evidence from
+stable isotopes and diet analysis. Mar. Ecol. Prog. Ser. 420, 15–26.
+Odell, D.K., 1981. California sea lion, Zalophus californianus (Lesson 1828). In:
+Ridgeway, S.H., Harrison, R.J. (Eds.), Handbook of Marine Mammals, Vol. 1: The
+Walrus, Sea Lions, Fur Seals, and Sea Otter. Academic Press, London, England,
+pp. 67–97.
+Österblom, H., Olsson, O., Blenckner, T., Furness, R.W., 2008. Junk-food in marine
+ecosystems. Oikos 117, 967–977.
+Paciﬁc  Fishery Management Council (PFMC), 2014a. Status of the Paciﬁc  Coast
+Coastal Pelagic Species Fishery and Recommended Acceptable Biological
+Catches: Stock Assessment and Fishery Evaluation 2014. Paciﬁc  Fishery
+Management Council, Portland, Oregon.
+Paciﬁc
+ Fishery Management Council (PFMC), 2014b. Ecosystem Initiative 1:
+Protecting Unﬁshed  and Unmanaged Forage Fish Species. Paciﬁc  Fishery
+Management Council, Portland, Oregon.
+Pikitch, E.K., Rountos, K.J., Essington, T.E., Santora, C., Pauly, D., Watson, R., Sumaila,
+U.R., Boersma, P.D., Boyd, I.L., Conover, D.O., Cury, P., Heppell, S.S., Houde, E.D.,
+Mangel, M., Plagányi, É.E., Sainsbury, K., Steneck, R.S., Geers, T.M., Gownaris, N.,
+Munch, S.B., 2014. The global contribution of forage ﬁsh  to marine ﬁsheries
+and ecosystems. Fish Fish. 15, 43–64.
+Plagányi, É.E., 2007. Models for an Ecosystem Approach to Fisheries. Food and
+Agriculture Organization, pp. 108.
+Plagányi, É.E., Essington, T.E., 2014. When the SURFs up, forage ﬁsh  are key. Fish.
+Res. 159, 68–74.
+Polis, G.A., Myers, C.A., Holt, R.D., 1989. The ecology and evolution of intraguild
+predation: potential competitors that eat each other. Annu. Rev. Ecol. Syst. 20,
+297–330.
+R Development Core Team (RDCT), 2014. R: A Language and Environment for
+Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria
+http://www.R-project.org/.
+Rindorf, A., Gislason, H., Lewy, P., 2006. Prey switching of cod and whiting in the
+North Sea. Mar. Ecol. Prog. Ser. 325, 243–253.
+Robinson, W.M., Butterworth, D.S., Plagányi, É.E., 2015. Quantifying the projected
+impact of the South African sardine ﬁshery  on the Robben Island penguin
+colony.
+ ICES J. Mar. Sci. 72, 1822–1833.
+Ruzicka, J.J., Brodeur, R.D., Wainwright, T.C., 2007. Seasonal food web models for
+the
+ Oregon inner-shelf ecosystem investigating the role of large jellyﬁsh.  Calif.
+Coop. Ocean. Fish. Investig. Rep. 48, 106–128.
+Ruzicka, J.J., Brodeur, R.D., Emmett, R.L., Steele, J.H., Zamon, J.E., Morgan, C.A.,
+Thomas, A.C., Wainwright, T.C., 2012. Interannual variability in the Northern
+California Current food web structure: changes in energy ﬂow pathways and
+the role of forage ﬁsh  euphausiids, and jellyﬁsh.  Prog. Oceanogr. 102, 19–41.
+Schreiber, E.A., Burger, J., 2001. Biology of Marine Birds. CRC Press, Boca Raton,
+Florida.
+Schwartzlose, R.A., Alheit, J., Bakun, A., Baumgartner, T.R., Cloete, R., Crawford,
+R.J.M., Fletcher, W.J., Green-Ruiz, Y., Hagen, E., Kawasaki, T., 1999. Worldwide
+large-scale ﬂuctuations of sardine and anchovy populations. S. Afr. J. Mar. Sci.
+21, 289–347.
+Shin, Y.-J., Shannon, L.J., Cury, P.M., 2004. Simulations of ﬁshing  effects on the
+southern Benguela ﬁsh  community using an individual-based model: learning
+from a comparison with ECOSIM. Afr. J. Mar. Sci. 26, 95–114.
+Smith, A.D., Brown, C.J., Bulman, C.M., Fulton, E.A., Johnson, P., Kaplan, I.C.,
+Lozano-Montes, H., Mackinson, S., Marzloff, M., Shannon, L.J., 2011. Impacts of
+ﬁshing  low-trophic level species on marine ecosystems. Science 333,
+1147–1150.
+Szoboszlai, A.I., Thayer, J.A., Wood, S.A., Sydeman, W.J., Koehn, L.E., 2015. Forage
+species in predator diets: synthesis of data from the California Current. Ecol.
+Inform.
+ 29, 45–56.
+Thayer, J.A., Sydeman, W.J., 2007. Spatio-temporal variability in prey harvest and
+reproductive ecology of a piscivorous seabird, Cerorhinca monocerata, in an
+upwelling system. Mar. Ecol. Prog. Ser. 329, 253–265.
+Tyler, W.B., Briggs, K.T., Lewis, D.B., Ford, R.G., 1993. Seabird distribution and
+abundance in relation to oceanographic processes in the California Current
+System. In: Vermeer, K., Briggs, K.T., Morgan, K.H., Siegel-Causey, D. (Eds.), The
+Status, Ecology, and Conservation of Marine Birds of the North Paciﬁc.
+Canadian Wildlife
+ Service, Ottawa, Canada, pp. 48–60.
+U.S. Fish and Wildlife, 1997. Recovery Plan for the Threatened Marbled Murrelet
+(Brachyramphus marmoratus) in Washington, Oregon, and California. US Fish
+and Wildlife Service, Portland, Oregon, USA.
+U.S. Fish and Wildlife, 2009. Endangered and threatened wildlife and plants:
+removal of the Brown Pelican (Pelecanus occidentalis) from the Federal List of
+Endangered and Threatened Wildlife. Fed. Regist. 74, 59444–59472.
+Velarde, E., Ezcurra, E., Anderson, D.W., 2013. Seabird diets provide early warning
+of sardine ﬁshery  declines in the Gulf of California. Sci. Rep., 3, http://dx.doi.
+org/10.1038/srep01332.
+Walters, C., 1986. Adaptive Management of Renewable Resources. MacMillan Pub.
+Co., New York.
+Yodzis, P., 2000. Diffuse effects in food webs. Ecology 81, 261–266.
+Zwolinski, J.P., Demer, D.A., Byers, K.A., Cutter, G.R., Renfree, J.S., Sessions, T.S.,
+Macewicz, B.J., 2012. Distributions and abundances of Paciﬁc  sardine
+(Sardinops sagax) and other pelagic ﬁshes  in the California Current Ecosystem
+during spring 2006, 2008, and 2010, estimated from acoustic-trawl surveys.
+Fish. Bull. 110, 110–122.

@@ -1,0 +1,3898 @@
+For Review Only
+Comparison of approaches for incorporating depredation on 
+fisheries catches into Ecopath
+Journal: ICES Journal of Marine Science
+Manuscript ID ICESJMS-2020-394.R1
+Manuscript Types: Original Article
+Date Submitted by the 
+Author: 29-Sep-2020
+Complete List of Authors: Clavareau, Lyndsay; Ifremer Brittany Centre, Coastal Ecosystem 
+Research Unit (DYNECO)
+Marzloff, Martin; Ifremer Brittany Centre, Coastal Ecosystem Research 
+Unit (DYNECO) / 
+Trenkel, Verena; Ifremer, EMH
+Bulman, Cathy; CSIRO, Ocean & Atmosphere
+Gourguet, Sophie; Ifremer Centre de Bretagne, Maritime Economics Unit
+Le Gallic, Bertrand; Univ Brest, AMURE
+HERNVANN, Pierre-Yves; Ifremer, Unité de Sciences et Technologies 
+Halieutiques; AGROCAMPUS OUEST - Centre de Rennes, Ecology and 
+Ecosystem Health research unit
+Péron, Clara; Muséum National d'Histoire Naturelle, Laboratoire de 
+biologie des organismes et Ecosystèmes Aquatiques (BOREA)
+Gasco, Nicolas; Muséum National d'Histoire Naturelle, Laboratoire de 
+biologie des organismes et Ecosystemes Aquatiques (BOREA)
+Faure, Johanna; Muséum National d'Histoire Naturelle, Laboratoire de 
+Biologie des organismes et Ecosystemes aquatique (BOREA)
+Tixier, Paul; Deakin University School of Life and Environmental Sciences
+Keyword: marine predator, Kerguelen, Crozet, model structure, depredation, 
+ecosystem model
+ 
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+For Review Only
+1
+1 Comparison of approaches for incorporating depredation on 
+2 fisheries catches into Ecopath
+3 Lyndsay Clavareau 1,2*, Martin P. Marzloff 1, Verena M. Trenkel 2, Catherine M. Bulman 3, 
+4 Sophie Gourguet4, Bertrand Le Gallic5, Pierre-Yves Hernvann6,7, Clara Péron8, Nicolas Gasco8, 
+5 Johanna Faure8, and Paul Tixier9
+6
+7 1Département Océanographie et Dynamique des Ecosystèmes, Ifremer, 1625, route de Sainte-Anne, 29280 
+8 Plouzané, France
+9 2Ifremer, rue de l’île d’Yeu, 44311 Nantes cedex 3, France
+10 3CSIRO Oceans & Atmosphere, GPO Box 1538, Hobart, Tasmania, 7001, Australia
+11 4Ifremer, University of Brest, CNRS, UMR 6308, AMURE, Unité d’Economie Maritime, IUEM, Plouzané, 
+12 France
+13 5Université Brest, Ifremer, CNRS, UMR 6308, AMURE, IUEM, France
+14 6Ifremer, Unité de Sciences et Technologies Halieutiques, Laboratoire de Technologie et Biologie Halieutiques, 
+15 F-56100, Lorient, France
+16 7ESE, Ecology and Ecosystems Health, Institut Agro, Agrocampus Ouest, 35042 Rennes, France
+17 8Laboratoire de Biologie des Organismes et Écosystèmes Aquatiques (BOREA), Muséum national d’Histoire 
+18 naturelle, CNRS, UCN, IRD, SU, UA, CP 26, 43, rue Cuvier, Paris 75005, France
+19 9School of Life and Environmental Sciences (Burwood campus), Deakin University, Geelong, Victoria 3125, 
+20 Australia
+21 *Corresponding author: lyndsay.clavareau@ifremer.fr
+22
+23
+Page 1 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+2
+24 Abstract
+25 Ecosystem-based approaches are increasingly used in fisheries management to account for the 
+26 direct trophic impacts of fish population harvesting. However, fisheries can also indirectly alter 
+27 ecosystem structure and functioning, for instance via the provision of new feeding opportunities 
+28 to marine predators. For instance, marine depredation, where predators feed on fishery catches 
+29 on fishing gear, is a behaviour developed by many marine species globally. This behaviour can 
+30 modify both the ecological role of predators and fisheries performance. Yet, these ecosystem-
+31 wide effects of depredation are rarely considered holistically. In this study, we explored 
+32 different ways of incorporating depredation into an Ecopath trophic model. We assessed, 
+33 through a subantarctic case study, how three alternative model structures can account for 
+34 depredation effects on fishery catches, predator and non-commercial prey populations, as well 
+35 as target fish stocks. While none adequately addresses all facets of depredation, the alternative 
+36 models can to some extent capture how depredation can lead to increased fishing pressure on 
+37 stocks. As structural specificities of Ecopath prevented us from representing other depredation 
+38 effects such as provisioning effects for predator populations, we conclude this study with a set 
+39 of guidance to effectively capture the complex effects of depredation in marine ecosystems and 
+40 fisheries models. 
+41 Keywords: marine predators, Kerguelen, Crozet, Ecopath, model structure, depredation, 
+42 ecosystem model
+43
+44
+45
+46
+47
+48
+Page 2 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+3
+49 Introduction
+50 Fisheries can alter the structure and the functioning of marine ecosystems through 
+51 multiple direct and indirect pathways (Hall, 1999). While resource extraction is a primary driver 
+52 of change in trophic interactions, fisheries may also provide new feeding opportunities in the 
+53 form of resource subsidies for some predators. These food subsidies can lead to new interactions 
+54 between species in marine ecosystems and involve discards as well as the target resource itself, 
+55 which, when caught on fishing gear, may represent an easy-to-catch prey for a broad range of 
+56 large marine predators (Votier et al., 2010). In fact, and concomitantly with the global 
+57 expansion of fisheries over the past 60 years, many large marine predator species, primarily 
+58 sharks and marine mammals, have begun feeding on fishery catches as a new way of acquiring 
+59 food (Read, 2008; Mitchell et al., 2018). 
+60 This behaviour, termed “depredation”, has been reported globally in coastal and 
+61 offshore fisheries across all sectors (industrial, artisanal and recreational) and a range of fishing 
+62 techniques including traps, nets and hooks-and-lines (Northridge, 1984; Gilman et al., 2007; 
+63 Mitchell et al., 2018). Depredation is a type of human wildlife interaction that impacts many 
+64 components of socio-ecosystems including fisheries and human fishing communities, 
+65 depredating species, exploited fish stocks and other ecosystem components (Northridge, 2018). 
+66 From the many impacts that have been studied in marine or terrestrial systems, four main 
+67 theoretical pathways are likely to simultaneously modify ecosystem structure and dynamics: (i) 
+68 provisioning: depredation improves fitness of depredating individuals through a facilitated 
+69 access to prey, subsequently enhancing predator populations (Oro et al., 2013; Tixier et al., 
+70 2015); (ii) alteration of predation pressures: depredation modifies the role of predators by 
+71 displacing their foraging efforts and prey preferences (Newsome et al., 2015); (iii) decrease in 
+72 fishing performance: removals of fish from gear by predators reduce catch rates of fishers; (iv) 
+Page 3 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+4
+73 increased fishing pressure on stocks: fishers increase their fishing effort to compensate for catch 
+74 losses caused by predators (Peterson et al., 2013). 
+75 Because depredation can induce complex changes in marine socio-ecosystem dynamics, 
+76 it is essential for ecosystem-based fisheries management to account for this behaviour. While 
+77 ecosystem-based fisheries management is increasingly supported by a suite of modelling 
+78 approaches, especially trophic modelling (Hollowed, 2000) using Ecopath (Plagányi and 
+79 Butterworth, 2004), Atlantis (Fulton et al., 2011), or diverse size- (Blanchard et al., 2014) or 
+80 traits-based models (Jacobsen et al., 2017; Trenkel, 2018), to date, none have incorporated 
+81 depredation on fishery catches. In fact, very few studies have examined the effects of 
+82 depredation through holistic approaches. The primary reason for not incorporating depredation 
+83 in ecosystem models lies in the absence of consensus on how to conceptually or mathematically 
+84 capture this form of interaction at the interface between ecological and human components. For 
+85 example, in Ecopath models ecological groups and human activities are independently 
+86 represented, as like other ecosystem models, Ecopath originally focused on food webs and 
+87 trophic flows ( Fulton et al., 2003). By essence, this constitutes a structural hurdle to capture 
+88 depredation as a behaviour-mediated interaction emerging at the interface between marine 
+89 populations and fisheries. Indeed, the Ecopath model architecture lacks flexibility to easily 
+90 capture depredation given that, on the one hand, ecological interactions (i.e. predation) between 
+91 species or functional groups are captured via a diet matrix while, on the other hand, fishing 
+92 extracts target species biomass from of the system. Nevertheless, inclusion of depredation in 
+93 ecosystem models appears as an essential challenge to tackle, given that this behaviour likely 
+94 changes food-web structure with subsequent consequences on ecosystem dynamics.
+95 Here, we explore ways of incorporating depredation into the user-friendly and 
+96 widespread Ecopath modelling framework (Christensen et al., 2008). Using a subantarctic case 
+97 study of marine mammal depredation on commercial fisheries (Roche et al., 2007), we assessed 
+Page 4 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+5
+98 how three alternative model formulation can capture the ecosystem-level effects of depredation. 
+99 Relative to a baseline model that did not include depredation, we specifically compared how 
+100 effectively each model captured consequences of depredation in terms of: (1) changes in fishing 
+101 and predation mortalities on target species, (2) mutual impacts of depredation-related groups 
+102 (i.e. depredating, target species and fishery), and (3) broader ecosystem-level consequences.
+103
+104 Material and Methods
+105 Ecopath modelling framework
+106 The Ecopath framework models biomasses and trophic flows within an ecosystem 
+107 assuming a mass-balanced equilibrium for a given time period (Ecopath.org, Christensen and 
+108 Walters, 2004). Ecopath models capture interactions between species or functional groups, i.e. 
+109 groups of species that share similar ecological roles (Piroddi et al., 2015). In Ecopath, functional 
+110 groups are modelled as producers, consumers or detritus with no dynamics. Groups may be 
+111 further sub-divided according to life stages (multi-stanza) (Christensen and Walters, 2004). 
+112 Fisheries are represented using a dedicated formalism that allows for catches to be distributed 
+113 between landings and discards.
+114 Two master Ecopath equations describe biomass flows between functional groups. 
+115 Equation 1 defines the total biological production (P)i of functional group i as:
+116 (𝑃│𝐵)𝑖 ×  𝐵𝑖 =  
+𝑌𝑖 +  ∑𝑗𝐵𝑗 × (𝑄│𝐵)𝑗 × 𝐷𝐶𝑗𝑖 + 𝐸𝑖 + 𝐵𝐴𝑖
+𝐸𝐸𝑖
+ (1)
+117 Where: (P/B)i is the production (P) to biomass (B) ratio for functional group i; EEi the 
+118 ecotrophic efficiency, i.e. losses other than through predation and fishing; Y i fishery yield, 
+119 (Q/B)j the consumption (Q) to biomass (B) ratio for predator j, DCij the proportion of group i 
+120 in the diet of predator j, Ei the net migration rate for group i (immigration – emigration; here 
+121 set to zero for all groups), BAi the biomass accumulation rate, (Christensen et al., 2008; Piroddi 
+122 et al., 2015).
+Page 5 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+6
+123 The second equation calculates biomass consumption of consumer group i as the sum 
+124 of group biomass production, loss via respiration processes (R) modulated by the amount of 
+125 unassimilated food (GS) (Equation 2).
+126 𝑄𝑖 =
+𝑃𝑖 +  𝑅𝑖
+1 ― 𝐺𝑆𝑖
+ (2)
+127 Assuming the modelled ecosystem is at equilibrium over the study period, the Ecopath 
+128 software estimates unknown parameters to achieve mass balance (Christensen et Walters, 2004; 
+129 Piroddi et al., 2015). While fisheries landings and discards as well as diet composition of each 
+130 functional group are specified from available data, P/B, Q/B and P/C ratios, equilibrium 
+131 biomasses and ecotrophic efficiency (EE) of model groups are often estimated by Ecopath. 
+132
+133 Modelling depredation
+134 As a complex behaviour-mediated interaction between fishers and depredating species, 
+135 depredation can induce a range of direct and indirect effects, including:
+136 i) Enhancing physiological performance of the depredating species via a 
+137 facilitated access to food resources. The depredated resource has a high-energy content for the 
+138 depredating species as prey catching and handling only requires limited effort (Tixier et al., 
+139 2015);
+140 ii) kleptoparasitism (Northridge, 2018): Removal of fish caught on fishing gear 
+141 induces extra costs to fishers while benefiting to depredating species as described in (i);
+142 iii) Additional fishing pressure on the exploited and depredated fish population: this 
+143 only occurs when fishers deploy extra fishing effort to maintain their total catch despite the 
+144 reduced yields (Gilman et al., 2007; Tixier et al., 2015; Werner et al., 2015);
+145 iv) Released predation pressure on other prey groups. By accessing a new food 
+146 source, the depredating species decreases the extent to which they feed on other food sources 
+147 (Gilman et al., 2007).
+Page 6 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+7
+148 The above list of potential short-term depredation effects is not comprehensive as indirect long-
+149 term effects encompass, among others, a range of potential socio-economics consequences to 
+150 fisheries.
+151 This study aimed at capturing complex depredation-related effects within the Ecopath 
+152 modelling framework. Note, that to-date, Ecopath models can only represent three types of 
+153 variables, namely: detritus groups, functional groups and fisheries. Because depredating species 
+154 cannot directly feed on fisheries catches in Ecopath, and to avoid nonsensical assumptions in 
+155 terms of population dynamics, we decided to explicitly capture depredated fish biomass as a 
+156 detritus group consumed by the depredating species. We proposed three alternative model 
+157 formulations to incorporate this ‘depredated target species’ detritus group into a baseline 
+158 Ecopath model that does not capture depredation (Figure 1).
+159 1) Baseline model: in this baseline model, depredation is ignored and only the natural 
+160 predatory behaviour of depredating species is incorporated. Fishing of the target species 
+161 produces landings and discards, and natural predation interactions are based on the diet 
+162 matrix (Figure 1a).
+163 2) Food subsidy model: this model explicitly captures that depredation can act as a food 
+164 subsidy for the depredating species. The “depredated target species” detritus group 
+165 represents the depredated biomass of the target species, which is entirely consumed by 
+166 the depredating species. Here, we distribute the total diet contribution of the target 
+167 species to the depredating species (as defined in the baseline case) between the 
+168 proportion of depredation from the “depredated target species” and the proportion of 
+169 natural predation on the “target species”. Thus, we assume that the overall contribution 
+170 of the target species to the depredating species diet (both via predation and depredation) 
+171 is unchanged relative to the baseline model. Followingly, proportional contributions of 
+172 other preys to depredating species diet, as well as the diet matrix for all other groups, 
+Page 7 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+8
+173 remain unchanged.  We assumed that the distribution of target species across the three 
+174 target species life stages (see below) was similar in the depredated fraction and in the 
+175 landings.
+176 3) Increased fishing effort model: by including depredated biomass into commercial 
+177 fishery discards, this model captures an overall increase in the caught biomass of target 
+178 species, which now accounts for the sum of landings, discards as well as biomass of 
+179 catch removed from the fishing gear by the depredating species. Both commercial 
+180 fishery discards and depredated biomass then feed into two distinct detritus groups, the 
+181 “organic matter” and the “depredated target species", respectively. The “depredated 
+182 target species" contributes to depredating species diet as described above for the food 
+183 subsidy model (Figure 1c). Conversely to the food subsidy model, this formulation 
+184 explicitly captures that depredating species feed on fisheries catches.
+185 4) Competing fishery model: by representing depredation as an additional fishery (distinct 
+186 from the commercial fishery), this model does not only account for additional fishing 
+187 pressure on target species due to depredation but also explicitly captures competition 
+188 between fishers and depredating species. As in the increased fishing effort model, the 
+189 “depredation” fishery discards all its catches into the “depredated target species” that is 
+190 consumed by the depredating species group (as described above for other models). The 
+191 commercial fishery produces landings and discards (Figure 1d). In this model, the target 
+192 species group is thus exposed to two competing fisheries (i.e. the commercial and the 
+193 depredation fishery). 
+194
+195 Comparison of alternative model formulations
+196 We compared how the alternative model formulations, which respectively account for 
+197 depredation as (1) food subsidy, (2) increased fishing effort or (3) competing fishery, capture 
+Page 8 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+9
+198 depredation effects relative to the baseline model with no depredation. To facilitate model 
+199 comparison, all P/B and Q/B ratios estimated for the baseline model, as well as other input 
+200 parameters (i.e. biomass, diet matrix etc.) were kept constant across all models, except for 
+201 model-specific adaptations as presented above (section “Modelling depredation”). Therefore, 
+202 for each model, only the biomass of toothfish groups (represented as a multi-stanza population) 
+203 were re-estimated by Ecopath, keeping the biomass of the small adult stanza fixed.
+204 Quantitative comparison of the three alternative depredation model formulations 
+205 relative to the baseline model relied on three complementary metrics, predation mortality, 
+206 fishing mortality, and mixed trophic impact, to assess changes in: (1) fishing and predation 
+207 mortality on target species, (2) mutual impacts of the groups directly involved in depredation 
+208 (i.e. depredating, target species and fishery), and (3) ecosystem impacts of depredating species. 
+209 Rationales for using these three metrics are:
+210 Changes in predation mortality are expected to reflect release in natural predation due 
+211 to depredating species switching diet to feed on fisheries catches of the same species. Predation 
+212 mortality (M2) corresponds to the sum of all mortalities due to all n predator groups feeding on 
+213 prey group i (Equation 3), as follows: 
+214 𝑀2𝑖 =  
+𝑛
+∑
+𝑗 = 1
+𝑄𝑗 × 𝐷𝐶𝑗𝑖           (3)
+215 where Qj is the total consumption rate of predating group j (Equation 2), and DCij is the fraction 
+216 of group i in the diet of predator j. Qj is calculated as the product of Bj, the biomass of group j 
+217 and Qj/Bj, the consumption/biomass ratio for group j (Christensen et al., 2008, Piroddi et al., 
+218 2015).
+219 The mortality due to fishing is calculated either as (i) the sum of landings and discards 
+220 divided by the biomass of the target group in the baseline and food subsidy models; or, (ii) the 
+Page 9 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+10
+221 sum of landings, discards and depredated biomass divided by target group biomass in the 
+222 increased fishing effort and competing fishery models. 
+223 Finally, changes in mixed trophic impacts (referred to as ‘impacts’ hereafter) summarise 
+224 how alternative formulations modify the cascading effects of depredation-related groups on 
+225 other model groups. The mixed trophic impact indicates how a long-term increase in a given 
+226 group biomass can affect the equilibrium biomass of other groups via all direct and indirect 
+227 feedback loops (Ulanowicz and Puccia, 1990). The impact indicator is a matrix whose ijth 
+228 element represents the interaction between the impacting group i and the impacted group j. This 
+229 indicator considers fisheries as predators, which means landings and discards correspond to 
+230 their prey intake in the model (Christensen et al., 2008; Piroddi et al., 2015).
+231
+232 Case study
+233 The commercial longline fishery operating in the Exclusive Economic Zones of 
+234 Kerguelen and Crozet Islands (French subantarctic islands located between 45°S and 50°S, 
+235 50°E and 70°E) is conducted by seven licensed vessels and targets Patagonian toothfish 
+236 (Dissostichus eleginoides) (hereafter “toothfish” - Guinet et al., 2015). As the fishery holds the 
+237 largest quota for that fish species across subantarctic waters, it is also the fishery most affected 
+238 by depredation. Killer whales (Orcinus orca) and sperm whales (Physeter macrocephalus) are 
+239 the two primary depredating species, together removing an estimated 279 t of toothfish per year 
+240 at Crozet and 250 t per year at Kerguelen, equivalent to 30% and 6% of the total catches, in the 
+241 two areas respectively(Gasco et al., 2015; Tixier et al., 2020).
+242 Our Ecopath models represented the marine ecosystem of Crozet and Kerguelen in 
+243 2017. The two areas were considered as a single area for highly mobile species, such as sharks, 
+244 birds, and some marine mammals. For less mobile groups, such as benthic groups, which are 
+245 similar at the community level but do show differences at the species level, especially among 
+Page 10 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+11
+246 benthic fish, between Crozet and Kerguelen (Duhamel et al., 2005) the food-web was duplicated 
+247 for each of the two areas (i.e. area-specific groups as used in Piroddi et al., 2017). Similarly, 
+248 two longline fisheries - Kerguelen fishery and Crozet fishery - were incorporated to account for 
+249 the large differences in catches between the two areas (80% of the total quota was caught at 
+250 Kerguelen). A total of 59 functional groups were considered in the model: 38 area-specific 
+251 groups and 21 groups shared between Crozet and Kerguelen (Figure 2; Table S1). 
+252 Toothfish was modelled as three weight-based stanza for each area to represent different 
+253 life stages of the species: juveniles (< 2 kg), small (2 - 5 kg) and large adults (> 5 kg). Sperm 
+254 whales extensively depredate on toothfish catches both at Crozet and Kerguelen, but individuals 
+255 are strongly segregated between the two areas (Labadie et al., 2018). Therefore, this species 
+256 was divided into two area-specific groups in the model. Unlike sperm whales, killer whales 
+257 depredate almost exclusively at Crozet (Labadie et al., 2018). Although two killer whale 
+258 morphotypes occur at Crozet and are both observed depredating on toothfish catches (Tixier et 
+259 al., 2016), only the so-called “Crozet killer whales” were presented in the study due to the lack 
+260 of information on the other morphotype (type-D). Abundance estimates for killer whales were 
+261 taken from Tixier et al. (2017) and those for sperm whales from Labadie et al. (2018). The 
+262 natural diet of sperm whales was assumed to be mostly composed of cephalopods and, to a 
+263 lesser extent, of adult toothfish (Clarke, 1980; Cherel and Duhamel, 2004). For the Crozet killer 
+264 whales, natural prey included pinnipeds, whales, penguins and toothfish (Tixier et al., 2019). 
+265 Population size estimates and diet compositions for all pinnipeds and bird populations were 
+266 derived from Guinet et al. (1996) and Cherel et al. (2004), as well as from expert consultation. 
+267 Data for the remaining functional groups were taken from the literature and from previously 
+268 developed Ecopath models for Kerguelen, the Falkland Islands and the Antarctic Peninsula 
+269 (Pruvost et al., 2005). Species were generally aggregated into functional groups when sharing 
+270 similar trophic and ecological niches. However, species caught by the fishery, including both 
+Page 11 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+12
+271 target and by-catch species, were modelled separately. The main by-catch species of the 
+272 toothfish fishery at Crozet and Kerguelen represent approximately 6% of the total catches and 
+273 are grenadiers (Macrourus spp.), blue antimora (Antimora rostrata), and whiteleg skate 
+274 (Amblyraja taaf) at Crozet and kerguelen sandpaper skate (Bathyraja irrasa) and eaton’s skate 
+275 (Bathyraja eatonii) at Kerguelen). Blue antimora is fully discarded, while the other species are 
+276 partly or fully retained (CCAMLR, 2018a; CCAMLR, 2018b). As this work primarily focused 
+277 on inclusion of depredation, the Ecopath models neglected fisheries by-catch given their 
+278 marginal volumes in the French Patagonian toothfish fishery. Full details on model 
+279 parameterisation are provided in Supplementary material. 
+280 Data on fishery catches, including both landings and discards, were collected by the 
+281 French Southern Ocean Fishery Observer Program (Gasco, 2011) and extracted from the 
+282 “PECHEKER” database (Martin and Pruvost, 2007; Pruvost et al., 2011). Toothfish population 
+283 estimates were obtained from spawning stock biomass estimates (Massiot-Granier et al., 2019a; 
+284 Massio-Granier et al., 2019b). Depredation rates were set at 30% of the total catches for Crozet 
+285 and 2% of the total catches at Kerguelen as estimated for 2017 following the methodology used 
+286 by Gasco et al., (2015). Further details on the data used are available in Supplementary material 
+287 (Table S2). For clarity, we primarily present the results from the Crozet region hereafter.
+288
+289 Results
+290 Fishing and predation mortality
+291 Relative to the baseline model, fishing mortality was unchanged in the food subsidy 
+292 model but increased by ~15% in the increased fishing effort and the competing fishery models 
+293 (Figure 3a). The increase relative to the baseline model was equal across all toothfish stages in 
+294 the competing fishery model, and varied from 14.9% (juvenile toothfish) to 15.2% (large 
+295 toothfish) in the increased fishing effort model. 
+Page 12 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+13
+296 Natural predation mortality on toothfish decreased simlarly by less than 3% in all food 
+297 subsidy, increased fishing effort and competing fishery models relative to the baseline model. 
+298 The maximum relative decline was 2.3% for small adult toothfish (Figure 3b). For other killer 
+299 whale prey groups, natural predation mortality increased by 0.4 to 0.6% in the food subsidy 
+300 model, on filtering marine mammal, and fur seals and king penguin, respectively. Natural 
+301 predation on other prey groups did not change in the increased fishing effort and the competing 
+302 fishery models relative to the baseline model (Figure 4). Note that this difference in the food 
+303 subsidy model partially comes from a ~1.8% increase in the equilibrium biomass of killer 
+304 whales relative to all other models. Except for this killer whale biomass in the food subsidy 
+305 model, equilibrium biomasses for all groups were similar across all models. Despite similar 
+306 input parameters set evenly across all models, this slight change unexpectedly emerged from 
+307 mass-balancing the food subsidy model, possibly because it did not include any feedback 
+308 between ‘depredated target species’ and the commercial fishery.
+309
+310 Mutual effects of depredation-related groups
+311 Mixed trophic impacts of predators and fisheries were overall consistent across all 
+312 depredation models, except for slight model specific differences: fisheries activity, sperm whale 
+313 natural predation and sperm whale depredation all positively impacted juvenile toothfish but 
+314 were detrimental to larger life stages (Figure 5). Natural predation by killer whales positively 
+315 impacted all toothfish stages (Figure 5). The small toothfish stage was negatively impacted by 
+316 fishing and depredation, but only marginally positively affected by killer whales natural 
+317 predation (Figure 5). In the competing fishery model, killer whales depredation positively 
+318 impacted small toothfish life stages but negatively the two larger all toothfish life stages (Figure 
+319 5). 
+Page 13 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+14
+320 Except for the positive impact of killer whales (+ ~0.03), depredating species (i.e. sperm 
+321 whales and in the competing fishery model the "depredation fishery", which includes 
+322 depredation from killer whales and sperm whales) were detrimental to the toothfish longline 
+323 fishery (Figure 6). Sperm whales had the largest negative impact on the commercial fishery (-
+324 0.07 to -0.08). These negative impacts of depredating groups on the fishery suggest that the 
+325 depredation models were able to capture losses in fishery performance due to depredation. 
+326 Impacts of the commercial fishery were negative on all depredating groups, with a 
+327 stronger impact on sperm whales than killer whales (i.e. respectively -0.04 and -0.022; Figure 
+328 7). Note however that the “depredated toothfish” component was estimated to be benefitial to 
+329 both sperm (+ ~0.004) and killer (+ ~0.02) whales (Figure 7). 
+330 As a side result, we also observed marginal decreases in trophic levels of the depredating 
+331 species in the  food subsidy, increased fishing effort and competing fishery models relative to 
+332 the baseline model, by ~0.3% for sperm whales down to ~1.8% for killer whales (Figure S2).
+333  
+334 Ecosystem effects of depredating species
+335 Overall, impacts of killer whales (i.e. “killer whale” in the food subsidy model and 
+336 increased fishing effort model, and both depredating and naturally-predating components in the 
+337 competing fishery model), were negative on most of their prey groups including diving seabirds 
+338 fur seals and elephant seals (females and pups) across all models (Figure 8). Most prey groups, 
+339 including marine mammals and penguins, were marginally (> 0.1%) less negatively impacted 
+340 by killer whales in the three alternative depredation models relative to the baseline model. Due 
+341 to a direct release in natural predation pressure, killer whales were estimated to positively 
+342 impact all toothfish groups (Figure 8). 
+343 Larger impacts of sperm whales (absolute estimate of mixed trophic impact > 0.03; 
+344 Figure 9) only concerned groups that are directly related to the commercial fishery, either 
+Page 14 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+15
+345 because they are involved in depredation (i.e. small and large toothfish), or accidently caught 
+346 as bycatch such as blue antimora and whiteleg skate (Figure 9). Sperm whale impacts varied 
+347 slighlty across the alternative models and appeared to be marginally buffered in the increased 
+348 fishing effort model. 
+349 The ecosystem effects of depredation captured by the different Ecopath models are 
+350 summarised in table 1.
+351
+352 Discussion
+353 Ecosystem models are pivotal tools to account for multiple drivers of ecological 
+354 systems, such as interactions between species (i.e. predation, competition) and environmental 
+355 conditions (Hollowed, 2000; Plagányi and Butterworth, 2004). They can also include the effects 
+356 of anthropogenic activities (e.g. harvesting), which often leads to competition between natural 
+357 populations and humans. Because depredation generates a number of effects beyond direct 
+358 competition between humans and wildlife which have to date not received much attention in 
+359 ecosystem modelling frameworks (Peterson et al., 2013; Werner et al., 2015), their complex 
+360 consequences on socio-ecosystem dynamics are not well understood and remain challenging to 
+361 anticipate. In the following sections, we discuss how the alternative Ecopath model 
+362 formulations developed to explicitly represent depredation in a case study can to some extent 
+363 capture consequences of depredation on marine ecosystem structure and dynamics. Given the 
+364 structural constraints of the Ecopath framework to represent complex consequences of 
+365 depredation at the interface between fisheries and marine predators, we also identify a number 
+366 of limitations in the proposed model formulations and provide guidance for future research in 
+367 ecosystem modelling to better capture the range of socio-ecological effects associated with 
+368 depredation.
+369
+Page 15 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+16
+370 A first step towards model-based assessment of the ecosystem effects of depredation in marine 
+371 systems
+372 Our study provides the first model-based assessment of the system-level impacts of 
+373 depredation in marine systems. By comparing three alternative depredation-explicit Ecopath 
+374 model formulations with a baseline model that neglects depredation processes, we assess how 
+375 including depredation can affect estimates of fishing mortality and predation pressure. In our 
+376 models of the Kerguelen/Crozet system, fishing mortality increased with the inclusion of 
+377 depredation, but changes in other indicators, including predation mortality, were marginal. 
+378 By incorporating depredation as part of fishery catches, the increased fishing effort 
+379 model and the competing fishery model explicitly captured the increase in fishing mortality 
+380 induced by depredation. Both models estimated a ~15% increase in fishing mortality due to 
+381 toothfish depredation by killer and sperm whales. Since depredation has only been qualitatively 
+382 reported to increase fishing mortality in other longline fisheries (Werner et al., 2015; Peterson 
+383 and Hanselman, 2017), this result is noteworthy. Because depredation can be a cryptic source 
+384 of fishing mortality, it is not systematically detected (e.g., species depredating on fishing gear 
+385 at depth, when fishers are away or leaving limited evidence when removing fish) and is only 
+386 rarely quantified (Tixier et al., 2020), such estimates are necessary to improve accuracy of fish 
+387 stock assessments and hence to support sustainable fishery management (Gilman et al., 2013). 
+388 However, our estimate of increased fishing mortality due to depredation is case-specific and 
+389 method-dependent. First, the French toothfish fishery operates in a remote region, where only 
+390 a small fleet (7 vessels) targets a commercially valuable stock that was unexploited until the 
+391 1970s (Duhamel and Williams, 2011). While depredation increased fishing mortality by 15%, 
+392 the estimated depredated biomass (~279 t per year; Tixier et al., 2020) only represents a minor 
+393 fraction (possibly 1%) of the estimated population biomass used for the model. Although this 
+394 suggests a limited impact of depredation on toothfish in this region, a similar increase in fishing 
+Page 16 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+17
+395 mortality in response to depredation may have a greater impact in other regions where stocks 
+396 have been heavily exploited. Indeed, fishery catches represent a higher proportion of the 
+397 depleted stock biomass in intensively exploited stocks so any further increase in fishing effort 
+398 (for instance due to depredation) could have severe impacts for fully or over-exploited 
+399 stocks.  Here the subantarctic longline fishery, which operates in a remote hard-to-access area 
+400 and is well-regulated, exploits a rather abundant stock so we can assume that the estimated 15% 
+401 increase in fishing mortality due to depredation is not too critical for toothfish stock 
+402 sustainability. Moreover, changes in fishing mortality in a depredation-impacted system may 
+403 depend on whether fishers can increase their fishing effort to recoup catch losses. Fisheries with 
+404 different management systems and more restrictive fishing seasons may offer fewer 
+405 opportunities to compensate for depredation losses. For instance, in South Georgia where the 
+406 toothfish fishery is also subject to killer and sperm whale depredation, fishing is restricted to 
+407 winter months only (Towers et al. 2019). 
+408 In the proposed depredation-explicit models, depredation only induced a marginal 
+409 release in predation pressure on natural prey species of depredating sperm whales and killer 
+410 whales. All alternative models predicted a slight decrease of around 2% in direct predation of 
+411 both killer and sperm whales on toothfish. Note that this directly results from the assumption 
+412 that the total consumption of toothfish by whales at Crozet remained unchanged, in relation to 
+413 study of Tixier et al. (2019b) which found no difference between the contribution of toothfish 
+414 to the diet of depredating and non-depredating killer whales, i.e. that natural predation on 
+415 toothfish was partially replaced by depredation on toothfish catches. Toothfish is a natural prey 
+416 of sperm whales but is likely to only marginally contribute to their diet that is largely dominated 
+417 by cephalopods, as evidenced in Antarctic waters (Yukhov, 1972). As such, access to toothfish 
+418 on fishing gear likely increases the contribution of this prey in the diet of individuals engaging 
+419 in depredation, subsequently releasing predatory pressures of these individuals on other of their 
+Page 17 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+18
+420 primary cephalopod prey species. However, the extent to which this release, which may be 
+421 spatially restricted to areas where fishing occurs and depend on the proportion of depredating 
+422 individuals in the sperm whale population, alters the full ecosystem, is still unknown. Cascading 
+423 impacts are likely greater when depredated species are naturally mostly absent from their diet, 
+424 as is the case for harbour seals (Phoca vitulina) depredating eels from fyke-nets in Sweden 
+425 (Lundström et al., 2010). 
+426 The magnitude of predation release on wild prey may not only depend on the importance 
+427 of the depredated species for a predator’s natural diet but also on the predator’s trophic position, 
+428 population abundance and the extent to which it gains energy from depredation. Most species 
+429 depredating on fishery catches are higher trophic level species such as large sharks and marine 
+430 mammals, and changes in predation pressures from these top-predators are likely to generate 
+431 greater top-down cascading ecosystem effects than changes from meso-predators (Newsome et 
+432 al., 2015). Population size and energetic requirements of the depredating species, paired with 
+433 the energetic value of the depredated fish, will dictate its overall consumption. 
+434
+435 Inclusion of depredation in Ecopath: limitations and recommendations
+436 While the depredation-explicit models to some extent capture increase in fishing 
+437 pressure and release in predation pressures as consequences of depredation, a range of other 
+438 processes (for instance, facilitated access to food resources for predators, or decrease in fishing 
+439 gear capturability) were not accurately captured (if at all) in these models. These limitations in 
+440 the proposed model formulations are largely due to structural constraints of the Ecopath 
+441 modelling framework.
+442 Facilitated access to prey, which can potentially enhance depredating species’ individual 
+443 and population performance, was partially incorporated via two modelling tricks: (1) by adding 
+444 a specific ‘depredated target species’ detritus group; and, consequently, by (2) separating out 
+Page 18 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+19
+445 depredation from natural predation on target species. However, depredation was only linked to 
+446 the commercial fishery as a “discard” component in the increased fishing effort  and in the 
+447 competing fishery models because catches cannot appear in the diet matrix in Ecopath. These 
+448 alternative model structures theoretically allow for a positive impact of depredated fish biomass 
+449 on depredating species. However, this positive impact does not capture how reduced foraging 
+450 effort due to facilitated access to food resource can enhance certain life history parameters of 
+451 the depredating species (i.e. life expectancy, fecundity, or growth; Tixier et al., 2015). To 
+452 achieve this, it would be necessary to increase the assimilation rate of depredated resources 
+453 relative to predation, and adapt information about population growth rate (i.e. P/B). 
+454 Adding ‘depredated target species’ as an additional detritus group in Ecopath allows the 
+455 partial incorporation of two separate depredation effects (i.e. release of predation pressure and 
+456 facilitated access to food resources) but it skews estimates of trophic levels in the model. For 
+457 instance, representing the depredated biomass as a detritus group directly leads to an 
+458 underestimation of the depredating species’ trophic level in Ecopath, given that detritus groups 
+459 are assigned a basal trophic level (= 1) in Ecopath (Christensen et al., 2008). Thus, caution 
+460 should be exercised when using a depredation-explicit model to study trophic levels in Ecopath. 
+461 In the Crozet/Kerguelen case study, a reduction in the depredating species’ trophic levels is 
+462 unrealistic since the depredated fish, toothfish, is among the highest trophic levels well above 
+463 most other natural prey items of killer and sperm whales (Tixier et al., 2019). Similarly, a 
+464 decrease in trophic level would seem misleading in many other depredation cases, such as in 
+465 the wide-ranging tropical longline fisheries where sharks and odontocetes heavily depredate on 
+466 high trophic level groups (i.e. tuna and swordfish; Rabearisoa et al., 2018). Moreover, 
+467 depredation-related changes in trophic level are likely to depend on predator switching their 
+468 diet preferences towards the easily-accessible resource (rather than foraging for their natural 
+469 preys; Jacoby et al., 1999). While trophic levels of depredating species at Crozet/Kerguelen 
+Page 19 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+20
+470 should remain unchanged under the assumption that their overall toothfish consumption is not 
+471 changed by depredation, trophic levels of depredating species are most likely to increase as the 
+472 proportional contribution of depredation in their diet increases (Jacoby et al., 1999). 
+473 Conversely, species increasing their consumption of low trophic level prey when depredating, 
+474 as evidenced in cases where predators remove bait from fishing gears (e.g. Thode et al., 2016), 
+475 are likely to decrease their trophic level. 
+476 Decline in fishery performance could not be fully captured in any of the models. Indeed, 
+477 none of the three depredation-explicit models explicitly captured depredation as a loss in gear 
+478 capturability and/or as an extra cost to the fishery, but rather represent depredated biomass as 
+479 discards recycled by the depredating species. While the competing fishery model incorporated 
+480 depredation as a virtual fishery to capture the supplementary negative effect of killer and sperm 
+481 whales on the fishery via removal of catches from fishing gears, it did not explicitly quantify 
+482 energy gains for the depredating species and efficiency loss for the fishery. Moreover, model 
+483 realism also depends on data availability, which represent a major limitation of any ecosystem 
+484 model. For instance, in our case, a single virtual fishery represented toothfish biomass 
+485 depredated by both sperm whales and killer whales as data were insufficient to discriminate 
+486 impacts of their respective depredation. To include depredation, some data are added to those 
+487 traditionally used in ecosystem models, such as the quantity of resource depredated or the 
+488 depredation rate. In addition to this, it is necessary to know in what proportion depredation 
+489 modifies the depredating species’ diet.
+490 In addition to analysing how to account for the greatest number of expected impacts 
+491 associated with depredation, evaluating alternative model structures also helped delineate the 
+492 limitations of each model formulation. While all alternative models were derived from the same 
+493 baseline model, each of the three depredation-explicit models posed different modelling choices 
+Page 20 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+21
+494 in terms of model group aggregation and feedback structure, which can significantly impact 
+495 ecosystem model predictions (Pinnegar et al.,2005; Marzloff et al., 2011). 
+496 Note for instance, that we endeavoured to keep equilibrium biomasses for all groups 
+497 similar across all models by setting similar input parameters across all models. All equilibrium 
+498 biomasses were identical across models except for an unexpected ~1.8% increase in the 
+499 equilibrium biomass of killer whale in the food subsidy model (which possibly explains the 
+500 observed difference in natural predation mortality due to depredating killer whales relative to 
+501 other models). We suspect that this slight change in the food subsidy model emerged from the 
+502 Ecopath mass-balancing algorithm, as this model does not include any feedback between 
+503 ‘depredated target species’ and the commercial fishery. In the increased fishing effort model, 
+504 depredation was included into the commercial fishery but depredating species and fishing gear 
+505 were aggregated into a single ‘caught toothfish’ functional group. This aggregated 
+506 representation is ecologically questionable given that ecosystem models shall ideally 
+507 discriminate between prey and predator populations (Fulton et al., 2003), while one could argue 
+508 that the amount of fishing gear can be comparable to a predator population abundance for the 
+509 target species. Indeed, fishers and depredating species do not compete for hooked fish, since 
+510 only one model group removes the total fish caught. Moreover, the  increased fishing effort 
+511 model did not discriminate between the predation and depredation effects of depredating 
+512 species on the commercial fishery. This distinction appears relevant in our case study for killer 
+513 whales, as natural predation on competitors of toothfish for food may be indirectly beneficial 
+514 for the fishery while depredation negatively affects that same fishery. However, disaggregating 
+515 the fishery into a ‘depredating species’ fishery and a commercial fishery, as done in the 
+516 competing fishery model, does not seem completely realistic as separating out a single fishery 
+517 into two independent components in the Ecopath model. Indeed, in the case of an increase in 
+518 commercial fishing effort, the virtual depredation fishery should be affected similarly, assuming 
+Page 21 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+22
+519 a direct relationship between fishing effort and depredation rate. However, this is not the case 
+520 in this model as the two fisheries remain fully separated. 
+521
+522 Recommendations for depredation-resolving ecosystem models
+523 Due to structural constraints and lack of flexibility of the Ecopath framework to capture 
+524 behaviour-mediated processes, this study could not fully capture the complexity of interactions 
+525 between fisheries and depredating species. For these reasons, we decided not to pursue with 
+526 dynamic simulations with Ecopath with Ecosim. Depredation is the consequence of behavioural 
+527 innovations and adaptations of marine predator species to new feeding opportunities offered by 
+528 fisheries, including actively searching and/or following fishing vessels or purposely using 
+529 human equipment to feed on aggregated, easy-to-catch resources despite the associated risk 
+530 (Bearzi et al., 2019). These adaptations are time-dependent, occurring at the inter-annual level 
+531 when individuals progressively learn depredation (e.g. Tixier et al., 2016) or extend their spatial 
+532 range of interaction with vessels (e.g., Schakner et al., 2014), or at the intra-annual level when 
+533 individuals only switch to depredation when natural prey are scarce. 
+534 Medium- and long-term consequences of depredation for depredating populations not 
+535 only result from positive provisioning effects but also from injuries or lethal risks related to 
+536 interactions with fisheries. If depredation supplies more energy than the natural diet, 
+537 depredation may enhance fitness and, therefore, the reproductive performances of individuals. 
+538 This was found for killer whales depredating on toothfish catches at Crozet and depredating on 
+539 tuna catches in the Strait of Gibraltar (Guinet et al., 2015; Tixier et al., 2015; Esteban et al., 
+540 2016). If the energy gain due to depredation relative to natural feeding is large, depredating 
+541 populations could expand (in particular if also benefiting from dedicated conservation effort), 
+542 which could further enhance the magnitude of depredation long-term impacts on the ecosystem. 
+543 However, this scenario may be only realistic in a situation where the risks of fatal interactions 
+Page 22 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+23
+544 with fishing gears and vessels are limited. Unlike depredating species in the Crozet/Kerguelen 
+545 fishery and to a greater extent for in the Southern Ocean (where high level of regulations reduce 
+546 potential fisheries negative impacts on marine predators), depredating species can be exposed 
+547 to the accidental risk of getting caught in fishing gear and/or intentional shooting from fishers 
+548 (Dans et al., 2003; Azevedo et al., 2017). Depredating species bycatch such as marine mammals 
+549 often reported in many static net and trawl fisheries (Read, 2008). These bycatches should be 
+550 considered in future studies aiming to address the full range of ecosystem effects resulting from 
+551 depredation.
+552 While considering depredation related processes in ecosystem models is important, this 
+553 study only partially addresses this challenge, which will require further development in future 
+554 studies. Future ecosystem modelling studies should consider temporal variations in the size of 
+555 depredating species populations and in the composition of their diet associated with changes in 
+556 prey availability. However, to provide accurate input information, further understanding of the 
+557 socio-ecosystem interactions generated locally by depredation is needed. Firstly, and as raised 
+558 by the findings of the present study, understanding the extent to which depredated resources 
+559 replace natural prey in depredating species’ diets appears as a critical element to investigate. 
+560 Secondly, assessing whether the balance between benefits and costs is positive or negative for 
+561 depredating species is pivotal to determining long-term depredating species' population growth 
+562 rates. In summary, we present a pilot study exploring, within the constrained Ecopath 
+563 framework, alternative ways of incorporating depredation on fisheries catches. By assessing 
+564 how different model formulations affected estimates of natural predation and fishing mortality 
+565 on different model groups, the study provides a number of insights concerning the ecosystem 
+566 effects of a depredation-impacted subantarctic fishery. The results also highlight the limitations 
+567 of Ecopath-based modelling to address complex behaviour-mediated processes. Thus, the 
+568 development of dedicated models that can accurately capture complex multi-faceted socio-
+Page 23 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+24
+569 economic and ecological impacts inherent to depredation conflicts is essential to identify the 
+570 conditions needed for long-term coexistence of fisheries and marine predators, and to contribute 
+571 to ecosystem-based management of marine ecosystem.
+572
+573 Supplementary material 
+574 The following supplementary material is available at ICESJMS online. Supplementary 
+575 materials contain a more exhaustive description of model construction, as well as an assessment 
+576 of data availability. It also presents additional figures on depredating species trophic level.
+577
+578 Acknowledgements
+579 This study was supported by the French National Research Agency (ANR) through the 
+580 ORCADEPRED research project (ANR-17-CE32-0007). We are grateful to Elisabeth Fulton 
+581 and Jessica Melbourne-Thomas (CSIRO) as well as Christophe Barbraud, Yves Cherel, Karine 
+582 Delord and Christophe Guinet (CEBC) for sharing their expertise and helping in the 
+583 development of the models. Special thanks are due to Guy Duhamel, Charlotte Chazeau and 
+584 Félix Massiot-Granier (Muséum National d’Histoire Naturelle de Paris) for providing access to 
+585 data and insightful comments. Lastly, we would like to thank Ching Villanueva and all 
+586 participants in the ORCADEPRED project.
+587
+588 Data Availability Statement
+589 The data underlying this article cannot be shared publicly for reasons of confidentiality.
+590
+591 References
+592 Azevedo, A.F., Carvalho, R.R., Kajin, M., Van Sluys, M., Bisi, T.L., Cunha, H.A., Lailson-
+593 Brito, J. 2017. The first confirmed decline of a delphinid population from Brazilian 
+Page 24 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+25
+594 waters: 2000–2015 abundance of Sotalia guianensis in Guanabara Bay, South-eastern 
+595 Brazil. Ecological Indicators, 79, 1–10. 
+596 Bearzi, G., Piwetz, S., Reeves, R.R. 2019. Odontocete Adaptations to Human Impact and 
+597 Vice Versa, in: Würsig, B. (Ed.), Ethology and Behavioral Ecology of Odontocetes, 
+598 Ethology and Behavioral Ecology of Marine Mammals. Springer International 
+599 Publishing, Cham, pp. 211–235. 
+600 Blanchard, J.L., Andersen, K.H., Scott, F., Hintzen, N.T., Piet, G., Jennings, S. 2014. 
+601 Evaluating targets and trade-offs among fisheries and conservation objectives using a 
+602 multispecies size spectrum model. Journal of Applied Ecology, 51, 612-622.
+603 CCAMLR, 2018a. Fishery Report 2018: Dissostichus eleginoides Kerguelen Islands EEZ. 
+604 URL:  https://www.ccamlr.org/en/system/files/05%20TOP5851%202018.pdf
+605 CCAMLR, 2018b. Fishery Report 2018: Dissostichus eleginoides Crozet Islands EEZ. URL: 
+606 https://www.ccamlr.org/en/system/files/06%20TOP586%202018.pdf
+607 Cherel, Y., Duhamel, G., Gasco, N. 2004. Cephalopod fauna of subantarctic islands: new 
+608 information from predators. Marine Ecology Progress Series, 266, 143–156. 
+609 Cherel, Y., Duhamel, G. 2004. Antarctic jaws: cephalopod prey of sharks in Kerguelen 
+610 waters. Deep Sea Research Part I: Oceanographic Research Papers, 51, 17-31.
+611 Christensen, V., Walters, C.J. 2004. Ecopath with Ecosim: methods, capabilities and 
+612 limitations. Ecological Modelling, 172, 109–139. 
+613 Christensen, V., Walters, C., Pauly, D., Forrest, R. 2008. Ecopath with Ecosim 6: a user’s 
+614 guide. Fisheries Centre, University of British Columbia, Vancouver, BC
+615 Clarke, M.R. 1980. Cephalopoda in the diet of sperm whales of the Southern Hemisphere and 
+616 their bearing on sperm whale biology. Discovery report, 37,1–324
+Page 25 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+26
+617 Dans, S.L., Koen Alonso, M., Pedraza, S.N., Crespo, E.A. 2003. Incidental catch of dolphins 
+618 in trawling fisheries off Patagonia, Argentina: can populations persist? Ecological 
+619 Applications, 13, 754–762. 
+620 Duhamel, G., Williams, R. 2011. History of whaling, sealing, fishery and aquaculture trials in 
+621 the area of the Kerguelen Plateau. Cybium, 35, 15-28. 
+622 Duhamel, G., Gasco, N., Davaine, P. 2005. Poissons des îles Kerguelen et Crozet. Guide 
+623 régional de l’océan Austral. Paris : Muséum National d’Histoire Naturelle, 419pp.
+624 Esteban, R., Verborgh, P., Gauffier, P., Giménez, J., Guinet, C., de Stephanis, R. 2016. 
+625 Dynamics of killer whale, bluefin tuna and human fisheries in the Strait of Gibraltar. 
+626 Biological Conservation, 194, 31–38. 
+627 Fulton, E.A., Smith, A.D., Johnson, C.R. 2003. Effect of complexity on marine ecosystem 
+628 models. Marine Ecology Progress Series, 253, 1-16.
+629 Fulton, E.A., Link, J.S., Kaplan, I.C., Savina-Rolland, M., Johnson, P., Ainsworth, C., …& 
+630 Smith, D.C. 2011. Lessons in modelling and management of marine ecosystems: the 
+631 Atlantis experience: Lessons learnt with Atlantis. Fish and Fisheries, 12, 171–188. 
+632 Gasco, N. 2011 Contributions to marine science by fishery observers in the French EEZ of 
+633 Kerguelen, Proceedings of the 1st international Science Symposium on the Kerguelen 
+634 Plateau (Concarneau, 2010). The Kerguelen Plateau, Marine Ecosystem and Fisheries: 
+635 93-98. 
+636 Gasco, N., Tixier, P., Duhamel, G., Guinet, C. 2015. Comparison of two methods to assess 
+637 fish losses due to depredation by killer whales and sperm whales on demersal 
+638 longlines. CCAMLR science, 22, 1-14
+639 Gilman, E., Brothers, N., Mcpherson, G., Dalzell, P. 2007. A review of cetacean interactions 
+640 with longline gear. Journal of Cetacean Research and Management, 8, 215−223.
+Page 26 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+27
+641 Gilman, E., Suuronen, P., Hall, M., Kennelly, S. 2013. Causes and methods to estimate 
+642 cryptic sources of fishing mortality. Journal of Fish Biology, 83, 766-803. 
+643 Guinet, C., Cherel, Y., Ridoux, V., Jouventin, P. 1996. Consumption of marine resources by 
+644 seabirds and seals in Crozet and Kerguelen waters: changes in relation to consumer 
+645 biomass 1962–85. Antartic science, 8, 23–30. 
+646 Guinet, C., Tixier, P., Gasco, N., Duhamel, G. 2015. Long-term studies of Crozet Island killer 
+647 whales are fundamental to understanding the economic and demographic 
+648 consequences of their depredation behaviour on the Patagonian toothfish fishery. ICES 
+649 Journal of Marine Science, 72, 1587–1597. 
+650 Hall, S.J. 1999. The effect of fishing on marine ecosystems and communities. Fish Biology 
+651 Aquatic Research Series, Blackwell, Oxford
+652 Hollowed, A. 2000. Are multispecies models an improvement on single-species models for 
+653 measuring fishing impacts on marine ecosystems? ICES Journal of Marine Science, 
+654 57, 707–719. 
+655 Jacobsen, N.S., Burgess, M.G., Andersen, K.H. 2017. Efficiency of fisheries is increasing at 
+656 the ecosystem level. Fish and Fisheries, 18, 199–211. 
+657 Jacoby, M.E., Hilderbrand, G.V., Servheen, C., Schwartz, C.C., Arthur, S.M., Hanley, T.A., 
+658 Robbins, C.T., Michener, R. 1999. Trophic Relations of Brown and Black Bears in 
+659 Several Western North American Ecosystems. The Journal of Wildlife Management 
+660 63, 921 - 929. 
+661 Labadie, G., Tixier, P., Barbraud, C., Fay, R., Gasco, N., Duhamel, G., Guinet, C. 2018. First 
+662 demographic insights on historically harvested and poorly known male sperm whale 
+663 populations off the Crozet and Kerguelen Islands (Southern Ocean). Marine Mammal 
+664 Science, 34, 595–615. 
+Page 27 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+28
+665 Lundström, K., Lunneryd, S.-G., Königson, S., Hemmingsson, M. 2010. Interactions between 
+666 harbour seals (Phoca vitulina) and coastal fisheries along the Swedish west coast: an 
+667 overview. NAMMCOSP Scientific Publications 8, 329-340. 
+668 Martin, A., Pruvost, P. 2007. Pecheker, relational database for analysis and management of 
+669 fisheries and related biological data from the French southern ocean fisheries 
+670 monitoring scientific programs, Muséum National d’Histoire Naturelle.
+671 Marzloff, M.P., Dambacher, J.M., Johnson, C.R., Little, L.R., Frusher, S.D. 2011. Exploring 
+672 alternative states in ecological systems with a qualitative analysis of community 
+673 feedback. Ecological Modelling 222, 2651–2662. 
+674 Massiot-Granier, F., Duhamel, G., Péron, C. 2019. An integrated stock assessment for the 
+675 Kerguelen Island EEZ Patagonian toothfish (Dissostichus eleginoides) fishery in 
+676 Division 58.5.1. CCAMLR Document WG-FSA2019/58.
+677 Massiot-Granier, F., Duhamel G., Péron C. 2019. An integrated stock assessment for the 
+678 Crozet Islands Patagonian toothfish (Dissostichus eleginoides) fishery in Subarea 58.6. 
+679 CCAMLR Document WG-FSA2019/57 rev1.
+680 Mitchell, J.D., McLean, D.L., Collin, S.P., Langlois, T.J. 2018. Shark depredation in 
+681 commercial and recreational fisheries. Reviews in Fish Biology and Fisheries, 28, 715-
+682 748.
+683 Newsome, T.M., Dellinger, J.A., Pavey, C.R., Ripple, W.J., Shores, C.R., Wirsing, A.J., 
+684 Dickman, C.R. 2015. The ecological effects of providing resource subsidies to 
+685 predators: Resource subsidies and predators. Global Ecology and Biogeography, 24, 
+686 1–11. 
+687 Northridge, S. P. 1984.World review of interactions between marine mammals and fisheries. 
+688 Report #251, United Nations (UN) Food and Agriculture Organization (FAO), Rome, 
+689 Italy. 190 pp.
+Page 28 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+29
+690 Northridge, S.P. 2018. Fisheries Interactions, in: Encyclopedia of Marine Mammals. Elsevier, 
+691 pp. 375–383. 
+692 Oro, D., Genovart, M., Tavecchia, G., Fowler, M.S., Martínez-Abraín, A. 2013. Ecological 
+693 and evolutionary implications of food subsidies from humans. Ecology Letters, 16, 
+694 1501–1514. 
+695 Peterson, M.J., Mueter, F., Hanselman, D., Lunsford, C., Matkin, C., Fearnbach, H. 2013. 
+696 Killer whale (Orcinus orca) depredation effects on catch rates of six groundfish 
+697 species: implications for commercial longline fisheries in Alaska. ICES Journal of 
+698 Marine Science, 70, 1220–1232. 
+699 Peterson, M.J., Hanselman, D. 2017. Sablefish mortality associated with whale depredation in 
+700 Alaska. ICES Journal of Marine Science, 74, 1382–1394. 
+701 Pinnegar, J.K., Blanchard, J.L., Mackinson, S., Scott, R.D., Duplisea, D.E. 2005. Aggregation 
+702 and removal of weak-links in food-web models: system stability and recovery from 
+703 disturbance. Ecological Modelling, 184, 229–248. 
+704 Piroddi, C., Coll, M., Steenbeek, J., Macias Moy, D., Christensen, V. 2015. Modelling the 
+705 Mediterranean marine ecosystem as a whole: addressing the challenge of complexity. 
+706 Marine Ecology Progress Series, 533, 47–65. 
+707 Piroddi, C., Coll, M., Liquete, C., Macias, D., Greer, K., Buszowski, J., Steenbeek, J., 
+708 Danovaro, R., Christensen, V. 2017. Historical changes of the Mediterranean Sea 
+709 ecosystem: modelling the role and impact of primary productivity and fisheries 
+710 changes over time. Scientific reports 7, 44491. 
+711 Plagányi, É.E., Butterworth, D.S. 2004. A critical look at the potential of Ecopath with ecosim 
+712 to assist in practical fisheries management. African Journal of Marine Science, 26, 
+713 261–287. 
+Page 29 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+30
+714 Pruvost, P., Duhamel, G., Palomares, M.L.D. 2005. An ecosystem model of the kerguelen 
+715 islands’ EEZ. In: Palomares, M., Pruvost, P., Pitcher, T., Pauly, D. (Eds.), Modeling 
+716 Antarctic Marine Ecosystems. Fisheries Centre Research Reports, vol. 13. pp. 40–64.
+717 Pruvost, P., Martin, A., Denys, G., Causse, R. 2011. SIMPA-PECHEKER. A tool for fisheries 
+718 management and ecosystem modelling. In the Kerguelen Plateau Marine Ecosystem 
+719 and Fisheries, Proceedings of the 1st international Science Symposium on the 
+720 Kerguelen Plateau, 2010, pp. 263-270. Ed. by G. Duhamel and D. Welsford D. Société 
+721 Française d'Ichtyologie. Paris, France
+722 Rabearisoa, N., Sabarros, P.S., Romanov, E.V., Lucas, V., Bach, P. 2018. Toothed whale and 
+723 shark depredation indicators: A case study from the Reunion Island and Seychelles 
+724 pelagic longline fisheries. PLoS ONE, 13, e0202037. 
+725 Read, A.J. 2008. The looming crisis: interactions between marine mammals and fisheries. 
+726 Journal of Mammalogy, 89, 541–548. 
+727 Roche, C., Guinet, C., Gasco, N., Duhamel, G. 2007. Marine mammals and demersal longline 
+728 fishery interactions in Crozet and Kerguelen Exclusive Economic Zones: an 
+729 assessment of depredation levels. CCAMLR Science, 14, 67-82. 
+730 Schakner, Z.A., Lunsford, C., Straley, J., Eguchi, T., Mesnick, S.L. 2014. Using models of 
+731 social transmission to examine the spread of longline depredation behavior among 
+732 sperm whales in the Gulf of Alaska. PLoS ONE, 9, e109079. 
+733 Thode, A., Wild, L., Straley, J., Barnes, D., Bayless, A., O’Connell, V., …& Martin, S. 2016. 
+734 Using line acceleration to measure false killer whale (Pseudorca crassidens) click and 
+735 whistle source levels during pelagic longline depredation. The Journal of the 
+736 Acoustical Society of America, 140, 3941–3951. 
+Page 30 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+31
+737 Tixier, P., Authier, M., Gasco, N., Guinet, C. 2015. Influence of artificial food provisioning 
+738 from fisheries on killer whale reproductive output: Artificial food provisioning and 
+739 killer whale reproduction. Animal Conservation, 18, 207–218. 
+740 Tixier, P., Gasco, N., Duhamel, G., Guinet, C. 2016. Depredation of Patagonian toothfish 
+741 (Dissostichus eleginoides) by two sympatrically occurring killer whale (Orcinus orca) 
+742 ecotypes: Insights on the behavior of the rarely observed type D killer whales. Marine 
+743 Mammal Science, 32, 983–1003. 
+744 Tixier, P., Barbraud, C., Pardo, D., Gasco, N., Duhamel, G., Guinet, C. 2017. Demographic 
+745 consequences of fisheries interaction within a killer whale (Orcinus orca) population. 
+746 Marine Biology, 164, 170-186. 
+747 Tixier, P., Giménez, J., Reisinger, R., Méndez-Fernandez, P., Arnould, J., Cherel, Y., Guinet, 
+748 C. 2019. Importance of toothfish in the diet of generalist subantarctic killer whales: 
+749 implications for fisheries interactions. Marine Ecology Progress Series, 613, 197–210.
+750 Tixier, P., Burch, P., Massiot-Granier, F., Ziegler, P., Welsford, D., Lea, M.-A., … & Péron, 
+751 C. 2020. Assessing the impact of toothed whale depredation on socio-ecosystems and 
+752 fishery management in wide-ranging subantarctic fisheries. Reviews in Fish Biology 
+753 and Fisheries, 30, 203–217. 
+754 Towers, J.R., Tixier, P., Ross, K.A., Bennett, J., Arnould, J.P.Y., Pitman, R.L., Durban, J.W. 
+755 2019. Movements and dive behaviour of a toothfish-depredating killer and sperm 
+756 whale. ICES Journal of Marine Science, 76, 298–311. 
+757 Trenkel, V.M. 2018. How to provide scientific advice for ecosystem-based management now. 
+758 Fish and Fisheries, 19, 390–398. 
+759 Ulanowicz, R.E., Puccia, C.J. 1990. Mixed trophic impacts in ecosystems. Coenoses, 7-16.
+Page 31 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+32
+760 Votier, S.C., Bearhop, S., Witt, M.J., Inger, R., Thompson, D., Newton, J. 2010. Individual 
+761 responses of seabirds to commercial fisheries revealed using GPS tracking, stable 
+762 isotopes and vessel monitoring systems. Journal of Applied Ecology, 47, 487–497. 
+763 Werner, T.B., Northridge, S., Press, K.M., Young, N. 2015. Mitigating bycatch and 
+764 depredation of marine mammals in longline fisheries. ICES Journal of Marine 
+765 Science, 72, 1576–1586. 
+766 Yukhov, V.L. 1972. The range of fish of the genus Dissostichus (Fam. Nototheniidae) in 
+767 Antarctic waters of the Indian Ocean. Vosprosy ikhtiologii, 12, 348-385. Translation 
+768 in: Journal of Ichthyology. 12, 346−347
+Page 32 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+33
+769 Tables
+770
+771 Table 1. Summary of results across the alternative Ecopath models applied to the longline fisheries around Crozet island. Blank fields means that 
+772 the effect was not detected for a given model, a  means the effect was found, while;  denotes that a model produced the opposite effect. 
+ModelEffect in model Fig
+baseline  food subsidy Increased fishing 
+effort 
+Competing 
+fishery
+Longline fishing pressure (landings + discards) on toothfish 3    
+Decrease in predation pressure on toothfish (free swimming 
+individuals) by depredating species due to depredation
+3   
+Increase in fishing effort due to depredation by killer whales and 
+sperm whales on toothfish
+3-5  
+Decrease in predation pressure on other natural preys of depredating 
+killer whales and sperm whales
+4 
+Competition for toothfish (free swimming) between depredating 
+killer whales, sperm whales and fishers
+6-7    
+Competition for hooked toothfish between depredating killer whales, 
+and sperm whales and fishers
+6-7  
+prey access facilitation by fishery for depredating by killer whales 
+and sperm whales 
+7  
+Page 33 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+34
+Figures legend
+Figure 1. Schematic representations of alternative Ecopath model structures for including 
+depredation on a target species. a) baseline model: no depredation; b) food subsidy model, 
+depredated biomass is represented as a detritus group, c) increased fishing effort model, 
+depredation incorporated into the commercial fishery, d) competing fishery model, depredation 
+is an independent fishery. L landings biomass, D discards biomass, De depredated biomass and 
+PD depredating species population biomass PT Target species population biomass.
+Figure 2. Simplified flow diagram of the baseline Ecopath model. Functional groups specific 
+to Crozet are framed in orange, those occurring both around Crozet and Kerguelen Islands in 
+blue. Figures in brackets correspond to the number of functional groups explicitly defined in 
+the model. Focal groups of this study are highlighted in grey. Connections between longline 
+and sperm and killer whales represent depredation processes (which are included according to 
+different formulations in the three depredation-specific models but excluded in the baseline 
+model).
+Figure 3. Effects of alternative Ecopath model formulation on Patagonian toothfish fishing (a) 
+and natural predation (b) mortality. Estimates from the three alternative depredation models are 
+expressed relatively to the baseline model (no depredation). Models are numbered from 1 to 3: 
+1 food subsidy model, 2 increased fishing effort model and 3 competing fishery model. 
+Toothfish are modelled as three weight-based stages: juveniles (< 2.07 kg), small adults (2.07-
+5 kg) and large adults (> 5kg). 
+Figure 4. Relative change in killer whale predation mortality rates on non-commercial prey 
+groups across alternative depredation models (relative to the baseline model with no 
+depredation). Models are numbered from 1 to 3: 1 food subsidy model, 2 increased fishing effort 
+model and 3 competing fishery model. 
+Figure 5. Impact indicator of longline fishery and depredating marine mammals on the three 
+different toothfish life stages in the four Ecopath models, without depredation (0 for baseline 
+model) and with depredation (1 food subsidy model, 2 increased fishing effort model and 3 
+competing fishery model). Toothfish were modelled as three weight-based life stages: juveniles 
+(< 2.07 kg; left panel), small adults (2.07-5 kg; central panel) and large adults (> 5kg; right 
+panel). In the competing fishery model, "Depredation fishery" corresponds to depredation 
+behaviour of sperm whale and killer whale, while "killer whale" and "sperm whale" refer to the 
+naturally-predating component of these groups. In the two other depredation models, “killer 
+Page 34 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+35
+whale” and “sperm whale” groups include both effects of depredation and natural predation by 
+these groups. 
+Figure 6. Impact indicator of depredating marine mammal species on the Crozet longline 
+fishery. The "depredation fishery" group corresponds to toothfish removed by sperm whale and 
+killer whale. Models are numbered from 0 to 3: 0 baseline model with no depredation, 1 food 
+subsidy model, 2 increased fishing effort model and competing fishery model. "Depredation 
+fishery" represents depredation by both sperm and killer whales in competing fishery model, 
+while "killer whale" and "sperm whale" only represent natural predation by these groups. In the 
+two other depredation model, “killer whale” and “sperm whale” groups include both effects of 
+depredation and natural predation by these groups. 
+Figure 7. Mixed Trophic Impacts of the Crozet longline fishery on the subgroups of depredating 
+killer whales (left) and sperm whales (right). Models are numbered from 0 to 3: 0 baseline 
+model with no depredation, 1 food subsidy model, 2 increased fishing effort model and 3 
+competing fishery model. "Depredation fishery" represents depredation by both sperm and 
+killer whales in competing fishery model (but excludes the naturally-predating components of 
+these groups).
+Figure 8. Killer whale mixed trophic impact on all functional groups in the Crozet ecosystem. 
+Only large effects (absolute value > 0.03) are shown. Estimates are provided for each models, 
+which are numbered from 0 to 3: 0 baseline model with no depredation, 1 food subsidy model, 
+2 i ncreased fishing effort model and 3 competing fishery model (where ‘3DS’ and ‘3DF’ 
+distinguish between the impact of the ‘depredating species’ group and the ‘depredating fishery’, 
+respectively). "Depredation fishery" represents depredation by both sperm and killer whales in 
+competing fishery model, while "killer whale" and "sperm whale" only represents the natural 
+predation by these groups. In the two other depredation model, “killer whale” and “sperm 
+whale” groups include both depredation and natural predation effects of these groups. 
+Functional group preceded by * are part of killer whales diet. 
+Page 35 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+36
+Figure 9. Sperm whale mixed trophic impacts on all functional groups in Crozet ecosystem 
+Only large effects (absolute value > 0.03) are shown. Estimates are provided for each models, 
+which are numbered from 0 to: 0 baseline model with no depredation, 1 food subsidy model, 2 
+increased fishing effort model and 3 competing fishery model (where ‘3DS’ and ‘3DF’ 
+distinguish between the impact of the ‘depredating species’ group and the ‘depredating fishery’, 
+respectively). "Depredation fishery" represents depredation by both sperm and killer whales in 
+competing fishery model, while "killer whale" and "sperm whale" only represents the natural 
+predation by these groups. In the two other depredation model, “killer whale” and “sperm 
+whale” groups include both depredation and natural predation effects of these groups. 
+Functional group preceded by * are part of sperm whales diet.
+Page 36 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 1. Schematic representations of alternative Ecopath model structures for including depredation on a 
+target species. a) baseline model: no depredation; b) food subsidy model, depredated biomass is 
+represented as a detritus group, c) increased fishing effort model, depredation incorporated into the 
+commercial fishery, d) competing fishery model, depredation is an independent fishery. L landings biomass, 
+D discards biomass, De depredated biomass and PD depredating species population biomass PT Target 
+species population biomass. 
+169x207mm (600 x 600 DPI) 
+Page 37 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 2. Simplified flow diagram of the baseline Ecopath model. Functional groups specific to Crozet are 
+framed in orange, those occurring both around Crozet and Kerguelen Islands in blue. Figures in brackets 
+correspond to the number of functional groups explicitly defined in the model. Focal groups of this study are 
+highlighted in grey. Connections between longline and sperm and killer whales represent depredation 
+processes (which are included according to different formulations in the three depredation-specific models 
+but excluded in the baseline model). 
+169x106mm (600 x 600 DPI) 
+Page 38 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 3. Effects of alternative Ecopath model formulation on Patagonian toothfish fishing (a) and natural 
+predation (b) mortality. Estimates from the three alternative depredation models are expressed relatively to 
+the baseline model (no depredation). Models are numbered from 1 to 3: 1 food subsidy model, 2 increased 
+fishing effort model and 3 competing fishery model. Toothfish are modelled as three weight-based stages: 
+juveniles (< 2.07 kg), small adults (2.07-5 kg) and large adults (> 5kg). 
+169x99mm (600 x 600 DPI) 
+Page 39 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 4. Relative change in killer whale predation mortality rates on non-commercial prey groups across 
+alternative depredation models (relative to the baseline model with no depredation). Models are numbered 
+from 1 to 3: 1 food subsidy model, 2 increased fishing effort model and 3 competing fishery model. 
+169x99mm (600 x 600 DPI) 
+Page 40 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 5. Impact indicator of longline fishery and depredating marine mammals on the three different 
+toothfish life stages in the four Ecopath models, without depredation (0 for baseline model) and with 
+depredation (1 food subsidy model, 2 increased fishing effort model and 3 competing fishery model). 
+Toothfish were modelled as three weight-based life stages: juveniles (< 2.07 kg; left panel), small adults 
+(2.07-5 kg; central panel) and large adults (> 5kg; right panel). In the competing fishery model, 
+"Depredation fishery" corresponds to depredation behaviour of sperm whale and killer whale, while "killer 
+whale" and "sperm whale" refer to the naturally-predating component of these groups. In the two other 
+depredation models, “killer whale” and “sperm whale” groups include both effects of depredation and natural 
+predation by these groups. 
+169x99mm (600 x 600 DPI) 
+Page 41 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 6. Impact indicator of depredating marine mammal species on the Crozet longline fishery. The 
+"depredation fishery" group corresponds to toothfish removed by sperm whale and killer whale. Models are 
+numbered from 0 to 3: 0 baseline model with no depredation, 1 food subsidy model, 2 increased fishing 
+effort model and competing fishery model. "Depredation fishery" represents depredation by both sperm and 
+killer whales in competing fishery model, while "killer whale" and "sperm whale" only represent natural 
+predation by these groups. In the two other depredation model, “killer whale” and “sperm whale” groups 
+include both effects of depredation and natural predation by these groups. 
+169x99mm (600 x 600 DPI) 
+Page 42 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 7. Mixed Trophic Impacts of the Crozet longline fishery on the subgroups of depredating killer whales 
+(left) and sperm whales (right). Models are numbered from 0 to 3: 0 baseline model with no depredation, 1 
+food subsidy model, 2 increased fishing effort model and 3 competing fishery model. "Depredation fishery" 
+represents depredation by both sperm and killer whales in competing fishery model (but excludes the 
+naturally-predating components of these groups). 
+169x99mm (600 x 600 DPI) 
+Page 43 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 8. Killer whale mixed trophic impact on all functional groups in the Crozet ecosystem. Only large 
+effects (absolute value > 0.03) are shown. Estimates are provided for each models, which are numbered 
+from 0 to 3: 0 baseline model with no depredation, 1 food subsidy model, 2 increased fishing effort model 
+and 3 competing fishery model (where ‘3DS’ and ‘3DF’ distinguish between the impact of the ‘depredating 
+species’ group and the ‘depredating fishery’, respectively). "Depredation fishery" represents depredation by 
+both sperm and killer whales in competing fishery model, while "killer whale" and "sperm whale" only 
+represents the natural predation by these groups. In the two other depredation model, “killer whale” and 
+“sperm whale” groups include both depredation and natural predation effects of these groups. Functional 
+group preceded by * are part of killer whales diet.   
+169x99mm (600 x 600 DPI) 
+Page 44 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+For Review Only
+ 
+Figure 9. Sperm whale mixed trophic impacts on all functional groups in Crozet ecosystem Only large effects 
+(absolute value > 0.03) are shown. Estimates are provided for each models, which are numbered from 0 to: 
+0 baseline model with no depredation, 1 food subsidy model, 2 increased fishing effort model and 3 
+competing fishery model (where ‘3DS’ and ‘3DF’ distinguish between the impact of the ‘depredating species’ 
+group and the ‘depredating fishery’, respectively). "Depredation fishery" represents depredation by both 
+sperm and killer whales in competing fishery model, while "killer whale" and "sperm whale" only represents 
+the natural predation by these groups. In the two other depredation model, “killer whale” and “sperm whale” 
+groups include both depredation and natural predation effects of these groups. Functional group preceded 
+by * are part of sperm whales diet. 
+169x99mm (600 x 600 DPI) 
+Page 45 of 45
+http://mc.manuscriptcentral.com/icesjms
+Manuscripts submitted to ICES Journal of Marine Science
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60

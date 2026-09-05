@@ -1,0 +1,1513 @@
+1 
+ 
+Ecopath model of the Southern Bight of 
+the North Sea (version 3) 
+Steven Pint1,2, Martha Stevens1, Marleen De Troch2, Dick van Oevelen3, Johanna Jacomina Heymans4, 
+Gert Everaert1 
+1 Flanders Marine Institute (VLIZ), Wandelaarkaai 7, B-8400, Ostend, Belgium 
+2 Ghent University (Marine Biology), Campus Sterre Krijgslaan 281-S8, B-9000 Ghent, Belgium 
+3 Royal Netherlands Institute for Sea Research (NIOZ, EDS), Korringaweg 7 4401 NT, Yerseke, Netherlands 
+4 University of the Highlands and Islands (SAMS, UHI), Oban, Argyll PA37 1QA, Scotland 
+Contents 
+Contents 1 
+Preface 4 
+1. Basic input parameters 4 
+1.1. Introduction to Southern Bight of the North Sea 4 
+1.2. Data sources for the Southern Bight of the North Sea model 5 
+1.3. Functional group input parameters 6 
+1.3.1. Marine mammals 7 
+Harbour porpoise 7 
+Seals 8 
+1.3.2. Seabirds 8 
+Discard feeders 8 
+Non-discard feeders 8 
+1.3.3. Fish 8 
+Cod 9 
+Whiting 9 
+Herring 10 
+Plaice 10 
+Sharks 10 
+Rays 10 
+Sea Bass 10 
+Demersal fish 11 
+Sprat 11 
+Mackerel 11 
+Horse mackerel 11 
+2 
+ 
+Sandeels 11 
+Dab 11 
+Sole 12 
+Other flatfish 12 
+Other gadoids 12 
+Miscellaneous filter feeding pelagic fish 12 
+1.3.4. Invertebrates 12 
+Squid & cuttlefish 12 
+Large crabs + shrimps 12 
+Epifaunal macrobenthos (mobile grazers) 13 
+Infaunal macrobenthos 13 
+Small mobile epifauna (swarming crustaceans) 13 
+Small infauna (polychaetes) 13 
+Sessile epifauna 13 
+Meiofauna 13 
+Crangon crangon 13 
+Blue mussels (aquaculture) 14 
+1.3.5. Plankton 14 
+Carnivorous zooplankton 14 
+Herbivorous & omnivorous plankton (copepods) 14 
+Gelatinous zooplankton 14 
+Phytoplankton 14 
+1.3.6. Detritus 14 
+Discards 14 
+1.4. Diets 15 
+2. Defining fleets and assigning landings and discards 21 
+2.1. Fleets (commercial) distinguished by STECF gear types 21 
+2.2. Assigning 1991 landings to fleets 21 
+2.3. Calculating discards for 1991 21 
+3. Balancing of the Ecopath model 22 
+3.1. Pre-balance diagnostics 22 
+3.1.1. Biomass 24 
+3.1.2. Production/biomass 24 
+3 
+ 
+3.1.3. Consumption/biomass 25 
+3.1.4. Production/consumption 25 
+3.1.5. Respiration/assimilation 26 
+3.2. Revision of the input data 26 
+3.3. Balanced model 27 
+3.4. Post-balance diagnostics 29 
+3.4.1. Biomass 29 
+3.4.2. Production/biomass 29 
+3.4.3. Consumption/biomass 30 
+3.4.4. Production/consumption 31 
+Abbreviations 32 
+Data availability 33 
+Citation 33 
+References 33 
+ 
+ 
+  
+4 
+ 
+Preface 
+In this technical report, we describe the required data, the pre-processing steps taken and the 
+methodologies used to develop a fully calibrated ecosystem model for the southern part of the North Sea. 
+The ecosystem model was developed in both Ecopath with Ecosim (EwE) and Rpath, which  is a R 
+implementation of the commonly used EwE software. The model will serve as a tool to explore the  
+ecosystem’s natural history and its evolution  throughout the years. A first version of the model was 
+developed between July 2020 and February 2021.  
+Ecopath with Ecosim (EwE) is an ecosystem modelling software (https://ecopath.org/)  established in 1984 
+by Polovina (1984) and updated through the years by Christensen and Pauly (1992) and Walters et al. 
+(1997). It has three main components: 1) Ecopath: a mass-balance snapshot of the ecosystem; 2) Ecosim: 
+a time dynamic simulation of the system; and 3) Ecospace: a spatial and time dynamic module. 
+In this technical report, we describe an Ecopath model for the Southern Bight of the North Sea (SBNS; ICES 
+area IVc) in 1991. The year of the model, 1991, was chosen for three main reasons: 1) it is the year with 
+the most complete diet data, i.e. North Sea Year of the Stomach; 2) it is the base year in the “mother 
+model”, the North Sea model of Mackinson and Daskalov (2007); and 3) the period between 1991 and 
+2023 is a long time span for time series fitting in Ecosim to understand the influence of parameters, such 
+as vulnerability. 
+We provide an overview of our basic input parameters, the fisher ies included in this model, our data 
+sources, and methods to estimate basic input parameters.  Steps undertaken to assess and balance the 
+model are described in this manuscript  as well. We are using an ecosystem modelling approach, i.e. an 
+Ecopath with Ecosim model of the SBNS, to address our research question: “ What does the food web in 
+the SBNS look like, and how did it evolve over time?”.  
+1. Basic input parameters 
+1.1. Introduction to Southern Bight of the North Sea 
+We developed an ecosystem model for the Southern Bight of the North Sea (SBNS). The SBNS (ICES area 
+IV division c) has a surface area of 63,633.86 km-2 (ICES Spatial Facility, Fig. 1a). It is a relatively shallow 
+(<50 m) part of the North Sea (Fig. 1b). The southern limit of the SBNS is determined by the English Channel 
+and its northern limit is at the latitude of the island Schiermonniksoog, Netherlands. Apart from extreme 
+observations, surface water temperatures vary seasonally between 5°C and 20°C. The s alinity varies 
+between 29 to 35 PSU and is strongly influenced by the infl ow of Atlantic water (offshore) and the river 
+plumes of the Scheldt, Rhine, Seine, and Meuse in the coastal zones (Lacroix et al., 2004). An anticlockwise 
+circulation in the North Sea brings water from the North Atlantic along the coast of the UK in the west of 
+the SBNS and water from the English Channel in the east, along the Belgian and Dutch coast (Turrell, 1992). 
+The sediment in SBNS consists mainly of sands (Fig. 1c, ICES, 2008).  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5 
+ 
+Figure 1: The geographical location of our study area (a), the Southern Bight of the North Sea (ICES area IVc, in red) adjusted from 
+SWD/2016/0272 final - 2016/0238 (COD) and the environmental setting, (b) bathymetry of the North Sea (source RIVO – 
+alternative from ICES, 2008) and (c) seabed sediment types of the North Sea. http://www.awi -bremerhaven.de/GEO 
+/Marine_GIS/Margis%20homepage/index.html. 
+1.2. Data sources for the Southern Bight of the North Sea model 
+Ecopath models are mass-balance snapshots of the ecosystem, and the input data are expressed in mass-
+based units. To feed a SBNS specific model, we collected a range of data from multiple sources. Here, we 
+give an overview of how we estimated input parameters, e.g. biomass (wet mass in t km-2 y-1) and QB (Fig. 
+2). To estimate the biomass for our study area, we relied on biomass estimates from stock assessments 
+and catch per unit effort (CPUE) data. For most commercial fish species , biomass data is available  from 
+ICES expert group reports such as HAWG, WGWIDE and WGNSSK . For species that were not included in 
+ICES expert group reports, e.g. sea bass, seabirds and brown shrimp, estimates from research papers were 
+used instead. In the specific case of harbour porpoise, we used an abundance estimate from OSPAR and 
+the average weight per individual (Bjørge and Tolley, 2009). For some groups, such as plankton , we did 
+not find a good estimate of the biomass in the SBNS. Hence, we assumed similar biomass compared to 
+the study area of the other EwE models, the North Sea model (Mackinson and Daskalov, 2007) and the 
+Southern North Sea ( SNS; Stäbler et al., 2016). CPUE data was collected from the International Bottom 
+Trawl survey in the North Sea (NS -IBTS, ICES Database of Trawl Surveys (DATRAS), 2020; 
+https://datras.ices.dk/Data_products/Download/Download_Data_public.aspx). 
+
+6 
+ 
+ 
+Figure 2: An overview of estimating the biomass and other parameters for the Southern Bight of the North Sea (SBNS) EwE 
+model. 
+Catch related data was obtained from STECF (mainly for information about fishing gear types, landings, 
+and discards) and ICES (mainly for historical catch data). The diets in the SNS model of Stäbler et al. (2016) 
+were adjusted to our study area. Diets of the species that were not included in the SNS model of Stäbler 
+et al. (2016) were taken from CEFAS fish stomach records ( https://www.cefas.co.uk/data-and-
+publications/fish-stomach-records/) and scientific literature.  Detailed information  concerning data 
+sources for the input data in our model is described in the following sections. 
+1.3. Functional group input parameters 
+We determined the functional groups (FGs), i.e. a biomass group s representing one or multiple species, 
+based on the SNS model of Stäbler et al. (2016). The ecosystem model of Stäbler et al. (2016) was focused 
+on ICES areas IVb and IVc. Functional groups that had a low occurrence in our study area (ICES area IVc), 
+based on the ICES ecosystem map ( https://ecosystemdata.ices.dk/Map/index.aspx? 
+Action=AddLayer&DataSet=657&LatN=&LatS=&LonE=&LonW=&Sdate=&Edate), were left out of our 
+model. Other functional groups, i.e. functional groups that are not within our focus or have less economic 
+value, were clustered together to decrease the complexity in the model. We obtained a total of  43 
+functional groups, for which an overview of the input data and their sources can be consulted in Table 1. 
+
+7 
+ 
+Table 1: An overview of the input parameters (biomass (B), total mortality (Z), production over biomass (PB), consumption over 
+biomass (QB), production over consumption (PQ), and ecotrophic efficiency (EE), and references per functional group. The grey 
+shaded area indicates a functional group with a multi-stanza. 
+ 
+1.3.1. Marine mammals 
+Three marine mammals regularly occur in the SBNS: harbour porpoise ( Phocoena phocoena), common 
+seal (Phoca vitulina) and grey seal (Halichoerus grypus). Other species such as the bottlenose dolphin and 
+minke whale are uncommon in this area and sighted rarely. As they are irregular inhabitants of the SBNS 
+and more likely to just travel through or arrive by accident, they are not included in the model.  
+Harbour porpoise 
+A density of 0.607 individuals km -2 was obtained from OSPAR – SCANS III (Hammond et al., 20 17) and 
+multiplied with the average weight per individual of about 0.055 t (Bjørge and Tolley, 2009). We calculated 
+a biomass of 0.03 t km -2 y-1 for our model. Production -biomass ratio (PB) of 0.02 y -1 and consumption-
+biomass ratio (QB) of 17.63 y-1 for harbour porpoise were assumed to be similar to the values of toothed 
+whales from the SNS model of Stäbler et al. (2016). 
+Functional group Data sources
+B (t km-²) Z (y-1) PB (y-1) QB (y-1) PQ EE
+Harbour porpoise 0.03 0.02 24.64 Bjørge and Tolley (2009), Hammond et al. (2017; OSPAR-SCAN III), Stäbler et al. (2016)
+Seals 0.008 0.09 26.84 Mackinson and Daskalov (2007)
+Bicknell et al. (2013), Mackinson and Daskalov (2007), Nilsson and Nilsson (1976), Potiek et al. (2019),
+Reeves and Furness (2002), Sherley et al. (2020), Waggitt et al. (2020)
+Bicknell et al. (2013), Mackinson and Daskalov (2007), Nilsson and Nilsson (1976), Potiek et al. (2019),
+Reeves and Furness (2002), Sherley et al. (2020), Waggitt et al. (2020)
+Sharks 0.0003 0.54 3.37 ICES Database of Trawl Surveys (DATRAS), Sparholt (1990)
+Rays 1.51 0.30 2.89 ICES Database of Trawl Surveys (DATRAS), Sparholt (1990)
+Cod
+    Juvenile Cod 1.13 7.05 ICES (2019a)
+    Cod (adult) 0.22 1.13 3.20 Fishbase – Life history tool*, ICES Stock Assessment Database, ICES – Historical Nominal Catches 1950-2010 
+Whiting
+    Juvenile Whiting 2.80 ICES (2019a)
+    Whiting (adult) 0.09 1.31 5.41 Fishbase – Life history tool*, ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Other gadoids 0.06 0.85 5.23 ICES Database of Trawl Surveys (DATRAS), Sparholt (1990)
+Demersal fish 0.05 2.49 4.94 ICES Database of Trawl Surveys (DATRAS), Sparholt (1990)
+Herring
+    Juvenile Herring 0.87 ICES (2020) 
+    Herring (adult) 0.76 0.87 6.78 Fishbase – Life history tool*, ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Sprat 0.21 0.80 9.01 ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Mackerel 0.92 1.34 4.81 ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Horse mackerel 1.51 0.34 4.96 ICES Stock Assessment Database, Sparholt (1990)
+Sandeels 4.38 1.00 9.59 ICES Stock Assessment Database
+Plaice
+    Juvenile Plaice 0.49 ICES (2019a)
+    Plaice (adult) 0.90 0.89 3.63 Fishbase – Life history tool*, ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Dab 9.64 0.46 5.58 ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Other flatfish 0.15 0.84 6.90 ICES Database of Trawl Surveys (DATRAS), Sparholt (1990)
+Sole
+    Juvenile Sole 0.54 ICES (2019a)
+    Sole (adult) 0.32 1.15 5.56 Fishbase – Life history tool*, ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Sea Bass 0.00004 0.56 3.81 ICES Stock Assessment Database, ICES Database of Trawl Surveys (DATRAS)
+Pelagic fish 4.00 10.19 0.98 Mackinson and Daskalov (2007)
+Squid & cuttlefish 0.13 11.02 20.00 ICES Database of Trawl Surveys (DATRAS), Mackinson and Daskalov (2007)
+Carnivorous zooplankton 4.00 0.32 0.99 Mackinson and Daskalov (2007)
+Herbivorous zooplankton 16.00 9.20 30.00 Mackinson and Daskalov (2007)
+Gelatinous zooplankton 0.09 2.86 0.45 Stäbler et al. (2016)
+Large crabs & shrimp 2.30 1.05 0.20 Mackinson and Daskalov (2007), OBIS**, Stäbler (2016)
+Blue mussels (aquaculture) 0.06 0.36 2.67 Horn et al. (2020)
+Epifaunal macrobenthos (mobile grazers) 78.00 0.39 0.20 Mackinson and Daskalov (2007)
+Infaunal macrobenthos 136.00 1.00 0.30 Mackinson and Daskalov (2007)
+C. crangon
+    Crangon (below 5cm) 12.50 Hufnagl et al. (2010a), Stäbler et al. (2016)
+    Crangon (commercial size) 0.36 6.50 10.00 Hufnagl et al. (2010a), Tulp et al. (2016), Stäbler et al. (2016)
+Small mobile epifauna (swarming crustaceans) 30.00 1.90 0.35 Mackinson and Daskalov (2007)
+Small infauna (polychaetes) 150.00 0.90 0.30 Mackinson and Daskalov (2007)
+Sessile epifauna 105.00 0.26 0.20 Mackinson and Daskalov (2007)
+Meiofauna 35.00 125.00 0.99 Mackinson and Daskalov (2007)
+Phytoplankton 7.50 286.70 Mackinson and Daskalov (2007)
+Detritus 50.00 Mackinson and Daskalov (2007)
+Discards 0.00 Stäbler et al. (2016)
+Seabirds (discard feeders)
+Seabirds (non-discard feeders)
+Input parameters
+0.0004 0.1 60.52
+0.002 1.12 48.2
+NOAA’s National Marine Fisheries Service (2005); Northeast Fisheries Science Center (2010); OBIS Canada (2011); Parr (n.d.); Rees et al. (n.d.); Santos (2016); Swedish county administration boards et al. (2017);
+The Norwegian Oil Industry Association (2001); Türkay (n.d.); Van Guelpen (2016); Van Guelpen and Pohle (2014); VLIZ (2004)
+** Brodie et al. (2013); Buhl-Mortensen (2014); DFO (2016); Hassel (2014); ICES (2010); IFREMER (2016); Libby (2014); MBA (2016); Meurisse and Semal (2020); Miller et al. (2014); National Museum of Natural History (2001); 
+* Asila and Ogari (1988); Beddington and Cooke (1983); Beverton and Holt (1957); Beverton and Holt (1964); Beverton (1992); Blueweiss et al. (1978); Froese and Binohlan (2000); Froese et al. (in prep.);
+Gulland (1971); Musick (1999); Palomares (1991); Palomares and Pauly (1999); Pauly (1979); Pauly (1980); Pauly (1984); Pauly (1986); Pauly (1989); Pauly and Christensen (1998); Pauly et al. (1998); 
+Ricker (1975); Taylor (1958)
+8 
+ 
+Seals 
+We assumed that the parameters, such as biomass, PB, and QB for seals, i.e. grey and common seal were 
+the same as in the North Sea model of Mackinson and Daskalov (2007). Th us, the biomass for seals was 
+0.008 t km-2 y-1, PB 0.09 y-1 and QB 26.84 y-1. 
+1.3.2. Seabirds  
+We divided the seabirds into two functional groups, i.e. discard feeders and non- discards feeders. We did 
+this because discards can be a large portion of some species’ diets. Large flock of seabirds are  often 
+observed feeding on discards thrown overboard by fishermen. Other seabirds, such as divers and northern 
+gannets do not feed on discards (or do so to a limited extent). 
+Discard feeders 
+Discard feeders consist of seabirds whose diet relies for a large part on discards. The following species 
+were included in this group: European herring gull ( Larus argentatus ), great black -backed gull ( Larus 
+marinus), lesser black-backed gull (Larus fuscus), common gull (Larus canus), black-legged kittiwake (Rissa 
+tridactyla), and great skua (Stercorarius skua). The biomass of discard feeders was estimated to be 0.0004 
+t km-2 y-1 based on scientific literature from Bicknell et al. (2013), Potiek et al. (2019), Reeves and Furness 
+(2002), Sherley et al. (2020)  and Waggitt et al. (2020). PB was taken from the North Sea model of 
+Mackinson and Daskalov (2007) and estimated to be 0.10 y -1, whereas QB was estimated using the 
+empirical formula of Nilsson and Nilsson (1976) resulting in 60.52 y-1.  
+Non-discard feeders 
+Non-discard feeders consist of seabirds where discards do not (or to a limited extend) contribute to their 
+diet. The following species were included in this group: Great crested grebe (Podiceps cristatus), Northern 
+gannet ( Morus bassanus ), little gull ( Hydrocoloeus minutus), common tern ( Sterna hirundo ), common 
+murre (Uria aalge), razorbill (Alca torda), scoter sp. (Melanitta sp.), loon (Gaviidae) and tern (Sternidae). 
+Podiceps cristatus is common in freshwater areas but also in estuaries and shallow coastal waters (Stienen 
+& Vanermen, 2018). Sterna hirundo is also a common bird at freshwater bodies, such as rivers and lakes, 
+but is also common around saltwater bodies , such as lagoons, and coastal waters (Bicknell et al., 2013; 
+Potiek et al, 2019; Stienen & Vanermen, 2018). The biomass of non-discard feeders was estimated at 0.002 
+t km-2 y-1 based on several research papers: Bicknell et al. (2013), Potiek et al. (2019), Reeves and Furness 
+(2002), Sherley et al. (2020) and Waggitt et al. (2020). PB (1.12 y-1) was taken from the North Sea model 
+(Mackinson and Daskalov, 2007), and QB was estimated with the empirical formula of Nilsson and Nilsson 
+(1976) resulting in 48.20 y-1. 
+1.3.3. Fish 
+The functional groups containing fish were chosen based on their importance for fisheries, both 
+commercial and recreational. The PB of fish was calculated using equation 1. The total mortality (Z) equals 
+fishing mortality (F) plus the natural mortality (M, Eq. 1). Fishing mortality is equal to the catch (C) over 
+biomass (B, Eq. 2). The natural mortality is calculated according to the empirical formula of Pauly (1980) 
+using asymptotic length (Linf; Eq. 3) or asymptotic weight (Winf; Eq. 4) depending on which parameter was 
+known. 
+𝑃
+𝐵 = 𝑍 = 𝐹 + 𝑀           (1) 
+𝐹 =
+𝐶
+𝐵            (2) 
+𝑙𝑜𝑔 𝑀 =  −0.0066 − 0.279 𝑙𝑜𝑔 𝐿𝑖𝑛𝑓 + 0.6543 𝑙𝑜𝑔 𝐾 + 0.4634 𝑙𝑜𝑔 𝑇    (3) 
+9 
+ 
+𝑙𝑜𝑔 𝑀 =  −0.2107− 0.0824 𝑙𝑜𝑔 𝑊𝑖𝑛𝑓 + 0.6757 𝑙𝑜𝑔 𝐾 + 0.4627 𝑙𝑜𝑔 𝑇   (4) 
+In equation 3 and 4, K is  the growth coefficient and T is the temperature (°C), i.e. 10°C. Consumption -
+biomass ratio (QB; Eq. 5) was estimated using the empirical formula of Pauly et al. (1990). Pf (apex and/or 
+pelagic predators and/or zooplankton feeders) is 1 for top predators and zooplanktivores and 0 for 
+detritivores and herbivores. Hd (herbivores and detritivores) is 1 for herbivores and 0 for carnivores. The 
+values for the parameters; K, L inf and Winf were obtained from Fishbase (Froese and Pauly 2023) through 
+the Life history tool (Asila and Ogari, 1988); Beddington and Cooke, 1983; Beverton and Holt, 1957; 
+Beverton and Holt, 1964; Beverton, 1992; Blueweiss et al., 1978; Froese and Binohlan, 2000; Froese et al., 
+in prep.; Gulland, 1971; Musick, 1999; Palomares, 1991; Palomares and Pauly, 1999; Pauly, 1979; Pauly, 
+1980; Pauly, 1984; Pauly, 1986; Pauly, 1989; Pauly and Christensen, 1998; Pauly et al., 1998; Ricker, 1975; 
+Taylor, 1958) for each species. For FGs composed of multiple species,  we took a weighted mean of the 
+species’ parameters with their biomass as weight. 
+𝑙𝑜𝑔
+𝑄
+𝐵 =  6.37 − 1.5045 (
+1000
+(𝑇+273.1)) − 0.168 𝑙𝑜𝑔 𝑊𝑖𝑛𝑓 + 0.1399 𝑙𝑜𝑔 𝑃𝑓 + 0.2765 𝑙𝑜𝑔 𝐻𝑑 (5) 
+Table 1 provides an overview of all model parameter estimates. 
+Cod 
+We divided cod ( Gadus morhua) into two stanza groups as they are a target species for fisheries, which 
+focus on adult individuals. For adult cod (2+) we estimated the biomass to be 0.02 t km-2 y-1. We obtained 
+this biomass estimate by multiplying the spawning stock biomass of cod in the greater North Sea (North 
+Sea, English Channel and Skagerrak ; ICES Stock Assessment Database) with the ratio of cod in the SBNS 
+compared to those in the greater North Sea based on CPUE data (NS-IBTS; ICES Database of Trawl Surveys 
+(DATRAS)). PB and QB were calculated as 1.14 y-1 and 3.20 y-1 for adult cod. Total mortality of juvenile cod 
+was calculated using F and M from ICES (2019a) and was estimated at 1.13 y-1. For multi-stanza functional 
+groups such as Cod, weight at maturity over asymptotic weight ( Wmaturity / Winfinity) which were retrieved 
+from Fishbase – Life history tool (Asila and Ogari, 1988; Beddington and Cooke, 1983; Beverton and Holt, 
+1957; Beverton and Holt, 1964; Beverton, 1992; Blueweiss et al., 1978; Froese and Binohlan, 2000; Froese 
+et al., in prep.; Gulland, 1971; Musick, 1999; Palomares, 1991; Palomares and Pauly, 1999; Pauly, 1979; 
+Pauly, 1980; Pauly, 1984; Pauly, 1986; Pauly, 1989; Pauly and Christensen, 1998; Pauly et al., 1998; Ricker, 
+1975; Taylor, 1958), is required as basic input in Ecopath. For this, a value of 0.137 was obtained. 
+Whiting 
+We divided whiting (Merlangius merlangus) in two stanza groups as they are a target species for fisheries. 
+For adult whiting (2+), we estimated the biomass to be 0.09 t km-2 y-1. This estimate was obtained based 
+on the ratio of whiting in the SBNS compared to the greater North Sea based on CPUE data (NS-IBTS; ICES 
+Database of Trawl Surveys (DATRAS) ), which was then multiplied with the total spawning whiting stock 
+biomass in the greater North Sea ( North Sea and English Channel; ICES Stock Assessment Database). PB 
+and QB were calculated as 1.31 y -1 and 5.41 y-1 for adult whiting. Total mortality of juvenile whiting was 
+calculated using F and M from ICES (2019a) and was estimated at 2.80 y-1. Maturity over asymptotic weight 
+(Wmaturity / Winfinity) for whiting was estimated at 0.182 (Fishbase – Life history tool; Asila and Ogari, 1988); 
+Beddington and Cooke, 1983; Beverton and Holt, 1957; Beverton and Holt, 1964; Beverton, 1992; 
+Blueweiss et al., 1978; Froese and Binohlan, 2000; Froese et al., in prep.; Gulland, 1971; Musick, 1999; 
+Palomares, 1991; Palomares and Pauly, 1999; Pauly, 1979; Pauly, 1980; Pauly, 1984; Pauly, 1986; Pauly, 
+1989; Pauly and Christensen, 1998; Pauly et al., 1998; Ricker, 1975; Taylor, 1958). 
+10 
+ 
+Herring 
+We divided herring (Clupea harengus) into two stanza groups as they are a target species for fishery. For 
+adult herring (1+), we estimated the biomass to be 0.76 t km -2 y-1. This estimate was obtained based on 
+the ratio of herring in the SBNS compared to the greater North Sea using CPUE data ( NS-IBTS; ICES 
+Database of Trawl Surveys (DATRAS)), which was then multiplied with the total spawning stock biomass 
+of herring in the greater North Sea (North Sea, English Channel and Skagerrak; ICES Stock Assessment 
+Database). PB and QB were calculated as 0.87 y-1 and 6.78 y-1 for adult herring. Total mortality of juvenile 
+herring was calculated using F and M from ICES (2020) and was 0.87 y-1. Maturity over asymptotic weight 
+(Wmaturity / Winfinity) for herring was 0.207 obtained from FishBase – Life history tool (Asila and Ogari, 1988); 
+Beddington and Cooke, 1983; Beverton and Holt, 1957; Beverton and Holt, 1964; Beverton, 1992; 
+Blueweiss et al., 1978; Froese and Binohlan, 2000; Froese et al., in prep.; Gulland, 1971; Mu sick, 1999; 
+Palomares, 1991; Palomares and Pauly, 1999; Pauly, 1979; Pauly, 1980; Pauly, 1984; Pauly, 1986; Pauly, 
+1989; Pauly and Christensen, 1998; Pauly et al., 1998; Ricker, 1975; Taylor, 1958). 
+Plaice 
+We divided plaice (Pleuronectes platessa) into two stanza groups, as they are a target species for fisheries. 
+For adult plaice (2+), we estimated the biomass to be 0.90 t km-2 y-1. This estimate was based on the ratio 
+of plaice landings in the SBNS compared to the North Sea ( NS-IBTS; ICES Database of Trawl Surveys 
+(DATRAS)), which was then multiplied with the total stock biomass of plaice in the North Sea (North Sea 
+and Skagerrak; ICES Stock Assessment Database). PB and QB were calculated as 0.89 y -1 and 3.64 y-1 for 
+adult plaice. Total mortality of juvenile plaice was calculated using F and M from ICES (2019a) and was 
+0.49 y-1. A Wmaturity / Winfinity value of 0.147 was estimated for plaice using FishBase – Life history tool (Asila 
+and Ogari, 1988); Beddington and Cooke, 1983; Beverton and Holt, 1957; Beverton and Holt, 1964; 
+Beverton, 1992; Blueweiss et al., 1978; Froese and Binohlan, 2000; Froese et al., in prep.; Gulland, 1971; 
+Musick, 1999; Palomares, 1991; Palomares and Pauly, 1999; Pauly, 1979; Pauly, 1980; Pauly, 1984; Pauly, 
+1986; Pauly, 1989; Pauly and Christensen, 1998; Pauly et al., 1998; Ricker, 1975; Taylor, 1958). 
+Sharks 
+The most common sharks in the SBNS are the spurdog ( Squalus acanthias), school shark ( Galeorhinus 
+galeus), small-spotted catshark (Scyliorhinus canicula) and smooth-hound (Mustelus spp.). We estimated 
+their biomass following the approach of Sparholt (1990). We calculated the ratio of sharks to the sum of 
+cod and whiting for the SBNS using CPUE data from the International Bottom Trawl survey in the North 
+Sea (NS-IBTS, ICES Database of Trawl Surveys (DATRAS)) . We then multiplied this ratio with the sum of 
+cod and whiting biomass in the SBNS. We obtained a biomass of 0.0003 t km -2 y-1. The PB was estimated 
+to be 0.54 y-1 and QB 3.37 y-1. 
+Rays 
+Ray species included in this functional group are thornback ray ( Raja clavata ), spotted ray ( Raja 
+montagui), starry ray ( Amblyraja radiata, low abundance), rajids unid., blue skate ( Dipturus batis, low 
+abundance) and cuckoo ray (Leucoraja naevus, low abundance). We estimated their biomass according to 
+the approach of Sparholt (1990). We calculated the ray -plaice ratio of the SBNS using CPUE data of the 
+NS-IBTS (ICES Database of Trawl Surveys (DATRAS)) . Then we multiplied the ray -plaice ratio with the 
+calculated total stock biomass of plaice. We obtained a biomass of 1.51 t km -2 y-1. The PB was estimated 
+to be 0.30 y-1 and QB 2.90 y-1. 
+Sea Bass 
+We estimated sea bass’ ( Dicentrarchus labrax) biomass following the approach of Sparholt (1990) . We 
+calculated the ratio of ratio sea bass compared to the sum of cod and whiting in the SBNS using CPUE data 
+of the NS-IBTS (ICES Database of Trawl Surveys (DATRAS)). We then multiplied this ratio with the sum of 
+11 
+ 
+cod and whiting biomass in the SBNS. We obtained a biomass of 0.0004 t km-2 y-1. The PB was estimated 
+to be 0.56 y-1 and QB 3.81 y-1. 
+Demersal fish 
+The demersal fish FG includes demersal fish, gurnards, and dragonets. The most common species in this 
+FG are john dory ( Zeus faber), eelpout (Zoarces viviparus), shorthorn sculpin ( Myoxocephalus Scorpius), 
+longspined bullhead (Taurulus bubalis), hooknose (Agonus cataphractus), striped sea snail (Liparis liparis), 
+greater weever (Trachinus draco), lesser weever ( Echiichthys vipera) and surmullet (Mullus surmuletus). 
+We estimated their biomass following the approach of Sparholt (1990). We calculated the ratio  of 
+demersal fish compared to the sum of cod and whiting in  the SBNS using CPUE data from the NS-IBTS 
+(ICES Database of Trawl Surveys (DATRAS)). Then, we multiplied this ratio with the sum of cod and whiting 
+biomass in the SBNS. We obtained a biomass of 0.05 t km-2 y-1. The PB was estimated to be 2.49 y-1 and 
+QB 4.94 y-1. 
+Sprat 
+Biomass was estimated based on the ratio of sprat (Sprattus sprattus) in the SBNS compared to the greater 
+North Sea based on CPUE data (NS-IBTS; ICES Database of Trawl Surveys (DATRAS)) , which was then 
+multiplied with the total spawning stock biomass of sprat in the greater North Sea (North Sea, Skagerrak 
+and Kattegat; ICES Stock Assessment Database We calculated a biomass of 0.21 t km-2. PB and QB were 
+calculated as 0.80 y-1 and 9.01 y-1. 
+Mackerel 
+Mackerel (Scrombus scrombus) biomass was estimated based on the ratio of mackerel landings in the 
+SBNS compared to the greater North Sea (NS-IBTS; ICES Database of Trawl Surveys (DATRAS)), which was 
+then multiplied with the total spawning stock biomass of mackerel in the greater North Sea  (North Sea, 
+English Channel and Skagerrak) . The greater North Sea spawning stock biomass required for this 
+calculation was estimated for the North Sea by taking the North Sea portion (stock) of the spawning stock 
+biomass in the Atlantic (ICES Stock Assessment Database ). This resulted in a biomass estimate of 0.92 t 
+km-2 y-1. PB and QB were calculated as 1.34 y-1 and 4.81 y-1. 
+Horse mackerel 
+We estimated the biomass of horse mackerel ( Trachurus trachurus) following the approach of Sparholt 
+(1990). We calculated the horse mackerel -herring ratio of the SBNS using data from the NS-IBTS (ICES 
+Database of Trawl Surveys (DATRAS)) . Then we multiplied the horse mackerel -herring ratio with the 
+calculated biomass of whiting. We obtained a biomass of 1.51 t km-2 y-1. The PB was estimated to be 0.34 
+y-1 and QB 4.96 y-1. 
+Sandeels 
+Sandeel (Ammodytidae) biomass was estimated based on the ratio of s andeel landings in the SBNS 
+compared to the North Sea (sandeel area 1r; ICES Stock Assessment Database), which was then multiplied 
+with the total stock biomass of s andeels in the  North Sea  (sandeel area 1r ; ICES Stock Assessment 
+Database). This resulted in a biomass estimate of 4.39 t km-2 y-1. PB and QB were calculated as 1.00 y-1 and 
+9.59 y-1. 
+Dab 
+We estimated dab’s (Limanda limanda) biomass based on the ratio of dab in the SBNS compared to the 
+North Sea based on CPUE data  (NS-IBTS; ICES Database of Trawl Surveys (DATRAS)) , which was then 
+multiplied with the total stock biomass of dab in the North Sea ( ICES Stock Assessment Database ).  We 
+obtained a biomass of 9.64 t km-2 y-1. The PB was estimated to be 0.46 y-1 and QB 5.58 y-1. 
+12 
+ 
+Sole 
+We divided sole (Solea solea) in two stanza groups as they are a target species for fisheries. For adult sole 
+(2+), we estimated the biomass to be 0.32 t km-2 y-1. This estimate was based on the ratio of sole landings 
+in the SBNS compared to the North Sea ( NS-IBTS; ICES Database of Trawl Surveys (DATRAS)) , which was 
+then multiplied with the total stock biomass of sole in the North Sea (North Sea; ICES Stock Assessment 
+Database). PB and QB were calculated at 1.15 y-1 and 5.56 y-1 for adult sole. Total mortality of juvenile sole 
+was calculated using F and M from ICES (2019a) and was 0.54 y -1. A Wmaturity / Winfinity value of 0.185 was 
+estimated for sole using FishBase – Life history tool (Asila and Ogari, 1988); Beddington and Cooke, 1983; 
+Beverton and Holt, 1957; Beverton and Holt, 1964; Beverton, 1992; Blueweiss et al., 1978; Froese and 
+Binohlan, 2000; Froese et al., in prep.; Gulland, 1971; Musick, 1999; Palomares, 1991; Palomares and 
+Pauly, 1999; Pauly, 1979; Pauly, 1980; Pauly, 1984; Pauly, 1986; Pauly, 1989; Pauly and Christensen, 1998; 
+Pauly et al., 1998; Ricker, 1975; Taylor, 1958). 
+Other flatfish 
+The other common flatfish in the SBNS (besides plaice, dab and sole) are European flounder (Platichthys 
+flesus), lemon sole (Microstomus kitt), turbot (Scophthalmus maxima) and brill (Scophthalmus rhombus). 
+We estimated their biomass according to the approach of Sparholt (1990). We calculated the ‘other 
+flatfish-plaice’ ratio of the SBNS using data from the NS-IBTS (ICES Database of Trawl Surveys (DATRAS)). 
+Then, we multiplied the ‘other flatfish -plaice’ ratio with the calculated total stock biomass of plai ce. We 
+obtained a biomass of 0.15 t km-2 y-1. The PB was estimated to be 0.83 y-1 and QB 6.90 y-1. 
+Other gadoids 
+The FG of the other gadoids consists of fivebeard rockling ( Ciliata mustela), poor cod ( Trisopterus 
+minutus), pouting ( Trisopterus luscus), three-bearded rockling ( Gaidropsarus vulgaris, low abundance), 
+fourbeard rockling ( Enchelyopus cimbrius, low abundance) and silvery pout ( Gadiculus argenteus, low 
+abundance). We estimated their biomass following the approach of Sparholt (1990). We calculated the 
+ratio of other gadoids to the sum of cod and whiting  in the SBNS using data from the NS-IBTS (ICES 
+Database of Trawl Surveys (DATRAS)). We then multiplied this ratio with the sum of the biomass of cod 
+and whiting in the SBNS . We obtained a biomass of 0.06 t km-2 y-1. The PB was estimated to be 0.85 y-1 
+and QB 5.23 y-1. 
+Miscellaneous filter feeding pelagic fish 
+The miscellaneous filter feeding group consist of shad ( Alosa sp.), anchovy ( Engraulis encrasicolus) and 
+European pilchard (Sardina pilchardus). We could not estimate the biomass of miscellaneous filter feeding 
+pelagic fish with the data available to us. Instead, we took the values of the North Sea model of Mackinson 
+and Daskalov (2007) for which PB is 4.00 y-1 and the QB is 10.19 y-1. Trophic efficiency was set to 0.98. 
+1.3.4. Invertebrates 
+Squid & cuttlefish 
+We included three species of squid and cuttlefish in this FG, i.e. veined squid ( Loligo forbesii), European 
+squid (Loligo vulgaris) and common cuttlefish (Sepia officinalis). We estimated the biomass for squid and 
+cuttlefish by calculating the mean ratio from 1999 until 2018 between the abundance in the SBNS and the 
+greater North Sea based on the ICES NS-IBTS data and multiplying this ratio with the total biomass of the 
+North Sea model (Mackinson and Daskalov, 2007). The resulting biomass was 0.13 t km-2 y-1. We based PB 
+(11.02 y-1) and QB (20.00 y-1) on the North Sea model (Mackinson and Daskalov, 2007). 
+Large crabs + shrimps  
+Common large crabs with commercial value in the SBNS are edible crab (Cancer pagurus), common spider 
+crab ( Maja brachydactyla ) and velvet swimming crab ( Necora puber ). Note that  European lobster 
+13 
+ 
+(Homarus gammarus) is also included in this FG. Shrimp species included are Crangon allmanni, Eualus 
+pusiolus, Pandalus montagui, Spirontocaris lilljeborgi, Processa nouveli, and Pandalina spp. We estimated 
+the biomass of shrimp species by calculating the abundance ratio of the SBNS and North Sea ( Brodie et 
+al., 2013; National Museum of Natural History, 2001; Northeast Fisheries Science Center, 2010; Türkay, 
+n.d.; NOAA’s National Marine Fisheries Service, 2005; DFO, 2016; Hassel, 2014; Swedish county 
+administration boards et al., 2017; Buhl-Mortensen, 2014; Parr, n.d.; Rees et al., n.d.; Miller et al., 2014; 
+ICES, 2010); Van Guelpen, 2016; OBIS Canada, 2011; Santos, 2016; Meurisse and Semal, 2020; MBA, 2016; 
+IFREMER, 2016; VLIZ , 2004; Libby , 2014; Van Guelpen and Pohle , 2014; The Norwegian Oil Industry 
+Association, 2001), which we then multiplied with the best estimate biomass of Mackinson and Daskalov 
+(2007, Table 11.8). Pandalus borealis and nephrops (Nephrops norvegicus) are not included in our model 
+as they have a low occurrence in our study area. The total biomass of all shrimp species was added to the 
+total large crab biomass, which we assumed to be equal to the entire North Sea (Mackinson and Daskalov, 
+2007). This resulted in an estimated biomass of 2.30 t km -2 y-1. For PB, a weighted mean was taken from 
+all relevant functional groups from Stäbler et al. (2016) (with biomass as weight) which resulted in an 
+estimate of 1.05 y-1 and production-consumption (P/Q) ratio, 0.20. For these estimates, we assumed that 
+the ratio between the functional groups in the SBNS is similar to the ratio in the North Sea. 
+Epifaunal macrobenthos (mobile grazers) 
+The biomass, PB and production over consumption (PQ) for the epifaunal macrobenthos were taken from 
+Mackinson and Daskalov (2007). The biomass was 78 t km-2; the PB 0.39 y-1, and the PQ was 0.20. 
+Infaunal macrobenthos 
+The biomass, PB and production over consumption (PQ) for the infaunal macrobenthos were taken from 
+Mackinson and Daskalov (2007). The biomass was 136 t km-2; the PB 1.00 y-1, and the PQ was 0.30. 
+Small mobile epifauna (swarming crustaceans) 
+The biomass, PB and production over consumption (PQ) for the small mobile epifauna were taken from 
+Mackinson and Daskalov (2007). The biomass was 30 t km-2; the PB 1.90 y-1, and the PQ was 0.35. 
+Small infauna (polychaetes) 
+The biomass, PB and production over consumption (PQ) for the small infauna were taken from Mackinson 
+and Daskalov (2007). The biomass was 150 t km-2; the PB 0.90 y-1, and the PQ was 0.30. 
+Sessile epifauna 
+The biomass, PB and production over consumption (PQ) for the sessile epifauna were taken from 
+Mackinson and Daskalov (2007). The biomass was 105 t km-2; the PB 0.26 y-1, and the PQ was 0.20. 
+Meiofauna 
+The PB, QB and EE for the meiofauna were taken from Mackinson and Daskalov (2007). The PQ was 35 y-
+1; the QB 125 y-1, and the EE was 0.99. 
+Crangon crangon 
+We divided brown shrimp ( Crangon crangon) in to two stanza groups as they are a target species for 
+fisheries. Crangon crangon  larger than 50 mm  were considered adults , because this is the length at 
+recruitment for fishery. For adult Crangon crangon (> 50 mm), we based the biomass on a research study 
+of Tulp et al. (2016) to be 0.36 t km-2 y-1. The total mortality (Z) of the adults, 6.50 y-1, was based on Stäbler 
+et al. (2016 ), after Hufnagl et al. (2010a). Z for juveniles, 12.50 y -1, was estimated in the sam e manner 
+(Hufnagl et al., 2010a. Stäbler et al., 2016). The QB was set to 10.00 y -1 (Stäbler et al., 2016). The von 
+Bertalanffy growth function K for Crangon crangon was found to be 1.17 (Hufnagl et al., 2010a). The 
+asymptotic length of Crangon crangon is 79.32 mm, length at ‘maturity’ is 50 mm length, i.e. length at 
+14 
+ 
+recruitment to fisheries. From both, we calculated the corresponding weight according to Hufnagl et al. 
+(2010b; section 3.1.4 ). The resulting weight at maturity over asymptotic weight ( Wmaturity / W infinity) 
+required as basic input to Ecopath is 0.24. 
+Blue mussels (aquaculture) 
+This functional group was introduced in the model for a case study in a later stage. We directed our 
+attention to the cultivation of mussels in Belgium, commencing with a minimal initial biomass, i.e. 0.055 
+t km -2. This was because there was no existing mussel aquaculture in Belgium in 1991. The PB and QB 
+were taken from an Ecopath model of the northern Wadden Sea (Horn et al., 2020), and are 0.36 y -1 and 
+2.67 y-1 respectively. 
+1.3.5. Plankton 
+Carnivorous zooplankton 
+In this FG we included krill species of the order Euphausiacea, e.g. Thysanoessa inermis, Meganyctiphanes 
+norvegica. We assumed that the carnivorous zooplankton PB, production -consumption ratio and 
+ecotrophic efficiency in the SBNS were the same as in the North Sea (Mackinson and Daskalov, 2007). The 
+PB is 4.00 y-1, the production-consumption ratio is 0.32, and the ecotrophic efficiency is 0.99. 
+Herbivorous & omnivorous plankton (copepods) 
+The herbivorous & omnivorous plankton consist of several copepod species, e.g. Pseudocalanus 
+elongatus, Paracalnus parvus, Microcalanus pusillus, Acartia spp. and Temora longicornis.  We assumed 
+that the herbivorous & omnivorous zooplankton biomass, PB and QB in the SBNS were similar to those of 
+the North Sea model (Mackinson and Daskalov, 2007). The biomass is 16.00 t km -2 y-1, the PB is 9.20 y -1 
+and the QB is 30.00 y-1. 
+Gelatinous zooplankton 
+The gelatinous zooplankton are jellyfish, i.e. moon jellyfish ( Aurelia aurita ), blue jellyfish ( Cyanea 
+lamarckii) and lion’s mane jellyfish ( Cyanea capillata ). We assumed that the gelatinous zooplankton 
+biomass, PB and P/Q ratio in the SBNS were the same as in the SNS model (Stäbler et al., 2016). The 
+biomass is 0.09 t km-2 y-1, the PB is 2.86 y-1 and the production-consumption ratio is 0.45. 
+Phytoplankton 
+We assumed that the phytoplankton biomass and PB in the SBNS were the same as for the entire North 
+Sea (Mackinson and Daskalov, 2007). The biomass is 7.50 t km-2 y-1 and the PB is 286.70 y-1. 
+1.3.6. Detritus 
+We combined t he two detritus groups (POM and DOM)  from the North Sea model of Mackinson and 
+Daskalov (2007). The sum of the  biomass of these two groups resulted in the detritus biomass in our 
+model: 50.00 t km-2 y-1.  
+Discards 
+The biomass of the discards in the SBNS were estimated at 0.0001 t km-2 y-1. We assumed that the discards 
+biomass in our study area was equal to that of the SNS (Stäbler et al., 2016). 
+ 
+ 
+ 
+15 
+ 
+1.4. Diets 
+We based the diets of our functional groups on Stäbler et al. (2016) , which were adjusted to fit our 
+functional groups. To achieve this, the diets for some functional groups from Stäbler et al. (2016) were 
+merged by taking th e weighted mean of the functional groups’ diets assuming that the biomass ratio 
+between functional groups remained equal. The weight used for calculating the weighted mean was the 
+biomass of the corresponding functional groups. For example, we grouped gurnards, dragonets, and small 
+demersal fish into a single functional group , i.e. demersal fish, and thus a single diet . We used their 
+corresponding biomass’ as the weight for taking the weighted mean for each prey item. Several functional 
+groups of the SNS model of Stäbler et al. (2016) did not occur in our model. We eliminated these functional 
+groups from the diets of our functional groups and recalculated the diet proportions back to a total of one 
+while keeping the diet items ratio equal. Note that there is one exception to our methodology to estimate 
+diets: the diet of blue mussels. Their diet was based on Horn et al. (2020) and as filter feeders, they mainly 
+feed on phytoplankton, detritus, and herbivorous zooplankton. An overview of all diets is provided in 
+Table 2. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+16 
+ 
+Table 2: An overview of the diets in the Southern Bight of the North Sea. 
+ Prey \ predator 1 2 3 4 5 6 7 8 
+1 Harbour porpoise         
+2 Seals         
+3 Seabirds (discard)         
+4 Seabirds (non-discard)         
+5 Sharks         
+6 Rays        1.11E-03 
+7 Juvenile Cod 3.66E-02 3.82E-02 5.42E-03 2.30E-03  8.46E-03 6.22E-03 9.83E-03 
+8 Cod (adult)  7.69E-02      9.52E-03 
+9 Juvenile Whiting 3.04E-02 5.20E-03 1.33E-02 1.80E-02 2.25E-03 4.95E-03 1.75E-02 5.40E-02 
+10 Whiting (adult) 9.36E-02 8.34E-02   1.08E-01 4.48E-03  8.71E-02 
+11 Other gadoids 6.95E-02 3.36E-02  5.01E-04 1.21E-01 3.31E-02 2.92E-02 2.67E-02 
+12 Demersal fish 5.87E-04 1.38E-01 2.60E-03 9.01E-04 1.29E-02 1.05E-03 5.33E-02 3.59E-02 
+13 Juvenile Herring 1.62E-03 1.04E-05   1.78E-03 3.62E-03 4.67E-03 1.69E-02 
+14 Herring (adult) 4.85E-03 7.38E-03 4.83E-02 5.91E-02 1.90E-01 1.30E-02 3.22E-03 1.58E-01 
+15 Sprat 1.53E-01 3.39E-03 4.44E-02 5.45E-02 3.88E-02 4.44E-03 1.87E-02 1.10E-02 
+16 Mackerel 2.88E-02  6.04E-03 2.01E-02 1.03E-01   4.98E-05 
+17 Horse mackerel 1.81E-02 1.50E-02   1.74E-02  8.40E-04 2.99E-03 
+18 Sandeels 4.01E-01 3.65E-01 2.09E-01 3.33E-01 3.62E-02 3.34E-01 1.07E-01 4.78E-02 
+19 Juvenile Plaice   2.71E-03 3.01E-04   1.73E-05 3.76E-02 
+20 Plaice (adult)  7.44E-02   5.40E-02 2.06E-03  4.63E-03 
+21 Dab  5.98E-02  1.00E-04 1.82E-02 1.29E-02 3.58E-03 2.17E-01 
+22 Other flatfish  5.57E-02      3.18E-03 
+23 Juvenile Sole   2.08E-04   1.19E-03 1.88E-03 3.49E-03 
+24 Sole (adult)  4.44E-02   1.39E-04 3.10E-03   
+25 Sea Bass 4.51E-07 1.06E-04 2.00E-06 6.92E-07 9.93E-06 8.10E-07 4.10E-05 2.76E-05 
+26 Pelagic fish   2.60E-03  4.72E-04  1.16E-04 5.55E-05 
+27 Squid & cuttlefish 1.61E-01  3.85E-03 1.00E-04 6.09E-02 2.93E-03 6.14E-03 1.07E-02 
+28 Carnivorous zooplankton   1.46E-02 1.00E-04 6.10E-03 4.90E-03 2.26E-02 7.91E-04 
+29 Herbivorous plankton (copepods)   5.31E-03 6.01E-04  7.21E-07 6.50E-06  
+30 Gelatinous zooplankton     3.51E-02  1.79E-03 1.00E-03 
+31 Large crabs + shrimps    3.98E-02 1.04E-02 9.35E-02 1.53E-01 1.57E-01 1.08E-01 
+32 Blue mussels (aquaculture)  1.15E-04 1.04E-04 1.00E-04    1.13E-04 
+33 Epifaunal macrobenthos (mobile grazers)   1.05E-04  4.78E-02 1.40E-01 1.97E-01 1.01E-01 
+34 Infaunal macrobenthos   1.60E-02 3.60E-01 2.31E-02 6.51E-03 8.25E-02 3.74E-02 
+35 Crangon (below 5cm)   2.71E-03  6.12E-03 1.90E-02 1.26E-01 9.44E-03 
+36 Crangon (commercial size)     2.34E-03 7.26E-03 3.96E-02 3.44E-03 
+37 
+Small mobile epifauna (swarming 
+crustaceans)     6.38E-03 1.55E-01 4.44E-03 2.49E-05 
+38 Small infauna (polychaetes)   5.21E-03 5.01E-04 1.28E-02 8.29E-02 1.16E-01 8.47E-04 
+39 Sessile epifauna   2.40E-02 1.07E-01 1.04E-03  1.49E-04 2.61E-04 
+40 Meiofauna     7.26E-04 2.16E-03   
+41 Phytoplankton         
+42 Detritus         
+43 Discards   4.86E-01 3.22E-02     
+ Import   6.77E-02      
+17 
+ 
+ 
+Table 2: An overview of the diets in the Southern Bight of the North Sea (continued). 
+ Prey \ predator 9 10 11 12 13 14 15 16 
+1 Harbour porpoise         
+2 Seals         
+3 Seabirds (discard)         
+4 Seabirds (non-discard)         
+5 Sharks         
+6 Rays    2.72E-05     
+7 Juvenile Cod 2.26E-03 1.11E-03  5.13E-03    1.98E-03 
+8 Cod (adult)         
+9 Juvenile Whiting 9.61E-04 1.93E-02 3.12E-04 1.49E-02    5.73E-05 
+10 Whiting (adult)  1.34E-04       
+11 Other gadoids 1.09E-03 7.57E-03 1.76E-02 1.51E-02    3.96E-04 
+12 Demersal fish 6.08E-02 2.14E-02 1.96E-02 5.27E-02    1.45E-03 
+13 Juvenile Herring 2.44E-03 2.90E-02  3.54E-04    1.27E-02 
+14 Herring (adult)         
+15 Sprat 1.43E-02 2.92E-01 4.05E-03 9.37E-03    2.92E-02 
+16 Mackerel    3.02E-04    8.04E-06 
+17 Horse mackerel 1.53E-03 9.88E-03  3.95E-05    1.02E-01 
+18 Sandeels 1.62E-01 3.26E-01 1.04E-03 2.89E-01    1.20E-01 
+19 Juvenile Plaice         
+20 Plaice (adult)         
+21 Dab 6.99E-04 1.19E-04 5.20E-03 2.40E-02     
+22 Other flatfish 3.27E-06        
+23 Juvenile Sole 1.23E-03 5.33E-04       
+24 Sole (adult)    2.92E-04     
+25 Sea Bass 4.67E-05 1.64E-05 1.50E-05 4.05E-05    1.12E-06 
+26 Pelagic fish 4.93E-04 1.77E-05       
+27 Squid & cuttlefish 8.37E-02 9.60E-03 8.32E-04 1.96E-02    8.10E-03 
+28 Carnivorous zooplankton 1.32E-01 4.86E-02 1.05E-01 1.64E-02 2.73E-01 3.09E-01  6.60E-02 
+29 Herbivorous plankton (copepods) 6.55E-03 3.09E-03 3.12E-01 5.36E-02 6.75E-01 6.70E-01 8.89E-01 4.85E-01 
+30 Gelatinous zooplankton 4.57E-03 4.05E-03      8.49E-02 
+31 Large crabs + shrimps  1.33E-01 4.39E-02 1.78E-02 1.86E-01    2.28E-02 
+32 Blue mussels (aquaculture)  1.10E-04  9.07E-05     
+33 Epifaunal macrobenthos (mobile grazers) 7.98E-02 8.99E-02 1.35E-01 8.85E-02    2.50E-02 
+34 Infaunal macrobenthos 2.60E-02 4.10E-02 1.77E-01 4.58E-02    2.12E-04 
+35 Crangon (below 5cm) 7.48E-02 1.51E-02 2.57E-04 5.32E-03    3.95E-04 
+36 Crangon (commercial size) 1.74E-02 3.21E-03 9.79E-05 1.64E-03     
+37 
+Small mobile epifauna (swarming 
+crustaceans) 1.35E-02 2.15E-03 2.87E-02 9.80E-02 5.19E-02 2.06E-02  9.07E-03 
+38 Small infauna (polychaetes) 1.81E-01 3.22E-02 1.76E-01 5.52E-02    3.35E-03 
+39 Sessile epifauna 4.79E-05 1.00E-04  4.62E-06    5.98E-03 
+40 Meiofauna 3.27E-06   1.83E-02    1.00E-06 
+41 Phytoplankton  2.54E-05     1.11E-01 2.21E-02 
+42 Detritus         
+43 Discards         
+ Import         
+ 
+ 
+18 
+ 
+Table 2: An overview of the diets in the Southern Bight of the North Sea (continued). 
+ Prey \ predator 17 18 19 20 21 22 23 24 
+1 Harbour porpoise         
+2 Seals         
+3 Seabirds (discard)         
+4 Seabirds (non-discard)         
+5 Sharks         
+6 Rays         
+7 Juvenile Cod      5.00E-03   
+8 Cod (adult)         
+9 Juvenile Whiting 3.33E-02     9.81E-04   
+10 Whiting (adult)         
+11 Other gadoids 4.28E-03     2.95E-03   
+12 Demersal fish 7.15E-02     1.20E-02 1.28E-02  
+13 Juvenile Herring 1.31E-01  2.03E-04   1.22E-04   
+14 Herring (adult)         
+15 Sprat 3.26E-02     1.49E-02   
+16 Mackerel         
+17 Horse mackerel 8.44E-02        
+18 Sandeels 2.00E-02  7.63E-03   1.58E-02   
+19 Juvenile Plaice         
+20 Plaice (adult)         
+21 Dab 6.07E-03     5.17E-02   
+22 Other flatfish      5.24E-02   
+23 Juvenile Sole         
+24 Sole (adult)         
+25 Sea Bass 5.49E-05     9.23E-06 9.82E-06  
+26 Pelagic fish         
+27 Squid & cuttlefish 1.14E-01        
+28 Carnivorous zooplankton 1.70E-01 6.63E-02    3.89E-02   
+29 Herbivorous plankton (copepods) 5.89E-02 6.41E-01   1.25E-02    
+30 Gelatinous zooplankton 8.48E-05  3.46E-03   5.37E-02   
+31 Large crabs + shrimps  7.10E-02  1.69E-02 1.09E-01 1.07E-02 6.34E-02  5.44E-02 
+32 Blue mussels (aquaculture)         
+33 Epifaunal macrobenthos (mobile grazers) 1.73E-01 8.40E-04 1.05E-01 2.13E-02 2.58E-01 1.87E-01 1.28E-02 1.11E-02 
+34 Infaunal macrobenthos 8.74E-04 5.88E-03 1.75E-01 4.36E-01 2.40E-01 8.86E-02 1.15E-01 1.27E-02 
+35 Crangon (below 5cm) 2.24E-03  5.90E-05 8.60E-03 2.47E-04 2.30E-03   
+36 Crangon (commercial size) 9.58E-04  1.00E-05 1.52E-03 9.50E-05 8.82E-04   
+37 
+Small mobile epifauna (swarming 
+crustaceans) 1.93E-02 1.63E-02 1.96E-01 5.13E-02 3.29E-01 1.15E-01   
+38 Small infauna (polychaetes) 7.78E-03 1.97E-01 4.78E-01 3.62E-01 1.38E-01 1.99E-01 4.23E-01 9.22E-01 
+39 Sessile epifauna   1.42E-02  1.10E-02 9.58E-02   
+40 Meiofauna  5.02E-02 3.46E-03 1.03E-02 9.00E-04  4.36E-01  
+41 Phytoplankton  2.28E-02       
+42 Detritus         
+43 Discards         
+ Import         
+ 
+ 
+19 
+ 
+Table 2: An overview of the diets in the Southern Bight of the North Sea (continued). 
+ Prey \ predator 25 26 27 28 29 30 31 32 
+1 Harbour porpoise         
+2 Seals         
+3 Seabirds (discard)         
+4 Seabirds (non-discard)         
+5 Sharks         
+6 Rays         
+7 Juvenile Cod   1.13E-02      
+8 Cod (adult)         
+9 Juvenile Whiting 1.49E-03  9.51E-04      
+10 Whiting (adult) 3.49E-03        
+11 Other gadoids 1.96E-02        
+12 Demersal fish 2.08E-02  5.70E-03      
+13 Juvenile Herring   9.51E-04      
+14 Herring (adult)         
+15 Sprat   1.13E-02      
+16 Mackerel 1.33E-01        
+17 Horse mackerel 6.67E-02  1.13E-02      
+18 Sandeels 2.99E-03  4.51E-02      
+19 Juvenile Plaice         
+20 Plaice (adult)   5.70E-03      
+21 Dab   5.70E-03      
+22 Other flatfish   1.14E-02      
+23 Juvenile Sole 1.06E-02        
+24 Sole (adult) 1.10E-03  5.70E-03      
+25 Sea Bass 1.60E-05  4.38E-06      
+26 Pelagic fish 6.89E-02 5.31E-02 2.24E-02      
+27 Squid & cuttlefish 8.81E-03 5.60E-03 5.63E-02   7.36E-02   
+28 Carnivorous zooplankton  1.49E-01 2.31E-01 5.83E-02  2.94E-01 5.62E-03  
+29 Herbivorous plankton (copepods) 2.10E-01 6.95E-01 3.36E-01 8.27E-01  2.94E-01 1.12E-02 1.00E-02 
+30 Gelatinous zooplankton  3.32E-02       
+31 Large crabs + shrimps  3.73E-01 9.48E-03 1.44E-02   4.85E-02 2.25E-03  
+32 Blue mussels (aquaculture)         
+33 Epifaunal macrobenthos (mobile grazers) 1.05E-03 2.66E-02     3.53E-01  
+34 Infaunal macrobenthos       3.61E-01  
+35 Crangon (below 5cm) 3.55E-02 3.56E-03 5.40E-03   1.82E-02 5.83E-04  
+36 Crangon (commercial size) 3.49E-02 1.36E-03 2.07E-03   6.96E-03 2.23E-04  
+37 
+Small mobile epifauna (swarming 
+crustaceans)  1.22E-02 1.70E-01 1.15E-01  1.18E-01 2.98E-02  
+38 Small infauna (polychaetes)  1.11E-02 2.24E-02    1.39E-01  
+39 Sessile epifauna       8.62E-02  
+40 Meiofauna       1.12E-02  
+41 Phytoplankton   5.63E-02  9.47E-01 1.47E-01  8.50E-01 
+42 Detritus     5.26E-02   1.40E-01 
+43 Discards         
+ Import 8.84E-03        
+ 
+20 
+ 
+Table 2: An overview of the diets in the Southern Bight of the North Sea (continued). 
+ Prey \ predator 33 34 35 36 37 38 39 40 
+1 Harbour porpoise         
+2 Seals         
+3 Seabirds (discard)         
+4 Seabirds (non-discard)         
+5 Sharks         
+6 Rays         
+7 Juvenile Cod         
+8 Cod (adult)         
+9 Juvenile Whiting         
+10 Whiting (adult)         
+11 Other gadoids         
+12 Demersal fish    5.07E-03     
+13 Juvenile Herring         
+14 Herring (adult)         
+15 Sprat         
+16 Mackerel         
+17 Horse mackerel         
+18 Sandeels         
+19 Juvenile Plaice    4.52E-04     
+20 Plaice (adult)         
+21 Dab         
+22 Other flatfish    1.62E-03     
+23 Juvenile Sole         
+24 Sole (adult)         
+25 Sea Bass    3.89E-06     
+26 Pelagic fish         
+27 Squid & cuttlefish         
+28 Carnivorous zooplankton         
+29 Herbivorous plankton (copepods)    2.88E-03     
+30 Gelatinous zooplankton         
+31 Large crabs + shrimps     1.21E-02     
+32 Blue mussels (aquaculture)         
+33 
+Epifaunal macrobenthos (mobile 
+grazers) 5.91E-02   3.69E-03     
+34 Infaunal macrobenthos 2.37E-01   4.34E-04     
+35 Crangon (below 5cm)   4.31E-03 4.14E-02     
+36 Crangon (commercial size)         
+37 
+Small mobile epifauna (swarming 
+crustaceans) 5.91E-02 3.45E-02  8.29E-02 1.54E-01    
+38 Small infauna (polychaetes) 2.96E-01 1.90E-01  3.86E-01  9.09E-02   
+39 Sessile epifauna    2.19E-02     
+40 Meiofauna  8.62E-02 9.96E-01 4.42E-01 2.31E-01 2.73E-01  2.00E-01 
+41 Phytoplankton 5.91E-02      3.33E-01  
+42 Detritus 2.37E-01 6.90E-01   6.15E-01 6.36E-01 6.67E-01 8.00E-01 
+43 Discards 5.38E-03        
+ Import         
+21 
+ 
+2. Defining fleets and assigning landings and discards 
+2.1. Fleets (commercial) distinguished by STECF gear types 
+Nine commercial EwE fleets were distinguished using STECF gear type s. In total, 17 gear types were 
+included in the STEC F data for the SBNS (STECF, 2017; https://stecf.jrc.ec.europa.eu/dd/effort/ 
+graphs-annex). These gear types were allocated to their corresponding EwE fleet (Table 3). 
+Table 3: Structure of the EwE fleets in the Southern Bight of the North Sea model and the allocation of gear types 
+Gear description Gear types EwE fleet 
+Beam trawls ≥ 120 mm BT1 
+beam Beam trawls ≥ 80 mm and < 120 mm BT2 
+Beam trawls > 31 mm and < 80 mm or missing mesh size BEAM 
+Bottom trawls and seines ≥ 100 mm TR1 
+demersal 
+Bottom trawls and seines ≥ 16 mm and < 32 mm TR3 
+Bottom trawls and seines ≥ 70 mm and < 100 mm TR2 
+Danish seine ≥ 90 mm DEM_SEINE 
+OTTER ≥ 32 mm and < 70 mm or missing mesh size OTTER 
+Dredges DREDGE dredge 
+Longlines LL1 hooks 
+Gill nets, entangling nets GN1 nets 
+Trammel nets GT1 
+Unspecified gear type NONE other 
+Pelagic seine (all mesh size) PEL_SEINE pelagic 
+Pelagic trawls (all mesh size) PEL_TRAWL 
+Pots POTS pots 
+Beam trawls < 31 mm and < 90 mm BEAM shrimp 
+ 
+2.2. Assigning 1991 landings to fleets 
+Catch data, i.e. landings and discards at age, from 2003 – 2017 for the SBNS (ICES are IVc) was obtained 
+from STECF FDI ( STECF, 2017; https://stecf.jrc.ec.europa.eu/dd/effort/graphs-annex). Historical catch 
+data from ICES ( https://www.ices.dk/data/dataset-collections/Pages/Fish-catch-and-stock 
+-assessment.aspx) was obtained for the catches of 1991 in the SBNS. We applied methods used by Bentley 
+et al. (2018) and Stäbler et al. (2016) to estimate the landings and discards for the SBNS in 1991. Catches 
+of both 1991 and 2003 were first allocated to the EwE FGs of the model. Next, the contribution of each 
+fleet to the catches of 2003 was calculated. Because this fleet data was not available for 1991, the landings 
+of the 1991 EwE FGs were multiplied with the contribution of fleets in 2003. This resulted in total landings 
+biomass for each functional group and fleet. Note that for multi-stanza FGs, we assumed that all landings 
+belonged to the adult group of that multi-stanza. 
+2.3. Calculating discards for 1991 
+We estimated the discards for 1991 by calculating the ratio of landings and discards in 2003 per fleet and 
+per FG. We multiplied the landing-discard ratio of 2003 with the landings of 1991 per FG and per fleet to 
+estimate the discards in 1991 assuming the ratio remained the same from 1991 to 2003. We also assumed 
+that all discards in multi-stanza FGs belonged to the juvenile group of that FG. 
+22 
+ 
+2.4. Recreational fishery 
+We included Belgian recreational fisher ies based on Verleye et al. (2019). We incorporated the 
+recreational fleets (i.e. anglers (boat), trawlers, anglers (land), nets and others ) grouped according to 
+Verleye et al. (2019). As only data from 2018 onwards is available for Belgian recreational fisher ies, the 
+recreational catch for target species, such as cod, sea bass, mackerel, plaice, sole and brown shrimp was 
+limited in the model. 
+ 
+3. Balancing of the Ecopath model 
+The previous chapter  describes an unbalanced EwE model of the SBNS. Initially thirteen FGs were 
+unbalanced when using the basic input parameters from chapter 1. Energy ‘imbalance’ is determined by 
+examining each group’s ecotrophic efficiency (EE). A group’s EE exceeding 1 indicates that the energy 
+demand placed upon that group exceeds its PB and therefore needs to be reduced. 
+3.1. Pre-balance diagnostics 
+We used pre-balance (PREBAL) diagnostics as described in Link (2010) to identify ecological issues in the 
+model and to balance it obeying the rules of thermodynamics and ecology. Group biomass should span 5 
+to 7 orders of magnitude and the slope should decline by 5 to 10% with each increasing trophic level. PB 
+and QB ratios should also show a general decline with increasing trophic level, whilst  P/Q ratios should 
+fall between 0.1 and 0.3 (Darwall et al., 2010, Heymans et al., 2016). Respiration/assimilation  should be 
+below 1 as the proportion of biomass lost through respiration cannot exceed the biomass of food 
+assimilated (Heymans et al., 2016). 
+Table 4: Basic estimates from the initial unbalanced model of the Southern Bight of the North Sea. Numbers highlighted in red 
+indicate unbalances, i.e. the ecothrophic efficiency is too high (>1), blue values are estimated by Ecopath.  
+Functional group 
+Ecopath parameters 
+TL B (t km-2) Z (y-1) PB (y-1) QB (y-1) EE PQ (y-1) BA (t km-2) BA rate (y-1) 
+Harbour porpoise 4.42 0.03  0.02 24.64 0.00 0.00   
+Seals 4.67 0.01  0.09 26.84 0.00 0.00   
+Seabirds (discard) 3.03 0.0004  0.10 60.52 0.17 0.00   
+Seabirds (non-discard) 3.74 0.0016  1.12 48.20 0.02 0.02   
+Sharks 4.50 0.0003  0.54 3.37 66.26 0.16   
+Rays 4.09 1.51  0.30 2.89 0.06 0.10   
+Cod          
+Juvenile Cod 4.16 0.01 1.13  7.05 27.65 0.16   
+Cod (adult) 4.53 0.02 1.13  3.20 38.81 0.35   
+Whiting          
+Juvenile Whiting 4.16 0.24 2.80  13.41 0.49 0.21   
+Whiting (adult) 4.10 0.09 1.31  5.41 1.09 0.24   
+Other gadoids 3.54 0.06  0.85 5.23 9.05 0.16   
+Demersal fish 4.11 0.05  2.49 4.94 7.53 0.50   
+          
+23 
+ 
+Table 4: Basic estimates from the initial unbalanced model of the Southern Bight of the North Sea. Numbers highlighted in red 
+indicate unbalances, i.e. the ecothrophic efficiency is too high (>1), blue values are estimated by Ecopath (continued).  
+ 
+Functional group Ecopath parameters 
+TL B (t km-2) Z (y-1) PB (y-1) QB (y-1) EE PQ (y-1) BA (t km-2) BA rate (y-1) 
+Herring          
+Juvenile Herring 3.33 0.04 0.87  18.00 35.34 0.05   
+Herring (adult) 3.36 0.76 0.87  6.78 0.19 0.13   
+Sprat 2.89 0.21  0.80 9.01 4.57 0.09   
+Mackerel 3.69 0.92  1.34 4.81 0.21 0.28   
+Horse mackerel 4.34 1.51  0.34 4.96 3.23 0.07   
+Sandeels 3.17 4.39  1.00 9.59 0.80 0.10   
+Plaice          
+Juvenile Plaice 3.55 0.11 0.49  9.39 1.31 0.05   
+Plaice (adult) 3.60 0.90 0.89  3.63 0.11 0.25   
+Dab 3.61 9.63  0.46 5.58 0.08 0.08   
+Other flatfish 3.86 0.15  0.84 6.90 1.13 0.12   
+Sole          
+Juvenile Sole 3.40 0.14 0.54  9.74 0.13 0.06   
+Sole (adult) 3.54 0.32 1.15  5.56 0.10 0.21   
+Sea Bass 4.30 0.00  0.56 3.81 31.18 0.15   
+Pelagic fish 3.36 0.03  4.00 10.19 0.98 0.39   
+Squid & cuttlefish 3.64 0.13  11.03 20.00 1.03 0.55   
+Carnivorous zooplankton 3.13 2.34  4.00 12.50 0.99 0.32   
+Herbivorous plankton 
+(copepods) 2.00 16.00  9.20 30.00 0.42 0.31   
+Gelatinous zooplankton 3.48 0.09  2.86 6.35 1.78 0.45   
+Large crabs + shrimps  3.60 2.30  1.05 5.27 1.32 0.20   
+Blue mussels 
+(aquaculture) 2.01 0.06  0.36 2.67 0.01 0.13   
+Epifaunal macrobenthos 
+(mobile grazers) 2.98 78.00  0.39 1.94 0.99 0.20   
+Infaunal macrobenthos 2.44 136.00  1.00 3.33 0.41 0.30   
+C. crangon          
+Crangon (below 5cm) 3.25 0.58 12.50  25.14 0.09 0.50   
+Crangon (commercial 
+size) 3.43 0.36 6.51  10.00 0.05 0.65   
+Small mobile epifauna 
+(swarming crustaceans) 2.52 30.00  1.90 5.43 1.30 0.35   
+Small infauna 
+(polychaetes) 2.48 150.00  0.90 3.00 1.45 0.30   
+Sessile epifauna 2.00 105.00  0.26 1.30 0.07 0.20   
+Meiofauna 2.25 22.63  35.00 125.00 0.99 0.28   
+Phytoplankton 1.00 7.50  286.70  0.24    
+Detritus 1.00 50.00    1.14  -370.91 -7.42 
+Discards 1.00 0.00       5.16       
+ 
+24 
+ 
+3.1.1. Biomass 
+The biomass (log scale) in the unbalanced SBNS model spans seven orders of magnitude, falling within the 
+ecological range (5-7 orders) and the slope declines by 130 %, falling below the ecological range (5-10%) 
+suggested by Link (2010; Fig. 3). Several groups show variance from the trend line. The PREBAL ecological 
+rules of thumb from Link et al. (2010) are applicable to poikilotherms and not so much to homeotherms. 
+Marine mammals and seabirds consequently show large divergence. Sandeels and dab seem to hav e a 
+high biomass and may be overestimated. 
+ 
+Figure 3: PREBAL diagnostic biomass. Functional groups are ordered by increasing trophic level.  
+3.1.2. Production/biomass 
+PB (log scale) in the unbalanced SBNS model spans five orders of magnitude, falling within the ecological 
+range (5-7 orders) and the slope declines by 120%, falling below the ecological range (5 -10%) suggested 
+by Link (2010 ; Fig. 4).  Overall, there is little variance from the trend line apart from seabirds, marine 
+mammals, phytoplankton, juvenile brown shrimp  (Crangon crangon ), and squid and cuttlefish. The 
+homeotherms, i.e. seabirds and marine mammals  have higher consumptive demands per unit of body 
+mass than poikilotherms.  
+ 
+Figure 4: PREBAL diagnostic production/biomass. Functional groups are ordered by increasing trophic level. 
+
+25 
+ 
+3.1.3. Consumption/biomass 
+QB is expected to decline with increasing trophic level followi ng basic energetic assumptions. QB (log 
+scale) in the unbalanced SBNS model spans two orders of magnitude and the slope declines by 28 % (Fig. 
+5). Blue mussels (aquaculture) and benthos have low QB ratios. The opposite is true for seabirds and 
+marine mammals being homeotherms , which demands a high amount of energy.  These deviances may 
+affect the trend line.  
+ 
+Figure 5: PREBAL diagnostic consumption/biomass. Functional groups are ordered by increasing trophic level. 
+3.1.4. Production/consumption 
+There are several FGs falling outsid e the suggested P/Q range of 0.1 - 0.3 (Fig. 6). However, most fish 
+groups fall within or close to the range, with few exceptions such as pelagic fish and demersal fish. There 
+are invertebrate species such brown shrimp (Crangon crangon), squid and cuttlefish that have high P/Q. 
+These ratios are similar to values found by Stäbler et al. (2016).  Nevertheless, it is advised to revise the 
+ratios of the FGs that fall outside the advised range.  Marine mammals and seabirds are s low producing 
+and the energy from consumption is prioritised for other physiological processes such as  
+thermoregulation.  
+ 
+Figure 6: PREBAL diagnostic production/consumption. Functional groups are ordered by increasing trophic level. 
+
+26 
+ 
+3.1.5. Respiration/assimilation  
+All respiration/assimilation values fall below 1. 
+ 
+3.2. Revision of the input data  
+By altering the basic input parameters and group diet composition based on the PREBAL diagnostics, we 
+balanced the basic estimates. Groups with the highest 𝐸𝐸 estimates were adjusted first as suggested by 
+(Heymans et al., 2016). By doing so, other imbalances may improve as well. The diets of functional groups 
+were adjusted in case high cannibalism was present in the FG. The vast majority of imbalances in the 
+model were corrected by adjusting functional group input parameters, either to fix ecological issues or to 
+reduce 𝐸𝐸 estimates. The adjustments to our in put parameters were performed keeping the mother 
+models, i.e. North Sea (Mackinson and Daskalov, 2007), and SNS (Stäbler et al., 2016), in mind. The 
+changes made to the input parameters are listed below. The balanced food web is illustrated in Figure 8. 
+Below in Table 5, we provide the input parameters of the balanced model of the SBNS. In Table 6, the 
+revised diet composition is provided. In addition, the basic estimates are shown in Table 6. 
+Table 5: Balancing steps towards a balanced Ecopath model of the Southern Bight of the North  Sea. Ecotrophic efficiency (EE), 
+biomass (B), total mortality (Z), production over consumption (PQ), production over biomass (PB) and functional group (FG). 
+Balancing step Functional group Issue Parameter Initial value Adjusted value Unit 
+1 Sharks EE: 66 B 0.00 0.03 t km-2 
+2 Juvenile herring EE: 34 & PQ:  0.048 Z 0.87 5.70 y-1 
+3 Sea Bass EE= 77 B 0.00004 0.00380 t km-2 
+4 Juvenile cod EE: 14.135 Z 1.13 1.70 y-1 
+5 Adult cod PQ: 0.333 B 0.02 0.22 t km-2 
+6 Demersal fish EE: 8.914 & PQ: 0.5 Z 2.49 1.48 y-1 
+B 0.05 0.95 t km-2 
+7 Other gadoids EE: 8.083 B 0.01 0.06 t km-2 
+8 Sprat EE: 5.306 & PQ: 0.089 PB 0.80 2.60 y-1 
+B 0.21 0.35 t km-2 
+9 Juvenile plaice EE: 4.928 & PQ: 0.053 Z 0.50 2.30 y-1 
+10 Discards EE: 3.849 B 0.00 50.00 t km-2 
+11 Adult whiting EE: 3.666 & PQ: 2.242 B 0.09 0.35 t km-2 
+12 Horse mackerel EE: 2.383  PB 0.34 0.90 y-1 
+13 Large crabs & shrimp EE: 2.296 B 2.30 5.35 t km-2 
+14 Gelatinous 
+zooplankton 
+EE: 2.046 B 0.09 0.19 t km-2 
+15 Squid & cuttlefish EE: 1.681 Diet portion of FG 27 in diet of FG 27 0.06 0.03 y-1 
+Diet portion of FG 29 in diet of FG 27 0.31 0.34 y-1 
+PB 11.05 4.50 y-1 
+B 0.13 0.60 t km-2 
+16 Other flatfish EE: 2.044 B 0.15 0.40 t km-2 
+PB 0.84 0.95 y-1 
+17 Sprat EE: 1.719 B 0.35 0.58 t km-2 
+PB 2.60 2.70 y-1 
+18 Sandeels EE: 1.689 PB 1.00 2.00 y-1 
+19 Small infauna 
+(polychaetes) 
+EE: 1.501 PB 0.90 1.60 y-1 
+20 Small mobile epifauna EE: 1.412 PB 1.00 3.30 y-1 
+21 Demersal fish EE: 1.454 B 0.95 1.50 t km-2 
+22 Juvenile cod EE  1.500 PB 1.70 2.10 y-1 
+       
+       
+27 
+ 
+Table 5: Balancing steps towards a balanced Ecopath model of the Southern Bight of the North Sea. Ecotrophic efficiency (EE), biomass (B), 
+total mortality (Z), production over consumption (PQ), production over biomass (PB) and functional group (FG) (continued). 
+Balancing step Functional group Issue Parameter Initial value Adjusted value Unit 
+23 Epifaunal 
+macrobenthos 
+EE: 1.273 PB 0.39 0.55 y-1 
+24 Large crabs & shrimp EE: 1.145 B 5.35 5.50 t km-2 
+   PB 1.05 1.20 y-1 
+25 Gelatinous 
+zooplankton 
+EE: 1.192 B 0.19 0.25 t km-2 
+26 Sea bass EE: 1.199 B 0.00 0.01 t km-2 
+27 Other gadoids EE: 1.065 B 0.59 0.65 t km-2 
+28 Sprat EE: 1.021 B 0.58 0.63 t km-2 
+29 Epifuanal 
+macrobenthos 
+EE: 1.026 PB 0.55 0.60 y-1 
+30 Small infauna 
+(polychaetes) 
+EE: 1.082 PB 1.60 1.80 y-1 
+31 Small mobile epifauna EE: 1.055 PB 2.30 3.65 y-1 
+32 Squid & cuttlefish EE: 1.00 B 0.60 0.62 t km-2 
+33 Detritus EE: 1.546 Unassim. Consumption (FG: 29, 39, 40) 0.20 0.40 y-1 
+Diet portion of FG 40 in diet of FG 40 0.20 0.10 y-1 
+Diet portion of FG 42 in diet of FG 40 0.80 0.90 y-1 
+34 Discards EE: 5.942 Diet portion of FG 34 in diet of FG 33 0.24 0.28 y-1 
+Diet portion of FG 42 in diet of FG 33 0.24 0.24 y-1 
+Diet portion of FG 43 in diet of FG 33 0.05 0.01 y-1 
+35 Juvenile Sole PQ: 0.055 Z 0.54 1.10 y-1 
+36 Demersal fish EE: 1.03 PB 1.41 1.55 y-1 
+37 Dab PQ: 0.083 PB 0.48 0.60 y-1 
+3.3. Balanced model 
+ 
+Figure 7: Visual representation of the balanced food web model for the Southern Bight of the North Sea. Each functional group 
+and fisheries fleet is represented with a circle indicating its estimated biomass, with trophic level represented on the y-axis. Boxes 
+highlight related functional groups and fisheries fleets: (A) apex predators, (B) fish species, (C) zooplankton, (D) crabs and shrimp, 
+(E) recreational fisheries and (F) commercial fisheries including mussel aquaculture. 
+
+28 
+ 
+Table 6: Basic estimates from the balanced Ecopath model of the Southern Bight of the North Sea. Values in are estimated by 
+Ecopath. 
+Functional group 
+Ecopath parameters 
+TL B (t km-2) Z (y-1) PB (y-1) QB (y-1) EE PQ (y-1) BA (t km-2) BA rate (y-1) 
+Harbour porpoise 4.40 0.03  0.02 24.64 0.00 0.001   
+Seals 4.65 0.01  0.09 26.84 0.00 0.003   
+Seabirds (discard) 3.02 0.0004  0.10 60.52 0.17 0.002   
+Seabirds (non-discard) 3.73 0.0016  1.12 48.20 0.02 0.02   
+Sharks 4.49 0.03  0.54 3.37 0.66 0.16   
+Rays 4.08 1.51  0.30 2.89 0.07 0.10   
+Cod          
+Juvenile Cod 4.14 0.17 2.10  8.29 0.92 0.25   
+Cod (adult) 4.52 0.22 1.14  3.20 0.66 0.35   
+Whiting          
+Juvenile Whiting 4.13 0.94 2.80  13.41 0.57 0.21   
+Whiting (adult) 4.09 0.35 1.31  5.41 0.95 0.24   
+Other gadoids 3.53 0.65  0.85 5.23 0.97 0.16   
+Demersal fish 4.10 1.50  1.55 4.94 0.96 0.31   
+Herring          
+Juvenile Herring 3.33 0.21 5.70  26.33 0.98 0.22   
+Herring (adult) 3.36 0.76 0.87  6.78 0.60 0.13   
+Sprat 2.89 0.63  2.70 9.01 0.94 0.30   
+Mackerel 3.68 0.92  1.34 4.81 0.42 0.28   
+Horse mackerel 4.34 1.51  0.90 4.96 0.99 0.18   
+Sandeels 3.15 4.39  2.00 9.59 0.94 0.21   
+Plaice          
+Juvenile Plaice 3.52 0.34 2.30  12.54 0.34 0.18   
+Plaice (adult) 3.57 0.90 0.89  3.63 0.78 0.25   
+Dab 3.60 9.63  0.60 5.58 0.13 0.11   
+Other flatfish 3.85 0.40  0.95 6.90 0.94 0.14   
+Sole          
+Juvenile Sole 3.32 0.19 1.10  10.46 0.20 0.11   
+Sole (adult) 3.50 0.32 1.15  5.56 0.75 0.21   
+Sea Bass 4.29 0.01  0.56 3.81 0.92 0.15   
+Pelagic fish 3.36 0.10  4.00 10.19 0.98 0.39   
+Squid & cuttlefish 3.57 0.62  4.50 20.00 0.97 0.23   
+Carnivorous zooplankton 3.12 4.18  4.00 12.50 0.99 0.32   
+Herbivorous plankton (copepods) 2.00 16.00  9.20 30.00 0.63 0.31   
+Gelatinous zooplankton 3.46 0.25  2.86 6.35 0.91 0.45   
+Large crabs + shrimps  3.60 5.50  1.20 6.00 0.99 0.20   
+Blue mussels (aquaculture) 2.01 0.06  0.36 2.67 0.05 0.13   
+Epifaunal macrobenthos (mobile grazers) 3.02 78.00  0.60 3.00 0.97 0.20   
+Infaunal macrobenthos 2.42 136.00  1.00 3.33 0.70 0.30   
+C. crangon          
+Crangon (below 5cm) 3.12 0.58 12.50  25.14 0.23 0.50   
+Crangon (commercial size) 3.34 0.36 6.51  10.00 0.22 0.65   
+Small mobile epifauna (swarming crustaceans) 2.49 30.00  3.65 10.43 1.00 0.35   
+Small infauna (polychaetes) 2.43 150.00  1.80 6.00 1.00 0.30   
+Sessile epifauna 2.00 105.00  0.26 1.30 0.14 0.20   
+Meiofauna 2.11 17.00  35.00 125.00 0.99 0.28   
+Phytoplankton 1.00 7.50  286.70  0.24    
+Detritus 1.00 50.00    0.95  150.11 3.00 
+Discards 1.00 50.00       0.97       
+29 
+ 
+3.4. Post-balance diagnostics  
+3.4.1. Biomass 
+The biomass (log scale) in the balanced SBNS model spans seven orders of magnitude and the slope 
+declines by 5.7%, falling within the ecological range suggested by Link (2010 ; Fig. 8 ). Still, some groups 
+show variance from the trend line , i.e. blue mussels (aquaculture) and benthos . A possibility to improve 
+the benthos group is to split this FG in multiple FGs. 
+ 
+ 
+Figure 9: POSTBAL diagnostic biomass. Functional groups are ordered by increasing trophic level. 
+3.4.2. Production/biomass 
+PB (log scale) in the balanced SBNS model spans five orders of magnitude and the slope declines by 2.7 % 
+(Fig. 9). This decrease falls still below the suggested decline (Link, 2010).  Overall, there is little variance 
+from the trend line except for phytoplankton, juvenile brown shrimp ( Crangon crangon), and squid and 
+cuttlefish. However, these PB values are similar to the PB values of Stäbler et al. (2016) for the central and 
+SNS and Mackinson and Daskalov (2007) for the entire North Sea. 
+ 
+
+30 
+ 
+ 
+Figure 10: POSTBAL diagnostic production/biomass. Functional groups are ordered by increasing trophic level. 
+3.4.3. Consumption/biomass 
+QB is expected to decline with increasing trophic level followi ng basic energetic assumptions. QB (log 
+scale) in the balanced SBNS model spans two orders of magnitude and the slope declines by 0.5 % (Fig. 
+10). It did not improve, but it follows the decline with increasing trophic levels. 
+ 
+ 
+Figure 11: POSTBAL diagnostic consumption/biomass. Functional groups are ordered by increasing trophic level. 
+
+31 
+ 
+ 
+ 
+ 
+3.4.4. Production/consumption 
+Most FGs fall inside the suggested P/Q range of 0.1 - 0.3 (Fig. 11). The groups that fall outside the ideal 
+range, were compared to the mother models’ values and are in line with the P/Q values of the mother 
+models (Mackinson and Daskalov, 2007; Stäbler et al., 2016). Some invertebrate species such brown 
+shrimp (Crangon crangon), squid and cuttlefish that have high P/Q.  
+ 
+Figure 12: POSTBAL diagnostic production/ consumption. Functional groups are ordered by increasing trophic level. 
+  
+
+32 
+ 
+Abbreviations 
+B:    Biomass 
+C:    Catch 
+CEFAS:    Centre for Environment, Fisheries, and Aquaculture Science 
+CPUE:    Catch Per Unit Effort 
+EwE:   Ecopath with Ecosim 
+F:   Fishing mortality 
+FG:   Functional group; plural FGs: functional groups 
+HAWG:   Herring Assessment Working Group for the area south of 62° N 
+Hd:    Herbivores and detritivores 
+ICES:   International Council for the Exploitation of the Sea 
+K:   von Bertalanffy growth function 
+Linf:   asymptotic length, i.e. the length fish of a population would reach if they were  
+   to grow indefinitely  
+M:   Natural mortality 
+NS-IBTS:  International Bottom Trawl Survey North Sea 
+OBIS:   Ocean Biodiversity Information System 
+OSPAR:   the mechanism by which 15 Governments & the EU cooperate to protect the  
+   marine environment of the North-East Atlantic. (OSlo and PAris convention) 
+OSPAR - SCANS III:  Small Cetacean Abundance in the European Atlantic and North Sea 
+PB:    Production over biomass 
+P/Q:   Production-consumption ratio 
+Pf:   Apex and/or pelagic predators and/or zooplankton feeders 
+QB:   Consumption 
+SBNS:   Southern Bight of the North Sea 
+SNS:   Southern North Sea 
+SSB:   Spawning Stock Biomass 
+STECF:   Scientific, Technical and Economic Committee for Fisheries 
+STECF FDI:  Fisheries-Dependent Information 
+T:   Temperature 
+TSB:   Total Stock Biomass 
+WGNSSK:  Working Group on the assessment of Demersal Stocks in the North Sea and  
+   Skagarrak 
+WGWIDE:  Working Group on Widely Distributed Stocks 
+Winf:   Asymptotic weight, i.e. the weight fish of a population would reach if they  
+   were to grow indefinitely  
+Wmaturity:  The mean weight at which fish of a given population mature for the first  
+   time 
+Z:   Total mortality 
+  
+33 
+ 
+Data availability 
+The input data, Rscripts and Ecopath model can be accessed by https://doi.org/10.14284/668 and should 
+be cited as follows: 
+Pint, S.; Stevens, M.; De Troch, M.; van Oevelen, D.; Heymans, J.J.; Everaert, G.; Flanders Marine Institute; 
+Ghent University; Royal Netherlands Institute for Sea Research; University of the Highlands and Islands; 
+(2024): Data - Ecopath model of the South ern Bight of the North Sea. Marine Data Archive. 
+https://doi.org/10.14284/668  
+Citation 
+Pint S., Stevens M., De Troch M., van Oevelen D., Heymans J. J., Everaert G.: Ecopath model of the 
+Southern Bight of the North Sea (version 3), https://dx.doi.org/10.48470/74, 2024. 
+References 
+Asila, A.A. and J. Ogari.: Growth parameters and mortality rates of Nile perch (Lates niloticus) estimated 
+from length-frequency data in the Nyanza Gulf (Lake Victoria), p. 272-287. In S. Venema, J. Möller-
+Christensen and D. Pauly (eds.) Contributions to t ropical fisheries biology: papers by the 
+participants of the FAO/DANIDA follow-up training courses. FAO Fish. Rep., (389): 519 p., 1988. 
+Beddington, J.R. and Cooke, J.G.: The potential yield of fish stocks. FAO Fish. Tech. Pap. (242), 47 p., 
+1983. 
+Bentley, J. W., Serpetti, N., Fox, C., Reid, D. and Heymans, J. J.: Modelling the food web in the Irish Sea in 
+the context of a depleted commercial fish community. Part 1: Ecopath Technical Report., 
+Scottish Assoc. Mar. Sci. Oban, U.K., (294), 147, 2018.  
+Beverton, R.J.H. and Holt, S.J.: A review of methods for estimating mortality rates in fish populations, 
+with special references to sources of bias in catch sampling. Rapp. P.-V. Réun. CIEM 140:67-83, 
+1956. 
+Beverton, R.J.H. and Holt, S.J.: On the dynamics of exploited fish populations. Fish. Invest. Ser. II. Vol. 19, 
+533 p., 1957. 
+Beverton, R.J.H. and Holt, S.J.: Table of yield functions for fisheries management. FAO Fish. Tech. Pap. 
+38, 49 p., 1964. 
+Beverton, R.J.H.: Patterns of reproductive strategy parameters in some marine teleost fishes. J. Fish Biol. 
+41(B):137-160, 1992. 
+Bicknell, A. W. J., Oro, D., Camphuysen, K. C. J. and Votier, S. C.: Potential consequences of discard 
+reform for seabird communities, J. Appl. Ecol., 50(3), 649–658, doi:10.1111/1365-2664.12072, 
+2013.  
+Bjørge, A. and Tolley, K. A.: Harbor Porpoise: Phocoena phocoena, Encycl. Mar. Mamm., 530–533, 
+doi:10.1016/B978-0-12-373553-9.00125-5, 2009.  
+Blueweiss, L., Fox, H., Kudzman, V., Nakashima, D., Peters, R., and Sams, S.: Relationships between body 
+size and some life history parameters. Oecologia 37:257-272, 1978 
+Brodie, B., Mowbray, F. and Power, D.: DFO Newfoundland and Labrador Region Ecosystem Trawl 
+Surveys. Version 1 In OBIS Canada Digital Collections. Bedford Institute of Oceanography, 
+Dartmouth, NS, Canada. Published by OBIS, Digital http://www.iobis.org/, 2013, Accessed on 
+29/06/2020. 
+Buhl-Mortensen, L.: MAREANO - Base-line mapping of hyperbenthic crustacea fauna obtained with RP-
+sledge. Institute of Marine Research, Norway https://doi.org/10.15468/gecvl4, 2014 
+Christensen, V. and Pauly, D.: ECOPATH II - a software for balancing steady-state ecosystem models and 
+34 
+ 
+calculating network characteristics, Ecol. Modell., 61(3–4), 169–185, doi:10.1016/0304-
+3800(92)90016-8, 1992.  
+Christensen V., Walters C.J., Pauly D. and Forrest R.: Ecopath with Ecosim version 6 User Guide, 2008.  
+Corrales X., Coll M., Ofir E., Piroddi C., and others:  Hindcasting the dynamics of an Eastern 
+Mediterranean marine ecosystem under the impacts of multiple stressors. Mar Ecol Prog Ser 
+580:17-36. https://doi.org/10.3354/meps12271, 2017.  
+DFO: Central and Arctic Multi-Species Stock Assessment Surveys Version 6 In OBIS Canada Digital 
+Collections. Bedford Institute of Oceanography, Dartmouth, NS, Canada. Published by OBIS, 
+Digital http://www.iobis.org/, 2016, Accessed on 29/06/2020. 
+Flanders Marine Institute (VLIZ). Taxonomic Information System for the Belgian coastal area. 10 Aug 
+2004, Oostende, Belgium, Accessed on 29/06/2020. 
+Froese, R., and Binohlan, C.: Empirical relationships to estimate asymptotic length, length at first 
+maturity and length at maximum yield per recruit in fishes, with a simple method to evaluate 
+length frequency data. J. Fish Biol. 56:758-773, 2000. 
+Froese, R., Binohlan, C., and Pauly, D.: Empirical equations to estimate natural mortality in fishes. (In 
+prep.). 
+Froese, R. and Pauly, D. (Editors): FishBase. World Wide Web electronic publication. www.fishbase.org, 
+version (10/2023), 2023 
+Gulland, J.A.: The fish resources of the oceans. FAO/Fishing News Books, Surrey, UK, 1971. 
+Hammond, P. S., Lacey, C., Gilles, A., Viquerat, S., Börjesson, P., Herr, H., Macleod, K., Ridoux, V., Santos, 
+M. B., Scheidat, M., Teilmann, J., Vingada, J., Øien, N., Gillespie, D., Leaper, R., Sveegaard, S., & 
+Antonio Vázquez, J.: Estimates of cetacean abundance in European Atlantic waters in summer 
+2016 from the SCANS-III aerial and shipboard surveys. 2017. 
+Hassel, A.: MAREANO - Base-line mapping of epifauna obtained with Beamtrawl. Institute of Marine 
+Research, Norway https://doi.org/10.15468/iomgfj, 2014. 
+Heymans, J. J., Coll, M., Link, J. S., Mackinson, S., Steenbeek, J., Walters, C. and Christensen, V.: Best 
+practice in Ecopath with Ecosim food-web models for ecosystem-based management, Ecol. 
+Modell., 331, 173–184, doi:10.1016/j.ecolmodel.2015.12.007, 2016.  
+Horn, S., Coll, M., Asmus, H. and Dolch, T., Food web models reveal potential ecosystem effects of 
+seagrass recovery in the northern Wadden Sea. Restor Ecol, 29: 
+e13328. https://doi.org/10.1111/rec.13328, 2021. 
+Hufnagl, M., Temming, A., Siegel, V., Tulp, I. and Bolle, L.: Estimating total mortality and asymptotic 
+length of Crangon crangon between 1955 and 2006, ICES J. Mar. Sci., 67(5), 875–884, 
+doi:10.1093/icesjms/fsq003, 2010a.  
+Hufnagl, M., Temming, A., Dänhardt, A. and Perger, R.: Is Crangon crangon (L. 1758, Decapoda, Caridea) 
+food limited in the Wadden Sea?, J. Sea Res., 64(3), 386–400, doi:10.1016/j.seares.2010.06.001, 
+2010b.  
+ICES: Greater North Sea Ecoregion – fisheries overview. ICS Advice: Fisheries Overviews. Report. 
+https://doi.org/10.17895/ices.pub.4647, 2018  
+ICES Historical Plankton Dataset (1901-1912). The International Council for the Exploration of the Sea, 
+Copenhagen. Online source: http://ecosystemdata.ices.dk., 2010. 
+ICES: North Sea Ecosystem overview Ecosystem components, North Sea Ecosyst. Overv., 1–24, 2008.  
+ICES Stock Assessment Database. Copenhagen, Denmark. ICES. 04/03/2024. 
+https://standardgraphs.ices.dk 
+ICES: Report of the Working Group on the Assessment of Demersal Stocks in the North Sea and 
+Skagerrak (WGNSSK)., 2019a.  
+ICES: Report of the Herring Assessment Working Group for the Area South of 62° N (HAWG)., 2020.  
+35 
+ 
+Institut Français de Recherche pour l'Exploitation de la Mer – IFREMER: COMARGIS: Information System 
+on Continental Margin Ecosystems https://doi.org/10.15468/0djslr, 2016. 
+Lacroix, G., Ruddick, K., Ozer, J. and Lancelot, C.: Modelling the impact of the Scheldt and Rhine/Meuse 
+plumes on the salinity distribution in Belgian waters (southern North Sea), J. Sea Res., 52(3), 
+149–163, doi:10.1016/J.SEARES.2004.01.003, 2004.  
+Libby, D. A.: Maine Department of Marine Resources Inshore Trawl Survey, 2000 – 2009. Maine 
+Department of Marine Resources, PO Box 8, West Boothbay Harbor, Maine 04575, 2010. 
+Link, J. S.: Adding rigor to ecological network models by evaluating a set of pre-balance diagnostics: A 
+plea for PREBAL, Ecol. Modell., 221(12), 1580–1591, doi:10.1016/j.ecolmodel.2010.03.012, 
+2010.  
+Mackinson, S. and Daskalov, G.: An ecosystem model of the North Sea to support an ecosystem 
+approach to fisheries management: description and parameterisation, Sci. Ser. Tech. Rep., (142), 
+196, 2007.  
+Marine Biological Association of the UK (MBA): DASSH: The UK Archive for Marine Species and Habitats 
+Data, 2016. 
+Meurisse, L., Semal, P.: Royal Belgian Institute of Natural Sciences Crustacea collection, 2020. 
+Miller, R, Nozères, C, Kennedy, M.: DFO Quebec Region MLI museum collection. Version 2. OBIS Canada 
+Digital Collections. Published by OBIS http://www.iobis.org/, 2014. Accessed on 29/06/2020. 
+Musick, J.A.: Criteria to define extinction risk in marine fishes. Fisheries 24(12):6-14, 1999. 
+National Museum of Natural History, Smithsonian Institution NMNH Invertebrate Zoology Collection 
+Database. National Museum of Natural History, Smithsonian Institution, 10th and Constitution 
+Ave. N.W., Washington, DC 20560-0193, Version 3.2.04 (0802221), 2001. 
+Nilsson, S. G. and Nilsson, I. N.: Numbers, Food Consumption, and Fish Predation by Birds in Lake 
+Möckeln, Southern Sweden, Scand. J. Ornithol., 7(1), 61–70, 1976.  
+NOAA’s National Marine Fisheries Service (NMFS) Northeast Fisheries Science Center.: Northeast 
+Fisheries Science Center Bottom Trawl Survey Data. NOAA’s National Marine Fisheries Service 
+(NMFS) Northeast Fisheries Science Center. Woods Hole, Massachusetts, United States of 
+America, 2005. 
+Northeast Fisheries Science Center, National Marine Fisheries Service, NOAA, U.S. Department of 
+Commerce. NEFSC Benthic Database. Northeast Fisheries Science Center, 166 Water Street, 
+Woods Hole Laboratories, Woods Hole, MA 02543.Retrieved from http://www.usgs.gov/obis-
+usa/, 2010. 
+OBIS Canada: FRB Eastern Arctic Investigations: The Calanus Series. OBIS Canada Digital Collections. OBIS 
+Canada, Bedford Institute of Oceanography, Dartmouth, Nova Scotia, Canada, Version 2, Digital, 
+retrieved from http://iobis.org/, 2011. 
+Parr, J. Marine Life Information Network (MarLIN) marine survey data (Professional). Marlin, Collated 
+Marine Life Survey Datasets, Marine Biological Associaton of the UK, Plymouth, UK 
+Palomares, M.L.D.: La consommation de nourriture chez les poissons: étude comparative, mise au point 
+d’un modèle prédictif et application à l’étude des reseaux trophiques. Ph.D. Thesis, Institut 
+National Polytechnique de Toulouse, France, 1991. 
+Palomares, M.L. and Pauly, D.: A multiple regression model for predicting the food consumption of 
+marine fish populations. Aust. J. Mar. Freshwat. Res. 40:259-273, 1989. 
+Palomares, M.L.D. and Pauly, D.: Predicting the food consumption of fish populations as functions of 
+mortality, food type, morphometrics, temperature and salinity. Mar. Freshwat. Res. 49:447-453, 
+1999. 
+Pauly, D.: Gill size and temperature as governing factors in fish growth: a generalization of von 
+Bertalanffy’s growth formula. Ber. Inst. f. Meereskunde Univ. Kiel. No 63, xv + 156 p., 1979. 
+Pauly, D.: On the interrelationships between natural mortality, growth parameters, and mean 
+36 
+ 
+environmental temperature in 175 fish stocks, ICES J. Mar. Sci., 39(2), 175–192, 
+doi:10.1093/icesjms/39.2.175, 1980.  
+Pauly, D.: A mechanism for the juvenile-to-adults transition in fishes. J. Cons. CIEM 41:280-284, 1984. 
+Pauly, D.: A simple method for estimating the food consumption of fish populations from growth data 
+and food conversion experiments. Fish. Bull. (US) 84:827-840, 1986. 
+Pauly, D.; Food consumption by tropical and temperate fish populations: some generalizations. J. Fish 
+Biol. 35 (Suppl. A):11-20, 1989. 
+Pauly, D. and Christensen, V.: Trophic levels of fishes, p. 155. In R. Froese and D. Pauly (eds.) FishBase 
+1998: concepts, design and data sources. ICLARM, Manila, Philippines. 293 p., 1998. 
+Pauly, D., Moreau, J. and Gayanilo, F.C. Jr.: Auximetric analyses, p. 130-134. In R. Froese and D. Pauly 
+(eds.) FishBase 1998: concepts, design and data sources. ICLARM, Manila, Philippines. 293 p., 
+1998. 
+Pauly, D. Christensen, V. and Sambilay, V.: Some features of fish food consumption estimatives used by 
+ecosystem modellers, ICES Counc. Meet., (657), 1–8, 1990.  
+Polovina, J. J.: Model of a coral reef ecosystem, Coral Reefs, 3(1), 23–27, doi:10.1007/bf00306137, 1984.  
+Potiek, A., Vanermen, N., Middelveld, R. P., de Jong, J., Stienen, E. W. M. and Fijn, R. C.: Spatial and 
+temporal distribution of different age classes of seabirds in the North Sea Analysis of ESAS 
+database., 2019.  
+Rees, H.L. et al.: A comparison of benthic biodiversity in the North Sea, English Channel and Celtic Seas - 
+Epifauna. Centre for Environment, Fisheries and Aquaculture Science; Burnham Laboratory, 12 
+Apr 2005, Essex, UK. 
+Reeves, S. A. and Furness, R. W.: Net Loss – Seabirds Gain? Implications of fisheries management for 
+seabirds scavenging discards in the northern North Sea, (June 2014), 74 pp., 2002.  
+Ricciardi, A. and Bourget, E.: Weight-to-weight conversion factors for marine benthic 
+macroinvertebrates, Mar. Ecol. Prog. Ser., 163, 245–251, doi:10.3354/meps163245, 1998.  
+Ricker, W.E.: Computation and interpretation of biological statistics of fish populations. Bull. Fish. Res. 
+Board Can. (191), 382 p., 1975. 
+Santos, R.: Zariquiey Collection. Biological Reference Collections ICM CSIC. Institute of Marine Sciences 
+(ICM-CSIC). https://dx.doi.org/10.15470/cqtmj1, 2016. 
+Scientific, Technical and Economic Committee for Fisheries (STECF) – Fisheries Dependent - Information 
+– Classic (STECF-17-09). Publications Office of the European Union, Luxembourg, ISBN 978-92-79-
+67481-5, doi:10.2760/561459, JRC107598, 2017. 
+Scott E., Serpetti N., Steenbeek J., Heymans J.J.: A Stepwise Fitting Procedure for automated fitting of 
+Ecopath with Ecosim models, SoftwareX, 5, 25-30, https://doi.org/10.1016/j.softx.2016.02.002, 
+2016.  
+Sherley, R. B., Ladd-Jones, H., Garthe, S., Stevenson, O. and Votier, S. C.: Scavenger communities and 
+fisheries waste: North Sea discards support 3 million seabirds, 2 million fewer than in 1990, Fish 
+Fish., 21(1), 132–145, doi:10.1111/faf.12422, 2020.  
+Sparholt, H.: An estimate of total biomass of fish in the North Sea, J. Cons. int. Explor. Mer., 46, 200–210, 
+doi:10.1093/icesjms/40.2.161, 1990.  
+Stäbler, M., Kempf, A., Mackinson, S., Poos, J. J., Garcia, C. and Temming, A.: Combining efforts to make 
+maximum sustainable yields and good environmental status match in a food-web model of the 
+southern North Sea, Ecol. Modell., 331, 17–30, doi:10.1016/j.ecolmodel.2016.01.020, 2016.  
+Stratmann, T., van Oevelen, D., Martínez Arbizu, P., Wei, C. L., Liao, J. X., Cusson, M., Scrosati, R. A., 
+Archambault, P., Snelgrove, P. V. R., Ramey-Balci, P. A., Burd, B. J., Kenchington, E., Gilkinson, K., 
+Belley, R. and Soetaert, K.: The BenBioDen database, a global database for meio-, macro- and 
+megabenthic biomass and densities, Sci. Data, 7(1), 1–12, doi:10.1038/s41597-020-0551-2, 
+37 
+ 
+2020.  
+Swedish county administration boards, Swedish municipalities, Swedish coalitions of water 
+conservation, Swedish Meteorological and Hydrological Institute, et al.: SHARK - Regional 
+monitoring and monitoring projects of Epibenthos in Sweden since 1994, 2017. 
+Taylor, C.C.: Cod growth and temperature. J. Cons. CIEM 23:366-370, 1958. 
+The Norwegian Oil Industry Association: Offshore reference stations, North/Norwegian sea. The 
+Norwegian Oil Industry Association (OLF), Akvaplan-niva and Det Norske Veritas, Norway, 2001. 
+Tulp, I., Chen, C., Haslob, H., Schulte, K., Siegel, V., Steenbergen, J., Temming, A. and Hufnagl, M.: Annual 
+brown shrimp (Crangon) biomass production in Northwestern Europe contrasted to annual 
+landings, ICES J. Mar. Sci. J. du Cons., 73(10), 2539–2551, doi:10.1093/icesjms/fsw141, 2016.  
+Türkay, M.: Senckenbergisches Sammlungsverwaltungssystem, SeSam. Senckenbergische 
+Naturforschende Gesellschaft, Frankfurt, Germany. http://sesam.senckenberg.de/ 
+Turrell, W. R.: New hypotheses concerning the circulation of the northern North Sea and its relation to 
+North Sea fish stock recruitment, ICES J. Mar. Sci., 49(1), 107–123, 
+doi:10.1093/icesjms/49.1.107, 1992.  
+Van Guelpen L and Pohle, G.: Bay of Fundy Species List. v1.2. Canadian node of the Ocean Biogeographic 
+Information System (OBIS Canada). Dataset/Occurrence. 
+http://ipt.iobis.org/obiscanada/resource?r=bofetf&v=1.2, 2014. 
+Van Guelpen, L.: Atlantic Reference Centre Museum of Canadian Atlantic Organisms - Invertebrates and 
+Fishes Data. Version 4 In OBIS Canada Digital Collections. Bedford Institute of Oceanography, 
+Dartmouth, NS, Canada. Published by OBIS, Digital http://www.iobis.org/, 2016. Accessed on 
+29/06/2020. 
+Verleye, T. J., Dauwe, S., van Winsen, F. and Torreele, E.: Recreatieve zeevisserij in België anno 2018 - 
+Feiten cijfers., 2019.  
+Waggitt, J. J., Evans, P. G. H., Andrade, J., Banks, A. N., Boisseau, O., Bolton, M., Bradbury, G., Brereton, 
+T., Camphuysen, C. J., Durinck, J., Felce, T., Fijn, R. C., Garcia-Baron, I., Garthe, S., Geelhoed, S. C. 
+V., Gilles, A., Goodall, M., Haelters, J., Hamilton, S., Hartny-Mills, L., Hodgins, N., James, K., 
+Jessopp, M., Kavanagh, A. S., Leopold, M., Lohrengel, K., Louzao, M., Markones, N., Martínez-
+Cedeira, J., Ó Cadhla, O., Perry, S. L., Pierce, G. J., Ridoux, V., Robinson, K. P., Santos, M. B., 
+Saavedra, C., Skov, H., Stienen, E. W. M., Sveegaard, S., Thompson, P., Vanermen, N., Wall, D., 
+Webb, A., Wilson, J., Wanless, S. and Hiddink, J. G.: Distribution maps of cetacean and seabird 
+populations in the North-East Atlantic., 2020.  
+Walters, C., Christensen, V. and Pauly, D.: Structuring dynamic models of exploited ecosystems from 
+trophic mass-balance assessments, Rev. Fish Biol. Fish., 7(2), 139–172, 
+doi:10.1023/A:1018479526149, 1997.  
+ 
+ 

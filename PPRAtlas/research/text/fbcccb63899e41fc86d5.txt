@@ -1,0 +1,2315 @@
+fmars-07-578717 December 2, 2020 Time: 19:49 # 1
+ORIGINAL RESEARCH
+published: 08 December 2020
+doi: 10.3389/fmars.2020.578717
+Edited by:
+Alida Bundy,
+Bedford Institute of Oceanography
+(BIO), Canada
+Reviewed by:
+Júlio Neves De Araújo,
+Agência Paulista de Tecnologia dos
+Agronegócios (APTA), Brazil
+Samuel Shephard,
+Inland Fisheries Ireland, Ireland
+*Correspondence:
+Pierre-Yves Hernvann
+pierre.yves.hernvann@gmail.com
+Specialty section:
+This article was submitted to
+Marine Fisheries, Aquaculture
+and Living Resources,
+a section of the journal
+Frontiers in Marine Science
+Received: 01 July 2020
+Accepted: 03 November 2020
+Published: 08 December 2020
+Citation:
+Hernvann P-Y, Gascuel D,
+Grüss A, Druon J-N, Kopp D, Perez I,
+Piroddi C and Robert M (2020) The
+Celtic Sea Through Time and Space:
+Ecosystem Modeling to Unravel
+Fishing and Climate Change Impacts
+on Food-Web Structure
+and Dynamics.
+Front. Mar. Sci. 7:578717.
+doi: 10.3389/fmars.2020.578717
+The Celtic Sea Through Time and
+Space: Ecosystem Modeling to
+Unravel Fishing and Climate Change
+Impacts on Food-Web Structure and
+Dynamics
+Pierre-Yves Hernvann 1,2*, Didier Gascuel 2, Arnaud Grüss 3,4, Jean-Noël Druon 5,
+Dorothée Kopp 1, Ilan Perez 2,6, Chiara Piroddi 5 and Marianne Robert 1
+1 Ifremer, STH, Lorient, France, 2 ESE, Ecology and Ecosystem Health, Institut Agro, INRAE, Rennes, France, 3 National
+Institute of Water and Atmospheric Research, Evans Bay Parade, Greta Point, Wellington, New Zealand, 4 School of Aquatic
+and Fishery Sciences, University of Washington, Seattle, WA, United States, 5 European Commission, Joint Research Centre
+(JRC), Ispra, Italy, 6 MARBEC, Univ. Montpellier, CNRS, Ifremer, IRD, Sète, France
+Both trophic structure and biomass ﬂow within marine food webs are inﬂuenced
+by the abiotic environment and anthropogenic stressors such as ﬁshing. The abiotic
+environment has a large effect on species spatial distribution patterns and productivity
+and, consequently, spatial co-occurrence between predators and prey, while ﬁshing
+alters species abundances and food-web structure. In order to disentangle the impacts
+of the abiotic environment and ﬁshing in the Celtic Sea ecosystem, we developed a
+spatio-temporal trophic model, speciﬁcally an Ecopath with Ecosim with Ecospace
+model, for the period 1985–2016. In this model, particular attention was paid to the
+parameterization of the responses of all trophic levels to abiotic environmental changes.
+Satellite remote sensing data were employed to determine the spatial distribution and
+annual ﬂuctuations of primary production (PP). Spatial and temporal changes in the
+habitat favorable for zooplankton were predicted with a novel ecological-niche approach
+using daily detection of productivity fronts from satellite ocean color. Finally, functional
+responses characterizing the effect of several abiotic environmental variables (including,
+among others, temperature, salinity and dissolved oxygen concentration, both at the
+surface and at the bottom) on ﬁsh species groups’ habitat suitability were produced from
+the predictions of statistical habitat models ﬁtted to presence-absence data collected by
+multiple ﬁsheries-independent surveys. The dynamic component of our model (Ecosim)
+was driven by time-series of ﬁshing effort, PP , zooplankton habitat suitability and abiotic
+environmental variables, and was ﬁtted to abundance and ﬁsheries catch data. The
+spatial component of our model (Ecospace) was constructed, for speciﬁc years of
+the period 1985–2016 with contrasted abiotic environmental conditions, to predict the
+variable distribution of the biomass of all functional groups. We found that ﬁshing was
+the main driver of observed ecosystem changes in the Celtic Sea over the period 1985–
+2016. However, the integration of the environmental variability into the model and the
+Frontiers in Marine Science | www.frontiersin.org 1 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 2
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+subsequent improvement of the ﬁt of the dynamic Ecosim component highlighted (i) the
+control of the overall pelagic production by PP and (ii) the inﬂuence of temperature on
+the productivity of several trophic levels in the Celtic Sea, especially on trophic groups
+with warm and cold water afﬁnities. In addition, Ecospace predictions indicated that the
+spatial distributions of commercial ﬁsh species may have substantially changed over the
+studied period. These spatial changes mainly appeared to be driven by temperature and
+may, therefore, largely impact future ﬁsheries given the continuity of climatic changes.
+Keywords: Celtic Sea, ecosystem modeling, habitat model, environment, Ecopath with Ecosim and Ecospace,
+primary production, ﬁshing impact
+INTRODUCTION
+Food webs govern the structure and functioning of marine
+ecosystems (Libralato et al., 2014) and are, therefore, typically
+modeled using trophodynamic models. However, marine
+ecosystems are far from being spatially homogeneous and the
+productivity of species at the base of the trophic network and
+prey-predator interactions can vary largely over space (Polis
+et al., 1997). This spatial variability determines the characteristics
+of food webs, including their stability and persistence (Huxel and
+McCann, 1998; Melian and Bascompte, 2002; Gravel et al., 2011).
+The main driver of the spatial heterogeneity in prey-
+predator interactions in marine ecosystems is the abiotic
+environment (hereafter simply referred to as the “environment”).
+Environmental variables such as salinity, temperature and
+chlorophyll-a govern species distributions by deﬁning their
+“environmental niche” (Hutchinson, 1957; Chase and Leibold,
+2003). Hence, by regulating the degree of overlap between
+species niches, the environment largely inﬂuences species
+interactions and shapes communities and food-web structure
+along gradients (Pellissier et al., 2013; Kortsch et al., 2019).
+In addition, topography and the structural habitat play an
+essential role in the spatial variability of marine food webs. In
+particular, water depth greatly inﬂuences exchanges between the
+pelagic and benthic compartments of ecosystems through food
+accessibility (Giraldo et al., 2017; Agnetta et al., 2019). Seabed
+features (including substrate composition) and water column
+characteristics also mediate species interactions within marine
+ecosystems by inﬂuencing the accessibility of potential prey items
+to predators (Gardner, 1981), by providing refugia to the prey
+(e.g., Menge and Lubchenco, 1981) or by facilitating predation
+through aggregation (Le Fèvre, 1987).
+The complexity of marine food webs is enhanced by the
+responses of predators to their prey, and by competition
+(Hunsicker et al., 2011). The feeding rate of any predator on
+a given prey depends on the abundance of that prey (Holling,
+1959) and the relative preference of the predator for other co-
+occurring prey items (Murdoch, 1969). The spatial distribution of
+a predator can be substantially aﬀected by the spatial distribution
+of its potential prey (Logerwell and Hargreaves, 1996; Torres
+et al., 2008), and vice versa (Barnett and Semmens, 2012), as well
+as by the spatial distribution of the other predators that compete
+for those prey (Hansson, 1984; Ward et al., 2001). Therefore,
+identifying the relative role of the drivers of the structure and
+functioning of marine ecosystems and their changes requires
+spatially-explicit ecosystem models where the spatial patterns
+of species biomass depend on both a speciﬁc environment and
+trophic interactions.
+Spatially-explicit ecosystem models such as Atlantis (Fulton
+et al., 2004; Audzijonyte et al., 2019), OSMOSE (Shin and
+Cury, 2001) and Ecopath with Ecosim and Ecospace (Pauly
+et al., 2000; Christensen et al., 2014) simulate food-web
+functioning while representing the spatial distribution patterns
+of all ecosystem components. These spatially-explicit ecosystem
+models are powerful tools to disentangle the intricate eﬀects
+of trophic relationships, the environment and anthropogenic
+stressors, e.g., ﬁshing, on species distribution patterns and
+biomass ﬂows within marine ecosystems. In the context of
+climate change, spatially-explicit food-web models that integrate
+predictions from statistical habitat or niche modeling approaches
+are particularly useful to predict how ecosystems may respond
+to future modiﬁcations in environmental conditions (Pellissier
+et al., 2013; Moullec et al., 2019a). However, such spatial food-
+web models are currently relatively scarce and these models
+have often diﬃculty to comprehensively represent heterogeneous
+spatial processes.
+The Celtic Sea represents a large portion of the Western
+European continental shelf, and extends from the Western
+English Channel to the Celtic break delimiting Porcupine Sea
+Bight and the South-West of Ireland ( Figure 1). This ecosystem
+has a complex spatial organization since it encompasses a broad
+range of depths and a diversity of substrate types, resulting in a
+variety of benthic habitats that host a wide diversity of species
+assemblages (Le Danois, 1948; Ellis et al., 2013, 2002; Martinez
+et al., 2013). This diversity of species assemblages is conducive to
+complex trophic interactions (Trenkel et al., 2005). In addition,
+the Celtic Sea is located at the interface of the Lusitanian and
+Boreal provinces, therefore deﬁning the northern or southern
+limit of the distribution range of many species (Dinter, 2001).
+The presence of pelagic mesoscale structures such as productivity
+fronts (Pingree, 1980; Pingree et al., 1982) is another source
+of spatial heterogeneity in the Celtic Sea ecosystem. Ultimately,
+spatial heterogeneity in Celtic Sea ﬁsh communities is reﬂected
+by the highly mixed ﬁsheries that operate in the Celtic Sea region
+(Sharples et al., 2013; Mateo et al., 2017; Dolder et al., 2018;
+Moore et al., 2019). Fishing has been identiﬁed as the primary
+driver of changes in the Celtic Sea ecosystem since 1950 and this
+pressure has culminated in the late 1990s (Gascuel et al., 2016;
+Frontiers in Marine Science | www.frontiersin.org 2 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 3
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 1 | General location of the Celtic Sea (top left corner) and delimitation of the study area regarding physical and management boundaries. The Celtic Sea is
+located at the border between Lusitanian and Boreal provinces. The Celtic Sea EwE and Ecospace model (red dashed contour) is developed for the shelf area
+shallower than 200 m depth matching ICES divisions (polygons) 7.e (Western English Channel), 7.f (Bristol Channel), 7.g (Celtic Sea North), 7.h (Celtic South) and
+7.j.2 (Southwest of Ireland- East belonging to the NE Atlantic Fisheries Commission regulatory area).
+Hernvann and Gascuel, 2020; Mérillet et al., 2020). Nonetheless,
+long-term variability in hydro-climatic conditions has also largely
+aﬀected the Celtic Sea ecosystem (Beaugrand et al., 2000;
+Hernvann and Gascuel, 2020) and the ongoing climate change
+may greatly impact the basal ecosystem production (McGinty
+et al., 2011), ﬁsh populations (Brunel and Boucher, 2007), and
+entire communities (ter Hofstede et al., 2010; Simpson et al.,
+2011) of the Celtic Sea.
+In this study, we analyzed the interdependent impacts of
+ﬁshing and climate change on the structure and functioning of
+marine ecosystems using the Celtic Sea as a regional case study.
+We developed a spatially-explicit trophic model for the Celtic Sea
+to represent the eﬀects of the environment on the distribution
+and productivity of functional groups, from phytoplankton to
+top predators. Multiple data types were considered for this aim.
+Spatio-temporal dynamics of plankton groups were represented
+in the spatially-explicit trophic model using the predictions
+of remote sensing based models. The responses of higher
+trophic level functional groups to changes in the environment
+were represented using the predictions of statistical habitat
+models, which were ﬁtted to data from large scale survey and
+environmental databases. This overall information was used
+to calibrate the trophic model and determine how changes in
+primary production, zooplankton habitat and temperature may
+have interacted with ﬁshing to shape the Celtic Sea food-web
+dynamics over the period 1985ñ2016. Then, the spatial structure
+and functioning of the Celtic Sea food web were analyzed for
+contrasted years in terms of environmental conditions to better
+understand the processes of changes in the Celtic Sea ecosystem
+over the studied decades.
+MATERIALS AND METHODS
+The EwE Framework in a Nutshell and
+General Approach to Model the Trophic
+Functioning of the Celtic Sea
+The EwE Modeling Framework in a Nutshell
+Our approach relies on the Ecopath with Ecosim (EwE)
+framework (Pauly et al., 2000; Christensen and Walters, 2004).
+Hereafter, we only brieﬂy summarize the EwE modeling steps
+since more details about the EwE framework and its main
+equations can be found in Christensen and Walters (2004) and
+are summed up in Supplementary Appendix SA.
+Ecopath is the basal component of EwE, and provides a
+snapshot of the ecosystem of interest for a given period, i.e.,
+generally a speciﬁc year. Ecopath represents the ecosystem of
+interest through functional groups (i.e., groups of species/taxa
+that have similar trophic and ecological niches and life-history
+characteristics) that exchange matter and energy through trophic
+relationships while the mass balance between the production of
+each functional group and all consumptions is assumed.
+Ecosim is the dynamic module of EwE that allows for hindcast
+or forecast of changes in functional group biomasses. Ecosim
+predator-prey dynamics (under top-down or bottom-up control)
+are determined based on the foraging arena theory (Ahrens
+et al., 2012) whereby vulnerability coeﬃcients modulate the
+proportion of prey biomass accessible to predators by altering
+predator consumption rates. Vulnerability coeﬃcients can be
+estimated by ﬁtting Ecosim to observed biomass, abundance or
+catch time-series. The response of the ecosystem to stressors
+Frontiers in Marine Science | www.frontiersin.org 3 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 4
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 2 | Schematic of the data integration framework used to build and calibrate the Ecopath with Ecosim (EwE) with Ecospace model. Gray rectangles
+represent data or EwE input. Blue rectangles correspond to statistical model runs to estimate EwE inputs from data.
+can be simulated in Ecosim: (1) time-series of ﬁshing eﬀort
+or ﬁshing mortalities can, respectively, drive exploited groups
+dynamics through top-down processes; (2) time-series of primary
+production can drive phytoplankton dynamics controlling
+bottom-up the food-web; and (3) environmental time-series can
+aﬀect the consumption rates of predators according to linear
+response of following speciﬁc user-deﬁned functional responses.
+Ecospace is the spatial component of EwE, which predicts
+the spatial distribution of functional group biomasses over a
+horizontal 2-D grid (Walters, 1999; Pauly et al., 2000). The most
+recent version of Ecospace includes an habitat foraging capacity
+model that determines the suitability of each model grid cell for a
+functional group as the relative proportion of the cell over which
+the group can feed (Christensen et al., 2014). Each grid cell’s
+capacity is calculated as the product of functions that reﬂect the
+preferences of the group of interest for speciﬁc environmental
+parameter values.
+General Approach of Integrated Trophic Modeling in
+the Celtic Sea
+The Celtic Sea ecosystem was previously modeled by Moullec
+et al. (2017) using the Ecopath and Ecosim modules of EwE
+to represent its dynamics and ﬁshing impact between 1980
+and 2013. However, this model relied on a limited amount
+of ﬁeldwork data and did not investigate the eﬀect of any
+environmental driver and their spatial heterogeneity on
+ecosystem structure and functioning over this period. To
+improve the ecological realism of the Celtic Sea food-web
+model, we develop an integrated trophic modeling approach
+consisting in successively (i) updating the Ecopath model and
+integrating local trophic data to deﬁne trophic relationships,
+(ii) exploring spatio-temporal changes in the dynamic of
+plankton groups, (iii) investigating the environmental drivers
+of high trophic levels, including temperature, and studying
+their spatio-temporal changes, and (iv) integrating ﬁshing
+and changes in temporal variation in environmental drivers
+of functional groups in the ﬁt of the Ecosim model over
+the period 1985ñ2016 and using their spatial distribution
+to build the Ecospace model. The diﬀerent steps of this
+integrated trophic modeling framework are displayed
+in Figure 2.
+Updating and Improving the Pre-existing
+Celtic Sea Ecopath Model
+We updated the pre-existing Ecopath models for 2013 and 1980
+(Moullec et al., 2017) and built a new Celtic Sea Ecopath model
+for the year 1985. The species composition of a few functional
+groups was reﬁned for a greater coherence in the diet of the
+species they contain (see details in Supplementary Appendix
+SB). A major upgrade of the Celtic Sea model was the provision
+of a new diet matrix for the Ecopath model, estimated using
+the Bayesian integrated model “EcoDiet” and its R package
+Frontiers in Marine Science | www.frontiersin.org 4 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 5
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+implementation (Hernvann et al., in press; Théro et al., 2020) 1,2.
+EcoDiet allows to simultaneously estimate diet proportions of all
+functional groups by integrating multiple data types, i.e., stomach
+content analyses, biotracer analyses and literature knowledge.
+Here, EcoDiet was applied to trophic analyses conducted on
+ﬁsh collected in the Celtic Sea during a ﬁsheries-independent
+survey as part of the EATME project (Issac et al., 2017; Rault
+et al., 2017; Day et al., 2019), and information from an updated
+bibliographic search. The new model comprised a total of 50
+single and multispecies functional groups, including exploited
+ﬁshes and invertebrates, non-commercial benthic invertebrates
+(ﬁve groups), zoo- and phyto- plankton (four and two groups,
+respectively), and mammals and seabirds (four groups). Some
+of these functional groups were further split into younger and
+older life-stage groups (cod Gadus morhua , hake Merluccius
+merluccius, and anglerﬁsh Lophius sp.) based on onthogenetic
+changes in diet identiﬁed by stomach content analyses (Issac
+et al., 2017; Day et al., 2019). Details on the Celtic Sea
+Ecopath model, its parameters, and the species it represents
+can be found in Supplementary Appendix SB . The validity
+of the 1985 Ecopath model was analyzed using the standard
+PREBAL diagnostics (Link, 2010;Supplementary Appendix SB).
+Representing the Dynamics of Plankton
+Groups
+Spatial-temporal changes in the production of phytoplankton
+groups (primary production, PP) were taken from the Vertically
+Generalized Production Model (VGPM, Behrenfeld and
+Falkowski, 1997) for the period 1998ñ2016, and from a regional
+application of hydrodynamic-biogeochemical NEMO-ERSEM
+to the European shelf (Baretta et al., 1995; Madec, 2008;
+Edwards et al., 2012; UK Met Oﬃce 3) for the period 1985ñ
+1997. The VGPM model uses remote-sensed chlorophyll- a
+data collected by SeaWiFS and MODIS-Aqua to quantify PP
+over the entire water column (Morel and Berthon, 1989).
+PP is one of the direct outputs of the NEMO-ERSEM model
+and was extracted over the entire water column to align
+with the VGPM outputs. Data products were obtained from
+the Ocean Productivity website 4 and the E.U. Copernicus
+Marine Environment Monitoring Service 5 (eu), respectively.
+Time-series of PP in the Celtic Sea were used to force the
+productivity of phytoplankton groups in Ecosim (Christensen
+et al., 2009; Mackinson et al., 2009) while annual maps of
+primary productivity were used in Ecospace (Steenbeek et al.,
+2013). PP maps averaged by 5-year periods are provided in
+Supplementary Appendix SC.
+The spatio-temporal changes of the suitable feeding
+habitat of zooplankton (small and large mesozooplankton,
+macrozooplankton) were estimated for the 1998ñ2016 period
+using a niche model of mesozooplankton in the North Atlantic
+1https://github.com/pyhernvann/EcoDiet
+2https://cran.r-project.org/web/packages/EcoDiet/index.html
+3https://www.metoﬃce.gov.uk/
+4http://sites.science.oregonstate.edu/ocean.productivity/
+5https://marine.copernicus.eu/
+(Druon et al., 2019). This zooplankton suitable habitat (ZSH)
+model relies on the identiﬁcation of productivity fronts at
+mesoscale. Because these fronts persist long enough in the
+pelagic realm (at least 3 to 4 weeks), they allow the production
+of elevated biomass of mesozooplankton which, in turn, can
+sustain higher trophic level organisms. The mesozooplankton
+habitat model is ﬁtted to data of the Continuous Plankton
+Recorder (CPR) and relies on remotely-sensed horizontal
+gradients of chlorophyll-a (SeaWiFS and MODIS-Aqua sensors).
+This habitat model only results of the daily observation
+of productivity fronts by satellite sensors, therefore the
+ZSH model is an algorithm that translates chlorophyll- a
+distribution directly into a daily habitat value. Seasonal maps
+of ZSH in the Celtic Sea are provided in Supplementary
+Appendix SC.
+Linking the Dynamics of Higher Trophic
+Level Organisms to Environment
+To characterize the response of higher trophic level organisms
+to environment, we determined functional relationships for
+38 Ecopath groups (over 45 high trophic level groups,
+excluding mammals and birds, and benthic meiofauna) using
+the statistical habitat modeling approach developed by Grüss
+et al. (2020, 2018). This approach involved the following
+steps: (1) the construction of ﬁsheries-independent survey and
+environmental databases; (2) the development of generalized
+additive models (GAMs); and (3) the use of the GAMs to estimate
+functional relationships.
+Construction of Survey and Environmental Databases
+For each functional group, presence/absence (encounter/non-
+encounter) data were collected by 13 International Bottom
+Trawl Surveys (IBTS; Cronne, 2016) conducted between 1987
+and 2017 in European waters ( Supplementary Appendix
+SD; ICES database) 6. We allocated presence/absence data,
+collected by the surveys (only 3 surveys for 4 low TL benthic
+invertebrates groups; Supplementary Appendix SD ), to a
+0.125◦ spatial grid to address the issue of heterogeneity in
+sampling schemes (Grüss et al., 2020). A set of environmental
+variables were compiled for all of these grid cells. These
+environmental variables included time-invariant topographic
+and habitat variables: bathymetry, distance to the coast, and
+percentages of seabed substrate types. The environmental
+variables also included hydro-climatic time-varying variables:
+surface (ﬁrst 10 m) and bottom sea temperature, salinity and
+dissolved oxygen concentration, and surface phytoplankton
+concentration. Spatial-temporal estimates of these variables for
+each grid cell at a monthly resolution were obtained from
+the General Bathymetric Chart of the Oceans (GEBCO) 7, the
+European Marine Observation and Data Network (EMODnet) 8,
+and the Copernicus platform. More details are provided in
+Supplementary Appendix SD.
+6https://www.ices.dk/data/data-portals/Pages/DATRAS.aspx
+7https://www.gebco.net/
+8https://www.emodnet-seabedhabitats.eu/
+Frontiers in Marine Science | www.frontiersin.org 5 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 6
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+GAM Fitting
+The literature was screened to determine which of the variables
+included in the environmental database may inﬂuence the spatial
+distribution patterns of each functional group. This list was
+reduced through a collinearity analysis to avoid the selection of
+variables that are strongly correlated with one another together or
+with eastings and northings (longitude and latitude expressed in
+UTM coordinates) (Grüss et al., 2018). Then, for each functional
+group, we ﬁtted binomial GAMs of the following form to the
+presence/absence data from the survey database (“mgcv” package
+in the R environment Wood, 2017):
+g (η)= te (X, Y)+ s (x1)+ s (x2)+ . . .+
+s (xn)+ factor
+(
+Survey
+)
++ factor (Year) (1)
+where η is the probability of presence of the functional group; g
+is the logit link function between η and each predictor; te(X,Y)
+is a tensor product smooth ﬁtted to eastings and northings that
+accounts for spatial autocorrelation at broad scale; x1, x 2,. . .,
+xn are the predictors from the environmental database; s is
+a thin plate regression spline ﬁtted to a given predictor and
+limited to four degrees of freedom for interpretability; and
+Survey and Year are treated as ﬁxed-eﬀect factors (Farmer and
+Karnauskas, 2013; Grüss et al., 2018). Only predictors with a
+signiﬁcant eﬀect (statistical criteria detailed in Supplementary
+Appendix SE ) were kept in the GAMs, and the models
+were evaluated using the interactive cross-validation procedure
+described in Grüss et al. (2018). More details can be found in
+Supplementary Appendix SE.
+Production of Preference Functions
+Fitted GAMs were utilized to produce preference functions (also
+called functional reponses below) expressing for the preferences
+of each functional group for speciﬁc environmental parameter
+values. For each environmental variable i integrated in a
+GAM, predictions were made with the GAM over a vector of
+values ranging between the minimum and maximum values of
+environmental variable i in the Celtic Sea, while: (1) setting
+eastings X and northings Y at their values at the barycenter
+of the Celtic Sea; (2) keeping the other variables at their mean
+value from the GAM modeled dataset; and (3) setting the Survey
+and Year factors at their mode from the GAM modeled dataset.
+GAM predictions were then rescaled to provide preferences
+functions ranging between 0 and 1, which account for the
+relative eﬀects of each environmental variable on the probability
+of presence of the functional group of interest. The procedure
+for rescaling follows Grüss et al., 2018 and is described in
+Supplementary Appendix SE.
+Fitting Ecosim and Building Ecospace
+Ecosim
+The Ecosim model was ﬁrst ﬁtted to observed biomasses
+from available ICES stock assessments, abundance indices from
+scientiﬁc surveys for ﬁsh (EVHOE; Duhamel et al., 2018; UK-
+WCGFS, CEFAS), the CPR survey 9 for plankton (Johns, 2019),
+9https://www.cprsurvey.org/
+and catch time-series (Statlant)10. Time-series of ﬁshing mortality
+(for assessed stocks) or catch (for non-assessed stocks) were
+used as forcing functions. A summary of the time-series used
+is provided in Supplementary Appendix SF. Ecosim calibration
+was conducted using the stepwise ﬁtting procedure implemented
+into EwE by Scott et al. (2016) and following the protocol
+found in Bentley et al. (2019) to determine the most suitable
+number of predator-prey dynamics parameters (vulnerabilities
+Vs) to estimate. To assess the relative impacts of ﬁshing
+and environment on the ecosystem, we adopted an approach
+similar to the one developed by Mackinson (2014). We applied
+the ﬁtting procedure, integrating ﬁshing forcing functions
+only, then integrating the environmental drivers of plankton
+and ﬁsh dynamics, ﬁrst separately and then simultaneously.
+PP and zooplankton suitable habitat (ZSH) time-series drove
+the production of phytoplankton groups (see Christensen
+et al., 2009) and the consumption of zooplankton (small
+and large mesozooplankton, macrozooplankton), respectively.
+More speciﬁcally, ZSH time-series were used as multiplier of
+the arena area for zooplankton-phytoplankton interactions, of
+zooplankton vulnerability for ﬁsh-zooplankton interactions, and
+of both parameters for zooplankton-zooplankton interactions
+(see Supplementary Appendix SF ; Dahood et al., 2019).
+Temperature variations and corresponding preference functions
+to the model drove the consumption of ﬁsh groups (foraging
+environmental response; see Bentley et al., 2017; Serpetti et al.,
+2017; Corrales et al., 2018). In order to avoid any potential
+confounding eﬀects with temperature-induced changes, that we
+precisely wanted to quantify in this study, we chose to not
+use the available information on recruitment anomalies (e.g.,
+from stock assessments) as forcing function of the dynamics
+of functional groups represented by multiple life-stages. To
+quantify the relative contribution of each driver, the various ﬁts
+of the models were compared using the sum of squares between
+observed and predicted time-series and the bias-corrected Akaike
+information criterion (AICc) of the model (Akaike, 1974). We
+addressed the uncertainty in Ecopath input parameters in Ecosim
+outputs through the Monte Carlo uncertainty routine based on
+conﬁdence intervals determined from Pedigrees (Heymans et al.,
+2016; Steenbeek et al., 2018). More details on the ﬁtting procedure
+can be found in Supplementary Appendix SF.
+Ecospace
+The ﬁtted Ecosim scenario was run over the period 1985ñ2016,
+and the “Ecopath model from Ecosim” plug-in (Steenbeek et al.,
+2016) was employed to generate 6 Ecopath models corresponding
+to mean conditions over successive 5-year periods (from 1985ñ
+1989 to 2005ñ2010, and 2011ñ2016 for the last period). Ecospace
+models were built for each of the 5-year periods to facilitate the
+comparison of spatial distributions through time and run over a
+spin-up period of 5 years. The Ecospace models integrated the
+average maps of PP to force its distribution, those of ZSH to feed
+the distribution of habitat foraging capacity for zooplankton, and
+those of environmental variables employed in the GAMs and the
+10https://www.ices.dk/data/dataset-collections/Pages/Fish-catch-and-stock-
+assessment.aspx
+Frontiers in Marine Science | www.frontiersin.org 6 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 7
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+associated preference functions of higher TL groups to spatially
+distribute ﬁsh habitat foraging capacities (Coll et al., 2016; Grüss
+et al., 2018, 2016). Trophic and diversity indicators (Table 1) were
+projected based on functional groups’ distributions, partly using
+the ECOIND plug-in (Coll and Steenbeek, 2017). This approach
+decoupling temporal and spatial changes will be further discussed
+in the Discussion section. Parameters of the Ecospace model are
+given in Supplementary Appendix SG.
+RESULTS
+Improvement of Ecosim Model Fit and
+Relative Importance of Ecosystem
+Drivers
+The statistically best model was obtained when trophic
+interactions, ﬁshing, and environment were included together
+in the model ﬁtting (SS = 340 and AICc = −3365, Table 2),
+hence improving the model ﬁt by 86%. The proportions of
+each driver in the Sum of Square SS reduction suggest that
+ﬁshing was the main driver of ecosystem changes, followed
+by trophic interactions and, with much lower but signiﬁcant
+contributions, the environment ( Table 2 and Figure 3 ).
+Temperature eﬀects on higher trophic levels and overall changes
+in low trophic levels productivity had similar weight in the
+ﬁt. Integrated independently from plankton data, temperature
+forcing especially increased the hindcast quality for species with
+thermal preferenda at outside the temperature ranged covered in
+the Celtic Sea (warmer or colder, Figure 3B). Conversely, PP and
+ZHS integration essentially led to a better ﬁt for functional groups
+belonging to the pelagic pathway.
+Predicted Historical Trends for
+Functional Groups Abundance
+Low Trophic Levels
+With regard to the basal productivity in the Celtic Sea ecosystem,
+no clear trend was apparent in the Ecosim model over the
+period 1985ñ2016. Despite this relative stability, some diﬀerences
+can be observed in CPR time-series within the phytoplankton
+community. Most signiﬁcant changes in observed phytoplankton
+data occurred during the late 1980s when the abundance
+of large phytoplankton (diatoms and dinoﬂagellates) dropped
+whereas the one of small phytoplankton increased ( Figure 4 ).
+However, the trends for both large phytoplankton and small
+phytoplankton were not correctly captured by Ecosim and
+remained overall constant over the entire period 1985ñ2016 in
+the model.
+Similarly to PP , the ZSH remained stable over the study
+period, yet, looking at the data, substantial changes were
+observed within the zooplankton community, mostly during
+the late 1980s. When PP and ZSH were integrated, Ecosim
+reproduced the overall observed trend in small mesozooplankton
+abundance, which substantially declined before 1990 and
+was still decreasing until the mid-2000s. By contrast, large
+mesozooplankton abundance tended to increase over the period
+1985ñ2016. Again for this zooplankton group, the trend
+predicted by Ecosim correctly matched observations both in
+terms of trend and of amplitude of variations. Both trends
+and interannual variability in zooplankton abundance were
+not captured when PP and ZSH were not included in the ﬁt
+(Figure 4 ). The stability in the predicted phytoplankton time-
+series precludes us from linking changes in mesozooplankton
+abundance with changes in primary productivity in the Celtic
+TABLE 1 | Indicators used to analyze spatial changes in the Celtic Sea structure over the period 1985–2016.
+Acronym Indicator Unit Deﬁnition References
+SOI System Omnivory Index – Mean standard deviation of trophic levels in the diets Libralato, 2013
+K Kempton’s diversity index – Trophic group’s diversity Ainsworth and Pitcher, 2006
+MTL Mean trophic level TL Mean trophic level of the community (TL ≥ 2) Christensen et al., 2008
+BTL=x Total biomass at TL threshold x tones Total biomass of groups with TL superior or equal to x Christensen et al., 2008
+HTI High Trophic Indicator % Percentage of predators with TL ≥ 4 among the consumers Bourdaud et al., 2016
+TABLE 2 | Results of the Ecosim ﬁtting procedure.
+Scenario Vs/Predator Vs/Predator-Prey K minSS AICc
+Baseline 0 0 0 3082 879
+Trophic interaction 40 13 53 2195 318
+Fishing 0 0 0 1248 −905
+Trophic interactions+ Fishing 45 7 52 385 −3119
+Trophic interactions+ Fishing+ Plankton forcing 45 8 53 383 −3128
+Trophic interactions+ Fishing+ Temperature 29 14 43 394 −3093
+Trophic interactions + Fishing + Plankton forcing + Temperature 46 6 52 340 −3365
+Vs columns indicate the number of vulnerability parameters that have been estimated and whether they have been estimated by predator or by couple predator-prey. K
+is the total number of parameters estimated by the model, which is equal to the number of Vs estimated as no PP anomaly is estimated. The maximum number for K
+to avoid overﬁtting is 56 (Supplementary Appendix SE). The best model in terms of minSS, the sum of squares between observed and predicted values reached at the
+end of the ﬁt, and AICc is the one including both trophic interactions, ﬁshing, plankton-related data and temperature effect on high trophic level groups. The best model
+statistically is written in bold.
+Frontiers in Marine Science | www.frontiersin.org 7 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 8
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 3 | Changes in the temporal ﬁt of the Ecosim model: (A) mean gain
+in the Sum of Square (SS) when integrating each driver in the ﬁtting
+procedure: “Trophic” when estimating the vulnerabilities, “Fishing” when
+integrating ﬁshing mortality time-series and forced catches, “Plankton” when
+integrating primary production (PP) and zooplankton suitable habitat (ZSH),
+“Temperature” when integrating sea surface temperature (SST) and sea
+bottom temperature (SBT) – Plankton and Temperature data were integrated
+only in the models accounting for Trophic interactions and Fitting;.
+(B) Changes in the SS for pelagic species and species with temperature
+optimum outside the Celtic Sea temperature range according to the different
+environmental drivers integrated in the ﬁt. (C) Trends in the forcing variables –
+F is the mean ﬁshing mortality time-series for stocks under assessment.
+Sea between 1985 and 2016. Although Ecosim was able to
+correctly predict the overall zooplankton abundance level over
+the study period, the predictions did not perfectly match the
+observed patterns, especially at the beginning of the time-
+series.
+FIGURE 4 | Observed (points; CPR) vs. predicted (lines; Ecosim) changes in
+the plankton community of the Celtic Sea over the period 1985–2016. Black
+line: best ﬁtted model, including trophic interactions, ﬁshing, PP , ZSH and
+temperature; green line: with integration of PP and ZSH but without
+(Continued)
+Frontiers in Marine Science | www.frontiersin.org 8 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 9
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 4 | temperature forcing; orange line: with integration of temperature
+forcing but without PP and ZSH. The gray shaded area is delimited by the
+95% intervals of the Monte Carlo runs that propagate the uncertainty on
+Ecopath input parameters to Ecosim. The points correspond to observed
+time-series used during Ecosim calibration.
+Higher Trophic Levels
+The observed time-series of biomass, abundance and catch of
+most of high trophic level groups were satisfactorily reproduced
+by Ecosim. Overall, Ecosim predictions were better for those
+single-species groups for which stock assessments are carried out
+than for multispeciﬁc ﬁsh groups, and they were less consistent
+for exploited invertebrate groups.
+In 1985, main target species such as large Gadiformes
+[e.g., hake, cod, whiting ( Merlangius merlangus ), haddock
+(Melanogrammus aegleﬁnus )], large ﬂatﬁsh species [i.e., sole
+(Solea solea), plaice ( Pleuronectes platessa)], anglerﬁsh, megrim
+(Lepidorhombus whiﬃagonis ), sea bass ( Dicentrarchus labrax ),
+other large piscivorous demersal ﬁsh [e.g., saithe ( Pollachius
+virens), ling (Molva molva), pollock (Pollachius pollachius), turbot
+(Psetta maxima ), conger ( Conger conger )] and forage ﬁsh [i.e.,
+herring (Clupea harengus), mackerel ( Scomber scombrus), horse
+mackerel ( Trachurus trachurus )] were already subject to high
+ﬁshing mortality that far exceeded natural losses. Driven by
+an increase in ﬁshing mortality, the biomass of most of these
+groups declined between 1985 and the mid-2000s while their
+catches simultaneously stabilized or decreased. In 2005, their
+ﬁshing mortality decreased and Ecosim predicted a stabilization
+of their abundance that preceded a progressive recovery from
+2010 onward (Figure 5).
+The pressure exerted on species that were initially less
+exploited such as smaller ﬂatﬁsh (i.e., endobenthivorous),
+medium demersal ﬁsh (i.e., epibenthivorous), or cephalopods
+increased after 1985. Concomitantly, the natural mortality
+exerted on these species decreased as a result of the depletion of
+highly commercial groups such as large predatory ﬁsh (e.g., hake,
+cod, whiting, megrim). The predicted biomass trends of lower
+TL ﬁsh and invertebrates varied according to their exploitation
+patterns (Figure 5). Dramatic changes in the composition of the
+pelagic community were also predicted by Ecosim. In parallel
+to horse mackerel depletion, the biomass of pelagic ﬁshes that
+feed upon similar ressources such as suprabenthivorous ﬁsh,
+sprat ( Sprattus sprattus ) or boarﬁsh ( Capros aper ) increased,
+while these pelagic ﬁshes were initially almost absent from the
+Celtic Sea ecosystem.
+The recovery of commercial species in the 2010s is noticeable,
+particularly the large increases in the biomasses of large
+predators, including hake (whose biomass increased 5-fold) and
+a few other species. According to the model, these species
+recoveries translated into an increase in predation pressure from
+large predators and a decline in the abundance of cephalopods,
+small pelagic and small demersal ﬁsh.
+The rising temperatures resulting from climate forcing had
+various eﬀects on the diﬀerent species represented in the
+model, and they mainly impacted ﬁsh productivity during
+the mid-1990, when a substantial increase in both surface
+and bottom temperatures was observed. As highlighted by
+the comparison of model’s ﬁt on observed data according
+to scenarios ( Figures 3B , 5), the integration of temperature
+forcing allowed to better capture the overall trends in the
+abundance of Boreal and Lusitanian species. The foraging ability
+of Boreal species, including cod, plaice, whiting, herring and
+endobenthivorous demersal ﬁsh, dropped at the same time that
+ﬁshing mortality increased, and this accentuated the depletion of
+the above-mentioned species. Conversely, for Lusitanian species
+that have warmer thermal preferences, such as sardine, boarﬁsh,
+hake and cephalopods, increased productivity in the Celtic Sea
+ecosystem in the 1990s acted antagonistically to the increasing
+ﬁshing pressure and synergistically with decreasing competition
+pressure. The diﬀerential trends in the productivity of warm and
+cold water aﬃnity species between the start and the end of the
+study period were responsible for diﬀerences in the recovery
+capacities of commercial groups in the 2010s. For instance, cod
+biomass remains quite stable when temperature is not driving
+productivity, and plaice recovers much slower from ﬁshing
+pressure release. Conversely, sole depletion in the ﬁrst part of the
+time-series is stronger as its recovery is strengthened ( Figure 5).
+These variations triggered changes in the ﬁsh assemblages.
+Interannual variability in high trophic level abundance was better
+reproduced when incorporating PP and ZSH data, especially for
+pelagic species (Figure 5).
+Predicted Spatial Distribution of
+Food-Web Components in the Celtic Sea
+Habitat Projection for the Celtic Sea
+Evaluation tests suggested that GAMs ( Supplementary
+Appendix SE ) were good enough to produce yearly foraging
+habitat maps for the 38 higher trophic level functional groups
+(year 2016, Supplementary Appendix SE ). The tests also
+indicated that GAM ﬁts and predictive capacities were better
+for monospeciﬁc groups than for heterogeneous multispecies
+groups. The ﬁt was also lower when the sampling gear employed
+during the surveys was not adapted to a given functional
+group (e.g., benthic invertebrates). The type of environmental
+predictors retained in ﬁnal GAMs varied across functional
+groups, as their number, ranging from 3 for the non-commercial
+invertebrate groups to 9 for hake. The preference functions
+estimated from ﬁtted GAMs exhibited diverse shapes. The
+retained predictors often included bathymetry (32 groups) and
+temperature (surface or bottom; 35 groups), two variables of
+importance in shaping the Celtic Sea environment. Depth in the
+Celtic Sea drove marked northeast-southwest gradients, while
+surface temperature led to pronounced latitudinal gradients and
+bottom temperature resulted in two opposed pools of warm
+and cold waters in the English and Bristol Channel and in
+southern Ireland.
+Salinity functional responses quantify habitat suitability in the
+riverine-inﬂuenced Bristol Channel. When they were retained
+in ﬁnal GAMs, seabed substrate variables resulted in patchy
+predicted habitats for demersal species. In those instances, it was
+possible to make a clear distinction between restricted areas of
+rocky or mixed substrate and large irregular strands of muddy,
+Frontiers in Marine Science | www.frontiersin.org 9 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 10
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 5 | Fitted biomass trends from the Ecosim model for a selection of demersal and pelagic ﬁsh species. Black line: best ﬁtted model, including trophic
+interactions, ﬁshing, PP , ZSH and temperature; green line: with integration of PP and ZSH but without temperature forcing; orange line: with integration of
+temperature forcing but without PP and ZSH. The gray shaded area is delimited by the 95% intervals of the Monte Carlo runs that propagate the uncertainty on
+Ecopath input parameters to Ecosim. The color points indicate the different time-series of observed data during Ecosim calibration.
+sandy or coarse sediments. The other environmental variables
+considered in the present study were less frequently retained
+in ﬁnal GAMs. Habitat foraging capacity maps for the period
+1985ñ1989 are provided in Supplementary Appendix SE.
+Predicted Biomass Distributions
+The Ecospace model predicted the biomass distribution of
+all components of the ecosystem, from the phytoplankton
+to top predators. The biomass distributions of functional
+groups reﬂected the overall habitat foraging capacities of
+these groups, hence their ecological niche, but were also
+inﬂuenced by their trophic interactions with prey, predators and
+competitors (Figure 6).
+The distributions of those functional groups for which no
+GAM was developed were estimated by Ecospace only according
+to their feeding relationships (birds, mammals, bacteria, benthic
+meiofauna, large pelagic ﬁsh). A wide variety of spatial patterns
+were exhibited by the functional groups represented in Ecospace.
+Due to their high mobility in the water column and their
+eurythermic characteristics, horse mackerel and mackerel were
+Frontiers in Marine Science | www.frontiersin.org 10 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 11
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 6 | Predicted biomass distribution in 2016 for functional groups for which statistical habitat models (generalized additive models) were developed. Biomass
+is represented in relative units, i.e., scaled on the highest density predicted in the Celtic Sea. The color scale represents the relative abundance of the considered
+group, from zero (blue) to the maximum (red).
+Frontiers in Marine Science | www.frontiersin.org 11 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 12
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+predicted to be the most widely distributed monospeciﬁc groups
+in the Celtic Sea ecosystem ( Figure 6 ). Other ﬁsh groups that
+were predicted to occupy a large fraction of the Celtic Sea
+were multispeciﬁc groups such as benthivorous elasmobranchs,
+epibenthivorous demersal ﬁsh, pouts ( Trisopterus minutus and
+T. luscus) and benthic cephalopods, which are all made of several
+species and, therefore, display a broader, composite ecological
+niche. By contrast, some species were predicted to occupy only
+a relatively small fraction of the Celtic Sea ecosystem. This
+was particularly the case for benthic groups, which are highly
+dependent on the seabed substrate. For instance, the distribution
+of Norway lobster (Nephrops norvegicus) was restricted to muddy
+patches in the western part of the central Celtic Sea where
+the species can more easily bury in mud. Ecospace modeling
+allowed us to distinguish between groups that have similar
+trophic niches but diﬀerent environmental niches. Thus, sole
+and plaice have similar diets but showed limited spatial overlap
+because of their, respectively, warm and cold water aﬃnities;
+the same was observed for sardine ( Sardina pilchardus ) and
+herring. Species that are taxonomically close such as the gadoids
+cod, haddock and whiting were shown to regularly coexist
+in the same areas but could also have substantially diﬀerent
+distributions: whiting inhabited shallower areas than cod and
+haddock; both haddock and cod had aﬃnities for muddy
+areas, but haddock also frequented sandy substrates whereas
+cod preferred coarse sediments. The distributions of adults
+and juveniles for hake, anglerﬁsh and cod were comparable
+yet exhibited some diﬀerences (i.e., juveniles showed a greater
+aﬃnity for muddy substrates), which highlighted the relevance
+of representing multiple stanzas for some species in Ecospace
+to better simulate changes in spatial distribution and predation
+pressure over ﬁsh life cycle and the potential for cannibalism.
+Species Assemblages
+The distribution of functional groups provided a view on ﬁsh
+community assemblages in the Celtic Sea ecosystem. Very coastal
+areas and bays around Ireland, United Kingdom and France
+and the inner Bristol Channel were found to be inhabited
+by functional groups tolerant to low salinities, such as large
+concentrations of benthic invertebrates, small benthivorous
+organisms and, upper in the surface, suprabenthivorous and
+small epipelagic ﬁsh (i.e., herring, sardine, sprat). Higher trophic
+levels in these areas were mainly represented by whiting
+and sea bass. Also, intense primary and secondary pelagic
+production took place in these areas. Areas next to the shelf
+edge, located from the tip of Brittany to southwestern Ireland,
+were characterized by deeper waters with a steeper slope. Here,
+abundant populations of megrim, hake, anglerﬁsh and other
+piscivorous demersal ﬁsh were found together with widely
+distributed pelagic ﬁsh species such as boarﬁsh, blue whiting
+(Micromesistius poutassou ), mackerel and horse mackerel.
+Benthic invertebrates in these areas were mainly deposit and
+suspension feeders. Primary production was observed limited in
+these areas, but the pelagic habitat was favorable to zooplankton
+development. In the cold central and northwestern Celtic
+Sea, the mix of sediment types and the moderate depth was
+favorable to diverse demersal species, including epibenthivorous
+demersal ﬁsh, hake, anglerﬁsh and three gadoid species, cod,
+haddock and whiting. Mackerel and horse mackerel were the
+dominant pelagic species in this area. The density of benthic
+carnivores and necrophageous invertebrates was especially high
+in this area. Finally, the Western English Channel and the
+outer Bristol Channel diﬀered from the other regions of
+the Celtic Sea by their relatively warm waters and coarse
+substrate and their higher plankton productivity sustained by
+mesoscale structures. The Western English Channel and the outer
+Bristol Channel were characterized by the presence of small
+benthivorous ﬁsh, epibenthivorous ﬁsh, pouts, ﬂatﬁsh (plaice
+and sole), commercial invertebrates (crustaceans and bivalves),
+cephalopods species, some gadoid species, and a mix of pelagic
+species including mainly horse mackerel and mackerel but also
+small epipelagic species.
+Temporal Changes in Functional Groups’
+Distributions
+Overall, relative habitat capacity was constant for most functional
+groups over the study period. Most changes in relative habitat
+capacity occurred between the late 1980s and the mid-1990s
+(Figure 7 ). The intensity of changes was variable across
+functional groups and can be related to the water temperature
+preferences of functional groups. The ﬁtted GAMs indeed
+highlighted that temperature, which is the variable most aﬀected
+by climatic changes in the area, was an ecological niche
+descriptor common to almost all components of the ecosystem.
+Thus, changes in the modeled habitats over the studied period
+were observed for those functional groups with most extreme
+thermal preferences in the Celtic Sea such as pilchard ( Sardina
+pilchardus), sea bass, medium pelagic ﬁsh and squids (mainly
+or exclusively composed of Lusitanian species), as well as cod,
+haddock, sprat, herring, endobenthivorous ﬁsh and whiting
+(mainly or exclusively composed of Boreal species).
+Functional groups dominated by Boreal species illustrate
+biomass distribution changes related to environment ( Figure 8).
+Most changes in the distribution of species that prefer cold waters
+occurred early in the study period, with a slight contraction of the
+area occupied by these species in the eastern and southwestern
+Celtic Sea in response to the more intense warming of already
+warm bottom waters in those areas. For the remainder of the
+study period, the relative distribution of biomass of Boreal species
+remained relatively stable.
+Ecosystem Indicators
+Primary production in the Celtic Sea ( Figure 9A) was essentially
+located in coastal areas, from the southern coast of Ireland to the
+Western English Channel and western Brittany, and along the
+southern part of the Celtic Sea shelf break. Diﬀerences in primary
+production between the lowest and the highest productive areas
+never exceed a factor of four. The biomass of secondary producers
+(i.e., zooplankton and benthic invertebrates that not carnivorous;
+Figure 9B) was more spread over the shelf and did not display
+similarly high densities in the center of the Western English
+Channel. The total biomass of high trophic level groups (i.e.,
+TL≥ 3; Figure 9C) was less variable over space and more patchy.
+The biomass of primary and secondary producers in the Celtic
+Frontiers in Marine Science | www.frontiersin.org 12 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 13
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 7 | Index of change in the spatial distribution of functional groups’ habitat in relation to their thermal preferences between the 1985–1989 and 1995–1999
+periods and between the 1985–1989 and 2010–2016 periods: Left: Values by functional group and averages over functional groups according to their temperature
+preferenda (cold, warm and intermediary corresponding to groups with thermal preferendum lower than, higher than, or within the range of temperatures in the Celtic
+Sea, respectively). The index is the absolute difference between 1 and the slope of the linear regression between Ecospace model cells’ values of relative habitat for
+the 1985–1989 period and the two other periods. Right: mean index per group of thermal afﬁnity, “cold,” “intermediate,” and “warm” for species with thermal
+preferendum, respectively, inferior, within, and superior to the temperature range covered in the Celtic Sea over 1985–2016.
+FIGURE 8 | Predicted changes in the total biomass of Boreal demersal species. (A) Mean biomass distribution (t.km-2) for the period 1985–1989 and temperature
+(◦C) for the same period. Relative changes of Boreal demersal species biomass are displayed in (B) 1990–1994; (C) 1995–1999; (D): 2010–2016 and calculated as
+the ratio between these selected periods and the initial biomass. In (B–D) the colors correspond to the ratio of absolute biomass between the predicted biomass
+and biomass for 1985–1989. The black lines delimit areas for which the fraction in the total Celtic Sea Boreal demersal species biomass increased (“+” area) and
+decrease (“–” area) compared to 1985–1989.
+Sea was concentrated around particular areas, mainly around the
+coasts and in the English Channel, and this available production
+is eﬃciently transferred to higher trophic levels and then likely
+spread horizontally.
+The spatialized mean trophic level (MTL) and high trophic
+index (HTI) highlighted that higher trophic levels were mainly
+located in the western Celtic Sea. In particular, high values of the
+MTL were concentrated in the northwestern Celtic Sea, whereas
+the HTI is higher in deeper areas along the shelf-break (Figure 10,
+left panel). Areas associated with a high MTL were those
+areas that were occupied by many medium to large demersal
+functional group including epibenthivorous and piscivorous ﬁsh,
+Frontiers in Marine Science | www.frontiersin.org 13 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 14
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 9 | Primary production in the Celtic Sea and biomass for trophic
+levels 2–3.5 and greater than 3.5 in 1985. (A) Primary production; (B) total
+biomass for trophic levels 2–3.5; (C) total biomass for tropic levels greater
+than 3.
+elasmobranchs, gadoids, anglerﬁsh and hake. Areas characterized
+by a high HTI were those where the biomasses of hake, megrim
+and anglerﬁsh were high. In the eastern part of the Celtic
+Sea, the MTL was lower, due the large abundance of small
+demersal ﬁsh species feeding on benthic invertebrates (e.g., sole,
+plaice, small benthivorous ﬁsh) in this area, particularly medium
+and epipelagic species, which dominate in the Western English
+Channel. In the eastern part of the Celtic Sea, top-predators were
+mainly represented by large pelagic sharks and sea bass.
+The Kempton’s index highlighted spatial patterns in functional
+group diversity. Spatial patterns in functional group diversity
+were independent from that of biomass levels. For instance, mean
+values of Kempton’s index were found in areas with either low
+total biomass (shelf-break) or high total biomass (fronts and
+muddy areas) densities. Functional group diversity was found
+to be particularly high at the border between the main Celtic
+Sea regions identiﬁed previously. The SOI was similar but not
+identical to the Kempton’s diversity index. It was highest in the
+northwestern part of the central Celtic Sea, which was inhabited
+by generalist species and species that can feed on both benthic
+invertebrates and ﬁsh, including gadoids and anglerﬁsh, but not
+hake which primarily feeds on medium-sized pelagic ﬁsh.
+All the indicators displayed measurable variations over time
+and space ( Figure 10 , middle panels). The trends in the HTI
+and MTL were in opposed directions, which means that the
+ratio of low trophic level biomass to total biomass increased
+overall but that, in parallel, the proportion of species with a TL
+greater than 4 increased. These results were mainly driven by the
+dramatic changes in horse mackerel and hake abundances that
+occurred over the study period, while, after a deep depletion,
+the abundance of most mesopredator in the 2000s returned to
+levels similar to the 1980s. For the HTI and MTL, the direction
+of the change was the same among Ecospace cells, partly because
+the species driving observed changes were widely distributed in
+the Celtic Sea region. Trophic diversity declined overall over the
+whole Celtic Sea, especially in coastal areas. While functional
+groups diversity also declined in the southern Celtic Sea and the
+English Channel, it increased in the northwestern part of the
+central Celtic Sea. The standard deviations of the four indices
+(Figure 10, right panels) highlighted a measurable modiﬁcation
+of the whole structure of the Celtic Sea ecosystem over the
+period 1985ñ2016, yet some speciﬁc areas were more aﬀected
+than others. In particular, the food-web structure of the central
+Celtic Sea displayed substantial changes between 1985 and 2016,
+which were reﬂected by both an increase in MTL and a decrease
+in HTI and SOI. The standard deviation of spatial indices relative
+to their mean value also suggests a greater amplitude of changes
+occurred in the Kempton index.
+DISCUSSION
+Integrating Multiple Data Types for More
+Ecological Realism in Trophic Models
+The data types integrated in the Celtic Sea EwE model
+signiﬁcantly improved its ability to represent the functioning
+of the Celtic Sea ecosystem by providing a more relevant
+picture of the food-web structure and by depicting more
+realistically the drivers that rule its dynamics, and notably the
+environmental drivers.
+Improving the Description of Food-Web Components
+and Interactions
+To ensure that a food-web model correctly represents the
+temporal and spatial dynamics of an ecosystem, trophic
+relationships have to be deﬁned as accurately as possible, through
+the combined use of classical and novel analyses (Pethybridge
+et al., 2018; McCormack et al., 2019). In this study, the use
+of outputs of the EcoDiet model (Hernvann et al., in press)
+applied to the stomach contents and biotracers compiled within
+the recent and extensive EATME project was advantageous to
+provide a reliable diet matrix to Ecopath, in better agreement
+with local data than by the use of literature alone. Additionally,
+the substantial collection of data compiled for the present study
+[115 time-series versus 62 in Moullec et al. (2017)] provided new
+Frontiers in Marine Science | www.frontiersin.org 14 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 15
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+FIGURE 10 | Mean values, change and variability in four ecosystem indicators in the Celtic Sea over the period 1985–2016. Mean trophic level MTL (1st line), high
+trophic index HTI (2nd line), system omnivory index SOI (3rd line) and Kempton’s diversity index (4th line) as spatialized in Ecospace,(left panels), their change
+(difference) between 1985 and 2016 (middle panels), and their standard deviation calculated over the period 1985–2016 (right panels).
+insights on the abundance trends of some food-web components,
+hence allowing the Celtic Sea EwE model to better capture
+ecosystem dynamics. Though the integration of abundance time-
+series for multispeciﬁc groups in EwE was informative, the
+dynamic of these groups remained poorly understood compared
+to the dynamic groups under stock assessment. Gathering
+relevant time-series of ﬁshing eﬀort for the period 1985ñ2016
+for multispeciﬁc groups would greatly improve the hindcast.
+However, the large diversity of gears and métiers from many
+countries operating in the Celtic Sea makes this endeavor
+particularly challenging.
+Primary and Secondary Production
+The integration of primary and secondary production related
+data in EwE only slightly improved the ﬁt of the Ecosim model.
+The reason for such a low improvement was the absence of clear
+variation of primary and secondary production in the time-series.
+This suggested a relative stability of the hydro-climatic conditions
+in the Celtic Sea between 1985 and 2016 as the main driver of
+plankton development. PP and ZHS integration allowed a better
+hindcast for pelagic functional groups, especially for zooplankton
+and some planktivorous ﬁsh, both for trends and interannual
+ﬂuctuations, while trends in phytoplankton abundance were
+poorly reproduced. This poor ﬁt for phytoplankton groups
+illustrates the diﬃculty to represent plankton prey-predator
+interactions and zooplankton grazing pressure in EwE models
+and the consequence this may have on the prediction of higher
+trophic levels. Here, high productivity and biomass levels of
+phytoplankton prevent their control by top-down process and
+limit their variation in abundance to a very low amplitude.
+Despite this lack of realism on the dynamic of phytoplankton,
+the information brought on the bottom-up impact of PP and the
+development conditions for zooplankton well complemented the
+insight on top-down impact exerced by higher trophic levels on
+these secondary producers.
+Remote sensing data have been increasingly utilized over
+the last two decades in marine ecology studies (Chassot et al.,
+2011). The use of satellite-derived PP estimates is relatively
+common in marine ecosystem modeling (Christensen et al., 2009;
+Abdou et al., 2016; Grüss et al., 2016) and has the potential to
+become a routine procedure in new generations of ecosystem
+models (Lowerre-Barbieri et al., 2019). The main advantages
+Frontiers in Marine Science | www.frontiersin.org 15 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 16
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+of satellite-derived PP estimates are that they derived from
+a direct observation and they are accessible at high spatial
+resolution, given that regional biogeochemical models are not
+always locally available. However, satellite-derived PP estimates
+are only available for recent past (the past two decades) and, so
+far, they have not been calibrated to provide values for diﬀerent
+size classes of phytoplankton (Kramer et al., 2018). In particular,
+CPR data suggested that the phytoplankton community went
+through measureable changes in the Celtic Sea over the period
+1982ñ2016: The PCI index, proxy of the total standing biomass,
+increased, while no signiﬁcant trend was detected in the diatom
+and dinoﬂagellate (both included in large phytoplankton group)
+counts, which suggested an increase in the biomass of nano-
+phytoplankton between 1985 and 2016.
+Despite the relatively short temporal availability of the
+mesozooplankton niche model of Druon et al. (2019), the
+endeavor of integrating it in the food-web model turned out
+to be particularly promising. In particular, estimates from the
+mesozooplankton niche model allowed us to highlight areas of
+the Celtic Sea that are favorable to primary production but not
+to secondary production, and to identify regions with lower
+food availability for high trophic levels or where the grazing
+pressure exerted on zooplankton is important. Since the early
+2000s, several end-to-end ecosystem models have coupled low
+and high trophic level models (i.e., have implemented on-line
+two-way coupling), hence allowing for a better representation
+of bottom-up and top-down controls within marine ecosystems
+(Travers et al., 2009, 2007). However, only a few ecosystem
+modelers have managed to implement an on-line two-way
+coupling, and it has been more common to develop alternative
+ways to link low trophic level and high trophic level dynamics
+(Libralato and Solidoro, 2009; Piroddi et al., 2017), such as
+forcing the high trophic level model with outputs from a
+biogeochemical model (e.g., Halouani et al., 2016). In this context,
+forcing future ecosystem models by observation-based primary
+productivity and zooplankton habitat would represent a valuable
+and conservative alternative approach.
+Habitat Modeling
+The habitat modeling framework adopted in this study that
+relied on GAMs was used to assess and predict the response of
+almost all high trophic level groups to warming and to project
+the abundance and distribution of each group in the Celtic
+Sea. The habitat-derived functional response to temperature
+signiﬁcantly improved the ﬁt of the Ecosim model. Here
+again, the improvement of model ﬁt was relatively low, as
+surface and bottom temperatures appeared to be stable over a
+substantial fraction of the study period. Still, this improvement
+was substantial for those functional groups that can cope
+with extreme temperatures, i.e., which have their temperature
+optimum outside out of the range of temperature values occuring
+in the Celtic Sea ecosystem (e.g., plaice, cod and sardine).
+Despite their interest in predicting past, current, and future
+species distributions, habitat modeling approaches have still been
+rarely coupled to ecosystem models (Grüss et al., 2016; Coll
+et al., 2019; Moullec et al., 2019b). In this study, we successfully
+integrated the outputs of a statistical habitat model into a spatial
+trophic model. The limited complexity of the GAM smoothers
+employed here, together with the choice of modeling probabilities
+of presence and not abundances with the GAMs, are in line with
+the ecological niche theory (Citores et al., 2020). The European
+IBTS survey data employed in this study encompassed a large
+range of environmental values, hence providing insights into the
+potential response of species groups to the warmer conditions
+that could become the norm in the Celtic Sea by the end of
+the century. The European IBTS survey dataset recently proved
+to be highly valuable to study species distributions (Baudron
+et al., 2020; Moriarty et al., 2020) and characterize ecosystem
+functioning (Maureaud et al., 2019). The methodology developed
+by Grüss et al. (2018, 2020) can integrate as many variables
+as desired (e.g., variables measured at diﬀerent locations of
+the water column, percentages of diﬀerent substrate types) and
+can be applied to any particular representation of functional
+groups, including multistanza groups. Thus, the approach of
+Grüss et al. (2020, 2018) is an interesting alternative to the
+classical and less ﬂexible automatic approach used in Ecospace
+(Steenbeek et al., 2016) that imports information from AquaMaps
+(aquamaps.org), with more limited and much less accurate
+information (Jones et al., 2012).
+Note, however, that habitat models quality remained
+acceptable but limited for multispecies benthic invertebrate
+groups, for which presence/absence data was limited here
+to a few French surveys due to the lack of availability and
+homogeneity for other surveys. This also stresses the need for
+improving large scale sampling for these compartments.
+Are we Still Missing Something?
+While calibrating the Ecosim model, several periods of time
+with a poorer ﬁt were identiﬁed for diﬀerent functional groups.
+Early changes in phytoplankton and zooplankton abundances
+were hardly reproduced by the Ecosim model. Ecosim failed to
+catch the great decline in small mesozooplankton abundance
+at the beginning of the time-series, as well as the decline
+in diatom and dinoﬂagellate abundances and the increase in
+nanophytoplankton abundance. Although it could be due to
+wrong trends in PP estimated by the biogeochemical model in
+the absence of satellite-derived data, this could also be due to
+uncaptured environmental eﬀects. This would be expected as our
+study period starts in 1985, only a few years before the occurrence
+of abrupt changes in the state of the Celtic Sea ecosystem
+(e.g., in terms of turbulence, temperature, salinity and plankton
+abundance) that were identiﬁed in a previous study (Hernvann
+and Gascuel, 2020), and as Ecosim is not capable of tackling such
+ecosystem regime shift dynamics (Walters et al., 1997; Tomczak
+et al., 2012). As the stability in the plankton-related time-series
+did not allow us to explain their dynamics, the oceanographic
+conditions limiting phytoplankton and zooplankton production
+may not be the main factors of the regime shift. Several
+hypotheses have been proposed for identifying the main drivers
+of the severe drop in mesozooplankton abundance that occurred
+in the Celtic Sea, including climate drivers or changes in ocean
+circulation, but the mechanisms responsible for these changes
+(mediating factor of phytoplankton-zooplankton interactions,
+direct mortality factor of zooplankton, changes in zooplankton
+Frontiers in Marine Science | www.frontiersin.org 16 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 17
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+species composition, changes in phytoplankton composition,
+etc.) remain elusive (Pitois and Fox, 2006). In this context, EwE
+modeling exercises that estimate artiﬁcial “primary production
+anomalies” may improve the ﬁt of our Ecosim model (Mackinson
+et al., 2009; Araújo and Bundy, 2012; Bentley et al., 2019). The
+application of this speciﬁc procedure to the Celtic Sea EwE
+model provided an anomaly time-series signiﬁcantly correlated to
+the North Atlantic Oscillation (NAO) index. Nevertheless, these
+developments were not included in this study as: (i) they did
+not allow us to better reproduce patterns in plankton abundance
+in the early years of the period 1985ñ2016; (ii) they may be
+confounded with environmental factors that may improve, for
+instance, ﬁsh recruitment; and (iii) they did not provide any
+indications on the mechanisms at stake.
+From Temporal and Spatial to a Fully Spatio-Temporal
+Note that a novel spatio-temporal framework, that integrates
+both temporal and spatial dimensions, has been developed by
+Steenbeek et al. (2013) and included into the EwE software.
+The present approach relies on the sequential development of
+temporal rather than spatial food-web model and does not treat
+both aspects simultaneously in the same framework. Thus, the
+changes in functional group abundance predicted temporally
+do not account for eventual mismatch between prey and
+predators spatial distribution. The consequences on the overall
+model predictions may remain limited here due to very limited
+changes in the distribution of functional groups. However, such
+novel version of Ecopath spatio-temporal framework should be
+considered to predict long-term changes in the Celtic Sea in
+a context of climate change, which would imply substantial
+shifts in species distributions at various rates according to the
+functional groups.
+Spatial Patterns of Species Assemblages
+and Trophic Functioning in the Celtic Sea
+Heterogeneity in Biological Production Inﬂuenced by
+Oceanography
+The Ecospace model highlighted the heterogeneous spatial
+patterns of biological production in the Celtic Sea that are mainly
+driven by contrasting water mixing conditions over the study
+region. In coastal areas, inner Bristol and English Channel, well-
+mixed waters allow for early phytoplankton blooms in spring and
+high primary production during the year depending on nutrient
+inﬂux/recycling (Pingree et al., 1976; Pingree, 1980; Jordan and
+Joint, 1984). The seasonally mixed waters spreading over the shelf
+of the Celtic Sea lead to lower primary production, which occurs
+later there and at a lower level than in coastal areas (Pingree, 1980;
+Hickman et al., 2012; Giering et al., 2019). Note however, that
+PP can be locally enhanced oﬀshore by the combined eﬀects of
+topography and tidally-induced vertical mixing (through internal
+waves at the shelf break; Sharples et al., 2007 and water current
+shear stress in shallow waters of the shelf). The resulting shelf-
+break front is well developed in South-West Celtic Sea and ﬁner
+along the western shelf (Holligan and Groom, 1986; Druon et al.,
+2001; Joint et al., 2001). In shallower waters, the Ushant front
+(Pingree et al., 1982) occurs at the interface between the well-
+mixed and stratiﬁed waters of the shelf from the Brittany tip
+to the Western Channel while the Celtic Sea front (Simpson,
+1976) lies between the Bristol Channel and the Irish Sea.
+According to literature, the most productive areas, and especially
+productivity fronts, were predicted to concentrate biomass over
+several trophic levels up to top-predators (Pade et al., 2009;
+Scales et al., 2014; Druon et al., 2019). Speciﬁc functional groups
+inhabiting the water column displayed aggregated biomass at
+their location such as mesozooplankton, mackerel and pelagic
+sharks, as observed at the Ushant front. As about 80% (upwelling)
+to 90% (oceanic waters) of the PP is transferred to detritus
+(Raymont, 1980; Joint and Williams, 1985; Parker, 1991), spatial
+patterns in PP would also aﬀect benthic compartments. The low
+level of information on benthos in the present study however,
+prevents any conclusions about these aspects.
+The spatial structuration induced by primary production
+was shown to propagate through the food web. However,
+except for the above-mentioned functional groups, the spatial
+contrast in productivity in the Celtic Sea generally dampens
+with increasing trophic level. The mismatch between higher
+trophic level species niche and highest primary productivity
+areas is more important for predators than for prey. In other
+words, trophic ﬂows progressively operate a biomass transfer
+from restricted productive areas to lower productive areas in the
+Celtic Sea. Biomass transfers across the shelf are mainly operated
+through functional groups characterized by wide ecological
+niches and large dispersal rates (one input parameter of Ecospace;
+Romagnoni et al., 2015) such as medium pelagic species mackerel,
+horse mackerel, pouts and large piscivorous predators in the
+Celtic Sea. For such functional groups, Ecospace enables the
+representation of locally enhanced biomass production due to
+a higher availability of resources when accounting for dispersal
+toward more suitable environments (Christensen et al., 2014).
+Thus, through this modeling framework, we highlighted that
+high ﬁsh densities could be maintained in low productive areas
+of the Celtic Sea through subsidization by prey and predators
+movements (Polis et al., 1997, 1996) and transport through
+residual tidal currents.
+Spatial Variation in Functional Groups Assemblages
+In agreement with previous in situ studies, the functional groups’
+distributions predicted by the Ecospace model highlighted the
+existence of diﬀerent species assemblages in the Celtic Sea. The
+species assemblages of the inner Bristol Channel and coastal areas
+corresponded to those described by Ellis et al. (2000); Kaiser
+et al. (2004) and Martinez et al. (2013), and these assemblages
+included herring and sprat as dominant pelagic species, ﬂatﬁsh
+[plaice, sole, dab (Limanda limanda)], gadoids whiting and pouts,
+demersal sharks and rays (e.g., catshark Scyliorhinus canicula ,
+rays Raja sp.), gurnards (Eutrigla sp.), small ﬁsh (e.g., dragonets
+Callionymus sp.), large crustaceans (e.g., Maja squinado ) and
+small crabs, pagurids and shrimps. The central Celtic Sea
+assemblages identiﬁed in this study match those reported in Ellis
+et al. (2013) and Martinez et al. (2013) and are characterized
+by many gadoid species, including whiting, haddock, pouts and
+cod, as well as by shrimps. As the present study, Ellis et al.
+(2013) and Martinez et al. (2013) also characterized the demersal
+assemblage of the Celtic Sea shelf-edge as being comprised of
+Frontiers in Marine Science | www.frontiersin.org 17 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 18
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+hake, megrim, anglerﬁsh, pouts, mesopelagic species such as
+Argentina sp ., and benthic cephalopods. The large abundances
+of pelagic species such as mackerel, horse mackerel, boarﬁsh and
+blue whiting on the Celtic Sea shelf-edge that were also predicted
+in this study are consistent with the ﬁndings of Reid (2001)
+and Trenkel et al. (2014).
+In agreement with Rees (1999), we found that the Western
+English Channel displays a particularly diverse benthic
+assemblage that includes large crustaceans and commercial
+bivalves [Kaiser et al., 1998; e.g., king scallop ( Pecten maximus),
+queen scallop (Aequipecten opercularis)], as well as suprabenthos
+(Vallet and Dauvin, 1998). The preponderant community of
+pelagic species in the Western English Channel has been carefully
+screened for decades (Southward et al., 1988; Hawkins et al.,
+2003). The spatial patterns of abundance of most demersal
+species predicted in this study were consistent with those derived
+from English Celtic Sea groundﬁsh survey data (Warnes and
+Jones, 1995; Tidd and Warnes, 2006), even though the latter were
+not employed for statistical habitat modeling in this study.
+Heterogeneous Species Assemblages Result in
+Different Local Food Webs
+The diﬀerent species assemblages of the Celtic Sea identiﬁed in
+this study provided some new insights to the possible spatial
+structure of the food web in the Celtic Sea region. While
+some functional groups are widely distributed, some others
+are only present in some speciﬁc areas of the Celtic Sea and
+their absence or negligible biomass at particular locations may
+be interpreted as reﬂecting local reorganizations of the food
+web. Thus, the complex Celtic Sea food-web structure could be
+interpreted as a meta food web made of local, environmentally-
+driven, food webs connected through space by functional groups
+with larger dispersion capacities (Kortsch et al., 2019, 2015).
+Ecospace reveals to be a useful tool to understand the spatial
+structure of food webs as a complement to more qualitative
+approaches for characterizing the trophic structure of marine
+ecosystems (Albouy et al., 2014; Pellissier et al., 2018; Kortsch
+et al., 2019). Spatial indicators can be produced with Ecospace
+to determine the spatial structure of the food web in relation
+to the environment. Our results suggest that shallowest and
+least saline (aﬀected by rivers) waters of the Celtic Sea, together
+with the deepest waters of the region, are characterized by a
+low number of compartments and groups with relatively low
+variability in terms of TL. The two above-mentioned areas
+are, however, radically diﬀerent in terms of functioning. The
+latter is dominated by a speciﬁc trophic pathway where top-
+predators (i.e., hake, megrim) in high density feed on abundant
+pelagic species (i.e., blue whiting, boarﬁsh). The former, in deeper
+environments, is essentially represented by low trophic level
+benthic and pelagic functional groups with non-diversiﬁed diets.
+The distinction made between the two areas does not exclude
+the existence of important benthic-pelagic coupling in both areas,
+but this coupling may be due to the reliance on pelagic primary
+production rather than to exchanges between upper trophic level
+species. Intermediate-depth areas of the Celtic Sea were found
+to be dominated by pelagic functional groups, yet they displayed
+large concentrations of benthopelagic ﬁsh feeding on the benthos
+and pelagos. Finally, the central Celtic Sea was found to be
+dominated by predatory and generalist functional groups that
+feed on both pelagic and benthic compartments, which may
+render this speciﬁc area more stable than the rest of the Celtic
+Sea. Spatialized indicators highlighted that boundaries between
+these diﬀerent areas constituted ecotones, characterized by higher
+functional group and trophic diversity as they suited to a wider
+range of species.
+The Limited Perception of the Mean
+Annually-Averaged Ecosystem Functioning
+The spatio-temporal dynamic model of this study represents
+the trophic functioning of the Celtic Sea ecosystem averaged
+over a year. We proceeded this way because of data availability
+for model calibration (i.e., survey-derived abundance indices,
+stock assessment products, and catch statistics). Averaging
+trophic interactions can be questionable, as trophic functioning
+over the year is strongly related to seasonal variations in
+plankton production. These variations are mainly associated
+with hydrographic features and water mixing processes. In
+addition, seasonal movements, and subsequent changes in spatial
+distributions and local abundances have been highlighted for
+both pelagic [widely distributed pelagic ﬁsh (Trenkel et al., 2014)
+and coastal to a lower degree (Brophy, 2002)] and demersal
+communities (Dunn and Pawson, 2002; Persohn et al., 2009; Neat
+et al., 2014). These movements can notably be related to feeding,
+spawning and overwintering.
+Seasonal changes in distributions would explain the variability
+of ﬁsh diets in the Celtic Sea reported in Trenkel et al.
+(2005) and Chassot et al. (2008). For instance, large Celtic Sea
+predators consume more blue whiting during the summer and
+more mackerel during the winter, whereas the consumption
+of horse mackerel is relatively constant throughout the year.
+However, modeling changes in ﬁsh spatial distributions at a ﬁner
+temporal scale remains a challenging issue given the data that are
+available to us.
+More Insights Into the Dynamic of a Shelf
+Ecosystem Under Multiple
+Environmental and Anthropogenic
+Pressures
+The Celtic Sea Ecosim model best explained the food-web
+dynamics when it integrated trophic interactions, ﬁshing,
+environmental conditions controlling plankton production, and
+warming as a driver of the productivity of higher trophic level
+groups. The way the Ecosim model ﬁtted to data when diﬀerent
+data types were integrated provided a better understanding of
+the relative impacts of ﬁshing and environmental changes on the
+Celtic Sea ecosystem during the three last decades.
+Fishing on the Frontline
+Previous work based on catch and eﬀort reconstruction
+highlighted the large impacts that ﬁshing has had on the Celtic
+Sea ecosystem since 1950 (Pinnegar et al., 2002; Guénette and
+Gascuel, 2012; Hernvann and Gascuel, 2020). In particular, the
+dramatic increase in ﬁshing pressure that has occurred in the
+Frontiers in Marine Science | www.frontiersin.org 18 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 19
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+Celtic Sea region over several decades may have drastically
+reduced the biomass of large predators and may have triggered
+the deep alteration of the food-web structure through trophic
+cascades (Hernvann and Gascuel, 2020). The impacts of ﬁshing
+in the Celtic Sea ecosystem suggested by the present study concur
+with the conclusions of previous EwE modeling works in the
+ecosystem by Bentorcha et al. (2017) and Moullec et al. (2017).
+At the beginning of our study period, in 1985, the biomass of
+main large bentho-demersal ﬁsh and predator species had already
+been severely impacted by ﬁshing and pelagic and invertebrate
+ﬁsheries started developing in the Celtic Sea region. Then,
+between 1985 and 2016, ﬁshing kept on severely impacting the
+Celtic Sea ecosystem. Despite the integration of environmental
+variability in the Ecosim model, our ﬁndings suggest that ﬁshing
+had more profound impacts on the Celtic Sea ecosystem than
+environmental changes.
+Compared to previous versions of the Celtic Sea EwE model,
+the present Ecosim predictions were more accurate due to the use
+of new survey data (EVHOE and UK-WCGFS) which allowed
+for a better description of the indirect eﬀects of ﬁshing in the
+Celtic Sea EwE model. The divergent abundance time-series for
+smaller and larger ﬁsh groups, which increased and decreased,
+respectively, over the period 1985ñ2016, were better identiﬁed in
+this study than in the studies that employed previous versions of
+the Celtic Sea EwE model. The analysis of the mortality estimates
+suggested that the driving factor of trends in mortality was
+predation release on smaller species, due to both the continuously
+increasing pressure exerted on large predatory ﬁsh and the
+reallocation of ﬁshing eﬀort on medium ﬁsh in response to
+the depletion of to large predators. These results concur with
+the hypotheses formulated in community size-structure studies
+(Blanchard et al., 2005; Shephard et al., 2012, 2011). Though this
+phenomenon was only described for demersal species, the large
+decline in the biomass of horse mackerel in the beginning of the
+1990s predicted in this study (a 6-fold decline within only a 10-
+year time frame resulting from a large increase in ﬁshing eﬀort
+on horse mackerel) may have also contributed to the increasing
+biomass of smaller species. This may probably be the case (horse
+mackerel leaving a vacant niche) for other small pelagic species,
+such as boarﬁsh to boom in the early 2000s, as observed by
+Blanchard and Vandermeirsch (2005) and Coad (2012) and also
+correlated to changes in the temperature. Thus, ﬁshing appears
+as the main driver of changes in species assemblages in the Celtic
+Sea, especially leading to a decrease in the diversity of diets and a
+general decline in the mean trophic level in the area.
+Finally, the biomass recoveries initiated in the Celtic Sea
+over the recent period were particularly noticeable, and these
+biomass recoveries seemed to allow for a progressively increasing
+dominance of demersal species in the Celtic Sea ecosystem and
+a rise of the predation pressure exerted on smaller demersal
+ﬁsh, crustaceans, and cephalopods as highlighted by the biomass
+decline of the latter and the increase in the HTI index.
+Climate Change in Ambush
+The importance of the ﬁshing driver in the Celtic Sea contributed
+to mask the impacts of environmental changes on the ecosystem.
+Indeed, many abundance trends of exploited groups reﬂected
+stock depletions and recoveries independently of warming eﬀects.
+The dominance of the ﬁshing driver in observed time series is
+consistent with the lack of evidence of any warming eﬀect in
+the Celtic Sea from studies that analyzed species biomass trends
+or community size-structure (Genner et al., 2004; Blanchard
+et al., 2005). However, through the use of GAM predictions
+and temperature forcing, we were able to account for the
+cumulative impacts of ﬁshing and environment changes in EwE
+and to disentangle the relative contributions of these diﬀerent
+drivers of change. The mid-1990s were characterized by a
+net warming of the Atlantic Ocean that was attributed to a
+shift of the Atlantic Multidecadal Oscillation (AMO) from a
+negative to a positive phase, which was likely ampliﬁed by
+anthropogenic climate change (Ting et al., 2009). As a response
+to this large-scale warming events, both sea surface and bottom
+temperatures in the Celtic Sea increased. The Celtic Sea EwE
+with Ecospace model suggests that these temperature changes
+led to a decrease in the productivity of most of Boreal species,
+including herring, sprat, cod, whiting and haddock, and to an
+increase in the productivity of functional groups with warm water
+aﬃnity, particularly species with extreme thermal preferenda
+such as sardine, sea bass, mixed medium pelagic ﬁsh [mainly
+anchovy ( Engraulis encrasicolus )] and cephalopods, and to a
+lesser extent, widely distributed pelagic species such as mackerel,
+horse mackerel and boarﬁsh. In future years, these trends in
+species productivity may impair the recovery of some current
+commercially important species (i.e., gadoids) and oblige ﬁshers
+to target less exploited warm-water species. Additionally, the
+species distributions predicted by Ecospace indicated a relative
+concentration of Boreal species’ biomasses in a smaller area
+around the mid-1990s. This modiﬁcation of Boreal functional
+groups’ distributions persisted until the end of the study period
+and resulted from a contraction of these groups’ niches induced
+by warming. If the scale of these changes was limited, it conﬁrmed
+the response of these species to climate change, which was barely
+detectable in temporal trends. The niche contraction of demersal
+Boreal species in the south of the Celtic Sea was associated to
+an increase in functional groups diversity, related to the largest
+proportion of biomass represented by species with warmer water
+aﬃnities. The latter, the trophic diversity declined in response
+to change in assemblage, being mainly benthivorous and of
+low trophic level.
+These responses of functional groups’ productivity and
+distribution to ocean warming predicted in this study were
+consistent with the ﬁndings of multiple ﬁsh community studies
+that were conducted across Europe for a large proportion of
+both demersal and pelagic species. In such studies, species were
+shown to respond to warming in the 1990s (Simpson et al., 2011;
+Montero-Serra et al., 2015). Changes were mostly correlated
+to species’ preferred temperature and central latitude of their
+range so that the abundance or recruitment of cold water species
+decreased while that of warm water, widely distributed species
+increased (Poulard and Blanchard, 2005; Simpson et al., 2011;
+Auber et al., 2017, 2015; Bentley et al., 2020). If no homogeneous
+poleward shifts of the communities were highlighted over the
+European shelf (Dulvy et al., 2008; Simpson et al., 2011), the
+spatial distribution of numerous species was aﬀected by warming
+Frontiers in Marine Science | www.frontiersin.org 19 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 20
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+(Baudron et al., 2020), some displaying displacements of their
+center of distribution and others showing migration to deeper
+waters (Dulvy et al., 2008; Punzón et al., 2016). The potential
+changes in the distribution of species located south of the Celtic
+Sea or already present in low abundance in the Celtic Sea are
+responsible for the increase in species diversity observed by
+Hiddink and ter Hofstede (2008) and ter Hofstede et al. (2010).
+The Relative Stability of the Celtic Sea Ecosystem
+When spatializing ﬁsh communities’ responses to warming over
+the European shelf, Simpson et al. (2011) pointed out that the
+Celtic Sea was less impacted than the neighboring areas. This
+result may be linked to the lower variability of Celtic Sea thermal
+conditions after the mid-1990s that resulted from the particular
+hydrographic situation of the Celtic Sea (i.e., Gulf Stream
+inﬂuence, Hughes et al., 2017; Tinker et al., 2020). However,
+the amplitude of warming in the mid-1990s suggested that local
+thermal conditions were not the only reason for the weaker
+response of the Celtic Sea ecosystem to warming compared
+to neighboring ecosystems. Ecospace results suggest that the
+greater stability of Celtic Sea communities may be due to the
+complex spatial structuration and high biodiversity of the Celtic
+Sea ecosystem. According to various theoretical and modeling
+studies, the meta-community organization of food webs may act
+as a stabilizer of trophic dynamics (McCann et al., 2005; Gravel
+et al., 2011; Mougi and Kondoh, 2016). The spatial arrangement
+of environmental gradients in the Celtic Sea is complex compared
+to other ecosystems where gradients are more correlated together
+(e.g., the Bay of Biscay, the North Sea). Additionally, though
+they are developed from collated data from multiple origins,
+harmonized seabed maps at the European scale indicate that
+substrate patchiness is higher than in neighboring ecosystems
+(e.g., the North Sea, the Eastern English Channel). The spatial
+structuration of the Celtic Sea ecosystem may favor a stable
+meta-community organization and allow for more resistance
+to the impacts of environmental changes. The complex spatial
+structure of the Celtic Sea may also reduce the probability of
+co-occurrence of “autochtonous” and a “allochtonous” species in
+the ecosystem, hence lowering the risks of competition between
+these two types of species if they have similar trophic niches.
+Finally, the substantial contribution of both benthic and pelagic
+pathways to matter ﬂows in the Celtic Sea ecosystem may also
+participate in the stability of the ecosystem (Rooney et al., 2006;
+Blanchard et al., 2011).
+We also found that the Celtic Sea is relatively stable in terms
+of basal productivity. As reﬂected by biogeochemical models
+and satellite-derived time-series, the oceanographic conditions
+favoring phytoplankton and zooplankton abundances over the
+study period remained overall constant. This may be due to the
+mechanisms involved in the production of mesoscale structures
+in the Celtic Sea that favor plankton production. Indeed, a
+substantial part of total primary production in the Celtic Sea
+is due to the tidally-induced semi-permanent mixing fronts
+that occur in the central part of the eastern Celtic shelf, i.e.,
+the Ushant Front and the Celtic Sea Front. Contrary to other
+ecosystems in which productivity fronts are largely dependent
+on climatic conditions, tidal mixing fronts in the Celtic Sea
+can form simply under the mechanical action of wave activity,
+resulting in a more regular production in the Celtic Sea region,
+which is consistent with the production of mesozooplankton
+(Druon et al., 2019).
+A Step Further Toward
+Ecosystem-Based Management?
+This new EwE with Ecospace model of the Celtic Sea ecosystem
+represents a signiﬁcant step forward in the integration of
+ecological realism in trophic modeling of the Celtic Sea ecosystem
+(Guénette and Gascuel, 2009; Bentorcha et al., 2017; Moullec
+et al., 2017). In the Celtic Sea, highly mixed-species ﬁsheries
+catch a large diversity of ﬁsh assemblages and employ a large
+diversity of ﬁshing techniques and strategies (Moore et al., 2019)
+that can result in highly diﬀerent catch compositions for the
+same location over time (Martinez et al., 2013; Dolder et al.,
+2018). In this context, resource mapping and optimization of
+ﬁshing practices in time and space have been identiﬁed as a
+critical need to reduce the ecosystem impacts of ﬁshing in the
+Celtic Sea, e.g., by reducing unwanted catch (Dolder et al.,
+2018; Calderwood et al., 2019; Reid et al., 2019; Robert et al.,
+2019). The Celtic Sea Ecospace model reproduced the patterns
+observed during ﬁsheries-independent surveys but also clearly
+identiﬁed the spatial structuration and species assemblages that
+were identiﬁed in some spatial studies of ﬁsheries catch, based on
+logbooks and vessel monitoring systems (Gerritsen et al., 2012;
+Mateo et al., 2017).
+The EwE with Ecospace model developed in this study
+represents a valuable tool for the spatial management of ﬁshing
+activities in the Celtic Sea. In future studies, the Celtic Sea
+Ecospace model could be employed to produce multiple spatial
+food-web indicators to describe ecosystem status as part of
+ecosystem-based management (Tam et al., 2017), or to identify
+critical areas of the Celtic Sea in terms of diversity and
+functionalities (Babcock et al., 2005). As other ecosystem models,
+our EwE with Ecospace model could be also used to inform spatial
+zoning in the Celtic Sea (e.g., Kaplan et al., 2012; Abdou et al.,
+2016; Halouani et al., 2016) and other management regulations
+(e.g., relative to discarding practices, Pennino et al., 2020). Such
+framework can therefore provide great support to policies such
+as the Common Fisheries Policy (e.g., spatial ﬁshing capacities)
+and the Marine Strategy Framework Directive (e.g., descriptor
+D3 commercially exploited ﬁsh, D4 food webs, e.g., Piroddi et al.,
+2015; Piroddi et al., submitted).
+Although ﬁshing appeared to be the main driver of changes
+in the Celtic Sea ecosystem over the three last decades, this
+may likely not be the case anymore in the future. While ﬁshing
+pressure in the Celtic Sea region has been substantially reduced
+over the recent years and is still currently (slowly) declining,
+the relative stability of environmental conditions observed over
+the last two decades may likely not hold; projections of coupled
+physical and biogeochemical models under various CO2 emission
+scenarios predict a global increase in surface and bottom
+temperatures and a decline in primary production in the Celtic
+Sea ecosystem (Kay et al., 2018). In this context, similarly
+to previous temporal or spatio-temporal ecosystem modeling
+Frontiers in Marine Science | www.frontiersin.org 20 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 21
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+studies (Serpetti et al., 2017; Corrales et al., 2018; Moullec et al.,
+2019a), the calibrated the Celtic Sea Ecospace model would be a
+powerful tool to project the potential impacts of climate change
+on the regional living resources and the ﬁsheries that these
+resources support.
+DATA AVAILABILITY STATEMENT
+The original contributions presented in the study are included
+in the article/ Supplementary Material, further inquiries can be
+directed to the corresponding author. The Celtic Sea Ecopath
+model at the core of this study can be accessed from EcoBase,
+the open-access database of Ecopath with Ecosim (EwE) models
+published worldwide in the scientﬁc literature. EcoBase is an
+information repository of EwE models freely accessible online at
+http://ecobase.ecopath.org/ or via the EwE software.
+AUTHOR CONTRIBUTIONS
+P-YH designed the study, performed the main statistical analyses,
+and built and ran the ecosystem model. P-YH, J-ND, MR, DG,
+and IP provided and gathered the data used in the study. AG,
+J-ND, CP , and DG helped to and participated in designing
+and applying the habitat and trophic modeling approaches
+integrated in the present modeling framework. DG, MR, and DK
+contributed to the design of the integrated modeling framework.
+DG, MR, DK, AG, J-ND, CP , and IP contributed to results
+analysis and interpretation. This work was part of a Ph.D. project
+designed by DG, MR, and DK. P-YH led the drafting of the
+manuscript with the contributions and revisions from all the
+authors. All authors contributed to the article and approved the
+submitted version.
+FUNDING
+This work was part of a Ph.D. funded by the Région
+Bretagne and the French Institute for the Exploitation of the Sea
+(IFREMER). The temporary stay of the principal investigator at
+the Joint Research Center of the European Commission as part
+of this research project was funded by an international mobility
+grant from IFREMER.
+ACKNOWLEDGMENTS
+We are particularly grateful to the Joint Research Center of the
+European Commission who hosted the main investigator during
+his international mobility. We thank the CPR survey and David
+Jones for providing access to the plankton data. We also thank
+Dr. John Pinnegar (CEFAS) and Dr. Verena Trenkel (IFREMER)
+for access to the UK-WCGFS survey data.
+SUPPLEMENTARY MATERIAL
+The Supplementary Material for this article can be found
+online at: https://www.frontiersin.org/articles/10.3389/fmars.
+2020.578717/full#supplementary-material
+REFERENCES
+Abdou, K., Halouani, G., Hattab, T., Romdhane, M. S., Frida Ben, and Le Loc’h,
+F. (2016). Exploring the potential eﬀects of marine protected areas on the
+ecosystem structure of the Gulf of Gabes using the Ecospace model. Aquat.
+Living Resour. 29:202. doi: 10.1051/alr/2016014
+Agnetta, D., Badalamenti, F., Colloca, F., D’Anna, G., Di Lorenzo, M.,
+Fiorentino, F., et al. (2019). Benthic-pelagic coupling mediates interactions in
+Mediterranean mixed ﬁsheries: an ecosystem modeling approach. PLoS One
+14:e0210659. doi: 10.1371/journal.pone.0210659
+Ahrens, R. N. M., Walters, C. J., and Christensen, V. (2012). Foraging arena
+theory: foraging arena theory. Fish Fish. 13, 41ñ59. doi: 10.1111/j.1467-2979.
+2011.00432.x
+Ainsworth, C., and Pitcher, T. (2006). Modifying Kempton’s species diversity index
+for use with ecosystem simulation models. Ecol. Indic. 6, 623ñ630. doi: 10.1016/
+j.ecolind.2005.08.024
+Akaike, H. (1974). A new look at the statistical model identiﬁcation. IEEE Trans.
+Automatic Control 19, 716ñ723. doi: 10.1109/TAC.1974.1100705
+Albouy, C., Velez, L., Coll, M., Colloca, F., Le Loc’h, F., Mouillot, D., et al.
+(2014). From projected species distribution to food-web structure under climate
+change. Glob. Change Biol. 20, 730ñ741. doi: 10.1111/gcb.12467
+Araújo, J., and Bundy, A. (2012). Eﬀects of environmental change, ﬁsheries and
+trophodynamics on the ecosystem of the western Scotian Shelf, Canada. Mar.
+Ecol. Prog. Ser. 464, 51ñ67. doi: 10.3354/meps09792
+Auber, A., Gohin, F., Goascoz, N., and Schlaich, I. (2017). Decline of cold-water
+ﬁsh species in the Bay of Somme (English Channel, France) in response to
+ocean warming. Estuar. Coast. Shelf Sci. 189, 189ñ202. doi: 10.1016/j.ecss.2017.
+03.010
+Auber, A., Travers-Trolet, M., Villanueva, M. C., and Ernande, B. (2015).
+Regime shift in an exploited ﬁsh community related to natural
+climate oscillations. PLoS One 10:e0129883. doi: 10.1371/journal.pone.0
+129883
+Audzijonyte, A., Pethybridge, H., Porobic, J., Gorton, R., Kaplan, I., and Fulton,
+E. A. (2019). Atlantis: a spatially explicit end-to-end marine ecosystem model
+with dynamically integrated physics, ecology and socio-economic modules.
+Methods Ecol. Evol. 10, 1814ñ1819. doi: 10.1111/2041-210X.13272
+Babcock, E. A., Pikitch, E. K., McAllister, M. K., Apostolaki, P., and Santora, C.
+(2005). A perspective on the use of spatialized indicators for ecosystem-based
+ﬁshery management through spatial zoning. ICES J. Mar. Sci. 62, 469ñ476.
+doi: 10.1016/j.icesjms.2005.01.010
+Baretta, J. W., Ebenhöh, W., and Ruardij, P. (1995). The European regional seas
+ecosystem model, a complex marine ecosystem model. Neth. J. Sea Res. 33,
+233ñ246. doi: 10.1016/0077-7579(95)90047-0
+Barnett, A., and Semmens, J. M. (2012). Sequential movement into coastal
+habitats and high spatial overlap of predator and prey suggest high predation
+pressure in protected areas. Oikos 121, 882ñ890. doi: 10.1111/j.1600-0706.2011.
+20000.x
+Baudron, A. R., Brunel, T., Blanchet, M., Hidalgo, M., Chust, G., Brown, E. J.,
+et al. (2020). Changing ﬁsh distributions challenge the eﬀective management
+of European ﬁsheries. Ecography 43, 494ñ505. doi: 10.1111/ecog.04864
+Beaugrand, G., Ibañez, F., and Reid, P. (2000). Spatial, seasonal and long-term
+ﬂuctuations of plankton in relation to hydroclimatic features in the English
+Channel, Celtic Sea and Bay of Biscay. Mar. Ecol. Prog. Ser. 200, 93ñ102. doi:
+10.3354/meps200093
+Behrenfeld, M. J., and Falkowski, P. G. (1997). Photosynthetic rates derived from
+satellite-based chlorophyll concentration. Limnol. Oceanogr. 42, 1ñ20. doi: 10.
+4319/lo.1997.42.1.0001
+Bentley, J., Serpetti, N., Fox, C. J., Reid, D. G., and Heymans, J. J. (2019).
+Modelling the Food Web in the Irish Sea in the Context of a Depleted
+Commercial Fish Community. Part 2: ICES Ecopath with Ecosim Key Run .
+Frontiers in Marine Science | www.frontiersin.org 21 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 22
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+Oban: Scottish Association for Marine Science. doi: 10.13140/RG.2.2.15136.
+12809
+Bentley, J. W., Serpetti, N., Fox, C. J., Heymans, J. J., and Reid, D. G. (2020).
+Retrospective analysis of the inﬂuence of environmental drivers on commercial
+stocks and ﬁshing opportunities in the Irish Sea. Fish. Oceanogr. 29, 415ñ435.
+doi: 10.1111/fog.12486
+Bentley, J. W., Serpetti, N., and Heymans, J. J. (2017). Investigating the potential
+impacts of ocean warming on the Norwegian and Barents Seas ecosystem using
+a time-dynamic food-web model. Ecol. Model. 360, 94ñ107. doi: 10.1016/j.
+ecolmodel.2017.07.002
+Bentorcha, A., Gascuel, D., and Guénette, S. (2017). Using trophic models to assess
+the impact of ﬁshing in the Bay of Biscay and the Celtic Sea. Aquat. Living
+Resour. 30:7. doi: 10.1051/alr/2017006
+Blanchard, F., and Vandermeirsch, F. (2005). Warming and exponential abundance
+increase of the subtropical ﬁsh Capros aper in the Bay of Biscay (1973ñ2002).
+C. R. Biol. 328, 505ñ509. doi: 10.1016/j.crvi.2004.12.006
+Blanchard, J. L., Dulvy, N. K., Jennings, S., Ellis, J. R., Pinnegar, J. K., Tidd, A.,
+et al. (2005). Do climate and ﬁshing inﬂuence size-based indicators of Celtic Sea
+ﬁsh community structure? ICES J. Mar. Sci. 62, 405ñ411. doi: 10.1016/j.icesjms.
+2005.01.006
+Blanchard, J. L., Law, R., Castle, M. D., and Jennings, S. (2011). Coupled energy
+pathways and the resilience of size-structured food webs. Theor. Ecol. 4, 289ñ
+300. doi: 10.1007/s12080-010-0078-9
+Bourdaud, P., Gascuel, D., Bentorcha, A., and Brind’Amour, A. (2016). New
+trophic indicators and target values for an ecosystem-based management
+of ﬁsheries. Ecol. Indic. 61(Part 2), 588ñ601. doi: 10.1016/j.ecolind.2015.
+10.010
+Brophy, D. (2002). Tracing populations of Atlantic herring (Clupea harengus L.)
+in the Irish and Celtic Seas using otolith microstructure. ICES J. Mar. Sci. 59,
+1305ñ1313. doi: 10.1006/jmsc.2002.1304
+Brunel, T., and Boucher, J. (2007). Long-term trends in ﬁsh recruitment in the
+north-east Atlantic related to climate change. Fish. Oceanogr. 116: 16, 336ñ349.
+doi: 10.1111/j.1365-2419.2007.00435.x
+Calderwood, J., Robert, M., Pawlowski, L., Vermard, Y., Radford, Z., Catchpole,
+T. L., et al. (2019). Hotspot mapping in the Celtic Sea: an interactive tool
+using multinational data to optimise ﬁshing practices. Mar. Policy 116: 103511.
+doi: 10.1016/j.marpol.2019.103511
+Chase, J. M., and Leibold, M. A. (2003). Ecological Niches: Linking Classical and
+Contemporary Approaches, Interspeciﬁc Interactions . Chicago, IL: University of
+Chicago Press.
+Chassot, E., Bonhommeau, S., Reygondeau, G., Nieto, K., Polovina, J. J., Huret,
+M., et al. (2011). Satellite remote sensing for an ecosystem approach to
+ﬁsheries management. ICES J. Mar. Sci. 68, 651ñ666. doi: 10.1093/icesjms/
+fsq195
+Chassot, E., Rouyer, T., Trenkel, V. M., and Gascuel, D. (2008). Investigating
+trophic-level variability in Celtic Sea ﬁsh predators. J. Fish Biol. 73, 763ñ781.
+doi: 10.1111/j.1095-8649.2008.01938.x
+Christensen, V., Coll, M., Steenbeek, J., Buszowski, J., Chagaris, D., and Walters,
+C. J. (2014). Representing variable habitat quality in a spatial food web model.
+Ecosystems 17, 1397ñ1412. doi: 10.1007/s10021-014-9803-3
+Christensen, V., and Walters, C. J. (2004). Ecopath with Ecosim: methods,
+capabilities and limitations. Ecol. Model. 172, 109ñ139. doi: 10.1016/j.
+ecolmodel.2003.09.003
+Christensen, V., Walters, C. J., Ahrens, R., Alder, J., Buszowski, J., Christensen,
+L. B., et al. (2009). Database-driven models of the world’s large marine
+ecosystems. Ecol. Model. 220, 1984ñ1996. doi: 10.1016/j.ecolmodel.2009.04.041
+Christensen, V., Walters, C. J., and Pauly, D. (2008). Ecopath with Ecosim version 6
+user guide. Lenfest Ocean Futures Project 2008. Vancouver: University of British
+Columbia.
+Citores, L., Ibaibarriaga, L., Lee, D.-J., Brewer, M. J., Santos, M., and Chust,
+G. (2020). Modelling species presenceñabsence in the ecological niche theory
+framework using shape-constrained generalized additive models. Ecol. Model.
+418:108926. doi: 10.1016/j.ecolmodel.2019.108926
+Coad, J. O. (2012). Boom in Boarﬁsh Abundance: Insight from Otolith Analysis .
+Available online at: http://ices.dk/products/CMdocs/CM-2012/J/J1012.pdf
+Coll, M., Pennino, M. G., Steenbeek, J., Sole, J., and Bellido, J. M. (2019).
+Predicting marine species distributions: complementarity of food-web and
+Bayesian hierarchical modelling approaches. Ecol. Model. 405, 86ñ101. doi:
+10.1016/j.ecolmodel.2019.05.005
+Coll, M., and Steenbeek, J. (2017). Standardized ecological indicators to assess
+aquatic food webs: the ECOIND software plug-in for Ecopath with Ecosim
+models. Environ. Model. Softw. 89, 120ñ130. doi: 10.1016/j.envsoft.2016.12.004
+Coll, M., Steenbeek, J., Sole, J., Palomera, I., and Christensen, V. (2016). Modelling
+the cumulative spatialñtemporal eﬀects of environmental drivers and ﬁshing
+in a NW Mediterranean marine ecosystem. Ecol. Model. 331, 100ñ114. doi:
+10.1016/j.ecolmodel.2016.03.020
+Corrales, X., Coll, M., Oﬁr, E., Heymans, J. J., Steenbeek, J., Goren, M., et al. (2018).
+Future scenarios of marine resources and ecosystem conditions in the Eastern
+Mediterranean under the impacts of ﬁshing, alien species and sea warming. Sci.
+Rep. 8:14284. doi: 10.1038/s41598-018-32666-x
+Cronne, L. (2016). SISP 15 - manual of the IBTS North Eastern Atlantic surveys.
+Ser. ICES Surv. Protoc. SISP 15:92. doi: 10.17895/ices.pub.3519
+Dahood, A., Watters, G. M., and de Mutsert, K. (2019). Using sea-ice to calibrate
+a dynamic trophic model for the Western Antarctic Peninsula. PLoS One
+14:e0214814. doi: 10.1371/journal.pone.0214814
+Day, L., Kopp, D., Robert, M., and Le Bris, H. (2019). Trophic ecology of large
+gadiforms in the food web of a continental shelf ecosystem. Prog. Oceanogr.
+175, 105ñ114. doi: 10.1016/j.pocean.2019.03.007
+Dinter, W. P. (2001). Biogeography of the OSPAR Maritime Area: A Synopsis and
+Synthesis of Biogeographical Distribution Patterns Described for the North East
+Atlantic. Bonn: Federal Agency for Nature Conservation.
+Dolder, P. J., Thorson, J. T., and Minto, C. (2018). Spatial separation of catches in
+highly mixed ﬁsheries. Sci. Rep. 8:13886. doi: 10.1038/s41598-018-31881-w
+Druon, J.-N., Hélaouët, P., Beaugrand, G., Fromentin, J.-M., Palialexis,
+A., and Hoepﬀner, N. (2019). Satellite-based indicator of zooplankton
+distribution for global monitoring. Sci. Rep. 9:4732. doi: 10.1038/s41598-019-41
+212-2
+Druon, J. N., Langlois, G., and Le Fèvre, J. (2001). Simulating vertical mixing in
+a shelf-break region: addition of a shear instability model, accounting for the
+overall eﬀect of internal tides, on top of a one-dimensional turbulence closure
+mixed layer model. Cont. Shelf Res. 21, 423ñ454. doi: 10.1016/S0278-4343(00)
+00090-X
+Duhamel, E., Pawlowski, L., and Garren, F. (2018). EVHOE 2018 cruise,Thalassa
+R/V. Available online at: https://campagnes.ﬂotteoceanographique.fr/
+campagnes/18000518/ (accessed July 1, 2020).
+Dulvy, N. K., Rogers, S. I., Jennings, S., Stelzenmller, V., Dye, S. R., and Skjoldal,
+H. R. (2008). Climate change and deepening of the North Sea ﬁsh assemblage:
+a biotic indicator of warming seas. J. Appl. Ecol. 45, 1029ñ1039. doi: 10.1111/j.
+1365-2664.2008.01488.x
+Dunn, M. R., and Pawson, M. G. (2002). The stock structure and migrations of
+plaice populations on the west coast of England and Wales. J. Fish Biol. 61,
+360ñ393. doi: 10.1111/j.1095-8649.2002.tb01571.x
+Edwards, K. P., Barciela, R., and Butenschön, M. (2012). Validation of the
+NEMO-ERSEM operational ecosystem model for the North West European
+Continental Shelf. Ocean Sci. 8, 983ñ1000. doi: 10.5194/os-8-983-2012
+Ellis, J. R., Lancaster, J. E., Cadman, P. S., and Rogers, S. I. (2002). “The marine
+fauna of the Celtic Sea, ” inMarine Biodiversity in Ireland and Adjacent Waters,
+ed. J. D. Nuun (Belfasts: Ulster Museum), 45ñ46.
+Ellis, J. R., Martinez, I., Burt, G. J., and Scott, B. E. (2013). Epibenthic assemblages
+in the Celtic Sea and associated with the Jones Bank.Prog. Oceanogr. 117, 76ñ88.
+doi: 10.1016/j.pocean.2013.06.012
+Ellis, J. R., Rogers, S. I., and Freeman, S. M. (2000). Demersal Assemblages in the
+Irish Sea, St George’s Channel and Bristol Channel. Estuar. Coast. Shelf Sci. 51,
+299ñ315. doi: 10.1006/ecss.2000.0677
+Farmer, N. A., and Karnauskas, M. (2013). Spatial distribution and conservation of
+speckled hind and warsaw grouper in the Atlantic Ocean oﬀ the southeastern
+US. PloS one, 8:e78682. doi: 10.1371/journal.pone.0078682
+Fulton, E. A., Parslow, J. S., Smith, A. D. M., and Johnson, C. R. (2004).
+Biogeochemical marine ecosystem models II: the eﬀect of physiological detail
+on model performance. Ecol. Model. 173, 371ñ406. doi: 10.1016/j.ecolmodel.
+2003.09.024
+Gardner, M. B. (1981). Eﬀects of turbidity on feeding rates and selectivity of
+bluegills. Trans. Am. Fish. Soc. 110, 446ñ450. doi: 10.1577/1548-8659(1981)
+110<446:eotofr>2.0.co;2
+Frontiers in Marine Science | www.frontiersin.org 22 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 23
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+Gascuel, D., Coll, M., Fox, C., Guénette, S., Guitton, J., Kenny, A., et al. (2016).
+Fishing impact and environmental status in European seas: a diagnosis from
+stock assessments and ecosystem indicators. Fish Fish. 17, 31ñ55. doi: 10.1111/
+faf.12090
+Genner, M. J., Sims, D. W., Wearmouth, V. J., Southall, E. J., Southward, A. J.,
+Henderson, P. A., et al. (2004). Regional climatic warming drives longñterm
+community changes of British marine ﬁsh. Proc. R. Soc. Lond. Ser. B Biol. Sci.
+271, 655ñ661. doi: 10.1098/rspb.2003.2651
+Gerritsen, H. D., Lordan, C., Minto, C., and Kraak, S. B. M. (2012). Spatial
+patterns in the retained catch composition of Irish demersal otter trawlers: high-
+resolution ﬁsheries data as a management tool. Fish. Res. 129ñ130, 127ñ136.
+doi: 10.1016/j.ﬁshres.2012.06.019
+Giering, S. L. C., Wells, S. R., Mayers, K. M. J., Schuster, H., Cornwell, L.,
+Fileman, E. S., et al. (2019). Seasonal variation of zooplankton community
+structure and trophic position in the Celtic Sea: a stable isotope and biovolume
+spectrum approach. Prog. Oceanogr. 177:101943. doi: 10.1016/j.pocean.2018.
+03.012
+Giraldo, C., Ernande, B., Cresson, P., Kopp, D., Cachera, M., Travers-Trolet,
+M., et al. (2017). Depth gradient in the resource use of a ﬁsh community
+from a semi-enclosed sea. Limnol. Oceanogr. 62, 2213ñ2226. doi: 10.1002/lno.
+10561
+Gravel, D., Canard, E., Guichard, F., and Mouquet, N. (2011). Persistence
+increases with diversity and connectance in trophic metacommunities. PLoS
+One 6:e19374. doi: 10.1371/journal.pone.0019374
+Grüss, A., Babcock, E. A., Sagarese, S. R., Drexler, M., Chagaris, D. D., Ainsworth,
+C. H., et al. (2016). Improving the spatial allocation of functional group
+biomasses in spatially-explicit ecosystem models: insights from three Gulf
+of Mexico models. Bull. Mar. Sci. 92, 473ñ496. doi: 10.5343/bms.2016.
+1057
+Grüss, A., Chagaris, D. D., Babcock, E. A., and Tarnecki, J. H. (2018). Assisting
+ecosystem-based ﬁsheries management eﬀorts using a comprehensive survey
+database, a large environmental database, and generalized additive models.
+Trans. Am. Fish. Soc. 10, 40ñ70. doi: 10.1002/mcf2.10002
+Grüss, A., Rose, K. A., Justiæ, D., and Wang, L. (2020). Making the most of available
+monitoring data: a grid-summarization method to allow for the combined use
+of monitoring data collected at random and ﬁxed sampling stations. Fish. Res.
+229:105623. doi: 10.1016/j.ﬁshres.2020.105623
+Guénette, S., and Gascuel, D. (2009). “Considering Both Fishing and Climate in a
+model of the Celtic Sea and the Bay of Biscay: what do we learn?” inProceedings
+of the International Council for the Exploration of the Sea, Annual Science
+Conference, Berlin.
+Guénette, S., and Gascuel, D. (2012). Shifting baselines in European ﬁsheries: the
+case of the Celtic Sea and Bay of Biscay. Ocean Coast. Manage . 70, 10ñ21.
+doi: 10.1016/j.ocecoaman.2012.06.010
+Halouani, G., Ben Rais, Lasram, F., Shin, Y.-J., Velez, L., Verley, P., et al. (2016).
+Modelling food web structure using an end-to-end approach in the coastal
+ecosystem of the Gulf of Gabes (Tunisia).Ecol. Model. 339, 45ñ57. doi: 10.1016/
+j.ecolmodel.2016.08.008
+Hansson, S. (1984). Competition as a Factor Regulating the Geographical
+Distribution of Fish Species in a Baltic Archipelago: a neutral model analysis.
+J. Biogeogr. 11, 367ñ381. doi: 10.2307/2844802
+Hawkins, S. J., Southward, A. J., and Genner, M. J. (2003). Detection of
+environmental change in a marine ecosystemóevidence from the western
+English Channel. Sci. Total Environ. Detect. Environ. Change 310, 245ñ256.
+doi: 10.1016/S0048-9697(02)00645-9
+Hernvann, P.-Y., and Gascuel, D. (2020). Exploring the impacts of ﬁshing and
+environment on the Celtic Sea ecosystem since 1950. Fish. Res. 225:105472.
+doi: 10.1016/j.ﬁshres.2019.105472
+Heymans, J. J., Coll, M., Link, J. S., Mackinson, S., Steenbeek, J., Walters, C., et al.
+(2016). Best practice in Ecopath with Ecosim food-web models for ecosystem-
+based management. Ecol. Model. 331, 173ñ184. doi: 10.1016/j.ecolmodel.2015.
+12.007
+Hickman, A., Moore, C., Sharples, J., Lucas, M., Tilstone, G., Krivtsov, V., et al.
+(2012). Primary production and nitrate uptake within the seasonal thermocline
+of a stratiﬁed shelf sea. Mar. Ecol. Prog. Ser.463, 39ñ57. doi: 10.3354/meps09836
+Hiddink, J. G., and ter Hofstede, R. (2008). Climate induced increases in species
+richness of marine ﬁshes. Glob. Change Biol. 14, 453ñ460. doi: 10.1111/j.1365-
+2486.2007.01518.x
+Holligan, P. M., and Groom, S. B. (1986). Phytoplankton distributions along the
+shelf break. Proc. R. Soc. Edinb. Sect. B Biol. Sci. 88, 239ñ263. doi: 10.1017/
+S0269727000004589
+Holling, C. S. (1959). The components of predation as revealed by a study of small-
+mammal predation of the european pine sawﬂy. Can. Entomol. 91, 293ñ320.
+doi: 10.4039/Ent91293-5
+Hughes, S. L., Tinker, J., and Dye, S. (2017). Temperature. MCCIP Science Review
+2017. MCCIP Science Review 2017 . 22ñ41. Available online at: http://www.
+mccip.org.uk/media/1750/2017arc_sciencereview_003_tem.pdf (accessed July
+1, 2020).
+Hunsicker, M. E., Ciannelli, L., Bailey, K. M., Buckel, J. A., Wilson White, J., Link,
+J. S., et al. (2011). Functional responses and scaling in predator-prey interactions
+of marine ﬁshes: contemporary issues and emerging concepts. Ecol. Lett. 14,
+1288ñ1299. doi: 10.1111/j.1461-0248.2011.01696.x
+Hutchinson, G. E. (1957). Concluding Remarks. Cold Spring Harb. Symp. Quant.
+Biol. 22, 415ñ427. doi: 10.1101/SQB.1957.022.01.039
+Huxel, G. R., and McCann, K. (1998). Food web stability: the inﬂuence of trophic
+ﬂows across habitats. Am. Nat. 152, 460ñ469. doi: 10.1086/286182
+Issac, P., Robert, M., Le Bris, H., Rault, J., Pawlowski, L., and Kopp, D. (2017).
+Investigating feeding ecology of two anglerﬁsh species, Lophius piscatorius and
+Lophius budegassa in the Celtic Sea using gut content and isotopic analyses.
+Food Webs 13, 33ñ37. doi: 10.1016/j.fooweb.2017.08.001
+Johns, D. (2019). Monthly Averaged Data for Diatoms, Dinoﬂagellates, Small
+Copepods, Large Copepods, and Various Taxonomic Groups of Zooplankton in
+the D4 CPR Standard Area 1958ñ2016 as Recorded by the Continuous Plankton
+Recorder Survey. Plymouth, MA: CPR survey. doi: 10.7487/2019.150.1.1197
+Joint, I., Wollast, R., Chou, L., Batten, S., Elskens, M., Edwards, E., et al.
+(2001). Pelagic production at the Celtic Sea shelf break. Deep Sea Res.
+Part II Top. Stud. Oceanogr. 48, 3049ñ3081. doi: 10.1016/S0967-0645(01)
+00032-7
+Joint, I. R., and Williams, R. (1985). Demands of the herbivore community on
+phytoplankton production in the Celtic Sea in August. Mar. Biol. 87, 297ñ306.
+doi: 10.1007/BF00397809
+Jones, M. C., Dye, S. R., Pinnegar, J. K., Warren, R., and Cheung, W. W. L.
+(2012). Modelling commercial ﬁsh distributions: prediction and assessment
+using diﬀerent approaches.Ecol. Model. 225, 133ñ145. doi: 10.1016/j.ecolmodel.
+2011.11.003
+Jordan, M. B., and Joint, I. R. (1984). Studies on phytoplankton distribution and
+primary production in the western English Channel in 1980 and 1981. Cont.
+Shelf Res. 3, 25ñ34. doi: 10.1016/0278-4343(84)90041-4
+Kaiser, M. J., Armstrong, P. J., Dare, P. J., and Flatt, R. P. (1998). Benthic
+communities associated with a heavily ﬁshed scallop ground in the
+english channel. J. Mar. Biol. Assoc. U.K. 78, 1045ñ1059. doi: 10.1017/
+S0025315400044313
+Kaiser, M. J., Bergmann, M., Hinz, H., Galanidi, M., Shucksmith, R., Rees,
+E. I. S., et al. (2004). Demersal ﬁsh and epifauna associated with sandbank
+habitats. Estuar. Coast. Shelf Sci. 60, 445ñ456. doi: 10.1016/j.ecss.2004.
+02.005
+Kaplan, I. C., Horne, P. J., and Levin, P. S. (2012). Screening California Current
+ﬁshery management scenarios using the Atlantis end-to-end ecosystem model.
+Prog. Oceanogr. 102, 5ñ18. doi: 10.1016/j.pocean.2012.03.009
+Kay, S., Anderson, H., Eilola, K., Wehde, H., Ramirez-Romero, E., Jordà, G., et al.
+(2018). Climate Change and European Aquatic RESources - Deliverable D1.3
+Projections of Physical and Biogeochemical Parameters and Habitat Indicators for
+European Seas, Including Synthesis of Sea Level Rise and Storminess . Plymouth:
+Plymouth Marine Laboratory (PML).
+Kortsch, S., Primicerio, R., Aschan, M., Lind, S., Dolgov, A. V., and Planque,
+B. (2019). Food-web structure varies along environmental gradients in a
+high-latitude marine ecosystem. Ecography 42, 295ñ308. doi: 10.1111/ecog.
+03443
+Kortsch, S., Primicerio, R., Fossheim, M., Dolgov, A. V., and Aschan, M. (2015).
+Climate change alters the structure of arctic marine food webs due to poleward
+shifts of boreal generalists. Proc. R. Soc. B Biol. Sci. 282:20151546. doi: 10.1098/
+rspb.2015.1546
+Kramer, S. J., Roesler, C. S., and Sosik, H. M. (2018). Bio-optical discrimination
+of diatoms from other phytoplankton in the surface ocean: evaluation and
+reﬁnement of a model for the Northwest Atlantic. Remote Sens. Environ. 217,
+126ñ143. doi: 10.1016/j.rse.2018.08.010
+Frontiers in Marine Science | www.frontiersin.org 23 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 24
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+Le Danois, E. (1948). Les Profondeurs de la mer; Trente ans de Recherches sur la
+Faune Sous-Marine au Large des Côtes de France. Paris: Payot.
+Le Fèvre, J. (1987). Aspects of the biology of frontal systems. Adv. Mar. Biol. 23,
+163ñ299. doi: 10.1016/S0065-2881(08)60109-1
+Libralato, S. (2013). “System Omnivory Index, ” in Encyclopedia of Ecology , ed.
+B. Fath (Amsterdam: Elsevier), 481ñ486. doi: 10.1016/B978-0-12-409548-9.
+00605-9
+Libralato, S., Pranovi, F., Stergiou, K., and Link, J. (2014). Trophodynamics in
+marine ecology: 70 years after Lindeman. Mar. Ecol. Prog. Ser. 512, 1ñ7. doi:
+10.3354/meps11033
+Libralato, S., and Solidoro, C. (2009). Bridging biogeochemical and food web
+models for an End-to-End representation of marine ecosystem dynamics:
+the Venice lagoon case study. Ecol. Model. 220, 2960ñ2971. doi: 10.1016/j.
+ecolmodel.2009.08.017
+Link, J. S. (2010). Adding rigor to ecological network models by evaluating a set
+of pre-balance diagnostics: a plea for PREBAL. Ecol. Model. 221, 1580ñ1591.
+doi: 10.1016/j.ecolmodel.2010.03.012
+Logerwell, E. A., and Hargreaves, N. B. (1996). The distribution of sea birds relative
+to their ﬁsh prey oﬀ Vancouver Island: opposing results at large and small spatial
+scales. Fish. Oceanogr. 5, 163ñ175. doi: 10.1111/j.1365-2419.1996.tb00115.x
+Lowerre-Barbieri, S. K., Catalán, I. A., Frugård Opdal, A., and Jørgensen, C. (2019).
+Preparing for the future: integrating spatial ecology into ecosystem-based
+management. ICES J. Mar. Sci. 76, 467ñ476. doi: 10.1093/icesjms/fsy209
+Mackinson, S. (2014). Combined analyses reveal environmentally driven changes
+in the North Sea ecosystem and raise questions regarding what makes an
+ecosystem model’s performance credible? Can. J. Fish. Aquat. Sci. 71, 31ñ46.
+doi: 10.1139/cjfas-2013-0173
+Mackinson, S., Daskalov, G., Heymans, J. J., Neira, S., Arancibia, H., Zetina-
+Rejón, M., et al. (2009). Which forcing factors ﬁt? Using ecosystem models to
+investigate the relative inﬂuence of ﬁshing and changes in primary productivity
+on the dynamics of marine ecosystems. Ecol. Model. 220, 2972ñ2987. doi: 10.
+1016/j.ecolmodel.2008.10.021
+Madec, G. (2008). NEMO Ocean Engine . Paris: Institut Pierre-Simon Laplace
+(IPSL).
+Martinez, I., Ellis, J. R., Scott, B., and Tidd, A. (2013). The ﬁsh and ﬁsheries of
+Jones Bank and the wider Celtic Sea. Prog. Oceanogr. 117, 89ñ105. doi: 10.1016/
+j.pocean.2013.03.004
+Mateo, M., Pawlowski, L., and Robert, M. (2017). Highly mixed ﬁsheries: ﬁne-scale
+spatial patterns in retained catches of French ﬁsheries in the Celtic Sea. ICES J.
+Mar. Sci. 74, 91ñ101. doi: 10.1093/icesjms/fsw129
+Maureaud, A., Hodapp, D., van Denderen, P. D., Hillebrand, H., Gislason, H.,
+Spaanheden Dencker, T., et al. (2019). Biodiversityñecosystem functioning
+relationships in ﬁsh communities: biomass is related to evenness and the
+environment, not to species richness. Proc. R. Soc. B Biol. Sci. 286:20191189.
+doi: 10.1098/rspb.2019.1189
+McCann, K. S., Rasmussen, J. B., and Umbanhowar, J. (2005). The dynamics of
+spatially coupled food webs: spatially coupled food webs. Ecol. Lett. 8, 513ñ523.
+doi: 10.1111/j.1461-0248.2005.00742.x
+McCormack, S. A., Trebilco, R., Melbourne-Thomas, J., Blanchard, J. L., Fulton,
+E. A., and Constable, A. (2019). Using stable isotope data to advance marine
+food web modelling. Rev. Fish Biol. Fish.29, 277ñ296. doi: 10.1007/s11160-019-
+09552-4
+McGinty, N., Power, A. M., and Johnson, M. P. (2011). Variation among northeast
+Atlantic regions in the responses of zooplankton to climate change: not all areas
+follow the same path. J. Exp. Mar. Biol. Ecol.400, 120ñ131. doi: 10.1016/j.jembe.
+2011.02.013
+Melian, C. J., and Bascompte, J. (2002). Food web structure and habitat loss. Ecol.
+Lett. 5, 37ñ46. doi: 10.1046/j.1461-0248.2002.00280.x
+Menge, B. A., and Lubchenco, J. (1981). Community organization in temperate and
+tropical rocky intertidal habitats: prey refuges in relation to consumer pressure
+gradients. Ecol. Monogr. 51, 429ñ450. doi: 10.2307/2937323
+Mérillet, L., Kopp, D., Robert, M., Mouchet, M., and Pavoine, S. (2020).
+Environment outweighs the eﬀects of ﬁshing in regulating demersal community
+structure in an exploited marine ecosystem. Glob. Change Biol. 26, 2106ñ2119.
+doi: 10.1111/gcb.14969
+Montero-Serra, I., Edwards, M., and Genner, M. J. (2015). Warming shelf seas drive
+the subtropicalization of European pelagic ﬁsh communities. Glob. Change Biol.
+21, 144ñ153. doi: 10.1111/gcb.12747
+Moore, C., Davie, S., Robert, M., Pawlowski, L., Dolder, P., and Lordan, C. (2019).
+Deﬁning métier for the Celtic Sea mixed ﬁsheries: a multiannual international
+study of typology. Fish. Res. 219:105310. doi: 10.1016/j.ﬁshres.2019.105310
+Morel, A., and Berthon, J.-F. (1989). Surface pigments, algal biomass proﬁles,
+and potential production of the euphotic layer: relationships reinvestigated in
+view of remote-sensing applications. Limnol. Oceanogr. 34, 1545ñ1562. doi:
+10.4319/lo.1989.34.8.1545
+Moriarty, M., Sethi, S. A., Pedreschi, D., Smeltz, T. S., McGonigle, C., Harris, B. P.,
+et al. (2020). Combining ﬁsheries surveys to inform marine species distribution
+modelling. ICES J. Mar. Sci. 77, 539ñ552. doi: 10.1093/icesjms/fsz254
+Mougi, A., and Kondoh, M. (2016). Food-web complexity, meta-community
+complexity and community stability. Sci. Rep. 6:24478. doi: 10.1038/srep24478
+Moullec, F., Barrier, N., Drira, S., Guilhaumon, F., Marsaleix, P., Somot,
+S., et al. (2019a). An end-to-end model reveals losers and winners in a
+warming mediterranean sea. Front. Mar. Sci. 6:345. doi: 10.3389/fmars.2019.
+00345
+Moullec, F., Velez, L., Verley, P., Barrier, N., Ulses, C., Carbonara, P., et al. (2019b).
+Capturing the big picture of Mediterranean marine biodiversity with an end-
+to-end model of climate and ﬁshing impacts. Prog. Oceanogr. 178, 102179.
+doi: 10.1016/j.pocean.2019.102179
+Moullec, F., Gascuel, D., Bentorcha, K., Guénette, S., and Robert, M. (2017).
+Trophic models: What do we learn about Celtic Sea and Bay of Biscay
+ecosystems? J. Mar. Syst. 172, 104ñ117. doi: 10.1016/j.jmarsys.2017.03.008
+Murdoch, W. W. (1969). Switching in general predators: experiments on predator
+speciﬁcity and stability of prey populations. Ecol. Monogr. 39, 335ñ354. doi:
+10.2307/1942352
+Neat, F. C., Bendall, V., Berx, B., Wright, P. J., ” Cuaig, M., Townhill, B., et al.
+(2014). Movement of Atlantic cod around the British Isles: implications for ﬁner
+scale stock management. J. Appl. Ecol. 51, 1564ñ1574. doi: 10.1111/1365-2664.
+12343
+Pade, N. G., Queiroz, N., Humphries, N. E., Witt, M. J., Jones, C. S., Noble, L. R.,
+et al. (2009). First results from satellite-linked archival tagging of porbeagle
+shark, Lamna nasus: area ﬁdelity, wider-scale movements and plasticity in diel
+depth changes. J. Exp. Mar. Biol. Ecol. 370, 64ñ74. doi: 10.1016/j.jembe.2008.12.
+002
+Parker, R. A. (1991). Eddy diﬀusion of phytoplankton and nutrients: estimating
+coeﬃcients from simulated and observed vertical distributions. J. Plankton Res.
+13, 815ñ830. doi: 10.1093/plankt/13.4.815
+Pauly, D., Christensen, V., and Walters, C. (2000). Ecopath, Ecosim, and Ecospace
+as tools for evaluating ecosystem impact of ﬁsheries. ICES J. Mar. Sci. 57,
+697ñ706. doi: 10.1006/jmsc.2000.0726
+Pellissier, L., Albouy, C., Bascompte, J., Farwig, N., Graham, C., Loreau, M.,
+et al. (2018). Comparing species interaction networks along environmental
+gradients: Networks along environmental gradients. Biol. Rev. 93, 785ñ800.
+doi: 10.1111/brv.12366
+Pellissier, L., Rohr, R. P., Ndiribe, C., Pradervand, J.-N., Salamin, N., Guisan,
+A., et al. (2013). Combining food web and species distribution models for
+improved community projections. Ecol. Evol. 3, 4572ñ4583. doi: 10.1002/
+ece3.843
+Pennino, M. G., Bevilacqua, A. H., Torres, M. A., Bellido, J. M., Sole, J., Steenbeek,
+J., et al. (2020). Discard ban: a simulation-based approach combining
+hierarchical Bayesian and food web spatial models. Mar. Policy 116:103703.
+doi: 10.1016/j.marpol.2019.103703
+Persohn, C., Lorance, P., and Trenkel, V. M. (2009). Habitat preferences of
+selected demersal ﬁsh species in the Bay of Biscay and Celtic Sea, North-
+East Atlantic. Fish. Oceanogr. 18, 268ñ285. doi: 10.1111/j.1365-2419.2009.
+00515.x
+Pethybridge, H. R., Choy, C. A., Polovina, J. J., and Fulton, E. A. (2018). Improving
+marine ecosystem models with biochemical tracers. Annu. Rev. Mar. Sci. 10,
+199ñ228. doi: 10.1146/annurev-marine-121916-063256
+Pingree, R. D. (1980). “Chapter 13 Physical Oceanography of the Celtic Sea and
+English Channel, ” in Elsevier Oceanography Series , eds F. T. Banner, M. B.
+Collins, and K. S. Massie (Amsterdam: Elsevier), 415ñ465. doi: 10.1016/S0422-
+9894(08)71358-8
+Pingree, R. D., Holligan, P. M., Mardell, G. T., and Head, R. N. (1976). The
+inﬂuence of physical stability on spring, summer and autumn phytoplankton
+blooms in the Celtic Sea. J. Mar. Biol. Assoc. U.K. 56, 845ñ873. doi: 10.1017/
+S0025315400020919
+Frontiers in Marine Science | www.frontiersin.org 24 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 25
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+Pingree, R. D., Mardell, G. T., Holligan, P. M., Griﬃths, D. K., and Smithers,
+J. (1982). Celtic Sea and Armorican current structure and the vertical
+distributions of temperature and chlorophyll. Cont. Shelf Res. 1, 99ñ116. doi:
+10.1016/0278-4343(82)90033-4
+Pinnegar, J. K., Jennings, S., O’Brien, C. M., and Polunin, N. V. C. (2002). Long-
+term changes in the trophic level of the Celtic Sea ﬁsh community and ﬁsh
+market price distribution. J. Appl. Ecol. 39, 377ñ390. doi: 10.1046/j.1365-2664.
+2002.00723.x
+Piroddi, C., Coll, M., Liquete, C., Macias, D., Greer, K., Buszowski, J., et al. (2017).
+Historical changes of the Mediterranean Sea ecosystem: modelling the role
+and impact of primary productivity and ﬁsheries changes over time. Sci. Rep.
+7:44491. doi: 10.1038/srep44491
+Piroddi, C., Teixeira, H., Lynam, C. P., Smith, C., Alvarez, M. C., Mazik, K.,
+et al. (2015). Using ecological models to assess ecosystem status in support of
+the European Marine Strategy Framework Directive. Ecol. Indic. 58, 175ñ191.
+doi: 10.1016/j.ecolind.2015.05.037
+Pitois, S. G., and Fox, C. J. (2006). Long-term changes in zooplankton biomass
+concentration and mean size over the Northwest European shelf inferred from
+Continuous Plankton Recorder data. ICES J. Mar. Sci. 63, 785ñ798. doi: 10.
+1016/j.icesjms.2006.03.009
+Polis, G. A., Anderson, W. B., and Holt, R. D. (1997). Toward an integration
+of landscape and food-web ecology: the dynamics of spatially subsidized food
+webs. Annu. Rev. Ecol. Syst. 28, 289ñ316. doi: 10.1146/annurev.ecolsys.28.1.289
+Polis, G. A., Holt, R. D., Menge, B. A., and Winemiller, K. O. (1996). “Time, space,
+and life history: inﬂuences on food webs, ” in Food Webs, eds G. A. Polis and
+K. O. Winemiller (Boston, MA: Springer), 435ñ460. doi: 10.1007/978-1-4615-
+7007-3_38
+Poulard, J.-C., and Blanchard, F. (2005). The impact of climate change on the ﬁsh
+community structure of the eastern continental shelf of the Bay of Biscay. ICES
+J. Mar. Sci. 62, 1436ñ1443. doi: 10.1016/j.icesjms.2005.04.017
+Punzón, A., Serrano, A., Sánchez, F., Velasco, F., Preciado, I., González-Irusta,
+J. M., et al. (2016). Response of a temperate demersal ﬁsh community to global
+warming. J. Mar. Syst. 161, 1ñ10. doi: 10.1016/j.jmarsys.2016.05.001
+Rault, J., Le Bris, H., Robert, M., Pawlowski, L., Denamiel, M., and Kopp, D. (2017).
+Diets and trophic niches of the main commercial ﬁsh species from the Celtic
+Sea. J. Fish Biol. 91, 1449ñ1474. doi: 10.1111/jfb.13470
+Raymont, J. E. G. (1980). Plankton & Productivity in the Oceans , Second Edn.
+Oxford: Pergamon Press Ltd. doi: 10.1016/C2009-0-10951-0
+Rees, H. (1999). A comparison of benthic biodiversity in the North Sea, English
+Channel, and Celtic Seas. ICES J. Mar. Sci. 56, 228ñ246. doi: 10.1006/jmsc.1998.
+0438
+Reid, D. G. (2001). SEFOS-shelf edge ﬁsheries and oceanography studies: an
+overview. Fish. Res. 50, 1ñ15. doi: 10.1016/S0165-7836(00)00238-1
+Reid, D. G., Calderwood, J., Afonso, P., Bourdaud, P., Fauconnet, L., González-
+Irusta, J. M., et al. (2019). “The Best Way to Reduce Discards Is by Not Catching
+Them!, ” inThe European Landing Obligation, eds S. S. Uhlmann, C. Ulrich, and
+S. J. Kennelly (Cham: Springer), 257ñ278. doi: 10.1007/978-3-030-03308-8_13
+Robert, M., Calderwood, J., Radford, Z., Catchpole, T., Reid, D. G., and Pawlowski,
+L. (2019). Spatial distribution of discards in mixed ﬁsheries: species trade-
+oﬀs, potential spatial avoidance and national contrasts. Rev. Fish Biol. Fish. 29,
+917ñ934. doi: 10.1007/s11160-019-09581-z
+Romagnoni, G., Mackinson, S., Hong, J., and Eikeset, A. M. (2015). The Ecospace
+model applied to the North Sea: evaluating spatial predictions with ﬁsh biomass
+and ﬁshing eﬀort data. Ecol. Model. 300, 50ñ60. doi: 10.1016/j.ecolmodel.2014.
+12.016
+Rooney, N., McCann, K., Gellner, G., and Moore, J. C. (2006). Structural
+asymmetry and the stability of diverse food webs. Nature 442, 265ñ269. doi:
+10.1038/nature04887
+Scales, K. L., Miller, P. I., Hawkes, L. A., Ingram, S. N., Sims, D. W., and Votier,
+S. C. (2014). REVIEW: on the Front Line: frontal zones as priority at-sea
+conservation areas for mobile marine vertebrates. J. Appl. Ecol. 51, 1575ñ1583.
+doi: 10.1111/1365-2664.12330
+Scott, E., Serpetti, N., Steenbeek, J., and Heymans, J. J. (2016). A Stepwise Fitting
+Procedure for automated ﬁtting of Ecopath with Ecosim models. SoftwareX 5,
+25ñ30. doi: 10.1016/j.softx.2016.02.002
+Serpetti, N., Baudron, A. R., Burrows, M. T., Payne, B. L., Helaouët, P., Fernandes,
+P. G., et al. (2017). Impact of ocean warming on sustainable ﬁsheries
+management informs the Ecosystem Approach to Fisheries. Sci. Rep. 7:13438.
+doi: 10.1038/s41598-017-13220-7
+Sharples, J., Ellis, J. R., Nolan, G., and Scott, B. E. (2013). Fishing and the
+oceanography of a stratiﬁed shelf sea. Prog. Oceanogr. 117, 130ñ139. doi: 10.
+1016/j.pocean.2013.06.014
+Sharples, J., Tweddle, J. F., Mattias Green, J. A., Palmer, M. R., Kim, Y.-N.,
+Hickman, A. E., et al. (2007). Spring-neap modulation of internal tide mixing
+and vertical nitrate ﬂuxes at a shelf edge in summer. Limnol. Oceanogr. 52,
+1735ñ1747. doi: 10.4319/lo.2007.52.5.1735
+Shephard, S., Fung, T., Houle, J. E., Farnsworth, K. D., Reid, D. G., and Rossberg,
+A. G. (2012). Size-selective ﬁshing drives species composition in the Celtic Sea.
+ICES J. Mar. Sci. 69, 223ñ234. doi: 10.1093/icesjms/fsr200
+Shephard, S., Reid, D. G., and Greenstreet, S. P. R. (2011). Interpreting the large
+ﬁsh indicator for the Celtic Sea. ICES J. Mar. Sci. 68, 1963ñ1972. doi: 10.1093/
+icesjms/fsr114
+Shin, Y., and Cury, P. (2001). Exploring ﬁsh community dynamics through size-
+dependent trophic interactions using a spatialized individual-based model.
+Aquat. Living Resour. 14, 65ñ80. doi: 10.1016/S0990-7440(01)01106-8
+Simpson, J. H. (1976). A boundary front in the summer regime of the Celtic Sea.
+Estuar. Coast. Mar. Sci. 4, 71ñ81. doi: 10.1016/0302-3524(76)90008-6
+Simpson, S. D., Jennings, S., Johnson, M. P., Blanchard, J. L., Schön, P.-J., Sims,
+D. W., et al. (2011). Continental Shelf-Wide Response of a Fish Assemblage to
+Rapid Warming of the Sea. Curr. Biol. 21, 1565ñ1570. doi: 10.1016/j.cub.2011.
+08.016
+Southward, A. J., Boalch, G. T., and Maddock, L. (1988). Fluctuations in the
+herring and pilchard ﬁsheries of devon and cornwall linked to change in climate
+since the 16th century. J. Mar. Biol. Assoc. U.K. 68, 423ñ445. doi: 10.1017/
+S0025315400043320
+Steenbeek, J., Buszowski, J., Christensen, V., Akoglu, E., Aydin, K., Ellis, N.,
+et al. (2016). Ecopath with Ecosim as a model-building toolbox: source code
+capabilities, extensions, and variations. Ecol. Model. 319, 178ñ189. doi: 10.1016/
+j.ecolmodel.2015.06.031
+Steenbeek, J., Coll, M., Gurney, L., Mélin, F., Hoepﬀner, N., Buszowski, J., et al.
+(2013). Bridging the gap between ecosystem modeling tools and geographic
+information systems: driving a food web model with external spatialñ
+temporal data. Ecol. Model. 263, 139ñ151. doi: 10.1016/j.ecolmodel.2013.
+04.027
+Steenbeek, J., Corrales, X., Platts, M., and Coll, M. (2018). Ecosampler: a
+new approach to assessing parameter uncertainty in Ecopath with Ecosim.
+SoftwareX 7, 198ñ204. doi: 10.1016/j.softx.2018.06.004
+Tam, J. C., Link, J. S., Rossberg, A. G., Rogers, S. I., Levin, P. S., Rochet, M.-J.,
+et al. (2017). Towards ecosystem-based management: identifying operational
+food-web indicators for marine ecosystems. ICES J. Mar. Sci. 74, 2040ñ2052.
+doi: 10.1093/icesjms/fsw230
+ter Hofstede, R., Hiddink, J., and Rijnsdorp, A. (2010). Regional warming changes
+ﬁsh species richness in the eastern North Atlantic Ocean. Mar. Ecol. Prog. Ser.
+414, 1ñ9. doi: 10.3354/meps08753
+Théro, H., Rivot, E., Robert, M., Guitton, J., Kopp, D., Gascuel, D.,
+et al. (2020). EcoDiet. R package version 1.0.0.0 . doi: 10.5281/zenodo.40
+81537
+Tidd, A. N., and Warnes, S. (2006). Species Distributions from English Celtic Sea
+Groundﬁsh Surveys, 1992–2003 (Science Series Technical Report) . Lowestoft:
+Cefas.
+Ting, M., Kushnir, Y., Seager, R., and Li, C. (2009). Forced and internal twentieth-
+century SST trends in the North Atlantic. J. Clim. 22, 1469ñ1481. doi: 10.1175/
+2008JCLI2561.1
+Tinker, J. P., Howes, E. L., Wakelin, S., Menary, M., Kent, E., Berry, D., et al. (2020).
+The impacts of climate change on temperature (air and sea), relevant to the
+coastal and marine environment around the UK. MCCIP Sci. Rev. 2020, 1ñ30.
+doi: 10.14465/2020.ARC01.TEM
+Tomczak, M. T., Niiranen, S., Hjerne, O., and Blenckner, T. (2012). Ecosystem
+ﬂow dynamics in the Baltic ProperóUsing a multi-trophic dataset as a basis
+for foodñweb modelling. Ecol. Model. 230, 123ñ147. doi: 10.1016/j.ecolmodel.
+2011.12.014
+Torres, L. G., Read, A. J., and Halpin, P. (2008). Fine-scale habitat modeling of a
+top marine predator: Do prey data improve predictive capacity? Ecol. Appl. 18,
+1702ñ1717. doi: 10.1890/07-1455.1
+Frontiers in Marine Science | www.frontiersin.org 25 December 2020 | Volume 7 | Article 578717
+fmars-07-578717 December 2, 2020 Time: 19:49 # 26
+Hernvann et al. Spatial Food Web Modeling of the Celtic Sea
+Travers, M., Shin, Y.-J., Jennings, S., and Cury, P. (2007). Towards end-to-end
+models for investigating the eﬀects of climate and ﬁshing in marine ecosystems.
+Prog. Oceanogr. 75, 751ñ770. doi: 10.1016/j.pocean.2007.08.001
+Travers, M., Shin, Y.-J., Jennings, S., Machu, E., Huggett, J. A., Field, J. G., et al.
+(2009). Two-way coupling versus one-way forcing of plankton and ﬁsh models
+to predict ecosystem changes in the Benguela. Ecol. Model. 220, 3089ñ3099.
+doi: 10.1016/j.ecolmodel.2009.08.016
+Trenkel, V., Pinnegar, J., Dawson, W., Du Buit, M., and Tidd, A. (2005). Spatial
+and temporal structure of predator-prey relationships in the Celtic Sea ﬁsh
+community. Mar. Ecol. Prog. Ser. 299, 257ñ268. doi: 10.3354/meps299257
+Trenkel, V. M., Huse, G., MacKenzie, B. R., Alvarez, P., Arrizabalaga, H.,
+Castonguay, M., et al. (2014). Comparative ecology of widely distributed pelagic
+ﬁsh species in the North Atlantic: implications for modelling climate and
+ﬁsheries impacts. Prog. Oceanogr. 129, 219ñ243. doi: 10.1016/j.pocean.2014.04.
+030
+Vallet, C., and Dauvin, J.-C. (1998). Composition and diversity of the benthic
+boundary layer macrofauna from the english channel. J. Mar. Biol. Assoc. U.K.
+78, 387ñ409. doi: 10.1017/S0025315400041527
+Walters, C. (1999). Ecospace: prediction of mesoscale spatial patterns in trophic
+relationships of exploited ecosystems, with emphasis on the impacts of marine
+protected areas. Ecosystems 2, 539ñ554. doi: 10.1007/s100219900101
+Walters, C., Christensen, V., and Pauly, D. (1997). Structuring dynamic models
+of exploited ecosystems from trophic mass-balance assessments. Rev. Fish Biol.
+Fish. 7, 139ñ172. doi: 10.1023/A:1018479526149
+Ward, T., Hoedt, F., McLeay, L., Dimmlich, W., Jackson, G., Rogers, P., et al.
+(2001). Have recent mass mortalities of the sardine Sardinops sagax facilitated
+an expansion in the distribution and abundance of the anchovy Engraulis
+australis in South Australia? Mar. Ecol. Prog. Ser. 220, 241ñ251. doi: 10.3354/
+meps220241
+Warnes, S., and Jones, B. W. (1995). Species Distributions from
+English Celtic Sea Groundﬁsh Surveys, 1984 to 1991 (Fisheries
+Research Technical Report) . Lowestoft: MAFF Directorate of Fisheries
+Research.
+Wood, S. N. (2017). Generalized Additive Models: An Introduction with
+R, 2nd Edn. London: Chapman and Hall. doi: 10.1201/97813153
+70279
+Conﬂict of Interest: The authors declare that the research was conducted in the
+absence of any commercial or ﬁnancial relationships that could be construed as a
+potential conﬂict of interest.
+Copyright © 2020 Hernvann, Gascuel, Grüss, Druon, Kopp, Perez, Piroddi and
+Robert. This is an open-access article distributed under the terms of the Creative
+Commons Attribution License (CC BY). The use, distribution or reproduction in
+other forums is permitted, provided the original author(s) and the copyright owner(s)
+are credited and that the original publication in this journal is cited, in accordance
+with accepted academic practice. No use, distribution or reproduction is permitted
+which does not comply with these terms.
+Frontiers in Marine Science | www.frontiersin.org 26 December 2020 | Volume 7 | Article 578717

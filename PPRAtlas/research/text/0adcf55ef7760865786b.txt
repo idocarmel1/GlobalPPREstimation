@@ -1,0 +1,1685 @@
+ 
+ 
+SCIENTIFIC COMMITTEE 
+THIRD REGULAR SESSION 
+ 
+13-24 August 2007 
+Honolulu, United States of America 
+ 
+An Ecopath with Ecosim model of the Western and Central Pacific Ocean  
+warm pool pelagic ecosystem 
+WCPFC-SC3-EB SWG/IP-8 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+V. Allain1, S. Nicol1, T. Essington2, T. Okey3, B. Olson4 and D. Kirby1. 
+ 
+ 
+                                                 
+1 Oceanic Fisheries Programme, SPC, Noumea CEDEX New Caledonia. 
+2 University of Washington, Seattle, U.S.A. 
+3 CSIRO Marine and Atmospheric Research, Australia.  
+4 IATTC, La Jolla, USA. 
+ 1
+An Ecopath with Ecosim model of the Western and Central 
+Pacific Ocean warm pool pelagic ecosystem. 
+ 
+ 
+Valerie Allain 1, Simon Nicol 1, Tim Essington 2, Tom Okey 3, Bob Olson 4 and David 
+Kirby1. 
+ 
+ 
+1.  Oceanic Fisheries Programme, Secretaria t of the Pacific Community, BP D5, 98848 Noumea 
+CEDEX New Caledonia. 
+2.  University of Washington, 1122 Boat St. Seattle, WA. 98l05 Seattle, WA, U.S.A. 
+3.  CSIRO Marine and Atmospheric Research , PO Box 120, Cleveland QLD 4163, Australia.  
+Actual addresses: Bamfield Marine Sciences Ce ntre, 100 Pachena Road, Bamfield, BC, V0R 
+1B0, Canada; University of Victoria, School of  Environmental Studies, PO Box 1700 STN CSC, 
+Victoria BC  V8W 2Y2, Canada and Conservati on Science Institute, Box 8164, Victoria, BC, 
+V8W 3R8, Canada. 
+4.  Inter-American Tropical Tuna Commission, 8604 La Jolla Shores Drive, La Jolla, CA 92037, 
+U.S.A. 
+ 
+ 
+1. Introduction..................................................................................................................... 3 
+2. Methods........................................................................................................................... 6 
+2.1. Model Description ................................................................................................... 6 
+2.2. Spatial boundaries of the model and import/export issues ...................................... 7 
+2.3. Functional Groups.................................................................................................... 7 
+2.4. Ecopath with Ecosim input parameters.................................................................... 7 
+2.5. Modelling approach ................................................................................................. 8 
+3. Results........................................................................................................................... 14 
+3.1. First run and balancing strategy............................................................................. 14 
+3.2. Multi-stanza and new groups................................................................................. 15 
+3.3. Parameter changes (Table 3).................................................................................. 16 
+3.4. Diet composition changes...................................................................................... 17 
+3.5. Basic estimates of the balanced model .................................................................. 19 
+3.6. Model Structure and Sensitivity............................................................................. 20 
+3.7. ECOSIM simulation............................................................................................... 22 
+4. Discussion..................................................................................................................... 24 
+5. Future developments..................................................................................................... 26 
+6. References..................................................................................................................... 28 
+ 2
+ 
+1. Introduction 
+The warm pool in the western equatorial P acific is one of the biogeochemical provinces 
+defined by (Longhurst, 1995); it is generally delimited by the 29ºC surface isotherm and a 
+salinity front ( Figure 1). It is an oligotrophic system characterized by low salinity, low 
+nitrates, high temperature, deep thermocline, low surface chlorophyll and maximum 
+chlorophyll located at 90m dept h. Conversely, the cold tongue in the Eastern equatorial 
+Pacific is an upwelling system with high sali nity, high nitrates, low temperature, shallow 
+thermocline, high surface chlorophyll and maximum chlorophyll at the surface. The 
+warm pool-cold tongue system is variable in terms of hydrography, nutrient availability 
+and zonal extension in response to interannu al variations such as El Niño Southern 
+Oscillation (ENSO) but also decadal oscillat ions. These interactions are considerable 
+drivers of ecosystem productivity and high order predator dynamics in the warm pool 
+ecosystem (Lehodey et al., 1997; Lehodey, 2001; Lehodey et al., 2003). 
+ 
+WARM POOL
+COLD TONGUE
+WARM POOL
+COLD TONGUE
+ 
+Figure 1. Spatial extent of the warm pool – cold tongue system in the Pacific Ocean. 
+ 
+The western and central Pacific Ocean (WCP O) regions are important for economic, 
+cultural and biodiversity contri butions at regional and in ternational scales (Anonymous, 
+2000).  The tuna fishery in the WCPO catches approximately half of the world’s tuna and 
+is of high economic importance to Pacific is land countries and territories (Williams & 
+Reid, 2006). Throughout the WCPO, total annual catches of target tuna species (skipjack, 
+ 3
+yellowfin, bigeye and albacore tuna) are now in excess of 2 million tonnes (Williams & 
+Reid, 2006).  Not surprisingly, management co ncerns arise from potential conflicts in 
+goals that attempt to sustain these economic, cultural and biodiversity values.   
+ 
+Mathematical models that faithfully describe the processes that we understand/observe to 
+influence species and ecosystems are useful  for assisting with decision making where 
+such conflicts occur (Burgman  et al. , 1993; Walters & Martell,  2004). These models 
+allow us to make quantitative predictions about  species or ecosystems to different policy 
+alternatives (Hilborn & Mangel,  1997).  Our knowledge about all the intera ctions that 
+sustain the WCPO ecosystem is incomplete, hence any model is a simplification - an 
+abstraction on how we think the ecosystem operates. However, they provide a mechanism 
+for identifying these knowledge gaps and for a ssessing the influence this uncertainty has 
+on achieving management goals.   
+ 
+Rarely does a single model summarise all the issues faced by managers or provide the 
+opportunity to explore the potential consequenc es of all management options (Hilborn & 
+Mangel, 1997).  Models are constructed with  specific questions and consequently have 
+specific purposes and constraints in interpre tation and extrapolation.  The WCPO stock 
+models provide a description of single species  dynamics (tuna) and their interaction with 
+fisheries objectives (Hampton et al., 2006a; Hampton et al., 2006b; Langley & Hampton, 
+2005; Langley et al., 2005). 
+ 
+Seapodym models are ecosystem models that  describe the Pacific Ocean including the 
+warm pool (Lehodey, 2004).  They were init ially developed for investigating physical-
+biological interactions between tuna populations and the pe lagic ecosystem of the Pacific 
+Ocean. Using predicted environment from  ocean-biogeochemical models, Seapodym 
+integrates spatio-temporal and multi-popula tion dynamics and considers interactions 
+among populations of different species and between populations and their physical and 
+biological environment (including intermediate trophic levels). The model also includes a 
+description of multiple fisheries.  
+ 
+ 4
+While Seapodym models tells us about tuna in  a spatially and numerically explicit way, a 
+complimentary model is required that provides  the capacity to explicitly examine trade-
+offs in trophic structure between competing policies. One of the modelling approaches 
+available to explore the ecosystem tr ophic structure is Ecopath with Ecosim 5, which has 
+been widely used in aquatic and terrestrial system for th is purpose.  This approach 
+requires that the biomass of the ecosystem is balanced and consequently the effects of 
+altered biomass production or harvest on the entire ecosystem assemblage can be 
+explored.  Such a model would complement the existing suite of models available to 
+management.  Furthermore models constructed within this context will allow independent 
+exploration of the influence of the assumpti ons used in both the stock assessment and 
+Seapodym models and vice versa.  This pape r describes the colla borative approach to 
+develop an Ecopath with Ecosim model for the WCPO warm pool.  Specifically it 
+describes: 
+1- Ecopath model balancing methods and outcomes;  
+2- Preliminary Ecosim simulations; and 
+3- Further model development. 
+ 
+                                                 
+5 www.ecopath.org  
+ 5
+2. Methods 
+2.1. Model Description 
+Ecopath models are mass-balance models that  describe energy pathways in a food web. 
+Ecosim adds a temporal dynamic to this equilibrium, by adding a time-series of fishery or 
+environmental vectors that allow the influen ce of these covariates on the distribution of 
+biomass to be explored (Christensen et al., 2000). 
+ 
+The master equation for Ecopath is: 
+ii ji j ji i i i NM BA DCB
+QB Y EEB
+PB + +∑ + = ) () (  
+Where  and  are biomasses of prey (i ) and predators ( j), respectively; iB jB i
+B
+P) ( is the 
+production/biomass ratio, equivalent to total mo rtality (Z) in most circumstances (Allen, 
+1971); EEi is the ecotrophic efficiency, the fraction of the total productio n of a group that 
+is used in the system; Yi is the fisheries catch per unit area and time (i.e. Y = F × B); j
+B
+Q) ( 
+is the food consumption per unit biomass of j; and DCji is the contribution of i to the diet 
+of j; BAi is the biomass accumulation of i (positive or negative); NMi is the net migration 
+of i (emigration less immigration). 
+ 
+Consequently for each entity (functional group) modelled in Ecopath, information is 
+required on production/biomass ( P/B), consumption/biomass ( Q/B), biomass, proportion 
+of habitat area occupied, biomass in habitat area (t.km -2), diet composition and fishing 
+mortality. 
+ 
+In Ecosim the Ecopath equation is re-expressed in a dynamic formulation: 
+) () (
+1 j i ij
+n
+ji i ii
+i B B c B F MB B fdt
+dB
+=
+∑ − − − =  
+Where,  is a function of  if i is a primary producer or  =  if i 
+is a consumer, where is the net growth efficiency, and is the function used to 
+)( iB f iB )( iB f ) (j i ij iB B c g∑
+ig ) (j i ijB B c
+ 6
+predict consumption rates from BB
+i to Bj
+B
+                                                
+.  A function for cij is derived from specification of 
+prey vulnerabilities. 
+ 
+2.2. Spatial boundaries of the model and import/export issues 
+The boundaries of the warm pool vary according to environmental conditions; for the 
+purpose of this study fixed boundaries have been chosen: 110-180ºE6 and 15ºN-15ºS 
+(Figure 1). It represents a surface area of 26.964 million km2.  
+ 
+Imports and exports were not considered into  this model. All dead organisms end up in 
+the detritus pool, a nd unused detritus ( i.e. detritus not consumed  by detritivores) is 
+considered to be exported out of the system by sedimentation. 
+ 
+2.3. Functional Groups 
+The final aggregation of th e ecosystem to 31 functional groups was based upon an 
+iterative process of including gr oups or species of special interest as well as using the 
+pre-existing information available for this  ecosystem and aggregating/separating groups 
+in order to account for within  group moderated predation ( Table 1).  A description of the 
+data sources and aggregati on issues are described in Appendix 1 .  Species of special 
+interest such as turtles, marine mammals or birds were not included due to the lack of 
+data, but could be added if information becomes available. 
+ 
+2.4. Ecopath with Ecosim input parameters 
+To model the warm pool ecosystem data we re gathered from different sources (Appendix 
+1) and classified according to the degree of confidence in their values (high, medium, low 
+confidence and guesstimates) ( Table 2 ). Initial and final parameters for all the 
+components as well as diet matrices a nd fisheries catches are presented in Table 3, Table 
+4 and Table 5. 
+ 
+6 Mean longitude of the front between the warm pool and the cold tongue for the period 1980-2000 is 
+178ºW (Le Borgne et al., 2002a). 
+ 7
+Prior to balancing the model some simple heuristics to he lp ensure that the input 
+parameter values were rational were developed.  These were: 
+B vs. EE: It was decided to input a B value rather than an EE estimate especially for top 
+predators unless there were good estimates of the lower trophic levels on which the 
+predators are feeding. 
+Assimilation efficiency U/Q: This parameter is considered of importance only when the 
+detritus component was to be co nsidered in the system. In our  model the default value of 
+0.2 was kept for all the components of the model. This value is recommended for 
+carnivorous fish (Christensen et al., 2000), however the assimilation efficiency is usually 
+lower for omnivores and can reach 0.4 for zooplankton (Christensen  et al. , 2000; Jarre-
+Teichmann, 1996). 
+Gross efficiency P/Q (P/B / Q/B): This ratio was expected to be less than 0.3; this high 
+value was reached by species with very efficient and rapid growth. 
+ 
+2.5. Modelling approach 
+A collaborative approach was used to build th is Ecopath model. Seven participants with 
+diverse expertises on Ecopath modelli ng, other modelling and pelagic research 
+contributed to the development of the model during a workshop organised at the 
+Secretariat of the Pacific Community, Noumea, New Caledonia, March 5-9, 2007. 
+ 
+ 8
+Functional group name Functional group description Justification
+Swordfish Large Xiphias gladius
+Other billfish Large Istiophorus platypterus, Makaira indica, Makaira mazara, Tetrapturus audax, Tetrapturus 
+angustirostris
+Blue shark Large Prionace glauca
+Other sharks Large Alopiidae, Carcharhinidae, Lamnidae, Sphyrnidae
+Bigeye tuna Thunnus obesus  larger than class size/age/weight at 50% of maturity 124cm/3.85y-
+46.2months/43kg*
+Yellowfin tuna Thunnus albacares  larger than class size/age/weight at 50% of maturity 120cm/2.25y-
+27months/33kg*
+Skipjack tuna Katsuwonus pelamis  larger than class size/age/weight at 100% of maturity 43cm/0.75y-
+9months/1.6kg*
+Piscivorous fish Alepisauridae, Bramidae, Carangidae, Coryphaenidae, Gempylidae, wahoo Acanthocybium solandri, 
+opah Lampris guttatus,  small Scombridae Bycatch species of interest for 
+ecosystem management  but species 
+by species information not available.
+Small billfish Small billfish, same species as large groups swordfish and other billfish
+Small sharks Small sharks, same species as large groups blue shark and other sharks
+Small bigeye tuna Thunnus obesus  smaller than class size/age/weight at 50% of maturity 124cm/3.85y-
+46.2months/43kg and larger than 20cm/3 months/0.18kg*
+Small yellowfin tuna Thunnus albacares  smaller than class size/age/weight at 50% of maturity 120cm/2.25y-
+27months/33kg and larger than 24cm/3 months/0.33kg*
+Small skipjack tuna Katsuwonus pelamis  smaller than class size/age/weight at 100% of maturity 43cm/0.75y-
+9months/1.6kg and larger than 24cm/3 months/0.25kg*
+Baby SKJ Katsuwonus pelamis  from hatching to recruitement = 0 to 3 months, smaller than 24cm/0.25kg* Additional group required to 
+decrease the importance of 
+cannibalism and balance the model
+Epipelagic forage Euphausids, shrimps, Stomatopoda, Decapoda, Amphipoda, Hyperiidae, Phronima, Megalopa, 
+Palinuridae, Scyllaridae...; Engraulidae, Clupeidae, Exocoetidae, small Carangidae Bramidae 
+Scombridae, juveniles of reef fish Acanthuridae, Balistidae, Chaetodontidae, Diodontidae, 
+Holocentridae, Kyphosidae, Lethrinidae, Malacanthidae, Monacanthidae, Nomeidae, Ostraciidae, 
+Pomacanthidae, Priacanthidae, Scaridae...; Argonautidae, Carinariidae, Cavoliniidae, Loliginidae, 
+Eucleoteuthis luminosa, Hyaloteuthis pelagica, Moroteuthis lonnbergi, Onychoteuthidae, Sepiolidae, 
+Th
+ysanoteuthidae...
+Species by species information was 
+not available. Pre-existing 
+aggregated information available.
+Epipelagic crustaceans Stomatopoda, Megalopa stage, Hyperiidea, Amphipoda, Palinura, Enoplometopidae, Phronima sp., 
+Thalassocaris sp., Scyllaridae, Harpiosquillidae…
+Epipelagic fish Acanthuridae, Balistidae, Bramidae, Carangidae, Chaetodontidae, Diodontidae, Echeneidae, 
+Engraulidae, Exocoetidae, Holocentridae, Kyphosidae, Lethrinidae, Malacanthidae, Molidae, 
+Monacanthidae, Nomeidae, Ostraciidae, Pomacanthidae, Priacanthidae, Scaridae, Scombridae, 
+Serranidae, Tetraodontidae, Zanclidae...
+Epipelagic small fish  Larval and juvenile stages of the "Epipelagic fish" species
+Epipelagic molluscs Argonautidae, Carinariidae, Cavoliniidae, Loliginidae, Eucleoteuthis luminosa, Hyaloteuthis 
+pelagica, Moroteuthis lonnbergi, Onychoteuthidae, Sepiolidae, Thysanoteuthidae…
+Epipelagic small molluscs  Larval and juvenile stages of the "Epipelagic molluscs" species
+Migrant mesopelagic 
+forage
+Nemichthyidae, Myctophidae, Gempylidae, Phosichthyidae…; Enoploteuthidae, Stenoteuthis, 
+Pterygioteuthis, Heteroteuthinae…
+Species by species information was 
+not available. Pre-existing 
+aggregated information available.
+Migrant mesopelagic fish Nemichthyidae, Myctophidae, Gempylidae, Phosichthyidae…
+Migrant mesopelagic 
+molluscs
+Enoploteuthidae, Stenoteuthis, Pterygioteuthis, Heteroteuthinae…
+Mesopelagic forage Juvenile Alepisauridae, Omosudidae, Paralepididae, Ophiididae, Trichiuridae, Caristiidae, 
+Ostracoberycidae, Percophidae, Scombrolabracidae, Scorpaenidae, Argyropelecus, Triacanthidae, 
+Macrurocyttidae...; Octopoteuthidae, Ommastrephidae, Moroteuthis, Ancistrocheirus, 
+Am
+phitretidae...
+Species by species information was 
+not available. Pre-existing 
+aggregated information available.
+Mesopelagic fish Juvenile Alepisauridae, Omosudidae, Paralepididae, Ophiididae, Trichiuridae, Caristiidae, 
+Ostracoberycidae, Percophidae, Scombrolabracidae, Scorpaenidae, Argyropelecus, Triacanthidae, 
+Macruroc
+yttidae…
+Mesopelagic molluscs Octopoteuthidae, Ommastrephidae, Moroteuthis, Ancistrocheirus, Amphitretidae…
+Highly migrant 
+bathypelagic forage
+Myctophidae, Maurolicus, Sternoptyx, Liocranchia, Caridae, Oplophorus, Sergestidae, 
+Euphausiidae…
+Migrant bathypelagic 
+forage
+Histioteuthidae, Penaeoidea, Acanthephyra…
+Bathypelagic forage Paralepididae, Scopelarchidae, Diretmidae, Chiasmodontidae, Bolitaenidae…
+Mesozooplankton Zooplankton of the class size 200-2000µm, mostly copepods.
+Microzooplankton Zooplankton of the class size 20-200µm: copepod nauplii, ciliates, sarcodinids, rotifers, small 
+cladocerans…
+Large phytoplankton All pelagic photosynthetic organisms larger than 2-8µm, mainly diatoms, autotrophic dinoflagellates, 
+pelagophytes, prymnesiophytes
+Small phytoplankton All pelagic photosynthetic organisms smaller than 2-8µm, mainly Prochhlorococcus, Synechococcus 
+and autotrophic eukaryotes
+Detritus All pelagic non-living material, bacterioplankton, heterotrophic pico- and nanozooplankton (<20µm) Group required in Ecopath model
+Primary production driving the 
+bottom-up mechanisms
+Secondary production. Species by 
+species information was not 
+available. Size-class information 
+available.
+Species by species information was 
+not available. Pre-existing 
+aggregated information available.
+Bycatch species of interest for 
+fisheries and ecosystem management 
+Bycatch species of interest for 
+ecosystem management 
+Target species of interest for 
+fisheries and management
+Bycatch species of interest for 
+fisheries and ecosystem management 
+Target species of interest for 
+fisheries and management
+Additional groups required to 
+decrease the importance of 
+cannibalism and balance the model
+Additional groups required to 
+decrease the importance of 
+cannibalism and balance the model
+Additional groups required to 
+decrease the importance of 
+cannibalism and balance the model
+ 
+Table 1. Initial and final functional groups included in the warm pool ecosystem Ecopath model. 
+White cells: in initial and final iterations, red cells: added in the final iteration, blue cells: removed from 
+the final iteration. * age at maturity, length at age, weight at age according to Multifan-CL 2006 
+parameterisation; biomass and mortality information from Multifan-CL are provided for fish older than 
+3 months only.  
+ 9
+ECOSYSTEM COMPONENTS CATCH DIET BIOMASS PRODUCTION CONSUMPTION
+Swordfish SPC DIET STUDY Other Ecopath Other Ecopath Guesstimate
+Other billfish SPC DIET STUDY Other Ecopath Guesstimate Guesstimate
+Blue shark SPC DIET STUDY Other Ecopath Guesstimate Guesstimate
+Other sharks SPC DIET STUDY Other Ecopath Other Ecopath Guesstimate
+Bigeye tuna SPC DIET STUDY Stock Assessment Model Stock Assessment Model ENERGETIC model
+Yellowfin tuna SPC DIET STUDY Stock Assessment Model Stock Assessment Model ENERGETIC model
+Skipjack tuna SPC DIET STUDY Stock Assessment Model Stock Assessment Model ENERGETIC model
+Piscivorous fish SPC DIET STUDY Guesstimate Other Ecopath Guesstimate
+Small bigeye tuna SPC DIET STUDY Stock Assessment Model Stock Assessment Model ENERGETIC model
+Small yellowfin tuna SPC DIET STUDY Stock Assessment Model Stock Assessment Model ENERGETIC model
+Small skipjack tuna SPC DIET STUDY Stock Assessment Model Stock Assessment Model ENERGETIC model
+Small billfish Guesstimate Other Ecopath Guesstimate Guesstimate
+Small sharks Guesstimate Other Ecopath Other Ecopath Guesstimate
+Epipelagic forage Guesstimate SEAPODYM model SEAPODYM model Guesstimate
+Migrant mesopelagic forage Guesstimate SEAPODYM model SEAPODYM model Guesstimate
+Mesopelagic forage Guesstimate SEAPODYM model SEAPODYM model Guesstimate
+Highly migrant bathypelagic 
+forage Guesstimate SEAPODYM model SEAPODYM model Guesstimate
+Migrant bathypelagic forage Guesstimate SEAPODYM model SEAPODYM model Guesstimate
+Bathypelagic forage Guesstimate SEAPODYM model SEAPODYM model Guesstimate
+Mesozooplankton Guesstimate Field measure Guesstimate Guesstimate
+Microzooplankton Guesstimate Field measure Guesstimate Guesstimate
+Large phytoplankton Field measure Field measure
+Small phytoplankton Field measure Field measure
+Detritus
+high confidence
+medium confidence
+low confidence
+Guesstimates
+ 
+Table 2. Origin of the data of the input parameter s for the initial iteration of the model with the 
+degree of confidence in the data quality. 
+ 
+ 
+ 
+ 10
+ 11
+Initial Final Initial Final Initial Final Initial Final Initial Final
+Swordfish 0.0036 0.0036 0.4 0.4 5 5 0.2 0.2
+Other Billfish 0.0052 0.0052 0.6 0.6 5 5 0.2 0.2
+Blue Shark 0.016 0.016 0.3 0.3 5 3 0.2 0.2
+Other Sharks 0.0012 0.0012 0.3 0.3 5 3 0.2 0.2
+BET 0.00162 0.00162 0.95 0.95 24.728 15 0.2 0.2
+YFT 0.00799 0.00799 1.537 1.537 16.14 16.14 0.2 0.2
+SKJ 0.0842 0.0842 2.046 2.046 33.475 25 0.2 0.2
+Piscivorous fish 0.05 0.025 1.5 1.5 10 10 0.2 0.2
+Small Billfish 0.0106 0.0106 1 1 10 10 0.2 0.2
+Small Sharks 0.0118 0.0118 0.5 0.5 10 5 0.2 0.2
+Small BET 0.00356 0.00241 0.834 0.834 22.387 26.159 0.2 0.2
+Small YFT 0.2 0.2
+Small SKJ 0.2 0.2
+Baby SKJ 0.2
+Epi forage 0.2
+Epi crust 0.98 0.2
+Epi fish 0.95 0.2
+Epi small fish 0.98 0.2
+Epi mollusc 0.95 0.2
+Epi small mo 0.98 0.2
+M Meso forage 0.2
+M Meso fish 0.95 0.2
+M meso mollus 0.95 0.2
+Meso forage 0.2
+Meso fish 0.95 0.2
+Meso mollusc 0.95 0.2
+HM Bathy for 0.95 0.2 0.2
+M Bathy forage 0.95 0.2 0.2
+Bathy forage 0.95 0.2 0.2
+Mesozpk 0.2 0.35
+Microzpk 0.2 0.4
+Large phyto
+Small phyto
+Detritus
+Unassim./Cons.Biomass Production / biomass Consumption / biomass Ecotrophic efficiency
+0.0157 0.0128 1.983 1.983 18.009 33.964
+0.0275 0.0194 2.539 2.539 69.288 50.698
+0.00659 25 191.81
+0.339 3.691 15
+8 30
+3 15
+10 60
+7 20
+llusc 15 100
+0.417 2.132 15
+2.2 10
+c 3 10
+0.164 2.435 15
+2.5 10
+3 10
+age 0.629 1.189 1.189 15 8
+0.343 1.338 1.338 15 8
+0.759 0.845 0.845 15 8
+4.358 4.4 38 50 230 230
+1.461 2 120 120 382 382
+1.849 1.849 120.3 120.3
+10.477 8 109.44 109.44
+100  
+Table 3. Initial and final input parameters for the Ecopath model. Biomass in tons/km 2, 
+Production/Biomass and Consumption/Bi omass in /year, Unassim./Cons.= 
+Unassimilated/Consumption with no unit. White cells: no changes, red cells: modified or added in the 
+final iteration, blue cells: removed in the final iteration. 
+ 
+baby SKJ
+Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Initial Final Final
+Swordfish
+Other Billfish
+Blue Shark 0.01 0.001 0.001
+Other Sharks 0.01 0.01
+BET 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.003 0.003
+YFT 0.001 0.001 0.001 0.001 0.011 0.001 0.001 0.003 0.003
+SKJ 0.006 0.006 0.55 0.55 0.1 0.2 0.15 0.01 0.01 0.02 0.019 0.019 0.07 0.072
+Piscivorous fish 0.075 0.075 0.05 0.05 0.353 0.272 0.262 0.06 0.061 0.05 0.05 0.008 0.009 0.1 0.082 0.145 0.15 0.06 0.0607
+Small Billfish 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.007 0.007 0.004 0.004
+Small Sharks 0.02 0.01 0.01 0.002 0.002
+Small BET 0.001 0.001 0.01 0.01 0.01 0.01 0.01 0.02 0.001 0.01 0.001 0.01 0.005 0.01 0.005
+Small YFT 0.01 0.01 0.01 0.01 0.09 0.014 0.104 0.104 0.03 0.031 0.05 0.03 0.03 0.05 0.026 0.05 0.051 0.05 0.052 0.008 0.0081
+Small SKJ 0.055 0.035 0.2 0.1 0.3 0.2 0.1 0.08 0.041 0.23 0.03 0.65 0.34 0.054 0.2 0.051 0.15 0.052 0.017 0.00506 0.14 0.0304
+baby SKJ 0.02 0.1 0.1 0.041 0.101 0.02 0.053 0.154 0.077 0.0101 0.0323 0.02
+Epi forage 0.05 0.054 0.15 0.04 0.35 0.255 0.504 0.306 0.2 0.06 0.59
+Epi crust 0.01 0.101 0.074 0.059 0.006 0.0506 0.0754 0.309 0.2
+Epi fish 0.02 0.05 0.01 0.151 0.186 0.173 0.103 0.103 0.0709 0.205 0.155 0.02
+Epi small fish 0.506 0.08
+Epi mollusc 0.05 0.03 0.07 0.1 0.02 0.151 0.31 0.163 0.205 0.103 0.0709 0.323 0.155 0.02
+Epi small mollusc 0.00202 0.08
+M Meso forage 0.1 0.01 0.08 0.055 0.05 0.02 0.14 0.1 0.07 0.09 0.58
+M Meso fish+other 0.025 0.005 0.07 0.02 0.031 0.02 0.099 0.065 0.041 0.052 0.215 0.0215 0.083 0.075
+M meso mollusc 0.075 0.005 0.03 0.051 0.039 0.186 0.108 0.103 0.052 0.00101 0.108 0.103 0.075
+Meso forage 0.3 0.02 0.05 0.05 0.6 0.13 0.005 0.02 0.14 0.171 0.5 0.06 0.34
+Meso fish + other 0.05 0.005 0.141 0.02 0.204 0.076 0.037 0.087 0.041 0.073 0.0323 0.021 0.05
+Meso mollusc 0.25 0.015 0.282 0.03 0.408 0.101 0.062 0.087 0.103 0.103 0.0538
+HM Bathy forage 0.2 0.15 0.027 0.027 0.141 0.034 0.035 0.01 0.01 0.03 0.033 0.1 0.103 0.07 0.025 0.0269 0.052
+M Bathy forage 0.1 0.1 0.02 0.02 0.282 0.022 0.022 0.005 0.005 0.001 0.001 0.002 0.0004 0.000431 0.005
+Bathy forage 0.15 0.15 0.05 0.05 0.02 0.02 0.04 0.04 0.007 0.062 0.212 0.066 0.0711
+Mesozpk 0.003 0.003 0.07 0.071 0.01 0.025 0.02 0.022 0.02 0.021 0.001 0.029 0.0205 0.075 0.103 0.4
+Microzpk
+Large phyto
+Small phyto
+Detritus
+Prey \ Predator Swordfish BETOther SharksBlue SharkOther Billfish
+Small 
+Billfish
+Piscivorous 
+fishSKJYFT Small SKJSmall YFTSmall BET
+Small 
+Sharks
+ 
+ 
+ 12
+Epi forage Epi crust Epi fish Epi 
+small fish
+Epi 
+mollusc
+Epi small 
+mollusc
+M Meso 
+forage
+M Meso 
+fish+other
+M meso 
+mollusc Meso forage Meso 
+fish + other
+Meso 
+mollusc
+Initial Final Final Final Final Final Initial Final Final Initial Final Final Initial Final Initial Final Initial Final Initial Final Initial Final
+Swordfish
+Other Billfish
+Blue Shark
+Other Sharks
+BET
+YFT
+SKJ
+Piscivorous fish
+Small Billfish
+Small Sharks
+Small BET
+Small YFT
+Small SKJ
+baby SKJ
+Epi forage 0.05 0.2 0.1
+Epi crust 0.097 0.1 0.176 0.1 0.211 0.2 0.4
+Epi fish 0.113 0.1
+Epi small fish 0.101 0.176 0.2
+Epi mollusc 0.1
+Epi small mollusc 0.193 0.141 0.2
+M Meso forage 0.05 0.1 0.2 0.1 0.05
+M Meso fish+other 0.235 0.15 0.3 0.2 0.15
+M meso mollusc 0.118 0.3 0.2 0.15
+Meso forage 0.1 0.1 0.1 0.2
+Meso fish + other 0.3 0.3
+Meso mollusc 0.15
+HM Bathy forage 0.05 0.235 0.05 0.2 0.3 0.25
+M Bathy forage 0.1 0.1 0.1 0.3 0.25
+Bathy forage 0.05 0.2 0.1
+Mesozpk 0.7 0.45 0.609 0.9 0.059 0.7 0.5 0.465 0.05 0.6 0.3 0.2 0.5 0.6 0.25 0.25 0.1 0.1 0.1
+Microzpk 0.1 0.1 0.2 0.1 0.07 0.1 0.1 0.5 0.2 0.05
+Large phyto 0.05 0.05 0.1 0.1 0.05 0.1
+Small phyto 0.05 0.05 0.8 0.8
+Detritus 0.4 0.2 0.4 0.25 0.65 0.1 0.1
+Mesozpk MicrozpkPrey \ Predator
+HM Bathy 
+forage
+M Bathy 
+forage
+Bathy 
+forage
+ 
+13
+Table 4. Initial and final diet matrices for the Ecopath model. Preys in rows, predators in column. Diet is expressed in fraction and total of each column 
+is 1. White cells: no changes, red cells: modified or added in the final iteration, purple cells: slightly modified in the final iteration, blue cells: removed in the 
+final iteration. 
+ 
+ 
+ 
+Longline PS Unass PS FAD Domestic ID PHL Total
+Swordfish 0.0000714 0
+Other Billfish 0.000219 0.0000141 0
+Blue Shark 0.000144 0
+Other Sharks 0.0000479 0.0000444 0
+BET 0.00041 0.0000012 0.0000218 0.000386 0.001
+YFT 0.000803 0.00136 0.000197 0.00414 0.007
+SKJ 0.00184 0.00995 0.0126 0.0113 0.036
+Piscivorous fish 0.000157 0.000223 0
+Small Billfish 0
+Small Sharks 0
+Small BET 0.000504 0.0000525 0.000555 0.000286 0.001
+Small YFT 0.000763 0.00174 0.00217 0.0023 0.007
+Small SKJ 0.000011 0.000072 0.000197 0.00144 0.002
+Epi forage 0
+M Meso forage 0
+Meso forage 0
+HM Bathy forage 0
+M Bathy forage 0
+Bathy forage 0
+Mesozpk 0
+Microzpk 0
+Large phyto 0
+Small phyto 0
+Detritus 0
+Sum 0.005 0.013 0.016 0.02 0.054  
+Table 5. Fisheries landings in tons/km2/year for the Ecopath model. 
+ 
+3. Results 
+3.1. First run and balancing strategy  
+The first run, which was based on literature estimates, stock assessment estimates for tuna 
+biomass, Seapodym model estimates of forage  biomass and empirical data from stomach 
+analysis for the diet matrix indicated that the model was not balanced. Ecotrophic 
+efficiency was higher than 1
+7 for most of the lower trophic level components: 
+microzooplankton; forage groups; small tuna  groups and the aggregated group of 
+piscivorous fish.  The most unbalanced groups were skipjack tuna (SKJ).  
+ 
+The strategy chosen to improve the model was to adjust first the most unbalanced 
+components (highest EE), one after the ot her, by changing the input data. Diet 
+composition modifications were preferred to ot her parameter changes such as biomass or 
+production rate, particularly for the species  for which stock assessment existed.  We 
+                                                 
+7 EE>1 indicates that consumption of this group is higher than the quantity available in the system, the 
+group is unbalanced. 
+ 14
+considered that confidence was higher in stock assessments 8 than in diet composition 
+which is known to be highly uncertain.  However, disequilibrium in some groups was so 
+high that only drastic changes of bioma ss, consumption or production could balance 
+them.  During the balancing process we rea lised that it was necessary to disaggregate 
+some components in the model and to ta ke into account the linkages between the 
+different age groups of the same species by implementing the “multi-stanza’ routine in 
+Ecopath.  The changes made are reported below. 
+ 
+3.2. Multi-stanza and new groups 
+With the objective of using the Ecopath model to conduct Ecosim simulations, it was 
+necessary to link together the different stag es of yellowfin (YFT), bigeye (BET) and 
+skipjack (SKJ) using the multi-stanza tool.  Starting age of each group was specified as 
+well as their total mortality (Z), B, Q/B fo r the adult group, and th e curvature parameter 
+K of the Von Bertalanffy growth curve (VBGF) (respectively 0.3, 0.32 and 0.8 for BET, 
+YFT and SKJ). For the other parameters th e default values were used (recruitment 
+power=1, BA/B=0, Wmaturity/Winf=0, no fixed fecundity). This opt ion allows Ecosim 
+to link different stages of the same species with recruitment factor.  
+ 
+SKJ was the most unbalanced species, larg ely due to predati on by other tuna and 
+cannibalism. Because much of the predati on on SKJ was exerted on the very small 
+individuals (less than 10cm), a third gr oup of SKJ, “baby SKJ”, which described 
+individuals from 0 to 3 months, was added to the model.  
+ 
+Balancing problems were encountered in some  of the aggregated forage groups, despite 
+many changes in the diet composition.  This  was due to over-aggregation of different 
+species within the same group creating overly simplified tr ophic connections ( i.e. 
+equilibrium could not be achieved because  of cannibalism - a high proportion of the 
+group’s diet was itself - and small trophic loops  - one order cycle: when group 1 feeds on 
+group 2 that in return feeds on group 1). To solve this pr oblem the forage groups were 
+                                                 
+8 It is important to notice that SKJ stock assessment is probably the less reliable of the 3 tuna species 
+assessments (Simon Hoyle, SPC, pers. comm.). 
+ 15
+disaggregated into: crustaceans, fish and mollu scs for the epipelagic component; and into 
+fish + others and molluscs for migrant mesopelagic and for mesopelagic ( Table 1 ). 
+Bathypelagic components were not disaggregated. Furthermore for the epipelagic 
+component small molluscs and small fish groups were created to avoid cannibalism.  
+ 
+3.3. Parameter changes (Table 3) 
+Piscivorous fish biomass was decreased by half  to reduce the predation pressure on its 
+preys. Small tuna group biomasses were recal culated using the muti-stanza tools.  These 
+estimates were lower in comparison to in itial parameters. Meso and micro-zooplankton 
+biomasses were slightly increased to sustain the forage feeding on them. Small 
+zooplankton biomass was decreased, to increase the EE.  In this oligotrophic area it was 
+assumed that most of the phytoplankton is used in the system. Detritus biomass was 
+added (see 
+Appendix 1). 
+ 
+The baby SKJ group was assumed to be productiv e with a high mortality  rate, an initial 
+value of P/B ratio value of 5 was chosen, slig htly higher than that estimated for forage 
+species.  Under this construct the SKJ gr oup did not balance (EE>400).  The group could 
+not be balanced through modifi cations of the diet compositi ons as baby SKJ were prey 
+for many different predators and small changes in the diet composition resulted in these 
+groups and lower trophic groups no longer balancing.  A change in P/B ratio from 5 to 25 
+reduced the EE from 400 to 10.  New forage groups P/B values were estimated following 
+the principles that crustaceans are more productive than molluscs which, in turn, are more 
+productive than fish; that small components are more productive than  large components 
+and that productivity is higher in shallow waters than in deep waters. Mesozooplankton 
+P/B was also increased to sustain predation on this group. 
+ 
+Q/B was decreased for most of  the top predator groups to reduce the predation pressure 
+on their preys. Adult SKJ consumption (Q/B=33) was initially estimated to represent a 
+daily ration of ca. 9% (Q/B / 3.65 = % bo dyW/day=daily ration); a ration of 5-6% was 
+considered more realistic and Q/B was revised to 25.  After multi-stanza calculations Q/B 
+ 16
+values for young groups of SKJ were adjuste d.  Similarly, other sm all tuna Q/B’s were 
+recalculated using the multi-stanza tool.  
+ 
+Biomasses of the initial forage groups were re-distributed among the disaggregated new 
+forage groups based upon available inform ation.  The predation impacts from upper 
+trophic levels, however was too high to allo w balancing of these forage groups. The 
+possibility of an advection of forage at the edge of the warm pool close to the cold tongue 
+was explored; however calculations indicated that plausible quantit ies that could be 
+advected would be insufficient to balance the model.  This crude estimate was based on 
+advection (flow) rate, biologic ally plausible forage concen tration, the size of the 
+ecosystem boundary and the total area of the ecosystem modelled here.  It was found that 
+advection could only account fo r a trivial fraction (ca. 10 -4) of the production needed to 
+balance the model.  This process of balanc ing the model through Q/B and the diet matrix 
+indicated that existing information on bioma ss estimates for the forage components were 
+highly uncertain.  To obtain an estimate of the required biomass of forage to sustain the 
+system, EE values for the forage groups we re fixed and biomass estimated.  It was 
+assumed that nearly all the forage was used in the system so an EE of 0.95 was used for 
+all forage components and 0.98 was used fo r the epipelagic small fish and small 
+molluscs.  
+ 
+Unassimilated to consumption ratio or as similation efficiency of meso- and micro-
+zooplankton were increased from 0.2 initia lly to respectively 0.35 and 0.4 in agreement 
+with literature information.  
+ 
+3.4. Diet composition changes 
+Ecopath-calculated predation mortalities allowed the identification of groups that induced 
+a high predation pressure on “unbalanced groups”, and consequently modification of their 
+diet composition to decrease predation resolv ed many of the balancing issues.  Changes 
+made are detailed in 
+Table 4. 
+ 
+ 17
+Disaggregating groups induced major modificati ons in the diet matr ix.  Introducing new 
+forage species required changes in the diet of all the components of the ecosystem. For 
+top predators in general the proportions of a particular forage category was transferred 
+and split in the different s ub-groups of this category; e.g. swordfish foraging on 0.3 of 
+mesopelagic in the initial model was change d into 0.05 of mesopelagic fish and 0.25 of 
+mesopelagic mollusc in the final iteration. However this rule could not always be 
+followed and extensive modifications were required: 
+• the proportions of epipelagic and mesope lagic forage were increased for YFT, 
+SKJ and Small YFT;   
+• the epipelagic proportion was reduced but mesopelagics were increased for 
+piscivorous fish;   
+• the epipelagic and migrant mesopelagic groups were increased and mesopelagic 
+group reduced for small BET;  
+• epipelagics were increased but mesopelagics reduced for small SKJ; 
+• the initial predation on Small SKJ was reassigned to baby SKJ; 
+• the dietary proportion of baby SKJ for YFT,  SKJ, piscivorous fish and small YFT 
+was decreased; 
+• the diet of baby SKJ was assumed to be dominated by mesozooplankton and 
+epipelagic preys; 
+• predation on small YFT and small BET was al so reduced in the diet of blue shark 
+and YFT;  
+• small BET proportions were decreased in the diet of BET, small billfish and small 
+sharks; and 
+• small YFT was also reduced in the diets of SKJ and piscivorous fish. 
+ 
+The consequence of the high biomass and hi gh consumption rate for SKJ in the model 
+was a very high predation pre ssure on SKJ prey. Cannibalism  had been observed in the 
+diet studies (initial di et proportion of 0.65 of Small SKJ), however this value had to be 
+reduced drastically to achieve balance.  All the SKJ predation on small SKJ was 
+transferred to baby SKJ (0.65 to 0.02).  Similarly because of the high biomass and 
+consumption of the SKJ, small YFT in their diet was removed.  The diet was reassigned 
+ 18
+to epipelagic and migrant mesopelagic forage .  Small SKJ diet was reviewed to include 
+some predation on baby SKJ, but with epipelagic forage dominating their diet. 
+ 
+Blue shark diet was entirely revised: pr edation on top predators was removed and 
+consumption of mesopelagic and bathypela gic forage increased.  Cannibalism was 
+removed from mesozooplankton and microzooplankton.  Trophic loops were identified as 
+a major problem for balancing the model, so for example all the l oops were removed in 
+the diet composition of the different forage  components. Mesozooplankton predation on 
+microzooplankton was decreased, as it was hypothesised that mesozooplankton feeds 
+predominantly on the microbial loop that in this model was captured in the detritus group. 
+ 
+3.5. Basic estimates of the balanced model 
+The parameter values for the balanced model are presented in Table 6. 
+ 
+Group name Trophic level Biomass (t/km²) Prod./ biom . (/year) Cons./ biom. (/year) Ecotrophic efficienc y Production / consumption
+Swordfish 5.24 0.0036 0.4 5 0.05 0.08
+Other Billfish 5.58 0.0052 0.6 5 0.075 0.12
+Blue Shark 5.35 0.016 0.3 3 0.031 0.1
+Other Sharks 5.57 0.0012 0.3 3 0.356 0.1
+BET 5.41 0.00162 0.95 15 0.777 0.063
+YFT 4.88 0.00799 1.537 16.14 0.56 0.095
+SKJ 4.92 0.0842 2.046 25 0.347 0.082
+Piscivorous fish 4.93 0.025 1.5 10 0.946 0.15
+Small Billfish 5.22 0.0106 1 10 0.114 0.1
+Small Sharks 5.27 0.0118 0.5 5 0.043 0.1
+Small BET 4.51 0.00241 0.834 26.159 0.644 0.032
+Small YFT 4.89 0.0128 1.983 33.964 0.849 0.058
+Small SKJ 4.33 0.0194 2.539 50.698 0.927 0.05
+baby SKJ 3.88 0.00659 25 191.81 0.776 0.13
+Epi crust 2.64 4.515 8 30 0.98 0.267
+Epi fish 3.54 2.127 3 15 0.95 0.2
+Epi small fish 3.24 0.785 10 60 0.98 0.167
+Epi mollusc 4.3 0.384 7 20 0.95 0.35
+Epi small mollusc 3.2 0.955 15 100 0.98 0.15
+M Meso fish+other 3.57 3.404 2.2 10 0.95 0.22
+M meso mollusc 4.25 1.484 3 10 0.95 0.3
+Meso fish + other 4.21 0.634 2.5 10 0.95 0.25
+Meso mollusc 4.74 0.201 3 10 0.95 0.3
+HM Bathy forage 3.38 1.803 1.189 8 0.95 0.149
+M Bathy forage 4.7 0.282 1.338 8 0.95 0.167
+Bathy forage 3.64 0.0698 0.845 8 0.95 0.106
+Mesozpk 2.2 4.4 50 230 0.995 0.217
+Microzpk 2 2 120 382 0.992 0.314
+Large phyto 1 1.849 120.3 - 0.829 -
+Small phyto 1 8 109.44 - 0.756 -
+Detritus 1 100 - - 0.791 -  
+Table 6. Basic estimates of the balanced model. Blue cells represent the parameters calculated by the 
+model. 
+ 
+ 19
+3.6. Model Structure and Sensitivity 
+The balanced model presented is one of the many possibilities that could fit the defined 
+constraints of the warm pool eco system.  Alternative structures are yet to be explored.  
+The mixed-trophic impact routine in Ecopath provides a summary  of the diet structure of 
+all groups on each other group; the impact can be positive (a prey will have a positive 
+impact on its predator) or negative (a predator  will have a negative impact on its prey).  
+The mixed-trophic impact matrix for the balanced model ( Figure 2) indicates that higher 
+order predators in the balanced model exert negative effects upon each other.  The lower-
+order groups typically exert negative e ffects upon each other and positive effects on 
+higher order predators. 
+ 
+ 
+ 
+Figure 2. Mixed trophic impact matrix of selected components of the ecosystem. Impacting groups on 
+the left, impacted groups on top; grey box below the line represents a negative impact, black box above 
+the line represents a positive impact. 
+ 
+ 20
+The sensitivity routine included in Ecopath mo dified each of the 3 input parameters per 
+species group from -50% to +50% in 10% st eps and calculated the fourth parameter to 
+maintain mass-balance.  A table of the magnit ude of changes of the fourth parameters for 
+each species according to the % of variation of the input parameters can be extracted 
+from Ecopath. This large table can be summ arised by calculating a simple index of 
+sensitivity per component following the methodology outlined in Olson & Watters (2003) 
+(see caption Figure 3 ).  Components where changes will induce large variations in the 
+overall system can then be identified.  In the balanced model migrant bathypelagic forage 
+and molluscs (mesopelagic, migrant mesopela gic and epipelagic) were the components 
+inducing large changes ( Figure 3).  In general, the model was more sensitive to changes 
+in the lower trophic levels rather than variations in the top predators. 
+ 
+ 
+0 20 40 60 80 100 120
+Swordfish
+Other Billfish
+Blue Shark
+Other Sharks
+BET
+YFT
+SKJ
+Piscivorous fish
+Small Billfish
+Small Sharks
+Small BET
+Small YFT
+Small SKJ
+baby SKJ
+Epi crust
+Epi fish
+Epi small fish
+Epi mollusc
+Epi small mollusc
+M Meso fish+other
+M meso mollusc
+Meso fish + other
+Meso mollusc
+HM Bathy forage
+M Bathy forage
+Bathy forage
+Mesozpk
+Microzpk
+Large phyto
+Small phyto
+ 
+Figure 3. Sensitivity analysis of the Ecopath model. Results are presented with an index of sensitivity 
+which is the count of estimated parameters of the model that are affected by at least 30% given +-10-50% 
+changes in the input parameters of the y-axis components following the method presented in (Olson & 
+Watters, 2003). 
+ 
+ 21
+3.7. ECOSIM simulation 
+The Ecosim application was briefly explored  to check the stability of the model and 
+further potential sensitivities.  Three simple top-down scenarios were tested: (1) complete 
+removal of all the fisheries after 5 years; (2 ) removal of FAD purse seine fisheries after 5 
+years, other fisheries maintained at current  level; and (3) all fisheries doubled after 5 
+years and maintained at that level.  These scenarios provided traj ectories that allowed 
+identifying the most reactive species, the species  with very stable behaviour whatever the 
+conditions, and the groups of species evolving in conjunction or in opposition.  The 
+default value of 2 was used for the Vulnerability coefficients9; this value represents a mix 
+between bottom-up and top-down controls. 
+The trajectories from the 3 scenarios identify that BET and YFT (juveniles and adults), 
+other sharks, other billfish, piscivorous fish (
+Figure 4) were the more reactive species to 
+top-down forcing (fishing harvest changes) . The tunas mentione d above, sharks and 
+billfish increased when the fishing pressure was removed.  BET was the species that 
+showed the highest increase particularly wh en the FAD fisheries are removed. YFT was 
+the species increasing the most when the Do mestic Indonesian and Phillipino fisheries 
+were removed.  YFT decreased dramatically when fishing pressure increased and BET 
+became extinct 15 years after the fishing harvest rate was doubled (
+Figure 4C).  Sharks 
+and other billfish biomass also decreased with a doubling of fishing harvest rate.  
+Piscivorous fish behaviour differed, respondi ng positively to the decrease in predation 
+pressure caused by the major decline in biomasses of BET and YFT to a doubling of 
+fishing harvest rate. SKJ did not show much variation when fishing harvest was changed. 
+No cascading effect to the forage level was observed for the scenarios explored; the 
+forage component is probably more sensitive to bottom-up control that needs to be tested. 
+ 
+ 
+ 
+                                                 
+9 Vulnerability coefficients are based on the foraging arena theory developed by Walters and Juanes (1993). 
+The theory assumes that prey exch ange between vulnerable and safe habitats, and that only when in 
+vulnerable habitats are they susceptible to predation.  When exchange rates are slow, the model acts like a 
+“donor controlled” predator prey sy stem.  When exchange rates are rapid, the model acts like a joint 
+“donor-recipient” control, analogous to the basic predator prey models (e.g. Lotka Volterra). 
+ 22
+ 
+llllll l
+0 5 10 15 20 25 30
+1
+2
+3
+BET
+Small BET
+YFT
+Other Billfish
+Small YFT
+Other Sharks
+Piscivorous FishSmall SKJ
+A
+llllll l
+0 5 10 15 20 25 30
+1
+2
+3
+BET
+Small BET
+YFT
+Other Billfish
+Small YFT
+Other Sharks
+Piscivorous FishSmall SKJ
+llllll l
+0 5 10 15 20 25 30
+llllll lllllll lllllll l
+0 5 10 15 20 25 30
+1
+2
+3
+1
+2
+3
+BET
+Small BET
+YFT
+Other Billfish
+Small YFT
+Other Sharks
+Piscivorous FishSmall SKJ
+A
+ 
+1
+1.5
+BET
+Small BET
+Other Sharks
+Piscivorous Fish
+0.5 llllll l
+0 5 10 15 20 25 30
+B
+1
+1.5
+BET
+Small BET
+Other Sharks
+Piscivorous Fish
+0.5 llllll l
+0 5 10 15 20 25 30
+1
+1.5
+BET
+Small BET
+Other Sharks
+Piscivorous Fish
+0.5 llllll l
+0 5 10 15 20 25 30
+llllll lllllll lllllll l
+0 5 10 15 20 25 30
+B
+ 
+llllll l
+0 5 10 15 20 25 30
+1
+2
+0
+BET Small BET
+YFT
+Other Billfish
+Other Sharks
+Piscivorous Fish
+Swordfish
+Bathy forage
+C
+llllll l
+0 5 10 15 20 25 30
+1
+2
+0
+BET Small BET
+YFT
+Other Billfish
+Other Sharks
+Piscivorous Fish
+Swordfish
+Bathy forage
+llllll l
+0 5 10 15 20 25 30
+llllll lllllll lllllll l
+0 5 10 15 20 25 30
+1
+2
+0
+BET Small BET
+YFT
+Other Billfish
+Other Sharks
+Piscivorous Fish
+Swordfish
+Bathy forage
+C
+ 
+Figure 4. Biomass/Original Biomass ratio trajectories of the ecosystem components over 30 years 
+with 3 different Ecosim scenarios: A) complete removal of all the fisheries after 5 years, B) removal 
+of FAD purse seine fisheries after 5 years, other fisheries maintained at current level, C) all fisheries 
+doubled after 5 years and maintained at that level. 
+ 
+ 23
+4. Discussion 
+The balanced model represents an alternativ e to Godinot & Allain (2003) model which 
+was constructed without much of the dietary information currently available.  Both 
+constructs demonstrate sensitivity to groups  in the lower trophic groups. The Ecosim 
+simulations identified that the higher order trophic levels are sensitive to changes in 
+fishing harvest rate, except for skipjack whic h remained stable to the perturbations of 
+fishing harvest rate. 
+ 
+The balancing process revealed  a disagreement in the input data: the forage biomass 
+estimates extracted from the Seapodym model and the field measurements of zooplankton 
+biomass could not sustain the biomass of tuna estimated from the stock assessment model 
+MULTIFAN-CL. Initial biomass values fo r forage groups summed to 2.6 tons/km 2, 
+however that needed to be increased to 16.7 tons/km 2 (x6.4) to balance the model. Four 
+hypotheses could be considered to explain this discrepancy: 
+-the system is not well captured because of too much overaggregation; 
+-there is an underestimation of forage, particularly epipelagic and mesopelagic 
+component and possibly a bad repartition of the diet proportions among the different 
+forage components; 
+-there is an overestimation of tuna biomass; 
+-a potential importation of fora ge/zooplankton from the East th at would interact with the 
+West is not captured in the model. 
+ 
+Because little information was available on forage we chose to consider tuna biomass 
+estimates as more reliable than forage estimates when balancing the model.  This 
+assumption identified, along with the sensit ivity analysis, the high dependence of the 
+model to forage changes.  Testing hypotheses about the reliability of forage component 
+information and the validity of the tuna biomasses estimates within the Ecopath with 
+Ecosim framework would provide a bette r understanding of where the important 
+uncertainty occurs. 
+ 
+ 24
+The construction of the Ecopath model provided important lessons on the technical aspect 
+and limits of mass-balance modelling, but also  on the functioning of the pelagic warm 
+pool ecosystem itself.  We encountered tw o major problems that created balancing 
+difficulties: cannibalism and diet loops. We  managed to overcome these problems by 
+disaggregating some groups (i.e. SKJ or forage) and by modifying the diet matrix. 
+Overaggregation of groups and species allo wed a simple model with few components, 
+however as observed in this example it induces  structural problems in the model that can 
+prove difficult to overcome.  Obtaining a balanced model required a compromise between 
+simplification and complexity.   
+ 
+The balancing process also id entified potential consequences of data uncertainty and 
+knowledge gaps about the functioning of the pelagic ecosystem of the western and central 
+Pacific Ocean.  SKJ appear to have a key role  in the system because of its high biomass, 
+high production, high consumption and important cannibalism. This species was the most 
+difficult to balance and the changes carried out on this group had important impacts on 
+the other components of the system. It was necessary to divide this species into 3 age 
+classes to balance the model.  The SKJ cons umption rate was high in order to maintain 
+their high productivity and because cannibalis m is high, the species exerts important 
+pressure on its juveniles.  J uvenile SKJ was also a major source of food for all the top 
+predators. Consequently, in the balanced model SKJ occupied a central position in the 
+system that might be comparable in a way to the position of Auxis sp.  in the Eastern 
+Pacific (Olson & Watters, 2003). Given this construct, SKJ was driving our Ecopath 
+model and draft Ecosim simulatio ns showed a very high resi lience of this species to 
+perturbations, it was nearly impossible to elim inate this species from the system with a 
+top-down control. SKJ resilien cy is probably related to th e high production rate and the 
+internal density-dependence induced by cannibalism. 
+ 
+ 25
+5. Future developments 
+The Ecopath model developed here has proven to be a very useful learning tool.  The 
+ultimate goal of this exercise is to provide ecosystem models with the capacity of testing 
+different fishing policies and environmental ch ange scenarios to assist managers with 
+identifying the most robust and reliable ma nagement options that will achieve their 
+objectives.  Before reaching this end point, model development will require: 
+- model parameter and structural uncertainty analysis; 
+- model validation through the fitting of historical fishing data; and 
+- the testing of management options and environmental impact. 
+ 
+Model parameter and structural  uncertainty analysis will provide a better understanding 
+of the model’s behaviour and dependencies.  A synthesis of data from other ecosystems 
+(i.e. establishing a list of  input values with all the cont ext information for reference) 
+would help with bounding parameter inputs where specific knowledge uncertainty is 
+high. Consultation with experts is  the best way to insure that  the values extracted from 
+the literature are well adapted to the study case (Okey & Pauly, 1999). An important step 
+will be the construction of alternate Ecopath models of the warm pool with different 
+structures particularly in the components (m ore or less size-classe s for the species of 
+interest, aggregation or disaggr egation of the forage groups, different organisation of the 
+forage groups, etc).  The results from such structural analysis wi ll provide important 
+insights into the reliability  of stock assessment, the Seapodym model, dietary and 
+literature information. A further level of exploration that will help with understanding the 
+functioning of the model will be the testing of simulation scenarios.  As applied by Olson 
+& Watters (2003), fitting fishing effort time- series was a good method for validating and 
+exploring the properties of the model associated  with top-down processes.  The fitting of 
+an index of environmental variability in  primary production (to mimic the SOI index 
+variation for example) would provide an alternate bottom-up exploration of model 
+properties.   
+ 
+Potential outcomes of a realistic and validated Ecopath model and Ecosim simulations are 
+multiple and are of particular interest for managers.  Ecosim allows testing of scenarios 
+ 26
+that will provide information on the impact  on non-target species and on the overall 
+ecosystem that can be evalua ted in conjunction w ith stock assessment models.  The 
+impact of changes in environmental parameters  such as global warming, increase of the 
+frequency and/or strength of El Niño events could be assessed as well as the consequence 
+of the implementation of fishing policies such as regulation of the FAD fisheries. 
+ 
+Another potential of the model that has not  been explored is the Ecospace module. 
+Specifying habitats in the modelled area and allowing spatially-explicit expression of the 
+functional groups and fisheries in the model area will allow exploration of the potential 
+effects of marine protected areas on the high seas, as well as evaluations of the robustness 
+of temporal simulations in a spatially-explicit context.  This would also provide further 
+opportunity for comparison and cross-validat ion with stock assessment models and 
+Seapodym models. 
+ 
+ 27
+6. References 
+ 
+ 1.  Anon. 1993. Trophic models of aquatic ecosystems. Christensen, V.  & Pauly, D.  Eds.  ICLARM 
+Conference Proceedings. 26, Manila, pp. 1-390. 
+ 2.  Anon. 2000. Fishbase 2000: concepts, design and data sources. Froese, R.  & Pauly, D.  Eds.  
+ICLARM, Los Baños, Laguna, Philippines, pp. 1-344. 
+ 3.  Allain, V. 2003. Diet of mahi-mahi, wahoo and lancetfish in the western and central Pacific. 16th 
+Meeting of the Standing Committee on Tuna and Billfish, SCTB16, Mooloolaba, Queensland, 
+Australia, 9-16 July 2003. BBRG-6, 1-19.  
+ 4.  Allain, V. 2004. Diet of yellowfin tuna in different areas of the western and central Pacific Ocean. 
+17th Meeting of the Standing Committee on Tuna and Billfish, SCTB17, Majuro, Marshall Islands, 
+9-18 August 2004. BIO-1, 1-20.  
+ 5.  Allain, V. 2005. Diet of large pelagic pred ators of the western and central Pacific Ocean. 1st 
+Meeting of the Scientific Committee of the We stern and Central Pacific Fisheries Commission, 
+WCPFC-SC1, Noumea, New Caledonia, 8-19 August 2005. BI WP-2, 1-18.  
+ 6.  Allen, R. R. 1971. Relation between production and biomass. Journal of Fisheries Research Board of 
+Canada. 28, 1573-1581.  
+ 7.  Anonymous 2000. Convention on the conservation and management of highly migratory fish stocks 
+in the western and central Pacific Ocean. Wester n and Central Pacific Fisheries Commission, pp. 1-
+27. 
+ 8.  Barber, R. T., Sanderson, M. P., Lindley, S. T ., Chai, F., Newton, J., Trees, C. C., Foley, D. G., & 
+Chavez, F. P. 1996. Primary productivity and its regulation in the equatorial Pacific during and 
+following the 1991-1992 El Niño. Deep-Sea Research II. 43(4-6), 933-969.  
+ 9.  Blackburn, M. 1968 . Micronekton of the eastern tropical  Pacific Ocean: family composition, 
+distribution, abundance, and relations to tuna. Fishery Bulletin. 67(1), 71-115.  
+ 10.  Brown, S. L., Landry, M. R., Neveux, J., & Dupouy, C. 2003. Microbial community abundance and 
+biomass along a 180° transect in the equatorial Pacific during an El Niño-Southern Oscillation cold 
+phase. Journal of Geophysical Research. 108(C12), 8139.  
+ 11.  Burgman, M. A., Ferson, S., & Akçakaya, H. R. 1993. Risk assessment in conservation biology.  
+Chapman & Hall, London, pp. 1-314. 
+ 12.  Calbet, A. & Landry, M. R. 1999. Mesozooplankton influences on the microbial food web: direct 
+and indirect trophic interactions in the olig otrophic open ocean. Lim nology and Oceanography. 44 
+(6), 1370-1380.  
+ 13.  Carpenter, K. & Niem, V. 1999. FAO sp ecies identification guide for fishery purposes. FAO, Rome. 
+ 14.  Chai, F., Dugdale, R. C., Peng, T.-H., Wilker son, F. P., & Barber, R. T. 2002. One-dimensional 
+ecosystem model of the equatorial Pacific upwellin g system. Part I: model development and silicon 
+and nitrogen cycle. Deep-Sea Research II. 49(13-14), 2713-2745.  
+ 15.  Champalbert, G., Neveux, J., Gaudy, R., & Le Borgne, R. 2003. Diel variations of copepod feeding 
+and grazing impact in the high-n utrient, low-chlorophyll zone of  the equatorial Pacific Ocean 
+(0º;3ºS, 180º). Journal of Geophysical Research. 108(C12), 8145.  
+ 16.  Chavez, F. P., Buck, K. R., Service, S. K., Newton, J., & Barber, R. T. 1996. Phytoplankton 
+variability in the central and eastern tropical Pacific. Deep-Sea Research II. 43(4-6), 835-870.  
+ 17.  Christensen, V. 1995. A model of trophic interactions in the North Sea in 1981, the Year of the 
+Stomach. Dana. 11(1), 1-28. http://www.ecopath.org/modules/Models/papers/NorthseaMS.pdf. 
+ 28
+ 18.  Christensen, V., Walters, C. J., & Pauly, D. 2000. Ecopath with Ecosim: a user's guide.  Fisheries 
+Centre, University of British Columbia, Vancoucer, Canada and ICLARM, Penang, Malaysia, pp. 1-
+130. 
+ 19.  Dam, H. G., Zhang, X., Butler, M., & Roman, M. R. 1995. Mesozooplankton grazing and 
+metabolism at the equator in the cen tral Pacific: implications for carbon and nitrogen fluxes. Deep-
+Sea Research II. 42(2-3), 735-756.  
+ 20.  Gaudy, R., Champalbert, G., & Le Borgne, R. 2003. Feeding and metabolism of mesozooplankton in 
+the equatorial Pacific high-nutri ent, low-chlorophyll zone along 180°. Journal of Geophysical 
+Research.  108(C12), 8144.  
+ 21.  Gjøsaeter, J. & Kawaguchi, K. 1980. A review of the world resources of mesopelagic fish. FAO 
+Fisheries Technical Paper. 193, 1-151.  
+ 22.  Godinot, O. 2002. A preliminary Ecopath model of the warm pool pelagic ecosystem. MSc thesis in 
+Aqautic Ecology and Water Quality Management - Wageningen University - Netherlands. 026/2002, 
+1-67.  
+ 23.  Godinot, O. 2003. The warm pool pelagic ecosystem. A trophic model using Ecopath. Oceanic 
+Fisheries Programme of the Secreatariat of the Pacific Community. May 2003, 1-42.  
+ 24.  Godinot, O. & Allain, V. 2003. A preliminary Ecopath model of the warm pool pelagic ecosystem. 
+16th Meeting of the Standing Committee on Tuna and Billfish, SCTB16, Mooloolaba, Queensland, 
+Australia, 9-16 July 2003. BBRG-5, 1-27.  
+ 25.  Grandperrin, R. 1975. Structures trophiques aboutissant aux thons de longue ligne dans le Pacifique 
+sud-ouest tropical.  1-296.  
+ 26.  Hampton, J., Langley, A., & Kleiber, P. 2006a. Stock assessment of bigeye tuna in the western and 
+central Pacific ocean, including an  analysis of management options. 2nd Meeting of the Scientific 
+Committee of the Western and Central Pacific Fisheries Commission, WCPFC-SC2, Manila, 
+Philippines, 7-18 August 2006. SA WP-2, 1-103. http://www.wcpfc.org/sc2/pdf/SC2_SA_WP2.pdf. 
+ 27.  Hampton, J., Langley, A., & Kleiber, P. 2006b. Stock assessment of yellowfin tuna in the western 
+and central Pacific ocean, includi ng an analysis of management  options. 2nd Meeting of the 
+Scientific Committee of the Western and Central Pacific Fisheries Commission, WCPFC-SC2, 
+Manila, Philippines, 7-18 August 2006. SA WP-1 , 1-103. 
+http://www.wcpfc.org/sc2/pdf/SC2_SA_WP1.pdf. 
+ 28.  Hilborn, R. & Mangel, M. 1997. The eocological detective confronting models with data.  Princeton 
+University Press, Princeton, pp. 1-315. 
+ 29.  ICES. 1989. Report of the multispecies assessment working group, 7-16 June 1989, Copenhagen. 
+ICES Council Meeting 1989/. Assess:20(1), 125.  
+ 30.  Ishizaka, J., Harada, K., Ishikawa, K., Kiyo sawa, H., Furusawa, H., Watanabe, Y., Ishida, H., 
+Suzuki, K., Handa, N., & Takahashi, M. 1997. Size and taxonomic plankton community structure 
+and carbon flow at the equator, 175ºE during 1990-1994. Deep-Sea Research II. 44 (9-10), 1927-
+1949.  
+ 31.  Jarre-Teichmann, A. 1996. Initial estimates on krill. Fisheries Centre Research Reports. 4, 10.  
+ 32.  Jones, R. 1984. Some observations on energy transfer through the North Sea and Georges Bank food 
+webs. Rapport et P.V.des Réunions du Conseil International de l'Exploration de la Mer. 183 , 204-
+217.  
+ 33.  Kirby, D. S. 2005. Prey consumption estimates for tunas in the WCPO. 1st Meeting of the Scientific 
+Committee of the Western and Centrral Pacific Fisheries Commission, WCPFC-SC1, Noumea, New 
+Caledonia, 8-19 August 2005. WCPFC-SC1(EB WP-4), 1-23.  
+ 34.  Kitchell, J. F., Boggs, C. H., He, X., & Walters,  C. 1999. Keystone predator s in the central Pacific. 
+In Ecosystem approaches for fisheries management. University of Alaska Sea Grant, AK-SG-99-01, 
+Fairbanks, pp. 665-683. 
+ 29
+ 35.  Kitchell, J. F., Essington, T. E., Boggs, C. H., Schindler, D. E., & Walters, C. J. 2002. The role of 
+sharks and longline fisheries in a pelagic ecosystem of the Central Pacific. Ecosystems. 5, 202-216.  
+ 36.  Lam, V. W. Y. & Pauly, D. 2005. Mapping the global biomass of mesopelagic fishes. Sea Around 
+Us. July-August 2005, 4.  
+ 37.  Landry, M. R. & Calbet, A. 2004. Microzooplankton production in the oceans. ICES Journal of 
+Marine Science. 61 , 501-507.  
+ 38.  Landry, M. R., Constantinou, J., & Kirshtein, J. 1995. Microzooplankton grazing in the central 
+equatorial Pacific during February and August, 1992. Deep-Sea Research II. 42(2-3), 657-671.  
+ 39.  Langley, A. & Hampton, J. 2005. Stock assessm ent of albacore tuna in the south Pacific Ocean. 1st 
+Meeting of the Scientific Committee of the We stern and Central Pacific Fisheries Commission, 
+WCPFC-SC1, Noumea, New Caledonia, 8-19 August 2005. SA-WP-3, 1-63. 
+http://www.wcpfc.int/sc1/pdf/SC1_SA_WP_3.pdf. 
+ 40.  Langley, A., Hampton, J., & Ogura, M. 2005. Stock assessment of skipjack tuna in the western and 
+central Pacific Ocean. 1st Meeting of the Scien tific Committee of the Western and Central Pacific 
+Fisheries Commission, WCPFC-SC1, Noumea, New Caledonia, 8-19 August 2005. SA-WP-4, 1-68. 
+http://www.wcpfc.int/sc1/pdf/SC1_SA_WP_4.pdf. 
+ 41.  Lawson, T. A. 2006. Estimates of annual catch es in the WCPFC statistical area. 2nd Meeting of the 
+Scientific Committee of the Western and Central Pacific Fisheries Commission, WCPFC-SC2, 
+Manila, Philippines, 7-18 August 2006. ST IP1, 1-25.  
+ 42.  Le Borgne, R., Barber, R. T., Delcroix, T., Inou e, H. Y., Mackey, D. J., & Rodier, M. 2002a. Pacific 
+warm pool and divergence: temporal and zonal variations on the quator and their effects on the 
+biological pump. Deep-Sea Research II. 49(13-14), 2471-2512.  
+ 43.  Le Borgne, R., Champalbert, G., & Gaudy, R. 2003. Mesozooplankton biomass and composition in 
+the equatorial Pacific along 180°. Journal of Geophysical Research. 108(C12), 8143.  
+ 44.  Le Borgne, R., Feely, R. A., & Mackey, D. J. 2002b. Carbon fluxes in the equatorial Pacific: a 
+synthesis of the JGOFS programme. Deep-Sea Research II. 49(13-14), 2425-2442.  
+ 45.  Le Borgne, R. & Landry, M. R. 2003. EBENE:  a JGOFS investigation of plankton variability and 
+trophic interactions in the equatorial Paci fic (180°). Journal of Geophysical Research. 108(C12), 
+8136.  
+ 46.  Le Borgne, R. & Rodier, M. 1997. Net zooplankton and the biological pump: a comparison between 
+the oligotrophic and mesotrophic equatorial Pacific. Deep-Sea Research II. 44(9-10), 2003-2023.  
+ 47.  Le Bouteiller, A., Leynaert, A., Landry, M. R ., Le Borgne, R., Neveux, J ., Rodier, M., Blanchot, J., 
+& Brown, S. L. 2003. Primary production, new production, and growth rate in the equatorial Pacific: 
+changes from mesotrophic to oligotrophic regime. Journal of Geophysical Research. 108(C12), 
+8141.  
+ 48.  Legand, M., Bourret, P., Four manoir, P., Grandperrin, R., Guérédrat, J. A., Michel, A., Rancurel, P., 
+Repelin, R., & Roger, C. 1972. Relations trophiques et distributions verticales en milieu pélagique 
+dans l'Océan Pacifique intertropical. Cahier de l'ORSTOM.Série Océanographie. X(4), 303-393.  
+ 49.  Lehodey, P. 2001. The pelagic ecosystem of the tropical Pacific Ocean: dynamic spatial modelling 
+and biological consequences of ENSO. Progress in Oceanography. 49, 439-468.  
+ 50.  Lehodey, P. 2004. A Spatial Ecosystem And Populations Dynamics Model (SEAPODYM) for tuna 
+and associated oceanic top-predator species: Part I - Lower and intermediate trophic components. 
+17th Meeting of the Standing Committee on Tuna and Billfish, SCTB17, Majuro, Marshall Islands, 
+9-18 August 2004. ECO(1), 1-26.  
+ 51.  Lehodey, P. 2005. Application of SEAPODYM to  the Pacific pelagic ecosystem. Recent results and 
+perspectives. 1st Meeting of the Scientific Committ ee of the Western and Centrral Pacific Fisheries 
+Commission, WCPFC-SC1, Noumea, New Caledonia, 8-19 August 2005. WCPFC-SC1(EB WP-8), 
+1-29.  
+ 30
+ 52.  Lehodey, P., Andre, J. M., Bertignac, M., Hampton, J., Stoens, A., Menkes, C., Memery, L., & 
+Grima, N. 1998. Predicting skipjack tuna forage distributions in the equatorial Pacific using a 
+coupled dynamical bio-geochemical model. Fisheries Oceanography. 7(3/4), 317-325.  
+ 53.  Lehodey, P., Bertignac, M., Hampton, J., Lewi s, A., & Picaut, J. 1997. El Niño southern oscillation 
+and tuna in the western Pacific. Nature. 389, 715-718.  
+ 54.  Lehodey, P., Chai, F., & Hampton, J. 2003. M odelling climate-related variability of tuna populations 
+from a coupled ocean-biogeochemical-populations dynamic model. Fisheries Oceanography. 12 
+(4/5), 483-494.  
+ 55.  Longhurst, A. 1995. Seasonal cycles of pelagic production and consumption. Progress in 
+Oceanography. 36(2), 77-167.  
+ 56.  Mackey, D. J., Pars low, J., Higgins, H. W., Griffiths, F.  B., & O'Sullivan, J. E. 1995. Plankton 
+productivity and biomass in the western equatorial Pacific: biological and physical controls. Deep-
+Sea Research II. 42(2-3), 499-533.  
+ 57.  McClain, C. R., Christian, J. R., Signorini, S. R., Lewis, M. R., Asanuma, I., Turk, D., & Dupouy-
+Douchement, C. 2002. Satellite ocean-color observ ations of the tropical Pacific Ocean. Deep-Sea 
+Research II. 49(13-14), 2533-2560.  
+ 58.  Okey, T. A. & Pauly, D. 1999. A mass-balan ced model of trophic flow s in Prince William sound: 
+decompartmentalizing ecosystem knowledge. In Ecosystem Approaches forFisheries Management . 
+University of Alaska Sea Grant, AK-SG-99-01, Fairbanks, pp. 621-635. 
+ 59.  Olson, R. J. & Watters, G. M. 2003. A model of  the pelagic ecosystem in the eastern tropical Pacific 
+Ocean. IATTC Bulletin. 22(3).  
+ 60.  Pauly, D., Soriano-Bartz, M., & Palomares, M.  L. 1993. Improved construction,parameterization and 
+interpretation of steady-state ecosystem models. In Trophic models of aquatic ecosystems. 
+Christensen, V. & Pauly, D. Eds. ICLARM Conference Proceedings 26, Manila, pp. 1-13. 
+ 61.  Poore, G. 2004. Marine decapod crustacean of Southern Australia. A guide to identification.  CSIRO 
+Publishing, Collingwood, pp. 1-574. 
+ 62.  Rodier, M. & Le Borgne, R. 1997. Export flux of particles at the equator in the western and central 
+Pacific ocean. Deep-Sea Research II. 44(9-10), 2085-2113.  
+ 63.  Roger, C. 1974. Les Euphausiacés du Pacifique Équatorial et  sud tropical. Mémoires O.R.S.T.O.M. 
+71, 1-130.  
+ 64.  Roman, M. R., Dam, H. G., Le Borgne, R., & Zhang, X. 2002. Latitudinal comparisons of equatorial 
+Pacific zooplankton. Deep-Sea Research II. 49(13-14), 2695-2711.  
+ 65.  Roper, C. F. E. & Young, R. E. 1975. Vertical distribution of pelagic cephalopods. Smithsonian 
+Contributions to Zoology. 209, 1-51.  
+ 66.  Smith, M. & Heemstra, P. 1986. Smith's sea fishes.  Springer-Verlag, Berlin, pp. 1-1047. 
+ 67.  Verity, P. G., Stoecker, D. K., Sieracki, M. E ., & Nelson, J. R. 1996. Microzooplankton grazing of 
+primary production at 140°W in the equatorial Pacific. Deep-Sea Research II. 43(4-6), 1227-1255.  
+ 68.  Vinogradov, M. E., Shushkina, E. A., Vederni kov, V. I., Nezlin, N. P., & Gagarin, V. I. 1997. 
+Primary production and plankton stocks in the Paicifc Ocean and their seasonal variation according 
+to remote sensing and field observations. Deep-Sea Research II. 44(9-10), 1979-2001.  
+ 69.  Walters, C. J. & Juanes, F. 1993. Recruitment limitation as a consequence of natural selection for 
+use of restricted feeding habitats and predation risk taking by juvenile fishes. Canadian Journal of 
+Fisheries and Aquatic Sciences. 50, 2058-2070. 
+ 70.  Walters, C. J. & Martell, S. D. J. 2004. Fisheries Ecology and Management. Princeton University 
+Press, Princeton, pp. 1-448. 
+ 31
+ 71.  Wang, X., Le Borgne , R., Murtugudde, R., Busalacchi, A. J., & Behrenfeld, M. J. 2007. Spatial and 
+temporal variability of the carbon to chlorophyll ratio in the equatorial Pacific: a basin scale model 
+study. Submitted.   
+ 72.  White, J. R., Zhang, X., Welling, L. A., Roman,  M. R., & Dam, H. G. 1995. Latitudinal gradients in 
+zooplantkon biomass in the tropical Pacific at 140° W during the JGOFS EqPac study: effects of El 
+Niño. Deep-Sea Research II. 42(2-3), 715-733.  
+ 73.  Williams, P. G. & Reid, C. 2006. Overview of  tuna fisheries in the Western and Central Pacific 
+Ocean, including economic conditio ns - 2005. 2nd Meeting of th e Scientific Committee of the 
+Western and Central Pacific Fisheries Commission, WCPFC-SC2, Manila, Philippines, 7-18 August 
+2006. GN WP-1, 1-40. http://www.wcpfc.org/sc2/pdf/SC2_GN_WP1.pdf. 
+ 74.  Wrobel, D. & Mills, C. 1998. Pacific coast pelagic invertebrates. A guide to the common gelatinous 
+animals. Sea Challengers, Monterey Bay Aquarium, Monterey, pp. 1-108. 
+ 75.  Zhang, X., Dam, H. G., White, J. R., & Roman, M. R. 1995. Latitudinal variations in 
+mesozooplankton grazing and metabolism in the centr al tropical Pacific du ring the U.S. JGOFS 
+EqPac study. Deep-Sea Research II. 42(2-3), 695-714.  
+ 32
+Appendix 1.  Data sources and description for the functional groups 
+ 
+Detritus 
+Detritus biomass was estimated in a previ ous study (Godinot, 2002) to be approximately 
+130gWM/m2 after the empirical method given by Pauly et al. (1993).  
+Phytoplankton groups 
+Data on primary producers came from an intensive bibliographic search that gathered a 
+large amount of information from the we stern oligotrophic Pacific area and the 
+oligotrophic parts of the central Pacific th at are north and south of the equatorial 
+mesotrophic region. The most reliable informati on was selected as input parameters in 
+consultation with Robert Le Borgne10.  
+COMPOSITION: Two groups of primary prod ucers are considered: small and large 
+phytoplankton with a theoretical size limit of approximately 2 to 8µm. In general biomass 
+and production estimates of primary producers were estimated by size-class rather than 
+by taxons.  Unfortunately, there has been no consistent size limit differentiation used in 
+the literature ( e.g. 8µm (Brown et al. , 2003; Le Borgne & Landry, 2003), 1 and 3 µm 
+(Rodier & Le Borgne, 1 997), 3 and 10µm (Ishizaka  et al. , 1997), 3µm (Le Bouteiller et 
+al., 2003; Champalbert  et al. , 2003), 5µm (Chai  et al. , 2002), 2µm (Dam  et al. , 1995)) 
+which added uncertainty to the parameterisation.  In the oligotrophic waters of the 
+western Pacific the small producers are considered dominant (Chai  et al. , 2002; 
+Champalbert et al. , 2003; Dam  et al. , 1995; Ishizaka  et al. , 1997; Le Borgne et al. , 
+2002b; Le Bouteiller et al., 2003; Rodier & Le Borgne, 1997; Verity  et al., 1996) and we 
+assumed that large phytoplankton is about 15% of the primary producers biomass as 
+stated by Le Borgne et al.  (2002b). Information on the taxonomic composition for each 
+group is provided in 
+Table 1. 
+BIOMASS: Phytoplankton biomass is mainly estimated by 2 techniques: measurements 
+of Chlorophyll a concentration or counting of phytoplankton cells. Both techniques imply 
+the use of conversion factors (C /Chla and C/cell) to obtain values in grams of C. C/Chla 
+                                                 
+10 Robert Le Borgne, Centre IRD de Nouméa, BP A5, Nouméa Cédex, New Caledonia; 
+leborgne@noumea.ird.nc. 
+ 33
+ratio varies with light, nutrient and temperature (Wang  et al. , 2007): due to 
+photoacclimation the ratio decreases from high to low light; there is then a decrease of the 
+ratio with depth (Chavez et al., 1996; Le Borgne et al., 2002b; Le Bouteiller et al., 2003). 
+C/Chla ratio can vary from 200 at the surface to 40 in deeper waters; in the warm pool 
+maximum of chlorophyll is at ca. 90m depth, a C/Chla ratio of 40 was considered in this 
+study (Brown et al. , 2003). C/cell ratio depends on the taxons considered (Brown et al. , 
+2003; Le Bouteiller et al. , 2003). Carbon biomass is converted into wet mass (WM) with 
+the conversion factor: 11.539gWM/gC (ICES , 1989 and Jones, 1984 in Christensen, 
+1995).  
+Counting is considered the most  reliable technique (Le Borgne, pers.comm.) and the 
+minimum and maximum values provided by Brown  et al.  (2003) and Ishizaka  et al.  
+(1997) were averaged to obtain a total depth-integrated phytoplankton biomass of 
+1068mgC/m2 or 12.3265gWM/m 2. This value is divided into 1.84898gWM/m 2 for large 
+phytoplankton (15%) and 10.4775 gWM/m2 for small phytoplankton. 
+PRODUCTION: Total primary production between 96.4 and 624mgC/m 2/day have been 
+determined by several studies prov iding a rough average of 325mgC/m 2/day (Barber et 
+al., 1996; Ishizaka  et al. , 1997; Le Borgne et al., 2002a; Le Bouteiller et al. , 2003; 
+Mackey et al., 1995; McClain et al., 2002; Rodier & Le Borgne, 1997; Vinogradov et al., 
+1997). Production can be considered roughly c onstant in the 0-100m depth layer in the 
+warm pool (Le Borgne, pers.comm.) allowing to calculate conversion factors: 
+Plarge ppk = Ptot ppk/6.1558 and P small ppk = Ptot ppk/1.193956 (Le Borgne & Landry, 2003). 
+Hence production of large phytoplankton is 52.8mgC/m 2/day and production of small 
+phytoplankton is estimated at 272.2mgC/m 2/day. According to the biomass estimations, 
+productions to biomass ratios are: P/Bsmall ppk=109.44/y and P/Blarge ppk=120.3/y. 
+Zooplankton groups 
+Numerous references were reviewed to gath er information on zooplankton in the Pacific. 
+Similarly to phytoplankton the more relevant and accurate information has been selected 
+in collaboration with Robert Le Borgne to parameterise the model. 
+COMPOSITION: In our model we defi ned 2 zooplankton f unctional groups: 
+microzooplankton (20-200µm) and meso zooplankton (200-2000µm). Smaller 
+ 34
+zooplankton: nano- and picozooplankton (<20µm) are assumed to be involved only in the 
+microbial loop along with the heterotrophic bacteria and are considered in the model in 
+the detritus group, they are t hought to have a minor role in the classical food chain. 
+Larger zooplankton: macrozooplankton (>2000µm)  is assimilated to micronekton/forage 
+in our model.  
+Microzooplankton is comprised primarily of copepod nauplii but also ciliates, 
+foraminiferans, acantharians, and heterotrophic dinoflagellates (Roman  et al. , 2002; 
+Ishizaka et al., 1997; Verity et al., 1996; Calbet & Landry, 1999). Mesozooplankon group 
+is dominated by copepods but also contains ostracods, larv al euphausiids, chaetognaths, 
+amphipods, pteropods, siphonophores, foraminiferans  and radiolarians among others (Le 
+Borgne & Rodier, 1997; Ishizaka  et al. , 1997; Le Borgne et al. , 2003). The proportions 
+between the different groups can be considered ca. 20% microzooplankton and 80% 
+mesozooplankton of the cumulated micro- and mesozooplankton; if nanoplankton is also 
+considered then nano- and microzooplankt on represent 40% and mesozooplankton 60% 
+(Ishizaka et al., 1997; Rodier & Le Borgne, 1997; Roman et al., 2002). 
+BIOMASS: Biomass estimates of zooplankton in oligotrophic conditions are provided by 
+numerous authors and range be tween 439 and 2111mgWetWeight/m 2 for 
+microzooplankton and between 1216 and 8158mgWW/m 2 for macrozooplankton (Calbet 
+& Landry, 1999; Ishizaka  et al. , 1997; Le Borgne & Rodier, 1997; Le Borgne  et al., 
+2003; Rodier & Le Borgne, 1997; Roman  et al., 2002; Vinogradov et al. , 1997; White et 
+al., 1995). In our model we considered de pth-integrated av erage values of 
+1461mgWW/m2 for microzooplankton and 4358mgWW/m2 for mesozooplankton.  
+Biomasses are provided with different un its and conversion factors were used to 
+transform them in wet weight (WW). The following conversion factors are valid for 
+zooplankton: C/N=5.9 and N/P=20 (atomic in mol.), gC/gDW=0.36, gAFDW/gDW=0.74 
+(Le Borgne  et al. , 2003), gN/gDW=0.038, gP/gDW=0.0075, gDW/gWW=0.16 
+(Champalbert et al., 2003). 
+PRODUCTION: There is little informati on available on production. P/B ratio is 
+equivalent to growth rate in a steady stat e situation and estimates using this hypothesis 
+(P/B = 38-150/y (Roman et al., 2002)) are much lower than the estimates calculated from 
+ 35
+ingestion rates (P/B=153-1164/y (Ishizaka et al., 1997)). Growth rates and then P/B ratios 
+for the microzooplankton community are ro ughly comparable to those of their 
+phytoplankton preys (Landry & Calbet, 2004) for which the production estimations are 
+more reliable; moreover mesozooplankton shou ld have a lower P/B. We assumed the 
+values estimated from growth rates: P/Bmicrozooplankton=120/y and P/Bmesozooplankton=38/y. 
+CONSUMPTION: Consumption, grazing and pred ation studies have been conducted by 
+several authors and indicate Q/B values ranging from 77 to 1204/y for microzooplankton 
+and from 80 to 985/y for mesozooplankton (Chai  et al. , 2002; Landry  et al. , 1995; Le 
+Borgne & Landry, 2003; Verity  et al. , 1996; Wang  et al. , 2007; Gaudy et al. , 2003). 
+Average values of Q/Bmesozooplankton=230/y and Q/Bmicrozooplankton=382/y were included into 
+the model.  
+DIET COMPOSITION: The compilation of the information found in different 
+publications allowed establishing the following approximate diet composition (Calbet & 
+Landry, 1999; Chai et al. , 2002; Dam et al., 1995; Gaudy et al. , 2003; Landry & Calbet, 
+2004; Le Borgne & Landry, 2003; Zhang  et al., 1995). Microzooplankton would eat 80% 
+of small phytoplankton, 5% of large phytoplankton, 10% of hete rotrophic bacteria 
+associated to detritus and 5% of cannibalism while mesozooplankton would consume 5% 
+of small phytoplankton, 10% of large phytoplankton, 40% of microzooplankton, 10% of 
+cannibalism and 35% of detritus. 
+Micronekton/forage groups 
+Micronekton or forage descri bes the organisms in the 2- 20cm size class.  Under this 
+denomination are included numerous species of crustaceans, fish, cephalopods and other 
+invertebrates for which information is very scarce. The availability of information on 
+ecological groups of forage rather than on taxo nomic groups leaded us  to consider these 
+ecological groups (Lehodey, 2004). 
+COMPOSITION: Based on the work of Blackburn (1968), Grandperrin (1975), Legand et 
+al. (1972) and Roger (1974)) among others, Le hodey (2004; 2005) defined 6 classes of 
+pelagic micronekton according to their vertic al distribution and vertical migratory 
+behaviour: epipelagic (0- ~200m), mes opelagic (~200- ~400m) and bathypelagic 
+ 36
+(>~400m) components including migrant and non-migrant groups ( Figure 5 ). These 
+classes were used in our model. 
+To identify the species included in the differe nt forage classes, information has been 
+compiled from literature, the main references being Fishbase 11, Carpenter & Niem 
+(1999), Grandperrin (1975), Smith & Heemst ra (1986) for fish, Roper & Young (1975), 
+The Cephalopod page 12, and Tree of life/Cephalopods 13 for cephalopods, Poore (2004) 
+for crustacean, and Wrobel & Mills (1998) fo r invertebrates. Taxonomic composition of 
+these groups is detailed in Table 1. 
+ 
+NIGHT DAY    Vertical distribution and migration of forage species
+surface
+200 m
+400 m
+EPI
+oceanic
+reef/FAD
+MIGRANT
+MESO
+MESO HIGHLY
+MIGRANT
+BATHY
+MIGRANT
+BATHY
+BATHY
+NIGHT DAY    Vertical distribution and migration of forage species NIGHT DAY    NIGHT DAY    Vertical distribution and migration of forage species
+surface
+200 m
+400 m
+EPI
+oceanic
+reef/FAD
+MIGRANT
+MESO
+MESO HIGHLY
+MIGRANT
+BATHY
+MIGRANT
+BATHY
+BATHY
+surface
+200 m
+400 m
+EPI
+oceanic
+reef/FAD
+MIGRANT
+MESO
+MESO HIGHLY
+MIGRANT
+BATHY
+MIGRANT
+BATHY
+BATHY
+ 
+Figure 5. Schematic view of the different forage components according to their vertical distribution 
+and their vertical day/night migratory behaviour. 
+ 
+BIOMASS: In the SEAPODYM 14 model developed by Lehodey the forage components 
+are modelled as single populations com posed of different species (Lehodey  et al. , 1998; 
+                                                 
+11 http://www.fishbase.org/home.htm
+12 http://www.thecephalopodpage.org/
+13 http://www.tolweb.org/Cephalopoda/19386
+14 SEAPODYM model and associated programs and documentation are made available to the scientific 
+community free of charge. For more information consult http://www.seapodym.org/. 
+ 37
+Lehodey, 2001; Lehodey  et al. , 2003; Lehodey, 2004; Lehodey, 2005). Forage biomass 
+originates from the trophic conversion of primary producti on to secondary production 
+applying energy transfer coefficients variable according to the forage classes. A growth 
+model is not used to estimate forage biom ass, it is a simple conversion (Lehodey, 2004). 
+In the SEAPODYM model primary production  is predicted from a coupled general 
+circulation model and bio-ge ochemical model. Average forage biomasses for the 6 
+components were extracted from the model for the warm pool region for the period 
+January 1993 to December 2002. Values vary between 0.759 and 0.164 g/m 2 (or 
+tons/km2) according to the component considered ( Table 3). Cumulated mesopelagic and 
+bathypelagic biomass indicates a dept h integrated biomass of 2.31 tons/km 2 very similar 
+to 2 tons/km 2, the value provided by Gjøsaeter & Kawaguchi (1980) in the western 
+Pacific for the 200-1000m depth mesopelagic biomass and of the same order to the values 
+calculated by Lam & Pauly (2005). 
+PRODUCTION: Production values were also extracted from SEAPODYM model for the 
+same area and time period and allowed to  calculate a P/B between 3.69 and 0.84 
+according to the forage component considered. Production values decrease from the 
+surface to deep areas with faster turnover  in the epipelagic strata due to higher 
+temperature than in the deeper layers. 
+CONSUMPTION: A Q/B value of 15 was chosen  for all the forage components. This 
+value is a guesstimate and is coherent with th e values found in the literature for forage 
+species (4.6 to 36) and compiled in a prev ious Ecopath model (Godinot, 2002; Godinot, 
+2003; Godinot & Allain, 2003). 
+DIET COMPOSITION: Very little informati on is available on diet of micronekton 
+species and considering the aggregation of very different species in unknown proportions 
+in our model it was not realistic to try and base the diet compositi on on studies found in 
+the literature. Diet composition was arbitrarily determined according to the 
+vertical/temporal distribution of the different forage comp onents in the water column. 
+Two forage components occurring in the same depth strata at the same time can forage on 
+each other. Zooplankton groups were also cons idered as potential preys as well as large 
+phytoplankton in the epipelagic strata. 
+ 38
+Piscivorous fish 
+There is a large number of piscivorous species . For some of them individual information 
+is available but it is not a general rule. Al so, to avoid a too large number of components 
+in the model, it has been decided to aggregate all these species in the same group. 
+COMPOSITION: This group is very heteroge neous including all the predators except 
+tuna, billfish and sharks. It is composed of  non-target species with commercial value as 
+well as discarded species (Table 1). These species can have very different behaviours, for 
+example opah and Alepisauridae are known to sp end most of their time in deep waters 
+while Coryphaenidae are surface dwellers. 
+BIOMASS: No information could be obtained on the biomass of the piscivorous fish. The 
+value included in our model is a guesstimate of the same order of the value calculated in a 
+preliminary model of the warm pool based on ecotrophic efficiency (Godinot & Allain, 
+2003).  
+PRODUCTION: Based on a compilation of data, mainly from Ecopath models described 
+in Anon. (1993) but also from other models (Kitchell  et al. , 1999; Kitchell  et al. , 2002; 
+Olson & Watters, 2003; Anon., 2000), a range of  P/B values from 0.3 to 3 has been 
+determined and an average value of 1.5 has been chosen.  
+CONSUMPTION: As for P/B, Q/B values were compiled from the same publications and 
+a range from 2.9 to 20 was determined, an av eraged value of 10 was included into the 
+model. 
+DIET COMPOSITION: Diet composition is based on the analysis of 181 non-empty 
+stomachs of predators collected in the warm  pool area between 2001 and 2007 as part of 
+an extensive trophic study in the Pacific (Allain, 2003; 2004; 2005). Pr edators considered 
+to determine the diet of the piscivorous group are 1 Lepidocybium flavobrunneum , 
+1 Lobotes surinamensis, 1 Platax spp., 1 Platax teira, 3 Ruvettus pretiosus, 8 Sphyraena 
+barracuda, 4 Sphyraena spp. , 4 Taractichthys longipinnis, 23 Acanthocybium solandri , 
+1 Allothunnus fallai , 1 Assurger anzac , 5 Bramidae, 1 Caranx sexfasciatus, 
+24 Coryphaena hippurus, 2 Euthynnus affinis , 88 Elagatis bipinnulata , 2 Gempylus 
+serpens, 4 Gnathanodon speciosus and 7 Lampris guttatus.  
+ 39
+Tuna 
+Tuna are the target species of oceanic pelagi c fisheries in the Paci fic, they are of high 
+interest for management, they have been monitored for a long time and therefore they 
+have been detailed in the model. 
+COMPOSITION: In the warm pool area the tuna  species constituting most of the catches 
+are skipjack Katsuwonus pelamis , yellowfin Thunnus albacares  and bigeye Thunnus 
+obesus; albacore Thunnus alalunga is only present on the north and south boundaries of 
+the warm pool and has not been considered in the model. Each species has been split into 
+2 groups: adults and juveniles according to 50% of maturity for the populations of YFT 
+and BET and 100% of maturity for the population of SKJ. In this model, age, size and 
+weight at maturity ( Table 1 ) correspond to the values used in MULTIFAN-CL 15, the 
+stock assessment model used by SPC to provide annual estimates to the WCPFC 16 
+scientific committee. 
+BIOMASS: Biomasses are extracted from  2006 MULTIFAN-CL regions 3 assessments 
+for YFT and BET and 2005 region 5 assessment for SKJ (no assessment was provided in 
+2006 for SKJ). MULTIFAN-CL is an age-structured model allowing to differentiate 
+biomasses for adults and juveniles. 
+PRODUCTION: Ecopath is a mass-balanced  model and under this condition, total 
+mortality equals to production ove r biomass (Allen, 1971 in Christensen  et al. , 2000). 
+Total mortality was calculated for adults and juveniles using MULTIFAN-CL data. 
+CONSUMPTION: Tuna consumption has been modelled with a bioenergetic model per 
+age class (Kirby, 2005). Models have been developed for YFT and SKJ, however the 
+absence of data did not allow to paramete rise a bioenergetic model for BET; YFT 
+consumption rates were simply applied to BET making the estimates for this species less 
+reliable. 
+DIET COMPOSITION: As for piscivorous fish, diet composition is based on the stomach 
+content analysis of tuna collected in the warm pool  area between 2001 and 2007. 143 
+non-empty stomachs of SKJ were examined (48 juveniles, 95 adults), 283 YFT (192 juv., 
+                                                 
+15 http://www.multifan-cl.org/
+16 WCPFC: Western and Central Pacific Fisheries Commission; http://www.wcpfc.int  
+ 40
+89 ad.) and 137 BET (15 juv., 120 ad.). However values were modified to account for 
+species not observed in stomach but that are probably part of the diet. 
+Sharks and billfish 
+Little information is available for billfish and sharks and it is variable according to the 
+species considered.  
+COMPOSITION: Swordfish Xiphias gladius and blue shark Prionace glauca constitute 2 
+individual groups. Swordfish is particularly targeted by some fisheries and blue shark is 
+the most common shark bycatch. Bl ue, black and striped marlin (Makaira mazara, 
+M. indica, Tetrapturus audax) , sailfish Istiophorus platypterus and spearfish 
+T. angustirostris are aggregated in the “other billfish” component and Alopiidae, 
+Carcharhinidae, Lamnidae and Sphyrnidae shar k families are aggregated in the “other 
+shark” component. Juvenile components are also taken into consideration, “small 
+billfish” include juvenile swordfish and other billfish, “small sharks” include juvenile 
+blue and other sharks. Age/size/weight defini ng juvenile and adult groups have not been 
+specified. 
+BIOMASS: Biomass values included in this  model are the ones used in the Central 
+Pacific Ecopath model developed by Kitchell et al. (1999). 
+PRODUCTION: P/B ratios are guesstimates based on other Ecopath models or studies. 
+Compilation of publications detailed in G odinot (2002) provided P/B ranges of 0.14-0.41 
+for blue shark, 0.1-0.6 for other sharks, 0.35-0.5 for swordfish and 0.3-1 for other billfish. 
+CONSUMPTION: In the same report Q/B rang es can be found: 2.1-2.8 for blue sharks, 
+1.5-9.7 for other sharks, 2.8-7.8 for swordfish and 4-7.8 for other sharks. 
+DIET COMPOSITION: As for piscivorous fish and tuna, diet composition is based on 
+the stomach content analysis of tuna collected between  2001 and 2007. However number 
+of samples being small in the warm pool ar ea, all the samples from the western and 
+central Pacific have been considered: 27 non-empty stomachs of swordfish, 13 blue 
+sharks, 36 other sharks and 17 other billfish. The small number of samples does not allow 
+a good level of confidence in the data and values were modified to account for species 
+not observed in the stomachs but that are probably part of the diet. 
+ 41
+Fisheries information 
+Fisheries information has been extracted from  SPC fisheries database system CES Tuna 
+fishery Catch and Effort query System 17 and from Lawson (2006).  Four fisheries have 
+been considered: longline, purse seine unassociated schools, purse seine FAD schools and 
+domestic fisheries of Indonesia and Philippines ( Table 5 ).  For sharks, billfish and 
+piscivorous fish groups, longlin e data are extracted from th e database for the warm pool 
+area and the average values for years 1995  to 2004 were considered. In CES shark 
+information is not provided on a species by spec ies basis, blue sharks were then assumed 
+to constitute 75% of shark catches as calculated from the data provided in Lawson (2006) 
+for the WCPFC area. Billfish information is  provided by species. CES does not provide 
+detailed information on bycatch species caught by purse seine; they were then extracted 
+from Lawson (2006) for the whole WCPFC area. Catch per km 2 was assumed identical 
+for WCPFC and WCPO as purse seine fisher ies operate mainly around the equator. All 
+the bycatch caught with purse seine were assumed to be FAD associated. 
+Catch data for tuna were extracted from the stock a ssessment 2006 for yellowfin and 
+bigeye and stock assessment 2005 for skip jack. For YFT and BET data are annual 
+averages of the years 1995 to 2004 for region 3 (in the model 1 of MUFDAGER). For 
+SKJ catch data is an annual average of the years 1993 to 2 002 and longline data are in 
+fact pole-and-line data for region 5 (in the model 4 of MUFDAGER).  
+ 
+                                                 
+17 http://www.spc.int/oceanfish/html/statistics/Ces/index.htm
+ 42

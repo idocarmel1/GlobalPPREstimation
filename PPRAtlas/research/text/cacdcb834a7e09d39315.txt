@@ -1,0 +1,1340 @@
+ 
+PO Box 1390, Skulagata 4 
+120 Reykjavik, Iceland  Final Project 1998 
+ 
+ 
+ 
+ 
+ 
+TROPHIC MODELLING AS A TOOL TO EVALUATE AND 
+MANAGE ICELAND'S MULTISPECIES FISHERIES 
+ 
+ 
+ 
+Asberr Natoumbi Mendy 
+Fisheries Department, 
+Department of State for Presidential Affairs, 
+Fisheries and Natural Resources, 
+6, Marina Parade, 
+Banjul, The Gambia 
+ 
+ 
+ABSTRACT 
+ 
+The main purpose of this project is primarily to attempt, for the first tim e, to detail a 
+steady-state model of tropic interactions a nd organic m atter transfer in the Icelandic 
+fisheries, using user-friendl y software, ECOPATH (version 4 alphas).  The rationale 
+behind this is to present t o t he Icel anders an opt ional t ool for t he eval uation and 
+management of multispecies fisheries such as th e Icelandic fisheries.  Ecopath is user 
+friendly i n a num ber of i mportant feat ures: (i) use of a “generalized linear inverse” 
+matrix ro utine allo wing th e system  o f lin ear eq uations used to estimate model 
+parameters t o over- or sl ightly underdet ermine; (i i) est imation of (al most) any  set  of 
+unknowns and not only of biomasses; (iii) explicit consideration of respiratory, ejective 
+and excretory losses (with default provided for inputs) and of the detritus pathways; (iv) 
+estimation of num erous derived quantities on species groups or a whole-system  basis, 
+such as gross and net  effi ciencies, t ropic levels, food electivity, pathways and cycles 
+involving any groups and “ascendancy” sensu R. E. Ulanowicz.  
+ 
+The model presented was based mainly on published data and personal communications 
+from staff of Marine Research Institute .  It was structured around commercially 
+important fish groups and shri mp with a top predator (i.e. Gadus morhua L.) evaluated 
+at 1.3 t .km-2.  B iomass est imates obt ained for other fish were considered very 
+reasonable and comparable with estim ates from analytical tools used in Iceland.  The 
+results of m ixed t ropic i mpacts, t rophic aggregat ion, and ot her net work anal yses are 
+presented. The i nput dat a and results are expressed on area basi s and t hus cover t he 
+total marine fisheries waters of Iceland.  The period modeled here is 1997 and 1998. 
+ 
+Key w ords: Tropi c model , Ecosyst em, Fi sheries management , si ngle speci es, 
+multispecies, tropic interactions, Icelandic fisheries. 
+ 
+ 1
+TABLE OF CONTENTS 
+ 
+ 
+ 
+ 
+1 BACKGROUND AND JUSTIFICATION ...................................................................................... 4 
+1.1 Geography and Location............................................................................................................ 4 
+1.2 The Mixing Effects .................................................................................................................... 5 
+1.3 Fisheries Research...................................................................................................................... 5 
+1.4 Fisheries Resources Management .............................................................................................. 6 
+1.5 Mass-balance Models................................................................................................................. 7 
+2 THE OBJECTIVE OF THE PROJECT ........................................................................................... 8 
+3 MATERIALs AND METHODs....................................................................................................... 8 
+3.1 The Key System Component and Key Data in Ecopath With EcoSim Model........................... 9 
+3.2 Parametrization and Source of Data......................................................................................... 12 
+3.2.1 Biomass (B) .................................................................................................................... 12 
+3.2.2 PB - the production/biomass ratio .................................................................................. 12 
+3.2.3 QB - the consumption/biomass ratio .............................................................................. 13 
+3.2.4 EE - the ecotrophic efficiency ........................................................................................ 13 
+3.2.5 DC - Diet Composition................................................................................................... 13 
+4 RESULTS AND DISCUSSION..................................................................................................... 14 
+4.1 Parameter Estimates ................................................................................................................. 15 
+4.2 Prey-Predator Matrix................................................................................................................ 17 
+4.3 Trophic Transfer Efficiency..................................................................................................... 17 
+4.4 Primary Production Required to Sustain Consumption and catches ........................................ 18 
+4.5 Trophic Aggregation ................................................................................................................ 19 
+4.6 Mortality Coefficients .............................................................................................................. 20 
+4.7 Mixed Trophic Impact.............................................................................................................. 21 
+4.8 Fishing Mortality and Biomass Change ................................................................................... 22 
+4.9 Individual Selected Model Groups........................................................................................... 24 
+4.9.1 Cod Group ...................................................................................................................... 24 
+4.9.2 Haddock Group .............................................................................................................. 25 
+4.9.3 Northern Shrimp............................................................................................................. 25 
+4.9.4 Capelin............................................................................................................................ 26 
+5 CONCLUSION .............................................................................................................................. 27 
+ACKNOWLEDGMENT ........................................................................................................................ 27 
+LIST OF REFERENCES ....................................................................................................................... 28 
+ 
+ 
+ 2
+LIST OF FIGURES 
+ 
+ 
+Figure 1.  Shows circulation and ocean fronts in Icelandic waters derived from satellite tracked drifters. 
+(Valdimarsson, H. and Malmberg, S.A. 1998). ................................................................................ 4 
+Figure 2.   A network of tropic interactions in the Icelandic Sea in 1997. The boxes are arranged on the 
+y-axis after tropic levels. The model groups are balanced so that input equals output. Flows 
+exiting a group do so from the top or sides of a box, while flows enter at the bottom................... 15 
+Figure 3.  The trophic transfer efficiency in the Icelandic system. Mean = 9.72 ................................... 17 
+Figure 4.  Mixed trophic impacts in the 1997 Icelandic system.  The bars quantify the direct and 
+indirect trophic impacts that the groups on the left have on those on the top.  The impacts are 
+relative but comparable among groups........................................................................................... 22 
+Figure 5.  Shows an example of a 10 year simulation using Ecosim (adult cod is worst affected in this 
+example) ............................................................................................................................... ..........23 
+Figure 6.  Simulated effect of fishing rate on Icelandic fisheries biomass and possible impact on model 
+groups. ............................................................................................................................... ............. 23 
+Figure 7.  Simulated effect of F.M on cod group biomass and possible impact on other model groups.
+............................................................................................................................... ......................... 24
+Figure 8.  Simulated effect of F.M. on the haddock biomass and possible impact on other model groups
+............................................................................................................................... ......................... 25
+Figure 9.  Simulated effect of F.R. on capelin biomass and possible impact on other model groups ....26 
+ 
+ 
+ 
+ 
+LIST OF TABLES 
+ 
+ 
+Table 1.  Historical catch data in nearest ‘000 tons of major commercial species (from MRI report for 
+1997/98). ............................................................................................................................... ...........6 
+Table 2.   Parameters used to describe the Icelandic Fisheries ecosystem model, 1997.  An explanation 
+of each parameter (except for GE) used in this model is given in section 3.2. in the report.  GE, 
+gross efficiency is the ratio between production and consumption. Key: () indicates values 
+estimated assuming mass balance, * indicates values assumed after reviewing models involving 
+similar groups and ecosystems e.g. of the North Sea, West Greenland shrimp grounds (Pedersen, 
+1994). EE = 0.95 for some groups are qualified guessestimates. ................................................... 10 
+Table 3.  Diet composition matrix for the Icelandic Fisheries ecosystem model, 1997. ........................ 11 
+Table 4.  (Cont. of table 3).  Diet composition matrix for the Icelandic Fisheries ecosystem model, 
+1997................................................................................................................................ ................ 11 
+Table 5.  Estimates of primary production and detritus required to sustain consumption and catch (t.km
+.yr )  in the Icelandic ecosystem, arranged in descending ecological cost.
+-
+2 -1 .................................. 18
+Table 6.  Absolute flows (t.km-2yr-1) by discrete trophic levels (I to VI). The groups are sorted 
+according to their trophic levels (TL). Total flows (t.km-2yr-1) and biomasses (t.km-2yr-1) trophic 
+level is presented.  The total biomasses excludes detritus.............................................................. 19 
+Table 7.  Mortality Coefficients for Icelandic Fisheries ecosystem model groups (all units are in year )-1
+............................................................................................................................... ......................... 20
+Table 8.   Basic Parameter Estimates Statistics ...................................................................................... 21 
+Table 9.  F.M at which the...................................................................................................................... 24 
+Table 10.  Shows groups affected by F.R. 0.1 on northern shrimp ........................................................ 25 
+ 
+ 3
+1 BACKGROUND AND JUSTIFICATION 
+ 
+ 
+1.1 Geography and Location 
+ 
+Iceland covers an area of 103,000 km 2.  Off its coasts, out to a depth of 200 m , is a 
+continental shelf with a total area of 115,000 km 2 but is 216,000 km 2 at 50 nautical 
+miles equidistant from  the baseline, rising to 750,000 km 2 at the 200-m ile economic 
+zone (Malmberg, 1991).  Beyond the continen tal shelf limit are submarine ridges and 
+the deep ocean. 
+ 
+The country is situated at a point were fr onts of cold and warm  ocean currents m eet.  
+Iceland is located atop several subm arine ridges which define the limits of the various 
+areas of the ocean around it.  The ridges form  a barrier against the three m ain ocean 
+currents: the warm  Irm inger currents or Gulf-stream from  the south, the cold East-
+Greenland Current  and the East-Icelandic Current  (Figure 1).  These include the 
+ridge which runs from  Greenland to the Br itish Isles, through Iceland and the Faroe 
+Islands. This is an old area of  volcanic activity from the tertiary period.  It is also the 
+so-called Mid-Atlantic Ridge, a rift system  and scene of current volcanic activity 
+joined by crystal drift, which divides the Atlantic Ocean into a western and eastern 
+basin. 
+ 
+ 
+ 
+ 
+Figure 1.  Shows circulation and ocean fronts in Icelandic waters derived from satellite tracked 
+drifters. (Valdimarsson, H. and Malmberg, S.A. 1998). 
+ 
+The Greenland-Scotland Ridge forms a barrier against the main ocean currents around 
+Iceland and to the south is the warm  Irminger Current which is a branch of the North 
+ 4
+Atlantic Current with a tem perature range of 6-8°C.  The cold East-Greenland and 
+East Icelandic Current (1-2°C) prevail in the north.  There are also deep and bottom  
+currents in the sea around Iceland, principally the overflow of deep cold water from  
+the Nordic Seas and the Arctic Ocean sout h over the subm arine ridges into the North 
+Atlantic.  
+ 
+1.2 The Mixing Effects 
+ 
+The im pact of  water currents with the s ubmarine ridges, and vice versa, causes a 
+mixing in the sea, an upwelling in the c ontinental slopes and anti-clockwise m ixing 
+around Iceland.  This phenom enon facilitates the transportation of dissolved oxygen 
+through to the deep waters and the m ovement of nutrients upwards to the surface 
+layers (Malm berg, 1991).  These conditions, coupled with a fairly extensive 
+continental shelf and the rays of the sun, form  an ideal environm ent for the 
+recruitment and growth of m arine life, th e basis for the existence of rich fishing 
+grounds around Iceland and all human life within the country. 
+ 
+The hydrographic conditions in Icelandic waters  are also reflected in the atm ospheric 
+or clim atic conditions in and over the country and the surrounding seas, m ainly 
+through the Iceland Low and Greenland High.  These conditions in sea and air have 
+their impact on biological conditions, expre ssed through the food chain in the waters 
+including recruitment and catches of commercial fishes. 
+ 
+1.3 Fisheries Research  
+ 
+The waters around Iceland, fed by the warm  Gulf Stream  from  the south, offer 
+exceptional conditions for fish stocks to thrive.  Since understanding of the m arine 
+ecosystem is the foundation of sensible and sustainable harvesting of these resources, 
+a key role has been assigned to m arine research.  Such research is the basis on which 
+effective fisheries m anagement can be im plemented and the system  that has been 
+developed in Iceland today aims to harvest the stocks in the most responsible manner, 
+in order to ensure and m aintain m aximum long-term  productivity of all m arine 
+resources. 
+ 
+Fisheries have been im portant to the I celandic nation ever since the country was 
+settled in the ninth and tenth centuries.  Today, fisheries are responsible for some 75% 
+of Iceland's total revenues from goods exports (around 5% of the world' s total fishing 
+exports), and yield 55% of all national fore ign currency earnings.  During this present 
+century, Iceland has developed from  a poor agricultural nation into a m odern 
+technological society whose foundation is based on productive m arine fisheries.  
+History has shown that the cod ( Gadus morhua)  has been the m ost im portant 
+commercial fish species. Table 1 summarizes decadal trend in catches by fish species.  
+The value reported in this table represen t only landed catches by each species and do 
+not include catches that are discarded out at sea.  
+  
+ 5
+Table 1.  Historical catch data in nearest ‘000 tons of major commercial species (from MRI 
+report for 1997/98).  
+ 
+Year\Species Cod Haddock Saithe Redfish G. Halibut Herring Capelin Nephrop N.Shrimp
+1905 92    
+1915 136    
+1925 332    
+1935 402    
+1945 216    
+1950 350 67 73 126   
+1955 538 65 48 110 54  0.2 0.4
+1965 394 99 60 114 7 763 50 4 1
+1975 371 46 88 71 24 33 460 2 5
+1985 325 51 57 92 32 49 1000 2 25
+1995 169 61 49 90 36 300 746 1 84
+1997 204 44 37 73 30 285 2 1 82
+ 
+ 
+1.4 Fisheries Resources Management 
+ 
+After having acquired control of the te rritorial sea, the Icelanders took upon 
+themselves the responsibility of seeing that th e nation's fish stocks are exploited in a 
+rational and sustainable manner.  The first step in this direction was effort limitations, 
+primarily focused on limiting the number of vessels and fishing days.  These measures 
+however, did not achieve the protection objec tives they were intended to secure but 
+rather led to inefficient use of effort a nd over-investment.  The Icelanders as a nation 
+that depends upon the existence, growth and developm ent of the fish stocks could not 
+be satisfied with a system that produced such results. 
+ 
+Icelanders thus looked for other fisheries management strategies, and in doing so have 
+broken new grounds in fisheries m anagement.  Iceland is believed to be the first 
+country to adopt a system  of fisheries management based prim arily on individual 
+transferable quota shares (ITQs) which are totally transferable and divisible (Ministry 
+of Fisheries).  The ITQs allocated to fish ing vessels aggregate to the total allowable 
+catch (TAC) for a given year, which is decided on after scientists had conducted stock 
+analyses and have m ade their recom mendations on safe harvest levels.  This quota 
+system had the twin objectives of  lim iting the total catch and encouraging m ore 
+efficient fishing operations, through the tran sfer of fishing rights am ong vessels and 
+more rapid reduction of the fishing fleet. 
+ 
+The ITQ system  is based on estim ates of fi shable biomass of individual species that 
+would be available for uptake during the next  fishing season.  As fish survival and 
+mortality rates are a result of m any com plex factors involving tropic relationships, 
+abiotic and biotic environm ental factor s, etc., the understanding of how a given 
+ecosystem f unctions needs a quantitative m odel of  the interactions between its 
+components. 
+ 
+The emerging consensus among fisheries scientists and managers of aquatic resources 
+is that management and monitoring of fisheries resources should m ove from a single-
+species approach to that of an ecosystem  approach, to appreciate the dynam ics and 
+ 6
+inter-relationships in aquatic ecosystem s.  The acknowledgem ent of the present 
+fishing effort and discarding practices only buttressed the apparent need for 
+modification of fisheries m anagement policies for biological and econom ically 
+sustainable yield of fisheries resources.  Despite the new awareness, the dynam ics of, 
+and interactions between, the various com ponents of ecosystem are complex and it is 
+difficulty to build adequate models for realistic scientific advice policies. 
+  
+Although several tools (conceptual and analytical) have been in use for a considerable 
+period of tim e, three of these tools have  gained som e grounds but none has received 
+general acceptance; (i) m ultispecies virtual population analysis (MSVPA, Sparre, 
+1991), (ii) sim pler differential equation m odels for biom ass dynam ics (Larkin and 
+Gazey, 1982) and, (iii) bioenergetics m odeling to assess im pacts of changing 
+predation regimes, mainly in freshwater ecosystem s (Stewart et al., 1981; Kitchell et 
+al., 1994, 1996).  No further descriptions of these tools will be attem pted here and 
+readers are therefore referred to cite m aterials. In 1984, Polovina developed a sim pler 
+tool (Ecopath) for analyzing tropic inter actions in a fisheries resource which was 
+further developed by Christensen and Pa uly (1992a, 1992b, 1995).  Ecopath has since 
+been widely applied to aquatic ecosystem s (fisheries resource system s, aquaculture 
+ponds and natural system s; see contributi ons in Christensen and Pauly, 1993), and 
+recently also to farming systems (Dalsgaard et al., 1995).  
+ 
+1.5 Mass-balance Models 
+ 
+As a mass-balance model, Ecopath has the dis tinct advantag that it is straightf orward 
+to parameterize and calculate, thus m aking it possible to standardize and to check the 
+mutual compatibility of a set of estimates related to the ecology of single species (e.g., 
+Jarre et al . 1991).  Although adding dynam ics to th e interactions that would allow 
+proceeding beyond m odest ecosystem  perturbations rem ains problem atic, m ass-
+balance models give a comprehensive overview of interactions in a given scenario and 
+in situations where data requirem ents of more elaborate approaches are not m et.  
+Moreover, they f orce f ishery scientists to include all ecosystem  com partments 
+relevant to fish production, rather than  lim iting their focus to species of m ajor 
+commercial interest, directing all other predation to a nebulous pool of “other food” 
+as practiced in MSVPA (Jarre, 1998).  Note that while the authors of Ecopath 
+(Polovina 1984, Christensen and Pauly, 1992) initially em phasized the steady-state 
+nature of the m odels described by Ecopath , equilibrium is not necessary for a m ass-
+balance m odel to be constructed: thus, the equation of the system  can include a 
+biomass accumulation term, reflecting a change.   
+ 
+ 
+ 7
+2 THE OBJECTIVE OF THE PROJECT 
+ 
+The purpose of  this project is to attem pt, for the f irst tim e, to integrate the inter-
+relationships between various species groups  and fishery, using a balanced, steady-
+state m odel (Ecopath, version 4 alpha) in th e Icelandic fisheries.  Up to recently, 
+Icelandic fisheries management was based on, and, evolved around a core species, the 
+“Icelandic Cod”, hence overlooking fish community structure and tropic relationships.  
+An attempt will also be m ade to introdu ce alongside Ecopath a sim ulation approach 
+(Ecosim, a m odule of Ecopath) which utili zes assessm ent results of Ecopath to 
+construct dynamic ecosystem model to simulate and analyze changing equilibrium.  
+ 
+ 
+3 MATERIALS AND METHODS 
+ 
+The trophic community structure is analyzed with the Ecopath 4a model, see previous 
+note.  Populations and their interdepende ncies are described by determ inistic linear 
+equations. Characteristics of the Ecopath model are discussed elsewhere (Polovina 
+1984; Christensen and Pauly 1992a, 1992b).  Basically, the approach is to m odel an 
+ecosystem using a system  of simultaneous linear equations (one for each species or 
+group of species).  The basic Ecopath equation (Christensen and Pauly 1992b) describes 
+a steady-state ecosystem  where the utilized production of each com partment 
+corresponds to the consumption by all predators plus all exports as follows: 
+ 
+Bi.(Pi/Bi)-∑jBj.(Qj/Bj).DCji-(Pi/Bi)(1-EEi)-EXI- Bacc = 0      ( 1) 
+ 
+where  
+ 
+ P i = total production (t.km-2yr-1) of group (i) over a time period considered  
+Bi = biomass (t.km-2yr-1) of groups(i);  
+Pi/Bi = production/biomass ratio (year-1) of group (i), which under  
+steady-state conditions, is equal to instantaneous coefficient of total 
+mortality Z (Allen 1971)  
+EEi  = ecotrophic efficiency is the part production that goes to predation,  
+   catches and exports to other systems; 
+Bj  = biomass of predator (j);  
+Qj/Bj  = consumption/biomass ratio (year-1) of predator(j);  
+DCji  = is the fraction of prey group (i) by weight in the average diet of  
+   predator (j);  
+EXi  = is the sum of fisheries catches of group (i) plus  
+   considered emigration to adjacent waters(t.km-2yr-1); and 
+ B acc = Biomass accumulation here assumed zero. 
+ 
+The model requires that at least three out of  the four input param eters (B, P/B, Q/B 
+and EE) be previously known for each com partment. One of the m ost im portant 
+features of the model is that it is based upon a series of sim ultaneous equations linked 
+through the data provided by the predator-prey matrix. 
+ 
+Since Ecopath provides only a static picture of ecosystem  tropic structure (W alters et 
+al, 1997),  Ecosim, a module of Ecopath is an approach which uses results of Ecopath 
+assessments to construct dynam ic ecosystem  m odels, as system s of coupled 
+ 8
+differential equations can be used for dynam ic simulation and analysis of changing 
+equilibrium. 
+ 
+Ecosim uses the linear equations that describe trophic fluxes in m ass-balance, 
+equilibrium assessm ents (such as in Ecopath approach) and re-expressed them  as 
+differential equations defining trophic inter actions as dynam ic relationships varying 
+with biomasses and harvest regim es.  The Ec osim routine is incorporated in the well-
+documented ECOPATH software so as to en able a wide range of potential users to 
+conduct fisheries policy analyses that explicitly account for ecosystem  trophic 
+interactions, without requiring the users to engage in com plex m odeling or 
+information gathering m uch beyond that required for Ecopath (W alters et al, 1997).  
+While the Ecosim  predictions can be expected to fail under fishing regim es very 
+different from those leading to the Ecopath  input data, Ecosim  will at least indicate 
+likely directions of biom ass change in  various trophic groups under experim ental 
+policies aimed at improving overall ecosystem management (Walters et al, 1997).  
+ 
+3.1 The Key System Component and Key Data in Ecopath With EcoSim Model 
+ 
+The biota of the study area were in th e present m odel grouped in 21 key groups 
+(system components) defined from the available biomass and commercial importance.  
+The econom ically m ost im portant species  are dem ersal fish, such as cod ( Gadus 
+morhua L.), redfish (Sebastes marinus L.), haddock (Melagrammus aeglefinus L.) and 
+saithe ( Pollachius virens L.) as well as pelagic species where capelin ( Mallotus 
+villosus M) and herring ( Clupea harengus L.) are by far the m ost important (Jonsson, 
+1983).  Prawns (Pandulus borealis L.) have in recent times developed into the second 
+most important species in terms of economic value. 
+ 
+It would be observed that economically most important fish species formed individual 
+species groups while the rest are grouped acco rding to their ecological or taxonomical 
+relations.  This enables species specific in formation relative to the ecosystem  to be 
+generated as required.  Tables 2 and 3 show various system  com ponents and input 
+data/parameters of the m odel.  The gr oup’s zooplankton and benthos included all 
+species of m acro-, m eio- and m icro fauna as well as bacterial loops.  The Nekton 
+group contains all other organism s that are capable of swim ming against water 
+currents.  No inf ormation was available to  provide a finer classification of these 
+groups.   
+ 
+ 9
+Table 2.   Parameters used to describe the Icelandic Fisheries ecosystem model, 1997.  An 
+explanation of each parameter (except for GE) used in this model is given in section 3.2. in the 
+report.  GE, gross efficiency is the ratio between production and consumption. Key: () indicates 
+values estimated assuming mass balance, * indicates values assumed after reviewing models 
+involving similar groups and ecosystems e.g. of the North Sea, West Greenland shrimp grounds 
+(Pedersen, 1994). EE = 0.95 for some groups are qualified guessestimates. 
+ 
+ Group Name Catches 
+(tkm.2y.1) 
+Biomass 
+  (tkm.2y.1)
+P/B 
+y.1
+Q/B 
+y.1
+EE GE 
+(P/Q) 
+Marine Mammals 0.00 1.745 0.010 5.000 (0.017) (0.002) 
+Seabirds 0.00 0.017 0.010 35.000 (0.588) (0.000) 
+Cod 0.27 1.300 0.410 3.100* (0.894) (0.132) 
+Juvenile Cod 0.00 (1.331) 0.350 3.100* 0.950 (0.113) 
+Haddock 0.06 0.200 0.798 3.800* (0.975) (0.210) 
+Saithe 0.05 0.213 0.686 3.300* (0.875) (0.208) 
+Redfish 0.12 2.133 0.350 4.500* (0.942) (0.078) 
+Greenland Halibut 0.04 0.153 0.618 3.500* (0.739) (0.171) 
+Other Flatfish 0.04 (0.841) 0.300 3.600* 0.950 (0.083) 
+Other Dem. Fish 0.03 (1.277) 0.450 3.000* 0.950 (0.150) 
+Herring 0.09 (0.800) (0.700) 4.600* (0.949) (0.152) 
+Capelin 1.67 2.692 1.950 7.000* (0.941) (0.270) 
+Other Pelagics 0.03 (6.244) 0.585 4.500* 0.947 (0.130) 
+Nephrops 0.00 0.013 0.370 2.000* (0.333) (0.185) 
+Northern Shrimps 0.08 (1.550) 1.020 6.000* 0.956 (0.170) 
+Molluscs 0.02 (0.731) 0.200 6.000* 0.950 (0.033) 
+Benthos 0.00 (15.757) 3.000 10.000* 0.950 (0.300) 
+Nekton 0.00 (8.040) .600 3.500* 0.950 (0.171) 
+Zooplankton - 30.000 5.000 20.000* (0.555) (0.250) 
+Phytoplankton - 162.667 50.000 - (0.079) - 
+Detritus - 200.000 - - (0.013) - 
+ 
+ 10
+Table 3.  Diet composition matrix for the Icelandic Fisheries ecosystem model, 1997.  
+  
+ Prey\Predator 1 2 3 4 5 6 7 8 9 10
+1 Marine Mammals - - - - - - - - - - 
+2 Seabirds - - - - - - - - - - 
+3 Cod 0.020 - - - - - - 0.020 - 0.005
+4 Juvenile Cod 0.010 - 0.040 - - 0.001 0.005 0.030 0.010 0.025
+5 Haddock 0.008 - 0.005 - - 0.010 - - - - 
+6 Saithe 0.003 - 0.013 - - - - - - - 
+7 Redfish 0.010 - 0.052 - 0.003 0.010 - 0.040 0.060 0.020
+8 Greenland Halibut  - 0.005 - - - - - - 
+9 Other Flatfish 0.010 - 0.027 - 0.007 0.002 - - - - 
+10 Other Dem. Fish 0.050 - 0.020 - - - - - - 0.002
+11 Herring - 0.005 0.005 - - 0.001 - - - - 
+12 Capelin 0.120 0.387 0.270 - 0.100 0.290 0.030 0.080 0.037 0.037
+13 Other Pelagics 0.020 0.014 0.052 - - 0.001 0.020 0.060 - - 
+14 Nephrops - - - - - - - - - 
+15 Northern Shrimps 0.010 - 0.111 0.150 0.035 - 0.013 0.040 0.033 0.033
+16 Molluscs - - - - - - - - - 0.030
+17 Benthos 0.059 0.417 0.110 0.410 0.532 0.080 0.150 0.050 0.500 0.458
+18 Nekton 0.180 0.040 0.085 0.070 0.013 0.260 0.040 0.250 0.200 0.200
+19 Zooplankton 0.500 0.077 0.205 0.270 0.310 0.344 0.742 0.130 0.040 0.040
+20 Phytoplankton - - - 0.100 - - - - - - 
+21 Detritus - 0.060 - - - 0.001 - 0.300 0.120 0.120
+ Total 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000
+ 
+ 
+Table 4.  (Cont. of table 3).  Diet composition matrix for the Icelandic Fisheries ecosystem model, 
+1997.  
+ 
+ Prey\Predator 11 12 13 14 15 16 17 18 19
+11 Herring - - - - - - - 0.015 - 
+12 Capelin - - - - - - - 0.001 - 
+13 Other Pelagics - - - - - - - 0.100 - 
+14 Nephrops - - - - - - - - - 
+15 Northern Shrimps - - - - - - - - - 
+16 Molluscs - - - - - - - - - 
+17 Benthos - - - 0.300 0.300 0.350 0.200 0.034 - 
+18 Nekton - - - 0.150 - - - 
+19 Zooplankton 0.900 0.900 0.800 0.500 0.550 0.300 - 0.850 - 
+20 Phytoplankton 0.100 0.100 0.200 0.050 0.050 0.200 - 1.000
+21 Detritus - - - 0.150 0.100 0.200 0.600 - - 
+ Total 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000
+ 
+ 
+ 
+ 11
+3.2 Parametrization and Source of Data 
+ 
+Steady-state models are less data hungry than  simulation models.  At the sam e time, 
+steady-state m odels are very useful for making sum maries of available data and 
+trophic flows in a system  (Christensen and Pauly 1993).  Most im portantly, these 
+models help identify gaps in one' s knowle dge about an ecosystem .  Together, this 
+makes steady-state models a good starting poi nt for ecosystem modeling (Christensen 
+and Pauly, 1993).  Although this m odel requires very lim ited data, certain 
+requirements must be met. It is normal that one of the parameters Bi, P/Bi, Q/Bi or EEi 
+may be unknown and in special cases that Q/B i may be unknown in addition to one of 
+the parameters mentioned above.  Below are attempts to briefly explain these input 
+parameters and their data sources. 
+ 
+3.2.1 Biomass (B) 
+ 
+The biomass estimates and catches used here are obtained from  the 1998/99 annual 
+report on the state of marine stocks in Icelandic Waters by the MRI, Sigurjónsson and 
+Víkingsson 1997 contribution to NAFO/ICES sym posium on the Role of Marine 
+Mammals in the Ecosystem , Lilliendahl and Solm undsson, 1997 estim ate of sum mer 
+food consum ption of six bird species in Iceland and personal correspondence from  
+individuals working on particular species or  group of species in the Marine Research 
+Institute. Although there exists a lot of da ta in the institute on lim ited num ber of 
+species (im portant com mercial species) there are also serious data gaps for m ost 
+species.  These data gaps on som e groups or system components are explained by the 
+inclination towards m anagement of Icel andic fisheries resources based on single 
+species which led to strong data requirem ents in all the m ore important tim e series 
+data for VPA analysis.  Biom ass estimates used here are for fishable stocks only, see 
+the 1998/99 report. 
+ 
+In this m odel biomass of a group was assu med to be constant for the period (1997) 
+covered by the model and that an average biomass can be used as representative of the 
+biomass of each group.  A biom ass accumulation term could have been to the left-
+hand term of equation (1), had this assumption not be met (see above).  The units used 
+are t.km-2year-1 as given in Table 2.    
+  
+3.2.2 PB - the production/biomass ratio 
+  
+Production/biomass (P/B) ratio and total m ortality (Z) were shown by Allen (1971) to 
+be identical, under steady-state, when von Bertalanffy growth and exponential 
+mortality are assumed (Christensen and Pauly, 1992).  One of the assumptions for Z = 
+P/B can be Von Bertalanf fy growth and constant m ortality across ages.  To 
+approximate this assumption one may need to base Z on F+M where F is a population 
+weighted average over all ages.  Thus, P/B is  taken as Z for the m ajor fish species of 
+Iceland, i.e., Ratios for Cod, Haddock,  Saithe, Greenland Halibut, Herring and 
+Capelin were taken from  the State of th e Marine Stock report for 1998/99, MRI. The 
+rest were either from  sources m entioned in the biom ass section or qualified guess 
+estimates following review of literature or other published m odels of sim ilar species 
+and ecosystems. In instances where data was available, Z was calculated.  
+ 
+ 12
+ 
+3.2.3 QB - the consumption/biomass ratio 
+ 
+The consum ption param eter expresses th e intake of food by a group over the tim e 
+period considered and it is entered as consum ption over biom ass ratio, (QB).  Most 
+QB estimated values were assum ed after reviewing m odels involving sim ilar groups 
+and ecosystem s e.g. the North Sea (Christensen 1995) and W est Greenland shrim p 
+grounds (Pedersen, 1994).  Attention is also drawn to sources quoted above.  But 
+where total consumption and biomass of species group, exist, QB was calculated e.g., 
+whales. 
+ 
+3.2.4 EE - the ecotrophic efficiency 
+ 
+Ecotrophic efficiency (EE) is used here to express the proportion of the production for 
+any group that is utilized for predation,  catches or biom ass accum ulation in the 
+system.  This parameter, scaled between 0 to 1 is difficult to estimate and can for most 
+groups be expected to be closer to 1 than  to 0 (Christensen, 1995).  The EE is linked 
+to the non-predation m ortality, M0, EE i =1-(M0 i /P i).  EE = 0.95 was assum ed for 
+some groups as a qualified guess, assuming M0 to be low. 
+ 
+3.2.5 DC - Diet Composition  
+ 
+Diet com position (DC) is the average co mposition of the food of each consum er 
+organism on a weight basis.  The diet co mposition of the groups were obtained from  
+published literature such as the f eeding habits  of  demersal f ish species in Icelandic 
+waters (Palsson, 1983, Sjávarnytjar við Ísland Gunnarsson, et al ., 1998), Cetaceans 
+and Seabirds reports mentioned earlier in the report and from other models cited here.  
+It should be mentioned also that more quantitative work on feeding habits of Icelandic 
+marine fauna need to be carried out. 
+ 
+ 
+ 
+ 13
+4 RESULTS AND DISCUSSION 
+ 
+The prevalent fish stock m anagement strategy employed in Iceland is single species 
+oriented and more or less centered and evolved around key fish species; cod, haddock, 
+saithe and others as already m entioned in this report.  As the saying goes, “no fish is 
+an island”. It is therefore pertinent to look beyond single species m anagement tools to 
+ensure the sustainability of fisheries in th e long term . This pilot project was initiated 
+to exam ine the use of a m ass balance steady-state m odel which incorporates fish 
+community structure to come up with trophic relations in the Icelandic fisheries. 
+  
+The prim ary purpose of this paper is to di scuss results obtained from  the Icelandic 
+fisheries m odel to show that steady-st ate m odels are less data hungry than VPA 
+analysis, and the Ecopath m odel can be used  as a m anagement tool in the Icelandic 
+fisheries.  Although the input param eter da ta are scanty or available in qualitative 
+form the m odel does produce reasonable resu lts.  Figure 1 below gives a graphical 
+presentation of a food web of the Icelandi c fisheries system .  Here all groups are 
+balanced, i.e., input equals output. 
+ 14
+ 
+ 
+Figure 2.   A network of trophic interactions in the Icelandic Sea in 1997. The boxes are arranged 
+on the y-axis after trophic levels. The model groups are balanced so that input equals output. 
+Flows exiting a group do so from the top or sides of a box, while flows enter at the bottom. 
+ 
+ 
+4.1 Parameter Estimates 
+ 
+The groups used in the m odel are given in Table 2.  Input values relative to catch, 
+biomass, P/B and Q/B ratios, and ecotrophic e fficiency together with values estimated 
+when the m odel assum ed a balanced stat e are also given.  All groups (key 
+components) are balanced so that input equals output and hence express the inter-
+relationship am ong the species and the fisher y in the Icelandic fisheries system .  
+Biomass estimates and P/B ratios excluding those estimated by the m odel came from 
+resources survey reports of the MRI.  The original input values of biom ass and P/B 
+ratios for the herring group obtained from  the above report were, on assum ing a 
+ 15
+balanced state, increased from  0.58 t.km-2 and 0.35 to 0.8 t.km -2 and 0.7 respectively.  
+This m ay be due to an underestim ation of these param eters by the analytical 
+method(s) used by MRI. A 0.95 estim ate of ecotrophic efficiency (EE) was assum ed 
+and inputted for groups as necessary. It is reasonable to assum e that m ost of the 
+production in an exploited system  will be pr edated upon or fished.  This assum ption, 
+though, m ay not be true for top predator s with little or no fishing and predation 
+pressure.  The apex predator, cod, in the model endures quite a considerable fishing 
+pressure and significant predation in the early stages of life.  
+ 
+Here a separate group for juvenile cod was m odeled due to the cannibalistic behavior 
+of the adult cod (Bogstad, et al, 1994).  The m odel biomass estimate for the juvenile 
+cod group is 1.331 t.km-2 and 1.550 t.km-2 for northern shrimps. 
+ 
+A close look at the gross food conversion e fficiency (GE), which for any group is the 
+ratio between its total production and total food consum ption revealed that the GE 
+value for capelin was slightly high as this ratio for m ost vertebrates ranges from  0.05 
+to 0.25 (Christensen, 1995).  The high GE can be probably attributed to a low 
+consumption estimate.  Apart from this observation, parameter input values used here 
+seem reasonable and hence led to an easily balanced model.  
+ 
+ 16
+4.2 Prey-Predator Matrix 
+ 
+A prey-predator m atrix was constructed on the basis of the relative food item  
+proportions within stom ach of groups shown in Table 3 and 4.  Food habit studies 
+carried out in the Icelandic f isheries area are mainly qualitative in nature while f or 
+some groups, no feeding studies had ever b een conducted.  The deficit in data on 
+feeding habits has been addressed here by using diet com position of sim ilar species 
+studied in similar ecosystems and adjusting them to fit the model.  Basically, once the 
+initial diet vectors were determ ined, the approach consisted in adjusting these vectors 
+in order to satisfy the pre-established lim its on EE and other m odel inputs.  In m ost 
+cases m inor adjustm ents of the order of 0.025% to 0.05% were applied to satisfy 
+model requirements.  
+ 
+4.3 Trophic Transfer Efficiency 
+  
+Since Lindeman (1942), it has often been assum ed that tropic transfer efficiencies in 
+ecosystems vary around 10%, so that one-ten th of the energy that enters a trophic 
+level is transferred to the next trophic leve l; and that the tropic transfer efficiency 
+gradually decreases on the higher trophic levels due to increased respiration 
+(Lindeman 1942; Burns 1989).  
+ 
+Using the trophic aggregation routine in  Ecopath (Christensen and Pauly 1992a) 
+based on Ulanowicz (1995), the flows in a sy stem can be distributed by trophic levels 
+and the transfer efficiencies can be estim ated.  The tropic transfer efficiency of the 
+Icelandic system  shows higher transfer effi ciencies at lower trophic level (3, 4) as 
+seen in Figure 2.  The average trophic transfer level of the system  was estim ated at 
+9.72 which are close to the commonly used 10% rule. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3
+8
+13
+18
+23 456 78
+Trophic Level
+Transfer efficiency (%)
+Figure 3.  The trophic transfer efficiency in the Icelandic system. Mean = 9.72 
+ 
+ 
+ 17
+4.4 Primary Production Required to Sustain Consumption and catches 
+ 
+Table 5 gives the prim ary production require d to sustain consum ption of various 
+groups in the Icelandic ecosystem .  Th e total prim ary production and detritus 
+available in the system  are 639.7 and 7739.9 t.km -2-yr-1 respectively.  It could be 
+observed that only 880.57 t.km -2-yr-1 was consumed by all the m odel groups.  All the 
+groups except benthos and zooplankton (whose PPR/Con. ratios am ounted to 1) 
+consumed less than the production.  
+ 
+Table 5.  Estimates of primary production and detritus required to sustain consumption and 
+catch (t.km-2.yr-1)  in the Icelandic ecosystem, arranged in descending ecological cost.  
+ 
+Group PPR Con PPR Catch E.cost 
+Cod 106.7 4.0 54.5 0.3 26.5 
+Marine Mammals 216.6 8.7 3.7 0.0 24.8 
+Greenland Halibut 10.4 0.5 4.5 0.0 19.4 
+Other Dem. Fish 68.5 3.8 3.5 0.0 17.9 
+Other flatfishes 49.1 3.0 7.2 0.0 16.2 
+Saithe 11.2 0.7 3.8 0.1 15.9 
+Molluscs 36.2 4.4 5.9 0.0 8.3 
+Juvenile Cod 33.7 4.1 0.3 0.0 8.2 
+Seabirds 4.5 0.6 2.6 0.0 7.4 
+Haddock 5.1 0.8 1.9 0.1 6.8 
+Nekton 183.0 28.1 0.2 0.0 6.5 
+Redfish 61.5 9.6 9.7 0.1 6.4 
+Herring 13.6 3.7 2.1 0.1 3.7 
+Capelin 49.8 13.5 15.8 1.7 3.7 
+Other Pelagics 95.5 28.1 0.7 0.0 3.4 
+Northern Shrimps 31.2 9.3 1.7 0.1 3.4 
+Nephrops 0.1 0.0 0.0 0.0 3.2 
+Benthos 157.5 157.5 0.0 0.0 1.0 
+Zooplankton 600.0 600.0 0.0 0.0 1.0 
+Total 1734.2 880.6 118.0 2.5 183.7 
+ 
+ 
+The primary production and detritus required to sustain the consum ption of each of 
+the groups in the system  and the catches we re quantified by Ecopath 4a (Table 5).  
+The model calculated total primary production required to sustain catches to be 118.0 
+t.km-2, of which 54.5 t.km -2 and 15.8 t.km -2 were required by cod and capelin 
+respectively.  The catch of 1997 require d only 1.41% of the available prim ary 
+productivity. The efficiency of the fishery whic h is calculated as a ratio of the sum of 
+all catches and total prim ary production is 0.0003. (Table 9).  Various authors have 
+collected the ratio between prim ary production and (potential) fishery catches (see 
+Polovina and Marten, 1982).  The global rated average efficiency of fisheries is about 
+0.0002 (Christensen and Pauly 1992).  
+ 
+In Table 5, the groups are arranged in the or der of ecological cost ratio. It gives m ore 
+details on ecological cost to m aintain differe nt groups in the system .  This ratio is 
+presented here as a m easure of the “food web price” for having a group in an 
+ecosystem, and as such it is a m easure re lated to the ´em ergy´ concept of Odum  
+ 18
+(1988).  Em ergy expresses how m uch solar energy equivalents a flow in a system  
+represents.  Cod is observed to be the m ost costly group to have in the Icelandic 
+system with 26.5 points followed by marine mammals with 24.80.  
+ 
+4.5 Trophic Aggregation 
+ 
+Apart from  being able to calculate group-specific fractional trophic levels as 
+suggested by Odum and Heald (1975), a rou tine has been included in Ecopath which 
+aggregate the entire system  into discrete trophic levels sensu Lindem an (1942).  In 
+order to clearly show the trophic structure of  the Icelandic fisheries system  the flows 
+in this system  were aggregated in discre te trophic levels using the m ethod suggested 
+by Ulanowicz (1995).  Table 5 shows the re sults produced by the trophic aggregation 
+routine in Ecopath.  The results shows that the m ost important group in trophic level 
+II is benthos, on trophic level III it is the nekton, other pelagic and capelin that 
+dominate while m arine m ammals and cod dom inate trophic level IV.  Table 5 also 
+shows the trophic levels of the group sorted in  descending order.  Cod is seen to top 
+the league among the fish group, as expected.  
+ 
+Table 6.  Absolute flows (t.km-2yr-1) by discrete trophic levels (I to VI). The groups are sorted 
+according to their trophic levels (TL). Total flows (t.km-2yr-1) and biomasses (t.km-2yr-1) trophic 
+level is presented.  The total biomasses excludes detritus. 
+ 
+TL Group Name I II III IV V VI VII 
+3.72 Cod - - 1.540 2.320 0.162 0.008 0.000 
+3.60 Saithe - 0.000 0.319 0.364 0.019 0.000 0.000 
+3.50 Marine Mammals - - 5.093 3.208 0.403 0.020 0.000 
+3.45 Seabirds - 0.036 0.323 0.242 0.002 - - 
+3.37 Other flatfishes - 0.363 1.664 0.919 0.080 0.001 0.000 
+3.28 Haddock - - 0.652 0.105 0.003 0.000 0.000 
+3.26 Greenland Halibut - 0.164 0.114 0.239 0.018 0.000 0.000 
+3.26 Other Dem. Fish - 0.385 2.660 0.701 0.081 0.003 - 
+3.22 Juvenile Cod - 0.413 2.899 0.788 0.027 - - 
+3.14 Redfish - - 8.653 0.900 0.045 0.000 - 
+3.10 Nekton - - 25.484 2.656 - - - 
+3.05 Molluscs - 0.877 2.851 0.596 0.062 - - 
+2.93 Northern Shrimps - 1.395 7.906 - - - - 
+2.90 Herring - 0.368 3.312 - - - - 
+2.90 Capelin - 1.346 12.114 - - - - 
+2.88 Nephrops - 0.005 0.021 - - - - 
+2.80 Other Pelagics - 5.620 22.480 - - - - 
+2.25 Benthos - 157.52
+3 
+- - - - - 
+2.00 Zooplankton - 600.00 - - - - - 
+1.00 Phytoplankton 133.351 - - - - - - 
+1.00 Detritus 739.936 - - - - - - 
+ Total flow by TL 873.290 768.49
+6 
+98.085 13.037 0.904 0.033 0.000 
+ Tot. Biomass by TL 162.667 48.142 23.255 3.406 0.223 0.008 0.000 
+ 
+ 
+ 
+ 19
+4.6 Mortality Coefficients 
+ 
+One output of  the m odel is m ortality coef ficients (Table 6).  The total m ortalities 
+(Zyr.1) input to the m odel are based on those calculated by MRI staff using VPA 
+methods.  But where m ortalities are absent th e model gives estimates (Table 2).  The 
+Z of all groups is divided into its various constituents, e.g., m ortality due to fishing, 
+predation and others. For example, a weighted total mortality of 0.410 for fishable cod 
+stock was fed into the model and the fo llowing breakdown was obtained: m ortality 
+due to fishing was 0.209, 0.157 and 0.044 were  due to predation and other m ortality 
+respectively. Contrary to what som e people believe, m ortality exerted on m ost 
+commercially important groups by fishing is lower than that due to other m ortality; 
+the estim ates of  natural m ortality coef ficients are generally higher com pared to 
+fishing m ortality coefficient (Pedersen, 1994; see also table 6).  According to 
+Pedersen (1994) high natural m ortality s hows how difficult it is to obtain precise 
+estimates of indices of abundance for fish and shrimps using an analytical approach 
+such as VPA.  This also affirm s the need for ecosystem  approach m anagement of 
+multispecies fisheries. 
+ 
+ 
+Since this is a steady-state m odel, f ishing m ortality is calculated as catch/biom ass 
+ratio where catch is a rate (e.g., t km -2year-1), the biom ass lacks the tim e dimension, 
+(e.g., is expressed as t km-2).  Thus the fishing mortality is an instantaneous rate, (e.g., 
+year-1) (Christensen and Pauly, 1992).  Fishing m ortality of cod that produces an 
+equilibrium state in the system  is estim ated at 21% of  the biom ass which is 
+comparable to the 25 % set by the MRI.  It is thought that although the target was 
+25% the actual rate of  fishing was 21% of  the cod stock.  Fishing m ortality rates that 
+produce an equilibrium state in the Icelandic system are given in Table 7. 
+ 
+Table 7.  Mortality Coefficients for Icelandic Fisheries ecosystem model groups (all units are in 
+year-1) 
+Group Name Prod./Biom.(Z) Fishing mort. Predat. Mort. Other mort. 
+Marine Mammals 0.010 0.000 0.000 0.010 
+Seabirds 0.010 0.006 0.000 0.004 
+Cod 0.410 0.209 0.157 0.044 
+Juvenile Cod   0.350 0.003 0.330 0.018 
+Haddock 0.789 0.293 0.485 0.020 
+Saithe 0.686 0.231 0.369 0.086 
+Redfish 0.350 0.055 0.275 0.020 
+Greenland Halibut 0.618 0.261 0.182 0.157 
+Other Flatfish 0.300 0.044 0.241 0.015 
+Other Dem. Fish 0.450 0.023 0.405 0.023 
+Herring 0.700 0.107 0.557 0.036 
+Capelin 1.950 0.619 1.215 0.115 
+Other Pelagics 0.585 0.004 0.553 0.031 
+Nephrops 0.370 0.123 0.000 0.247 
+Northern Shrimps 1.020 0.054 0.920 0.045 
+Molluscs 0.200 0.033 0.157 0.010 
+Benthos 3.000 0.000 2.850 0.150 
+Nekton 0.600 0.000 0.570 0.030 
+Zooplankton 5.000 0.000 2.775 2.225 
+Phytoplankton 50.000 0.000 3.933 46.067 
+ 20
+In addition, the Ecopath 4a m odel provides important information (Table 8) that m ay 
+allow one to establish the status of  an ecosystem in terms of maturity and to com pare 
+different systems (see Christensen and Paul y 1992a).  The total system  throughput is 
+equal to the sum  of all flows (consum ption, exports, respiratory flows and flows into 
+the detritus) within an ecosystem.   
+ 
+Table 8.   Basic Parameter Estimates Statistics 
+ 
+Parameter Value Units 
+Sum of all consumption 881 t.km2.year
+Sum of all exports 7645 t.km2.year
+Sum of all respiratory flows 488 t.km2.year
+Sum of all flows into detritus 7740 t.km2.year
+Total system throughput 16754 t.km2.year
+Sum of all production 8350 t.km2.year
+Mean trophic level of the catch 3.04 - 
+Gross efficiency (catch/net p.p.) 0.0003 - 
+Calculated net primary production 8133.4 - 
+Total primary production/total respiration 16.7 - 
+Net system production 7645 t.km2.year
+Total primary production/total biomass 34.2 - 
+Total biomass/total throughput 0.014 - 
+Total biomass (excluding detritus) 237.7 t.km2
+Total catches 2.5 t.km2.year
+Connectance index 0.298 - 
+System omnivory index 0.208 - 
+ 
+ 
+ 
+4.7 Mixed Trophic Impact 
+ 
+Ecopath incorporates a routine based on the m ethod of an approach developed by 
+Ulanowicz and Pauccia (1990).  This appr oach was first used in ecology by Hannon 
+(1973) and Hannon and Joiries (1989) to asse ss the im pact of any group in a system  
+on all other groups.  Mixed trophic im pact r outine assesses the direct and indirect 
+effect that changes in the biom ass of a group will have on the biom ass of the other 
+groups.  From the mixed trophic impact analysis presented in Figure 4, it can be seen 
+that the lower trophic level planktonic groups have higher im pact on other groups of 
+the ecosystem.  The relatively small negative impact observed in the exploited groups 
+can be seen as a result of a system  that evolved over a long tim e.  The fishing effort 
+too has rem arkably little or no negative impact on the sam e groups.  The only 
+harvested groups negatively im pacted by fi shing are cod, haddock, and saithe and 
+Greenland halibut. These groups happen to be the m ost highly targeted fish species in 
+Iceland.  
+ 
+Generally, fish predators im pact each other negatively as confirm ed by Figure 4.  
+Also from Figure 4, it is observed that cap elin and northern shrim p impact positively 
+on the cod group.  The cod have a positive impact on m olluscs.  This could be 
+because adult cod preys on other dem ersal fish (sea catfish and others) which prey on 
+molluscs.  The juvenile cod have registered a negative impact on northern shrimps but 
+ 21
+as mentioned earlier, only slightly.  Both capelin and northern shrim p have a positive 
+impact on cod.  
+ 
+ 
+Figure 4.  Mixed trophic impacts in the 1997 Icelandic system.  The bars quantify the direct and 
+indirect trophic impacts that the groups on the left have on those on the top.  The impacts are 
+relative but comparable among groups.  
+ 
+According to Christensen (1995), the m ixed trophic impact can be seen as a sim ple 
+sensitivity analysis because it gives an idea of how im portant the different groups in 
+the system  are for the trophic dynam ics, a nd therefore where gains from  im proved 
+parameter estimation can be expected. 
+ 
+4.8 Fishing Mortality and Biomass Change  
+ 
+As an indication of what could be achie ved with Ecosim , a series of selected 
+simulations involving som e major model groups were conducted and the results are 
+here presented.  The results are relative and thus only point to the direction of biomass 
+change and also indicate the groups likely to be affected by such changes. Figure 4 for 
+an exam ple of Ecosim  simulation, biom ass over tim e.  In the sim ulation processes, 
+fishing rates were varied to appreciate their im pact on the fisheries as a whole or on 
+the individuals.  Included in the Ecosim  output are f ishing mortality (F.M) at which 
+the simulated group are at equilibrium  and the F.M. at which these groups are likely 
+to collapse within the simulated time period, 10 years. 
+ 
+ 22
+ 
+Figure 5.  Shows an example of a 10 year simulation using Ecosim (adult cod is worst 
+affected in this example) 
+ 
+Figure 5 shows the effect of di fferent fishing rates or regim es applied to the Icelandic 
+fisheries as a unit.  The entire ecosystem  was seen to equilibrate at F.R 1 but when 
+F.R. 0.5, 1.5 and 2.0 were applied their e ffect on various groups were clearly visible 
+as graphically presented below, (Figure 4).  Only m ajor or com mercially im portant 
+groups are shown in the graph.  
+ 
+ 
+ 
+-100
+-80
+-60
+-40
+-20
+0
+20
+40
+60
+80
+100
+120
+Cod
+Juvenile C
+od
+Haddo
+ck
+Saithe
+Red Fish
+Green
+land H
+al.
+Herring
+Caplin
+Nephr
+op
+Northern S
+hrimp
+Model groups
+Percentage biomass chnage
+F.R (0.5)
+F.R. (1.5)
+F.R. (2.0)
+ 
+ 
+Figure 6.  Simulated effect of fishing rate on Icelandic fisheries biomass and possible impact on 
+model groups.  
+ 
+ 23
+Ecosim is able to show fishing rates likel y to cause the collapse of some major groups 
+within the sim ulated time period (Table 9).  Other m ajor groups are seen to persist 
+beyond the 10 year period under those fishing rates. 
+ 
+Table 9.  F.M at which the  
+tabulated groups are likely to collapse 
+ 
+Group F.M. 
+Cod 1.8 
+Haddock 2.2 
+Greenland Hal. 2.7 
+Herring 2.8 
+Nephrop 2.1 
+ 
+ 
+4.9 Individual Selected Model Groups 
+ 
+4.9.1 Cod Group 
+ 
+The cod group is seen to have equilibrated at F.M 0.21 year-1. The effect of F.M 0.105 
+year-1, 0.315 year -1 and 0.42 year -1 respectively on cod group was sim ulated and the 
+resulted effects of these fishing regim es are shown in Figure 6.  It was clear from  the 
+simulation exercise that when the cod on selected groups experiences a change in 
+biomass other groups in the system  re spond accordingly confirm ing the assertion 
+made earlier that “no f ish is an island”.  According to the sim ulation results the cod 
+group is likely to collapse at F.M. 0.42 within the simulated period.  
+ 
+ 
+-80
+-60
+-40
+-20
+0
+20
+40
+60
+80
+100
+Cod
+Juvenile C
+od
+Haddo
+ck
+Saithe
+Red Fish
+Green
+land Ha
+l.
+Herring
+Caplin
+Nephr
+op
+Northern S
+hrimp
+Model groups
+Percentage biomass change
+F.R (0.105)
+F.R. (0.315)
+F.R. (0.42)
+ 
+ 
+Figure 7.  Simulated effect of F.M on cod group biomass and possible impact on other model 
+groups. 
+ 
+ 24
+4.9.2 Haddock Group  
+ 
+For the haddock group, the m ajor change is  on the biom ass of the group itself with 
+little or no impact on other major groups, see Figure 7 for details.  The haddock group 
+is at equilibrium with a fishing rate of 0.29 year-1. 
+ 
+-100
+-80
+-60
+-40
+-20
+0
+20
+40
+60
+80
+100
+Cod
+Juvenile Cod
+Haddock
+Sa
+ithe
+Red Fis
+h
+Greenland
+ Ha
+l.
+Herring
+Caplin
+Nephrop
+No
+rthern S
+hrimp
+Model groups
+Percentage biomass change F.R (0.145)
+F.R. (0.58)
+ 
+Figure 8.  Simulated effect of F.M. on the haddock biomass and possible impact on other model 
+groups 
+ 
+4.9.3 Northern Shrimp 
+ 
+No significant im pact is observed on any of  the m ajor m odel groups when F.R. of 
+0.025 is applied on northern shrim p and only cod and juvenile cod groups are 
+significantly im pacted on by F.R. of 0.1.  This is not surprising as both groups are 
+major predators of northern shrim p.  Table 10 gives the extent of this effect on the 
+impacted groups.  The likelihood of norther n shrim p collapsing within the 10 year 
+period is rem ote under these fishing regim es. Note the equilibrium  F.R. on northern 
+shrimp is estimated at 0.05. 
+ 
+ 
+Table 10.  Shows groups affected by F.R. 0.1 on northern shrimp 
+ 
+Group F.M. (0.1) 
+Cod -1.9 
+Juvenile cod -2.6 
+Northern Shrimp -13.5 
+ 
+ 
+ 
+ 25
+4.9.4 Capelin  
+ 
+Capelin is one of the m ajor forage groups in the Icelandic system .  Fishing rates 
+applied on capelin are observed to have im pact on major groups of the m odel (Figure 
+8).  The estimated equilibrium F.R. is 0.62.  
+ 
+ 
+-80
+-60
+-40
+-20
+0
+20
+40
+60
+Cod
+Juvenile Cod
+Ha
+ddock
+Saithe
+Re
+d Fish
+Greenla
+nd H
+al.
+Herring
+Caplin
+Ne
+phrop
+No
+rthern Sh
+rimp
+Model groups
+Percentage biomass change
+F.R (0.31)
+F.R. (1.24)
+ 
+Figure 9.  Simulated effect of F.R. on capelin biomass and possible impact on other model groups 
+ 
+ 
+ 
+ 
+ 26
+5 CONCLUSION 
+ 
+The prim ary purpose of this report was to  evaluate the trophic interactions and 
+organic matter transfer in the Icelandic fish eries system using ECOPATH 4a.  In spite 
+of lack of parameter estimates for some groups, the Ecopath 4a model was reasonably 
+balanced.  The results obtained from  this m odel were found to be reasonable and 
+comparable with estim ates obtained by other m odels used as fisheries m anagement 
+tools in Iceland.  However, the seasonal shif ts in the ecosystems were not considered.  
+It is recom mended, therefore, that the next m odeling attem pts focus on producing 
+separate models for the different seasons where seasonal shifts and migratory patterns 
+could be accounted for, using the seasona l version of Ecopath presently being 
+developed at the Fisheries centre, University of  British Colum bia (see 
+www.ecoparth.org)  
+  
+The lim ited availability of param eter estim ates of som e groups including the m ain 
+invertebrates groups of the Icelandic fisher ies on an annual basis reflects a need for 
+process-oriented studies aim ed at producing such estim ates. It is recom mended that 
+more analysis of feeding habits of most groups be done. 
+ 
+It is therefore hoped that the rationale pres ented in this report will help establish the 
+potential of steady-state m odeling as a tool to im prove understanding of the 
+ecosystems and hence stim ulate future ecol ogical studies in fisheries waters of 
+Iceland.  
+ 
+From the selected sim ulations carried out  in this report it is f itting to recom mend 
+further investigation into the use of  the Ec osim routine incorporated in Ecopath as a 
+valuable tool for the design of ecosystem-scale adaptive management experiments.  
+ 
+ 
+ACKNOWLEDGMENT 
+ 
+I wish to thank Dr. Gunnar Stefansson w ho supervised and guided m e through the 
+planning and im plementation of this proj ect.  My thanks also go to Dr. Tum i 
+Tómasson, the director of the United Nations University Fisheries Training 
+Programme for his keen sense of responsibility, swift response to requests and interest 
+in seeing that this project was a success.  Special thanks are also due to the 
+Government of the Gam bia and especially Mr. Dram meh, Director of Fisheries for 
+consenting to my participation in this training programme. Dr. Heimo Mikkola, FAO 
+Resident Representative in the Gambia worth special mention for the part he played in 
+making participation in this program me a possibility. My sincere appreciation and 
+gratitude also goes to Dr. Villy Christen sen who took his tim e to provide m e with 
+answers to all m y numerous e-mail enquiries and without whose expert guidance this 
+model would not have been realized. To Dr. Aliba Bundy, I say thanks a m illion for 
+assisting in literature search and data acquisition. Finally, I wish to thank all those 
+staff members of the Marine Research Institu te who had assisted in gathering data f or 
+input in the m odel, especially professor Jakob Jakobsson, Hrafnkell Eriksson, Unuur 
+Skuladothir, Solom undur Einersson, Kristin Gudm undsson, Jakob Magnusson, 
+Gilason, and Gisli Vikingsson.  
+ 27
+LIST OF REFERENCES 
+ 
+Allen, K.R. 1971. Relation between production and biomass. J. Fish. Res. Bd. Canada 
+28: 1573-1581 
+ 
+ARREGUIN-SÁNCHEZ, F., E. VALERO- PACHECO and E.A. CHÁVEZ, 1993. 
+Atrophic box m odel of the coastal fish co mmunities of the southwestern Gulf of 
+Mexico, p. 197-205. In Christensen V. and D. Pauly (e ds.) Trophic models of aquatic 
+ecosystems. ICLARM Conf. Proc. 26, 390 p. 
+ 
+ARREGUIN-SÁNCHEZ, F., J.C. SEIJO and E. VALERO-PACHECO. 1993. An 
+application of ECOPATH II to the north continental shelf ecosystem  of Yucatan, 
+Mexico, p. 269-278. In Christensen V. and D. Pauly (e ds.) Trophic models of aquatic 
+ecosystems. ICLARM Conf. Proc. 26, 390 p. 
+ 
+Bogstad. B., Lilly, G. R., Mehl, S., Pá lsson, O. K., and Stefánsson, G. 1994. 
+Cannibalism and year-class strength in Atlantic cod ( Gadus morhua L.) in Artoboreal 
+ecosystems (Barent Sea, Iceland, and easte rn Newfoundland). ICES m ar. Sci. Symp., 
+198: 576-599. 
+ 
+Christensen, V. and Pauly, D. (1992). A guide to the Ecopath II program  (version 
+2.1). ICLARM Software 6, 72 p. 
+ 
+Christensen, V. and D. Pauly. 1993. On st eadstate modelling of ecosystems, p. 14-19. 
+In Christensen V. and D. Pauly (eds.) Trophic m odels of aquatic ecosystem s. 
+ICLARM Conf. Proc. 26, 390 p. 
+ 
+CHRISTENSEN, V. and D. PAULY. 1993.  Flow characteristics of aquatic 
+ecosystems, p. 338-352. In Christensen V. and D. Paul y (eds.) Trophic m odels of 
+aquatic ecosystems. ICLARM Conf. Proc. 26, 390 p. 
+ 
+Christensen, V. 1995. A m odel of trophic interactions in the North Sea in 1981, the 
+year of stomach. Dana 11:1-28. 
+ 
+Close to the Sea, 2nd edition. Published by the Ministry of Fisheries Iceland. 
+ 
+Gíslasson, A. and Ástþórsson, O.S., 1998.  Seasonal variation in biom ass, abundance 
+and composition of zooplankton in the subartic waters north of Iceland. Polar Biol. 
+(1998) 20: 85-94. 
+ 
+Gunnarsson K., Jónsson, G. and Pálsson Ó. K., 1998.  Sjávarnytjar við Ísland.  
+Reykjavik: Mál og menning. 
+ 
+Hannon, B. and C. Joiries, 1989. A seasona l analysis of the southern North Sea 
+ecosystem. Ecology 70(6): 1916 - 1934. 
+ 
+Hauksson, E. and Bogason, V. (1997). The occurrence of vagrant Seals in Iceland, in 
+1989-94. J. Northw. Atl. Fish., Vol. 22: 47-54. 
+ 
+ 28
+Jakobsson, J., Guðmundsdóttir, Á. and Stefán sson G., 1993. Stock related changes in 
+biological parameters of the Icelandic summer spawning herring. C.M. 1993/H:47. 
+ 
+Jarre-Teichmann, A. 1998. The potential role of m ass balance m odels for the 
+management of upwelling ecosystem . Ecol ogical Applications, 8 (1) Supplem ent, 
+1998. P. S93-S103. 
+ 
+Kitchell, J.E., Eby, E.A., He, X., Schindler, D.E. and Wright, R.M. 1994. Predator-
+prey dynamics in an ecosystem context. J. Fish Biol. 45: 209-226.    
+ 
+Kitchell, J.E., Schindler, D.E., Ogutu-Ohwa yo, R. and Reinthal, P.N. 1997. The Nile 
+perch in Lake Victoria: interactions be tween predation and fisheries. Ecological 
+Applications [Ecol.Appl.], vol. 7, no.2, pp. 653-664. 
+ 
+Larkin, P.A. and Gazey, W . 1982. Applica tion of ecological sim ulation m odels to 
+management of tropical m ultispecies fisheries. In: Pauly D.  and Murphy G.I.(eds.). 
+Theory and m anagement of tropical fisher ies. Proceedings of the ICLARM/CSIRO 
+workshop on the theory and m anagement of tropical m ultispecies stocks, 12-21 
+january 1981, Cronulla, Australia., pp.123-140, ICLARM conference proceedings. 
+Manilla [ICLARM CONF.PROC], no.9. 
+ 
+Lindeman, R.L., 1942. The trophic-dynamic aspect of ecology. Ecology 23: 399-418. 
+ 
+Magnússon K. G. and Pálsson Ó. K., 1989.  Trophic ecological relationships of 
+Icelandic cod. Rapp. P.-v. Réun. Cons. Int. Explor. Mer. 188: 206-224.  
+ 
+Malmberg, S.A., 1988. Ecological im pact of hydrographic conditions in Icelandic 
+Waters. Int. Symp. Long Term Changes Mar. Fish Pop., Vigo 1986. p. 95-123. 
+ 
+Odum, W .E. and Heald, E.J., 1975. The detritus-based food web of an estuarine 
+mangrove community, pp. 265-286. In L.E. Cronin (ed). Estuarine Research. Vol. 1. 
+Academic Press, New York. 
+ 
+Odum, H.T., 1988. Self-organization, tr ansformity and inform ation. Science 
+242:1132-1139. 
+ 
+Palsson O. K., 1983. The feeding habits of de mersal fish species in Icelandic waters. 
+Rit Fiskideild., vol.7(1): 60. 
+ 
+Pauly, D., Soriano-Bartz M.L. and. Palo mares M. I.D 1993. Im proved construction, 
+parametrization and interpretation of stead-state ecosystem  models, p. 1-13. In 
+V.Christensen and D. Pauly (eds.) Trophic models of aquatic ecosystem s. ICLARM 
+Conf. Proc. 26: 390. 
+ 
+Pederson, S.A. (1992) Multispecies inter actions on the offshore west Greenland and 
+shrimp grounds.  ICES Cm 1994/P2. 
+ 
+ 29
+Sakshaug, E., Bjoerge, A., Gulliksen, B., Loeng, H. and Mehlum , F. 1994. Structure, 
+biomass distribution, and energetics of the pelagic ecosystem in the Barents Sea: A 
+synopsis. Polar biology. Berlin, Heidelberg, vol. 14 (6): 405-411. 
+ 
+Sigurjónsson, J. and Vikingsson, G.A. 1997.  Seasonal abundance of and estim ated 
+food consumption by cetaceans in Icelandic and adjacent waters. J. Northw. Atl. Fish. 
+Sci., Vol. 22: 271-287. 
+ 
+Spare, P., 1991. Introduction to m ultispecies virtual population analysis. ICES Mar. 
+Sci. Symp. 193:12-21. 
+ 
+State of Marine Stocks in Icelandic Waters 1997/98. Marine Research Institute Report 
+Nr. 67. 
+ 
+Stefánsson, G., Sigurjonsson, J., Viking sson, G.A. 1997. On dynam ic interractions 
+between some fish resources and cetaceans off Iceland based on a sim ulation model. 
+Northwest Atlantic Fisheries Organization,  Dartm ounth, NS [Canada]. J. Northwest 
+Atl. Fish. Sci., Vol. 22: 357-370. 
+ 
+Stefánsson G. and Pálsson Ó. K.  1998. Point of view a fram ework for m ultispecies 
+modelling of arcto-boreal System s, Review s in Fish Biology and Fisheries 8: 101-
+104. 
+ 
+Stewart, D.J., Kitchell, J.F. and Crowder,  L.B. 1981 Forage fishes and their salm onid 
+predators in Lake Michigan. Transactions of the American Fisheries Society. Vol.. 
+110, no.6:  751-763. 
+ 
+Ulanowicz, R.E., 1986. Growth and development: ecosystem  phenom enology. 
+Springer-Verlag, New York. pp. 203. 
+ 
+Ulanowicz, R.E., 1995. Ecosystem trophic foundations: Lindeman Exonerata.  In B.C. 
+Patten and S.E. Jorgensen (eds): Com plex ecology: The part-whole relation in 
+ecosystems, p. 549-560. Prentice-Hall, Englewood Cliffs, New Jersey. 
+ 
+Ulanowicz, R.E., and C. J. Puccia, 1990.  Mixed trophic im pacts in ecosystem s. 
+Coenoses 5: 7-16. 
+ 
+Valdimarsson, H. and Malm berg, S.A. (1998) Near-surface circulation in Icelandic 
+waters derived from  satellite tracked drif ters. Subm itted in print and accepted, RIT 
+Fiskideildar, Reykjavik.  
+ 
+Vilhjálmsson, H. (1994). The Icelandic capelin stock.  Mallotus villosus (Müller) in 
+the Iceland – Greenland – Jan Mayen area. Vol. XIII No. 1. Rit Fiskideildar, 13(1): p. 
+1-281. 
+ 
+Walters, C., Christensen, V. and Pauly,  D. 1997. Structuring dynam ic m odels of 
+exploited ecosystems from trophic mass-balance assessments. Reviews in fish biology 
+and fisheries 7, 139-172. 
+ 
+ 30
+Welch, H.E., Bergm ann, M.A. Siferd, T.D ., Martin, K.A., Curtis, M.F., Crawford, 
+R.E. and Conover, R.J.  1992. Energy flow through the m arine ecosystem  of the 
+Lancaster South region, arctic Canada. Arctic, vol. 45(4): 343-357. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 31

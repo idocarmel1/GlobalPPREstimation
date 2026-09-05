@@ -1,0 +1,1640 @@
+RESEA RCH ARTICL E
+Modelling microplastic bioaccumulatio n and
+biomagnification potential in the Gala ´ pagos
+penguin ecosystem using Ecopath and Ecosim
+(EwE) with Ecotracer
+Karly McMullen
+ID
+1
+*, Fe ´ lix Herna ´ n Vargas
+2
+, Paola Calle
+3
+, Omar Alavarado-Cadena
+3
+,
+Evgeny A. Pakhomov
+1,4
+, Juan Jose ´ Alava
+1
+*
+1 Ocean Pollution Resea rch Unit, Institute for the Oceans and Fisherie s, Univers ity of British Columbia,
+Vancou ver, British Columbia, Canada, 2 The Peregrine Fund, Isla Santa Cruz, Gala ´ pagos Islands, Ecuador,
+3 Escuela Superior Polite ´ cnica del Litoral, ESPOL, Facultad de Ciencias de la Vida, ESPOL Polytechn ic
+University , Guayaquil, Ecuado r, 4 Department of Earth, Ocean and Atmospher ic Sciences, University of
+British Columb ia, Vancouver, British Columbia, Canada
+* k.mcmulle n@oceans .ubc.ca (KM); j.alava@oc eans.ubc.ca (JJA)
+Abstract
+Bioaccumulation and biomagnification of anthropogen ic particles are crucial factors in
+assessing microplastic impacts to marine ecosystems. Microplastic pollution poses a signifi-
+cant threat to iconic and often endangered species but examining their tissues and gut con-
+tents for contaminant analysis via lethal sampling is challenging due to ethical concerns and
+animal care restrictions. Incorporating empirical data from prey items and fecal matter into
+models can help trace microplastic movement through food webs. In this study, the Gala ´ pa-
+gos penguin food web served as an indicator species to assess microplastic bioaccumula -
+tion and biomagnification potential using trophodynamic Ecopath with Ecosim (EwE)
+modelling with Ecotracer. Empirical data collected from surface seawater near Gala ´ pagos
+penguin colonies, zooplankton, penguin prey, and penguin scat in October 2021 were used
+to inform the ecosystem model. Multiple scenarios, including a 99% elimination rate, were
+employed to assess model sensitivity. Model predictions revealed that microplastics can
+bioaccumulate in all predator-prey relationships, but biomagnification is highly dependent
+on the elimination rate. It establishes the need for more research into elimination rates of dif-
+ferent plastics, which is a critical missing gap in current microplastic ecotoxicological and
+bioaccumulation science. Compared to empirical data, modelling efforts underpredicted
+microplastic concentrations in zooplankton and over-predicte d concentrations in fish. Ulti-
+mately, the ecosystem modelling provides novel insights into potential microplastics’ bioac-
+cumulation and biomagnification risks. These findings can support regional marine plastic
+pollution management efforts to conserve native and endemic species of the Gala ´ pagos
+Islands and the Gala ´ pagos Marine Reserve.
+PLOS ONE
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 1 / 25
+a1111111111
+a1111111111
+a1111111111
+a1111111111
+a1111111111
+OPEN ACCESS
+Citation: McMullen K, Vargas FH, Calle P,
+Alavarado-Ca dena O, Pakhomov EA, Alava JJ
+(2024) Modelling microplast ic bioaccum ulation
+and biomagnific ation potentia l in the Gala ´ pagos
+penguin ecosyste m using Ecopath and Ecosim
+(EwE) with Ecotracer. PLoS ONE 19(1): e0296788.
+https://do i.org/10.1371/j ournal.pone .0296788
+Editor: Arumugam Sundaram anickam, Annamalai
+University , INDIA
+Received: August 31, 2023
+Accepted: December 19, 2023
+Published: January 24, 2024
+Peer Review History: PLOS recognize s the
+benefits of transpar ency in the peer review
+process; therefore, we enable the publication of
+all of the content of peer review and author
+response s alongside final, published articles. The
+editorial history of this article is available here:
+https://doi.o rg/10.1371/jo urnal.pone.0 296788
+Copyright: © 2024 McMullen et al. This is an open
+access article distributed under the terms of the
+Creative Commons Attribution License, which
+permits unrestricte d use, distribu tion, and
+reproduction in any medium, provided the original
+author and source are credited.
+Data Availabilit y Statement: The data underlying
+some results presented in the study are available
+from D. Ruiz and M. Wolff (2011): https:// www.
+1. Introduction
+In the Plasticene era, escalating plastic production has outpaced plastic elimination efforts,
+leading to its surge in the environment [1, 2]. Over 170 trillion plastic particles now float in the
+global ocean, with this estimate consistently rising [3–5]. These particles, many of which are
+considered microplastics (plastic particles 1000 nm to < 5 mm in size), become bioavailable to
+marine organisms, and have been widely documented in fish [6, 7] and invertebrates [8],
+including zooplankton [9], and, to a lesser extent, seabirds [10–13], marine mammals [14–17],
+and sea turtles [14, 18–20]. Microplastics, due to their size and pervasive nature, enter biota
+through various pathways, including direct intake via water [21–24] and air [21, 25], as well as
+indirectly through contaminated prey [16, 21, 26–29]. The latter may represent a major path-
+way of microplastic ingestion for top predators [16]. These particles can cause physical damage
+to the gut and digestive tract, endocrine disruption due to sorption and leaching of toxic chem-
+icals, and can impair feeding ability and predator avoidance [30–34]. These sublethal but
+chronic health impacts may have cascading effects at the species or ecosystem level [35].
+Bioaccumulation, bioconcentration, and biomagnification are common toxicokinetic and
+bioaccumulation science concepts often used in ecotoxicological and environmental risk
+assessments for water soluble (hydrophilic) chemicals such as pesticides, metals, pharmaceuti-
+cals, and personal care products [36], hydrocarbons, and ionic or neutral chemicals such as
+per- and polyfluoroalkyl substances (PFAS), as well as for hydrophobic or lipophilic sub-
+stances, including persistent organic pollutants (POPs) [37–39]. Bioaccumulation refers to the
+increase of a pollutant, i.e. microplastics, in an organism over time, or the gradual net uptake
+from all environmental compartments, including the surrounding environment and the food
+items [21, 28, 29, 39, 40]. Bioconcentration is a subcategory of bioaccumulation and refers to
+the gradual buildup of a contaminant in an organism from the water alone, excluding uptake
+from prey [29, 37]. Conversely, biomagnification implies an increase of the contaminant con-
+centration at each trophic level of the food web. The contaminant concentration amplifies
+through the food web and organisms at higher trophic levels or apex predators exhibit elevated
+contaminant concentrations compared to organisms at lower trophic levels [39, 41].
+These concepts have recently been applied to microplastic science [21, 26, 28, 29, 36, 42]. A
+recent literature review across multiple empirical studies shows evidence for bioaccumulation
+of microplastics within trophic levels [42]. Studies have also established trophic transfer of
+microplastics in natural-like laboratory settings [16, 27]. However, while species-specific
+bioaccumulation is likely to occur in marine species and it is a function of the elimination rate
+[21], evidence for biomagnification of microplastics between trophic levels is lacking [29, 42,
+43]. The bioaccumulation and biomagnification capacity of microplastics are a cause for con-
+cern due to potential impacts on high trophic level species, and therefore require further
+research [40, 42].
+Ecosystem and bioaccumulation modelling in tandem with the application of several
+ecotoxicological and bioaccumulation metrics can help to determine exposure levels and
+bioaccumulation potential, without needing to conduct invasive and lethal sampling or dissec-
+tion of live individual organisms of threatened, endemic marine species. Within this rationale,
+food web bioaccumulation modelling is a feasible and useful tool to predict and estimate the
+bioaccumulation potential and ecotoxicological risks of microplastics to higher trophic level
+species [21].
+The Gala ´ pagos Islands offer a unique opportunity to study microplastic bioaccumulation
+and biomagnification in relatively isolated and simplistic food webs. Recent studies have
+highlighted presence of microplastics in the archipelago [44, 45], but little is known about the
+trophic transfer and accumulation of microplastics in endemic and endangered marine species
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 2 / 25
+sciencedi rect.com/sci ence/article/pi i/
+S138511011 100075X Model data can be accessed
+on SEANOE (McMullen K, Herna ´ n VF, Calle P,
+Alavarado-Ca dena O, Pakhomov E, Alava JJ.
+Modelling microplast ic bioaccum ulation and
+biomagnific ation potentia l in the Gala ´ pagos
+penguin ecosyste m using Ecopath and Ecosim
+(EwE) with Ecotracer. SEANOE. 2023. https://doi.
+org/10.1788 2/97201).
+Funding: This research was partially funded by the
+Nippon Foundation via the Nippon Foundation
+Marine Litter Project at the Institute for the Oceans
+and Fisheries, University of British Columbia ,
+awarded to J. J. Alava and E. A. Pakhomov under
+award number F19-02677 (NIPPFOU N 2019) in
+collaboration with and via the Nippon Foundation-
+Ocean Nexus Center (Dr. Yoshitaka Ota) at
+University of Washington [https://oceann exus.uw.
+edu/about/] . This research was partially supported
+by the NSERC Discove ry Grant RGPIN-2014 -
+05107 to E. A. Pakhomov [https://w ww.
+nserccrsng. gc.ca/profes sors-prof esseurs/gran ts-
+subs/dgigp- psigp_eng.asp] . Both the Nippon
+Foundation and NSERC funders had no
+involveme nt in the study design, data collection
+and analysis, decision to publish, or preparation of
+the manuscript.
+Competing interests : The authors have declared
+that no competing interests exist.
+in the unique food webs of the islands. Gala ´ pagos seabirds, including the Gala ´ pagos penguin
+(Spheniscus mendiculus), may serve as sentinel species for biomonitoring microplastic pollu-
+tion [46]. The Gala ´ pagos penguin is the only tropical, non-migrating penguin species with a
+decreasing population currently estimated at 1200 individuals [47]. This species faces several
+challenges from intense El Niño events and ocean warming [48, 49] to ocean plastics [44].
+Using the Gala ´ pagos penguin as “the canary in the coal mine,” this study predicted the
+bioaccumulation and biomagnification of microplastics in their food web. The objectives of
+this study were to: first, understand the bioaccumulation behaviour of microplastics in the
+food web of the Gala ´ pagos penguin; second, predict the biomagnification potential of micro-
+plastics in the food web of the Gala ´ pagos penguin; and third, compare these findings to empir-
+ical data gathered in the Gala ´ pagos. Trophodynamic ecosystem modelling, including basic and
+advanced Ecopath and Ecosim (EwE) models along with the Ecotracer routine [50], were
+applied. Empirical seawater and biotic data gathered in the Gala ´ pagos were used as uptake and
+environmental input data and later were compared against the predicted data to assess model
+bias and corroborate the modelling performance. The research was designed to provide essen-
+tial insights into the bioaccumulation potential and ecotoxicological risks of microplastics to
+higher trophic level species and inform regional policies to combat marine plastic pollution in
+the Gala ´ pagos Islands.
+2. Methods
+2.1 Ecosystem modelling theory
+Ecopath with Ecosim (EwE) is a trophodynamic ecosystem modelling tool used to understand
+how different species in an ecosystem interact with one another, how they respond to changes
+in the environment, and how human activities might impact the ecosystem [50]. Ecopath is
+central to the software suite and provides a mass-balance snapshot of the ecosystem in ques-
+tion, while Ecosim offers a dynamic approach for temporal simulations based on predator-
+prey interactions using Lotka-Volterra and foraging arena theories [50–52]. The EwE model
+together integrates biotic and abiotic components in an ecosystem by incorporating the princi-
+ples of mass balance as well as a set of linear equations that describe and track the average flow
+of mass and energy between functional groups according to a diet composition matrix. Func-
+tional groups can be species or groups of species that have similar life-history or characteristics
+which are combined into biomass pools. The diet composition matrix is used to represent the
+flow of mass and energy within the ecosystem. It also accounts for energy losses over time
+through processes such as respiration, emigration, and decomposition [50–52]. The core prin-
+ciples and mathematical equations of EwE are described in the user guide, which is accessible
+at http://www.ecopath.org [53].
+2.2 Model descriptions
+Two models were used to simulate microplastic movements through the Gala ´ pagos penguin
+food web, namely, a novel and simplistic food web model for the Gala ´ pagos penguin based on
+the species diet; and a trophic model of the Bolivar Channel Ecosystem (BCE), based on Ruiz
+and Wolff model [54] which includes an advanced snapshot of the BCE, with functional
+groups including seabirds, a proportion of which are Gala ´ pagos penguins (i.e., ~26% of the
+functional group ‘pool’). The latter incorporates a wider variety of groups and energy flows for
+a holistic ecosystem view, while the former isolates the Gala ´ pagos penguin food web to closely
+track microplastic movements within the specific food web. Both models were run with the
+Ecotracer routine to assess and compare bioaccumulation and biomagnification.
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 3 / 25
+2.2.1 The Gala ´ pagos Penguin (GP) food web model. The Gala ´ pagos Penguin (GP) food
+web model was constructed using EwE 6.6.8 [53]. The model was developed using a top-down
+approach by first analyzing the diet of the Gala ´ pagos penguin (Table 1). Based on limited avail-
+able dietary data, the Gala ´ pagos penguin is suggested to feed primarily on small planktivorous
+fish, including sardines (Sardinops sagax), piquitingas (Lile stolifera), and salema (Xenocys jes-
+siae), as well as fry or juveniles of mullets (Mugil spp.) [48, 55–57; F. H. Vargas, pers. comm.,
+16 August 2023]. Closely related to the Gala ´ pagos penguin, the Humboldt Penguin (Spheniscus
+humboldti) also feeds on anchovies (Engraulis ringens), Araucanian herring (Strangomera ben-
+tincki), and silverside (Odontesthes regia), and to a lesser extent, cephalopods (Patagonian
+squid, Doryteuthis gahi and Humboldt squid, Dosidiscus gigas) and crustaceans (stomatopods
+and isopods) [58]. The diet composition of the Magellanic penguin (Spheniscus magellanicus),
+which is also closely related to the Gala ´ pagos penguin, was found to be similar [59]. Assessed
+penguins primarily ate anchovy (Engraulis anchoita) and thornfish (Bovichtus argentinus)
+[59]. This information provided a foundation for creating the GP model based on plausible
+diet matrix assumptions.
+The finalized diet matrix was compared and adjusted based on an existing EwE model avail-
+able on Ecobase (http://ecobase.ecopath. org/) [60, 61], the Floreana island rocky reef ecosys-
+tem model, which includes the Gala ´ pagos penguin in the seabird functional group along with
+other marine species [62], as well as the BCE model [54]. Initially, cephalopods were part of
+the GP model; however, this species functional group was eventually excluded due to the
+unavailability of sufficient biomass data and the fact that they were not accounted for in the
+Floreana and BCE models. Conversely, barracuda (Barracuda pelicano) were added to the GP
+model because they were recognized as seabird prey in the Floreana and BCE models [54, 62].
+It is reasonable to conclude that juvenile barracuda are likely to be preyed upon, given the pre-
+ferred prey size for penguins [58, 63].
+The final diet matrix consisted of ten functional groups, as shown in Table 1. Species selec-
+tion and identification were done using scuba diving field guides [64, 65] as well as using the
+BCE model [54]. Diet information for penguin prey and lower trophic level species were
+Table 1. Diet composition of Gala ´ pagos penguin (GP) EwE model.
+Prey/preda tor TL 1 2 3 4 5 6 7
+1 Gala ´ pagos Penguin 3.7
+2 Barracuda 3.6 0.05
+3 Mullet 2.3 0.05
+4 Anchovy , Herring, Sardines , Salema 2.7 0.81 0.6
+5 Decapo ds 2.0 0.05
+6 Predatory zooplankt on 2.6 0.02 0.1 0.1 0.25 0.01 0.2
+7 Herbivorou s zooplankto n 2 0.02 0.1 0.05 0.2 0.01 0.25
+8 Macroa lgae 1 0.05 0.3 0.05
+9 Microalga e/phytoplank ton 1 0.2 0.2 0.2 0.2 0.6
+10 Detrit us 1 0.4 0.15 0.2 0.15 0.15
+Import 0 0.1 0.2 0.2 0.28 0.2 0.2
+Sum 1 1 1 1 1 1 1
+Prey and diet composition matrix in the food web of the Gala ´ pagos penguin (GP) EwE model, based on the best available data and informa tion from the existing
+literature and expert knowledg e. The numbers preceding the prey/predato r name indicate the functional group number . These numbers can be found in the column
+headers of the primary row, where each number correspo nds to the respective functional group. Import indicates the proportion of diet a predator consumes that is not
+consider ed within the context of this ecosystem model.
+https://do i.org/10.1371/j ournal.pone .0296788.t001
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 4 / 25
+accessed through FishBase (https://www.fishbase.se/) and SeaLifeBase (https://www.
+sealifebase.ca/) [66–68]. Where data was not available, the diet information of the closest
+related species was used. Functional group biomasses (t/km
+2
+) were calculated based on existing
+models and reasonable estimations of biomass in g/m
+2
+. Production per biomass (P/B) was cal-
+culated based on the average lifespan of the species (i.e., the inverse of mortality). Gala ´ pagos
+penguins, for example, live up to 15 to 20 years [69], therefore a P/B of 0.07 is reasonable when
+assuming a mortality of
+1
+15
+y
+-1
+. Consumption per biomass (Q/B) was obtained from FishBase
+and SeaLifeBase [66–68]. The Q/B parameter from FishBase was adjusted and recalculated for
+barracuda and mullets, given the penguins’ preference for smaller-sized prey; therefore,
+assuming the barracuda and mullet functional groups are comprised of juveniles, the size i.e.,
+max total length (TL), was set to 30 cm for barracuda (S. idiates) and 25 cm for mullet (M. gala-
+pagensis), then FishBase calculations were rerun. Ecotrophic efficiency was left to be calculated
+by the EwE model. The sources of information and input data can be found in Table 2 & S1
+Table in S1 File [48, 54, 57, 62, 70–73].
+After inputting all parameter estimates, the model was found to be unbalanced, therefore
+parameters were manually adjusted until balance was achieved. The Q/B was reduced, and the
+P/B was increased for fish so that the P/Q ratio was near 0.2–0.3 based on EwE best practices
+[74, 75]. The biomass of herbivorous and predatory zooplankton was increased to account for
+their predation. Given the intentionally limited scope of the model and specific focus on the
+Gala ´ pagos penguin, diet import was reasonably assumed for most functional groups given that
+not all prey were included (e.g., not all barracuda prey).
+2.2.2 Bolivar Channel Ecosystem (BCE) model. The Bolivar Channel Ecosystem (BCE)
+model is a more advanced EwE model consisting of thirty functional groups known to inhabit
+the highly productive, upwelling zone between Isabela and Fernandina islands [54]. The origi-
+nal model was provided by courtesy of the authors to support the assessment of microplastic
+bioaccumulation in the area. Ruiz and Wolff [54] estimated biomass from observed sightings
+and censuses where applicable. The model includes one functional group entitled ‘seabirds’,
+comprising 74% of flightless cormorants (Phalacrocorax harrisi) and 26% Gala ´ pagos penguins
+(S. mendiculus). Input parameters underwent a series of resampling through the Ecoranger
+resampling routine to select a random set of input values from normal distributions of the
+input parameters. The model is fully described in Ruiz and Wolff [54].
+Table 2. List of species and functional groups of the Gala ´ pagos penguin (GP) EwE model.
+Common name Species name Source
+Gala ´ pagos Penguin Spheniscus mendiculus NA
+Barracuda s Sphyraena idiates [64]
+Mullet Mugil galapagensis*, cephalus, curema [54, 64, 65]
+Anchovy Engraulidae: Anchoa naso [64]
+Sardines Sardinops sagax sagax [64]
+Herring s Clupeidae: Opisthonema berlangai [64]
+Salema Xenichthys agassizi, Xenocys jessiae* [54, 64, 65]
+Decapod s Panulirus gracilis, panulirus penicillatus, Scyllariidea astori* [54, 64]
+Predatory Zooplankton Functional group spp. [54]
+Herbivorou s Zooplankton Functional group spp. [54]
+*The asterisk represent s the main species reference d to determine biological parameters.
+Data is based on the existing literature sources.
+https://d oi.org/10.1371/j ournal.pon e.0296788.t00 2
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 5 / 25
+2.3 Modelling bioaccumulation of microplastics with EwE Ecotracer routine
+The Ecotracer routine is an EwE module used to track and assess the bioaccumulation poten-
+tial of pollutants in marine food webs over time [50, 76, 77]. Ecotracer uses Ecosim temporal
+simulations to predict the flow of contaminants through the food web [76–78]. The contami-
+nant concentration over time in each functional group is based on the flow rates from Ecosim,
+as well as decay, elimination, and physical exchange rates. The linear dynamical equation for
+changes in contaminant concentration over time for a given functional group (pool) or species
+and the dynamic changes in contaminant concentration can be found in Ecopath with Ecosim:
+A User’s Guide Ecosystem effects of invertebrate fisheries View project Ecosystem Fmsy estima-
+tions for data rich stocks [52].
+The contaminant concentrations in immigrating and emigrating organisms were consid-
+ered to be negligible for the purposes of this modelling work to simplify the model and because
+the Gala ´ pagos penguins are endemic and residents of the Gala ´ pagos Islands and do not under-
+take migration.
+Input parameters were gathered from observed data from the field [79], laboratory studies,
+and existing modelling work outlined in Table 3. Microplastic concentrations (particle
+size > 10 μm) in the environment were obtained [79] and were entered as input data for the
+initial and inflow environmental concentrations of microplastics in the Ecotracer module for
+both EwE models. The direct uptake rates were derived from the observed zooplankton inges-
+tion rates of anthropogenic particles [79]. This information was utilized as the exclusive source
+for the microplastic uptake, based on the premise that zooplankton occupy a pivotal position
+at the bottom of aquatic food webs and therefore represent the initial point of entry for the
+bioaccumulation of microplastics in the ecosystem [21]. Considering the purpose of the
+modelling work, which aimed to evaluate the levels and magnitude of bioaccumulation and
+biomagnification of microplastics in the Gala ´ pagos penguin food web, alternative sources of
+microplastic exposure such as inhalation of airborne particles or direct uptake from the envi-
+ronment were assumed to be negligible and thus not considered.
+Microplastic elimination or egestion rates were adopted from the food web bioaccumula-
+tion model developed by Alava [21] or collected from the best available data (See Table 4).
+Briefly, the egestion or elimination rate of microplastic is computed from the retention time
+(τ) as the elimination or egestion rate is inversely related to the retention or residency time: τ =
+1/k
+E
+; thus, solving for k
+E
+:k
+E
+= 1/τ [21]. Finally, an average decay rate was set at ~0.0283 per
+year (2.825% per year), based on plastic particles decay estimates (ranging 0.65% to 5% per
+year), accounting for weight loss due to solar radiation and oxygenation, documented by Ever-
+aert et al. [80]. Ecotracer was run for a simulation period of 100 years.
+2.4 Model scenarios
+To explore the microplastic bioaccumulation potential and biomagnification capacity in the
+food web, the model was run using four different scenarios: (1) A baseline scenario using
+Table 3. Ecotracer enviro nmental parame ters, input data, and respective sources used in the Gala ´ pagos Penguin (GP) EwE model.
+Ecotrace r Parameter Environ mental Input Data Source/Detail s
+Initial concentr ation (t/km
+2
+) 4.11x10
+-2
+7.57x10
+-6
+g/MP [21]
+4.11x10
+-6
+± 3.72x10
+-6
+average MP g/L [79]
+Converted to t/km
+2
+based on [81]
+Base inflow rate (t/km
+2
+/y) 4.11x10
+-2
+Consistent state scenario based on [82]
+Decay Rate (/year) 0.0283 [80]
+Direct absorption rate (g/kg) 7.38x10
+-2
+Based on observed zooplan kton ingestion rate [79]
+https://do i.org/10.1371/j ournal.pone .0296788.t003
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 6 / 25
+observed environmental anthropogenic particle concentrations [79] and egestion rates from
+literature; (2) a high environmental concentration scenario, which assumed a higher abun-
+dance of microplastics in the environment, based on the upper limit of the standard deviation
+of the aforementioned observed microplastic abundance data; (3) a low environmental con-
+centration scenario, which assumed a lower abundance of microplastics in the environment,
+based on the lower limit of the standard deviation of the microplastic abundance data; and
+finally, (4) a 99% egestion rate scenario which assumes all microplastics are excreted in under
+24 hours, using the environmental concentration data from baseline scenario (S2 Table in
+S1 File). See S1-S4 Tables in S1 File for additional Ecotracer input data.
+2.5 Bioaccumulation and biomagnification metrics
+The application of bioaccumulation and biomagnification criteria and metrics for microplas-
+tics were based on Alava [21, 89, 93].
+Bioaccumulation factor (BAF). The bioaccumulation factor (BAF) was calculated by com-
+paring the amount of microplastics accumulated by aquatic biota to the total concentration of
+microplastics present in both the aquatic environment and diet (e.g., the predator’s prey). A
+BAF greater than 1 indicates plausible bioaccumulation under steady state (e.g., BAF >1).
+BAF ¼
+Ci
+Co þ Cj
+ð1Þ
+Where Ci is the microplastic concentration in the predator (in units of g/kg), Co is the con-
+centration in the environment and Cj is the concentration in the diet (prey) in units of g/kg.
+Bioconcentration factor (BCF). The bioconcentration factor (BCF) was calculated by com-
+paring the amount of microplastics accumulated by the aquatic organism or biota (in units of
+g/kg) to the total concentration of microplastics present in the water or aquatic environment
+(in units of g/L). A BCF greater than 1 indicates bioconcentration in the organism (e.g., BCF
+>1).
+BCF ¼
+Ci
+Cw
+ð2Þ
+Where Ci is the microplastic concentration in biota (g/kg) and Cw is the concentration in
+the water (g/L).
+Predator-prey biomagnification factor (BMF
+TL
+). The predator-prey biomagnification factor
+(BMF
+TL
+) was calculated by comparing the amount of microplastics accumulated by the preda-
+tor in units of g/kg to the total concentration of microplastics (g/kg) in the prey, divided by the
+difference in trophic levels. A BMF greater than 1 indicates plausible trophic biomagnification
+Table 4. Data values of microplas tic retentio n times to calculate the egestion (eliminat ion) rates with reference sources used for the Gala ´ pagos Penguin (GP) EwE
+model.
+Group Conservative Eliminatio n Rate (Short Retention time) Eliminat ion Rate Based on Literature Source
+Gala ´ pagos penguin <24 hours 70 hours [83, 84]
+Barracuda <24 hours 49 days [85, 86]
+Mullet <24 hours 30 days [7]
+Anchovy, Herring , Sardines, Salema <24 hours 49 days [85–87]
+Decapods <24 hours 14 days [88]
+Predatory zooplankton <24 hours 7 days [31]
+Herbivorous zooplankton <24 hours 7 days [31]
+https://do i.org/10.1371/j ournal.pone .0296788.t004
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 7 / 25
+(e.g., BMF
+TL
+>1).
+BMF ¼
+Ci=Cj
+TLi   TLj
+ð3Þ
+Where Ci is the microplastic concentration in the predator, Cj is the concentration in prey,
+TL is the trophic level for the predator (i) and prey (j).
+Trophic magnification factor (TMF). The trophic magnification factor (TMF) is a com-
+monly employed metric in food web analysis that measures the biomagnification of pollutants
+at various trophic levels [21, 90–92]. The TMF is calculated as the antilog of the regression
+slope of the linear regression between the logarithmic-transformed concentrations of micro-
+plastics (Log MPs) predicted in the GI tract of organisms of the food web and their trophic
+level, TL [21]. The linear equation is as follows.
+Log
+10
+MP ¼ a þ bTL ð4Þ
+Where b is the slope, TL is the trophic level, and a is the y-intercept. The TMF can be
+expressed as the equivalent exponential mathematical terms expressed as TMF = 10
+b
+, where b
+is the slope.
+TMF ¼ 10
+b
+ð5Þ
+The TMF (slope, b) is statistically evaluated using a significance level (α) of 0.05. A
+TMF > 1 (b > 0) indicates that the contaminant biomagnifies in the food web. A TMF < 1
+(b < 0) indicates trophic dilution of the contaminants, while a TMF = 1 (b = 0) indicates no
+change in contaminant concentrations among organisms of a food web [21, 90].
+2.6 Sensitivity assessment and model bias
+The sensitivity of the model was assessed by testing changes in the environmental concentra-
+tions and the functional group elimination rates. This was conducted by comparing the out-
+comes of the model through four of the different scenarios (S2 Table in S1 File), including
+high and low environmental concentrations as well as high (e.g., > 24 hours) and low (e.g., <
+24 hours) retention times, equivalent to slow (high retention) or fast (low retention) elimina-
+tion rates, respectively. The most sensitive parameters were determined by assessing the vari-
+ance in output data according to changes in environmental concentrations and elimination
+rate.
+2.7 Model bias
+A model bias (MB) approach was applied to assess the performance of the food web model and
+corroborate the projections of microplastics under the three abiotic concentrations’ scenarios
+(scenario 1–3) and one conservative egestion rate scenario (scenario 4). The performance of
+the model was analyzed in terms of the model bias ratio:
+MB ¼
+C
+BP;iMP
+C
+BO;iMP
+ð6Þ
+where C
+BP,iMP
+and C
+BO,iMP
+are the model calculated (predicted) and observed microplastic
+concentrations in species i, respectively. This analysis was done by comparing the projected
+microplastics concentrations in biota (zooplankton, anchovy, and mullet) yielded by the
+model simulations to the empirical data measured in free-ranging zooplankton, wild-caught
+anchovy, and mullets in waters of the Gala ´ pagos National Park [79]. The microplastic and
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 8 / 25
+anthropogenic particle mean concentrations for zooplankton, anchovy, and mullet were
+7.38x10
+-7
+, 7.69x10
+-10
+, and 1.48x10
+-8
+g/kg, respectively [79].
+3. Results
+3.1 Gala ´ pagos penguin food web model in Ecopath
+A successfully balanced GP model was constructed with a total of ten functional groups of
+varying trophic levels (Fig 1; Table 5). Analysis of the energy flow diagram revealed the highest
+energy flows from microalgae/phytoplan kton to herbivorous zooplankton, as well as from
+anchovy, herring, sardines, and salema to barracuda and to the Gala ´ pagos penguin. A high
+biomass of macroalgae and detritus was necessary to maintain the balance of the model, and
+matched output of the BCE model [54]. Detritus, microalgae/phytoplankton, and macroalgae
+made up trophic level 1, followed by herbivorous zooplankton, mullet, predatory zooplankton,
+and anchovy, herring, sardines, salema as trophic level 2, in order of lowest to highest. Preda-
+tory zooplankton had a higher trophic level than mullets, which is expected given mullet’s pref-
+erence for detritus compared to predatory zooplankton consuming other zooplankton.
+Likewise, anchovy, herring, sardines, and salema had a similar trophic level compared to pred-
+atory zooplankton, which is not surprising given similar food preferences, namely other zoo-
+plankton. The Gala ´ pagos penguin and barracuda were the high trophic level species included
+in the model. Ecotrophic efficiencies (EE) were comparable to Ruiz & Wolff [54] and ranged
+from 0 to 0.68 where the highest EE resulted in predatory zooplankton, herbivorous zooplank-
+ton, and microalgae/phytoplan kton.
+3.2 Microplastic bioaccumulation and biomagnification via Ecotracer
+3.2.1 Gala ´ pagos penguin (GP) food web model. Utilizing the baseline Ecotracer scenario
+for the GP food web model, output data revealed a rapid increase in contaminant concentra-
+tion (g) per biomass (kg) until around year 5, after which it shifted to a more gradual increase
+Fig 1. Gala ´ pagos penguin EwE food web model energy flow diagram. Circles represent the amount of biomass and labels indicate the respective functional
+group. Thicker lines between functional groups reflect higher energy flows from one functional group to another, and trophic levels are indicated on the y-axis.
+https://do i.org/10.1371/j ournal.pone .0296788.g00 1
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 9 / 25
+and eventually plateaued, reaching steady state around year 60 (Fig 2A). The microplastic con-
+centration in the Gala ´ pagos Penguin plateaued at 7.6x10
+-5
+g/kg, while the microplastic concen-
+tration in their primary prey item, planktivorous fish, reached a steady state at 4.93x10
+-8
+g/kg.
+The Gala ´ pagos penguin was found to have the highest level of microplastics per biomass,
+Table 5. Parameter output from the Gala ´ pagos penguin EwE food web model.
+Group name Trophic
+level
+Habita t area
+(proportion)
+Biomass in
+habitat area (t/
+km
+2
+)
+Biomass (t/
+km
+2
+)
+Production /
+biomass (/year)
+Consumption /
+biomass (/year)
+Ecotrophic
+Efficiency
+Production /
+consumption
+(/year)
+1 Gala ´ pagos Penguin 3.710 1 0.0125 0.0125 0.067 60.30 0.000 0.001
+2 Barracuda 3.636 1 13.06 13.06 0.063 3.9 0.046 0.016
+3 Mullet 2.260 1 22.6 22.6 2.8 10.9 0.0006 0.257
+4 Anchovy, Herring,
+Sardines, Salema
+2.743 1 19 19 4.6 15 0.386 0.307
+5 Decapods 2.035 1 14.5 14.5 0.687 11.95 0.004 0.058
+6 Predatory
+zooplankton
+2.578 1 15 15 45 99.1 0.593 0.454
+7 Herbivorous
+zooplankton
+2 1 22 22 36 200 0.566 0.18
+8 Macroalgae 1 1 800.5 800.5 15.7 0.023
+9 Microalgae/
+phytoplankto n
+1 1 31.2 31.2 146.3 0.675
+10 Detritus 1 1 500 500 0.066
+Paramete r output captur es a balanced, static represent ation of the food web at the moment in time with respective biomass, production / biomass (P/B), consumpti on /
+biomass (Q/B), Ecotroph ic Efficiency (EE), and product ion / consump tion (P/Q) metrics.
+https://do i.org/10.1371/j ournal.pone .0296788.t005
+Fig 2. Gala ´ pagos penguin model microplastic concentra tion over time and trophic level. (A) Bioaccum ulation simulatio ns using the EwE Ecotracer routine,
+showing the projectio ns of microplast ics (MPs) bioaccumulati on in the Gala ´ pagos penguins food web model under the baseline scenario with seawate r initial
+concentratio ns = 0.00411 t/km
+2
+. The simulations for the bioaccumu lation include the eliminati on rates based on the literature. For zooplankton, as the key
+trophic level for the initial uptake of microplastic s, the ingestion rate of microplas tics and anthropo genic particles by zooplank ton (i.e., 7.38x10
+-7
+g/kg/day) was
+used, based on [79]. (B) Linear regressio ns showing the significant relations hip between predicted concentratio ns of microplastic s (log-transfo rmed data) and
+trophic levels in the GP model at year 100. The antilog of the regression slope was used to determine TMF.
+https://do i.org/10.1371/j ournal.pone .0296788.g00 2
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 10 / 25
+followed by barracuda, anchovy, sardine, herring, and salema, and then predatory zooplankton
+(Fig 2A). In contrast, species or functional groups at lower trophic levels had lower concentra-
+tions of microplastics per unit of biomass.
+The baseline simulation results predicted the plausible bioaccumulation and biomagnifica-
+tion of microplastics in the functional groups of species within this model. The relationship
+between the logarithmic-transform ed concentration of microplastics and the species’ trophic
+levels shows that the TMF was significantly greater than 1 (i.e., TMF > 1; when the slope is sta-
+tistically different or greater than zero [(b > 0)] in a positive, significant linear regression). The
+TMF increased from 7.08 at year 1 to 61.7 at year 100 (Fig 2; S5 Table in S1 File). By year 100,
+there was a substantial difference between the Gala ´ pagos penguin and Barracuda (trophic level
+3) compared to lower trophic level groups, indicating biomagnification in the model. The
+regression between the logarithmic microplastic concentration (g/kg) revealed a slope of 1.79
+with a TMF = 61.7 (p < 0.05), further indicating a statistically significant relationship for bio-
+magnification in the model (Fig 2B).
+The Gala ´ pagos penguin had the highest BAF, regardless of what scenario was assessed,
+while the mullet had the lowest BAF and BCF (Fig 2; S6 Table in S1 File). The BMF increased
+with each trophic level and was high (BMF
+TL
+= 1239 and BMF
+TL
+= 1796) for the Gala ´ pagos
+penguin, with planktivorous fish and mullet being considered as prey, respectively, though it
+was substantial for all prey items from the Gala ´ pagos penguin. The BMF
+TL
+was the lowest for
+planktivorous fish (BMF
+TL
+= 3.06) as well as for predatory zooplankton with herbivorous zoo-
+plankton as prey (BMF
+TL
+= 3.05).
+3.2.2 Bolivar Channel (BCE) ecosystem model. The BCE model with the Baseline Eco-
+tracer scenario yielded similar results to the GP food web model in terms of overall trend, but
+with lower microplastic concentrations per functional group. Output data once again revealed
+a rapid increase in contaminant concentration (g) per biomass (kg) until around year 5, and
+diverging slightly from the GP model, concentrations plateaued earlier, reaching steady state
+around year 35 as shown in Fig 3A. Microplastic concentrations in the seabirds plateaued at
+around 5.9x10
+-7
+g/kg, two orders of magnitude lower than results from the GP model. Micro-
+plastic concentrations in the penguins’ primary prey items, planktivorous fish, reached steady
+states at 6.63x10
+-8
+g/kg (Fig 3A), which is within the same order of magnitude as yielded in the
+GP model. The functional groups with the highest concentrations of microplastics per biomass
+displayed a pattern consistent with the one established in the GP model. The functional groups
+of interest with elevated microplastic concentrations included seabirds as the highest, followed
+by barracuda, predatory zooplankton, and finally, small planktivorous reef fish (Fig 3A).
+Unlike the GP model, predatory zooplankton had slightly higher microplastic concentrations
+compared to small planktivorous fish and herbivorous zooplankton had higher concentrations
+of microplastics than both detritivorous species, mullets, and lobsters.
+Similar to the GP model simulations, BCE simulation resulted in plausible bioaccumulation
+and biomagnification of microplastics in the functional groups of species in the model. The
+relationship between the concentration of microplastics and the species’ trophic levels shows
+that the TMF was once again significantly greater than 1 (slope > 0; Fig 3A). The TMF ranged
+from 6.17 at year 1 to 16.6 at year 100 (S7 Table in S1 File). At year 100, the TMF was lower
+than estimated by the GP model. Seabirds and barracuda displayed a similar trend, yielding
+higher bioaccumulation and biomagnification potentials than other functional groups of inter-
+est. Of particular interest were the projections for predatory marine mammals and sharks, hav-
+ing the highest biomagnification capacity of all functional groups in the model. Overall, the
+regression indicated a high biomagnification potential as the logarithmic microplastic concen-
+tration (g/kg) versus the trophic level revealed a statistically significant slope of 1.22, i.e.,
+TMF = 16.7 (p < 0.001; Fig 3; S7 Table in S1 File).
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 11 / 25
+As in the GP model, seabirds had the highest BAF and BCF potential, regardless of what
+prey scenario was assessed, and the mullet once again had the lowest BAF and BCF (S8
+Table in S1 File). The resulting BMF
+TL
+was different than the GP model. Foremost, the plankti-
+vorous reef fish revealed BMF
+TL
+< 1, indicating lack of biomagnification. The Gala ´ pagos pen-
+guin revealed positive BMF
+TL
+across all prey items, where the highest was once again with prey
+item lobster. That said, BMF
+TL
+was substantially lower than the GP model; the highest BMF
+TL
+in the BCE model was a factor of 76 compared to a factor of 2308 in the GP model.
+3.3 Model sensitivity
+To assess the sensitivity of the model parameters, four different scenarios were evaluated for
+each model, resulting in a total of eight simulations to examine microplastic bioaccumulation
+and biomagnification. The simulation outcomes showed that the elimination rate was the
+most sensitive parameter. This was evidenced by the fact that the results from this scenario dis-
+played the greatest variability in terms of BAF and BCF, as well as smaller ranges in BMF
+TL
+across both the GP model and the BCE model, as shown in Table 6.
+In the 99% elimination rate scenario for both the GP and BCE models, the BAF and BCFs
+were substantially lower, with values that were two to four orders of magnitude lower than
+those estimated in the high and low abundance scenarios as well as the baseline scenarios
+(Table 6). The BAF and BCF for the high and low abundance simulations were comparable to
+the baseline scenario for the GP and BCE models.
+For the GP model using the 99% elimination rate scenario, the BMF
+TL
+ranged from 0.02 to
+49.6 depending on the predator and prey (Table 6). Conversely, the BMF
+TL
+had a much
+broader range (e.g., 3.06 to 2308) across the other three scenarios. When comparing the
+BMF
+TL
+for the Gala ´ pagos penguins and planktivorous fish, the baseline scenario resulted in
+the highest BMF
+TL
+(BMF
+TL
+= 1239). This value was comparable to the high and low abundance
+Fig 3. BCE model microplastic concentra tion over time and trophic level. (A) Bioaccum ulation simulatio ns using the EwE Ecotracer routine, showing the
+projections of microplas tics (MPs) bioaccumu lation in the BCE model under the baseline scenario where seawater initial concentratio ns = 0.00411 t/km
+2
+.
+The simulations for the bioaccumu lation include the eliminati on rates based on the literature. For zooplankton, as the key trophic level for the initial uptake
+of micro plastics, the ingestion rate of microplast ics and anthropo genic particles by zooplank ton (i.e., 7.38x10
+-7
+g/kg/day) was used, based on [79]. (B) Linear
+regressions showing the significan t relationship between predicted concentra tions of microplas tics (log-transfo rmed data) and trophic levels in the BCE
+model at year 100. The antilog of the regression slope was used to determine TMF.
+https://doi. org/10.1371/j ournal.pone .0296788.g00 3
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 12 / 25
+scenarios but was substantially higher than the BMF
+TL
+of 27.7 as estimated by the 99% elimina-
+tion scenario for the same species combination.
+For the BCE model, the BMF
+TL
+ranged from -0.04 to 76.71 in the 99% elimination rate sce-
+nario, which was more comparable to the other three scenarios yielding -2.73 to around 76
+BMF
+TL
+, depending on the predator-prey combination (Table 6). Once again, the BMF
+TL
+for
+the Gala ´ pagos penguins and planktivorous fish was much higher in the high and low abun-
+dance scenarios as well as the baseline scenarios (BMF
+TL
+= ~8.5) compared to the 99% elimina-
+tion rate scenario (BMF
+TL
+= 0.10).
+Simulation outcomes of the different scenarios yielded interesting results for TMF calcula-
+tions, where all scenarios, except for the 99% elimination rate, predicted the plausible trophic
+biomagnification of microplastics in the biomass species’ functional groups (Table 7; Fig 4A
+Table 6. Bioaccumulat ion, bioconcentr ation, and biomagn ification factors in the Gala ´ pagos penguin and BCE models across scenarios.
+A) Gala ´ pagos Penguin (GP) Model
+Metric Scenario Predatory
+zooplankton with
+prey set to
+herbivorous
+zooplankton
+Planktivorous fish
+with prey set to
+predatory
+zooplankton
+Planktivorous fish
+with prey set to
+herbivorous
+zooplankton
+Mullet with prey
+set to detritus
+Gala ´ pagos
+penguin with prey
+set to
+planktivorous fish
+Gala ´ pagos
+penguin with prey
+set to mullet
+Gala ´ pagos penguin
+with prey set to
+decapods
+BAF Low microplastic abundance 4.36x10
+-8
+4.92x10
+-8
+4.92x10
+-8
+2.27x10
+-8
+5.86x10
+-5
+5.86x10
+-5
+5.86x10
+-5
+High microplastic abundance 4.36x10
+-8
+4.92x10
+-8
+4.92x10
+-8
+2.26x10
+-8
+5.89x10
+-5
+5.89x10
+-5
+5.89x10
+-5
+99% elimination 1.66x10
+-8
+2.71 x10
+-10
+2.71 x10
+-10
+1.15 x10
+-10
+7.26 x10
+-9
+7.2 x10
+-9
+7.26 x10
+-9
+Baseline 4.36x10
+-8
+4.92x10
+-8
+4.92x10
+-8
+2.26x10
+-8
+5.90x10
+-5
+5.90x10
+-5
+5.90x10
+-5
+BCF Low microplastic abundance 4.36x10
+-8
+4.92x10
+-8
+4.92x10
+-8
+2.27x10
+-8
+5.86x10
+-5
+5.86x10
+-5
+5.86x10
+-5
+High microplastic abundance 4.36x10
+-8
+4.92x10
+-8
+4.92x10
+-8
+2.26x10
+-8
+5.89x10
+-5
+5.89x10
+-5
+5.89x10
+-5
+99% elimination 1.66x10
+-8
+2.71x10
+-10
+2.71x10
+-10
+1.15x10
+-10
+7.26x10
+-9
+7.26x10
+-9
+7.26x10
+-9
+Baseline 4.36x10
+-8
+4.92x10
+-8
+4.92x10
+-8
+2.26x10
+-8
+5.90x10
+-5
+5.90x10
+-5
+5.90x10
+-5
+BMF
+TL
+Low microplastic abundance 3.50 6.84 3.06 11.4 1232.5 1784 2300
+High microplastic abundance 3.50 6.85 3.06 11.3 1238 1794 2305
+99% elimination 1.40 0.10 0.02 0.12 27.7 43.5 49.6
+Baseline 3.50 6.84 3.06 11.3 1239 1796 2308
+B) Bolivar Channel Ecosystem (BCE) Model
+Metric Scenario Predatory
+zooplankton with
+prey set to
+herbivorous
+zooplankton
+Planktivorous fish
+with prey set to
+predatory
+zooplankton
+Planktivorous fish
+with prey set to
+herbivorous
+zooplankton
+Mullet with prey
+set to detritus
+Seabirds with prey
+set to
+planktivorous fish
+Seabirds with prey
+set to mullet
+Seabirds with prey
+set to lobster
+BAF Low microplastic abundance 7.34x10
+-8
+6.62x10
+-8
+6.62x10
+-8
+1.14x10
+-8
+5.84x10
+-7
+5.84x10
+-7
+5.84x10
+-7
+High microplastic abundance 7.34x10
+-8
+6.62x10
+-8
+6.62x10
+-8
+1.14x10
+-8
+5.85x10
+-7
+5.85x10
+-7
+5.85x10
+-7
+99% elimination 2.83x10
+-8
+3.50 x10
+-10
+3.50 x10
+-10
+8.45x10
+-11
+3.55x10
+-11
+3.55x10
+-11
+3.55x10
+-11
+Baseline 7.34x10
+-8
+6.62x10
+-8
+6.62x10
+-8
+1.14x10
+-8
+5.85x10
+-7
+5.85x10
+-7
+5.85x10
+-7
+BCF Low microplastic abundance 7.34 x10
+-8
+6.62 x10
+-8
+6.62 x10
+-8
+1.14 x10
+-8
+5.84 x10
+-7
+5.84 x10
+-7
+5.84x10
+-7
+High microplastic abundance 7.34 x10
+-8
+6.62 x10
+-8
+6.62 x10
+-8
+1.14 x10
+-8
+5.85 x10
+-7
+5.85 x10
+-7
+5.85x10
+-7
+99% elimination 2.83 x10
+-8
+3.50 x10
+-8
+3.50 x10
+-10
+8.45 x10
+-11
+3.55 x10
+-11
+3.55 x10
+-11
+3.55 x10
+-11
+Baseline 7.34 x10
+-8
+6.62 x10
+-8
+6.62 x10
+-8
+1.14 x10
+-8
+5.85 x10
+-7
+5.85x10
+-7
+5.85x10
+-7
+BMF
+TL
+Low microplastic abundance 4.58 -2.73 -2.73 18.56 8.59 36.84 76.14
+High microplastic abundance 4.58 -2.73 -2.73 18.52 8.62 36.93 76.05
+99% elimination 1.77 -0.04 -0.04 0.89 0.10 0.30 76.71
+Baseline 4.57 -2.73 -2.73 18.32 8.61 36.93 75.81
+Bioaccumul ation factor (BAF), bioconcentr ation factor (BCF), and predator-p rey biomagnific ation factors (BMF
+TL
+) from average microplastic concentration (g/kg)
+from selected predator-pr ey combination s in the Gala ´ pagos penguin and BCE web model, under four different scenarios including low microplast ic abundance in
+seawater , high microplast ic abundance in seawater, 99% elimination rates for all function al groups, and the baseline scenario which includes elimination rates based on
+available literature.
+https://do i.org/10.1371/j ournal.pone .0296788.t006
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 13 / 25
+and 4B). For the 99% elimination rate, some slopes were negative (i.e., year 1 in the GP model
+and years 1 to 100 in the BCE model), indicating lack of trophic magnification, however
+regressions were not significant (p > 0.05) in the GP modelled scenario (Fig 4A) or the BCE
+(Fig 4B). A negative slope, if significant, would indicate trophic dilution of microplastics (i.e., a
+decline in microplastic concentrations as the trophic level increases, TMF < 1 [slope < 0]).
+The highest TMF value was predicted at year 100 in the baseline and high abundance sce-
+narios running in the GP model, i.e., TMF = 61.7 (Table 7). The highest TMF predicted in the
+BCE model was 16.7 in the high abundance and baseline scenario. Across both models under
+the 99% elimination rate scenario, there was very low TMF values from year one to year 100.
+Table 7. Apparent trophic magnifica tion factors (TMF) and regression statistics.
+Model Years Scenario Slope (b) P-value TMF (= 10
+b
+) Biomagni fication metric outcome
+GP 1 Low Abundance 0.85 p < 0.05 7.07 Potenti al biomagnific ation
+25 Low Abundance 1.62 p < 0.05 41.9 Potenti al biomagnific ation
+50 Low Abundance 1.76 p < 0.05 57.8 Potenti al biomagnific ation
+100 Low Abundance 1.78 p < 0.05 59.8 Potenti al biomagnific ation
+1 High Abundance 0.85 p < 0.05 7.08 Potenti al biomagnific ation
+25 High Abundance 1.61 p < 0.05 41.1 Potenti al biomagnific ation
+50 High Abundance 1.74 p < 0.05 54.4 Potenti al biomagnific ation
+100 High Abundance 1.79 p < 0.05 61.7 Potenti al biomagnific ation
+1 99% Elimination -0.32 p > 0.05 0.48 Not significant/N o biomagnific ation
+25 99% Elimination 0.28 p > 0.05 1.91 Not significant/N o biomagnific ation
+50 99% Elimination 0.39 p > 0.05 2.43 Not significant/N o biomagnific ation
+100 99% Elimination 0.41 p > 0.05 2.57 Not significant/N o biomagnific ation
+1 Baseline 0.85 p < 0.05 7.08 Potenti al biomagnific ation
+25 Baseline 1.61 p < 0.05 41.1 Potenti al biomagnific ation
+50 Baseline 1.74 p < 0.05 55.4 Potenti al biomagnific ation
+100 Baseline 1.79 p < 0.05 61.7 Potenti al biomagnific ation
+BCE 1 Low Abundance 0.79 p < 0.05 6.18 Potenti al biomagnific ation
+25 Low Abundance 1.19 p < 0.05 15.6 Potenti al biomagnific ation
+50 Low Abundance 1.22 p < 0.05 16.4 Potenti al biomagnific ation
+100 Low Abundance 1.21 p < 0.05 16.4 Potenti al biomagnific ation
+1 High Abundance 0.79 p < 0.05 6.18 Potenti al biomagnific ation
+25 High Abundance 1.19 p < 0.05 15.6 Potenti al biomagnific ation
+50 High Abundance 1.22 p < 0.05 16.4 Potenti al biomagnific ation
+100 High Abundance 1.22 p < 0.05 16.4 Potenti al biomagnific ation
+1 99% Elimination -0.72 p > 0.05 0.19 Not significant/N o biomagnific ation
+25 99% Elimination -0.44 p > 0.05 0.36 Not significant/N o biomagnific ation
+50 99% Elimination -0.43 p > 0.05 0.37 Not significant/N o biomagnific ation
+100 99% Elimination -0.43 p > 0.05 0.37 Not significant/N o biomagnific ation
+1 Baseline 0.79 p < 0.05 6.19 Potenti al biomagnific ation
+25 Baseline 1.20 p < 0.05 15.7 Potenti al biomagnific ation
+50 Baseline 1.22 p < 0.05 16.7 Potenti al biomagnific ation
+100 Baseline 1.22 p < 0.05 16.7 Potenti al biomagnific ation
+Apparent trophic magnificat ion factors (TMF) and regression statistics for the linear regression models of the log of microp lastic (MP) concentr ations versus trophic
+level for the Gala ´ pagos penguin (GP) model and Bolivar Channel Ecosystem (BCE) model, for year 1, 25, 50, and 100, under four different scenarios including low
+micropla stic abundance in seawater, high microplastic abundance in seawate r, 99% elimination rates for all functional groups, and the baseline scenario which includes
+elimination rates based on available literature.
+https://do i.org/10.1371/j ournal.pone .0296788.t007
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 14 / 25
+Fig 4. Micropla stic concentra tions and trophic level linear regress ions. Linear regressions showing the relations hip between predicted
+concentratio ns of microplastic s (log-transfo rmed data) and trophic levels for: A) the Gala ´ pagos penguin (GP) model; and, B) the Bolivar Channel
+Ecosystem (BCE) model, for year 1, 25, 50, and 100, under four different scenarios including low micropla stic abund ance in seawater, high
+microplast ic abundance in seawater, 99% elimination rates for all functional groups, and the baseline scenario which includes elimination rates based
+on available literature. The antilog of the regressio n slope was used to determine TMF. This panel was made to visualize the overall trends, not to
+display the fine detail of each graph.
+https://doi.o rg/10.1371/j ournal.pone .0296788.g004
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 15 / 25
+TMF ranged from 0.48 to 2.57 in the GP model, while the lowest TMF values, ranging from
+0.19 to 0.37 were predicted from year one to 100 in the BCE model (Table 7). TMF rose sub-
+stantially from year 1 to year 25 and then gradual increases in TMF through to year 100 were
+predicted for the other scenarios tested (Fig 4A and 4B).
+3.4 Model bias
+The projected concentration of MPs in the environment, and biota including zooplankton,
+anchovies, and mullet were compared to empirically collected data from similar abiotic (envi-
+ronmental) and biotic compartments. The outcomes of the MB ratio analysis revealed system-
+atic under prediction (MB < 1) of microplastic concentrations in zooplankton, across all
+scenarios, with a MB ranging from 0.002 to 0.1 at low abundance scenario and high abundance
+scenario, respectively while using the GP model (Fig 5A and S1A, S1B Fig in S1 File). Similarly,
+under prediction for zooplankton occurred in the BCE model, with MB ranging from 0.002 to
+0.08 in the low and baseline scenarios, respectively (Fig 5B and S1C, S1D Fig in S1 File). Con-
+versely, the baseline, low, and high abundance (1, 2, 3) scenarios revealed over-prediction of
+microplastic concentrations (MB > 1) in fish ranging from 5.4 (low abundance) to 105.1 (high
+abundance) for anchovies in the GP model and 9.2 (low abundance) to 72.8 (baseline) for
+anchovies in the BCE model, as well as, 13.0 (low abundance) to 252.3 (high abundance) for
+mullets in the GP model and 11.8 (high abundance) to 65.5 (baseline) for mullets in the BCE
+model (Fig 5B; S1 Fig in S1 File). Results for fish are different in the 99% elimination rate sce-
+nario, namely, fish had the closest concentration values to the observed data (MB = ~1) (S1B
+and S1D Fig in S1 File). In the GP model, the 99% elimination rate scenario yielded MB of
+0.29 and 0.65 and the BCE yielded MB of 0.38 and 0.48 for the anchovies and mullets,
+respectively.
+4. Discussion
+Ecosystem modelling simulation results in this study revealed bioaccumulation potential in all
+predator-prey combinations in both GP and BCE models across all scenarios. Biomagnifica-
+tion of microplastics was apparent in all simulations, except for the 99% elimination rate
+Fig 5. Model bias. Assessmen t of the model bias (MB = C
+BP,iMP
+/C
+BO, iMP
+; where C
+BP,iMP
+and C
+BO,iMP
+are the model predicted and observed microplas tic
+concentratio ns, respectively, in zooplank ton, anchovies , and mullets ) and performan ce of the (A) Gala ´ pagos penguin (GP) and (B) Bolivar Channel Ecosystem
+(BCE) models by comparin g the simulations of micropla stic concent rations averaged from year 1–100. Four different scenarios are compared for model bias,
+including low microplastic abundance in seawater, high microplastic abundance in seawater, 99% elimination rates for all functional groups, and the baseline
+scenario which includes eliminati on rates based on available literature. The dotted line indicates MB = 1 (i.e., predicted microplas tics data is equivalent to the
+observed microplastic concentratio n).
+https://do i.org/10.1371/j ournal.pone .0296788.g00 5
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 16 / 25
+scenario, which showed a lack of trophic magnification with insignificant negative slopes
+(p > 0.05) in both GP and BCE models. Biomagnification was highly dependent on microplas-
+tic egestion rates. As well, the microplastic concentration in zooplankton was systematically
+under-predicted in both GP and BCE models, whereas microplastic concentrations in fish
+were over-predicted, with the closest concentration values to the observed data being seen in
+the 99% elimination rate scenario and the baseline scenario for fish and zooplankton respec-
+tively (Fig 5 & S1 Fig in S1 File).
+These results are comparable to limited existing microplastic bioaccumulation and biomag-
+nification simulations using EwE, which is not surprising given similar methods and parame-
+ters used [93, 94]. Ma and You’s [94] EwE simulations found microplastics bioaccumulate
+quickly in fish food webs of Baiyangdian Lake, China. Likewise, Alava et al. [93] ran Ecotracer
+through an extensive list of 20 marine ecosystem models available through EcoBase. The pro-
+jections of microplastic concentrations in biota revealed that top predators are likely exposed
+to higher levels of microplastics accumulated through their diet (e.g., prey items). However,
+the elimination or egestion rate was likewise a key factor in determining the net bioaccumula-
+tion behaviour of microplastics. Emphasis was placed on better understanding of the role of
+retention times and elimination rates of microplastics in different functional groups. Likewise,
+microplastic bioaccumulation modelling in a cetacean food web [21] was comparable to EwE
+results, indicating that species-specific bioaccumulation of microplastics is likely, while bio-
+magnification is highly dependent on species-specific elimination rates.
+According to a comprehensive meta-analysis [42] evidence has been found for bioaccumu-
+lation of microplastics in marine species; however, biomagnification of these pollutants in the
+food web has yet to be confirmed by field data. A select number of field studies have observed
+trophic transfer of microplastics [16, 27, 95], but there is a disagreement as to whether micro-
+plastics are eliminated or retained in the GI tract or gut [95]. Microplastic dilution, for exam-
+ple, has been found in mussels and fish in the Persian Gulf [26]. To better understand this
+phenomenon, Miller et al. [29] explored microplastic movement through a coral reef food web
+and found bioconcentration evident in zooplankton, crustaceans, and fish, but no bioaccumu-
+lation or biomagnification.
+Bioaccumulation and biomagnification currently represent an important debate in the field
+of microplastic science and uncertainty remains. While conducting research to investigate
+these ecotoxicological factors, it is important to consider (1) microplastics are a class of con-
+taminants and may move differently within a food web depending on their physical and chem-
+ical characteristics [96], (2) microplastic input into the ocean is increasing year over year, and
+(3) evidence suggest ingestion of microplastics provides no advantage to marine organisms in
+a changing ocean. Thus, though microplastic biomagnification is not agreed upon, it is still
+important to reduce the anthropogenic emissions of microplastics to the sea.
+First, it is critical to consider microplastics as a class of contaminants [96]. It is reasonable
+that their behaviour in the gastrointestinal tract is varied based on their characteristics (e.g.,
+size, shape, microbial biosphere, additives, dyes), as different microplastics and associated
+chemicals will react differently in the gut [97, 98]. There is evidence to suggest that small
+microplastics and nanoplastics (<1 μm), not measured in this study, can pass through tissue
+membranes, translocate to tissues, and enter the blood stream [99–102]. Chemical additives or
+harmful bacteria on microplastics can adsorb within the biota [103, 104] and may or may not
+bioaccumulate, biomagnify, or multiply within the organism [22, 105]. Specific shapes and
+sizes may be more toxic [98] and prone to lower or higher GI tract retention times, influencing
+microplastic bioaccumulation [21].
+Secondly, plastic and microplastic pollution inputs into the ocean is increasing in the Plasti-
+cene [32, 80, 106–109]. The increase in these anthropogenic particles will inevitably lead to
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 17 / 25
+microplastics accumulation in ecosystems, whether it will be a marine ecosystem accessible to
+researchers and the public, or deep-sea ecosystems that are not commonly sampled.
+Lastly, numerous studies note prominent ingestion of microplastics when organisms are
+exposed to plastic particles in the environment or in laboratory conditions. Microplastic inges-
+tion has been linked with several primarily sublethal health effects [31, 34, 110, 111] and, there-
+fore, it is plausible that ingested microplastics do not offer advantages in stressful changing
+oceanic conditions further harmed by overfished resources and climate change effects [112].
+Instead, the presence of microplastics or nanoplastics may independently pose a significant
+concern and may be magnified by other environmental challenges [113].
+Overall, future research should prioritize laboratory assessments of microplastic accumula-
+tion across trophic levels, with particular attention on egestion rates and GI tract retention
+times, physical-chemical characteristics of retained microplastics, and ecotoxicological health
+effects. Future modelling work should explore different interactions with microplastic at the
+primary consumer level. For example, microplastics can be added as a functional group in
+EwE and mediation applied to increase plastic consumption when phytoplankton abundance
+is low and vice versa [74, 93]. It would also be prudent to create model scenarios with varying
+rates of increase for microplastics in the specific ecosystem. Future modelling should likewise
+consider multiple-anthropogenic stressors, including the impact of climate change forcing and
+El Niño Southern Oscillation (ENSO) events in the Gala ´ pagos penguin food web when there
+are drastic changes on sea surface temperature (negative anomalies), disruption of primary
+production and pronounced food shortages when fewer fish serving as prey for penguins dur-
+ing El Niño are available [48, 114]. These multifactorial stressors may well affect the exposure
+pathways, bioaccumulation, and elimination of microplastics in marine top predators, includ-
+ing seabirds like the Gala ´ pagos penguins.
+5. Conclusion
+It is imperative to continue prioritizing efforts to reduce the input of microplastics into vul-
+nerable ecosystems and food webs, such as that of the endangered Gala ´ pagos penguin.
+Despite ongoing research, the biomagnification of microplastics remains unclear, and addi-
+tional studies are needed to fully understand this phenomenon. This study identified a
+knowledge gap in microplastic elimination rates, which are needed to determine biomagni-
+fication potential.
+As microplastic research continues, it is key to continue efforts raising awareness and miti-
+gating microplastic pollution entering waterways, while not losing sight of other pressing
+threats to the world’s oceans. It is critical to adopt a balanced, holistic approach when consid-
+ering oceanic threats, including plastics, but also overfishing, and climate change, in order to
+effectively protect and preserve iconic species like the Gala ´ pagos penguin and our precious
+ocean environment.
+Ultimately, this trophodynamic ecosystem modelling work provided predictions and
+insights on the potential bioaccumulation and biomagnification risks of microplastics as a
+global pollutant of concern to support regional marine plastic pollution management efforts
+for the conservation of native and endemic species of the Gala ´ pagos Islands and the Gala ´ pagos
+Marine Reserve.
+Please refer to the Supplementary Information for additional figures and tables, including
+model input values, scenario details, functional group details, linear regression data, bioaccu-
+mulation factors (BAF), bioconcentration factors (BCF), predator-prey biomagnification fac-
+tors (BMF
+TL
+), and model bias figures. All data are accessible online at SEANOE (https://doi.
+org/10.17882/97201) [115].
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 18 / 25
+Supporting information
+S1 File. Supplementary information includes model input values, scenario details, func-
+tional group details, linear regression data, bioaccumulation factors (BAF), bioconcentra-
+tion factors (BCF), predator-prey biomagnification factors (BMF
+TL
+), and model bias
+figures.
+(DOCX)
+Author Contributions
+Conceptualization: Karly McMullen, Evgeny A. Pakhomov, Juan Jose ´ Alava.
+Data curation: Karly McMullen.
+Formal analysis: Karly McMullen, Juan Jose ´ Alava.
+Funding acquisition: Evgeny A. Pakhomov.
+Investigation: Karly McMullen.
+Methodology: Karly McMullen, Juan Jose ´ Alava.
+Project administration: Karly McMullen.
+Resources: Evgeny A. Pakhomov, Juan Jose ´ Alava.
+Software: Karly McMullen.
+Supervision: Fe ´ lix Herna ´ n Vargas, Paola Calle, Evgeny A. Pakhomov, Juan Jose ´ Alava.
+Visualization: Karly McMullen.
+Writing – original draft: Karly McMullen.
+Writing – review & editing: Karly McMullen, Fe ´ lix Herna ´ n Vargas, Paola Calle, Omar
+Alavarado-Cadena, Evgeny A. Pakhomov, Juan Jose ´ Alava.
+References
+1. Borrelle SB, Ringma J, Law KL, Monnaha n CC, Lebret on L, Mcgivern A, et al. Predicted growth in
+plastic waste exceeds efforts to mitigate plastic pollution. Science. 2020 Sep 18; 369(6510) : 1515–8.
+https://doi.or g/10.1126/ science.aba3 656 PMID: 329435 26
+2. Cordier M, Uehara T. How much innovatio n is needed to protect the ocean from plastic contaminat ion?
+Sci, Total Environ . 2019 Jun 20; 670:789 –99. https://doi.or g/10.101 6/j.scitotenv .2019.03.258 PMID:
+30921712
+3. Eriksen M, Cowger W, Erdle LM, Coffin S, Villarrubia-G o ´ mez P, Moore CJ, et al. A growing plastic
+smog, now estimate d to be over 170 trillion plastic particles afloat in the world’s oceans—U rgent solu-
+tions required. PLOS One. 2023 Mar 8; 18(3):e028 1596. https://doi.or g/10.1371/ journal.pon e.
+0281596 PMID: 36888681
+4. Van Sebille E, Wilcox C, Lebreton L, Maxime nko N, Hardesty BD, Van Franeker JA, et al. A global
+inventory of small floating plastic debris. Environment al Research Letters. 2015 Dec 8; 10(12).
+5. Eriksen M, Lebreton LCM, Carson HS, Thiel M, Moore CJ, Borerro JC, et al. Plastic Pollution in the
+World’s Oceans: More than 5 Trillion Plastic Pieces Weighing over 250,000 Tons Afloat at Sea. PLOS
+One. 2014 Dec 10; 9(12).
+6. Azevedo-Santo s VM, Gonc ¸ alves GRL, Manoel PS, Andrade MC, Lima FP, Pelicice FM. Plastic inges-
+tion by fish: A global assessmen t. Environm ental Pollution (Barking, Essex: 1987). 2019 Dec; 255(Pt
+1):112994. https://doi.or g/10.101 6/j.envpol .2019.112994 PMID: 315418 37
+7. Jovanović B, Go ¨ kdağ K, Gu ¨ ven O, Emre Y, Whitley EM, Kideys AE. Virgin microplastics are not caus-
+ing imminent harm to fish after dietary exposure . Mar. Pollut . Bull. 2018 May 1; 130:123–31. https://
+doi.org/10.10 16/j.marp olbul.2018.03 .016 PMID: 29866538
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 19 / 25
+8. Ugwu K, Herrera A, Go ´ mez M. Microplast ics in marine biota: A review. Mar. Pollut. Bull. 2021 Aug 1;
+169:112540. https://do i.org/10.1016 /j.marpol bul.2021.1125 40 PMID: 34087664
+9. Botterell ZLR, Beaumont N, Dorringt on T, Steinke M, Thompson RC, Lindeque PK. Bioavailabil ity and
+effects of microplastics on marine zooplan kton: A review. Environm ental Pollution. 2019 Feb 1;
+245:98–110.
+10. Ivar Do Sul JA, Costa MF. The present and future of microplastic pollution in the marine environm ent.
+Environment al polluti on. 2014 Feb 1; 185:352 –64. https://doi.or g/10.101 6/j.envpol .2013.10.036
+PMID: 24275078
+11. Ku ¨ hn S, van Franeker JA. Quantitativ e overview of marine debris ingested by marine megafaun a.
+Mar. Pollut. Bull. 2020 Feb 1; 151:110858. https:// doi.org/10.10 16/j.marp olbul.2019.11 0858 PMID:
+32056640
+12. Roman L, Hardesty BD, Hindell MA, Wilcox C. A quantitative analysis linking seabird mortality and
+marine debris ingestion . Sci Rep. 2019 Dec 1; 9(1). https://doi.or g/10.103 8/s41598 -018-36585 -9
+PMID: 30824751
+13. Wilcox C, Van Sebille E, Hardesty BD, Estes JA. Threat of plastic pollution to seabirds is global, perva-
+sive, and increasing. Proc. Natl. Acad. Sci. USA. 2015 Sep 22; 112(38):11 899–904 . https://doi.or g/10.
+1073/pnas. 1502108112 PMID: 263248 86
+14. Lo ´ pez-Martı ´ nez S, Morales- Caselles C, Kadar J, Rivas ML. Overview of global status of plastic pres-
+ence in marine vertebr ates. Global Change Biology. 2021 Feb; 27(4):728– 37. https://doi. org/10.1111/
+gcb.15416 PMID: 33111371
+15. Lusher AL, Hernand ez-Milian G. Microplastic Extraction from Marine Vertebrate Digestiv e Tracts,
+Regurgitate s and Scats: A Protocol for Researcher s from All Experience Levels. Bio. Protoc. 2018
+Nov; 8(22). https://doi.or g/10.21769/ BioProtoc.30 87 PMID: 350364 74
+16. Nelms SE, Galloway TS, Godley BJ, Jarvis DS, Lindeque PK. Investigat ing microplastic trophic trans-
+fer in marine top predators. Environmental Pollution. 2018 Jul 1; 238:999 –1007. https://doi.or g/10.
+1016/j.envp ol.2018.02.016 PMID: 29477242
+17. Zantis LJ, Carroll EL, Nelms SE, Bosker T. Marine mammals and microplastics: A systematic review
+and call for standardis ation. Environm ental Pollution. 2021 Jan 15; 269:116142. https://doi.or g/10.
+1016/j.envp ol.2020.11614 2 PMID: 332882 97
+18. Lynch JM. Quantit ies of Marine Debris Ingested by Sea Turtles: Global Meta-Analy sis Highligh ts Need
+for Standardized Data Reporting Methods and Reveals Relative Risk. Environ. Sci. Technol. 2018
+Nov 6; 52(21):120 26–38. https://doi. org/10.1021/a cs.est.8b 02848 PMID: 302518 46
+19. Yaghmour F, Al Bousi M, Al Naqbi H, Samara F, Ghalayini T. Junk food: A prelimi nary analysis of
+ingested marine debris by hawksb ill Eretmoch elys imbricata and olive ridley Lepidoc helys olivacea
+sea turtles (Testudin es: Cheloniidae) from the eastern coast of the United Arab Emirate s. Mar. Pollut .
+Bull. 2021 Dec 1; 173. https://doi.or g/10.101 6/j.marpo lbul.2021.113 073 PMID: 347419 25
+20. Schuyler Q, Hardesty BD, Wilcox C, Townsend K. Global Analysis of Anthropoge nic Debris Ingestion
+by Sea Turtles. Conservation Biology. 2014 Feb; 28(1):129– 39. https:// doi.org/10.11 11/cobi.12 126
+PMID: 23914794
+21. Alava JJ. Modeling the Bioaccum ulation and Biomagnif ication Potential of Microplast ics in a Cetacean
+Foodweb of the Northeaster n Pacific: A Prospecti ve Tool to Assess the Risk Exposure to Plastic Parti-
+cles. Front. Mar. Sci. 2020 Sep 22; 7.
+22. Koelmans AA. Modelin g the role of microplastic s in bioaccumula tion of organic chemicals to marine
+aquatic organis ms. A critical review. In: Bergmann M, Gutow L, Klages M, editors. Marine Anthropo-
+genic Litter. Springer International Publish ing; 2015. p. 309–324.
+23. Roch S, Friedrich C, Brinker A. Uptake routes of microplast ics in fishes: practical and theoretica l
+approaches to test existing theories . Sci. Rep. 2020 Dec 1; 10(1). https://doi.or g/10.103 8/s41598-020-
+60630-1 PMID: 32127589
+24. Seta ¨ la ¨ O, Fleming-Lehtin en V, Lehtiniemi M. Ingestion and transfer of microplastic s in the planktoni c
+food web. Environment al Pollut ion. 2014; 185:77–83. https://doi.or g/10.1016/ j.envpol.2013. 10.013
+PMID: 24220023
+25. Amato-Loure nc ¸ o LF, Carvalho- Oliveira R, Ju ´ nior GR, dos Santos Galvão L, Ando RA, Mauad T. Pres-
+ence of airborne microplastics in human lung tissue. J. Hazard. Mater. 2021 Aug 15; 416:126124.
+https://doi.or g/10.1016/ j.jhazmat.20 21.126124 PMID: 34492918
+26. Akhbarizadeh R, Moore F, Keshavarz i B. Investigating microplastic s bioaccumula tion and biomagn ifi-
+cation in seafood from the Persia n Gulf: a threat to human health? Food Additive s & Contaminants :
+Part A. 2019 Nov 2; 36(11):169 6–708. https://do i.org/10.1080 /1944004 9.2019.164947 3 PMID:
+31393815
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 20 / 25
+27. Farrell P, Nelson K. Trophi c level transfer of microplastic: Mytilus edulis (L.) to Carcinus maenas (L.).
+Environment al Pollution . 2013 Jun 1; 177:1–3 . https://doi.or g/10.101 6/j.envpol. 2013.01.046 PMID:
+23434827
+28. Goswami P, Vinithkum ar NV, Dharani G. First evidence of microplastic s bioaccumula tion by marine
+organisms in the Port Blair Bay, Andaman Islands. Mar. Pollut. Bull. 2020 Jun 1; 155. https://doi.or g/
+10.1016/j.m arpolbul.20 20.111163 PMID: 32469778
+29. Miller ME, Motti CA, Hamann M, Kroon FJ. Assessme nt of microplastic bioconcen tration, bioaccumu-
+lation and biomagnif ication in a simple coral reef food web. Science of the Total Enviro nment. 2023
+Feb 1; 858:1596 15. https://doi.or g/10.1016 /j.scitotenv.202 2.159615 PMID: 3630928 8
+30. Bergmann M, Gutow L, Klages M. Marine Anthropoge nic Litter. Springer Nature; 2015.
+31. Cole M, Lindeque P, Fileman E, Halsband C, Goodhead R, Moger J, et al. Microplas tic ingestion by
+zooplankto n. Environ. Sci. Technol. 2013 Jun 18; 47(12):664 6–55. https:// doi.org/10.10 21/es400 663f
+PMID: 23692270
+32. Everaert G, De Rijcke M, Lonneville B, Janssen CR, Backhaus T, Mees J, et al. Risks of floating micro-
+plastic in the global ocean. Environm ental Pollution. 2020 Dec 1; 267:115 499. https://doi. org/10.1016/
+j.envpol.2020 .115499 PMID: 33254632
+33. Ku ¨ hn S, Bravo Rebolled o EL, Van Franeker JA. Deleterio us effects of litter on marine life. In: Berg-
+mann M, Gutow L, Klages M, editors. Marine Anthropoge nic Litter. Springer International Publishing;
+2015. p. 75–116.
+34. Wright SL, Thompson RC, Galloway TS. The physical impacts of microplastics on marine organism s:
+a review. Environmental pollutio n. 2013 Jul 1; 178:483 –92. https://doi.or g/10.101 6/j.envpol. 2013.02.
+031 PMID: 23545014
+35. Galloway TS, Cole M, Lewis C. Interactio ns of microplastic debris throug hout the marine ecosystem .
+Nature ecology & evolution . 2017 Apr 20; 1(5):0116. https://doi.or g/10.103 8/s41559-017- 0116 PMID:
+28812686
+36. Chormare R, Kumar MA. Environm ental health and risk assessmen t metrics with special mention to
+biotransfer, bioaccum ulation and biomagnific ation of environm ental pollutants . Chemos phere. 2022
+Sep 1; 302:134836. https:// doi.org/10.10 16/j.chemos phere.2022.1 34836 PMID: 35525441
+37. Arnot JA, Gobas FAPC. A review of bioconcen tration factor (BCF) and bioaccumula tion factor (BAF)
+assessmen ts for organic chemic als in aquatic organisms. Environme ntal Reviews. 2006 Dec 1; 14
+(4):257–97 .
+38. Gobas FAPC, De Wolf W, Burkhard LP, Verbrugg en E, Plotzke K. Revisiting bioaccum ulation criteria
+for POPs and PBT assessmen ts. Integrated Environm ental Assessme nt and Managemen t: An Inter-
+national Journal. 2009 Oct; 5(4):624–3 7. https://doi.or g/10.189 7/IEAM_2 008-089.1 PMID: 19552497
+39. Gobas FAPC Morrison HA. Bioconcen tration and bioaccumula tion in the aquatic environm ent. In:
+Boethling R, Mackay D, editors. Handbook of property estimation methods for chemic als: Environm en-
+tal health sciences. CRC press; 2000 Mar 29. p. 189–231.
+40. Provencher JF, Ammendol ia J, Rochma n CM, Mallory ML. Assessi ng plastic debris in aquatic food
+webs: What we know and don’t know about uptake and trophic transfer. Environm ental Reviews.
+2019; 27(3):304– 17.
+41. Kelly BC, Ikonom ou MG, Blair JD, Morin AE, Gobas FAPC. Food web-spec ific biomagn ification of per-
+sistent organic pollutants . Science. 2007 Jul 13; 317(5835) :236–9.
+42. Miller ME, Hamann M, Kroon FJ. Bioaccumul ation and biomagn ification of microplas tics in marine
+organisms: A review and meta-analy sis of curren t data. PLOS One. 2020 Oct 16; 15(10):e02 40792.
+https://doi.or g/10.1371/ journal.pon e.0240792 PMID: 330647 55
+43. Covernton GA, Cox KD, Fleming WL, Buirs BM, Davies HL, Juanes F, et al. Large size (>100-μm)
+microplastics are not biomagn ifying in coastal marine food webs of British Columbia, Canada. Ecologi -
+cal Applications . 2022 Oct; 32(7):e265 4.
+44. Jones JS, Porter A, Muñoz-Pe ´ rez JP, Alarco ´ n-Ruale s D, Galloway TS, Godley BJ, et al. Plastic con-
+tamination of a Galapagos Island (Ecuad or) and the relative risks to native marine species. Science of
+the Total Environm ent. 2021 Oct 1; 789:147704. https:// doi.org/10.10 16/j.scitote nv.2021.14 7704
+PMID: 34049146
+45. Alfaro-Nu ´ ñez A, Astorga D, Ca ´ ceres-Farı ´ as L, Bastidas L, Soto Villegas C, Macay K, et al. Microplastic
+pollution in seawater and marine organism s across the Tropical Eastern Pacific and Gala ´ pagos. Sci.
+Rep. 2021 Dec 1; 11(1).
+46. Boersma PD. Penguins as marine sentinels. Bioscience . 2008 Jul 1; 58(7):597– 607.
+47. International BirdLife. Sphenisc us mendiculu s. 2020 [cited 14 Novemb er 2023]. In: The IUCN Red List
+of Threatened Species 2020 [Interne t]. Available from: https://dx. doi.org/10.23 05/IUCN.U K.2020-3.
+RLTS.T2269 7825A18272 9677.en .
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 21 / 25
+48. Vargas H, Harrison S, Rea S, Macdonald DW. Biological effects of El Niño on the Gala ´ pagos penguin.
+Biol. Conserv. 2006 Jan; 127(1):107 –14.
+49. Wolff M, Ruiz DJ, Taylor M. El Niño induced changes to the Bolivar Channel ecosystem (Galapag os):
+Comparing model simulation s with historical biomass time series. Mar. Ecol. Prog Ser. 2012 Feb 23;
+448:7–22.
+50. Christensen V, Walters CJ. Ecopath with Ecosim: Methods , capabilities and limitations. Ecol. Modell.
+2004 Mar 1; 172(2–4):1 09–39.
+51. Christensen V, Pauly D. ECOPAT H II—a softwar e for balancing steady-stat e ecosystem models and
+calculating network characteris tics. Ecologi cal modellin g. 1992 Jun 1; 61(3–4):16 9–85.
+52. Christensen V, Walters CJ, Pauly D. Ecopath with Ecosim: A User’s Guide. 2005 [cited April 2023]. In:
+Fisheries Centre, University of British Columbia, Vancou ver, Canada and ICLARM, Penang, Malaysia
+[Internet]. Availab le from: https://ww w.researchg ate.net/pu blication/2 67193103
+53. Christensen V, Walters C, Pauly D, Forrest R. Lenfest Ocean Futures Project . Ecopath with Ecosim
+Version 6: User Guide. 2008 [cited April 2023]. In: Lenfest Ocean Futures Project 2008 [Internet ].
+Available from: https:// repository.oc eanbestp ractices.org
+54. Ruiz DJ, Wolff M. The Bolivar Channel Ecosystem of the Galapagos Marine Reserve: Energy flow
+structure and role of keyston e groups. J. Sea. Res. 2011 Aug; 66(2):123– 34.
+55. Mills KL. Diving behavio ur of two Gala ´ pagos Penguins Sphenis cus mendiculu s. Marine Ornitholog y.
+2000 Apr 15; 28:75–9.
+56. Vargas H, Lougheed C, Snell H. Population size and trends of the Gala ´ pagos Penguin Sphenis cus
+mendiculu s. Ibis. 2005 Apr; 147(2):367 –74.
+57. Wilson RP, Wilson MPT. Foragin g Ecology of Breeding Sphenis cus Pengu ins. Penguin biology.
+1990;181–206 .
+58. Herling C, Culik BM, Hennicke JC. Diet of the Humboldt penguin (Sphenisc us humbold ti) in northe rn
+and southern Chile. Mar. Biol. 2005 May; 147(1):13– 25.
+59. Fernandez SJ, Yorio P, Ciancio JE. Diet compos ition of expandi ng breeding populations of the Magel-
+lanic Penguin. Marine Biology Research. 2019 Jan 2; 15(1):84–9 6.
+60. Colleter M, Valls A, Guitton J, Gascuel D, Pauly D, Christensen V. Global overview of the applications
+of the Ecopath with Ecosim modelin g approach using the EcoBase models reposito ry. Ecol. Modell.
+2015; 302:42–53.
+61. Colle ´ ter M, Valls A, Guitton J, Lyne M, Arreguı ´ n-Sa ´ nchez F, Christens en V, et al. EcoBase : a reposi-
+tory solution to gather and communic ate information from EwE models. 2013 [cited April 2023] [Inter-
+net]. Available from: https://inst itut-agro-renne s-anger s.hal.science /hal-011034 42
+62. Okey TA, Banks S, Born AF, Bustamante RH, Calvopiña M, Edgar GJ, et al. A trophic model of a Gala ´ -
+pagos subtidal rocky reef for evaluating fisherie s and conservatio n strategie s. Ecol. Modell. 2004 Mar
+1; 172(2–4):3 83–401.
+63. Ferna ´ ndez Severini MD, Villagran DM, Buzzi NS, Sartor GC. Microplastics in oysters (Crassostrea
+gigas) and water at the Bahı ´ a Blanca Estuary (Southwe stern Atlantic): An emerging issue of global
+concern. Reg. Stud. Mar. Sci. 2019 Nov 1;32.
+64. Constant P. Marine life of the Gala ´ pagos: the diver’s guide to fishes, whales, dolphins and marine
+invertebrates. Odyssey; 2007.
+65. Humann P, DeLoach N. Reef fish identifica tion: Gala ´ pagos. New World Publications Incorporated;
+2003.
+66. Froese R, Pauly D. FishBase 2000: Concepts , design and data sources. ICLARM, Los Baños,
+Laguna, Philippine s; 2000.
+67. Froese R, Pauly D. FishBase. World Wide Web electronic publication; 2022.
+68. Palomares MLD, Pauly D. SeaLifeBase. World Wide Web electron ic publication; 2022.
+69. Rafferty JP. Galapagos penguin. 2020 [cited April 2023]. In: Encycloped ia Britannica [Interne t]. Avail-
+able from: https://ww w.britannica .com/anima l/Galapago s-penguin. 2020.
+70. Karpouzi VS. Modelling and mapping trophic overlap between fisherie s and the world’s seabirds. M.
+Sc. Thesis. The Univers ity of British Columbia. 2005. Available from: https://open.l ibrary.ubc .ca/soa/
+cIRcle/coll ections/ubcthe ses/831/ items/1.0074 880
+71. Grove JS, Lavenbe rg RJ. The fishes of the Gala ´ pagos Islands. Stanfor d: Stanford University Press;
+1997. p. 863.
+72. Muck P, Rojas de Mendiola B, Antoni etti E. Comparative studies on feeding in larval anchoveta
+(Engraulis ringens) and sardine (Sardinop s sagax). In: Pauly D, Mendo J, Tsukaya ma I, editors. The
+Peruvian upwelling ecosystem : dynamics and interacti ons. ICLARM Conferen ce Procee dings 18, 438
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 22 / 25
+p. IMARPE, Callao, Peru; GTZ, Eschborn , Germany; and ICLARM, Manila, Philippine s; 1989. p. 86–
+96.
+73. Serra RT, Tsukaya ma I. Sinopsi s de datos biologicos y pesqueros de la sardina Sardinops sagax
+sagax en el Pacifico sororiental. FAO Sinop. Pesca. 1988; 1:60.
+74. Christensen V. Fish 501 Mass Balance . 2021 [cited April 2023]. In: University of British Columbia, Insti-
+tute for Oceans and Fisheries [Interne t]. Availab le from: https://s ites.google. com/view/fish 501-2021/
+lectures
+75. Heymans JJ, Coll M, Link JS, Mackinso n S, Steenbeek J, Walters C, et al. Best practice in Ecopath
+with Ecosim food-web models for ecosystem- based managemen t. Ecol. Modell. 2016 Jul 10;
+331:173–84.
+76. Booth S. Pollutants in the seas around us. In: Pauly D, Zeller D, editors. Global Atlas of Marine Fisher-
+ies A critical apprais al of catches and ecosystem impacts . Washingto n, Covelo, London: Island
+Press; 2016. p. 152–70.
+77. Coombs AP. Marine mamma ls and human health in the eastern Bering Sea: Using an ecosystem-
+based food web model to track PCBs. M.Sc. Thesis. Univers ity of British Columb ia. 2004. Available
+from: https://ope n.library.ubc.c a/soa/cIRcle /collections/ ubctheses/831 /items/ 1.0074886
+78. Alava JJ, Cisneros-Mon temayor AM, Sumaila UR, Cheung WWL. Projected amplificat ion of food web
+bioaccumula tion of MeHg and PCBs under climate change in the Northeaster n Pacific. Sci. Rep. 2018
+Dec 1;8(1). https://doi.or g/10.1038/ s41598-018- 31824-5 PMID: 301943 94
+79. McMullen K. The Gala ´ pagos penguin as the “canary in the coal mine” for microplastics resear ch in the
+Gala ´ pagos Marine Reserv e & plastic pollution percepti ons in Ecuado rian mangro ve commu nities. M.
+Sc. Thesis. University of British Columbia. 2023. Available from: http://hdl.h andle.n et/2429/846 64
+80. Everaert G, Van Cauwenberg he L, De Rijcke M, Koelmans AA, Mees J, Vandegehuch te M, et al. Risk
+assessmen t of microplastic s in the ocean: Modelling approac h and first conclusions . Environment al
+Pollution. 2018 Nov 1; 242:1930 –8. https://doi.or g/10.1016 /j.envpol.201 8.07.069 PMID: 300610 84
+81. Lusher A. Microplastics in the marine environ ment: distribu tion, interactio ns and effects. In: Bergmann
+M, Gutow L, Klages M, editors. Marine Anthropoge nic Litter. Springer; 2015. p. 245–307.
+82. Lebreton L, Egger M, Slat B. A global mass budget for positively buoyant macroplasti c debris in the
+ocean. Sci. Rep. 2019 Dec 1; 9(1). https:/ /doi.org/10.10 38/s4159 8-019-494 13-5 PMID: 31515537
+83. Jackson S. Do seabird gut sizes and mean retention times reflect adaptation to diet and foraging
+method?. Physiologic al Zoology. 1992 May 1; 65(3):674– 97.
+84. Laugksch RC, Duffy DC. Food transit rates in cape gannets and jackass penguins. Condor. 1986 Feb
+1:117–9.
+85. Critchell K, Hoogenbo om MO. Effects of microplas tic exposure on the body condition and behavio ur of
+planktivorous reef fish (Acanth ochromis polyacanth us). PLOS One. 2018 Mar 1; 13(3). https://d oi.org/
+10.1371/jour nal.pone. 0193308 PMID: 29494635
+86. Ory NC, Gallardo C, Lenz M, Thiel M. Capture, swallowing, and egestion of microplast ics by a plankti-
+vorous juvenile fish. Environm ental Pollution. 2018 Sep 1; 240:566 –73. https://doi.o rg/10.1016/j.
+envpol.2018. 04.093 PMID: 29758531
+87. Ohkubo N, Yoneda M, Ito M, Hano T, Kono K. Microplast ic uptake and gut retention time in Japanese
+anchovy (Engraulis japonicus ) under laboratory conditions . Mar. Pollut. Bull. 2022 Mar 1;176. https://
+doi.org/10.10 16/j.marp olbul.2022.11 3433 PMID: 35202882
+88. Murray F, Cowie PR. Plastic contaminati on in the decapod crustacean Nephrop s norvegi cus (Lin-
+naeus, 1758). Mar. Pollut. Bull. 2011 Jun; 62(6):1207 –17. https://doi.or g/10.101 6/j.marpolbul. 2011.
+03.032 PMID: 2149785 4
+89. Alava JJ. Proposing a Bioaccumul ation Metric Criteria Framew ork for Plastic Particles in Marine Biota
+and Foodwebs. In Abstracts Book: Society of Environm ental Toxicology and Chem istry North America
+SETAC. In: (Society for Environm ental Toxicology and Chemistry) (SETAC ) (SETAC SciCon4) Solu-
+tions with Respect for Our Commun ity and Environm ent [Internet ]. Portland, Oregon; 2021. p. 25.
+Available from: https:// scicon4.set ac.org/wp-co ntent/upl oads/2021/ 11/SciCon4 -abstract-boo k.pdf
+90. Borgå K, Kidd KA, Muir DCG, Berglund O, Conder JM, Gobas FAPC, et al. Trophic magnificatio n fac-
+tors: Considera tions of ecology, ecosystems, and study design. Integr. Environ . Assess. Manag. 2012
+Jan; 8(1):64–84 . https:// doi.org/10.10 02/ieam.2 44 PMID: 216747 70
+91. Conder JM, Gobas FAPC, Borgå K, Muir DCG, Powell DE. Use of trophic magnificatio n factors and
+related measures to character ize bioaccumula tion potentia l of chemicals . Integr. Environ. Assess.
+Manag. 2012 Jan; 8(1):85–97 . https://d oi.org/10.100 2/ieam.21 6 PMID: 215388 35
+92. Walters DM, Jardine TD, Cade BS, Kidd KA, Muir DCG, Leipzig-Scott P. Trophi c Magnificatio n of
+Organic Chemicals: A Global Synthesis. Environ. Sci. Technol. 2016 May 3; 50(9):4650 –8. https://doi.
+org/10.1021/a cs.est.6b 00201 PMID: 270149 05
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 23 / 25
+93. Alava JJ, Moreno-Ba ´ ez M, McMullen K, Tekma n MB, Barrows APW, Bergmann M, et al. Ecologica l
+Impacts of Marine Plastic Pollution, Microplastics’ Foodweb Bioaccum ulation Modelling and Global
+Ocean Footprint: Insights into the Problems , the Managemen t Implications and Coastal Commun ities
+Inequities. The Nippon Founda tion-Ocean Litter Project (2019–2023 ). IOF Working Papers 2023 (01),
+81 pp., Institute for the Oceans and Fisheries, University of British Columbia, Vancouve r, Canada;
+2023. Available from: https://oceans .ubc.ca/resea rch/publ ications/w orking-pape rs/
+94. Ma Y fei, You X yi Modellin g the accumulat ion of microplastics throug h food webs with the example
+Baiyangdian Lake, China. Science of the Total Environm ent. 2021 Mar 25; 762.
+95. Chagnon C, Thiel M, Antunes J, Ferreira JL, Sobral P, Ory NC. Plastic ingestion and trophic transfer
+between Easter Island flying fish (Cheilop ogon rapanouien sis) and yellowfin tuna (Thunnus albacar es)
+from Rapa Nui (Easter Island). Environm ental Pollution. 2018 Dec 1; 243:127 –33. https://doi.or g/10.
+1016/j.envp ol.2018.08.042 PMID: 30172118
+96. Rochman CM, Brookson C, Bikker J, Djuric N, Earn A, Bucci K, et al. Rethinking microplastics as a
+diverse contaminan t suite. Vol. 38, Environ mental Toxicology and Chemistry. Wiley Blackwell; 2019.
+p. 703–11.
+97. Monclu ´ s L, McCann Smith E, Ciesielsk i TM, Wagner M, Jaspers VLB. Microplast ic Ingestion Induces
+Size-Specific Effects in Japanese Quail. Environ mental Science & Technolo gy. 2022 Oct 27; 56
+(22):15902 –11. https://doi.or g/10.102 1/acs.est. 2c03878 PMID: 363022 60
+98. Thornton Hampton LM, Brander SM, Coffin S, Cole M, Hermabes siere L, Koelma ns AA, et al. Charac-
+terizing microplastic hazards: which concentra tion metrics and particle characteris tics are most infor-
+mative for understanding toxicity in aquatic organism s? Microplastic s and Nanoplastic s. 2022 Aug 6; 2
+(1).
+99. Ramsperger AFRM, Bergam aschi E, Panizzolo M, Fenoglio I, Barbero F, Peters R, et al. Nano- and
+microplastics: a comprehen sive review on their exposure routes, translocati on, and fate in humans.
+NanoImpact . 2023 Jan 1; 29. https://doi.or g/10.1016/ j.impact.202 2.100441 PMID: 36427812
+100. Leslie HA, van Velzen MJM, Brandsm a SH, Vethaak AD, Garcia-Va llejo JJ, Lamoree MH. Discovery
+and quantificat ion of plastic particle pollution in human blood. Environ Int. 2022 May 1;163. https://doi.
+org/10.1016/j .envint.202 2.10719 9 PMID: 35367073
+101. Ragusa A, Svelato A, Santacr oce C, Catalano P, Notarstefano V, Carnevali O, et al. Plasticenta : First
+evidence of microplastics in human placenta. Environme nt internationa l. 2021 Jan 1; 146:106274.
+https://doi.or g/10.1016/ j.envint.202 0.106274 PMID: 3339593 0
+102. Ragusa A, Notarstefano V, Svelato A, Belloni A, Gioacchini G, Blondeel C, et al. Raman Microspec tro-
+scopy Detection and Character isation of Microplastics in Human Breastmilk. Polymers (Basel). 2022
+Jul 1; 14(13). https://doi.or g/10.339 0/polym141 32700 PMID: 358087 45
+103. Bakir A, O’Connor IA, Rowland SJ, Hendriks AJ, Thomps on RC. Relative importan ce of microplastic s
+as a pathway for the transfer of hydrophobic organic chemicals to marine life. Environm ental Pollution.
+2016 Dec; 219:56–65. https:/ /doi.org/10.10 16/j.envpo l.2016.0 9.046 PMID: 27661728
+104. Naik RK, Naik MM, D’Costa PM, Shaikh F. Microplastic s in ballast water as an emergin g source and
+vector for harmful chemicals, antibiotics, metals, bacterial pathoge ns and HAB species : A potential
+risk to the marine environm ent and human health. Marine Pollution Bulletin. 2019 Dec 1; 149:110525.
+https://doi.or g/10.1016/ j.marpolbul.20 19.1105 25 PMID: 31470206
+105. Beiras R, Muniateg ui-Lorenzo S, Rodil R, Tato T, Montes R, Lo ´ pez-Iba ´ ñez S, et al. Polyethyle ne
+microplastics do not increase bioaccum ulation or toxicity of nonylph enol and 4-MBC to marine zoo-
+plankton. Science of the Total Environme nt. 2019 Nov 20; 692:1–9 . https://doi.or g/10.1016/ j.scitotenv.
+2019.07.106 PMID: 31326592
+106. Andrady AL. Plastics in the Anthropoc ene. In: Plastics and the Ocean. Wiley; 2022. p. 1–42.
+107. Haram LE, Carlton JT, Ruiz GM, Maxime nko NA. A Plasticene Lexicon. Mar. Pollut. Bull. 2020 Jan 1;
+150. https://doi.or g/10.101 6/j.marpolbul.2 019.110 714 PMID: 317535 59
+108. Thompson RC, Olson Y, Mitchell RP, Davis A, Rowland SJ, John AWG, et al. Lost at Sea: Where Is All
+the Plastic? Science. 2004 May 7; 304(5672): 838. https://doi.or g/10.112 6/science.109 4559 PMID:
+15131299
+109. United Nations Environment Program me. UNEP year book 2011: emergin g issues in our global envi-
+ronment. 2011 [cited April 2023] [Internet ]. Available from: https://we docs.unep.o rg/20.500.118 22/
+8276
+110. Anbumani S, Kakkar P. Ecotoxicolo gical effects of microplastics on biota: a review. Vol. 25, Environ-
+mental Science and Pollution Research. Springer Verlag; 2018. p. 14373– 96.
+111. Yin K, Wang Y, Zhao H, Wang D, Guo M, Mu M, et al. A comparati ve review of microplast ics and nano-
+plastics: Toxicity hazards on digestive, reproductiv e and nervous system. Science of The Total Envi-
+ronment. 2021 Jun 20; 774:145 758.
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 24 / 25
+112. Alava JJ, McMullen K, Jones J, Barraga ´ n-Paladin es MJ, Hobbs C, Tirape ´ A, et al. Multiple anthropo-
+genic stressors in the Gala ´ pagos Islands’ complex social–ecol ogical system: Interactio ns of marine
+pollution, fishing pressure , and climate change with manageme nt recommenda tions. Integrated Envi-
+ronmental Assessme nt and Managem ent. John Wiley and Sons Inc; 2022.
+113. Rowlands E, Gallowa y T, Cole M, Lewis C, Peck V, Thorpe S, et al. The Effects of Combined Ocean
+Acidification and Nanoplastic Exposure s on the Embryon ic Developm ent of Antarcti c Krill. Front. Mar.
+Sci. 2021 Aug 3;8.
+114. Vargas H, Lacy RC, Johnson PJ, Steinfurth A, Crawford RJM, Dee Boersma P, et al. Modellin g the
+effect of El Niño on the persistenc e of small populations: The Gala ´ pagos penguin as a case study.
+Biol. Conserv. 2007 Jun; 137(1):138 –48.
+115. McMullen K, Vargas FH, Calle P, Alavarado- Cadena O, Pakhomov EA, Alava JJ (2024) Modellin g
+microplastic bioaccumula tion and biomagnific ation potential in the Gala ´ pagos penguin ecosystem
+using Ecopath and Ecosim (EwE) with Ecotracer. PLoS ONE 19(1): e02967 88. https://doi.or g/10.
+1371/journa l.pone.029678 8
+PLOS ONE
+Modellin g microplastic bioaccum ulation in Gala ´ pagos penguins
+PLOS ONE | https://doi.or g/10.137 1/journal.po ne.02967 88 January 24, 2024 25 / 25

@@ -1,0 +1,1562 @@
+fmars-07-00540 July 30, 2020 Time: 18:36 # 1
+ORIGINAL RESEARCH
+published: 31 July 2020
+doi: 10.3389/fmars.2020.00540
+Edited by:
+Manuel J. Zetina-Rejón,
+National Polytechnic Institute
+of Mexico (IPN), Mexico
+Reviewed by:
+Sean Lucey,
+Northeast Fisheries Science Center
+(NOAA), United States
+Howard Townsend,
+National Marine Fisheries Service
+(NOAA), United States
+Pablo Del Monte-Luna,
+Centro Interdisciplinario de Ciencias
+Marinas (IPN), Mexico
+*Correspondence:
+Lynne J. Shannon
+lynne.shannon@uct.ac.za;
+lshannon4@yahoo.co.uk
+Specialty section:
+This article was submitted to
+Marine Fisheries, Aquaculture
+and Living Resources,
+a section of the journal
+Frontiers in Marine Science
+Received: 13 March 2020
+Accepted: 15 June 2020
+Published: 31 July 2020
+Citation:
+Shannon LJ, Ortega-Cisneros K,
+Lamont T, Winker H, Crawford R,
+Jarre A and Coll M (2020) Exploring
+Temporal Variability in the Southern
+Benguela Ecosystem Over the Past
+Four Decades Using a Time-Dynamic
+Ecosystem Model.
+Front. Mar. Sci. 7:540.
+doi: 10.3389/fmars.2020.00540
+Exploring Temporal Variability in the
+Southern Benguela Ecosystem Over
+the Past Four Decades Using a
+Time-Dynamic Ecosystem Model
+Lynne J. Shannon 1*, Kelly Ortega-Cisneros 1,2,3, Tarron Lamont 4,5, Henning Winker 6,7,
+Robert Crawford 4, Astrid Jarre 1 and Marta Coll 8
+1 Department of Biological Sciences, University of Cape Town, Cape Town, South Africa, 2 Department of Ichthyology
+and Fisheries Science, Rhodes University, Grahamstown, South Africa, 3 Institute for Coastal and Marine Research, Nelson
+Mandela University, Port Elizabeth, South Africa, 4 Oceans and Coasts Research, Department of Environment, Forestry
+and Fisheries, Cape Town, South Africa, 5 Department of Oceanography, University of Cape Town, Cape Town, South Africa,
+6 Department of Environment, Forestry and Fisheries, Cape Town, South Africa, 7 Centre for Statistics in Ecology,
+Environment and Conservation, Department of Statistical Sciences, University of Cape Town, Cape Town, South Africa,
+8 Institute of Marine Science (ICM-CSIC), Barcelona, Spain
+This paper presents a new, updated, temporally dynamicEcosim model for the Southern
+Benguela (1978–2015) by capturing recent advancements in our understanding of the
+dynamics and newly available data series from an additional decade of research in
+the region. The paper documents the model development and the thinking behind
+incorporating a newly available upwelling index, and observed ﬁshing effort as important
+drivers of modeled ecosystem dynamics. The most sensitive predator-prey interactions
+were identiﬁed and vulnerabilities (of prey to predators) were estimated to improve
+model ﬁt to ﬁeld observations under each scenario. Sardine interactions with prey
+and predators were consistently found to be sensitive interactions in model ﬁtting,
+accounting for at least 40% of the most sensitive trophic interactions in the southern
+Benguela modeled food web. Model ﬁts to data were improved by a total of 85%
+reduction in sum of squares when upwelling effects on large phytoplankton availability
+to zooplankton and small pelagic ﬁsh was incorporated, geographic shifts in sardine
+distribution were captured by means of altered availability of sardine to predators,
+corresponding vulnerabilities of prey to predators were estimated, and an additional,
+small, hypothetical forcing function was ﬁtted to small phytoplankton production. African
+penguin and Cape gannet ﬁts to data series were improved by incorporating a recently
+published bird Food Availability Index, although model ﬁts of several ﬁsh groups then
+deteriorated, emphasizing the need for additional empirical species-speciﬁc functional
+response studies. Attempts at ﬁtting the full area model to either west coast or south
+coast time series did not improve overall model ﬁts, highlighting limitations of the
+current non-spatialized model in describing coast-speciﬁc dynamics. This study shows
+promise in unraveling the observed dynamics of the Benguela upwelling ecosystem,
+and points to the importance of exploring spatially disaggregated approaches, in
+Frontiers in Marine Science | www.frontiersin.org 1 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 2
+Shannon et al. Modeling Southern Benguela Temporal Variability
+particular the new foraging habitat capacity of the Ecospace approach, to improve
+our understanding of processes whereby variability in upwelling inﬂuences dynamics
+of the Southern Benguela ecosystem. This is important in reconciling knowledge
+needed to manage ﬁsheries and to protect marine biodiversity by means of ecosystem-
+based management in South Africa, and to advance management advice under future
+scenarios of climate change.
+Keywords: Ecosim, southern Benguela, temporal variability, forcing functions, upwelling index
+INTRODUCTION
+The Benguela upwelling system is one of four major eastern
+boundary current systems in the world. The southern
+Benguela is a well-studied upwelling ecosystem bounded
+by the warm Agulhas current to the south and east, and
+the northern Benguela upwelling area oﬀ Namibia to the
+north. It is inﬂuenced by strong, wind-driven upwelling,
+which results in high biological productivity and supports
+several important commercial ﬁsheries including the small
+pelagics, hake and squid ﬁsheries but also an important
+small-scale sector.
+Variability in the southern Benguela is high on a monthly,
+interannual and decadal scale, and populations of many species
+in the system reﬂect the high variability of the system
+(Cochrane et al., 2009) and thus predictions on the dynamics
+of the system and its populations can be challenging (e.g.,
+Shannon et al., 2006; Travers and Shin, 2010). In the last
+two decades, substantial changes in environmental variables
+have been observed in this system, including changes in sea
+surface temperature, upwelling intensity, incidence of harmful
+algal blooms and extreme events (Rouault et al., 2010; van
+der Lingen et al., 2016; Lamont et al., 2018) among others.
+For example, the Agulhas Current has warmed by 0.2ñ0.4 ◦C
+throughout the year over the period 1982ñ2009 (Rouault et al.,
+2010). The total cumulative upwelling (TCU) and the number
+of upwelling days in the Agulhas Bank signiﬁcantly increased
+between 1979 and 2014, while a linear, albeit non-signiﬁcant
+trend in the TCU has been identiﬁed for the southern Benguela
+(Lamont et al., 2018).
+In the southern Benguela, changes in the distribution and
+abundance of several species of ecological and commercial
+importance have been recorded, and have been related to
+ﬁshing and environmental changes (Blamey et al., 2015).
+Eastward shifts have been observed in the distribution of
+sardine, anchovy, West Coast rock lobster and kelp (e.g.,
+Roy et al., 2007; Cockcroft et al., 2008; Bolton et al., 2012;
+Watermeyer et al., 2016). Anchovy Engraulis encrasicolus showed
+an eastward shift in distribution in 1996, and more than
+50% of its biomass is now located east of Cape Agulhas
+(Coetzee et al., 2018). This distributional change is believed
+to be environmentally driven, attributed to a decrease in sea
+surface temperature in the inner shelf of the Agulhas Bank
+to the east of Cape Agulhas (Roy et al., 2007). The eastward
+distributional shift of West Coast rock lobster Jasus lalandii
+resulted in severe impacts on the ﬁshery and local communities
+(Cockcroft et al., 2008). The distributional shift coincided
+with a decrease in the somatic growth of West Coast Rock
+lobster and an increase in the occurrence of lobster walk-
+outs, suggesting that these changes were environmentally driven
+(Cockcroft et al., 2008).
+Zooplankton abundance has shown considerable variability
+in the southern Benguela and has been related to changes
+in the abundance of their predators. Copepod abundance
+increased from 1950 to the late 1990s in the southern Benguela
+(Verheye et al., 1998, 2016; Hutchings et al., 2012). This
+trend was attributed to the decrease in small pelagics ﬁsh
+after the start of the ﬁshery and to increased productivity.
+Similarly, a decline in copepod biomass has been recorded
+in the Agulhas Bank since 1996 including the biomass of
+the dominant large copepod in the Agulhas Bank Calanus
+agulhensis (Huggett et al., 2019). It is likely that the eastward
+shift in the distribution of small pelagics increased predation
+pressure on copepods and resulted in decreased copepod
+abundance in the area. Higher proportions of Calanus agulhensis
+over the past 3 years, indicating a possible reversal of the
+previously noted trend, was synonymous with below average
+biomass of both anchovy and sardine east of Cape Agulhas
+(Huggett et al., 2019).
+Ecosystem models are being widely applied to quantify food
+web dynamics and ecosystem responses to multiple drivers (e.g.,
+Travers-Trolet et al., 2014; Corrales et al., 2018; Ortega-Cisneros
+et al., 2018a). Ecopath with Ecosim (EwE, Walters et al., 1999;
+Christensen and Walters, 2004) models ﬁtted to time series data
+are proving to be useful tools for providing the ecosystem context
+for ecosystem-based ﬁsheries management (EBFM; Heymans
+et al., 2016) in their ability to capture food web responses to
+environmental and ﬁsheries drivers, both past (e.g., Shannon
+et al., 2004a, 2009; Watermeyer et al., 2008) and future (Serpetti
+et al., 2017; Corrales et al., 2018).
+The aim of this study was to revise, update and re-ﬁt the
+existing EwE models of the Southern Benguela (Shannon et al.,
+2004a, 2008; Smith et al., 2011) based on advancements in
+our understanding of dynamics and new available data sources
+emerging from an additional decade of research in the region.
+This paper documents the model and the thinking behind
+this modeling process involved in the development of the
+new time-dynamic trophic model of the Southern Benguela.
+The model was designed to facilitate future model testing of
+alternative management scenarios under scenarios of climate
+change, to assist developing future spatial-temporal modeling
+eﬀorts and to provide a tool for use in further unpacking
+Frontiers in Marine Science | www.frontiersin.org 2 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 3
+Shannon et al. Modeling Southern Benguela Temporal Variability
+FIGURE 1 | Map showing modeled area (blue shaded) and Cape Agulhas, determining the boundary between the west coast vs. the south coast subsystems of the
+Southern Benguela ecosystem (Hutchings et al., 2009; Watermeyer et al., 2016).
+key trophic interactions currently under closer inspection by
+colleagues in the region.
+MATERIALS AND METHODS
+Model Construction and Functional
+Groups
+The Ecopath with Ecosim (Walters et al., 2000) modeling
+approach was used to construct an improved and updated
+food web model of the Southern Benguela ecosystem, following
+guidelines of best practice as outlined in Heymans et al.
+(2016). The existing models of the Southern Benguela extend
+from the Orange River mouth in the north west (29 ◦S)
+to 28 ◦E (East London) in the south east (Shannon et al.,
+2004a), spanning an area of 220,000 km 2 (Figure 1 ) and
+the years 1978ñ2003 (Shannon et al., 2008). These were
+expanded and updated to 2015, from 31 to 48 living model
+groups, comprising 26 ﬁsh groups and 7 top predators (see
+Table 1 ). The single phytoplankton model group previously
+used (Shannon et al., 2004a, 2008) was subdivided into two
+groups: small phytoplankton (Phytoplankton 1) < 10 µm and
+larger phytoplankton (Phytoplankton 2) > 10 µm, based on
+Probyn (1992). This disaggregation was performed to incorporate
+bottom-up environmental processes as a key driver in upwelling
+systems such as the Benguela.
+Pelagic ﬁsh are pivotal in the functioning of upwelling
+ecosystems, regulating the ﬂow of energy up and down the food
+web (Cury et al., 2000). Multi-stanza groups ( Supplementary
+Table S1) were added for anchovy and sardine in the revised
+model presented herein, to facilitate future ﬁsheries management
+simulations to explore the extent to which ﬁsheries and predators
+compete for small pelagics. For both anchovy and sardine, two
+stanzas were modeled: (i) recruits (under 1 year old) and (ii)
+adults (1 year and older). In the case of sardine, the adult
+stanza includes several year classes as sardine are longer lived.
+Mesopelagic ﬁsh were disaggregated in the revised model since
+relative abundances of lanternﬁsh ( Lampanyctodes hectoris) and
+lightﬁsh ( Maurolicus muelleri ) have been changing over the
+past decade (DAFF , unpublished data; Janet Coetzee, personal
+Communication), and since there is a move to target lanternﬁsh
+using midwater trawling on the West Coast (ANON, 2016).
+Frontiers in Marine Science | www.frontiersin.org 3 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 4
+Shannon et al. Modeling Southern Benguela Temporal Variability
+TABLE 1 | Revised species and ﬁshing ﬂeet aggregation: (a) species groups and
+(b) ﬁshing ﬂeets modeled.
+(a) Modeled groups/species Corresponding
+aggregated group
+used in earlier
+EwE models
+1 Small phytoplankton (<10 µ m) Phytoplankton
+2 Larger phytoplankton (≥10 µ m) Phytoplankton
+3 Microzooplankton (2–200 µm equivalent spherical
+diameter)
+4 Mesozooplankton (200–2000 µm)
+5 Macrozooplankton (2–20 mm)
+6 Gelatinous zooplankton
+7 Anchovy recruits (<1 year) Engraulis
+encrasicolus
+Anchovy
+8 Anchovy adults (≥1 year)
+E. encrasicolus
+Anchovy
+9 Sardine recruits (<1 year) Sardinops sagax Sardine
+10 Sardine adults (≥1 year) S. sagax Sardine
+11 Redeye round herring Etrumeus whiteheadii
+12 Other small pelagic ﬁsh
+13 Horse mackerel juveniles ( <2 years) Trachurus
+trachurus capensis
+14 Horse mackerel adults ( ≥2 years) T. trachurus
+capensis
+15 Chub mackerel Scomber japonicus
+16 Lanternﬁsh Lampanyctodes hectoris Mesopelagics
+17 Lightﬁsh Maurolicus muelleri Mesopelagics
+18 Shallow-water Cape Hake small ( <3 years)
+Merluccius capensis
+19 Shallow-water Cape hake large ( ≥3 years)
+M. capensis
+20 Deep-water Cape hake small ( <3 years)
+M. paradoxus
+21 Deep-water Cape hake large ( ≥3 years)
+M. paradoxus
+22 Snoek Thyrsites atun
+23 Tuna (Thunnus spp.) and Atlantic bonito
+(Sarda sarda), commonly called kartonkel
+Other large
+pelagics
+24 Sciaenids Other large
+pelagics
+25 Medium Sparidae Other large
+pelagics
+26 Large Sparidae Other large
+pelagics
+27 Yellowtail Seriola lalandii Other large
+pelagics
+28 Other lineﬁsh Other large
+pelagics
+29 Mullet Liza richardsonii, commonly called
+haarder
+New group
+30 Pelagic-feeding demersal ﬁsh
+31 Benthic-feeding demersal ﬁsh
+32 Agulhas Sole Austroglossus pectoralis Benthic-feeding
+demersal ﬁsh
+33 Benthic-feeding Chondrichthyans
+34 Pelagic-feeding Chondrichthyans
+35 Apex Chondricthyans
+36 Chokka Squid Loligo reynaudii Cephalopods
+37 Other cephalopods
+38 Seals Arctocephalus pusillus pusillus
+39 Cetaceans
+(Continued)
+TABLE 1 | Continued
+(a) Modeled groups/species Corresponding aggregated
+group used in earlier EwE
+models
+40 African Penguin Spheniscus
+demersus
+Seabirds
+41 Cape Gannet Morus capensis Seabirds
+42 Cape Cormorant Phalacrocorax
+capensis
+Seabirds
+43 Other seabirds
+44 Benthic Producers
+45 Meiobenthos
+46 Macrobenthos
+47 West Coast Rock Lobster Jasus
+lalandii
+Macrobenthos
+48 South Coast Rock Lobster
+Panulirus homarus
+Macrobenthos
+(b) Modeled ﬁshing ﬂeets
+1 Purse seine
+2 Demersal trawl
+3 Hake inshore trawl - south coast
+4 Hake longline
+5 Hake handline
+6 Offshore trawl for shallow-water hake M. capensis on the west
+coast (Cap WC offsh trawl)
+7 Offshore trawl for shallow-water hake on the south coast ( Cap SC
+offsh trawl)
+8 Offshore trawl for deep-water hake Merluccius paradoxus on the
+west coast (Par WC offsh trawl)
+9 Offshore trawl for deep-water hake on the south coast ( Par SC offsh trawl)
+10 Line ﬁshery for snoek on the west coast ( Snoek WC line)
+11 Line ﬁshery for tuna and billﬁsh on the west coast ( Tuna and billﬁsh WC line)
+12 Tuna pole
+13 Line ﬁshery for sciaenids on the west coast ( Sciaenids WC line)
+14 Line ﬁshery for sciaenids on the south coast ( Sciaenids SC line)
+15 Line ﬁshery for medium sparids on the west coast ( Medium Sparids WC line)
+16 Line ﬁshery for medium sparids on the south coast ( Medium Sparids SC line)
+17 Line ﬁshery for large Sparids on the west coast ( Large Sparids WC line)
+18 Line ﬁshery for large sparids on the south coast ( Large Sparids SC line)
+19 Line ﬁshery for yellowtail on the west coast ( Yellowtail WC line)
+20 Large pelagic longline
+21 Line ﬁshery – other ﬁsh species
+22 Line ﬁshery for chondrichthyans on the south coast ( Chonds SC line)
+23 Line ﬁshery for chondrichthyans on the west coast ( Chonds WC line)
+24 Longline for demersal chondrichthyans ( Dem Shark Longline)
+25 Midwater trawl for horse mackerel (Hmack Midwater trawl)
+26 Inshore trawl for sole Austroglossus pectoralis (sole insh trawl)
+27 Squid jig
+28 West coast rock lobster ﬁshery ( WCRL)
+29 South Coast rock lobster ﬁshery ( SCRL)
+30 Beach seine and gillnet
+31 Non-speciﬁed ﬁsheries catching some species ( Other)
+Groups in bold type are those that have been disaggregated in this revised
+model compared to previous models of the system. Species listings corresponding
+to aggregated functional groups in previous models of the Southern Benguela
+(Shannon et al., 2003, 2008) are provided in the second column. Detailed
+information on species listings in aggregated demersal ﬁsh and chondrichthyan
+groups are provided in Supplementary Table S2 . Shortened labels used in
+parameter and results tables are provided in parentheses. Fleets often catch across
+multiple species groups; for detailed catches by ﬂeet seeSupplementary Table S3
+(corresponding abbreviations of ﬁshing ﬂeets are provided in italics in parentheses).
+Frontiers in Marine Science | www.frontiersin.org 4 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 5
+Shannon et al. Modeling Southern Benguela Temporal Variability
+The importance of modeling key predators of small pelagic
+ﬁsh as separate entities to ascertain possible dependencies of
+predators on forage ﬁsh has been well noted by Koehn et al.
+(2016). To facilitate model versatility for future simulation
+modeling for management/conservation purposes, the three
+most abundant breeding seabirds oﬀ South Africa, namely
+African Penguin Spheniscus demersus , Cape Gannet Morus
+capensis, and Cape Cormorant Phalacrocorax capensis, previously
+included in a single seabird group, were accommodated as
+separate model groups. African penguin is categorized as
+Endangered according to the IUCN classiﬁcation, Cape Gannet
+was classiﬁed as Endangered but it has been suggested that
+the species be reclassiﬁed as Vulnerable based on recent
+trends in the northern Benguela (Sherley et al., 2019), and
+Cape Cormorant is Vulnerable. The “other seabirds” model
+group comprised breeding (resident) or more common migrant
+seabirds excluding the afore-mentioned three species (Crawford
+et al., 1991). Consideration was given to splitting the “Detritus”
+group into two: “normal detritus” and “discarded ﬁsh including
+oﬀal.” However, to preserve the origin of the ﬁsh scavenged
+during ﬁshing operations (e.g., Ryan and Moloney, 1988;
+Wickens et al., 1992; Watkins et al., 2008) in food web
+analyses, a single “detritus” group was retained and ﬁsh (in
+particular hake) scavenged from nets by seabirds and seals was
+considered as “live” consumption despite being mostly oﬀal
+from “large hake” caught by trawlers (Grémillet et al., 2008).
+Available cetacean data were too sparse to warrant splitting into
+resident cetaceans and migratory cetaceans, or even into toothed
+and baleen whales.
+In the case of predatory line ﬁsh (“traditional” boat-
+based, hand-line caught species), species relative abundance and
+eﬀort time series were disaggregated by region according ﬁve
+functional groups based on objective clustering techniques and
+standardization procedures described in Winker et al. (2013,
+2014) and Blamey et al. (2015) (see Table 1 ). Mullet was
+modeled as a separate functional group since it occurs inshore
+and in bays. Demersal ﬁsh were modeled as before (Shannon
+et al., 2004a) with the exception of Agulhas Sole ( Austroglossus
+pectoralis), an important commercial species in the inshore
+trawl ﬁshery on the South Coast, now modeled as a separate
+group. This decision was taken in anticipation of ﬁsheries
+management simulation testing in future studies. West coast sole
+(Austroglossus microlepis ) was retained in the general “benthic-
+feeding demersal ﬁsh” model group.
+Model diets previously used for setting the 1978 model
+(Shannon et al., 2004a, 2008) were assumed in this
+study, with updates to account for species disaggregation
+and revised dietary knowledge, where applicable and as
+documented in the Supplementary Material Section 4 and
+Supplementary Table S4.
+Best practices guidelines available for EwE models were
+followed during the model development (Heymans et al., 2016).
+The “prebal” approach (Link, 2010) was invoked to check for
+any obvious inconsistencies or peculiarities in the base (1978)
+model of the Southern Benguela. While “prebal” serves as a useful
+set of guidelines and warning signals as to potential problems
+in construction of food web models (Heymans et al., 2016), the
+various guidelines need to be viewed in the context of the system
+under consideration, and in light of the objectives of the model
+under development.
+Fitting the Model to Data Time Series
+Fitting of the revised Ecosim model of the Southern Benguela
+food web (1978ñ2015) was undertaken following previous
+procedures (Shannon et al., 2004a), but in this study ﬁshed groups
+were driven by 13 time series of ﬁshing eﬀort and two time
+series of ﬁshing mortality, and model trajectories of biomass and
+landings outputs for 1978ñ2015 were compared to over 50 catch,
+abundance, and mortality time series (Supplementary Table S5).
+These data series were the best available at the start of this
+study, and the ones for which we were able to secure access
+to at the time. Before continuing with model ﬁtting, general
+model structure was checked against guidelines provided by Link
+(2010) (Supplementary Material Section 6). To aid in the model
+ﬁtting process, an estimate of relative uncertainty associated with
+the model parameters was also made ( Supplementary Material
+Section 7). Model pedigree was estimated using the classiﬁcation
+system in Ecopath, which takes into account the likely degree of
+uncertainty that various parameter sources infer. These scores
+were used to assist in weighting of time series for model
+ﬁtting. Subsequently, most of the catch, abundance (mostly
+biomass), mortality and ﬁshing eﬀort time series assembled
+(Supplementary Table S5 ) were used in model ﬁtting with the
+exception of survey-based spawner biomass series for anchovy
+and sardine [instead, stock assessment (modeled) time series
+were used as per the “Status of the South Africa Marine Fishery
+Resources, 2014” report]. In the case of anchovy and sardine,
+combined west and south coast estimates of biomass and harvest
+proportion were used.
+Using Ecosim (Walters et al., 1997) “Fit to Time Series”
+routines, the most sensitive predator-prey interactions were
+identiﬁed and vulnerabilities (of prey to predators) were
+estimated to improve model ﬁt to data series of ﬁeld observations.
+The automated stepwise routine to explore EwE model ﬁtting to
+available time series (Scott et al., 2016) was used as a means of
+identifying a suitable number and combination of vulnerability
+and primary production anomaly parameters that would facilitate
+ﬁtting of the Southern Benguela model.
+Initial Sequential Model Fitting Incorporating an
+Upwelling Anomaly
+As mentioned in the introduction, TCU per year (m −3 s−1
+100 m −1) in the Southern Benguela was higher in mid-1990s
+and decreased again in the 2000s, but in the latter part of the
+timeseries, there were more years where upwelling exceeded the
+long-term mean (from Lamont et al., 2018; Figure 2 ). Annual
+means were computed, from July of one calendar year to June
+of the following calendar year, such that the full upwelling cycle
+was captured in a single annual value. These annual means were
+then used to drive primary production changes in the model
+via a forcing function ( Upwell) on large-celled phytoplankton
+following Lockerbie and Shannon (2019), and then only was an
+additional hypothetical environmental anomaly applied to small
+phytoplankton. The latter was ﬁtted using the routine available in
+Frontiers in Marine Science | www.frontiersin.org 5 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 6
+Shannon et al. Modeling Southern Benguela Temporal Variability
+FIGURE 2 | Total cumulative upwelling per year (m−3 s−1 100 m−1) in the Southern Benguela (replotted from Lamont et al., 2018).
+Ecosim to estimate an environmental forcing function applicable
+to primary production to improve ﬁt of the model to observed
+time series data. We applied this routine to estimate additional
+environmental forcing that modiﬁed the dynamics of small-
+celled phytoplankton production in an attempt to further reﬁne
+model ﬁtting by emulating additional environmental “noise”
+in the ecosystem.
+Weighting of Time Series Corresponding to Focus
+Model Groups
+An initial weighting of time series was explored in a second
+ﬁtting process in which sardine, anchovy, penguin, hakes and
+line ﬁsh were all aﬀorded higher weightings (weightings1 in
+Supplementary Table S8 ) in an attempt to better capture
+the ecosystem eﬀects of observed small pelagic ﬁsh and key
+predator dynamics.
+Reﬁned Fitting Process to Include Sardine and
+Anchovy Availability on the West Coast
+In order to account for the change in availability of small pelagic
+ﬁsh to predators in the 2000s due to the observed southward
+and eastward shift that was reﬂected in several ﬁsh resources oﬀ
+South Africa (Watermeyer et al., 2016), spatial change in forage
+ﬁsh availability was modeled as follows:
+ñ A forcing function based on TCU ( Upwell) was applied
+to large-celled phytoplankton production, and vulnerability
+parameters for predator-prey interactions were estimated,
+ñ A forcing function based on the modeled relative
+proportion of sardine spawners west of Cape Agulhas
+(Carryn de Moor, personal communication; Figure 3) was
+applied to the availability of juvenile and adult sardine to all
+their predators,
+ñ A forcing function based on relative anchovy biomass
+surveyed in November west of Cape Agulhas (Coetzee et al.,
+2016; Figure 3) was applied to the availability of anchovy
+recruits and spawners to all their predators,
+ñ A forcing function based on the Food Availability index of
+Crawford et al. (2019) was applied to anchovy and sardine
+availability to their predators and its inverse was applied to
+aﬀect additional mortality of African penguins,
+ñ Finally, a hypothetical, model-ﬁtted environmental
+anomaly was incorporated on small phytoplankton to ﬁne-
+tune model ﬁts, which mainly improved ﬁts of anchovy data
+Frontiers in Marine Science | www.frontiersin.org 6 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 7
+Shannon et al. Modeling Southern Benguela Temporal Variability
+FIGURE 3 | Relative proportion of the total spawner biomass found to the west of Cape Agulhas: based on November survey biomass series for anchovy (from
+Figure 1 of FISHERIES/2016/JUL/SWG-PEL/22REV2) and model-predicted sardine south coast component in November each year (based on the aforementioned
+divided by survey bias, Carryn de Moor, personal communication).
+series (refer to explanation in section “Initial Sequential
+Model Fitting Incorporating an Upwelling Anomaly”).
+Further Exploring Alternative Weighting of Time
+Series
+Under diﬀerent weightings of the relative importance of
+time series in ﬁtting the Southern Benguela model, the
+following simulation procedure was adopted once the ﬁshing
+eﬀort/mortality time series had been read in:
+ñ Total cumulative upwelling ( Upwell) was used to directly
+force large-celled phytoplankton production and the most
+sensitive predator-prey interactions were identiﬁed and
+vulnerability of prey to predators estimated to improve
+model ﬁt to data series of ﬁeld observations
+ñ A small, additional, hypothetical environmental anomaly
+was ﬁtted to small-celled phytoplankton to reﬁne model ﬁts,
+especially to anchovy biomass data series.
+All in all, results of 17 diﬀerent model ﬁtting scenarios are
+reported and discussed in an attempt to achieve an acceptable
+ﬁt of the temporal ecosystem model to observed time series of
+catch and abundance. In each scenario, factors such as weighting
+of time series, vulnerability of a prey group to a predator,
+and environmental anomalies aﬀecting primary productivity
+were sequentially added in attempts to improve model ﬁt
+to observations.
+RESULTS
+The Revised 1978 Southern Benguela
+Food Web
+Parameters (input to the model or estimated by the model)
+for the revised and updated model of the Southern Benguela
+ecosystem in 1978 are tabulated ( Table 2 and Supplementary
+Tables S1–S4 ). As part of the “prebal” process, parameter
+spread and ecosystem characteristics in terms of ﬂow rates were
+checked for consistency with general trophic principles and
+ecosystem characteristics from global models using the Prebal
+model routine in Ecopath, and found to be consistent with
+Frontiers in Marine Science | www.frontiersin.org 7 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 8
+Shannon et al. Modeling Southern Benguela Temporal Variability
+TABLE 2 | Balanced parameters for the revised model of the Southern Benguela in 1978.
+Group name Trophic level Biomass (t.km −2) Total mortality (y −1) P/B (y −1) Q/B (y −1) EE P/Q (y −1)
+Phytoplankton 1 1.000 35.000 200.000 0.328
+Phytoplankton 2 1.000 40.000 154.400 0.028
+Microzooplankton 2.053 2.178 482.000 1928.000 0.950 0.250
+Mesozooplankton 2.526 8.875 40.000 133.333 0.950 0.300
+Macrozooplankton 2.866 13.737 13.000 31.707 0.950 0.410
+Gelatinous Zooplankton 3.293 4.545 0.584 1.669 0.321 0.350
+Anchovy
+Anchovy recruits 2.526 4.535 1.200 19.042 0.976 0.063
+Anchovy spawners 3.547 7.063 1.200 14.400 0.323 0.083
+Sardine
+Juvenile sardine 2.526 0.228 1.400 21.819 0.984 0.064
+Adult sardine 2.910 0.600 1.200 12.371 0.979 0.097
+Redeye 3.662 5.555 1.300 13.000 0.787 0.100
+Other small pelagics 3.604 0.493 1.000 10.000 0.990 0.100
+Horse mackerel
+Juvenile Hmack 3.611 0.937 1.200 19.076 0.247 0.063
+Adult Hmack 3.773 1.618 1.000 10.000 0.890 0.100
+Chub mackerel 3.984 0.284 0.800 8.000 0.837 0.100
+Lanternﬁsh 3.730 4.433 1.200 12.000 0.990 0.100
+Lightﬁsh 3.639 4.392 1.200 12.000 0.990 0.100
+Snoek 4.372 0.198 0.500 5.000 0.900 0.100
+Tuna and Swordﬁsh 4.562 0.029 0.470 9.400 0.900 0.050
+Large Sparids 3.913 0.012 0.500 5.000 0.900 0.100
+Medium Sparids 3.795 0.027 0.500 5.000 0.900 0.100
+Sciaenids 4.273 0.021 0.500 5.000 0.900 0.100
+Yellowtail 4.232 0.033 0.500 5.000 0.900 0.100
+Other lineﬁsh 3.029 0.019 0.500 5.000 0.900 0.100
+Mullet 2.393 0.063 0.500 5.000 0.900 0.100
+Chokka Squid 3.807 0.455 3.500 10.000 0.988 0.350
+Other cephalopods 3.825 0.900 3.500 10.000 0.969 0.350
+M. capensis
+Small M. capensis 4.004 1.076 2.000 15.008 0.940 0.133
+Large M. capensis 4.614 0.823 0.800 4.400 0.845 0.182
+M. paradoxus
+Small M. paradoxus 3.957 1.293 2.000 16.030 0.960 0.125
+Large M. paradoxus 4.525 0.989 0.800 4.700 0.931 0.170
+PF Demersals 4.159 1.912 0.700 3.500 0.900 0.200
+BF Demersals 3.450 4.464 0.700 3.500 0.900 0.200
+Agulhas Sole 3.242 0.006 0.700 3.500 0.990 0.200
+PF Chondrichthyans 4.821 0.582 0.500 4.545 0.266 0.110
+BF Chondrichthyans 3.590 0.873 1.000 10.000 0.820 0.100
+Apex Chondrichthyans 4.898 0.045 0.500 5.000 0.000 0.100
+Seals 4.626 0.133 0.250 19.306 0.961 0.013
+Cetaceans 4.435 0.083 0.150 10.000 0.900 0.015
+African Penguin 4.064 0.002 0.201 96.980 0.612 0.002
+Cape Gannet 4.394 0.002 0.199 99.917 0.485 0.002
+Cape Cormorant 3.771 0.003 0.199 125.274 0.039 0.002
+Other seabirds 4.535 0.053 0.199 125.882 0.633 0.002
+(Continued)
+Frontiers in Marine Science | www.frontiersin.org 8 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 9
+Shannon et al. Modeling Southern Benguela Temporal Variability
+TABLE 2 | Continued
+Group name Trophic level Biomass (t.km −2) Total mortality (y −1) P/B (y −1) Q/B (y −1) EE P/Q (y −1)
+Benthic Producers 1.000 6.218 15.000 0.500
+Meiobenthos 2.000 11.663 4.000 33.000 0.950 0.121
+Macrobenthos 2.161 54.177 1.200 10.000 0.950 0.120
+WC rock lobster* 2.498 0.500 0.420 1.900 0.990 0.221
+SC rock lobster 2.498 0.981 1.200 4.000 0.990 0.300
+Detritus 1.000 50.000 0.243
+Values that were estimated by the model are indicated in bold font. For details of model groups, refer toTable 1 and Supplementary Table S2. P/B, Production/Biomass
+(y−1); Q/B, Consumption/biomass (y−1); P/Q, Production/consumption; EE, Ecotrophic Efﬁciency.∗Biomass accumulation was estimated to be −0.603 t.km−2.
+FIGURE 4 | Schematic of the trophic ﬂows through the Southern Benguela food web estimated for 1978. Circles representing functional groups and are
+proportionally scaled according to biomass in 1978.
+the guiding principles proposed by Link (2010) and Heymans
+et al. (2016) (for details, see Supplementary Material section
+6). The trophic ﬂow diagram summarizes the complex trophic
+web between trophic level 3 and 5, reﬂecting the importance of
+forage ﬁsh for a diverse assemblage of predatory species in this
+system ( Figure 4 ). A discrepancy between isotope-derived and
+stomach content-derived estimates of trophic levels of anchovy,
+sardine and redeye in the Benguela was previously noted by van
+der Lingen and Miller (2011). Isotope studies showed greater
+trophic separation between redeye and the other two species
+in the period 2008ñ2010, than between anchovy and sardine,
+whereas assumed diet compositions previously modeled redeye
+to be feeding from a similar trophic level to anchovy (Shannon
+et al., 2003, 2004a). In the current revised model where anchovy
+are modeled in two stanzas each ( Supplementary Table S1 ),
+anchovy recruits are feeding low in the food web (at the same level
+as juvenile sardine, Table 1), whereas adult anchovy are feeding
+higher but still slightly lower in the food web than redeye, so that
+overall, anchovy and redeye comparisons are more in line with
+the initial isotope studies. It should be noted that trophic levels
+are dynamic, and those of small pelagics depend greatly on the
+structure of the phyto-and zoo-plankton communities over the
+period being examined. For example, simply comparing modeled
+trophic levels between the 1978 base model and the end of the
+ﬁtted period, viz. 2015, we see that the trophic level of small
+pelagics can vary by up to 21% (detailed results not shown).
+Fitting the Model to Data Time Series
+Through automated, stepwise ﬁtting, the “best” model [lowest
+Akaike information criterion (AIC) and Sum of Squares (SS)] was
+obtained when ﬁshing was incorporated, vulnerability estimates
+for the 40 most sensitive predator-prey interactions made, and
+an environmental anomaly with 18 spline points estimated and
+applied to the small phytoplankton model group to improve
+model ﬁts to time series data. These numbers of vulnerabilities
+and spline points were used in subsequent model ﬁtting as
+reported below. The time series were given equal weightings in
+this exploratory, automated model ﬁtting (scenario 1, Table 3).
+Initial Sequential Model Fitting Incorporating an
+Upwelling Anomaly
+With Total Upwelling used to force large-celled phytoplankton
+production, estimating vulnerabilities for the 40 most sensitive
+predator-prey interactions enabled SS to be reduced by 83%
+(under equal weighting of time series, scenario 2, Table 3 ).
+Nevertheless, ﬁts of birds and large pelagics were not good
+(plots not shown).
+Weighting of Time Series Corresponding to Focus
+Model Groups
+As intended, the weighting strategy aimed to improve
+pelagic ﬁsh-predator model representation (weightings1 in
+Supplementary Table S8 ) improved model ﬁts to most line
+Frontiers in Marine Science | www.frontiersin.org 9 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 10
+Shannon et al. Modeling Southern Benguela Temporal Variability
+TABLE 3 | Scenarios examined to improve model ﬁt to data, when the data-derived upwelling anomaly (upwell – see footnote) is applied to large phytoplankton (apart
+from in Scenario 1), 40 vulnerabilities are ﬁtted for the most inﬂuential predator-prey interactions (40vs) and a hypothetical environmental anomaly (18 spline points) is
+applied to small phytoplankton (Anomaly on PP1).
+Scenario Factors ﬁtted AIC Cumulative reduction in SS
+1a Equal weightings n/a n/a
+Equal weightings + 40vs 182.7 74%
+Equal weightings + 40vs + Anomaly on PP1 46.19 76%
+1b Equal weightings + 40vs + Upwell + revised Anomaly on PP1 42.66 76%
+2 Equal weightings + Upwell n/a n/a
+Equal weightings + Upwell + 40vs 87.28 83%
+Equal weightings + Upwell + 40vs + Anomaly on PP1 −79.92 84%
+3 Weighting1 n/a n/a
+Weighting1 + 40vs 8346 23%
+Weighting1 + 40vs + Anomaly on PP1 7943 40%
+4 Weighting1 + 40vs + Anomaly on n/a n/a
+PP1 + Upwell
+Weighting1 + 40vs + Upwell + reﬁtted
+Anomaly on PP1 8080 34%
+5 Weighting1 + upwell n/a n/a
+*Weighting1 + upwell + 40vs 7887 44%
+Weighting1 + upwell + 40vs + Anomaly on PP1 7584 53%
+6 Weighting1 + upwell + 40vs n/a n/a
+Weighting1 + upwell + 40vs + Anomaly on PP1 plus FF on sardine + revised
+Anomaly on PP1
+7773 47% (only a further 3% reduction from scenario 5*
+above, but some better pelagic predator ﬁts to
+biomass series- see Supplementary Table S10)
+Preferred Equal weightings + upwell + FF on sardine n/a n/a
+Equal weightings + upwell + FF on 92.88 84%
+sardine + 40vs −6.096 85%
+Equal weightings + upwell + FF on sardine + 40vs + PP1 anomaly
+7 Weighting2 + upwell n/a n/a
+Weighting2 + upwell + 40vs 1628 62%
+Weighting2 + upwell + 40vs + Anomaly on PP1 1493 65%
+8 Weighting3 + upwell n/a n/a
+Weighting3 + upwell + 40vs 2476 55%
+Weighting3 + upwell + 40vs + Anomaly on PP1 2337 59%
+9 Weighting4 + upwell n/a n/a
+Weighting4 + upwell + 40vs 2350 55%
+Weighting4 + upwell + 40vs + Anomaly on PP1 (west coast scenario) 2222 59%
+10 Weighting5 + upwell n/a n/a
+Weighting5 + upwell + 40vs 2439 55%
+Weighting5 + upwell + 40vs + Anomaly on PP1 (south coast scenario) 2284 59%
+11 Weighting6 + upwell n/a n/a
+Weighting5 + upwell + 40vs 1772 61%
+Weighting5 + upwell + 40vs + Anomaly on PP1 1613 64%
+12 Equal weightings + upwell + FF on sardine + FF on anchovy n/a n/a
+Equal weightings + upwell + FF on sardine + FF on anchovy + 40vs −85.97 86%
+Equal weightings + upwell + FF on sardine + FF on anchovy + 40vs + PP1
+anomaly
+−190.2 87%
+13 Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin
+mortality
+n/a n/a
+Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin
+mortality + 40vs
+−129.2 86.6%
+Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin
+mortality + 40vs + PP1 anomaly
+−258.0 87.4%
+14 Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin
+mortality
+n/a n/a
+(Continued)
+Frontiers in Marine Science | www.frontiersin.org 10 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 11
+Shannon et al. Modeling Southern Benguela Temporal Variability
+TABLE 3 | Continued
+Scenario Factors ﬁtted AIC Cumulative reduction in SS
+Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin mortality + 25vs
+(As in scenario 13 above but where vulnerabilities for 25 predators were ﬁtted in place
+of 40 most vulnerable predator-prey interactions)
+−357.7 87.6% (88% if PP1 anomaly is also added)
+15 Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin mortality n/a n/a
+Equal weightings + upwell + FF on sardine + PC2 on anchovy + Penguin mortality + 25vs
+(As in scenario 13 above but where vulnerabilities were ﬁtted for the 25 predators for
+which time series were used in model ﬁtting)
+−334.7 87.6% (88% if PP1 anomaly also added)
+The hypothetical environmental anomaly applied to small phytoplankton was revised after each series of ﬁttings as a ﬁnal “tuning” of the model to data series and the
+ﬁtting factors appear in the order in which the ﬁtting proceeded. In the preferred scenario and scenarios 12, 13, and 14, data-derived forcing functions were applied as
+indicated to consumption of sardine, consumption of anchovy and African penguin mortality (FF and PC). Reduction in sum of squares (SS) of model ﬁts to data series are
+sequentially reported for each scenario. Akaike’s information criterion (AIC) is a measure of model quality (Symonds and Moussalli, 2011). The number of AIC data points
+was 1410. Weighting of time series are documented as reported in Supplementary Table S8 and these together with forcing functions (upwell and FF) are summarized
+below. Equal weightings indicates that all data time series used for model ﬁtting were equally weighted. Weighting1 was selected to heavily prioritize key groups in the
+model ﬁtting (see text). Weighting2 was based on model group pedigree. Weighting3 was based on pedigree of the model time series where catches and effort are
+weighted at a high value of 10. Weighting4 and Weighting5 apply to west coast (WC) versus south coast (SC) time series; where WC and SC biomass or effort is available
+for a single group, only the WC or SC series is used. Lineﬁsh CPUE series are afforded higher weighting (4) in Weighting6, which is otherwise the same as Weighting3
+and based on pedigrees allocated to model time series. Weighting details are provided in Supplementary Table S8.
+ﬁsh data series as well as to the endangered African Penguin.
+When ﬁshing eﬀort series alone drove temporal dynamics of
+model groups, the overall model ﬁts were still poor for most
+groups, but were reduced by 44% (scenario 5, Table 3) when
+vulnerability of prey to predators was ﬁne-tuned (for the 40
+most sensitive interactions) under observed ﬁsheries and total
+upwelling driver series. A further 9% reduction in SS was
+achieved when a hypothetical anomaly was ﬁtted to small
+phytoplankton, yielding an overall reduction of 53% in sum of
+squares (Table 3). As expected, model ﬁts were not improved to
+the same extent when vulnerabilities were tuned before upwelling
+was incorporated (scenario 4).
+Reﬁned Fitting Process to Include Sardine and
+Anchovy Availability on the West Coast
+The simple sardine availability function applied to sardine-
+predator interactions assuming equally weighted time series
+(preferred scenario) yielded the same% reduction in SS of model
+ﬁts to data series as obtained under Scenario 2 (85% SS reduction,
+Table 3). However, closer inspection of model plots ( Figure 5)
+showed that modeled anchovy and sardine adults and recruit
+series were up to 37% better correlated to data series in the
+preferred scenario than without the sardine availability function
+(Supplementary Table S9). Similarly, African penguins and adult
+hake of both species showed greatly improved model ﬁts to data.
+Most model lineﬁsh groups on the west coast correlated more
+closely with data when sardine availability function was included,
+but this was not the case for some south coast lineﬁsh groups;
+only large sparids on the south coast improved in model ﬁt.
+By contrast, under weighting1 to strengthen importance on
+focus model groups (weighting 1 in Supplementary Table S7 ;
+Scenario 6 in Table 3), SS of ﬁts of the model to time series was
+reduced by only 47% (Table 3). However, model ﬁts to data were
+improved for several sardine predators, in particular penguins,
+adult M. paradoxus and yellowtail which increased in model-
+data correlations by 39, 80, and 71% respectively (Supplementary
+Table S10). Nevertheless, model ﬁt to data series for anchovy
+and sardine, and several other predators deteriorated despite
+eﬀorts to enhance these groups by heavier weighting of their
+data time series.
+When, in addition to a sardine availability function, an
+availability function was applied to anchovy consumption across
+all predators, based on the proportion of anchovy spawner
+biomass surveyed west versus south of Cape Agulhas (Coetzee
+et al., 2016), model ﬁts to data series of anchovy and sardine
+recruits, medium sparids and yellowtail improved ( Table 3 ,
+scenario 12 and Supplementary Table S11). However, model ﬁts
+to anchovy and sardine spawner biomass, penguins, adult hake,
+large sparids and sciaenids were much poorer ( Supplementary
+Table S11 and Supplementary Figures S3, S4).
+Extensive model scenarios (details not shown) were run in an
+attempt to best incorporate information contained in the Food
+Availability Index of Crawford et al. (2019). Initially, a forcing
+function based on this index was applied only to sardine and/or
+anchovy ñ bird interactions, but model ﬁts were most improved
+when the simple sardine availability index used in the previous
+scenarios was retained, the Food Availability Index (Crawford
+et al., 2019) applied to availability of anchovy across all model
+predators, and the inverse of this function applied to “other
+mortality” of African Penguins (Scenario 13, Table 3). However,
+although incorporation of this index in this way greatly improved
+model ﬁts to data series for penguins and medium sparids on the
+south coast, and to a lesser extent for gannets, ﬁts were poorer
+for most other groups in this scenario (Supplementary Table S11
+and Supplementary Figures S5, S6).
+Further Exploring Alternative Weighting of Time
+Series
+Model trajectories of biomass and landings outputs for 1978ñ
+2015 were compared to time series ( Supplementary Table S5 )
+of catches, biomass (with the exception of survey-based spawner
+biomass series for anchovy and sardine, as above) and mortality
+time series, and model AIC and Sum of Squares (SS) ( Table 3)
+as well as data-model plots per functional group (not shown
+Frontiers in Marine Science | www.frontiersin.org 11 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 12
+Shannon et al. Modeling Southern Benguela Temporal Variability
+apart from the “preferred scenario” in Figure 6) were examined
+for diﬀerent time series weightings. None of the selected and
+carefully reasoned time series weighting scenarios improved
+overall models ﬁts; SS of model ﬁts to data were reduced by
+a maximum of 65% in scenario 7 (weighting2 based on model
+pedigree), and 64% in scenario 11 (weighting6 in which lineﬁsh
+CPUE series are aﬀorded higher weighting), compared to an
+84% and 85% reduction in SS respectively in scenario 2 and
+the preferred scenario, both of which assume equal weighting of
+time series. Furthermore, including only west coast series or only
+south coast series for model groups where coast-disaggregated
+series were available did not improve model ﬁts overall either (SS
+reduction remained at 59%, scenarios 3ñ5, Table 3).
+Where indicated by upwell, a forcing function is applied to
+large phytoplankton based on Lamont et al. (2018) cumulative
+upwelling series (Table 3). In the preferred scenario and scenarios
+12 and 13, forcing factors derived from the proportion of
+sardine and anchovy respectively modeled or surveyed west of
+Cape Agulhas (Coetzee et al., 2016; Carryn de Moor, personal
+communication) are applied to juvenile and adult sardine and
+anchovy interactions with their predators (FF). In scenario 13,
+a forcing function/its inverse derived from the Food Availability
+FIGURE 5 | Continued
+Frontiers in Marine Science | www.frontiersin.org 12 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 13
+Shannon et al. Modeling Southern Benguela Temporal Variability
+Index of Crawford et al. (2019) is applied to juvenile and adult
+anchovy consumption by predators/African penguin mortality
+respectively (PC2).
+Flow Control
+Sardine dominated 40% of the 40 most sensitive predator-prey
+interactions searched for during model ﬁtting. Vulnerability
+estimation found sardine to exert top-down ﬂow control on small
+phytoplankton, whereas microzooplankton exerted bottom-up
+control on sardine in model ﬁtting ( Supplementary Table S12).
+In the absence of any forcing functions, model ﬁtting requires
+that sardine and anchovy control microzooplankton trophically.
+Bottomñup control emerged for sardine on Sciaenids, African
+penguins, Cape gannet, Cape Cormorant and other seabirds
+(Supplementary Table S12). Several predators exerted top-down
+control on sardine, including horse mackerel, yellowtail, small
+hake, other cephalopods and pelagic-feeding chondrichthyans.
+No interactions between anchovy and its predators were
+found when searching for the 40 most sensitive predator-prey
+interactions with or without environmental forcing incorporated
+into the model ﬁts ( Supplementary Table S12 and others not
+shown). An additional two vulnerability scenarios were explored
+in which the same vulnerability setting was applied to interactions
+between a speciﬁc predator and all its prey groups. Firstly,
+FIGURE 5 | Continued
+Frontiers in Marine Science | www.frontiersin.org 13 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 14
+Shannon et al. Modeling Southern Benguela Temporal Variability
+FIGURE 5 | Model ﬁts of anchovy and sardine, and predators dependent on them in the preferred model ﬁtting scenario. The contribution of each group to model
+sum of squares is provided on the plots. The ﬁgure is split into three sections to facilitate inclusion of scatterplots for each model-observation time series pair, and
+the R2 of each correlation is provided.
+vulnerabilities were ﬁtted for 25 predators in place of the 40
+most sensitive predator-prey interactions (scenario 14). In a
+second instance, vulnerabilities were ﬁtted for the 25 predators
+for which time series were used in model ﬁtting (scenario 15).
+These scenarios yielded poorer model ﬁts of the key species
+anchovy and sardine, and unrealistic trajectories of tuna and
+swordﬁsh in recent years, despite large reduction in overall model
+SS (Table 3). Further, model ﬁts in scenario 14 were poorer for
+sciaenids, snoek, horse mackerel and hake. Nevertheless, ﬁtted
+vulnerabilities in the ﬁrst instance suggested bottom-up ﬂow
+control for Sciaenids, African penguin, Cape gannet and deep-
+water hake, and topñdown by yellowtail, snoek, small shallow
+water Cape hake and chondrichthyans, in good agreement with
+the 40v-scenarios modeled. In the second instance, bottom-up
+ﬂow control was estimated for anchovy, sardine juveniles, horse
+mackerel, lightﬁsh, large hakes, demersal ﬁsh, chokka squid and
+Cape gannet, whereas chub mackerel, adult sardine, lanternﬁsh,
+snoek, yellowtail, small shallow-water Cape hake and African
+Penguins were estimated to exert top-down control on their prey.
+The outliers here compared to previous scenarios are top-down
+Frontiers in Marine Science | www.frontiersin.org 14 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 15
+Shannon et al. Modeling Southern Benguela Temporal Variability
+FIGURE 6 | Model trajectories from the preferred Southern Benguela model ﬁtting scenario showing (A) meso-and macro-zooplankton dynamics in relation to total
+cumulative upwelling, and (B) demersal and chondrichthyan stock dynamics.
+control by African penguin ( v = 19) and lanternﬁsh ( V > 1000),
+suggesting these two groups may be far from their carrying
+capacities in this model conﬁguration.
+DISCUSSION
+To date, the dual, interacting contributions of both ﬁshing
+and environmental variability in driving observed dynamics
+in the Southern Benguela ecosystem have been highlighted by
+means of ecosystem modeling (Shannon et al., 2004b; Travers-
+Trolet et al., 2014; Ortega-Cisneros et al., 2018b) and using
+survey-based (Shannon et al., 2010) and modeled-derived (Fu
+et al., 2018) indicators. Building on previous Ecosim modeling
+(Shannon et al., 2004a, 2008; Smith et al., 2011), a more detailed
+disaggregation of the southern Benguela food web was possible
+given the more extensive abundance and catch time series data
+available. These expanded data series were used to improve
+the model resolution of the Southern Benguela ecosystem, and
+to further explore food web processes underpinning observed
+ecosystem dynamics. In our study, internal model food web
+dynamics were modeled in two ways, namely by means of
+parameterizing predator-prey interactions described in terms of
+vulnerabilities of prey to predators, and by means of direct
+forcing of sardine and anchovy availability to its predators. These
+internal predator-prey dynamics are themselves aﬀected by, and
+interact with, both environmental and ﬁshing drivers. Here,
+estimated ﬁshing eﬀort series were used to drive over half of
+the 31 model ﬁshing ﬂeets, and upwelling eﬀects were modeled
+by forcing applied to large phytoplankton production. Together,
+modeling these three key drivers produced model ecosystem
+dynamics that compared favorably to several of the observed
+catch, abundance and mortality time series data available for the
+Southern Benguela.
+To elaborate further, reasonable overall ﬁt of small pelagic
+predators to available catch and abundance time series data was
+obtained by (i) allocating equal weightings to all time series
+used (while excluding modeled anchovy and sardine recruitment
+in billions, and excluding coast-speciﬁc modeled anchovy
+and sardine November biomass series), (ii) incorporating an
+upwelling anomaly based on annual means of TCU reported in
+Lamont et al. (2018) applied to large phytoplankton productivity,
+and iii) applying a forcing function derived from the relative
+proportion of sardine spawner biomass on the west coast (based
+on Coetzee et al., 2016, modiﬁed to account for survey bias,
+Carryn de Moor, personal communication) to modify availability
+of sardine (juveniles and adults) to predators. Subsequently, the
+40 most sensitive predator-prey interactions were parameterized
+in terms of vulnerability to predation, to improve model ﬁts.
+Finally a small, model-estimated hypothetical forcing function
+was ﬁtted to small phytoplankton in lieu of non-speciﬁed
+environmental variability, in an attempt to further improve
+model ﬁt to data series.
+Upwelling intensity and variability both increased on the
+west and south coasts of South Africa in the ﬁrst part of the
+1990s (Blamey et al., 2012). Upwelling drives productivity in the
+Benguela, aﬀecting prey abundance of ﬁsh and top predators
+(Hutchings et al., 2009), speciﬁcally mediated through small
+pelagic ﬁsh which link plankton productivity to predators in
+upwelling food web (e.g., Cury et al., 2000; Roy et al., 2001).
+van der Sleen et al. (2018) successfully ﬁtted a GAM model
+to describe the relationship between anchovy recruitment and
+the December-March cumulative upwelling in the southern
+Benguela. In our modeling study, this same upwelling index,
+averaged annually (Lamont et al., 2018), was incorporated
+Frontiers in Marine Science | www.frontiersin.org 15 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 16
+Shannon et al. Modeling Southern Benguela Temporal Variability
+through forcing of large phytoplankton productivity, which feeds
+through the model food web via zooplankton dynamics. Copepod
+abundance on the west coast of South Africa increased between
+1950 and the late 1990s, likely reﬂecting reduced predation
+pressure by small pelagic ﬁsh over the period, together with
+long-term intensiﬁcation of coastal upwelling (Verheye and
+Richardson, 1998; Verheye et al., 1998). Between 1988 and 2003,
+a decline in abundance of large copepods was measured oﬀ
+South Africa, with a concomitant increase in abundance of small
+copepods (Huggett et al., 2009), likely related to both oﬀshore
+warming and increased predation pressure exerted by small
+pelagics in the early 2000s when forage ﬁsh abundance was
+unusually high (Hutchings et al., 2009). In our non-spatialized
+model, small copepods are included in the mesozooplankton
+model group, which indeed showed a three-fold increase between
+2000 and 2015, as well as a slight long-term increase over the
+modeled time period (1978ñ2015) despite west and south coast
+trajectories not being separated in our model (Figure 6A).
+Southern Benguela ecosystem dynamics were ﬁtted for
+the period 1978 to 2015, spanning the period of ecosystem
+changes including ecosystem regime shifts. Since the 1980s,
+declines and geographical shifts in distribution have been
+observed in several species oﬀ South Africa, and have been
+related to ﬁshing and environmental changes (Blamey et al.,
+2014). For example, as recommended by Griﬃths (2000),
+line ﬁshing eﬀort was severely reduced from 2000 onward
+following declaration of an emergency in this ﬁshery. There
+have been indications that silver kob Argyrosomus inodorus
+and carpenter Argyrozona argyrozona are responding positively
+to reduced catches (Winker et al., 2013). These trends are
+captured by increasing Ecosim model abundances of Sciaenidae
+and medium Sparids respectively ( Figure 5 ). Demersal ﬁsh oﬀ
+South Africa’s west coast have exhibited changes over time,
+with indications of ecosystem shifts in the early 1990s and
+mid-2000s (Atkinson et al., 2011). These authors found increases
+in some fast-growing species of eels and ﬁsh, and declines
+in slow-growing, long-lived species such as chondrichthyans,
+attributing the changes to environmental drivers (temperature
+being the key) in combination with indirect trophic eﬀects of
+ﬁshing (Atkinson et al., 2011). In the ﬁtted Ecosim model,
+increases in benthic-feeding and pelagic-feeding demersal ﬁsh
+and pelagic-feeding demersal chondrichthyans were captured
+in the 1990s, whereas demersal ﬁsh and benthic-feeding
+chondrichthyans declined in the early 2000s and model pelagic-
+feeding chondrichthyans increased ( Figure 6B). Both species of
+Cape hake have been showing mixed trends since the 1960s
+(Rademeyer et al., 2008; Atkinson et al., 2011), but the ecosystem
+model ﬁtted passably to stock assessment model series for
+recent decades ( Figure 5 ). Relative abundances of anchovy
+and sardine were recorded to have shifted from predominantly
+west coast to greater proportions being found oﬀ the south
+and east coasts of South Africa (van der Lingen et al., 2002;
+Fairweather et al., 2006). Watermeyer et al. (2016) showed
+parallel, although smaller increases in the proportion of redeye,
+chub mackerel, kingklip, yellowtail, and chokka squid located
+east of Cape Agulhas between 1985 and 2008, and deduced
+from system connectivity indices that the period 2003ñ2008
+was likely one of change. This supported the early signals
+of change previously reported in demersal ﬁsh data series
+(Atkinson et al., 2011), winds, upwelling and bottom oxygen
+depletion levels (Howard et al., 2007; Blamey et al., 2012;
+Jarre et al., 2015).
+By considering the ecosystem holistically and elucidating key
+interactions, this modeling study has expounded on several of
+the key predator-prey relationships in the southern Benguela
+food web, which have been receiving careful attention by other
+colleagues in the area. Our study underlines the strong inﬂuence
+of sardine on the food web dynamics of the Southern Benguela.
+Predator-prey interactions involving sardine accounted for 40%
+of the 40 most sensitive predator-prey interactions in the
+Southern Benguela model, emphasizing the pivotal role that
+sardine play in controlling ﬂow of energy in the Southern
+Benguela food web. This was captured in the model ﬁtting
+process through applying a forcing function on all interactions
+between sardine as prey, and their predators; here, a simple
+forcing was invoked that was based on the proportion of sardine
+spawners located west of Cape Agulhas each year. Anchovy-
+predator interactions were absent from the 40 most sensitive
+predator-prey interactions identiﬁed in this study. The greater
+relative importance of sardine trophically compared to anchovy
+was further highlighted by our ﬁnding that a similar availability
+function explored in the case of anchovy, based on proportion
+of anchovy spawner biomass surveyed west of Cape Agulhas,
+only improved model ﬁt for penguins and anchovy, but reduced
+model ﬁt for adult sardine, hake adults and most lineﬁsh groups
+(Supplementary Table S11).
+Availability of forage ﬁsh to predators needs further
+careful consideration. In the Benguela, seabirds particularly
+are closely associated with the dynamics of small pelagic
+ﬁsh. All three seabird species that rely heavily on sardine
+and anchovy as key prey species have been classiﬁed as
+endangered (Cape gannets, Cape cormorants and African
+penguins). Crawford et al. (2019) have undertaken Principal
+Component (PC) analyses of South African seabird diet and
+life history measures. PC1 showed an alternation between
+sardine and anchovy in the diet; PC2 contrasted good
+(when either anchovy or sardine was available) and poor
+(when gannets needed to eat saury oﬀshore, or hake oﬀal)
+foraging regimes. PC2 was signiﬁcantly related to numbers of
+gannet and Cape cormorant breeders, and to adult penguin
+survival. Using PCA results (PC2 in particular, which captures
+prey availability), the authors proposed a Forage Availability
+Index. As expected, this seabird-focused index was found
+to be helpful in improving model ﬁts for African penguin
+and Cape gannet, and via unexpected ecosystem feedbacks
+also medium sparids, but did not improve model ﬁts to
+data series for small pelagics or lineﬁsh ( Supplementary
+Table S11 and Supplementary Figures S5, S6 ), emphasizing
+the importance of establishing a series of species-speciﬁc
+functional response relationships based on empirical data,
+to be incorporated to improve ecosystem model ﬁts across
+several key functional groups simultaneously. A particular
+future focus research area should be closer examination of
+the functional responses of predatory ﬁsh to their prey.
+Frontiers in Marine Science | www.frontiersin.org 16 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 17
+Shannon et al. Modeling Southern Benguela Temporal Variability
+In our study, predatory ﬁsh showed top-down (e.g., snoek)
+and bottom-up (e.g., Sciaenids) ﬂow control ( Supplementary
+Table S12 ). Further, a functional relationship capturing both
+bottom-up and topñdown interactions has been found between
+geelbek (a Sciaenid) and sardine availability on the south west
+coast of South Africa (Parker et al., 2020). In addition, a
+weaker although still signiﬁcant relationship between anchovy
+and yellowtail has also been identiﬁed by these authors
+(Parker et al., 2020). Our model ﬁtting results support their
+ﬁnding: when an anchovy availability function was applied
+to anchovy consumption by predators, model ﬁts to data
+series of both anchovy and yellowtail improved ( Table 3 ,
+scenario 12 and Supplementary Table S11 ), and top-down
+ﬂow control was estimated for yellowtail on its pelagic prey
+(scenarios 14 and 15). Ways to incorporate these newly
+found functional responses should be explored in future
+ecosystem modeling work.
+Despite helpful guidelines in ﬁtting Ecosim models to time
+series data (Shannon et al., 2004a; Heymans et al., 2016; amongst
+others), the model ﬁtting process is very much dependent
+on one’s understanding of the food web in question, and
+appreciation of the quality and intricacies in the data series
+available. What may be a sensible sequence of ﬁtting in one
+system may well not be the most appropriate in another.
+Diﬀerent ways of accounting for and incorporating process
+concepts into an Ecosim model of a given system need to be
+tested and aligned to current understanding of that ecosystem.
+The importance of local knowledge and experts in facilitating
+most sensible or “best” model ﬁt should not be underestimated,
+as has been demonstrated similarly in the case of applying
+and interpreting ecosystem indicators (Shannon et al., 2010).
+Further, ecosystem type and the objective of the model in
+question dictate model group aggregations, which in turn
+inﬂuence some of the characteristics used as general guidelines
+in pre-balancing Ecopath models (Link, 2010; see discussion in
+Supplementary Material S6).
+As the model currently stands, it is not yet fully suited as a
+management tool, yet it could be usefully applied in a scenario
+testing mode. This study provides documentation of an updated,
+detailed baseline trophic model for the southern Benguela
+ecosystem, from which functional predator-prey responses,
+spatialized modeling, and management strategy evaluation can
+be explored. For instance, improved parameterization of anchovy
+and sardine in the new model could facilitate investigation into
+whether predator-ﬁshery competition may be reduced if ﬁsheries
+diﬀerentially target diﬀerent size classes of anchovy and sardine
+to those selected by predatory ﬁsh. Furthermore, as may be the
+case for seabirds elsewhere, it could be investigated whether
+ﬁsheries targeting adult forage ﬁsh negatively impact seabirds
+by changing availability of juvenile ﬁsh relied upon as prey for
+our resident breeding seabirds (Field et al., 2010; Sydeman et al.,
+2017). On the contrary, data constraints encountered for some
+functional groups such as cetaceans will limit the usefulness
+of the model in answering detailed questions pertaining to
+dolphins and whales.
+In particular, Ecospace and the novel modeling applications
+within (Steenbeek et al., 2013; Christensen et al., 2014) will
+be used to extend the current temporal model presented here
+to better capture spatial aspects of trophic interactions in
+the southern Benguela. Ecospace model conﬁguration will also
+facilitate additional environmental drivers to be incorporated.
+For example, it will be possible to directly incorporate sea surface
+temperature ﬁelds (Dufois et al., 2012; Rouault et al., 2010),
+to use TCU divergence between September and January as a
+proxy for oxygen depletion, as proposed by Jarre et al. (2015)
+and to explore incorporating further seasonality [recall that van
+der Sleen et al. (2018) demonstrated a stronger relationship
+between anchovy recruitment and DecemberñMarch cumulative
+upwelling when anchovy spawner biomass located west of Cape
+Agulhas was above a certain threshold level]. These avenues will
+help deﬁne spatial habitat capacity for each functional group
+modeled. Productivity of sardine and anchovy diﬀer between the
+west and south coasts, and at least in the case of sardine, depend
+strongly on spatial distribution of ﬁshing pressure (Watermeyer
+et al., 2018). A fully spatialized Southern Benguela Ecospace
+model would support spatially explicit advice on ﬁshing strategies
+under long-term climate variability and change and has been
+identiﬁed as a key research area in several recently launched
+international projects.
+To reiterate, in this study in which the Benguela ecosystem is
+modeled as a single unit using a non-spatial trophic model, the
+observed spatial changes have been approximated simply through
+internal food web dynamics by (i) estimating vulnerability
+parameters of most sensitive predator-prey interactions based on
+existing data time series, (ii) forcing changes in availability of
+sardine as prey to predators based on the surveyed proportion
+of sardine on the west coast, and (iii) by annual cumulative
+upwelling driving phytoplankton productivity. Attempting to
+ﬁt the model to either west coast or south coast time
+series rather than mixing spatial series did not improve
+overall model ﬁts, highlighting the limitations of the current
+non-spatialized model in describing coast-speciﬁc dynamics.
+Nevertheless, the model presented is an important contribution
+toward a platform from which climate scenarios could be
+explored with respect to ﬁsheries management measures under
+global change, such as the work that is being undertaken by
+the Fisheries and Marine Ecosystem Model Intercomparison
+Project (Fish-MIP) using several diﬀerent types of ecosystem
+modeling approaches in numerous regions of the world
+(Tittensor et al., 2018).
+Timing of concluding this revised, ﬁtted, temporal Ecosim
+model as a basis from which to extend into a spatialized Ecospace
+model of the Southern Benguela is ideal in the light of the recent
+National Biodiversity Assessment 2018 (NBA 2018; Skowno
+et al., 2019). The NBA 2018 has collated and assessed multiple
+spatial layers and pressures in the ocean spaces oﬀ South Africa,
+and incorporates expert knowledge and interpretation of
+these data and maps. This assessment, and in view of the
+new expanded array of 41 marine protected areas recently
+gazetted for South Africa, provides enormous opportunity for
+expanding Ecopath with Ecosim modeling of the Southern
+Benguela spatially, and will guide extensive spatial-temporal
+scenario testing using Ecospace in support of ecosystem-based
+management of our marine social-ecological systems.
+Frontiers in Marine Science | www.frontiersin.org 17 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 18
+Shannon et al. Modeling Southern Benguela Temporal Variability
+DATA AVAILABILITY STATEMENT
+All datasets generated for this study are included in the
+article/Supplementary Material.
+AUTHOR CONTRIBUTIONS
+LS conceived the study, developed and ran the model simulations,
+and wrote the manuscript. All the authors provided comments on
+and inputs to the manuscript. KO-C provided substantial inputs
+to both text and ﬁgures. TL provided the upwelling index. HW
+provided the line ﬁsh data series and advised on model structure.
+RC provided the Forage Availability Index. AJ helped in framing
+the study and provided the inputs to the manuscript structure and
+focus. MC contributed to development of the 1978 model.
+FUNDING
+L ’ Institut de Recherche pour le Développement (IRD), CRH,
+Research Unit MARBEC (UMR 248), avenue Jean Monnet, CS
+30171, 34203 Sète Cedex, France, is thanked for providing core
+funding for the revision of the Southern Benguela EwE model.
+Funding for this study through the South African Research
+Chairs Initiative, funded by DSI and administered by NRF ,
+through the Research Chair in Marine Ecology and Fisheries
+(Grant No. 65238) is also gratefully acknowledged. In addition,
+this work is also a contribution to the EU-Horizon 2020 project
+“TRIATLAS” (Grant No. 817578) and the One Ocean Hub.
+ACKNOWLEDGMENTS
+D. Merkle, T. Fairweather, and A. Makhado from the Department
+of Environment, Forestry and Fisheries (DEFF), South Africa, are
+thanked for making catch and abundance data available for small
+pelagic ﬁsh, demersal ﬁsh and seabirds, respectively. C. de Moor is
+thanked for sharing earlier stock assessment model series of small
+pelagics. We are grateful to V. Christensen for comments on an
+earlier draft of the manuscript.
+SUPPLEMENTARY MATERIAL
+The Supplementary Material for this article can be found
+online at: https://www.frontiersin.org/articles/10.3389/fmars.
+2020.00540/full#supplementary-material
+REFERENCES
+ANON (2016). Fisheries_2016_APR_SWG_PEL_16. Mesopelagic Experiment
+Application Submitted to DAFF. Cape Town: Department of Agriculture,
+Forestry and Fisheries.
+Atkinson, L. J., Leslie, R. W., Field, J. G., and Jarre, A. (2011). Changes
+in demersal ﬁsh assemblages on the west coast of South Africa, 1986ñ
+2009. African J. Mar. Sci. 33, 157ñ170. doi: 10.2989/1814232x.2011.57
+2378
+Blamey, L. K., Howard, J. A. E., Agenbag, J., and Jarre, A. (2012). Regime-shifts
+in the southern Benguela shelf and inshore region. Prog. Oceanogr. 106, 80ñ95.
+doi: 10.1016/j.pocean.2012.07.001
+Blamey, L. K., Plagányi, ÉE., and Branch, G. M. (2014). Was overﬁshing
+of predatory ﬁsh responsible for a lobster-induced regime shift in the
+Benguela? Ecol. Modell 273, 140ñ150. doi: 10.1016/j.ecolmodel.2013.
+11.004
+Blamey, L. K., Shannon, L. J., Bolton, J. J., Crawford, R. J. M., Dufois, F., and
+Evers-King, H. (2015). Ecosystem change in the southern Benguela and the
+underlying processes. J. Mar. Syst. 144, 9ñ29. doi: 10.1016/j.jmarsys.2014.
+11.006
+Bolton, J. J., Anderson, R. J., Smit, A. J., and Rothman, M. D. (2012). South African
+kelp moving eastwards: the discovery of Ecklonia maxima (Osbeck) Papenfuss
+at De hoop nature reserve on the south coast of South Africa. African J. Mar.
+Sci. 34, 147ñ151. doi: 10.2989/1814232x.2012.675125
+Christensen, V., Coll, M., Steenbeek, J., Buszowski, J., Chagaris, D., and Walters,
+C. J. (2014). Representing variable habitat quality in a spatial food web model.
+Ecosystems 17, 1397ñ1412. doi: 10.1007/s10021-014-9803-3
+Christensen, V., and Walters, C. J. (2004). Ecopath with Ecosim: methods,
+capabilities and limitations. Ecol. Modell. 172, 109ñ139. doi: 10.1016/j.
+ecolmodel.2003.09.003
+Cochrane, K. L., Augustyn, C. J., Fairweather, T., Japp, D., Kilongo, K., and
+Iitembu, J. (2009). Benguela current large marine ecosystem—governance and
+management for an ecosystem approach to ﬁsheries in the region. Coast.
+Manag. 37, 235ñ254. doi: 10.1080/08920750902851187
+Cockcroft, A. C., van Zyl, D., and Hutchings, L. (2008). Large-scale changes in
+the spatial distribution of South African West Coast rock lobsters: an overview.
+African J. Mar. Sci. 30, 149ñ159. doi: 10.2989/AJMS.2008.30.1.15.465
+Coetzee, J., Merkle, D., Geja, Y., Mushanganyisi, K., and Shabangu,
+F. (2016). Results of the 2016 Spawner Biomass Survey . Report No
+FISHERIES/2016/DEC/SWG-PEL/79. Cape Town: Department of Agriculture,
+Forestry and Fisheries.
+Coetzee, J., Merkle, D, Shabangu, F., Geja, Y., and Petersen, J. (2018). Results of the
+2018 Pelagic Biomass Survey. Report No FISHERIES/2018/DEC/SWG-
+PEL/38. Cape Town: Department of Agriculture, Forestry
+and Fisheries.
+Corrales, X., Coll, M., Oﬁr, E., Heymans, J. J., Steenbeek, J., and Goren, M.
+(2018). Future scenarios of marine resources and ecosystem conditions
+in the Eastern Mediterranean under the impacts of ﬁshing, alien
+species and sea warming. Sci. Rep. 8:14284. doi: 10.1038/s41598-018-
+32666-x
+Crawford, R. J. M., Ryan, P. G., and Williams, A. J. (1991). Seabird consumption
+and production in the Benguela and western agulhas ecosystems. South African
+J. Mar. Sci. 11, 357ñ375. doi: 10.2989/025776191784287709
+Crawford, R. J. M., Sydeman, W. J., Thompson, S. A., Sherley, R. B., and Makhado,
+A. B. (2019). Food habits of an endangered seabird indicate recent poor forage
+ﬁsh availability oﬀ western South Africa. ICES J. Mar. Sci. 76, 1344ñ1352.
+doi: 10.1093/icesjms/fsz081
+Cury, P., Bakun, A., Crawford, R. J. M., Jarre, A., Quiñones, R. A., and Shannon,
+L. J. (2000). Small pelagics in upwelling systems: patterns of interaction and
+structural changes in “wasp-waist” ecosystems. ICES J. Mar. Sci. 57, 603ñ618.
+doi: 10.1006/jmsc.2000.0712
+Dufois, F., Penven, P., Peter Whittle, C., and Veitch, J. (2012). On the warm
+nearshore bias in pathﬁnder monthly SST products over eastern boundary
+upwelling systems. Ocean Model. 47, 113ñ118. doi: 10.1016/j.ocemod.2012.01.
+007
+Fairweather, T. P., van der Lingen, C. D., Booth, A. J., Drapeau, L., and van der
+Westhuizen, J. J. (2006). Indicators of sustainable ﬁshing for South African
+sardine Sardinops sagax and anchovy Engraulis encrasicolus. African J. Mar. Sci.
+28, 661ñ680. doi: 10.2989/18142320609504215
+Field, J. C., MacCall, A. D., Bradley, R. W., and Sydeman, W. J. (2010). Estimating
+the impacts of ﬁshing on dependent predators: a case study in the California
+Current. Ecol. Appl. 20, 2223ñ2236. doi: 10.1890/09-0428.1
+Fu, C., Travers-Trolet, M., Velez, L., Grüss, A., Bundy, A., and Shannon, L. J.
+(2018). Risky business: the combined eﬀects of ﬁshing and changes in primary
+Frontiers in Marine Science | www.frontiersin.org 18 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 19
+Shannon et al. Modeling Southern Benguela Temporal Variability
+productivity on ﬁsh communities. Ecol. Modell. 368, 265ñ276. doi: 10.1016/j.
+ecolmodel.2017.12.003
+Grémillet, D., Pichegru, L., Kuntz, G., Woakes, A. G., Wilkinson, S., and Crawford,
+R. J. M. (2008). A junk-food hypothesis for gannets feeding on ﬁshery waste.
+Proc. R. Soc. B Biol. Sci. 275, 1149ñ1156. doi: 10.1098/rspb.2007.1763
+Griﬃths, M. H. (2000). Long-term trends in catch and eﬀort of commercial lineﬁsh
+oﬀ South Africa’s Cape Province: snapshots of the 20th century.South African J.
+Mar. Sci. 22, 81ñ110. doi: 10.2989/025776100784125663
+Heymans, J. J., Link, J. S., Mackinson, S., Steenbeek, J., Walters, C., Christensen,
+V., et al. (2016). Best practice in ecopath with ecosim food-web models
+for ecosystem-based management. Ecol. Modell. 331, 173ñ184. doi: 10.1016/j.
+ecolmodel.2015.12.007
+Howard, J. A. E., Jarre, A., Clark, A. E., and Moloney, C. L. (2007). Application
+of the sequential t-test algorithm for analysing regime shifts to the southern
+Benguela ecosystem. African J. Mar. Sci. 29, 437ñ451. doi: 10.2989/AJMS.2007.
+29.3.11.341
+Huggett, J., Verheye, H., Escribano, R., and Fairweather, T. (2009). Copepod
+biomass, size composition and production in the Southern Benguela: spatioñ
+temporal patterns of variation, and comparison with other eastern boundary
+upwelling systems. Prog. Oceanogr. 83, 197ñ207. doi: 10.1016/j.pocean.2009.
+07.048
+Huggett, J. A., Batyi-Nkwenkwe, K., Mdazuka, Y., Setati, S., and Wright, E. (2019).
+“Long-term variability in copepods oﬀ the South Coast during Spring, 1988ñ
+2018, ” inSouth Africa’s Oceans and Coasts Annual Science Report, 2018, Report
+No: 18 , eds S. P. Kirkman, J. A. Huggett, and R. J. M. Crawford (Pretoria:
+Department of Environmental Aﬀairs), RP188/2019, ISBN: 987-0-621-47469-5.
+Hutchings, L., Jarre, A., Lamont, T., van den Berg, M., and Kirkman, S. P. (2012).
+St Helena Bay (southern Benguela) then and now: muted climate signals, large
+human impact. African J. Mar. Sci. 34, 559ñ583. doi: 10.2989/1814232X.2012.
+689672
+Hutchings, L., van der Lingen, C. D., Shannon, L. J., Crawford, R. J. M., Verheye,
+H. M. S., Bartholomae, C. H., et al. (2009). The Benguela current: an ecosystem
+of four components. Prog. Oceanogr. 83, 15ñ32. doi: 10.1016/j.pocean.2009.07.
+046
+Jarre, A., Hutchings, L., Kirkman, S. P., Kreiner, A., Tchipalanga, P. C. M., and
+Kainge, P. (2015). Synthesis: climate eﬀects on biodiversity, abundance and
+distribution of marine organisms in the Benguela. Fish. Oceanogr. 24, 122ñ149.
+doi: 10.1111/fog.12086
+Koehn, L. E., Essington, T. E., Marshall, K. N., Kaplan, I. C., Sydeman, W. J.,
+and Szoboszlai, A. I. (2016). Developing a high taxonomic resolution food
+web model to assess the functional role of forage ﬁsh in the California
+Current ecosystem. Ecol. Modell. 335, 87ñ100. doi: 10.1016/j.ecolmodel.2016.
+05.010
+Lamont, T., García-Reyes, M., Bograd, S. J., van der Lingen, C. D., and Sydeman,
+W. J. (2018). Upwelling indices for comparative ecosystem studies: variability in
+the Benguela upwelling system.J. Mar. Syst.188, 3ñ16. doi: 10.1016/J.JMARSYS.
+2017.05.007
+Link, J. S. (2010). Adding rigor to ecological network models by evaluating a set
+of pre-balance diagnostics: a plea for PREBAL. Ecol. Modell. 221, 1580ñ1591.
+doi: 10.1016/j.ecolmodel.2010.03.012
+Lockerbie, E. M., and Shannon, L. (2019). Toward exploring possible future states
+of the southern Benguela. Front. Mar. Sci. 6:380. doi: 10.3389/fmars.2019.
+00380
+Ortega-Cisneros, K., Cochrane, K. L., Fulton, E. A., Gorton, R., and Popova, E.
+(2018a). Evaluating the eﬀects of climate change in the southern Benguela
+upwelling system using the Atlantis modelling framework. Fish. Oceanogr. 27,
+489ñ503. doi: 10.1111/fog.12268
+Ortega-Cisneros, K., Shannon, L., Cochrane, K., Fulton, E. A., and Shin, Y.-
+J. (2018b). Evaluating the speciﬁcity of ecosystem indicators to ﬁshing
+in a changing environment: a model comparison study for the southern
+Benguela ecosystem. Ecol. Indic. 95, 85ñ98. doi: 10.1016/J.ECOLIND.2018.
+07.021
+Parker, D., Coetzee, J. D., Winker, H., and van der Lingen, C. D. (2020). Accounting
+for lineﬁsh dependency in the management of South African small pelagic
+ﬁsheries. Afr. J. Mar. Sci. doi: 10.2989/1814232X.2020.1788160
+Probyn, T. A. (1992). The inorganic nitrogen nutrition of phytoplankton in the
+southern Benguela: new production, phytoplankton size and implications for
+pelagic foodwebs. South Afr. J. Mar. Sci. 12, 411ñ420.
+Rademeyer, R. A., Butterworth, D. S., and Plagányi, ÉE. (2008). Assessment of the
+South African hake resource taking its two-species nature into account. African
+J. Mar. Sci. 30, 263ñ290. doi: 10.2989/AJMS.2008.30.2.7.557
+Rouault, M., Pohl, B., and Penven, P. (2010). Coastal oceanic climate change and
+variability from 1982 to 2009 around South Africa. African J. Mar. Sci. 32,
+237ñ246. doi: 10.2989/1814232X.2010.501563
+Roy, C., van der Lingen, C. D., Coetzee, J. C., and Lutjeharms, J. R. E. (2007). Abrupt
+environmental shift associated with changes in the distribution of Cape anchovy
+Engraulis encrasicolus spawners in the southern Benguela. African J. Mar. Sci.
+29, 309ñ319. doi: 10.2989/AJMS.2007.29.3.1.331
+Roy, C., Weeks, S., Rouault, M., Nelson, G., Barlow, R., and van der Lingen,
+C. (2001). Extreme oceanographic events recorded in the Southern Benguela
+during the 1999-2000 summer season. S. Afr. J. Sci. 97, 465ñ471.
+Ryan, P. G., and Moloney, C. L. (1988). Eﬀect of trawling on bird and seal
+distributions in the southern Benguela region. Mar. Ecol. Prog. Ser. 45, 1ñ11.
+doi: 10.3354/meps045001
+Scott, E., Serpetti, N., Steenbeek, J., and Heymans, J. J. (2016). A Stepwise Fitting
+Procedure for automated ﬁtting of Ecopath with Ecosim models. SoftwareX 5,
+25ñ30. doi: 10.1016/j.softx.2016.02.002
+Serpetti, N., Baudron, A. R., Burrows, M. T., Payne, B. L., Helaouët, P., and
+Fernandes, P. G. (2017). Impact of ocean warming on sustainable ﬁsheries
+management informs the ecosystem approach to ﬁsheries. Sci. Rep. 7:13438.
+doi: 10.1038/s41598-017-13220-7
+Shannon, L. J., Christensen, V., and Walters, C. J. (2004a). Modelling stock
+dynamics in the southern Benguela ecosystem for the period 1978ñ2002.
+African J. Mar. Sci. 26, 179ñ196. doi: 10.2989/18142320409504056
+Shannon, L. J., Field, J. G., and Moloney, C. L. (2004b). Simulating anchovyñ
+sardine regime shifts in the southern Benguela ecosystem. Ecol. Modell. 172,
+269ñ281. doi: 10.1016/j.ecolmodel.2003.09.011
+Shannon, L. J., Coll, M., and Neira, S. (2009). Exploring the dynamics of ecological
+indicators using food web models ﬁtted to time series of abundance and catch
+data. Ecol. Indic. 9, 1078ñ1095. doi: 10.1016/j.ecolind.2008.12.007
+Shannon, L. J., Coll, M., Yemane, D., Jouﬀre, D., Neira, S., and Bertrand, A. (2010).
+Comparing data-based indicators across upwelling and comparable systems
+for communicating ecosystem states and trends. ICES J. Mar. Sci. J. Cons. 67,
+807ñ832. doi: 10.1093/icesjms/fsp270
+Shannon, L. J., Moloney, C. L., Jarre, A., and Field, J. G. (2003). Trophic ﬂows in
+the southern Benguela during the 1980s and 1990s. J. Mar. Syst. 39, 83ñ116.
+doi: 10.1016/S0924-7963(02)00250-6
+Shannon, L. J., Neira, S., and Taylor, M. (2008). Comparing internal and external
+drivers in the southern Benguela and the southern and northern Humboldt
+upwelling ecosystems. African J. Mar. Sci. 30, 63ñ84. doi: 10.2989/AJMS.2008.
+30.1.7.457
+Shannon, V., Hempel, G., Malanotte-Rizzoli, P., Moloney, C., and Woods, J. (2006).
+Benguela: Predicting a Large Marine Ecosystem. Large Marine Ecosystem Series
+14. Amsterdam: Elsevier.
+Sherley, R. B., Crawford, R. J. M., Dyer, B. M., Kemper, J., Makhado, A. B., and
+Masotla, M. (2019). The status and conservation of the cape gannet morus
+capensis. Ostrich 90, 335ñ346. doi: 10.2989/00306525.2019.1684396
+Skowno, A., Poole, C., Raimondo, D., Sink, K., Van Deventer, H., Van Niekerk, L.,
+et al. (2019). National Biodiversity Assessment 2018: The Status of South Africa’s
+Ecosystems and biodiversity. Synthesis Report . Pretoria: South African National
+Biodiversity Institute.
+Smith, A. D. M., Brown, C. J., Bulman, C. M., Fulton, E. A., Johnson, P., and Kaplan,
+I. C. (2011). Impacts of ﬁshing lowñtrophic level species on marine ecosystems.
+Science 333, 1147ñ1150. doi: 10.1126/science.1209395
+Steenbeek, J., Coll, M., Gurney, L., Mélin, F., Hoepﬀner, N., and Buszowski, J.
+(2013). Bridging the gap between ecosystem modeling tools and geographic
+information systems: driving a food web model with external spatialñtemporal
+data. Ecol. Modell. 263, 139ñ151. doi: 10.1016/J.ECOLMODEL.2013.04.027
+Sydeman, W. J., Thompson, S. A., Anker-Nilssen, T., Arimitsu, M., Bennison, A.,
+and Bertrand, S. (2017). Best practices for assessing forage ﬁsh ﬁsheries-seabird
+resource competition. Fish. Res. 194, 209ñ221. doi: 10.1016/j.ﬁshres.2017.05.
+018
+Symonds, M. R. E., and Moussalli, A. (2011). A brief guide to model selection,
+multimodel inference and model averaging in behavioural ecology using
+Akaike’s information criterion. Behav. Ecol. Sociobiol. 65, 13ñ21. doi: 10.1007/
+s00265-010-1037-6
+Frontiers in Marine Science | www.frontiersin.org 19 July 2020 | Volume 7 | Article 540
+fmars-07-00540 July 30, 2020 Time: 18:36 # 20
+Shannon et al. Modeling Southern Benguela Temporal Variability
+Tittensor, D. P., Eddy, T. D., Lotze, H. K., Galbraith, E. D., Cheung, W., Barange,
+M., et al. (2018). A protocol for the intercomparison of marine ﬁshery and
+ecosystem models: ﬁsh-MIP v1.0. Geosci. Model Dev. 11, 1421ñ1442. doi: 10.
+5194/gmd-11-1421-2018
+Travers, M., and Shin, Y.-J. (2010). Spatio-temporal variability in ﬁsh-induced
+predation mortality on plankton. A simulation approach using a coupled
+trophic model of the Benguela ecosystem. Prog. Oceanogr. 84, 118ñ120. doi:
+10.1016/j.pocean.2009.09.014
+Travers-Trolet, M., Shin, Y.-J., Shannon, L. J., Moloney, C. L., and Field, J. G.
+(2014). Combined ﬁshing and climate forcing in the southern Benguela
+upwelling ecosystem: an end-to-end modelling approach reveals dampened
+eﬀects. PLoS One 9:e94286. doi: 10.1371/journal.pone.0094286
+van der Lingen, C., and Miller, T. (2011). ““Trophic dynamics of pelagic nekton
+in the Southern Benguela current ecosystem: calibrating trophic models
+with stable isotope analysis, ” in Interdisciplinary Studies on Environmental
+Chemistry- Marine Environmental Modeling & Analysis , eds J. Omori, X. Guo,
+N. Yoshie, N. Fujii, I. Handoh, A. Isobe, et al. Tokyo, 85ñ94.
+van der Lingen, C. D., Coetzee, J. C., and Hutchings, L. (2002). Temporal
+shifts in the spatial distribution of anchovy spawners and their eggs in
+the Southern Benguela: Implications for recruitment. GLOBEC Rep. 16,
+46ñ48.
+van der Lingen, C. D., Hutchings, L., Lamont, T., and Pitcher, G. C. (2016). Climate
+change, dinoﬂagellate blooms and sardine in the southern Benguela current
+large marine ecosystem. Environ. Dev. 17, 230ñ243. doi: 10.1016/j.envdev.2015.
+09.004
+van der Sleen, P., Rykaczewski, R., Turley, B., Sydeman, W., García-Reyes, M.,
+Bograd, S., et al. (2018). Non-stationary responses in anchovy (Engraulis
+encrasicolus) recruitment to coastal upwelling in the Southern Benguela. Mar.
+Ecol. Prog. Ser. 596, 155ñ164. doi: 10.3354/meps12567
+Verheye, H. M., Lamont, T., Huggett, J. A., Kreiner, A., and Hampton, I.
+(2016). Plankton productivity of the Benguela current large marine ecosystem
+(BCLME). Environ. Dev. 17, 75ñ92. doi: 10.1016/j.envdev.2015.07.011
+Verheye, H. M., and Richardson, A. J. (1998). Long-term increase in crustacean
+zooplankton abundance in the southern Benguela upwelling region (1951ñ
+1996): bottom-up or top-down control? ICES J. Mar. Sci. 55, 803ñ807.
+Verheye, H. M., Richardson, A. J., Hutchings, L., Marska, G., and Gianakouras, D.
+(1998). Long-term trends in the abundance and community structure of coastal
+zooplankton in the southern Benguela system, 1951ñ1996.South African J. Mar.
+Sci. 19, 317ñ332. doi: 10.2989/025776198784126728
+Walters, C., Christensen, V., and Pauly, D. (1997). Structuring dynamic models
+of exploited ecosystems from trophic mass-balance assessments. Rev. Fish Biol.
+Fish. 7, 139ñ172. doi: 10.1023/A:1018479526149
+Walters, C., Pauly, D., and Christensen, V. (1999). Ecospace: prediction of
+mesoscale spatial patterns in trophic relationships of exploited ecosystems, with
+emphasis on the impacts of marine protected areas. Ecosystems 2, 539ñ554.
+doi: 10.1007/s100219900101
+Walters, C., Pauly, D., Christensen, V., and Kitchell, J. F. (2000). Representing
+density dependent consequences of life history strategies in aquatic ecosystems:
+EcoSim II. Ecosystems 3, 70ñ83. doi: 10.1007/s100210000011
+Watermeyer, K. E., Hutchings, L., Jarre, A., and Shannon, L. J. (2016). Patterns of
+distribution and spatial indicators of ecosystem change based on key species
+in the Southern Benguela. PLoS One 11:e0158734. doi: 10.1371/journal.pone.
+0158734
+Watermeyer, K. E., Jarre, A., Shannon, L. J., Mulumba, P., and Botha, J. (2018). A
+frame-based modelling approach to understanding changes in the distribution
+and abundance of sardine and anchovy in the southern Benguela. Ecol. Modell.
+371, 1ñ17. doi: 10.1016/j.ecolmodel.2017.12.017
+Watermeyer, K. E., Shannon, L. J., and Griﬃths, C. L. (2008). Changes in the
+trophic structure of the southern Benguela before and after the onset of
+industrial ﬁshing. African J. Mar. Sci. 30, 351ñ382. doi: 10.2989/AJMS.2008.30.
+2.11.561
+Watkins, B. P., Petersen, S. L., and Ryan, P. G. (2008). Interactions between seabirds
+and deep-water hake trawl gear: an assessment of impacts in South African
+waters. Anim. Conserv. 11, 247ñ254. doi: 10.1111/j.1469-1795.2008.
+00192.x
+Wickens, P. A., Japp, D. W., Shelton, P. A., Kriel, F., Goosen, P. C., and
+Rose, B. (1992). Seals and ﬁsheries in South Africa — competition and
+conﬂict. South African J. Mar. Sci. 12, 773ñ789. doi: 10.2989/0257761920950
+4741
+Winker, H., Kerwath, S. E., and Attwood, C. G. (2013). Comparison of two
+approaches to standardize catch-per-unit-eﬀort for targeting behaviour in a
+multispecies hand-line ﬁshery. Fish. Res. 139, 118ñ131. doi: 10.1016/j.ﬁshres.
+2012.10.014
+Winker, H., Kerwath, S. E., and Attwood, C. G. (2014). Proof of concept for a
+novel procedure to standardize multispecies catch and eﬀort data.Fish. Res. 155,
+149ñ159. doi: 10.1016/j.ﬁshres.2014.02.016
+Conﬂict of Interest: The authors declare that the research was conducted in the
+absence of any commercial or ﬁnancial relationships that could be construed as a
+potential conﬂict of interest.
+Copyright © 2020 Shannon, Ortega-Cisneros, Lamont, Winker, Crawford, Jarre and
+Coll. This is an open-access article distributed under the terms of the Creative
+Commons Attribution License (CC BY). The use, distribution or reproduction in
+other forums is permitted, provided the original author(s) and the copyright owner(s)
+are credited and that the original publication in this journal is cited, in accordance
+with accepted academic practice. No use, distribution or reproduction is permitted
+which does not comply with these terms.
+Frontiers in Marine Science | www.frontiersin.org 20 July 2020 | Volume 7 | Article 540

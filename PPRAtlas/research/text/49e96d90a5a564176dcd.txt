@@ -1,0 +1,1002 @@
+	
+	
+	
+	
+ECOTRACER 
+A user’s guide to tracking contaminants  
+using the Ecopath with Ecosim (EwE) approach 
+	
+	
+Shawn Booth, Jeroen Steenbeek (EII) 
+Sabine Charmasson (IRSN) 
+Date : 1 August 2020 
+Document version 1.0 
+EwE software version 6.6.3 
+ 
+
+ 
+ 
+  
+ 
+ 
+CONTENTS	
+ 
+Abstract ................................................................................................................................................................... 1 
+Introduction .......................................................................................................................................................... 2 
+Ecotracer dynamics ............................................................................................................................................ 3 
+Environment .................................................................................................................................................... 3 
+Biota ..................................................................................................................................................................... 4 
+Ecotracer input interface and required data .......................................................................................... 5 
+Navigator ........................................................................................................................................................... 5 
+Environment .................................................................................................................................................... 6 
+Biota ..................................................................................................................................................................... 7 
+Ecotracer output interface and data management ............................................................................... 8 
+Conclusion ........................................................................................................................................................... 10 
+Acknowledgements ......................................................................................................................................... 10 
+References ........................................................................................................................................................... 11 
+Annex I: Simulation scenarios (tutorials) ............................................................................................. 18 
+Annex II: Driving environmental contaminants through the spatial temporal data 
+framework .......................................................................................................................................................... 25 
+ 
+1 
+ 
+ABSTRACT 
+	
+Ecotracer is a useful tool within the Ecopath and Ecosim (EwE)  modelling approach to track 
+radioisotopes,  contaminants,  persistent  pollutants,  or  stable  isotopes  through  a  food  web 
+m o d e l .   A f t e r  a c h i e v i n g  a  m a s s ‐ b a l a n c e d  E c o p a t h  m o d e l ,  E c o t r a c er  can  be  used  with  the 
+E c o s i m  ( t i m e  d y n a m i c )  o r  E c o s p a c e  ( s p a t i a l ‐ t e m p o r a l  d y n a m i c )  t o t r a c k  t h e  f l o w  o f  t h e  
+pollutant through the modelled ecosystem. 
+ 
+EwE  uses  a  mass‐balance  approach,  and  the  flows  of  a  contaminant  due  to  predator/prey 
+interactions are tracked within the underlying Ecopath model. However, Ecotracer also needs 
+parameters for groups based on a kinetic toxicology approach to  estimate initial conditions. 
+However, similar to Ecopath, Ecotracer can become dynamic through either the use of Ecosim 
+or Ecospace to follow the changes of a contaminant that has dif ferent temporal inputs or to 
+variations in temporal spatial concentrations in the water column. 
+ 
+The purpose of this manual is to give a full description of the Ecotracer approach including the 
+dynamic equations that describe the basis for the input paramet ers, and to familiarize users 
+with the various interfaces for the inputs and outputs. Simulat ion scenarios are also given to 
+allow  users  to  become  more  familiar  with  Ecotracer,  and  instructions  are  given  on  how  to 
+navigate through the different interfaces used. 
+ 	
+2 
+ 
+INTRODUCTION	
+ 
+Ecotracer is a sub‐routine in the Ecopath with Ecosim (EwE) mod eling framework (Polovina 
+1984;  Christensen  &  Walters  2004;  Walters  and  Christensen  2018) t h a t  a l l o w s  t h e  u s e r  t o  
+follow a contaminant or stable isotope in modelled functional groups and the environment in 
+a balanced Ecopath model. Many EwE models have been made that f ocus on fishery‐related 
+questions,  but  here  the  focus  is o n  h o w  t h e  E c o t r a c e r  r o u t i n e  is  used  within  EwE  to  trace 
+contaminants  such  as  radionuclides  through  an  aquatic  ecosystem.  EwE  consists  of  three 
+routines: Ecopath which is a mass balance interpretation of an  ecosystem where, in essence, 
+the production of a group in the model is equal to its consumption; Ecosim allows the user to 
+b u i l d  i n  t i m e  d y n a m i c s  t o  t h e  E c o p a t h  m o d e l  f o r  e v e n t s  s u c h  a s  changes  in  contaminant 
+loading to an ecosystem; and Ecospace which allows for the spat ial‐temporal resolution for 
+such  events  as  the  effects  of  change  in  loading  on  marine  organ isms  that  result  from 
+organisms inhabiting different spatial areas or habitat types that have different environmental 
+concentrations through time. 
+ 
+Typical  applications  of  Ecotracer  have  been  for  contaminants  suc h  a s  m e r c u r y  ( B o o t h  a n d  
+Zeller 2005), 14C (Sandberg 2007; Tierney et al. 2017), and PCBs (Booth et al.  2016) that can 
+have detrimental impacts on human and environmental health. The use of Ecotracer can help 
+to estimate the amount of contaminant or concentration in a group/species of interest, spatial 
+differences in concentration within the same functional groups if Ecospace is used, the fluxes 
+between  groups  due  to  trophic  interactions,  and  the  importance  o f  d i e t  v e r s u s  d i r e c t  
+environmental uptake. It can also help to estimate functional g roups’ concentrations when 
+such data are lacking (i.e., have a starting value of zero) and  make forward projections based 
+on changing environmental concentrations. Concentration levels are an important aspect for 
+environmental and human health as, in conjunction with consumpt ion rates, they determine 
+exposure levels that may have detrimental effects. Regulatory l imits on the concentration in 
+aquatic  products  destined  for  human  consumption  may  also  affect  t r a d e  a n d  f i s h e r i e s  
+opportunities. 
+ 
+Ecotracer  requires  a  balanced  Ecopath  model  to  follow  the  contaminant,  radioisotopes  or 
+stable isotopes in the model groups, and environment (e.g., wat er concentration). Ecotracer 
+when used with Ecosim can provide estimates to important ecotox icological questions such 
+as: 1) what could be the expected group concentrations if the e nvironmental concentration 
+did  not  change?;  2)  what  could  be  the  expected  results  in  group   concentrations  if  the 
+environmental  concentration  changed  through  time?;  and  3)  is  th ere  an  effect  on 
+concentration levels as a result of  changing underlying Ecopath  parameters such as fishing 
+mortality?  The  first  question  is  useful  if  many  functional  grou ps  in  the  model  lack 
+concentration  data.  The  second  question  can  be  important  to  est imate  resulting 
+concentrations  in  biota  if  the  input  into  the  environment  changes.  The  third  can  help  to 
+understand  contaminant  flows  as  a  result  of  changes  in  the  dynamics  of  the  underlying 
+structure of an ecosystem. 
+ 
+Ecotracer when used with Ecospace can help to answer whether th ere are differences in the 
+same species that occur over a large geographic area, and wheth er different environmental 
+concentrations in different areas have an affect on the resulting concentrations in organisms. 
+In this case, a two‐dimensional representation of the model are a is made which has a user 
+3 
+ 
+defined spatial resolution (i.e., grid cells). Spatial environmental concentrations can be driven 
+by effluents being released as a point source, or from atmospheric deposits that change over 
+space and time. Effluents released from a point source would be affected by currents resulting 
+in different spatial and temporal distributions, and atmospheric releases could be affected by 
+different levels of releases due to industrial activity through time or accident scenarios as well 
+as  currents.  In  the  case  of  large‐scale  accidents,  such  as  the Dai‐ichi  nuclear  accident  at 
+Fukushima, spatial differences can result from both point sourc es and differing atmospheric 
+deposits both of which occurred through time. 
+ECOTRACER	DYNAMICS	
+ 
+Ecotracer simulates the contaminant fluxes and resulting amounts and concentrations using 
+a modified transfer contaminant model (e;g., Landrum et al. 1992; Thomann 1981), and 
+applies it to both the environment and biota. Resulting changes at any time step are 
+dependent upon the gains and losses in functional groups and are described in Walters and 
+Christensen (2018) as, 
+ 
+ 𝑑𝐴௜ሺ𝑡ሻ
+𝑑𝑡 ൌ  𝛼௜െ𝛽 ௜𝐴௜ሺ𝑡ሻ  Eq. 1
+ 
+where αi, represents the gains (Bq∙year ‐1) in each functional group  i, β i represents the rate 
+losses  (year‐1)  to  each  functional  group,  and  Aio  represents  the  amount  (e.g.,  Bq)  in  each 
+functional group i. This general formulation allows different measurement units of substances 
+(e.g., Bq or µg) to be tracked in the modelled environment, and  the resulting concentrations 
+(e.g., Bq∙t‐1) are computed separately using the biomass output in Ecopath and Ecosim. 
+ 
+The environmental compartment concentrations are also calculated by tracking the gains and 
+losses in the cells representing the environment, 
+ 
+ 𝑑𝐶
+௢ሺ𝑡ሻ
+𝑑𝑡 ൌ  𝛼௢െ 𝛽௢𝐶௢ሺ𝑡ሻ  Eq. 2
+ 
+where Co represents the environmental concentration (e.g., Bq∙km‐2), αo, represents the gains 
+(Bq∙year‐1) in each environmental cell o, and βo represents the rate losses (year‐1) in each cell. 
+	
+Environment	
+ 
+Gains in the environment originate from the release of contaminants into the environment as 
+a base inflow rate, and from the excretion from organisms. Loss es originate from the direct 
+uptake from the environment by organisms, physical decay rates, and base volume exchange. 
+In Ecospace, the environment can be represented by multiple grid cells and thus the gains and 
+losses can be considered to be for each environmental compartment o, such that, 
+ 
+ 𝛼௢ൌ𝐵 𝐼௢൅෍𝑚 ௜𝐴௜
+௡
+௜
+  Eq. 3
+ 
+4 
+ 
+where  BIo i s  t h e  b a s e  i n f l o w  r a t e  ( B q ∙ k m‐2∙year‐1)  to  a  grid  cell,  and  miAi a r e  t h e  e x c r e t o r y  
+products for each functional group within each grid cell. 
+ 
+Losses from the environment are d ue to biological, physical dec ay processes, environmental 
+volume changes, and direct uptake by organisms, such that, 
+ 
+ 𝛽
+௢𝐶௢ൌሺ 𝑑௜൅ 𝑉௜ሻ𝐶௢൅෍𝑢 ௜𝐵௜𝐶௢
+௡
+௜
+  Eq. 4
+where di represents the physical decay rate (year‐1), Vi represents the base volume exchange 
+loss (year‐1), and the second term (u iBiCo) represents the total uptake rate by all functional 
+groups (see below). Temporal changes to the environmental concentration (Co) can be made 
+by applying a forcing function to the base inflow rate, through  a contaminant concentration 
+driver file (Table 1), or by current/advection fields. 
+ 
+Biota	
+ 
+In biota, intake amounts (e.g., Bq∙year‐1) result from direct uptake rates (i.e., respiration) the 
+fraction retained from trophic interactions (i.e., diet), and immigration. i.e., 
+ 
+ α௜ൌ𝑢௜𝐵௜𝐶௢൅𝐴𝐸௜ ෍𝑄 ௝௜∗ 𝐴௝
+𝐵௝
+൅𝑐 ௜𝐼௜
+௝ୀ௣௥௘௬
+  Eq. 5
+ 
+where, Co represents the environmental concentration (Bq∙km‐2), Bi is the biomass (t) of group 
+i,  ui  represent  the  intake/biomass/environmental  concentration/year (km2∙t‐1∙year‐1);  AEi i s  
+the assimilation efficiency for each group, Q ji is the consumption rate (t∙year ‐1) of group  j by 
+group i, Aj is the amount of substance in a group (e.g., Bq), Bj is the prey biomass of each prey 
+item j (Bq∙t‐1); ci is the group biomass concentration (Bq∙t ‐1) and I is the immigrating biomass 
+(t∙year‐1). 
+ 
+The losses from a group (β
+iCi) are attributed to predation, fisheries, other mortality, excretion 
+and decay, i.e., 
+  
+ 𝛽
+௜𝐶௜ ൌሺ ෍ ൬𝑄௜௝
+𝐵௜
+൰൅𝐹௜൅𝑀 𝑂௜൅𝐸௜൅𝑚௜൅𝑑௜ሻ𝐶௜
+௝ୀ௣௥௘ௗ
+  Eq. 6
+ 
+where Qij is the rate of consumption (t∙year‐1) of group i due to predation by j, Fi is the fishing 
+mortality rate (year‐1), MOi (year‐1) is other mortality rate (i.e., non‐predation mortality), E i is 
+the emigrating biomass rate (year‐1), mi (year‐1) is the excretion and/or metabolic rate, and di 
+(year‐1) is the physical decay rate. These rates are multiplied by Ci the amount of contaminant 
+(Bq) in each group i. Excretory products that are released from tissues to the environment are 
+added to the environmental concentration. 
+ 
+The solution for finding the e quilibrium amount of contaminant  in a primary producer with 
+the resulting concentration only being due to direct uptake, lo sses to due predation, other 
+mortality, metabolism, and decay is given as, 
+ 
+5 
+ 
+ 𝐶௜,௘௤ൌ 𝜇௜𝐵௜𝐶௢
+∑ 𝑄௜௝
+𝐵௜
+൅𝑀 𝑂௜൅𝑚௜൅𝑑௜௝ୀ௣௥௘ௗ
+  Eq. 7
+ 
+whereas for other groups an additional term must be accounted f or due to the group’s prey 
+items; in these cases the equilibrium solution can be defined as, 
+ 
+ 𝐶௜,௘௤ൌ
+𝜇௜𝐵௜𝐶௢ ൅ 𝐴𝐸௜ 
+𝑄௝௜
+𝐵௜
+∑ 𝑄௜௝
+𝐵௜
+൅𝑀 𝑂௜൅𝑚௜൅𝑑௜௝ୀ௣௥௘ௗ
+  Eq. 8
+ 
+The Ecotracer approach is dynamic and extends the basic concent ration ratio (CR) approach, 
+but the CR approach is contained within it as, 
+ 
+ 𝐶𝑅
+௜ൌ
+ቀ𝐴௜
+𝐵௜
+ቁ
+𝐶௢
+ൌ
+𝑢௜൅ 𝐴𝐸௜ 
+𝑄௝௜
+𝐵௜
+𝐶𝑅௝
+𝑍௜൅ 𝑚௜
+  Eq. 9
+ 
+The amount of contaminant in the detritus compartment originate s from the unassimilated 
+consumption  resulting  from  predation,  as  well  as  non‐predation  mortality.  Thus,  groups 
+feeding  on  detritus  will  have  exposure  levels  associated  with  the  contributions  from  the 
+fraction of unassimilated consumption from all groups. Initial concentrations in the biota and 
+environment are also input parameters that can be used if data is available. For groups lacking 
+contaminant  data  from  field  studies  or  literature  data,  the  mod el  is  able  to  estimate 
+concentration or burdens in the groups, leading to the ability  to estimate risk through time 
+and make comparisons to regulatory limits. 
+ECOTRACER	INPUT	INTERFACE	AND	REQUIRED	DATA	
+ 
+The Ecotracer interface involves a number of input parameters ( e.g., BI) and some that are 
+calculated internally by the program (e.g. gains from diet). Ecotracer’s interface can be loaded 
+from the task bar or from the side‐menu. The interface is broke n into three parts: the side 
+panel (navigator) to choose Ecotracer or one of the other compo nents of EwE; the interface 
+for input for the environment; and input data for the functional groups based on the Ecopath 
+model (Figure 1). The fields for the environment and the functi onal groups, their description 
+and units are described below. 
+ 
+Navigator	
+ 
+T h e  s i d e  p a n e l  a l l o w s  e a s y  a c c e s s  t o  t h e  d i f f e r e n t  r o u t i n e s  w i thin  the  EwE  modelling 
+framework. After creating a balanced Ecopath model, the Ecotrac er routine can be selected 
+in this area. Ecotracer parameters must be selected and a name can be given to the scenario. 
+Also, it is necessary to select either ‘enable contaminant trac ing for Ecosim’ if the model is 
+only being run forward in time or ‘enable contaminant tracing f or Ecospace’ if the model is 
+spatialized  using  the  Ecospace.  The  selection  of  which  is  dependent  upon  the  underlying 
+model and whether there are time or spatial‐temporal dynamics that are of interest. 
+ 
+6 
+ 
+Troubleshooting:  if  you  do  not  get  a  response  in  Ecotracer  and you  have  entered  a  direct 
+absorption rate for primary producers; ensure that Ecosim or Ecospace have the contaminant 
+tracing box checked. 
+ 
+Environment	
+ 
+The simplest case for the environment is if the model area has a near uniform concentration. 
+I f  t h i s  i s  t h e  c a s e  t h e n  o n e  c o n c e n t r a t i o n  c a n  b e  u s e d  f o r  t h e  initial  concentration  of  the 
+environment.  If  there  are  differences  in  time,  but  the  spatial  area  is  treated  as  being 
+homogenous in concentration, then the base inflow rate can be c hanged using a csv file that 
+represents either absolute or relative changes to the initial e nvironmental concentration. If 
+there are spatial‐temporal variations in environmental contaminants in the model area, then 
+a  professional  license  for  EwE  is  needed.  Through  the  Spatial  Temporal  Data  Framework 
+(STDF; Steenbeek et al., 2013), monthly maps of contaminant concentrations can be inserted 
+into Ecotracer, enabling modellers to incorporate historical an d/or projected environmental 
+contaminants  into  Ecotracer.  Brief  instructions  how  to  use  the  STDF  with  Ecotracer  are 
+provided as an annex at the end of this manual. 
+ 
+Initial concentration: concentration  in  the  water.  Currently,  there  is  no  explicit  dep th 
+representation in Ecospace and to be consistent with the biomass units (i.e., t∙km‐2) in Ecopath 
+the units are expressed per km 2 with the units commonly being mass for most contaminants 
+(e.g.,  g∙km‐2)  or  becquerels  for  radioisotopes  (i.e.,  Bq∙km‐2).  Therefore,  units  expressed  in 
+terms of unit per volume (e.g., μg∙L‐1) must be converted to the spatial resolution used. 
+ 
+Base inflow rate: the  amount  entering  the  environment  each  year  (e.g.,  g∙km ‐2∙year‐1). 
+Obviously  a  base  inflow  rate  for  a  one  time  release  of,  for  instance,  a  hazardous  chemical 
+would not need a base inflow rate. However, to maintain background levels under equilibrium 
+conditions a base inflow rate is needed to account for uptake a nd/or physical decay rates of 
+the contaminant.  
+ 
+Base volume exchange loss: the rate at which a contaminant is lost to the environment (year
+‐
+1). 
+ 
+F i l e  f o r  B a s e  I n f l o w  R a t e :  this  is  intended  to  be  used  when  the  environment  receives  a 
+uniform increase. This is a .csv file that is arranged to implement changes to the environment 
+on a relative or absolute scale through time (Table 1). 
+ 
+File for Point source Release: the  point  source  release  is  another  way  of  implementing 
+changes  to  the  environment  on  a  spatial‐temporal  scale  in  conjunction  with  Ecospace.  It 
+requires a series of ASCII files to implement the changes in a spatial cell through time and is a 
+feature of the EwE pro license. 
+ 
+Maximum number of time steps: Ecotracer  numerically  solves  the  equations  at  a  higher 
+resolution (i.e., more time steps) than Ecopath, Ecosim and Ecospace, which all have monthly 
+time steps in order to reach a stable solution using an explicit integration method. The number 
+o f  t i m e  s t e p s  i s  i m p o r t a n t  f o r  s o m e  c o n t a m i n a n t s  t h a t  h a v e  r e l atively  high  physical  decay 
+rates. Therefore, the time steps and the number of calculations  are increased to accurately 
+7 
+ 
+trace the contaminant within Ecotracer, but Ecotracer integrates itself with the monthly time 
+steps of Ecopath, Ecosim and Ecospace.   
+ 
+Biota	
+ 
+F o r  e a s e  o f  c o m p u t a t i o n  w i t h i n  t h e  E c o t r a c e r  p r o g r a m ,  E c o t r a c e r  uses  the  amount  of 
+substance (e.g., Bq or g). However, for output (see below) the  user can choose between the 
+amount  in  a  group  (e.g.,  Bq)  or  biomass  concentration  (e.g.,  g∙t‐1).  When  validating  model 
+o u t p u t  t o  f i e l d  s a m p l e  d a t a ,  i t  i s  l i k e l y  t h a t  t h e  u s e r  w o u l d  be  comparing  the  biomass 
+concentrations. All functional groups do not need to have start ing concentrations, but they 
+should have estimates of direct uptake rates, otherwise the resulting biomass concentrations 
+will  only  reflect  dietary  uptakes  based  on  the  diet  compositions  entered  for  the  Ecopath 
+model.  While  this  may  not  be  important  for  top  piscivores  due  to  the  fact  that  their  diets 
+mostly determine their contaminant load, it may affect the lowe r trophic levels of the food 
+web where direct uptake rates may be more important than diet, and are the only entry way 
+for primary producers. Dietary uptake is not entered as part of  the Ecotracer routine as it is 
+determined from the diet matrix, the consumption rate, the unas similated amount, and the 
+proportion of contaminant excreted. 
+ 
+Initial conc: t h e  a m o u n t  ( e . g . ,  B q )  i n  a  g r o u p  a t  t h e  s t a r t  o f  t h e  m o d e l  p e r iod  (i.e.,  t  =  0). 
+Groups with no data from sample surveys can have a starting amount of zero.  
+ 
+Concentration in immigrating biomass: the  concentration  of  a  contaminant  (Bq∙t‐1)  in  a 
+functional group that is entering the model area under consideration.  
+ 
+Direct absorption rate: represents  the  amount  of  a  contaminant  that  a  functional  groups 
+takes  up  from  the  environment  (km 2∙t‐1∙year‐1) .  I t  r e p r e s e n t s  t h e  p r o p o r t i o n a l i t y  c o ‐
+efficient between  the  direct  uptake  rates  (e.g.,  Bq∙year ‐1),  and  the  biomass  (t)  and 
+environmental concentration (e.g., Bq∙km ‐2). Generally, the primary producers must have a 
+direct absorption rate, and it is useful to determine the direct absorption rate for other groups 
+otherwise the resulting concentrations will only be due to trop hic interactions (i.e., dietary 
+items). Also, direct absorption rates are important for simulat ing changes in environmental 
+concentrations through time. 
+ 
+Metabolism rate: the rate (year
+‐1) of losses due to the transformation of the contaminant of 
+concern into another form (e.g., methylmercury to ionic mercury ). These represent losses to 
+the system. 
+ 
+Decay rate: the instantaneous physical decay rate constant (i.e., λ; year ‐1) of radioisotopes 
+and represents losses to the system. 
+ 
+Proportion of contaminant excreted: this is the proportion (0‐1) of the contaminant that is 
+excreted back into the environment and stays in the system. It is equivalent to 1 – assimilation 
+efficiency. 
+ 
+Excretion rates: excretion rates (year
+‐1) are also described in Walters and Christensen (2018), 
+but at this time are not represented in the user interface. How ever, if they are small relative 
+8 
+ 
+to the surrounding environment they may not be of importance. H owever, in comparison to 
+t h e  m e t a b o l i s m  r a t e  t h e r e  i s  a n  i m p o r t a n t  d i f f e r e n c e .  E x c r e t o r y  products  stay  within  the 
+system  (i.e.,  they  are  available  to  be  taken  up  again  by  biota),  whereas  the  metabolism  of 
+contaminants are lost to the system because they are changed into something else. 
+ECOTRACER	OUTPUT	INTERFACE	AND	DATA	MANAGEMENT	
+ 
+The interface for the output of the data involves the navigator, a side panel and a graph area 
+(Figure 4). Ecotracer output is selected from the navigator to  display the side panel and the 
+graph area. Data on the side panel involves choosing the data t hat is to be displayed on the 
+graph area, the type of contaminant data displayed, the data displayed on the graphing area, 
+the specific routine run button, and whether or not the data is automatically saved. Once data 
+has been entered into the input interface, the simulation is initiated from the output interface 
+either through the ‘Run Ecosim’ or ‘Run Ecospace’ buttons on th e side panel to the graphing 
+interface. 
+ 
+The  graphical  interface  displays  how  the  contaminant  in  the  env ironment  and  in  each 
+functional  group  changes  through  time.  There  is  a  choice  between  having  the  functional 
+groups  trace  the  contaminant  by  the  amount  (e.g.,  Bq)  in  the  group  or  by  the  biomass 
+concentration  (e.g.  Bq∙t‐1) .  T h e  e n v i r o n m e n t a l  c o n c e n t r a t i o n  i s  e s s e n t i a l l y  a n  a r e a  d e n s ity 
+(e.g.,  Bq∙km ‐2).  Under  an  assumption  of  environmental  equilibrium,  the  enviro nmental 
+concentration on the graph should show a flat line. Under no changes to the functional groups 
+underlying parameters (e.g., fishing mortality), the concentrat ion in each group (e.g., Bq∙t ‐1) 
+should also be represented by a flat line. 
+ 
+For  radioisotopes  under  assumed  equilibrium  conditions,  the  amount  lost  by  radioactive 
+decay  would  have  to  be  added  in  as  a  base  inflow  rate  to  maintain  equilibrium.  Although 
+equilibrium conditions may not be realistic, it is definitely a  good way to see if the model is 
+behaving properly, and may be a good assumption if the environmental concentrations do not 
+change much due to a radioisotope having a long half‐life, or w hen long‐lived animals (e.g., 
+whales)  are  not  represented  in  the  model  as  they  would  not  be  a ffected  by  historical 
+environmental  concentrations.  The  inverse  of  the  P/B  ratio  can  be  an  indication  of  the 
+longevity of the groups in the model. 
+ 
+Output files in Ecosim can be saved to a directory by selecting auto‐save results. In Ecospace, 
+it is necessary to open Ecospace parameters on the navigator pa nel and then select the files 
+under  the  auto‐save  dialogue  box.  In  most  cases,  the  biomass  maps  and  the  contaminant 
+concentration  map  need  to  be  selected.  This  is  because  the  concentration  map  is  for  the 
+amount and therefore it is necessary to compute the concentration (e.g., Bq∙t
+‐1) from the two 
+sets of data. The path directory for output files can be found  in the status window. However, 
+usually for the first run of a scenario it is useful to not sav e the data and examine the output 
+by hovering over the concentration data on the graph; point‐val ues can be shown by right 
+clicking on a line on the graph and selecting ‘show point values’. After adjustments have been 
+made to basic input parameters (Ecopath or Ecotracer) if required, and the point values are in 
+the desired range of expected output values, it is then worthwhile to save the output files. 
+ 
+Currently  post‐processing  of  the  output  files  must  be  done  in  another  program  such  as 
+Microsoft Excel or R. Models that only use Ecosim for time dynamics will have a single output 
+9 
+ 
+file containing a single column of output for each functional g roup and 12 rows of data for 
+each year with the cells containing the amount in the group. Models using Ecospace have csv 
+output  files  for  each  species  that  cover  one  time  step  for  one species  with  the  columns 
+representing the longitudinal grid of the map and the rows the  latitudinal grid working from 
+the top left cell to the bottom right cell. 
+ 
+C h a n g e s  i n  c o n c e n t r a t i o n  f o r  t h e  e n v i r o n m e n t  a n d  f u n c t i o n a l  g r oups  other  than  those 
+resulting from changes in environmental concentrations result f rom the kinetic interactions 
+as described earlier. Functional groups with no starting concen trations will have increasing 
+concentrations, and groups with starting concentrations may have changes through time as a 
+result of their losses and gains at each time step. However, di fferences between a functional 
+group’s model output and those with a starting amount based on  field collected samples can 
+also  be  affected  by  biases  in  sampling  (i.e.,  sampling  not  bein g  representative  of  the 
+population concerned) or by incorrect Ecopath or Ecotracer para meters. The biomass of the 
+group may also change through time most commonly due to trophic  interactions or changes 
+in  fishing  mortalities  if  these  are  represented  in  the  model.  Thus,  the  resulting  biomass 
+concentrations can be a function of changes in the amount of co ntaminant in the functional 
+groups and changes in the underlying Ecopath parameters through time. 
+ 	
+10 
+ 
+CONCLUSION	
+ 
+Ecotracer is a useful computer simulation tool to gain knowledge on the transfer of pollutants 
+in an ecosystem. We attempted to give a practical guide to peop le who are interested in the 
+use of the EwE ecosystem modelling framework a better understan ding on the technical use 
+of  the  routine,  and  the  interfaces  used.  We  hope  this  inspires  people  from  various 
+backgrounds to engage and gain a better understanding of how co ntaminants behave in an 
+ecosystem. 
+ACKNOWLEDGEMENTS	
+ 
+This work has been funded by the Institut de Radioprotection et de Sûreté Nucléaire (IRSN) 
+and the French program Investissement d’Avenir run by the National Research Agency 
+(AMORAD project, grant ANR‐11‐RSNR‐0002, 2013‐2022). 
+ 
+ 	
+11 
+ 
+REFERENCES	
+ 
+Booth, S., Zeller, D., 2005. Mer cury, food webs, and marine mam mals: implications of diet an d climate change for human 
+health. Environ. Health Perspect. 113, 521‐526. https://doi.org/10.1289/ehp.7603. 
+ 
+Booth, S., Cheung, W., Coombs‐Wallace, A., Lam, V., Zeller, D., Christensen, V., Pauly, D., 2016, Pollutants in the Seas Around 
+Us, in: Pauly, D., Zeller, D. (Eds.), Global Atlas of Marine Fi sheries: a Critical Appraisal of  Catches and Ecosystem Impacts,  
+Island Press, pp. 152–170. 
+ 
+Christensen, V., Walters, C.J., 2004. Ecopath with Ecosim: meth ods, capabilities and limitations. Ecol. Model. 172, 109‐139. 
+https://doi.org/10.1016/j.ecolmodel.2003.09.003. 
+ 
+Landrum,  P.F.,  Lee  II,  H.,  Lydy,  M.J.,  1992.  Toxicokinetics  in  aquatic  systems:  model  comparisons  and  use  in  hazard 
+assessment. Environ. Toxicol. Chem. 11, 1709‐1725. https://doi.org/10.1002/etc.5620111205.
+ 
+ 
+Polovina, J.J., 1984. Model of a coral reef ecosystem: I. The ECOPATH model and its application to French Frigate Shoals. Coral 
+Reefs, 3, 1‐11. 
+ 
+Sandberg, J., Kumblad, L., Kautsky, U., 2007. Can ECOPATH with ECOSIM enhance models of radionuclide flows in food webs?‐
+a n  e x a m p l e  f o r  
+14C  i n  a  c o a s t a l  f o o d  w e b  i n  t h e  B a l t i c  S e a .  J .  E n v i r o n .  R a d i o a c t.  92,  96‐111. 
+https://doi.org/10.1016/j.jenvrad.2006.09.010. 
+ 
+Steenbeek, J., Coll, M., Gurney, L., Melin, F., Hoepffner, N.,m  Buszowski, J., Christensen, V. 2013. Bridging the gap between 
+ecosystem modeling tools and geographic information systems: dr iving a food web model with external spatial‐temporal 
+data. Ecol Model. 263: 139‐151. https://doi.org/10.1016/j.ecolmodel.2013.04.027 
+ 
+Thomann, R.V., 1981. Equilibrium model of fate of microcontaminants in diverse aquatic food chains. Can. J. Fish. Aquat. Sci. 
+38, 280‐296. 
+ 
+Tierney, K., Muir, G.K., Cook, G.T., MacKinnon, G., Howe, J.A.,  Heymans, J.H., Hughes, D.J., Xu, S., 2017. Ecosystem uptake 
+and  transfer  of  Sellafiel d‐derived  radiocarbon  (
+14C )  p a r t  2 :  T h e  W e s t  o f  S c o t l a n d .  M a r .  P o l l u t .  B u l l .  115,  57‐66. 
+https://doi.org/10.1016/j.marpolbul.2016.11.014. 
+ 
+Walters,  W.J.,  Christensen,  V., 2018.  Ecotracer:  analyzing  concentration  of  contaminants  and  radioisotopes  in  an  aquatic 
+spatial‐dynamic food web model. J. Environ. Radioact. 181, 118‐127. https://doi.org/10.1016/j.jenvrad.2017.11.008. 
+12 
+ 
+ 
+ 
+ 
+Figure	1. Screen capture of the Ecotracer routine showing the access to the user interface on the side panel (green), the areas for environmental 
+data (blue) and functional group (red) inputs. The input data user interface can also be accessed through the toolbar at the top of the interface. 
+  
+
+13 
+ 
+ 
+ 
+Figure	2. Close‐up view of the interface for environmental parameters for Ecotracer. Environmental inflow forcing function (highlighted in green) 
+requires a csv file (see Table 1), whereas the contaminant concentration driver file (highlighted in red) uses a series of ASCII files for each grid cell 
+used in Ecospace, and requires the EwE pro license for the spatial‐temporal framework. 
+ 
+ 
+ 
+ 
+ 
+Figure	3. Close‐up view of the interface for functional group parameters for Ecotracer. The direct absorption rate (ui; highlighted in red) indicates 
+that primary producers are generally the first compartment that are involved in the transfer of a contaminant through the food web model. The 
+amount taken up by predator/prey interactions are defined by pa rameters in the underlying Ecopa th model and by the diet matrix , and are 
+accounted for internally by EwE. Note that the Initial conc. is the total amount in the functional group (see text for details). 
+ 
+
+14 
+ 
+ 
+ 
+Figure	4. Full view of the Ecotracer output interface composed of the nav igator, side panel and graphing area. The graph area, in this e xample 
+shows that the amount of contaminant in the environment is gene rally constant through time. It is also possible to select more  than one group 
+by using the control or alt key. 
+ 
+
+15 
+ 
+ 
+Figure	 5. Navigator  pane  for  Ecotracer  showing  the  location  of  the  Status  and  Remarks  area  (highlighted  in  red).  These  allow  the  user  to 
+determine what changes have been made and to find the directory path for output files generated after a simulation. 
+ 
+
+16 
+ 
+ 
+Figure	6. Side panel to the graph area with colour details for the enviro nment and functional groups, plotting data type (highlighted in  green) 
+and the box for auto‐saving results (highlighted in red) after each simulation run. In the show data section, the label concentration is the amount 
+of contaminant and the concentration/biomass is the amount/biomass (i.e., concentration).
+
+17 
+ 
+ 
+Table	 1:  Environmental  inflow  forcing 
+function  file  that  changes  the  relative 
+base inflow rate from 1 to 3.40 over ten 
+years;  pool  indicates  the  environment; 
+and type 2 signifies a relative rate to the 
+original environmental concentrations. 
+name  Environment 
+pool  4 
+type  2 
+0  1.00 
+1  1.24 
+2  1.48 
+3  1.72 
+4  1.96 
+5  2.20 
+6  2.44 
+7  2.68 
+8  2.92 
+9  3.16 
+10  3.40 
+	
+ 	
+18 
+ 
+ANNEX	I:	SIMULATION	SCENARIOS	(TUTORIALS)	
+ 
+T w o  s i m u l a t i o n  s c e n a r i o s  a r e  p r e s e n t e d  h e r e  t o  g i v e  a  u s e r  a  b asic  introduction  to  the 
+Ecotracer routine within the EwE modelling framework: 
+ The  first  represents  a  simple  model  with  two  living  groups  (ph ytoplankton  and 
+zooplankton) and a detritus group with all necessary data (and  could be solved numerically 
+without the use of EwE).  
+The second is a more complex, and it is necessary to use analys is to fill in the missing 
+data, a situation that is more likely to be come across. In the first example, a tree is given that 
+mimics the navigator panel for ease. 
+ 
+Scenario	1	
+ 
+Scenario 1 consists of three groups with the Ecopath parameter values given (Table 2). As well, 
+zooplankton  only  eat  phytoplankton.  For  Ecotracer,  there  is  an  initial  environmental 
+concentration,  a  direct  absorption  rate  (DAR)  for  phytoplankton,  an  assimilation  efficiency 
+(AE) for zooplankton, and decay rates are lacking (Table 3). Th e ‘>’ symbol below describes 
+t h e  d i r e c t i o n  p a t h  a n d  t o  c l i c k ,  w h e r e a s  t h e  ‘ = ’  n e e d s  t o  h a v e  data entered including  such 
+things as file names that need to be created. In this scenario,  it is easy to find the numerical 
+solutions for each group at equilibrium by equations 7 and 8. 
+ 
+Table 2. Ecopath input data for a simple case simulation. 
+Group  Biomass (t)  P/B (year
+‐1)  Q/B (year ‐1) 
+Zooplankton  0.0001  1.0  5.0 
+Phytoplankton  1.0  2.0  ‐ 
+Detritus  1.0  ‐  ‐ 
+ 
+ 
+Table 3. Ecotracer input data for a simple case simulation. 
+Group  Initial conc. 
+(Bq∙km‐2) 
+DAR 
+(km‐2∙t‐1∙year‐
+1) 
+AE 
+(fraction) 
+Environment  1.0  ‐  ‐ 
+Zooplankton  ‐  ‐  0.8 
+Phytoplankton  ‐  1 x 10
+‐5 ‐  
+Detritus  ‐  ‐  ‐ 
+  
+19 
+ 
+ToolBar 
+>File 
+>New model 
+=choose directory to save the new model and a file name 
+ 
+Navigator panel 
+>Ecopath 
+>Input 
+>Model parameters 
+=fill in Model year and No. years (5 years) 
+>Basic input 
+>Define groups... 
+=insert two groups and name (phytoplankton and zooplankton); set phytoplankton 
+to producer.00 
+=ok and save changes 
+=add data from table 2; save 
+>Diet composition 
+=put in diet fraction (zooplankton only eat phytoplankton so 1 for diet fraction) 
+(Message regarding landings and discards, okay to ignore, there are no fisheries) 
+> Output 
+>Basic estimates 
+ 
+>Tools 
+>Ecotracer 
+=Name new Ecosim scenario > create 
+=Name new Ecotracer scenario > create 
+>Ecotracer parameters 
+=enable contaminant tracing for Ecosim 
+ 
+>Ecosim 
+>lnput 
+>Ecosim parameters 
+= Duration of simulation (years): 5 
+(notice that the contaminant tracing box is checked) 
+ 
+>Tools 
+>Ecotracer 
+>Ecotracer input 
+=input data from table 3 
+>Ecotracer output 
+=choose: show data (concentration/biomass or concentration) 
+=select all groups to display on graph 
+> Run Ecosim (results show automatically on graph display) 
+ 
+(note that the environment stays at 1.0, but all the other groups are near zero—there is 
+a colored line along the x-axis; to check the functional group values, select them and they 
+will appear on the graph without the environment concentration) 
+  
+20 
+ 
+Scenario	2	
+ 
+This scenario can be carried out in an Excel spreadsheet to sol ve for the parameters needed 
+for input into Ecotracer. This scenario is based on a more typical situation where there are no 
+reported values for all parameters and it is necessary to make  an estimate for the missing 
+parameters. The base Ecopath model is   Anchovy  Bay,  a  model  tha t  i s  p a r t  o f  t h e  E w E  
+download and is automatically saved on your computer in the ‘EwE sample databases’ folder.  
+ 
+C o n c e n t r a t i o n  r a t i o s  a r e  u s u a l l y  r e p o r t e d  i n  t h e  l i t e r a t u r e ,  o r h a v e  t o  b e  d e r i v e d  f r o m  
+separately  reported  studies  for  water  concentrations  and  for  co ncentrations  in  biota. 
+Typically, assuming no temperature, particles (salts), or pressure effects, 1 m3 of water is equal 
+to 1 tonne. Measurements of the contaminant in biota need to be scaled to the biomass unit 
+in Ecopath (i.e., tonnes) as they are usually reported per gram  of tissue. Measurements of a 
+contaminant in dry weight should be changed to wet weights using a conversion factor. 
+ 
+Table 4. List of symbols used. 
+Symbol  Description  Unit   
+Bi  Biomass  tonne   
+P/Bi  Production to biomass ratio  year ‐1   
+TLi  Trophic level  unitless   
+CRi  Concentration ratio  unitless   
+CREwEi  EwE concentration ratio  unitless   
+mi  Excretion rate  year ‐1   
+di  Decay rate  year ‐1   
+AEi  Assimilation efficiency  0 ‐ 1   
+ui  Direct absorption rate  km 2∙t∙year‐1   
+Ai, eq  Equilibrium amount  g   
+Ci,eq  Equilibrium concentration  g∙t ‐1   
+    
+ 
+Starting Information 
+ 
+Ecotracer and all values can be done in a spreadsheet to find missing values. The intent of this 
+s c e n a r i o  i s  t o  b u i l d  a  s p r e a d s h e e t  m o d e l  f o r  a l l  t h e  p a r a m e t e r s t o  r u n  i n  E c o t r a c e r .  T h e  
+parameters for the Ecopath model (B, P/B, and TL) are taken fro m the Anchovy Bay model 
+with  additional  ecotoxicological  data  being  provided.  Four  our purposes  we  will  consider 
+Anchovy Bay to be 1000 m x 1000 m with an average depth of 250  m. 
+137Cs in Anchovy Bay 
+has found to have an activity of 2 Bq∙m‐3. 
+ 
+The following represents a way to estimate the direct absorptio n rate for groups. Generally, 
+for  substances  that  bioaccumulate,  the  amount  of  a  substance  such  as 137Cs  in  a  group  or 
+species is more dependent on diet than direct uptake at higher  trophic levels.However, the 
+direct absorption rate is an important parameter to estimate th roughout the food web. Lack 
+o f  a  d i r e c t  a b s o r p t i o n  r a t e  a t  l o w e r  t r o p h i c  l e v e l s  c a n  l e a d  t o  an  overestimate  on  the 
+importance of diet or to an error being amplified through the f ood web with higher trophic 
+levels not reaching measured or likely concentration levels. 
+ 
+21 
+ 
+ 
+Table 5. Starting data for an Ecotracer simulation of 137Cs with data concerning Ecopath parameters (B, TL, and P/B) from the Anchovy Bay model and data representative of what 
+might be measured in field surveys or reported in the literature. The table is designed to replicate an Excel spreadsheet. Values needed to be transferred into the Ecotracer routine 
+include the excretion rate (mi), physical decay rate (di), the amount not assimilated (1‐AE), amount of 137Cs (Ai). Methods need to be used to estimate missing values of m i, Ai, 1‐
+AE, and transforming the environmental concentration from a volume to spatial basis. Ui is solved by finding total gains (TGains) from consumption (Cons) and direct uptake (DU), 
+and total losses (TLoss) from Losses and Ai. 
+ A   B C D   F   G H I J K L M   O P Q RST U V W  
+1  Group  B P/B  TL  Bq∙m ‐3 Bq∙km‐2 CR CR EwE Bq∙t‐1 mi 
+(year‐1)
+di 
+(year‐1)
+Losses 
+(year‐1) 
+AE 1‐AE Ai, eq
+(Bq) 
+Ci, eq
+(Bq∙t‐1)
+Cons U i DU TGains  TLoss 
+2  Env  ‐ ‐  ‐  2 ‐‐ ‐ ‐ ‐ ‐   ‐ ‐ ‐ ‐ ‐ ‐ ‐ ‐  
+3  Whales  0.0800 0.050  4.670  ‐ ‐ 375 750 0.023   28.0 350.0 ‐ 
+4  Seal  0.0609 0.154  3.362  ‐ ‐ 112 225 3.65 0.023   15.2 250.0 ‐ 
+5  Cod  3.0000 0.310  3.480  ‐ ‐ 75 150 8.76 0.023   0.80 0.20 450.0 150.0  
+6  Whiting  1.8000 0.581  3.815  ‐‐ 0.023    
+7  Mackerel 1.2000 0.723  3.579  ‐ ‐ 40 80 4.38 0.023   0.80 0.20 96.0 80.0  
+8  Anchov  7.0000 1.149  3.000  ‐ ‐ 60 120 10.95 0.023   0.80 0.20 840.0 120.0  
+9  Shrimp  0.8000 3.000  3.222  ‐‐ 0.023    
+10  Benthos  30.4200 3.000  2.222  ‐‐ 0.023    
+11  Zoops  14.8000 35.000  2.000  ‐ ‐ 25 50 23.73 0.023   0.75 0.25 740.0 50.0  
+12  Algae  9.0000 240.000  1.000  ‐ ‐ 8 16 182.50 0.023   1.00 0.00 144.0 16.0  
+13  Detr  10.0000 ‐  1.000  ‐‐ ‐ ‐ 0.023   ‐‐ ‐ ‐ ‐ ‐ ‐  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+22 
+ 
+1) T h e  a v e r a g e  o f  2  B q ∙ m‐3  needs  to  be  converted  to  Bq∙km‐2.  The  volume  of  the  ocean  is 
+calculated as 250,000,000 m3 leading to 500,000,000 Bq∙km‐2. 
+ 
+2) Elimination rates (K
+e; day‐1) need to be determined for groups that lack data. In this scenario 
+log Ke is plotted against the TL of groups to estimate the K e for groups that lack data (Figure 
+7). The resulting relationship is used to estimate the Ke for the groups that lacked data. The Ke 
+is then used to estimate (Ke x 365) the elimination rate (mi; year‐1). 
+ 
+3) Loss rates in this example result from total mortality (P/B),  physical decay rates (di), and 
+elimination rates (mi) and these can be summed to be applied against the amount (A
+i) of 137Cs 
+in the groups. 
+ 
+4) Assimilation efficiencies for groups missing data need to be e stimated. In this simulation, 
+since all fish groups had an AE of 0.8, and given AEs range bet ween 0.75 and 0.95 a value of 
+0.8 was used for fish and invertebrate groups without a reporte d AE. For marine mammals 
+the AE is calculated from the total gains and total losses (i.e., AE = Total losses/Total gains). 
+ 
+5)  Concentrations  (Bq∙t
+‐1)  are  needed  to  estimate  the  direct  absorption  rate  for  all  groups 
+excluding marine mammals. In this scenario there are 3 groups w ithout concentration data. 
+Therefore,  in  this  simulation  a  regression  analysis  is  done  plotting  concentration  against 
+trophic  level  (Figure  8).  The  importance  of  estimating  a  direct   absorption  rate  is  for 
+simulations done when there are changing environmental concentr ations or changes to the 
+underlying Ecopath input parameters. 
+ 
+6) Calculating the gains from cons umption in order to solve for u
+i. Recall that at equilibrium 
+when dCi(t)/dt = 0, that the gains are equal to the losses. We have set  up the loss rate (step 
+3), and the gains, excluding marine mammals, are both due to the direct absorption rate (from 
+step 5) and consumption gains. Consumption gains are estimated from AEi, Qi (consumption), 
+and  Aj/Bj  (concentration  in  diet  items  of  predator i).  Unfortunately,  the  concentration  of 
+detritus  is  not  known,  but  it  is  derived  from  all  the  unassimila t e d  c o n s u m p t i o n  f r o m  t h e  
+Ecopath model.  As a result, it is an iterative process that in volves an estimate of what the 
+concentration in detritus would be. Generally, a good guess is  to start with phytoplankton as 
+it is generally the largest contributor to detritus; in Anchovy  Bay, phytoplankton contribute 
+approximately 70 % of  the concentration to detritus. Thus, star ting detritus with the same 
+concentration as phytoplankton to determine the ui for all groups, and then run Ecotracer to 
+get  the  estimate  of  the  concentration  of  137C s  f o r  d e t r i t u s .  T h e n  r e ‐ r u n  w i t h  t h e  n e w  
+concentration for detritus. Before the second iteration it is necessary to re‐calculate the gains 
+from consumption; if the Excel spreadsheet is set up with formulas this will change the values 
+of ui as well. This example started with a value of 16 Bq∙t‐1 for detritus, and after the first run 
+Ecotracer estimated 22.4 Bq∙t ‐1. Using this value for the second iteration and after changing 
+the consumption values and ui for the groups the second iteration estimated a value of 21.92 
+Bq∙t‐1 (close enough!). 
+ 
+23 
+ 
+ 
+ 
+Figure	 7.  Relation  between  the  elimination  rate  constant  (Ke)  and  trophic  level  used  to 
+estimate the elimination rate (mi). 
+ 
+ 
+ 
+ 
+Figure	8. Relation between concentration in functional groups and trophic level used to 
+estimate the direct adsorption rate. 
+ 
+
+24 
+ 
+ 
+Table 6. Values used for the simulation of 137Cs in Anchovy Bay. Values in bold are data taken from the Ecopath model with B = biomass (t), TL (trophic level), P/B 
+(production:biomass ratio; year ‐1) or that would be representative of field sample measurements  or reported literature values (CR = concentration ratio), CR EwE (Ecopath 
+concentration ratio), AE (assimilation efficiency), and Ci,eq ( concentration; Bq∙t‐1). Italicized and bold values for the environmental concentration (Bq∙km ‐2), mi (year‐1), di 
+(physical decay rate; year‐1), 1‐AE, Ai (Bq), and ui (km2∙t∙year‐1) need to be entered into the Ecotracer routine. Losses (year‐1) are the sum of P/B, mi and di and are applied to 
+Ai to determine total losses (TLoss; Bq∙year‐1). Cells with no data are estimated by Ecotracer; underlined values are also estimated by Ecotracer but are entered here to   show 
+how the estimate of the direct absorption rate u i is calculated. 1‐AE for marine mammals are determined as TLosse s/TGains. Total gains result from consumption (Cons; 
+Bq∙year‐1) and direct uptake (ui*Bi*Co; Bq∙year‐1). 
+ 
+ A   B C   D   E F G H IJK L   M O P Q RS T U  
+1  Group  B P/B  TL  Bq∙m ‐3 Bq∙km‐2 CR CR EwE mi di Losses AE  1‐AE Ai, eq Ci, eq Cons ui DU TGains TLoss 
+2  Env  ‐ ‐  ‐  2 5x108 ‐‐ ‐ 0.023 ‐‐   ‐‐ ‐ ‐ ‐ ‐ ‐ ‐  
+3  Whales  0.0800 0.050  4.670  ‐ ‐ 375 1.5x10‐6 1.10 0.023 1.168 ‐  0.26 60.0 750.0 94.2 ‐ ‐ 94.2 70.1 
+4  Seal  0.0609 0.154  3.362  ‐ ‐ 112 4.5x10‐7 3.65 0.023 3.827 ‐  0.06 13.7 225.0 55.8 ‐ ‐ 55.8 52.4 
+5  Cod  3.0000 0.310  3.480  ‐ ‐ 75 3.0x10‐7 8.76 0.023 9.093 0.80  0.20 450.0 150.0 452.5 2.43x10‐6 3639.4 4091.9 4091.9 
+6  Whiting  1.8000 0.581  3.815  ‐‐ 3.8x10‐7 3.29 0.023 3.889 0.80  0.20 344.3 191.3 453.2 9.84x10‐7 885.8 1339.0 1339.0 
+7  Mackerel 1.2000 0.723  3.579  ‐ ‐ 40 1.6x10‐7 4.38 0.023 5.126 0.80  0.20 96.0 80.0 388.9 1.72x10‐7 103.2 492.1 492.1 
+8  Anchovy  7.0000 1.149  3.000  ‐ ‐ 60 2.4x10‐7 10.95 0.023 12.122 0.80  0.20 840.0 120.0 2556.4 2.18x10‐6 7626.1 10182.5 10182.5 
+9  Shrimp  0.8000 3.000  3.222  ‐‐ 2.4x10‐7 7.30 0.023 10.323 0.80  0.20 94.8 118.5 406.1 1.43x10‐6 572.7 978.8 978.8 
+10  Benthos  30.4200 3.000  2.222  ‐‐ 1.1x10‐7 27.01 0.023 30.033 0.80  0.20 1608.6 52.9 8049.9 2.65x10‐6 40261.5 48311.4 48311.4 
+11  Zoops  14.8000 35.000  2.000  ‐ ‐ 25 1.0x10‐7 23.73 0.023 58.748 0.75  0.25 740.0 50.0 25861.0 2.38x10‐6 17612.6 43473.5 43473.5 
+12  Algae  9.0000 240.000  1.000  ‐ ‐ 8 3.2x10‐8 182.50 0.023 422.523 1.00  0.00 144.0 16.0 ‐ 1.35x10‐5 60843.3 60843.3 60843.3 
+13  Detr  10.0000 ‐  1.000  ‐‐‐ ‐ 0.023 ‐‐   ‐‐ ‐ ‐ ‐ ‐  
+ 
+25 
+ 
+ANNEX	II:	DRIVING	ENVIRONMENTAL	CONTAMINANTS	THROUGH	THE	SPATIAL	TEMPORAL	DATA	
+FRAMEWORK	
+ 
+Environmental distributions of contaminants can be made time‐varying through the spatial 
+temporal framework (STDF). Incorporating monthly changing patterns of contaminant 
+concentrations into Ecotracer is a three‐step process: 1) Prepare maps in a GIS; 2) define 
+external data connections in EwE; and 3) connect an external data connection to drive the 
+contents of the Ecospace contaminants layer. 
+ 
+1.
+	Prepare	maps	in	a	GIS	
+ 
+Although the STDF contains a GIS engine that converts GIS data to the Ecospace grid 
+(Steenbeek et al. 2013), it is highly recommended that ecosystem modellers perform this 
+step in a dedicated GIS software to minimize GIS processing artifacts. 
+ 
+The step to prepare maps in a GIS entails the necessary steps to convert contaminant 
+distributions over time into discrete, monthly ESRI ASCII maps that match the exact 
+dimensions, cell size, spatial extent, and geospatial projection of the base map in an 
+Ecospace scenario. 
+ 
+The Ecospace base map can be extracted from a loaded Ecospace scenario as follows: 
+ Click Navigator > Ecospace > Input >Maps 
+ Double‐click the Depth layer at the right‐most panel  
+ In the ‘Edit layer’ interface that appears, select the Data tab 
+ In the Data tab, select Export > To ASCII… 
+ 
+The actual steps to convert contaminant distributions to monthly Ecospace maps can require 
+a number of GIS operations, depending on the format and content of the original 
+contaminant data. Operations may require: 
+ Reprojecting to the Ecospace base map (most likely WGS84 / epsg:4326) 
+ Temporal clustering 
+ Clipping  
+ Kriging (point data) and/or resampling (vector data) 
+ Exporting to the ESRI ASCII format. 
+ 
+2.
+	Define	external	data	connections	in	EwE	
+ 
+Once one or more time series of monthly ASCII maps have been prepared, Ecospace needs 
+to know where to find these time series on the local machine. Do the following: 
+ 
+ Click Menu > Ecospace > Define external data connections… 
+ In the “Define external data connections” interface, select connection type “A series 
+of Ecospace ASCII maps over time” and click Create (Figure 9). This will define the 
+time series, and will bring up the “Configure external data” interface to configure the 
+new time series (Figure 10). 
+26 
+ 
+ In the “Configure external data” interface, enter a unique name to identify the time 
+series in the Ecopath with Ecosim user interface. 
+ It is advisable to use the description to describe where the maps time series came 
+from. 
+ The variable field serves to limit where the external data connection appears in the 
+Ecopath with Ecosim user interface. For contaminants, leave this field at its default 
+value (No variable).  
+ Now add the actual maps to the external data connection. Click Browse and navigate 
+the folder that contains the maps. Select all the maps, and click “Open”. The maps 
+will appear in the “Configure external data” interface. 
+ This interface has limited abilities to parse the date from map file names. Please 
+check the “Time” column and ensure that each map has a correct time tag. One can 
+modify time tags by hand, or with the tools provided in the “Set file times” section. 
+ Once all maps are correctly time‐tagged, close the “Configure external data”. The 
+newly configured time series of external maps will appear in the “Define external 
+data connections” interface.  
+ Close this interface too. 
+ 
+Ecospace now has the information to locate and integrate time series of external ASCII 
+contaminant maps into the running model. 
+ 
+3.	Connect	the	external	data	to	the	Contaminants	layer	
+ 
+Now at least one time series of contaminants in seawater has been defined, this time series 
+needs to be connected to drive the contents of the Ecospace contaminants map layer. Do 
+the following: 
+ 
+ In the Navigator, open Ecospace > Input > External data (Figure 11) 
+ Under input maps, locate the environmental contaminants map. One can also use 
+the on‐screen filter options to reduce the number of visible input maps 
+ In the row for the environmental contaminants map, click the cell “Slot 1” to assign 
+an external connection here. This brings up an interface dedicated to configuring 
+how external data is integrated into Ecospace (Figure 12) 
+
+ Here, from the list of available connections, select the connection that you wish to 
+apply, and click the apply (   ) button. The connection now appears under the list of 
+“Connected” external data connections. 
+ An important aspect is to set a proper scale to ensure that the 137Cs concentrations 
+as obtained from external data is properly scaled to the units expected by Ecospace.  
+ Click Close. 
+ Run Ecospace.    
+
+27 
+ 
+  
+ 
+Figure	9:	To define a new spatial‐temporal data connection, select the type of the connection 
+and click Create. From this interface one can also reconfigure  external data connections that 
+were previously created. 
+   
+
+28 
+ 
+ 
+ 
+ 
+Figure	10:	The interface to configure a specific external data connection (e.g, a time series of 
+maps). Each time series has a name to uniquely define the serie s in the Ecopath with Ecosim 
+user interface, an optional description, a variable that only serves to limit where the external 
+data  connection  appears  in  the  Ecopath  with  Ecosim  user  interface,  and  a  series  of  time‐
+tagged  maps  that,  in  this  particular  figure,  reflects  historical  concentrations  of 137Cs  in  the 
+water off of Fukushima, at monthly time steps, since March 2011.	
+  
+
+29 
+ 
+ 
+ 
+Figure	11: The External data interface where previously defined external d ata connections 
+are applied to Ecospace layers.	
+ 	
+
+30 
+ 
+	
+Figure	12:	Configuring the integration of an external time series of maps into Ecospace, in this 
+case  to  the  environmental  contaminants  layer.  Applied  external time  series  are  shown  as 
+"Connected". The selected connect ion can be configured, which i ncludes entering a scaling 
+factor to ensure that external data matches the magnitude of da ta currently in the Ecospace 
+environmental  contaminants  layer.  As  described  in  Steenbeek  et al.  (2013),  the  Calculate 
+option scales the average map mean for the first full year of e xternal data to the map data 
+loaded in Ecospace.	

@@ -1,0 +1,1624 @@
+ 
+  
+   
+ 
+Ecopath with Ecosim for the Baltic 
+Sea (ICES SD 22-32 excluding the 
+Gulf of Riga)  
+Model description 
+Nataliia Kulatska, Maciej Tomczak, Lena Bergström 
+Sveriges lantbruksuniversitet, SLU 
+Institutionen för akvatiska resurser 
+Aqua notes 2026:4 
+ 
+ 
+Nataliia Kulatska, https://orcid.org/0000-0002-1825-2332, Sveriges lantbruksuniversitet, 
+Institutionen för akvatiska resurser,  
+Maciej Tomczak, https://orcid.org/0000-0001-5956-0115, Sveriges lantbruksuniversitet, 
+Institutionen för akvatiska resurser,  
+Lena Bergström, https://orcid.org/0000-0002-8059-8764, Sveriges lantbruksuniversitet, 
+Institutionen för akvatiska resurser,  
+ 
+Rapportens innehåll har granskats av:  
+Elisabeth Bolund, Sveriges lantbruksuniversitet (SLU), Institutionen för akvatiska resurser  
+Ekin Akoglu, Sveriges lantbruksuniversitet (SLU), Institutionen för akvatiska resurser  
+ 
+Rekommenderad citering: Kulatska, N., Tomczak, M., Bergström, L. (2026). Ecopath with 
+Ecosim for the Baltic Sea (ICES SD 22-32 excluding the Gulf of 
+Riga). Model description. Aqua notes 2026:4. Uppsala: Sveriges 
+lantbruksuniversitet, Institutionen för akvatiska resurser. 
+https://doi.org/10.54612/a.7s9j8fa2pv 
+Publikationsansvarig: Sara Bergek, Sveriges lantbruksuniversitet (SLU),  
+  Institutionen för akvatiska resurser  
+Redaktör:  Stefan Larsson, Sveriges lantbruksuniversitet (SLU),  
+  Institutionen för akvatiska resurser  
+Utgivare:   Sveriges lantbruksuniversitet, Institutionen för akvatiska resurser 
+Utgivningsår:  2026 
+Utgivningsort:  Uppsala 
+Illustration framsida:   torsk (t.v.): Fredrik Saarkoppel; braxen (t.h.): SLU 
+Upphovsrätt:   Alla bilder används med upphovspersonens tillstånd. 
+Serietitel:  Aqua notes 
+Delnummer i serien: 2026:4 
+ISBN (elektronisk version): 978-91-8124-168-6 
+DOI:   https://doi.org/10.54612/a.7s9j8fa2pv 
+Nyckelord:  ecosystem modelling, Baltic Sea, food-web 
+ 
+ 
+ 
+ 
+© 2026 (Nataliia Kulatska, Maciej Tomczak, Lena Bergström)  
+Detta verk är licenserat under CC BY 4.0, andra licenser eller upphovsrätt kan gälla för illustrationer.   
+Ecopath with Ecosim for the Baltic Sea (ICES SD 22-32 
+excluding the Gulf of Riga). Model description.  
+ 
+Östersjön är ett ekologiskt unikt brackvattenekosystem med kraftiga salthalts - och 
+temperaturgradienter, låg biodiversitet samt omfattande områden med syrebrist. Dessa naturliga 
+begränsningar, i kombination med antropogena effekter såsom övergödning, föroreningar, överfiske 
+och klimatförändringar, gör Östersjön till ett särskilt sårbart marint system. 
+För att bättre förstå och förvalta detta komplexa ekosystem utvecklade vi en omfattande Ecopath 
+with Ecosim (EwE)-modell, som täcker nästan hela Östersjön (ICES delområden 22- 32, exklusive 
+Rigabukten). EwE är ett väletablerat verktyg som används för att simulera trofiska interaktioner, 
+energiflöden och ekosystemets dynamik över tid under olika miljö- och förvaltningsscenarier. 
+Ecopath-komponenten ger en statisk, massbalanserad representation av ekosystemet för 
+referensåret 2004 och omfattar 4 6 funktionella grupper som representerar primärproducenter, 
+zooplankton, bentiska evertebrater, fisk (inklusive olika livsstadier), sjöfåglar och marina däggdjur. 
+Tio fiskeflottor inkluderades för att spegla fiskets mångfald och dess påverkan. Ecosim -modulen 
+utvidgar analysen över tid och simulerar ekosystemets respons på förändringar i fisketryck och 
+produktivitet mellan 2004 och 2019. 
+Modellvalideringen visade att EwE effektivt återskapade historiska trender i biomassa och 
+fångster för de flesta nyckelarter, särskilt sälar, torsk och sill. Vissa avvikelser, till exempel för 
+skarpsill, nors och vikarsäl, belyser dock databegränsningar oc h behovet av förbättrad 
+parameterisering eller inkludering av ytterligare ekologiska processer. 
+Den resulterande modellen representerar den första EwE -modellen som täcker hela 
+Östersjöområdet och integrerar tidigare regionala modeller i en enhetlig rumslig och funktionell 
+struktur. Modellen ger värdefulla insikter i ekosystemets funktion och trofiska  samband och 
+möjliggör en helhetsbedömning av kumulativa effekter från fiske och miljöförändringar. 
+Trots vissa begränsningar, såsom förenklad representation av lägre trofiska nivåer, brist på data 
+för vissa grupper och dåliga passningar till observationer i vissa fall, utgör modellen en robust grund 
+för ekosystembaserad fiskeriförvaltning (EBFM) och stödjer målen i havsmiljödirektivet (MSFD). 
+Framtida modellutveckling bör inkludera miljödrivande faktorer (salthalt, temperatur, 
+näringsämnen), koppling till fysikalisk-biogeokemiska modeller, öka den rumsliga upplösningen 
+(via Ecospace) samt integrera osäkerhetsanalyser och socioekonomiska dimensioner. 
+The Baltic Sea is an ecologically unique semi-enclosed brackish ecosystem, characterized by sharp 
+salinity and temperature gradients, low biodiversity, and extensive hypoxic zones. These natural 
+constraints, combined with human-induced pressures such as eutrophication, pollution, overfishing, 
+and climate change, make it a particularly vulnerable marine system. 
+To better understand and manage this complex ecosystem, we have developed a comprehensive 
+Ecopath with Ecosim (EwE) model covering nearly the entire Baltic Sea (ICES Subdivisions 22-32, 
+excluding the Gulf of Riga). EwE is a well -established modelling framework used to simulate 
+trophic interactions, energy flows, and temporal ecosystem dynamics under various environmental 
+and management scenarios. 
+The Ecopath component provides a static, mass-balanced representation of the ecosystem for the 
+reference year 2004, incorporating 4 6 functional groups representing primary producers, 
+zooplankton, benthic invertebrates, fish (including multi -stanza life stages), seabirds, and marine 
+mammals. Ten fishing fleets were included to reflect the diversity of fisheries and their impacts. The 
+Sammanfattning 
+Summary 
+ 
+Ecosim module extends the analysis temporally, simulating ecosystem responses to changing fishing 
+pressure and productivity between 2004 and 2019. 
+Model validation showed that the EwE framework effectively reproduced historical biomass and 
+catch trends for most key species, particularly seals, juvenile cod, and herring. However, 
+discrepancies for some groups, such as sprat, smelt, and ringed seals; highlight data limitations and 
+the need for refined parameterisation or inclusion of additional ecological processes. 
+The resulting model represents the first Baltic -wide EwE model, integrating previous regional 
+efforts into a unified spatial and functional framework. It provides valuable insights into ecosystem 
+functioning and trophic linkages, enabling holistic assessment of cumulative impacts from fishing 
+and environmental change. 
+Despite certain limitations, such as simplified lower  trophic level representation, missing data 
+for some groups and misfit to some data, the model serves as a robust foundation for ecosystem -
+based fisheries management (EBFM) and supports Marine Strategy Framework Directive (MSFD) 
+objectives. 
+Future model developments should integrate environmental forcing (salinity, temperature, 
+nutrients), couple with physical-biogeochemical models, increase spatial resolution (via Ecospace), 
+and incorporate uncertainty analyses and socio-economic dimensions. 
+  
+ 
+1. Introduction ............................................................................................................. 6 
+1.1 Model domain............................................................................................................ 7 
+2. Functional groups description: ecology, parameters, components ................. 9 
+3. Ecopath: method, results, diagnostics ............................................................... 23 
+4. Ecosim: input and results .................................................................................... 28 
+4.1.1 Model fit and validation (modelled vs data) .................................................. 33 
+5. Discussion ............................................................................................................. 40 
+References ....................................................................................................................... 43 
+Acknowledgement ........................................................................................................... 46 
+Supplementary material ................................................................................................. 47 
+Table of contents 
+6 
+ 
+The Baltic Sea represents one of the most extreme environments for both marine 
+and freshwater species due to its abiotic conditions. It is characterized by steep 
+gradients in both temperature and salinity, creating a transitional zone that is 
+challenging t o many organisms adapted to either marine or freshwater 
+environments (Ojaveer et al., 2010). The brackish nature of the sea limits the range 
+of species able to thrive, resulting in naturally low biodiversity relative to other 
+large marine ecosystems (Elmgren & Hill, 1997). Furthermore, extensive hypoxic 
+and anoxic zones in deeper areas severely constrain benthic species and disrupt 
+trophic linkages, as benthic invertebrates serve as critical prey for demersal fish and 
+other predators (Conley et al., 2009). 
+This low biodiversity leads to a fragile food web structure in which species 
+interactions are strong and functional redundancy is limited. Consequently, the 
+removal or decline of a single species can disrupt ecosystem functioning due to the 
+absence of other species capable of fulfilling similar ecological roles (Möllmann et 
+al., 2009). 
+In addition to natural stressors, the Baltic Sea is subject to a multitude of 
+anthropogenic pressures. These include eutrophication, introduction of pollutants 
+and hazardous substances, overexploitation of commercial fish species, habitat 
+degradation, and the overarching effects of climate change (HELCOM, 2023). The 
+simultaneous occurrence of these stressors increases the risk of cumulative and 
+potentially synergistic impacts on individuals, populations, and entire ecological 
+communities (Crain et al., 2008; Griffiths et al., 2017). 
+To enhance our understanding of the structure, dynamics, and potential future 
+vulnerabilities of the Baltic Sea ecosystem, we have developed a comprehensive 
+Ecopath with Ecosim (EwE)  model covering the entire region. EwE is a widely 
+used modelling framework in marine ecology designed to simulate energy and 
+biomass flows and to explore ecosystem responses under various management and 
+environmental scenarios (Christensen & Pauly, 1992; Walters et al., 1997). 
+The Ecopath component of the model establishes a static, mass- balanced 
+representation of the ecosystem, quantifying biomass and energy flows across 
+trophic levels. Each functional group, ranging from primary producers to top 
+predators, is parameterized by its biomass, production -to-biomass ratio (P/B), 
+consumption-to-biomass ratio (Q /B), diet composition, and other ecologically 
+1. Introduction 
+7 
+ 
+relevant metrics. This mass- balance approach ensures that the energy gained and 
+lost within the ecosystem remains consistent, allowing for the estimation of trophic 
+efficiencies, predator -prey dependencies, and system -level indicators such as 
+omnivory index and keystoneness (Christensen et al., 2005). 
+The Ecosim module extends this analysis by incorporating temporal dynamics 
+into the model. It allows for simulation of how ecosystems evolve over time in 
+response to internal ecological processes (e.g., reproduction, mortality, predation) 
+and external drivers such as fishing pressure, nutrient loading, or climate variability. 
+Ecosim enables scenario analysis, thereby supporting decision -making in 
+ecosystem-based management by comparing the effects of alternative policy 
+strategies and environmental change pr ojections (Mackinson et al., 2009; Coll et 
+al., 2015). 
+Through the EwE framework, our model offers a valuable tool for integrated 
+assessments, facilitating the exploration of cumulative impacts and supporting 
+adaptive management of the Baltic Sea ecosystem accounting for both natural and 
+anthropogenic stressors. 
+This report presents progress in the Baltic Sea ecosystem modelling and 
+introduces the first EwE model developed for the entire region. The model focuses 
+on representing ecosystem dynamics, energy flows, and key ecological functions. 
+A particular emphasis is placed on supporting ecosystem -based fisheries 
+management, providing a scientific basis for sustainable exploitation and 
+conservation strategies. 
+The model description is structured as follows: Chapter 2 presents descriptions 
+of the functional groups, including their ecological roles, parameterization, and the 
+species and components included in the Ecopath with Ecosim model. Chapter 3 
+describes the approach and the results of the Ecopath mass -balance model, 
+providing insights into energy flows, trophic interactions, and ecosystem structure. 
+Chapter 4 details the dynamic simulations from the Ecosim model, illustrating 
+temporal changes in response to various natural and anthropogenic drivers. Finally, 
+Chapter 5 offers a discussion of the strengths and limitations of the modelling 
+approach and explores potential applications and future developments in light of 
+current advances in ecosystem -based manageme nt and ecological modelling 
+science. 
+1.1 Model domain 
+The model developed in this study builds upon experience of the previously 
+published Ecopath with Ecosim (EwE) model for the Central Baltic Sea (Bauer et 
+al., 2019). Spatial coverage is almost the entire Baltic Sea, described as ICES Sub-
+Divisions 22-32.  This expanded model includes a broader range of environmental 
+gradients and ecological conditions, excluding only the Gulf of Riga ( Figure 1). 
+8 
+ 
+Such an extension allows for a more comprehensive investigation of ecosystem 
+dynamics across diverse hydrographic regimes and species distributions. 
+By incorporating these additional areas, the model enhances the ability to 
+address spatial variation in stock structures, trophic interactions, and ecosystem 
+functioning. It provides an improved framework for exploring how differences in 
+environmental conditions influence ecological processes and for assessing the 
+potential implications for ecosystem-based fisheries management. 
+The Gulf of Riga was excluded from the model domain due to its distinct 
+hydrological and ecological characteristics. This semi -enclosed sub-basin exhibits 
+unique seasonal dynamics, stratification patterns, and species composition, which 
+differ significantly from those observed in the broader Baltic Sea (Jansons et al., 
+2017; Strāķe et al., 2020). As such, it requires a separate, specifically tailored 
+modelling approach to accurately represent its ecosystem functioning. 
+Figure 1.Map of the model area. Numbers correspond to the ICES Subdivisions (SDs). These are 
+grouped into three parts based on similarity in environmental conditions and characteristic species, 
+as noted by the colours: Western Baltic (WB, red), Central Baltic (CB, green), and Northern Baltic 
+(NB, violet). 
+
+9 
+ 
+In order to simplify complex food webs into manageable components, species in 
+EwE models are organized into functional groups based on their ecological roles 
+and trophic interactions. The functional groups incorporated in the present model 
+(Figure 2) represent the most ecologically significant components of the open sea 
+regions of the Baltic Sea.  
+ 
+Figure 2. Conceptual food- web model of the entire Baltic Sea based on previously documented 
+trophic relationships. Group areas are organized vertically by major ecological roles (e.g., 
+predators, zooplankton, phytoplankton), and horizontally by subregions: Northern Baltic (blue), 
+Central Baltic (green), and Western Baltic (red). Overlaps of functional groups with coloured 
+sections denote their spatial distribution across different Baltic subregions. Arrows illustrate the 
+direction of trophic linkages based on known diet compositions and regional prey availability. This 
+structure enables the model to simulate energy flow, biomass cycling, and trophic interactions 
+across spatially distinct, but ecologically connected sub-basins. Source: Wikström et al. 2024 
+The uppermost trophic level (Figure 2) consists of top predators, including marine 
+mammals (ringed, grey, and harbour seals, and harbour porpoise), fish-eating birds 
+2. Functional groups description: ecology, 
+parameters, components 
+10 
+ 
+(e.g., black guillemot ), and piscivorous fish (e.g., cod and salmon). These apex 
+predators exert top-down control on medium-sized planktivorous and benthivorous 
+fish species. Region-specific fish stocks (e.g., Eastern Baltic Cod, Western Baltic 
+Cod) are represented to capture di fferences in life history traits, prey availability, 
+and spatial distribution. 
+Medium trophic levels include key forage fish such as herring, sprat, stickleback, 
+vendace, and smelt, which act as both consumers of lower trophic level organisms 
+(e.g., zooplankton) and prey for top predators.  
+Lower trophic levels include various zooplankton taxa (e.g., Temora, Acartia, 
+Pseudocalanus, cladocerans) and benthic invertebrates (e.g., Mytilus, Limecola  
+balthica, polychaetes, and echinoderms), which link primary production to higher 
+trophic levels. Phytoplankton and detritus form the base of the food web, 
+representing primary productivity and organic matter recycling, respectively. 
+Ringed seals ( Pusa hispida) are predominantly distributed in ice -covered 
+northern regions, especially the Gulf of Bothnia, which hosts approximately 90% 
+of the population. Smaller southern populations inhabit the Archipelago Sea, the 
+eastern Gulf of Finland, and the Gulf of Riga (H alkka and Tolvanen, 2017). Their 
+diet is dominated by small to medium- sized fish species, such as three- spined 
+stickleback, herring, and vendace (Scharff-Olsen et al. 2019). 
+The grey seal (Halichoerus grypus) is the largest predator in the Baltic Sea. They 
+inhabit a diverse range of coastal environments: rocky islets, sandy shores, and ice-
+covered areas during winter months. Grey seals are opportunistic predators, with a 
+diet varying based on prey availability, geographic location, and the age of the seal. 
+Primary prey species across the Baltic Sea is herring, while sprat and cod are 
+significant in the southern regions and vendace in the northern areas (Lundström, 
+et al. 2007, 2010). 
+Harbour seals (Phoca vitulina) typically favour nearshore habitats such as rocky 
+shores and sandbanks and tend to avoid areas with intense human activity. As other 
+seals, they are opportunistic predators, feed on a variety of prey, but mainly herring, 
+sprat, cod, flatfish and sandeel (Andersen, 2007). They typically hunt in shallow 
+coastal waters but can dive deeper when necessary, using whiskers to detect prey 
+movements. 
+The harbour porpoise ( Phocoena phocoena) is a small cetacean found in the 
+southwestern Baltic, Kattegat, and Belt Seas. The central Baltic subpopulation is 
+critically endangered, with estimates indicating only a few hundred individuals 
+remaining (Koschinski, 2001). Harbour porpoises prefer shallow coastal waters, but 
+can also inhabit deeper offshore areas. They are often found in regions with strong 
+currents and variable salinity levels, where prey is abundant. Harbour porpoises 
+primarily feed on small, schooling fish, including herring, sprat, juvenile cod and 
+gobies (Lindroth, 1962, Aarefjord, et al. 1995). Due to their high metabolic rate, 
+11 
+ 
+they must eat frequently, consuming the equivalent of up to 10% of their body 
+weight daily (Berggren and Petterson, 1990, Kastelein et al., 1997), 
+To adequately represent the ecological structure and trophic interactions at the 
+mid trophic levels and of the fish community in the Baltic Sea, the model 
+incorporates 18 distinct fish functional groups, as de scribed in Table 1 . These 
+groups were defined based on multiple criteria, including their relative biomass, 
+diet composition, and significance in both total ecosystem biomass and fishery 
+landings. This functional classification ensures that ecologically and commercially 
+important species are appropriately represented. 
+Moreover, the grouping strategy reflects a simplified approximation of the 
+underlying stock structures. This allows the model to account for the ecological 
+diversity and spatial heterogeneity of fish populations while maintaining a 
+manageable level of comp lexity suitable for ecosystem -based modelling 
+approaches (Christensen & Walters, 2004; Coll et al., 2008). 
+In the current EwE model, a multistanza approach was applied to key 
+commercially important fish species to better represent ontogenetic shifts in diet 
+composition and recruitment patterns. Multistanza groups allow for the division of 
+a single species into multiple life -history stages (e.g., juvenile, subadult, adult), 
+each with distinct trophic interactions, mortality rates, and ecological roles 
+(Christensen & Walters, 2004). This method is particularly useful for species with 
+complex life cycles and size- structured predation, such as cod ( Gadus morhua), 
+herring (Clupea harengus), and sprat ( Sprattus sprattus), which play crucial roles 
+in the Baltic Sea food web. 
+By using multistanza groups, the model can more accurately capture the 
+variability in energy transfer across trophic levels and provide improved resolution 
+of species-specific dynamics relevant to both ecosystem functioning and fisheries 
+management. This t echnique also enhances the capacity of the model to simulate 
+recruitment variability and size -dependent predator-prey relationships, which are 
+essential for understanding population resilience and the effectiveness of different 
+management strategies (Walters et al., 2010).  
+Table 1. Fish groups in the model. ICES SD is management sub-divisions used by ICES, multi-stanza 
+is life-history stages. 
+Fish species or group Stock ICES SD Multi-stanza 
+Atlantic cod (Gadus morhua) Eastern Baltic 25-32 
+juveniles; 
+adults 
+Western Baltic 22-24 
+juveniles; 
+adults 
+Atlantic salmon (Salmo salar)   25-32 no 
+Atlantic herring ( Clupea 
+harengus) Northern Baltic 30-31 
+juveniles; 
+adults 
+12 
+ 
+Central Baltic 
+25-29;32 
+excluding 
+Gulf of Riga 
+(GoR) 
+juveniles; 
+adults 
+Western Baltic 22-24 
+juveniles; 
+adults 
+European sprat ( Sprattus 
+sprattus)   25-32 
+juveniles; 
+adults 
+Vendace (Coregonus albula)   30-31 no 
+Three-spined stickleback 
+(Gasterosteus aculeatus) 
+  22-32 no   
+European smelt ( Osmerus 
+eperlanus)   30-31 no 
+European flounder ( Platichthys 
+flesus)   22-26, 28 no 
+Baltic flounder (Platichthys 
+solemdali)   27, 29-32 no 
+European plaice ( Pleuronectes 
+platessa)   22-29, 32 no 
+Turbot (Scophthalmus maximus)   22-24 no 
+Common dab ( Limanda 
+limanda)   22-24 no 
+Whiting ( Merlangius 
+merlangus)   22-24 no 
+Western Baltic flatfish (common 
+sole ( Solea solea
+), brill 
+(Scophthalmus rhombus)) 
+  
+22-24 no 
+  
+Western Baltic other fish 
+(gobies, sandeel)   22-24 no 
+At the lower trophic level, the model includes 13 functional groups representing 
+zooplankton and benthic invertebrates, which serve as critical components in 
+energy transfer and nutrient cycling within the Baltic Sea ecosystem. These groups 
+are central to mediating trophic interactions between primary producers and higher-
+level consumers, particularly fish. 
+Zooplankton groups are aggregated into taxonomic and functional categories 
+based on their ecological roles and prey availability for fish. Key groups include 
+mysids, Pseudocalanus spp, Acartia spp, Temora spp, all of which constitute major 
+prey items for juvenile and planktivorous fish species such as herring and sprat 
+(Möllmann and Köster, 2002). Remaining taxa are grouped into two broader 
+13 
+ 
+categories: zooplankton copepods and zooplankton cladocerans, which collectively 
+represent the bulk of micro- and mesozooplankton biomass in the system. 
+Benthic invertebrates are similarly grouped based on ecological function, 
+feeding strategy, and taxonomic identity. Functionally significant taxa include the 
+large omnivorous crustacean isopod Saduria entomon and dominant molluscs such 
+as Mytilus spp. (blue mussels) and Limecola balthica (formerly Macoma balthica), 
+which play important roles in benthic -pelagic coupling. Deposit -feeding 
+macrofauna, such as Monoporeia affinis  and Pontoporeia femorata, are essential 
+for sediment bioturbation and organic matter processing. 
+Predatory and suspension-feeding benthos are grouped separately to reflect their 
+different ecological roles. Predatory benthic invertebrates include polychaetes such 
+as Bylgides sarsi, Hediste diversicolor, and the echinoderm Henricia spinulosus. 
+Suspension feeders ( Astarte spp ., Arctica islandica  and Modiolus modiolus ) are 
+included due to their filtering capacity and contribution to energy flow in benthic 
+food webs. Additionally, crabs, echinoderms, and a residual “other benthos” group 
+are included to account for less abundant but ecologically relevant taxa.  
+In the current model, primary production is represented by a single functional 
+group: phytoplankton. Phytoplankton are the principal autotrophic organisms in the 
+open waters of the Baltic Sea and form the base of the pelagic food web. 
+Given that the model domain primarily encompasses open sea areas, macroalgae 
+and other benthic macrophytes (e.g., Fucus spp., Zostera marina ) were not 
+included. These groups are typically restricted to coastal and shallow benthic 
+habitats, where light penetration allows for their growth and productivity. While 
+benthic primary producers can be ecologically significant in nearshore ecosystems, 
+their exclusion is justified by the spatial scale and focus of the model, which 
+emphasizes pelagic processes and open-sea trophic dynamics. 
+Details of the parametrization are described in Tables 2-5. 
+Table 2. Ecopath input parameters and their sources for mammals and birds. All biomasses (B) are 
+in units of t/km2. P/B is production/biomass, Q/B  is consumption/biomass, UA is unassimilated 
+consumption and Diet is diet composition.  Number in brackets is initial value used in previous 
+versions of the model and subsequently adjusted. All values are yearly.
+14 
+ 
+Group name Parameter Value Source 
+Ringed seal B 0.00428 Number of individuals from Helcom (2018) were 
+multiplied by average weight of 91 kg (Oksanen, 
+2015) and divided by size of Northen Baltic area 
+to get density. 
+P/B 0.1 Harvey et al., 2003 in  Bauer et al (2018) 
+Q/B 8.79 
+(16.28) 
+adjusted, initially from Bauer et al (2018) 
+Diet   Scharf 2018 
+Grey seal B 0.0073 Number of individuals from censusing (Helcom, 
+2018) were divided by 0.7 ( haul-
+out fraction 
+during surveys is a ssumed 70% by HELCOM.), 
+then multiplied by average weight of 100 kg 
+(Tomczak, pers.comm.) and divided by size of 
+Baltic area to get density 
+P/B 0.1 Harvey et al., 2003 in  Bauer et al (2018) 
+Q/B 7.5 
+(16.28) 
+adjusted, initially from Bauer et al (2018) 
+Diet   Scharf 2018 
+Harbor seal B 0.00113 Number of individuals from censusing (Helcom, 
+2018b) were devided by 0.7 (to bring censusing 
+to population level, Harding), then multiplied by 
+average weight of 70 kg (Härkönen and Heide-
+Jørgensen, 1990) and divided by size of Western 
+Baltic area to get density 
+P/B 0.1 Harvey et al., 2003 in  Bauer et al (2018) 
+Q/B 21.85 
+(20) 
+adjusted, initially from WB EwE 
+Diet   Scharf 2018 
+Harbour 
+porpoise 
+B 0.0137 Number of individuals from Helcom (2018) were 
+multiplied by average weight of 55 kg 
+(https://www.ascobans.org/en/species/phocoena-
+phocoena) and divided by size of Western Baltic 
+area to get density 
+P/B 0.18 WB EwE 
+Q/B 26.36 
+(28) 
+adjusted, initially from WB EwE 
+Diet   Lundström et al. in press 
+B 0.002 Bauer et al (2018) 
+15 
+ 
+Fish-feeding 
+birds 
+P/B 0.1 Bauer et al (2018) 
+Q/B 130 Bauer et al (2018) 
+    
+Table 3. Ecopath input parameters and their sources for fish groups. All biomasses (B) are in units 
+of t/km2. The ‘Total mortality’ parameter of multistanza groups is equivalent to the P/B 
+(production/biomass) in other groups. ‘Q/B’ refers to consumption/biomass, ‘UA’ to unassimilated 
+consumption and ‘Diet’ to diet composition. Number in brackets is initial value used in previous 
+versions of the model and subsequently adjusted. All values are yearly. 
+Group name Parameter Value Source 
+EB cod adults B 0.5 
+(0.215) 
+Adjusted (initially SSB from 
+WGBFAS, 2020 divided by Baltic 
+area) 
+Total mortality 0.9 (1.1) adjusted (initially total mortality 
+calculated as the sum of natural 
+mortality M (WGBFAS, 2020) and 
+ratio of catch (landings and discards) 
+and SSB) 
+    
+    
+Q/B 3.81 Witek, 1995 
+UA 0.17 Harvey et al., 2003 
+Diet   stomach data (WKSPATIAL, 2017) 
+EB cod juveniles B 0.619 calculated by EwE 
+Total mortality 1.2 assumed to be 1.2 times adult 
+mortality, as in Bauer et al (2018) 
+Q/B 7.65 calculated by EwE 
+Diet   stomach data (WKSPATIAL, 2017) 
+WB cod adults B 0.15 
+(0.066) 
+Adjusted (initially SSB from 
+WGBFAS, 2020 divided by Baltic 
+area) 
+Total mortality 0.9  sum of natural mortality M 
+(WGBFAS, 2020) and ratio of catch 
+(landings and discards) and SSB 
+    
+    
+Q/B 3.81 Witek, 1995 
+Diet   diet composition in 2007 (Huwer et 
+al., 2014) 
+WB cod juveniles B 0.354 calculated by EwE 
+Total mortality 1 assumed to be 1.2 times adult 
+mortality, as in Bauer et al (2018) 
+Q/B 7.65 calculated by EwE 
+16 
+ 
+Diet   diet composition in 2007 (Huwer et 
+al., 2014) 
+Salmon B 0.024 number of smolt (WGBAST , 2020) 
+multiplied by 5kg average weight 
+divided by sum of Northern and 
+Central Baltic areas 
+Total mortality 0.7 
+(0.38) 
+Adjusted from mortality on 
+FishBase 
+Q/B 4 (7.14) Adjusted (initially FishBase) 
+UA 0.17 Harvey et al., 2003 
+Diet   Karlsson 1999 (used values for >60 
+cm, if less than 60 mostly eats sprat) 
+NB herring adults B 0.964  SSB (WGBFAS, 2018) divided by 
+Baltic area 
+Total mortality 1 
+(0.296) 
+adjusted (initially total mortality 
+calculated as the sum of natural 
+mortality M (WGBFAS, 2018) and 
+ratio of landings and SSB) 
+Q/B 3 Witek, 1995 
+Diet   Peltonen 2004; Parmanne 2004 
+NB herring juveniles B 0.577 calculated by EwE 
+Total mortality 1.25 assumed to be 1.2 times adult 
+mortality, as in Bauer et al (2018) 
+Q/B 5.811 calculated by EwE 
+Diet   Parmanne 2004 
+CB herring adults B 1.9  SSB (WGBFAS, 2020) divided by 
+Baltic area 
+Total mortality 1 (0.35) adjusted (initially total mortality 
+calculated as the sum of natural 
+mortality M (WGBFAS, 2020) and 
+ratio of landings and SSB) 
+Q/B 3 Witek, 1995 
+Diet   Casini & Cardinale, 2004; 
+Möllmann et al., 2004 
+CB herring juveniles B 1.169 calculated by EwE 
+Total mortality 1.2 assumed to be 1.2 times adult 
+mortality, as in Bauer et al (2018) 
+17 
+ 
+Q/B 5.811 calculated by EwE 
+Diet   Casini & Cardinale, 2004 
+WB herring adults B 1.66 
+(0.166) 
+Adjusted (initially  SSB (HAWG, 
+2020) divided by Baltic area 
+Total mortality 0.9 
+(0.768) 
+adjusted (initially total mortality 
+calculated as the sum of natural 
+mortality M (HAWG, 2020) and 
+ratio of landings and SSB) 
+    
+Q/B 3 Witek, 1995 
+Diet     
+WB herring juveniles B 0.773 calculated by EwE 
+Total mortality 1 assumed to be 1.2 times adult 
+mortality, as in Bauer et al (2018) 
+Q/B 5.811 calculated by EwE 
+Diet   Casini & Cardinale, 2004; 
+Möllmann et al., 2004; Tomczak et 
+al., 2012 
+Vendace B 0.12 ssb (Bergenius, pers.comm) divided 
+by Northern Baltic area 
+Total mortality 0.74 Natural mortality from FishBase 
+Q/B 4.4 FishBase 
+Diet   ratios approximate, species from 
+FishBase 
+Stickleback B 0.328 Olsson 2019 
+Total mortality 2.57 Natural mortality from FishBase 
+Q/B 8.76 Rajasilta 1980 
+Diet   Peltonen 2004 
+Sprat adults B 3.017  SSB (WGBFAS, 2020) divided by 
+Baltic area     
+Total mortality 1.24 
+(0.474) 
+adjusted (initially total mortality 
+calculated as the sum of natural 
+18 
+ 
+    mortality M (WGBFAS, 2020) and 
+ratio of landings and SSB)     
+Q/B 4.63 Witek, 1995 
+Diet   Casini & Cardinale, 2004; 
+Möllmann et al., 2004 
+  B 5.623 calculated by EwE 
+Sprat juvenile Total mortality 1.865 assumed to be 1.5 times adult 
+mortality, as in Bauer et al (2018) 
+Q/B 8.466 calculated by EwE 
+Diet   Casini & Cardinale, 2004 
+Smelt B   calculated by EwE 
+Total mortality 0.66 
+(0.22) 
+Adjusted (initially natural mortality 
+from FishBase) 
+Q/B 2.7 (5.9) Adjusted (initially from FishBase) 
+Diet   FishBase 
+Whiting B 0.1 DATRAS 
+Total mortality 0.9 
+(0.47) 
+Adjusted (initially natural mortality 
+from FishBase) 
+Q/B 3.3 FishBase 
+Diet   Ross, 2016 
+Northern and Central 
+Baltic flounder 
+B 0.16 DATRAS 
+Total mortality 0.6 
+(0.79) 
+Adjusted (initially total mortality 
+from Bauer et al, 2018) 
+Q/B 3.5 (4.2) Adjusted (initially Bauer et al, 2018) 
+Diet   Haase, 2020, Florin, 2010 
+Western and Central 
+Baltic flounder 
+B 0.5 DATRAS 
+Total mortality 0.6 
+(0.79) 
+Adjusted (initially total mortality 
+from Bauer et al, 2018) 
+Q/B 3.5 (4.2) Adjusted (initially Bauer et al, 2018) 
+Diet   Borg, 2014 
+Place: adult B 0.45 
+(0.067) 
+Adjusted (initially ssb (WGBFAS, 
+2020) divided by Baltic area) 
+Total mortality 0.5 
+(0.12) 
+Adjusted (initially natural mortality 
+from FishBase) 
+Q/B 3 (3.42) Adjusted (initially from FishBase) 
+Diet   Rijnsdorp and B. Vingerhoed 2011  
+Dab B 0.25 DATRAS 
+19 
+ 
+Total mortality 0.5 Same as place 
+Q/B 3 Same as place 
+Diet   FishBase 
+Turbot B 0.035 DATRAS 
+Total mortality 0.5 Same as place 
+Q/B 3 Same as place 
+Diet   ratios approximate, species from 
+FishBase 
+Western Baltic 
+flatfish 
+B 0.007 DATRAS 
+Total mortality 0.7 Adjusted from place 
+Q/B 3.257 Adjusted from place 
+Diet   Fishbase 
+Table 4. Ecopath input parameters and their sources for lower links in trophic web (zooplankton, 
+benthos, primary producers). All biomasses (B) are in units of t/km2. P/B is production/biomass. 
+‘Q/B’ refers to consumption/biomass, ‘UA’ unassimilated consumption . Number in brackets is 
+initial value used in previous versions of the model and subsequently adjusted. All values are yearly. 
+Group name parameter Value source 
+Mysids B 
+ 
+calculated by EwE 
+P/B 5 (3) Adjusted (initialy Witek, 1995) 
+Q/B 15 Witek, 1995 
+Diet yes Bauer et al (2018) 
+Pseudocalanus sp B 1.93 Bauer et al (2018) 
+P/B 6.3 (6) Adjusted (initialy Witek, 1995) 
+Q/B 30 Witek, 1995 
+Diet yes Bauer et al (2018) 
+Acartia sp B 3.027 Bauer et al (2018) 
+P/B 20 
+(16.8) 
+Adjusted (initialy Witek, 1995) 
+Q/B 83 Witek, 1995 
+Diet yes Bauer et al (2018) 
+Temora sp B 2.271 Bauer et al (2018) 
+P/B 20 (12) Adjusted (initialy Witek, 1995) 
+Q/B 83 (60) Adjusted (initialy Witek, 1995) 
+Diet yes Bauer et al (2018) 
+zooplankton copepods B 5 
+ 
+P/B 10 Witek, 1995 
+Q/B 57 Witek, 1995 
+Diet yes, but 
+no 
+ratios 
+havet.nu 
+20 
+ 
+zooplankton 
+cladocerans  
+B 4.006 
+ 
+P/B 19.3 Witek, 1995 
+Q/B 97 Witek, 1995 
+Diet yes, but 
+no 
+ratios 
+havet.nu 
+Saduria B 2.4 (2) Adjusted (initially Bauer et al 
+(2018)) 
+P/B 1.3 Witek, 1995 
+Q/B 6.51 Witek, 1995 
+Diet yes Bauer et al (2018) 
+Mytilus sp B 3.46 
+(10) 
+Adjusted (initially Bauer et al 
+(2018)) 
+P/B 1.75 Witek, 1995 
+Q/B 8.73 Witek, 1995 
+Diet yes Bauer et al (2018) 
+Macoma baltica B 54.01 
+(45) 
+Adjusted (initially Bauer et al 
+(2018)) 
+P/B 0.4 Witek, 1995 
+Q/B 2 Witek, 1995 
+Diet yes Bauer et al (2018) 
+Deposit feeders B 9 Sharkweb, Aranda  survey 
+P/B 2 (1.85) Adjusted (initialy Witek, 1995) 
+Q/B 10 
+(9.35) 
+Adjusted (initialy Witek, 1995) 
+Diet yes 
+ 
+predatory  benthos B 0.86 Sharkweb, Aranda  survey 
+P/B 2.7 Witek, 1995 
+Q/B 13.5 Witek, 1995 
+Diet yes, but 
+no 
+ratios 
+havet.nu 
+Crabs B 4.5 Sharkweb 
+P/B 0.9 Witek, 1995 
+Q/B 5.22 Witek, 1995 
+Diet yes, but 
+no 
+ratios 
+havet.nu 
+Echinodermata B 3 Sharkweb 
+P/B 2 Witek, 1995 
+Q/B 4 Witek, 1995 
+21 
+ 
+Diet yes, but 
+no 
+ratios 
+havet.nu 
+Suspension feeders  B 21.5 Sharkweb, Aranda  survey 
+P/B 4 Witek, 1995 
+Q/B 10 Witek, 1995 
+Diet 
+  
+other benthos B 2.3 Sharkweb, Aranda  survey 
+P/B 3 Witek, 1995 
+Q/B 10 Witek, 1995 
+Diet 
+  
+Primary producers B 7.05 
+ 
+ 
+Table 5. Ecopath input (regular text) and output (bold text) parameters of the functional groups 
+used in the model. Biomass (B)  is in units of t/km2, production/biomass (P/B) and 
+consumption/biomass ( Q/B) ratios and total mortality (Z) are yearly rates. EE is ecotrophic 
+efficiency. TL is trophic level. 
+Group name B Z P/B Q/B EE Unassim. 
+consumption 
+TL 
+Ringed seal 0.004  0.1 8.79 0.000 0.2 4.04 
+Grey seal 0.007  0.1 17.5 0.000 0.2 4.17 
+Harbour seal 0.001  0.1 21.85 0.000 0.2 4.54 
+Harbour 
+porpoise 
+0.014  0.18 26.36 0.000 0.2 4.38 
+Fisheating 
+birds 
+0.002  0.1 130 0.000 0.2 4.00 
+EB Cod Juv 0.619 1.2  7.196 0.127 0.2 3.82 
+EB Cod Ad 0.500 0.9  3.5 0.496 0.17 4.06 
+WB Cod Juv 0.158 1  6.736 0.967 0.2 3.99 
+WB Cod Ad 0.150 0.9  3.5 0.484 0.2 4.13 
+Salmon 0.024  0.7 4 0.556 0.2 4.02 
+NB herring juv 0.577 1.25  5.764 0.658 0.2 3.05 
+NB herring ad 0.964 1  3 0.230 0.2 3.16 
+CB herring juv 1.169 1.2  6.550 0.310 0.2 3.03 
+CB herring ad 1.900 1  3.5 0.753 0.2 3.09 
+WB herring 
+juv 
+0.773 1  6.478 0.275 0.2 3.03 
+WB herring ad 1.660 0.9  3.5 0.163 0.2 3.08 
+Sprat Juv 5.623 1.865  8.466 0.233 0.2 3.00 
+Sprat Ad 3.017 1.24  4.63 0.634 0.2 3.00 
+Vendace 0.120  0.74 4.4 0.215 0.2 3.00 
+Stickleback 0.328  2.57 8.76 0.320 0.2 3.00 
+22 
+ 
+Smelt 0.184  0.66 2.7 0.500 0.2 3.25 
+NCB Flounder 
+ad 
+0.160  0.6 3.5 0.313 0.2 3.12 
+WCB Flounder 
+ad 
+0.500  0.6 3.5 0.702 0.2 3.41 
+Plaice ad 0.450  0.5 3 0.331 0.2 3.27 
+Turbot 0.035  0.5 3 0.740 0.2 3.94 
+Dab 0.250  0.5 3 0.848 0.2 3.23 
+Whiting 0.100  0.9 3.3 0.783 0.2 3.87 
+WB flatfish 0.007  0.7 3.257 0.525 0.2 3.31 
+WB other fish 3.741  1.5 4.5 0.500 0.2 2.72 
+Mysids 2.057  5 15 0.750 0.2 2.30 
+Pseudocalanus 
+sp 
+1.930  6.3 30 0.981 0.2 2.00 
+Acartia sp 3.027  20 83 0.269 0.2 2.00 
+Temora sp 2.271  20 83 0.729 0.2 2.00 
+zooplankton 
+copepods 
+5.000  10 57 0.252 0.2 2.00 
+zooplankton 
+cladocerans 
+4.006  19.3 97 0.423 0.2 2.00 
+Saduria 2.400  1.3 6.51 0.507 0.2 3.01 
+Mytilus sp 3.460  1.75 8.73 0.454 0.2 2.00 
+Limecola 
+balthica 
+(Macoma) 
+54.010  0.4 2 0.192 0.2 2.00 
+Deposit 
+feeders 
+9.000  2 10 0.653 0.2 2.00 
+predatory 
+benthos 
+0.860  2.7 13.5 0.163 0.2 2.80 
+crabs 4.500  0.9 5.22 0.057 0.2 2.90 
+echinodermata 3.000  2 4 0.911 0.2 3.00 
+suspention 
+feeders 
+21.500  4 10 0.070 0.2 2.00 
+other benthos 2.300  3 10 0.820 0.2 2.17 
+Primary 
+producers 
+7.050  200  0.877 0 1.00 
+Detritus 1645    0.339 0 1.00 
+ 
+ 
+ 
+23 
+ 
+Ecopath (see Box 1 for basic principles) integrates functional groups into a food-
+web structure under the principle of mass balance: the biomass available at each 
+trophic level must be sufficient to support predation by higher trophic levels and 
+fisheries catches, with energy supplied through primary production and trophic 
+transfers. As a static model, Ecopath reconstructs a snapshot of the ecosystem that 
+is internally balanced in terms of energy and biomass flows, representing conditions 
+in a specific reference year. For this study, the year 2004 was selected as the base 
+3. Ecopath: method, results, diagnostics 
+Box1: Principles of Ecopath 
+The Ecopath modelling approach is founded on the principle of mass balance, 
+which ensures that all energy and biomass entering a functional group within an 
+ecosystem is fully accounted for through various loss processes. These include 
+predation, respiration, unassimi lated food, fishing mortality, and other forms of 
+mortality. The Ecopath model provides a static, steady-
+state snapshot of 
+ecosystem structure and function, typically representing average conditions over 
+a defined temporal baseline (usually one year). 
+The model operates under the assumption that, for each functional group, 
+inputs and outputs of energy (or biomass) are in balance. This is formalized 
+through two primary master equations: 
+1. Energy Balance Equation: 
+Consumption=production+respiration+unassimilated food 
+This equation represents the partitioning of consumed energy. A portion is con-
+verted into biomass (production), some is used for metabolic maintenance (respi-
+ration), and the remainder is lost as unassimilated matter (e.g., feces or excreted 
+waste). 
+2.   Production Balance Equation: 
+Production=predation mortality+fishing mortality+biomass accumulation+net 
+migration+other mortality 
+This equation describes the fate of the production within each group. 
+Production may be removed via consumption by predators, harvested through 
+fisheries, lost or gained through migration, or lost due to natural causes such as 
+disease or senescence. In som e cases, biomass may also accumulate if growth 
+exceeds losses. 
+24 
+ 
+year, since it is the beginning of consistent fisheries effort data available for the 
+Baltic Sea. 
+To achieve mass balance, Ecopath requires a set of key input parameters for each 
+functional group: 
+• Biomass (in t/km²); 
+• Production rate, typically expressed as the production -to-biomass ratio 
+(P/B); 
+• Consumption rate, expressed as the consumption-to-biomass ratio (Q/B); 
+• Diet composition, specifying trophic links among groups. 
+Where available, biomass values were sourced from stock assessment reports, 
+scientific surveys, and official statistics. When such data were unavailable, values 
+were derived from published literature or estimates from other ecosystem models. 
+For three func tional groups: smelt, mysids, and Western Baltic “other fish”, 
+biomass data were not available; therefore, Ecopath estimated their biomass as part 
+of the balancing procedure. 
+Values for P/B and Q/B ratios were taken from empirical studies whenever 
+possible. In the absence of specific empirical estimates, values were taken from 
+Ecopath parameter databases, regional studies, or ecosystem modelling literature 
+relevant to the Baltic Sea (e.g., Christensen et al., 2005; Coll et al., 2008). 
+Additionally, the model includes a habitat area parameter for each functional 
+group, representing the proportion of the total Baltic Sea area inhabited by the 
+group. For groups distributed across the entire sea, the habitat area value was set to 
+1. Value 1 was also assigned to functional groups defined using multistanza 
+structure (i.e., with separate juvenile and adult stanzas), as Ecopath requires a value 
+of 1 for each stanza group regardless of actual spatial restriction.  For these groups 
+biomass was divi ded by size of entire Baltic. For groups limited to specific 
+subregions, habitat area values were assigned based on the relative size of each sub-
+basin: Northern Baltic (0.29), Western Baltic (0.127), Central Baltic (0.583). 
+However, the value for the Central Baltic was not directly used, since only 
+multistanza-defined fish groups inhabit this region exclusively, and these require a 
+habitat area value of 1 by default. For species with a distribution spanning multiple 
+regions, the habitat area value was calculated as the sum of the proportions for the 
+corresponding subregions. For example, Atlantic salmon ( Salmo salar ), which 
+migrates between the Northern and Central Baltic, was assigned a habitat area of 
+0.873 (0.29 + 0.583). T his spatial parameterization enables the model to 
+approximate the ecological footprint of each functional group and ensures accurate 
+scaling of biomass and energy flow across the Baltic Sea heterogeneous subregions. 
+The Ecopath model incorporates fishing pressure through the inclusion of 10 
+distinct fishing fleets (Table 6), each representing a specific aggregation of fishing 
+activities. These fleets are defined based on combinations of gear type and vessel 
+size categ ory, following the classification system developed by the Scientific, 
+25 
+ 
+Technical, and Economic Committee for Fisheries -  STECF (STECF, 2006). This 
+approach ensures that the diversity and specialization of the Baltic Sea fisheries are 
+adequately captured, reflecting their impacts on ecosystem structure and function. 
+Each fleet was characterized by its interaction with different functional groups and 
+life stages (stanzas) of species within the model. The proportions of landings and 
+discards for each functional group and stanza were assigned using STECF data for 
+the year 2004, which corresponds to the base year of the model. These data provide 
+detailed records of catch composition, fleet effort, and discard rates, enabling 
+realistic parameterization of fishing mortality for both target and non-target species. 
+This fleet-based representation is essential for simulating the difference in impact 
+of fishing gears on various components of the ecosystem, including demersal versus 
+pelagic species, juveniles versus adults, and retained versus discarded biomass. 
+Moreover, it provides a structured foundation for exploring management scenarios, 
+such as gear -selective regulations or fleet -specific effort reductions, within the 
+dynamic Ecosim simulations. 
+Table 6. Ecopath model fleet groups based on type of operation (active or passive bottom, pelagic), 
+type of gear used and size of vessel in STECF data. 
+Ecopath fleet  STECF gears  STECF size categories  
+ACT0018  'DEM_SEINE','OTTER','R-
+DEM_SEINE','R-OTTER'  
+'O10T12M','O8T10M','U8M','O12T18M
+','U10M'  
+ACT1824  'DEM_SEINE','OTTER','R-
+DEM_SEINE','R-OTTER'  
+'O18T24M'  
+ACT2440  'DEM_SEINE','OTTER',  
+'R-DEM_SEINE','R-OTTER'  
+'O24T40M'  
+PAS0012  'GILL','POTS','R-
+GILL','LONGLINE','R-
+LONGLINE','TRAMMEL','R
+-TRAMMEL'  
+'O10T12M','O8T10M','U8M','U10M'  
+PAS1218  'GILL','POTS','R-
+GILL','LONGLINE','R-
+LONGLINE','TRAMMEL','R
+-TRAMMEL'  
+'O12T18M'  
+PAS1840  'GILL','POTS','R-
+GILL','LONGLINE','R-
+LONGLINE','TRAMMEL','R
+-TRAMMEL'  
+'O18T24M', 'O24T40M'  
+PEL0018  'PEL_SEINE','PEL_TRAWL'
+,'R-PEL_TRAWL'  
+'O10T12M','O8T10M','U8M','O12T18M
+','U10M'  
+PEL1824  'PEL_SEINE','PEL_TRAWL'
+,'R-PEL_TRAWL'  
+'O18T24M'  
+26 
+ 
+PEL2440  'PEL_SEINE','PEL_TRAWL'
+,'R-PEL_TRAWL'  
+'O24T40M'  
+PEL4000  'PEL_SEINE','PEL_TRAWL'
+,'R-PEL_TRAWL'  
+'O40M'  
+To assess whether the Ecopath model output was both mass- balanced and 
+ecologically realistic, we applied a Pre- balance (Prebal) analysis following the 
+approach described by Link (2010) and further elaborated in Ecopath modelling 
+guidelines (Heymans et al. 2016). This diagnostic tool helps verify that the 
+modelled food web follows the general patterns observed in natural ecosystems. A 
+key assumption in ecological theory is that biomass should decline with increasing 
+trophic level, due to the cumulative energy loss associated with trophic transfers 
+(typically 90% loss between levels). As such, the slope of a linear regression 
+between the logarithm of biomass and trophic level should fall within a typical 
+range of 5– 10%. This slope serves as a proxy for trophic  transfer efficiency and 
+indicates whether energy flows through the food web in a biologically realistic 
+manner. In our model, the estimated slope of this regression was 7.5% ( Figure 3), 
+which lies well within the expected theoretical range. This result suggests that the 
+model adequately captures realistic energy loss patterns across the trophic hierarchy 
+and meets key mass -balance criteria. Nevertheless, a few functional groups 
+deviated from the expected biomass -trophic level trendline, including harbour 
+seals, Western Baltic flatfish (sole and brill), EB cod (both juveniles and adults) 
+and Limecola balthica. These deviations may reflect uncertainties in parameter 
+estimation (e.g., biomass, diet composition), data limitations, or real -world 
+ecological anomalies. These groups may require further review and potential 
+refinement to improve overall model realism and predictive accuracy. 
+ 
+ 
+
+27 
+ 
+Figure 3. Declining biomass with increasing trophic level. Line: linear regression.  
+28 
+ 
+The static mass-balanced output from Ecopath served as the initial condition for the 
+Ecosim dynamic simulations  (see Box 2 for principles). Ecosim was used to 
+simulate temporal changes in the Baltic Sea food web from the base year 2004 until 
+2019, providing insight into the ecosystem's responses to changing fishing pressure 
+and environmental conditions over time. The simulations were driven by time series 
+of fishing effort, fishing mortality rates and primary production (Figures 4-6).  
+To ensure the model realistically reflected observed historical ecosystem dynamics, 
+it was fitted to a range of empirical time series (Table 7), including stock assessment 
+results, scientific survey data, and fisheries catch statistics ( Figures 7-11). This 
+fitting process allowed for the adjustment of key parameters, such as vulnerability 
+settings to optimize the model’s alignment with observed trends. The close match 
+between model outputs and empirical data provides confidence in the model’s 
+ability to  reproduce historical ecosystem dynamics and its potential utility in 
+forecasting future scenarios under alternative management and environmental 
+conditions. 
+ 
+4. Ecosim: input and results 
+Box2: Principles of Ecosim 
+Ecosim is the dynamic simulation module of the Ecopath with Ecosim (EwE) 
+modelling framework. It extends the static, mass-balanced snapshot provided by 
+Ecopath into a time -dynamic model that simulates changes in biomass, energy 
+flow, and trophic interactions over time. Ecosim allows for the evaluation of eco-
+system responses to external drivers such as fishing pressure, environmental 
+variability, and species interactions. 
+The core of Ecosim is a set of differential equations that govern the biomass 
+dynamics of each functional group based on ecological and anthropogenic pro -
+cesses. 
+The general form of the Ecosim master equation for each functional group i is: 
+growth rate = growth efficiency × total consum ption by i on its prey -  total 
+consumption on i by its predators + immig ration rate - (fishing mortality rate + 
+other mortality + emigration rate) × biomass 
+29 
+ 
+Table 7. Time series used in Ecosim 
+Name Period  Source 
+Ringed seal_HELCOM 2004-2016 HELCOM 
+Grey seal_HELCOM 2004-2017 HELCOM 
+Harbour seal_HELCOM 2004-2017 HELCOM 
+Fisheating birds_Henth 2004-2014 HELCOM 
+EB Cod Juv_SS3 2004-2019 ICES WGBFAS 2020 
+EB Cod Juv_BITS1 2004-2019 DATRAS 
+EB Cod Ad_SS3 2004-2019 ICES WGBFAS 2020 
+EB Cod Ad_BITS1 2004-2019 ICES WGBFAS 2020 
+WB Cod Juv_SAM 2004-2019 ICES WGBFAS 2020 
+WB Cod Juv_BITS1 2004-2019 DATRAS 
+WB Cod Ad_SAM 2004-2019 ICES WGBFAS 2020 
+WB Cod Ad_BITS1 2004-2019 DATRAS 
+Salmon_smolt_as 2004-2019 ICES WGBAST 2021 
+NB herring ad_SS3 2004-2019 ICES WGBFAS 2020 
+NB herring ad_BIAS 2007-2017 BIAS 
+CB herring juv_as 2004-2019 ICES WGBFAS 2020 
+CB herring ad_as 2004-2019 ICES WGBFAS 2020 
+CB herring juv_sur 2004-2019 BIAS 
+CB herring ad_sur 2004-2019 BIAS 
+WB herring juv_sur 2004-2019 ICES WGBFAS 2020 
+WB herring ad_sur 2004-2019 BIAS 
+WB herring juv_as 2004-2019 ICES WGBFAS 2020 
+WB herring ad_as 2004-2019 ICES WGBFAS 2020 
+sprat Juv_sur 2004-2019 BIAS 
+Sprat Ad_sur 2004-2019 BIAS 
+sprat Juv_as 2004-2019 ICES WGBFAS 2020 
+Sprat Ad_as 2004-2019 ICES WGBFAS 2020 
+Vendace 2004-2019 M. Bergenius Nord 
+Stickleback 2004-2014 Olsson et. al., 2019 
+Smelt 2004-2017 DATRAS 
+NCB Flounder ad_BITS1 2004-2019 DATRAS 
+WCB Flounder ad 2004-2019 ICES WGBFAS 2020 
+Plaice ad_sur 2004-2019 DATRAS 
+Plaice ad_as 2004-2019 ICES WGBFAS 2020 
+Turbot 2004-2019 DATRAS 
+Dab 2004-2019 DATRAS 
+Whiting 2004-2019 DATRAS 
+WB flatfish 2004-2019 DATRAS 
+Pseudocalanus sp 2004-2019 SHARK/ICES WGIAB 
+30 
+ 
+Acartia sp 2004-2019 SHARK/ICES WGIAB 
+Temora sp 2004-2019 SHARK/ICES WGIAB 
+zooplankton copepods 2004-2019 SHARK/ICES WGIAB 
+zooplankton cladocerans 2004-2019 SHARK/ICES WGIAB 
+Saduria 2004-2019 SHARK/ICES WGIAB 
+Mytilus sp 2004-2019 SHARK/ICES WGIAB 
+Limecola balthica (Macoma) 2004-2019 SHARK/ICES WGIAB 
+Deposit feeders 2004-2019 SHARK/ICES WGIAB 
+predatory benthos 2004-2019 SHARK/ICES WGIAB 
+Crabs 2004-2019 SHARK/ICES WGIAB 
+echinodermata 2004-2019 SHARK/ICES WGIAB 
+suspention feeders 2004-2019 SHARK/ICES WGIAB 
+other benthos 2004-2019 SHARK/ICES WGIAB 
+PhytoC_spr_orig 2004-2019 BALTSEM 
+PhytoC_sum_orig 2004-2019 BALTSEM 
+EB Cod Juv_Catch 2004-2019 ICES WGBFAS 2020 
+EB Cod AD_Catch 2004-2019 ICES WGBFAS 2020 
+WB Cod Juv_Catch 2004-2019 ICES WGBFAS 2020 
+WB Cod Ad_Catch 2004-2019 ICES WGBFAS 2020 
+Salmon_Catch 2004-2019 STECF 
+NB herring juv_catch 2004-2019 ICES WGBFAS 2020 
+NB herring ad_catch 2004-2019 ICES WGBFAS 2020 
+CB herring juv_catch 2004-2019 ICES WGBFAS 2020 
+CB herring ad_catch 2004-2019 ICES WGBFAS 2020 
+WB herring juv_catch 2004-2019 ICES WGBFAS 2020 
+WB herring ad_catch 2004-2019 ICES WGBFAS 2020 
+Sprat Juv_catch 2004-2019 ICES WGBFAS 2020 
+Sprat Ad_catch 2004-2019 ICES WGBFAS 2020 
+Vendace_catch 2004-2019 STECF 
+Stickleback_catch 2014-2019 STECF 
+Smelt_catch 2004-2019 STECF 
+NCB Flounder ad_catch 2004-2019 ICES WGBFAS 2020 
+WCB Flounder ad_catch 2004-2019 ICES WGBFAS 2020 
+Plaice ad_catch 2004-2019 ICES WGBFAS 2020 
+Turbot_catch 2004-2019 ICES WGBFAS 2020 
+Dab_catch 2004-2019 ICES WGBFAS 2020 
+Whiting_catch 2004-2019 STECF 
+WB flatfish_catch 2004-2019 STECF 
+WB other fish_catch 2004-2019 STECF 
+EB Cod Juv_F 2004-2019 ICES WGBFAS 2020 
+EB Cod Ad_F 2004-2019 ICES WGBFAS 2020 
+31 
+ 
+WB Cod Juv_F 2004-2019 ICES WGBFAS 2020 
+WB Cod Ad_F 2004-2019 ICES WGBFAS 2020 
+NB herring ad_F 2004-2019 ICES WGBFAS 2020 
+CB herring juv_F 2004-2019 ICES WGBFAS 2020 
+CB herring ad_F 2004-2019 ICES WGBFAS 2020 
+WB herring juv_F 2004-2019 ICES WGBFAS 2020 
+WB herring ad_F 2004-2019 ICES WGBFAS 2020 
+Sprat Juv_F 2004-2019 ICES WGBFAS 2020 
+Sprat Ad_F 2004-2019 ICES WGBFAS 2020 
+Plaice ad_catch 2004-2019 STECF 
+effort_ACT0018 2004-2019 STECF 
+effort_ACT1824 2004-2019 STECF 
+effort_ACT2440 2004-2019 STECF 
+effort_PAS0012 2004-2019 STECF 
+effort_PAS1218 2004-2019 STECF 
+effort_PAS1840 2004-2019 STECF 
+effort_PEL0018 2004-2019 STECF 
+effort_PEL1824 2004-2019 STECF 
+effort_PEL2440 2004-2019 STECF 
+effort_PEL4000 2004-2019 STECF 
+ 
+Figure 4. Time series of spring and summer biomasses of phytoplankton. 
+ 
+
+32 
+ 
+Figure 5. Time series of fish fishing mortalities estimated in stock assessments. 
+Figure 6. Time series of fisheries efforts for each fleet category (see table 6 for details). 
+The vulnerability parameters (Table A1 in S upplementary material) are central to 
+the structure and behaviour of the Ecosim model representing predator -prey 
+interactions. Vulnerability values quantify the susceptibility of prey populations to 
+predation, reflecting the principles of the "foraging are na theory" implemented in 
+Ecosim. According to this theory, prey populations are conceptually divided into 
+vulnerable and invulnerable states, with predators having access primarily to the 
+vulnerable fraction at a ny given moment (Walters et al., 1997; Christensen and 
+Walters, 2004). 
+
+33 
+ 
+A low vulnerability parameter (close to 1 or 2, as observed for many predator -
+prey pairs in this table) implies strong prey refuge or limited accessibility of prey 
+to predators, resulting in a bottom- up controlled food web. Conversely, very high 
+vulnerability values (as noted for some predator -prey pairs, e.g., North Baltic 
+herring juvenile predation on stickleback with a value of 1e+08) suggest a scenario 
+with limited prey refuge, effectively representing a top -down control where 
+predator biomass strongly influences prey biomass dynamics. Such high values, 
+often deliberately extreme, are typically used to simulate specific predator- prey 
+relationships where predation intensity and trophic cascades are hypothesized to be 
+dominant ecological drivers. The curre nt vulnerability settings suggest differing 
+ecological assumptions across trophic interactions. For instance, several key fish 
+groups, such as cod, herring and sprat (both juvenile and adult), exhibit substantial 
+vulnerabilities (ranging from approximately 17.8 to 56.4). These indicate that these 
+groups are susceptible to predation. Conversely, the relatively low vulnerability 
+assigned to top predators (e.g., seals and harbour porpoises with values around 2) 
+indicates these species are less vulnerable to pr edation, consistent with their 
+ecological roles. 
+4.1.1 Model fit and validation (modelled vs data) 
+To evaluate the performance of the Ecosim model, outputs were compared against 
+observed time series from scientific surveys, stock assessments, and fisheries catch 
+statistics over the period 2004 –2019. Figures 7-11 present visual comparisons 
+between modelled trajectories (lines) and empirical data (points) for biomass and 
+catch across multiple functional groups.  Additionally, goodness of fit ( Sum of 
+Squared differences; SS) is presented. A lower SS indicate a better fit to specific 
+dataset, while high value shows potential issues with fitting. 
+The model captured the overall trends in seal biomasses ( Figure 7) reasonably 
+well, with the exception of ringed seals, where a mismatch was observed toward 
+the end of the time series, suggesting potential issues with overestimation in recent 
+years.  
+For Eastern Baltic (EB) cod, the modelled biomass showed considerable 
+fluctuations; however, these fluctuations corresponded well with the trends 
+observed in survey indices (BITS1) for juvenile cod. In the case of Western Baltic 
+(WB) cod, the model did not fit the stock assessment results (SAM) well during the 
+early years of the time series, but the fit improved substantially from 2008 onward. 
+However, when compared to survey data (BITS1), the model fit was better at the 
+beginning of the time series and worsened slightly in later years. 
+From the group grey seals have the lowest SS value indicating good fit of model 
+estimates to data, while WB cod the highest indicating the misfit especially at the 
+beginning of time -series. However for fisheating birds SS value is low, visual 
+inspection of fit suggest rather poor fit, especially in the second half of time-series. 
+34 
+ 
+ 
+Figure 7. Fit of modelled biomasses (line) of higher trophic levels to survey or assessment (dots).  
+Values indicate contribution of dataset to Sum of Squared differences (SS). 
+The model fit for Northern Baltic (NB) herring (Figure 8) was generally good, 
+although the fit to the adult biomass from the stock assessment (SS3) was weaker, 
+except during the middle of the time series where the model briefly captured 
+observed trends. For Central Baltic (CB) herring the model showed reasonable 
+agreement for adult survey-based indices (sur), though juvenile biomass exhibited 
+excessive fluctuations not reflected in the data. For Western Baltic (WB) herring, 
+the model provided its best performance  (though fit to adult biomass from survey 
+got the highest SS value), especially for adult biomass during 2010–2015. Juvenile 
+WB herring fits were moderately accurate but failed to capture the highest peaks 
+observed in survey data. 
+Among clupeids, the model fit for sprat biomass was the poorest. Adult sprat 
+biomass from surveys was underestimated in both magnitude and variability, 
+whereas the model fit for juvenile sprat was better aligned with observed patterns, 
+particularly in the later part of the time series. Still, the model tended to 
+overestimate biomass levels in years with known stock declines. 
+ 
+
+35 
+ 
+ 
+Figure 8. Fit of modelled biomasses (line) of clupeids to survey or assessment (dots). Values indicate 
+contribution of dataset to Sum of Squared differences (SS). 
+The biomasses of other fish stocks ( Figure 9) were generally well captured by the 
+model, including vendace, stickleback, and flounder, with trajectories following the 
+main patterns of survey data. However, some species, especially smelt and Northern 
+and Central Baltic flounder, were modelled with high uncertainty.  
+Model fits for plaice, turbot, and dab were acceptable in early years but diverged 
+from survey trends toward the end of the time series, with the model consistently 
+underestimating observed biomasses. This discrepancy suggests either emerging 
+ecological ch anges not accounted for in the model or limitations in survey 
+catchability estimates. 
+Modelled salmon smolt biomass showed limited variation and underestimated 
+the observed peaks, indicating potential issues in recruitment parameterisation. 
+Among zooplankton and bentic organisms (Figure 10) Saduria, Acartia, Temora 
+and clasocerans had a good fit to data, while crabs and suspension feeders were 
+completely and Pseudocalanus to a large extent misfitting data. 
+ 
+
+36 
+ 
+ 
+Figure 9. Fit of modelled biomasses (line) of other fish to survey or assessment (dots).  Values 
+indicate contribution of dataset to Sum of Squared differences (SS). 
+ 
+ 
+Figure 10. Fit of modelled biomasses (line) to zooplankton and benthos data (dots). Values indicate 
+contribution of dataset to Sum of Squared differences (SS). 
+
+37 
+ 
+ 
+Figure 11. Fit of modelled catches (line) of cod and clupeids to data (dots).  Values indicate 
+contribution of dataset to Sum of Squared differences (SS). 
+Modelled catches of cod stocks and clupeids ( Figure 11) show considerable 
+temporal fluctuations, reflecting realistic dynamics in exploitation rates and stock 
+variability. However, fit to observed catch data was weak overall, particularly for 
+cod and juvenile herring. 
+For cod, juvenile catches in both the EB and WB regions were overestimated 
+during several years, whereas adult catch trends were only moderately well 
+captured. Fit to WB cod juvenile catch was relatively strong after 2008, consistent 
+with biomass fit improvements (Figure 8). 
+For clupeids, Western Baltic herring adult catch align ed well with reported 
+landings, while juvenile catches were overestimated resulting in largest SS value. 
+Catch fits for sprat were more variable: adult  sprat catch was reasonably 
+represented, while juvenile sprat catch was notably overestimated, possibly due to 
+overestimation of stock size or selectivity. 
+
+38 
+ 
+ 
+Figure 12. Fit of modelled catches (line) of other fish to data (dots). Values indicate contribution of 
+dataset to Sum of Squared differences (SS). 
+Fit to catches of other fish groups (Figure 12) were generally good, except for WB 
+other fish and stickleback (which got the highest SS values) , however most of the 
+groups reflect a strange artifact visible as a bump in the middle or end of the time-
+series. 
+Overall, the model reasonably reproduces observed trends in biomass and 
+catches across major functional groups, especially for seals, herring, and juvenile 
+cod. However, mismatches for some groups (e.g., smelt, sprat, ringed seals, flatfish) 
+suggest areas, where further parameter refinement, improved environmental 
+forcing, or consideration of additional ecological processes (e.g., migration, 
+disease, unobserved predation) may enhance performance. 
+The model’s ability to capture key interannual variability while maintaining 
+ecological realism supports its utility for exploring ecosystem -based management 
+scenarios. However, future refinements should focus on improving model-data fits 
+for underperforming groups and validating assumptions about fishing selectivity, 
+habitat use, and environmental sensitivity. 
+Evaluation of goodness of fit 
+To quantitatively evaluate the goodness-of-fit of the Ecosim model and provide an 
+objective metric for comparing alternative parameterisations, Akaike’s Information 
+Criterion (AIC) and its small- sample correction (AICc) were calculated. These 
+metrics balance model fit against complexity by penalising higher numbers of free 
+
+39 
+ 
+parameters, making them particularly well suited for evaluating Ecosim calibration 
+choices. For least‑squares models such as Ecosim, AIC is computed as: 
+𝐴𝐴𝐴𝐴𝐴𝐴= 𝑛𝑛 ∙ln(𝑅𝑅𝑅𝑅𝑅𝑅) + 2𝐾𝐾, 
+where RSS is the residual sum of squares from the fitting procedure, n is the total 
+number of empirical observations, and K  is the number of estimated parameters 
+(including one parameter representing residual variance). The corrected criterion 
+AICc is defined as: 
+𝐴𝐴𝐴𝐴𝐴𝐴𝑐𝑐= 𝐴𝐴𝐴𝐴𝐴𝐴+ 2𝐾𝐾(𝐾𝐾+ 1)
+𝑛𝑛 − 𝐾𝐾 −1  
+For the primary Ecosim calibration run, the model yielded a residual sum of 
+squares of RSS = 985.6, based on n = 1421 observations and K  = 44 fitted  
+parameters. Substituting these into the equations gives: 
+𝑅𝑅𝑅𝑅𝑅𝑅= 0.6936, ln(𝑅𝑅𝑅𝑅𝑅𝑅) = −0.3665, 
+𝐴𝐴𝐴𝐴𝐴𝐴= −433.61,   𝐴𝐴𝐴𝐴𝐴𝐴𝑐𝑐= −430.73. 
+These strongly negative values indicate a comparatively good fit once model 
+complexity is accounted for. 
+ 
+40 
+ 
+The development of a full -scale Ecopath with Ecosim (EwE) model covering the 
+majority of the Baltic Sea (ICES Subdivisions 22 -32, excluding the Gulf of Riga) 
+marks a significant step forward in holistic ecosystem modelling for this complex 
+brackish water body. It provides a more integrated and ecologically coherent basis 
+for understanding and managing the cumulative impacts of fisheries, 
+eutrophication, and climate change under varying environmental regimes. 
+Previous EwE efforts in the Baltic Sea have been limited in spatial or functional 
+scope. For instance, Bauer et al. (2019) constructed a well -resolved model for the 
+Central Baltic Sea (ICES SDs 25 -28), focusing primarily on mid -trophic level 
+interactions a nd key pelagic species such as cod, herring, and sprat. Similarly, 
+Western Baltic (Opitz & Froese, 2019), Finish Archipelago (Uusitalo et al. 2023), 
+Gdansk Basin (Calkiewicz  et al. 2019), Lithuanian coast, Gulf of Riga and Puck 
+Bay (Tomczak et al. 2009) m odels have been developed, but these were largely 
+confined to regional scale and national waters or focused on localized processes. 
+Compared to these regional models, the present Baltic- wide model provides a 
+holistic spatial framework, capable of analysing cross- basin connectivity, regional 
+productivity gradients, and the distributional dynamics of species that span multiple 
+sub-basins. This spatial comprehensiveness is particularly important in the context 
+of basin-specific hydrographic conditions (e.g. salinity, oxygen), which influence 
+critical processes such as cod recruitment (Hinrichsen et al., 2011) and trophic 
+interactions across benthic and pelagic subsystems. 
+A major strength of the model lies in its resolution of functional groups, 
+particularly fish species structured by life stages (via multistanza groups), the 
+inclusion of detailed zoobenthic and zooplankton taxa, and a top predator guild 
+comprised of seals, seabirds, and harbour porpoise. These inclusions allow for 
+realistic simulations of trophic dynamics and top- down controls, improving upon 
+previous aggregated representations that could mask ontogenetic shifts and 
+ecosystem feedbacks (Walters et al., 2008). 
+The model demonstrates generally good performance in reconstructing 
+empirical time series for many functional groups (Figures 3-6). Biomass fits for top 
+predators and juvenile cod are particularly strong, while adult clupeid dynamics are 
+captured reasonabl y well. Nevertheless, biomass for some groups (e.g., smelt, 
+mysids, ringed seals) and catch dynamics for sprat show room for improvement, 
+5. Discussion 
+41 
+ 
+indicating data limitations and the potential need for refined parameterisation or 
+incorporation of ecological processes such as migration, density dependence, or 
+disease. 
+As part of the evaluation of model performance, Akaike’s Information Criterion 
+(AIC) and its small- sample correction (AICc) were calculated to complement the 
+visual assessment of model -data fit. These metrics provide an objective way to 
+compare alternative calibration settings by balancing goodness -of-fit against the 
+number of parameters estimated. For least -squares models such as Ecosim, AIC 
+was calculated using the total number of observational data points (n), the residual 
+sum of squares ( RSS), and the number of fitted parameters (K ). In the primary 
+calibration run, the Ecosim model produced RSS  = 985.6, based on n = 1421 
+observations and K  = 44 fitted parameters. The resulting values (AIC = –433.61; 
+AICc = –430.73) indicate a strong fit relative to the level of model complexity and 
+provide a sound reference point for comparing future calibration variants. 
+Incorporating AIC and AICc into the  calibration workflow provides a transparent 
+and reproducible basis for comparing alternative vulnerability patterns,  forcing 
+structures, or parameter sets, complementing visual inspection of model- data 
+agreement. In interpreting these results, the AIC and AICc values support the 
+conclusion that the current vulnerability structure and parameterisation achieve an 
+efficient balance between explanatory power and parsimony. The negative values 
+reflect a model that captu res the main temporal dynamics of the Baltic Sea food 
+web without excessive parameterisation. These criteria also establish a transparent 
+basis for evaluating alternative Ecosim configurations, such as revised vulnerability 
+patterns or forcing functions , ensuring that increases in complexity are accepted 
+only when they result in demonstrably improved model performance. 
+The model is subject to several limitations. Some biomass inputs had to be 
+estimated internally (e.g., for mysids and smelt) due to data unavailability, 
+introducing parameter uncertainty. Catch fit performance is also variable, 
+particularly in early years of the time series, possibly reflecting inconsistent fishing 
+effort data or unreported discards. Additionally, the exclusion of the Gulf of Riga 
+(due to its distinct hydrography and enclosed nature) means the model cannot 
+account for ecological connectivit y involving this sub- basin, including migration 
+routes or larval dispersal. Another notable limitation is that the lower trophic levels, 
+particularly microbial loops and phytoplankton phenology, are represented in a 
+simplified manner. This may constrain the model’s ability to fully capture bottom-
+up control mechanisms, which can be critical during periods of environmental 
+perturbation or regime shifts. 
+The model provides a robust tool for informing ecosystem -based fisheries 
+management (EBFM) and Marine Strategy Framework Directive (MSFD) 
+implementation. Under MSFD, EU Member States are required to achieve Good 
+Environmental Status (GES) across 11 descrip tors, many of which are ecological 
+42 
+ 
+(e.g., D1: Biodiversity, D4: Food webs, D3: Commercial fish and shellfish). EwE 
+models directly contribute to Descriptors 3 and 4 by simulating trophic flows, 
+biomass dynamics, and fisheries pressure. By integrating environmental drivers, 
+this model also allows for scenario testing relevant to Descriptor 5 (Eutrophication) 
+and Descriptor 7 (Hydrography). For instance, the model could be used to explore 
+how nutrient reduction targets or salinity shifts due to climate change affect trophic 
+transfer and stock productivity. 
+In the context of EBFM, the model supports:  
+• Multi-species harvest strategy evaluation, considering predator -prey 
+feedbacks,  
+• Trade-off analysis between conservation goals (e.g., seal recovery) and 
+fishing yields, 
+• Management Strategy Evaluation (MSE) to compare outcomes under 
+different policy options, fishing effort allocations, or climate scenarios.  
+Furthermore, the model can help evaluate Good Environmental Status thresholds 
+effects, for example, by simulating thresholds beyond which cod recruitment 
+collapses due to hypoxia or low salinity (Lehmann et al., 2022).  
+To enhance model robustness and utility, several future developments are 
+recommended:  
+• Adding environmental forcing variables (i.e. salinity, temperature, and 
+nutrient concentrations) to link physical and biogeochemical processes to 
+biological dynamics. 
+• Integration with coupled physical-biogeochemical models (e.g., ERGOM or 
+GETM) to simulate fine-scale salinity and oxygen dynamics,  
+• Adding a spatial component of analysis (Ecospace) 
+• Bayesian parameter estimation or Monte Carlo simulation to incorporate 
+uncertainty in key inputs, 
+• Inclusion of socio-economic layers (e.g., fleet dynamics, market responses) 
+for full end-to-end modelling. 
+ 
+43 
+ 
+Antti Halkka, A., Tolvanen, P.  (2017). The Baltic Ringed Seal – An Arctic Seal in 
+European Waters – WWF Finland report 36. 
+Aarefjord, H., Bjørge, A., Kinze, C. C., Lindstedt, I. (1995). Diet of the harbour porpoise 
+Phocoena Phocoena in Scandinavian waters. - Rep. Int. Whal. Commn. (special 
+issue) 16: 211-222 
+Andersen, S. M., Teilmann, J., Harders, P. B., Hansen, E. H., and Hjollund, D. (2007). 
+Diet of harbour seals and great cormorants in Limfjord, Denmark: interspecific 
+competition and interaction with fishery. ICES Journal of Marine Science, 64: 
+1235–1245. 
+Berggren, P., Pettersson, F. (1990). Observationer av tumlare i svenska kust- och 
+havsomraden. Fauna och Flora 85:100-106. 
+Calkiewicz, J., Drgas, A., Smolinski, S., Tomczak, M.T., Margonski, P., Muller-Karulis, 
+B., Szymanek, L. (2019). Ecopath and Ecosim as tools in foodweb understanding 
+- the Gulf of Gdansk example. Front. Mar. Sci. Conference Abstract: XX Iberian 
+Symposium on Marine Biology Studies (SIEBM XX) . 
+https://doi.org/10.3389/conf.fmars.2019.08.00014 
+Christensen, V., Pauly, D. (1992). ECOPATH II—a software for balancing steady -state 
+ecosystem models and calculating network characteristics. Ecological Modelling, 
+61(3-4), 169–185. 
+Christensen, V., Walters, C. J. (2004). Ecopath with Ecosim: methods, capabilities and 
+limitations. Ecological Modelling, 172(2–4), 109–139. 
+Christensen, V., Walters, C. J., Pauly, D. (2005). Ecopath with Ecosim: a user's guide. 
+Fisheries Centre, University of British Columbia. 
+Conley, D. J., et al. (2009). Hypoxia-related processes in the Baltic Sea. Environmental 
+Science & Technology, 43(10), 3412–3420. 
+Crain, C. M., Kroeker, K., Halpern, B. S. (2008). Interactive and cumulative effects of 
+multiple human stressors in marine systems. Ecology Letters, 11(12), 1304–1315. 
+Elmgren, R., Hill, C. (1997). Ecosystem function at low biodiversity – the Baltic example. 
+In: Ormond, R.F.G., Gage, J.D., Angel, M.V. (Eds.), Marine Biodiversity: 
+Patterns and Processes. Cambridge University Press. 
+Griffiths, J. R., Kadin, M., Nascimento, F. J., et al. (2017). The importance of benthic–
+pelagic coupling for marine ecosystem functioning in a changing world. Global 
+Change Biology, 23(6), 2179–2196. 
+Heymans, J.J., Coll, M., Link, J.S., Mackinson, S., Steenbeek, J., Walters, C., 
+Christensen, V. (2016). Best practice in Ecopath with Ecosim food-web models 
+References 
+44 
+ 
+for ecosystem-based management. Ecological Modelling, 331, 173-184, 
+https://doi.org/10.1016/j.ecolmodel.2015.12.007. 
+HELCOM (2023): State of the Baltic Sea. Third HELCOM holistic assessment 2016-
+2021. Baltic Sea Environment Proceedings, No. 194. 
+HELCOM. (2018). Population trends and abundance of seals. HELCOM core indicator 
+report. 
+Jansons, V., et al. (2017). Hydrography and dynamics of the Gulf of Riga: Long-term 
+trends and their ecological implications. Estuarine, Coastal and Shelf Science, 
+195, 29–41. 
+Kastelein, R A, Hardeman, J. Boer, H. (1997). Food consumption and body weight of 
+harbour porpoises (Phocoena phocoena). - In: Read, A.J., Wiepkema, P.R., 
+Nachtigall, P.E. (eds.). The biology of the harbour porpoise. De Spil Publishers, 
+Woerden, The Netherlands: 217-233 
+Koschinski, S. (2001) Current knowledge on harbour porpoises (Phocoena phocoena) in 
+the Baltic Sea. Ophelia, 55:3, 167-197, 
+https://doi.org/10.1080/00785326.2001.10409483 
+Link, J. S. (2010). Ecosystem-Based Fisheries Management: Confronting Tradeoffs. 
+Cambridge University Press. 
+Lundström, K., Bergenius, M., Aho, T., Lunneryd, S. G. (2014). Födoval hos vikaresäl i 
+Bottenviken. Aqua Reports, 1. 
+Lundström, K., Hjerne, O., Alexandersson, K., Karlsson, O. (2007). Estimation of grey 
+seal (Halichoerus grypus) diet composition in the Baltic Sea. NAMMCO 
+Scientific Publications, 6: 177–196. 
+Lundström, K., Hjerne, O., Lunneryd, S.-G., Karlsson, O. (2010). Understanding the diet 
+composition of marine mammals: grey seals (Halichoerus grypus) in the Baltic 
+Sea. ICES Journal of Marine Science, 67: 1230–1239. 
+Mackinson, S., Deas, B., Beveridge, D., Casey, J. (2009). Mixed-fishery or ecosystem 
+conundrum? Multispecies considerations in fisheries management. ICES Journal 
+of Marine Science, 66(4), 764–770. 
+Möllmann, C., Diekmann, R., Müller-Karulis, B., Kornilovs, G., Plikshs, M. (2009). 
+Reorganization of a large marine ecosystem due to atmospheric and 
+anthropogenic pressure: a discontinuous regime shift in the Central Baltic Sea. 
+Global Change Biology, 15(6), 1377–1393. 
+Ojaveer, H., et al. (2010). Status of biodiversity in the Baltic Sea. PLoS ONE, 5(9), 
+e12467. 
+Opitz, S., Froese, R. (2019). Ecosystem Based Fisheries Management for the Western 
+Baltic Sea. Geomar. 
+Scharff-Olsen, C. H., Galatius, A., Teilmann, J., Dietz, R. et.al. (2019). Diet of seals in 
+the Baltic Sea region: a synthesis of published and new data from 1968 to 2013. 
+ICES Journal of Marine Science, 76(1): 284–297, 
+https://doi.org/10.1093/icesjms/fsy159 
+Strāķe, S., et al. (2020). Ecosystem functioning in the Gulf of Riga – status, trends, and 
+future perspectives. Journal of Marine Systems, 204, 103310. 
+45 
+ 
+Tomczak M. T., Müller-Karulis B., Järv L., Kotta J., Martin G., Minde A., et al. (2009). 
+Analysis of trophic networks and carbon flows in south-eastern Baltic coastal 
+ecosystems. Prog. Oceanogr. 81, 111–131. doi: 10.1016/j.pocean.2009.04.017 
+Uusitalo, L., Puntila-Dodd, R., Artell, J., Jernberg, S. (2023). Modelling framework to 
+evaluate societal effects of ecosystem management. Science of The Total 
+Environment, 898, 165508, https://doi.org/10.1016/j.scitotenv.2023.165508 
+Walters, C. J., Christensen, V., Pauly, D. (1997). Structuring dynamic models of 
+exploited ecosystems from trophic mass-balance assessments. Reviews in Fish 
+Biology and Fisheries, 7(2), 139–172. 
+ 
+46 
+ 
+We are extremely grateful to Elisabeth Bolund and Ekin Akoglu for their comments 
+and recommendations. 
+Acknowledgement 
+47 
+ 
+Table A1. Vulnerabilities of specific prey group to each of the predators. 
+  
+Supplementary material  
+48 
+ 
+ 
+Prey \ 
+predator 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 
+1 Ringed seal                                            
+2 Grey seal                                             
+3 Harbour seal                                            
+4 Harbour porpoise                                            
+5 Fisheating birds                                            
+6 EB Cod Juv 56.4     1                                      
+7 EB Cod Ad 1E+08 56.4                                           
+8 WB Cod Juv  23 2     1       1         1  1.4                  
+9 WB Cod Ad  23 2                                         
+10 Salmon 1E+08 56.4                                           
+11 
+NB herring 
+juv 1E+08 56.4        1  2.4                                 
+12 
+NB herring 
+ad 1E+08 56.4        1                                   
+13 CB herring juv 56.4    1.2 1   1    2         2.5                      
+14 CB herring ad 56.4    1.2 1   1                                   
+15 WB herring juv  23 2    17.8 1                1  1.4                  
+16 WB herring ad  23 2    17.8 1                  1.4                  
+17 Sprat Juv  56.4 23 2 1E+08 1.2 1 17.8 1 1      1       2.5  1  1.4                  
+18 Sprat Ad  56.4 23 2 1E+08 1.2 1 17.8 1 1      1         1  1.4                  
+19 Vendace 1E+08                                            
+20 Stickleback 1E+08      1   1 1E+08 2.4           2.5                      
+21 Smelt 1E+08 56.4     1                                      
+22 
+NCB 
+Flounder 
+ad 1E+08 56.4                                           
+23 WCB Flounder ad 56.4 23      1                                    
+24 Plaice ad  56.4 23                        1.4                  
+25 Turbot                                             
+26 Dab   23                      1                    
+27 Whiting    2                     1  1.4                  
+28 WB flatfish  23                                          
+29 WB other fish  23 2  1.2 1 17.8 1              2.5  1  1.4                  
+30 Mysids      1.2 1 17.8 1  1E+08 2.4 1 2 2  1 1.1   1E+08  2.5    1.4         1         
+31 Pseudocalanus sp          1E+08 2.4 1 2 2  1 1.1  1E+08                         
+32 Acartia sp          1E+08 2.4 1 2 2  1 1.1  1E+08          2               
+33 Temora sp          1E+08 2.4 1 2 2  1 1.1  1E+08          2               
+34 zooplankton copepods               1 1.1 2.8                     6.9     
+35 zooplankton cladocerans         1E+08 2.4 1 2 2 1 1 1.1 2.8 1E+08          2          6.9     
+36 Saduria      1.2 1 17.8 1             1 2.5  1                    
+37 Mytilus sp                    1E+08 1 2.5             1     2 1   
+38 
+Limecola balthica 
+(Macoma)    1.2 1 17.8              1 2.5             1     2 1   
+39 Deposit feeders     1.2 1       2                      1    6.9     
+40 predatory benthos     1.2 1 17.8 1            1E+08 1 2.5    1.4                  
+41 crabs                        1E+08    2.3                 
+42 echinodermata                       1E+08  2               2    
+43 suspention feeders                     1 2.5      1E+08                
+44 other benthos     1.2 1 17.8 1       1     1E+08 1 2.5 1E+08 1 2 1.4 2.3 1E+08               1 
+45 Primary producers          1E+08 2.4                  2 1 3.6 8.2 1E+08 1  3.7 2.4  6.9   1  
+46 Detritus                             1E+08 2 1     1 3.7 2.4 1  2  1 1 
+                                               
+49 
+ 
+ 
