@@ -1,15 +1,15 @@
 # Projects Integration — Design
 
 Date: 2026-09-05
-Status: awaiting user review
+Status: revision 2, awaiting user review
 
 ## Purpose
 
 Five loosely related sub-projects live side by side in `GlobalPPREstimation` with no
 declared relationship, one nested git repository, and roughly 3.2 GB of redundant
 archives. This pass unifies them into a single repository with one documented pipeline,
-removes a superseded comparison calculation, and produces the per-taxon-per-year catch
-data that later integration work depends on.
+simplifies the SeaAroundUs PPR calculation down to what is actually used, and produces
+the per-taxon-per-year catch data that later integration work depends on.
 
 The end-state pipeline is:
 
@@ -19,13 +19,16 @@ The end-state pipeline is:
 
 ## Scope
 
-In scope this pass: **A** repo hygiene and git unification, **B** Jensen removal,
-**D** all-years catch distillation, **F** knowledge graph, **G** pipeline documentation,
-**H** package the species-to-group mapper skill.
+In scope this pass: **A** repo hygiene and git unification, **B** SeaAroundUs
+calculation simplification, **D** all-years catch distillation, **F** knowledge graph,
+**G** pipeline documentation, **H** package the species-to-group mapper skill.
 
 Deferred to their own spec: **C** the canonical `data/<unit_id>/` spine, and **E** the
 per-ecosystem final workbook. Task D is in scope this pass because a clone must carry
 usable per-taxon-per-year catch data, and that data exists nowhere else.
+
+Work happens directly on `main`. The repository is still before its real initial commit,
+so no branch is used.
 
 ## Current state
 
@@ -58,13 +61,23 @@ Per-taxon-per-year catch exists **only** inside `raw_data/SAU_downloads/<unit_id
   **region-level aggregates only**, no taxon breakdown.
 - `global_output/tables/regions/<unit_id>/species.csv` — per taxon, but **2019 only**.
 
+### Trophic-level coverage
+
+Measured across every group table in the current global output: **2268 group rows in 168
+files, none below 100 % TL coverage, zero tonnes of missing TL.** This is what licenses
+dropping the coverage columns in task B. It is measured on the 2019 analysis year only,
+so task B replaces those columns with an assertion rather than an assumption.
+
 ### Git
 
-- Parent `GlobalPPREstimation` -> `github.com/idocarmel1/GlobalPPREstimation`; only
-  `README.md` and `.gitignore` are committed.
+- Parent `GlobalPPREstimation` -> `github.com/idocarmel1/GlobalPPREstimation`; `main`
+  holds the initial commit plus this spec.
 - `FishEstimationAI/.git` -> `github.com/idocarmel1/PPREstimation`; working tree is
-  **dirty with uncommitted deletions** from an on-disk reorganisation that was never
-  committed (`SPPR_Methods.md` -> `information/`, notebooks and model JSONs moved).
+  dirty with uncommitted deletions from an on-disk reorganisation.
+- **Two independent clones of the same `PPREstimation` remote exist outside this
+  repository**, at `../קוד/FishEstimation/` and `../קוד/FishEstimationAI/`. Neither is
+  touched by this work. This is why the nested `.git` here can simply be deleted: its
+  history is preserved in those clones and on GitHub, and nothing needs pushing.
 - No submodules.
 
 ## A — Repo hygiene and git unification
@@ -103,9 +116,8 @@ match.
 
 One exception to note: `Global_history_TE010_2026-09-04.zip` duplicates a directory that
 A3 also deletes, so both copies go and that deliverable is removed entirely. That is
-intended — the user's reasoning is that its method is the superseded 1995 calculation —
-but it means the zip's deletion is not recoverable from the directory, unlike the other
-three rows here.
+intended — its method is the superseded 1995 calculation — but it means the zip's
+deletion is not recoverable from the directory, unlike the other three rows here.
 
 | Path | Size | Duplicates |
 | --- | --- | --- |
@@ -132,18 +144,29 @@ blobs, so committing both costs roughly the size of the union.
 `raw_data/SAU_downloads/` stays and is committed: it is the only source of
 per-taxon-per-year catch.
 
-### A5. Git unification
+### A5. Rename FishEstimationAI to PPREstimation
 
-1. In `FishEstimationAI/`, stage and commit the pending reorganisation, then push to
-   `origin` (`PPREstimation`) so that repository's history is preserved remotely.
-2. Remove `FishEstimationAI/.git`. The parent then tracks those files as ordinary
-   directories.
-3. Per-file history for FishEstimationAI lives on in `PPREstimation`; the monorepo log
-   starts fresh for those paths. This is the accepted trade of the chosen approach.
+`FishEstimationAI/` becomes `PPREstimation/`, matching the name of the repository it came
+from. References to update: `CLAUDE.md`, `README.md`, `information/USER_GUIDE.md`,
+`notebooks/hackaton040926.ipynb`, `.claude/settings.local.json`. The `.idea/` files that
+mention it are IDE state and are moved to `.gitignore` rather than edited.
 
-Both pushes are confirmed with the user before they run.
+Compiled `__pycache__` matches are ignored — they are regenerated artifacts.
 
-### A6. Fix `.gitignore`
+### A6. Collapse the nested git repository
+
+Delete `FishEstimationAI/.git` (after the rename, `PPREstimation/.git`). The parent then
+tracks those files as ordinary directories.
+
+**No push to `PPREstimation` is performed and no commit is made inside it.** Its history
+is already preserved on GitHub and in the two independent clones at
+`../קוד/FishEstimation/` and `../קוד/FishEstimationAI/`, which this work does not touch.
+Per-file history for these paths starts fresh in the monorepo, which is accepted.
+
+Before deleting, `git -C` status and remote of the nested repo are recorded into the
+commit message so the provenance is written down.
+
+### A7. Fix `.gitignore`
 
 The stock Python `.gitignore` rules are unanchored and reach into project data.
 Confirmed: line 14 `downloads/` matches `PPRAtlas/research/downloads/`, which would have
@@ -151,46 +174,105 @@ been silently excluded from the first commit.
 
 - Anchor `/lib/`, `/var/`, `/downloads/`, `/share/python-wheels/` to the repository root.
 - Add `.venv/`, `.idea/`, `.vscode/`, `.pytest_cache/`, `__pycache__/`.
+- Fold in the rules from the nested `FishEstimationAI/.gitignore` that still apply,
+  rescoped to `PPREstimation/`: notably `output/*` with `!output/top10/`, which currently
+  excludes `output/Ecobase_models/` and `output/collected_PPRs.xlsx`. **Flagged for
+  confirmation** — carrying this rule forward means those results do not reach a cloner,
+  which may conflict with the "a cloner gets all relevant data" requirement.
 - Verify with `git check-ignore -v` against a sampled path from every data directory,
   and assert the sample comes back clean.
 
 This must land **before** the first `git add`.
 
-## B — Jensen removal
+## B — Simplify the SeaAroundUs PPR calculation
 
-Two unrelated things share the name. Only one is being removed.
+Two unrelated things share the name "Jensen". Only one is affected.
 
-**Removed** — SeaAroundUs computes an *intentional Jensen-error* comparison: a
-deliberately wrong aggregation (catch-weighted mean TL, then exponentiate) kept as a
-baseline to demonstrate convexity bias.
+**Untouched** — `PPREstimation` (formerly `FishEstimationAI`) is the main algorithm
+folder. Its Jensen's-inequality correction in `monte_carlo_SPPR` and every related
+effect stay exactly as they are. Also untouched: `PPRAtlas/research/text/*.txt`, which
+contains the author *Jensen, A.L. (1996)* and the species *Jensen's skate* inside
+extracted paper text.
 
-**Kept, untouched** — `FishEstimationAI` uses a genuine Jensen's-inequality correction
-in `monte_carlo_SPPR`; it is core method. `PPRAtlas/research/text/*.txt` contains the
-author *Jensen, A.L. (1996)* and the species *Jensen's skate* inside extracted paper
-text.
+**Changed** — SeaAroundUs currently computes each group two ways and compares them. The
+comparison is dropped and only the naive aggregation is kept.
 
-### Code changes
+### What is kept and why
+
+`calculate_sppr(tl, te)` is `(1/te) ** (tl - 1)`; at the configured `te = 0.1` this is
+exactly `10 ** (TL - 1)`. It is retained unchanged and applied at three levels:
+
+| Level | TL used | Output |
+| --- | --- | --- |
+| taxon | the taxon's own TL | `sppr`, `ppr` |
+| commercial group | catch-weighted mean TL of the group | `tl_weighted`, `sppr`, `ppr` |
+| functional group | catch-weighted mean TL of the group | `tl_weighted`, `sppr`, `ppr` |
+
+The group figures are deliberately the Jensen-affected ones. Their purpose is to expose
+the bias introduced by moving from taxa to groups — an effect `PPRCalculator` cannot show
+on its own, because Ecopath models are group-based and have no taxon level. The
+correctly-aggregated value is not stored because it is exactly the sum of taxon `ppr`
+within the group, recoverable from the taxon table with a `groupby` whenever the
+comparison is wanted.
+
+### Column changes in `aggregate_groups`
+
+Of the 15 columns currently emitted, 5 are kept and 10 removed.
+
+| Column | Fate |
+| --- | --- |
+| `<group>` | kept |
+| `catch_tonnes_matched` | kept — the multiplicand in `ppr = catch_matched * sppr` |
+| `tl_weighted_jensen` | kept, **renamed** `tl_weighted` |
+| `sppr_jensen` | kept, **renamed** `sppr` |
+| `ppr_jensen` | kept, **renamed** `ppr` |
+| `sppr_correct`, `ppr_correct` | removed — the corrected aggregation |
+| `jensen_difference`, `jensen_ratio_correct_to_error`, `jensen_percent_difference` | removed — comparison machinery |
+| `taxon_count_total`, `taxon_count_matched` | removed — QA metadata |
+| `catch_tonnes_total`, `catch_tonnes_missing_tl`, `catch_coverage_fraction` | removed — see the assertion below |
+
+The `_jensen` suffix is dropped because the file name already states the grouping. At
+summary level the columns become `ppr_commercial` and `ppr_functional`, with
+`ppr_species` unchanged as the taxon-level total. The naming convention records that
+these group values are not the corrected calculation; the documentation in task G states
+it explicitly.
+
+### The coverage assertion
+
+Dropping `catch_coverage_fraction` is safe only while TL coverage is complete. Verified
+today at 100 % across all 2268 group rows, but only for the 2019 analysis year, and
+task D extends to 1950-2019 where older taxa may lack TL matches.
+
+So the five removed QA columns are replaced by one check in `validation.py`:
+`tl_coverage_complete`, which fails loudly if any group in any processed year carries
+catch with no TL. This converts a silent-underestimate risk into a hard error, and costs
+one row rather than five columns.
+
+### Other code changes
 
 | File | Change |
 | --- | --- |
-| `src/ppr_pipeline/calculations.py` | drop the 7 emitted columns (`tl_weighted_jensen`, `sppr_jensen`, `ppr_jensen`, `jensen_difference`, `jensen_ratio_correct_to_error`, `jensen_percent_difference`) and the docstring reference |
-| `src/ppr_pipeline/validation.py` | remove `_jensen_violations` and the two check rows |
-| `src/ppr_pipeline/notebook.py` | remove the narrative section and the underestimation plot |
-| `src/ppr_pipeline/pipeline.py` | remove `ppr_commercial_jensen` / `ppr_functional_jensen` from the annual record and the `jensen_comparison.csv` write |
+| `src/ppr_pipeline/validation.py` | remove `_jensen_violations` and its two check rows; add `tl_coverage_complete` |
+| `src/ppr_pipeline/notebook.py` | remove the correct-versus-Jensen narrative section and the underestimation plot |
+| `src/ppr_pipeline/pipeline.py` | drop `ppr_commercial_correct` / `ppr_functional_correct`; rename the `_jensen` pair to `ppr_commercial` / `ppr_functional`; stop writing `jensen_comparison.csv` |
+
+`jensen_comparison.csv` is deleted rather than trimmed: once the corrected columns are
+gone it is a duplicate of `commercial.csv` plus `functional.csv`.
 
 ### Data changes
 
-Delete every `jensen_comparison.csv`. Strip the jensen columns from `global_summary.csv`,
-per-region `commercial.csv` and `functional.csv`, and `PPRAtlas/inputs/annual_regions.csv`.
-Remove the corresponding README and manifest prose.
-
-Existing outputs are edited by column removal rather than regenerated, so the change is
+Apply the same column removal and renaming to the existing outputs so they match the
+code: `global_summary.csv`, per-region `commercial.csv` and `functional.csv`,
+`PPRAtlas/inputs/annual_regions.csv`, and the corresponding README and manifest prose.
+Outputs are edited by column removal rather than regenerated, so the change is
 deterministic and diffable.
 
 ### Verification
 
 SeaAroundUs tests pass before and after. A column-level diff proves every surviving
-value is byte-identical to its pre-change counterpart — only whole columns disappear.
+value is byte-identical to its pre-change counterpart — only whole columns disappear or
+change name. Tests covering the removed columns are rewritten, not deleted, so the
+retained behaviour stays covered.
 
 ## D — All-years catch distillation
 
@@ -199,9 +281,9 @@ New module `src/ppr_pipeline/annual_catch.py`.
 Input: `raw_data/SAU_downloads/<unit_id>-catch.zip`.
 Output: `SeaAroundUsExtraction/data/catch_by_taxon_year/<unit_id>.csv.gz`.
 
-This is an interim location scoped to SeaAroundUs. Task C's canonical
-`data/<unit_id>/` spine will later absorb or reference these tables; the path is
-deliberately not the repository root so the two do not collide before C is designed.
+This is an interim location scoped to SeaAroundUs. Task C's canonical `data/<unit_id>/`
+spine will later absorb or reference these tables; the path is deliberately not the
+repository root so the two do not collide before C is designed.
 
 Columns: `unit_id, year, taxon, common_name, functional_group, commercial_group,
 catch_tonnes, landings_tonnes, discards_tonnes, reported_tonnes, unreported_tonnes`.
@@ -231,9 +313,11 @@ pre-cleanup mess.
 
 Rewrite the root `README.md` to state the sweep -> extract -> estimate -> integrate ->
 map pipeline, name each sub-project's role and its inputs and outputs, and record the
-coverage reality (167 archived / 84 NPP / 16 modelled, the latter being the top-10 pilot).
-Cross-link the existing per-project READMEs. Note the deferred C and E work so the
-`data/<unit_id>/` target is written down rather than remembered.
+coverage reality (167 archived / 84 NPP / 16 modelled, the latter being the top-10
+pilot). State explicitly that SeaAroundUs group-level PPR is the Jensen-affected
+aggregation and why it is kept that way. Cross-link the existing per-project READMEs.
+Note the deferred C and E work so the `data/<unit_id>/` target is written down rather
+than remembered.
 
 ## H — Package the species-to-group mapper skill
 
@@ -254,17 +338,18 @@ Cross-link the existing per-project READMEs. Note the deferred C and E work so t
 
 ## Carried-forward constraint
 
-For the deferred task E, the per-ecosystem workbook should carry **only the columns the
-map visualisation needs**. Recorded here so the constraint survives into that spec.
+For the deferred task E, the per-ecosystem workbook should be lean enough for a human
+reader: only the columns the map visualisation needs, and few sheets rather than many.
+Recorded here so the constraint survives into that spec.
 
 ## Verification and commit
 
-- All three test suites (SeaAroundUs 11 files, PPRAtlas 3, FishEstimationAI 3) run
-  before any change to establish a baseline, and again after.
+- All three test suites (SeaAroundUs 11 files, PPRAtlas 3, PPREstimation 3) run before
+  any change to establish a baseline, and again after.
 - Every deletion is verified against the artifact it duplicates before it runs.
 - `git check-ignore` sampling proves no real data is excluded.
-- Commits are grouped by task (A, B, D, F, G, H) rather than squashed.
-- Nothing is pushed without explicit confirmation.
+- Commits are grouped by task (A, B, D, F, G, H) rather than squashed, on `main`.
+- The push is confirmed with the user before it runs.
 
 ## Risks
 
@@ -272,6 +357,8 @@ map visualisation needs**. Recorded here so the constraint survives into that sp
 | --- | --- |
 | Promotion loses work unique to the old tree | manifest-first, explicit resolution of every differing path |
 | `.gitignore` silently drops data | anchor the stock rules, verify by sampling before the first `add` |
-| Jensen removal perturbs surviving values | column-level byte-identity diff |
+| Column removal perturbs surviving values | column-level byte-identity diff |
+| TL coverage is incomplete in historical years | `tl_coverage_complete` assertion fails loudly instead of underestimating |
 | Distillation misreads the raw schema | 2019 slice must reproduce existing `species.csv` totals |
 | Deleting `PPR_global_te005_results/` was not explicitly authorised | flagged in A3 for confirmation at spec review |
+| Carrying `output/*` ignore forward hides Ecobase results from cloners | flagged in A7 for confirmation at spec review |
