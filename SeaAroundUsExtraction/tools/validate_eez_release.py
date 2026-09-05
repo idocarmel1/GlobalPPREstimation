@@ -13,6 +13,21 @@ ROOT = Path(__file__).resolve().parents[1]
 NS = {'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
 RID = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id'
 
+# The boolean checks ppr_pipeline.validation.validate_region emits, named here in one
+# place instead of as string literals inside validate(). Selecting checks by name and
+# then calling .all() passes vacuously when the selection is empty, so a removed or
+# renamed check would be reported as a pass; boolean_check() below requires the rows
+# to exist first. group_ppr_within_convexity_bound is the one-sided invariant that
+# group PPR never exceeds the taxon-summed PPR, since 10 ** (TL - 1) is convex.
+BOOLEAN_CHECK_NAMES = ('catch_reconciled','group_ppr_within_convexity_bound','tl_coverage_complete')
+
+
+def boolean_check(validation, name):
+    """Return whether a named boolean check passed; fail loudly if it is absent."""
+    values = validation.loc[validation['check']==name,'value'].astype(str).str.lower()
+    assert not values.empty, f'validation.csv has no {name} check'
+    return bool(values.eq('true').all())
+
 
 def workbook_cells(path):
     """Read cached exported values independently of the workbook generator."""
@@ -230,9 +245,13 @@ def validate(root=ROOT, *, workbooks=True):
     assert set(archive_audit.unit_id) == expected_ids
     assert (archive_audit.data_version == 50.1).all()
     validation = pd.read_csv(tables/'validation.csv')
+    missing_checks = sorted(set(BOOLEAN_CHECK_NAMES) - set(validation['check']))
+    assert not missing_checks, f'validation.csv is missing expected boolean checks: {missing_checks}'
     checks = validation.loc[validation.unit=='boolean','value'].astype(str).str.lower()
+    assert not checks.empty
     assert checks.eq('true').all()
-    assert validation.loc[validation['check']=='tl_coverage_complete','value'].astype(str).str.lower().eq('true').all()
+    for name in BOOLEAN_CHECK_NAMES:
+        assert boolean_check(validation,name), name
     total_rows = 0
     for row in summary.itertuples(index=False):
         source = pd.read_csv(tables/'regions'/row.unit_id/'species.csv')
@@ -284,7 +303,8 @@ def validate(root=ROOT, *, workbooks=True):
         'catch_tonnes_sum_across_eezs':float(catch),'ppr_sum_across_eezs':float(summary.ppr_species.sum()),
         'catch_tl_coverage_fraction':float(summary.matched_catch_tonnes.sum()/catch),
         'missing_tl_catch_tonnes':float(summary.missing_tl_catch_tonnes.sum()),
-        'flag_counts':spatial['flag_counts'],'tl_coverage_complete':bool(validation.loc[validation['check']=='tl_coverage_complete','value'].astype(str).str.lower().eq('true').all()),
+        'flag_counts':spatial['flag_counts'],'tl_coverage_complete':boolean_check(validation,'tl_coverage_complete'),
+        'group_ppr_within_convexity_bound':boolean_check(validation,'group_ppr_within_convexity_bound'),
         'totals_by_spatial_type_not_additive':comparison.groupby('region_type').agg(units=('unit_id','size'),catch_tonnes=('total_catch_tonnes','sum'),ppr=('ppr_species','sum')).reset_index().to_dict('records')}
     if workbooks:
         report.update(check_workbooks(output,summary,flags,pairs,expected_comparison))

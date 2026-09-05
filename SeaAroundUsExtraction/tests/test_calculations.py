@@ -132,3 +132,31 @@ def test_group_aggregation_returns_schema_for_zero_catch_unit() -> None:
         "sppr",
         "ppr",
     ]
+
+
+def test_group_aggregation_uses_matched_catch_only_for_a_partly_matched_group() -> None:
+    """A group where some taxa have a TL and some do not.
+
+    Every group figure must be built from the TL-matched catch alone. Substituting
+    the group's total catch would inflate both ``catch_tonnes_matched`` and ``ppr``
+    by the unmatched 90 tonnes, which no happy-path test would notice.
+    """
+    species = pd.DataFrame(
+        {
+            "commercial_group": ["Mixed", "Mixed", "Mixed"],
+            "catch_tonnes": [4.0, 6.0, 90.0],
+            "tl": [2.0, 3.0, float("nan")],
+        }
+    )
+    species = calculations.add_species_ppr(species, te=0.1)
+    result = calculations.aggregate_groups(species, "commercial_group", te=0.1)
+
+    row = result.iloc[0]
+    # 4 + 6 matched, not the 100 tonnes the group actually landed.
+    assert row["catch_tonnes_matched"] == pytest.approx(10.0)
+    # (4 * 2.0 + 6 * 3.0) / 10, weighted by matched catch only.
+    assert row["tl_weighted"] == pytest.approx(2.6)
+    assert row["sppr"] == pytest.approx(10.0**1.6)
+    assert row["ppr"] == pytest.approx(10.0 * 10.0**1.6)
+    # Still one-sided against the taxon sum (which itself skips the unmatched taxon).
+    assert row["ppr"] < float(species["ppr"].sum())

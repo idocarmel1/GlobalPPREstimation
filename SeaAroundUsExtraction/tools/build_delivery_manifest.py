@@ -17,7 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 # these are still checks that validate_region actually emits. When
 # ppr_pipeline.validation.validate_region's check names change, that test - not a
 # silently-narrowed pandas filter - is what should fail.
-BOOLEAN_CHECK_NAMES = ("catch_reconciled", "tl_coverage_complete")
+BOOLEAN_CHECK_NAMES = (
+    "catch_reconciled",
+    "group_ppr_within_convexity_bound",
+    "tl_coverage_complete",
+)
 JENSEN_GAP_CHECK_NAMES = ("commercial_ppr_difference", "functional_ppr_difference")
 QUERIED_CHECK_NAMES = BOOLEAN_CHECK_NAMES + JENSEN_GAP_CHECK_NAMES
 

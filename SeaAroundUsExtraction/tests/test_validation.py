@@ -97,3 +97,63 @@ def test_validate_region_reports_incomplete_trophic_level_coverage() -> None:
     assert metrics["tl_coverage_complete"] is False
     assert metrics["unmatched_taxa_count"] == 1
 
+
+
+def test_validate_region_holds_the_convexity_bound_for_the_real_aggregation() -> None:
+    """`10 ** (TL - 1)` is convex, so the group PPR can never exceed the taxon sum."""
+    species = add_species_ppr(
+        pd.DataFrame(
+            {
+                "taxon": ["A", "B", "C"],
+                # C1 spans two trophic levels (a real Jensen gap); C2 spans one.
+                "commercial_group": ["C1", "C1", "C2"],
+                "functional_group": ["F1", "F1", "F1"],
+                "catch_tonnes": [5.0, 5.0, 7.0],
+                "tl": [2.0, 4.0, 3.0],
+            }
+        )
+    )
+    commercial = aggregate_groups(species, "commercial_group")
+    functional = aggregate_groups(species, "functional_group")
+
+    metrics = validate_region(
+        "TEST", species, commercial, functional, 17.0
+    ).set_index("check")["value"]
+
+    assert metrics["group_ppr_within_convexity_bound"] is True
+    # The gap is one-sided: the group aggregation underestimates, never overshoots.
+    assert metrics["commercial_ppr_difference"] < 0
+    assert metrics["functional_ppr_difference"] < 0
+
+
+def test_validate_region_flags_group_ppr_above_the_taxon_sum() -> None:
+    """A weighting error that inflates group PPR past the taxon sum must not pass."""
+    species = add_species_ppr(
+        pd.DataFrame(
+            {
+                "taxon": ["A", "B"],
+                "commercial_group": ["C1", "C1"],
+                "functional_group": ["F1", "F1"],
+                "catch_tonnes": [100.0, 1.0],
+                "tl": [2.0, 4.0],
+            }
+        )
+    )
+    commercial = aggregate_groups(species, "commercial_group")
+    functional = aggregate_groups(species, "functional_group")
+
+    # Reproduce an unweighted-mean-TL aggregation bug. The plain mean of 2.0 and 4.0
+    # is 3.0, far above the catch-weighted mean of ~2.02, so the group PPR lands
+    # above the taxon sum - impossible for a convex 10 ** (TL - 1).
+    unweighted_tl = 3.0
+    matched_catch = float(species["catch_tonnes"].sum())
+    commercial.loc[0, "tl_weighted"] = unweighted_tl
+    commercial.loc[0, "sppr"] = float(calculations.calculate_sppr(unweighted_tl))
+    commercial.loc[0, "ppr"] = matched_catch * commercial.loc[0, "sppr"]
+
+    metrics = validate_region(
+        "TEST", species, commercial, functional, 101.0
+    ).set_index("check")["value"]
+
+    assert metrics["commercial_ppr_difference"] > 0
+    assert metrics["group_ppr_within_convexity_bound"] is False

@@ -99,6 +99,12 @@ def main() -> None:
     baseline_ppr = float(baseline_summary["ppr_species"].sum())
     weighted_commercial = float(candidate_summary["ppr_commercial"].sum())
     weighted_functional = float(candidate_summary["ppr_functional"].sum())
+    # (1 / te) ** (TL - 1) is convex, so exponentiating a group's catch-weighted mean
+    # trophic level can never exceed the sum over its taxa. The group totals must sit
+    # at or below the taxon-level total; anything above it is a weighting or sign error.
+    convexity_bound = 1e-10 * abs(total_ppr) + 1e-8
+    assert weighted_commercial - total_ppr <= convexity_bound
+    assert weighted_functional - total_ppr <= convexity_bound
     report = {
         "status": "passed",
         "scope_label": "global_te005",
@@ -115,6 +121,12 @@ def main() -> None:
         "total_ppr_ratio_te005_to_te010": total_ppr / baseline_ppr,
         "commercial_total_ppr": weighted_commercial,
         "functional_total_ppr": weighted_functional,
+        # The group figures use the catch-weighted mean trophic level, so they sit
+        # below the taxon-level total by the Jensen gap. The corrected value has not
+        # gone anywhere - it is ppr_species, the taxon-summed total - so the fraction
+        # of PPR lost by aggregating taxa into groups is still 1 - group / species.
+        "commercial_underestimate_fraction": 1.0 - weighted_commercial / total_ppr,
+        "functional_underestimate_fraction": 1.0 - weighted_functional / total_ppr,
         "tl_catch_coverage_fraction": float(
             candidate_summary["matched_catch_tonnes"].sum() / total_catch
         ),
@@ -125,6 +137,7 @@ def main() -> None:
             "te005_formula_exact_within_tolerance": True,
             "cross_release_ppr_ratio_equals_2_power_tl_minus_1": True,
             "all_boolean_pipeline_validations_passed": True,
+            "group_ppr_never_above_taxon_summed_ppr": True,
             "polygon_counts_match_scope": True,
         },
     }

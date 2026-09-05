@@ -6,6 +6,21 @@ import nbformat
 from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook
 
 
+# The boolean checks ppr_pipeline.validation.validate_region emits, named once here
+# rather than re-typed as string literals inside each builder's generated cell.
+#
+# Both builders' reconciliation cells select these by name and then call `.all()`.
+# An `.isin(...)` selection that matches nothing yields an empty frame whose `.all()`
+# is vacuously True, so a removed or renamed check would pass silently instead of
+# failing. The generated cells therefore assert every expected name is actually
+# present in validation.csv before evaluating any of them.
+BOOLEAN_CHECK_NAMES = (
+    "catch_reconciled",
+    "group_ppr_within_convexity_bound",
+    "tl_coverage_complete",
+)
+
+
 def build_validation_notebook(output_path: str | Path) -> Path:
     """Create the executable pilot-validation research notebook."""
 
@@ -59,11 +74,16 @@ plt.show()"""
         ),
         new_markdown_cell("## Catch and aggregation reconciliation"),
         new_code_cell(
-            """validation = pd.read_csv(TABLES / 'validation.csv')
-key_checks = ['catch_reconciled', 'tl_coverage_complete']
+            f"""validation = pd.read_csv(TABLES / 'validation.csv')
+key_checks = {list(BOOLEAN_CHECK_NAMES)!r}
+# An empty selection would make the assertion below vacuously true, so require the
+# checks to be present before evaluating them.
+missing_checks = sorted(set(key_checks) - set(validation['check']))
+assert not missing_checks, f'validation.csv is missing expected checks: {{missing_checks}}'
 display(validation[validation['check'].isin(key_checks)].pivot(index='unit_id', columns='check', values='value'))
 
 boolean_checks = validation[validation['check'].isin(key_checks)]
+assert not boolean_checks.empty
 assert boolean_checks['value'].astype(str).str.lower().isin(['true', '1', '1.0']).all()"""
         ),
         new_markdown_cell("## Trophic-level matching coverage"),
@@ -178,11 +198,16 @@ display(summary.groupby('region_type', as_index=False).agg(
         ),
         new_markdown_cell("## Catch and aggregation reconciliation"),
         new_code_cell(
-            """validation = pd.read_csv(TABLES / 'validation.csv')
-boolean_names = ['catch_reconciled', 'tl_coverage_complete']
+            f"""validation = pd.read_csv(TABLES / 'validation.csv')
+boolean_names = {list(BOOLEAN_CHECK_NAMES)!r}
+# An empty selection would make the assertion below vacuously true, so require the
+# checks to be present before evaluating them.
+missing_checks = sorted(set(boolean_names) - set(validation['check']))
+assert not missing_checks, f'validation.csv is missing expected checks: {{missing_checks}}'
 boolean_checks = validation[validation['check'].isin(boolean_names)].copy()
 boolean_checks['passed'] = boolean_checks['value'].astype(str).str.lower().isin(['true', '1', '1.0'])
 display(boolean_checks.groupby('check')['passed'].agg(['sum', 'count']))
+assert not boolean_checks.empty
 assert boolean_checks['passed'].all()"""
         ),
         new_markdown_cell("## Trophic-level matching coverage"),
