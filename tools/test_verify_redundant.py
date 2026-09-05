@@ -94,6 +94,86 @@ def test_size_mismatch_same_path(tmp_path, capsys):
     assert "keep.txt" in out
 
 
+def test_preserved_elsewhere_resolves_against_extra_root(tmp_path, capsys):
+    """An entry absent from the target directory, but whose content lives in a second
+    directory (e.g. a canonical content-addressed store), is a distinct success category:
+    `preserved-elsewhere`. It must not be conflated with `relocated` (found under the
+    *target* directory) or `absent` (found nowhere).
+    """
+    zpath = tmp_path / "f.zip"
+    payload = b"unique-content-only-in-store"
+    _make_zip(zpath, {"wrap/orphan.txt": payload})
+    target = tmp_path / "disk"
+    target.mkdir()
+    (target / "unrelated.txt").write_bytes(b"something else entirely")
+    store = tmp_path / "store"
+    store.mkdir()
+    (store / "orphan-in-store.txt").write_bytes(payload)
+
+    ok = verify(str(zpath), str(target), strip=1, extra_root=str(store))
+
+    assert ok is True
+    out = capsys.readouterr().out
+    assert "REDUNDANT - safe to delete" in out
+    assert "NOT REDUNDANT" not in out
+    assert "preserved-elsewhere" in out
+    assert "orphan.txt" in out
+    assert "orphan-in-store.txt" in out
+
+
+def test_content_mismatch_at_path_resolved_via_extra_root(tmp_path, capsys):
+    """Mirrors the real PPRAtlas case: the target directory has a file sitting AT the
+    entry's expected path (right name, right size) but with the WRONG bytes -- a
+    corrupted mirror copy -- while the correct content was deliberately preserved under
+    a separate canonical store. This must resolve to `preserved-elsewhere`, not
+    `content-mismatch`: "absent from the target directory" means the *correct* content
+    is absent from target, even when something sits at the expected path.
+    """
+    zpath = tmp_path / "h.zip"
+    correct = b"correct-bytes-for-this-entry"
+    wrong = b"corrupted-bytes-same-length!"
+    assert len(correct) == len(wrong)
+    _make_zip(zpath, {"wrap/report.xls": correct})
+    target = tmp_path / "disk"
+    target.mkdir()
+    (target / "report.xls").write_bytes(wrong)  # present at expected path, wrong content
+    store = tmp_path / "store"
+    store.mkdir()
+    (store / "canonical-report.xls").write_bytes(correct)
+
+    ok = verify(str(zpath), str(target), strip=1, extra_root=str(store))
+
+    assert ok is True
+    out = capsys.readouterr().out
+    assert "REDUNDANT - safe to delete" in out
+    assert "NOT REDUNDANT" not in out
+    assert "preserved-elsewhere" in out
+    assert "report.xls" in out
+    assert "canonical-report.xls" in out
+    assert "content-mismatch" in out  # category header still printed, just count 0
+
+
+def test_absent_entry_still_fails_even_with_extra_root(tmp_path, capsys):
+    """An extra search root must not paper over a genuinely absent entry -- only content
+    that actually exists somewhere (target or extra root) may clear the gate.
+    """
+    zpath = tmp_path / "g.zip"
+    _make_zip(zpath, {"wrap/gone.txt": b"nowhere-to-be-found-at-all"})
+    target = tmp_path / "disk"
+    target.mkdir()
+    (target / "unrelated.txt").write_bytes(b"totally different content")
+    store = tmp_path / "store"
+    store.mkdir()
+    (store / "also-unrelated.txt").write_bytes(b"still not it")
+
+    ok = verify(str(zpath), str(target), strip=1, extra_root=str(store))
+
+    assert ok is False
+    out = capsys.readouterr().out
+    assert "NOT REDUNDANT - keep" in out
+    assert out.count("gone.txt") == 1  # listed once, under absent -- not double-counted
+
+
 def test_content_mismatch_same_path_same_size(tmp_path, capsys):
     """Regression case for the in-place content-hash check.
 

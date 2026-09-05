@@ -1,0 +1,1987 @@
+Progress in Oceanography 241 (2026) 103631
+
+Contents lists available at ScienceDirect
+
+Progress in Oceanography
+journal homepage: www.elsevier.com/locate/pocean
+
+Analysing ecosystem and demersal stocks dynamics in the Chilean
+Patagonia system (41◦ 28.6′S–57◦ S) from 1980 to 2020 using food
+web modelling☆
+Sergio Neira a,b,c,*,1, Hugo Arancibia d,2 , Mónica E. Barros b,c,3,
+Ana Arriagada b,c,e,4, Rubén Alarcón c,e,5 , Claudio Gatica f
+a
+
+Departamento de Oceanografía, Facultad de Ciencias Naturales y Oceanográficas, Universidad de Concepción, Concepción, Chile
+Programa COPAS COASTAL ANID FB210021, Universidad de Concepción, Chile
+c
+Programa de Doctorado en Ciencias con mención en Manejo de Recursos Acuáticos Renovables (MaReA), Facultad de Ciencias Naturales y Oceanográficas, Universidad
+de Concepción, Concepción, Chile
+d
+Asesorías Ocean Technology and Aquaculture Chile Ltda., Concepción, Chile
+e
+Universidad Andrés Bello, Departamento Ecología y Biodiversidad, Facultad de Ciencias de la Vida, Dirección postal Autopista 7100, Concepción, Chile
+f
+Instituto de Investigación Pesquera, Talcahuano, Chile
+b
+
+A R T I C L E I N F O
+
+A B S T R A C T
+
+Keywords:
+Food web
+Demersal fisheries
+Predation
+Ecopath with Ecosim
+Chilean Patagonia
+Cape Horn Current
+
+The Chilean Patagonia system (41◦ 28.6′S–55◦ S) is influenced by the Cape Horn Current and exhibits high di­
+versity, endemism, and important demersal stocks. However, food web structure and dynamics, the ecological
+role of key living components, and the impacts of fishing are poorly understood. In this paper, we model the
+structure and dynamics of the food web that sustains the demersal fish targeted by the fisheries operating in
+Chilean Patagonia, which takes place on the Patagonian Shelf and inshore waters. For this, we built a quanti­
+tative model for this ecosystem in 1980 using the Ecopath with Ecosim software, with 15 functional groups (from
+phytoplankton to top predators) including demersal target species such as hoki (Macruronus magellanicus),
+kingklip (Genypterus blacodes), southern blue whiting (Micromesistius australis), skates, and southern hake
+(Merluccius australis). We split hoki into juvenile and adult stanzas based on their importance as prey (juveniles)
+and landings (adults). Input data came from studies to estimate abundance, biomass, production, and diets of
+fishing target species and other key functional groups, while catch data came from official statistics. The model
+was balanced and fit to biomass and catch series from 1980 to 2020 using fishing mortality (F), vulnerability to
+predation parameters (v), and primary productivity anomaly (PP) estimated by model that aims to simulate PP
+trend. Zooplankton and benthos were the most important prey at intermediate trophic level consumers, while
+small pelagic fish and hoki juveniles were the main prey for higher trophic levels (i.e., hoki adults, southern hake,
+and southern blue whiting). Predation mortality (M2) of target species was salient and variable in time. The
+dynamics of fishing target species and the whole food web from 1980 to 2000 was explained mostly by fishing
+mortality, but model fit increased when considering PP and v. We conclude that i) juvenile hoki is a key prey
+group in the system, especially for hoki adults (cannibalism) and southern hake (predation), ii) southern hake is
+the main predator among demersal fish, and ii) fishing and bottom-up changes were important drivers in the
+system likely mediated by trophic interactions. These findings are crucial in moving forward on the development
+of ecosystem-based fisheries management in Chilean Patagonia.
+
+This article is part of a special issue entitled: ‘Cabo de Hornos Current’ published in Progress in Oceanography.
+* Corresponding author at: Departamento de Oceanografía (Cabina 10), Facultad de Ciencias Naturales y Oceanográficas. P.O. Box 160-C Universidad de Con­
+cepción, Concepción, Chile.
+E-mail address: seneira@udec.cl (S. Neira).
+1
+Sergio Neira, ORCID: 0000-0002-7855-8034.
+2
+Hugo Arancibia, ORCID: 0000-0001-7459-9755.
+3
+Mónica E. Barros, ORCID: 0000-0002-2234-8601.
+4
+Ana Arriagada, ORCID: 0000-0002-6673-9188.
+5
+Rubén Alarcón, ORCID: 0000-0002-7721-378X.
+☆
+
+https://doi.org/10.1016/j.pocean.2025.103631
+Available online 25 November 2025
+0079-6611/© 2025 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+fishing bans that have been set in all these fisheries, the biomass and
+landings of the main target species are the lowest in history (Fig. 2). The
+reasons for this general decline are not fully understood, but overfishing
+is the most likely explanation. Global experience suggests that overf­
+ishing can also affect the trophic structure and functioning of marine
+ecosystems (Pauly et al., 1998; Frank et al., 2005). The dynamics of
+individual stocks and food webs are also influenced by the variability in
+environmental conditions and habitat characteristics (e.g., Cubillos
+et al., 2014; Castillo-Jordán et al., 2016). The combined effects of
+altered food webs and environmental variability may explain the slow or
+null recovery of large demersal fishes after stock collapse (Hutchings,
+2000; Petitgas et al., 2010; Pedersen et al., 2017; van Gemert &
+Andersen, 2018; Petrie et al., 2022).
+The General Fishing and Aquaculture Law of Chile (N◦ 18.892 of
+1991) and its later modification (Article 1B of Law N◦ 20.657 of 2013)
+established conservation and sustainability as the main goals for fish­
+eries management and mandate that management actions consider both
+the precautionary approach and the ecosystem approach. In spite of
+that, fish stocks in the study area have been considered isolated from
+their prey, predators, competitors, the physical environment, and
+habitat characteristics. Consequently, the management of these fisheries
+has been based solely on traditional single-species approaches
+(Jurado–Molina et al., 2016). However, well-documented ecological and
+technical interactions between these target species and the fleets that
+operate in the area have led fishing authorities to recognize the need for
+
+1. Introduction
+Globally, fisheries science and management have been changing
+their focus from traditional single-species approaches towards more
+holistic ecosystem-based fisheries management, since individual species
+are just one part of a complex webs of interactions with other species and
+their environment (FAO, 2003, Pitcher & Cheung, 2013; Cheung et al.,
+2024).
+The Chilean Patagonia marine zone (41◦ 28.6′S–57◦ S, Fig. 1) is
+influenced by the Cape Horn Current and exhibits high diversity and
+endemism as well as important fisheries targeting demersal fish species
+(Molinet & Niklitschek, 2023). Fishing activities began at the end of the
+1970s, consolidating its development in the 1980s with the operation of
+industrial and artisanal fleets (SUBPESCA, 2011). The main target spe­
+cies in this area are southern hake (Merluccius australis), kingklip (Gen­
+ypterus blacodes), southern blue whiting (Micromesistius australis), hoki
+(Macruronus magellanicus), and skates (Zearaja chilensis).
+Between 1980 and 1990 annual landings reached 125,000 tons,
+dominated by hoki and southern hake (Fig. 2). The highest annual
+landings were recorded from 2001 to 2009, with values exceeding
+150,000 tons, mainly composed of hoki and southern blue whiting.
+However, due to a decline in hoki and southern blue whiting biomass
+since 2000, total landings since 2012 have not exceeded 60,000 tons
+(Fig. 2).
+Despite management actions such as total allowable quotas and
+
+Fig. 1. Study area: Chilean Patagonia extending from 41.28′6 ◦ S to 57◦ S and around 35 nautical miles offshore. This is the main area where fleets targeting demersal
+fish stocks operate. The total area is 290 thousand km2.
+2
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+a much broader ecosystem approach for this complex multi-species and
+multi-fleet system. For example, Payá (1992), Pool et al. (1997) and
+Arancibia et al. (2010) described food consumption and the diet of fish
+stocks in Chilean Patagonia. These studies indicate that hoki plays a key
+role in the system both by sustaining significant landings and as the main
+prey for piscivore fish such as southern hake and kingklip, which, in
+turn, are also fishing target species in the system.
+Unfortunately, due to the single-species approach used in fisheries
+management and modelling, the direct and indirect ecological effects of
+overfishing, trophic interactions and environmental variability on target
+species and the whole food web are not fully considered in the man­
+agement of fisheries off Chilean Patagonia.
+Recent publications have moved the focus from single-species to
+multispecies and food web approaches in the Chilean Patagonia region.
+However, they either are focused on the inland sea (Pavés et al., 2013;
+Pavés et al., 2014), a specific region as the Magellan region (Haro et al.,
+2020; Haro et al., 2022; Haro et al., 2025), or considered only demersal
+fish (Jurado–Molina et al., 2016). Therefore, no food web description
+
+has been conducted integrating all trophic levels in the inner sea and the
+shelf system along Chilean Patagonia. In this paper, we model the
+structure and dynamics of the food web that sustains the demersal fish
+targeted by the fisheries operating in Chilean Patagonia, which takes
+place on the Patagonian Shelf and inshore waters. We use biological,
+fishing and ecological data and the Ecopath with Ecosim software (EwE,
+Christensen & Pauly, 1992; Walters et al., 1997; Pauly et al., 2000). EwE
+is a family of models that has been applied to different marine ecosys­
+tems around the world (see https://www.ecopath.org) to asses, among
+other analyses, the individual and combined effects of fishing, predation
+and environmental forcing on individual populations and whole eco­
+systems. Therefore, EwE is one of the most recommended models for an
+ecosystem approach to fisheries (Plagányi, 2007).
+The aim of this paper was to analyse the dynamics of the ecosystem
+and demersal stocks in the Chilean Patagonia system (41◦ 28.6′S–57◦ S)
+for the period 1980–2020. For this effort, we used data that are routinely
+generated by stock assessment programs and other scientific research on
+key ecological components in the study area. This data were used to
+
+Fig. 2. Biomass (black line) and corrected total landings (grey bars) of main demersal fish stocks in Chilean Patagonia. These data correspond to official statistics on
+stock biomass estimated by using indirect (i.e. single-species stock assessment models) assessment methods and official landings statistics corrected by the Instituto
+de Fomento Pesquero according to discard estimates and underreported landings.
+3
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+build a quantitative and time-dynamic representation of the food web
+sustaining the demersal fish species targeted by the main fleets oper­
+ating in Chilean Patagonia. This is a contribution towards an ecosystembased management of this complex multi-species and multi-fleet system,
+that considers the ecological role of functional groups, as well as the
+impacts of top-down (predation and fishing) and bottom-up (primary
+productivity) forcing on this ecosystem.
+
+was based on available data. Artisanal fleets operate maily in the inner
+sea (i.e., up to 5 nautical miles), while industrial fleets operate exclu­
+sively in the shelf of the outer sea (i.e., beyond 5 nautical miles).
+We used the Ecopath with Ecosim software (Polovina & Ow, 1985;
+Christensen & Pauly, 1992; Walters et al., 1997; Pauly et al., 2000;
+Walters et al., 2000) as a modelling platform. EwE is based on two main
+assumptions: (1) predation, exports, and mortalities balance the pro­
+duction of each functional group in the model, and (2) the consumption
+of each group is balanced by production, respiration and unassimilated
+food (i.e., mass balance). The equations are:
+
+2. Methods
+2.1. Study area and period
+
+Pi = Yi + Bi M2i + Ei + BAi + M0i
+
+The Chilean Patagonia study area extends from 41◦ 28.6′S to 57◦ S,
+including inner (channels and fjords) and open (oceanic) waters, and
+extending from the coastline to 35 nautical miles westward. The total
+surface area is about 290 thousand km2 (Fig. 1). The area was delimited
+to encompass the distribution of all fleets operating in Chilean Patagonia
+between 1980 and the present. Chilean Patagonia is one of the largest
+fjord regions in the world. Due to the region’s high rainfall and the
+presence of numerous rivers and glaciers, its oceanic coast is charac­
+terised by low surface salinity, around 33–34 PSU, and temperatures
+ranging from 5 ◦ C to 11 ◦ C (Pantoja et al., 2011; Saldías et al., 2019). We
+chose the year 1980 for the initial modelling period, as it reflects the
+state of the marine food web in Chilean Patagonia at the onset of largescale fishing activities in the ecosystem and allowed us to project the
+model into the future and fit it to observed data series of biomass and
+catch of target species.
+
+where Pi is the total production of group i; Yi is the catch of i; M2i is
+predation mortality of i; Bi is total biomass of i; Ei is the migration rate;
+BAi is the accumulation of biomass of i; M0i = Pi (1 − EEi ) is the other
+mortality rate (i.e., mortalities independent from predation and catch).
+Equation (1) can be re-expressed as:
+( )
+∑n
+P
+Q
+P
+Bi ( )i −
+B
+DCji − ( )i Bi (1 − EEi ) − Yi − Ei − BAi = 0
+(2)
+j
+j=1
+B
+B i
+B
+where (BP )i is production to biomass rate, (QB )i is consumption to biomass
+rate, and DCji is the fraction of prey i in the diet of the predator j.
+The mass-balance for each group is given by the following equation:
+Q = P+R+U
+
+The model considered fifteen functional groups, including all trophic
+levels in the ecosystem, from primary producers to top predators
+(Table 1). The model was focused on the dynamics of the main fishing
+target species in the study area (southern hake, hoki, southern blue
+whiting, kingklip, and skates) as well as their main prey and predators.
+Considering that hoki exhibits ontogenetic changes in vulnerability to
+predation and fishing (Arancibia et al., 1994; Pool et al., 1997), this
+group was split into two “multi-stanza” groups, i.e., juveniles (<3 years
+old) and adults (≥3 years old), which corresponded to age-structured
+functional groups. In addition, the following fleets were included: i)
+industrial trawl, targeting southern hake but also catching hoki, south­
+ern blue whiting, kingklip, and skates; ii) artisanal vertical longline,
+which catch southern hake, hoki and kingklip; and iii) artisanal bottom
+longline, targeting skates. The selection of functional groups and fleets
+Table 1
+Functional groups in the trophic model of Chilean Patagonia marine ecosystem,
+year 1980.
+Description
+
+1. Phytoplankton
+2. Microzooplankton
+3. Mesozooplankton
+4. Macrozooplankton
+5. Benthos
+6. Small pelagic fish
+
+Planktonic microalgae community
+Flagellates
+Copepods
+Euphausiids
+Organisms that inhabit low, in and on the seabed
+Small and medium pelagic fish including Brama australis,
+Strangomera bentincki, Engraulis ringens, and Sprattus
+fuegensis)
+Seriolella cearulea and Seriolella punctata
+Macruronus magellanicus < 3 years old
+Macruronus magellanicus ≥ 3 years old
+Micromesistius australis
+
+7. Other demersal fish
+8. Hoki (j)
+9. Hoki (a)
+10. Southern blue
+whiting
+11. Kingklip
+12. Skates
+13. Southern hake
+14. Sea lions
+15. Detritus
+
+(3)
+
+where Q is consumption, P is production, R is respiration and U is un­
+assimilated food.
+When parameters were unknown, they were calculated by solving
+Eqs. (1) and (3) under the assumption that EEi = 0.950. The above
+implies that EwE calculates the unknown parameter (e.g., Bi, P/Bi, Q/Bi)
+for each i assuming that M0 for that group is 0.050 year− 1.
+Mortality rates and diet composition were assumed to be similar for
+individuals within each stanza for hoki. The representation of functional
+groups in multiple stanzas assumes that (i) the growth of the species
+follows the von Bertalanffy model, with the weight being proportional to
+the length cubed, and (ii) the population has had a relatively stable
+mortality and recruitment rate for at least a few years so it has a stable
+age distribution.
+In Table 2 we show the source of information for each parameter in
+the EwE model. In the case of hoki, the adult age group was the leading
+stanza, and we used the growth parameters reported by Ojeda et al.
+(1998). The quality of the input data used in building the model was
+evaluated with the Pedigree Index (Funtowicz & Ravetz, 1990; Chris­
+tensen & Walters, 2004). The pedigree routine enables users to track and
+weight the origin of data by using predefined values for each type of
+input parameter. The pedigree index for the input data ranges from 0,
+indicating that the data is not rooted in local sources, to 1, which rep­
+resents data that is entirely derived from local sources. Based on the
+individual pedigree values, an overall pedigree index is calculated. This
+index helps to determine the extent to which the models rely on data
+from other models compared to data collected from the study area
+(Christensen & Walters, 2004). Pedigree values are presented in Sup­
+plementary material.
+The following equation defines the temporal dynamics of the
+biomass of each functional group in Ecosim component of EwE:
+
+2.2. Mathematical model and functional groups
+
+Functional group
+
+(1)
+
+∑n
+∑n
+(
+)
+dBi
+cji Bi , Bj − M0i Bi − Fi Bi −
+cij (Bi , Bj )
+= gi
+j=1
+j=1
+dt
+
+(4)
+
+i
+where dB
+dt is the rate of change of the biomass of group i in a time interval
+(
+)
+t; gi is the net growth efficiency (P/Q) of group i; cji Bi , Bj is the function
+that predicts the consumption of prey i by predator j; M0i is other
+mortality rate of i; and Fi is the fishing mortality rate of i. This model
+allows temporal simulations to evaluate the effect of forcing functions
+on the biomass of one or more functional groups.
+
+Genypterus blacodes
+Zearaja chilensis
+Merluccius australis
+Otaria byronia
+All organic matter not included in another functional
+group
+
+4
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Table 2
+Sources of input data for the model of the Chilean Patagonia marine ecosystem. Key: B = Biomass; P/B = production to biomass ratio; Q/B = consumption to biomass
+ratio; DC = diet composition; Y = landings; j = juveniles; a = adults.
+Functional group
+
+B
+
+P/B
+
+1. Phytoplankton
+2. Microzooplankton
+3. Mesozooplankton
+4. Macrozooplankton
+5. Benthos
+6. Small pelagic fish
+7. Other demersal fish
+8. Hoki (j)
+9. Hoki (a)
+10. Southern blue whiting
+11. Kingklip
+12. Skates
+13. Southern hake
+14. Sea lions
+
+15
+
+15
+12
+12
+12
+17
+12
+8
+2
+3
+10
+24
+18
+9
+1, 21
+
+​
+​
+​
+
+17, 23
+​
+​
+
+​
+13
+4
+5
+12
+19
+11
+
+Q/B
+
+DC
+
+Y
+
+​
+
+​
+
+​
+
+​
+
+12
+12
+12
+2
+12
+8
+16
+16
+25
+2
+16
+6
+
+12
+12
+12
+2
+12
+16
+​
+​
+​
+​
+​
+​
+
+22
+22
+22
+22
+
+​
+
+16
+16
+16
+2
+16
+7, 20
+​
+
+22
+​
+
+1 Aguayo, A., Sepúlveda, M., Palma, F., Díaz, H., Yañez, J., 1998. Censo poblacional de lobos marinos comunes en el litoral de la V a la IX Región. Informe final
+proyecto Fondo de Investigación Pesquera 96–51, Subsecretaría de Pesca, Valparaíso.
+2 Arancibia, H., Neira, S., Barros, M., Gatica, C., Zúñiga, M.J., Alarcón, R., Acuña, R., 2010. Formulación e implementación de un enfoque multiespecífico de eval­
+uación de stock en recursos demersales de la zona sur austral – Fase I. Proyecto Fondo de Investigación Pesquera, FIP 2008–23. Universidad de Concepción / Instituto
+de Investigación Pesquera VIII Región. Concepción, Chile.
+3 Chong, J.V., Aguayo, M., & Payá, I., 2007. Estimación de edad, crecimiento y mortalidad natural de la merluza de cola, Macruronus magellanicus Lönnberg, 1907
+(Macruronidae, Gadiformes) en el Océano Pacífico Suroriental. Revista de biología marina y oceanografía, 42, 311–333.
+4 Contreras, F. J., & Quiroz, J. C., 2018a. Estatus y posibilidades de explotación biológicamente sustentables de los principales recursos pesqueros nacionales al año
+2018: Congrio dorado, 2018. Informe 3 consolidado. Instituto de Fomento Pesquero, IFOP, Valparaíso, Chile.
+5 Contreras, F., & Quiroz, J. C., 2018b. Estatus y posibilidades de explotación biológicamente sustentables de los principales recursos pesqueros nacionales al año 2018:
+Merluza de tres aletas, 2018. Informe 3 consolidado. Instituto de Fomento Pesquero, IFOP. Valparaíso, Chile.
+6 Kastelein, R., Kershaw, J., Berghout, E., Wiepkema, R., 1995. The food consumption of South American sea lions (Otaria flavescens). Aquatic Mammals, 21(1):43–53.
+7 Muñoz, L., Pavez, G., Quiñones, R.A., Oliva, D., Santos, M., Sepúlveda, M., 2013. Diet plasticity of the South American sea lion in Chile: stable isotope evidence.
+Revista de biología marina y oceanografía, 48(3), 613–622.
+8 Neira, S., & Arancibia, H., 2004. Trophic interactions and community structure in the upwelling system off Central Chile (33–39 degrees S). Journal of Experimental
+Marine Biology and Ecology, 312(2), 349––366.
+9 Ojeda, V., & Aguayo, M., 1986. Edad y crecimiento en (Merluccius australis) (Gadiformes, merlucciidae). Investigación Pesquera, 33, 47:59.
+10 Ojeda, V., Cerna, F., Chong, J., Aguayo, M., Payá, I., 1998. Estudio de crecimiento y construcción de claves talla edad de merluza de tres aletas y merluza de cola.
+Informes Técnicos FIP. FIP/IT N◦ 97–15. Instituto Fomento Pesquero.
+11 Oliva, D., Durán, L.R., Sepúlveda, M., Cárcamo, D., Pizarro, M., Anguita, C., Santos, M., Canto, A., Herrera, P., Muñoz, L., Orellana, O., Vásquez, P., 2020.
+Estimación poblacional de lobos marinos e impacto de la captura incidental. Pre-informe Final Proyecto FIP 2018–54.
+12 Pavés, H.J., González, H.E., Castro, L., Iriarte, J.L., 2014. Carbon Flows Through the Pelagic Sub-food Web in Two Basins of the Chilean Patagonian Coastal
+Ecosystem: the Significance of Coastal–Ocean Connection on Ecosystem Parameters. Estuaries and Coasts 38, 179–191.
+13 Payá, I., Céspedes, R., Ojeda, V., González, J., & Lillo, S., 2017. Estatus y posibilidades de explotación biológicamente sustentables de los principales recursos
+pesqueros nacionales al año 2017. Merluza de cola, año 2017. Documento consolidado. Instituto de Fomento Pesquero, IFOP.
+14 Pérez, M. C., Gálvez, P., Garcés, E., & González, J., 2018. Estatus y posibilidades de explotación biológicamente sustentables de los principales recursos pesqueros
+nacionales, 2018: Raya volantín, 2018. Instituto de Fomento Pesquero, IFOP. Valparaíso, Chile.
+15 Pizarro, G., Montecino, V., Guzmán, L., Muñoz, V., Chacón, V., Pacheco, H., Frangópulos, M., Retamal, L., Alarcón, C., 2005. Patrones locales recurrentes del
+fitoplancton en fiordos y canales australes (43◦ -56◦ S) en primavera y verano. Ciencia y Tecnología del Mar, 28 (2): 63–83.
+16 Pool, H., Balbontín, F., Montenegro, C., Cortés, N., & Arriaza, M., 1997. Interacciones tróficas en recursos demersales en la zona sur-austral. Inf. Téc. FIP-IT/94–32.
+17 Quiroga, E., Quiñones, R., Palma, M., Sellanes, J., Gallardo, V. A., Gerdes, D., Rowe, G., 2005. Biomass size-spectra of macrobenthic communities in the oxygen
+minimum zone off Chile. Estuarine, Coastal and Shelf Science, 62(1), 217–231.
+18 Quiroz, J. C., & Wiff, R., 2005. Demographic analysis and exploitation vulnerability of beaked skate (Dipturus chilensis) off the Chilean austral zone. ICES CM, 19.
+19 Quiroz, J. C., Pérez, M. C., Ojeda, V., Chong, L., Lillo, S., & Céspedes, R., 2018. Estatus y posibilidades de explotación biológicamente sustentables de los principales
+recursos pesqueros nacionales año 2018: Merluza del sur, 2018. Informe 3 consolidado. Instituto de Fomento Pesquero, IFOP. Valparaíso, Chile.
+20 Sepúlveda, M., Neira, S., Oliva, D., Pavés, H., Pavez, G., Santos, M., Sarmiento, R., 2016. Rol ecológico del lobo marino común en el territorio y aguas juris­
+diccionales chilenas. Informe Final Proyecto FIP N◦ 2014–28.
+21 Sepúlveda, M., Oliva, D., Sielfeld, W., Pérez, M.J., Moraga, R., Schrader, D., Urra, A., Diaz, H., Inostroza P., Melo, A., 2008. Cuantificación poblacional de lobos
+marinos en el litoral de la V a IX Región. Informe Final Proyecto FIP 2006–49.
+22 SERNAPESCA. 1980. Anuario estadístico de pesca 1980. Ministerio de Economía, Fomento y Turismo, Gobierno de Chile.
+23 Veit-Köhler, G., Gerdes, D., Quiroga, E., Hebbeln, D., Sellanes, J., 2009. Metazoan meiofauna within the oxygen-minimum zone off Chile: results of the 2001-PUCK
+expedition. Deep Sea Research Part II: Topical Studies in Oceanography, 56(16), 1105–1111.
+24 Wiff, R., Ojeda, V., Quiroz, J.C., 2007. Age and growth in pink cusk-eel (Genypterus blacodes) off the Chilean austral zone: evaluating differences between man­
+agement fishing zones. Journal of Applied Ichthyology, 23(3), 270–272.
+25 Wiff, R., Roa-Ureta, R. H., Borchers, D. L., Milessi, A. C., & Barrientos, M. A., 2015. Estimating consumption to biomass ratio in non-stationary harvested fish
+populations. PloS one, 10(11), e0141538.
+
+5
+
+Progress in Oceanography 241 (2026) 103631
+
+S. Neira et al.
+
+(
+
+)
+
+pedigree analysis (see Supplementary material S4–S7).
+
+The consumption cji Bi , Bj is calculated by applying the concept of
+foraging arena (Walters et al., 1997); Bi is split into vulnerable to pre­
+dation (Vij ) and invulnerable to predation (Bi − Vij ) fractions. The rate of
+transference (vij ) between the vulnerable and invulnerable fractions is
+the maximal instantaneous mortality rate that consumer j can exert on
+prey i. The expression is:
+(
+)
+dV ij
+= vij Bi − Vij − vij Vij − aij Vij Bj
+dt
+
+2.4. Quantifying ecosystem structure and mortality sources in target
+species
+EwE calculates several indices to characterise the ecosystem and its
+living components. We analysed the following indices: Trophic level
+(TL, Odum & Heald, 1975), System flows, number of connections in the
+network, the analysis of direct and indirect trophic impacts (MTI) of
+Ulanowicz and Puccia (1990), and two indices measuring the potential
+for being a keystone species or the keystoneness (KS) from Libralato
+et al. (2006) and the modified KS from Valls et al. (2015). MTI measures
+the relative impact of the impacting group i on the impacted group j, by
+considering direct (predation) and indirect (competition) trophic in­
+teractions in the model. KS by Libralato et al. (2006) is calculated based
+on a measure of relative trophic impact (εi) (a measure of the overall
+effect of group i on all the other groups in the model, derived from MTI
+analysis) and a measure of the contribution of the biomass of group i to
+the total biomass in the food web. The keystone functional groups are
+those that have a value of the calculated index close to or greater than
+zero (Libralato et al., 2006). KS by Valls et al. (2015) considers also the
+trophic level (TL) of each group to discriminate among low TL keystone
+and high TL keystone. Therefore, species/functional groups with high KS
+values may play a keystone role in the system and small changes in their
+biomass may have important impacts on the biomass of the other
+functional groups in the ecosystem. With these indicators, we evaluated
+the ecological role of each functional group in the model. Following
+Barros et al. (2024), we estimated and compared the different sources of
+mortality for the main target species of the demersal fishery from 1980
+to 2020.
+
+(5)
+
+where aij is the effective search rate of predator j for prey i, and vij is the
+vulnerability that represents the degree to which the predation mortality
+of a prey is explained by the increase in the biomass of the predator.
+2.3. Fitting the model to time series and data used to calibrate the model
+In EwE, predator–prey interactions are influenced by the behaviour
+of prey, which moderates their exposure to predation. As a result, the
+patterns of biomass flow can demonstrate either bottom-up or top-down
+control (Walters et al., 2000). By conducting repeated simulations, EwE
+allows fitting of predicted biomasses and catch to time series of observed
+data. The best fit is achieved with fishing mortality rates, vulnerability
+parameters, and/or anomalies in primary production. The aim is to
+minimize the differences between model’s predictions and observations.
+According to Heymans et al. (2016), the best practice for fitting an EwE
+model to data series involves using statistical hypothesis testing methods
+outlined by Mackinson et al. (2009) and further refined by Tomczak
+et al. (2012), Mackinson (2014), and Alexander et al. (2014). This
+procedure, which has been automated by Scott et al. (2016) and inte­
+grated into EwE, is based on calculating the sum of squares (SS) and the
+Akaike Information Criterion (AIC) (Akaike, 1974), incorporating eight
+hypotheses (see Alexander et al., 2014).
+The calibration process used six data series of fishing mortality to
+drive the model, six data series of catch, and nine data series of relative
+biomass (see Supplementary S1). This procedure enabled us to estimate
+a maximum of 14 parameters related to vulnerabilities and/or spline
+points for primary production. Biomass data series were collected from
+official reports on stock assessment by Instituto de Fomento Pesquero
+(IFOP), using direct (i.e., survey) or indirect (i.e. single-species stock
+assessment models) assessment methods. Catch data series were ob­
+tained from official landings statistics from the National Fisheries Ser­
+vice corrected by IFOP. Anomalies in primary production was not an
+observed time-series, but it was generated by the model during fitting to
+produce the best fit to the observed time-series of other groups. Finally,
+we performed the built-in Monte Carlo routine in EwE to evaluate input
+parameter uncertainty and the robustness of model results. We per­
+formed 150 Monte Carlo runs using the uncertainty defined in the
+
+3. Results
+3.1. Food web structure off Chilean Patagonia
+The input and output parameters for each functional group in the
+balanced model are presented in Table 3 and Table 4. The overall
+pedigree index for the model was 0.7, which indicate that 70 % of the
+input data was obtained for the functional groups in the study area using
+high precision methods.
+The quantitative flow diagram representing the food web supporting
+fishing target species in year 1980 (Fig. 3), showed functional groups
+allocated according to their trophic level (TL) from primary producers
+(phytoplankton) up to top predators and fishing. The main flows of
+mass/energy occurred in the plankton (phytoplankton towards
+zooplankton) and benthic (detritus towards benthos) realms. Among
+
+Table 3
+Input and output parameters resulting from the mass-balanced run of the Ecopath model representing the food web sustaining the target species of the fisheries
+operating in Chilean Patagonia, year 1980. Key: TL = Trophic level; B = Biomass; P/B = production to biomass ratio; Q/B = consumption to biomass ratio; EE =
+Ecotrophic efficiency; P/Q = Gross food conversion efficiency; Y = landings; j = juveniles; a = adults. Parameters estimated by Ecopath are shown in bold.
+Functional group
+
+TL
+
+B (ton⋅km− 2)
+
+P/B (year− 1)
+
+1. Phytoplankton
+2. Microzooplankton
+3. Mesozooplankton
+4. Macrozooplankton
+5. Benthos
+6. Small pelagic fish
+7. Other demersal fish
+8. Hoki (j)
+9. Hoki (a)
+10. Southern blue whiting
+11. Kingklip
+12. Skates
+13. Southern hake
+14. Sea lions
+15. Detritus
+
+1.00
+2.11
+2.79
+3.08
+2.00
+3.44
+3.00
+3.90
+4.29
+4.39
+3.55
+4.34
+5.07
+4.60
+1.00
+
+146.230
+0.670
+7.271
+8.331
+11.645
+8.427
+0.774
+2.927
+2.722
+1.400
+0.197
+0.073
+3.140
+0.035
+
+137.00
+534.00
+14.60
+5.48
+2.70
+1.15
+0.70
+1.20
+0.70
+0.42
+0.39
+0.15
+0.19
+0.20
+
+​
+
+​
+
+EE
+
+1476.00
+40.15
+17.52
+36.00
+10.00
+3.50
+6.24
+3.11
+3.60
+1.40
+1.24
+0.68
+14.36
+
+0.05
+0.95
+0.95
+0.95
+0.24
+0.95
+0.95
+0.81
+0.04
+0.91
+0.21
+0.09
+0.66
+0.00
+0.02
+
+​
+
+Q/B (year− 1)
+
+​
+
+6
+
+Y (ton⋅km− 2⋅year−
+
+P/Q
+​
+
+​
+
+​
+
+0.36
+0.36
+0.31
+0.08
+0.12
+0.20
+0.19
+0.23
+0.12
+0.28
+0.12
+0.28
+0.01
+​
+​
+​
+​
+​
+​
+
+​
+
+0.006
+0.056
+0.011
+0.013
+
+​
+
+​
+
+0.125
+
+1
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Table 4
+Diet composition for the predators in the Ecopath model representing the food web sustaining the target species of the fisheries operating in Chilean Patagonia, year
+1980. Nomenclature: j = juveniles; a = adults. The numbers in the first row indicate the predator number in the first column.
+Prey\predator
+
+2
+
+3
+
+4
+
+1. Phytoplankton
+2. Microzooplankton
+3. Mesozooplankton
+4. Macrozooplankton
+5. Benthos
+6. Small pelagic fish
+7. Other demersal fish
+8. Hoki (j)
+9. Hoki (a)
+10. Southern blue whiting
+11. Kingklip
+12. Skates
+13. Southern hake
+14. Sea lions
+15. Detritus
+Import
+Sum
+
+0.900
+0.100
+​
+
+0.295
+0.700
+0.005
+
+0.300
+0.250
+0.450
+
+​
+
+​
+
+​
+
+​
+
+0.400
+0.350
+
+​
+
+​
+
+​
+
+​
+
+​
+
+1.000
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+0.700
+0.200
+0.100
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+0.070
+0.110
+0.310
+0.050
+0.180
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+0.010
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+1.000
+
+​
+
+​
+
+​
+
+​
+
+1.000
+
+1.000
+
+1.000
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+​
+
+0.250
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+1.000
+
+​
+
+0.100
+0.010
+0.890
+​
+
+0.500
+0.020
+0.150
+0.050
+
+​
+
+​
+
+​
+
+0.050
+0.050
+​
+0.060
+
+​
+
+​
+
+​
+
+0.020
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+0.020
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+1.000
+
+1.000
+
+1.000
+
+1.000
+
+0.600
+
+​
+
+0.040
+
+​
+
+0.100
+
+​
+
+​
+
+0.270
+1.000
+
+0.060
+0.100
+0.100
+0.025
+0.025
+
+​
+
+​
+
+0.200
+
+​
+
+​
+
+​
+
+0.002
+
+​
+
+0.100
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+0.220
+1.000
+
+0.820
+1.000
+​
+
+1.000
+
+0.100
+0.590
+1.000
+
+Fig. 3. Quantitative flow diagram representing the food web sustaining the target species of the fisheries operating in Chilean Patagonia, the year 1980. Nodes
+represent functional groups, and size is logarithmically proportional to biomass. The thickness of the lines is proportional to the magnitude of the flux. The light grey
+horizontal lines indicate trophic levels of the groups. Key: j = juveniles; a = adults.
+
+predators of intermediate TL (2.0 < TL < 4.0), the main flows linked
+phytoplankton and zooplankton with small pelagic fish and the latter
+group with hoki juveniles. Among groups with TL ≥ 4.0, the main flows
+linked zooplankton, small pelagic fish and hoki juveniles with hoki
+adults. Sea lions and southern hake are the functional groups with the
+highest TL in the model. However, southern hake had a higher con­
+sumption rate than sea lions.
+The percentage of the system’s flows (all flows into consumer
+without considering plankton and detritus) through each predator and
+the percentage of links (trophic interactions) in which each functional
+group was involved in the system are shown in Fig. 4. The functional
+group small pelagic fish concentrated the highest percentage of total
+flows (16 %) and trophic links (11 %) in the system, followed by adults
+of hoki and kingklip with 9 % of trophic links each. The functional
+groups with the least interactions were “other demersal fish” and skates
+(4 % of trophic links).
+Fig. 5 presents estimates of prey consumption by each predator in the
+model. In the case of predators with intermediate trophic levels, the
+
+main prey were zooplankton and benthos. Among higher TL predators,
+the main prey consumed were the functional groups “small pelagic fish”
+and hoki juveniles. Considering that “small pelagic fish” is a functional
+group encompassing several species (mainly myctophids and clupeids,
+species with little or no commercial value) all of them with smaller
+biomass than juvenile hoki, we infer that hoki juveniles were, by far, the
+main single prey for other demersal fish, southern hake, and hoki adults
+(cannibalism).
+In the mixed trophic impacts plot (Fig. 6) we can highlight the
+negative impact of southern hake and hoki adults on all other demersal
+stocks (hoki juvenile, skates, kingklip, and southern blue whiting). The
+negative impact of hoki juveniles on kingklip, skates and southern blue
+whiting were also important, as was the negative impact of sea lions on
+hoki juveniles and southern blue whiting. The industrial trawl fleet had
+a positive impact on hoki juveniles and southern blue whiting.
+The keystoneness index (KS) and the relative trophic impact (εi) for
+each functional group of the model are presented in Fig. 7. Hoki adults
+and “small pelagic fish” were the most important functional groups in
+7
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Fig. 4. Percentage of flows through each predator and percentage of trophic links in which each predator is involved (without considering plankton and detritus) in
+the model representing Chilean Patagonia marine ecosystem, year 1980. Key: j = juveniles; a = adults.
+
+the model in terms of KS and εi. However, as their KS values were
+negative (below 0), they can be regarded as influential groups in the
+community and not necessarily keystones.
+
+towards a less productive system from 2001 to 2020 (Fig. 9).
+From 1980 to 2020, fishing mortality (F) was greater than predation
+mortality (M2) for kingklip and hoki adults, accounting for an average of
+29 % and 11 % of total mortality (Z), respectively (Fig. 10). This means
+that a large part of mortality in these groups was not explained by F and
+M2. On the other hand, in southern hake, southern blue whiting, and
+hoki juveniles, M2 was the main source of mortality, with a mean pro­
+portion of 40 %, 83 %, and 72 % of Z during the study period (see
+Fig. 10). The group skates did not experience M2 (Fig. 10).
+Model results indicated that M2 was variable over time in all target
+species (Fig. 11). Cannibalism was the primary source of M2 in southern
+hake, especially after 2005, with sea lions as the second most significant
+predator group. In southern blue whiting, southern hake played a major
+role explaining M2, followed by hoki adults, and kingklip. Kingklip
+exhibited relatively low M2 with skates as the main predator, followed
+by sea lions. Until 2000, cannibalism by adult hoki was the main source
+of M2 for juvenile hoki, followed by predation from southern hake. After
+2000, predation by southern hake became the main source of M2. This
+shift coincided with changes in primary production anomalies and a
+decline in hoki biomass (see Figs. 8 and 9). Sea lions were the main
+predators for hoki adults.
+
+3.2. Ecosystem and demersal stocks dynamics 1980–2020
+This section describes the results of the dynamic simulations over
+time. The analysis using the AICc, the best fit among model predictions
+and observed data was obtained when fishing mortality, vulnerabilities
+and primary production anomaly were considered (Table 5). The fitting
+procedure estimated 11 vulnerabilities and 3 spline points of primary
+production (PP). Fishing mortality series explained 56 % of variability in
+observed time series, while the combination of fishing mortality series
+and vulnerability parameters explained 63 %, and the combination of
+fishing mortality series and model anomaly in PP explained 75 %
+(Table 5). The best fit model improved the overall fit by 82 % compared
+to the un-fitted baseline model, and considered the combination of
+fishing mortality series, vulnerability parameters and model anomaly in
+PP. Fig. 8 shows the best fit of the model to data series of biomass and
+catch of target species from 1980 to 2020. Monte Carlo analysis showed
+the uncertainty in model predictions based on the likely range of input
+parameters. Uncertainty ranges showed the same trends and contained
+the best fits to available biomass and catch data series. The vulnerabil­
+ities estimated during the fitting procedure are shown in Supplementary
+S2. In general, the fitted model reproduced appropriately the observed
+biomass trends and magnitudes (Fig. 9). The best estimate of biomass
+was found in skates, although there was an overestimation observed
+between 1985 and 1995. A similar trend was observed in southern hake,
+which also experienced an overestimation of biomass during the same
+period. For hoki juveniles, the model did not accurately replicate the
+high interannual variability in biomass from 1980 to 2000, but it did
+capture the overall trend and fit well observed biomass towards the end
+of the series. Regarding catch, trends were well represented. However,
+the model overestimated catch between 1985 and 1995 for southern
+hake, skates, kingklip, and juvenile hoki. In contrast, there was an un­
+derestimation of catch between 1995 and 2010 for southern blue
+whiting. During the fitting procedure to observed time series of other
+groups, EwE estimated a hypothetical anomaly in PP that indicated a
+shift in system PP from a more productive period from 1980 to 2000
+
+4. DISCUSSION
+The aim of this paper was to analyse the dynamics of the ecosystem
+and demersal stocks in the Chilean Patagonia system (41◦ 28.6′S–57◦ S)
+for the period 1980–2020 by means of dynamic food web modelling. In
+terms of food web structure and functioning zooplankton and benthos
+were the most important prey at intermediate trophic levels, while small
+pelagic fish and hoki juveniles were the main prey for higher trophic
+levels (i.e., hoki adults, southern hake, and southern blue whiting). The
+functional group “small pelagic fish” concentrate the most of system
+flows and trophic links, followed by hoki (juveniles, and adults). No
+“keystone” species were identified in the system in 1980, although hoki
+adults and “small pelagic fish” were functional groups of moderate
+trophic impact and ecological importance. During 1980–2020, preda­
+tion mortality (M2) was higher than fishing mortality in southern hake,
+southern blue whiting and hoki juveniles. M2 was also variable in time
+for target species. The dynamics of target species and the whole food
+8
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Fig. 5. Consumption rates of each prey type for the different consumer groups in the Ecopath model representing the food web sustaining the target species of the
+fisheries operating in Chilean Patagonia, year 1980. Key: j = juveniles; a = adults.
+
+web from 1980 to 2000 were explained by top-down (predation and
+fishing) and bottom-up (shift in PP anomaly in the late 1990s) forcing. In
+the following sections we will present a detailed discussion of major
+results.
+
+2018). Input data and model structure are likely the main sources of
+uncertainty (Chagaris et al., 2015). Data uncertainty arises from the
+scarcity in basic estimates of abundance, production, consumption and
+diets for skates and non-target species such other demersal and other
+pelagic fish. Structural uncertainty, on the other hand, is a function of
+the number of functional groups included in the model, their in­
+teractions, and the environmental forcing factors selected, among other
+aspects (Chagaris et al., 2015). Higher complexity (more groups and
+interactions) results in higher uncertainty in model simulation, making
+dynamics and predictions harder to interpret (Pinnegar et al., 2005). On
+the other hand, models composed of only a few functional groups have
+unrealistic behaviour (Fulton et al., 2003; Pinnegar et al., 2005).
+Therefore, the complexity of our model arose from a compromise be­
+tween realism, interpretation and use. In this sense, our model should be
+considered as part of the ongoing development of more accurate models
+and understanding of the marine ecosystems of Chilean Patagonia.
+Analysis of trophic flows indicated that, at an intermediate level,
+zooplankton and benthos were the main prey, while “small pelagic fish”
+and hoki juveniles were the main prey for predators located at middle
+and higher trophic levels. This is similar to what was found by Pavés
+
+4.1. Food web structure off Chilean Patagonia 1980
+Input data such as estimates of biomass, production/biomass and
+consumption/biomass ratios, diet composition and landings were
+collected mostly from studies carried out in Chilean Patagonia to eval­
+uate stock size, feeding behaviour and fishery statistics of target species.
+The overall “pedigree index” for the model (i.e., the analysis of the
+quality and uncertainty of input data) resulted in 0.7 (0 < pedigree < 1),
+meaning that 70 % of the input data were reliable and estimated within
+the system represented by the model. This value is in the upper limit of
+the global range registered in the scientific literature for the “pedigree
+index” of Ecopath models, which ranges from 0.137 to 0.743 with an
+average value of 0.472 (Colléter et al., 2015).
+Our food web model is, of course, a simplification of the system and
+just like any other model is affected by uncertainties (Steenbeek et al.,
+9
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Fig. 6. Mixed trophic impacts for the functional groups of the model representing Chilean Patagonia marine ecosystem, year 1980. The X-axis is the impacted groups;
+the Y-axis is the impacting groups. Negative impacts are shown in red, and positive impacts in blue. Key: (a) = adults; (j) = juveniles.
+
+et al. (2013) in the inner sea of Chilean Patagonia. Considering that
+“small pelagic fish” is a functional group encompassing several species,
+we infer that hoki juveniles are a key prey in the system specially for
+hoki adults (cannibalism) and southern hake. This is similar to results by
+Jurado–Molina et al. (2016) in the same system but using a different
+modelling approach (Multispecies Virtual Population Analysis). Future
+studies could consider splitting small pelagic fish into more specific
+species such Falkland Spratt (Sprattus fuegensis), that seems to play an
+important ecological role in the inner sea (Pavés et al., 2013) and the
+Francisco Coloane Marine Area in the Magellan Strait (Haro et al.,
+2022).
+The analysis of mixed trophic impacts provides information on direct
+(predation) and indirect (e.g., potential competition) feeding impacts
+among functional groups. These impacts can also be positive (for pred­
+ator) or negative (for prey). We observed that demersal fish stocks
+(especially hoki juveniles, hoki adults, and southern hake) and the in­
+dustrial trawl fleet are likely the most influential groups as they have
+important direct and indirect impacts on target and non-target species.
+For example, southern hake had negative impacts on skates, kingklip,
+southern blue whiting, and hoki (both adults and juveniles). Hoki adults
+had negative impact on hoki juveniles (cannibalism), and industrial
+trawl had negative impact on skates, kingklip and hoki. Among positive
+impacts, phytoplankton impacted on zooplankton groups and small
+pelagic fish. Small pelagic fish, in turn, had positive impact on southern
+whiting, while and hoki juveniles impacted positively on southern hake.
+Pavés et al. (2013) found similar results, but for artisanal fleets in the
+inner sea of Patagonia.
+The Libralato et al. (2006) keystoneness index indicated whether a
+functional group has the capability to play critical role in the community
+as keystone species. In our model, no functional group was identified as
+keystone (since KSi > 0). However, hoki adults and small pelagic fish
+scored high reaching KS values close to zero and total impact > 0.5
+(Fig. 7 upper panel), and adult hoki reached values similar to those
+obtained for Chilean hake in the ecosystem of south-central Chile
+(>− 0.25, Barros et al., 2024). On the other hand, the Valls et al. (2015)
+KS index identified adult hoki as a keystone species of low trophic level
+with a potentially high impact in the Chilean Patagonia system. This
+
+indicates that hoki could have a key role in the trophic web of the
+Chilean Patagonia system. In this regard, special concern should be
+given to the heavy decline in the biomass of the hoki since 2000 (Fig. 2),
+due to fishing pressure (Alarcón & Arancibia, 2015) and a reduction in
+recruitment which was correlated with a shift to colder sea surface
+temperature (Cubillos et al., 2014; Castillo-Jordán et al., 2016).
+4.2. Ecosystem and demersal stock dynamics 1980–2020
+Predation mortality (M2) was very important (as it was the main
+source of total mortality) in southern hake, hoki juveniles and southern
+blue whiting, with southern hake being the main predator among
+demersal fish. Jurado–Molina et al. (2016) also suggested that trophic
+interactions in the study area are mainly driven by the southern hake’s
+predation on its main prey species: hoki and southern blue whiting. M2
+for this species was greater than fishing mortality (F). This result seems
+robust since predation could be underestimated because we only
+considered sea lions as top predators, but other high trophic level
+predators (e.g., orcas, sperm whales, and sea birds) are known to forage
+in at least the inner sea portion of the study area (Haro et al., 2020,
+2022, 2025, Pavés et al., 2013, 2014). Unfortunately, available data on
+the abundance and feeding habits of these predators in the model area is
+scarce and precludes their reliable inclusion in this model. We
+encourage that future studies assess the impacts of these predators.
+High predation mortality (M2) for species targeted by fisheries was
+observed from 1980 to 2020. In southern hake and hoki, cannibalism
+was the main source of M2. Predation by hoki adults, southern hake and
+skates explained the most of M2 in juveniles of hoki, southern blue
+whiting and kingklip. Most of the M2 in hoki adults and southern hake
+was explained by sea lions, southern hake and skates. The above could
+indicate that, in the study area, M2 is an important source of variability
+for these populations, and efforts should be directed to better modelling
+this source of natural mortality in current stock assessment programs.
+Similar results have been observed in other demersal communities. In
+central Chile, Barros et al. (2024) found that predation was the main
+source of mortality among demersal crustaceans, and common hake
+(Merluccius gayi) where the primary predator. The same authors
+10
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Fig. 7. Keystoneness index from Libralato et al. (2006) (upper panel) and Keystone index from Valls et al. (2015) (inferior panel) for the functional groups of the
+model representing the Chilean Patagonia marine ecosystem in the year 1980. In the upper panel, the X-axis shows the relative impact and the Y-axis indicates
+keystoneness. In the inferior panel the X-axis shows the trophic level, the Y-axis indicates rank keystone index, and dotted line indicates the third quartile values of
+TL. The numbers indicate the species or groups. Nomenclature: (a) = adults; (j) = juveniles.
+
+concluded that the population dynamics of these crustaceans have been
+significantly influenced by common hake predation over the past 30
+years. Ocampo Reinaldo et al. (2016) analysed the trophic web of the
+San Matías Gulf ecosystem in Argentina. Their results show that the
+Argentine hake (Merluccius hubbsi) plays the role of a specialised top
+predator whose cannibalism could have a strong effect on the abundance
+of the same population and indicate that fleets (trawl and longline) have
+
+replaced mortality by predation by eliminating part of the largest can­
+nibals and other predators.
+The overall fit of model predictions to observed time-series of
+biomass and catch was primarily explained by top-down forcing (fishing
+and vulnerability to predation), explaining 63 % of variability in timeseries (Table 5). However, the fit improved 20 % when a hypothetical
+anomaly in model’s primary productivity was included (Table 5). This
+11
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+sea surface temperature anomalies detected around the year 1998, as
+noted by Cubillos et al. (2014), matched the trends in primary produc­
+tion anomalies estimated in this study.
+We consider that future studies in the Chilean Patagonia area could
+help to improve the model inputs by generating ecological data and time
+series for functional groups other than target species. Future studies
+should also model the impact of using observed environmental vari­
+ability as forcing for the dynamics of individual functional groups and
+the whole food web. As the space dimension is also lacking in the current
+configuration of the model, future studies should also explore the spatial
+dynamics of the biomass of the functional groups and fleets by applying
+Ecospace, the spatially explicit model that relies in Ecopath and is part of
+the EwE software (Waters et al., 1999).
+We conclude that juvenile hoki are a key prey in the Chilean Pata­
+gonia ecosystem, especially for hoki adults (cannibalism) and southern
+hake, and that southern hake is the main predator among demersal fish.
+In addition, top-down fishing pressures and bottom-up changes in pri­
+mary productivity were both important drivers of changes in the food
+
+Table 5
+Comparison across selected stepwise fitting interactions and the model baseline.
+K is the number of parameters, v is the number of vulnerability parameters, PP is
+the number of spline points, min SS is the minimum sum of squares obtained,
+AIC is Akaike information criterion, AICc is corrected Akaike information
+criterion.
+Model
+
+K
+
+v
+
+PP
+
+Min SS
+
+AIC
+
+AICc
+
+%
+improved
+fit
+
+1. Baseline
+2. Baseline
++v
+3. Baseline
++ PP
+4. Baseline
++ v + PP
+5. Fishing
+6. Fishing +
+v
+7. Fishing +
+PP
+8. Fishing +
+v + PP
+
+0
+1
+
+0
+1
+
+0
+0
+
+559.38
+559.38
+
+28.59
+30.60
+
+28.59
+30.60
+
+0.00
+0.00
+
+14
+
+0
+
+14
+
+398.02
+
+− 122.96
+
+− 122.25
+
+28.85
+
+14
+
+1
+
+13
+
+399.75
+
+− 120.66
+
+− 119.95
+
+28.54
+
+0
+13
+
+0
+13
+
+0
+0
+
+245.06
+202.58
+
+− 408.82
+− 483.03
+
+− 408.82
+− 482.42
+
+56.19
+63.79
+
+13
+
+0
+
+13
+
+135.96
+
+− 694.35
+
+− 693.75
+
+75.69
+
+14
+
+11
+
+3
+
+99.54
+
+− 857.54
+
+− 856.84
+
+82.21
+
+has been found in other ecosystems where consideration of both changes
+in top-down fishing pressure and changes in bottom-up primary pro­
+duction limits to ecosystem productivity improve model performance
+relative to observed dynamics (Mackinson et al., 2009; Neira et al.,
+2014, Barros et al., 2024).
+The modelled primary production anomalies indicated a shift from a
+productive period from 1980 to 2000, towards a low productive period
+from 2001 to 2020 (Fig. 9). The first period is associated with the onset
+and development of the fishing activities and high biomass of all
+demersal stocks. Additionally, a shift in juvenile hoki predators was
+observed, coinciding with the shift in the estimated primary production
+anomaly. This shift in primary production could be attributed to con­
+current environmental changes. Cubillos et al. (2014) identified a cor­
+relation between sea surface temperature anomalies and a significant
+decline in hoki recruitment after 2000 in Chilean Patagonia. The shifts in
+
+Fig. 9. Primary production (PP) for the Chilean Patagonia marine ecosystem
+from 1980 to 2020. Three spline points were estimated. Blue indicates positive
+anomalies in PP; red indicates negative anomalies in PP.
+
+Fig. 8. Time series fits for biomass (ton/km2) and annual catch(ton/km2) in southern hake, southern blue whiting, skates, kingklip and hoki (juveniles and adults) for
+the marine ecosystem of Chilean Patagonia from 1980 to 2020. Key: a = adults; j = juveniles; black dots = biomass stock assessments and catch; white dots = acoustic
+biomass; continuous line = Ecosim prediction; shaded area = 90 % and 10 % percentiles of 150 Monte Carlo simulations.
+12
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Fig. 10. Monthly mean values (1980 to 2020) of total mortality (Z, year− 1), fishing mortality (F, year− 1), predation mortality (M2, year− 1), and other mortality (M0,
+year− 1) for southern hake, southern blue whiting, kingklip, hoki (juveniles and adults) and skates in Chilean Patagonia marine ecosystem. Key: a = adults; j =
+juveniles. The box plots indicate quartiles and outliers.
+
+Fig. 11. Mortality due to predation (M2 year− 1) in southern hake, southern blue whiting, kingklip and hoki (juveniles and adults) in the Chilean Patagonia marine
+ecosystem from 1980 to 2020. Key: a = adults; j = juveniles.
+
+web likely mediated by trophic interactions. These findings are impor­
+tant in moving forward an ecosystem-based fisheries management in
+Chilean Patagonia, which seems key to maintain these fisheries sus­
+tainably and to maintain the resilience of the whole ecosystem in the
+face of future changes in fishing, predation, and environmental
+variability.
+
+CRediT authorship contribution statement
+Sergio Neira: Writing – review & editing, Writing – original draft,
+Visualization, Validation, Supervision, Software, Resources, Project
+administration, Methodology, Investigation, Funding acquisition,
+Formal analysis, Data curation, Conceptualization. Hugo Arancibia:
+Writing – review & editing, Conceptualization. Mónica E. Barros:
+Writing – review & editing, Methodology, Data curation. Ana
+13
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Arriagada: Writing – review & editing, Writing – original draft, Soft­
+ware, Methodology, Data curation. Rubén Alarcón: Writing – review &
+editing, Data curation. Claudio Gatica: Writing – review & editing, Data
+curation, Conceptualization.
+
+FAO, 2003. The Ecosystem Approach to Fisheries. FAO Technical guidelines for
+responsible Fisheries, No. 4, Suppl. 2. Food and Agricultural Organization of the
+United Nations, Rome.
+Frank, K.T., Petrie, B., Choi, J.S., Leggett, W.C., 2005. Trophic Cascades in a Formerly
+Cod-Dominated Ecosystem. Science 308, 1621–1623. https://doi.org/10.1126/
+science.1113075.
+Fulton, E.A., Smith, A.D.M., Johnson, C.R., 2003. Effect of complexity on marine
+ecosystem models. Mar. Ecol. Prog. Ser. 253, 1–16.
+Funtowicz, S.O., Ravetz, J.R., 1990. Uncertainty and Quality in Science for Policy.
+Springer, Dordrecht.
+Haro, D., Sabat, P., Arreguín-Sánchez, F., Neira, S., Hernández, J.C., 2020. Trophic role
+of the humpback whale (Megaptera novaeangliae) in the feeding area of Magellan
+Strait, Chile. Ecol. Ind. https://doi.org/10.1016/j.ecolind.2019.105796.
+Haro, D., Neira, S., Hernández-Padilla, J.C., Arreguín-Sánchez, F., Sabat, P., Vargas, C.,
+2022. Approaching the ecological role of the squat lobster (Munida gregaria) and the
+Fuegian sprat (Sprattus fuegensis) in the Francisco Coloane Marine Area, Magellan
+Strait, Chile using a pelagic food web model. Animals 13, 3. https://doi.org/
+10.3390/ani13010003.
+Haro, D., Labra, F.A., Neira, S., Padilla-Hernández, J.C., Arreguín-Sánchez, F., 2025.
+Ecological role of marine mammals in the Magellan strait: insights from trophic
+modeling. Ecol. Model. https://doi.org/10.1016/j.ecolmodel.2024.110944.
+Heymans, J.J., Coll, M., Link, J.S., Mackinson, S., Steenbeek, J., Walters, C.,
+Christensen, V., 2016. Best practice in Ecopath with Ecosim food-web models for
+ecosystem-based management. Ecol. Model. 331, 173–184. https://doi.org/
+10.1016/j.ecolmodel.2015.12.007.
+Hutchings, J.A., 2000. Collapse and recovery of marine fishes. Nature 406, 882–885.
+https://doi.org/10.1038/35022565.
+Jurado–Molina, J, Gatica, C, Arancibia, H, Neira, S, Alarcón, R, 2016. A Multispecies
+Virtual Population Analysis for the southern Chilean demersal fishery. Mar. Coastal
+Fish. 8, 350–360.
+Libralato, S., Christensen, V., Pauly, D., 2006. A method for identifying keystone species
+in food web models. Ecol. Model. 195, 153–171. https://doi.org/10.1016/j.
+ecolmodel.2005.11.029.
+Mackinson, S., 2014. Combined analyses reveal environmentally driven changes in the
+North Sea ecosystem and raise questions regarding what makes an ecosystem
+model’s performance credible? Can. J. Fish. Aquat. Sci. 71, 31–46. https://doi.org/
+10.1139/cjfas-2013-0173.
+Mackinson, S., Daskalov, G., Heymans, J.J., Neira, S., Arancibia, H., Zetina-Rejón, M.,
+Jiang, H., Cheng, H.Q., Coll, M., Arreguin-Sanchez, F., Keeble, K., Shannon, L., 2009.
+Which forcing factors fit? using ecosystem models to investigate the relative
+influence of fishing and changes in primary productivity on the dynamics of marine
+ecosystems. Ecol. Model. 220, 2972–2987. https://doi.org/10.1016/j.
+ecolmodel.2008.10.021.
+Molinet, C., Niklitschek, E.J., 2023. Fisheries and Marine Conservation in Chilean
+Patagonia. In: Castilla, J.C., Armesto Zamudio, J.J., Martínez-Harms, M.J.,
+Tecklin, D. (Eds.), Conservation in Chilean Patagonia: Assessing the State of
+Knowledge, Opportunities, and Challenges. Springer International Publishing, Cham,
+pp. 285–302.
+Neira, S., Moloney, C., Cury, P., Christensen, V., Arancibia, H., 2014. Analyzing changes
+in the southern Humboldt ecosystem for the period 1970-2004 by means of dynamic
+food web modeling. Ecol. Model. 274, 41–49.
+Ocampo Reinaldo, M., Milessi, A.C., Romero, M.A., Crespo, E., Wolff, M., González, R.A.,
+2016. Assessing the effects of demersal fishing and conservation strategies of marine
+mammals over a Patagonian food web. Ecol. Model. 331, 31–43. https://doi.org/
+10.1016/j.ecolmodel.2015.10.025.
+Odum, W.E., Heald, E.J., 1975. The detritus-based food web of an. Estuar. Res. Chem.
+Biol. Estuar. Syst. 1, 265.
+Ojeda, V., Cerna, F., Chong, J., Aguayo, M., Payá, I., 1998. Estudio de crecimiento y
+construcción de claves talla edad de merluza de tres aletas y merluza de cola.
+Informes Técnicos Fondo de Investigación Pesquera. Instituto de Fomento Pesquero,
+Valparaíso, Chile.
+Pantoja, S., Luis Iriarte, J., Daneri, G., 2011. Oceanography of the Chilean Patagonia.
+Cont. Shelf Res. 31, 149–153. https://doi.org/10.1016/j.csr.2010.10.013.
+Pauly, D., Christensen, V., Dalsgaard, J., Froese, R., Torres, F., 1998. Fishing down
+Marine Food Webs. Science 279, 860–863. https://doi.org/10.1126/
+science.279.5352.860.
+Pauly, D., Christensen, V., Walters, C., 2000. Ecopath, Ecosim, and Ecospace as tools for
+evaluating ecosystem impact of fisheries. ICES J. Mar. Sci. 57, 697–706. https://doi.
+org/10.1006/jmsc.2000.0726.
+Pavés, H.J., González, H.E., Christensen, V., 2013. Structure and functioning of two
+pelagic communities in the North Chilean Patagonian coastal system. Hydrobiologia
+717, 85–108. https://doi.org/10.1007/s10750-013-1576-8.
+Pavés, H.J., González, H.E., Castro, L., Iriarte, J.L., 2014. Carbon Flows through the
+Pelagic Sub-food Web in two Basins of the Chilean Patagonian Coastal Ecosystem:
+the significance of Coastal–Ocean connection on Ecosystem Parameters. Estuar.
+Coasts. https://doi.org/10.1007/s12237-014-9780-y.
+Payá, I., 1992. The diet of Patagonian hake Merluccius australis polylepis and its daily
+ration of Patagonian grenadier Macrouronus magellanicus. S. Afr. J. Mar. Sci. 12,
+753–760. https://doi.org/10.2989/02577619209504739.
+Pedersen, E.J., Thompson, P.L., Ball, R.A., Fortin, M.-J., Gouhier, T.C., Link, H.,
+Moritz, C., Nenzen, H., Stanley, R.R.E., Taranu, Z.E., Gonzalez, A., Guichard, F.,
+Pepin, P., 2017. Signatures of the collapse and incipient recovery of an overexploited
+marine ecosystem. R. Soc. Open Sci. 4, 170215. https://doi.org/10.1098/
+rsos.170215.
+
+Declaration of competing interest
+The authors declare that they have no known competing financial
+interests or personal relationships that could have appeared to influence
+the work reported in this paper.
+Acknowledgements
+We are thankful to two anonymous reviewers and the guest editors
+for their valuable comments and suggestions that greatly improved the
+final version of this paper. SN, AA, and MB acknowledge partial funding
+by COPAS COASTAL ANID FB210021. MB thanks the fellowship ANID
+Becas/Doctorado Nacional, 21160713 and the Dirección de Postgrado
+de la Universidad de Concepción. AA thanks ANID Becas/Doctorado
+Nacional 21202411.
+Appendix A. Supplementary data
+Supplementary data to this article can be found online at https://doi.
+org/10.1016/j.pocean.2025.103631.
+References
+Akaike, H., 1974. A new look at the statistical model identification. IEEE Trans. Autom.
+Control 19, 716–723. https://doi.org/10.1109/TAC.1974.1100705.
+Alarcón, R., Arancibia, H., 2015. Biology, fishery and products of Chilean hoki
+(Macruronus novaezelandiae magellanicus). Hakes (pp. 294-323).
+Alexander, K.A., Heymans, J.J., Magill, S., Tomczak, M.T., Holmes, S.J., Wilding, T.A.,
+2014. Investigating the recent decline in gadoid stocks in the west of Scotland shelf
+ecosystem using a foodweb model. ICES J. Mar. Sci. 72, 436–449. https://doi.org/
+10.1093/icesjms/fsu149.
+Arancibia, H., Alarcón, R., Cubillos, L., Núñez, S., Toledo, I., Vilugrón, L., Veloso, C.,
+Peña, H., 1994. Evaluación indirecta de merluza de cola en la VIII Región. Informes
+Técnicos Fondo de Investigación Pesquera, FIP 93-09. Instituto de Investigación
+Pesquera VII Región, Concepción. Chile.
+Arancibia, H., Neira, S., Barros, M., Gatica, C., Zúñiga, M.J., Alarcón, R., Acuña, R., 2010.
+Formulación e implementación de un enfoque multiespecífico de evaluación de stock
+en recursos demersales de la zona sur austral – Fase I. Proyecto Fondo de
+Investigación Pesquera, FIP 2008-23. Universidad de Concepción/Instituto de
+Investigación Pesquera VIII Región, Concepción, Chile.
+Barros, M.E., Arriagada, A., Arancibia, H., Neira, S., 2024. Using a time-dynamic food
+web model to compare predation and fishing mortality in Pleuroncodes monodon
+(Galatheidae: Crustaceae) and other benthic and demersal resource species off
+central Chile. Ecol. Model. 487, 110546. https://doi.org/10.1016/j.
+ecolmodel.2023.110546.
+Castillo-Jordán, C., Klaer, N.L., Tuck, G.N., Frusher, S.D., Cubillos, L.A., Tracey, S.R.,
+Salinger, M.J., 2016. Coincident recruitment patterns of Southern Hemisphere
+fishes. Can. J. Fish. Aquat. Sci. 73, 270–278. https://doi.org/10.1139/cjfas-20150069.
+Chagaris, D.D., Mahmoudi, B., Walters, C.J., Allen, M.S., 2015. Simulating the Trophic
+Impacts of Fishery Policy Options on the West Florida Shelf using Ecopath with
+Ecosim. Mar. Coastal Fish. 7, 44–58. https://doi.org/10.1080/
+19425120.2014.966216.
+Cheung, W.W.L., Pauly, D., Sumaila, U.R., 2024. Hope or despair Revisited: Assessing
+Progress and New challenges in Global Fisheries. Fish Fish. https://doi.org/10.1111/
+faf.12877.
+Christensen, V., Pauly, D., 1992. ECOPATH II — a software for balancing steady-state
+ecosystem models and calculating network characteristics. Ecol. Model. 61,
+169–185. https://doi.org/10.1016/0304-3800(92)90016-8.
+Christensen, V., Walters, C.J., 2004. Ecopath with Ecosim: methods, capabilities and
+limitations. Ecol. Model. 172, 109–139. https://doi.org/10.1016/j.
+ecolmodel.2003.09.003.
+Colléter, M., Valls, A., Guitton, J., Gascuel, D., Pauly, D., Christensen, V., 2015. Global
+overview of the applications of the Ecopath with Ecosim modeling approach using
+the EcoBase models repository. Ecol. Model. 302, 42–53. https://doi.org/10.1016/j.
+ecolmodel.2015.01.025.
+Cubillos, L.A., Niklitschek, E.J., Cahuin, S., 2014. Relating a recruitment shift of
+Patagonian grenadier (Macruronus magellanicus Lönnberg) to large-scale
+environmental changes off Southern Chile. N. Z. J. Mar. Freshw. Res. 48, 284–293.
+https://doi.org/10.1080/00288330.2013.846920.
+
+14
+
+S. Neira et al.
+
+Progress in Oceanography 241 (2026) 103631
+
+Petitgas, P., Secor, D.H., McQuinn, I., Huse, G., Lo, N., 2010. Stock collapses and their
+recovery: mechanisms that establish and maintain life-cycle closure in space and
+time. ICES J. Mar. Sci. 67, 1841–1848. https://doi.org/10.1093/icesjms/fsq082.
+Petrie, B., Frank, K.T., Leggett, W.C., 2022. Temporal evolution of critical traits and their
+relationship to cod stock collapse and recovery. Can. J. Fish. Aquat. Sci. 79,
+1765–1779. https://doi.org/10.1139/cjfas-2022-0028.
+Pinnegar, J.K., Blanchard, J.L., Mackinson, S., Scott, R.D., Duplisea, D.E., 2005.
+Aggregation and removal of weak-links in food-web models: system stability and
+recovery from disturbance. Ecol. Model. 184, 229–248. https://doi.org/10.1016/j.
+ecolmodel.2004.09.003.
+Pitcher, T.J., Cheung, W.W.L., 2013. Fisheries: Hope or despair? Mar. Pollut. Bull. 74,
+506–516. https://doi.org/10.1016/j.marpolbul.2013.05.045.
+Plagányi, É.E. Models for an ecosystem approach to fisheries. FAO Fisheries Technical
+Paper. No. 477. Rome, FAO. 2007. 108p.
+Polovina, J.J., Ow, M.D., 1985. An approach to estimating an ecosystem box model. Fish.
+Bull. 83, 457–460.
+Pool, H., Balbontín, F., Montenegro, C., Cortes, N., Arriaza, M., 1997. Interacciones
+tróficas de recursos demersales en la zona sur austral Informes técnicos Fondo de
+Investigación Pesquera, FIP 94-32. Instituto de Fomento Pesquero, Valparaíso, Chile.
+Saldías, G.S., Sobarzo, M., Quiñones, R., 2019. Freshwater structure and its seasonal
+variability off western Patagonia. Prog. Oceanogr. 174, 143–153. https://doi.org/
+10.1016/j.pocean.2018.10.014.
+Scott, E., Serpetti, N., Steenbeek, J., Heymans, J.J., 2016. A Stepwise Fitting Procedure
+for automated fitting of Ecopath with Ecosim models. SoftwareX 5, 25–30. https://
+doi.org/10.1016/j.softx.2016.02.002.
+
+Steenbeek, J., Corrales, X., Platts, M., Coll, M., 2018. Ecosampler: a new approach to
+assessing parameter uncertainty in Ecopath with Ecosim. SoftwareX 7, 198–204.
+https://doi.org/10.1016/j.softx.2018.06.004.
+SUBPESCA., 2011. Pesqueria Demersal Austral y capturas como fauna acompañante.
+Informe Técnico (R. Pesq.) N◦ 158/2011.S.d.P.y. Acuicultura,◦ Valparaíso, Chile.
+Tomczak, M.T., Niiranen, S., Hjerne, O., Blenckner, T., 2012. Ecosystem flow dynamics
+in the Baltic Proper—Using a multi-trophic dataset as a basis for food–web
+modelling. Ecol. Model. 230, 123–147. https://doi.org/10.1016/j.
+ecolmodel.2011.12.014.
+Ulanowicz, R.E., Puccia, C.J., 1990. Mixed Trophic Impacts in ecosystems. Coenoses 5,
+7–16.
+Valls, A., Coll, M., Christensen, V., 2015. Keystone species: toward an operational
+concept for marine biodiversity conservation. Ecol. Monogr. 85, 29–47. https://doi.
+org/10.1890/14-0306.1.
+van Gemert, R., Andersen, K.H., 2018. Challenges to fisheries advice and management
+due to stock recovery. ICES J. Mar. Sci. 75, 1864–1870. https://doi.org/10.1093/
+icesjms/fsy084.
+Walters, C., Christensen, V., Pauly, D., 1997. Structuring dynamic models of exploited
+ecosystems from trophic mass-balance assessments. Rev. Fish Biol. Fish. 7, 139–172.
+https://doi.org/10.1023/A:1018479526149.
+Walters, C., Pauly, D., Christensen, V., Kitchell, J.F., 2000. Representing Density
+Dependent Consequences of Life history strategies in Aquatic Ecosystems: EcoSim II.
+Ecosystems 3, 70–83. https://doi.org/10.1007/s100210000011.
+Waters, C., Pauly, D., Christensen, V., 1999. Ecospace: prediction of mesoscale spatial
+patterns in trophic relationships of exploited ecosystems, with emphasis on the
+impacts of marine protected areas. Ecosystems 2, 529–554.
+
+15
+
+

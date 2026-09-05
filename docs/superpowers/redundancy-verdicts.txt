@@ -34,3 +34,45 @@ Global_history_TE010_2026-09-04.zip: checked 3378 entries against SeaAroundUsExt
    content-mismatch (same path/size, different bytes) : 0
    absent (no matching content anywhere)                : 0
    VERDICT: REDUNDANT - safe to delete
+
+=== regions.zip re-verified AFTER repair (2026-09-05) ===
+Two files corrupted in the on-disk regions/ mirror (Table_1-f0424c0e.xls,
+Table_2-3434d627.xls -- proven three-way against the zip and catalog.json) were
+restored by copying from the canonical, hash-verified store PPRAtlas/archive/files/.
+A third file (regions/LME_013/HUM-2018/Supplementary material revised and final.xls)
+has no other on-disk witness and was left untouched in regions/; its content was
+additionally preserved in the canonical store as
+PPRAtlas/archive/files/3411ef1000bb15030821.xls so the zip's copy is not the only
+surviving one anywhere. tools/verify_redundant.py was extended with an optional
+extra_root parameter (checked against PPRAtlas/archive/files/ here) that resolves an
+entry whose correct content is absent from the target directory -- whether nothing or
+the wrong bytes sit at its expected path -- against that second root, reporting it as
+"preserved-elsewhere" rather than content-mismatch/absent. The other three zips above
+are unchanged from the pre-promotion Task 1 verdicts: Task 2's promotion moved their
+target directories, so re-running verify.py against the current (post-promotion) tree
+would compare against paths Task 1 never verified against; the original proof, taken
+against the correct pre-promotion layout, still holds for content that has not been
+touched since.
+
+regions.zip: checked 964 entries against PPRAtlas\archive\regions (extra_root=PPRAtlas\archive\files)
+   matched (in place, content identical)               : 959
+   relocated (elsewhere, content identical)            : 4
+      regions/LME_027/CAN-2009/118_118_Northwest_Africa_(1987).json  ->  LME_027\CAN-2009\27_118_Northwest_Africa_(1987).json
+      regions/LME_028/GUI-2004/646_646_Guinea_(1998).json  ->  LME_028\GUI-2004\28_646_Guinea_(1998).json
+      regions/LME_028/LME028-Gascuel-2009/726_726_Guinea_(1985).json  ->  LME_028\LME028-Gascuel-2009\28_726_Guinea_(1985).json
+      regions/LME_035/1998/412_412_Gulf_of_Thailande_(1963).json  ->  LME_035\1998\35_412_Gulf_of_Thailande_(1963).json
+   preserved-elsewhere (content lives under extra root) : 1
+      regions/LME_013/HUM-2018/Supplementary material revised and final.xls  ->  3411ef1000bb15030821.xls
+   size-mismatch (same path, different size)           : 0
+   content-mismatch (same path/size, different bytes) : 0
+   absent (no matching content anywhere)                : 0
+   VERDICT: REDUNDANT - safe to delete
+
+NOTE: the brief's expected final regions.zip count text ("957 matched, 4 relocated, 1
+preserved-elsewhere, ...") appears to reuse the pre-repair matched count verbatim.
+957 + 4 + 1 = 962 but 964 entries were checked; after the two Table_*.xls files are
+genuinely repaired they correctly count as matched, giving 959 (not 957). 959 + 4 + 1
+= 964, which reconciles exactly. The verdict (REDUNDANT, 0 size-mismatch, 0
+content-mismatch, 0 absent) matches the brief's expectation; only the matched/
+preserved-elsewhere split differs from the arithmetic in the brief's prose, which this
+run's numbers are internally consistent about.

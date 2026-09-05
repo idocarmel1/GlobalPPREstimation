@@ -1,0 +1,95 @@
+--- installed/database_json.py
++++ work/database_json_preserve_source.py
+@@ -148,6 +148,10 @@
+     @staticmethod
+     def _parse_metadata_from_filename(filename):
+         """Attempts to extract Metadata from the LME_Number_Name_(Year).json format."""
++        sibling = os.path.join(os.path.dirname(filename), "Metadata.xlsx")
++        if os.path.exists(sibling):
++            meta = pd.read_excel(sibling, header=None, dtype=str)
++            return dict(zip(meta.iloc[:, 0], meta.iloc[:, 1]))
+         base = os.path.basename(filename).replace('.json', '')
+         match = re.match(r"([^_]+)_(\d+)_([^_]+(?:_[^_]+)*)_\(([^)]+)\)", base)
+         if match:
+@@ -575,7 +579,7 @@
+         ba_rows = [r for r in rows if r["BA_known"]]
+ 
+         L = ["## Mass balance", "",
+-             f"Checked by `ewe_model_json_creator.py` on the assembled JSON for "
++             f"Checked by the source-preserving local copy of `database_json.py` on the assembled JSON for "
+              f"{model_name}, EE tolerance {findings['ee_tol']}.", "",
+              f"**Verdict: {verdict}** - {len(findings['errors'])} error(s), "
+              f"{len(findings['indeterminate'])} indeterminate, "
+@@ -872,8 +876,8 @@
+                 self.logger.info(f"    - Total Diet + Import sum for {group_name}: {total_diet_sum:.5f}")
+                 needs_normalization = not np.isclose(total_diet_sum, 1.0, atol=1e-6)
+                 if needs_normalization:
+-                    self.logger.warning(f"    - Diet Sum is not 1 ({total_diet_sum:.5f}). Normalizing to 1.0")
+-                norm_factor = 1.0 / total_diet_sum if needs_normalization else 1.0
++                    self.logger.warning(f"    - Diet Sum is not 1 ({total_diet_sum:.5f}). Preserving published fractions")
++                norm_factor = 1.0  # Preserve published diet fractions; extraction rule.
+                 import_val = import_val * norm_factor
+ 
+             # C. Merge Diet and Detritus Fate
+@@ -955,7 +959,7 @@
+                 diet_list.append({
+                     "prey_seq": p_seq,
+                     "proportion": self._fmt_float(vals["proportion"]),
+-                    "detritus_fate": self._fmt_float(vals["detritus_fate"])
++                    "detritus_fate": self.NO_DATA if vals["detritus_fate"] == 0.0 else self._fmt_float(vals["detritus_fate"])
+                 })
+ 
+             # D. Primary Producer & Detritus Identification
+@@ -1023,11 +1027,11 @@
+             group_obj = {
+                 "group_name": group_name,
+                 "group_seq": group_seq,
+-                "habitat_area": hab_area,
++                "habitat_area": str(row.iloc[2]) if not pd.isna(row.iloc[2]) else self.NO_DATA,
+                 "biomass_habitat_area": biomass_hab_area,
+                 "b_hab_area_input": b_input,
+                 "biomass": biomass,
+-                "vbk": "0",
++                "vbk": self.NO_DATA,
+                 "pb": pb,
+                 "pb_input": pb_input,
+                 "ee": ee,
+@@ -1045,9 +1049,9 @@
+                 "other_mort": other_mort,
+                 "export": self._fmt_float(export_val) if export_val else "0",
+                 "gs": gs if gs else self.NO_DATA,
+-                "shadow_price": "0",
+-                "ge": self.NO_DATA,
+-                "ge_input": "false",
++                "shadow_price": self.NO_DATA,
++                "ge": get_val(row.iloc[9])[0],
++                "ge_input": get_val(row.iloc[9])[1],
+                 "diet_imp": self._fmt_float(import_val) if import_val else "0",
+                 "diet_descr": {"diet": diet_list if len(diet_list) > 1 else (diet_list[0] if diet_list else None)},
+                 "taxon_descr": taxon_descr,
+@@ -1061,7 +1065,7 @@
+ 
+         # 4. Save to JSON
+         final_json = {"group": groups_json}
+-        with open(output_json, 'w') as f:
++        with open(output_json, 'w', encoding='utf-8') as f:
+             json.dump(final_json, f, indent=4)
+ 
+         self.logger.info(f"\nSuccess: Output saved to {output_json}")
+@@ -1115,7 +1119,7 @@
+ 
+         # Matrices
+         diet_matrix = pd.DataFrame(0.0, index=group_ids + ['Import'], columns=group_ids)
+-        det_fate_matrix = pd.DataFrame(0.0, index=group_ids, columns=group_ids)
++        det_fate_matrix = pd.DataFrame(np.nan, index=group_ids, columns=group_ids)
+ 
+         has_tax = False
+         has_tl = False
+@@ -1146,6 +1150,7 @@
+                 'Production / biomass (/year)': parse_val(g.get('pb')),
+                 'Consumption / biomass (/year)': parse_val(g.get('qb')),
+                 'Ecotrophic Efficiency': parse_val(g.get('ee')),
++                'Production / consumption': parse_val(g.get('ge')),
+                 'Other mortality': parse_val(g.get('other_mort')),
+                 'Unassim. consumption': parse_val(g.get('gs')),
+                 'Detritus import (t/km^2/year)': parse_val(g.get('detritus_import'))
