@@ -1,5 +1,5 @@
 ---
-name: artifact-template-ewe-species-to-group-mapper
+name: ewe-species-to-group-mapper
 description: "Map every taxon in an LME catch workbook to the closest functional group in every Ecopath with Ecosim model described by supplied papers and supplements. Produce model-specific mapping and explanation columns, confidence colors, a taxonomy/provenance sheet, and validated spreadsheet output. Use when the user selects EwE Species-to-Group Mapper or asks to match LME species/catch taxa to EwE functional groups."
 ---
 
@@ -14,6 +14,15 @@ Match an LME catch-taxon workbook to every distinct Ecopath model in the supplie
 - Any attached appendices, supplementary spreadsheets/documents, model files, or cited taxonomy sources
 
 If the workbook or model paper is missing, ask for it. If a cited supplement is missing, attempt to retrieve it online before mapping.
+
+## Worked examples
+
+`examples/` holds three completed mappings — `LME_032_Arabian_Sea.xlsx`,
+`LME_034_Bay_of_Bengal.xlsx` and `LME_047_East_China_Sea.xlsx`. Read one before
+starting to see the expected column layout, confidence colouring and provenance
+sheet. They are reference output, not biological lookup tables: never copy an
+assignment from one ecosystem into another without evidence from that ecosystem's
+own sources.
 
 ## Capabilities to use
 
