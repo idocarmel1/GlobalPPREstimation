@@ -77,10 +77,6 @@ def main() -> None:
     assert np.allclose(actual_ratio, expected_ratio, rtol=1e-12, atol=1e-12)
     assert (candidate_ppr.loc[positive] > baseline_ppr_rows.loc[positive]).all()
 
-    jensen = pd.read_csv(CANDIDATE / "jensen_comparison.csv")
-    assert (jensen["ppr_correct"] + 1e-6 >= jensen["ppr_jensen"]).all()
-    jensen_violations = int((jensen["ppr_correct"] + 1e-6 < jensen["ppr_jensen"]).sum())
-
     validation = pd.read_csv(CANDIDATE / "validation.csv")
     assert _bool_validation_passed(validation)
 
@@ -101,8 +97,8 @@ def main() -> None:
     total_catch = float(candidate_summary["total_catch_tonnes"].sum())
     total_ppr = float(candidate_summary["ppr_species"].sum())
     baseline_ppr = float(baseline_summary["ppr_species"].sum())
-    weighted_jensen_commercial = float(candidate_summary["ppr_commercial_jensen"].sum())
-    weighted_jensen_functional = float(candidate_summary["ppr_functional_jensen"].sum())
+    weighted_commercial = float(candidate_summary["ppr_commercial"].sum())
+    weighted_functional = float(candidate_summary["ppr_functional"].sum())
     report = {
         "status": "passed",
         "scope_label": "global_te005",
@@ -117,11 +113,8 @@ def main() -> None:
         "total_ppr_te005": total_ppr,
         "total_ppr_te010": baseline_ppr,
         "total_ppr_ratio_te005_to_te010": total_ppr / baseline_ppr,
-        "commercial_jensen_total_ppr": weighted_jensen_commercial,
-        "commercial_jensen_underestimate_fraction": 1 - weighted_jensen_commercial / total_ppr,
-        "functional_jensen_total_ppr": weighted_jensen_functional,
-        "functional_jensen_underestimate_fraction": 1 - weighted_jensen_functional / total_ppr,
-        "jensen_violation_count": jensen_violations,
+        "commercial_total_ppr": weighted_commercial,
+        "functional_total_ppr": weighted_functional,
         "tl_catch_coverage_fraction": float(
             candidate_summary["matched_catch_tonnes"].sum() / total_catch
         ),
@@ -132,7 +125,6 @@ def main() -> None:
             "te005_formula_exact_within_tolerance": True,
             "cross_release_ppr_ratio_equals_2_power_tl_minus_1": True,
             "all_boolean_pipeline_validations_passed": True,
-            "correct_ppr_not_below_jensen": True,
             "polygon_counts_match_scope": True,
         },
     }

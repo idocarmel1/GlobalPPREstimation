@@ -196,21 +196,6 @@ def _coverage_table(species: pd.DataFrame) -> pd.DataFrame:
     return table.sort_values(["unit_id", "catch_tonnes"], ascending=[True, False])
 
 
-def _combined_group_table(
-    results: dict[str, dict[str, Any]], classification: str
-) -> pd.DataFrame:
-    frames = []
-    group_column = f"{classification}_group"
-    for unit_id, data in results.items():
-        frame = data[classification].copy()
-        frame.insert(0, "classification", classification)
-        frame.insert(0, "region_name", data["name"])
-        frame.insert(0, "unit_id", unit_id)
-        frame = frame.rename(columns={group_column: "group_name"})
-        frames.append(frame)
-    return pd.concat(frames, ignore_index=True)
-
-
 def run_analysis(
     project_root: str | Path,
     config_path: str | Path,

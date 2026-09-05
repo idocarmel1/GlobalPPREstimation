@@ -25,7 +25,7 @@ def build_notebook(root=ROOT):
 
 Every official EEZ unit is retained. Earlier spatial selection rules are **flags only**, not filters or replacements. EEZ, LME and High Seas are overlapping analysis systems and their totals must not be added together.
 
-The approved 1995 trophic-chain calculation is `SPPR = 10**(TL-1)` and `PPR = catch tonnes × SPPR`. No alternative 2020 regression is used; the 2020 supplement supplies MeanTL only. The separate /9 carbon conversion remains off. Commercial and functional outputs include both correct aggregation and the intentional catch-weighted-TL Jensen shortcut.'''),
+The approved 1995 trophic-chain calculation is `SPPR = 10**(TL-1)` and `PPR = catch tonnes × SPPR`. No alternative 2020 regression is used; the 2020 supplement supplies MeanTL only. The separate /9 carbon conversion remains off. `SPPR` is applied per taxon, and again per commercial and functional group using the group's catch-weighted mean trophic level; because the exponential is convex, the taxon-level sum is the unbiased figure and the group figure is a systematic underestimate whenever a group spans more than one trophic level.'''),
         code('''from pathlib import Path
 import json, sys
 import numpy as np
@@ -56,14 +56,8 @@ routes['catch_fraction_eez'] = routes.catch_tonnes / summary.total_catch_tonnes.
 display(routes)
 display(summary.nsmallest(15,'catch_tl_coverage_fraction')[['unit_id','region_name','catch_tl_coverage_fraction','missing_tl_catch_tonnes']])
 print('Overall matched catch fraction:',summary.matched_catch_tonnes.sum()/summary.total_catch_tonnes.sum())'''),
-        md('## Correct versus intentional Jensen aggregation'),
-        code('''jensen = pd.read_csv(TABLES/'jensen_comparison.csv')
-valid = jensen.dropna(subset=['ppr_jensen'])
-assert (valid.ppr_correct+1e-6 >= valid.ppr_jensen).all()
-bias = jensen.groupby('classification',as_index=False).agg(ppr_correct=('ppr_correct','sum'),ppr_jensen=('ppr_jensen','sum'))
-bias['underestimate_fraction'] = 1-bias.ppr_jensen/bias.ppr_correct
-display(bias)
-top = summary.head(20).sort_values('ppr_species')
+        md('## Species-level PPR by EEZ'),
+        code('''top = summary.head(20).sort_values('ppr_species')
 ax = top.plot.barh(x='region_name',y='ppr_species',legend=False,figsize=(10,8),color='#147D92')
 ax.set_xlabel('tonnes primary-production equivalent'); ax.set_ylabel('')
 ax.set_title(f"Top 20 EEZs, {metadata['year']}, TE=0.1")

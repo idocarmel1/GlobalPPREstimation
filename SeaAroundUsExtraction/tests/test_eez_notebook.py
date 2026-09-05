@@ -45,6 +45,17 @@ def test_nondefault_thresholds_appear_in_generated_rule_narrative(tmp_path,monke
     assert '10%' not in narrative and '90%' not in narrative and '1.20' not in narrative
 
 
+def test_generated_notebook_has_no_jensen_comparison(tmp_path):
+    api=builder(); prepare(tmp_path)
+    notebook=api.build_notebook(tmp_path)
+    text='\n'.join(''.join(cell.source) for cell in notebook.cells)
+    assert 'jensen_comparison.csv' not in text
+    assert 'jensen_violations' not in text
+    assert 'Jensen' not in text
+    assert 'ppr_correct' not in text
+    assert 'ppr_jensen' not in text
+
+
 @pytest.mark.parametrize('failure',['execute','html','unexecuted','changed_inputs'])
 def test_failed_rerun_preserves_old_artifacts_but_invalidates_success(tmp_path,monkeypatch,failure):
     api=builder(); output=prepare(tmp_path)

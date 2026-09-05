@@ -72,7 +72,12 @@ def check_table_cells(cells, expected):
 
 
 def check_groups(source, groups, classification):
-    """Reconstruct all group results, retaining unknown versus known-zero PPR."""
+    """Reconstruct all group results, retaining unknown versus known-zero PPR.
+
+    This deliberately recomputes the catch-weighted-mean-TL (Jensen-affected)
+    aggregation independently of ``ppr_pipeline.calculations.aggregate_groups``,
+    rather than importing it, so the two implementations can be cross-checked.
+    """
     key=f'{classification}_group'
     names=source[key].fillna('Unclassified').replace('','Unclassified')
     assert groups[key].is_unique and set(groups[key]) == set(names)
@@ -80,24 +85,13 @@ def check_groups(source, groups, classification):
     for name in sorted(set(names)):
         part=source.loc[names==name]
         matched=part.loc[part.tl.notna()]
-        total=float(part.catch_tonnes.sum())
         catch=float(matched.catch_tonnes.sum())
-        ppr=float((matched.catch_tonnes*10.**(matched.tl-1)).sum()) if len(matched) else np.nan
         mean=float((matched.catch_tonnes*matched.tl).sum()/catch) if catch>0 else np.nan
         sppr=10.**(mean-1) if catch>0 else np.nan
-        jensen=catch*sppr if catch>0 else np.nan
-        difference=ppr-jensen if catch>0 else np.nan
-        expected=dict(taxon_count_total=len(part),taxon_count_matched=len(matched),
-            catch_tonnes_total=total,catch_tonnes_matched=catch,catch_tonnes_missing_tl=total-catch,
-            catch_coverage_fraction=catch/total if total else np.nan,
-            sppr_correct=ppr/catch if catch>0 else np.nan,ppr_correct=ppr,
-            tl_weighted_jensen=mean,sppr_jensen=sppr,ppr_jensen=jensen,jensen_difference=difference,
-            jensen_ratio_correct_to_error=ppr/jensen if catch>0 and jensen else np.nan,
-            jensen_percent_difference=difference/jensen if catch>0 and jensen else np.nan)
+        ppr=catch*sppr if catch>0 else np.nan
+        expected=dict(catch_tonnes_matched=catch,tl_weighted=mean,sppr=sppr,ppr=ppr)
         for field,value in expected.items():
             check_value(indexed.loc[name,field],value,f'{classification}/{name}/{field}')
-        if catch>0:
-            assert ppr+max(1e-6,abs(ppr)*1e-12)>=jensen
 
 
 def reconstruct_comparison(root, metadata):
@@ -238,7 +232,7 @@ def validate(root=ROOT, *, workbooks=True):
     validation = pd.read_csv(tables/'validation.csv')
     checks = validation.loc[validation.unit=='boolean','value'].astype(str).str.lower()
     assert checks.eq('true').all()
-    assert pd.to_numeric(validation.loc[validation['check'].str.endswith('jensen_violations'),'value']).eq(0).all()
+    assert validation.loc[validation['check']=='tl_coverage_complete','value'].astype(str).str.lower().eq('true').all()
     total_rows = 0
     for row in summary.itertuples(index=False):
         source = pd.read_csv(tables/'regions'/row.unit_id/'species.csv')
@@ -290,7 +284,7 @@ def validate(root=ROOT, *, workbooks=True):
         'catch_tonnes_sum_across_eezs':float(catch),'ppr_sum_across_eezs':float(summary.ppr_species.sum()),
         'catch_tl_coverage_fraction':float(summary.matched_catch_tonnes.sum()/catch),
         'missing_tl_catch_tonnes':float(summary.missing_tl_catch_tonnes.sum()),
-        'flag_counts':spatial['flag_counts'],'jensen_violation_count':0,
+        'flag_counts':spatial['flag_counts'],'tl_coverage_complete':bool(validation.loc[validation['check']=='tl_coverage_complete','value'].astype(str).str.lower().eq('true').all()),
         'totals_by_spatial_type_not_additive':comparison.groupby('region_type').agg(units=('unit_id','size'),catch_tonnes=('total_catch_tonnes','sum'),ppr=('ppr_species','sum')).reset_index().to_dict('records')}
     if workbooks:
         report.update(check_workbooks(output,summary,flags,pairs,expected_comparison))

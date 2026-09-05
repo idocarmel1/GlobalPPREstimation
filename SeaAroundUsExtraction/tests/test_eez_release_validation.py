@@ -18,18 +18,21 @@ def call(name, *args):
     return getattr(audit, name)(*args)
 
 
-GROUP_COLUMNS = ['commercial_group','taxon_count_total','taxon_count_matched',
-    'catch_tonnes_total','catch_tonnes_matched','catch_tonnes_missing_tl',
-    'catch_coverage_fraction','sppr_correct','ppr_correct','tl_weighted_jensen',
-    'sppr_jensen','ppr_jensen','jensen_difference','jensen_ratio_correct_to_error','jensen_percent_difference']
+GROUP_COLUMNS = ['commercial_group','catch_tonnes_matched','tl_weighted','sppr','ppr']
 
 
 def group_fixture(matched=False):
+    """A single taxon that is either TL-matched with zero catch, or has catch but no TL.
+
+    Either way the group's matched catch is zero, so every downstream group value
+    (``tl_weighted``, ``sppr``, ``ppr``) is undefined (NaN) - there is no longer a
+    ``taxon_count_matched`` / ``catch_coverage_fraction`` pair of columns to tell the
+    two cases apart, so both collapse to the same expected group row.
+    """
     source = pd.DataFrame({'commercial_group':['Unknown'], 'functional_group':['Unknown'],
         'catch_tonnes':[0. if matched else 5.], 'tl':[3. if matched else np.nan],
         'ppr':[0. if matched else np.nan]})
-    values = ['Unknown',1,int(matched),0. if matched else 5.,0.,0. if matched else 5.,
-              np.nan if matched else 0.,np.nan,0. if matched else np.nan,*([np.nan]*6)]
+    values = ['Unknown',0.,np.nan,np.nan,np.nan]
     return source, pd.DataFrame([values],columns=GROUP_COLUMNS)
 
 
@@ -39,8 +42,8 @@ def test_group_unknown_and_zero_catch_semantics(matched):
     call('check_groups', source, groups, 'commercial')
 
 
-@pytest.mark.parametrize('column,value', [('ppr_correct',0.),('catch_tonnes_missing_tl',0.),
-    ('taxon_count_matched',1),('sppr_correct',0.),('ppr_jensen',0.),('jensen_difference',0.)])
+@pytest.mark.parametrize('column,value', [('catch_tonnes_matched',5.),('tl_weighted',3.),
+    ('sppr',100.),('ppr',500.)])
 def test_unmatched_group_rejects_invented_numeric_results_and_hidden_missing_tl(column,value):
     source, groups = group_fixture()
     groups.loc[0,column] = value
@@ -130,7 +133,7 @@ def test_group_export_rejects_invented_blank_result(matched):
     source,groups=group_fixture(matched)
     exported=cells(groups)
     call('check_table_cells',exported,groups)
-    exported['M2']=0.
+    exported['E2']=0.  # 'ppr', the last of the five group columns
     with pytest.raises(AssertionError): audit.check_table_cells(exported,groups)
 
 
@@ -160,17 +163,17 @@ def test_empty_regional_workbook_requires_no_data_and_zero_totals(mutation):
         with pytest.raises(AssertionError): audit.check_empty_region(sheets,row)
 
 
-def test_jensen_difference_allows_machine_cancellation_but_not_wrong_result():
+def test_group_ppr_allows_machine_cancellation_but_not_wrong_result():
     # Same mathematically zero difference after independent summation orders.
-    audit.check_value(4.092726157978177e-12,-4.092726157978177e-12,'group/jensen_difference')
+    audit.check_value(4.092726157978177e-12,-4.092726157978177e-12,'group/ppr')
     with pytest.raises(AssertionError):
-        audit.check_value(1.,0.,'group/jensen_difference')
+        audit.check_value(1.,0.,'group/ppr')
 
 
-@pytest.mark.parametrize('column',GROUP_COLUMNS[7:])
+@pytest.mark.parametrize('column',GROUP_COLUMNS[1:])
 def test_known_group_export_rejects_each_numeric_result_column(column):
-    # A single TL=3 member, catch=2: SPPR=100 and both PPR methods=200.
-    groups=pd.DataFrame([['Known',1,1,2.,2.,0.,1.,100.,200.,3.,100.,200.,0.,1.,0.]],columns=GROUP_COLUMNS)
+    # A single TL=3 member, catch=2: SPPR=100 and PPR=200.
+    groups=pd.DataFrame([['Known',2.,3.,100.,200.]],columns=GROUP_COLUMNS)
     exported=cells(groups)
     audit.check_table_cells(exported,groups)
     address=next(k[:-1]+'2' for k,v in exported.items() if k.endswith('1') and v==column)
@@ -221,8 +224,7 @@ def test_check_workbooks_checks_real_export_boundaries(tmp_path,monkeypatch,muta
         source=pd.DataFrame({'commercial_group':['Known'],'functional_group':['Known'],
             'catch_tonnes':[row.total_catch_tonnes],'tl':[3.],'ppr':[row.ppr_species]})
         source.to_csv(folder/'species.csv',index=False)
-        groups=pd.DataFrame([['Known',1,1,row.total_catch_tonnes,row.total_catch_tonnes,0.,1.,100.,
-            row.ppr_species,3.,100.,row.ppr_species,0.,1.,0.]],columns=GROUP_COLUMNS)
+        groups=pd.DataFrame([['Known',row.total_catch_tonnes,3.,100.,row.ppr_species]],columns=GROUP_COLUMNS)
         groups.to_csv(folder/'commercial.csv',index=False)
         functional=groups.rename(columns={'commercial_group':'functional_group'})
         functional.to_csv(folder/'functional.csv',index=False)
@@ -237,7 +239,7 @@ def test_check_workbooks_checks_real_export_boundaries(tmp_path,monkeypatch,muta
     for field in flags.columns[1:]: compact[field]=flags[field].to_numpy()
     exports['PPR_eez_summary.xlsx']={'Configuration':{'B7':.1},'All Areas Summary':cells(all_compact),
         'summarized summary':cells(compact),'EEZ Selection Flags':cells(flags),'EEZ LME Pairs':cells(pairs),'Selection Rules':{}}
-    if mutation in ('commercial','functional'): exports['EEZ_002_name.xlsx'][mutation.title()]['I2']=999.
+    if mutation in ('commercial','functional'): exports['EEZ_002_name.xlsx'][mutation.title()]['E2']=999.
     elif mutation=='pair': exports['PPR_eez_summary.xlsx']['EEZ LME Pairs']['D2']=False
     elif mutation=='all_area': exports['PPR_eez_summary.xlsx']['All Areas Summary']['D2']=999.
     elif mutation=='compact_cumulative': exports['PPR_eez_summary.xlsx']['summarized summary']['H2']=.5
