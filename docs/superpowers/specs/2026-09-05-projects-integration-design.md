@@ -1,7 +1,7 @@
 # Projects Integration — Design
 
 Date: 2026-09-05
-Status: revision 2, awaiting user review
+Status: revision 3, approved
 
 ## Purpose
 
@@ -131,7 +131,7 @@ deletion is not recoverable from the directory, unlike the other three rows here
 | Path | Size | Reason |
 | --- | --- | --- |
 | `SeaAroundUsExtraction/Global_history_TE010_2026-09-04/` | 261 MB | implements the 1995 SPPR/PPR method from `PPRCalculator`, which will be recomputed per LME |
-| `SeaAroundUsExtraction/PPR_global_te005_results/` | 13 MB | **flagged for confirmation** — same 1995 pipeline at TE=0.05; covered by the same reasoning but not named explicitly by the user |
+| `SeaAroundUsExtraction/PPR_global_te005_results/` | 13 MB | same 1995 pipeline at TE=0.05; confirmed for deletion |
 | `FishEstimationAI/graphify-out/` | 15 MB | superseded by the repo-wide graph built in task F |
 
 ### A4. What is explicitly kept
@@ -175,10 +175,10 @@ been silently excluded from the first commit.
 - Anchor `/lib/`, `/var/`, `/downloads/`, `/share/python-wheels/` to the repository root.
 - Add `.venv/`, `.idea/`, `.vscode/`, `.pytest_cache/`, `__pycache__/`.
 - Fold in the rules from the nested `FishEstimationAI/.gitignore` that still apply,
-  rescoped to `PPREstimation/`: notably `output/*` with `!output/top10/`, which currently
-  excludes `output/Ecobase_models/` and `output/collected_PPRs.xlsx`. **Flagged for
-  confirmation** — carrying this rule forward means those results do not reach a cloner,
-  which may conflict with the "a cloner gets all relevant data" requirement.
+  rescoped to `PPREstimation/`, **except** `output/*` / `!output/top10/`. That rule is
+  dropped: `output/Ecobase_models/` (230 workbooks) and `output/collected_PPRs.xlsx`
+  become tracked, so a cloner receives them. The Excel lock-file rule `~$*` is kept and
+  promoted to the root, since any open workbook anywhere in the tree creates one.
 - Verify with `git check-ignore -v` against a sampled path from every data directory,
   and assert the sample comes back clean.
 
@@ -340,7 +340,12 @@ than remembered.
 
 For the deferred task E, the per-ecosystem workbook should be lean enough for a human
 reader: only the columns the map visualisation needs, and few sheets rather than many.
-Recorded here so the constraint survives into that spec.
+
+Final outputs eventually move into the per-ecosystem folders built by task C. Every
+output location named in this spec — `PPREstimation/output/`,
+`SeaAroundUsExtraction/data/catch_by_taxon_year/`, `global_output/tables/regions/` — is
+therefore a staging location, not a permanent home. Task C decides what moves and what
+is referenced in place. Recorded here so the constraint survives into that spec.
 
 ## Verification and commit
 
@@ -360,5 +365,3 @@ Recorded here so the constraint survives into that spec.
 | Column removal perturbs surviving values | column-level byte-identity diff |
 | TL coverage is incomplete in historical years | `tl_coverage_complete` assertion fails loudly instead of underestimating |
 | Distillation misreads the raw schema | 2019 slice must reproduce existing `species.csv` totals |
-| Deleting `PPR_global_te005_results/` was not explicitly authorised | flagged in A3 for confirmation at spec review |
-| Carrying `output/*` ignore forward hides Ecobase results from cloners | flagged in A7 for confirmation at spec review |
