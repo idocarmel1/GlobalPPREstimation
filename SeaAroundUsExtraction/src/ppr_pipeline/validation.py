@@ -5,15 +5,7 @@ import pandas as pd
 
 
 def _sum_ppr(frame: pd.DataFrame) -> float:
-    return float(pd.to_numeric(frame["ppr_correct"], errors="coerce").sum())
-
-
-def _jensen_violations(frame: pd.DataFrame, tolerance: float) -> int:
-    valid = frame[["ppr_correct", "ppr_jensen"]].dropna()
-    if valid.empty:
-        return 0
-    threshold = tolerance * np.maximum(1.0, np.abs(valid["ppr_correct"].to_numpy()))
-    return int(np.sum(valid["ppr_correct"].to_numpy() + threshold < valid["ppr_jensen"].to_numpy()))
+    return float(pd.to_numeric(frame["ppr"], errors="coerce").sum())
 
 
 def validate_region(
@@ -25,7 +17,17 @@ def validate_region(
     *,
     tolerance: float = 1e-10,
 ) -> pd.DataFrame:
-    """Return long-form validation metrics for one pilot unit."""
+    """Return long-form validation metrics for one unit.
+
+    ``commercial_ppr_difference`` and ``functional_ppr_difference`` are the group PPR
+    minus the taxon-summed PPR. Because the group figures use the catch-weighted mean
+    trophic level, these differences are the Jensen gap and are expected to be
+    negative wherever a group spans more than one trophic level.
+
+    ``tl_coverage_complete`` guards the decision to drop the per-group coverage
+    columns: it is False as soon as any taxon lacks a trophic level, which would make
+    the group PPR a silent underestimate.
+    """
 
     catch_total = float(species["catch_tonnes"].sum())
     matched = species.loc[species["tl"].notna()]
@@ -35,8 +37,6 @@ def validate_region(
     functional_ppr = _sum_ppr(functional)
 
     catch_ok = bool(np.isclose(catch_total, raw_filtered_tonnes, rtol=tolerance, atol=1e-8))
-    commercial_ok = bool(np.isclose(species_ppr, commercial_ppr, rtol=tolerance, atol=1e-8))
-    functional_ok = bool(np.isclose(species_ppr, functional_ppr, rtol=tolerance, atol=1e-8))
     metrics: list[tuple[str, object, str]] = [
         ("raw_filtered_tonnes", float(raw_filtered_tonnes), "tonnes"),
         ("species_catch_tonnes", catch_total, "tonnes"),
@@ -56,10 +56,7 @@ def validate_region(
         ("functional_ppr", functional_ppr, "tonnes_primary_production_equivalent"),
         ("commercial_ppr_difference", commercial_ppr - species_ppr, "tonnes_primary_production_equivalent"),
         ("functional_ppr_difference", functional_ppr - species_ppr, "tonnes_primary_production_equivalent"),
-        ("commercial_ppr_reconciled", commercial_ok, "boolean"),
-        ("functional_ppr_reconciled", functional_ok, "boolean"),
-        ("commercial_jensen_violations", _jensen_violations(commercial, tolerance), "count"),
-        ("functional_jensen_violations", _jensen_violations(functional, tolerance), "count"),
+        ("tl_coverage_complete", bool(species["tl"].notna().all()), "boolean"),
     ]
     return pd.DataFrame(
         [{"unit_id": unit_id, "check": check, "value": value, "unit": unit} for check, value, unit in metrics]
