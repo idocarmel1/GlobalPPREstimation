@@ -36,14 +36,21 @@ export function regionalExportShard(units, argv) {
 }
 
 export function regionalGroupFormulas(speciesRows, groupColumn) {
+  // The group table is now [group(A), catch_tonnes_matched(B), tl_weighted(C),
+  // sppr(D), ppr(E)] - the catch-weighted-mean-TL (Jensen-affected) aggregation
+  // only, with no corrected/comparison figure left to reconstruct via SUMIF
+  // against the Species sheet. B and C come straight from the CSV (the
+  // catch-weighted mean TL isn't a single-cell formula); D and E are still
+  // recomputed live from them, the same independent-verification pattern used
+  // everywhere else in these workbooks, rather than trusted verbatim from the CSV.
+  // speciesRows/groupColumn are no longer used (there is nothing left to SUMIF
+  // from the Species sheet) but are kept in the signature to avoid touching the
+  // call site.
+  void speciesRows;
+  void groupColumn;
   return {
-    H:'=IF(E2=0,"",I2/E2)',
-    I:`=IF(C2=0,"",SUMIF('Species'!$${groupColumn}$2:$${groupColumn}$${speciesRows},A2,'Species'!$U$2:$U$${speciesRows}))`,
-    K:`=IF(J2="","",(1/'Metadata'!$B$5)^(J2-1))`,
-    L:'=IF(E2=0,"",E2*K2)',
-    M:'=IF(E2=0,"",I2-L2)',
-    N:'=IF(L2=0,"",I2/L2)',
-    O:'=IF(L2=0,"",M2/L2)',
+    D: `=IF(C2="","",(1/'Metadata'!$B$5)^(C2-1))`,
+    E: '=IF(B2=0,"",B2*D2)',
   };
 }
 

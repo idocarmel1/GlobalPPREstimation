@@ -179,7 +179,6 @@ async function buildSummaryWorkbook(metadata) {
   await addCsvSheet(workbook, path.join(TABLES, SUMMARY_CSV), "Summary");
   await addCsvSheet(workbook, path.join(TABLES, "validation.csv"), "Validation");
   await addCsvSheet(workbook, path.join(TABLES, "tl_coverage.csv"), "TL Coverage");
-  await addCsvSheet(workbook, path.join(TABLES, "jensen_comparison.csv"), "Jensen Comparison");
   await addCsvSheet(workbook, path.join(TABLES, "ingestion_audit.csv"), "Ingestion Audit");
   const configuration = addKeyValueSheet(workbook, "Configuration", `PPR ${SCOPE_LABEL} configuration`, [
     ["Scope", metadata.scope, IS_EEZ ? 'All EEZs; flags only, no filtering or replacements' : IS_GLOBAL ? "All Sea Around Us-defined LME and High Seas units" : "Not a global estimate or global ranking"],
@@ -208,10 +207,16 @@ async function buildSummaryWorkbook(metadata) {
   const dims = styleDataSheet(summary, "PilotSummaryTable", { region_name: 27 });
   applyFormatsByHeaders(summary);
   if (dims.rows > 1) {
-    summary.getRange("P2").formulas = [[`=K2/SUM($K$2:$K$${dims.rows})`]];
-    summary.getRange(`P2:P${dims.rows}`).fillDown();
-    summary.getRange("Q2").formulas = [[`=RANK(K2,$K$2:$K$${dims.rows},0)`]];
-    summary.getRange(`Q2:Q${dims.rows}`).fillDown();
+    // fraction_{scope}_ppr / rank_{scope}_ppr are columns N/O now that the
+    // summary table has 15 columns instead of the 17 it had before the two
+    // *_correct / *_jensen PPR column pairs were collapsed into ppr_commercial /
+    // ppr_functional - these formulas overwrite the CSV-loaded values with an
+    // independently-verifiable Excel recomputation, same as everywhere else in
+    // this workbook.
+    summary.getRange("N2").formulas = [[`=K2/SUM($K$2:$K$${dims.rows})`]];
+    summary.getRange(`N2:N${dims.rows}`).fillDown();
+    summary.getRange("O2").formulas = [[`=RANK(K2,$K$2:$K$${dims.rows},0)`]];
+    summary.getRange(`O2:O${dims.rows}`).fillDown();
     summary.getRange(`H2:H${dims.rows}`).conditionalFormats.add("cellIs", {
       operator: "lessThan",
       formula: 0.9,
@@ -230,7 +235,6 @@ async function buildSummaryWorkbook(metadata) {
   for (const [sheetName, tableName] of [
     ["Validation", "PilotValidationTable"],
     ["TL Coverage", "PilotTLCoverageTable"],
-    ["Jensen Comparison", "PilotJensenTable"],
     ["Ingestion Audit", "PilotIngestionTable"],
   ]) {
     const sheet = workbook.worksheets.getItem(sheetName);
@@ -239,12 +243,6 @@ async function buildSummaryWorkbook(metadata) {
     if (sheetName === 'Validation') sheet.getRange(`D1:D${d.rows}`).format.columnWidth=42;
     if (sheetName === "TL Coverage" && d.rows > 1) {
       sheet.getRange(`J2:J${d.rows}`).conditionalFormats.add("dataBar", { color: PALETTE.teal });
-    }
-    if (sheetName === "Jensen Comparison" && d.rows > 1) {
-      sheet.getRange(`R2:R${d.rows}`).conditionalFormats.add("colorScale", {
-        colors: [PALETTE.white, PALETTE.paleOrange, "#F79009"],
-        thresholds: ["min", "50%", "max"],
-      });
     }
   }
 
@@ -341,11 +339,10 @@ async function buildSummaryWorkbook(metadata) {
   previews.push(await renderSheet(workbook, SUMMARY_XLSX, "Summary", "A1:AC40"));
   previews.push(await renderSheet(workbook, SUMMARY_XLSX, "Validation", "A1:D40"));
   previews.push(await renderSheet(workbook, SUMMARY_XLSX, "TL Coverage", "A1:J40"));
-  previews.push(await renderSheet(workbook, SUMMARY_XLSX, "Jensen Comparison", "A1:R30"));
   previews.push(await renderSheet(workbook, SUMMARY_XLSX, "Ingestion Audit", "A1:K30"));
   previews.push(await renderSheet(workbook, SUMMARY_XLSX, "Configuration", "A1:C16"));
   previews.push(await renderSheet(workbook, SUMMARY_XLSX, "Sources", "A1:C10"));
-  const qa = await inspectWorkbook(workbook, SUMMARY_XLSX, "Summary", `A1:Q${Math.min(dims.rows, 12)}`);
+  const qa = await inspectWorkbook(workbook, SUMMARY_XLSX, "Summary", `A1:O${Math.min(dims.rows, 12)}`);
   const blob = await SpreadsheetFile.exportXlsx(workbook);
   await blob.save(path.join(OUTPUT, SUMMARY_XLSX));
   return { qa, previews };
@@ -401,16 +398,15 @@ async function buildRegionalWorkbook(pilot, metadata) {
     const dims = styleDataSheet(sheet, tableName, { commercial_group: 26, functional_group: 34 });
     applyFormatsByHeaders(sheet);
     if (dims.rows > 1) {
+      // The group table is now [group, catch_tonnes_matched, tl_weighted, sppr, ppr]
+      // (5 columns, A-E) - the old catch_coverage_fraction (G) and
+      // jensen_percent_difference (O) columns this used to highlight no longer
+      // exist, so there is nothing left in this table to apply those two
+      // conditional formats to.
       for (const [col,formula] of Object.entries(regionalGroupFormulas(speciesDims.rows,groupCol))) {
         sheet.getRange(`${col}2`).formulas = [[formula]];
         sheet.getRange(`${col}2:${col}${dims.rows}`).fillDown();
       }
-      sheet.getRange(`G2:G${dims.rows}`).conditionalFormats.add("cellIs", {
-        operator: "lessThan",
-        formula: 0.9,
-        format: { fill: PALETTE.paleRed, font: { color: PALETTE.red, bold: true } },
-      });
-      sheet.getRange(`O2:O${dims.rows}`).conditionalFormats.add("dataBar", { color: PALETTE.orange });
     }
   }
 
@@ -424,8 +420,8 @@ async function buildRegionalWorkbook(pilot, metadata) {
   const filename = `${pilot.id}_${safeName}.xlsx`;
   const previews = [];
   previews.push(await renderSheet(workbook, filename, "Species", `A1:U${Math.min(speciesDims.rows, 22)}`));
-  previews.push(await renderSheet(workbook, filename, "Commercial", "A1:O25"));
-  previews.push(await renderSheet(workbook, filename, "Functional", "A1:O25"));
+  previews.push(await renderSheet(workbook, filename, "Commercial", "A1:E25"));
+  previews.push(await renderSheet(workbook, filename, "Functional", "A1:E25"));
   previews.push(await renderSheet(workbook, filename, "Missing TL", "A1:U12"));
   previews.push(await renderSheet(workbook, filename, "Validation", "A1:D22"));
   previews.push(await renderSheet(workbook, filename, "Metadata", "A1:C16"));

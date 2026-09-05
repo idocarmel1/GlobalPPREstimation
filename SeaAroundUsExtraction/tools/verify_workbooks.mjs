@@ -31,7 +31,12 @@ for (const file of files) {
   });
   const isSummary = file.endsWith(`PPR_${SCOPE_LABEL}_summary.xlsx`);
   const formulaSheet = isSummary ? "Summary" : "Species";
-  const formulaRange = isSummary ? "P2:Q6" : "T2:U5";
+  // fraction_{scope}_ppr / rank_{scope}_ppr moved from P/Q to N/O when the summary
+  // table shrank from 17 to 15 columns (ppr_commercial_correct/ppr_functional_correct/
+  // ppr_commercial_jensen/ppr_functional_jensen collapsed into ppr_commercial/
+  // ppr_functional) - sample the columns build_workbooks.mjs now actually writes
+  // formulas into.
+  const formulaRange = isSummary ? "N2:O6" : "T2:U5";
   const formulas = await workbook.inspect({
     kind: "table",
     range: `${formulaSheet}!${formulaRange}`,
