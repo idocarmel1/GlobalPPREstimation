@@ -185,11 +185,17 @@ def mapping_dir(root: Path, unit: str) -> Path:
     return root / "data" / unit / "mapping"
 
 
+# Sidecars that live beside a mapping and must never be read as one: the group
+# dictionary, the paper's transcribed member list, and the weights the builder resolved.
+SIDECAR_SUFFIXES = (".groups.csv", ".members.csv", ".resolved.csv")
+
+
 def mapping_files(root: Path, unit: str) -> list[Path]:
     d = mapping_dir(root, unit)
     if not d.exists():
         return []
-    return sorted(p for p in d.glob("*.csv") if not p.name.endswith(".groups.csv"))
+    return sorted(p for p in d.glob("*.csv")
+                  if not p.name.endswith(SIDECAR_SUFFIXES))
 
 
 def parse_groups_cell(value) -> list:

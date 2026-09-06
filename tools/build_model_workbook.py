@@ -84,6 +84,25 @@ def simple_sppr(level):
     return round((1.0 / TRANSFER_EFFICIENCY) ** (level - 1.0), SPPR_DP)
 
 
+def show_weights(w, dp=3):
+    """Round weights for display so they still sum to 1 exactly.
+
+    Rounding each independently leaves a set like 0.360/0.240/0.400 reading 0.999, which
+    a reader checks, finds wrong, and cannot distinguish from a real normalisation bug.
+    Largest-remainder: round every weight down, then hand the leftover units to whichever
+    had the biggest fractional part.
+    """
+    if not w:
+        return ""
+    scale = 10 ** dp
+    scaled = [x * scale for x in w]
+    floors = [int(x) for x in scaled]
+    short = round(scale - sum(floors))
+    for i in sorted(range(len(w)), key=lambda i: -(scaled[i] - floors[i]))[:max(0, short)]:
+        floors[i] += 1
+    return " | ".join(f"{f / scale:.{dp}f}" for f in floors)
+
+
 def num(v):
     """A finite float, or None. sppr_all uses NaN for a method that did not resolve."""
     if isinstance(v, bool) or not isinstance(v, (int, float)):
@@ -231,7 +250,7 @@ def sheet_map(wb, order, taxa, resolved, totals, grand):
         ws.append([
             t, e["common_name"], e["functional_group"], e["commercial_group"],
             " | ".join(r["names"]),
-            " | ".join(f"{w:.3f}" for w in r["weights"]) if len(r["weights"]) > 1 else "",
+            show_weights(r["weights"]) if len(r["weights"]) > 1 else "",
             r["basis"] if len(r["weights"]) > 1 else "",
             r["confidence"], r["evidence"],
             round(totals[t], 3), round(100 * totals[t] / grand, 4) if grand else 0,
@@ -615,6 +634,13 @@ def build_one(unit, book_path, atlas):
 
     for e in taxa.values():
         e["by_year"] = {y: round(v, CATCH_DP) for y, v in e["by_year"].items()}
+    decided = sum(1 for r in rows
+                  if mio.parse_groups_cell(r.get("group"))
+                  and mio.parse_groups_cell(r.get("group")) != ["Unresolved"])
+    if not decided:
+        return None, (f"{stem}: no taxon has been assigned a group yet "
+                      "(the mapping is still a stub)")
+
     totals = {t: sum(v["by_year"].values()) for t, v in taxa.items()}
     grand = sum(totals.values())
     order = sorted(taxa, key=lambda t: -totals[t])

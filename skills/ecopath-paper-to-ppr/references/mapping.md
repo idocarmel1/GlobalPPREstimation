@@ -74,6 +74,13 @@ Read the paper. Then look specifically for:
 - group-definition prose, size or life-stage splits, synonyms used by older papers
 - "based on", "adapted from", "following" — then read that earlier paper too
 
+**If you find a species-to-group table, transcribe it to `<model_stem>.members.csv` before
+mapping anything.** The validator then checks every decision against it and treats a
+contradiction as an error. This is worth more than any other single step: in the Arabian Sea
+the table was in the archive the whole time, and checking against it caught five wrong
+assignments the previous mapping had carried for months. Format in
+`references/mapping-output-format.md`.
+
 Make real download attempts for supplements you can identify but do not have; record the
 filename, URL and result. Never claim a supplement was read when only its citation was
 found. Distinguish `direct source` (the paper adopts it), `supporting regional source`
@@ -127,21 +134,24 @@ on.
 ### 7. Merge
 
 ```bash
-python tools/merge_taxon_sppr.py --units LME_047
-python tools/build_ecosystem_data.py --units LME_047 --force
+python tools/build_model_workbook.py --units LME_047
+python tools/verify_model_workbook.py --units LME_047
 ```
 
-The merge refuses to run if a mapped group is absent from the model's own `groups_df`,
-because every PPR derived from that row would be fiction.
+The builder refuses to run if a mapped group is absent from the model's own `groups_df`,
+because every PPR derived from that row would be fiction. It writes one workbook per model
+under `data/<unit>/models/`, plus `<model_stem>.resolved.csv` recording the weights it
+actually used. The verifier then re-derives the workbook's formulas by hand and checks the
+per-taxon and aggregate sheets against each other.
 
 ## Output
 
-Three files per model under `data/<unit_id>/mapping/`, specified exactly in
-`references/mapping-output-format.md`:
+Under `data/<unit_id>/mapping/`, specified exactly in `references/mapping-output-format.md`:
 
 ```
 <model_stem>.csv          taxon, common_name, functional_group, commercial_group,
                           group, weights, confidence, evidence, explanation
+<model_stem>.members.csv  the paper's own species-to-group table, where it has one
 <model_stem>.groups.csv   the group dictionary
 <model_stem>.notes.md     provenance and limitations
 ```

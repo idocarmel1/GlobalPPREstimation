@@ -1,6 +1,6 @@
 # Output format
 
-Three files per model, under `data/<unit_id>/mapping/`. The model stem is the exact
+Up to four files per model, under `data/<unit_id>/mapping/`. The model stem is the exact
 filename stem of the SPPR workbook in `PPREstimation/output/top10/`, so
 `47_2_East_China_Sea_(2018).xlsx` gives:
 
@@ -10,8 +10,8 @@ data/LME_047/mapping/47_2_East_China_Sea_(2018).groups.csv   the group dictionar
 data/LME_047/mapping/47_2_East_China_Sea_(2018).notes.md     provenance and limits
 ```
 
-Plain CSV, not a workbook. The mapping is data; `tools/build_ecosystem_data.py` renders it
-into the ecosystem workbook with the confidence colouring. That split means a mapping is
+Plain CSV, not a workbook. The mapping is data; `tools/build_model_workbook.py` renders it
+into `data/<unit_id>/models/<model_stem>.xlsx` with the confidence colouring. That split means a mapping is
 diffable in git, cannot corrupt a workbook someone has open, and cannot be silently
 reformatted.
 
@@ -98,6 +98,33 @@ Not good: "best match", "closest group", "similar species", "see above".
 
 Say when the evidence is inference. Do not write that the paper states something it does
 not.
+
+## `<model>.members.csv` — transcribe the paper's own table when it has one
+
+If the paper contains a species-to-group table, **transcribe it to disk before mapping**.
+This is the single highest-value thing you can do, and it is the difference between a
+mapping a reviewer can check and one they have to trust.
+
+```
+printed_name, accepted_name, group_name, source_page
+Formio niger, Parastromateus niger, Med Benthic Carnivores, p.21
+Leiognathus bindus, Photopectoralis bindus, Small Benthic Carnivores, p.21
+```
+
+`printed_name` is the paper's spelling, `accepted_name` the current one. Both are indexed,
+because the mismatches hide in the older nomenclature: a table printed in 1998 says
+`Formio niger` where the catch record says `Parastromateus niger`, and a mapping can
+contradict a documented member without either name looking wrong on its own.
+
+`validate_mapping.py` picks the file up automatically and **treats a contradiction as an
+error, not a difference of opinion**. It also reports how much tonnage the table confirms,
+which is the honest measure of how much of the mapping is evidence rather than judgement.
+
+Why this matters more than it sounds: in the Arabian Sea the table existed in the archive
+all along — 129 species numbered under 24 groups in CMFRI Bulletin 51 — and the first
+mapping never found it. Checking against it caught five wrong assignments carrying 2.3 % of
+the catch, every one of them the same failure: the Sea Around Us size class read in
+preference to the model's own placement.
 
 ## `<model>.groups.csv`
 

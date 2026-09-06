@@ -106,9 +106,9 @@ By tonnage: `high` 65.0 %, `medium` 35.0 %, `low` <0.05 %, `unresolved` <0.001 %
 tonnage. 335 taxa (22.6 % of tonnage) still carry `evidence = inherited_mapping` and have
 **not** been re-derived here — that is honest provenance, not a claim of correctness.
 
-### Four inherited decisions were wrong
+### Five inherited decisions were wrong
 
-All four contradict the Bulletin's own species table, and all four were size/habitat
+All five contradict the Bulletin's own species table, and all five were size/habitat
 misreadings of the Sea Around Us class against the model's placement. Together they move
 **2.3 % of LME tonnage** off groups whose SPPR are 3–26× higher than the correct ones,
 depending on the taxon and the SPPR method.
@@ -121,7 +121,7 @@ depending on the taxon and the SPPR method.
 | `Megalaspis cordyla` (0.19 Mt, 0.10 %) | `Small Benthopelagics` | `Large Benthopelagics` | member 25 of Grp7, "horse mackerel (*Megalaspis cordyla*)" |
 | `Plotosidae`, `Plotosus lineatus` (507 t) | `Large Benthopelagics` | `Benthic Omnivores` | *Plotosus* sp. is member 86 of Grp17 |
 
-A fifth, smaller fix is not a wrong group but a wrong source claim: five `Gerres` /
+A sixth, smaller fix is not a wrong group but a wrong source claim: five `Gerres` /
 `Gerreidae` rows justified themselves as the Bulletin's "silverbellies". The Bulletin's
 silverbellies are Leiognathidae, not Gerreidae. The group (`Small Benthic Carnivores`) is
 unchanged; the evidence code dropped from `explicit_member`/`high` to `analogue`/`medium`.

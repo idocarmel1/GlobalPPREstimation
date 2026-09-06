@@ -34,6 +34,30 @@ GENERIC = ("best match", "closest group", "most similar", "seems to fit", "best 
 TIER_ORDER = ("high", "medium", "low", "unresolved")
 
 
+def read_members(path: Path) -> dict:
+    """`<stem>.members.csv`: the paper's own species-to-group table, if it has one.
+
+    Wanted `printed_name`, `accepted_name`, `group_name`. Both name columns are indexed
+    because the mismatches hide in the older nomenclature -- a table printed in 1998 says
+    `Formio niger` where the catch record says `Parastromateus niger`, and a mapping can
+    contradict a documented member without either name looking wrong on its own.
+    """
+    if not path.exists():
+        return {}
+    import csv as _csv
+    out = {}
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        for r in _csv.DictReader(fh):
+            g = (r.get("group_name") or "").strip()
+            if not g:
+                continue
+            for key in ("accepted_name", "printed_name"):
+                n = (r.get(key) or "").strip().lower()
+                if n:
+                    out.setdefault(n, set()).add(g)
+    return out
+
+
 def check(root: Path, unit: str, min_coverage: float) -> int:
     taxa, _years = mio.read_catch(root, unit)
     if not taxa:
@@ -66,6 +90,10 @@ def check(root: Path, unit: str, min_coverage: float) -> int:
         missing_cols = [c for c in mio.FIELDS if c not in (rows[0] if rows else {})]
         if missing_cols:
             errors.append(f"missing columns: {missing_cols}")
+
+        members = read_members(path.parent / f"{stem}.members.csv")
+        confirmed_n = confirmed_t = 0
+        contradicted = []
 
         seen = {}
         tier_t = {k: 0.0 for k in TIER_ORDER}
@@ -152,6 +180,17 @@ def check(root: Path, unit: str, min_coverage: float) -> int:
                 inherited_t += tonnes
                 inherited_n += 1
 
+            # The paper's own member list, where one was transcribed, outranks every
+            # judgement in this file. A row that contradicts it is an error, not a
+            # difference of opinion.
+            documented = members.get(t.strip().lower())
+            if documented and not unresolved:
+                if documented & set(names):
+                    confirmed_n += 1
+                    confirmed_t += tonnes
+                else:
+                    contradicted.append((tonnes, t, sorted(documented), names))
+
         absent = [t for t in taxa if t not in seen]
         if absent:
             miss_t = sum(totals[t] for t in absent)
@@ -176,6 +215,14 @@ def check(root: Path, unit: str, min_coverage: float) -> int:
             print(f"  inherited, unchecked : {inherited_n} taxa, "
                   f"{100 * inherited_t / grand:.1f} % of tonnage still carry evidence "
                   "`inherited_mapping`")
+        if members:
+            print(f"  against the paper's member list ({len(members)} names):")
+            print(f"      confirmed        : {confirmed_n} taxa, "
+                  f"{100 * confirmed_t / grand:.1f} % of tonnage")
+            print(f"      contradicted     : {len(contradicted)}")
+            for tonnes, t, doc, got in sorted(contradicted, reverse=True)[:10]:
+                errors.append(f"`{t}` ({tonnes:,.0f} t) is listed under {doc} in the "
+                              f"paper's member list but mapped to {got}")
         print(f"  CATCH TONNAGE ON A GROUP : {cov:.1f} %   "
               f"(taxa resolved: {100 * (len(taxa) - tier_n['unresolved']) / len(taxa):.1f} %)")
 
