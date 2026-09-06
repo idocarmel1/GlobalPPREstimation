@@ -76,6 +76,14 @@ CONF_FILL = {
 HEADLINE = ["new_TE_EEfix", "new_TE_noEEfix", "SPPR_2015", "Ulanowicz_TE",
             "SPPR_1995_TE0.1", "SPPR_1986"]
 
+# A network method may legitimately sit well above or below the trophic-chain estimate --
+# across the healthy models here the ratio runs 0.1x to 4.6x. It may not sit 6,000x above
+# it: `sym_GE_asDC` on the Bay of Bengal model returns 2.1e13 tonnes, which after the usual
+# 9:1 wet-weight-to-carbon conversion is some thousands of times that sea's entire annual
+# primary production. That is a near-singular solve, not a modelling difference. The
+# threshold is a plausibility flag, not a claim about which method is right.
+IMPLAUSIBLE_RATIO = 25.0
+
 
 def simple_sppr(level):
     """The trophic-chain SPPR, rounded once so every sheet quotes the same number."""
@@ -364,10 +372,9 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
         # The resulting PPR is not small or uncertain, it is meaningless -- one Okhotsk
         # group comes out at -2.7e10 -- and an unflagged negative in a results table is
         # worse than no number at all.
-        neg = sorted({g for t in order for g, v in zip(resolved[t]["names"],
-                                                       [resolved[t]["sppr"][i]] * len(resolved[t]["names"]))
-                      if v is not None and v < 0})
         vals = [v for v in row if v is not None]
+        ratio = max((abs(v) / s for v, s in zip(row, simple)
+                     if v is not None and s), default=0.0)
         if any(v < 0 for v in vals):
             status[m] = ("DIVERGED - negative SPPR reaches this ecosystem's catch; "
                          "the numbers on this row are not a PPR")
@@ -375,6 +382,9 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
             status[m] = "did not resolve for any mapped group"
         elif all(v == 0 for v in vals):
             status[m] = "returned zero for every mapped group - check the method upstream"
+        elif ratio > IMPLAUSIBLE_RATIO:
+            status[m] = (f"IMPLAUSIBLE - up to {ratio:,.0f}x the trophic-chain estimate; "
+                         "the solve is near-singular for this model")
         else:
             status[m] = "ok"
         ws.append([m, status[m]] + row)

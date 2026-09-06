@@ -63,12 +63,22 @@ Inside one workbook the twenty methods are likewise not alternatives to be avera
 spread between them is the result.
 
 `PPR by method` carries a **status** column, because not every method works on every model.
-Four of the Sea of Okhotsk model's groups come out with negative SPPR under the `TE` solver
-variants — one at −2.7 × 10^10 — so those rows are flagged `DIVERGED` and the Summary sheet
-picks a different headline method rather than quoting −71 billion tonnes. A method that
-returns nothing, or zero for every group, is flagged too. A flag is a property of the model
-under that method, not of the mapping; `model_health` in the SPPR workbook is the upstream
-record.
+Three failures show up in the pilot:
+
+| flag | what happened | example |
+| --- | --- | --- |
+| `DIVERGED` | negative SPPR reaches this ecosystem's catch | Sea of Okhotsk under the `TE` solver variants: four groups negative, one at −2.7 × 10¹⁰, giving −71 billion tonnes |
+| `IMPLAUSIBLE` | positive but orders of magnitude above the trophic-chain estimate | Bay of Bengal `sym_GE_asDC`: 2.1 × 10¹³ tonnes, 6,700× the simple method and thousands of times that sea's annual primary production |
+| zero / did not resolve | the method returned nothing usable | `SPPR_1986` on three models; the six `sym_*` methods on the Gulf of Thailand |
+
+Across the healthy models the network methods run 0.1–4.6× the trophic-chain estimate, so
+the implausibility threshold sits at 25×. It is a plausibility flag, not a claim about which
+method is right — the flagged numbers are still in the sheet, marked. **The Summary sheet
+chooses its headline method from the unflagged ones**, which is why the Sea of Okhotsk leads
+with `Ulanowicz_TE` rather than the usual `new_TE_EEfix`. A flag describes the model under
+that method, not the mapping; `model_health` in the SPPR workbook is the upstream record.
+
+The Arabian Sea model is the only one of the six with no flags at all.
 
 Two grey rows apply the simple method to the **catch-weighted mean trophic level of each Sea
 Around Us group** rather than to each taxon. SPPR is convex in trophic level, so aggregating
