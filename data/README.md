@@ -70,11 +70,12 @@ checked. What is new here is that it runs across all seventy years rather than o
 Taxa with no trophic level are omitted and contribute no PPR. Coverage is currently complete,
 and a `tl_coverage_complete` check upstream fails loudly if that stops being true.
 
-**This is the first-pass estimate, not the network method.** The SPPR sheet's Ecopath columns
-come from `PPREstimation`, which resolves production back through the actual diet matrix. Those
-are per *group*, and joining them to catch taxa needs the taxon-to-group mapping that
-`skills/ewe-species-to-group-mapper` performs — not yet automated. Until it is, the PPR sheet
-uses the simple per-taxon method, which needs no mapping.
+**The `PPR` sheet is always the first-pass estimate, never the network method.** It uses the
+simple per-taxon calculation, which needs no group mapping and so works for all 364
+ecosystems. Where an Ecopath model and a mapping both exist, the network results live in the
+separate `PPR by method` sheet — see below. Keeping them apart matters: the two are not
+interchangeable, they cover different fractions of the catch, and averaging or substituting
+one for the other would be wrong.
 
 ## Ecopath PPR — done for three ecosystems
 
