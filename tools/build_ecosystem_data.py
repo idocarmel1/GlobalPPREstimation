@@ -325,6 +325,16 @@ def build_unit(unit, atlas, npp_all, force=False):
     article_dir = ARCHIVE / unit
     articles = sorted(p.name for p in article_dir.iterdir() if p.is_dir()) if article_dir.exists() else []
 
+    # An extracted model is not the same thing as a usable answer. A model needs a
+    # taxon-to-group mapping before any PPR can come out of it, and several extracted
+    # models are marked unfit and will never get one. Counting both keeps the gap visible
+    # rather than letting "10 ecosystems have models" stand in for "10 have results".
+    mapped = sorted(q.stem for q in (d / "mapping").glob("*.csv")
+                    if not q.name.endswith((".groups.csv", ".members.csv", ".resolved.csv"))
+                    ) if (d / "mapping").is_dir() else []
+    built = sorted(q.stem for q in (d / "models").glob("*.xlsx")
+                   if not q.name.startswith("~$")) if (d / "models").is_dir() else []
+
     meta = {
         "unit_id": unit,
         "region_name": meta_src.get("region_name") or "",
@@ -340,6 +350,8 @@ def build_unit(unit, atlas, npp_all, force=False):
             "taxa_with_trophic_level": sum(1 for r in rows if r["taxon"] in tl),
             "has_npp": npp is not None,
             "ecopath_models": len(models),
+            "models_mapped": len(mapped),
+            "model_workbooks": len(built),
         },
         "sources": {
             "catch": f"../../SeaAroundUsExtraction/data/catch_by_taxon_year/{unit}.csv.gz",
@@ -408,6 +420,8 @@ def main() -> int:
                 "taxa_with_tl": c["taxa_with_trophic_level"],
                 "articles": meta["article_count"],
                 "ecopath_models": c["ecopath_models"],
+                "models_mapped": c["models_mapped"],
+                "model_workbooks": c["model_workbooks"],
                 "has_npp": int(c["has_npp"]),
             }
         )
@@ -422,6 +436,9 @@ def main() -> int:
     tot = len(index)
     print(f"\nbuilt {tot} ecosystems")
     print(f"  with an Ecopath model : {sum(1 for r in index if r['ecopath_models'])}")
+    print(f"  with a mapping        : {sum(1 for r in index if r['models_mapped'])}")
+    print(f"  with a model workbook : {sum(1 for r in index if r['model_workbooks'])}"
+          f"  ({sum(r['model_workbooks'] for r in index)} workbooks)")
     print(f"  with NPP              : {sum(1 for r in index if r['has_npp'])}")
     print(f"  with articles         : {sum(1 for r in index if r['articles'])}")
     return 0

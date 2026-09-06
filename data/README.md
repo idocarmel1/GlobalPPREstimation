@@ -96,7 +96,15 @@ are honest about it rather than hiding the gaps.
 | catch, per taxon per year, 1950–2019 | **364** |
 | archived source articles | 109 |
 | net primary production | 82 |
-| an extracted Ecopath model and SPPR results | **10** |
+| an extracted Ecopath model and SPPR results | 10 |
+| a taxon-to-group mapping | 6 |
+| **a model workbook, i.e. PPR by method** | **5** |
+
+Those last three rows are deliberately separate in `INDEX.csv` too, as `ecopath_models`,
+`models_mapped` and `model_workbooks`. An extracted model is not an answer: it needs a
+mapping before any PPR comes out of it, and several extracted models are marked unfit and
+will never get one. Sixteen model workbooks exist upstream; six ecosystems have a mapping;
+five have PPR.
 
 The ten are the pilot — the top ecosystems by the 1995 PPR ranking: `HS_077`, `LME_013`,
 `LME_027`, `LME_028`, `LME_032`, `LME_034`, `LME_035`, `LME_036`, `LME_047`, `LME_052`.
