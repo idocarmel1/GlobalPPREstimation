@@ -77,11 +77,12 @@ separate `PPR by method` sheet — see below. Keeping them apart matters: the tw
 interchangeable, they cover different fractions of the catch, and averaging or substituting
 one for the other would be wrong.
 
-## Ecopath PPR — done for three ecosystems
+## Ecopath PPR — done for five ecosystems
 
-`LME_032`, `LME_034` and `LME_047` now carry the full chain: catch taxon → Ecopath group →
-SPPR under 20 methods → PPR. The mappings came from the completed examples shipped with
-`skills/ewe-species-to-group-mapper`; `tools/merge_taxon_sppr.py` performs the join and
+`LME_032`, `LME_034`, `LME_035`, `LME_047` and `LME_052` now carry the full chain: catch taxon → Ecopath group →
+SPPR under 20 methods → PPR. Three mappings came from the completed examples shipped with
+`skills/ewe-species-to-group-mapper`; `LME_035` and `LME_052` were produced by running the
+skill on the archived papers. `tools/merge_taxon_sppr.py` performs the join and
 refuses to run if any mapped group is absent from the model's own `groups_df`, since a
 mismatch there would produce confident fiction.
 
@@ -90,12 +91,13 @@ unresolved but 90 % of its catch tonnage resolved** — the unmapped taxa are ov
 small-catch strays. For PPR, tonnage coverage is the number that counts; taxon-count coverage
 mostly measures how many rare species wandered into the catch record.
 
-| ecosystem | taxa unresolved | catch tonnage resolved |
-| --- | --- | --- |
-| `LME_032` Arabian Sea | 14 / 393 | 78 % |
-| `LME_034` Bay of Bengal | 12 / 288 | 78 % |
-| `LME_047` East China Sea | 27 / 254 | 78 % |
-| `LME_052` Sea of Okhotsk | 66 / 151 | 90 % |
+| ecosystem | taxa unresolved | catch tonnage resolved | mapping source |
+| --- | --- | --- | --- |
+| `LME_032` Arabian Sea | 14 / 393 | 78 % | skill example |
+| `LME_034` Bay of Bengal | 12 / 288 | 78 % | skill example |
+| `LME_047` East China Sea | 27 / 254 | 78 % | skill example |
+| `LME_035` Gulf of Thailand | 14 / 247 | **98 %** | skill run |
+| `LME_052` Sea of Okhotsk | 66 / 151 | 90 % | skill run |
 
 `LME_052`'s high taxon-level unresolved rate is a real property of the source, not a mapping
 failure. The usable model covers only the **northeastern** Okhotsk — cold water, mammal-focused,
