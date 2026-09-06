@@ -19,10 +19,16 @@ the archive.
 
     1. sweep          find published Ecopath models for each ecosystem
     2. archive        store the article, supplements and provenance   -> PPRAtlas/archive/regions/<unit_id>/
-    3. extract        pull model parameters out of the paper          -> skills/ecopath-extraction-*.skill
-    4. estimate       compute SPPR per group by several methods       -> PPREstimation/
-    5. integrate      join SPPR with catch and NPP data               -> (in design)
-    6. map            render the result on one interactive map        -> PPRAtlas/index.html
+    3. extract        pull model parameters out of the paper          -> skills/ecopath-extraction/
+    4. taxonomy       record which taxa are in each model group       -> skills/ecopath-paper-to-ppr/
+    5. estimate       compute SPPR per group by several methods       -> PPREstimation/
+    6. map taxa       assign every catch taxon to a model group       -> skills/ewe-species-to-group-mapper/
+    7. integrate      join SPPR with catch and NPP data               -> data/
+    8. publish        render the result on one interactive map        -> PPRAtlas/index.html
+
+Steps 3, 4 and 6 all read the same paper, which is why `skills/ecopath-paper-to-ppr/`
+combines them into one pass. It is assembled from the other two by
+`skills/build_combined_skill.py` rather than forked, so a fix lands in one place.
 
 Ecosystems are keyed by `unit_id` throughout: `LME_003`, `EEZ_711`, `HS_018`.
 
@@ -34,7 +40,8 @@ Ecosystems are keyed by `unit_id` throughout: `LME_003`, `EEZ_711`, `HS_018`.
 | [`PPRAtlas/`](PPRAtlas/README.md) | Curated archive of source articles per ecosystem, and the interactive map | `archive/regions/`, `data/catalog.json` | `index.html`, `archive/index.html` |
 | [`PPREstimation/`](PPREstimation/README.md) | The main algorithm: Ecopath model loading, automatic balancing, SPPR estimation by several methods | `real_models/*.json` | `output/` — one workbook per model |
 | `NPPExtraction/` | Net primary production per region, five satellite models | — | `NPP_2019_filled_SAU_regions.csv` |
-| `skills/` | Packaged skills: parameter extraction from papers, taxon-to-group mapping | source papers, catch workbooks | model JSON, mapping workbooks |
+| `skills/` | Packaged skills: parameter extraction from papers, group taxonomy capture, taxon-to-group mapping | source papers, catch archives | model JSON, `data/<unit>/mapping/*.csv` |
+| `data/` | The integration layer — one directory per ecosystem, joined on `unit_id` | everything above | `INDEX.csv`, per-ecosystem and per-model workbooks |
 
 ## Coverage
 
@@ -151,11 +158,17 @@ The workbook computes PPR independently and its 2019 total reproduces the pipeli
 
 ## Not yet built
 
-- **PPR from the Ecopath network methods.** The SPPR sheet already carries all 20 methods
-  per group for the ten modelled ecosystems, but turning those into PPR needs each catch
-  taxon mapped to a model group — the job of `skills/ewe-species-to-group-mapper`, not yet
-  automated. This is the main gap between the current state and a full result.
+- **Group membership from the papers.** `taxon_descr` is empty for every extracted model,
+  and the `taxons_included` field in the Ecobase dump is empty for all 5,553 groups it
+  contains. Every mapping so far therefore rests on taxonomic containment and habitat
+  inference rather than a documented member list. `skills/ecopath-paper-to-ppr/` adds the
+  stage that captures it while the paper is already open; the models extracted before it
+  existed still lack it.
+- **Ecopath PPR beyond the pilot.** The chain is built and runs, but only for ecosystems
+  with a usable model and a mapping. `data/model_selection.xlsx` records the ceiling.
 - **Sweeping new articles** into `PPRAtlas/archive/regions/` and extracting models from
   them, which is what would lift coverage above the current ten ecosystems.
+- **Rendering the network results on the map.** `PPRAtlas/index.html` still shows the
+  simple trophic-chain PPR only.
 
 Designed in `docs/superpowers/specs/`.
