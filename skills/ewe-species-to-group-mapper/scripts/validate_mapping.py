@@ -184,6 +184,16 @@ def check(root: Path, unit: str, min_coverage: float) -> int:
             # judgement in this file. A row that contradicts it is an error, not a
             # difference of opinion.
             documented = members.get(t.strip().lower())
+            if documented is None and mio.taxon_rank(t) == "genus":
+                # A genus in the catch record against species in the table: the documented
+                # answer is the union of the groups its species sit in, and the mapping
+                # only contradicts it by naming none of them.
+                pre = t.strip().lower() + " "
+                union = set()
+                for name, gs in members.items():
+                    if name.startswith(pre):
+                        union |= gs
+                documented = union or None
             if documented and not unresolved:
                 if documented & set(names):
                     confirmed_n += 1
