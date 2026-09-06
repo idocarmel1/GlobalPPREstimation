@@ -62,6 +62,20 @@ different questions.
 Inside one workbook the twenty methods are likewise not alternatives to be averaged. The
 spread between them is the result.
 
+`PPR by method` carries a **status** column, because not every method works on every model.
+Four of the Sea of Okhotsk model's groups come out with negative SPPR under the `TE` solver
+variants — one at −2.7 × 10^10 — so those rows are flagged `DIVERGED` and the Summary sheet
+picks a different headline method rather than quoting −71 billion tonnes. A method that
+returns nothing, or zero for every group, is flagged too. A flag is a property of the model
+under that method, not of the mapping; `model_health` in the SPPR workbook is the upstream
+record.
+
+Two grey rows apply the simple method to the **catch-weighted mean trophic level of each Sea
+Around Us group** rather than to each taxon. SPPR is convex in trophic level, so aggregating
+first and exponentiating after always understates the per-taxon sum — Jensen's inequality.
+For the Sea of Okhotsk in 2019 that is 2.13 against 2.80 billion tonnes, a 24 % gap. Those
+rows exist to size that effect, not to be used as estimates.
+
 ## Coverage — what actually exists
 
 364 ecosystems have catch data. Beyond that the picture thins out fast, and the workbooks

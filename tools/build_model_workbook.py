@@ -282,7 +282,10 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
                "needs no model and covers every taxon; the rest are this model's."])
     ws.append(["Methods are not alternatives to be averaged. They rest on different "
                "assumptions and the spread between them is the result."])
-    header_row(ws, ["method"] + list(years))
+    ws.append(["The two grey rows aggregate the catch to a group before exponentiating, "
+               "which understates the total: SPPR is convex in trophic level, so they "
+               "measure the Jensen effect rather than the PPR."])
+    header_row(ws, ["method", "status"] + list(years))
 
     simple = []
     for y in years:
@@ -293,10 +296,36 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
                 continue
             s += taxa[t]["by_year"].get(y, 0.0) * v
         simple.append(s)
-    ws.append(["simple trophic chain, per taxon"] + [round(v, 3) for v in simple])
+    ws.append(["simple trophic chain, per taxon", "ok"] + [round(v, 3) for v in simple])
     ws.cell(ws.max_row, 1).font = Font(italic=True)
 
-    per_method = {}
+    # The same simple method applied to catch-weighted mean trophic levels of the Sea
+    # Around Us groups rather than to each taxon. SPPR is convex in TL, so aggregating
+    # first and exponentiating after always understates the per-taxon sum -- Jensen's
+    # inequality. These two rows exist to show the size of that gap, not to be used.
+    for label, key in [("simple, aggregated to SAU functional group", "functional_group"),
+                       ("simple, aggregated to SAU commercial group", "commercial_group")]:
+        row = []
+        for y in years:
+            by_group = {}
+            for t in order:
+                level = tl.get(t)
+                c = taxa[t]["by_year"].get(y, 0.0)
+                if level is None or not c:
+                    continue
+                g = taxa[t][key] or "(none)"
+                acc = by_group.setdefault(g, [0.0, 0.0])
+                acc[0] += c
+                acc[1] += c * level
+            total = 0.0
+            for c, ctl in by_group.values():
+                if c:
+                    total += c * (1.0 / TRANSFER_EFFICIENCY) ** ((ctl / c) - 1.0)
+            row.append(round(total, 3))
+        ws.append([label, "Jensen comparison, not a PPR estimate"] + row)
+        ws.cell(ws.max_row, 1).font = Font(italic=True, color="808080")
+
+    per_method, status = {}, {}
     for i, m in enumerate(methods):
         row = []
         for y in years:
@@ -311,7 +340,28 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
                     any_v = True
             row.append(round(s, 3) if any_v else None)
         per_method[m] = row
-        ws.append([m] + row)
+
+        # A negative SPPR means the solver diverged for that group under that method.
+        # The resulting PPR is not small or uncertain, it is meaningless -- one Okhotsk
+        # group comes out at -2.7e10 -- and an unflagged negative in a results table is
+        # worse than no number at all.
+        neg = sorted({g for t in order for g, v in zip(resolved[t]["names"],
+                                                       [resolved[t]["sppr"][i]] * len(resolved[t]["names"]))
+                      if v is not None and v < 0})
+        vals = [v for v in row if v is not None]
+        if any(v < 0 for v in vals):
+            status[m] = ("DIVERGED - negative SPPR reaches this ecosystem's catch; "
+                         "the numbers on this row are not a PPR")
+        elif not vals:
+            status[m] = "did not resolve for any mapped group"
+        elif all(v == 0 for v in vals):
+            status[m] = "returned zero for every mapped group - check the method upstream"
+        else:
+            status[m] = "ok"
+        ws.append([m, status[m]] + row)
+        if status[m] != "ok":
+            ws.cell(ws.max_row, 2).fill = PatternFill("solid", fgColor="FFC7CE")
+            ws.cell(ws.max_row, 1).font = Font(bold=True, color="9C0006")
 
     ws.append([])
     resolved_t = sum(totals[t] for t in order
@@ -320,19 +370,25 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
                f"({100 * resolved_t / grand if grand else 0:.1f} %). Unresolved taxa "
                "contribute nothing to the model rows and everything to the simple row, so "
                "the two are not directly comparable until coverage is 100 %."])
-    ws.append([f"Coverage by year, %:"])
+    flagged = [m for m in methods if status[m] != "ok"]
+    if flagged:
+        ws.append([f"{len(flagged)} of {len(methods)} methods are flagged above. A flagged "
+                   "row is a property of this model under that method, not of the mapping; "
+                   "see model_health in the SPPR workbook."])
+        ws.cell(ws.max_row, 1).font = Font(bold=True, color="9C0006")
+    ws.append(["Coverage by year, %:"])
     cov = []
     for y in years:
         tot_y = sum(taxa[t]["by_year"].get(y, 0.0) for t in order)
         res_y = sum(taxa[t]["by_year"].get(y, 0.0) for t in order
                     if resolved[t]["names"] != ["Unresolved"])
         cov.append(round(100 * res_y / tot_y, 2) if tot_y else None)
-    ws.append(["catch on a named group, %"] + cov)
+    ws.append(["catch on a named group, %", ""] + cov)
 
-    widths(ws, [34] + [14] * len(years))
-    ws.freeze_panes = "B5"
+    widths(ws, [42, 60] + [14] * len(years))
+    ws.freeze_panes = "C5"
     ws.sheet_view.showGridLines = False
-    return per_method, simple
+    return per_method, simple, status
 
 
 def sheet_ppr_by_taxon(wb, order, years, methods, catch_ws, n_meta_cols):
@@ -446,7 +502,7 @@ def sheet_npp(wb, npp):
 
 
 def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
-                  per_method, simple, npp_median, totals, grand, notes_head):
+                  per_method, simple, status, npp_median, totals, grand, notes_head):
     ws = wb.create_sheet("Summary", 0)
     ws.append([f"{unit} — {meta.get('region_name') or ''}"])
     ws["A1"].font = TITLE
@@ -457,8 +513,14 @@ def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
         ws.cell(ws.max_row, 1).font = Font(italic=True)
     ws.append([])
 
-    headline = next((m for m in HEADLINE if m in methods and any(v is not None for v in per_method[m])),
-                    next((m for m in methods if any(v is not None for v in per_method[m])), None))
+    # Never lead with a method that diverged for this model. `new_TE_EEfix` is the
+    # primary solver and the natural headline, but it produces negative SPPR on the
+    # Okhotsk model, and a Summary sheet quoting -71 billion tonnes would be read as the
+    # answer by anyone who did not scroll to the flags.
+    def usable(m):
+        return status.get(m) == "ok" and any(v is not None for v in per_method[m])
+    headline = (next((m for m in HEADLINE if m in methods and usable(m)), None)
+                or next((m for m in methods if usable(m)), None))
     resolved_t = sum(totals[t] for t in order if resolved[t]["names"] != ["Unresolved"])
     n_unres = sum(1 for t in order if resolved[t]["names"] == ["Unresolved"])
     n_comp = sum(1 for t in order if len(resolved[t]["names"]) > 1)
@@ -473,7 +535,8 @@ def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
         ("taxa unresolved", n_unres),
         ("catch tonnage on a named group, %", round(100 * resolved_t / grand, 1) if grand else 0),
         ("SPPR methods", len(methods)),
-        ("headline method below", headline or "none resolved"),
+        ("methods flagged as unusable", sum(1 for m in methods if status.get(m) != "ok")),
+        ("headline method below", headline or "none usable — see PPR by method"),
     ]:
         ws.append([k, v])
     ws.append([])
@@ -571,13 +634,14 @@ def build_one(unit, book_path, atlas):
     catch_ws = sheet_catch(wb, order, taxa, years)
     sheet_map(wb, order, taxa, resolved, totals, grand)
     sheet_sppr(wb, order, resolved, methods, tl, unit, stem)
-    per_method, simple = sheet_ppr_by_method(
+    per_method, simple, method_status = sheet_ppr_by_method(
         wb, order, taxa, years, resolved, methods, tl, totals, grand)
     sheet_ppr_by_taxon(wb, order, years, methods, catch_ws, n_meta_cols=4)
     sheet_model_groups(wb, groups, methods, sppr_by_group)
     npp_median = sheet_npp(wb, load_npp_json(unit))
     sheet_summary(wb, unit, stem, atlas.get(unit, {}), order, taxa, years, resolved,
-                  methods, per_method, simple, npp_median, totals, grand, notes_head)
+                  methods, per_method, simple, method_status, npp_median, totals, grand,
+                  notes_head)
 
     out = ROOT / "data" / unit / "models" / f"{stem}.xlsx"
     out.parent.mkdir(parents=True, exist_ok=True)
