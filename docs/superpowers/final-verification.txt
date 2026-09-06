@@ -1,0 +1,56 @@
+=== final verification ===
+--- SeaAroundUsExtraction ---
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+185 passed, 1 warning in 5.10s
+--- PPRAtlas ---
+........                                                                 [100%]
+8 passed in 0.67s
+--- PPREstimation ---
+ERROR tests/test_monte_carlo_sppr.py::test_exclude_diverged_rejects_draws_that_fail_the_divergence_grade
+ERROR tests/test_monte_carlo_sppr.py::test_exclude_diverged_never_accepts_a_draw_the_ungated_run_rejected
+ERROR tests/test_monte_carlo_sppr.py::test_all_draws_rejected_warns_and_returns_nan_instead_of_crashing
+1 failed, 76 passed, 18 errors in 126.71s (0:02:06)
+
+=== structural invariants ===
+--- must NOT exist ---
+  FishEstimationAI                                         gone
+  SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04       gone
+  SeaAroundUsExtraction/EEZ_TE010_release_2026-09-04_complete.zip gone
+  SeaAroundUsExtraction/Global_history_TE010_2026-09-04    gone
+  SeaAroundUsExtraction/PPR_global_te005_results           gone
+  PPRAtlas/archive/regions.zip                             gone
+  PPREstimation/.git                                       gone
+--- must exist ---
+  PPREstimation                                            present
+  PPRAtlas/archive/files                                   present
+  PPRAtlas/archive/regions                                 present
+  SeaAroundUsExtraction/raw_data/SAU_downloads             present
+  SeaAroundUsExtraction/data/catch_by_taxon_year           present
+  skills/ewe-species-to-group-mapper.skill                 present
+  graphify-out/graph.json                                  present
+  README.md                                                present
+--- old schema must not survive in code or data ---
+SeaAroundUsExtraction/tools/build_workbooks.mjs
+SeaAroundUsExtraction/tools/verify_workbooks.mjs
+--- PPREstimation Jensen must be INTACT ---
+  SPPR_Methods.md jensen mentions: 4
+--- no gitlink (counted, not truthiness) ---
+  mode-160000 entries: 0
+
+=== size ===
+size-pack: 4.05 GiB
+3.7G	.
+
+Notes on the two remaining grep matches and the Jensen-integrity check:
+  tools/build_workbooks.mjs:212 and tools/verify_workbooks.mjs:36 are `//` comments recording that the
+  *_correct / *_jensen column pairs were collapsed. Comments, not live code.
+  PPREstimation/information/SPPR_Methods.md entered the repository whole in commit 52d907f and shows zero
+  deletions across the entire effort, so its Jensen's-inequality content is untouched. It was held back
+  from the earlier safety-net commit deliberately, which is why git records it as a new file rather than
+  a modification.
+
+Baseline -> final:
+  SeaAroundUsExtraction    47 passed  ->  185 passed
+  PPRAtlas                  8 passed  ->    8 passed
+  PPREstimation   1F/76P/18E (pre-existing)  ->  1F/76P/18E (unchanged)
