@@ -107,11 +107,28 @@ processed table covers a single analysis year.
   and `tools/eez_workbook.mjs` import `@oai/artifact-tool`, a package that is **not on the
   public npm registry** (404) and is not vendored here — there is no `package.json` anywhere
   in the repository. Node itself is installed and the other `.mjs` tooling works, so this is
-  a missing dependency, not a missing runtime.
+  a missing dependency, not a missing runtime. The affected files are
+  `tools/build_workbooks.mjs`, `tools/eez_workbook.mjs`, `tools/verify_workbooks.mjs` and
+  `tests/test_eez_workbook.mjs`.
 
-  Consequences: `regional_calculations/*.xlsx` carry stale headers from before the column
-  schema changed and cannot be rebuilt; `validate_eez_release.py` therefore passes only with
-  `--skip-workbooks`; and `tests/test_eez_workbook.mjs` cannot execute.
+  **Consequence, and it is the most important caveat in this repository: all 368 committed
+  `.xlsx` workbooks are stale and now contradict the CSVs beside them.** They were generated
+  before the group-aggregation change and cannot be regenerated. Specifically,
+  `global_output/PPR_global_summary.xlsx` and `eez_output/PPR_eez_summary.xlsx` each still
+  contain a full `Jensen Comparison` sheet with the removed `sppr_correct` / `ppr_correct` /
+  `jensen_difference` columns, Summary sheets carrying `ppr_commercial_correct` and
+  `ppr_functional_correct`, and Validation sheets asserting `commercial_ppr_reconciled = True`
+  and `jensen_violations = 0` — checks that no longer exist. For LME_036 the workbook reports
+  `commercial_ppr_difference` as effectively zero where `global_output/tables/validation.csv`
+  reports `-2,949,750,964`.
+
+  **Treat the CSVs under `tables/` as authoritative and the workbooks as historical.** The CSVs
+  were migrated and independently re-verified; the workbooks were not, because nothing here can
+  write them.
+
+  Also: `validate_eez_release.py` passes only with `--skip-workbooks`, and neither
+  `tests/test_eez_workbook.mjs` nor `tools/verify_workbooks.mjs` can execute — four `.mjs` files
+  depend on the missing package, not three.
 
   What *is* verified: all eight `.mjs` files pass `node --check`, and
   `tests/test_scope_args.mjs` and `tests/test_workbook_metadata.mjs` both run and pass (2/2
