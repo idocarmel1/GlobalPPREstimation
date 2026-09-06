@@ -33,6 +33,8 @@ Five sheets, deliberately few columns.
 | **SPPR** | the simple per-taxon `(1/TE)^(TL-1)`, and — where an Ecopath model exists — that model's per-group SPPR across all 20 methods |
 | **PPR** | taxon × year, catch × SPPR |
 | **NPP** | the five satellite estimates plus the ensemble, 2019 |
+| **Taxon SPPR** | *(where a mapping exists)* each taxon's Ecopath group, and that group's SPPR under all 20 methods |
+| **PPR by method** | *(where a mapping exists)* year × method, tonnes, with a catch-coverage line |
 
 A sheet with no data for an ecosystem says so in a line rather than sitting empty.
 
@@ -74,10 +76,27 @@ are per *group*, and joining them to catch taxa needs the taxon-to-group mapping
 `skills/ewe-species-to-group-mapper` performs — not yet automated. Until it is, the PPR sheet
 uses the simple per-taxon method, which needs no mapping.
 
+## Ecopath PPR — done for three ecosystems
+
+`LME_032`, `LME_034` and `LME_047` now carry the full chain: catch taxon → Ecopath group →
+SPPR under 20 methods → PPR. The mappings came from the completed examples shipped with
+`skills/ewe-species-to-group-mapper`; `tools/merge_taxon_sppr.py` performs the join and
+refuses to run if any mapped group is absent from the model's own `groups_df`, since a
+mismatch there would produce confident fiction.
+
+Coverage sits near 78 % of catch tonnage in all three; the remainder is taxa honestly marked
+`Unresolved`, which contribute no PPR and are counted rather than hidden.
+
+For `LME_047` in 2019 the network methods give 0.4–1.5 billion tonnes against the simple
+trophic-chain method's 3.4 billion. Lower is expected: the network methods follow the real
+diet matrix and recycling instead of assuming a pure chain at fixed transfer efficiency.
+Part of the gap is also coverage — the simple method runs on every taxon.
+
 ## What is missing, deliberately
 
-- **PPR from the Ecopath methods.** Blocked on the taxon-to-group mapping above. This is the
-  main thing standing between the current state and a full result.
+- **Ecopath PPR for the remaining ecosystems.** Needs the mapping run per ecosystem. Only
+  seven models are marked usable in `model_selection.xlsx`, so seven is the ceiling until
+  more articles are extracted.
 - **NPP for EEZs.** The NPP dataset covers LME and High Seas only.
 - **NPP over time.** A single 2019 value, so `ppr_over_npp_percent` uses a constant denominator
   across all years. Treat the trend in that column as driven by PPR alone.

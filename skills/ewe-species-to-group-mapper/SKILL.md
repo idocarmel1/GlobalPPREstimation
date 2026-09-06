@@ -9,11 +9,34 @@ Match an LME catch-taxon workbook to every distinct Ecopath model in the supplie
 
 ## Required inputs
 
-- One workbook with a species- or taxon-level sheet, normally named `Species`
-- One or more papers describing EwE models for the same LME
-- Any attached appendices, supplementary spreadsheets/documents, model files, or cited taxonomy sources
+This skill runs against the `GlobalPPREstimation` repository layout. For an ecosystem
+identified by its `unit_id` (`LME_036`, `EEZ_711`, `HS_077`):
 
-If the workbook or model paper is missing, ask for it. If a cited supplement is missing, attempt to retrieve it online before mapping.
+| what | where | notes |
+| --- | --- | --- |
+| the taxa to map | `data/<unit_id>/<unit_id>.xlsx`, sheet **`Catch`** | column `taxon`, plus `functional_group` and `commercial_group` from Sea Around Us |
+| the model's exact group list | `PPREstimation/output/top10/<model>.xlsx`, sheet **`groups_df`** | **authoritative — use it, do not mine group names from the paper** |
+| membership evidence | `PPRAtlas/archive/regions/<unit_id>/<ARTICLE>/` | the papers and supplements; this is where you learn *which taxa* belong to each group |
+| which model to use | `data/model_selection.xlsx` | check the `usable` column first |
+| coverage at a glance | `data/INDEX.csv` | |
+
+Two things about this layout that change how you work:
+
+**Group names and trophic levels are already extracted and exact.** `groups_df` gives
+`seq`, `group_name`, `group_type`, `tl`, `ge`, `ee` per group. Read them from there.
+Deriving group names from prose risks misspelling them, missing one, or inventing a group
+the model does not have — and the downstream join is on the exact name.
+
+**`taxon_descr` in `groups_df` is empty for every current model.** The extraction step did
+not capture group membership, so the papers remain the only source for which taxa sit in
+which group. That is the substantive work of this skill.
+
+**Check `usable` before you start.** Several extracted models are unfit — a model can be
+present on disk and still explode, be unbalanced, or have diet rows far from 1. Mapping onto
+an unusable model produces confident nonsense. If the selected model is not `usable`, say so
+and stop rather than mapping.
+
+If a needed paper or supplement is missing, attempt to retrieve it online before mapping.
 
 ## Worked examples
 
@@ -148,6 +171,21 @@ For each row, the explanation must state the decisive evidence, for example:
 - why the catch category remains unresolved
 
 Avoid generic text such as “best match.” Name the traits, source relationship, or ambiguity that determined the decision.
+
+## 7b. Where the output goes
+
+Write the mapping back into `data/<unit_id>/<unit_id>.xlsx` as a new sheet named
+**`Taxon-Group Map`**, leaving every existing sheet untouched. Required columns:
+
+    taxon | functional_group | commercial_group | <model>_group | <model>_confidence | <model>_explanation
+
+one `<model>_*` triple per distinct model, named with the model's exact stem from
+`PPREstimation/output/top10/`. `<model>_group` must be a verbatim `group_name` from that
+model's `groups_df` — anything else breaks the join that turns SPPR into PPR.
+
+Use `Unresolved` where no defensible assignment exists. An honest `Unresolved` is worth more
+than a plausible guess: the next step multiplies these by catch, so a wrong group silently
+produces a wrong PPR for that taxon in every year.
 
 ## 8. Add an `EwE Taxonomy` evidence sheet
 
