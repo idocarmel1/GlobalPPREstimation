@@ -137,12 +137,25 @@ processed table covers a single analysis year.
   the real schemas, but **not by execution**. Anyone who can supply `@oai/artifact-tool`, or
   port those two files onto a public spreadsheet library, closes this.
 
+## `data/` — the integration layer
+
+`data/<unit_id>/` holds one directory per ecosystem, joining catch, geography, articles,
+the selected Ecopath model, SPPR results and NPP on `unit_id`. Each has a five-sheet
+workbook — Summary, Catch, SPPR, PPR, NPP — built by `tools/build_ecosystem_data.py`.
+Start at `data/INDEX.csv`, which is the coverage matrix. See `data/README.md`.
+
+Bulk inputs are referenced rather than copied, so the whole spine is 45 MB.
+
+The workbook computes PPR independently and its 2019 total reproduces the pipeline's
+`ppr_species` exactly, then extends across all seventy years.
+
 ## Not yet built
 
-- **The per-ecosystem data spine** — one directory per ecosystem gathering catch,
-  geography, articles, the selected model, SPPR results and NPP.
-- **The per-ecosystem workbook** — a single lean spreadsheet per ecosystem: catch per
-  taxon per year, taxon SPPR by method, PPR, NPP, and a PPR/NPP summary.
+- **PPR from the Ecopath network methods.** The SPPR sheet already carries all 20 methods
+  per group for the ten modelled ecosystems, but turning those into PPR needs each catch
+  taxon mapped to a model group — the job of `skills/ewe-species-to-group-mapper`, not yet
+  automated. This is the main gap between the current state and a full result.
+- **Sweeping new articles** into `PPRAtlas/archive/regions/` and extracting models from
+  them, which is what would lift coverage above the current ten ecosystems.
 
-Both are designed in `docs/superpowers/specs/`. Output locations named above are
-staging locations until that spine exists.
+Designed in `docs/superpowers/specs/`.
