@@ -9,6 +9,13 @@ filename prefix, NPP by layer plus region id. This script joins all of it on `un
     data/<unit_id>/npp.json          net primary production by satellite model, when known
     data/<unit_id>/<unit_id>.xlsx    the five-sheet summary a human actually opens
 
+This workbook holds only what is true of the ecosystem regardless of any Ecopath model:
+catch, the trophic-chain SPPR and PPR, and NPP. Everything model-specific lives in
+`data/<unit_id>/models/<model_stem>.xlsx`, one workbook per model, built by
+`tools/build_model_workbook.py`. Keeping them apart is not tidiness: an ecosystem with two
+published models has two different answers for PPR, and a single sheet holding both invites
+a reader to average them.
+
 Bulk inputs are referenced by relative path rather than copied. The catch archives and
 the article archive together run to gigabytes; duplicating them per ecosystem would add
 nothing and cost a great deal.
@@ -164,7 +171,9 @@ def sheet_catch(wb, rows, years):
     if not rows:
         ws.append(["No catch data for this ecosystem."])
         return
-    head = ["taxon", "common_name", "functional_group", "commercial_group"] + [str(y) for y in years]
+    # Years are written as numbers, not text: the model workbooks match against them
+    # with MATCH(), and a text header silently fails that lookup.
+    head = ["taxon", "common_name", "functional_group", "commercial_group"] + list(years)
     ws.append(head)
     for r in sorted(rows, key=lambda x: -sum(x["by_year"].values())):
         ws.append(
@@ -175,6 +184,7 @@ def sheet_catch(wb, rows, years):
 
 
 def sheet_sppr(wb, unit, models, tl):
+    """The trophic-chain SPPR per taxon. Model SPPR lives in the model workbooks."""
     ws = wb.create_sheet("SPPR")
     ws.append([f"Specific PPR for {unit}"])
     ws["A1"].font = HEADER
@@ -185,25 +195,18 @@ def sheet_sppr(wb, unit, models, tl):
         c.font = HEADER
     for taxon, level in sorted(tl.items(), key=lambda kv: -kv[1]):
         ws.append([taxon, level, round((1.0 / TRANSFER_EFFICIENCY) ** (level - 1.0), 6)])
-    if not models:
-        ws.append([])
+    ws.append([])
+    if models:
+        ws.append([f"{len(models)} Ecopath model(s) also cover this ecosystem. Their "
+                   "per-group SPPR under all 20 methods, and the PPR that follows from it,"])
+        ws.append(["are in data/" + unit + "/models/ — one workbook per model, because two "
+                   "models give two different answers and they are not averageable."])
+        for m in models:
+            ws.append([f"    {m['model']}.xlsx"])
+    else:
         ws.append(["No Ecopath model has been extracted for this ecosystem yet,"])
         ws.append(["so the network-based SPPR methods are not available here."])
-        finish(ws, 3)
-        return
-    for m in models:
-        ws.append([])
-        ws.append([f"Ecopath model: {m['model']}"])
-        ws.cell(ws.max_row, 1).font = HEADER
-        if m.get("error"):
-            ws.append([f"could not be read: {m['error']}"])
-            continue
-        ws.append([str(h) for h in m["header"]])
-        for c in ws[ws.max_row]:
-            c.font = HEADER
-        for r in m["rows"]:
-            ws.append(list(r))
-    finish(ws, max(3, max((len(m.get("header") or []) for m in models), default=3)))
+    finish(ws, 3)
 
 
 def sheet_ppr(wb, rows, years, tl):
@@ -215,7 +218,7 @@ def sheet_ppr(wb, rows, years, tl):
     ws.append(["PPR = catch tonnes x (1/TE)^(TL-1), TE = 0.1, per taxon per year."])
     ws.append(["Taxa with no trophic level are omitted and their catch contributes no PPR."])
     ws.append([])
-    head = ["taxon", "trophic_level"] + [str(y) for y in years]
+    head = ["taxon", "trophic_level"] + list(years)
     ws.append(head)
     for c in ws[4]:
         c.font = HEADER
@@ -272,6 +275,7 @@ def sheet_summary(wb, unit, meta, rows, years, tl, npp, models):
         ("longitude", meta.get("marker_lon") or ""),
         ("archived articles", meta.get("article_count", 0)),
         ("Ecopath models extracted", len(models)),
+        ("model workbooks", f"data/{unit}/models/" if models else "none yet"),
         ("catch years", f"{years[0]}-{years[-1]}" if years else "none"),
         ("taxa in catch", len(rows)),
         ("taxa with a trophic level", sum(1 for r in rows if r["taxon"] in tl)),

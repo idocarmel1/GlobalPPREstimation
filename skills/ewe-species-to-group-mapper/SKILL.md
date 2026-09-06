@@ -1,219 +1,184 @@
 ---
 name: ewe-species-to-group-mapper
-description: "Map every taxon in an LME catch workbook to the closest functional group in every Ecopath with Ecosim model described by supplied papers and supplements. Produce model-specific mapping and explanation columns, confidence colors, a taxonomy/provenance sheet, and validated spreadsheet output. Use when the user selects EwE Species-to-Group Mapper or asks to match LME species/catch taxa to EwE functional groups."
+description: "Map every catch taxon of an LME, EEZ or High Seas unit to functional groups in each Ecopath with Ecosim model of that ecosystem, so per-group SPPR can be turned into per-taxon PPR. Handles coarse catch labels that span several groups by apportioning them rather than discarding them. Use when the user asks to map catch taxa to EwE functional groups, or selects EwE Species-to-Group Mapper."
 ---
 
 # EwE Species-to-Group Mapper
 
-Match an LME catch-taxon workbook to every distinct Ecopath model in the supplied source bundle. Use `assets/reference.xlsx` as a structural and visual example, not as a biological lookup table. Never copy East China Sea assignments into another ecosystem without evidence.
+Ecopath has no taxon level and Sea Around Us has no functional groups. This skill builds
+the join between them, one ecosystem at a time, so that `SPPR` per group becomes `PPR` per
+taxon per year.
 
-## Required inputs
+The measure of a mapping is **the share of catch tonnage that lands on a named group**, not
+the share of taxa. Those two numbers diverge badly — a mapping can leave 44 % of taxa
+unresolved and still carry 90 % of the tonnage, because the unresolved tail is rarities.
+PPR is a tonnage quantity. Optimise tonnage.
 
-This skill runs against the `GlobalPPREstimation` repository layout. For an ecosystem
-identified by its `unit_id` (`LME_036`, `EEZ_711`, `HS_077`):
+Target: **95 % of catch tonnage on a named group.** The first generation of mappings
+reached 78 % and stopped, because a handful of coarse labels like
+`Marine fishes not identified` were each written off as `Unresolved` while carrying a fifth
+of the catch between them. Read `references/coarse-taxa-playbook.md`; that gap is the main
+thing this skill exists to close.
 
-| what | where | notes |
-| --- | --- | --- |
-| the taxa to map | `data/<unit_id>/<unit_id>.xlsx`, sheet **`Catch`** | column `taxon`, plus `functional_group` and `commercial_group` from Sea Around Us |
-| the model's exact group list | `PPREstimation/output/top10/<model>.xlsx`, sheet **`groups_df`** | **authoritative — use it, do not mine group names from the paper** |
-| membership evidence | `PPRAtlas/archive/regions/<unit_id>/<ARTICLE>/` | the papers and supplements; this is where you learn *which taxa* belong to each group |
-| which model to use | `data/model_selection.xlsx` | check the `usable` column first |
-| coverage at a glance | `data/INDEX.csv` | |
+## Inputs
 
-Two things about this layout that change how you work:
+Runs against a `GlobalPPREstimation` checkout. Set `GLOBALPPR_ROOT` if you are not inside
+one.
 
-**Group names and trophic levels are already extracted and exact.** `groups_df` gives
-`seq`, `group_name`, `group_type`, `tl`, `ge`, `ee` per group. Read them from there.
-Deriving group names from prose risks misspelling them, missing one, or inventing a group
-the model does not have — and the downstream join is on the exact name.
+| what | where |
+| --- | --- |
+| the taxa to map | `SeaAroundUsExtraction/data/catch_by_taxon_year/<unit_id>.csv.gz` |
+| the model's exact group list | `PPREstimation/output/top10/<model>.xlsx`, sheet `groups_df` — **authoritative** |
+| membership evidence | `PPRAtlas/archive/regions/<unit_id>/<ARTICLE>/` — papers and supplements |
+| which model to use | `data/model_selection.xlsx`, column `usable` |
 
-**`taxon_descr` in `groups_df` is empty for every current model.** The extraction step did
-not capture group membership, so the papers remain the only source for which taxa sit in
-which group. That is the substantive work of this skill.
+`prepare_mapping.py` collects all of this into one work order, so you do not have to open
+the archives by hand to find out what exists.
 
-**Check `usable` before you start.** Several extracted models are unfit — a model can be
-present on disk and still explode, be unbalanced, or have diet rows far from 1. Mapping onto
-an unusable model produces confident nonsense. If the selected model is not `usable`, say so
-and stop rather than mapping.
+Two standing facts about this data:
 
-If a needed paper or supplement is missing, attempt to retrieve it online before mapping.
+**Group names are already extracted and exact.** Read them from `groups_df`, never from
+the prose. The downstream join is on the exact string.
+
+**`taxon_descr` is empty in every model extracted so far.** The extraction step did not
+capture group membership, so the papers remain the only source for which taxa sit in which
+group. That is the substantive work here. Note it in the notes file each time — it is a
+gap in the extraction skill, not in the paper.
+
+## The loop
+
+### 1. Prepare
+
+```bash
+python skills/ewe-species-to-group-mapper/scripts/prepare_mapping.py LME_047
+```
+
+Writes `data/<unit>/mapping/WORK_ORDER.md` — the models with their `usable` verdicts, the
+exact group lists with TL, biomass and model catch, and every taxon ranked by tonnage with
+a cumulative percentage and a `coarse` flag. It also stubs one CSV per model with a row for
+every taxon, so the mapping is complete by construction.
+
+**Check `usable` first.** A model can be extracted and still be unfit — unbalanced, or it
+explodes, or its diet rows are far from 1. Mapping onto an unusable model produces
+confident nonsense. If it is not usable, say so and stop.
+
+### 2. Read the model before the taxa
+
+Work out what axis the group list is built on — taxonomic, size and habitat, feeding
+guild, spatial stratum, life stage — and what any prefix in the names means.
+`references/model-structures.md` has the archetypes and the trap each one sets. Ten minutes
+here changes every decision afterwards.
+
+### 3. Find the membership evidence
+
+Read the paper. Then look specifically for:
+
+- a species-to-group table (often only in the supplement — the East China Sea one is a
+  `.docx` data sheet, not a table in the PDF)
+- the diet composition matrix, which constrains what a guild can contain
+- group-definition prose, size or life-stage splits, synonyms used by older papers
+- "based on", "adapted from", "following" — then read that earlier paper too
+
+Make real download attempts for supplements you can identify but do not have; record the
+filename, URL and result. Never claim a supplement was read when only its citation was
+found. Distinguish `direct source` (the paper adopts it), `supporting regional source`
+(relevant but not stated as inherited) and `analyst inference` (yours).
+
+### 4. Map, in tonnage order
+
+The work order is sorted by catch. In a typical LME the top thirty taxa carry 90 % of it.
+Work down that list; the two-tonne rarities at the bottom deserve a minute each, not an
+hour.
+
+Evidence hierarchy, in order:
+
+1. the exact taxon listed in that group in that model
+2. accepted-name or synonym match to a listed member
+3. taxonomic containment — the group is defined by a taxon that contains this one
+4. habitat, size band and feeding guild together, corroborated by TL
+5. a classification explicitly inherited from a cited predecessor model
+6. ecological analogue: diet, habitat, size, mobility and TL together
+7. **apportionment across the groups the taxon spans** — see the playbook
+8. `Unresolved`
+
+Rule 7 is the new one and it is where the coverage is. A coarse label is apportioned, not
+discarded. `Unresolved` still means *outside the model* — a billfish in a coastal-shelf
+model, a mollusc where there is no benthic group — not *hard to decide*.
+
+Never select a feeding guild from trophic level alone. TL corroborates; it never decides.
+
+### 5. Validate, and iterate against the number
+
+```bash
+python skills/ewe-species-to-group-mapper/scripts/validate_mapping.py LME_047
+```
+
+Reports tonnage coverage by confidence tier and lists the largest unresolved taxa. Errors
+are things that would make the PPR wrong: a missing taxon, a group name not verbatim in
+`groups_df`, catch on `Detritus` or a primary producer, malformed weights, a confidence
+that contradicts its decision.
+
+Run it after every pass. When the verdict is `INCOMPLETE`, the largest unresolved taxa it
+prints are your work list. Stop when it says `PASS`, or when the remaining unresolved
+tonnage is genuinely outside the model and you can say so in one sentence per taxon.
+
+### 6. Write the group dictionary and the notes
+
+`<model>.groups.csv` and `<model>.notes.md`, per `references/output-format.md`. One row per
+group whether or not catch lands on it; the notes carry the model's area, the axis, the
+supplements you did and did not get, and the judgement calls a reviewer should push back
+on.
+
+### 7. Merge
+
+```bash
+python tools/merge_taxon_sppr.py --units LME_047
+python tools/build_ecosystem_data.py --units LME_047 --force
+```
+
+The merge refuses to run if a mapped group is absent from the model's own `groups_df`,
+because every PPR derived from that row would be fiction.
+
+## Output
+
+Three files per model under `data/<unit_id>/mapping/`, specified exactly in
+`references/output-format.md`:
+
+```
+<model_stem>.csv          taxon, common_name, functional_group, commercial_group,
+                          group, weights, confidence, evidence, explanation
+<model_stem>.groups.csv   the group dictionary
+<model_stem>.notes.md     provenance and limitations
+```
+
+Plain CSV. The builder renders it into the ecosystem workbook with the confidence
+colouring — do not edit workbooks directly, and do not reorder or drop stub rows.
+
+One set of files per **distinct model**, even when two models share a group list. Models
+are distinct when they differ by period, area, scenario, season, depth stratum or group
+structure. `47_1_East_China_Sea_(1997)` and `47_2_East_China_Sea_(2018)` are two mappings,
+not one.
 
 ## Worked examples
 
-`examples/` holds three completed mappings — `LME_032_Arabian_Sea.xlsx`,
-`LME_034_Bay_of_Bengal.xlsx` and `LME_047_East_China_Sea.xlsx`. Read one before
-starting to see the expected column layout, confidence colouring and provenance
-sheet. They are reference output, not biological lookup tables: never copy an
-assignment from one ecosystem into another without evidence from that ecosystem's
-own sources.
+`examples/` holds three first-generation mappings — Arabian Sea, Bay of Bengal, East China
+Sea. Read one for the shape of the explanations. Two warnings about them:
 
-## Capabilities to use
+- They are **reference output, not lookup tables.** Never copy an assignment from one
+  ecosystem into another without evidence from that ecosystem's own sources.
+- They reach only 78 % tonnage coverage, and the Bay of Bengal one puts every stratified
+  taxon into stratum `2` without saying so. They are the baseline this skill is meant to
+  beat, not the standard to match.
 
-1. Use the available spreadsheet capability to inspect, edit, render, and validate the workbook while preserving its native structure.
-2. Use the available PDF/document capabilities to inspect papers, tables, captions, footnotes, figures, and supplements.
-3. Use the available `ecopath-extraction` capability, when present, to establish model boundaries, exact group lists/order, and model-specific TL values. This workflow does not require a full EwE parameter extraction unless the user requests it.
-4. Browse primary publisher pages, DOI records, repositories, and cited scientific papers when supplements or group definitions are absent from the supplied files.
+## Reporting
 
-Do not begin biological assignments until the source bundle and distinct model list are fixed.
+When you finish, report:
 
-## 1. Inventory sources and enumerate models
+- models mapped, and any skipped because they are not usable
+- **catch tonnage coverage per model**, then taxon counts by confidence tier
+- the composite splits you made and the weight basis for each
+- the unresolved taxa that carry real tonnage, and why each is outside the model
+- supplements sought and not obtained
+- anything about the model's structure that a reader of the PPR numbers must know
 
-Inventory every supplied paper, supplement, spreadsheet, appendix, and prior calculation file. For each paper, identify every distinct static Ecopath model. Treat models as distinct when they differ by period, scenario baseline, area, season, depth stratum, life-stage aggregation, or functional-group structure.
-
-Create one mapping decision column for every model even when two models use identical functional groups. Never collapse models merely because their mappings happen to be the same.
-
-Record for each model:
-
-- Paper citation and DOI/URL
-- Model label and modeled years
-- Modeled area and relation to the LME
-- Exact functional-group names and order
-- Model-specific TL values when reported
-- Whether group membership differs from other models in the paper
-- Where membership/grouping criteria are documented
-
-## 2. Recover supplementary and inherited taxonomy evidence
-
-Search the paper, publisher page, XML/JATS metadata, DOI landing page, repositories, and cited sources for:
-
-- Species-to-functional-group tables
-- Diet matrices or stomach-content tables
-- Group-definition tables
-- Life-stage or size splits
-- Taxonomic synonyms used by older papers
-- Statements such as “based on,” “adapted from,” or “following” a prior model
-
-Make real download attempts for identified supplementary files. Record the filename, URL, result, and limitation. Do not claim a supplement was read when only its filename or citation was found.
-
-If the focal paper relies on an earlier paper, inspect the earlier paper. Distinguish:
-
-- `direct source`: the focal paper explicitly adopts or adapts it
-- `supporting regional source`: biologically relevant but not stated as inherited
-- `analyst inference`: derived from taxonomy/ecology rather than a reported membership
-
-## 3. Build a model-specific group dictionary
-
-For every group in every model, record:
-
-- `paper`
-- `model`
-- `functional_group`
-- `model_tl`
-- `grouping_basis`: taxonomic, feeding guild, habitat, size, life stage, commercial single-species group, residual pool, or non-living compartment
-- `explicit_members`
-- `supporting_taxa_or_examples`
-- `membership_source`
-- `source_relationship`
-- `source_location`: file + page/table/figure/sheet
-- `source_url`
-- `notes_and_limitations`
-
-Keep exact model spelling in output columns. Normalize spelling only in an internal comparison key.
-
-## 4. Normalize workbook taxa
-
-For each workbook row determine, as far as the sources support:
-
-- Submitted scientific name
-- Accepted scientific name
-- Synonyms or historical combinations
-- Taxonomic rank: species, genus, family, order, broad category, or “nei/not identified”
-- Higher taxonomy relevant to model groups
-- Common name
-- Existing habitat/functional category
-- Trophic level and its source
-- Size, habitat, and feeding information when needed
-
-Do not overwrite the workbook's existing taxonomy or functional-group columns. Treat them as evidence inputs.
-
-## 5. Match each taxon independently to each model
-
-Apply this evidence hierarchy in order:
-
-1. Exact species explicitly listed in that model
-2. Accepted-name or synonym match to an explicit member
-3. Explicit genus/family/higher-rank containment supported by the model definition
-4. Unambiguous broad taxonomic group, such as a cephalopod entering a dedicated Cephalopods group
-5. Explicitly inherited classification from a cited predecessor model
-6. Strong ecological analogue using diet, habitat, size/life stage, mobility, and TL together
-7. Best-supported residual group, only if the model defines one that truly includes the taxon
-8. `Unresolved` when no defensible group can be selected
-
-Never assign a feeding guild from TL alone. TL is corroborating evidence, not a taxonomy substitute. Do not force unidentified fish into a precise feeding guild. Do not put every member of a family into a dedicated commercial species group unless the model defines that scope.
-
-When models share an identical group dictionary, assignments may be identical, but retain separate decision and explanation columns.
-
-## 6. Confidence rules and cell colors
-
-Use exactly these outcomes:
-
-- Green `#C6EFCE`: very sure. Direct membership/synonym evidence, explicitly inherited classification, or an unambiguous taxonomic group.
-- Yellow `#FFEB9C`: almost sure. Best-supported ecological inference with enough evidence to choose one group.
-- Red `#FFC7CE`: write exactly `Unresolved`. Evidence is insufficient or materially conflicting.
-
-Color only the decision cells. Explanation cells remain neutral and readable. Do not hide uncertainty inside an explanation while coloring the decision green.
-
-## 7. Write model-specific decision and explanation pairs
-
-Append paired columns to the `Species` sheet:
-
-```text
-EwE_<Author>_<Year>_<ModelLabel>
-EwE_<Author>_<Year>_<ModelLabel>_explanation
-```
-
-For each row, the explanation must state the decisive evidence, for example:
-
-- exact membership and source
-- accepted synonym and explicit listed name
-- unambiguous taxonomic containment
-- habitat + diet + TL ecological inference
-- why the catch category remains unresolved
-
-Avoid generic text such as “best match.” Name the traits, source relationship, or ambiguity that determined the decision.
-
-## 7b. Where the output goes
-
-Write the mapping back into `data/<unit_id>/<unit_id>.xlsx` as a new sheet named
-**`Taxon-Group Map`**, leaving every existing sheet untouched. Required columns:
-
-    taxon | functional_group | commercial_group | <model>_group | <model>_confidence | <model>_explanation
-
-one `<model>_*` triple per distinct model, named with the model's exact stem from
-`PPREstimation/output/top10/`. `<model>_group` must be a verbatim `group_name` from that
-model's `groups_df` — anything else breaks the join that turns SPPR into PPR.
-
-Use `Unresolved` where no defensible assignment exists. An honest `Unresolved` is worth more
-than a plausible guess: the next step multiplies these by catch, so a wrong group silently
-produces a wrong PPR for that taxon in every year.
-
-## 8. Add an `EwE Taxonomy` evidence sheet
-
-Create one row per model × functional group using the group-dictionary fields from Step 3. Repeat shared groups for each model so model-specific TL and provenance remain explicit.
-
-Use plain-text URLs in source columns. Clearly flag unavailable supplements and incomplete species lists. Never present a supporting regional paper as a direct inherited taxonomy unless the focal paper says so.
-
-## 9. Preserve and validate the workbook
-
-- Preserve every existing sheet, formula, value, style, filter, table, freeze pane, and validation rule unless a requested addition requires a targeted change.
-- Match the reference workbook's dark-blue headers, readable widths, wrapped explanations, and confidence colors.
-- Keep formulas formula-driven; do not replace them with cached values.
-- Ensure the pre- and post-mapping catch total is identical.
-- Ensure every decision is an exact group name from that model or `Unresolved`.
-- Ensure every species row has both a decision and explanation for every model.
-- Count green, yellow, and red rows per model.
-- Scan for formula errors.
-- Render and visually inspect every sheet, including `Species` and `EwE Taxonomy`, before export.
-
-## 10. Final response
-
-Return the completed `.xlsx` and briefly report:
-
-- Models mapped
-- Number of taxa
-- Confidence counts per model
-- Unresolved categories
-- Important supplement/provenance limitations
-- Confirmation that formulas and catch totals were preserved
-
-Do not claim that an inferred mapping came from the paper. The workbook must remain auditable enough that another researcher can revisit every yellow or red decision.
+Do not report a mapping as complete while the validator says `FAIL`.
