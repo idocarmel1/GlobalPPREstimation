@@ -85,8 +85,24 @@ SPPR under 20 methods → PPR. The mappings came from the completed examples shi
 refuses to run if any mapped group is absent from the model's own `groups_df`, since a
 mismatch there would produce confident fiction.
 
-Coverage sits near 78 % of catch tonnage in all three; the remainder is taxa honestly marked
-`Unresolved`, which contribute no PPR and are counted rather than hidden.
+Coverage is reported two ways, and the difference matters. `LME_052` has **44 % of its taxa
+unresolved but 90 % of its catch tonnage resolved** — the unmapped taxa are overwhelmingly
+small-catch strays. For PPR, tonnage coverage is the number that counts; taxon-count coverage
+mostly measures how many rare species wandered into the catch record.
+
+| ecosystem | taxa unresolved | catch tonnage resolved |
+| --- | --- | --- |
+| `LME_032` Arabian Sea | 14 / 393 | 78 % |
+| `LME_034` Bay of Bengal | 12 / 288 | 78 % |
+| `LME_047` East China Sea | 27 / 254 | 78 % |
+| `LME_052` Sea of Okhotsk | 66 / 151 | 90 % |
+
+`LME_052`'s high taxon-level unresolved rate is a real property of the source, not a mapping
+failure. The usable model covers only the **northeastern** Okhotsk — cold water, mammal-focused,
+1980s — while the catch series covers the whole LME and includes tropical and oceanic species
+(snappers, groupers, tuna, billfish, mako) the model was never built to represent. Neither source
+paper contains a species-to-group membership table, so assignments rest on taxonomic containment
+rather than a documented list, and the explanations say so rather than overclaiming.
 
 For `LME_047` in 2019 the network methods give 0.4–1.5 billion tonnes against the simple
 trophic-chain method's 3.4 billion. Lower is expected: the network methods follow the real
