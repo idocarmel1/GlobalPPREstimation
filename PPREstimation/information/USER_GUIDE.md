@@ -316,7 +316,7 @@ SPPR    = 0.1 ^ (1 − TL_mean)        (same value for every group)
 Returns all zeros if there is no catch. This is the coarsest estimate.
 
 **`SPPR_1995(global_TE=0.1)` → `pd.DataFrame`.**
-Christensen & Pauly (1995). Uses each group's *own* continuous trophic level:
+Pauly & Christensen (1995). Uses each group's *own* continuous trophic level:
 
 ```
 SPPR(group) = TE ^ (1 − TL(group))

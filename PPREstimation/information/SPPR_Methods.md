@@ -107,7 +107,7 @@ recursive dependencies (including cycles) in one shot.
 - **`DET_as_PP`** — sets the **base** detritus diet row, which `TE_option` (below) may then
   overwrite:
   - `DET_as_PP=True` — detritus has an all-zero diet row (it "eats" nothing), so `TL_DET = 1`.
-    This is the **Christensen & Pauly (1995) convention** — zero the detritus rows so detritus
+    This is the **Pauly & Christensen (1995) convention** — zero the detritus rows so detritus
     sits at the base — and it is what the code actually uses: `SPPR_1986`/`SPPR_1995`/
     `SPPR_1995_TL_fix` all call `get_TL(break_cycles=True, DET_as_PP=True)`.
   - `DET_as_PP=False` — the detritus row is rebuilt from the groups whose death fed it, so
@@ -176,7 +176,7 @@ caught.
   back-of-envelope comparisons across fisheries; blind to who eats whom.
 - Returns all zeros if there is no catch.
 
-### `SPPR_1995(global_TE=0.1)` — Christensen & Pauly (1995)
+### `SPPR_1995(global_TE=0.1)` — Pauly & Christensen (1995)
 ```python
 SPPR_1995(global_TE: str | float = 0.1) -> pd.DataFrame
 ```

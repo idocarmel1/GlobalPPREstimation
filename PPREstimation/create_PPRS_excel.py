@@ -183,7 +183,7 @@ def _spec_1986() -> MethodSpec:
 
 def _spec_1995(key: str, global_TE) -> MethodSpec:
     return MethodSpec(
-        key, f"Christensen & Pauly (1995): per-group TE^(1-TL) with global_TE={global_TE!r}.",
+        key, f"Pauly & Christensen (1995): per-group TE^(1-TL) with global_TE={global_TE!r}.",
         lambda m, mc_samples, te=global_TE: (m.SPPR_1995(global_TE=te), {}),
         source_resolved=False)
 

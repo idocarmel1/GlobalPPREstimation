@@ -1673,7 +1673,7 @@ class PPRCalculator:
         return SPPR
     
     def SPPR_1995(self, global_TE: str | float = 0.1) -> pd.DataFrame:
-        """Christensen & Pauly (1995)-style per-group SPPR = TE^(1-TL).
+        """Pauly & Christensen (1995)-style per-group SPPR = TE^(1-TL).
 
         Uses each group's own continuous trophic level together with a single global transfer
         efficiency.

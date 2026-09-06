@@ -103,10 +103,22 @@ processed table covers a single analysis year.
   asserts 19). Both pre-date this integration. See
   [`PPREstimation/README.md` — "Known test failures"](PPREstimation/README.md) for
   detail; it is not duplicated here.
-- **Workbook building needs Node**, via `node tools/build_workbooks.mjs`. Node is not
-  installed on the development machine, so `regional_calculations/*.xlsx` headers are
-  stale, and `validate_eez_release.py` currently passes only with `--skip-workbooks`.
-  Open follow-up.
+- **The Excel workbook builders cannot currently be run by anyone.** `tools/build_workbooks.mjs`
+  and `tools/eez_workbook.mjs` import `@oai/artifact-tool`, a package that is **not on the
+  public npm registry** (404) and is not vendored here — there is no `package.json` anywhere
+  in the repository. Node itself is installed and the other `.mjs` tooling works, so this is
+  a missing dependency, not a missing runtime.
+
+  Consequences: `regional_calculations/*.xlsx` carry stale headers from before the column
+  schema changed and cannot be rebuilt; `validate_eez_release.py` therefore passes only with
+  `--skip-workbooks`; and `tests/test_eez_workbook.mjs` cannot execute.
+
+  What *is* verified: all eight `.mjs` files pass `node --check`, and
+  `tests/test_scope_args.mjs` and `tests/test_workbook_metadata.mjs` both run and pass (2/2
+  each). The column-letter corrections inside `eez_workbook.mjs` — made when the group schema
+  shrank from 15 columns to 5 and the summary from 17 to 15 — are verified by analysis against
+  the real schemas, but **not by execution**. Anyone who can supply `@oai/artifact-tool`, or
+  port those two files onto a public spreadsheet library, closes this.
 
 ## Not yet built
 
