@@ -86,4 +86,24 @@ def render_map(root, db):
         text = text.replace('Recommended model sources</div>', 'Selected sources and archived alternatives</div>')
         text = text.replace('No model was load-tested in this project.', 'Pilot models were loaded and evaluated; numerical validity depends on method and configuration. See the selected result and linked diagnostics.')
         text = text.replace('</style>', '.network-note{font-size:11px;line-height:1.5;color:var(--muted)}.network-result{padding:14px 0;border-bottom:1px solid var(--line)}.network-value{font:700 25px Manrope;margin-top:14px}.network-status{font-size:11px;overflow-wrap:anywhere}.network-result select{max-width:100%}#metricLegendTitle{display:block;font-size:11px;margin-bottom:8px}#metricGradient{height:10px}#networkLegend .legend-labels{gap:8px}.field{margin-bottom:9px}[hidden]{display:none!important}</style>')
+    text = text.replace('</header>', '<nav class="view-nav" aria-label="View"><a href="index.html" aria-current="page">Map</a><a href="trends.html">Time series</a></nav></header>', 1)
+    text = text.replace('</style>', '.view-nav{display:flex;gap:4px;padding:4px;background:#fff;border:1px solid var(--line);border-radius:9px;align-self:center}.view-nav a{padding:8px 12px;border-radius:5px;color:var(--muted);text-decoration:none;white-space:nowrap;font-size:12px}.view-nav a[aria-current]{background:#183945;color:white}@media(max-width:800px){header{flex-wrap:wrap}.view-nav{margin-top:8px}}</style>')
     return re.sub(r'(?m)^[ \t]+$', '', text)
+
+
+def render_time_series(root):
+    """Embed annual data and local assets in a portable graph page."""
+    assets = root / 'atlas'
+    payload = json.loads((root / 'data/time_series.json').read_text(encoding='utf-8'))
+    text = (assets / 'time_series.html').read_text(encoding='utf-8')
+    replacements = {
+        '/* TIME_SERIES_CSS */': (assets / 'time_series.css').read_text(encoding='utf-8'),
+        '/* TIME_SERIES_DATA */': json.dumps(payload, ensure_ascii=False, separators=(',', ':'), allow_nan=False).replace('</', r'<\/'),
+        '/* TIME_SERIES_METRICS */': (assets / 'time_series_metrics.js').read_text(encoding='utf-8'),
+        '/* TIME_SERIES_VIEW */': (assets / 'time_series_view.js').read_text(encoding='utf-8'),
+    }
+    for marker, value in replacements.items():
+        if text.count(marker) != 1:
+            raise ValueError('Time-series template marker missing or duplicated: ' + marker)
+        text = text.replace(marker, value)
+    return text

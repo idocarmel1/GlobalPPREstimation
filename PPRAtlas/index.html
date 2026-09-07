@@ -34,14 +34,14 @@
     .footer-note{font-size:10px;color:var(--muted);line-height:1.5;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
     @media(max-width:1100px){.workspace{grid-template-columns:280px 1fr}.details{position:absolute;right:0;top:84px;bottom:0;width:380px;transform:translateX(100%);transition:.2s;box-shadow:var(--shadow)}.details.open{transform:none}.kpi:nth-last-child(-n+2){display:none}}
     @media(max-width:720px){header{padding:12px}.brand{min-width:0}.brand h1{font-size:17px}.brand p,.kpis{display:none}.workspace{grid-template-columns:1fr}.sidebar{position:absolute;left:0;top:67px;bottom:0;width:290px;transform:translateX(-100%);transition:.2s;box-shadow:var(--shadow)}.sidebar.open{transform:none}.details{top:67px;width:100%}.map-note{white-space:normal;width:80%;text-align:center}.leaflet-control-zoom{margin-top:70px!important}}
-  .network-note{font-size:11px;line-height:1.5;color:var(--muted)}.network-result{padding:14px 0;border-bottom:1px solid var(--line)}.network-value{font:700 25px Manrope;margin-top:14px}.network-status{font-size:11px;overflow-wrap:anywhere}.network-result select{max-width:100%}#metricLegendTitle{display:block;font-size:11px;margin-bottom:8px}#metricGradient{height:10px}#networkLegend .legend-labels{gap:8px}.field{margin-bottom:9px}[hidden]{display:none!important}</style>
+  .network-note{font-size:11px;line-height:1.5;color:var(--muted)}.network-result{padding:14px 0;border-bottom:1px solid var(--line)}.network-value{font:700 25px Manrope;margin-top:14px}.network-status{font-size:11px;overflow-wrap:anywhere}.network-result select{max-width:100%}#metricLegendTitle{display:block;font-size:11px;margin-bottom:8px}#metricGradient{height:10px}#networkLegend .legend-labels{gap:8px}.field{margin-bottom:9px}[hidden]{display:none!important}.view-nav{display:flex;gap:4px;padding:4px;background:#fff;border:1px solid var(--line);border-radius:9px;align-self:center}.view-nav a{padding:8px 12px;border-radius:5px;color:var(--muted);text-decoration:none;white-space:nowrap;font-size:12px}.view-nav a[aria-current]{background:#183945;color:white}@media(max-width:800px){header{flex-wrap:wrap}.view-nav{margin-top:8px}}</style>
 </head>
 <body>
 <div class="app">
   <header>
     <div class="brand"><div class="eyebrow">Sea Around Us × Ecopath</div><h1>PPR estimation and recycling</h1><p>66 LMEs · 84 EEZs · 17 High Seas regions · Global Estimation set</p></div>
     <div class="kpis"><div class="kpi"><b id="kpiPpr">100%</b><span>Selected ecosystems</span></div><div class="kpi"><b id="kpiArticles">71</b><span>Study assignments</span></div><div class="kpi"><b id="kpiRegions">60 / 84</b><span>Units with sources</span></div><div class="kpi"><b id="kpiFiles">14</b><span>Verified files</span></div></div>
-  </header>
+  <nav class="view-nav" aria-label="View"><a href="index.html" aria-current="page">Map</a><a href="trends.html">Time series</a></nav></header>
   <main class="workspace">
     <aside class="sidebar" id="sidebar">
       <div class="section-title">Find an ecosystem or article</div><div class="search"><input id="search" placeholder="Search names, authors, titles…"></div>
@@ -233,13 +233,21 @@ renderDetails = function(r) {
   const old=$('details').querySelector('.metric-grid');
   const panel=document.createElement('div');panel.className='network-result';
   const unit=network.units[r.unit_id],result=r.networkResult;
-  if(!unit){panel.innerHTML='<p>No article is selected for estimation in this pilot. This ecosystem remains uncolored.</p>';old.replaceWith(panel);return}
+  const trendLink=()=>{
+    const model=unit?.models[chosenModels[r.unit_id]];
+    const p=new URLSearchParams({units:r.unit_id,method:unit?metricState.method:'simple trophic chain',scope:unit?metricState.scope:'all',year:DB.year});
+    if(model)p.set('models',JSON.stringify({[r.unit_id]:model.id}));
+    const link=document.createElement('a');link.href='trends.html?'+p.toString();link.textContent=unit?'PPR through time →':'PPR through time · catch-taxon TL →';
+    const links=document.createElement('p');links.className='actions';links.appendChild(link);return links;
+  };
+  if(!unit){panel.innerHTML='<p>No article is selected for estimation in this pilot. This ecosystem remains uncolored.</p>';panel.appendChild(trendLink());old.replaceWith(panel);return}
   const idx=chosenModels[r.unit_id],model=unit.models[idx];
   panel.innerHTML=`<div class="field"><label for="modelFilter">Ecopath model for this ecosystem</label><select id="modelFilter"></select></div><div class="network-value">${resultText(r)}</div><div class="network-note">${metricName()} ${metricState.mode==='ppr'||metricState.mode==='ratio'?'· '+metricState.scope+' · '+DB.year+' · '+escapeMetric(metricState.method):'· '+metricState.te}</div><p class="network-status">${escapeMetric(result.status)}</p>`;
   const sel=panel.querySelector('select');
   unit.models.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m.label||m.id.replaceAll('_',' ');o.selected=i===idx;sel.appendChild(o)});
   sel.addEventListener('change',()=>{chosenModels[r.unit_id]=Number(sel.value);applyYear(DB.year)});
   const notes=document.createElement('p');notes.className='network-note';notes.textContent=unit.note;panel.appendChild(notes);
+  panel.appendChild(trendLink());
   if(result.coverage!=null){const coverage=document.createElement('p');coverage.className='network-note';coverage.textContent=`${pct(result.coverage)} of annual catch included (${precise(result.catch)} tonnes). `+(metricState.mode==='ratio'?'Both methods use exactly these taxa.':'Missing method values are excluded; this is a partial footprint when coverage is below 100%.');panel.appendChild(coverage)}
   if(metricState.mode==='ratio'&&result.value!=null){const pair=document.createElement('p');pair.className='network-note';pair.textContent=`${metricState.method}: ${precise(result.numerator)} t PP ÷ ${metricState.denominator}: ${precise(result.denominator)} t PP`;panel.appendChild(pair)}
   if(model){

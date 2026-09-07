@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PPR through time · Global PPR estimation</title>
+<style>/* TIME_SERIES_CSS */</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">≈</span><span>GLOBAL PPR<span class="brand-sub">Sea Around Us × Ecopath</span></span></a><nav aria-label="View"><a href="index.html">Map</a><a href="trends.html" aria-current="page">Time series</a></nav></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">ANNUAL PRIMARY PRODUCTION REQUIRED</p><h1>PPR through time</h1><p id="selectionTitle" class="subtitle"></p></div><button id="chooseEcosystems" class="primary" aria-haspopup="dialog">Choose ecosystems</button></div>
+  <section class="chart-card" aria-label="Time-series explorer">
+    <div class="controls">
+      <div class="field"><label for="metric">Measure</label><select id="metric"><option value="ppr">PPR</option><option value="ratio">PPR / NPP</option></select></div>
+      <div class="field method"><label for="pprMethod">PPR calculation</label><select id="pprMethod"></select></div>
+      <div class="field"><label for="sourceScope">Source scope</label><select id="sourceScope"><option value="all">All sources</option><option value="inner">Inner sources</option><option value="PP">Primary producers (PP)</option></select></div>
+      <div class="field"><label for="nppMethod">NPP calculation</label><select id="nppMethod"></select></div>
+    </div>
+    <div class="plot-heading"><div><h2 id="chartTitle">Annual PPR</h2><p id="cohortSummary" aria-live="polite"></p><div class="period"><label for="fromYear">From</label><select id="fromYear" aria-label="First year"></select><label for="toYear">to</label><select id="toYear" aria-label="Last year"></select></div></div><div class="readout"><span id="focusYear"></span><strong id="focusValue"></strong></div></div>
+    <div class="plot-wrap" id="plotWrap"><svg id="chart" role="img" aria-labelledby="svgTitle svgDesc"><title id="svgTitle">Annual PPR</title><desc id="svgDesc"></desc></svg><div id="emptyState" class="empty" hidden><strong>No estimate for this selection</strong><p id="emptyReason"></p><button id="emptyChoose">Choose ecosystems</button></div></div>
+    <div class="scrubber"><label for="inspectYear">Inspect year</label><input id="inspectYear" type="range" step="1"><output for="inspectYear" id="inspectValue"></output></div>
+    <div class="chart-footer"><p id="coverage"></p><button class="text-button" id="downloadCSV">Download plotted data ↓</button></div>
+  </section>
+  <div class="context"><p id="calculationNote"></p><p id="nppNote" hidden></p><p id="setNote"></p></div>
+  <details id="coverageDetails"><summary id="coverageDetailsTitle">Coverage and sources</summary><div id="coverageBody"></div></details>
+</main>
+<dialog id="ecosystemDialog" aria-labelledby="dialogTitle">
+  <div class="dialog-heading"><div><p class="eyebrow">DEFINE YOUR ESTIMATE</p><h2 id="dialogTitle">Ecosystems</h2></div><button id="closeEcosystems" aria-label="Close ecosystem selection">✕</button></div>
+  <p class="dialog-hint">The graph sums your selection. Each model version is used separately.</p>
+  <div class="picker-controls"><div class="field"><label for="ecosystemSet">Ecosystem set</label><select id="ecosystemSet"></select></div><div class="field"><label for="ecosystemSearch">Find an ecosystem</label><input id="ecosystemSearch" type="search" placeholder="Name or ID…"></div></div>
+  <div class="picker-actions"><span id="pickerCount" aria-live="polite"></span><button id="selectVisible" class="text-button">Select visible</button><button id="clearSelection" class="text-button">Clear all</button></div>
+  <div id="ecosystemList" class="ecosystem-list"></div>
+  <div class="dialog-footer"><p id="pickerNote"></p><button class="primary" id="doneEcosystems">Show graph</button></div>
+</dialog>
+<script>const SERIES_DB=/* TIME_SERIES_DATA */;</script>
+<script>/* TIME_SERIES_METRICS */</script>
+<script>/* TIME_SERIES_VIEW */</script>
+</body></html>

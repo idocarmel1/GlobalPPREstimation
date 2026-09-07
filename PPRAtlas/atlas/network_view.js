@@ -67,13 +67,21 @@ renderDetails = function(r) {
   const old=$('details').querySelector('.metric-grid');
   const panel=document.createElement('div');panel.className='network-result';
   const unit=network.units[r.unit_id],result=r.networkResult;
-  if(!unit){panel.innerHTML='<p>No article is selected for estimation in this pilot. This ecosystem remains uncolored.</p>';old.replaceWith(panel);return}
+  const trendLink=()=>{
+    const model=unit?.models[chosenModels[r.unit_id]];
+    const p=new URLSearchParams({units:r.unit_id,method:unit?metricState.method:'simple trophic chain',scope:unit?metricState.scope:'all',year:DB.year});
+    if(model)p.set('models',JSON.stringify({[r.unit_id]:model.id}));
+    const link=document.createElement('a');link.href='trends.html?'+p.toString();link.textContent=unit?'PPR through time →':'PPR through time · catch-taxon TL →';
+    const links=document.createElement('p');links.className='actions';links.appendChild(link);return links;
+  };
+  if(!unit){panel.innerHTML='<p>No article is selected for estimation in this pilot. This ecosystem remains uncolored.</p>';panel.appendChild(trendLink());old.replaceWith(panel);return}
   const idx=chosenModels[r.unit_id],model=unit.models[idx];
   panel.innerHTML=`<div class="field"><label for="modelFilter">Ecopath model for this ecosystem</label><select id="modelFilter"></select></div><div class="network-value">${resultText(r)}</div><div class="network-note">${metricName()} ${metricState.mode==='ppr'||metricState.mode==='ratio'?'· '+metricState.scope+' · '+DB.year+' · '+escapeMetric(metricState.method):'· '+metricState.te}</div><p class="network-status">${escapeMetric(result.status)}</p>`;
   const sel=panel.querySelector('select');
   unit.models.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m.label||m.id.replaceAll('_',' ');o.selected=i===idx;sel.appendChild(o)});
   sel.addEventListener('change',()=>{chosenModels[r.unit_id]=Number(sel.value);applyYear(DB.year)});
   const notes=document.createElement('p');notes.className='network-note';notes.textContent=unit.note;panel.appendChild(notes);
+  panel.appendChild(trendLink());
   if(result.coverage!=null){const coverage=document.createElement('p');coverage.className='network-note';coverage.textContent=`${pct(result.coverage)} of annual catch included (${precise(result.catch)} tonnes). `+(metricState.mode==='ratio'?'Both methods use exactly these taxa.':'Missing method values are excluded; this is a partial footprint when coverage is below 100%.');panel.appendChild(coverage)}
   if(metricState.mode==='ratio'&&result.value!=null){const pair=document.createElement('p');pair.className='network-note';pair.textContent=`${metricState.method}: ${precise(result.numerator)} t PP ÷ ${metricState.denominator}: ${precise(result.denominator)} t PP`;panel.appendChild(pair)}
   if(model){

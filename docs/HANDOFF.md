@@ -523,3 +523,27 @@ verification and scientific limitations. In particular, Thailand's inherited
 requires geographic extrapolation; failing SPPR configurations remain flagged.
 The knowledge graph is refreshed for this integrated state before the requested
 commit and push.
+
+## 15. Annual graph view — 2026-09-07
+
+The atlas now has a separate `PPRAtlas/trends.html` view for annual PPR and PPR/NPP,
+with PPR/NPP method selectors, source scope, ecosystem presets/custom selection,
+and separate model-version choices. Every map ecosystem links to its own graph.
+The original global preset includes 84 LME/High Seas identities; all 366 known
+LME/High Seas/EEZ identities are selectable. Missing and failed values remain
+unavailable, and each curve uses a fixed cohort across years.
+The year-range control can narrow that period. Individual ecosystem links open
+their available catch span and preserve gaps inside it; regional sums exclude
+incomplete annual series from the whole chosen period.
+
+The owner explicitly requested repeating **2019 NPP for every catch year** for
+now. Use a matched ecosystem cohort and `100 × ΣPPR / 9 / ΣNPP` for percentages;
+do not average regional ratios or include NPP from ecosystems lacking PPR.
+The existing six NPP choices are exposed; the ensemble option sums regional
+medians. The page and CSV disclose the fixed baseline and catch coverage.
+
+Read the annual-graphs section of `PPRAtlas/README.md` for usage and regeneration.
+`tools/build_time_series.py` independently checks the raw catch/TL and mapped
+SPPR totals against saved annual workbook rows before publishing the graph data.
+No PPREstimation algorithm or Jensen behavior was changed; coverage expansion
+(task 6) remains separate from allowing the existing simple method in the graph.
