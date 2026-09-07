@@ -559,3 +559,28 @@ Dimensionless method ratios, recycling diagnostics, NPP and catch quantities
 retain their values. Audited source JSON and XLSX files still store wet-weight
 PPR; source workbook links state that distinction. No PPREstimation algorithm
 or Jensen behavior was changed.
+
+## 17. Multiple annual curves and baseline comparison — 2026-09-07
+
+The time-series view now accepts multiple SPPR methods and an optional baseline
+method. Selected methods share one plot with separate colors and year readouts.
+A single selection retains its original teal curve, shaded area and numerical
+results. The baseline is drawn only if it is among the selected methods.
+Relative values divide each annual estimate by the baseline's matched annual
+estimate; values are dimensionless multiples, with zero/missing denominators
+left as gaps. For PPR/NPP the common NPP denominator cancels.
+
+Comparisons use a fixed common ecosystem cohort across the usable selected
+methods and baseline. A wholly unavailable selected method remains labeled
+unavailable without erasing usable curves. An unavailable baseline fails closed.
+These preaggregated annual totals can cover different catch taxa, unlike the
+map's ratio over common catch taxa; per-method catch coverage makes this explicit.
+
+The method picker, optional baseline selector, model choices, year inspection,
+saved URLs and per-ecosystem links support comparisons. Comparison CSVs include
+each method/year, original carbon totals, denominator values and resolved
+baseline model IDs; single-method/no-baseline CSV output remains unchanged.
+Focused numerical tests and browser checks cover single/two/three curves,
+shading, normalization, failed/empty selections, model changes and saved links.
+Source JSON and XLSX, PPREstimation/Jensen behavior, pilot selection and the
+fixed 2019 NPP convention remain unchanged.

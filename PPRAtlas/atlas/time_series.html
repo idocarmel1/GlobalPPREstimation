@@ -10,18 +10,27 @@
   <section class="chart-card" aria-label="Time-series explorer">
     <div class="controls">
       <div class="field"><label for="metric">Measure</label><select id="metric"><option value="ppr">PPR</option><option value="ratio">PPR / NPP</option></select></div>
-      <div class="field method"><label for="pprMethod">PPR calculation</label><select id="pprMethod"></select></div>
+      <div class="field method"><label id="pprMethodsLabel" for="pprMethod">PPR calculations</label><button id="pprMethod" class="method-select" aria-haspopup="dialog" aria-labelledby="pprMethodsLabel pprMethodText"><span id="pprMethodText"></span><span aria-hidden="true">⌄</span></button></div>
+      <div class="field"><label for="baselineMethod">Divide by baseline</label><select id="baselineMethod"></select></div>
       <div class="field"><label for="sourceScope">Source scope</label><select id="sourceScope"><option value="all">All sources</option><option value="inner">Inner sources</option><option value="PP">Primary producers (PP)</option></select></div>
       <div class="field"><label for="nppMethod">NPP calculation</label><select id="nppMethod"></select></div>
     </div>
     <div class="plot-heading"><div><h2 id="chartTitle">Annual PPR</h2><p id="cohortSummary" aria-live="polite"></p><div class="period"><label for="fromYear">From</label><select id="fromYear" aria-label="First year"></select><label for="toYear">to</label><select id="toYear" aria-label="Last year"></select></div></div><div class="readout"><span id="focusYear"></span><strong id="focusValue"></strong></div></div>
     <div class="plot-wrap" id="plotWrap"><svg id="chart" role="img" aria-labelledby="svgTitle svgDesc"><title id="svgTitle">Annual PPR</title><desc id="svgDesc"></desc></svg><div id="emptyState" class="empty" hidden><strong>No estimate for this selection</strong><p id="emptyReason"></p><button id="emptyChoose">Choose ecosystems</button></div></div>
     <div class="scrubber"><label for="inspectYear">Inspect year</label><input id="inspectYear" type="range" step="1"><output for="inspectYear" id="inspectValue"></output></div>
+    <div id="seriesLegend" class="series-legend" aria-label="Selected method values" hidden></div>
     <div class="chart-footer"><p id="coverage"></p><button class="text-button" id="downloadCSV">Download plotted data ↓</button></div>
   </section>
   <div class="context"><p id="calculationNote"></p><p id="nppNote" hidden></p><p id="setNote"></p></div>
   <details id="coverageDetails"><summary id="coverageDetailsTitle">Coverage and sources</summary><div id="coverageBody"></div></details>
 </main>
+<dialog id="methodDialog" aria-labelledby="methodDialogTitle">
+  <div class="dialog-heading"><div><p class="eyebrow">COMPARE ESTIMATION METHODS</p><h2 id="methodDialogTitle">PPR calculations</h2></div><button id="closeMethods" aria-label="Close method selection">✕</button></div>
+  <p class="dialog-hint">Select one or more methods. Each selection adds a curve to the same graph.</p>
+  <div class="picker-actions"><span id="methodCount" aria-live="polite"></span><button id="selectAllMethods" class="text-button">Select all</button><button id="clearMethods" class="text-button">Clear all</button></div>
+  <div id="methodList" class="ecosystem-list"></div>
+  <div class="dialog-footer"><p>A single curve keeps its shaded area. Multiple curves use separate colors.</p><button class="primary" id="doneMethods">Show graph</button></div>
+</dialog>
 <dialog id="ecosystemDialog" aria-labelledby="dialogTitle">
   <div class="dialog-heading"><div><p class="eyebrow">DEFINE YOUR ESTIMATE</p><h2 id="dialogTitle">Ecosystems</h2></div><button id="closeEcosystems" aria-label="Close ecosystem selection">✕</button></div>
   <p class="dialog-hint">The graph sums your selection. Each model version is used separately.</p>

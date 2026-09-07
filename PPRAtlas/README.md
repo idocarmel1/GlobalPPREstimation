@@ -13,9 +13,19 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   plotted-data CSV downloads (`ppr_tonnes_carbon`). Source workbooks and the
   audited annual input JSON retain wet-weight values. Catch remains wet weight;
   recycling diagnostics and dimensionless method ratios are not converted.
-- Choose PPR or PPR/NPP, a PPR method, source scope and NPP method. The simple
+- Choose PPR or PPR/NPP, one or more PPR methods, source scope and NPP method. The simple
   trophic-chain option uses catch-taxon TL at TE=0.1; `SPPR_1995_TE0.1` uses model
   TL. Identical formulas can differ because these trophic-level inputs differ.
+- **PPR calculations** opens a checkbox picker. Each selected method has its own
+  curve and inspected-year value; one selected method keeps the original teal
+  curve and shaded area. Multiple curves use colors and, for larger selections,
+  distinct line patterns. Unavailable methods are named with their reasons.
+- **Divide by baseline** optionally divides every selected curve by another
+  method for the same year, ecosystems, source scope and model choices. The
+  baseline appears as a curve only when also selected. Relative values are
+  dimensionless multiples (×); baseline/self is 1 where the baseline is positive.
+  Missing or zero denominators remain gaps. Choosing **None** restores absolute
+  PPR or PPR/NPP. In normalized PPR/NPP, the common NPP denominator cancels.
 - **Change** opens the ecosystem picker: original global LME + High Seas set,
   selected pilot, LMEs, High Seas, all EEZs, atlas catalog, or a custom selection.
   All 366 known identities are selectable. The two Arctic units without catch
@@ -24,6 +34,12 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   the chosen method. The same cohort is used for every plotted year. For model
   methods, choose a separate model version per ecosystem in the picker. Models
   are never averaged; failed and unverified estimates remain unavailable.
+  Comparisons use the intersection of ecosystems available to the usable curves
+  and the baseline. A wholly unavailable selected method is disclosed without
+  suppressing valid curves; an unavailable baseline makes relative values
+  unavailable. Method totals can cover different catch taxa, so each curve
+  reports its own catch coverage. Unlike the map's ratio calculation, these
+  annual comparisons do not recompute totals over common catch taxa.
 - NPP choices are Antoine–Morel, VGPM, Eppley, CbPM, CAFE and regional ensemble
   median. **The owner requested repeating the fixed 2019 NPP for all years for
   now.** This denominator is labeled on the graph. Annual NPP can later replace
@@ -40,6 +56,11 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   changing coverage cannot create a false trend.
   **Download plotted data** includes exact values, catch coverage, included IDs,
   calculation choices, model overrides and resolved model IDs. Coverage and sources lists exclusions.
+  Multiple-method or baseline downloads use one row per method and year, with
+  original carbon totals, denominator values, resolved baseline model IDs and
+  reasons for unavailable values. Single-method downloads without a baseline
+  retain their previous format. Shared URLs and ecosystem links preserve the
+  selected methods and baseline; existing `method=` links still work.
   Method coefficients and TLs are fixed across years; boundaries may overlap.
 
 Refresh from the repository root after refreshing the network atlas:
