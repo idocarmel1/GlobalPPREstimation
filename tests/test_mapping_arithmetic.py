@@ -13,7 +13,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "skills" / "ewe-species-to-group-mapper" / "scripts"))
+sys.path.insert(0, str(ROOT / "skills" / "claude" / "ewe-species-to-group-mapper" / "scripts"))
 sys.path.insert(0, str(ROOT / "tools"))
 
 import mapping_io as mio  # noqa: E402
@@ -243,7 +243,7 @@ def test_the_gap_vanishes_when_every_taxon_shares_a_trophic_level():
 def test_sidecar_files_are_not_mistaken_for_mappings(tmp_path):
     d = tmp_path / "data" / "LME_999" / "mapping"
     d.mkdir(parents=True)
-    for name in ["m.csv", "m.groups.csv", "m.members.csv", "m.resolved.csv"]:
+    for name in ["m.csv", "m.groups.csv", "m.members.csv", "m.resolved.csv", "m.taxonomy.csv"]:
         (d / name).write_text("taxon\n", encoding="utf-8")
     found = [p.name for p in mio.mapping_files(tmp_path, "LME_999")]
     assert found == ["m.csv"]

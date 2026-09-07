@@ -45,7 +45,31 @@ A model marked `no` must not be mapped. Say so and stop.
 | 24 | `Detritus` | DET | 1 | 9.3 | 0 |
 | 25 | `diet_import` | Import | 1 | 1 | 0 |
 
-`taxon_descr` is empty for every group, so the paper and its supplements are the only source of membership. Record that limitation in the notes.
+`taxon_descr` carries membership for 24 of 25 groups — use it before the paper.
+- `Marine Mammals`: Tursiops truncatus; Sousa chinensis; Delphinus delphis
+- `Sharks`: Rhizoprionodon acutus; Carcharinus limbatus; Scoliodon laticaudus; Sphyrna lewini
+- `Skates & Rays`: Rhinobatos granulatus; Rhinoptera javanica; Dasyatis sp.
+- `Large Pelagics`: Scomberomorus commerson; S. guttatus; Rachycentron canadum; Sphyraena obtusata; S. jello
+- `Tunas`: Euthynnus affinis; Thunnus tonggol; Auxis thazard; A. rochei
+- `Cephalopods`: Loligo duvauceli; Sepia pharaonis; S. elliptica; Sepiella inermis
+- `Large Benthopelagics`: Trichiurus lepturus; Megalaspis cordyla; Scomberoides tol; Chirocentrus dorab; Tachysurus sp.
+- `Large Benthic Carnivores`: Epinephelus diacanthus; Pristipomoides filamentosus; Saurida tumbil; S. undosquamis; Serranus sp.; Lutjanus sp.
+- `Med Benthic Carnivores`: Johnieops sina; Otolithes ruber; Grammoplites suppositus; Pampus argenteus; Formio niger; Priacanthus hamrur; Polynemus sp.; Dactyloptera sp.; Pseudorhombus arsius; P . natalensis; Balistids
+- `Small Benthic Carnivores`: Nemipterus japonicus; N. mesoprion; Therapon sp.; Lactarius lactarius; Secutor insidiator; Leiognathus bindus; Upeneus sp.; Apogon sp.; Uranoscopus sp.; Tetradon sp.
+- `Small Benthopelagics`: Decapterus russelli; D. macrosoma; Caranx kalla; Mene maculata; Myctophids
+- `Mackerel`: Rastrelliger kanagurta
+- `Clupeids`: Sardinella longiceps; S. fimbriata; S. gibbosa; Thryssa mystax; Dussumieria acuta; Escualosa thoracata; Pellona sp.; Opisthopterus tardoore
+- `Anchovies`: Stolephorus devisi; S. waitei; S.commersonii; S. indicus; Bregmaceros mcclellandi
+- `Crabs & Lobster`: Portunus sanguinolentus; P . pelagicus; Charybdis cruciata; Panulirus sp.
+- `Shrimps`: Metapenaeus monoceros; M. dobsoni; Parapenaeopsis stylifera; Solenocera choprai; Trachypenaeus sp.; Aristeus sp.
+- `Benthic Omnivores`: Cynoglossus macrostomus; Plotosus sp.; Fistularia sp.; Oratosquilla nepa
+- `Heterotrophic Benthos`: Bivalves; Gastropods; Echinoderms; Benthic crabs; Amphipods; Isopods
+- `Meiobenthos`: Annelids; Polychaetes; Foraminiferans; Hydrozoans
+- `Micro Nekton`: Jellyfish; Juvenile fishes; Leptocephalus; Eel elvers
+- `Large zooplankton`: Alima larva; Cypris; Calanus sp; Zoea of crab; Megalopa; Cladocerans; Sagitta; Mysids; Lucifer larva; Medusa; Siphonophores
+- `Micro Zooplankton`: Fish eggs; Decapod eggs and larvae; Bivalve larvae; Tintinnids
+- `Phytoplankton`: Fragilaria; Coscinodiscus; Thalassiothrix; Pleurosigma; Flavella; Asterionella; Skeletonema; Rhizosolenia; Chaetoceros; Nitzchia; Noctiluca; Ceratium
+- `Detritus`: Non-living organic material; group account printed p.20.
 
 ## Taxa, by tonnage
 

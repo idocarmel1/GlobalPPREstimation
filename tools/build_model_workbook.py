@@ -21,7 +21,7 @@ Sheets:
     NPP              satellite estimates
 
 The mapping comes from `data/<unit>/mapping/<model_stem>.csv`, produced by
-`skills/ewe-species-to-group-mapper`. A taxon there may name one group, several groups
+`skills/claude/ewe-species-to-group-mapper`. A taxon there may name one group, several groups
 (apportioned), or `Unresolved`.
 
 Two rules the arithmetic depends on:
@@ -47,10 +47,12 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "skills" / "ewe-species-to-group-mapper" / "scripts"))
+sys.path.insert(0, str(ROOT / "skills" / "claude" / "ewe-species-to-group-mapper" / "scripts"))
 import mapping_io as mio  # noqa: E402
+from ppr_scopes import SCOPES, read_scopes, read_health, method_health_flags, add_recycling_sheet
 
 TRANSFER_EFFICIENCY = 0.1
+WET_WEIGHT_TO_CARBON = 9.0
 
 # Every quantity is rounded once, here, and the rounded value is what every sheet uses.
 # Rounding per sheet instead would leave `PPR by method` and `PPR by taxon` disagreeing in
@@ -273,15 +275,14 @@ def sheet_map(wb, order, taxa, resolved, totals, grand):
     return ws
 
 
-def sheet_sppr(wb, order, resolved, methods, tl, unit, stem):
+def sheet_sppr(wb, order, resolved, methods, tl, unit, stem, scope='all'):
     """The combined SPPR sheet: the simple per-taxon value and the model's, side by side."""
-    ws = wb.create_sheet("SPPR")
+    ws = wb.create_sheet("SPPR" if scope == 'all' else 'sppr_' + scope)
     ws.append([f"Specific PPR per taxon — {unit}, model {stem}"])
     ws["A1"].font = TITLE
     ws.append([f"sppr_simple is the trophic-chain estimate (1/TE)^(TL-1) at TE={TRANSFER_EFFICIENCY}, "
                "applied to the taxon's own trophic level and needing no model."])
-    ws.append(["The remaining columns are this model's SPPR for the taxon's group, one per "
-               "method. Blank means the method did not resolve, never zero."])
+    ws.append([SCOPES[scope] + '. Blank means unavailable, not zero. sppr_simple is an unpartitioned reference.'])
     hdr = header_row(ws, ["taxon", "trophic_level", "sppr_simple", "Ecopath group"] + methods)
     for t in order:
         r = resolved[t]
@@ -294,19 +295,33 @@ def sheet_sppr(wb, order, resolved, methods, tl, unit, stem):
         ] + list(r["sppr"]))
     assert hdr == 4, "SPPR header must sit on row 4; the PPR by taxon formulas assume it"
     widths(ws, [34, 14, 14, 40] + [15] * len(methods))
+    # Composite group names must remain readable when adjacent method cells are blank.
+    import textwrap
+    for row in ws.iter_rows(min_row=5):
+        cell = row[3]
+        cell.alignment = Alignment(wrap_text=True, vertical='top')
+        lines = sum(max(1, len(textwrap.wrap(part, width=34)))
+                    for part in str(cell.value or '').splitlines())
+        ws.row_dimensions[cell.row].height = max(18, 15 * lines + 6)
     ws.freeze_panes = "E5"
     ws.sheet_view.showGridLines = False
+    if scope != 'all':
+        ws.row_dimensions[4].height = 42
+        for c in ws[4]:
+            c.alignment = Alignment(wrap_text=True, vertical='center')
+        for j in range(5, 5 + len(methods)):
+            ws.column_dimensions[get_column_letter(j)].width = 21
     return ws
 
 
-def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, grand):
+def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, grand,
+                        scope='all', upstream_flags=None):
     """Rows are methods, columns are years, values are the sum over every taxon."""
-    ws = wb.create_sheet("PPR by method")
+    ws = wb.create_sheet("PPR by method" if scope == 'all' else 'PPR ' + scope)
     ws.append(["Total PPR by method and year — every taxon summed, tonnes wet weight "
                "equivalent of primary production."])
     ws["A1"].font = TITLE
-    ws.append(["Rows are methods. The first is the simple trophic-chain estimate, which "
-               "needs no model and covers every taxon; the rest are this model's."])
+    ws.append([SCOPES[scope] + '. The simple chain rows are unpartitioned references; model rows use this scope.'])
     ws.append(["Methods are not alternatives to be averaged. They rest on different "
                "assumptions and the spread between them is the result."])
     ws.append(["The two grey rows aggregate the catch to a group before exponentiating, "
@@ -375,7 +390,9 @@ def sheet_ppr_by_method(wb, order, taxa, years, resolved, methods, tl, totals, g
         vals = [v for v in row if v is not None]
         ratio = max((abs(v) / s for v, s in zip(row, simple)
                      if v is not None and s), default=0.0)
-        if any(v < 0 for v in vals):
+        if (upstream_flags or {}).get(m):
+            status[m] = upstream_flags[m]
+        elif any(v < 0 for v in vals):
             status[m] = ("DIVERGED - negative SPPR reaches this ecosystem's catch; "
                          "the numbers on this row are not a PPR")
         elif not vals:
@@ -464,7 +481,7 @@ def sheet_ppr_by_taxon(wb, order, years, methods, catch_ws, n_meta_cols):
     ws.cell(total_row, 3, f"=SUM(C{first}:C{last})").font = HEAD
     for j in range(len(methods)):
         col = get_column_letter(4 + j)
-        ws.cell(total_row, 4 + j, f"=SUM({col}{first}:{col}{last})").font = HEAD
+        ws.cell(total_row, 4 + j, f'=IF(COUNT({col}{first}:{col}{last})=0,"",SUM({col}{first}:{col}{last}))').font = HEAD
 
     for i, t in enumerate(order):
         r = first + i
@@ -473,9 +490,10 @@ def sheet_ppr_by_taxon(wb, order, years, methods, catch_ws, n_meta_cols):
         ws.cell(r, 3, f"=IFERROR(INDEX(Catch!${cy0}:${cy1},MATCH($A{r},Catch!$A:$A,0),"
                       f"MATCH($B$4,Catch!${cy0}$1:${cy1}$1,0)),0)")
         for j in range(len(methods)):
+            lookup = (f'INDEX(SPPR!${sm0}:${sm1},'
+                      f'MATCH($A{r},SPPR!$A:$A,0),{j + 1})')
             ws.cell(r, 4 + j,
-                    f"=IFERROR($C{r}*INDEX(SPPR!${sm0}:${sm1},"
-                    f"MATCH($A{r},SPPR!$A:$A,0),{j + 1}),\"\")")
+                    f'=IFERROR(IF(ISNUMBER({lookup}),$C{r}*{lookup},""),"")')
 
     widths(ws, [34, 40, 14] + [15] * len(methods))
     ws.freeze_panes = f"D{first}"
@@ -579,9 +597,10 @@ def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
         pm = per_method[headline][i] if headline else None
         ws.append([
             y, round(catch, 3), round(ps, 3), pm,
-            round(100 * ps / npp_median, 4) if npp_median else None,
-            round(100 * pm / npp_median, 4) if (npp_median and pm is not None) else None,
+            round(100 * ps / WET_WEIGHT_TO_CARBON / npp_median, 4) if npp_median else None,
+            round(100 * pm / WET_WEIGHT_TO_CARBON / npp_median, 4) if (npp_median and pm is not None) else None,
         ])
+    ws.append(['PPR/NPP converts wet-weight PP to carbon at 9:1; NPP is the fixed 2019 ensemble median.'])
     if npp_median is None:
         ws.append([])
         ws.append(["PPR/NPP is blank because no NPP estimate exists for this ecosystem."])
@@ -655,6 +674,8 @@ def build_one(unit, book_path, atlas):
     grand = sum(totals.values())
     order = sorted(taxa, key=lambda t: -totals[t])
     resolved = build_taxon_sppr(rows, methods, sppr_by_group, groups_by_name, totals)
+    scoped = read_scopes(book_path)
+    health = read_health(book_path)
 
     notes = mio.mapping_dir(ROOT, unit) / f"{stem}.notes.md"
     notes_head = ""
@@ -664,6 +685,10 @@ def build_one(unit, book_path, atlas):
             if s and not s.startswith("---"):
                 notes_head = s[:200]
                 break
+    selection_path = ROOT / 'data/atlas_selection.json'
+    if selection_path.exists():
+        choice = json.loads(selection_path.read_text(encoding='utf-8')).get('units', {}).get(unit, {})
+        notes_head = (choice.get('note', '') + ' ' + notes_head).strip()
 
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
@@ -671,7 +696,15 @@ def build_one(unit, book_path, atlas):
     sheet_map(wb, order, taxa, resolved, totals, grand)
     sheet_sppr(wb, order, resolved, methods, tl, unit, stem)
     per_method, simple, method_status = sheet_ppr_by_method(
-        wb, order, taxa, years, resolved, methods, tl, totals, grand)
+        wb, order, taxa, years, resolved, methods, tl, totals, grand,
+        upstream_flags=method_health_flags(methods, sppr_by_group, health))
+    for scope in ('inner', 'PP'):
+        scope_methods, scope_groups = scoped[scope]
+        scope_resolved = build_taxon_sppr(rows, scope_methods, scope_groups, groups_by_name, totals)
+        sheet_sppr(wb, order, scope_resolved, scope_methods, tl, unit, stem, scope=scope)
+        sheet_ppr_by_method(wb, order, taxa, years, scope_resolved, scope_methods, tl, totals, grand,
+                            scope=scope, upstream_flags=method_health_flags(scope_methods, scope_groups, health))
+    add_recycling_sheet(wb, [book_path])
     sheet_ppr_by_taxon(wb, order, years, methods, catch_ws, n_meta_cols=4)
     sheet_model_groups(wb, groups, methods, sppr_by_group)
     npp_median = sheet_npp(wb, load_npp_json(unit))

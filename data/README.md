@@ -12,7 +12,7 @@ data/
   INDEX.csv                     coverage matrix — one row per ecosystem, read this first
   model_selection.xlsx          which article and model each ecosystem uses, and why
   <unit_id>/
-    <unit_id>.xlsx              the model-independent workbook (the thing to open first)
+    <unit_id>.xlsx              the ecosystem workbook (the thing to open first)
     metadata.json               identity, geography, coverage, pointers to bulk sources
     npp.json                    net primary production by satellite model, when known
     mapping/                    one CSV per Ecopath model: which group each catch taxon is in
@@ -29,8 +29,9 @@ checks the latter, including the formulas nothing else evaluates.
 
 ## Two kinds of workbook, and why they are separate
 
-**`<unit_id>.xlsx` holds what is true of the ecosystem regardless of any model**: catch, the
-trophic-chain SPPR and PPR, NPP. It exists for all 364 ecosystems with catch.
+**`<unit_id>.xlsx` holds catch, trophic-chain SPPR/PPR, NPP and model-group scope tables.**
+It exists for all 364 ecosystems with catch. Scoped rows name their model explicitly;
+models are never averaged. An ecosystem with no extracted model has a clear missing-data note.
 
 | sheet | what it holds |
 | --- | --- |
@@ -39,6 +40,8 @@ trophic-chain SPPR and PPR, NPP. It exists for all 364 ecosystems with catch.
 | **SPPR** | the simple per-taxon `(1/TE)^(TL-1)` |
 | **PPR** | taxon × year, catch × SPPR |
 | **NPP** | the five satellite estimates plus the ensemble, 2019 |
+| **sppr_all / sppr_inner / sppr_PP** | per-group SPPR, one row per model and exact group name |
+| **Recycling** | `b`, `rho living`, convergence, health status and diagnostic configuration |
 
 **`models/<model_stem>.xlsx` holds one Ecopath model's answer.** One workbook per model, so
 every column inside belongs to that model and none needs a model prefix.
@@ -53,6 +56,9 @@ every column inside belongs to that model and none needs a model prefix.
 | **PPR by taxon** | taxon × method for one year, chosen from a dropdown |
 | **Model groups** | the model's own `groups_df` and per-group SPPR |
 | **NPP** | as above |
+| **sppr_inner / sppr_PP** | mapped taxon SPPR in each source scope |
+| **PPR inner / PPR PP** | annual PPR by method in the matching scope |
+| **Recycling** | upstream diagnostic values and configurations |
 
 An ecosystem with two published models has two of these, and **they are not averageable**.
 They rest on different areas, years and group structures. Keeping them in separate files is
@@ -63,11 +69,11 @@ Inside one workbook the twenty methods are likewise not alternatives to be avera
 spread between them is the result.
 
 `PPR by method` carries a **status** column, because not every method works on every model.
-Three failures show up in the pilot:
+Diagnostic and result checks are kept separate:
 
 | flag | what happened | example |
 | --- | --- | --- |
-| `DIVERGED` | negative SPPR reaches this ecosystem's catch | Sea of Okhotsk under the `TE` solver variants: four groups negative, one at −2.7 × 10¹⁰, giving −71 billion tonnes |
+| `DIVERGED` | negative SPPR anywhere in the source model, including unfished groups | Sea of Okhotsk under the `TE` solver variants: four groups negative, one at −2.7 × 10¹⁰, giving −71 billion tonnes |
 | `IMPLAUSIBLE` | positive but orders of magnitude above the trophic-chain estimate | Bay of Bengal `sym_GE_asDC`: 2.1 × 10¹³ tonnes, 6,700× the simple method and thousands of times that sea's annual primary production |
 | zero / did not resolve | the method returned nothing usable | `SPPR_1986` on three models; the six `sym_*` methods on the Gulf of Thailand |
 
@@ -78,7 +84,7 @@ chooses its headline method from the unflagged ones**, which is why the Sea of O
 with `Ulanowicz_TE` rather than the usual `new_TE_EEfix`. A flag describes the model under
 that method, not the mapping; `model_health` in the SPPR workbook is the upstream record.
 
-The Arabian Sea model is the only one of the six with no flags at all.
+The exact SPPR_new configurations `new_GE`, `new_TE_EEfix` and `new_WithEgestion` also inherit a failed `diagnose_sppr()` verdict. A diagnostic for one configuration is not silently applied to a different solver or Monte Carlo setup.
 
 Two grey rows apply the simple method to the **catch-weighted mean trophic level of each Sea
 Around Us group** rather than to each taxon. SPPR is convex in trophic level, so aggregating
@@ -97,14 +103,15 @@ are honest about it rather than hiding the gaps.
 | archived source articles | 109 |
 | net primary production | 82 |
 | an extracted Ecopath model and SPPR results | 10 |
-| a taxon-to-group mapping | 6 |
-| **a model workbook, i.e. PPR by method** | **5** |
+| a taxon-to-group mapping | 8 |
+| **a model workbook, i.e. PPR by method** | **8** |
 
 Those last three rows are deliberately separate in `INDEX.csv` too, as `ecopath_models`,
 `models_mapped` and `model_workbooks`. An extracted model is not an answer: it needs a
 mapping before any PPR comes out of it, and several extracted models are marked unfit and
-will never get one. Sixteen model workbooks exist upstream; six ecosystems have a mapping;
-five have PPR.
+will never get one. Sixteen model workbooks exist upstream; eight ecosystems have mappings and
+ten downstream model workbooks. A workbook can retain failed methods for audit; its presence
+does not make every value scientifically usable.
 
 The ten are the pilot — the top ecosystems by the 1995 PPR ranking: `HS_077`, `LME_013`,
 `LME_027`, `LME_028`, `LME_032`, `LME_034`, `LME_035`, `LME_036`, `LME_047`, `LME_052`.
@@ -137,7 +144,7 @@ that stops being true.
 
 ## The mapping, and how coverage is measured
 
-`mapping/<model_stem>.csv` is produced by `skills/ewe-species-to-group-mapper` and holds one
+`mapping/<model_stem>.csv` is produced by `skills/claude/ewe-species-to-group-mapper` and holds one
 row per catch taxon: the Ecopath group, the confidence, the evidence code and the reasoning.
 `<model_stem>.resolved.csv` alongside it records the weights the builder actually used, so
 an apportioned taxon can be audited.
@@ -162,11 +169,29 @@ own `groups_df`, since a mismatch there would produce confident fiction.
 
 - **Ecopath PPR for most ecosystems.** Needs a usable model and a mapping per ecosystem.
   `model_selection.xlsx` is the ceiling on how far this can go without more extractions.
-- **Group membership from the papers.** `taxon_descr` is empty for every extracted model,
-  and the `taxons_included` field in the Ecobase dump is empty for all 5,553 groups in it.
-  Every mapping so far therefore rests on taxonomic containment and habitat inference rather
-  than a documented member list. `skills/ecopath-paper-to-ppr` adds the stage that captures
-  it while the paper is open, which is the durable fix.
+- **Complete source verification everywhere.** Seven pilot models now have reviewed
+  taxonomy/member/profile records. Source-only evidence remains incomplete for some groups;
+  inference and unresolved catch remain labelled, with geographic/period mismatches recorded.
 - **NPP for EEZs.** The NPP dataset covers LME and High Seas only.
 - **NPP over time.** A single 2019 value, so `ppr_over_npp_percent` uses a constant
   denominator across all years. Treat the trend in that column as driven by PPR alone.
+
+## Scope, comparison and map rules
+
+`all` includes all basal sources and imports; `inner` excludes imports; `PP` retains
+primary producers only. Older scalar methods without a PP decomposition remain blank
+in that scope. The simple trophic chain is an unpartitioned reference, not a PP-only
+component. Raw PPR stays in wet-weight PP equivalents. PPR/NPP divides by **9** to compare
+with carbon NPP, whose 2019 denominator stays fixed across catch years.
+
+`atlas_selection.json` explicitly gates the ten selected-article pilot ecosystems and
+selected source overlays. `tools/build_network_atlas.py` verifies model workbooks before
+exporting their rounded catches/SPPR to the atlas. Method ratios use the same available
+catch taxa for numerator and denominator, with coverage displayed and zero denominators
+unavailable. Finite recycling diagnostics are visible even when their status is FAIL.
+
+Thailand's filename `35_412_Gulf_of_Thailande_(1963)` is retained for stable joins, but
+its payload matches the published **1980** model. Guinea covers 111,932 km² off the country
+Guinea, not the whole Guinea Current LME. Okhotsk `NE` means new detailed Ecopath model,
+not northeastern. Read each model's source-check/profile before treating a regional
+catch application as the original study's spatial or historical footprint.

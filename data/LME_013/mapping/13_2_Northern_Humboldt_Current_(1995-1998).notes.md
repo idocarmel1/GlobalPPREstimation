@@ -1,0 +1,26 @@
+# Northern Humboldt Current, 1995-1998: source audit
+
+This is a **165,000 km2 northern Peruvian coastal model (4-16 S, to 111 km offshore)** applied to the entire Humboldt LME catch. Geographic transfer is a substantial limitation. Southern hake, hoki and other unrepresented southern stocks are not silently treated as Peruvian hake.
+
+Selection authority is `data/model_selection.xlsx`: Chiaverano (2018) is marked usable and Neira (2026) is not. Only the selected existing `13_2` model is mapped; the separate aggregated `13_3` extraction is outside this pass. No new mapping was retained for Chilean Patagonia.
+
+**Numerical health remains failed.** The supplied SPPR workbook reports FAIL for GE, TE and With Egestion: GE/egestion report divergence failure, while TE also fails balance. These are not repaired or overruled by selection or a mapping validator pass. The extraction report records source inconsistencies including gelatinous-zooplankton imbalance, Chrysaora diet sum and sardine catch. Taxonomy was added without modifying parameters or Jensen calculations. Failed SPPR must not silently contribute to valid PPR coverage.
+
+Sources actually inspected:
+
+- [Chiaverano et al. (2018), Progress in Oceanography 164:28-36](https://doi.org/10.1016/j.pocean.2018.04.009): all relevant local article text, especially pp.29-30, explicitly adopts Tam (2008), establishes 1995-1998 inputs and identifies the added Chrysaora/turtle groups.
+- Supplied `Supplementary material revised and final.xls`, via its existing `extracted/work/supplement.xlsx`: 12 sheets inventoried; full Tables A and E inspected. Table E establishes feeding guilds, not species membership. Supplied DOCX content was checked. No missing additional supplement was claimed.
+- [Tam et al. (2008), Progress in Oceanography 79:352-365](https://epic.awi.de/id/eprint/22464/1/Tam2008a.pdf): downloaded from the author institutional repository, retained in `source-review/Tam2008a.pdf`. Section 2.1, pp.353-354, provides species examples and hake sizes; PDF p.2 was visually checked. This is an explicitly adopted predecessor, not an unrelated regional analogue.
+- Name checks: [WoRMS Peruvian hake taxonomy](https://marinespecies.org/Perms/aphia.php?p=taxlist&pid=154235&rComp=%3E%3D&tRank=220), [IMARPE hake catalogue](https://biodiversidadacuatica.imarpe.gob.pe/Catalogo/Especie?id=180), [WoRMS Loligo nomenclature](https://www.marinespecies.org/aphia.php?p=taxlist&tName=Loligo), and [Eschmeyer's Labrisomus record](https://researcharchive.calacademy.org/research/ichthyology/catalog/fishcatget.asp?spid=17897).
+
+The archive README's missing-file claims are stale: article, XLS and DOCX were present. There is no complete species inventory for every residual pool. The member CSV transcribes actual source examples, not inferred catch assignments; printed spellings are retained with limited matching aliases.
+
+The model combines stocks, taxonomic pools, feeding guilds and three hake sizes. Odontesthes regia/Labrisomus philippii stay in Small demersal fish, Mugil cephalus in Medium demersal fish and Prionotus stephanophrys in Sea robin regardless of SAU class. These are source decisions. Peruvian hake spans Small/Medium/Large hake with fixed model total-catch weights, including discards. Tam's printed size intervals <29, 30-49 and >50 cm are retained as written.
+
+Clupeidae, Clupeiformes, Scombridae/Scombroidei and Teuthida use explicit constant proportions recomputed from the LME's identified catch within the same family/order. Other aggregates use catch composition or the explicit model_catch override. Macrobenthos receives benthic invertebrates with medium confidence: their exact species membership is not documented. Unlisted guild analogues are low confidence. Snake/cusk-eels are not automatically called Conger; oceanic billfish, unsupported deep-pelagic taxa and southern stocks remain Unresolved.
+
+**98.1854% of 677,999,683 tonnes is mapped.** All 218 rows have decisions: high 25, medium 115, low 30, unresolved 48. Unresolved catch is 12,302,901 tonnes. Eighteen composites carry about 4.5% of catch. The member checker confirms 21 taxa carrying 91.3% of catch with zero contradictions; that includes inherited source evidence and is not numerical validation. Exact amounts and reasons are in `*.review.json`.
+
+The taxonomy CSV covers all 39 source JSON groups, with exact sequence/name checks. Derived diet_import is described only in the group dictionary. The scoped JSON and SPPR workbook were refreshed through repository wrappers. Final PPR building, method-health filtering and result verification belong to integration.
+
+Final regeneration verification compared all three SPPR sheets (all, inner and primary-producer contributions) against the committed workbook: every deterministic column and its availability are identical. Exact source group names, all taxonomy descriptions and JSON numerical fields were checked; JSON changes are limited to taxon_descr. Monte Carlo outputs vary between runs; the sibling regeneration-comparison.json records their differences. The regenerated MC_new_GE now contains values where the committed workbook was blank (40 groups in each of three sheets); all GE/TE/With Egestion configuration health remains FAIL, so this does not establish valid PPR.

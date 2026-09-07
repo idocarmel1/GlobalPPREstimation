@@ -92,7 +92,7 @@ test('zero-share rows retain cumulative fraction within a nonzero spatial type',
   }
 });
 
-test('regional formulas distinguish unmatched groups from matched zero catch', () => {
+test('regional formulas follow the five-column weighted-TL schema and preserve missingness', () => {
   assert.equal(typeof eez.regionalGroupFormulas,'function');
   const wb = Workbook.create();
   const species = wb.worksheets.add('Species');
@@ -100,13 +100,16 @@ test('regional formulas distinguish unmatched groups from matched zero catch', (
   const group = wb.worksheets.add('Commercial');
   metadata.getRange('B5').values = [[.1]];
   species.getRange('H2').values = [['Test']];
-  group.getRange('A2:E2').values = [['Test',1,0,5,0]];
+  group.getRange('A2:E2').values = [['Test',10,3,0,0]];
   for (const [col,formula] of Object.entries(eez.regionalGroupFormulas(2,'H'))) group.getRange(`${col}2`).formulas = [[formula]];
-  assert.equal(group.getRange('I2').values[0][0],'');
-  assert.equal(group.getRange('M2').values[0][0],'');
-  group.getRange('C2:E2').values = [[1,0,0]];
-  species.getRange('U2').values = [[0]];
-  assert.equal(group.getRange('I2').values[0][0],0);
-  assert.equal(group.getRange('H2').values[0][0],'');
-  assert.equal(group.getRange('M2').values[0][0],'');
+  assert.equal(group.getRange('D2').values[0][0],100);
+  assert.equal(group.getRange('E2').values[0][0],1000);
+  metadata.getRange('B5').values = [[.5]];
+  assert.equal(group.getRange('D2').values[0][0],4);
+  assert.equal(group.getRange('E2').values[0][0],40);
+  // At zero matched catch the authoritative CSV has no weighted TL or PPR.
+  group.getRange('B2:C2').values = [[0,null]];
+  assert.ok(['',null].includes(group.getRange('D2').values[0][0]));
+  assert.ok(['',null].includes(group.getRange('E2').values[0][0]));
+  assert.deepEqual(Object.keys(eez.regionalGroupFormulas(2,'H')),['D','E']);
 });

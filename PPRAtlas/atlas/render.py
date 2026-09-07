@@ -18,6 +18,10 @@ applyYear(DB.year);
 '''
 
 def render_map(root, db):
+    network_path = root/'data/network_ppr.json'
+    network = json.loads(network_path.read_text(encoding='utf-8')) if network_path.exists() else None
+    if network:
+        db = dict(db, network=network)
     template=(root/'inputs/original_map.html').read_text(encoding='utf-8')
     prefix,remaining=template.split('const DB=',1)
     _,end=json.JSONDecoder().raw_decode(remaining)
@@ -66,4 +70,20 @@ def render_map(root, db):
     text=text.replace('zoomControl:true,minZoom:2}).setView([12,10],2)','zoomControl:true,minZoom:1}).setView([12,10],1)')
     text=text.replace("toFixed(v<.01?1:0)","toFixed(2)")
     text=text.replace('<div class="section-title">PPR-ranked units</div>','<p style="font-size:11px"><a href="archive/index.html" target="_blank">Browse article archive</a> · <a href="data/eez_searches.csv">EEZ searches</a> · <a href="data/lme_searches.csv">LME searches</a></p><div class="section-title">PPR-ranked units</div>')
-    return text
+    if network:
+        assets = root/'atlas'
+        script = (assets/'network_metrics.js').read_text(encoding='utf-8') + '\n' + (assets/'network_view.js').read_text(encoding='utf-8')
+        text = text.replace(YEAR_SCRIPT, script)
+        text = text.replace(marker, (assets/'network_controls.html').read_text(encoding='utf-8') + marker)
+        text = text.replace('<p style="font-size:10px;color:#647b8b">Whole-region PPR sum at TE=0.1. Residual overlap is retained; shares are not unique global coverage. Gray markers indicate missing data.</p>', '')
+        text = re.sub(r'<div class="section-title">Cumulative selected PPR — ranked circles</div><div class="legend-card">.*?</div></div>', '', text)
+        text = text.replace('Color region polygons by PPR', 'Color polygons by selected metric')
+        text = text.replace('Original polygons + PPR-rank markers', 'Ecosystem boundaries + current ranks')
+        text = text.replace('Recommended article areas', 'Selected pilot article areas')
+        text = text.replace('PPR-ranked units</div>', 'Ecosystems in this view</div>')
+        text = text.replace('Global ecosystem-model coverage', 'PPR estimation and recycling')
+        text = text.replace('<title>Global Ecopath Coverage · 167 Selected Ecosystems</title>', '<title>PPR estimation atlas · pilot integration</title>')
+        text = text.replace('Recommended model sources</div>', 'Selected sources and archived alternatives</div>')
+        text = text.replace('No model was load-tested in this project.', 'Pilot models were loaded and evaluated; numerical validity depends on method and configuration. See the selected result and linked diagnostics.')
+        text = text.replace('</style>', '.network-note{font-size:11px;line-height:1.5;color:var(--muted)}.network-result{padding:14px 0;border-bottom:1px solid var(--line)}.network-value{font:700 25px Manrope;margin-top:14px}.network-status{font-size:11px;overflow-wrap:anywhere}.network-result select{max-width:100%}#metricLegendTitle{display:block;font-size:11px;margin-bottom:8px}#metricGradient{height:10px}#networkLegend .legend-labels{gap:8px}.field{margin-bottom:9px}[hidden]{display:none!important}</style>')
+    return re.sub(r'(?m)^[ \t]+$', '', text)

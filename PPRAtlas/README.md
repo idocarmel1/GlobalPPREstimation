@@ -4,13 +4,25 @@ Open **index.html** for the interactive map, or **archive/index.html** for the s
 
 ## Using the map
 
-- Choose a PPR year from 1950–2019. The ecosystem set stays fixed; ranks, shares, cumulative colors and totals update.
-- Filter by ecosystem type, global selected-set rank, article quality, or local verified file availability.
-- Select a region to inspect its studies. File buttons open the actual archived source materials.
-- Red markers represent earlier, high-PPR ranks; green markers represent later cumulative shares. Gray markers indicate missing PPR, not zero catch.
-- The polygon-color switch and article-footprint switch operate independently. Approximate study envelopes are dashed. A missing study boundary is stated explicitly and is not replaced by an invented polygon.
+- Choose annual PPR, a ratio between methods, recycling `b`, or `rho living`.
+- Switch between all sources, inner sources (no imports), and primary producers only.
+- Select numerator/denominator methods for ratios. Both use identical available catch taxa;
+  the details panel reports catch coverage. Missing values and zero denominators stay unavailable.
+- Choose GE or TE for recycling. Values come from the upstream `diagnose_sppr()` output,
+  with status and configuration. Both spectral radii must be below 1 for convergence;
+  these conditions are necessary, not sufficient.
+- Click an ecosystem to choose its model and open the actual SPPR/PPR workbooks. Models
+  are kept separate. The year selector spans1950–2019; recycling is fixed for each model.
+- Only the ten ecosystems in `../data/atlas_selection.json` may be colored. Candidate
+  articles do not authorize new estimation coverage. Unselected and unavailable ecosystems
+  stay gray. The isolated Saygu2025 validation does not color the North Sea.
+- The article-area switch shows explicitly selected catalog sources only. Archived
+  alternatives remain readable in the details panel. Approximate envelopes are dashed.
 
-PPR uses the source calculation at TE=0.1. The 2019 selected-set sum is approximately 74.341 billion tonnes PP equivalent. It retains the workbook's whole-region overlap and missing-data limitations; it is not a verified spatially deduplicated global total. The map's article evidence does not establish PPR coverage.
+PPR uses mapped catch × scoped SPPR. Failed configurations and negative source-group SPPR
+are excluded from map estimates; finite diagnostic values remain inspectable with FAIL
+labels. Coefficients stay fixed across catch years. Geographic transfers and historical
+identity conflicts are stated in the details; no spatially deduplicated global total is claimed.
 
 ## Evidence and files
 
@@ -26,7 +38,7 @@ One original East China Sea PDF was damaged. Its original bytes are retained and
 
 ## Quality interpretation
 
-The inherited rubric is preserved: 55 points for model loadability, 20 for documentation, 15 for spatial fit, and 10 for recency/validation. New scores are provisional screening assessments. No model was load-tested in this project.
+The inherited rubric is preserved: 55 points for model loadability, 20 for documentation, 15 for spatial fit, and 10 for recency/validation. New scores are provisional screening assessments. Pilot models have now been loaded and evaluated through the integration tools. The inherited catalog scores remain screening scores; numerical configuration health is reported separately.
 
 - No verified file: total score capped at 25.
 - Readable main source, unaudited model completeness: loadability 20, documentation 10, total capped at 58.
@@ -35,6 +47,18 @@ The inherited rubric is preserved: 55 points for model loadability, 20 for docum
 - New spatial-fit values: whole EEZ 15, subregional 7, basin proxy 3. Recency is 7 for 2015 onward and 3 otherwise; this component does not assert independent model validation.
 
 Original quality fields remain in the input snapshot. Geographic and bibliographic corrections are recorded explicitly, including Darwin/Wolf Islands, Kerguelen EEZ versus High Seas, the Pacific warm-pool study extent, and the Northwest Africa compilation. Confidential or unavailable model inputs remain stated as limitations.
+
+## Refreshing network results
+
+From the repository root, after building and verifying model workbooks:
+
+```powershell
+python -X utf8 tools/build_network_atlas.py
+```
+
+This reads the existing catalog, writes `data/network_ppr.json` and renders `index.html`
+without refetching articles or changing the selected ecosystem set. A full atlas rebuild
+also includes this network file when present; refresh it after model/mapping changes.
 
 ## Rebuilding
 

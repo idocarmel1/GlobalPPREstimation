@@ -19,18 +19,25 @@ the archive.
 
     1. sweep          find published Ecopath models for each ecosystem
     2. archive        store the article, supplements and provenance   -> PPRAtlas/archive/regions/<unit_id>/
-    3. extract        pull model parameters out of the paper          -> skills/ecopath-extraction/
-    4. taxonomy       record which taxa are in each model group       -> skills/ecopath-paper-to-ppr/
+    3. extract        pull model parameters out of the paper          -> skills/claude/ecopath-extraction/
+    4. taxonomy       record which taxa are in each model group       -> skills/claude/ecopath-paper-to-ppr/
     5. estimate       compute SPPR per group by several methods       -> PPREstimation/
-    6. map taxa       assign every catch taxon to a model group       -> skills/ewe-species-to-group-mapper/
+    6. map taxa       assign every catch taxon to a model group       -> skills/claude/ewe-species-to-group-mapper/
     7. integrate      join SPPR with catch and NPP data               -> data/
     8. publish        render the result on one interactive map        -> PPRAtlas/index.html
 
-Steps 3, 4 and 6 all read the same paper, which is why `skills/ecopath-paper-to-ppr/`
+Steps 3, 4 and 6 all read the same paper, which is why `skills/claude/ecopath-paper-to-ppr/`
 combines them into one pass. It is assembled from the other two by
 `skills/build_combined_skill.py` rather than forked, so a fix lands in one place.
 
 Ecosystems are keyed by `unit_id` throughout: `LME_003`, `EEZ_711`, `HS_018`.
+
+The same three agent skills are available in [`skills/claude/`](skills/claude/) and
+[`skills/codex/`](skills/codex/), with agent-specific entry points and shared domain
+resources. See [`skills/README.md`](skills/README.md) for usage and rebuilding.
+Current results, verification and remaining scientific limits are in
+[`docs/INTEGRATION_COMPLETION.md`](docs/INTEGRATION_COMPLETION.md). The initial
+[`takeover review`](docs/CODEX_TAKEOVER.md) and original handoff retain the history.
 
 ## Sub-projects
 
@@ -110,65 +117,44 @@ processed table covers a single analysis year.
   asserts 19). Both pre-date this integration. See
   [`PPREstimation/README.md` — "Known test failures"](PPREstimation/README.md) for
   detail; it is not duplicated here.
-- **The Excel workbook builders cannot currently be run by anyone.** `tools/build_workbooks.mjs`
-  and `tools/eez_workbook.mjs` import `@oai/artifact-tool`, a package that is **not on the
-  public npm registry** (404) and is not vendored here — there is no `package.json` anywhere
-  in the repository. Node itself is installed and the other `.mjs` tooling works, so this is
-  a missing dependency, not a missing runtime. The affected files are
-  `tools/build_workbooks.mjs`, `tools/eez_workbook.mjs`, `tools/verify_workbooks.mjs` and
-  `tests/test_eez_workbook.mjs`.
-
-  **Consequence, and it is the most important caveat in this repository: all 368 committed
-  `.xlsx` workbooks are stale and now contradict the CSVs beside them.** They were generated
-  before the group-aggregation change and cannot be regenerated. Specifically,
-  `global_output/PPR_global_summary.xlsx` and `eez_output/PPR_eez_summary.xlsx` each still
-  contain a full `Jensen Comparison` sheet with the removed `sppr_correct` / `ppr_correct` /
-  `jensen_difference` columns, Summary sheets carrying `ppr_commercial_correct` and
-  `ppr_functional_correct`, and Validation sheets asserting `commercial_ppr_reconciled = True`
-  and `jensen_violations = 0` — checks that no longer exist. For LME_036 the workbook reports
-  `commercial_ppr_difference` as effectively zero where `global_output/tables/validation.csv`
-  reports `-2,949,750,964`.
-
-  **Treat the CSVs under `tables/` as authoritative and the workbooks as historical.** The CSVs
-  were migrated and independently re-verified; the workbooks were not, because nothing here can
-  write them.
-
-  Also: `validate_eez_release.py` passes only with `--skip-workbooks`, and neither
-  `tests/test_eez_workbook.mjs` nor `tools/verify_workbooks.mjs` can execute — four `.mjs` files
-  depend on the missing package, not three.
-
-  What *is* verified: all eight `.mjs` files pass `node --check`, and
-  `tests/test_scope_args.mjs` and `tests/test_workbook_metadata.mjs` both run and pass (2/2
-  each). The column-letter corrections inside `eez_workbook.mjs` — made when the group schema
-  shrank from 15 columns to 5 and the summary from 17 to 15 — are verified by analysis against
-  the real schemas, but **not by execution**. Anyone who can supply `@oai/artifact-tool`, or
-  port those two files onto a public spreadsheet library, closes this.
+- The upstream Excel builders require Codex's bundled `@oai/artifact-tool` runtime,
+  which is not a public npm package. It is available in this environment. All **368**
+  upstream workbooks have been regenerated and independently checked against the current
+  CSVs and group arithmetic: **85 global + 283 EEZ**, with no formula errors.
+  `tools/run_workbook_exports.ps1 -Scope global` (or `eez`) resolves that runtime
+  without installing repository-local packages. Revalidation uses
+  `SeaAroundUsExtraction/tools/verify_global_workbooks.py` and
+  `SeaAroundUsExtraction/tools/validate_eez_release.py`.
+- Published source coverage and numerical validity remain separate. In particular,
+  Thailand's Ecobase 412 payload matches **1980**, despite its inherited `1963` filename;
+  the Guinea model is a geographic transfer; several Humboldt configurations fail.
+  See the per-model source checks and mapping notes before scientific use.
 
 ## `data/` — the integration layer
 
 `data/<unit_id>/` holds one directory per ecosystem, joining catch, geography, articles,
-the selected Ecopath model, SPPR results and NPP on `unit_id`. Each has a five-sheet
-workbook — Summary, Catch, SPPR, PPR, NPP — built by `tools/build_ecosystem_data.py`.
+the selected Ecopath model, SPPR results and NPP on `unit_id`. Each has a
+workbook with catch, simple PPR, NPP, the three model SPPR scopes and recycling diagnostics,
+built by `tools/build_ecosystem_data.py`. Model identities remain explicit on every scoped row.
 Start at `data/INDEX.csv`, which is the coverage matrix. See `data/README.md`.
 
-Bulk inputs are referenced rather than copied, so the whole spine is 45 MB.
+Bulk inputs are referenced rather than copied.
 
 The workbook computes PPR independently and its 2019 total reproduces the pipeline's
 `ppr_species` exactly, then extends across all seventy years.
 
 ## Not yet built
 
-- **Group membership from the papers.** `taxon_descr` is empty for every extracted model,
-  and the `taxons_included` field in the Ecobase dump is empty for all 5,553 groups it
-  contains. Every mapping so far therefore rests on taxonomic containment and habitat
-  inference rather than a documented member list. `skills/ecopath-paper-to-ppr/` adds the
-  stage that captures it while the paper is already open; the models extracted before it
-  existed still lack it.
+- **Further source verification.** Seven pilot models now have reviewed taxonomy,
+  member evidence and model profiles; the older mappings retain documented evidence
+  limits. The combined skill preserves source membership during extraction.
 - **Ecopath PPR beyond the pilot.** The chain is built and runs, but only for ecosystems
   with a usable model and a mapping. `data/model_selection.xlsx` records the ceiling.
 - **Sweeping new articles** into `PPRAtlas/archive/regions/` and extracting models from
   them, which is what would lift coverage above the current ten ecosystems.
-- **Rendering the network results on the map.** `PPRAtlas/index.html` still shows the
-  simple trophic-chain PPR only.
+The atlas now shows verified network results, source-scope switching, method ratios on
+common catch, and GE/TE recycling diagnostics. Coloring is explicitly limited to the ten
+selected-article pilot ecosystems. The new-paper validation remains isolated; see
+[`docs/NEW_PAPER_VALIDATION.md`](docs/NEW_PAPER_VALIDATION.md).
 
 Designed in `docs/superpowers/specs/`.

@@ -35,6 +35,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import openpyxl
+from ppr_scopes import add_group_scope_sheets
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
@@ -279,6 +280,7 @@ def sheet_summary(wb, unit, meta, rows, years, tl, npp, models):
         ("catch years", f"{years[0]}-{years[-1]}" if years else "none"),
         ("taxa in catch", len(rows)),
         ("taxa with a trophic level", sum(1 for r in rows if r["taxon"] in tl)),
+        ("model source context", meta.get('model_context', {}).get('note', 'No pilot model selected')),
     ]:
         ws.append([k, v])
     ws.append([])
@@ -294,8 +296,9 @@ def sheet_summary(wb, unit, meta, rows, years, tl, npp, models):
             for r in rows
             if r["taxon"] in tl
         )
-        ratio = round(100.0 * ppr / npp_median, 4) if npp_median else None
+        ratio = round(100.0 * ppr / 9.0 / npp_median, 4) if npp_median else None
         ws.append([y, round(catch, 3), round(ppr, 3), ratio])
+    ws.append(['PPR/NPP converts wet-weight PP to carbon at 9:1; NPP is the fixed 2019 ensemble median.'])
     if npp_median is None:
         ws.append([])
         ws.append(["PPR/NPP is blank because no NPP estimate exists for this ecosystem."])
@@ -330,7 +333,7 @@ def build_unit(unit, atlas, npp_all, force=False):
     # models are marked unfit and will never get one. Counting both keeps the gap visible
     # rather than letting "10 ecosystems have models" stand in for "10 have results".
     mapped = sorted(q.stem for q in (d / "mapping").glob("*.csv")
-                    if not q.name.endswith((".groups.csv", ".members.csv", ".resolved.csv"))
+                    if not q.name.endswith((".groups.csv", ".members.csv", ".resolved.csv", ".taxonomy.csv"))
                     ) if (d / "mapping").is_dir() else []
     built = sorted(q.stem for q in (d / "models").glob("*.xlsx")
                    if not q.name.startswith("~$")) if (d / "models").is_dir() else []
@@ -367,6 +370,9 @@ def build_unit(unit, atlas, npp_all, force=False):
         },
         "note": "Bulk inputs are referenced, not copied. Paths are relative to this file.",
     }
+    selection_path = ROOT / 'data/atlas_selection.json'
+    if selection_path.exists():
+        meta['model_context'] = json.loads(selection_path.read_text(encoding='utf-8')).get('units', {}).get(unit, {})
     (d / "metadata.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
     if npp:
         (d / "npp.json").write_text(json.dumps(npp, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -378,6 +384,8 @@ def build_unit(unit, atlas, npp_all, force=False):
     wb.remove(wb.active)
     sheet_catch(wb, rows, years)
     sheet_sppr(wb, unit, models, tl)
+    add_group_scope_sheets(wb, [p for p in sorted(SPPR_DIR.glob('*.xlsx'))
+                               if unit_from_model_filename(p.name) == unit])
     sheet_ppr(wb, rows, years, tl)
     sheet_npp(wb, npp)
     sheet_summary(wb, unit, meta, rows, years, tl, npp, models)
@@ -428,7 +436,16 @@ def main() -> int:
         if i % 25 == 0 or i == len(units):
             print(f"  [{i}/{len(units)}] {unit}")
 
-    with (OUT / "INDEX.csv").open("w", newline="", encoding="utf-8-sig") as fh:
+    index_path = OUT / 'INDEX.csv'
+    if (args.units or args.limit) and index_path.exists():
+        with index_path.open(encoding='utf-8-sig', newline='') as fh:
+            previous = {r['unit_id']: r for r in csv.DictReader(fh)}
+        previous.update({r['unit_id']: r for r in index})
+        index = [previous[u] for u in sorted(previous)]
+        for r in index:
+            for key in ('taxa', 'taxa_with_tl', 'articles', 'ecopath_models', 'models_mapped', 'model_workbooks', 'has_npp'):
+                r[key] = int(r[key])
+    with index_path.open("w", newline="", encoding="utf-8-sig") as fh:
         w = csv.DictWriter(fh, fieldnames=list(index[0].keys()))
         w.writeheader()
         w.writerows(index)

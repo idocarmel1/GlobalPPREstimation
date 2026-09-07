@@ -1,0 +1,53 @@
+========================================================================================
+SPPR EXPORT RUN REPORT
+========================================================================================
+generated      : 2026-09-07T12:19:45
+models found   : 1
+workbooks ok   : 1
+models skipped : 0 (resume: workbook already present)
+models failed  : 0
+methods run    : 20 -> SPPR_1986, SPPR_1995_TE0.1, SPPR_1995_TEmean, Ulanowicz_globalTEmean, Ulanowicz_TE, EwE_TE_noEE, EwE_TE_EE, SPPR_2015, new_TE_noEEfix, new_TE_EEfix, new_GE, new_WithEgestion, sym_TE_asPP, sym_TE_asDC, sym_GE_asPP, sym_GE_asDC, sym_WithEgestion_asPP, sym_WithEgestion_asDC, MC_new_GE, MC_new_TE_EEfix
+MC draws       : 100
+time budget    : 600s per method
+
+READ THIS BEFORE USING THE NUMBERS
+----------------------------------------------------------------------------------------
+* NaN convention: NaN means not available, never zero. A basal source a method does not resolve is NaN, and a method that raised leaves its entire block NaN.
+* The three SPPR sheets: sppr_all, sppr_inner and sppr_PP are the same table under three source scopes, mirroring get_PPR: sppr_all sums every basal source, sppr_inner drops Import, and sppr_PP drops Import and Detritus. Each is a flat groups x methods table -- rows are group seq with the group name in the first column, one column per method, no MultiIndex. Sums are taken over each method's own basal-source columns before aggregation; the per-source breakdown itself is not written to the workbook.
+* Un-attributed methods are blank in sppr_PP: SPPR_1986 and SPPR_1995 return one un-attributed SPPR column, so their value cannot be split into a PP-only part: they are NaN in sppr_PP (and in ppr_pp_only) while sppr_inner and sppr_all carry the total. A method that resolves no Detritus source (SPPR_2015) has sppr_inner equal to sppr_PP by construction.
+* SPPR_2015 takes no arguments: SPPR_2015() has no only_pp_det parameter (only_pp belongs to get_PPR / get_PPR2NPP_ratio). It is called bare here and PP-only filtering is applied downstream at the get_PPR layer, which is what the ppr_pp_only column and SUM_PP already do.
+* det_theta is inert here: Under det_open_mode='none' det_theta does not affect the recycling gain b at all (verified: identical b at theta = 1, 3 and 10). Do not read the health sheet as a theta sensitivity.
+* Monte-Carlo rejections: MC runs use exclude_diverged=True, so draws graded FAIL on divergence are dropped as well as draws with a negative SPPR. The two are often the same draws rather than additive -- see the mc_diagnostics sheet for the split by cause.
+* Solver progress output is suppressed: SPPR_EwE and the Monte-Carlo methods are called with silent=True rather than silent=False: PPRCalculator imports tqdm.notebook, whose bar needs ipywidgets and raises ImportError('IProgress not found') outside Jupyter, which makes those methods fail outright in a terminal run. Nothing is lost -- this exporter has its own progress bar, and the MC rejection counts appear in mc_diagnostics and in the run report.
+* model_health is per configuration: diagnose_sppr grades a CONFIGURATION, not a model: a model can be healthy under one TE_option and divergent under another. Read each row with its config_ columns.
+* Per-method timeout: Every SPPR method, and every diagnose_sppr row, runs in a worker process with a wall-clock budget (180 s by default; --timeout SECONDS on the command line, method_timeout= from Python, and None or 0 to disable it). A method still running when the budget expires is killed and left NaN, exactly like a method that raised -- the status column of this sheet and the run report are the only places that say which of the two happened. A timeout is a statement about this machine and this model, not about the method: rerun it with a larger budget before reading anything into it.
+
+========================================================================================
+PER-MODEL DETAIL
+========================================================================================
+
+MODEL: 28_646_Guinea_(1998).json
+  name           : Guinea (1998)
+  workbook       : C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\PPREstimation\output\top10\28_646_Guinea_(1998).xlsx
+  health         : GE=OK, TE=WARN, With Egestion=OK
+  methods ok     : 20/20
+  monte-carlo    : MC_new_GE: 100/100 accepted (0 negative, 0 diverged); MC_new_TE_EEfix: 100/100 accepted (0 negative, 0 diverged)
+  NEGATIVE SPPR VALUES:
+    - sym_TE_asDC: 43 negative SPPR cell(s), min -1.22839e+06
+    - sym_WithEgestion_asDC: 73 negative SPPR cell(s), min -1.89653e+06
+  SPPR BALANCE PROBLEMS (inflow != outflow):
+    - SPPR_1986: inflow 4116.02 != outflow 273694
+    - SPPR_1995_TE0.1: inflow 4116.02 != outflow 1982.84
+    - SPPR_1995_TEmean: inflow 4116.02 != outflow 1850.48
+    - Ulanowicz_globalTEmean: inflow 4116.02 != outflow 2475.27
+    - Ulanowicz_TE: inflow 4116.02 != outflow 3332.05
+    - EwE_TE_noEE: inflow 4116.02 != outflow 1751.39
+    - EwE_TE_EE: inflow 4116.02 != outflow 3113.18
+    - sym_TE_asDC: inflow 4116.02 != outflow -9656.31
+    - sym_GE_asDC: inflow 4116.02 != outflow 4117.76
+    - sym_WithEgestion_asDC: inflow 4116.02 != outflow -120416
+    - MC_new_GE: inflow 4116.02 != outflow 4408.37
+    - MC_new_TE_EEfix: inflow 4116.02 != outflow 4445.87
+  diagnose_sppr WARNINGS:
+    - [TE] TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)
+    - [TE] rho(A_LL)=0.7176 is within 0.3 of divergence (max SPPR 6.31e+05 at group 5 (Sélaciens L prof), TL 4.47)

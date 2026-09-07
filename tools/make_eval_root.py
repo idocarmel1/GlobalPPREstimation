@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "skills" / "ewe-species-to-group-mapper" / "scripts"))
+sys.path.insert(0, str(ROOT / "skills" / "claude" / "ewe-species-to-group-mapper" / "scripts"))
 import mapping_io as mio  # noqa: E402
 
 
@@ -63,8 +63,10 @@ def main() -> int:
     take("PPRAtlas/data/regions.csv", optional=True)
     take("data/INDEX.csv")
     take("data/model_selection.xlsx")
-    take("skills/ewe-species-to-group-mapper")
-    take("skills/ecopath-paper-to-ppr")
+    take("skills/claude/ewe-species-to-group-mapper")
+    take("skills/claude/ecopath-paper-to-ppr")
+    take("skills/codex/ewe-species-to-group-mapper")
+    take("skills/codex/ecopath-paper-to-ppr")
 
     if missing:
         raise SystemExit("cannot build an eval root, these are required:\n  "

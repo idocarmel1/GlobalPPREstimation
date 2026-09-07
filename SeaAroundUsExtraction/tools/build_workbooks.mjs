@@ -215,7 +215,7 @@ async function buildSummaryWorkbook(metadata) {
     // this workbook.
     summary.getRange("N2").formulas = [[`=K2/SUM($K$2:$K$${dims.rows})`]];
     summary.getRange(`N2:N${dims.rows}`).fillDown();
-    summary.getRange("O2").formulas = [[`=RANK(K2,$K$2:$K$${dims.rows},0)`]];
+    summary.getRange("O2").formulas = [[`=RANK(K2,$K$2:$K$${dims.rows},0)+COUNTIF($K$2:K2,K2)-1`]];
     summary.getRange(`O2:O${dims.rows}`).fillDown();
     summary.getRange(`H2:H${dims.rows}`).conditionalFormats.add("cellIs", {
       operator: "lessThan",
