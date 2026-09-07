@@ -30,9 +30,10 @@ const PPRMetrics = (() => {
     });
     if (!present) return empty('No catch with available method values');
     if (ratio && denominator === 0) return empty('Zero denominator on common catch');
-    const value = ratio ? numerator / denominator : numerator;
+    // Sources and SPPR stay in wet weight; every returned PPR mass is carbon.
+    const value = ratio ? numerator / denominator : numerator / 9;
     return finite(value) ? {value,coverage:total ? support/total : null,catch:support,
-      status:'ok',numerator,denominator:ratio ? denominator : null} : empty('Non-finite result');
+      status:'ok',numerator:numerator / 9,denominator:ratio ? denominator / 9 : null} : empty('Non-finite result');
   }
   return {evaluate,finite};
 })();

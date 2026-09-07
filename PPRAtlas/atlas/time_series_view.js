@@ -58,8 +58,8 @@
     $('nppMethod').disabled=!ratio;$('sourceScope').disabled=methodInfo()?.kind==='taxon';
     $('nppNote').hidden=!ratio;
     $('nppNote').textContent=result.annual_npp?'NPP varies by year. PPR and NPP use exactly the same ecosystems.':`Fixed ${db.npp_year} NPP repeated for every year · ${nppInfo()?.label||state.npp}. This graph does not represent historical changes in NPP.`;
-    $('calculationNote').textContent=methodInfo()?.kind==='taxon'?'PPR = catch × (1 / 0.1)^(catch-taxon TL − 1). Trophic levels are held fixed across years.':`PPR = annual catch × model SPPR, using ${state.scope==='PP'?'primary-producer':state.scope} sources. Model coefficients and taxon mappings are held fixed across years; missing taxa are excluded.`;
-    if(ratio) $('calculationNote').textContent+=' PPR / NPP = 100 × ΣPPR / 9 / ΣNPP (%); the 9:1 factor converts wet-weight PP to carbon.';
+    $('calculationNote').textContent=methodInfo()?.kind==='taxon'?'PPR (tonnes carbon) = catch × (1 / 0.1)^(catch-taxon TL − 1) ÷ 9. Trophic levels are held fixed across years.':`PPR (tonnes carbon) = annual catch × model SPPR ÷ 9, using ${state.scope==='PP'?'primary-producer':state.scope} sources. Model coefficients and taxon mappings are held fixed across years; missing taxa are excluded.`;
+    if(ratio) $('calculationNote').textContent+=' PPR / NPP = 100 × ΣPPR carbon / ΣNPP carbon (%). Wet-weight PPR is converted to carbon once, at 1/9.';
     const set=db.sets.find(s=>s.id===state.set);
     $('setNote').textContent=single?(db.units[state.units[0]]?.note||''):(set?.note||'Sum of selected ecosystems. Regional boundaries may overlap; this sum is not spatially deduplicated.');
     $('emptyState').hidden=result.included.length>0;
@@ -81,7 +81,7 @@
       if(methodInfo()?.kind!=='taxon'){
         const model=unit.models.find(m=>m.id===(state.models[id]??unit.default_model));
         li.appendChild(document.createTextNode(' · '+(model?.label||model?.id||'No model')));
-        if(model?.workbook){li.appendChild(document.createTextNode(' · '));const source=element('a','workbook');source.href='../'+model.workbook.split('/').map(encodeURIComponent).join('/');li.appendChild(source);}
+        if(model?.workbook){li.appendChild(document.createTextNode(' · '));const source=element('a','source workbook (wet weight)');source.href='../'+model.workbook.split('/').map(encodeURIComponent).join('/');li.appendChild(source);}
       }
       list.appendChild(li);
     }
@@ -111,7 +111,7 @@
     const step=(fraction<=1?1:fraction<=2?2:fraction<=2.5?2.5:fraction<=5?5:10)*power;
     const ymax=Math.ceil((max||1)*1.04/step)*step;
     const factor=state.mode==='ratio'?1:ymax>=1e9?1e9:ymax>=1e6?1e6:ymax>=1e3?1e3:1;
-    const unit=state.mode==='ratio'?'PPR / NPP (%)':`${factor===1e9?'Billion ':factor===1e6?'Million ':factor===1e3?'Thousand ':''}tonnes wet-weight PP`;
+    const unit=state.mode==='ratio'?'PPR / NPP (%)':`${factor===1e9?'Billion ':factor===1e6?'Million ':factor===1e3?'Thousand ':''}tonnes carbon`;
     const x=i=>margin.left+(result.points.length<2?.5:i/(result.points.length-1))*width;
     const y=v=>margin.top+height*(1-v/ymax);
     geometry={x,y,margin,width,height,w,h};
@@ -145,7 +145,7 @@
   function inspect(index) {
     focus=Math.max(0,Math.min(result.points.length-1,Number(index)));
     const p=result.points[focus];
-    $('focusYear').textContent=p.year;$('focusValue').textContent=p.value==null?'Unavailable':state.mode==='ratio'?`${fmt(p.value)}%`:`${fmt(p.value)} t PP`;
+    $('focusYear').textContent=p.year;$('focusValue').textContent=p.value==null?'Unavailable':state.mode==='ratio'?`${fmt(p.value)}%`:`${fmt(p.value)} t C`;
     $('inspectYear').value=focus;$('inspectYear').setAttribute('aria-valuetext',`${p.year}: ${$('focusValue').textContent}`);$('inspectValue').value=p.year;
     $('coverage').textContent=p.coverage==null?(p.value===null?`${p.year} · No value is available.`:'Catch coverage unavailable.'): `${p.year} · ${fmt(p.coverage*100)}% of included ecosystems’ catch has a PPR coefficient (${fmt(p.covered_catch)} of ${fmt(p.catch)} tonnes).`;
     if($('focusLine')){const px=geometry.x(focus);$('focusLine').setAttribute('x1',px);$('focusLine').setAttribute('x2',px);$('focusDot').style.display=p.value===null?'none':'';$('focusDot').setAttribute('cx',px);$('focusDot').setAttribute('cy',geometry.y(p.value));}

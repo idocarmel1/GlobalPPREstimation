@@ -10,7 +10,7 @@ const state={units:['a','b'],method:'simple trophic chain',scope:'all',mode:'ppr
 test('ratio is the ratio of matched sums with wet-weight to carbon conversion',()=>{
  const r=aggregate(fixture(),{...state,mode:'ratio'});
  assert.deepEqual(r.included,['a','b']);
- assert.equal(r.points[0].ppr,900);
+ assert.equal(r.points[0].ppr,100);
  assert.equal(r.points[0].npp,91);
  assert.equal(r.points[0].value,100*900/9/91);
  assert.equal(r.points[1].npp,91); // fixed 2019 baseline duplicated
@@ -19,10 +19,10 @@ test('ratio is the ratio of matched sums with wet-weight to carbon conversion',(
 test('a stable cohort excludes missing years and missing NPP from both totals',()=>{
  const db=fixture();db.units.b.npp.vgpm=null;
  let r=aggregate(db,{...state,mode:'ratio'});
- assert.deepEqual(r.included,['a']);assert.equal(r.points[0].ppr,90);
+ assert.deepEqual(r.included,['a']);assert.equal(r.points[0].ppr,10);
  assert.match(r.excluded[0].reason,/NPP/);
  db.units.b.npp.vgpm=90;db.units.b.simple.ppr[1]=null;
- r=aggregate(db,state);assert.deepEqual(r.included,['a']);assert.equal(r.points[0].value,90);
+ r=aggregate(db,state);assert.deepEqual(r.included,['a']);assert.equal(r.points[0].value,10);
  assert.match(r.excluded[0].reason,/annual/);
 });
 test('true zeros survive; empty, unknown and unsupported choices never make up zero',()=>{
@@ -37,9 +37,9 @@ test('model overrides are independent and failures never fall back to simple',()
  const model=(id,status,ppr)=>({id,verified:true,scopes:{all:{methods:{network:{status,ppr,covered_catch:[5,10]}}}}});
  db.units.a.models=[model('old','ok',[50,100]),model('new','ok',[500,1000])];db.units.a.default_model='old';
  db.units.b.models=[model('bad','DIVERGED',[900,1800])];db.units.b.default_model='bad';
- let r=aggregate(db,{...state,method:'network'});assert.equal(r.points[0].value,50);assert.equal(r.excluded.length,1);
+ let r=aggregate(db,{...state,method:'network'});assert.equal(r.points[0].value,50/9);assert.equal(r.excluded.length,1);
  assert.deepEqual(r.model_ids,{a:'old'});assert.match(toCSV(r,{...state,method:'network'}),/old/);
- r=aggregate(db,{...state,method:'network',models:{a:'new'}});assert.equal(r.points[0].value,500);
+ r=aggregate(db,{...state,method:'network',models:{a:'new'}});assert.equal(r.points[0].value,500/9);
  r=aggregate(db,{...state,method:'network',models:{a:'missing'}});assert.equal(r.points[0].value,null);
  db.units.a.models[0].verified=false;assert.equal(aggregate(db,{...state,method:'network'}).points[0].value,null);
 });
@@ -51,16 +51,25 @@ test('deduplicates IDs, supports explicit years and future annual NPP',()=>{
 test('CSV retains the plotted values, coverage and denominator provenance',()=>{
  const r=aggregate(fixture(),{...state,mode:'ratio'});
  const csv=toCSV(r,{...state,mode:'ratio'});
- assert.match(csv,/year,value,ppr_tonnes_wet_pp,npp_tonnes_carbon/);
+ assert.match(csv,/year,value,ppr_tonnes_carbon,npp_tonnes_carbon/);
  assert.match(csv,/2019/);assert.match(csv,/simple trophic chain/);
  assert.equal(csv.trim().split('\n').length,3);
 });
 test('individual graphs can retain genuine annual gaps without drawing zero or changing a sum cohort',()=>{
  const db=fixture();db.units.a.simple.ppr[0]=null;
  let r=aggregate(db,{...state,units:['a'],allow_gaps:true});
- assert.deepEqual(r.included,['a']);assert.deepEqual(r.points.map(p=>p.value),[null,180]);
+ assert.deepEqual(r.included,['a']);assert.deepEqual(r.points.map(p=>p.value),[null,20]);
  r=aggregate(db,{...state,allow_gaps:true});assert.deepEqual(r.included,['b']);
  db.units.a.simple.ppr[0]=90;db.units.a.npp.vgpm=[null,2];
  r=aggregate(db,{...state,mode:'ratio',units:['a'],allow_gaps:true});
  assert.deepEqual(r.points.map(p=>p.value),[null,1000]);
+});
+test('PPR graph and its CSV use carbon exactly once without changing stored wet-weight inputs',()=>{
+ const db=fixture(),original=structuredClone(db);
+ const r=aggregate(db,state);
+ assert.equal(r.points[0].value,100);assert.equal(r.points[1].ppr,200);
+ assert.equal(r.points[0].catch,20);assert.deepEqual(db,original);
+ const csv=toCSV(r,state);
+ assert.match(csv,/"2000","100","100"/);
+ assert.doesNotMatch(csv,/ppr_tonnes_wet/);
 });

@@ -7,6 +7,12 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
 
 ## Annual graphs
 
+- All PPR masses displayed anywhere on the site use **tonnes carbon (t C)**:
+  source wet-weight PPR is divided by 9 once. This applies to map values,
+  tooltips, legends, method-ratio component masses, graph axes/readouts and
+  plotted-data CSV downloads (`ppr_tonnes_carbon`). Source workbooks and the
+  audited annual input JSON retain wet-weight values. Catch remains wet weight;
+  recycling diagnostics and dimensionless method ratios are not converted.
 - Choose PPR or PPR/NPP, a PPR method, source scope and NPP method. The simple
   trophic-chain option uses catch-taxon TL at TE=0.1; `SPPR_1995_TE0.1` uses model
   TL. Identical formulas can differ because these trophic-level inputs differ.
@@ -22,7 +28,8 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   median. **The owner requested repeating the fixed 2019 NPP for all years for
   now.** This denominator is labeled on the graph. Annual NPP can later replace
   the scalar values with arrays aligned to the exported years.
-- PPR/NPP (%) = `100 × sum(PPR tonnes wet PP) / 9 / sum(NPP tonnes carbon)`.
+- PPR/NPP (%) = `100 × sum(PPR tonnes carbon) / sum(NPP tonnes carbon)`.
+  The PPR input has already been divided by 9; do not convert it again.
   Numerator and denominator use the same ecosystems, excluding those without
   positive NPP. The regional ensemble option sums the individual region medians;
   it is not the median of the global model totals or a mean of regional ratios.
@@ -63,7 +70,7 @@ without writing files. The graph page embeds its inputs and needs no network.
 - The article-area switch shows explicitly selected catalog sources only. Archived
   alternatives remain readable in the details panel. Approximate envelopes are dashed.
 
-PPR uses mapped catch × scoped SPPR. Failed configurations and negative source-group SPPR
+Displayed PPR uses mapped catch × scoped SPPR ÷ 9 (tonnes carbon). Failed configurations and negative source-group SPPR
 are excluded from map estimates; finite diagnostic values remain inspectable with FAIL
 labels. Coefficients stay fixed across catch years. Geographic transfers and historical
 identity conflicts are stated in the details; no spatially deduplicated global total is claimed.

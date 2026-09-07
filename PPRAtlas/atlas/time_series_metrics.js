@@ -48,13 +48,14 @@
       const i=indices[k];
       if(!records.length || records.some(r=>!finite(r.record.ppr[i]) || r.record.ppr[i]<0 || ratio && (!finite(sample(r.unit.npp[state.npp],i)) || sample(r.unit.npp[state.npp],i)<=0)))
         return {year:Number(year),value:null,ppr:null,npp:null,catch:null,covered_catch:null,coverage:null};
-      const ppr=records.reduce((sum,r)=>sum+r.record.ppr[i],0);
+      // Audited input totals are wet weight; plot and CSV masses use carbon.
+      const ppr=records.reduce((sum,r)=>sum+r.record.ppr[i],0) / 9;
       const npp=ratio?records.reduce((sum,r)=>sum+sample(r.unit.npp[state.npp],i),0):null;
       const catches=records.map(r=>r.unit.simple?.catch?.[i]);
       const covered=records.map(r=>r.record.covered_catch?.[i]);
       const totalCatch=catches.every(finite)?catches.reduce((a,b)=>a+b,0):null;
       const coveredCatch=covered.every(finite)?covered.reduce((a,b)=>a+b,0):null;
-      return {year:Number(year),value:ratio?100*ppr/9/npp:ppr,ppr,npp,catch:totalCatch,covered_catch:coveredCatch,
+      return {year:Number(year),value:ratio?100*ppr/npp:ppr,ppr,npp,catch:totalCatch,covered_catch:coveredCatch,
         coverage:totalCatch>0 && coveredCatch!==null?coveredCatch/totalCatch:null};
     });
     return {points,included,excluded,selected:ids.length,npp_year:db.npp_year,
@@ -65,7 +66,7 @@
 
   function toCSV(result,state) {
     const escape=value=>value==null?'':`"${String(value).replaceAll('"','""')}"`;
-    const header='year,value,ppr_tonnes_wet_pp,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,ppr_method,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids';
+    const header='year,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,ppr_method,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids';
     return header+'\n'+result.points.map(p=>[p.year,p.value,p.ppr,p.npp,p.catch,p.covered_catch,p.coverage,
       result.included.length,result.selected,state.mode,state.method,state.scope,state.mode==='ratio'?state.npp:null,
       state.mode==='ratio' && !result.annual_npp?result.npp_year:null,result.included.join(';'),JSON.stringify(state.models||{}),JSON.stringify(result.model_ids)].map(escape).join(',')).join('\n')+'\n';

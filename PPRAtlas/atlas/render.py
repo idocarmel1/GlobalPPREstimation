@@ -4,12 +4,12 @@ import html, json, re
 YEAR_SCRIPT = r'''
 function applyYear(year){
   DB.year=Number(year); const annual=DB.annual[String(year)];
-  regions.forEach(r=>{const v=annual[r.unit_id];r.ppr_species_2019=v[0];r.total_catch_tonnes=v[1];r['data availability']=v[2]});
+  regions.forEach(r=>{const v=annual[r.unit_id];r.ppr_species_2019=v[0]==null?null:v[0]/9;r.total_catch_tonnes=v[1];r['data availability']=v[2]});
   regions.sort((a,b)=>(a.ppr_species_2019===null)-(b.ppr_species_2019===null)||(b.ppr_species_2019||0)-(a.ppr_species_2019||0)||a.unit_id.localeCompare(b.unit_id));
   const total=regions.reduce((sum,r)=>sum+(r.ppr_species_2019||0),0);let cumulative=0,prior=null,rank=null;
   regions.forEach((r,i)=>{const v=r.ppr_species_2019;if(v===null){r.ppr_rank=null;r.global_ppr_share=null;r.cumulative_ppr_share=null;return}if(v!==prior)rank=i+1;prior=v;cumulative+=v;r.ppr_rank=rank;r.global_ppr_share=total?v/total:0;r.cumulative_ppr_share=total?cumulative/total:0});
   regionGroup.clearLayers();markerGroup.clearLayers();regions.forEach(addRegion);
-  document.querySelector('#yearTotal').textContent=`${num(total)} t PP equivalent · ${regions.filter(r=>r.ppr_species_2019===null).length} region(s) missing`;
+  document.querySelector('#yearTotal').textContent=`${num(total)} t C · ${regions.filter(r=>r.ppr_species_2019===null).length} region(s) missing`;
   if(selectedId)renderDetails(regionById[selectedId]);refresh();
 }
 const yearSelect=document.querySelector('#yearFilter');Object.keys(DB.annual).sort().reverse().forEach(year=>{const o=document.createElement('option');o.value=year;o.textContent=year;o.selected=Number(year)===DB.year;yearSelect.appendChild(o)});
@@ -43,7 +43,7 @@ def render_map(root, db):
         "articles.filter(a=>passArticle(a)&&passRegion(regionById[a.unit_id])).forEach(a=>articleLayers[a.article_id].addTo(articleGroup));":"articles.filter(a=>a.geometry&&passArticle(a)&&passRegion(regionById[a.unit_id])).filter((a,i,all)=>all.findIndex(b=>b.footprint_key===a.footprint_key)===i).forEach(a=>articleLayers[a.article_id].addTo(articleGroup));",
         "if(selectedId&&(!regionById[selectedId]||!passRegion(regionById[selectedId])))selectedId=null;":"if(selectedId&&(!regionById[selectedId]||!passRegion(regionById[selectedId]))){selectedId=null;document.querySelector('#details').innerHTML='<p>Select a region from the filtered results.</p>'}",
         '<span class="rank" style="background:${pprColor(r)};color:${t<.24||t>.76?\'white\':\'#1e2830\'}">${r.ppr_rank}</span>':'<span class="rank" style="background:${pprColor(r)};color:${t<.24||t>.76?\'white\':\'#1e2830\'}">${r.ppr_rank??\'—\'}</span>',
-        '<span>PPR 2019</span>':'<span>PPR ${DB.year}</span>',
+        '<span>PPR 2019</span>':'<span>PPR ${DB.year} (t C)</span>',
         '<span>Global share</span>':'<span>Selected-set share</span>',
         '${a.recommendation}</div>':'${a.recommendation}<br><b>Coverage:</b> ${a.coverage_class}<br><b>Boundary:</b> ${a.geometry_method}</div>',
         '<button onclick="highlightArticle(\'${a.article_id}\')">Show area</button>':'${a.geometry?`<button onclick="highlightArticle(\'${a.article_id}\')">Show area</button>`:\'<span class="chip">Study boundary unavailable</span>\'}${fileLinks(a)}',

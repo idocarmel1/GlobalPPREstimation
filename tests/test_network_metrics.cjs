@@ -7,6 +7,13 @@ const unit={years:[2019],catch:[[10],[90],[0]],models:[{id:'one',verified:true,
 test('ratio uses common catch and reports coverage',()=>{
  const r=m.evaluate(unit,0,{year:2019,scope:'all',mode:'ratio',method:'a',denominator:'b'});
  assert.equal(r.value,.5);assert.equal(r.coverage,.1);assert.equal(r.catch,10);
+ assert.equal(r.numerator,20/9);assert.equal(r.denominator,40/9);
+});
+test('map PPR is carbon while catch and source coefficients retain their original units',()=>{
+ const original=structuredClone(unit);
+ const r=m.evaluate(unit,0,{year:2019,scope:'all',mode:'ppr',method:'a'});
+ assert.equal(r.value,9020/9);assert.equal(r.numerator,9020/9);
+ assert.equal(r.catch,100);assert.deepEqual(unit,original);
 });
 test('missing scope, denominator and failed method remain missing',()=>{
  for(const state of [{scope:'PP'},{denominator:'missing'}])

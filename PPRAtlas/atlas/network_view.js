@@ -5,8 +5,8 @@ const chosenModels = Object.fromEntries(Object.entries(network.units).map(([id,u
 const $ = id => document.getElementById(id);
 const escapeMetric = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const precise = v => v == null ? 'Unavailable' : v.toLocaleString(undefined,{maximumSignificantDigits:4});
-const metricName = () => ({ppr:'PPR',ratio:'Method ratio',b:'Recycling b',rho_living:'Rho living'})[metricState.mode];
-const resultText = r => r.networkResult?.value == null ? 'Unavailable' : precise(r.networkResult.value)+(metricState.mode==='ppr'?' t PP':metricState.mode==='ratio'?'×':'');
+const metricName = () => ({ppr:'PPR (tonnes carbon)',ratio:'Method ratio',b:'Recycling b',rho_living:'Rho living'})[metricState.mode];
+const resultText = r => r.networkResult?.value == null ? 'Unavailable' : precise(r.networkResult.value)+(metricState.mode==='ppr'?' t C':metricState.mode==='ratio'?'×':'');
 let colorExtent = [0,1];
 function availableMethods() {
   return [...new Set(Object.values(network.units).flatMap(u=>u.models.flatMap(m=>m.scopes[metricState.scope]?.methods||[])))];
@@ -83,10 +83,10 @@ renderDetails = function(r) {
   const notes=document.createElement('p');notes.className='network-note';notes.textContent=unit.note;panel.appendChild(notes);
   panel.appendChild(trendLink());
   if(result.coverage!=null){const coverage=document.createElement('p');coverage.className='network-note';coverage.textContent=`${pct(result.coverage)} of annual catch included (${precise(result.catch)} tonnes). `+(metricState.mode==='ratio'?'Both methods use exactly these taxa.':'Missing method values are excluded; this is a partial footprint when coverage is below 100%.');panel.appendChild(coverage)}
-  if(metricState.mode==='ratio'&&result.value!=null){const pair=document.createElement('p');pair.className='network-note';pair.textContent=`${metricState.method}: ${precise(result.numerator)} t PP ÷ ${metricState.denominator}: ${precise(result.denominator)} t PP`;panel.appendChild(pair)}
+  if(metricState.mode==='ratio'&&result.value!=null){const pair=document.createElement('p');pair.className='network-note';pair.textContent=`${metricState.method}: ${precise(result.numerator)} t C ÷ ${metricState.denominator}: ${precise(result.denominator)} t C`;panel.appendChild(pair)}
   if(model){
     const links=document.createElement('p');links.className='actions';
-    for(const [label,path] of [['PPR workbook',model.workbook],['SPPR and diagnostics',model.source]]){
+    for(const [label,path] of [['Source PPR workbook (wet weight)',model.workbook],['SPPR and diagnostics',model.source]]){
       if(!path)continue;const a=document.createElement('a');a.textContent=label;a.href='../'+path.split('/').map(encodeURIComponent).join('/');links.appendChild(a);
     }
     panel.appendChild(links);
@@ -99,7 +99,7 @@ function updateLegend() {
   $('pprOptions').hidden=diagnostic;$('recyclingOptions').hidden=!diagnostic;$('denominatorField').hidden=mode!=='ratio';
   $('yearFilter').disabled=diagnostic;$('methodLabel').textContent=mode==='ratio'?'Numerator method':'Estimation method';
   $('metricLegendTitle').textContent=metricName();
-  $('metricHelp').textContent=diagnostic?'Read directly from diagnose_sppr(). Values below 1 are necessary for convergence, but do not guarantee validity; inspect the reported status. TE has no recycling matrix, so its b is zero by construction, not evidence of absent ecological recycling. Diagnostics are fixed for the chosen model.':mode==='ratio'?'Numerator ÷ denominator, using only catch taxa available to both methods in the same year, model and source scope.':'Annual catch × mapped SPPR. Model coefficients are fixed across years. Failed methods remain unavailable.';
+  $('metricHelp').textContent=diagnostic?'Read directly from diagnose_sppr(). Values below 1 are necessary for convergence, but do not guarantee validity; inspect the reported status. TE has no recycling matrix, so its b is zero by construction, not evidence of absent ecological recycling. Diagnostics are fixed for the chosen model.':mode==='ratio'?'Numerator ÷ denominator, using only catch taxa available to both methods in the same year, model and source scope. Both PPR masses are shown in carbon (wet weight ÷ 9).':'PPR in tonnes carbon = annual catch × mapped SPPR ÷ 9. Model coefficients are fixed across years. Failed methods remain unavailable.';
   $('metricGradient').style.background=diagnostic?'linear-gradient(90deg,#e4f0ec,#dfb34a 70%,#aa3030)':mode==='ratio'?'linear-gradient(90deg,#3278a1,#f7fafb,#b64b3a)':'linear-gradient(90deg,#cde7e8,#075c69)';
   $('metricLow').textContent=diagnostic?'0':mode==='ratio'?'≤0.25×':precise(colorExtent[0]);
   $('metricMiddle').textContent=diagnostic?'0.5':mode==='ratio'?'1×':'log scale';

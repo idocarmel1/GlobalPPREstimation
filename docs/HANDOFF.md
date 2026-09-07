@@ -547,3 +547,15 @@ Read the annual-graphs section of `PPRAtlas/README.md` for usage and regeneratio
 SPPR totals against saved annual workbook rows before publishing the graph data.
 No PPREstimation algorithm or Jensen behavior was changed; coverage expansion
 (task 6) remains separate from allowing the existing simple method in the graph.
+
+## 16. Site-wide carbon display — 2026-09-07
+
+The owner requested **all PPR displayed on the site in carbon**, using a 1/9
+wet-weight conversion. Map values/tooltips/legends, method-ratio component
+masses, annual graph axes/readouts, and plotted-data CSV PPR columns now use
+tonnes carbon (t C). The map and annual aggregation modules convert source PPR
+once; PPR/NPP uses the already-converted PPR and is not divided by 9 again.
+Dimensionless method ratios, recycling diagnostics, NPP and catch quantities
+retain their values. Audited source JSON and XLSX files still store wet-weight
+PPR; source workbook links state that distinction. No PPREstimation algorithm
+or Jensen behavior was changed.
