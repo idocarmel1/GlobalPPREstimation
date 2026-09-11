@@ -85,9 +85,17 @@ next. It is the single most important ecological assumption in every flow-networ
 | `'global'` | one scalar for all groups | A single system-wide TE broadcast to every group — the classic "10% rule" assumption. Controlled by `global_TE`. |
 
 - **`global_TE`** (only used when `TE_option='global'`): either a literal float (e.g. `0.1`)
-  or `'mean'`, which computes the catch-weighted (or biomass-weighted if there is no catch)
-  mean of the per-group `'TE'` efficiency. Biologically, `'mean'` lets the data set its own
-  effective efficiency instead of imposing 10%.
+  or `'mean'`, which computes an arithmetic mean of consumer-group `'TE'` efficiency.
+- **`weights='consumption'`** applies only to a global mean TE. Choices are total consumption
+  `Q` (`'consumption'`, default), `'equal'`, `'catch'`, and `'biomass'`. Every choice uses
+  **consumer (`Regular`) groups only**, excluding primary producers, detritus and imports.
+  Zero-TE consumers remain included; missing weights are zero. Catch weights fall back to
+  consumer biomass when consumer catch sums to zero. Invalid weights or no positive total
+  raise `ValueError`. Consumption weighting is `sum(Q_i TE_i)/sum(Q_i)`, equivalently
+  `sum(P_i EE_i)/sum(Q_i)` for defined consumer ratios. This is total Q, not Q/B.
+  `SPPR_1995`, `SPPR_1995_TL_fix`, and `SPPR_EwE_Ulanowicz` accept and forward `weights`.
+  Fixed TE and group-specific efficiencies ignore this option; Monte-Carlo means of
+  group-specific TE distributions are not converted into a global consumer mean.
 - **`DET_values`** (default 1): the TE assigned to detritus rows. TE=1 means detritus passes
   its content on without a further "trophic loss", because detritus is itself a basal source,
   not a trophic step.
@@ -1107,6 +1115,22 @@ large outflows (mostly detrital, or biomass accumulation) absorb part of the pri
 | **Whether any of the above can be trusted** | `diagnose_sppr` | grades both convergence conditions (`b`, `ρ(A_LL)`), the input data and the PP budget in one call (§4) |
 
 ### Method comparison at a glance
+
+The exporter and atlas expose two arithmetic-mean versions of each global-mean family:
+
+| Export / atlas ID | Consumer weights |
+|---|---|
+| `SPPR_1995_TEmean` | Total consumption `Q` (default) |
+| `SPPR_1995_TEmean_catch` | Model catch; consumer biomass fallback if total consumer catch is zero |
+| `Ulanowicz_globalTEmean` | Total consumption `Q` (default) |
+| `Ulanowicz_globalTEmean_catch` | Model catch; consumer biomass fallback if total consumer catch is zero |
+
+All four use `sum(w_i * TE_i) / sum(w_i)` over Regular consumers; positive-weight
+consumers with TE=0 remain included. Primary producers, detritus and import groups
+do not enter these means. Catch weights are the model's published catch, fixed
+across the plotted years; they are not the atlas annual catch series. The original
+IDs now denote consumption weighting. Fixed-TE and group-specific methods retain
+their existing behavior. The 2026-09-11 refresh excludes unbalanced source models.
 
 | Method | Family | Cycles | Per-source breakdown | Detritus knobs | Notes |
 |--------|--------|--------|----------------------|----------------|-------|

@@ -1464,7 +1464,7 @@ class PPRCalculator:
         """
         return sorted(self._groups_df.index[self._groups_df['trophic_info'] == 'Import'].values)
 
-    def get_TE(self, TE_option: str, DET_values: float = 1, as_matrix: bool = True, global_TE: str | float = 'mean') -> pd.DataFrame | pd.Series:
+    def get_TE(self, TE_option: str, DET_values: float = 1, as_matrix: bool = True, global_TE: str | float = 'mean', weights: str = 'consumption') -> pd.DataFrame | pd.Series:
         """Build the per-group transfer-efficiency (TE) vector or matrix.
 
         Args:
@@ -1478,9 +1478,13 @@ class PPRCalculator:
             as_matrix (bool, optional): if True return an (n x n) DataFrame (the vector
                 broadcast across columns); if False return the length-n Series. Defaults to True.
             global_TE (str | float, optional): used only when TE_option == 'global'. If 'mean'
-                (default) the global value is the catch-weighted mean of the per-group 'TE'
-                efficiency (biomass-weighted when total catch is 0); otherwise it is used as the
-                literal global TE value.
+                (default), use the arithmetic mean of consumer-group TE with the chosen weights;
+                otherwise use the literal global TE value.
+            weights (str, optional): only used for global_TE='mean' with TE_option='global'.
+                'consumption' (default) weights by total Q, 'equal' gives each consumer one
+                vote, 'biomass' weights by B, and 'catch' weights by catch with a biomass fallback
+                when consumer catch is zero. All choices exclude PP, DET and Import groups.
+                Zero-TE consumers remain included. Missing weights are treated as zero.
 
         Returns:
             pd.DataFrame | pd.Series: the TE matrix if as_matrix else the TE Series, sorted by
@@ -1488,6 +1492,7 @@ class PPRCalculator:
 
         Raises:
             Exception: if TE_option is not one of the four supported strings.
+            ValueError: if mean weights are unknown, invalid, or have no positive consumer total.
         """
         TE_options = ['GE', 'TE', 'With Egestion', 'global']
         if TE_option == 'GE':
@@ -1499,11 +1504,28 @@ class PPRCalculator:
             te = (self.p / self.q).fillna(1) * (self.q / (self.q - self.egestion)).fillna(1)
         elif TE_option == 'global':
             if global_TE == 'mean':
-                weights=self.catch
-                if weights.sum() == 0:
-                    weights = self.get_groups_df()['biomass'].fillna(0)
+                groups = self.get_groups_df()
+                consumers = groups.index[groups['trophic_info'] == 'Regular']
+                if weights == 'consumption':
+                    mean_weights = self.q.reindex(consumers).fillna(0)
+                elif weights == 'equal':
+                    mean_weights = pd.Series(1.0, index=consumers)
+                elif weights == 'biomass':
+                    mean_weights = groups.loc[consumers, 'biomass'].fillna(0)
+                elif weights == 'catch':
+                    mean_weights = self.catch.reindex(consumers).fillna(0)
+                    if (mean_weights == 0).all():
+                        weights = 'biomass'
+                        mean_weights = groups.loc[consumers, 'biomass'].fillna(0)
+                else:
+                    raise ValueError("weights must be 'consumption', 'equal', 'catch', or 'biomass'.")
+                if not np.isfinite(mean_weights).all() or (mean_weights < 0).any():
+                    raise ValueError(f"Mean TE requires finite, nonnegative consumer {weights} weights.")
+                if mean_weights.sum() <= 0:
+                    raise ValueError(f"Mean TE requires positive consumer {weights} weights.")
                 te = ((self.p / self.q).fillna(1)) * (1 - self.M0 / self.p).fillna(1)
-                te = np.average(te, weights=weights)
+                active_weights = mean_weights[mean_weights > 0]
+                te = np.average(te.reindex(active_weights.index), weights=active_weights)
             else:
                 te = global_TE
             te = pd.Series(np.ones(self.n_groups) * te, index=self.GE.index)
@@ -1672,7 +1694,7 @@ class PPRCalculator:
         SPPR = pd.DataFrame(SPPR, index=self.GE.index, columns=['sppr'])
         return SPPR
     
-    def SPPR_1995(self, global_TE: str | float = 0.1) -> pd.DataFrame:
+    def SPPR_1995(self, global_TE: str | float = 0.1, weights: str = 'consumption') -> pd.DataFrame:
         """Pauly & Christensen (1995)-style per-group SPPR = TE^(1-TL).
 
         Uses each group's own continuous trophic level together with a single global transfer
@@ -1680,17 +1702,18 @@ class PPRCalculator:
 
         Args:
             global_TE (str | float, optional): the global TE; either the literal float or
-                'mean' (catch- / biomass-weighted mean efficiency, see get_TE). Defaults to 0.1.
+                'mean' (consumer-weighted arithmetic mean, see get_TE). Defaults to 0.1.
+            weights (str, optional): mean-TE weights; defaults to 'consumption'. Ignored for fixed TE.
 
         Returns:
             pd.DataFrame: a single 'sppr' column indexed by group seq.
         """
-        TE = self.get_TE(TE_option='global', global_TE=global_TE, as_matrix=False)
+        TE = self.get_TE(TE_option='global', global_TE=global_TE, as_matrix=False, weights=weights)
         TL = self.get_TL(break_cycles=True, DET_as_PP=True)  # break cylces in DC and force DET to be of TL=1.
         SPPR = TE ** (1 - TL)
         return SPPR.to_frame(name='sppr')
     
-    def SPPR_1995_TL_fix(self, global_TE: str | float = 0.1) -> pd.DataFrame:
+    def SPPR_1995_TL_fix(self, global_TE: str | float = 0.1, weights: str = 'consumption') -> pd.DataFrame:
         """SPPR_1995 variant that linearly interpolates between bracketing integer trophic levels.
 
         Instead of raising 1/TE to a non-integer power directly, it blends the two integer
@@ -1701,11 +1724,12 @@ class PPRCalculator:
         Args:
             global_TE (str | float, optional): the global TE; literal float or 'mean'
                 (see get_TE). Defaults to 0.1.
+            weights (str, optional): mean-TE weights; defaults to 'consumption'. Ignored for fixed TE.
 
         Returns:
             pd.DataFrame: a single 'sppr' column indexed by group seq.
         """
-        TE = self.get_TE(TE_option='global', global_TE=global_TE, as_matrix=False)
+        TE = self.get_TE(TE_option='global', global_TE=global_TE, as_matrix=False, weights=weights)
         TL = self.get_TL(break_cycles=True, DET_as_PP=True)  # break cylces in DC and force DET to be of TL=1.
         TL_fraction = TL % 1
         TL_int = TL.astype(int)
@@ -1957,7 +1981,7 @@ class PPRCalculator:
         else:
             return _fast_EwE_no_paths(TE_option=TE_option, use_EE=use_EE, silent=silent, max_paths=max_paths)
 
-    def SPPR_EwE_Ulanowicz(self, TE_option: str, global_TE: str | float = 'mean', use_EE: bool = True) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    def SPPR_EwE_Ulanowicz(self, TE_option: str, global_TE: str | float = 'mean', use_EE: bool = True, weights: str = 'consumption') -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """Matrix (nullspace) reformulation of the EwE path-summation SPPR.
 
         Instead of enumerating paths, build the per-edge weight matrix A = DC/TE with cycles
@@ -1970,10 +1994,11 @@ class PPRCalculator:
             TE_option (str): transfer-efficiency mode for building A; one of 'GE', 'TE',
                 'With Egestion', 'global' (the 'global' case requires global_TE).
             global_TE (str | float, optional): the global TE used when TE_option == 'global';
-                'mean' (catch-weighted, or biomass-weighted when total catch is 0) or a literal
+                'mean' (consumer-weighted arithmetic mean) or a literal
                 float. Defaults to 'mean'.
             use_EE (bool, optional): if True, scale each row by ecotrophic efficiency EE.
                 Defaults to True.
+            weights (str, optional): global mean-TE weights; defaults to 'consumption'.
 
         Returns:
             tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]: (SPPR, A, L), the per-group SPPR
@@ -1989,7 +2014,7 @@ class PPRCalculator:
         # DC = DC.div(DC.sum(axis=1), axis=0).fillna(0)
 
         # according to 2015's article, EwE uses TE = GE*EE. in to EwE user guide, they use just GE.
-        TE = self.get_TE(TE_option=TE_option, global_TE=global_TE, as_matrix=True,  DET_values=1)
+        TE = self.get_TE(TE_option=TE_option, global_TE=global_TE, as_matrix=True, DET_values=1, weights=weights)
         
         A = (DC / TE).fillna(0).values
         A[TE.values == 0] = 0

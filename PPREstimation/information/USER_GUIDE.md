@@ -1,5 +1,14 @@
 # User Guide: `ModelData` and `PPRCalculator`
 
+The workbook exporter and atlas provide catch and consumption variants of both
+global-mean families. `SPPR_1995_TEmean` and `Ulanowicz_globalTEmean` use consumption
+weights; their `_catch` counterparts use model catch, falling back to consumer
+biomass when consumer catch is zero. Both are arithmetic means over consumers,
+including TE=0. The weights remain fixed across catch years. To reproduce a variant
+directly, pass `global_TE='mean', weights='consumption'` or `weights='catch'` to
+`SPPR_1995`; also pass `TE_option='global', use_EE=False` to `SPPR_EwE_Ulanowicz`.
+The `weights` flag defaults to consumption and also accepts `equal` and `biomass`.
+
 This guide walks a new user through the two core classes of PPREstimation:
 
 - **`ModelData`** (in `ModelData.py`) — loads one Ecopath ecosystem model from disk and exposes its
@@ -212,7 +221,7 @@ These getters expose the completed model. All are cheap and return copies / fres
 | `get_PP_seq()` | `list` | Seq IDs of primary producers. |
 | `get_Regular_seq()` | `list` | Seq IDs of regular consumers. |
 | `get_Import_seq()` | `list` | Seq IDs of imported-diet groups. |
-| `get_TE(TE_option, DET_values=1, as_matrix=True, global_TE='mean')` | `pd.DataFrame \| pd.Series` | Transfer-efficiency vector/matrix (see §5.1). |
+| `get_TE(TE_option, DET_values=1, as_matrix=True, global_TE='mean', weights='consumption')` | `pd.DataFrame \| pd.Series` | Transfer-efficiency vector/matrix (see §5.1). |
 | `get_TL(break_cycles, DET_as_PP, TE_option='With Egestion')` | `pd.Series` | Trophic level per group (see §5.2). |
 | `get_NPP(only_inner=True)` | `float` | Net primary production = total production of PP groups (`only_inner=False` raises). |
 | `get_PPR(sppr, only_inner=False, only_pp=False)` | `pd.DataFrame` | Total PPR = `catch · SPPR`, **always a 1-row DataFrame** (see §5.3). |
@@ -231,8 +240,16 @@ modeling choice in the package, because it decides what counts as "lost" energy 
 | `'global'` | a single scalar broadcast to all groups | Uses one fixed efficiency for the whole web (classic "≈10%" assumption). Set by `global_TE`. |
 
 `global_TE` (only used when `TE_option='global'`): either a literal `float` (e.g. `0.1`) or `'mean'`,
-in which case it is the catch-weighted mean of the per-group `'TE'` efficiency (biomass-weighted if total
-catch is 0).
+in which case it is an arithmetic mean of consumer-group `'TE'` efficiency. Use `weights` to choose
+`'consumption'` (default, total Q = biomass × Q/B), `'equal'`, `'catch'`, or `'biomass'`.
+All choices use **consumer (`Regular`) groups only**, retain TE=0 consumers, and exclude primary
+producers, detritus and imports. Missing weights are zero; no positive total or invalid weights
+raise `ValueError`. The `'catch'` choice falls back to consumer biomass if consumer catch is zero.
+The option is ignored for fixed global TE and group-specific TE modes.
+
+`SPPR_1995(global_TE='mean', weights='consumption')` uses the new default. To compare alternatives,
+pass `weights='equal'`, `'catch'`, or `'biomass'`. The same option is available on
+`SPPR_1995_TL_fix` and `SPPR_EwE_Ulanowicz`.
 
 `DET_values` sets the TE assigned to detritus rows (default `1`: detritus is fully available as a basal
 source). `as_matrix=True` returns an n×n matrix (the vector broadcast across columns); `False` returns the

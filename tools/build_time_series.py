@@ -381,7 +381,8 @@ def build():
                     if scope not in scopes.setdefault(method, []):
                         scopes[method].append(scope)
     methods.extend({'id': method,
-                    'label': ('SPPR_1995_TE0.1 · model TL (TE 0.1)' if method == 'SPPR_1995_TE0.1' else method),
+                    'label': ('SPPR_1995_TE0.1 · model TL (TE 0.1)' if method == 'SPPR_1995_TE0.1'
+                              else network.get('method_labels', {}).get(method, method)),
                     'kind': 'model', 'scopes': supported}
                    for method, supported in scopes.items())
     counts = {'units': len(units), 'years': len(years),
@@ -405,7 +406,7 @@ def build():
                'catch_basis_policy':POLICY,
                'npp_policy': 'Year-specific NPP; unavailable years remain blank. An explicit display option may use the earliest available year for earlier years only, labeled as a proxy.',
                'units_note': 'PPR is tonnes wet-weight-equivalent primary production; NPP is tonnes carbon. Convert PPR to carbon at 9:1 for ratios.',
-               'model_note': 'Each model uses its fixed published coefficients across catch years. Distinct models are alternatives and are never averaged.',
+               'model_note': 'Each model uses its fixed published coefficients across catch years. Distinct models are alternatives and are never averaged. Mean-TE methods use consumer arithmetic means: consumption weights by default, or catch weights for the _catch variants (consumer biomass fallback when consumer catch is zero).',
                'scopes': network['scopes'], 'npp_methods': NPP_METHODS, 'ppr_methods': methods,
                'sets': sets, 'units': units, 'coverage': counts,
                'sources': audit['sources'][:5 + len(source_paths(ROOT))],

@@ -181,18 +181,21 @@ def _spec_1986() -> MethodSpec:
         lambda m, mc_samples: (m.SPPR_1986(), {}), source_resolved=False)
 
 
-def _spec_1995(key: str, global_TE) -> MethodSpec:
+def _spec_1995(key: str, global_TE, weights='consumption') -> MethodSpec:
     return MethodSpec(
-        key, f"Pauly & Christensen (1995): per-group TE^(1-TL) with global_TE={global_TE!r}.",
-        lambda m, mc_samples, te=global_TE: (m.SPPR_1995(global_TE=te), {}),
+        key, f"Pauly & Christensen (1995): per-group TE^(1-TL) with global_TE={global_TE!r}."
+             + (f" Arithmetic mean with consumer {weights} weights."
+                + (" Consumer biomass fallback when consumer catch is zero." if weights == 'catch' else '')
+                if global_TE == "mean" else ""),
+        lambda m, mc_samples, te=global_TE, w=weights: (m.SPPR_1995(global_TE=te, weights=w), {}),
         source_resolved=False)
 
 
-def _spec_ulanowicz(key: str, TE_option, global_TE, description) -> MethodSpec:
+def _spec_ulanowicz(key: str, TE_option, global_TE, description, weights='consumption') -> MethodSpec:
     return MethodSpec(
         key, description,
-        lambda m, mc_samples, t=TE_option, g=global_TE: (
-            _first(m.SPPR_EwE_Ulanowicz(TE_option=t, global_TE=g, use_EE=False)), {}))
+        lambda m, mc_samples, t=TE_option, g=global_TE, w=weights: (
+            _first(m.SPPR_EwE_Ulanowicz(TE_option=t, global_TE=g, use_EE=False, weights=w)), {}))
 
 
 def _spec_new(key: str, TE_option, description, **extra) -> MethodSpec:
@@ -249,9 +252,13 @@ METHOD_SPECS: tuple[MethodSpec, ...] = (
     _spec_1986(),
     _spec_1995("SPPR_1995_TE0.1", 0.1),
     _spec_1995("SPPR_1995_TEmean", "mean"),
+    _spec_1995("SPPR_1995_TEmean_catch", "mean", weights='catch'),
     _spec_ulanowicz("Ulanowicz_globalTEmean", "global", "mean",
-                    "Nullspace form of the EwE path sum, global TE at the true mean "
+                    "Nullspace form of the EwE path sum, global TE at the consumer consumption-weighted arithmetic mean "
                     "(Jensen-able on TL)."),
+    _spec_ulanowicz("Ulanowicz_globalTEmean_catch", "global", "mean",
+                    "Nullspace form of the EwE path sum, global TE at the consumer catch-weighted arithmetic mean. "
+                    "Consumer biomass fallback when consumer catch is zero (Jensen-able on TL).", weights='catch'),
     _spec_ulanowicz("Ulanowicz_TE", "TE", None,
                     "Nullspace form of the EwE path sum, per-group TE (Jensen-able on TE)."),
     MethodSpec("EwE_TE_noEE",

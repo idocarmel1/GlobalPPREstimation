@@ -32,8 +32,13 @@ def export_network(root=ROOT):
     npp = load_npp(root)
     response_package=load_response_package(root)
     payload = {'schema_version': 3, 'scopes': SCOPES, 'units': {},
+               'method_labels': {
+                   'SPPR_1995_TEmean': 'SPPR_1995_TEmean · consumption weights',
+                   'SPPR_1995_TEmean_catch': 'SPPR_1995_TEmean · catch weights (biomass fallback)',
+                   'Ulanowicz_globalTEmean': 'Ulanowicz_globalTEmean · consumption weights',
+                   'Ulanowicz_globalTEmean_catch': 'Ulanowicz_globalTEmean · catch weights (biomass fallback)'},
                'simple_units': export_simple_units(root),
-               'catch_basis_policy':POLICY,'discard_response_source':RESPONSE_PATH,
+               'catch_basis_policy':POLICY,'discard_response_source':response_package.get('_source_path',RESPONSE_PATH),
                'discard_study_version':response_package.get('study_version')}
     for unit, choice in selection['units'].items():
         data = {'note': choice['note'], 'selected_articles': choice.get('selected_articles', []),

@@ -116,7 +116,7 @@ function populateMethods() {
   const methods=availableMethods();
   for(const [id,key,fallback] of [['methodFilter','method','new_GE'],['denominatorFilter','denominator','new_TE_EEfix']]){
     if(!methods.includes(metricState[key]))metricState[key]=methods.includes(fallback)?fallback:methods[0];
-    $(id).replaceChildren(...methods.map(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;o.selected=m===metricState[key];return o}));
+    $(id).replaceChildren(...methods.map(m=>{const o=document.createElement('option');o.value=m;o.textContent=network.method_labels?.[m]||m;o.selected=m===metricState[key];return o}));
   }
 }
 // Override color functions only after initialization, so old template setup remains safe.

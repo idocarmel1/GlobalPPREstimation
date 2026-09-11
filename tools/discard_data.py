@@ -221,10 +221,20 @@ def read_final_mappings(workbook,model_id):
 
 
 def load_response_package(root):
-    path=Path(root)/RESPONSE_PATH
+    relative=RESPONSE_PATH
+    live=Path(root)/'data/discard_responses.current.json'
+    if live.exists(): relative='data/discard_responses.current.json'
+    path=Path(root)/relative
     if not path.exists(): return {'study_version':None,'response_models':[]}
     package=json.loads(path.read_text(encoding='utf-8'))
     if package.get('schema_version')!=1: raise ValueError('Unsupported discard-response schema')
+    if path==live:
+        origin=package.get('refresh_provenance',{})
+        original=Path(root)/RESPONSE_PATH
+        if (origin.get('original_package')!=RESPONSE_PATH or not original.exists() or
+            origin.get('original_package_sha256')!=hashlib.sha256(original.read_bytes()).hexdigest()):
+            raise ValueError('Refreshed responses do not match the original discard package.')
+    package['_source_path']=relative
     return package
 
 
@@ -260,7 +270,7 @@ def model_sensitivity(root,unit,model,mappings,package):
                     record.update(year=year,model_id=model['id'],source_hash=model.get('source_sha256'),
                         source_json_sha256=json_sha,study_version=package.get('study_version'),
                         source_validity=(response or {}).get('source_validity'),
-                        source_response=RESPONSE_PATH,landings_tonnes=total_l,discards_tonnes=total_d)
+                        source_response=package.get('_source_path',RESPONSE_PATH),landings_tonnes=total_l,discards_tonnes=total_d)
                     if finite(total_l) and finite(total_d):
                         affected={r['name']:r.get('simple_sppr') for r in unit.get('unidentified',{}).get('taxa',[])}
                         central=[(0. if treatment=='zero' else affected[t]) if treatment!='method' and t in affected else c for t,c in zip(taxa,baseline)]

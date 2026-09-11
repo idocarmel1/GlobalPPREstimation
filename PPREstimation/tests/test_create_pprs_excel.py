@@ -54,13 +54,24 @@ def cheap_tables(toy_model):
 
 # --------------------------------------------------------------------- method registry
 
-def test_registry_holds_the_nineteen_specified_methods():
-    assert len(cpe.ALL_METHOD_KEYS) == 19, cpe.ALL_METHOD_KEYS
-    assert len(set(cpe.ALL_METHOD_KEYS)) == 19, "method keys must be unique"
+def test_registry_holds_the_twenty_two_specified_methods():
+    assert len(cpe.ALL_METHOD_KEYS) == 22, cpe.ALL_METHOD_KEYS
+    assert len(set(cpe.ALL_METHOD_KEYS)) == 22, "method keys must be unique"
     # the six symbolic combinations must all be present
     symbolic = [k for k in cpe.ALL_METHOD_KEYS if k.startswith("sym_")]
     assert len(symbolic) == 6, symbolic
     assert {"MC_new_GE", "MC_new_TE_EEfix"} <= set(cpe.ALL_METHOD_KEYS)
+
+
+@pytest.mark.parametrize('key,te', [
+    ('SPPR_1995_TEmean', .225), ('SPPR_1995_TEmean_catch', .23),
+    ('Ulanowicz_globalTEmean', .225), ('Ulanowicz_globalTEmean_catch', .23),
+])
+def test_mean_te_registry_variants_use_the_expected_consumer_mean(toy_model, key, te):
+    actual, _ = cpe.SPEC_BY_KEY[key].run(toy_model, 0)
+    expected = (toy_model.SPPR_1995(global_TE=te) if key.startswith('SPPR_1995')
+                else toy_model.SPPR_EwE_Ulanowicz(TE_option='global', global_TE=te, use_EE=False)[0])
+    pd.testing.assert_frame_equal(actual, expected)
 
 
 def test_heavy_methods_are_excluded_from_the_fast_key_set():

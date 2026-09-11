@@ -6,7 +6,25 @@ from pathlib import Path
 import pytest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from discard_data import (read_catch_components,annual_values,interpolate_response,
-                          compatibility_error,prepare_responses,evaluate_band)
+                          compatibility_error,prepare_responses,evaluate_band,load_response_package,
+                          RESPONSE_PATH)
+
+
+def test_live_response_copy_requires_matching_original_package(tmp_path):
+    import hashlib
+    import json
+    original = tmp_path/RESPONSE_PATH
+    original.parent.mkdir(parents=True)
+    original.write_text(json.dumps({'schema_version':1,'response_models':[]}))
+    live = tmp_path/'data/discard_responses.current.json'
+    live.parent.mkdir()
+    live.write_text(json.dumps({'schema_version':1,'response_models':[],
+        'refresh_provenance':{'original_package':RESPONSE_PATH,
+          'original_package_sha256':hashlib.sha256(original.read_bytes()).hexdigest()}}))
+    assert load_response_package(tmp_path)['_source_path']=='data/discard_responses.current.json'
+    original.write_text('{}')
+    with pytest.raises(ValueError,match='original discard'):
+        load_response_package(tmp_path)
 
 
 def response():
