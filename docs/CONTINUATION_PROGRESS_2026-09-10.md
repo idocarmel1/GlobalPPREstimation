@@ -15,7 +15,7 @@ Plan: `docs/ACTIVE_TASK_HANDOFF_2026-09-10.md`. User explicitly authorized this 
 
 ## Active tasks
 
-**Latest state — September11, ready for Git delivery:** all raster workers,
+**Latest state — September11, delivered:** all raster workers,
 watchers, shared builders and checks have completed. Full graph rebuild82684 and
 read-only check84341 passed with exact export equality. Root157tests+2subtests,
 JS82, all independent output checks and final map/graph browser QA passed. Final
@@ -27,7 +27,8 @@ Installed extraction29resources and original interface match. Uncached raw audit
 and197frozen inputs passed;4 normalized index files restaged from audited bytes.
 All11,310original NPP rows and original PPR/mapping science are preserved.
 
-The authorized allowlist is staged. Final commit and push main remain. Do not run
+The authorized integration was committed and pushed to main as 58f08539.
+These closure notes record that successful delivery. No integration work remains. Do not run
 any extraction or builder again. All successful QA tabs closed; one failed preview
 tab may remain. Root preview server8769/session87153 may be stopped after delivery;
 the older server8768 is separately owned. Exclude unfinished expanded research.

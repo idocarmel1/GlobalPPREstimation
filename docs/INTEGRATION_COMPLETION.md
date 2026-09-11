@@ -7,8 +7,8 @@ regional NPP expansion are implemented. Only expansion of extracted Ecopath mode
 and the additional conversion-factor literature review remain deferred. All final
 builds and verification are complete; see the September11 evidence below.
 
-The September 7 pilot results below remain historical evidence. The September 10
-completion and remaining task list are recorded under **Current task status**.
+The September 7 pilot results below remain historical evidence. The September 11
+completion and deferred task list are recorded under **Current task status**.
 Annual NPP supersedes the earlier fixed-2019 convention; the atlas now defaults
 to landings and offers all catch and discards separately.
 
@@ -184,7 +184,8 @@ claim that unrelated suite was repaired.
 - [x] **Final generated-output verification.** All shared builds, independent
   arithmetic checks, actual browser scenarios and read-only full graph reproduction
   passed. The separately owned unfinished expanded discard experiment is excluded.
-- [ ] **Git delivery.** Final commit and push to main follow the completed checks.
+- [x] **Git delivery.** Integration commit 58f08539 was pushed successfully to main
+  after all checks and skill updates. The repository history records the delivery.
 
 - [x] **Task 1 — remove the search-status badge.** `expanded_search` is absent
   from ecosystem details; source-search metadata remains available in the archive.

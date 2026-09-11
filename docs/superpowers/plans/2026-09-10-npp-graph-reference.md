@@ -28,7 +28,7 @@
 - [x] Graph UI: extend `time_series.html`, `time_series_view.js` and necessary CSS. Add measure/scope selectors and JSON download; disable irrelevant controls, retain URL/preferences, explain reference/support in readouts, tooltips and coverage. Eleven actual-view tests pass, including no-catch NPP notes and complete missing-reference details.
 - [x] Rebuild/verify: after all source edits settle, rebuild time-series JSON/HTML once; independently verify actual annual reference and graph arithmetic, run affected Python/JavaScript checks and actual browser scenarios. Preserve all original regional NPP cells and existing PPR/mapping calculations; map/graph output hashes change for the authorized all-366 expansion and new workbook hashes.
 - [x] Documentation/skills: record implemented convention, geography limits and missing years; update graph instructions and affected project integration skill references, then rebuild/check distributions. Mark this plan and current task list complete only after evidence is available.
-- [ ] Commit/push: after the agents finish, verification passes and skills are refreshed, commit the completed project work and push the current branch. Exclude temporary caches and the separately owned, unfinished expanded discard experiment.
+- [x] Commit/push: after the agents finish, verification passes and skills are refreshed, commit the completed project work and push the current branch. Exclude temporary caches and the separately owned, unfinished expanded discard experiment.
 
 ## Required regression fixture
 
