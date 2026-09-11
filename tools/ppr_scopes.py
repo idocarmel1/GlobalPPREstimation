@@ -54,6 +54,22 @@ def read_health(path):
     return result
 
 
+def read_mc_diagnostics(path):
+    """Read acceptance counts from the stored simulations, without rerunning them."""
+    wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+    try:
+        rows = list(wb['mc_diagnostics'].values) if 'mc_diagnostics' in wb.sheetnames else []
+    finally:
+        wb.close()
+    result = {}
+    for row in rows[1:]:
+        entry = dict(zip(rows[0], row))
+        method = entry.get('method')
+        if isinstance(method, str) and method.startswith('MC_'):
+            result[method] = {key: finite(entry.get(key)) for key in ('n_samples', 'n_accepted')}
+    return result
+
+
 def method_health_flags(methods, groups, health):
     """Only apply diagnose_sppr to configurations actually evaluated upstream.
 

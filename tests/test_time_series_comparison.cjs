@@ -19,6 +19,47 @@ const state={units:['a','b','c'],methods:['one','two'],scope:'all',mode:'ppr',np
 const compare=(db,s)=>{assert.equal(typeof api.compare,'function','Multi-method comparison has not been implemented');return api.compare(db,s);};
 const values=series=>series.points.map(p=>p.value);
 
+function mcFixture() {
+  const db=fixture();
+  db.ppr_methods.push({id:'MC_new_GE',kind:'model',scopes:['all','inner']});
+  for(const u of Object.values(db.units))for(const model of u.models){
+    model.mc_diagnostics={MC_new_GE:{n_samples:100,n_accepted:100}};
+    for(const scope of Object.values(model.scopes))scope.methods.MC_new_GE=structuredClone(scope.methods.three);
+  }
+  return db;
+}
+
+test('MC acceptance below 80% excludes an ecosystem from every curve and the NPP denominator',()=>{
+  const db=mcFixture();
+  db.units.a.models[0].mc_diagnostics.MC_new_GE.n_accepted=2;
+  db.units.b.models[0].mc_diagnostics.MC_new_GE.n_accepted=80;
+  const s={...state,methods:['one','MC_new_GE'],mode:'ratio'},r=compare(db,s);
+  assert.deepEqual(r.included,['b','c']);
+  assert.ok(r.series.every(series=>series.points[0].npp===500));
+  assert.match(r.excluded[0].reason,/MC_new_GE.*2.*100.*80%/);
+  assert.deepEqual(compare(db,{...state,methods:['one']}).included,['a','b','c']);
+  assert.deepEqual(compare(db,{...s,models:{a:'new'}}).included,['a','b','c']);
+  const csv=api.comparisonToCSV(r,s);
+  assert.ok(csv.includes('b;c'));assert.ok(!csv.includes('a;b;c'));
+});
+
+test('MC cutoff applies to a baseline, single curve, all scopes and sensitivity treatments',()=>{
+  const db=mcFixture();db.units.a.models[0].mc_diagnostics.MC_new_GE.n_accepted=79;
+  assert.deepEqual(compare(db,{...state,methods:['one'],baseline:'MC_new_GE'}).included,['b','c']);
+  for(const scope of ['all','inner'])for(const catch_basis of ['landings','catch','discards']){
+    const r=compare(db,{...state,units:['a'],methods:['MC_new_GE'],scope,catch_basis,unidentified:'zero'});
+    assert.deepEqual(r.included,[]);assert.match(r.excluded[0].reason,/79.*100.*80%/);
+  }
+});
+
+test('an entirely rejected MC curve cannot silently restore ecosystems in the other curves',()=>{
+  const db=mcFixture();
+  for(const u of Object.values(db.units))u.models[0].mc_diagnostics.MC_new_GE.n_accepted=79;
+  const r=compare(db,{...state,methods:['one','MC_new_GE']});
+  assert.deepEqual(r.included,[]);assert.ok(r.series.every(s=>values(s).every(v=>v===null)));
+  assert.ok(r.excluded.every(e=>/80%/.test(e.reason)));
+});
+
 test('single method without baseline preserves the exact aggregate and CSV contract',()=>{
   const db=fixture();db.units.b.simple.ppr[1]=null;
   const s={...state,methods:['taxon']},original=api.aggregate(db,{...s,method:'taxon'});

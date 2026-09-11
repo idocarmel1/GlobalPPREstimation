@@ -17,6 +17,8 @@ from collections import Counter
 from pathlib import Path
 
 import openpyxl
+from ppr_scopes import read_mc_diagnostics
+from group_filter_data import annual_group_inputs
 
 from build_ecosystem_data import load_catch, load_trophic_levels
 from unidentified_catch import metadata as unidentified_metadata, coefficients as treatment_coefficients, VERSION, RULE
@@ -90,13 +92,21 @@ def simple_annual(rows, years, trophic_levels):
                               for index in range(len(years))]}
 
 
-def export_models(network_unit, years):
+def export_models(network_unit, years, root=None):
     models = []
     for source_model in network_unit.get('models', []):
         model = {key: source_model.get(key) for key in
                  ('id', 'label', 'verified', 'source', 'workbook', 'source_sha256', 'workbook_sha256')}
         model['scopes'] = {}
         if source_model.get('verified'):
+            if 'group_data' in source_model:
+                model['group_data'] = source_model['group_data']
+                model['taxon_scopes'] = source_model['scopes']
+            if 'mc_diagnostics' in source_model:
+                model['mc_diagnostics'] = source_model['mc_diagnostics']
+            if root is not None and model.get('source'):
+                verified_hash(root, model['source'], model.get('source_sha256'))
+                model['mc_diagnostics'] = read_mc_diagnostics(root / model['source'])
             for scope, source_scope in source_model['scopes'].items():
                 methods = {}
                 for index, method in enumerate(source_scope['methods']):
@@ -356,7 +366,10 @@ def build():
         for key in ('catch', 'missing_simple_catch'):
             values = record['unidentified'][key]
             record['unidentified'][key] = [values[lookup[y]] if y in lookup else None for y in years]
-        record['models'], record['default_model'] = export_models(network['units'].get(unit, {}), years)
+        record['models'], record['default_model'] = export_models(network['units'].get(unit, {}), years, root=ROOT)
+        group_inputs = annual_group_inputs(network['units'].get(unit, {}))
+        if group_inputs is not None:
+            record['group_inputs'] = group_inputs
     audit_models(ROOT, network, years, audit)
     methods = [{'id': SIMPLE, 'label': 'Trophic chain · catch-taxon TL (TE 0.1)',
                 'kind': 'taxon', 'scopes': ['all']}]

@@ -12,7 +12,8 @@ from pathlib import Path
 
 import openpyxl
 
-from ppr_scopes import SCOPES, read_health
+from ppr_scopes import SCOPES, read_health, read_scopes, read_mc_diagnostics, finite
+from group_filter_data import build_group_data
 import build_model_workbook as bmw
 import verify_model_workbook as verify
 from unidentified_catch import metadata as unidentified_metadata
@@ -55,7 +56,10 @@ def export_network(root=ROOT):
                 data.update(years=list(catch[0][4:]), taxa=taxa, catch=[list(r[4:]) for r in catch[1:]])
                 labels = [{'taxon': r[0], 'common_name': r[1],
                            'by_year': dict(zip(data['years'], r[4:]))} for r in catch[1:]]
-                data['unidentified'] = unidentified_metadata(labels, data['years'], bmw.mio.read_trophic_levels(root, unit))
+                trophic_levels = bmw.mio.read_trophic_levels(root, unit)
+                data['unidentified'] = unidentified_metadata(labels, data['years'], trophic_levels)
+                data['simple_sppr'] = [10 ** (trophic_levels[t] - 1)
+                                       if finite(trophic_levels.get(t)) is not None else None for t in taxa]
                 if 'landings' not in data:
                     components=read_catch_components(root,unit,taxa,data['years'])
                     data.update({key:value for key,value in components.items() if key not in ('_labels','years','taxa')})
@@ -79,6 +83,10 @@ def export_network(root=ROOT):
                 wb.close()
                 record.update(verified=True, workbook=path.relative_to(root).as_posix(),
                               workbook_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+                record['group_data'] = build_group_data(bmw.mio.read_groups(upstream),
+                    read_scopes(upstream), taxa, mappings,
+                    {key: record[key] for key in ('source', 'source_sha256', 'workbook', 'workbook_sha256')})
+                record['mc_diagnostics'] = read_mc_diagnostics(upstream)
                 record['discard_sensitivity'],record['discard_sensitivity_unavailable']=model_sensitivity(root,data,record,mappings,response_package)
             data['models'].append(record)
         data['default_model'] = next((i for i,m in enumerate(data['models']) if m['id'] == choice['default_model']), 0)

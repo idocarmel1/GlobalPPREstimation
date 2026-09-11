@@ -2,6 +2,7 @@
 const PPRMetrics = (() => {
   const annualNPP=typeof module==='object' && module.exports?require('./annual_npp.js'):globalThis.PPRAnnualNPP;
   const sensitivity=typeof module==='object' && module.exports?require('./discard_sensitivity.js'):globalThis.PPRDiscardSensitivity;
+  const groups=typeof module==='object' && module.exports?require('./group_metrics.js'):globalThis.PPRGroups;
   const finite = v => typeof v === 'number' && Number.isFinite(v);
   const totalAt=(matrix,index)=>Array.isArray(matrix)&&matrix.length&&matrix.every(row=>finite(row[index])&&row[index]>=0)?matrix.reduce((sum,row)=>sum+row[index],0):null;
   const empty = reason => ({value:null, coverage:null, catch:null, status:reason});
@@ -35,7 +36,16 @@ const PPRMetrics = (() => {
       status:npp?(npp.value===null?'Annual NPP unavailable':npp.substituted?`Estimated using ${npp.source_year} NPP`:'ok'):'ok'};
   }
   function evaluate(unit, modelIndex, state) {
-    if(state.method==='simple trophic chain' && state.scope==='all' &&
+    if(state.mode==='npp'){
+      const data=state.npp_data||{};
+      const npp=annualNPP.resolve(data.years||[],data.values,state.year,state.npp_fill,data.metadata,{allowZero:true});
+      return {value:npp.value,npp,coverage:null,catch:null,
+        status:npp.value===null?'Annual NPP unavailable':npp.substituted?`Estimated using ${npp.source_year} NPP`:'ok'};
+    }
+    const selectedModel=unit?.models?.[modelIndex];
+    const selectedGroups=selectedModel?state.group_selections?.[groups.key(state.unit_id,selectedModel)]:undefined;
+    const groupSubset=groups.active(selectedModel,selectedGroups);
+    if(!groupSubset && state.method==='simple trophic chain' && state.scope==='all' &&
       ['ppr','npp_ratio'].includes(state.mode) && state.simple_unit)return independentSimple(state.simple_unit,state);
     if (!unit) return empty('No selected article in the pilot');
     const model = unit.models[modelIndex];
@@ -53,7 +63,11 @@ const PPRMetrics = (() => {
       if(!finite(ppr.value))return {...ppr,npp};
       return {...ppr,npp,value:npp.value===null?null:100*ppr.value/npp.value,
         sensitivity:sensitivity.display(ppr.sensitivity,state,npp.value),
-        denominator:npp.value,status:npp.value===null?'Annual NPP unavailable':npp.substituted?`Estimated using ${npp.source_year} NPP`:'ok'};
+        denominator:npp.value,status:npp.value===null?'Annual NPP unavailable':ppr.status==='No groups selected'?ppr.status:npp.substituted?`Estimated using ${npp.source_year} NPP`:'ok'};
+    }
+    if(groupSubset){
+      const result=groups.evaluate(unit,model,state,selectedGroups);
+      return result.sensitivity?{...result,sensitivity:sensitivity.display(result.sensitivity,state)}:result;
     }
     const scope = model.scopes[state.scope];
     const yi = unit.years.indexOf(Number(state.year));
@@ -70,6 +84,8 @@ const PPRMetrics = (() => {
     if(evaluationCatch.some(row=>!finite(row[yi])||row[yi]<0))return empty('Catch amounts are missing or invalid for this basis and year');
     if (a < 0 || (ratio && b < 0)) return empty('Method unavailable in this scope');
     for (const method of ratio ? [state.method,state.denominator] : [state.method]) {
+      const mcFailure=groups.mcAcceptanceFailure(model,method);
+      if(mcFailure)return empty(mcFailure);
       if (scope.status[method] !== 'ok') return empty(method + ': ' + (scope.status[method] || 'unavailable'));
     }
     const treatment=state.unidentified||'method';

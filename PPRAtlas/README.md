@@ -19,14 +19,80 @@ final mappings. Use the plotted-data download for the selected catch-basis resul
 URLs and downloads preserve catch basis, sensitivity visibility and the existing
 year, method, source-scope, NPP and unidentified-taxon settings.
 
-Open **index.html** for the interactive map, or **archive/index.html** for the searchable source archive. The map shows all **366 ecosystems: 66 LMEs, 282 EEZs and 18 High Seas regions**. The original **167-region Global Estimation** selection remains the curated article archive; displaying an additional ecosystem does not imply article extraction or model verification.
+Open **index.html** for the interactive map, or **archive/index.html** for the searchable source archive. The map can show all **366 ecosystems: 66 LMEs, 282 EEZs and 18 High Seas regions**. The original **167-region Global Estimation** selection remains the curated article archive; displaying an additional ecosystem does not imply article extraction or model verification.
 
 The map opens with **simple trophic chain**, calculated directly from each taxon's selected catch basis and reference trophic level at TE=0.1. It provides PPR and regional PPR/NPP independently of articles and models, in All-source scope. Model-specific methods retain their selected-model verification gates. The two no-catch identities, HS_018 and LME_064, remain visible with unavailable PPR. The All filter includes missing results; numeric Top filters include ranked results only. Scientific source polygons are preserved; only new display geometry is simplified.
+
+## Map colors and ranking
+
+The sidebar follows: search, year, filters, map layers, map metric, article
+controls, ecosystem list. Metric controls begin with color metric, estimation
+method, and SPPR source scope, followed by catch/SPPR and NPP settings.
+
+**Ecosystem set** selects the original **Atlas ensemble (167)** or **All 366**.
+The map opens on the atlas ensemble. **Ecosystems to display** independently selects
+Top 10, Top 25, Top 50, All, or Other number (a positive integer). Ranking is computed
+across the full chosen set for the selected year and metric, before the display
+limit, region-type, search, and download filters. All includes unavailable regions;
+Top N includes only available results. Equal values share a rank and color;
+unit ID breaks display ties so a Top-N limit never shows more than N ecosystems.
+
+PPR colors run from green through yellow to red, with the highest PPR red. The color coordinate is
+`1 - cumulative_share_before`, using descending PPR across the full chosen set.
+Ties use the cumulative share before the entire tied group. Changing only the
+number displayed does not change the ranks or colors. Zero PPR uses green; missing
+results use gray. Article-quality fills and their legend use blue/teal.
+
+**Color ecosystems by → NPP production** ranks annual NPP independently of catch,
+SPPR, and Ecopath availability, using the selected NPP calculation and historical
+missing-value policy. NPP is already in tonnes carbon/year, so no wet-weight
+conversion is applied. Its cumulative color scale reverses PPR: largest producers
+are green, with yellow at the midpoint. PPR/NPP uses green–yellow–red on its existing
+logarithmic value scale; the method-ratio blue–white–red palette is unchanged. The details panel links to annual NPP provenance and the NPP graph.
+Set and display choices persist in the map URL (`rank_set`, `limit`, `count`).
+All-366 totals include overlapping spatial units; they are ranking denominators,
+not unique global production totals.
 
 Open **trends.html**, or choose **Time series** in the map header, for annual PPR and
 PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
 
-## Annual graphs
+## Model group selection
+
+Use **Choose model groups** in either view. Select an ecosystem and model, then
+choose groups with checkboxes, name search, and minimum/maximum filters for TE,
+TL, SPPR_all, SPPR_inner and catch-related PPR. Click a column heading to sort.
+Filters narrow the table; **Select matching** replaces that model's group
+selection with the matching rows. **Select all** restores every group and clears
+the table filters; **Clear all** selects none. Table values follow the displayed
+year, catch basis, PPR source scope, and chosen reference method. Changing the
+reference method or sorting does not silently change the group selection.
+
+The same named group selection applies to all estimation methods using that
+model, including MC, deterministic methods and the catch-taxon simple chain.
+Model-free ecosystems retain their independent simple-chain calculation. TE in
+the table is the source group's GE × EE, without EE repair; it is not the fixed
+TE assumption used by some benchmark methods. SPPR values come from the stored
+all/inner/PP source sheets; no food web or MC calculation is rerun.
+
+Selected groups retain their original taxon-to-group weights. Excluded catch is
+not redistributed, and ecosystem NPP remains unchanged. Selecting all groups
+uses the original calculation exactly, including its missing-data rules and
+rounding. With a subset, catch is limited to retained mapped contributions;
+missing baseline coefficients, failed diagnostics and MC acceptance below 80%
+cannot be rescued. A valid empty selection gives zero PPR. A method ratio with
+a zero denominator remains unavailable. Precomputed discard-routing envelopes
+do not describe arbitrary group subsets and are shown as **not assessed**.
+
+Group selections, model choices, reference-method/table filters and sorting are
+saved automatically in browser storage. Reopening the files in the same browser
+restores them; Map/Time series navigation also carries the selections in the URL.
+CSV and JSON downloads record active group selections. Each HTML embeds its data
+and controls and continues to open directly from disk, without a server or new
+external data files. Saving was verified with Chrome local files; clearing browser
+storage removes saved preferences, and browsers that block local-file storage
+show a saving-unavailable notice.
+
+## Annual graph calculations
 
 - All PPR masses displayed anywhere on the site use **tonnes carbon (t C)**:
   source wet-weight PPR is divided by 9 once. This applies to map values,
@@ -61,6 +127,15 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   unavailable. Method totals can cover different catch taxa, so each curve
   reports its own catch coverage. Unlike the map's ratio calculation, these
   annual comparisons do not recompute totals over common catch taxa.
+- **Monte Carlo acceptance:** a selected MC method (including a baseline) with
+  fewer than 80% accepted runs excludes that ecosystem from every curve in the
+  annual comparison and from its selected-ecosystem NPP denominator. Exactly
+  80% remains eligible. Counts come from the selected model's source workbook
+  `mc_diagnostics` sheet; the exclusion list reports the counts and percentage.
+  The gate applies before catch-basis and unidentified-catch sensitivity choices.
+  Even an entirely rejected MC curve cannot restore its failed ecosystems to
+  other curves. Missing acceptance diagnostics do not establish a low acceptance
+  rate; existing verification and method-status checks still apply.
 - NPP choices are Antoine–Morel, VGPM, Eppley, CbPM, CAFE and regional ensemble
   median. Inputs are year-specific, with unavailable years blank by default.
   All 366 identities have an ensemble estimate in every year from 1998–2019,

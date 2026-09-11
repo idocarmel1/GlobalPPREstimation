@@ -50,7 +50,7 @@ def test_all_identities_have_geometry_and_missing_catch_stays_missing(catalog):
 
 def test_all_rank_includes_missing_regions_and_top_rank_excludes_them(catalog):
     page = render_map(ROOT / 'PPRAtlas', catalog)
-    assert '<option value="all" selected>All 366</option>' in page
+    assert '<option value="all">All 366</option>' in page
     assert '167 Selected Ecosystems' not in page
     assert '${r.curated_archive_member?' in page
     assert 'Article search outside curated archive' in page

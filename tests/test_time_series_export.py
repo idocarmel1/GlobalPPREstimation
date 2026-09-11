@@ -102,3 +102,24 @@ def test_graph_years_include_npp_records_without_a_matching_catch_year():
         'no_catch': {'annual': {'1998': {}, '2005': {}}},
         'legacy_only': {'annual': {'2019': {}}},
     }) == [1998, 2000, 2001, 2005, 2019]
+
+
+def test_mc_acceptance_diagnostics_are_exported_from_verified_source(tmp_path):
+    import openpyxl
+    module = exporter()
+    wb = openpyxl.Workbook()
+    wb.active.title = 'mc_diagnostics'
+    wb.active.append(['method', 'n_samples', 'n_accepted', 'reject_frac'])
+    wb.active.append(['MC_new_GE', 100, 2, .98])
+    wb.active.append(['MC_new_TE_EEfix', 100, 80, .2])
+    wb.save(tmp_path / 'source.xlsx')
+    source = {'models': [{'id': 'model', 'verified': True, 'source': 'source.xlsx',
+                         'source_sha256': module.verified_hash(tmp_path, 'source.xlsx')['sha256'],
+                         'scopes': {}}], 'default_model': 0}
+    models, _ = module.export_models(source, [1990], root=tmp_path)
+    assert models[0]['mc_diagnostics']['MC_new_GE'] == {'n_samples': 100, 'n_accepted': 2}
+    assert models[0]['mc_diagnostics']['MC_new_TE_EEfix'] == {'n_samples': 100, 'n_accepted': 80}
+    wb.active['C2'] = 3
+    wb.save(tmp_path / 'source.xlsx')
+    with pytest.raises(ValueError, match='SHA-256 mismatch'):
+        module.export_models(source, [1990], root=tmp_path)

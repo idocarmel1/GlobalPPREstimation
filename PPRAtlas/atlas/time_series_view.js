@@ -2,20 +2,23 @@
 (() => {
   'use strict';
   const db=SERIES_DB, $=id=>document.getElementById(id), finite=PPRTimeSeries.finite;
-  const params=new URLSearchParams(location.search);
+  const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'trends'});
+  const params=groupStore?.params||new URLSearchParams(location.search);
   const initialSet=db.sets.find(s=>s.id===(params.get('set')||'global')) || db.sets[0];
   const initialMethods=params.has('methods')?params.get('methods').split(',').filter(Boolean):params.getAll('method').filter(Boolean);
-  let models={};try {const parsed=JSON.parse(params.get('models')||'{}');if(parsed && !Array.isArray(parsed) && typeof parsed==='object') models=parsed;} catch { /* Invalid optional model overrides remain unset. */ }
+  let models={...groupStore?.data.models};try {const parsed=JSON.parse(params.get('models')||'{}');if(parsed && !Array.isArray(parsed) && typeof parsed==='object') models={...parsed,...models};} catch { /* Invalid optional model overrides remain unset. */ }
   const state={units:params.has('units')?[...new Set(params.get('units').split(',').filter(Boolean))]:[...initialSet.units],
     set:params.has('units')?'custom':initialSet.id,methods:[...new Set(params.has('methods')?initialMethods:initialMethods.length?initialMethods:['simple trophic chain'])],baseline:params.get('baseline')||null,
     scope:params.get('scope')||'all',mode:['ratio','npp'].includes(params.get('metric'))?params.get('metric'):'ppr',npp_scope:params.get('npp_scope')==='global'?'global':'selected',
     catch_basis:['catch','discards'].includes(params.get('catch_basis'))?params.get('catch_basis'):'landings',uncertainty:params.get('uncertainty')==='0'?'0':'1',
     npp:params.get('npp')||'ens_median_tC_yr',npp_fill:params.get('npp_fill')==='earliest'?'earliest':'observed',unidentified:['zero','simple'].includes(params.get('unidentified'))?params.get('unidentified'):'method',models};
   let result,geometry,focus=Math.max(0,db.years.indexOf(Number(params.get('year')||db.years.at(-1))));
+  state.group_selections=groupStore?.data.selections||{};
   const methodInfo=id=>db.ppr_methods.find(m=>m.id===id);
   const methodLabel=id=>id==='npp'?`NPP · ${nppInfo()?.label||state.npp}`:methodInfo(id)?.label||id;
   const relevantMethods=()=>[...new Set([...state.methods,...(state.baseline?[state.baseline]:[])])];
-  const usesModels=()=>state.mode!=='npp'&&relevantMethods().some(id=>methodInfo(id)?.kind==='model');
+  const hasGroupSubset=()=>state.units.some(id=>{const unit=db.units[id],model=unit?.models.find(m=>m.id===(state.models[id]??unit.default_model));return model&&typeof PPRGroups!=='undefined'&&PPRGroups.active(model,state.group_selections?.[PPRGroups.key(id,model)]);});
+  const usesModels=()=>state.mode!=='npp'&&(relevantMethods().some(id=>methodInfo(id)?.kind==='model')||hasGroupSubset());
   const taxonOnly=()=>relevantMethods().length>0 && relevantMethods().every(id=>methodInfo(id)?.kind==='taxon');
   const hasValues=()=>result.series.some(s=>s.points.some(p=>finite(p.value)));
   const nppInfo=()=>db.npp_methods.find(m=>m.id===state.npp);
@@ -57,6 +60,7 @@
     const overrides=Object.fromEntries(Object.entries(state.models).filter(([id])=>state.units.includes(id)));
     if(Object.keys(overrides).length)p.set('models',JSON.stringify(overrides));
     p.set('year',result.points[focus].year);p.set('from',state.from);p.set('to',state.to);
+    if(groupStore){Object.assign(groupStore.data.models,state.models);groupStore.save(p);groupStore.attach(p);groupStore.shareLinks();}
     try {history.replaceState(null,'','?'+p.toString());} catch { /* Some local-file browsers restrict history. */ }
   }
   function update() {
@@ -98,6 +102,7 @@
     $('nppNote').baseNote=$('nppNote').textContent;$('nppNote').className=globalNPP?'reference-warning':'';
     $('calculationNote').textContent=taxonOnly()?'PPR (tonnes carbon) = catch × (1 / 0.1)^(catch-taxon TL − 1) ÷ 9. Trophic levels are held fixed across years.':`PPR (tonnes carbon) = annual catch × SPPR ÷ 9, using ${state.scope==='PP'?'primary-producer':state.scope} sources. Model coefficients, trophic levels and taxon mappings are held fixed across years; missing taxa are excluded.`;
     $('calculationNote').textContent=$('calculationNote').textContent.replace('= catch ×','= '+catchBasisLabel().toLowerCase()+' ×').replace('= annual catch ×','= annual '+catchBasisLabel().toLowerCase()+' ×');
+    if(typeof hasGroupSubset!=='undefined'&&hasGroupSubset())$('calculationNote').textContent+=' Selected groups retain their original model mapping weights; excluded catch is not reassigned.';
     if(ratio) $('calculationNote').textContent+=` PPR / NPP = 100 × selected PPR carbon / ${globalNPP?'fixed global atlas NPP reference':'NPP of the same included ecosystems'} (%). Wet-weight PPR is converted to carbon once, at 1/9.`;
     if(!nppOnly&&(state.methods.length>1 || result.normalized))$('calculationNote').textContent+=' Available curves use the same ecosystems; the catch taxa covered by each method may differ.';
     if(result.normalized)$('calculationNote').textContent+=` Each curve is divided by ${methodLabel(state.baseline)} in the same year and ecosystems. Values are dimensionless multiples (×); missing or zero baselines leave gaps.${ratio?' The common NPP denominator cancels in this comparison.':''}`;
@@ -111,6 +116,7 @@
     // Missing plotted ratios still have carbon totals, bounds and reasons to export.
     $('downloadCSV').disabled=!result.series.some(s=>s.points.length);$('downloadJSON').disabled=$('downloadCSV').disabled;$('inspectYear').disabled=!hasValues();
     renderCoverage();draw();saveURL();
+    if(typeof groupStore!=='undefined'&&groupStore)$('groupFilterSummary').textContent=Object.keys(groupStore.data.selections).length?`${Object.keys(groupStore.data.selections).length} models with group selections`:'All model groups included';
   }
 
   function renderCoverage() {
@@ -124,7 +130,7 @@
       const link=element('a',`${unit.name} (${id})`),p=methodParams(new URLSearchParams({units:id,scope:state.scope,metric:state.mode,npp:state.npp,npp_fill:state.npp_fill,npp_scope:state.npp_scope,unidentified:state.unidentified,catch_basis:state.catch_basis,uncertainty:state.uncertainty,from:state.from,to:state.to}));
       if(state.models[id])p.set('models',JSON.stringify({[id]:state.models[id]}));
       link.href='trends.html?'+p.toString();li.appendChild(link);
-      if(usesModels()){
+      if(!nppOnly&&(relevantMethods().some(id=>methodInfo(id)?.kind==='model')||result.series.some(series=>series.model_ids?.[id]))){
         const model=unit.models.find(m=>m.id===(state.models[id]??unit.default_model));
         li.appendChild(document.createTextNode(' · '+(model?.label||model?.id||'No model')));
         if(model?.workbook){li.appendChild(document.createTextNode(' · '));const source=element('a','Source workbook · total-catch calculation and mappings');source.href='../'+model.workbook.split('/').map(encodeURIComponent).join('/');li.appendChild(source);}
@@ -418,5 +424,13 @@
   }
   $('downloadCSV').addEventListener('click',()=>download('csv'));$('downloadJSON').addEventListener('click',()=>download('json'));
   new ResizeObserver(()=>{if(result)draw();}).observe($('plotWrap'));
+  const groupDialog=groupStore?PPRGroupDialog.create({units:db.units,store:groupStore,
+    getContext:()=>({...state,year:result?.points[focus]?.year??db.years[focus],method:state.methods[0]||'simple trophic chain'}),
+    onChange:()=>{state.group_selections=groupStore.data.selections;Object.assign(state.models,groupStore.data.models);update();}
+  }):null;
+  if(groupDialog){
+    $('openGroupFilter').addEventListener('click',()=>groupDialog.open(state.units.length===1?state.units[0]:undefined));
+    groupStore.subscribe(()=>{state.group_selections=groupStore.data.selections;Object.assign(state.models,groupStore.data.models);update();groupDialog.refresh();});
+  }
   update();
 })();

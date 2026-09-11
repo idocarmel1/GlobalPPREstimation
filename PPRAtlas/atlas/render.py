@@ -17,6 +17,29 @@ yearSelect.addEventListener('change',()=>applyYear(yearSelect.value));
 applyYear(DB.year);
 '''
 
+def order_map_sidebar(text):
+    """Arrange the existing sidebar blocks without changing their controls or IDs."""
+    start = re.search(r'<aside class="sidebar"[^>]*>', text).end()
+    end = text.index('</aside>', start)
+    parts = re.split(r'<div class="section-title">([^<]+)</div>', text[start:end])
+    blocks = dict(zip(parts[1::2], parts[2::2]))
+    layers = blocks['Map layers']
+    article_toggle = re.search(r'<label class="check"><input id="showArticles".*?</label>', layers).group(0)
+    blocks['Map layers'] = layers.replace(article_toggle, '')
+    blocks['Article controls'] = (
+        '<div class="checks">' + article_toggle + '</div>'
+        + blocks['Downloaded source files']
+        + '<div class="field"><label for="qualityFilter">Minimum article quality</label>'
+        + blocks['Minimum article quality'] + '</div>'
+        + '<div class="field"><label>Article quality — area fill</label>'
+        + blocks['Article quality — area fill'] + '</div>'
+    )
+    order = ['Find an ecosystem or article', 'Year', 'Filters', 'Map layers',
+             'Map metric', 'Article controls', 'Ecosystems in this view']
+    sidebar = parts[0] + ''.join('<div class="section-title">'+name+'</div>'+blocks[name] for name in order)
+    return text[:start] + sidebar + text[end:]
+
+
 def render_map(root, db):
     network_path = root/'data/network_ppr.json'
     network = json.loads(network_path.read_text(encoding='utf-8')) if network_path.exists() else None
@@ -75,8 +98,20 @@ def render_map(root, db):
     text=text.replace('<div class="section-title">PPR-ranked units</div>','<p style="font-size:11px"><a href="archive/index.html" target="_blank">Browse article archive</a> · <a href="data/eez_searches.csv">EEZ searches</a> · <a href="data/lme_searches.csv">LME searches</a></p><div class="section-title">PPR-ranked units</div>')
     if network:
         assets = root/'atlas'
-        text = text.replace('<option value="10">Pilot top 10</option>', f'<option value="pilot">Pilot model set ({len(network["units"])})</option>')
-        script = '\n'.join((assets/name).read_text(encoding='utf-8') for name in ['annual_npp.js', 'discard_sensitivity.js', 'network_metrics.js', 'network_view.js'])
+        text = text.replace('<div class="section-title">PPR year</div>', '<div class="section-title">Year</div>').replace('aria-label="PPR year"', 'aria-label="Year"')
+        text = re.sub(r'<div class="field"><label>Rank scope</label><select id="rankFilter">.*?</select></div>',
+            '<div class="field"><label for="rankSetFilter">Ecosystem set</label><select id="rankSetFilter">'
+            f'<option value="atlas">Atlas ensemble ({len(db.get("curated_region_ids", []))})</option>'
+            f'<option value="all">All {len(db["regions"])}</option></select></div>', text)
+        rank_controls = '''<div class="grid2"><div class="field"><label for="rankFilter">Ecosystems to display</label><select id="rankFilter"><option value="10">Top 10</option><option value="25">Top 25</option><option value="50">Top 50</option><option value="all" selected>All</option><option value="custom">Other number</option></select></div><div class="field" id="rankCustomField" hidden><label for="rankCustom">Number to display</label><input id="rankCustom" type="number" min="1" step="1" value="100" aria-describedby="rankCustomHelp"><small id="rankCustomHelp">Enter a positive whole number.</small></div></div>'''
+        text = text.replace('<div class="section-title">Downloaded source files</div>', rank_controls+'<div class="section-title">Downloaded source files</div>')
+        if 'id="rankFilter"' not in text:
+            raise ValueError('Map display-limit insertion point not found')
+        text = re.sub(r'function qualityColor\(q\)\{[^\n]+\}', "function qualityColor(q){return mix('#cde7e8','#075c69',Math.max(0,Math.min(1,q/100)))}", text)
+        text = re.sub(r'\.q-grad\{[^}]+\}', '.q-grad{background:linear-gradient(90deg,#cde7e8,#075c69)}', text)
+        text = text.replace('</style>', '.field input[type=number]{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px}.field input:invalid{border-color:#b64b3a}#rankCustomHelp{font-size:10px;color:var(--muted)}</style>')
+        script = '\n'.join((assets/name).read_text(encoding='utf-8') for name in ['annual_npp.js', 'discard_sensitivity.js', 'group_metrics.js', 'group_settings.js', 'group_ui.js', 'network_metrics.js', 'map_ranking.js', 'network_view.js'])
+        text = text.replace('</style>', (assets/'group_ui.css').read_text(encoding='utf-8')+'</style>')
         text = text.replace(YEAR_SCRIPT, script)
         text = text.replace(marker, (assets/'network_controls.html').read_text(encoding='utf-8') + marker)
         text = text.replace('<p style="font-size:10px;color:#647b8b">Whole-region PPR sum at TE=0.1. Residual overlap is retained; shares are not unique global coverage. Gray markers indicate missing data.</p>', '')
@@ -92,6 +127,8 @@ def render_map(root, db):
         text = text.replace('</style>', '.network-note{font-size:11px;line-height:1.5;color:var(--muted)}.network-result{padding:14px 0;border-bottom:1px solid var(--line)}.network-value{font:700 25px Manrope;margin-top:14px}.network-status{font-size:11px;overflow-wrap:anywhere}.network-result select{max-width:100%}#metricLegendTitle{display:block;font-size:11px;margin-bottom:8px}#metricGradient{height:10px}#networkLegend .legend-labels{gap:8px}.field{margin-bottom:9px}[hidden]{display:none!important}</style>')
     text = text.replace('</header>', '<nav class="view-nav" aria-label="View"><a href="index.html" aria-current="page">Map</a><a href="trends.html">Time series</a></nav></header>', 1)
     text = text.replace('</style>', '.view-nav{display:flex;gap:4px;padding:4px;background:#fff;border:1px solid var(--line);border-radius:9px;align-self:center}.view-nav a{padding:8px 12px;border-radius:5px;color:var(--muted);text-decoration:none;white-space:nowrap;font-size:12px}.view-nav a[aria-current]{background:#183945;color:white}@media(max-width:800px){header{flex-wrap:wrap}.view-nav{margin-top:8px}}</style>')
+    if network:
+        text = order_map_sidebar(text)
     return re.sub(r'(?m)^[ \t]+$', '', text)
 
 
@@ -101,9 +138,9 @@ def render_time_series(root):
     payload = json.loads((root / 'data/time_series.json').read_text(encoding='utf-8'))
     text = (assets / 'time_series.html').read_text(encoding='utf-8')
     replacements = {
-        '/* TIME_SERIES_CSS */': (assets / 'time_series.css').read_text(encoding='utf-8'),
+        '/* TIME_SERIES_CSS */': (assets / 'time_series.css').read_text(encoding='utf-8')+'\n'+(assets / 'group_ui.css').read_text(encoding='utf-8'),
         '/* TIME_SERIES_DATA */': json.dumps(payload, ensure_ascii=False, separators=(',', ':'), allow_nan=False).replace('</', r'<\/'),
-        '/* TIME_SERIES_METRICS */': '\n'.join((assets / name).read_text(encoding='utf-8') for name in ['annual_npp.js', 'discard_sensitivity.js', 'time_series_npp.js', 'time_series_metrics.js']),
+        '/* TIME_SERIES_METRICS */': '\n'.join((assets / name).read_text(encoding='utf-8') for name in ['annual_npp.js', 'discard_sensitivity.js', 'group_metrics.js', 'group_settings.js', 'group_ui.js', 'time_series_npp.js', 'time_series_metrics.js']),
         '/* TIME_SERIES_VIEW */': (assets / 'time_series_view.js').read_text(encoding='utf-8'),
     }
     for marker, value in replacements.items():

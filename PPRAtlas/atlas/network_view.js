@@ -1,13 +1,17 @@
 /* Runs after the inherited atlas has initialized its layers. */
 const network = DB.network;
-const mapParams=new URLSearchParams(location.search);
+const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'map'});
+const mapParams=groupStore?.params||new URLSearchParams(location.search);
 const defaultMethod=['inner','PP'].includes(mapParams.get('scope'))||['ratio','b','rho_living'].includes(mapParams.get('metric'))?'new_GE':'simple trophic chain';
-const metricState = {year:DB.year,scope:['all','inner','PP'].includes(mapParams.get('scope'))?mapParams.get('scope'):'all',mode:['ppr','ratio','npp_ratio','b','rho_living'].includes(mapParams.get('metric'))?mapParams.get('metric'):'ppr',method:mapParams.get('method')||defaultMethod,denominator:mapParams.get('denominator')||'new_TE_EEfix',te:mapParams.get('te')==='TE'?'TE':'GE',
+const metricState = {year:DB.year,scope:['all','inner','PP'].includes(mapParams.get('scope'))?mapParams.get('scope'):'all',mode:['ppr','npp','ratio','npp_ratio','b','rho_living'].includes(mapParams.get('metric'))?mapParams.get('metric'):'ppr',method:mapParams.get('method')||defaultMethod,denominator:mapParams.get('denominator')||'new_TE_EEfix',te:mapParams.get('te')==='TE'?'TE':'GE',
   catch_basis:['catch','discards'].includes(mapParams.get('catch_basis'))?mapParams.get('catch_basis'):'landings',uncertainty:mapParams.get('uncertainty')==='0'?'0':'1',
   npp:mapParams.get('npp')||'ens_median_tC_yr',npp_fill:mapParams.get('npp_fill')==='earliest'?'earliest':'observed',unidentified:['zero','simple'].includes(mapParams.get('unidentified'))?mapParams.get('unidentified'):'method'};
+const rankState={set:mapParams.get('rank_set')==='all'?'all':'atlas',limit:['10','25','50','all','custom'].includes(mapParams.get('limit'))?mapParams.get('limit'):'all',custom:mapParams.get('count')||'100'};
+const curatedIds=new Set(DB.curated_region_ids||[]);
 const chosenModels = Object.fromEntries(Object.entries(network.units).map(([id,u])=>[id,u.default_model]));
+metricState.group_selections=groupStore?.data.selections||{};
 try{
-  const saved=JSON.parse(mapParams.get('models')||'{}');
+  const saved={...JSON.parse(mapParams.get('models')||'{}'),...groupStore?.data.models};
   for(const [id,model] of Object.entries(saved||{})){
     const index=network.units[id]?.models.findIndex(m=>m.id===model);
     if(index>=0)chosenModels[id]=index;
@@ -18,8 +22,8 @@ const escapeMetric = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&
 const precise = v => v == null ? 'Unavailable' : v.toLocaleString(undefined,{maximumSignificantDigits:4});
 const catchBasisLabel=()=>({landings:'Landings',catch:'All catch',discards:'Discards'})[metricState.catch_basis];
 const isIndependentSimple=()=>['ppr','npp_ratio'].includes(metricState.mode)&&metricState.method==='simple trophic chain';
-const metricName = () => ({ppr:catchBasisLabel()+' PPR (tonnes carbon)',npp_ratio:catchBasisLabel()+' PPR / NPP (%)',ratio:'Method ratio',b:'Recycling b',rho_living:'Rho living'})[metricState.mode];
-const resultText = r => r.networkResult?.value == null ? 'Unavailable' : precise(r.networkResult.value)+(metricState.mode==='ppr'?' t C':metricState.mode==='ratio'?'×':metricState.mode==='npp_ratio'?'%':'');
+const metricName = () => ({npp:'NPP (tonnes carbon/year)',ppr:catchBasisLabel()+' PPR (tonnes carbon)',npp_ratio:catchBasisLabel()+' PPR / NPP (%)',ratio:'Method ratio',b:'Recycling b',rho_living:'Rho living'})[metricState.mode];
+const resultText = r => r.networkResult?.value == null ? 'Unavailable' : precise(r.networkResult.value)+(metricState.mode==='npp'?' t C/yr':metricState.mode==='ppr'?' t C':metricState.mode==='ratio'?'×':metricState.mode==='npp_ratio'?'%':'');
 const nppData=id=>({years:network.npp_years||[],values:network.npp?.[id]?.[metricState.npp],metadata:network.npp_metadata?.[id]});
 const showSensitivity=()=>metricState.catch_basis==='landings'&&metricState.uncertainty!=='0'&&['ppr','npp_ratio'].includes(metricState.mode);
 const assessedSensitivity=result=>showSensitivity()&&result?.sensitivity?.status==='assessed'&&!result.sensitivity.hidden&&PPRMetrics.finite(result.value)&&PPRMetrics.finite(result.sensitivity.lower)&&PPRMetrics.finite(result.sensitivity.upper)&&result.sensitivity.lower<=result.sensitivity.upper;
@@ -55,16 +59,17 @@ function appendResultDownload(panel,region,model,result,unit){
   const button=document.createElement('button');button.type='button';button.textContent='Download current estimate CSV';
   button.addEventListener('click',()=>{
     const band=result.sensitivity,visible=showSensitivity(),assessed=assessedSensitivity(result);
-    const row={ecosystem:region.unit_id,year:DB.year,model:model?.id||null,method:metricState.method,source_files:unit?.sources,comparison_denominator:metricState.mode==='ratio'?metricState.denominator:null,diagnostic_basis:['b','rho_living'].includes(metricState.mode)?metricState.te:null,source_scope:metricState.scope,catch_basis:metricState.catch_basis,
-      unidentified:metricState.unidentified,metric:metricState.mode,npp_method:metricState.npp,npp_fill:metricState.npp_fill,central_value:result.value,
-      central_unit:metricState.mode==='ppr'?'t C':metricState.mode==='npp_ratio'?'percent':metricState.mode==='ratio'?'multiple':'dimensionless',status:result.status,
+    const row={ecosystem:region.unit_id,year:DB.year,model:model?.id||null,method:metricState.mode==='npp'?metricState.npp:metricState.method,source_files:metricState.mode==='npp'?network.npp_sources:unit?.sources,comparison_denominator:metricState.mode==='ratio'?metricState.denominator:null,diagnostic_basis:['b','rho_living'].includes(metricState.mode)?metricState.te:null,source_scope:metricState.mode==='npp'?null:metricState.scope,catch_basis:metricState.mode==='npp'?null:metricState.catch_basis,
+      unidentified:metricState.mode==='npp'?null:metricState.unidentified,metric:metricState.mode,npp_method:metricState.npp,npp_fill:metricState.npp_fill,npp_source_year:result.npp?.source_year,npp_substituted:result.npp?.substituted,central_value:result.value,
+      central_unit:metricState.mode==='npp'?'t C/yr':metricState.mode==='ppr'?'t C':metricState.mode==='npp_ratio'?'percent':metricState.mode==='ratio'?'multiple':'dimensionless',status:result.status,
       selected_basis_tonnes:result.total_catch,covered_tonnes:result.catch,coverage:result.coverage,total_catch_tonnes:result.total_catch_all,discards_tonnes:result.total_discards,
       uncertainty:metricState.uncertainty,sensitivity_visible:visible,sensitivity_status:assessed?'assessed':visible?'not_assessed':'hidden',sensitivity_lower:assessed?band.lower:null,sensitivity_upper:assessed?band.upper:null,
       sensitivity_min_tC:visible&&PPRMetrics.finite(band?.min_tC)?band.min_tC:null,sensitivity_max_tC:visible&&PPRMetrics.finite(band?.max_tC)?band.max_tC:null,discard_fraction:band?.discard_fraction??(result.total_catch_all>0&&PPRMetrics.finite(result.total_discards)?result.total_discards/result.total_catch_all:null),
       sensitivity_routes:band?.route_ppr_tC,sensitivity_excluded_routes:band?.excluded_routes,sensitivity_reason:band?.reason,sensitivity_type:band?.uncertainty_type,sensitivity_source_hash:band?.source_hash,sensitivity_study_version:band?.study_version,sensitivity_route_evidence:band?.route_evidence,sensitivity_source_validity:band?.source_validity};
+    if(Object.keys(metricState.group_selections||{}).length)row.group_selections=metricState.group_selections;
     const quote=value=>'"'+String(value==null?'':typeof value==='object'?JSON.stringify(value):value).replaceAll('"','""')+'"';
     const csv=Object.keys(row).map(quote).join(',')+'\n'+Object.values(row).map(quote).join(',')+'\n';
-    const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download=`ppr-${region.unit_id}-${metricState.catch_basis}-${DB.year}.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download=`${metricState.mode==='npp'?'npp':'ppr'}-${region.unit_id}-${metricState.catch_basis}-${DB.year}.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });panel.appendChild(button);
 }
 function appendTreatment(panel,unit,result){
@@ -85,10 +90,10 @@ function appendTreatment(panel,unit,result){
   const inventory=document.createElement('a');inventory.textContent='Complete classifier and inventory';inventory.href='../data/unidentified_taxa.json';audit.appendChild(inventory);panel.appendChild(audit);
 }
 function appendNpp(panel,id){
-  const data=nppData(id),npp=PPRAnnualNPP.resolve(data.years,data.values,DB.year,metricState.npp_fill,data.metadata);
+  const data=nppData(id),npp=PPRAnnualNPP.resolve(data.years,data.values,DB.year,metricState.npp_fill,data.metadata,{allowZero:metricState.mode==='npp'});
   const text=document.createElement('p');text.className='network-note';
   const name=network.npp_methods?.find(m=>m.id===metricState.npp)?.label||metricState.npp;
-  text.textContent=`NPP ${DB.year} · ${name}: ${precise(npp.value)}${npp.value===null?'':' t C'}. `+(npp.substituted?`Historical estimate using the constant ${npp.source_year} value; this is not an observation for ${DB.year}.`:npp.value===null?'No annual value is available.':'Annual source value.');
+  text.textContent=`NPP ${DB.year} · ${name}: ${precise(npp.value)}${npp.value===null?'':' t C/yr'}. `+(npp.substituted?`Historical estimate using the constant ${npp.source_year} value; this is not an observation for ${DB.year}.`:npp.value===null?'No annual value is available.':'Annual source value.');
   panel.appendChild(text);
   if(metricState.npp.startsWith('ens_') && npp.metadata){
     const available=npp.metadata.available_models,modelNames=Array.isArray(available)?available.join(', '):available;
@@ -117,6 +122,7 @@ function populateMethods() {
 // Override color functions only after initialization, so old template setup remains safe.
 pprColor = function(r) {
   const v=r.networkResult?.value;
+  const ramp=t=>t<.5?mix('#1a9850','#fee08b',t*2):mix('#fee08b','#d73027',(t-.5)*2);
   if(!PPRMetrics.finite(v))return '#b7c4ca';
   if(metricState.mode==='ratio'){
     const t=Math.max(-2,Math.min(2,Math.log2(Math.max(v,.000001))))/2;
@@ -126,8 +132,13 @@ pprColor = function(r) {
     const t=Math.max(0,Math.min(1,v));
     return t<.7?mix('#e4f0ec','#dfb34a',t/.7):mix('#dfb34a','#aa3030',(t-.7)/.3);
   }
+  if(metricState.mode==='ppr'||metricState.mode==='npp'){
+    if(r.cumulative_before_share==null)return '#b7c4ca';
+    const t=r.networkResult.value===0?0:Math.max(0,Math.min(1,1-r.cumulative_before_share));
+    return ramp(metricState.mode==='npp'?1-t:t);
+  }
   const lo=Math.log1p(colorExtent[0]),hi=Math.log1p(colorExtent[1]);
-  return mix('#cde7e8','#075c69',hi===lo?.65:(Math.log1p(v)-lo)/(hi-lo));
+  return ramp(hi===lo?.5:Math.max(0,Math.min(1,(Math.log1p(v)-lo)/(hi-lo))));
 };
 baseRegionStyle = function(r) {
   const active=r.unit_id===selectedId,selected=!!network.units[r.unit_id],valid=PPRMetrics.finite(r.networkResult?.value);
@@ -162,12 +173,19 @@ renderDetails = function(r) {
   });
   const old=$('details').querySelector('.metric-grid');
   const panel=document.createElement('div');panel.className='network-result';
-  const independent=isIndependentSimple(),modelUnit=network.units[r.unit_id],unit=independent?network.simple_units?.[r.unit_id]:modelUnit,result=r.networkResult;
+  if(metricState.mode==='npp'){
+    const result=r.networkResult;
+    panel.innerHTML=`<div class="network-value">${resultText(r)}</div><p class="network-status">${escapeMetric(result.status)}</p>`;
+    appendNpp(panel,r.unit_id);
+    const link=document.createElement('a');link.href='trends.html?'+new URLSearchParams({units:r.unit_id,metric:'npp',year:DB.year,npp:metricState.npp,npp_fill:metricState.npp_fill});if(typeof groupStore!=='undefined'&&groupStore)link.href=groupStore.link(link.href);link.textContent='NPP through time →';panel.appendChild(link);
+    appendResultDownload(panel,r,null,result);old.replaceWith(panel);return;
+  }
+  const modelUnit=network.units[r.unit_id],result=r.networkResult,independent=isIndependentSimple()&&!result?.group_selection?.active,unit=independent?network.simple_units?.[r.unit_id]:modelUnit;
   const trendLink=()=>{
     const model=independent?null:modelUnit?.models[chosenModels[r.unit_id]];
     const p=new URLSearchParams({units:r.unit_id,method:unit?metricState.method:'simple trophic chain',scope:unit?metricState.scope:'all',year:DB.year,metric:metricState.mode==='npp_ratio'?'ratio':'ppr',npp:metricState.npp,npp_fill:metricState.npp_fill,unidentified:metricState.unidentified,catch_basis:metricState.catch_basis,uncertainty:metricState.uncertainty});
     if(model)p.set('models',JSON.stringify({[r.unit_id]:model.id}));
-    const link=document.createElement('a');link.href='trends.html?'+p.toString();link.textContent=unit?'PPR through time →':'PPR through time · catch-taxon TL →';
+    const link=document.createElement('a');link.href='trends.html?'+p.toString();if(typeof groupStore!=='undefined'&&groupStore)link.href=groupStore.link(link.href);link.textContent=unit?'PPR through time →':'PPR through time · catch-taxon TL →';
     const links=document.createElement('p');links.className='actions';links.appendChild(link);return links;
   };
   if(!unit){panel.innerHTML=`<p>${escapeMetric(result?.status||(independent?'Catch-taxon inputs are unavailable for this ecosystem.':'No Ecopath model is selected for this ecosystem.'))}</p>`;appendNpp(panel,r.unit_id);panel.appendChild(trendLink());old.replaceWith(panel);return}
@@ -177,6 +195,7 @@ renderDetails = function(r) {
   if(sel){modelUnit.models.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m.label||m.id.replaceAll('_',' ');o.selected=i===idx;sel.appendChild(o)});
     sel.addEventListener('change',()=>{chosenModels[r.unit_id]=Number(sel.value);applyYear(DB.year)});}
   const notes=document.createElement('p');notes.className='network-note';notes.textContent=independent?'Simple trophic chain uses catch-taxon trophic levels and TE=0.1. It does not require an extracted article or Ecopath model. Missing catch or trophic levels remain visible in coverage.':unit.note;panel.appendChild(notes);
+  if(isIndependentSimple()&&!independent)notes.textContent='Selected groups use this model’s taxon-to-group mapping. PPR coefficients still follow the catch-taxon trophic chain at TE=0.1.';
   panel.appendChild(trendLink());
   if(!['b','rho_living'].includes(metricState.mode))appendTreatment(panel,unit,result);
   appendNpp(panel,r.unit_id);
@@ -195,12 +214,13 @@ renderDetails = function(r) {
   old.replaceWith(panel);
 };
 function updateLegend() {
-  const mode=metricState.mode, diagnostic=mode==='b'||mode==='rho_living',independent=isIndependentSimple();
-  $('pprOptions').hidden=diagnostic;$('recyclingOptions').hidden=!diagnostic;$('denominatorField').hidden=mode!=='ratio';
+  const mode=metricState.mode, diagnostic=mode==='b'||mode==='rho_living',nppOnly=mode==='npp',independent=isIndependentSimple();
+  $('pprOptions').hidden=diagnostic||nppOnly;$('recyclingOptions').hidden=!diagnostic;$('denominatorField').hidden=mode!=='ratio';
   $('nppOptions').hidden=diagnostic;
-  $('mapUnidentified').disabled=diagnostic;$('mapCatchBasis').disabled=diagnostic;
+  $('mapUnidentified').disabled=diagnostic||nppOnly;$('mapCatchBasis').disabled=diagnostic||nppOnly;
+  for(const id of ['mapUnidentified','mapCatchBasis','mapUncertainty'])$(id).closest('.field').hidden=nppOnly;
   $('scopeFilter').disabled=independent;
-  $('mapUncertainty').disabled=diagnostic||mode==='ratio'||metricState.catch_basis!=='landings';
+  $('mapUncertainty').disabled=diagnostic||nppOnly||mode==='ratio'||metricState.catch_basis!=='landings';
   $('mapSensitivityHelp').textContent=metricState.catch_basis!=='landings'?'Envelope hidden in this view. Select landings to assess discard routing.':mode==='ratio'?'No envelope is assessed for a ratio of methods.':'Where assessed, the range applies routing alternatives to the same landings. It is not a confidence interval.';
   $('yearFilter').disabled=diagnostic;$('methodLabel').textContent=mode==='ratio'?'Numerator method':'Estimation method';
   $('metricLegendTitle').textContent=metricName();
@@ -208,34 +228,44 @@ function updateLegend() {
   if(independent)$('metricHelp').textContent='Simple trophic chain PPR (tonnes carbon) = selected catch × (1 / 0.1)^(catch-taxon TL − 1) ÷ 9. No extracted article or Ecopath model is required. Trophic levels stay fixed across years; unavailable catch or trophic levels remain missing or uncovered. This method has only an All-sources total.';
   if(mode==='npp_ratio')$('metricHelp').textContent='PPR / NPP = 100 × annual PPR carbon / annual NPP carbon (%). PPR is converted from wet weight once at 1/9. Missing annual NPP leaves the ecosystem unavailable.';
   if(independent&&mode==='npp_ratio')$('metricHelp').textContent+=' The numerator uses catch-taxon TL at TE=0.1 and requires no extracted article or Ecopath model.';
+  if(independent&&regions.some(r=>r.networkResult?.group_selection?.active))$('metricHelp').textContent='Simple trophic chain uses catch-taxon TL at TE=0.1. Group-filtered ecosystems also use their selected model’s catch-allocation weights; other ecosystems retain independent simple-chain values.';
   if(!diagnostic)$('metricHelp').textContent+=metricState.npp_fill==='earliest'?' Historical NPP estimates use each ecosystem’s earliest available value only for earlier missing years; internal and later gaps remain blank.':' Historical NPP is not inferred; unavailable years remain blank.';
-  if(!diagnostic && metricState.unidentified!=='method')$('metricHelp').textContent+=metricState.unidentified==='zero'?' Unidentified-catch sensitivity: zero PPR for explicitly classified taxa; selected catch tonnage retained.':' Unidentified-catch sensitivity: reference-TL simple-chain coefficients, All sources only. Missing reference coefficients remain uncovered.';
-  $('metricGradient').style.background=diagnostic?'linear-gradient(90deg,#e4f0ec,#dfb34a 70%,#aa3030)':mode==='ratio'?'linear-gradient(90deg,#3278a1,#f7fafb,#b64b3a)':'linear-gradient(90deg,#cde7e8,#075c69)';
+  if(!diagnostic && !nppOnly && metricState.unidentified!=='method')$('metricHelp').textContent+=metricState.unidentified==='zero'?' Unidentified-catch sensitivity: zero PPR for explicitly classified taxa; selected catch tonnage retained.':' Unidentified-catch sensitivity: reference-TL simple-chain coefficients, All sources only. Missing reference coefficients remain uncovered.';
+  if(nppOnly)$('metricHelp').textContent='Annual NPP from the selected satellite calculation or ensemble, in tonnes carbon per year. Independent of catch, SPPR methods and Ecopath-model availability. '+(metricState.npp_fill==='earliest'?'Earlier missing years use the earliest available value; internal and later gaps stay blank.':'Missing annual values stay unavailable.');
+  $('metricGradient').style.background=diagnostic?'linear-gradient(90deg,#e4f0ec,#dfb34a 70%,#aa3030)':mode==='ratio'?'linear-gradient(90deg,#3278a1,#f7fafb,#b64b3a)':'linear-gradient(90deg,#1a9850,#fee08b,#d73027)';
   $('metricLow').textContent=diagnostic?'0':mode==='ratio'?'≤0.25×':precise(colorExtent[0]);
   $('metricMiddle').textContent=diagnostic?'0.5':mode==='ratio'?'1×':'log scale';
   $('metricHigh').textContent=diagnostic?'≥1 · convergence fails':mode==='ratio'?'≥4×':precise(colorExtent[1]);
+  if(mode==='ppr'||nppOnly){
+    $('metricGradient').style.background=nppOnly?'linear-gradient(90deg,#d73027,#fee08b,#1a9850)':'linear-gradient(90deg,#1a9850,#fee08b,#d73027)';
+    $('metricLow').textContent='0% · smaller contributors';$('metricMiddle').textContent='50%';$('metricHigh').textContent='100% · largest contributors';
+    $('metricHelp').textContent+=' Color = 1 − cumulative share before this ecosystem, ranked highest first across the selected set. Equal values share a color.';
+  }
 }
 function applyYear(year) {
   DB.year=Number(year);metricState.year=DB.year;
   const annual=DB.annual[String(year)];
   regions.forEach(r=>{
-    r.networkResult=PPRMetrics.evaluate(network.units[r.unit_id],chosenModels[r.unit_id],{...metricState,npp_data:nppData(r.unit_id),simple_unit:network.simple_units?.[r.unit_id]});
+    r.networkResult=PPRMetrics.evaluate(network.units[r.unit_id],chosenModels[r.unit_id],{...metricState,unit_id:r.unit_id,npp_data:nppData(r.unit_id),simple_unit:network.simple_units?.[r.unit_id]});
     r.ppr_species_2019=r.networkResult.value;
     r.total_catch_tonnes=r.networkResult.total_catch??(metricState.catch_basis==='catch'?annual?.[r.unit_id]?.[1]??null:null);
-    r['data availability']=r.networkResult.value==null?'unavailable':isIndependentSimple()?'catch_trophic_levels':'pilot';
+    r['data availability']=r.networkResult.value==null?'unavailable':isIndependentSimple()&&!r.networkResult.group_selection?.active?'catch_trophic_levels':'pilot';
   });
-  regions.sort((a,b)=>(a.ppr_species_2019===null)-(b.ppr_species_2019===null)||(b.ppr_species_2019||0)-(a.ppr_species_2019||0)||a.unit_id.localeCompare(b.unit_id));
-  const values=regions.map(r=>r.networkResult.value).filter(PPRMetrics.finite);
-  colorExtent=values.length?[Math.min(...values),Math.max(...values)]:[0,1];
-  const total=values.reduce((a,b)=>a+b,0);let rank=0,prior=null,cumulative=0;
-  regions.forEach((r,i)=>{const v=r.networkResult.value;if(v==null){r.ppr_rank=null;r.global_ppr_share=null;r.cumulative_ppr_share=null;return}if(v!==prior)rank=i+1;prior=v;cumulative+=v;r.ppr_rank=rank;r.global_ppr_share=metricState.mode==='ppr'&&total?v/total:null;r.cumulative_ppr_share=metricState.mode==='ppr'&&total?cumulative/total:null});
+  const summary=PPRMapRanking.rank(regions,rankState.set==='atlas'?curatedIds:null);
+  colorExtent=summary.extent;
   regionGroup.clearLayers();markerGroup.clearLayers();regions.forEach(addRegion);
-  $('yearTotal').textContent=`${values.length} of ${regions.length} atlas ecosystems have this result. ${isIndependentSimple()?'Simple chain uses available catch and catch-taxon TL independently of articles.':'Ecopath methods require a verified selected model; models remain separate.'} Rankings describe the current view.`;
+  $('yearTotal').textContent=`${summary.available} of ${summary.size} ecosystems in the selected set have this result. ${metricState.mode==='npp'?'NPP does not require catch or an Ecopath model.':isIndependentSimple()?'Simple chain uses available catch and catch-taxon TL independently of articles.':'Ecopath methods require a verified selected model; models remain separate.'} Ranks use the full set before display filters. ${rankState.set==='all'?'The all-ecosystem sum includes overlapping regions.':''}`;
+  if(isIndependentSimple()&&regions.some(r=>r.networkResult?.group_selection?.active))$('yearTotal').textContent=$('yearTotal').textContent.replace('independently of articles','with model catch allocations where group selections are active');
   updateLegend();if(selectedId)renderDetails(regionById[selectedId]);refresh();
-  const params=new URLSearchParams(location.search);params.set('metric',metricState.mode);params.set('year',DB.year);params.set('npp',metricState.npp);params.set('npp_fill',metricState.npp_fill);
+  const params=new URLSearchParams(location.search);params.set('rank_set',rankState.set);params.set('limit',rankState.limit);if(rankState.limit==='custom')params.set('count',rankState.custom);else params.delete('count');params.set('metric',metricState.mode);params.set('year',DB.year);params.set('npp',metricState.npp);params.set('npp_fill',metricState.npp_fill);
   for(const key of ['scope','method','denominator','te','unidentified','catch_basis','uncertainty'])params.set(key,metricState[key]);
   const overrides=Object.fromEntries(Object.entries(chosenModels).filter(([id,index])=>index!==network.units[id].default_model).map(([id,index])=>[id,network.units[id].models[index].id]));
   if(Object.keys(overrides).length)params.set('models',JSON.stringify(overrides));else params.delete('models');
+  if(typeof groupStore!=='undefined'&&groupStore){
+    for(const [id,index] of Object.entries(chosenModels))if(network.units[id]?.models[index])groupStore.data.models[id]=network.units[id].models[index].id;
+    groupStore.save(params);groupStore.attach(params);groupStore.shareLinks();
+    const summary=$('groupFilterSummary');if(summary)summary.textContent=Object.keys(groupStore.data.selections).length?`${Object.keys(groupStore.data.selections).length} models with group selections`:'All model groups included';
+  }
   try{history.replaceState(null,'','?'+params.toString()+location.hash);}catch{/* Local-file history may be restricted. */}
 }
 populateMethods();
@@ -243,21 +273,42 @@ const nppMethods=network.npp_methods||[];
 if(!nppMethods.some(m=>m.id===metricState.npp))metricState.npp=nppMethods[0]?.id||'ens_median_tC_yr';
 $('mapNppMethod').replaceChildren(...nppMethods.map(m=>{const o=document.createElement('option');o.value=m.id;o.textContent=m.label||m.id;return o;}));
 $('mapNppMethod').value=metricState.npp;$('mapNppFill').value=metricState.npp_fill;$('metricMode').value=metricState.mode;$('scopeFilter').value=metricState.scope;$('teFilter').value=metricState.te;$('mapUnidentified').value=metricState.unidentified;$('mapCatchBasis').value=metricState.catch_basis;$('mapUncertainty').value=metricState.uncertainty;
-if(Object.hasOwn(DB.annual,mapParams.get('year')))DB.year=Number(mapParams.get('year'));
+if(Object.hasOwn(DB.annual,mapParams.get('year'))||(metricState.mode==='npp'&&network.npp_years?.includes(Number(mapParams.get('year')))))DB.year=Number(mapParams.get('year'));
 for(const [id,key] of [['metricMode','mode'],['scopeFilter','scope'],['methodFilter','method'],['denominatorFilter','denominator'],['teFilter','te'],['mapNppMethod','npp'],['mapNppFill','npp_fill'],['mapUnidentified','unidentified'],['mapCatchBasis','catch_basis'],['mapUncertainty','uncertainty']]){
-    $(id).addEventListener('change',()=>{metricState[key]=$(id).value;if(['scope','method','mode'].includes(key))populateMethods();applyYear(DB.year)});
+    $(id).addEventListener('change',()=>{metricState[key]=$(id).value;if(['scope','method','mode'].includes(key))populateMethods();if(key==='mode')populateYears();applyYear(DB.year)});
 }
-Object.keys(DB.annual).sort().reverse().forEach(year=>{const o=document.createElement('option');o.value=year;o.textContent=year;o.selected=Number(year)===DB.year;$('yearFilter').appendChild(o)});
+function populateYears(){
+  const years=[...new Set([...Object.keys(DB.annual).map(Number),...(metricState.mode==='npp'?network.npp_years||[]:[])])].sort((a,b)=>b-a);
+  if(!years.includes(DB.year))DB.year=years[0];
+  $('yearFilter').replaceChildren(...years.map(year=>{const o=document.createElement('option');o.value=year;o.textContent=year;o.selected=year===DB.year;return o}));
+}
+populateYears();
 $('yearFilter').addEventListener('change',()=>applyYear($('yearFilter').value));
 $('colorRegionsByPpr').checked=true;$('showArticles').checked=false;
-// Pilot membership stays in network.units, separate from independent catch data.
+// Set membership determines ranking; display count and existing search filters only hide rows.
 const priorPassRegion=passRegion;
 passRegion=function(r){
-  const select=$('rankFilter'),options=Array.from(select.options),pilot=options.find(option=>/\bpilot\b/i.test(option.textContent));
-  if(!pilot||select.value!==pilot.value)return priorPassRegion(r);
-  if(!network.units[r.unit_id])return false;
-  const all=options.find(option=>/^all\b/i.test(option.textContent));
-  if(!all)return priorPassRegion(r);
-  const previous=select.value;try{select.value=all.value;return priorPassRegion(r);}finally{select.value=previous;}
+  if(!PPRMapRanking.visible(r,rankState.limit,rankState.custom))return false;
+  const select=$('rankFilter'),previous=select.value;
+  try{select.value='all';return priorPassRegion(r);}finally{select.value=previous;}
 };
+$('rankSetFilter').value=rankState.set;$('rankFilter').value=rankState.limit;$('rankCustom').value=rankState.custom;
+$('rankCustomField').hidden=rankState.limit!=='custom';
+for(const [id,key,event] of [['rankSetFilter','set','change'],['rankFilter','limit','change'],['rankCustom','custom','input']]){
+  $(id).addEventListener(event,()=>{
+    rankState[key]=$(id).value;$('rankCustomField').hidden=rankState.limit!=='custom';applyYear(DB.year);
+  });
+}
+const groupDialog=groupStore?PPRGroupDialog.create({
+  units:Object.fromEntries(Object.entries(network.units).map(([id,u])=>[id,{...u,name:regionById[id]?.region_name||id}])),store:groupStore,
+  getContext:()=>({...metricState,year:DB.year}),onChange:()=>{
+    metricState.group_selections=groupStore.data.selections;
+    for(const [id,modelId] of Object.entries(groupStore.data.models)){const index=network.units[id]?.models.findIndex(m=>m.id===modelId);if(index>=0)chosenModels[id]=index;}
+    applyYear(DB.year);
+  }
+}):null;
+if(groupDialog){
+  $('openGroupFilter').addEventListener('click',()=>groupDialog.open(selectedId));
+  groupStore.subscribe(()=>{metricState.group_selections=groupStore.data.selections;for(const [id,modelId] of Object.entries(groupStore.data.models)){const index=network.units[id]?.models.findIndex(m=>m.id===modelId);if(index>=0)chosenModels[id]=index;}applyYear(DB.year);groupDialog.refresh();});
+}
 applyYear(DB.year);
