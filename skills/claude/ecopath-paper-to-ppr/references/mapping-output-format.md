@@ -61,6 +61,12 @@ no candidate group has any catch, say — the merge step falls back through `mod
 Weights do not vary by year. A taxon has one SPPR per method, so
 `PPR = catch(taxon, year) x SPPR(taxon, method)` stays exact.
 
+The model workbook and central `data/<unit>/<unit>.xlsx` both have a **Final
+mappings** sheet containing the resolved numeric weights, grouped by model/taxon.
+Use it for full persisted precision; `.resolved.csv` formats weights to six
+decimals. See `references/integration-contract.md` for workbook parity checks and
+the separate annual landings, all-catch and discards evaluation vectors.
+
 ### `confidence`
 
 | value | fill | when |
@@ -104,6 +110,23 @@ not.
 If the paper contains a species-to-group table, **transcribe it to disk before mapping**.
 This is the single highest-value thing you can do, and it is the difference between a
 mapping a reviewer can check and one they have to trust.
+
+Check the table's purpose first. Selected diet-study species are evidence about
+those species, not necessarily an exhaustive group inventory. Record whether the
+list is exhaustive, illustrative, catch allocation or diet evidence. Absence does
+not itself require weights; multiple supported biological or spatial groups do.
+For Bay of Bengal, A3.1 is diet-study evidence; A1.1 and A1.3 provide catch allocation
+and composition. Source-backed dedicated tuna groups take precedence over a broad
+diet-study label. Keep synonym evidence and regional split uncertainty separate.
+
+The current `members.csv` schema does not encode evidence scope or precedence:
+the validator treats each nonblank group assignment as a membership constraint.
+Keep unreconciled diet-study transcriptions in a separate source-audit table and
+record their purpose in notes. Populate `members.csv` only with the placement
+supported for the exact model after resolving conflicting source sections. Do
+not make a broad diet-study label override a dedicated model group. The validator
+can accept a composite with one overlapping member; inspect every candidate and
+its spatial weights independently before interpreting PASS as a source review.
 
 ```
 printed_name, accepted_name, group_name, source_page

@@ -1,6 +1,27 @@
 # PPR Ecopath Atlas
 
-Open **index.html** for the interactive map, or **archive/index.html** for the searchable source archive. The map retains the supplied design and shows the exact 167 ecosystems in the source workbook's **Global Estimation** sheet: 66 LMEs, 84 EEZs and 17 High Seas regions.
+The map and linked graph offer three catch bases: **landings** (default),
+**all catch**, and **discards only**. Each PPR numerator is calculated from that
+basis at taxon resolution, including reported and unreported amounts. Switching
+bases does not apply a region-wide retained/discarded percentage to an old PPR.
+
+In the landings view, **Discard-routing sensitivity** can be shown or hidden.
+Where a tested model, method, source scope and source hashes are compatible, the
+range applies alternative routing coefficients to the same landed vector, at the
+observed annual `D/(L+D)`. Only valid adjacent computed intervals are interpolated.
+All-catch and discards-only views have no routing envelope. An unsupported case
+says **not assessed**, never zero uncertainty. The range is not a confidence
+interval; NPP model spread remains separate. See the
+[study and methods](../research/discard_sensitivity_2026_09_10/README.md).
+
+Source workbook downloads retain their original total-catch calculations and exact
+final mappings. Use the plotted-data download for the selected catch-basis results.
+URLs and downloads preserve catch basis, sensitivity visibility and the existing
+year, method, source-scope, NPP and unidentified-taxon settings.
+
+Open **index.html** for the interactive map, or **archive/index.html** for the searchable source archive. The map shows all **366 ecosystems: 66 LMEs, 282 EEZs and 18 High Seas regions**. The original **167-region Global Estimation** selection remains the curated article archive; displaying an additional ecosystem does not imply article extraction or model verification.
+
+The map opens with **simple trophic chain**, calculated directly from each taxon's selected catch basis and reference trophic level at TE=0.1. It provides PPR and regional PPR/NPP independently of articles and models, in All-source scope. Model-specific methods retain their selected-model verification gates. The two no-catch identities, HS_018 and LME_064, remain visible with unavailable PPR. The All filter includes missing results; numeric Top filters include ranked results only. Scientific source polygons are preserved; only new display geometry is simplified.
 
 Open **trends.html**, or choose **Time series** in the map header, for annual PPR and
 PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
@@ -29,7 +50,7 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
 - **Change** opens the ecosystem picker: original global LME + High Seas set,
   selected pilot, LMEs, High Seas, all EEZs, atlas catalog, or a custom selection.
   All 366 known identities are selectable. The two Arctic units without catch
-  remain missing. The map's ten-ecosystem coloring gate is unchanged.
+  remain missing for PPR. Simple-map coloring is independent of the ten selected model regions.
 - The curve sums the selected ecosystems that have a complete annual series for
   the chosen method. The same cohort is used for every plotted year. For model
   methods, choose a separate model version per ecosystem in the picker. Models
@@ -41,13 +62,19 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   reports its own catch coverage. Unlike the map's ratio calculation, these
   annual comparisons do not recompute totals over common catch taxa.
 - NPP choices are Antoine–Morel, VGPM, Eppley, CbPM, CAFE and regional ensemble
-  median. **The owner requested repeating the fixed 2019 NPP for all years for
-  now.** This denominator is labeled on the graph. Annual NPP can later replace
-  the scalar values with arrays aligned to the exported years.
+  median. Inputs are year-specific, with unavailable years blank by default.
+  All 366 identities have an ensemble estimate in every year from 1998–2019,
+  including the two identities without catch. Per-model support remains explicit;
+  an available ensemble does not imply full satellite-water coverage.
+  **Missing historical NPP** optionally uses each ecosystem/method's earliest available
+  value for earlier years only. These are labeled estimates, including source years
+  in the inspector and CSV; internal gaps and later missing years remain blank.
+  This option makes a constant-value proxy, not a historical satellite observation.
 - PPR/NPP (%) = `100 × sum(PPR tonnes carbon) / sum(NPP tonnes carbon)`.
   The PPR input has already been divided by 9; do not convert it again.
-  Numerator and denominator use the same ecosystems, excluding those without
-  positive NPP. The regional ensemble option sums the individual region medians;
+  Numerator and denominator use the same fixed PPR-valid ecosystems. A year is
+  unavailable if any included ecosystem lacks positive NPP; changing NPP coverage
+  cannot silently change the cohort. The regional ensemble option sums regional medians;
   it is not the median of the global model totals or a mean of regional ratios.
 - Hover over the curve or use the keyboard-accessible **Inspect year** slider.
   Set **First year** and **Last year** to compare a shorter period. Single-region
@@ -59,7 +86,7 @@ PPR/NPP graphs. Every ecosystem's map details include a link to its own graph.
   Multiple-method or baseline downloads use one row per method and year, with
   original carbon totals, denominator values, resolved baseline model IDs and
   reasons for unavailable values. Single-method downloads without a baseline
-  retain their previous format. Shared URLs and ecosystem links preserve the
+  use one row per year, including catch-basis and sensitivity fields. Shared URLs and ecosystem links preserve the
   selected methods and baseline; existing `method=` links still work.
   Method coefficients and TLs are fixed across years; boundaries may overlap.
 
@@ -76,7 +103,9 @@ without writing files. The graph page embeds its inputs and needs no network.
 
 ## Using the map
 
-- Choose annual PPR, a ratio between methods, recycling `b`, or `rho living`.
+- Choose annual PPR, PPR/NPP, a ratio between methods, recycling `b`, or `rho living`.
+- NPP details follow the selected year and method. Model and central workbooks
+  expose the final catch-taxon mappings, including exact numerical weights.
 - Switch between all sources, inner sources (no imports), and primary producers only.
 - Select numerator/denominator methods for ratios. Both use identical available catch taxa;
   the details panel reports catch coverage. Missing values and zero denominators stay unavailable.
@@ -85,13 +114,14 @@ without writing files. The graph page embeds its inputs and needs no network.
   these conditions are necessary, not sufficient.
 - Click an ecosystem to choose its model and open the actual SPPR/PPR workbooks. Models
   are kept separate. The year selector spans1950–2019; recycling is fixed for each model.
-- Only the ten ecosystems in `../data/atlas_selection.json` may be colored. Candidate
-  articles do not authorize new estimation coverage. Unselected and unavailable ecosystems
-  stay gray. The isolated Saygu2025 validation does not color the North Sea.
+- Model-based coloring requires a verified selected model in `../data/atlas_selection.json`.
+  Independent simple-chain coloring uses catch and reference TL across all ecosystems.
+  Candidate articles do not authorize model-based coverage; the isolated Saygu2025
+  validation remains separate from production model selection.
 - The article-area switch shows explicitly selected catalog sources only. Archived
   alternatives remain readable in the details panel. Approximate envelopes are dashed.
 
-Displayed PPR uses mapped catch × scoped SPPR ÷ 9 (tonnes carbon). Failed configurations and negative source-group SPPR
+Displayed PPR uses the selected taxon catch basis × mapped scoped SPPR ÷ 9 (tonnes carbon). Failed configurations and negative source-group SPPR
 are excluded from map estimates; finite diagnostic values remain inspectable with FAIL
 labels. Coefficients stay fixed across catch years. Geographic transfers and historical
 identity conflicts are stated in the details; no spatially deduplicated global total is claimed.
@@ -169,3 +199,46 @@ The previous projects and the original ZIP remain unchanged. Research, file retr
 The supplied Cheung 2007 thesis and CMFRI Bulletin 51 were incorporated and audited. The Karnataka bulletin is dated 2008; its historical ARAB-2005 identifier is retained. The expanded search followed publisher, author, institutional repository and report/thesis routes after blocked downloads. Exact-DOI Figshare deposits provide supplements and supporting tables. Ordinary HTML landing pages, HTTP errors and authentication screens never count as recovered files. Some archived responses contain literal HTTP headers before a complete PDF; those headers are removed only after confirming the PDF payload, with raw response hashes and transformations recorded.
 
 **data/unretrieved_main_sources.csv** lists sources whose main text remains unretrieved (even if supplements exist). **docs/lme-expansion-report.md** summarizes actual counts and limitations. **research/lme_*.json** records page/table audits and source identity reviews. Run **discover_supplements.py** and **discover_alternates.py** to refresh public discovery metadata, then **download_sources.py** to attempt the candidate routes and **build_atlas.py** to update the article folders and map.
+
+Unidentified-catch sensitivity is available in both map and graph: selected-method SPPR (default), a zero-contribution assumption, or each affected taxon's reference-TL chain. The controls preserve catch tonnage and show the affected share; URLs and downloads record the choice. The reference chain is total-only and unavailable in inner/PP source scopes. See [the definition and methods](../docs/UNIDENTIFIED_CATCH.md) and [the exact affected taxa](../data/unidentified_taxa.json).
+
+## NPP through time and denominator geography
+
+The graph's **Measure** selector includes **NPP** in tonnes carbon per year.
+This curve uses the chosen annual NPP calculation for the selected ecosystems,
+independently of catch, Ecopath-model availability or PPR method. It appears once,
+even if several PPR methods were previously selected. PPR-specific controls are
+disabled without losing their selections. A missing required regional value
+leaves a gap in the fixed selected sum; a genuine NPP zero remains zero.
+
+For **PPR / NPP**, **NPP denominator** offers:
+
+- **Selected ecosystems**: selected PPR divided by the sum of NPP for the same
+  included PPR ecosystem cohort. This preserves the previous graph behavior.
+  Choosing the regional ensemble sums regional medians; it is not the median of
+  global model totals. Selected regional boundaries may overlap.
+- **Global atlas NPP**: selected PPR divided by a separate, fixed atlas reference
+  ensemble. PPR ecosystem/method selection and PPR exclusions cannot change this
+  denominator. It uses a dissolved union of all 66 LME and 18 high-seas input
+  polygons, including the two identities without catch. EEZs are not added.
+  The existing NPP method is applied once to this union; the ensemble median is
+  taken after computing each model's union-wide total. This is a coverage-limited
+  atlas reference, not total world-ocean NPP. Satellite-supported water area,
+  fill limits and algorithm support are recorded for each year. See
+  [reference definition and reproduction](../docs/GLOBAL_ATLAS_NPP_REFERENCE.md).
+
+Both discard-routing endpoints use exactly the same denominator as their central
+PPR estimate. Normalized method comparisons remain dimensionless multiples and
+have no routing envelope. NPP-only mode never normalizes a mass by a PPR method.
+The map retains its own regional denominator behavior.
+
+Annual missing values stay blank by default. The explicit earliest-year option
+uses a constant earlier-year proxy, preserves source year and support, and cannot
+fill internal/later gaps. For global scope the proxy uses the earliest computed
+reference ensemble on the same fixed union, not separately filled regional sums.
+Reference source coverage remains visible even when the value is a proxy.
+
+URLs record `metric=npp` or `metric=ratio` and `npp_scope=selected|global`.
+CSV and JSON downloads retain numeric NPP/denominator values, reference identities,
+geography, overlap policy, ensemble convention, annual support, source/provenance
+and substitutions. Downloads stay available for missing-value audit records.

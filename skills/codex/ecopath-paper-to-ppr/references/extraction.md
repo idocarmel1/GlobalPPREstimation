@@ -4,6 +4,10 @@ Turn a published Ecopath model into the eight files the EwE database importer
 expects and the JSON the downstream loader reads, with every number traceable to
 the page it came from.
 
+For project source-use records, read `references/source-bundle.md`. Keep archived
+article membership separate from verified numerical use; simple catch/TL PPR and
+satellite NPP do not require a new Ecopath extraction.
+
 The hard part is not the file format — the scripts handle that. The hard part is
 that a plausible-looking wrong number survives review forever. A diet
 proportion parsed one column left, a P/B read off the row above, an
@@ -551,6 +555,9 @@ The defaults make two further things reportable, and so required:
 
 ## Reference files
 
+- `references/mortality-and-discards.md` — distinguish article mortality rates from
+  calculator flows; preserve fleet discard fate, offal transfers, importer omissions
+  and separate experimental assumptions from source extraction.
 - `references/ecopath-model.md` — the mass-balance equations, what each
   parameter means, balance criteria, magnitude ranges, and which published values
   are model outputs. Read when a value looks wrong or a blank looks odd.

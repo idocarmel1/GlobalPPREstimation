@@ -14,6 +14,7 @@ Sheets:
     Summary          identity, coverage, and per-year catch / PPR / PPR-over-NPP
     Catch            taxon x year, tonnes
     Taxon-Group Map  the mapping, with confidence colouring and the explanations
+    Final mappings   exact numeric taxon/group weights, evidence, and model identity
     SPPR             taxon x method -- the simple per-taxon value and the model's, together
     PPR by method    method x year, summed over taxa
     PPR by taxon     taxon x method for one year, chosen from a dropdown
@@ -38,7 +39,10 @@ import argparse
 import csv
 import json
 import math
+import os
 import sys
+import tempfile
+import textwrap
 from pathlib import Path
 
 import openpyxl
@@ -50,6 +54,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "skills" / "claude" / "ewe-species-to-group-mapper" / "scripts"))
 import mapping_io as mio  # noqa: E402
 from ppr_scopes import SCOPES, read_scopes, read_health, method_health_flags, add_recycling_sheet
+from npp_data import load_npp, npp_for_year
 
 TRANSFER_EFFICIENCY = 0.1
 WET_WEIGHT_TO_CARBON = 9.0
@@ -214,6 +219,24 @@ def build_taxon_sppr(rows, methods, sppr_by_group, groups_by_name, totals):
     return out
 
 
+def final_mapping_rows(unit, stem, taxa, resolved, totals):
+    """One numeric row per assignment, using the exact weights used for SPPR."""
+    out = []
+    for taxon in sorted(taxa, key=lambda t: -totals[t]):
+        e, rec = taxa[taxon], resolved[taxon]
+        for i, group in enumerate(rec['names']):
+            out.append({
+                'unit_id': unit, 'model_id': stem, 'taxon': taxon,
+                'common_name': e['common_name'], 'SAU functional group': e['functional_group'],
+                'SAU commercial group': e['commercial_group'], 'group': group,
+                'weight': rec['weights'][i] if rec['weights'] else None,
+                'weight_basis': rec['basis'], 'confidence': rec['confidence'],
+                'evidence': rec['evidence'], 'explanation': rec['explanation'],
+                'catch_tonnes': round(totals[taxon], 3),
+            })
+    return out
+
+
 # ---------------------------------------------------------------------------- sheets
 
 def header_row(ws, values, row=None):
@@ -229,6 +252,43 @@ def header_row(ws, values, row=None):
 def widths(ws, spec):
     for i, w in enumerate(spec, start=1):
         ws.column_dimensions[get_column_letter(i)].width = w
+
+
+def sheet_final_mappings(wb, records):
+    ws = wb.create_sheet('Final mappings')
+    if not records:
+        ws.append(['No final mappings are available for this ecosystem.'])
+        ws.append(['Models without a recorded mapping are not assigned invented taxon groups or weights.'])
+        widths(ws, [26])
+        ws.freeze_panes = "A2"
+        ws.sheet_view.showGridLines = False
+        return
+    ws.append(['Final taxon-to-group mappings, identified separately for each Ecopath model'])
+    ws['A1'].font = Font(bold=True, size=14)
+    ws.append(['One row per taxon/group assignment; numeric weights are the exact values used to calculate SPPR.'])
+    ws.append(['Unresolved taxa retain a row with a blank weight. Catch tonnes repeat across a taxon\'s assignments; do not sum these rows.'])
+    header = list(records[0])
+    ws.append(header)
+    for c in ws[4]:
+        c.font = HEAD
+    for rec in records:
+        ws.append([rec[k] for k in header])
+        ws.cell(ws.max_row, header.index('weight') + 1).number_format = '0.000000000000000'
+        ws.cell(ws.max_row, header.index('confidence') + 1).fill = CONF_FILL.get(rec['confidence'], CONF_FILL['low'])
+    ws.freeze_panes = 'D5'
+    ws.sheet_view.showGridLines = False
+    for i, width in enumerate([14, 46, 30, 23, 27, 24, 35, 23, 22, 14, 24, 95, 18], 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    for cells in ws.iter_rows(min_row=5):
+        lines = 1
+        for cell in cells:
+            cell.alignment = Alignment(vertical='top')
+        for index, width in ((1, 44), (2, 28), (6, 33), (11, 93)):
+            cells[index].alignment = Alignment(wrap_text=True, vertical='top')
+            lines = max(lines, sum(max(1, len(textwrap.wrap(part, width=width)))
+                                   for part in str(cells[index].value or '').split('\n')))
+        ws.row_dimensions[cells[0].row].height = max(18, lines * 15 + 6)
+    ws.auto_filter.ref = f'A4:M{ws.max_row}'
 
 
 def sheet_catch(wb, order, taxa, years):
@@ -521,35 +581,39 @@ def sheet_model_groups(wb, groups, methods, sppr_by_group):
     ws.sheet_view.showGridLines = False
 
 
-def sheet_npp(wb, npp):
+def sheet_npp(wb, npp, years=()):
     ws = wb.create_sheet("NPP")
-    if not npp:
-        ws.append(["No net primary production estimate exists for this ecosystem."])
-        ws.append(["NPP currently covers LME and High Seas units only, not EEZs."])
-        return None
-    ws.append(["Net primary production, 2019, tonnes carbon per year"])
+    ws.append(["Annual net primary production, tonnes carbon per year"])
     ws["A1"].font = TITLE
-    ws.append([])
-    header_row(ws, ["satellite_model", "npp_tC_yr"])
-    for key, label in [("npp_antoinemorel_tC_yr", "Antoine-Morel"), ("npp_vgpm_tC_yr", "VGPM"),
-                       ("npp_eppley_tC_yr", "Eppley"), ("npp_cbpm_tC_yr", "CbPM"),
-                       ("npp_cafe_tC_yr", "CAFE")]:
-        if npp.get(key):
-            ws.append([label, float(npp[key])])
-    ws.append([])
-    for key, label in [("ens_median_tC_yr", "ensemble median"),
-                       ("ens_min_tC_yr", "ensemble min"),
-                       ("ens_max_tC_yr", "ensemble max"),
-                       ("water_area_km2", "water area (km2)")]:
-        if npp.get(key):
-            ws.append([label, float(npp[key])])
-    widths(ws, [26, 22])
+    ws.append(["PPR/NPP uses the ensemble median for the matching catch year. Blank values are unavailable; no year is substituted."])
+    numeric = ['npp_antoinemorel_tC_yr', 'npp_vgpm_tC_yr', 'npp_eppley_tC_yr',
+               'npp_cbpm_tC_yr', 'npp_cafe_tC_yr', 'ens_median_tC_yr',
+               'ens_min_tC_yr', 'ens_max_tC_yr']
+    header_row(ws, ['year'] + numeric + ['status', 'reason', 'provenance',
+                                       'n_models', 'available_models', 'ensemble_basis'])
+    available_years = {int(y) for y in (npp or {}).get('annual', {})}
+    if not available_years and npp_for_year(npp, 2019):
+        available_years.add(2019)
+    for year in sorted(set(years) | available_years):
+        rec = npp_for_year(npp, year) or {}
+        vals = [num(float(rec[k])) if rec.get(k) not in (None, '') else None for k in numeric]
+        ws.append([year] + vals + [rec.get('status') or 'unavailable',
+                                  rec.get('reason') or ('' if any(v is not None for v in vals) else 'No annual NPP estimate recorded'),
+                                  rec.get('provenance') or '',
+                                  int(rec['n_models']) if rec.get('n_models') not in (None, '') else None,
+                                  rec.get('available_models') or '', rec.get('ensemble_basis') or ''])
+    widths(ws, [10] + [23] * len(numeric) + [22, 60, 75, 12, 36, 65])
+    for c in ws[3]:
+        c.alignment = Alignment(wrap_text=True, vertical='center')
+    ws.row_dimensions[3].height = 32
+    ws.freeze_panes = 'B4'
+    ws.auto_filter.ref = f'A3:O{ws.max_row}'
     ws.sheet_view.showGridLines = False
-    return float(npp["ens_median_tC_yr"]) if npp.get("ens_median_tC_yr") else None
+    return npp
 
 
 def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
-                  per_method, simple, status, npp_median, totals, grand, notes_head):
+                  per_method, simple, status, npp, totals, grand, notes_head):
     ws = wb.create_sheet("Summary", 0)
     ws.append([f"{unit} — {meta.get('region_name') or ''}"])
     ws["A1"].font = TITLE
@@ -592,6 +656,8 @@ def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
                     "ppr_simple / NPP %", f"ppr_{headline} / NPP %"])
     hi = methods.index(headline) if headline else None
     for i, y in enumerate(years):
+        annual = npp_for_year(npp, y) or {}
+        npp_median = float(annual['ens_median_tC_yr']) if annual.get('ens_median_tC_yr') not in (None, '') else None
         catch = sum(taxa[t]["by_year"].get(y, 0.0) for t in order)
         ps = simple[i]
         pm = per_method[headline][i] if headline else None
@@ -600,10 +666,8 @@ def sheet_summary(wb, unit, stem, meta, order, taxa, years, resolved, methods,
             round(100 * ps / WET_WEIGHT_TO_CARBON / npp_median, 4) if npp_median else None,
             round(100 * pm / WET_WEIGHT_TO_CARBON / npp_median, 4) if (npp_median and pm is not None) else None,
         ])
-    ws.append(['PPR/NPP converts wet-weight PP to carbon at 9:1; NPP is the fixed 2019 ensemble median.'])
-    if npp_median is None:
-        ws.append([])
-        ws.append(["PPR/NPP is blank because no NPP estimate exists for this ecosystem."])
+    ws.append(['PPR/NPP converts wet-weight PP to carbon at 9:1 and uses the matching year\'s NPP ensemble median.'])
+    ws.append(['PPR/NPP is blank for years without NPP; see NPP for availability and provenance.'])
     widths(ws, [36, 22, 20, 24, 20, 24])
     ws.freeze_panes = "A2"
     ws.sheet_view.showGridLines = False
@@ -620,8 +684,27 @@ def load_atlas():
 
 
 def load_npp_json(unit):
-    p = ROOT / "data" / unit / "npp.json"
-    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+    """Load authoritative annual data rather than a potentially stale JSON export."""
+    return load_npp(ROOT).get(unit)
+
+
+def save_workbook_atomic(wb, out):
+    """Serialize beside the output, then replace it without opening it for truncation.
+
+    An intermittent Windows EINVAL has occurred when ZipFile opens an existing
+    destination with ``w+b``. Passing an already-open temporary stream avoids that
+    operation and keeps the last usable workbook intact if serialization fails.
+    """
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w+b', prefix='.model-', suffix='.xlsx',
+                                         dir=out.parent, delete=False) as stream:
+            temporary = Path(stream.name)
+            wb.save(stream)
+        os.replace(temporary, out)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def build_one(unit, book_path, atlas):
@@ -694,6 +777,7 @@ def build_one(unit, book_path, atlas):
     wb.remove(wb.active)
     catch_ws = sheet_catch(wb, order, taxa, years)
     sheet_map(wb, order, taxa, resolved, totals, grand)
+    sheet_final_mappings(wb, final_mapping_rows(unit, stem, taxa, resolved, totals))
     sheet_sppr(wb, order, resolved, methods, tl, unit, stem)
     per_method, simple, method_status = sheet_ppr_by_method(
         wb, order, taxa, years, resolved, methods, tl, totals, grand,
@@ -707,15 +791,17 @@ def build_one(unit, book_path, atlas):
     add_recycling_sheet(wb, [book_path])
     sheet_ppr_by_taxon(wb, order, years, methods, catch_ws, n_meta_cols=4)
     sheet_model_groups(wb, groups, methods, sppr_by_group)
-    npp_median = sheet_npp(wb, load_npp_json(unit))
+    npp = sheet_npp(wb, load_npp_json(unit), years)
     sheet_summary(wb, unit, stem, atlas.get(unit, {}), order, taxa, years, resolved,
-                  methods, per_method, simple, method_status, npp_median, totals, grand,
+                  methods, per_method, simple, method_status, npp, totals, grand,
                   notes_head)
 
     out = ROOT / "data" / unit / "models" / f"{stem}.xlsx"
     out.parent.mkdir(parents=True, exist_ok=True)
-    wb.save(out)
-    wb.close()
+    try:
+        save_workbook_atomic(wb, out)
+    finally:
+        wb.close()
 
     audit = mio.mapping_dir(ROOT, unit) / f"{stem}.resolved.csv"
     with audit.open("w", encoding="utf-8-sig", newline="") as fh:

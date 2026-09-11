@@ -59,3 +59,19 @@ blank in the article may point to an appendix; a supplement may omit definitions
 that appear only in the methods; and a workbook may contain several model years
 on separate sheets. `Deliberate blanks` in `REPORT.md` must therefore state the
 whole source bundle searched, not only the main PDF.
+
+## Project reference-use log
+
+In GlobalPPREstimation, maintain the root `external/ARTICLE_REFERENCE_USE_LOG.md`
+and companion JSON using `external/build_reference_use_log.py`, then `--check`.
+Record what the source supports and its local evidence. Keep archived candidates,
+selected articles, verified computational inputs, isolated validation, rejected
+attributions and contextual methods distinct. An archived paper is not proof of
+numerical use, and inherited bibliography is not a fresh source verification.
+Retain unresolved identities and access limits; regenerate after hashed evidence
+changes while preserving exact source bytes through the repository's Git rules.
+
+Independent simple catch/TL PPR and satellite NPP do not require an Ecopath paper.
+An atlas coverage gap alone is not a reason to extract a new model. Follow the
+requested stage, and include separately owned unfinished research only when its
+integration has been explicitly authorized.

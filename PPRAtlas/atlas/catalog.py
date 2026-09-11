@@ -1,4 +1,4 @@
-"""Join the fixed ecosystem selection to audited article assignments."""
+"""Display every ecosystem while keeping curated article membership explicit."""
 from pathlib import Path
 from collections import defaultdict
 import csv, json, math
@@ -7,6 +7,29 @@ from .core import rank_regions, select_regions
 
 def read_json(path):
     return json.loads(path.read_text(encoding='utf-8'))
+
+
+def display_geographies(root):
+    """Read identity-matched source polygons; simplify only the display copies."""
+    extraction = root.parent / 'SeaAroundUsExtraction'
+    identities = [row for folder in ('global_output', 'eez_output')
+                  for row in read_json(extraction / folder / 'tables/units.json')]
+    if len({row['unit_id'] for row in identities}) != len(identities):
+        raise ValueError('Duplicate ecosystem identities')
+    geometries = {}
+    for filename, prefix in [('LMEs.geojson', 'LME'), ('HighSeas.geojson', 'HS'), ('EEZs.geojson', 'EEZ')]:
+        for feature in read_json(extraction / 'spatial' / filename)['features']:
+            props = feature['properties']
+            unit_id = props.get('unit_id') or f"{prefix}_{int(props['region_id']):03d}"
+            if unit_id in geometries:
+                raise ValueError(f'Duplicate source polygon: {unit_id}')
+            geometry = shape(feature['geometry'])
+            if geometry.is_empty:
+                raise ValueError(f'Empty source polygon: {unit_id}')
+            geometries[unit_id] = dict(geometry=mapping(geometry.simplify(0.03, preserve_topology=True)),
+                                      geometry_source=f'SeaAroundUsExtraction/spatial/{filename}',
+                                      display_simplification_degrees=0.03)
+    return [(row, geometries[row['unit_id']]) for row in identities]
 
 def new_article(source, assignment, region, material):
     verified=[f for f in material if f['status']=='downloaded_verified']
@@ -74,6 +97,34 @@ def build_catalog(root):
     if not math.isclose(total,selected['total_ppr'],rel_tol=1e-12):raise ValueError('PPR total differs from workbook')
     for row in selected['regions']:
         if byid[row['unit_id']]['ppr_rank']!=row['rank_selected_ppr']:raise ValueError('Rank differs from workbook')
+    # Validate the historic archive selection before extending the display set.
+    # Its scientific totals and ranks remain available as explicit subset metadata.
+    for region in regions:
+        region.update(curated_archive_member=True, curated_ppr_rank=region['ppr_rank'])
+    annual=defaultdict(dict)
+    with (root/'inputs/annual_regions.csv').open(encoding='utf-8-sig') as stream:
+        for row in csv.DictReader(stream):
+            annual[row['year']][row['unit_id']]=[float(row['ppr_species']) if row['ppr_species'] else None,float(row['total_catch_tonnes']) if row['total_catch_tonnes'] else None,row['source_data_status']]
+    identities = display_geographies(root)
+    display_ids = {row['unit_id'] for row, _ in identities}
+    if not selected_ids <= display_ids:
+        raise ValueError('Curated ecosystems missing from source identity inventory')
+    for year, values in annual.items():
+        if set(values) != display_ids:
+            raise ValueError(f'Annual ecosystem identities differ from display inventory: {year}')
+    for row, geographic in identities:
+        if row['unit_id'] in selected_ids:
+            continue
+        ppr, catch, status = annual[str(selected['year'])][row['unit_id']]
+        point = shape(geographic['geometry']).representative_point()
+        regions.append(dict(row, **geographic, region_name=row['name'],
+                            marker_lat=point.y, marker_lon=point.x,
+                            ppr=ppr, ppr_species_2019=ppr, total_catch_tonnes=catch,
+                            curated_archive_member=False, curated_ppr_rank=None,
+                            search_status='not_in_curated_archive',
+                            search_notes='This ecosystem is outside the curated article archive; no article search is claimed.',
+                            **{'data availability':status}))
+    regions=rank_regions(regions);byid={r['unit_id']:r for r in regions}
     files=read_json(root/'inputs/recovered_files.json')
     attempts=[]
     for path in sorted((root/'research/downloads').glob('*.json')):
@@ -196,9 +247,4 @@ def build_catalog(root):
     for r in regions:
         related=[a for a in articles if a['unit_id']==r['unit_id']]
         r.update(article_count=len(related),best_quality_score=max([a['quality_score_100'] for a in related],default=0))
-    annual=defaultdict(dict)
-    with (root/'inputs/annual_regions.csv').open(encoding='utf-8-sig') as stream:
-        for row in csv.DictReader(stream):
-            if row['unit_id'] in selected_ids:
-                annual[row['year']][row['unit_id']]=[float(row['ppr_species']) if row['ppr_species'] else None,float(row['total_catch_tonnes']) if row['total_catch_tonnes'] else None,row['source_data_status']]
-    return dict(regions=regions,articles=articles,files=files,searches=searches,download_attempts=attempts,source_aliases=aliases,source_corrections=dict(corrections),annual=annual,year=selected['year'],source_workbook='PPR_global_summary.xlsx / Global Estimation',generated_on='2026-09-04',selected_total_ppr=total)
+    return dict(regions=regions,articles=articles,files=files,searches=searches,download_attempts=attempts,source_aliases=aliases,source_corrections=dict(corrections),annual=annual,year=selected['year'],source_workbook='PPR_global_summary.xlsx / Global Estimation (curated subset); annual_regions.csv (all identities)',generated_on='2026-09-10',selected_total_ppr=total,curated_region_ids=sorted(selected_ids),all_total_ppr=math.fsum(r['ppr'] for r in regions if r['ppr'] is not None))

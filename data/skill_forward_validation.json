@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "date": "2026-09-11",
+  "method": "Independent read-only forward test using delivered skills and linked documentation; no implementation or prior numerical validation reports used to infer answers.",
+  "distributions": [
+    "skills/claude/ecopath-extraction",
+    "skills/codex/ecopath-extraction",
+    "skills/claude/ewe-species-to-group-mapper",
+    "skills/codex/ewe-species-to-group-mapper",
+    "skills/claude/ecopath-paper-to-ppr",
+    "skills/codex/ecopath-paper-to-ppr"
+  ],
+  "scenarios": [
+    {
+      "request": "Simple PPR and regional ratio without an archived article or verified optional model",
+      "status": "passed"
+    },
+    {
+      "request": "NPP-only without catch/model, preserved control preferences and explicit earlier-year proxy",
+      "status": "passed"
+    },
+    {
+      "request": "Selected regional medians versus fixed-union model-total median, including overlap limits",
+      "status": "passed",
+      "disjoint_fixture_selected": 800,
+      "disjoint_fixture_global": 1000
+    },
+    {
+      "request": "Changed code, source checksum or foreign-year parent with an existing cache",
+      "status": "passed"
+    },
+    {
+      "request": "Fresh-clone reproduction without overwriting the expanded canonical release",
+      "status": "passed"
+    },
+    {
+      "request": "Catalog-only references, unresolved attribution and exact-byte evidence changes",
+      "status": "passed"
+    }
+  ],
+  "findings_resolved": [
+    "Mapping-only requests now stop at validated mapping files; copied workflows and entrypoints condition workbook integration on the requested deliverable.",
+    "The annual guide protects the expanded canonical release and describes isolated archive-base followed by regional expansion reproduction.",
+    "The regional handoff identifies completed publication, exited historical workers and the implemented lineage fix."
+  ],
+  "structural_validation": "All six distributions passed skill frontmatter validation; package/source parity passed after regeneration.",
+  "limitations": "Tests establish retrievable workflow decisions, not independent scientific replication or correctness of every paper extraction.",
+  "additional_checksum_scenario": {
+    "status": "passed",
+    "scenario": "Same-length source rewrite with preserved timestamp; current uncached audit versus historical extraction and future versioned plan",
+    "findings": "No contradiction in delivered shared contract, annual guide or regional handoff; an earlier passing audit cannot certify a later rewrite."
+  }
+}

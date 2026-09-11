@@ -1,0 +1,1644 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-09-10",
+  "scope": "Four frozen source-model evidence audits; no production or frozen-input edits",
+  "epistemic_policy": "Published parameter assumptions, frozen conversion fields, and hypothetical routes are distinct. Null means unavailable/not established; no blanket zero filling. Source-supported routing does not make a hypothetical fraction observed.",
+  "guidance": [
+    {
+      "title": "EwE User Guide: Ecopath Input",
+      "url": "https://pressbooks.bccampus.ca/eweguide/chapter/ecopath-input/",
+      "sections": [
+        "Landings",
+        "Discards",
+        "Discard Mortality",
+        "Discard Fate",
+        "Detritus Import"
+      ],
+      "claims": "Catch comprises landings and discards. Rates use total model area. Discard mortality and fate are separate inputs; fate allocates discards to detritus or export. A dedicated discard pool is supported. Biological detritus fate is distinct from fishery discard fate."
+    },
+    {
+      "title": "Ecosystem Modelling with EwE: Spatial fishery dynamics",
+      "url": "https://pressbooks.bccampus.ca/ewemodel/chapter/spatial-fishery-dynamics/",
+      "claims": "Fleet specification distinguishes landings, discards, discard mortality and discard fate."
+    },
+    {
+      "title": "Ecosystem Modelling with EwE: Bycatch and discards",
+      "url": "https://pressbooks.bccampus.ca/ewemodel/chapter/bycatch-and-discards/",
+      "claims": "Discard changes can affect scavengers and subsequent trophic pathways. This supports scenario analysis, not a universal quantitative return fraction."
+    }
+  ],
+  "loader_evidence": {
+    "file": {
+      "path": "inputs/PPREstimation/ModelData.py",
+      "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+      "bytes": 53389,
+      "role": "frozen calculator loader"
+    },
+    "locations": [
+      "313–314 detritus catch forced0",
+      "410 export renamed catch",
+      "850–893 selected fields and M0/egestion flow; no fleet discard parse",
+      "919 export renamed catch"
+    ],
+    "inference": "Source fleet return is not an explicit input path in this loader. Audit solved detritus balances separately before adding routes; original EE/diets can reflect author balancing even when fleet return metadata was omitted."
+  },
+  "models": [
+    {
+      "model_id": "13_2",
+      "name": "Northern Humboldt Current",
+      "source_period": "1995–1998",
+      "source_area_km2": 165000,
+      "native_units": {
+        "biomass": "t wet biomass km-2",
+        "flows": "t wet biomass km-2 year-1",
+        "pb_qb": "year-1"
+      },
+      "group_count": 39,
+      "caught_living_group_count": 18,
+      "frozen_living_harvest_sum": 35.5395489180725,
+      "harvest_excludes_detritus_export": true,
+      "source_supported_sr_status": "source_supported_destination",
+      "files": [
+        {
+          "path": "inputs/PPREstimation/real_models/global_cover_jsons/13_2_Northern_Humboldt_Current_(1995-1998).json",
+          "sha256": "4a851308ce4018ec710c745865c8b0b65096b8c5a47da18c51de4e8a6c865381",
+          "bytes": 234692,
+          "role": "frozen calculator model"
+        },
+        {
+          "path": "inputs/PPRAtlas/archive/regions/LME_013/HUM-2018/1-s2.0-S0079661117303312-main.pdf",
+          "sha256": "88f2592095d9a29222edd543dec7d45e65d9dff870460c037508a8ad60155aa0",
+          "bytes": 1507038,
+          "role": "publication"
+        },
+        {
+          "path": "inputs/PPRAtlas/archive/regions/LME_013/HUM-2018/Supplementary material revised and final.xls",
+          "sha256": "3bc8b11df628022943ea61385896c25bd44c0fab8536534518cc2a7e30b20091",
+          "bytes": 306688,
+          "role": "original numeric supplement"
+        },
+        {
+          "path": "inputs/PPRAtlas/archive/regions/LME_013/HUM-2018/extracted/13_2_Northern_Humboldt_Current_1995-1998/FLEET_DETRITUS_FATE.json",
+          "sha256": "b7f67f7f886f67bfa8a87ff859f641bb17ae1b700b860b0cef438f6afaad0212",
+          "bytes": 195,
+          "role": "derived fleet sidecar; off-by-one locator caveat"
+        }
+      ],
+      "source_pdf_pages_one_based": [
+        3
+      ],
+      "frozen_detritus_groups": [
+        {
+          "group_seq": "36",
+          "group_name": "Anchovy eggs",
+          "biomass": "0.4359999895095825",
+          "ee": "0.8843322396278381",
+          "detritus_import": "-9999",
+          "export": "0"
+        },
+        {
+          "group_seq": "37",
+          "group_name": "Fishery offal",
+          "biomass": "0.05000000074505806",
+          "ee": "0",
+          "detritus_import": "-9999",
+          "export": "0"
+        },
+        {
+          "group_seq": "38",
+          "group_name": "Pelagic detritus",
+          "biomass": "20",
+          "ee": "0",
+          "detritus_import": "-9999",
+          "export": "0"
+        },
+        {
+          "group_seq": "39",
+          "group_name": "Benthic detritus",
+          "biomass": "60",
+          "ee": "0.8890905380249023",
+          "detritus_import": "-9999",
+          "export": "0"
+        }
+      ],
+      "frozen_biological_detritus_fates": [
+        {
+          "from_group_seq": 1,
+          "to_group_seq": 38,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 2,
+          "to_group_seq": 38,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 3,
+          "to_group_seq": 38,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 4,
+          "to_group_seq": 38,
+          "fraction": 0.2
+        },
+        {
+          "from_group_seq": 4,
+          "to_group_seq": 39,
+          "fraction": 0.8
+        },
+        {
+          "from_group_seq": 5,
+          "to_group_seq": 38,
+          "fraction": 0.2
+        },
+        {
+          "from_group_seq": 5,
+          "to_group_seq": 39,
+          "fraction": 0.8
+        },
+        {
+          "from_group_seq": 6,
+          "to_group_seq": 38,
+          "fraction": 0.95
+        },
+        {
+          "from_group_seq": 6,
+          "to_group_seq": 39,
+          "fraction": 0.05
+        },
+        {
+          "from_group_seq": 7,
+          "to_group_seq": 38,
+          "fraction": 0.95
+        },
+        {
+          "from_group_seq": 7,
+          "to_group_seq": 39,
+          "fraction": 0.05
+        },
+        {
+          "from_group_seq": 8,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 9,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 10,
+          "to_group_seq": 36,
+          "fraction": 0.25
+        },
+        {
+          "from_group_seq": 10,
+          "to_group_seq": 39,
+          "fraction": 0.75
+        },
+        {
+          "from_group_seq": 11,
+          "to_group_seq": 38,
+          "fraction": 0.25
+        },
+        {
+          "from_group_seq": 11,
+          "to_group_seq": 39,
+          "fraction": 0.75
+        },
+        {
+          "from_group_seq": 12,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 13,
+          "to_group_seq": 38,
+          "fraction": 0.25
+        },
+        {
+          "from_group_seq": 13,
+          "to_group_seq": 39,
+          "fraction": 0.75
+        },
+        {
+          "from_group_seq": 14,
+          "to_group_seq": 38,
+          "fraction": 0.25
+        },
+        {
+          "from_group_seq": 14,
+          "to_group_seq": 39,
+          "fraction": 0.75
+        },
+        {
+          "from_group_seq": 15,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 16,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 17,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 18,
+          "to_group_seq": 38,
+          "fraction": 0.1
+        },
+        {
+          "from_group_seq": 18,
+          "to_group_seq": 39,
+          "fraction": 0.9
+        },
+        {
+          "from_group_seq": 19,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 20,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 21,
+          "to_group_seq": 38,
+          "fraction": 0.25
+        },
+        {
+          "from_group_seq": 21,
+          "to_group_seq": 39,
+          "fraction": 0.75
+        },
+        {
+          "from_group_seq": 22,
+          "to_group_seq": 38,
+          "fraction": 0.25
+        },
+        {
+          "from_group_seq": 22,
+          "to_group_seq": 39,
+          "fraction": 0.75
+        },
+        {
+          "from_group_seq": 23,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 24,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 25,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 26,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 27,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 28,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 29,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 30,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 31,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 32,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 33,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 34,
+          "to_group_seq": 38,
+          "fraction": 0.7
+        },
+        {
+          "from_group_seq": 34,
+          "to_group_seq": 39,
+          "fraction": 0.3
+        },
+        {
+          "from_group_seq": 35,
+          "to_group_seq": 38,
+          "fraction": 0.7
+        },
+        {
+          "from_group_seq": 35,
+          "to_group_seq": 39,
+          "fraction": 0.3
+        },
+        {
+          "from_group_seq": 36,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 37,
+          "to_group_seq": 38,
+          "fraction": 0.1
+        },
+        {
+          "from_group_seq": 37,
+          "to_group_seq": 39,
+          "fraction": 0.9
+        },
+        {
+          "from_group_seq": 38,
+          "to_group_seq": 39,
+          "fraction": 1.0
+        }
+      ],
+      "frozen_return_note": "Biological detritus fate is not evidence of fleet discard fate. No explicit fishery-return field is consumed by the frozen loader.",
+      "processing_offal_separate_flow": null,
+      "source_landings": 34.1192791755,
+      "source_discards": 1.4202697425725,
+      "source_discard_fraction_of_catch": 0.03996307735493703,
+      "discard_evidence_status": "published model assumptions and precise supplement values, not direct observation of every flow",
+      "source_fleet_return": [
+        {
+          "fleet": "Artisanal",
+          "to_group_seq": 37,
+          "fraction": 1,
+          "cell": "Table C-resolved detritus fate!D43"
+        },
+        {
+          "fleet": "Commercial",
+          "to_group_seq": 37,
+          "fraction": 1,
+          "cell": "Table C-resolved detritus fate!D44"
+        }
+      ],
+      "source_offal_onward_fate": {
+        "pelagic_detritus": 0.1,
+        "benthic_detritus": 0.9,
+        "cells": "Table C!E40:F40"
+      },
+      "source_offal_direct_consumers": [],
+      "offal_diet_evidence": "Table B!B40:AN40 consists of zeros; Table A!H42 EE=0",
+      "original_xls_parity": [
+        {
+          "sheet": "Table A-resolved parameters",
+          "cells_compared_including_blank_padding": 552,
+          "mismatches": 0
+        },
+        {
+          "sheet": "Table B-resolved diet",
+          "cells_compared_including_blank_padding": 2107,
+          "mismatches": 0
+        },
+        {
+          "sheet": "Table C-resolved detritus fate",
+          "cells_compared_including_blank_padding": 396,
+          "mismatches": 0
+        }
+      ],
+      "source_fidelity_caveats": [
+        "Paper PDF3/printed30 says sardine landings reduced from5.65 to1.4; original supplement J14=5.6513425. Preserve frozen table-based H; do not silently repair.",
+        "Original Table C fleet rows are43–44; frozen fleet sidecar source string incorrectly says44–45.",
+        "Frozen rendered Table C PNG/PDF omits fleet rows. The original XLS cells, independently read, are authoritative.",
+        "Anchovy eggs are represented by pp=2 in the calculator although publication counts them among living groups; preserve baseline convention.",
+        "Table A biomass column carries a per-year label; biomass is a standing stock dimensionally. Catch/production flows are annual.",
+        "No separate processing-offal quantity was recovered. The named Fishery offal compartment receives the documented fleet discard route; do not add a second offal subsidy.",
+        "Frozen ModelData ignores fleet split fields and source_tables; explicit original fleet return is not restored by merely loading this JSON."
+      ]
+    },
+    {
+      "model_id": "34_1",
+      "name": "Bay of Bengal",
+      "source_period": "1978",
+      "source_area_km2": 6205000,
+      "native_units": {
+        "biomass": "t wet biomass km-2",
+        "flows": "t wet biomass km-2 year-1",
+        "pb_qb": "year-1"
+      },
+      "group_count": 49,
+      "caught_living_group_count": 37,
+      "frozen_living_harvest_sum": 1.025531307,
+      "harvest_excludes_detritus_export": true,
+      "source_supported_sr_status": "hypothetical_destination_only",
+      "files": [
+        {
+          "path": "inputs/PPREstimation/real_models/global_cover_jsons/34_1_Bay_of_Bengal_(1978).json",
+          "sha256": "3620cd1219f6db2356a644e515c0eb391bce199440126f671053d8a247032192",
+          "bytes": 174584,
+          "role": "frozen calculator model"
+        },
+        {
+          "path": "inputs/PPRAtlas/archive/regions/LME_034/LME034-Guenette-2013/009031359-84f3dc3d.pdf",
+          "sha256": "84f3dc3dc64213b2f84c8bb2cf4bb1979f4023fbd00d2b996846dee66f497907",
+          "bytes": 1210865,
+          "role": "publication"
+        }
+      ],
+      "source_pdf_pages_one_based": [
+        7,
+        9,
+        24,
+        46
+      ],
+      "frozen_detritus_groups": [
+        {
+          "group_seq": "49",
+          "group_name": "Detritus",
+          "biomass": "137.0",
+          "ee": "0.332",
+          "detritus_import": "0",
+          "export": "0"
+        }
+      ],
+      "frozen_biological_detritus_fates": [
+        {
+          "from_group_seq": 1,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 2,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 3,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 4,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 5,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 6,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 7,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 8,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 9,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 10,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 11,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 12,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 13,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 14,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 15,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 16,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 17,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 18,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 19,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 20,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 21,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 22,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 23,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 24,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 25,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 26,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 27,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 28,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 29,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 30,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 31,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 32,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 33,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 34,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 35,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 36,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 37,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 38,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 39,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 40,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 41,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 42,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 43,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 44,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 45,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 46,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 47,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 48,
+          "to_group_seq": 49,
+          "fraction": 1.0
+        }
+      ],
+      "frozen_return_note": "Biological detritus fate is not evidence of fleet discard fate. No explicit fishery-return field is consumed by the frozen loader.",
+      "processing_offal_separate_flow": null,
+      "source_discards": null,
+      "source_discard_fraction_of_catch": null,
+      "source_fleet_return": null,
+      "discard_evidence_status": "catch explicitly includes landings plus discards, split not published in recovered model input",
+      "source_fidelity_caveats": [
+        "PDF/printed9 Catch section explicitly combines all landings including IUU with discards for Ecopath1978; AppendixA2.1 PDF46 gives total catch per fleet/group, not a discard split.",
+        "No source fleet fate or separately quantified processing offal recovered. Generic detritus is not proof of fishery-return routing.",
+        "PDF7 area6205000km2 includes northern Sumatra and Maldives; model extends beyond named LME. AppendixA2.1 normalizes catches to the entire study area.",
+        "Table16 PDF24 distinguishes biomass in habitat area from area-adjusted biomass; use frozen area-adjusted biomass consistently.",
+        "A hypothetical full return to group49 is implementable as an assumption only; absence of observed D does not block designated fH experiments."
+      ]
+    },
+    {
+      "model_id": "52_1",
+      "name": "Sea of Okhotsk, NE model variant",
+      "source_period": "1980s (filename label: 1980)",
+      "source_area_km2": 1590000,
+      "native_units": {
+        "biomass": "t wet biomass km-2",
+        "flows": "t wet biomass km-2 year-1",
+        "pb_qb": "year-1"
+      },
+      "group_count": 29,
+      "caught_living_group_count": 0,
+      "frozen_living_harvest_sum": 0.0,
+      "harvest_excludes_detritus_export": true,
+      "source_supported_sr_status": "unavailable_nonzero_harvest",
+      "files": [
+        {
+          "path": "inputs/PPREstimation/real_models/global_cover_jsons/52_1_Sea_of_Okhotsk_NE_(1980).json",
+          "sha256": "61b6176affe6051948b3ec972fe87d95dabd8d98b66744b4c7350fcf303b9099",
+          "bytes": 46244,
+          "role": "frozen calculator model"
+        },
+        {
+          "path": "inputs/PPRAtlas/archive/regions/LME_052/OKH-2004/Palomares20_FishCentResaRep28-440d8aa8.pdf",
+          "sha256": "440d8aa860813d435891b107bf85340df773df322c83fa1f9f82069e3661851d",
+          "bytes": 5344843,
+          "role": "publication"
+        }
+      ],
+      "source_pdf_pages_one_based": [
+        24,
+        25,
+        27
+      ],
+      "frozen_detritus_groups": [
+        {
+          "group_seq": "29",
+          "group_name": "Detritus",
+          "biomass": "-9999",
+          "ee": "0.13",
+          "detritus_import": "-9999",
+          "export": "0"
+        }
+      ],
+      "frozen_biological_detritus_fates": [
+        {
+          "from_group_seq": 1,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 2,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 3,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 4,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 5,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 6,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 7,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 8,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 9,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 10,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 11,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 12,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 13,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 14,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 15,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 16,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 17,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 18,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 19,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 20,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 21,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 22,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 23,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 24,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 25,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 26,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 27,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 28,
+          "to_group_seq": 29,
+          "fraction": 1.0
+        }
+      ],
+      "frozen_return_note": "Biological detritus fate is not evidence of fleet discard fate. No explicit fishery-return field is consumed by the frozen loader.",
+      "processing_offal_separate_flow": null,
+      "source_discards": null,
+      "source_discard_fraction_of_catch": null,
+      "source_fleet_return": null,
+      "discard_evidence_status": "published group catch/discard inputs unavailable; frozen H identically zero",
+      "source_fidelity_caveats": [
+        "Frozen paper is Chaikina2020 chapter printed23–34 based on a2004 thesis; it is not the original49-page thesis.",
+        "PDF25/printed24 uses NE for its new Ecopath variant, contrasted with SD; do not expand NE as a northeastern subregion.",
+        "Source period1980s and wholeSea area1590000km2; filename1980 is a catalog convention.",
+        "Table1 PDF27/printed26 reproduces29-group parameters but has no catch/discard column. All raw group exports=0; this does not establish a real-world zero fishery.",
+        "For the frozen input H=0 so D=fH=0 for every fraction; retain as no-harvest/invariance case and do not infer a nonzero discard sensitivity.",
+        "Generic detritus fate1 in JSON is not documented fleet fate. No processing-offal flow recovered.",
+        "Table1 biomass header erroneously includes year-1, although biomass is stock. Detritus biomass is blank; raw sentinel-9999 is unknown, not0."
+      ]
+    },
+    {
+      "model_id": "28_646",
+      "name": "Guinea offshore model",
+      "source_period": "1998",
+      "source_area_km2": 111932,
+      "native_units": {
+        "biomass": "t wet biomass km-2",
+        "flows": "t wet biomass km-2 year-1",
+        "pb_qb": "year-1"
+      },
+      "group_count": 44,
+      "caught_living_group_count": 28,
+      "frozen_living_harvest_sum": 0.86795216265,
+      "harvest_excludes_detritus_export": true,
+      "source_supported_sr_status": "hypothetical_destination_only",
+      "files": [
+        {
+          "path": "inputs/PPREstimation/real_models/global_cover_jsons/28_646_Guinea_(1998).json",
+          "sha256": "1bfed66f4729a70225ff920e3a09710e3d981ffaecc9e2b4b6349cdc52645243",
+          "bytes": 97538,
+          "role": "frozen calculator model"
+        },
+        {
+          "path": "inputs/PPRAtlas/archive/regions/LME_028/GUI-2004/Palomares-et-al-west-africa-ecosystems-bd6604d6.pdf",
+          "sha256": "bd6604d63f9b2bf3457fa84d97c1ea414a65c553147b1f9119588e43254d87bf",
+          "bytes": 5571871,
+          "role": "publication"
+        }
+      ],
+      "source_pdf_pages_one_based": [
+        129,
+        147,
+        153,
+        157
+      ],
+      "frozen_detritus_groups": [
+        {
+          "group_seq": "44",
+          "group_name": "Detritus",
+          "biomass": "290",
+          "ee": "0.475816131",
+          "detritus_import": "0",
+          "export": "1670.48071"
+        }
+      ],
+      "frozen_biological_detritus_fates": [
+        {
+          "from_group_seq": 1,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 16,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 34,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 36,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 35,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 40,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 26,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 38,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 18,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 24,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 19,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 11,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 12,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 27,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 25,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 39,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 2,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 29,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 28,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 31,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 30,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 33,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 32,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 21,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 13,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 17,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 20,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 37,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 22,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 4,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 14,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 15,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 23,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 43,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 6,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 5,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 8,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 7,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 9,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 10,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 3,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 41,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        },
+        {
+          "from_group_seq": 42,
+          "to_group_seq": 44,
+          "fraction": 1.0
+        }
+      ],
+      "frozen_return_note": "Biological detritus fate is not evidence of fleet discard fate. No explicit fishery-return field is consumed by the frozen loader.",
+      "processing_offal_separate_flow": null,
+      "discard_evidence_status": "separate source-model assumptions published; not separate fields in frozen JSON",
+      "source_discards": null,
+      "source_discards_sum_of_nonblank_rounded_table16_cells": 0.090762,
+      "source_discard_fraction_of_catch": null,
+      "source_table16_1998": [
+        {
+          "group_seq": 5,
+          "group_name": "Sélaciens L prof",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 132.18
+        },
+        {
+          "group_seq": 6,
+          "group_name": "Sélaciens L côtiers",
+          "landings_artisanal": 0.0027,
+          "landings_industrial": 0.0017,
+          "landings_total": 0.004,
+          "discards_industrial": 0.00562,
+          "bbox_y": 141.7799
+        },
+        {
+          "group_seq": 7,
+          "group_name": "Sélaciens M prof",
+          "landings_artisanal": 0.0,
+          "landings_industrial": 0.0,
+          "landings_total": null,
+          "discards_industrial": 0.00562,
+          "bbox_y": 151.4396
+        },
+        {
+          "group_seq": 8,
+          "group_name": "Sélaciens M côtiers",
+          "landings_artisanal": 0.0043,
+          "landings_industrial": 0.0026,
+          "landings_total": 0.007,
+          "discards_industrial": 0.00562,
+          "bbox_y": 161.0994
+        },
+        {
+          "group_seq": 9,
+          "group_name": "Thons majeurs",
+          "landings_artisanal": null,
+          "landings_industrial": 0.0001,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 170.7591
+        },
+        {
+          "group_seq": 10,
+          "group_name": "Thons mineurs",
+          "landings_artisanal": 0.0016,
+          "landings_industrial": 0.001,
+          "landings_total": 0.003,
+          "discards_industrial": null,
+          "bbox_y": 180.4189
+        },
+        {
+          "group_seq": 11,
+          "group_name": "Côtier pel L pred",
+          "landings_artisanal": 0.0093,
+          "landings_industrial": 0.0106,
+          "landings_total": 0.02,
+          "discards_industrial": null,
+          "bbox_y": 190.0786
+        },
+        {
+          "group_seq": 12,
+          "group_name": "Côtier pel S inv",
+          "landings_artisanal": 0.0257,
+          "landings_industrial": 0.0201,
+          "landings_total": 0.046,
+          "discards_industrial": 0.0006,
+          "bbox_y": 199.7384
+        },
+        {
+          "group_seq": 13,
+          "group_name": "Ethmalose",
+          "landings_artisanal": 0.2488,
+          "landings_industrial": null,
+          "landings_total": 0.249,
+          "discards_industrial": null,
+          "bbox_y": 209.3981
+        },
+        {
+          "group_seq": 14,
+          "group_name": "Pel L pred",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 218.9981
+        },
+        {
+          "group_seq": 15,
+          "group_name": "Pel S inv",
+          "landings_artisanal": 0.0,
+          "landings_industrial": 0.0929,
+          "landings_total": 0.093,
+          "discards_industrial": null,
+          "bbox_y": 228.6578
+        },
+        {
+          "group_seq": 16,
+          "group_name": "Bars",
+          "landings_artisanal": 0.0487,
+          "landings_industrial": 0.0403,
+          "landings_total": 0.089,
+          "discards_industrial": 0.01152,
+          "bbox_y": 238.3176
+        },
+        {
+          "group_seq": 17,
+          "group_name": "Gros capitaine",
+          "landings_artisanal": 0.0026,
+          "landings_industrial": 0.0012,
+          "landings_total": 0.004,
+          "discards_industrial": 0.0004,
+          "bbox_y": 247.9773
+        },
+        {
+          "group_seq": 18,
+          "group_name": "Côtier L pred",
+          "landings_artisanal": 0.0024,
+          "landings_industrial": 0.0111,
+          "landings_total": 0.014,
+          "discards_industrial": 0.00319,
+          "bbox_y": 257.6371
+        },
+        {
+          "group_seq": 19,
+          "group_name": "Côtier M pred",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 267.2968
+        },
+        {
+          "group_seq": 20,
+          "group_name": "Mâchoiron",
+          "landings_artisanal": 0.0231,
+          "landings_industrial": 0.0115,
+          "landings_total": 0.035,
+          "discards_industrial": 0.0033,
+          "bbox_y": 276.9565
+        },
+        {
+          "group_seq": 21,
+          "group_name": "Disques",
+          "landings_artisanal": 0.0009,
+          "landings_industrial": 0.0041,
+          "landings_total": 0.005,
+          "discards_industrial": 0.00118,
+          "bbox_y": 286.6163
+        },
+        {
+          "group_seq": 22,
+          "group_name": "Mulets",
+          "landings_artisanal": 0.0137,
+          "landings_industrial": null,
+          "landings_total": 0.014,
+          "discards_industrial": null,
+          "bbox_y": 296.276
+        },
+        {
+          "group_seq": 23,
+          "group_name": "Petit capitaine",
+          "landings_artisanal": 0.0002,
+          "landings_industrial": 0.0103,
+          "landings_total": 0.011,
+          "discards_industrial": 0.0031,
+          "bbox_y": 305.9358
+        },
+        {
+          "group_seq": 24,
+          "group_name": "Côtier M inv",
+          "landings_artisanal": 0.0063,
+          "landings_industrial": 0.0464,
+          "landings_total": 0.053,
+          "discards_industrial": 0.01328,
+          "bbox_y": 315.5955
+        },
+        {
+          "group_seq": 25,
+          "group_name": "Côtier S pred",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 325.2553
+        },
+        {
+          "group_seq": 26,
+          "group_name": "Capitaine royal",
+          "landings_artisanal": 0.0032,
+          "landings_industrial": null,
+          "landings_total": 0.003,
+          "discards_industrial": 0.0,
+          "bbox_y": 334.915
+        },
+        {
+          "group_seq": 27,
+          "group_name": "Côtier S inv",
+          "landings_artisanal": 0.0001,
+          "landings_industrial": 0.0018,
+          "landings_total": 0.002,
+          "discards_industrial": 0.0005,
+          "bbox_y": 344.5748
+        },
+        {
+          "group_seq": 28,
+          "group_name": "Dem L pred",
+          "landings_artisanal": 0.0008,
+          "landings_industrial": 0.0024,
+          "landings_total": 0.003,
+          "discards_industrial": 0.0007,
+          "bbox_y": 354.2345
+        },
+        {
+          "group_seq": 29,
+          "group_name": "Dem L inv",
+          "landings_artisanal": null,
+          "landings_industrial": 0.0001,
+          "landings_total": 0.0,
+          "discards_industrial": 0.00562,
+          "bbox_y": 363.8943
+        },
+        {
+          "group_seq": 30,
+          "group_name": "Dem M pred",
+          "landings_artisanal": 0.0129,
+          "landings_industrial": 0.0114,
+          "landings_total": 0.024,
+          "discards_industrial": 0.00326,
+          "bbox_y": 373.4942
+        },
+        {
+          "group_seq": 31,
+          "group_name": "Dem M inv",
+          "landings_artisanal": 0.0132,
+          "landings_industrial": 0.0167,
+          "landings_total": 0.03,
+          "discards_industrial": 0.00477,
+          "bbox_y": 383.154
+        },
+        {
+          "group_seq": 32,
+          "group_name": "Dem S pred",
+          "landings_artisanal": null,
+          "landings_industrial": 0.0017,
+          "landings_total": 0.002,
+          "discards_industrial": 0.00562,
+          "bbox_y": 392.8137
+        },
+        {
+          "group_seq": 33,
+          "group_name": "Dem S inv",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": 0.00562,
+          "bbox_y": 402.4734
+        },
+        {
+          "group_seq": 34,
+          "group_name": "Bathy L pred",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 412.1332
+        },
+        {
+          "group_seq": 35,
+          "group_name": "Bathy S pred",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 421.7929
+        },
+        {
+          "group_seq": 36,
+          "group_name": "Bathy SM inv",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 431.4527
+        },
+        {
+          "group_seq": 37,
+          "group_name": "Mésopélagiques",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": null,
+          "bbox_y": 441.1124
+        },
+        {
+          "group_seq": 38,
+          "group_name": "Cephalopodes",
+          "landings_artisanal": null,
+          "landings_industrial": 0.0539,
+          "landings_total": 0.054,
+          "discards_industrial": null,
+          "bbox_y": 450.7722
+        },
+        {
+          "group_seq": 39,
+          "group_name": "Crustacés",
+          "landings_artisanal": null,
+          "landings_industrial": 0.0119,
+          "landings_total": 0.012,
+          "discards_industrial": 0.005622,
+          "bbox_y": 460.4319
+        },
+        {
+          "group_seq": 40,
+          "group_name": "Benthos",
+          "landings_artisanal": null,
+          "landings_industrial": null,
+          "landings_total": null,
+          "discards_industrial": 0.00562,
+          "bbox_y": 470.0917
+        }
+      ],
+      "published_split_note": "Visible published D cells sum0.090762 t/km2 in the1998 annual table. This is not a precision-matched full total; blank cells remain unknown/not printed. Do not infer exact original D by subtracting rounded L from precise JSON H.",
+      "source_fleet_return": null,
+      "source_fidelity_caveats": [
+        "The proper source is Guenette & Diallo2004 Addendum printed124–159/PDF128–163, not the neighboring Guinea-Bissau or Gambia chapters.",
+        "Printed149/PDF153: discard data were nearly absent; small-capitaine D estimated as30% of industrial landings, generalized to other commercial species. This is D/L, not D/(L+D). Artisanal discards assumed negligible.",
+        "Additional noncommercial-group D assumptions are described; never apply30% uniformly to all H as an observed source fraction.",
+        "No explicit fleet destination or return fraction recovered from the chapter. One generic detritus group and biological fate1 do not establish a fleet return of1.",
+        "Raw detritus export1670.48071 is an ecosystem outflow, not catch; frozen loader zeros detritus catch.",
+        "Area111932km2 in Table1, approximately112000 in prose, extends beyond Guinea EEZ. It is not the Guinea Current LME polygon.",
+        "Printed Table16 units omit year;1998 annual model and rate definitions establish annual flows. Preserve original caption alongside interpretation.",
+        "Authors flag underestimated illegal catches, uncertain shark/tuna biomass and catch, and incomplete discard composition. Model assumptions are reference evidence, not empirical truth."
+      ]
+    }
+  ],
+  "verification": {
+    "referenced_frozen_files_hash_matched_manifest": 11,
+    "input_manifest_sha256": "0a37309f22ba887bbb6ff90a6cbba7329910c6c0108ba76ecb979e9224d71047",
+    "publication_pages_visually_reviewed": [
+      "humboldt:3",
+      "bay:7,9,24,46",
+      "okhotsk:24,25,27",
+      "guinea:129,147,153,157"
+    ],
+    "rendered_evidence": [
+      {
+        "path": "verification/source_pages/bay-pdf-007.png",
+        "sha256": "c6aa63c2c9f2ed4f973572a8cefb35185b6e310392534428761b0e177cbe6936",
+        "bytes": 425867,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/bay-pdf-009.png",
+        "sha256": "bb8cfd976bf87191488128ccafaa12f10cc47853b023a5fd9eacfce4b367147c",
+        "bytes": 416907,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/bay-pdf-024.png",
+        "sha256": "946786b47dcdc4b1af93912038a20f05992b0d85941fb2465d9402fae7b5b961",
+        "bytes": 382801,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/bay-pdf-046.png",
+        "sha256": "4b1e48318a9bf87540d6f0897781ece7a0573b37d19ff636af3da825db54a739",
+        "bytes": 292723,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/guinea-pdf-129.png",
+        "sha256": "fdfe6710d6e8ddad9c42714cca1dfe72e47abb661c75205ef1f384a84cf8a1a7",
+        "bytes": 545256,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/guinea-pdf-147.png",
+        "sha256": "bd8026bab776121b4e7679de94890327e3fcea2c8ae5f57432733f2550562288",
+        "bytes": 418554,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/guinea-pdf-153.png",
+        "sha256": "ae082eb8b7505c669dd7f8761f360370eb59cabd5dc7e96a4a3788089e34f93e",
+        "bytes": 516671,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/guinea-pdf-157.png",
+        "sha256": "4c7611f42cf6c717233e515c45e00d3b1ec72a59b2086293cee21068860ff69c",
+        "bytes": 448832,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/humboldt-original-xls-fleet-cells.png",
+        "sha256": "bb28e0f9d925df5edfd7bc9f2b7c468fc26ce1561ef81bfba72c134bea0f67ec",
+        "bytes": 114416,
+        "role": "original-XLS cell transcription, not original screenshot"
+      },
+      {
+        "path": "verification/source_pages/humboldt-pdf-003.png",
+        "sha256": "b561235a7484a4877c2c5fe784cc5b9bbacaa65ed516d4766cdca2da77a6a1e1",
+        "bytes": 796157,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/okhotsk-pdf-024.png",
+        "sha256": "4c7f653d137b85566ba5357070a4f6b611f9483e224e9c9a6122be90381e2c48",
+        "bytes": 472447,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/okhotsk-pdf-025.png",
+        "sha256": "17518d46164ef8ec3b093ac146b9df7fb4ec276e38809127b896ee623ca94610",
+        "bytes": 514187,
+        "role": "visually reviewed publication page"
+      },
+      {
+        "path": "verification/source_pages/okhotsk-pdf-027.png",
+        "sha256": "a04027ad2e9dadfc4648670e50256ba592fd6d2aeed4cb5bab0057d087958982",
+        "bytes": 363991,
+        "role": "visually reviewed publication page"
+      }
+    ],
+    "guinea_table_extraction": "Poppler -bbox coordinates; all36 table rows visually checked; blank cells preserved as null",
+    "humboldt_xls_reader": "xlrd2.0.2 installed into private verification/source_pages/vendor; no shared environment changes",
+    "reproduce": "python research/discard_sensitivity_2026_09_10/verification/source_pages/audit_sources.py"
+  }
+}

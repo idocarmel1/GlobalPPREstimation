@@ -1,0 +1,12880 @@
+An exploratory ecosystem
+model of the Bay of Bengal
+Large Marine Ecosystem
+
+Sylvie Guénette
+
+EcOceans, St. Andrews NB, Canada
+
+prepared for the
+Bay of Bengal Large Marine Ecosystem Project (www.boblme.org/)
+
+December 2013
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+2
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+3
+
+Abstract
+The trend towards ecosystem-based management requires the development of tools to gain insights in ecosystem
+functioning and the impact of fishing on ecosystem structure. This study aims at developing one of such tools, an
+ecosystem model of the Bay of Bengal built with the Ecopath and Ecosim software. The Bay was divided in three
+sections considered relatively independent from each other while migrating species were assumed to occupy the
+entire study area. The available data and the methods to develop the model are described. The static model
+(Ecopath) was built to represent year 1978 and synthesise available population dynamics and fisheries data. A
+preliminary Ecosim model was set up to allow exploring interactions between functional groups and the impact of
+fishing. Time series of abundance, catches and effort were assembled for four functional groups for this purpose.
+The Ecopath model is one image of the ecosystem that results from the data available and the choices that were
+made for each parameter at the input, stage and when balancing the model. Several crucial gaps in biomass
+estimates and level of exploitation were noted. Changing the assumptions would lead to different biomasses and
+P/B values and possibly, the strength of the foodweb links. Given the lack of time series to fit the model to a larger
+number of functional groups, and the use of commercial CPUEs as abundance indices for large pelagics, the
+uncertainty of temporal simulations is large.
+As it stands, the model is a great framework to articulate data, improve research questions, and determine what
+important piece of information would be useful to gather to answer the most crucial questions. It can be modified
+and expanded as data become available. The results from temporal simulations should not be used to give
+quantitative management advice. Instead, current Ecosim simulations could be used as a tool to explore food web
+dynamics and effects of fishing.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+4
+
+Table of contents
+Abstract .........................................................................................................................................................................3
+Introduction ...................................................................................................................................................................6
+Methods ........................................................................................................................................................................6
+Ecopath with Ecosim .................................................................................................................................................6
+Study area and model structure................................................................................................................................7
+Catch, effort and CPUE ..............................................................................................................................................9
+Catch .....................................................................................................................................................................9
+Effort .....................................................................................................................................................................9
+CPUE and fleet ....................................................................................................................................................10
+Large pelagics effort and CPUE time series (contributed by Rishi Sharma, IOTC) ..............................................10
+Fish ..........................................................................................................................................................................11
+Diets ....................................................................................................................................................................11
+Fish surveys .........................................................................................................................................................11
+Natural mortality ................................................................................................................................................12
+P/B and P/Q ........................................................................................................................................................13
+Sharks and rays ...................................................................................................................................................13
+Tuna-like and scombrids .....................................................................................................................................14
+Bathypelagic species ...........................................................................................................................................15
+Large piscivores (Lpisc) .......................................................................................................................................15
+Carangids ............................................................................................................................................................15
+Small pelagics (Spel) ............................................................................................................................................15
+Large piscivores of commercial interest (Lpisc comm) .......................................................................................15
+Other coastal fishes ............................................................................................................................................17
+Hilsa ....................................................................................................................................................................17
+Indian mackerel ..................................................................................................................................................19
+Benthic invertebrates ..............................................................................................................................................19
+Jellyfish ....................................................................................................................................................................19
+Cephalopods............................................................................................................................................................20
+Zooplankton ............................................................................................................................................................20
+Primary producers ...................................................................................................................................................20
+Birds and mammals .................................................................................................................................................21
+Detritus....................................................................................................................................................................21
+Balancing the model ....................................................................................................................................................21
+Ecosim model ..............................................................................................................................................................28
+Acknowledgements .....................................................................................................................................................32
+References ...................................................................................................................................................................32
+Appendices ..................................................................................................................................................................37
+A1 Functional groups...............................................................................................................................................37
+A1.1 Allocation of catch species to functional groups. .......................................................................................37
+A1.2 Area consifered for each functional group. ................................................................................................42
+A1.3 Functional groups composition ..................................................................................................................43
+A2 Catch, effort and CPUEs .....................................................................................................................................46
+A2.1 Total catch (t/km2/year) per fleet and functional group as input in Ecopath for year 1978. ....................46
+A2.2. Effort in horse power days for the east coast of India (Bhathal 2013) and relative effort as used for
+region 2 in Ecosim. ..............................................................................................................................................47
+A2.3. Biomass, catch, and fishing effort directed to hilsa compiled for Bangladesh, the extrapolation for 19781986, and the resulting fishing effort time series used in Ecosim (relative value). ............................................48
+A2.4 Effort by large pelagic fleet contributed by Rishi Sharma, IOTC. ................................................................49
+A3 Diet compositions ..............................................................................................................................................50
+A3.1 Source of fish diets. ....................................................................................................................................50
+A3.2 Original diet matrix .....................................................................................................................................54
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+5
+
+A4. Calculation of natural mortality. .......................................................................................................................57
+A5 Marine and inland catches by country for hilsa. ................................................................................................58
+A6. Alternative fitting results with Ecosim ..............................................................................................................60
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+6
+
+Introduction
+The Bay of Bengal LME is an embayment of the northeastern Indian Ocean bordered by Sri Lanka, India,
+Bangladesh, Malaysia, Thailand, Myanmar, Indonesia and the Maldives (Figure 1). It is influenced by the second
+largest hydrologic region in the world, the Ganges-Brahmaputra-Meghna (GBM) Basin (Heileman et al. 2009). The
+region is also affected by monsoons, storm surges and tsunamis leading to strong seasonality in water
+characteristics and in productivity (Heileman et al. 2009).
+The ecosystem is also under high pressure from fisheries including destructive practices and high bycatch levels
+(Heileman et al. 2009), and from habitat destruction and pollution (Holmgren 1994). For instance, the demand for
+Penaeus monodon larvae for aquaculture has resulted in large catches of other shrimp larvae and zooplankton that
+is probably having an impact on the ecosystem (Mahmood et al. 1994). Also, the damming of some rivers has
+destroyed some fisheries and reduced habitat for hilsa (Milton 2010).
+The Bay of Bengal Large Marine Ecosystem (BOBLME) Project (http://www.boblme.org/) is a collaborative effort
+between the United Nations Food and Agriculture Organization (FAO) and the countries bordering the Bay of
+Bengal to improve regional management of fisheries and the marine environment. The aim of the BOBLME project
+is to identify threats to the marine ecosystem, improve the livelihoods of coastal communities and secure food
+resources of the Bay of Bengal. One of its goals is to improve the management of coastal and marine natural
+resources. Increasingly, fisheries management is moving towards Ecosystem Approaches to Fisheries in the hope of
+developing strategies providing the right incentive structure for stakeholders (Hilborn et al. 2005) and to protect
+the ecosystem structure and functioning (FAO 2001 ; Pikitch et al. 2004; Babcock et al. 2005; Gavaris 2009). This
+requires the development of tools to gain insights in ecosystem functioning and to explore management
+strategies. In the case of the Bay of Bengal, the first caveat in this process was the gaps in knowledge in the total
+amount of biomass extracted from the ecosystem. Recent work from the University of British Columbia (UBC) Sea
+Around Us Project (SAUP) team filled this gap by complementing the FAO database with estimates of illegal,
+unreported and unregulated catches (IUU) in the region (Zeller et al. 2013).
+Several ecosystem models have been published in the study area in the last 20 years. Typically they cover a
+country coastal area such as the west coast of Peninsular Malaysia (Alias 2003), the southeast coast of India
+(Antony et al. 2010), and Bangladesh (Mustafa 2003; Rashed-Un-Nabi and Hadayet Ullah 2012; Ullah et al. 2012).
+Several models are available for the Gulf of Thailand (Christensen 1998; Vibunpant et al. 2003) and the South China
+Sea (Garces et al. 2003; Chen et al. 2008a; b; Hong et al. 2008; Chen et al. 2009). Each model was built with a
+specific goal in mind, to explore the effects of fishing in general, the effects of one specific fishery (e.g. Rashed-UnNabi and Hadayet Ullah 2012), or the role of a group of species (Antony et al. 2010).
+The present report describes the construction of an ecosystem model for the Bay of Bengal in 1978, using the
+Ecopath with Ecosim (EwE) software (Walters et al. 1997; Christensen and Walters 2004), including all available
+data on population dynamics, biomass estimates, and diet compositions. This model was built to cover the entire
+Bay of Bengal divided in 3 geographic regions and focusses more specifically on pelagic fisheries: hilsa, bigeye tuna,
+yellowfin tuna, and blue and striped marlins. For these species, times series of biomass estimates or CPUEs, and
+fishing effort where included to provide a first trial in an Ecosim temporal simulation model (Christensen and
+Walters 2004; Christensen and Walters 2005) for the period 1978-2010. Other species, demersal and pelagics were
+grouped as a function of their habitat, and their economic importance for fisheries, preparing for future
+expansions of the model.
+
+Methods
+Ecopath with Ecosim
+An Ecopath model describes the trophic interactions, synthesizing ecological and fisheries data of an ecosystem at
+a given time (Walters et al. 1997; Christensen and Walters 2004). These models account for the biomass of each
+functional group of species, their diet composition, production per unit of biomass (P/B, per year), consumption
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+7
+
+per unit of biomass (Q/B, per year), mortality rate from natural causes (M) and fishing (F), accumulation of biomass
+and net migration rate (all rates are annual). The principle behind this ecosystem modelling approach is that, on a
+yearly basis, biomass and energy in an ecosystem are conserved.
+The proportion of the mortality of each group that is accounted by the model (fishing, predation, biomass
+accumulation, migration) is called ecotrophic efficiency (EE). Typically, when biomass estimates are absent, an EE
+value is provided and the biomass left to estimate by Ecopath. The P/B is considered equal to total mortality under
+equilibrium condition (Allen 1971) since production and losses would be equal. The total mortality (Z) is thus
+computed as the sum of fishing mortality (F) and natural mortality (M) which includes mortality by predation.
+Ecosim is a tool for dynamic simulations based on the Ecopath model, an instantaneous image of the ecosystem at
+a given time (Christensen and Pauly 1992b; Walters et al. 1997; Christensen and Walters 2004). Ecosim uses a
+system of differential equations to describe changes in biomass and flows with the system by accounting for
+change in predation and fishing
+
+DBi
+= g i ∑ Q ji − ∑ Qij + I i − ( M 0,i + Fi + ei ) Bi
+dt
+j
+j
+
+eq. 1
+
+where gi is the net growth efficiency; Qji and Qij are the consumption of group j by group i and the consumption of
+2
+group i by group j respectively; Ii the immigration in t/km ; M0,i the annual instantaneous rate of non-predatory
+natural mortality; Fi the annual rate of fishing mortality; and ei the immigration rate. The estimation of
+consumption of prey i by predator j (Qij) at each time step is based on the foraging arena theory (Walters and
+Kitchell 2001; Christensen and Walters 2004) and calculated as:
+Qi j = (a i j vij Bi B j ) /(2vij + a ij B j )
+eq. 2
+where aij is the rate of effective search for prey i, v (vulnerability) is the rate of exchange between the vulnerable
+and invulnerable prey biomass pools. The estimate of aij is obtained by solving equation 2 using parameters from
+the Ecopath model and conditional on the value of v (default value=2). Low vulnerability (1> vij<1.5) implies a
+donor-control or type II functional response, while a large value implies that a change in biomass of the predator
+will cause a corresponding change in the mortality rate of its prey. Model fitting is achieved by estimating
+vulnerability values that minimizes the sum of squares of differences between model predictions and times series
+of biomass and catch.
+
+Study area and model structure
+The study area is the Bay of Bengal defined as the LME Bay of Bengal extended to include the northern Sumatra
+2
+and the Maldives (Figure 1). The study area covers 6,205,000 km of which 12% are on the continental shelf (< 200
+m, Table 1).
+Based on 2 transects on the coast and the open seas in the western Bay of Bengal, the sea surface temperature
+varies from 17 to 29°C in the first 100 m, for an average of about 25°C while the first 50 m are mostly above 26°C
+(Prasanna Kumar et al. 2007, figure 2). Below 100 m, the temperature declines rapidly from 20°C to less than 12°C
+at 300 m (figure 2 in Prasanna Kumar et al. 2007). For modelling purposes, water temperature is assumed to be
+26°C on the shelf and 12°C in deeper waters (the average temperature at about 250 m). The oxygen minimum zone
+reaches as high as 50 m at some time of the year and can become a constraint for the biota but this factor is not
+included in the model.
+The Bay of Bengal was divided in 3 regions: 1. the Maldives and open waters; 2. Sri Lanka, Indian coast, and Bay of
+Bengal; 3. the eastern coast of the Bay that covers the coast of Myanmar, Thailand, Malaysia, Sumatra and the
+Andaman and Nicobar Islands (Figure 1). In the Maldives, characterised by a very small reef area, the fisheries
+pursued mainly tuna and other large pelagics. Region 2 is characterised by a relatively small shelf under the
+influence of several rivers. Bangladesh and the West Bengal (India) are the most strongly influenced by the
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+8
+
+Figure 1. Map of the study area, the Bay of Bengal LME and the Maldives. Source UBC SAUP.
+
+Table 1. Shelf and EEZ surface area by country and region of the study area.
+Shelf Area
+EEZ Area
+%
+2
+2
+Region
+Entity
+(km )
+total (km )
+
+%
+shelf
+
+1
+
+Maldives
+
+915,423
+
+14.8
+
+30,998
+
+1
+
+High Seas
+
+1,929,874
+
+31.1
+
+0
+
+0
+
+2
+
+Bangladesh
+
+84,846
+
+1.4
+
+64,007
+
+75
+
+2
+
+India
+
+666,670
+
+10.7
+
+118,304
+
+18
+
+2
+
+Sri Lanka
+
+530,943
+
+8.6
+
+31,352
+
+6
+
+3
+
+India (Andaman & Nicobar)
+
+659,573
+
+10.6
+
+219,820
+
+33
+
+3
+
+Indonesia (Western)
+
+719,333
+
+11.6
+
+133,939
+
+19
+
+3
+
+Malaysia (West Peninsula)
+
+68,317
+
+1.1
+
+67,717
+
+99
+
+3
+
+Myanmar
+
+511,356
+
+8.2
+
+219,820
+
+43
+
+3
+
+Thailand
+
+42
+
+118,717
+
+1.9
+
+50,210
+
+6,205,051
+
+100
+
+936,168
+
+3
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+9
+
+Bramaputra-Ganges river system. Region 3 has a larger shelf, but is less influenced from river discharge than region
+2.
+In each region, coastal fish and invertebrates, identified with the region number, are assumed to be relatively
+isolated from other regions. Some groups are assumed to occupy the whole study area (e.g. oceanic sharks and
+tuna-like) or straddle 2 regions or all three (e.g. hilsa, Indian mackerel, coastal sharks, coastal scombrids, jellyfish).
+The area used for each grouped is listed in Appendix A1.2.
+
+Catch, effort and CPUE
+Catch
+We used the catches provided by the UBC Sea Around Us Project (SAUP) structured by country, sectors
+(subsistence, artisanal, industrial, tuna), and taxa, combining landings statistics and estimates of unreported
+catches (Zeller et al. 2013). Catches labeled miscellaneous fish, Perciformes and Pleuronectiformes were attributed
+to functional groups of the same region in equal proportions between fish groups (Appendix A1). Catches labeled
+as Scombrids and Scombroidei were attributed to functional groups tuna-like and coastal scombrids and Indian
+mackerel. Tuna catches labeled Thuninni were attributed to both tuna-like and coastal scombrids.
+Landings (IUU + landings) and discards were summed by region defined as where the fish was caught regardless of
+the fishing country. Catches from unknown fishing grounds were assigned to the same region as that of the fishing
+country. The 1978 catches input into the Ecopath model are the sum of all landings and discards (Appendix A2.1)
+because the distinction is not necessary to balance the model and because in Ecosim, it is not yet possible to input
+separate times series of discards. Thus, the temporal simulations (Ecosim) will run with total catch time series.
+Since catches were not reconstructed on the basis of effort (Zeller et al. 2013), it is difficult to link effort and fishing
+sectors which are defined differently among countries. In addition, the subsistence catch is derived from
+questionnaires, per capita consumption, and human population size, and thus not directly linked on the number of
+inshore boats. For the time being, artisanal and subsistence catches are grouped under small-scale and
+attributed to small vessels.
+Effort
+Effort by type of boats has recently been estimated for the Indian fleet during the period 1950-2005, compiled by
+size of boats and engine power (horse power, hp) (Bhathal 2013). The small-scale fleet includes non-motorized
+traditional vessels and motorized traditional vessels with outboard motors of less than 50 hp (usually 7-9 hp).
+Industrial includes vessels using inboard motors of 50 hp and above and deep-sea fishing vessels using engines of
+120 hp and above. The industrial effort (labeled large vessels, A2.2) includes that of the large trawlers, fishing for
+lobsters, prawns and catching demersal fishes. The total effort account for the horse power and the number of
+days fished in a year (hp days, Appendix A2.2).
+The number of boats by type (inboard, outboard and non-motorised) was available for Sri Lanka (Joseph 1999;
+Samarayanke 2003) but it does not directly correspond to the catch statistics sectors (Zeller et al. 2013). The Sri
+Lanka boats with inboard engines (9 m long, 3.5 GT) may correspond to the industrial fleet catches while the boats
+with or without outboard engines can be attributed to the artisanal sector. In absence of correspondence between
+the Indian (hp days) and Sri Lanka (number of boats) data on effort, and absence of data in Bangladesh, the Indian
+effort (small-scale and industrial fleets) was used as a representative trend for region 2.
+For all other countries, it was not possible to obtain fishing effort. Most measurements of effort by type of boats
+(mechanised, non-mechanised, large vessels) cover only a few years and are known to be incomplete especially for
+small-scale fisheries. A reconstruction of effort time series is underway for several regions of the world at the UBC
+Fisheries Centre but there are still serious difficulties for the estimation for the small-scale and subsistence fishery
+(Krista Greer, UBC Fisheries Centre, pers. comm.).
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+10
+
+Effort for hilsa consists of the number of boats in both marine and freshwater in Bangladesh (R. Sharma, IOTC,
+pers. comm.) (see Appendix A2.3). It was used as a proxy for the total effort on the species assuming that effort
+evolved the same way in other countries (and especially West Bengal). This assumption seems viable as
+Bangladesh was responsible for most of the catch (63-85%) over the study period. However, the effort time series
+encompassed the period 1987-2006 only. It was extrapolated to 1978 by assuming that effort increased by only
+10% from 1978 to 1987 because fishing has not changed dramatically before 1987, but it changed considerably in
+fleet and spatial structure in the early 1990s (R. Sharma, pers. comm.) (Figure 2). Between 2006 and 2010 effort
+was held constant at the 2006 level.
+30
+
+non-motorized
+motorized
+
+25
+N boats (1000s)
+
+Extrap. motorized
+
+20
+
+Extrap. Non-motorized
+
+15
+10
+5
+0
+1978
+
+1982
+
+1986
+
+1990
+
+1994
+
+1998
+
+2002
+
+2006
+
+Year
+Figure 2. Nominal fishing effort for hilsa in number of boats as compiled for the
+stock assessment study (lines) and extrapolations from 1978 to 1986 (symbols)
+
+CPUE and fleet
+Measures of catch per unit effort (CPUE) are available for Indian mackerel (1995-2009), skipjack (Katsuwonus
+pelamis in the Maldives, 1985-2011), kawakawa (Euthynnus affinis, 2004-2011), bigeye tuna (Thunnus
+obesus,1960-2012), yellowfin tuna (Thunnus albacares, 1963-2012), striped (Kajikia audax) and blue (Makaira
+nigricans) marlins (1971-2012), and 12 shark species in Sri Lanka (1972-2011) (Rishi Sharma, IOTC, Seychelles, pers.
+comm.). These could be used as time series of abundance but they still have to be paired with effort or fishing
+mortality to drive the model which is only possible for four of these species.
+The fleet structure for the model consist of two general fleets, industrial and small-scale, in region 2 and only one
+general fleet each in regions 1 and 3, a fleet dedicated to hilsa, and three fleets dedicated for yellowfin tuna,
+bigeye tuna and marlins respectively (Appendix A2.1). For each fleet a time series of effort is required. In absence
+of data for regions 1 and 3 and given that it would be unrealistic to assume no increase in effort since 1978, effort
+was assumed to increase linearly 3-fold between 1978 and 2010, which is half of the increase of the Indian smallscale fleet. Ecosim uses relative time series of effort so that hp days or number of hooks were rescaled to start at 1
+in 1978 (Appendix A2.4).
+Large pelagics effort and CPUE time series (contributed by Rishi Sharma, IOTC)
+Effort and CPUE series were estimated for bigeye and yellowfin tuna based on data provided by Far Seas
+Research Agency, Japan (Dr. Matsumoto pers. comm.) on aggregated data of the Japanese longline fleet from
+1960-2012 (52 years). Appendix A2.4 shows the data rescaled by fleets and areas of the Indian Ocean. For the
+yellowfin dataset, 5 areas are used to stratify the Indian Ocean and the NE Indian Ocean overlapping the BOB area
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+11
+
+is used. Effort is measured as the total number of hooks deployed by the area/region and by year (and quarter).
+For the bigeye tuna, three areas are used to stratify the CPUE data, and the eastern Indian Ocean that overlays the
+BOB area is used as to display effort and CPUE trends over time (data provided by Dr. Matsumoto, Far Seas
+Research Agency, Japan).
+For marlins, data aggregated for the entire Indian ocean is used to measure trends in CPUE and effort based on the
+Japanese and Taiwanese LL fleet from 1971 to 2012, though data across species of marlins were aggregated based
+on equal weights (for blue and striped marlin) as catches for these species are not well disaggregated in the data.
+For little tuna, like skipjack, data used were based on boat days of the pole and line fleet operating in the western
+Indian Ocean off the Maldives atolls (data provided by Dr. S. Adam, Marine Research Center, Maldives; see
+Appendix A2.4). The same type of data set was used for mackerel tuna (kawakawa). In both cases, the effort in
+number of boat-days was stratified by month and quarter though finally aggregated on a yearly basis. Data was
+limited and only available from 2004-2011 (8 years) and for this reason, were not used with Ecosim.
+
+Fish
+Of the 723 species listed for the Bay of Bengal, about 315 had growth, longevity or diet information. These species
+are listed in Appendix A1.3, grouped into functional groups. The name of fish functional groups is either based on
+the family name (e.g. Carangids) or the body size (Small, Medium, Large), the habitat (pelagic, oceanic, coastal),
+and their feeding habit: invertivore (inv) or piscivore (pisc). When assigned to a specific region, the name of a
+functional group starts with the region number (e.g. 2 L pisc).
+Diets
+Diets for fish were mainly taken from Fishbase (Froese and Pauly 2013) using preferably local and regional studies
+(see sources in Appendix A3.1). Diets from the FAO area 57 account for 8% (N=12), other parts of the Indian Ocean
+9%, the South China Sea 15%, and the Pacific (mainly western) 55%. Most diets for large pelagics (sharks, tuna-like,
+scombrids) were obtained from Atlantic waters.
+Diets were compiled in a spreadsheet following the breakdown found in each publication. Foreign diet items were
+assigned a functional group based on size, trophic level and habitat similarity. In a large number of cases, a part of
+the diet is not defined (bony fish, finfish, etc.). These items were allocated to functional groups as a function of
+habitat and size possibilities. Thus, there is large uncertainty in the diet of several groups. In addition, some species
+considered as separate functional groups (e.g. hilsa, Indian mackerel) may be under-represented in diets,
+especially for diets from outside the study area.
+Coastal diet items consumed by large pelagics (sharks, tuna-like, scombrids) and other functional groups
+distributed in the whole area, were allocated by region in the same proportion as the region’s shelf area (3.3%,
+22.8%, and 73.9% for regions 1, 2 and 3 respectively). This assumes that these species were distributed or obtained
+food equally on shelves as a function of the area available. This allocation works well for region 1 especially, the
+Maldives being a good area for sharks for instance, but with such a small shelf that the biomass of coastal fish is
+rather small compared to other regions. Being that there is more shelf area in region 3, most the predation on
+coastal fish for these groups would occur in region 3, an assumption that is debatable. The diets of hilsa and Indian
+mackerel were allocated to regions in proportion of the catch by region, assuming that catch reflects abundance.
+Fish surveys
+Estimates of biomass present in the area was obtained from the summary of the Dr. Fridtjof Nansen Programme
+1975–1993 (Sætersdal et al. 1999) that covered Sri Lanka and the eastern coast of the Bay of Bengal, from
+Bangladesh to northern Sumatra, in 1978-1980. The survey did not cover India and the results for the Maldives are
+exploratory only as the vessel was too big to maneuver efficiently among atolls (Strømme 1983). The survey was
+conducted using acoustics on the shelf (< 200 m depth) paired with trawl surveys conducted by local vessels. The
+report presented biomass estimates for pelagics and semi-demersals separately and then the trawl catch rates
+(kg/hour) for each family, and by country, and portion of the coasts in some cases (Myanmar, Sri Lanka, and
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+12
+
+Thailand). In some areas, biomasses varied greatly among seasons so semi-annual surveys were averaged to
+provide an annual biomass. The biomass of each family was calculated as the global tonnage for a category of fish
+(pelagic, semi-demersal) multiplied by the proportion of the weight they represent in the trawl survey. When
+indications of dominant species were given, they were used to allocate the biomass to functional groups. The
+highest biomass is estimated to be around Sri Lanka and Bangladesh (Table 2) which corresponds pretty well to the
+map of primary production from 1997-2010
+(http://www.lme.noaa.gov/index.php?option=com_content&view=category&layout=blog&id=50&Itemid=82).
+In absence of biomass estimates for the east coast of India, estimates of densities for the Bangladesh coast were
+used for the West Bengal (14% of the Indian coast, Bhathal 2005) while the estimates for the Sri Lanka coast was
+used for the reminder of the Indian coast. Ideally, estimates for the Indian coast would be added to the next
+version of the model.
+The 1983 Dr. Fridtjof Nansen survey in the
+Maldives (Strømme 1983) recorded mainly deepwater species such as Peristedion adeni, Synagrops
+spp., Chlorophthalmus spp. and species from the
+Myctophidae family but also a few small pelagics
+(Cubiceps sp, Spratelloides gracilis), cephalopods,
+jellyfish, a few elasmobranch and caranx. It is
+difficult to attribute the estimated total biomass to
+any specific groups.
+
+2
+
+Table 2. Resulting fish density (t/km ) in each country surveyed by
+the Fridtjof Nansen programme and area covered compared to
+shelf area estimated by the SAUP.
+2
+2
+Density (t/km )
+Area (km )
+Country
+
+Pelagic
+
+Demersal
+
+Nansen
+
+SAUP
+
+Sri Lanka
+
+4.42
+
+8.89
+
+23,010
+
+31,352
+
+Myanmar
+
+2.98
+
+2.27
+
+29,067
+
+219,820
+
+Bangladesh
+
+3.23
+
+3.15
+
+41,211
+
+64,007
+
+Malaysia
+
+3.19
+
+0.62
+
+41,211
+
+67,717
+
+The 1986-1988 survey (Anderson et al. 1992)
+Thailand
+1.83
+0.74
+41,211
+50,210
+covers a few exploited groups, on and around the
+Sumatra
+1.88
+2.67
+85,857
+133,939
+reefs (snapper, emperor, groupers, jacks, sharks),
+in 3 different habitats (atoll basins, outer atoll reef, and shallow reefs) throughout the Maldives. Reef fish were
+deemed not heavily exploited in the early 1990s as the Maldives is a tuna fishing nation (Anderson et al. 1992). The
+biomass of each group was obtained by using the average proportion in the survey catch and the total biomass
+collected in each habitat. Nowadays however, reef fish are heavily exploited to supply the tourist consumption in
+resorts (Hemmings et al. 2011).
+As the area surveyed does not include the whole shelf (Table 2), the density of coastal species (Lpisc, Carangids, S
+pelagics, L pisc comm, SM inv, SM pisc, milkfish plus, hilsa and Indian mackerel) are assumed to be the same across
+the country continental shelf. For convenience and comparability species densities were first calculated for their
+habitat in each region. Typically, oceanic species (e.g. large tuna-like, oceanic sharks) are attributed to the entire
+study area, while coastal species are restricted to the EEZ of each region. Coastal scombrids are assumed to
+constitute only one stock travelling in all EEZ of the Bay of Bengal (69% of the area), while deep water species were
+assumed to be present in all deep waters (85% of the study area) (Table 1).
+Natural mortality
+In absence of direct measurement, natural mortality (M) is usually estimated using various empirical methods
+based on catch curves of unexploited populations, longevity, and other empirical relationships (see Kenchington
+2013 for a review). None of these methods are valid for all species and all types of life history. I used two different
+empirical relationships: Pauly’s (1980) equation based on growth and water temperature, and Hoenig’s empirical
+relationship based on longevity (Tmax, Hoenig 1983). The temperature used in Pauly’s equation is 26°C for most
+fish except demersal fish with distribution deeper than 50 m for which a value of 12°C was assumed.
+Estimates based on Pauly’s equation MP are sensitive to growth rate, increasing with von Bertalanffy’s k. Growth
+parameters varying widely among populations and samples/studies, several values were extracted, mainly from
+Fishbase (Froese and Pauly 2013), to illustrate the potential level of variation. Unless only one valid growth
+equation was available a high and a low value were used to calculate MP, leading to estimates that can easily vary
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+13
+
+by 100% or more (Appendix A4: spreadsheet). Estimates based on Hoenig’s equation (MH) are sensitive to
+estimates of longevity that can be seriously underestimated in heavily exploited populations. Thus, when several
+estimates of longevity were found, the highest estimate was chosen. For each functional group, a minimum and
+maximum estimate was calculated based on the average over all species for which one or several estimates were
+produced. The minimal estimate was preferred for large fish while the highest estimate was preferred for smaller
+species to account for predation (Table 3).
+The estimates for tuna-like groups (tuna, sailfish, marlin,
+bonito) based on MH were often similar to the lowest of
+average MP estimate (Appendix 4). This corresponds
+very well with the large growth rate often observed for
+these species. A large growth rate is useful to avoid
+predation and decreased mortality rate in early stages of
+development and is followed by lower mortality for the
+rest of their life span. For instance, the growth rate
+estimated for Acanthocybium solandri is very high
+(Zischke et al. 2013) while longevity is close to 10 years,
+showing the discrepancy between some life histories
+and the principle behind some empirical equations.
+P/B and P/Q
+The production per unit of biomass (P/B) was calculated
+as the sum of natural (M) and fishing (F) mortalities.
+Fishing mortality is the ratio catch/biomass often called
+exploitation rate. This was highly dependent of the
+biomass estimated from survey and was often found to
+be too high when biomass was underestimated.
+
+Table 3. Natural mortality used in the model
+compared to the average minimum and maximum
+values in each functional groups.
+Fish groups
+
+M min
+
+M max
+
+M used
+
+Oceanic sharks
+
+0.17
+
+0.22
+
+0.17
+
+Coastal elasmobranch
+
+0.35
+
+0.43
+
+0.35
+
+Tuna-like
+
+0.32
+
+0.69
+
+0.32
+
+Coastal scombrids
+
+0.56
+
+0.97
+
+0.56
+
+S bathy
+
+2.14
+
+3.97
+
+2.14 a
+
+ML bathy
+
+0.37a
+
+L pisc
+
+0.42
+
+0.60
+
+0.42
+
+Carangids
+
+0.41
+
+0.65
+
+0.41
+
+S pelagics
+
+1.69
+
+2.29
+
+2.29
+
+L pisc comm
+
+0.39
+
+0.66
+
+0.39
+
+SM inv
+
+1.08
+
+1.47
+
+1.47
+
+SM pisc
+
+1.08
+
+1.23
+
+1.23
+
+Milkfish plus
+
+0.28
+
+0.36
+
+0.28
+
+Hilsa
+
+0.95
+
+1.61
+
+1.61
+As discussed in the natural mortality section,
+Indian mackerel
+1.52
+2.34
+1.52
+measurement of growth is highly variable and is likely to
+Bigeye tuna
+0.20
+0.40
+0.20
+create large uncertainty in the calculation of the
+consumption per unit of biomass (Q/B). In addition,
+Yellowfin tuna
+0.21
+0.63
+0.21
+empirical equations generally used to calculate Q/B
+Marlins
+0.26
+0.61
+0.26
+from growth parameters, temperature and type of diet
+a based on 1 species
+(Christensen and Pauly 1992a) or with the addition of
+the aspect ratio of the caudal fin (Palomares and Pauly 1998) tend to overestimate Q/B and result in very low gross
+efficiency GE=P/Q (Guénette 2005). Instead, P/Q was set at 0.15 for large fish (except for tuna and sharks), 0.2 for
+small and medium fish, and 0.25 for small pelagics.
+Sharks and rays
+Sharks and rays were classified in oceanic and coastal species of which sharks are the largest component because
+of the information available and their presence in reported landings. Catches were labeled by species or by more
+generic names (family, order) that did not allow differentiating between oceanic and coastal sharks. In the
+Maldives, coastal sharks were traditionally fished and became the target of an important fishery in the 1970s
+because of higher demand. Oceanic sharks constituted roughly half the catch at the beginning but accounted for
+70% of the catch in 1998 (Anderson and Waheed 1999). It was thus assumed that in region 1, the proportion of
+oceanic shark increased linearly from 50% to 70% between 1992 and 1998. There was no indication that this was
+the case in other regions except in Sri Lanka where the fishery expanded beyond the continental shelf with
+driftnets, increasing the catch of pelagic sharks starting in the 1970s (Joseph 1999). Thus catches were assumed to
+contain half coastal sharks for the whole time series in region 2 and 3.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+14
+
+Oceanic sharks are assumed to be present in the whole study area. In region 1, the biomass for the Maldives
+2
+(Anderson et al. 1992) was estimated at 0.6 t/km on the shelf, assuming equal biomasses for oceanic and coastal
+sharks (Table 4). Using this estimate and assuming a lower density for the open oceans, set at half that of the shelf
+(an arbitrary choice that could be re-examined by local experts), the average weighted by surface area results in a
+2
+biomass of oceanic sharks of 0.21 t/km , leading to C/B=0.01. In region 2, the biomass for oceanic shark was
+2
+estimated at 0.19 t/km , assuming that the biomass for Bangladesh waters was representative of the whole region,
+leading to C/B= 0.31. Biomasses from region 3 were ignored being smaller than the catch (Table 4). The weighted
+average biomass based on region 1 and 2 yielded a
+2
+biomass for oceanic shark of 0.20 t/km for the Bay
+Table 4. Sharks biomass, catches and F by region as derived from
+of Bengal and a fishing mortality of 0.08/year (Table
+surveys and catch statistics. See text for the derivation of
+4).
+Coastal sharks are restricted to EEZs (69% of the
+study area) which includes the continental shelves
+and some open waters but excludes the high seas.
+The weighted average results in a biomass of 0.118
+t/km2 and C/B=0.31, a relatively large estimate that
+may be plausible.
+Tuna-like and scombrids
+Tuna-like species are large tuna, marlins, swordfish
+that are large-bodied with oceanic distribution,
+present in 100% of study area. Four of these species
+were considered separately because time series of
+CPUE and effort were available and it would be
+possible to try to fit the times series in Ecosim:
+yellowfin tuna, bigeye tuna, and marlins composed
+of 2 species, the blue and striped marlins. There are
+no estimates of biomass for these species while
+catches amount to 0.004, 0.006, and 0.0009
+2
+t/km /year for yellowfin (YFT), bigeye (BET), and
+marlins respectively.
+
+resulting biomasses.
+Region
+Biomass
+Catch
+F=C/B
+area
+2
+2
+2
+t/km
+t/km /year
+/year
+km b
+Oceanic sharks
+1
+0.21
+0.002
+0.01
+2,845,297
+2
+0.19 a
+0.06
+0.31
+1,282,459
+3
+0.003
+0.01
+3.45
+2,077,295
+Result
+0.20
+0.037
+0.08
+6,205,051
+Coastal sharks
+1
+0.02
+0.008
+0.40
+915,423
+2
+0.19 a
+0.086
+0.46
+1,282,459
+3
+0.02
+0.019
+1.02
+2,077,295
+Result
+0.118
+0.037
+0.31
+4,275,177
+a based on Bangladesh only
+b areas differ whether high seas are included or not in region 1
+
+Table 5. Tuna-like and coastal scombrids biomasses, catches and
+F by region as derived from surveys and catch statistics. See text
+for the derivation of resulting biomasses.
+Region
+Biomass
+Catch
+F=C/B
+Area
+2
+2
+2
+t/km
+t/km /year
+/year
+km b
+Tuna-like
+1
+0.035
+0.012
+0.35
+2,845,297
+2
+0.124 a
+0.031
+0.25
+1,282,459
+3
+0.008 c
+0.024
+3.09
+2,077,295
+Result
+0.124
+0.017
+0.14
+6,205,051
+Coastal scombrids
+1
+0.006
+915,423
+2
+0.15
+0.077
+0.51
+1,282,459
+3
+0.01
+0.036
+3.79
+2,077,295
+Result
+0.15
+0.042
+0.28
+4,275,177
+a based on Sri Lanka only
+b areas differ whether high seas are included or not in region 1
+c based on Myanmar only
+
+In the Maldives, based on surveys, the tuna-like
+2
+biomass is estimated at 0.05 t/km ; assuming that
+this would be representative of the EEZ, and
+assuming half the density in open waters, the
+2
+resulting biomass would amount to 0.035 t/km
+(Table 5). In Bangladesh, there is no record of tunalike species in catches or surveys. The biomass
+density for region 2 is thus based on estimates from
+Sri Lanka, assuming that the Indian coast would hold
+2
+similar density as that of Sri Lanka (see the fish surveys section). The resulting biomass and F amount to 0.12 t/km
+and 0.25/year respectively in region 2. In region 3, the tuna-like biomass estimate based on surveys from Myanmar
+2
+2
+alone is too low (0.008 t/km ), compared to catches (0.02 t/km ). I assumed that densities were similar to that of
+2
+region 2 based on the estimate from Sri Lanka. The resulting biomass 0.124 t/km leads to an F of 0.14 (Table 5).
+Coastal scombrids are smaller species of the Scombridae family such as bonito Sarda orientalis, kawakawa
+Euthynnus affinis and Indo-Pacific king mackerel Scomberomorus guttatus. Their distribution covers 69% of the
+study area, excluding the high seas. The biomass of coastal scombrids is based on Bangladesh and Sri Lanka
+2
+estimates (region 2) that amounts to 0.15 t/km and F=0.28/year.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+15
+
+Bathypelagic species
+Bathypelagic species were divided in small (S bathy) and medium and large (ML bathy) to account for differences in
+productivity. These species are important for large pelagics species in open oceans but they also play a role in the
+diet of other species that live on the shelf especially when the shelf is narrow and the slope steep. In the Maldives,
+for instance, the acoustic survey around the atolls showed more mesopelagics (S bathy) than small pelagics
+2
+(Strømme 1983). The biomass of mesopelagics (3.28 t/km ) was obtained from estimates provided by Lam and
+Pauly (2005) based on Gjøsaeter (1978). Bathypelagic species are assumed to be distributed in deeper waters, or
+2
+85% of the study area (5,268,883 km ). There is no estimate of biomass for ML bathy so the value of EE was set at
+0.9.
+Large piscivores (Lpisc)
+The group Lpisc is composed of barracudas (Sphyraenidae), hairtails (Trichiuridae), dolphinfish (Coryphaena
+hippurus), threadfins (Polynemidae), needlefish (Belonidae), and eel-like fish (Muraenidae, Congridae,
+Muraenesocidae).
+2
+
+In region 3, the biomass is estimated at 0.39 t/km on the shelf,
+leading to F =0.68/year, which may be a very large exploitation
+rate for the late 1970s (Table 6). The resulting P/B would be very
+high (1.1/year) for such large-bodied species. The estimates are
+inexistent or too low compared to catches in regions 1 and 2, so
+an EE of 0.9 was assumed. Assuming a lower level of fishing in
+the 1970s, F was set at half that of region 3 in all regions.
+Carangids
+The carangids group is composed of trevally, scad, and pomfret, all
+members of the Carangidae family. Biomass estimates from
+2
+surveys (0.35-1.77 t/km ) led to F values of 0.35-0.82 /year in the
+three regions (Table 7). In the Maldives (region 1), the biomass
+estimate is probably low since it is based on the 1986-88 survey. In
+region 3, the exploitation rate is relatively high (0.82; P/B=1.24) for
+the 1970s and could be revisited.
+
+Table 6. L pisc biomass, catches, and F by region as
+obtained from surveys and catch statistics.
+Densities are presented for the shelf area.
+Region
+Biomass
+Catch
+F=C/B
+2
+2
+t/km
+t/km /year
+/year
+1
+0.09
+2
+0.12
+1.83
+14.7
+3
+0.39
+0.26
+0.68
+
+Table 7. Carangids biomasses, catches, and
+F by region as obtained from surveys and
+catch statistics. Densities are presented for
+the shelf area.
+Region Biomass
+Catch
+F=C/B
+2
+2
+t/km
+t/km /year
+/year
+1
+0.48
+0.18
+0.37
+2
+1.77
+0.62
+0.35
+3
+0.35
+0.29
+0.82
+
+Small pelagics (Spel)
+The small pelagics include mainly sardines (Clupeidae), anchovies (Engraulidae), halfbeaks (Hemiramphidae) and
+flyingfish (Exocoetidae). Initially considered separately, they were grouped because there is little knowledge of
+their biomass and exploitation rate.
+There was no biomass estimate for region 1, although there
+were indications that small pelagics were not very abundant in
+the Maldives compared to mesopelagics (Strømme 1983). The
+biomass was left to be estimated using EE=0.95 and assuming a
+relatively low fishing mortality (F=0.1). In region 3, this group
+2
+was estimated at 0.64 t/km , leading to F=0.65/year. In region 2
+the biomass was badly underestimated and was left to be
+estimated by Ecopath assuming the same fishing mortality as
+region 3 and EE=0.95.
+
+Table 8. Spel biomass, catches, and F by region as
+obtained from surveys and catch statistics. Densities
+are presented for the shelf area.
+Region
+Biomass
+Catch
+F=C/B
+2
+2
+t/km
+t/km /year
+/year
+1
+0.07
+2
+0.52
+3.15
+6.05
+3
+0.64
+0.42
+0.65
+
+Large piscivores of commercial interest (Lpisc comm)
+This functional group is composed of snappers (Lutjanidae), groupers (Serranidae), croakers (Sciaenidae), emperors
+(Lethrinidae), and lizardfish and Bombay duck (Synodontidae). All these families are targeted by fisheries and could
+be considered separately if there were better information on their exploitation.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+16
+
+Region 1
+In the Maldives, the 1986-1988 survey (Anderson et al. 1992) covers mainly this functional group, in 3 different
+habitats (atoll basins, outer atoll reef, and shallow reefs) throughout the EEZ. Reef fish were deemed not heavily
+exploited in the early 1990s as the Maldives (Anderson et al. 1992) but their exploitation increased since then (see
+Figure 3) to supply the tourist consumption (Hemmings et al. 2011). The biomass of each group was obtained by
+combining the average proportion in the survey catch and the total biomass collected in each habitat. The shallow
+reefs pose a problem because the total biomass was not estimated due to the large variability and uncertainty
+using handlines. A crude estimate was obtained by combining various sources of information and a method similar
+to that described in the most recent survey for groupers in the Maldives (Darwin Reef Fish Project 2011). Anderson
+2
+et al. (1992) provided a crude estimate of MSY based on the Philippines reefs (1-2 t/km , I used 1.5). Using the
+Cadima equation (MSY=0.5* (F + M) *avg biom, Garcia et al. 1989), M= 0.22 (the values estimated for groupers in
+the study area vary from 0.22-0.42, Appendix 4), F=0.05 (a low estimate of mortality), the average biomass would
+amount to 38,889 t. Using the average percentage of groupers caught in night and day sampling (16%, Anderson et
+2
+al. 1992), groupers biomass is estimated at 6,178 t or 1.8 t/km , a value lower than that was estimated using a
+2
+more recent survey of shallow areas (3.4 t/km , Table 9) (Darwin Reef Fish Project 2011). The same calculation for
+2
+the entire L pisc comm functional group (groupers, snappers, emperors) leads to a biomass of 4.48 t/km , catches
+2
+of 0.14 t/km and F=C/B=0.03 in 1986-88. I assumed a similar value of F for 1978-1980.
+The fishery for grouper started late in the area compared with snappers for instance (Figure 3) and remained
+below 1000 t during the whole time series. In 1986-88 the catch is estimated at 40 t which means a ratio C/B of
+0.006 compared with 0.029 in 2010 (Table 9). The Darwin Reef Fish Project (2011) estimated the catch for 20102011 at 950 t based on exports augmented with 20% in transport mortality, for a total of 1140 t, more than twice
+as much as the reconstructed catch from SAUP. This results in a larger C/B of 0.03, a low exploitation rate that
+would suggest a sustainable fishery. In contrast, there are reports of catch decline, rarity of some species, decrease
+in mean length, and increasing proportion of immature in the catch since 1987-1991 (Darwin Reef Fish Project
+2011). The mixed signals may be due to the overestimation of biomass and underestimation of catch, and perhaps
+a lack of information by species.
+Table 9. Estimate of biomass in the Maldives for the L pisc comm group (total biomass) and groupers (Anderson et al.
+1992) compared to a more recent survey (Darwin Reef Fish Project 2011).
+Total biomass
+Study
+
+Year
+
+Area
+2
+
+Biomass
+
+a
+
+Groupers
+
+MSY
+2
+
+Biomass
+2
+
+MSY
+2
+
+km
+t
+t/km
+t
+t/km
+t
+t/km
+t
+(Anderson et al.
+b
+1992)
+1986-88
+3,500 38,889 1.77 5,250 1.5
+6,178
+1.77
+(Darwin Reef Fish
+Project 2011)
+2010-11
+4,513
+15,486 3.43
+2,118
+a
+computed using the MSY estimate and Cadima’s equation
+b
+16% of total biomass of sampled groups
+c
+2010 only from SAUP compared with the estimate of 1140 t in (Darwin Reef Fish Project 2011).
+
+t/km
+
+2
+
+0.47
+
+Catch
+SAUP
+
+C/B
+
+t
+
+/year
+
+40
+
+0.006
+c
+
+443
+
+0.029
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+17
+
+8
+
+thousand tonnes
+
+7
+6
+
+groupers
+
+5
+
+emperor
+
+4
+
+snapper
+
+3
+2
+1
+0
+1950
+
+1960
+
+1970
+
+1980
+
+1990
+
+2000
+
+2010
+
+year
+Figure 3. Catches of three families composing the functional group L pisc
+comm. in region 1 (SAUP compilation Zeller et al. 2013).
+
+Regions 2 and 3
+2
+In region 2, the biomass estimate from the survey (4.42 t/km )
+leads to an F value of 0.51/year (Table 10). In region 3 the
+2
+biomass is estimated at 0.24 t/km , probably an underestimate,
+leading to F = 1.6/year. The biomass for region 3 was left to be
+estimated by the model with a P/B equal to that of region 2,
+assumed to be more reasonable.
+
+Table 10. L pisc comm biomass, catches, and F by
+region as obtained from surveys and catch
+statistics. Densities are presented for the shelf
+area.
+Region
+Biomass
+Catch
+F=C/B
+2
+2
+t/km
+t/km /year
+/year
+1
+1.77
+0.15
+0.03
+2
+4.42
+2.24
+0.51
+3
+0.24
+0.39
+1.60
+
+Other coastal fishes
+The other coastal fishes are demersal and benthopelagic species of small and medium body size divided into
+invertivores (SM inv) and piscivores (SM pisc). The invertivores include seabreams (Sparidae), spinefoot
+(Siganidae), mullet (Mugilidae), surgeonfish (Acanthuridae), parrotfish (Scaridae), goatfish (Mullidae), ponyfish
+(Leiognatidae) and several others (Appendix A4). The piscivores include grunts and sweetlips (Haemulidae),
+threadfins (Nemipteridae), turkeyfish (Scorpaenidae) and many other species. Very little is known of their
+exploitation rate and population dynamics. They were separated for ecological reasons (predator-prey
+relationships) more than for the necessities of the model dynamics. There are no biomass estimates except for SM
+2
+inv in region 3 which is probably too low (0.63 t/km ). The exploitation rate was assumed to be relatively low for
+these species (F=0.1) and EE=0.95.
+
+Hilsa
+Currently, the main species of hilsa fishery of Bangladesh is Tenualosa ilisha that contributes more than 99% of the
+total hilsa catches (Milton 2010). For modelling purposes, hilsa is considered as a single stock in the Bay of Bengal
+(Milton 2010; BOBLME 2012) that is straddling regions 2 and 3.
+Catches reconstructed by the Sea Around Us Team (Zeller et al. 2013) were compared with the compilation used
+for the stock assessment performed in 2012 (BOBLME 2012) for Bangladesh. Marine catches estimated by the
+SAUP team is 10% higher (Figure 4, Appendix A5), probably because of the effort in accounting for discards,
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+18
+
+1
+
+subsistence fishery, and unreported catches. The inland catch statistics from both sources (FAO and the
+assessment document (BOBLME 2012)) are very similar (Figure 4).
+The earliest estimate of inland catches is for 1984 in Bangladesh (90,000 t) and 1992 in India (39,298 t). Assuming
+that inland catches were at least as large in 1978, the total catch amounts to 143,521 t in Bangladesh and 80,190 t
+in India. Malaysian catches are rather modest (4,569 t) and composed of Tenualosa macrura (Rudolf Hermes, pers.
+comm., FAO) while in Myanmar, hilsa catches are undistinguishable from other clupeids and cannot be included
+here (A6). In 1978, the marine catch estimated for Bangladesh constitutes about 60% of that of the entire Bay of
+Bengal.
+The recent stock assessment performed in 2012 provides a time series of biomass based on Bangladesh marine
+and freshwater catches and CPUE time series for the period 1984-2006, and CPUE time series compiled for
+Bangladesh fishery (BOBLME 2012). The biomass estimate was obtained using a surplus production model for the
+period 1987-20006, and projections were made until 2010 based on observed catches and projected effort
+reductions (Rishi Sharma, pers. comm.). According to the assessment, exploitation rate (=C/B) for this stock
+increased from 0.14 in 1987 to 0.29 in 2006. The biomass was scaled for the Bay of Bengal (Btot) by using the 1987
+C/B ratio (0.14/year) to divide the estimated Bay of Bengal catch (regions 2 and 3) for a minimum estimated
+biomass of 1,581,156 t.
+300
+
+SAUP marine
+BOB marine
+
+Catches (1000 t)
+
+250
+
+FAO inland
+
+200
+
+BOB inland
+
+150
+100
+50
+0
+1984
+
+1989
+
+1994
+
+1999
+
+2004
+
+2009
+
+Year
+Figure 4. Hilsa catches in marine waters and inland in Bangladesh, as reconstructed by the Sea
+Around Us Project (SAUP), FAO, and the Bay of Bengal team (BOB).
+
+Based on the assessment, it was concluded that the stock was below optimal yield in both Bangladesh and India
+and that current catch levels may not be sustainable (BOBLME 2012). In the 1960s, hilsa was composed mainly of
+3-year-old while 90% of the commercial catches was composed of fish of less than 1 year old in 1999, showing
+signs of overfishing (Milton 2010). Also, a larger portion of the habitat is exploited nowadays. The depletion may
+have been partially masked by the introduction of mechanised boats and nylon twine in the early 1980s, which
+allowed the fishery to move from rivers and coastal areas to increasingly wider areas of the Bay extending up to
+200-250 km from the coastline (Milton 2010). Rivers constitute an important habitat as juveniles spend 7 months
+growing in rivers and then spend most of their lives in the ocean (Amin et al. 2008; Milton 2010). Thus, the
+damming of some rivers destroyed some fisheries and reduced habitat and hilsa production (Milton 2010). These
+aspects of the life history are not included in the model.
+
+1
+
+FishStatJ 2010, http://www.fao.org/fishery/statistics/software/fishstat/en
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+19
+
+Indian mackerel
+Indian mackerel (mainly Rastrelliger kanagurta) straddles
+Table 11. Indian mackerel biomass, catches, and F by
+region 2 and 3. Noble et al. (1992) present the earliest stock
+region as obtained from surveys and catch statistics.
+assessment for Indian mackerel along the Indian coast. Natural
+Densities are presented for the shelf area.
+Region
+Biomass
+Catch
+F=C/B
+mortality was estimated at 1 /year based on maturity at 1 year
+2
+2
+t/km
+t/km /year
+/year
+old and Rikhter and Evanov (1976) method. F was estimated at
+2
+0.79
+0.61
+0.77
+1.9/year on the west coast of India for the period 1984-1988
+3
+0.06
+0.24
+4.28
+using length cohort analysis (Noble et al. 1992). The authors
+Total
+0.23
+0.33
+1.44
+concluded that the stock was exploited at higher levels than
+FMSY and that fishing mortality should be decreased by 61%. In contrast, based on catch curves, Abdussamad et al.
+(2010) estimated fishing mortality at 3.5 to 7 per year between 1997 and 2007 along the Tuticorin coast (Tamil
+Nadu).
+2
+
+The estimated biomass based on the survey amounts to 0.79 t/km in region 2, leading to ratio C/B=0.77/year
+(Table 11). In region 3, the biomass estimate is too low, as the catch is 4 times higher. Assuming, F=0.77/year, the
+2
+biomass would be at least of 0.43 t/km for regions 2 and 3. Again, an exploitation rate of 0.77 /year seems high
+for the late 1970s.
+
+Benthic invertebrates
+Benthic animals were first divided into crustaceans, macrobenthos, and meiobenthos. The separation between
+crustaceans (shrimps and crabs) and other species of macrobenthos was felt necessary for predator-prey
+relationships and the important commercial shrimp and crab/lobster fisheries especially in Bangladesh (Holmgren
+1994). However, the available biomass estimates were given for both groups in aggregation (Holmgren 1994;
+Ansari et al. 2012). As a first trial, 25% of the estimated biomass of benthic invertebrates was arbitrarily assigned
+to crustaceans and 75% to the macrobenthos group (Table 12). In region 3, biomasses were based on Myanmar,
+Thailand and Andaman only. In region 2, data was only available for the Indian coast. In region 1, crustaceans and
+other macrobenthos were grouped for lack of information and the biomass was left to be estimated by Ecopath
+using an EE of 0.8. The P/B ratio was assumed to be similar to the one calculated for the Mauritanian coast
+(0.15/year, Guénette et al. 2014). The P/Q ratio (0.15) was taken from Jarre-Teichmann (1996).
+These biomasses were estimated in coastal habitats and ignore deep-water crustaceans. For instance, Suman et al.
+2
+(2006) sampled 7124 km at depth between 200 m and 1000 m and estimated the biomass of shrimps (e.g.
+Aristeus virilis, Acanthephyra armata, Heterocarpus sp.) and deep-sea scampi (Nephropsis stewarti and Puerulus
+2
+angulatus) at 0.2 t/km , a relatively small biomass compared to coastal areas. The authors state that the coastal
+fishery for shrimps in Indonesia is now taking
+Table 12. Crustaceans and macrobenthos biomass, catches, and F by
+268% of the maximum sustainable yield.
+Meiobenthos biomass was obtained from
+Holmgren (1994). The P/B ratio (9/year) was
+taken from (Gerlach 1971). The P/Q ratio was
+set at the same value as that of the
+macrobenthos (0.15). The biomasses retained
+for the EEZ assumed that the biomass in
+deeper waters were half that of the shelf.
+
+Jellyfish
+
+region as obtained from surveys and catch statistics. Densities are
+presented for the shelf area.
+Region
+Group
+Biomass
+Catch
+F=C/B
+2
+2
+t/km
+t/km /year
+/year
+1
+macrobenthos
+2.1E-06
+2
+crustaceans
+6.82
+2.24
+0.33
+macrobenthos
+13.65
+4.47
+0.03
+meiobenthos
+13.84
+3
+crustaceans
+2.78
+0.63
+0.23
+macrobenthos
+8.35
+0.09
+0.01
+meiobenthos
+6.86
+-
+
+Jellyfishes can be important in ecosystems and swarm in coastal areas in large numbers for short periods of time
+(Mills 2001; Hay 2006; Lynam et al. 2006; Brotz et al. 2012). However, the level of knowledge is rather low in the
+study area. In absence of local biomass estimate, the value for FAO area 57 used for global modelling was kept
+(Alder et al. 2007; Christensen et al. 2009). P/B=3/year was taken from Guénette (2005) and P/Q=0.3 from Arai
+(1996). The diet was also taken from Arai (1996).
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+20
+
+Cephalopods
+There is not much information on cephalopods in the study area. In Bangladesh, Sepia sp, Loligo sp and Octopus
+vulgaris were observed in the 10-100 m depth zone (Hossain 2004).
+Octopus mortality was estimated at 0.1/month for a life span of about 1.5 year and adults dying massively after
+spawning (Morocco population, Robert et al. 2010). Thus, M was estimated at 1.2 /year. Q/B was estimated by the
+model using a P/Q value of 0.3. Other cephalopods were assumed to have similar natural mortality and P/Q ratio
+as octopus. The biomasses derived from trawl survey (in region 3 only) underestimated the biomass at levels
+below catches. Thus, the biomass was left to be estimated by EwE using EE=0.9. Diet compositions were derived
+from qualitative and quantitative studies for Octopus vulgaris (Gonçalves 1991), Loligo forbesi and L. vulgaris (Rost
+Martins 1982; Pierce et al. 1994; Hanlon and Messenger 1996), Loligo pealei (Vovk 1985), and Illex illecebrosus
+(Froerman 1984).
+
+Zooplankton
+The biomass of zooplankton estimated based on 2 transects in the Bay of Bengal aggregated mesozooplankton
+(copepods, fish and invertebrate larvae, etc.) as well as larger and carnivorous zooplankton such as chaetognaths
+and euphausids. Thus, the group labeled zooplankton includes both herbivorous and carnivorous zooplankton.
+In region 2, the biomass is of the estimate for coastal and open waters of India (Prasanna Kumar et al. 2007, table
+2). The average was weighted by surface area, coastal waters representing 18% of the Indian EEZ (Table 13). The
+2
+biomass estimate derived for Thailand was not very high (2 t/km ) probably not representative of region 3, and
+was not used in the model. Biomass of regions 1 and 3 was left to be estimated by Ecopath using EE=0.6. P/B=24
+and Q/B=112 was based on Aydin et al. (2003).
+
+Table 13. Estimates of zooplankton available in the study area. WW=wet weight
+Country
+
+Location
+
+Thailand
+
+coastal
+
+India
+
+coastal
+open seas
+
+Biomass
+20
+
+Unit
+
+Resulting biomass
+2
+g /m
+
+Source
+
+mg WW/m
+
+16.93
+
+g WW/m
+
+2
+
+9.36
+
+g WW/m
+
+2
+
+3
+
+2a
+10.7
+
+(Holmgren 1994)
+(Prasanna Kumar et al. 2007,
+table2)
+
+a assuming a mean depth of 100 m; not used
+
+Primary producers
+Current estimates of phytoplankton production were obtained from the Sea Around Us Project
+2
+(www.seaaroundus.org/). The production in mgC/m /day was transformed in wet weight per year (WW
+2
+t/km /year) by assuming a ratio C:WW of 1:9 (Pauly and Christensen 1995). Primary production estimated from
+other studies is provided for comparison (Table 14).
+2
+
+2
+
+Assuming a P/B ratio of 100/year, the standing biomass would be estimated at 12 t/km in region 1, 29 t/km in
+2
+2
+region 2 and 21 t/km in region 3. in comparison, the standing biomass was estimated at 9 t/km on the Indian
+2
+coast and (7 t/km ) offshore of India (table 2 in Prasanna Kumar et al. 2007).
+Benthic primary producers such as seaweeds are known to be important in some areas of the Bay of Bengal, but
+very little is known about their biomasses and exploitation. The group has been included as a place holder and for
+diet purposes. The P/B (4.1/year) was derived from detailed work performed in Mauritania (Vermaat et al. 1993). A
+low EE was assumed for this group.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+21
+
+Table 14. Estimates of primary productivity by country EEZ obtained from the Sea Around Us
+Project (SAUP) web page compared with other sources. WW=wet weight; PP=primary production
+
+Entity
+
+Region
+
+EEZ Area
+2
+(km )
+
+SAUP,
+current
+
+1
+
+Maldives
+
+915,423
+
+1261
+
+1
+
+High Seas
+
+1,929,874
+
+1179
+
+2
+
+Bangladesh
+
+84,846
+
+5614
+
+2
+
+India
+
+666,670
+
+3324
+
+2
+
+Sri Lanka
+
+530,943
+
+1994
+
+3
+
+India (Andaman & Nicobar)
+
+659,573
+
+1501
+
+3
+
+Indonesia (Western)
+
+719,333
+
+1820
+
+3
+
+Malaysia (West Peninsula)
+
+68,317
+
+4293
+
+3
+
+Myanmar
+
+511,356
+
+3088
+
+3
+
+Thailand
+
+118,717
+
+2332
+
+PP g WW/m2/year
+Prasanna
+Kumar et al.
+Holmgren
+(2007), 2001- (1994)
+2006
+<1982
+1514
+2131
+
+2880
+
+6,205,051
+
+Birds and mammals
+Only a few species of marine birds have been listed for the Bay of Bengal, and only partial population estimates
+mostly outdated, are available for the Bay of Bengal (Mondreti et al. 2013). From the estimates provided in the
+review document, the region counts a minimum of about 76,000 marine birds (~ 20 tonnes) for which very little is
+known. At this point the inclusion of marine birds in the model would act mainly as a place holder.
+Marine mammals are also not very well known in terms of species composition and abundance. Some estimates
+are available for Orcaella brevirostris and Neophocaena phocaenoides in coastal waters of Bangladesh (Smith et al.
+2008). Afsal et al. (2008) describe the distribution and number of sightings of 10 species compiled from 35
+opportunistic surveys in Indian Seas (continental and Andaman & Nicobar Islands). Another 16 species are known
+to occur in Indian waters but were not observed during the survey. No biomass estimates were derived from these
+observations.
+
+Detritus
+Detritus biomass (D, in gC/m2) was estimated using an empirical equation [Pauly, 1993 #3095] based on primary
+production and depth of the photic zone:
+Log10D=-2.41 + 0.954Log10(PP) + 0.863Log10(E)
+2
+where PP is primary production in gC/m /year, and E the euphotic zone (set at 40 m). Using PP of 1206, 2925 and
+2
+2141 gWW/m /year for regions 1, 2 and 3 respectively, and a conversion ratio C:WW of 1:9 (Pauly and Christensen
+2
+1995), the total detritus biomass was estimated at 137 t/km .
+
+Balancing the model
+Using the input values (see Table 15 for parameters and Appendix A3.2 for initial diet composition), Ecopath solves
+simultaneous linear equations and estimates the missing parameters, often the Ecotrophic Efficiency (EE) value.
+The balancing process is done manually by checking inconsistencies in data, adjusting biomasses, P/B ratio, and
+diet composition, starting with parameters that were deemed less reliable (see user guide for more detail on this).
+As such, diet compositions are often modified on account of the uncertainty caused by seasonal and individual
+variation and sampling error. Overestimates of the proportion of rare prey in the diet of an abundant predator is a
+common source of excessive mortality. The biomasses of several functional groups were deemed uncertain and
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+22
+
+especially, in region 3 where they were systematically lower per unit area of shelf that in other regions. Thus
+biomasses were often modified to provide enough prey to predators and balance the model.
+In all regions, consumption on carangids was too high, mainly because of biases in SM pisc diet composition in
+addition to over predation from coastal scombrids and tuna-like groups. The biomass of carangids was increased in
+2
+all regions and especially in region 3 where the initial biomass was estimated at 0.35 t/km ; and needed to be
+increased 10-fold (Table 16). Also, the problematic diets were modified (Table 17). In region 1, some of the
+problems with carangids were caused by a large biomass of Lpisc as estimated by Ecopath. To decrease the
+biomass, L pisc cannibalism was decreased and its importance in the diet of other fish (e.g. SM pisc, carangids) was
+decreased.
+The biomass of benthic invertebrates was increased in all regions to accommodate predation pressure, and P/B
+was increased for SM inv in all regions. Cephalopods are a largely unknown component although they are an
+important predator in the system. To maintain their biomass at lower levels and reduce pressure on fish,
+2
+cephalopod cannibalism was reduced. Finally, hilsa biomass was increased from 1.75 to 2.4 t/km and that of
+2
+Indian mackerel from 0.43 to 1.9 t/km .
+Finally, after balancing, some groups seem to be not very well modelled. For instance, the group 1L pisc comm
+with its large biomass has an estimated EE of 0.4 which can indicate bias in diet or overestimate of their biomass or
+P/B. The same can be said for S bathy as a large portion of their production is unexplained by the model. The
+biomass of oceanic shark does not seem to be too low resulting in an EE of 0.58, meaning that the mortality
+unexplained by the model is very high. In contrast, EE is very high for coastal elasmobranch, which is caused in part
+by the relatively high catch relative to biomass input in the model.
+A word of caution: It is important to remember that the current Ecopath model is one image of the ecosystem
+given the data available and choices made for each parameter at the input stage and the modifications made to
+balance the model. Changing the assumptions would change biomasses and P/B values and possibly the strength
+of the foodweb links.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+23
+
+Table 15. Summary of the input parameters into Ecopath
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+
+Group name
+Oceanic sharks
+Coastal elasmobranch
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+S bathy
+ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Milkfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Bigeye tuna
+Yellowfin tuna
+Marlins
+Detritus
+
+Habitat
+area
+(fraction)
+1
+0.689
+1
+0.689
+1
+1
+0.849
+0.849
+0.005
+0.005
+0.005
+0.005
+0.005
+0.005
+0.459
+0.459
+0.459
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.207
+0.207
+0.207
+0.146
+0.146
+0.111
+0.111
+0.111
+0.111
+0.111
+0.111
+0.111
+0.335
+0.335
+0.335
+0.335
+0.459
+0.207
+0.335
+0.689
+1
+1
+1
+1
+
+Biomass
+in habitat
+area
+(t/km²)
+0.202
+0.118
+0.124
+0.151
+0.5
+3.28
+
+0.48
+4.48
+
+1.77
+4.42
+
+3.98
+7.96
+8.07
+11
+1.75
+0.43
+0.348
+0.643
+
+0.625
+1.854
+5.563
+4.57
+12.1
+29.3
+21.4
+
+137
+
+P/B
+(/year)
+0.249
+0.66
+0.46
+0.84
+3
+1.2
+2.14
+0.37
+0.76
+0.78
+2.39
+0.42
+1.57
+1.33
+2
+9
+24
+0.76
+0.76
+2.94
+0.89
+0.38
+1.57
+1.33
+2
+2
+9
+24
+1.76
+2.29
+0.76
+1.24
+2.29
+0.89
+0.38
+1.57
+1.33
+2
+2
+9
+24
+100
+100
+100
+4.1
+0.33
+0.34
+0.39
+
+Q/B
+(/year)
+
+EE
+
+0.9
+0.9
+0.9
+0.95
+
+112
+
+0.95
+0.95
+0.8
+0.8
+0.6
+0.9
+0.95
+0.95
+0.95
+0.95
+
+112
+
+0.9
+
+0.9
+0.9
+0.95
+
+112
+
+0.6
+
+0.4
+0.9
+0.9
+0.9
+0
+
+P/Q
+0.15
+0.15
+0.2
+0.2
+0.3
+0.3
+0.25
+0.2
+0.2
+0.2
+0.25
+0.2
+0.25
+0.25
+0.15
+0.15
+0.2
+0.2
+0.25
+0.2
+0.2
+0.25
+0.25
+0.15
+0.15
+0.15
+0.25
+0.2
+0.2
+0.2
+0.25
+0.2
+0.2
+0.25
+0.25
+0.15
+0.15
+0.15
+
+0.2
+0.2
+0.2
+
+Unassimil. /
+consumption
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0
+0
+0
+0
+0.2
+0.2
+0.2
+0
+
+Detritus
+import
+(t/km²/year)
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+24
+
+Table 16. Parameters of the balanced model. The values in bold indicate parameters estimated by Ecopath.
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+
+Group name
+Oceanic sharks
+Coastal elasmobranch
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+S bathy
+ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Milkfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Bigeye tuna
+Yellowfin tuna
+Marlins
+Detritus
+
+Trophic
+level
+4.22
+4.17
+4.55
+4.25
+3
+3.89
+3
+3.51
+4.08
+3.96
+3.10
+3.84
+3.08
+3.60
+2.37
+2
+2
+4.10
+3.98
+3.13
+3.90
+3.50
+3.11
+3.68
+2.62
+2.34
+2
+2
+2.36
+3.05
+4.23
+3.98
+3.15
+3.94
+3.52
+3.13
+3.75
+2.63
+2.37
+2
+2
+1
+1
+1
+1
+4.43
+4.76
+4.67
+1
+
+Fraction
+of
+habitat
+area
+1
+0.689
+1
+0.689
+1
+1
+0.849
+0.849
+0.005
+0.005
+0.005
+0.005
+0.005
+0.005
+0.459
+0.459
+0.459
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.207
+0.207
+0.207
+0.146
+0.146
+0.111
+0.111
+0.111
+0.111
+0.111
+0.111
+0.111
+0.335
+0.335
+0.335
+0.335
+0.459
+0.207
+0.335
+0.689
+1
+1
+1
+1
+
+Biomass
+in
+habitat
+area
+(t/km²)
+0.202
+0.118
+0.15
+0.151
+0.5
+0.569
+3.28
+0.270
+1.780
+2.2
+5.446
+4.48
+7.970
+5.723
+1.337
+0.502
+1.822
+4.431
+5
+7.746
+4.42
+4.104
+12.127
+8.793
+24
+12
+10
+11
+2.4
+1.9
+1.662
+3.5
+5.6
+1.472
+1.604
+8
+6.120
+9
+13
+13
+6.971
+12.1
+29.3
+21.4
+1.139
+0.014
+0.022
+0.003
+137
+
+Biomass
+(t/km²)
+0.202
+0.081
+0.150
+0.104
+0.500
+0.569
+2.785
+0.230
+0.009
+0.011
+0.027
+0.022
+0.040
+0.029
+0.614
+0.230
+0.836
+0.151
+0.170
+0.263
+0.150
+0.140
+0.412
+0.299
+0.816
+2.484
+2.070
+2.277
+0.350
+0.277
+0.185
+0.389
+0.622
+0.163
+0.178
+0.888
+0.679
+3.015
+4.355
+4.355
+2.335
+5.554
+6.065
+7.169
+0.784
+0.014
+0.022
+0.003
+137
+
+P/B
+(/year)
+0.249
+0.66
+0.46
+0.84
+3
+1.2
+2.14
+0.37
+0.76
+0.78
+2.39
+0.42
+2
+1.33
+2
+9
+24
+0.76
+0.76
+2.94
+0.89
+0.38
+2
+1.33
+3
+2.5
+9
+24
+1.76
+2.5
+0.76
+1.24
+2.29
+0.89
+0.38
+2
+1.33
+3
+2
+9
+24
+100
+100
+100
+4.1
+0.33
+0.34
+0.39
+
+Q/B
+(/year)
+1.66
+4.4
+2.3
+4.2
+10
+4
+8.56
+1.85
+3.8
+3.9
+9.56
+2.1
+8
+5.32
+13.33
+60
+112
+3.8
+3.8
+11.76
+4.45
+1.9
+8
+5.32
+20
+16.67
+60
+112
+7.04
+12.5
+3.8
+6.2
+9.16
+4.45
+1.9
+8
+5.32
+20
+13.33
+60
+112
+0
+0
+0
+0
+1.65
+1.7
+1.95
+
+EE
+0.582
+0.944
+0.894
+0.598
+0.066
+0.9
+0.132
+0.9
+0.9
+0.968
+0.95
+0.400
+0.95
+0.95
+0.8
+0.8
+0.6
+0.9
+0.920
+0.95
+0.919
+0.95
+0.95
+0.95
+0.892
+0.847
+0.816
+0.281
+0.935
+0.934
+0.9
+0.983
+0.925
+0.9
+0.9
+0.929
+0.95
+0.948
+0.944
+0.928
+0.6
+0.153
+0.389
+0.337
+0.4
+0.9
+0.9
+0.9
+0.332
+
+P/Q
+0.15
+0.15
+0.2
+0.2
+0.3
+0.3
+0.25
+0.2
+0.2
+0.2
+0.25
+0.2
+0.25
+0.25
+0.15
+0.15
+0.21
+0.2
+0.2
+0.25
+0.2
+0.2
+0.25
+0.25
+0.15
+0.15
+0.15
+0.21
+0.25
+0.2
+0.2
+0.2
+0.25
+0.2
+0.2
+0.25
+0.25
+0.15
+0.15
+0.15
+0.21
+
+0.2
+0.2
+0.2
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+25
+
+Table 17. Diet matrix from balanced model. Values in bold differ from the original diet by 0.1% or more.
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+
+Prey
+Oceanic shark
+Coastal shark ray
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+1 S bathy
+1 ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Mikfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Bigeye tuna
+Yellowfin tuna
+Marlins
+Detritus
+Import
+
+1
+0.0066
+0.0129
+0.0834
+0.0111
+0.0100
+0.1605
+0.0379
+0.0658
+0.0027
+0.0007
+0.0012
+0.0006
+0.0019
+0.0030
+0.0012
+0.0004
+0.0024
+0.0188
+0.0050
+0.0082
+0.0041
+0.0013
+0.0128
+0.0210
+5E-05
+0.0080
+0.0029
+0.0166
+0.0413
+0.0290
+0.0607
+0.0163
+0.0264
+0.0133
+0.0041
+0.0415
+0.0679
+1E-04
+0.0257
+0.0092
+0.0538
+0.0021
+0.0144
+0.0466
+0.0016
+0.0000
+0.0000
+0.0000
+0.0405
+
+2
+0.0295
+0.0581
+0.0018
+0.0018
+0
+0.0110
+0.0000
+0.0053
+0.0032
+0.0008
+0.0010
+0.0005
+0.0038
+0.0032
+0.0000
+0
+0
+0.0222
+0.0058
+0.0072
+0.0037
+0.0010
+0.0261
+0.0224
+0.0646
+0.0233
+0
+0
+0.0208
+0.0226
+0.0718
+0.0188
+0.0232
+0.0121
+0.0034
+0.0844
+0.0725
+0.2091
+0.0755
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0086
+
+3
+0
+0
+0.0306
+0.0490
+0
+0.1124
+0.0561
+0.0246
+0.0005
+0.0020
+0.0083
+0
+0.0088
+0.0019
+0.0000
+0
+0.0005
+0.0033
+0.0582
+0.0569
+0
+0.0068
+0.0060
+0.0133
+0.0000
+0
+0
+0.0038
+0.0226
+0.0327
+0.0106
+0.1884
+0.1843
+0
+0.0221
+0.0403
+0.0432
+0.0000
+0
+0
+0.0122
+0
+0.0008
+0
+0.0002
+0.0000
+0.0000
+0.0000
+0
+
+4
+0
+0
+0
+0
+0
+0.0322
+0.0220
+0
+0.0003
+0.002
+0.0093
+0
+0.0360
+0.0010
+0.0038
+0
+0.0004
+0.0023
+0.0409
+0.0641
+0
+1.E-06
+0.0300
+0.0071
+0.0198
+0.0064
+0
+0.0002
+0.0168
+0.0619
+0.0075
+0.1324
+0.2075
+0
+5E-06
+0.1876
+0.0229
+0.0640
+0.0207
+0
+0.0007
+0
+0
+0
+0
+0
+0
+0
+0
+
+5
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+
+0.0043
+
+0.0798
+
+0
+
+0
+
+0
+
+6
+7
+8
+9
+10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0019 0.0030
+0
+0
+0 0.0019
+0
+0
+0
+0
+0
+0 0.0125
+0.0100
+0 0.0640 0.0666 0.0631
+0.1100
+0 0.0750 0.1260 0.0331
+0
+0 0.0290 0.0628 0.0000
+0
+0 0.0030 0.0150 0.0152
+0.0010
+0
+0 0.0200 0.0300
+0.0019
+0 0.0066 0.2702 0.2290
+0
+0
+0 0.0225 0.0110
+0.0037
+0 0.0053 0.1548 0.2371
+0.0037
+0 0.0106 0.0496 0.0837
+0.0460
+0 0.1961 0.1840 0.1737
+0
+0
+0
+0 0.0004
+0 0.4585 0.1509 0.0245 0.0900
+0
+0 0.0042
+0
+0
+0.0010
+0
+0
+0
+0
+0.0200
+0 0.0030
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0304
+0 0.002
+0
+0
+0.0254
+0 0.0048
+0
+0
+0.0570
+0
+0
+0
+0
+0.05
+0 0.0884
+0
+0
+0.0104
+0
+0
+0
+0
+0 0.2067 0.0680
+0
+0
+0.0100
+0
+0
+0
+0
+0.0251
+0 0.0019
+0
+0
+0
+0 0.0068
+0
+0
+0.0200
+0
+0
+0
+0
+0.0350
+0 0.0049
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0821
+0 0.0039
+0
+0
+0.0821
+0 0.0078
+0
+0
+0.3483
+0
+0
+0
+0
+0.0268
+0 0.1432
+0
+0
+0
+0
+0
+0
+0
+0 0.3348 0.1101
+0
+0
+0
+0
+0
+0 0.0117
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0010
+0
+0
+0
+0 0.0000
+0
+0
+0
+0 0.0000
+0
+0
+0
+0 0.0000
+0
+0
+0
+0
+0 0.0092
+0
+
+0 0.0058
+
+0
+
+0
+
+11
+0
+0
+0
+0
+0
+0.0002
+0
+0
+0
+0.0001
+0.0223
+0
+0.0198
+0.0123
+0.1970
+0.0250
+0.6810
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0340
+0
+0
+0
+0
+0
+0
+0.0084
+0.0001
+
+12
+0
+0
+0
+0
+0
+0.0236
+0.0874
+0.0370
+0.0121
+0.02
+0.04
+0.012
+0.1603
+0.1097
+0.4634
+0
+0.0345
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0003
+0
+0
+0
+0
+
+13
+0
+0
+0
+0
+0.0053
+0.0026
+0.0000
+0
+0
+0
+0.0240
+0.0004
+0.0078
+0.0010
+0.5940
+0.0503
+0.1307
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0345
+0
+0
+0.1161
+0.0000
+0.0000
+0.0000
+0.0327
+
+14
+0
+0
+0
+0
+0
+0.0103
+0.0650
+0
+0.0013
+0.0001
+0.0800
+0.0045
+0.0869
+0.0373
+0.7013
+0.0001
+0.0123
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0001
+0.0000
+0.0000
+0.0000
+0
+
+15
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.05
+0.20
+0.10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.10
+0
+0
+0
+0
+0
+0
+0.55
+
+0 0.0010 0.0002
+
+0
+
+S. Guénette, 2013
+
+Prey \ predator
+1 Oceanic shark
+2 Coastal shark ray
+3 Tuna-like
+4 Coastal scombrids
+5 Jellyfish
+6 Cephalopods
+7 1 S bathy
+8 1 ML bathy
+9 1 L pisc
+10 1 Carangids
+11 1 S pelagics
+12 1 L pisc comm
+13 1 SM inv
+14 1 SM pisc
+15 1 Macrobenthos
+16 1 Meiobenthos
+17 1 Zooplankton
+18 2 L pisc
+19 2 Carangids
+20 2 S pelagics
+21 2 L pisc comm
+22 2 Mikfish plus
+23 2 SM inv
+24 2 SM pisc
+25 2 Crustaceans
+26 2 Macrobenthos
+27 2 Meiobenthos
+28 2 Zooplankton
+29 2,3 Hilsa
+30 2,3 Indian mackerel
+31 3 L pisc
+32 3 Carangids
+33 3 S pelagics
+34 3 L pisc comm
+35 3 Milkfish plus
+36 3 SM inv
+37 3 SM pisc
+38 3 Crustaceans
+39 3 Macrobenthos
+40 3 Meiobenthos
+41 3 Zooplankton
+42 1 Phytoplankton
+43 2 Phytoplankton
+44 3 Phytoplankton
+45 Benthic plants
+46 Bigeye tuna
+47 Yellowfin tuna
+48 Marlins
+49 Detritus
+50 Import
+
+Bay of Bengal model
+
+16
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+
+17
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.9
+0
+0
+0
+0
+0
+0
+0.1
+0
+
+18
+0
+0
+0.0030
+0
+0
+0.0666
+0.0600
+0.0190
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0150
+0.0100
+0.2610
+0.0225
+0.0329
+0.1719
+0.0600
+0.1610
+0.0229
+0.0000
+0.0245
+0.0395
+0.0292
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0010
+0.0000
+0.0000
+0.0000
+0
+0
+
+19
+0
+0
+0
+0
+0.0125
+0.0631
+0.0340
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0080
+0.0153
+0.1579
+0.0110
+0.0001
+0.2370
+0.0837
+0.1183
+0.0554
+0.0004
+0.0533
+0.0576
+0.0711
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0117
+0
+0
+0
+0
+0
+0.0092
+0
+
+20
+0
+0
+0
+0
+0
+0.0002
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0032
+0.0139
+0
+0
+0.0188
+0.0123
+0.1000
+0.0940
+0.0101
+0.6810
+0.0155
+0.0084
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0340
+0
+0
+0
+0
+0
+0.0084
+0.0001
+
+21
+0
+0
+0
+0
+0
+0.0236
+0.0624
+0.0027
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0121
+0.0200
+0.0606
+0.0120
+0.0128
+0.1476
+0.1097
+0.2796
+0.1837
+0
+0.0345
+0.0127
+0.0253
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0003
+0.0000
+0.0000
+0.0000
+0
+0
+
+22
+0
+0
+0
+0
+0
+0.0206
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0260
+0
+0.0260
+0
+0.2440
+0.6571
+0
+0.0003
+0.0260
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+26
+
+23
+0
+0
+0
+0
+0.0053
+0.0016
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0019
+0.0210
+0.0004
+0
+0.0078
+0.0010
+0.1500
+0.4440
+0.0473
+0.1307
+0.0025
+0.0020
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0345
+0
+0.1161
+0.0000
+0.0000
+0.0000
+0.0327
+0.0010
+
+24
+0
+0
+0
+0
+0
+0.0103
+0.0290
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0000
+0.0050
+0.0770
+0.0045
+0.0027
+0.0942
+0.0373
+0.3500
+0.3500
+0.0001
+0.0123
+0.0172
+0.0100
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0001
+0.0000
+0.0000
+0.0000
+0
+0.0002
+
+25
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.01
+0.04
+0.40
+0.15
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.40
+0
+
+26
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.03
+0.20
+0.10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.12
+0
+0
+0
+0
+0
+0.55
+0
+
+27
+28
+29
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.2928
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0046
+0
+0
+0
+0 0.90 0.4974
+0
+0 0.0079
+0
+0 0.0160
+0
+0 0.0000
+0
+0 0.0000
+0
+0 0.0000
+1 0.10
+0
+0
+0 0.1814
+
+S. Guénette, 2013
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+
+Prey \ predator
+Oceanic shark
+Coastal shark ray
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+1 S bathy
+1 ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Mikfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Detritus
+Import
+
+Bay of Bengal model
+
+30
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.1509
+0.0541
+0.1260
+0.0100
+0.0277
+0
+0
+0.018
+0
+0
+0
+0
+0
+0.1976
+0.0709
+0.1650
+0
+0.0541
+0.0709
+0
+0
+0
+
+31
+0
+0
+0.0030
+0
+0
+0.0666
+0.0147
+0.0028
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0395
+0.0292
+0.0200
+0.1352
+0.2410
+0.0225
+0.0329
+0.1220
+0.0616
+0.1610
+0.0229
+0
+0.0245
+0
+0
+0
+0.0010
+0.0000
+0.0000
+
+32
+0
+0
+0
+0
+0.0125
+0.0631
+0.0760
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0300
+0.0500
+0.0050
+0.0153
+0.1200
+0.0110
+0.0001
+0.2370
+0.0937
+0.1183
+0.0554
+0.0004
+0.0910
+0
+0
+0.0117
+0
+0
+0
+
+33
+0
+0
+0
+0
+0
+0.0002
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0155
+0.0084
+0
+0.0020
+0.0139
+0
+0
+0.0188
+0.0123
+0.1609
+0.0331
+0.0101
+0.6820
+0
+0
+0.0340
+0
+0
+0
+
+34
+0
+0
+0
+0
+0
+0.0236
+0.0414
+0.0027
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0127
+0.0253
+0.0121
+0.0414
+0.0606
+0.0120
+0.0128
+0.1476
+0.1097
+0.2796
+0.1837
+0
+0.0345
+0
+0
+0
+0.0003
+0.0000
+0.0000
+
+35
+0
+0
+0
+0
+0
+0.0206
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0260
+0
+0
+0
+0
+0.0260
+0
+0.0260
+0
+0.2440
+0.6571
+0
+0.0003
+0
+0
+0
+0
+0
+0
+
+36
+0
+0
+0
+0
+0.0053
+0.0016
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0025
+0.0020
+0
+0.0019
+0.0180
+0.0004
+0
+0.0078
+0.0010
+0.1701
+0.4239
+0.0473
+0.1340
+0
+0
+0.0345
+0.1161
+0.0000
+0.0000
+
+37
+38
+39
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0103
+0
+0
+0.0200
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0172
+0
+0
+0.0110
+0
+0
+0.0013
+0
+0
+0.0200
+0
+0
+0.0670
+0
+0
+0.0045
+0
+0
+0.0027
+0
+0
+0.0942
+0
+0
+0.0373
+0
+0
+0.4933 0.05
+0
+0.2080
+0 0.05
+0.0001 0.40 0.20
+0.0123 0.15 0.10
+0
+0
+0
+0
+0
+0
+0
+0 0.1
+0.0001
+0
+0
+0.0000
+0
+0
+0.0000
+0
+0
+
+27
+
+40
+41
+46
+0
+0
+0
+0
+0
+0
+0
+0 0.0216
+0
+0 0.0216
+0
+0
+0
+0
+0 0.061
+0
+0 0.1946
+0
+0 0.3243
+0
+0 0.0021
+0
+0 0.0021
+0
+0 0.0021
+0
+0
+0
+0
+0 0.0021
+0
+0 0.0011
+0
+0 0.0011
+0
+0
+0
+0
+0
+0
+0
+0 0.0148
+0
+0 0.0148
+0
+0 0.0148
+0
+0
+0
+0
+0
+0
+0
+0 0.0148
+0
+0 0.0074
+0
+0 0.0071
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0324
+0
+0 0.0216
+0
+0 0.0479
+0
+0 0.0479
+0
+0 0.0479
+0
+0
+0
+0
+0
+0
+0
+0 0.04798
+0
+0 0.0240
+0
+0 0.0229
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.90
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+47
+0
+0
+0
+0
+0
+0.7741
+0.0152
+0
+0
+0.0005
+0.0005
+0
+0.0020
+0.0012
+0
+0
+0
+0
+0.0035
+0.0035
+0
+0.0131
+0.0136
+0.0080
+0
+0
+0
+0
+0.0152
+0.0152
+0
+0.0112
+0.0112
+0
+0.0424
+0.0434
+0.0258
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+48
+0
+0
+0.0313
+0.07443
+0
+0.19763
+0
+0.0588
+0.0024
+0.0040
+0.0075
+0
+0.0021
+0.0016
+0.0010
+0
+0
+0.0170
+0.0277
+0.0514
+0
+0
+0.0143
+0.0107
+0.0071
+0
+0
+0
+0
+0.0450
+0.0545
+0.0896
+0.1663
+0
+0
+0.0462
+0.0346
+0.0231
+0
+0
+0
+0
+0
+0
+0
+0.0156
+0.0156
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+28
+
+Ecosim model
+A preliminary Ecosim model was set up to allow exploring interactions between functional groups and the impact
+of fishing. To run the model, a CSV file (comma delimited) was assembled, containing:
+1. Effort time series for each region and four specific functional groups: hilsa, yellowfin and bigeye tunas, and
+marlins (see the section Catch, effort and CPUE and Appendix 2) (the relative industrial effort for India including
+the industrial fleet and large trawlers and labeled large vessels in A2.2);
+2. Relative biomass time series for hilsa (biomass from assessment) and large pelagics (commercial CPUE);
+3. Catch time series for each functional group.
+The rules to build this type of file are described in the user’s guide. The model was fitted using the automatic
+fitting procedure and considering only the groups for which the sum of squares (SS) is sensitive to vulnerabilities
+(v) and excluding benthic invertebrates and bathypelagics.
+The fit to catches and relative biomass indices are not very good for either hilsa or the 3 large pelagic groups
+(Figure 5 and 6). The biomass trend predicted for hilsa shows no sign of decline contrary to the biomass trend from
+the stock assessment. Catches are either overestimated (e.g. hilsa and marlins) or under estimated by the model
+(e.g. bigeye and yellowfin tunas). At first sight, the predicted biomass indices seem to match the observed values,
+but a closer examination shows that although this is true at the end of the simulations, the predicted bigeye
+biomass does not decrease as much in the 1980s as the observed values suggest. The problem with tunas in this
+kind of model, in addition to the uncertainty of commercial CPUEs, is the migratory nature of these fish and the
+changes in spatial allocation of fishing effort which is not captured here. In addition, several of these species were
+already declining before 1978, the onset of this model (R. Sharma, pers. comm).
+The fit to catches is variable among the other functional groups (Figure 6). Predicted catches for sharks, and small
+fish (SM inv, SM pisc and Spelagics) do not fit the observed catches very well. The reasons for this are numerous.
+The effort trends are approximates for regions 1 and 2 and could lead to error in predicted catches. However,
+predicted catches are not necessarily worse in these regions than in region 2. Also, using the same effort for all
+species implies that relative abundances do not change over time and that there is no variation in which species
+are targeted by the fishery during the study period which may not be the case.
+There are no biomass trends for most species which means there are no constraints in the model and no guidance
+for what is possible. Trends for 2 Lpisc constitute a good example of these types of problems. The biomass is
+predicted to decrease abruptly in the 1980s (Figure 7) while fishing mortality increases from about 0.5 in 1978 to
+reach close to 4 at the end of the time series while predicted catches become lower than the observed. This poses
+at least two questions beyond that of the validity of the initial biomass: 1. Was F equal to 0.5 in 1978; and 2. Has
+fishing mortality increased on these species as fast as effort did? These are difficult questions to answer without
+knowledge on fishing habits during the time period and about biomass trends.
+Another example is how the predictions for hilsa biomass trends are dramatically different when the Indian
+industrial effort is slightly changed by considering only the industrial vessels the large vessels time series (A2.2).
+Appendix 6 shows a new series of plots similar to figures 5-7 for this alternative scenario. The predicted trend for
+hilsa biomass would change from a flat line when the large vessels time series is used (Figure 5) to a declining
+trend when only industrial vessels are considered (Figure A6.1); none of these simulations fit hilsa very well. The
+sudden change is caused by changes in trends of other functional groups trends in biomass (not shown, but see
+changes in the trends in catches in A6.2 compared to Figure 6) induced by the simulated fishery in region 2 leading
+to different estimations of vulnerabilities. Also note the small change in level of catch fo 2 L pisc in Figure 7 and
+Figure A6.3.
+A word of caution: It should be kept in mind that, for instance, the effort time series in region 1 and 3 are
+approximates, and the abundance indices for large pelagics are based on commercial CPUEs that are often biased.
+Also, abundance trends are missing for most functional groups, a lack of constraints resulting in very variable
+trends (e.g. hilsa).
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+Thus, results from temporal simulations should not be used to give quantitative management advice. Instead,
+current Ecosim simulations could be used as a tool to explore food web dynamics and effects of fishing. It could
+also be used as a framework to devise what important piece of information would be useful to gather to answer
+the most crucial questions.
+
+Figure 5. Observed (dots) and predicted (lines) relative abundance (B or CPUE) and catches (C) for hilsa, marlins, yellowfin tuna
+(YFT) and bigeye tuna (BET). The numbers besides the name is the sum of squares. The region 2 industrial fleet includes
+industrial vessels and large trawlers (Large vessels time series in A2.2).
+
+29
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+30
+
+Figure 6. Observed (dots) and predicted (lines) catches for other species. The numbers besides the name is the sum of squares.
+The region 2 industrial fleet includes industrial vessels and large trawlers (Large vessels time series in A2.2)
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+31
+
+fishing
+total
+predation
+
+small scale
+industrial
+
+small scale
+industrial
+
+Figure 7. Predicted trends in biomass, catches, and mortality (lines) and observed catches (dots) for the functional group 2 L
+pisc. The solid green areas represent the catch or fishing mortality caused by the each of the fleet in region 2. The region 2
+industrial fleet includes industrial vessels and large trawlers (Large vessels time series in A2.2)
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+32
+
+Acknowledgements
+The present work was funded by FAO through the Bay of Bengal Large Marine Ecosystem Project
+(www.boblme.org). Special thanks to Rudolf Hermes who coordinated this project and helped in various ways.
+Special thanks to Rishi Sharma for his advice and invaluable contribution to this work. Thank you to Krista Greer,
+Dirk Zeller, Danielle Knip, Villy Christensen, Duto Nugroho for data, articles, and helpful discussions.
+
+References
+Abdussamad, E. M., Pillai, N. G. K., Mohamed Kasim, H., Habeeb Mohammed, O. M. M. J., and Jeyabalan, K. 2010.
+Fishery, biology and population characteristics of the Indian mackerel, Rastrelliger kanagurta (Cuvier)
+exploited along the Tuticorin coast. Indian J. Fish., 57:17-21.
+Afsal, V. V., Yousuf, K., Anoop, B., Anoop, A. K., Kannan, P., Rajagopalan, M., and Vivekanandan, E. 2008. A note on
+cetacean distribution in the Indian EEZ and contiguous seas during 2003-07. J. Cetacean Res. Manage.,
+10(3):209-215.
+Alder, J., Guénette, S., Beblow, J., Cheung, W., and Christensen, V., 2007. Ecosystem-based global fishing policy
+scenarios. University of British Columbia, Vancouver, BC Canada, Fisheries Centre Research Report, 15 (7).
+91 pp.
+Alias, M., 2003. Trophic model of the coastal fisheries ecosystem of the west coast of Peninsular Malaysia. In:
+Assessment, management and future directions for coastal fisheries in Asian countries. pp. 313-332,
+Edited by G. Silvestre, L. Garces, I. Stobutzki, M. Ahmed, R. A. Valmonte-Santos, C. Luna, L. Lachica-Alino,
+P. Munro, V. Christensen, and D. Pauly, WorldFish Center, Penang (Malaysia). Vol. 67.
+Allen, R. R. 1971. Relation between production and biomass. J. Fish. Res. Bd. Canada, 28:1573-1581.
+Amin, S. M. N., Rahman, M. A., Haldar, G. C., Mazid, M. A., and Milton, D. A. 2008. Catch per unit effort,
+exploitation level, and production of hilsa shad in Bangladesh waters. Asian Fish. Sci., 21:175-187.
+Anderson, R. C., and Waheed, Z., 1999. Management of shark fisheries in the Maldives. Case studies of the
+management of elasmobranch fisheries, Edited. by R. Shotton, FAO, Rome
+Anderson, R. C., Waheed, Z., Rasheed, M., and Arif, A., 1992. Reef fish resources survey in the Maldives - Phase II.
+Madras, India, BOBP/WP/80. 54 pp. ftp://ftp.fao.org/docrep/fao/007/ae459e/ae459e00.pdf
+Ansari, Z. A., Furtado, R., Badesab, S., Mehta, P., and Thwin, S. 2012. Benthic macroinvertebrate community
+structure and distribution in the Ayeyarwady continental shelf, Andaman Sea. Indian journal of Geomarine sciences, 41(3):272-278.
+Antony, P. J., Dhanya, S., Lyla, P. S., Kurup, B. M., and Ajmal Khan, S. 2010. Ecological role of stomatopods (mantis
+shrimps) and potential impacts of trawling in a marine ecosystem of the southeast coast of India. Ecol.
+Model., 221(21):2604-2614.
+Arai, M., 1996. Carnivorous zooplankton, jellies and Velella in the Alaska Gyre. In: Mass-balance models of Northeastern Pacific ecosystems. pp. 18-19, Edited by D. Pauly and V. Christensen, Fisheries Centre, University
+of British Columbia, Vancouver, BC. Vol. 4 (1) 129 pp.
+Aydin, K. Y., MacFarlane, G. A., King, J. R., and Megery, B. A., 2003. PICES-GLOBEC international program on climate
+change and carrying capacity; The BASS/MODEL report on trophic models of the subarctic Pacific Basin
+Ecosystems. North Pacific Marine Scienve Organization (PICES), Sidney, BC, PICES Scientific Report, 25. 93
+pp. http://www.pices.in
+Babcock, E. A., Pikitch, E. K., McAllister, M. K., Apostolaki, P., and Santora, C. 2005. A perspective on the use of
+spatialized indicators for ecosystem-based fishery management through spatial zoning. ICES J. Mar. Sci.,
+62:469-476.
+Bhathal, B., 2005. Historical reconstruction of Indian marine fisheries catches, 1950-2000, as a basis for testing the
+"Marine Tophic Index". UBC Fishery Centre Vancouver, Canada, Fisheries Centre Research Report 13(5).
+122 pp.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+33
+
+Bhathal, B., 2013. The governement-led development of India's marine fisheries since 1950: Catch and effort
+trends, and bioeconomic models for exploring to alternative policy. PhD thesis, University of British
+Columbia, Vancouver BC.
+BOBLME, 2012. Report of the hilsa fisheries assessment working group II, 24-25 April 2012, Mumbai, India. Bay of
+Bengal Large Marine Ecosystem Project, BOBLME-2012-Ecology-10. 29 pp.
+Brotz, L., Cheung, W. L., Kleisner, K., Pakhomov, E., and Pauly, D. 2012. Increasing jellyfish populations: trends in
+Large Marine Ecosystems. In: Springer Netherlands, Hydrobiologia, 690(1):3-20.
+Chen, Z. Z., Qiu, Y. S., Jia, X. P., and Xu, S. N. 2008a. Using an Ecosystem Modeling Approach to Explore Possible
+Ecosystem Impacts of Fishing in the Beibu Gulf, Northern South China Sea. Ecosystems, 11(8):1318-1334.
+Chen, Z. Z., Qiu, Y. S., Jia, X. P., and Xu, S. N. 2008b. Simulating fisheries management options for the Beibu Gulf by
+means of an ecological modelling optimization routine. Fish. Res., 89(3):257-265.
+Chen, Z. Z., Xu, S. N., Qiu, Y. S., Lin, Z. J., and Jia, X. P. 2009. Modeling the effects of fishery management and
+marine protected areas on the Beibu Gulf using spatial ecosystem simulation. Fish. Res., 100(3):222-229.
+Christensen, V. 1998. Fishery-induced changes in a marine ecosystem: insight from models of the Gulf of Thailand.
+J. Fish Biol., 53:128-142.
+Christensen, V., and Pauly, D., 1992a. A guide to the Ecopath II software system (version 2.1). ICLARM Software 6.
+International Centre for Living Aquatic Resources Management, Manila, Philippines. 72 pp.
+Christensen, V., and Pauly, D. 1992b. Ecopath II- a software for balancing steady-state ecosystem models and
+calculating network characteristics. Ecol. Model., 61:169-185.
+Christensen, V., and Walters, C. J. 2004. Ecopath with Ecosim: methods, capabilities and limitations. Ecol. Model.,
+172:109-139.
+Christensen, V., and Walters, C. J., 2005. Using ecosystem modelling for fisheries management: Where are we?
+ICES CM 2005/M:19 (updated).
+Christensen, V., Walters, C. J., Ahrens, R., Alder, J., Buszowski, J., Christensen, L. B., Cheung, W. W. L., Dunne, J.,
+Froese, R., Karpouzi, V., Kaschner, K., Kearney, K., Lai, S., Lam, V., Palomares, M. L. D., Peters-Mason, A.,
+Piroddi, C., Sarmiento, J. L., Steenbeek, J., Sumaila, R., Watson, R., Zeller, D., and Pauly, D. 2009. Databasedriven models of the world's Large Marine Ecosystems. Ecol. Model., 220(17):1984-1996.
+Darwin Reef Fish Project, 2011. Management plan for the Maldives grouper fishery. Darwin Reef Fish Project,
+Marine Research Centre, Maldives and Marine Conservation Society, UK, 29 pp.
+http://www.mcsuk.org/downloads/coral_reefs/Maldives_Grouper%20_fishery_Management_Plan.pdf
+Dutta, S., Maity, S., Bhattacharyya, S. B., Sundaray, J. K., and Hazra, S. 2013. Diet composition and intensity of
+feeding of Tenualosa ilisha (Hamilton, 1822) occuring in the Northern Bay of Bengal, India. Proc. Zool.
+Soc., DOI 10.1007/s12595-013-0066-3
+FAO, 2001 Towards ecosystem-based fisheries management. In: The Reykjavik Conference on Responsible
+Fisheries in the Marine Ecosystem, 1-4 October 2001, p 11, Reykjavik, Iceland, FAO and Governement of
+Norway.
+Froerman, Y. M. 1984. Feeding spectrum and trophic relationship of short-finned squid (Illex illecebrosus) in the
+Northwest Atlantic. NAFO Sci. Coun. Studies, 7:67-75.
+Froese, R., and Pauly, D., (Editors). 2013. FishBase, World Wide Web electronic publication Version 08/2013.
+www.fishbase.org,
+Garces, L. R., Man, A., Ahmad, A. T., Mohamad-Norizan, M., and Silvestre, G., 2003. A trophic model of the coastal
+fisheries ecosystems off the west coast of Sabah and Sarawak, Malaysia. In: Assessment, management
+and future directions for coastal fisheries in Asian countries. pp. 333-352, Edited by G. Silvestre, L. Garces,
+I. Stobutzki, M. Ahmed, R. A. Valmonte-Santos, C. Luna, L. Lachica-Alino, P. Munro, V. Christensen, and D.
+Pauly, WorldFish Center, Penang (Malaysia). Vol. 67.
+Garcia, S., Sparre, P., and Csirke, J. 1989. Estimating surplus production and maximum yield from biomass data
+when catch and effort series are not available. Fish. Res., 8:13-23.
+Gavaris, S. 2009. Fisheries management planning and support for strategic and tactical decisions in an ecosystem
+approach context. In: Ecosystem Approach to Fisheries: Improvements on Traditional Management for
+Declining and Depleted Stocks, Annual Meeting of the North Pacific Marine Science Organization, Fish.
+Res., 100:6-14.
+Gerlach, S. A. 1971. On the importance of marine meiofauna for benthos communities. Oecologia, 6:176-190.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+34
+
+Gjøsaeter, J., 1978. Resource study of mesopelagic fish. PhD thesis thesis, University of Bergen, Bergen, Norway,
+203 pp.
+Gonçalves, J. M. 1991. The octopoda (Mollusca: Cephalopoda) of the Azores. Arquipel Life Mar Sci, 9:75-81.
+Guénette, S., 2005. Model of the Southeast Alaska. In: Foodweb models and data for studying fisheries and
+environmental impact on Eastern Pacific ecosystems. pp. 106-178, Edited by S. Guénette and V.
+Christensen, Fisheries Centre, University of British Columbia, Vancouver, BC, Canada. Vol. 13 (1).
+Guénette, S., Meissa, B., and Gascuel, D. 2014. Assessing the contribution of marine protected areas to the trophic
+functioning of Ecosystems: A model for the Banc d'Arguin and the Mauritanian shelf PLoS ONE,
+9(4):e94742.
+Hanlon, R. T., and Messenger, J. B., 1996. Cephalopod behaviour. Cambridge University Press, Cambridge. 232 pp.
+Hay, S. 2006. Marine ecology: Gelatinous bells may ring change in marine ecosystems. Curr. Biol., 16:R679-R682.
+Heileman, S., Bianchi, G., and Funge-Smith, S., 2009. VII-10 Bay of Bengal: LME #34. In: The UNEP large marine
+ecosystems: A perspective on changing conditions in LMEs of the world's regional seas. pp. 237-251,
+Edited by K. Sherman and G. Hempel, United Nations Environement Programme, Nairobi, Kenya. Vol. 82.
+Hemmings, M., Harper, S., and Zeller, D., 2011. Reconstruction of total marine catches for the Maldives, 19502008. In: Fisheries catch reconstructions: Islands, Part II. Edited by S. Harper and D. Zeller, Fisheries
+Centre. University of British Columbia, Vancouver, Canada. Vol. 19(4).
+Hilborn, R., Orensanz, J. M. L., and Parma, A. M. 2005. Institutions, incentives and the future of fisheries. Phil.
+Trans. R. Soc. B, 360:47-57.
+Hoenig. 1983. Empirical use of longevity data to estimate mortality rates. Fish. Bull., 82:898-903.
+Holmgren, S., 1994. An environmental assessment of the Bay of Bengal region. Bay of Bengal Programme, Madras,
+BOBP/REP/67. 240 pp.
+Hong, J., He-Qin, C., Hai-Gen, X., Arreguin-Sanchez, F., Zetina-Rejón, M. J., Del Monte Luna, P., and Le Quesne, W. J.
+F. 2008. Trophic controls of jellyfish blooms and links with fisheries in the East China Sea. Ecol. Model.,
+212:492-503.
+Hossain, M. M., 2004. On sustainable management of the Bay of Bengal Large Marine Ecosystem (BOBLME)
+National Report of Bangladesh, FAO: GCP/RAS/179/WBG. 121 pp.
+http://www.boblme.org/documentRepository/Nat_Bangladesh.pdf
+Jarre-Teichmann, A., and Guénette, S., 1996. Invertebrate benthos. In: Mass-balance models of North-eastern
+Pacific ecosystems. pp. 38-39, Edited by D. Pauly and V. Christensen, UBC Fish Centre Res Rep, Vancouver,
+BC. Vol. 4 (1).
+Joseph, L., 1999. Management of shark fisheries in Sri Lanka. In: Case studies of the management of elasmobranch
+fisheries. Edited by R. Shotton, FAO Fisheries technical paper 378/1, Rome.
+Kenchington, T. J. 2013. Natural mortality estimators for information-limited fisheries. Fish Fish.,
+doi:10.1111/faf.12027
+Lam, V. W. Y., and Pauly, D. 2005. Mapping the global biomass of mesopelagic fishes. Sea Around Us Project
+Newsletter.July/August (30)
+Lynam, C. P., Gibbons, M. J., Axelsen, B. E., Sparks, C. A. J., Coetzee, J., Heywood, B. G., and Brierley, A. S. 2006.
+Jellyfish overtake fish in a heavily fished ecosystem. Curr. Biol., 16(13):R492-R493.
+Mahmood, N., Chowdhury, M. J. U., Hossain, M. M., Haider, S. M. B., and Chowdbury, S. R., 1994. Bangladesh. In:
+An environmental assessment of the Bay of Bengal region. pp. 75-94, Edited by S. Holmgren, Bay of
+Bengal Programme, BOBP/REP/67, Madras.
+Mills, C. E. 2001. Jellyfish blooms: are populations increasing globally in response to changing ocean conditions? In:
+Springer Netherlands, Hydrobiologia, 451(1):55-68.
+Milton, D. A., 2010. Status of hilsa (Tenualosa ilisha) management in the Bay of Bengal: An assessment of
+population risk and data gaps for more effective regional management. FAO Bay of Bengal Large Marine
+Ecosystem Project BOBLME-2010-Ecology-01. 67 pp.
+Mondreti, R., Davidar, P., Péron, C., and Grémillet, D. 2013. Seabirds in the Bay of Bengal large marine ecosystem:
+Current knowledge and research objectives. Open J. Ecol., 3:172-184.
+Mustafa, G., 2003. Trophic model of the coastal ecosystem in the waters of Bangladesh, Bay of Bengal. In:
+Assessment, amanagement and future directions for coastal fisheries in Asian countries. pp. 263-280,
+Edited by G. Silvestre, L. Garces, I. Stobutzki, M. Ahmed, R. A. Valmonte-Santos, C. Luna, L. Lachica-Aliño,
+P. Munro, V. Christensen, and D. Pauly, WorldFish Center Conference Proceedings, Vol. 67.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+35
+
+Noble, A., Gopakumar, G., Pillai, N. G., Kulkarni, G. M., Kurup, K. N., Reuben, S., Sivadas, M., and Yohannan, T. M.
+1992. Assessment of mackerel stock along the Indian coast. Indian J. Fish., 39:119-124.
+Nootmorn, P., Sumontha, M., Keereerut, P., Jayasingh, R., Jagannath, N., and Sinha, M., 2008. Stomach content of
+the large pelagic fishes in the bay of bengal. IOTC-2008-WPEB-11. 13 pp.
+http://www.iotc.org/files/proceedings/2008/wpeb/IOTC-2008-WPEB-11.pdf
+Palomares, M. L. D., and Pauly, D. 1998. Predicting food consumption of fish populations as functions of mortality,
+food type, morphometrics, temperature and salinity. Mar. Freshwater Res., 49(5):447-453.
+Panjarat, S., 1999. Preliminary study on the stomach content of yellowfin tuna in the Andaman Sea. In: Preliminary
+results on the large pelagic fisheries resources survey in the Andaman Sea. pp. 114-122, Southeast Asian
+Fisheries Development Center, Vol. TD/RES 99.
+Pauly, D. 1980. On the interrelationships between natural mortality, growth parameters, and mean environmental
+temperature in 175 fish stocks. J. Cons. Int. Explor. Mer, 39:175-192.
+Pauly, D., and Christensen, V. 1995. Primary production required to sustain global fisheries. Nature, 374:255-257.
+Pierce, G. J., Boyle, P. R., Hastie, L. C., and Key, L. 1994. The life history of Loligo forbesi (Cephalopoda: Loliginidae)
+in Scottish waters. Fish. Res., 21:17-41.
+Pikitch, E. K., Santora, C., Babcock, E. A., Bakun, A., Bonfil, R., Conover, D. O., Dayton, P., Doukakis, P., Fluharty, D.,
+Heneman, B., Houde, E. D., Link, J., Livingston, P. A., Mangel, M., McAllister, M. K., Pope, J., and Sainsbury,
+K. J. 2004. Ecosystem-Based Fishery Management. Science, 305(5682):346-347.
+Prasanna Kumar, S., Sardesai, S., Ramaiah, N., Bhosle, N. B., Ramaswamy, V., Ramesh, R., Sharada, S., M.M. ,
+Sarupriya, J. S., and Muraleedharan, U., 2007. Bay of Bengal process studies (BOBPS) Final Report. Final
+Report Submitted to the Department of Ocean Development New Delhi, 142 pp.
+http://drs.nio.org/drs/handle/2264/535
+Rashed-Un-Nabi, M., and Hadayet Ullah, M. 2012. Effects of Set Bagnet fisheries on the shallow coastal ecosystem
+of the Bay of Bengal. Ocean & Coastal Management, 67:75-86.
+Rikhter, V. A., and Efanov, V. N. 1976. On one of the approaches to estimation of natural mortality on fish
+populations. ICNAF Research Documents, 76(VI/8):1-12.
+Robert, M., Faraj, A., McAllister, M. K., and Rivot, E. 2010. Bayesian state-space modelling of the De Lury depletion
+model: strengths and limitations of the method, and application to the Moroccan octopus fishery. ICES J.
+Mar. Sci., 67(6):1272-1290.
+Rost Martins, H. 1982. Biological studies of the exploited stock of Loligo forbesi (Mollusca: Cephalopoda) in the
+Azores. J. Mar. Biol. Assoc. U.K., 62:799-808.
+Sætersdal, G., Bianchi, G., Strømme, T., and Venema, S. C., 1999. The DR. FRIDTJOF NANSEN Programme 1975–
+1993. Investigations of fishery resources in developing countries. History of the programme and review of
+results. FAO Fish. Tech. Pap. 391, 434 pp.
+Samarayanke, R. A. D. B., 2003. Review of national fisheries situation in Sri Lanka. In: Assessment, management
+and future directions for coastal fisheries in Asian countries. pp. 987-1012, Edited by G. Silvestre, L.
+Garces, I. Stobutzki, M. Ahmed, R. A. Valmonte-Santos, C. Luna, L. Lachica-Alino, P. Munro, V. Christensen,
+and D. Pauly, WorldFish Center, Penang (Malaysia). Vol. 67.
+Smith, B. D., Ahmed, B., Mowgli, R. M., and Strindberg, S. 2008. Species occurrence and distributional ecology of
+nearshore cetaceans in the Bay of Bengal, Bangladesh, with abundance estimates for Irrawaddy dolphins
+Orcaella brevirostris and finless porpoises Neophocaena phocaenoides. J. Cetacean Res. Manage.,
+10(1):45-58.
+Strømme, T., 1983. Reports on surveys with the R/V Dr Fridtjof Nansen. Institute of Marine Research of Bergen,
+Bergen, UNDP/FAO Programme GLO/82/001. 29 pp. ftp://ftp.fao.org/docrep/nonfao/fns/fn134e.pdf
+Suman, A., Wudianto, and Bintoro, G. 2006. Species composition, distribution, and potential yield of deep sea
+shrimp resources in the western Sumatera of the Indian Ocean EEZ of Indonesian waters. Ind. Fish. Res. J.,
+12(2):159-167.
+Ullah, M. H., Rashed-Un-Nabi, M., and Al-Mamun, M. A. 2012. Trophic model of the coastal ecosystem of the Bay
+of Bengal using mass balance Ecopath model. Ecol. Model., 225(0):82-94.
+Vermaat, J. E., Beijer, J. A. J., Gijlstra, R., Hootsmans, M. J. M., Philippart, C. J. M., and van den Brink, N. W. 1993.
+Leaf dynamics and standing stocks of intertidal Zostera noltii Hornem. and Cymodocea nodosa (Ucria)
+Ascherson on the Banc d'Arguin (Mauritania). In: Ecological studies in the coastal waters of Mauritania,
+Leiden, The Netherlands, Hydrobiologia, 258:59-72.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+36
+
+Vibunpant, S., Khongchai, N., Seng-eid, J., Eimsa-ard, M., and Supongpan, M., 2003. Trophic model of the coastal
+fisheries ecosystem in the Gulf of Thailand. In: Assessment, amanagement and future directions for
+coastal fisheries in Asian countries. pp. 365-386, Edited by G. Silvestre, L. Garces, I. Stobutzki, M. Ahmed,
+R. A. Valmonte-Santos, C. Luna, L. Lachica-Aliño, P. Munro, V. Christensen, and D. Pauly, WorldFish Center
+Conference Proceedings, Vol. 67.
+Vovk, A. N. 1985. Feeding spectrum of longfin squid (Loligo pealeis) in the Northwest Atlantic and its position in the
+ecosystem. NAFO Sci. Coun. Studies, 8:33-38.
+Walters, C., and Kitchell, J. F. 2001. Cultivation/depensation effects on juvenile survival and recruitment:
+implications for the theory of fishing. Can. J. Fish. Aquat. Sci., 58:39-50.
+Walters, C. J., Christensen, V., and Pauly, D. 1997. Structuring dynamic models of exploited ecosystems from
+trophic mass-balance assessments. Rev. Fish Biol. Fish., 7:139-172.
+Zeller, D., Knip, D. M., Zylich, K., and Pauly, D., 2013. Reconstructed total fisheries catches for the countries of the
+Bay of Bengal Large Marine Ecosystem: 1950-2010. Report to the Bay of Bengal Large Marine Ecosystem
+Project (www.boblme.org) Prepared by the Sea Around Us, Fisheries Centre, Vancouver BC, Canada, 346
+pp.
+Zischke, M. T., Griffiths, S. P., and Tibbetts, I. R. 2013. Rapid growth of wahoo (Acanthocybium solandri) in the
+Coral Sea, based on length-at-age estimates using annual and daily increments on sagittal otoliths. ICES J.
+Mar. Sci., 70(6):1128-1139.
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+37
+
+Appendices
+A1 Functional groups.
+A1.1 Allocation of catch species to functional groups.
+Catch Name
+
+Functional group
+
+Catch Name
+
+Functional group
+
+Abalistes stellaris
+
+SM pisc
+
+Auxis spp.
+
+coastal scombrid
+
+Acanthocybium solandri
+
+tuna-like
+
+Auxis thazard
+
+coastal scombrid
+
+Acanthopagrus latus
+
+SM inv
+
+Auxis thazard thazard
+
+coastal scombrid
+
+Acanthuridae
+
+SM inv
+
+Batoidea
+
+oceanic, coastal sharks
+
+Acanthurus
+
+SM inv
+
+Belonidae
+
+L pisc
+
+Acanthurus lineatus
+
+SM inv
+
+Billfishes
+
+tuna-like
+
+Acetes
+
+shrimps
+
+Bivalvia
+
+macrobenthos
+
+Aethaloperca rogaa
+
+L pisc comm
+
+Bohadschia marmorata
+
+macrobenthos
+
+Alectis ciliaris
+
+Carangids
+
+Bothidae
+
+SM inv
+
+Alectis indica
+
+Carangids
+
+Brachyura
+
+Crabs
+
+Alepes
+
+Carangids
+
+Bramidae
+
+SM pisc
+
+Alepisaurus ferox
+
+ML bathy
+
+Bregmaceros mcclellandi
+
+S pelagics
+
+Alopias
+
+Oceanic shark
+
+Caesio
+
+SM inv
+
+Alopias pelagicus
+
+oceanic sharks
+
+Caesio caerulaurea
+
+SM inv
+
+Alopias spp.
+
+Oceanic shark
+
+Caesio lunaris
+
+SM inv
+
+Alopias superciliosus
+
+oceanic sharks
+
+Caesionidae
+
+SM inv
+
+Alopias vulpinus
+
+oceanic sharks
+
+Carangidae
+
+Carangids
+
+Aluterus
+
+SM inv
+
+Carangoides
+
+Carangids
+
+Ambassidae
+
+S pisc inv
+
+Carangoides coeruleopinnatus
+
+Carangids
+
+Amblygaster sirm
+
+S pelagics
+
+Carangoides ferdau
+
+Carangids
+
+Anchoviella
+
+S pelagics
+
+Carangoides malabaricus
+
+Carangids
+
+Anguilla
+
+L pisc
+
+Carangoides orthogrammus
+
+Carangids
+
+Anguilliformes
+
+L pisc
+
+Caranx
+
+Carangids
+
+Anodontostoma chacunda
+
+S pelagics
+
+Caranx hippos
+
+Carangids
+
+Aphareus rutilans
+
+L pisc comm
+
+Caranx ignobilis
+
+Carangids
+
+Apogonidae
+
+SM inv
+
+Caranx lugubris
+
+Carangids
+
+Aprion virescens
+
+L pisc comm
+
+Caranx melampygus
+
+Carangids
+
+Aquatic invertebrates
+
+macrobenthos
+
+Caranx sexfasciatus
+
+Carangids
+
+Arcidae
+
+macrobenthos
+
+Carcharhinidae
+
+coastal elasmobranch
+
+Ariidae
+
+Milkfish, Minv Mpisc
+
+Carcharhinidae
+
+oceanic, coastal sharks
+
+Ariomma indicum
+
+SM pisc
+
+Carcharhinus
+
+coastal elasmobranch
+
+Arius
+
+SM inv
+
+Carcharhinus
+
+oceanic, coastal sharks
+
+Atherinomorus lacunosus
+
+SM inv
+
+Carcharhinus albimarginatus
+
+coastal elasmobranch
+
+Auxis
+
+coastal scombrid
+
+Carcharhinus amblyrhynchos
+
+coastal elasmobranch
+
+Auxis rochei
+
+coastal scombrid
+
+Carcharhinus falciformis
+
+oceanic sharks
+
+Auxis rochei rochei
+
+coastal scombrid
+
+Carcharhinus limbatus
+
+coastal elasmobranch
+
+Carcharhinus melanopterus
+
+coastal elasmobranch
+
+Carcharhinus longimanus
+
+oceanic sharks
+
+a
+
+a
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+38
+
+Catch Name
+
+Functional group
+
+Catch Name
+
+Functional group
+
+Carcharhinus obscurus
+
+coastal elasmobranch
+
+Elagatis bipinnulata
+
+Carangids
+
+Carcharhinus sorrah
+
+coastal elasmobranch
+
+Elasmobranchii
+
+oceanic, coastal sharks
+
+Centrophorus granulosus
+
+oceanic sharks
+
+Eleutheronema tetradactylum
+
+L pisc
+
+Centropomidae
+
+L pisc
+
+Encrasicholina heteroloba
+
+S pelagics
+
+Cephalopholis argus
+
+L pisc comm
+
+Engraulidae
+
+S pelagics
+
+Cephalopholis boenak
+
+L pisc comm
+
+Ephippidae
+
+M inv, L pisc
+
+Cephalopholis miniata
+
+L pisc comm
+
+Epinephelus
+
+L pisc comm
+
+Cephalopoda
+
+cephalopods
+
+Epinephelus fuscoguttatus
+
+L pisc comm
+
+Cephea
+
+jellyfish
+
+Epinephelus polyphekadion
+
+L pisc comm
+
+Chanos chanos
+
+Milkfish plus
+
+Epinephelus tauvina
+
+L pisc comm
+
+Charybdis
+
+Crabs
+
+Euthynnus affinis
+
+coastal scombrid
+
+Chirocentrus
+
+L pisc
+
+Exocoetidae
+
+S pelagics
+
+Chirocentrus dorab
+
+L pisc
+
+Fenneropenaeus indicus
+
+shrimps
+
+Chirocentrus nudus
+
+L pisc
+
+Fenneropenaeus merguiensis
+
+shrimps
+
+Clams or cockles and arkshells
+
+macrobenthos
+
+Fistulariidae
+
+L pisc
+
+Clupeidae
+
+S pelagics
+
+Galeocerdo cuvier
+
+coastal elasmobranch
+
+Clupeiformes
+
+S pelagics
+
+Gastropoda
+
+macrobenthos
+
+Clupeoids
+
+S pelagics
+
+Gazza minuta
+
+SM inv
+
+Congresox talabonoides
+
+L pisc
+
+Gerreidae
+
+SM inv
+
+Congridae
+
+l bathy, L pisc
+
+Gerres
+
+SM inv
+
+Coryphaena
+
+L pisc
+
+Gnathanodon speciosus
+
+Carangids
+
+Coryphaena hippurus
+
+L pisc
+
+Gobiidae
+
+S inv, M pisc
+
+Crassostrea
+
+macrobenthos
+
+Gymnosarda unicolor
+
+coastal scombrid
+
+Crassostrea madrasensis
+
+macrobenthos
+
+Haemulidae
+
+SM pisc
+
+Cynoglossidae
+
+SM coast inv
+
+Harpadon nehereus
+
+L pisc comm
+
+Cynoglossus
+
+SM coast inv
+
+Harpago chiragra
+
+macrobenthos
+
+Dasyatidae
+
+oceanic, coastal sharks
+
+Hemiramphidae
+
+S pelagics
+
+Dasyatis
+
+coastal elasmobranch
+
+Hemiramphus
+
+S pelagics
+
+Decapoda
+
+crab, shrimp
+
+Hexanchus griseus
+
+oceanic sharks
+
+Decapterus
+
+Carangids
+
+Hilsa kelee
+
+Hilsa
+
+Decapterus russelli
+
+Carangids
+
+Himantura
+
+coastal elasmobranch
+
+Diodon
+
+Milkfish plus
+
+Holocentridae
+
+SM inv, pisc
+
+Drepane
+
+SM pisc
+
+Holothuria atra
+
+macrobenthos
+
+Drepane punctata
+
+SM pisc
+
+Holothuria edulis
+
+macrobenthos
+
+Dussumieria
+
+S pelagics
+
+Holothuriidae
+
+macrobenthos
+
+Dussumieria elopsoides
+
+S pelagics
+
+Holothuroidea
+
+macrobenthos
+
+Hyporhamphus
+
+S pelagics
+
+Homaridae and Palinuridae
+
+Crabs
+
+Ilisha elongata
+
+Hilsa
+
+Lutjanus gibbus
+
+L pisc comm
+
+Istiompax indica
+
+tuna-like
+
+Lutjanus johnii
+
+L pisc comm
+
+Istiophoridae
+
+tuna-like
+
+Lutjanus lutjanus
+
+L pisc comm
+
+Istiophorus
+
+tuna-like
+
+Lutjanus malabaricus
+
+L pisc comm
+
+Istiophorus platypterus
+
+tuna-like
+
+Macolor macularis
+
+L pisc comm
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+39
+
+Catch Name
+
+Functional group
+
+Catch Name
+
+Functional group
+
+Isurus
+
+oceanic sharks
+
+Macolor niger
+
+L pisc comm
+
+Isurus oxyrinchus
+
+oceanic sharks
+
+Makaira
+
+tuna-like
+
+Isurus paucus
+
+oceanic sharks
+
+Makaira indica
+
+tuna-like
+
+Isurus spp
+
+oceanic sharks
+
+Makaira mazara
+
+Marlins
+
+Kajikia audax
+
+Marlins
+
+Makaira nigricans
+
+tuna-like
+
+Katsuwonus pelamis
+
+tuna-like
+
+Marine fishes not identified
+
+Miscellaneous fishes
+
+Kawakawa
+
+coastal scombrid
+
+Marine pelagic fishes nei
+
+Miscellaneous fishes
+
+Labridae
+
+L pisc
+
+Marsupenaeus japonicus
+
+shrimps
+
+Lactarius lactarius
+
+S pelagics
+
+Megalaspis cordyla
+
+Carangids
+
+Lambis lambis
+
+macrobenthos
+
+Megalops cyprinoides
+
+L pisc
+
+Lamma nasus
+
+oceanic sharks
+
+Melicertus latisulcatus
+
+shrimps
+
+Lamnidae
+
+oceanic sharks
+
+Meretrix
+
+macrobenthos
+
+Lamniformes
+
+oceanic, coastal sharks
+
+Metapenaeus
+
+shrimps
+
+Lates calcarifer
+
+L pisc
+
+Metapenaeus monoceros
+
+shrimps
+
+Latidae
+
+L pisc
+
+macrobenthos
+
+Leiognathidae
+
+SM inv
+
+Miscellaneous aquatic
+invertebrates
+Miscellaneous crustaceans
+
+Leiognathus
+
+SM inv
+
+Miscellaneous fishes
+
+Miscellaneous fishes
+
+Lethrinidae
+
+L pisc comm
+
+crab, shrimp
+
+Lethrinus
+
+L pisc comm
+
+Miscellaneous marine
+crustaceans
+Miscellaneous marine molluscs
+
+Lethrinus harak
+
+L pisc comm
+
+Miscellaneous molluscs
+
+macrobenthos
+
+Lethrinus microdon
+
+L pisc comm
+
+Miscellaneous shrimps
+
+shrimps
+
+Lethrinus nebulosus
+
+L pisc comm
+
+Modiolus
+
+macrobenthos
+
+Lethrinus olivaceus
+
+L pisc comm
+
+Monacanthidae
+
+SM inv
+
+Lethrinus rubrioperculatus
+
+L pisc comm
+
+Mugil
+
+SM inv
+
+Lethrinus xanthochilus
+
+L pisc comm
+
+Mugilidae
+
+M inv, S inv
+
+Liza
+
+SM inv
+
+Mullidae
+
+SM inv
+
+Lobotes surinamensis
+
+L pisc
+
+Muraenesocidae
+
+L pisc
+
+Loliginidae
+
+cephalopods
+
+Muraenesox
+
+L pisc
+
+Loligo
+
+cephalopods
+
+Muraenesox cinereus
+
+L pisc
+
+Loligonidae
+
+cephalopods
+
+Myliobatidae
+
+coastal elasmobranch
+
+Lutjanidae
+
+L pisc comm
+
+Lutjanus bohar
+
+L pisc comm
+
+Lutjanus
+
+L pisc comm
+
+Nemipteridae
+
+SM pisc
+
+Lutjanus argentimaculatus
+
+L pisc comm
+
+Nemipterus
+
+SM pisc
+
+Netuma thalassina
+
+Milkfish plus
+
+Nemipterus japonicus
+
+SM pisc
+
+Octopoda
+
+cephalopods
+
+Plectropomus laevis
+
+L pisc comm
+
+Octopodidae
+
+cephalopods
+
+Plectropomus pessuliferus
+
+L pisc comm
+
+Octopus
+
+cephalopods
+
+Pleuronectidae
+
+SM pisc
+
+Octopus vulgaris
+
+cephalopods
+
+Pleuronectiformes
+
+Pleuronectiformes
+
+Otolithoides
+
+L pisc comm
+
+Plotosidae
+
+L pisc
+
+Palaemonidae
+
+shrimps
+
+Plotosus
+
+L pisc
+
+Palinuridae
+
+Crabs
+
+Polynemidae
+
+L pisc, SM inv
+
+crab, shrimp
+
+macrobenthos
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+40
+
+Catch Name
+
+Functional group
+
+Catch Name
+
+Functional group
+
+Palinurus
+
+Crabs
+
+Polynemus
+
+L pisc, SM inv
+
+Pampus
+
+SM inv
+
+Pomacentridae
+
+SM inv
+
+Pampus argenteus
+
+SM inv
+
+Pomadasys
+
+SM pisc
+
+Pampus chinensis
+
+SM inv
+
+Pomadasys argenteus
+
+SM pisc
+
+Panulirus
+
+Crabs
+
+Portunidae
+
+Crabs
+
+Panulirus homarus
+
+Crabs
+
+Portunus
+
+Crabs
+
+Panulirus longipes
+
+Crabs
+
+Portunus pelagicus
+
+Crabs
+
+Panulirus penicillatus
+
+Crabs
+
+Priacanthus
+
+SM pisc
+
+Panulirus polyphagus
+
+Crabs
+
+Prionace glauca
+
+oceanic sharks
+
+Panulirus versicolor
+
+Crabs
+
+Pristipomoides
+
+L pisc comm
+
+Paphia
+
+macrobenthos
+
+Psettodes erumei
+
+SM pisc
+
+Parapenaeopsis
+
+shrimps
+
+Psettodidae
+
+SM pisc
+
+Parapenaeopsis hardwickii
+
+shrimps
+
+Pseudocarcharias kamoharai
+
+oceanic sharks
+
+Parapenaeopsis sculptilis
+
+shrimps
+
+Pseudorhombus
+
+SM pisc
+
+Parastromateus niger
+
+Carangids
+
+Pseudotolithus
+
+L pisc comm
+
+Pectinidae
+
+macrobenthos
+
+Pseudotriakis microdon
+
+oceanic sharks
+
+Pellona
+
+S pelagics
+
+Rachycentron canadum
+
+L pisc
+
+Pellona ditchela
+
+S pelagics
+
+Rajiformes
+
+oceanic, coastal sharks
+
+Penaeidae
+
+shrimps
+
+Rastrelliger
+
+Indian mackerel
+
+Penaeus
+
+shrimps
+
+Rastrelliger brachysoma
+
+Indian mackerel
+
+Penaeus monodon
+
+shrimps
+
+Rastrelliger kanagurta
+
+Indian mackerel
+
+Penaeus semisulcatus
+
+shrimps
+
+Rhincodon typus
+
+oceanic sharks
+
+Pennahia
+
+L pisc comm
+
+Rhinobatidae
+
+coastal elasmobranch
+
+Pennahia argentata
+
+L pisc comm
+
+Rhizostomatidae
+
+jellyfish
+
+Perciformes
+
+Perciformes
+
+Rhopilema
+
+jellyfish
+
+Perna viridis
+
+macrobenthos
+
+Rhynchobatus djiddensis
+
+coastal elasmobranch
+
+Pinctada margaritifera
+
+macrobenthos
+
+Saccostrea cuccullata
+
+macrobenthos
+
+Platycephalidae
+
+L pisc
+
+Sardinella
+
+S pelagics
+
+Platycephalus indicus
+
+L pisc
+
+Sardinella fimbriata
+
+S pelagics
+
+Plectorhinchus
+
+SM pisc
+
+Sardinella gibbosa
+
+S pelagics
+
+Plectropomus areolatus
+
+L pisc comm
+
+Sardinella lemuru
+
+S pelagics
+
+Saurida
+
+L pisc comm
+
+Sardinella longiceps
+
+S pelagics
+
+Saurida tumbil
+
+L pisc comm
+
+Selachimorpha
+
+oceanic, coastal sharks
+
+Scarus
+
+SM inv
+
+Selachimorpha (Pleurotremata)
+
+oceanic, coastal sharks
+
+Scatophagus argus
+
+SM inv
+
+Selar boops
+
+SM inv
+
+Sciaenidae
+
+L pisc comm
+
+Selar crumenophthalmus
+
+Carangids
+
+Scolopsis
+
+SM pisc
+
+Selaroides leptolepis
+
+SM inv
+
+Scomber
+
+Indian mackerel
+
+Sepia
+
+cephalopods
+
+Scomberoides
+
+Carangids
+
+Sepiidae
+
+cephalopods
+
+Scomberoides commersonnianus
+
+Carangids
+
+Sepioteuthis lessoniana
+
+cephalopods
+
+Scomberoides lysan
+
+Carangids
+
+Sergestidae
+
+shrimps
+
+Scomberomorini
+
+coastal scombrid
+
+Seriola rivoliana
+
+Carangids
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+41
+
+Catch Name
+
+Functional group
+
+Catch Name
+
+Functional group
+
+Serranidae
+
+L pisc comm
+
+Seriolina nigrofasciata
+
+Carangids
+
+Sharks or rays and chimaeras
+
+oceanic, coastal sharks
+
+Thenus orientalis
+
+Crabs
+
+Shrimps and prawns
+
+shrimps
+
+Thryssa
+
+S pelagics
+
+Shrimps and prawns
+
+shrimps
+
+Thunnini
+
+tuna-like, scombrids
+
+Siganidae
+
+SM inv
+
+Thunnus
+
+tuna-like
+
+Siganus
+
+SM inv
+
+Thunnus alalunga
+
+tuna-like
+
+Siganus canaliculatus
+
+SM inv
+
+Thunnus albacares
+
+Yellowfin tuna
+
+Sillaginidae
+
+SM inv
+
+Thunnus maccoyii
+
+tuna-like
+
+Sillago
+
+SM inv
+
+Thunnus obesus
+
+Bigeye tuna
+
+Sillago sihama
+
+SM inv
+
+Thunnus tonggol
+
+coastal scombrid
+
+Siluriformes
+
+Milkfish, Minv Mpisc
+
+Trachipterus
+
+ML bathy
+
+Soleidae
+
+Sinv, M pisc
+
+Triacanthidae
+
+SM inv
+
+Solenocera crassicornis
+
+shrimps
+
+Triaenodon obesus
+
+coastal elasmobranch
+
+Sparidae
+
+SM inv
+
+Trichiuridae
+
+L pisc
+
+Sphyraena
+
+L pisc
+
+Trichiurus
+
+L pisc
+
+Sphyraena jello
+
+L pisc
+
+Trichiurus lepturus
+
+L pisc
+
+Sphyraenidae
+
+L pisc
+
+Tridacna
+
+macrobenthos
+
+Sphyrna
+
+oceanic sharks
+
+Trochus
+
+macrobenthos
+
+Sphyrna lewini
+
+oceanic sharks
+
+Trochus niloticus
+
+macrobenthos
+
+Sphyrna mokarran
+
+oceanic sharks
+
+Turbo
+
+macrobenthos
+
+Sphyrna
+
+oceanic sharks
+
+Upeneus
+
+SM inv
+
+Sphyrna zygaena
+
+oceanic sharks
+
+Upeneus sulphureus
+
+SM inv
+
+Sphyrnidae
+
+oceanic sharks
+
+Upeneus vittatus
+
+SM inv
+
+Spratelloides delicatulus
+
+S pelagics
+
+Uranoscopus
+
+SM pisc
+
+Spratelloides gracilis
+
+S pelagics
+
+Variola louti
+
+L pisc comm
+
+Squillidae
+
+shrimps
+
+Veneridae
+
+macrobenthos
+
+Stichopus
+
+macrobenthos
+
+Xiphias gladius
+
+tuna-like
+
+Stolephorus
+
+S pelagics
+
+Xiphioidei
+
+tuna-like
+
+Stomatopoda
+
+shrimps
+
+Zenarchopterus dispar
+
+S pelagics
+
+Stromateidae
+
+SM inv
+
+Synodontidae
+
+L pisc comm
+
+Tegillarca granosa
+
+macrobenthos
+
+Tenualosa ilisha
+
+Hilsa
+
+Tenualosa toli
+
+Hilsa
+
+Terapon
+
+SM pisc
+
+Terapon jarbua
+
+SM pisc
+
+Terapontidae
+
+SM pisc
+
+Tetraodontidae
+
+milkfish, SM inv
+
+Tetrapturus angustirostris
+
+tuna-like
+
+Tetrapturus audax
+
+tuna-like
+
+a. based on list of species in the Andaman catch data base
+b. for the catch from the tuna database only
+
+b
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+A1.2 Area consifered for each functional group.
+Group name
+Oceanic sharks
+Coastal elasmobranch
+Tuna-like
+Coastal scombrid
+Jellyfish
+Cephalopods
+S bathy
+ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Milkfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+0 plants
+Bigeye tuna
+Yellowfin tuna
+Marlins
+
+area (km2)
+6,205,051
+4,275,177
+6,205,051
+4,275,177
+6,205,051
+6,205,051
+5,268,883
+5,268,883
+30,998
+30,998
+30,998
+30,998
+30,998
+30,998
+2,845,297
+2,845,297
+2,845,297
+213,663
+213,663
+213,663
+213,663
+213,663
+213,663
+213,663
+213,663
+1,282,459
+1,282,459
+1,282,459
+905,170
+905,170
+691,507
+691,507
+691,507
+691,507
+691,507
+691,507
+691,507
+2,077,295
+2,077,295
+2,077,295
+2,077,295
+2,845,297
+1,282,459
+2,077,295
+4,275,177
+6,205,051
+6,205,051
+6,205,051
+
+proportion
+1
+0.689
+1
+0.689
+1
+1
+0.849
+0.849
+0.005
+0.005
+0.005
+0.005
+0.005
+0.005
+0.459
+0.459
+0.459
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.034
+0.207
+0.207
+0.207
+0.146
+0.146
+0.111
+0.111
+0.111
+0.111
+0.111
+0.111
+0.111
+0.335
+0.335
+0.335
+0.335
+0.459
+0.207
+0.335
+0.689
+1
+1
+1
+
+explanation
+All regions
+All regions
+All regions
+EEZ without high seas
+All regions
+All regions
+Deep waters only
+Deep waters only
+Shelf of region 1
+Shelf of region 1
+Shelf of region 1
+Shelf of region 1
+Shelf of region 1
+Shelf of region 1
+EEZ of region 1
+EEZ of region 1
+EEZ of region 1
+Shelf of region 2
+Shelf of region 2
+Shelf of region 2
+Shelf of region 2
+Shelf of region 2
+Shelf of region 2
+Shelf of region 2
+Shelf of region 2
+EEZ of region 2
+EEZ of region 2
+EEZ of region 2
+Shelf of regions 2 and 3
+Shelf of regions 2 and 3
+Shelf of region 3
+Shelf of region 3
+Shelf of region 3
+Shelf of region 3
+Shelf of region 3
+Shelf of region 3
+Shelf of region 3
+EEZ of region 3
+EEZ of region 3
+EEZ of region 3
+EEZ of region 3
+EEZ of region 1
+EEZ of region 2
+EEZ of region 3
+EEZ without high seas
+All regions
+All regions
+All regions
+
+42
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+43
+
+A1.3 Functional groups composition
+Functional group
+Oceanic sharks
+
+Coastal elasmobranch
+
+Tuna-like
+Bigeye tuna
+Yellowfin tuna
+Marlins
+Coastal scombrids
+Carangids
+
+L pisc
+
+L pisc comm
+
+Species list
+Isurus paucus, Isurus oxyrinchus, Alopias vulpinus, Alopias pelagicus, Prionace glauca,
+Carcharhinus longimanus, Sphyrna lewini, Sphyrna mokarran, Sphyrna zygaena,
+Carcharhinus falciformis, Alopias superciliosus, Hexanchus griseus, Rhincodon typus,
+Pteroplatytrygon violacea, Dalatias licha, Echinorhinus brucus, Centrophorus moluccensis
+Centrophorus uyato, Centroscyllium ornatum, Centrophorus niaukang, Centrophorus squamosus,
+Centrophorus tessellatus, Centrophorus granulosus, Pseudotriakis microdon,
+Pseudocarcharias kamoharai, Carcharhinus amblyrhynchoides
+Galeocerdo cuvier, Triaenodon obesus, Carcharhinus melanopterus, Carcharhinus limbatus,
+Carcharhinus dussumieri, Carcharhinus macloti, Carcharhinus albimarginatus,
+Rhizoprionodon acutus, Scoliodon laticaudus, Scoliodon walbeehmil, Carcharhinus sorrah,
+Mustelus manazo, Mustelus mosis, Carcharhinus albimarginatus, Carcharhinus altimus,
+Stegostoma fasciatum, Nebrius ferrugineus, Chiloscyllium indicum, Chiloscyllium griseum,
+Eusphyra blochii, Odontaspis ferox, Carcharhinus amblyrhynchos, Loxodon macrorhinus,
+Rhynchobatus djiddensis, Glaucostegus granulatus, Dasyatis microps,Himantura undulate, Himantura
+alcockii, Himantura marginata, Himantura imbricate, Himantura uarnak, Himantura jenkinsii,
+Himantura bleekeri, Aetobatus narinari, Rhinoptera javanica,
+Mobula japonica, Aetomylaeus nichofii, Mobula eregoodootenkee, Aetomylaeus maculatus,
+Aetomylaeus vespertilio
+Katsuwonus pelamis, Acanthocybium solandri, Thunnus alalunga, Tetrapturus angustirostris,
+Istiophorus platypterus,
+Istiompax indica, Makaira nigricans, Xiphias gladius
+Thunnus obesus
+Thunnus albacares
+Kajikia audax, Makaira mazara
+Auxis thazard thazard, Sarda orientalis, Auxis rochei rochei, Euthynnus affinis, Thunnus tonggol,
+Scomberomorus commerson, Scomberomorus guttatus, Scomberomorus lineolatus, Gymnosarda
+unicolor
+Carangoides fulvoguttatus, Caranx sexfasciatus, Gnathanodon speciosus, Caranx melampygus,
+Seriolina nigrofasciata, Carangoides orthogrammus, Carangoides equula, Carangoides chrysophrys,
+Carangoides malabaricus, Carangoides hedlandensis, Carangoides ferdau, Carangoides
+coeruleopinnatus, Carangoides talamparoides, Carangoides armatus, Caranx ignobilis, Alectis indica,
+Scomberoides lysan, Scomberoides commersonnianus, Alectis ciliaris, Elagatis bipinnulata,
+Seriola rivoliana, Caranx lugubris, Megalaspis cordyla, Selar crumenophthalmus, Uraspis helvola,
+Parastromateus niger, Alepes djedaba, Decapterus macrosoma, Decapterus russelli
+Sphyraena jello, Sphyraena barracuda, Sphyraena obtusata, Lates calcarifer, Pristis perotteti,
+Lepturacanthus savala, Trichiurus lepturus, Coryphaena hippurus, Coryphaena equiselis, Pomatomus
+saltatrix, Albula vulpes, Ablennes hians, Tylosurus crocodilus crocodilus, Strongylura leiura,
+Chirocentrus dorab, Chirocentrus nudus, Cheilinus undulatus, Strophidon sathete, Brotula
+multibarbata, Platycephalus indicus, Rachycentron canadum, Muraenesox bagio, Muraenesox
+cinereus, Congresox talabonoides, Fistularia petimba, Fistularia commersonii, Lobotes surinamensis,
+Leptomelanosoma indicum, Eleutheronema tetradactylum, Plotosus canius, Conger cinereus,
+Megalops cyprinoides
+Epinephelus fuscoguttatus, Epinephelus lanceolatus, Epinephelus coioides, Epinephelus
+flavocaeruleus, Epinephelus malabaricus, Epinephelus latifasciatus, Epinephelus multinotatus,
+Epinephelus polyphekadion, Plectropomus areolatus, Plectropomus pessuliferus, Plectropomus laevis,
+Variola louti, Epinephelus morrhua, Cephalopholis argus, Aethaloperca rogaa, Epinephelus
+chlorostigma, Epinephelus undulosus, Epinephelus fasciatus, Epinephelus areolatus, Epinephelus
+bleekeri, Epinephelus tauvina, Cephalopholis miniata, Cephalopholis boenak,
+Etelis coruscans, Lutjanus erythropterus, Lutjanus johnii, Lutjanus malabaricus, Lutjanus sanguineus,
+Lutjanus sebae, Lutjanus argentimaculatus, Aphareus rutilans, Aprion virescens, Etelis carbunculus,
+Etelis radiosus, Pristipomoides filamentosus, Pristipomoides multidens, Lutjanus ehrenbergii, Lutjanus
+monostigma, Lutjanus vitta, Lutjanus fulvus, Lutjanus lutjanus, Lutjanus carponotatus, Lutjanus
+rivulatus, Lutjanus gibbus, Lutjanus kasmira, Lipocheilus carnolabrum, Pristipomoides auricilla,
+Pristipomoides sieboldii, Pristipomoides zonatus, Lutjanus quinquelineatus, Lutjanus fulviflamma,
+Lutjanus bohar, Macolor macularis, Macolor niger
+
+S. Guénette, 2013
+
+Functional group
+
+Bay of Bengal model
+
+44
+
+Species list
+Protonibea diacanthus, Otolithoides biauritus, Otolithoides pama, Pterotolithus maculatus, Otolithes
+ruber, Otolithes cuvieri, Johnius carutta, Johnius dussumieri, Johnius borneensis, Johnius
+macrorhynus, Pennahia anea, Pennahia argentata
+
+Milkfish plus
+SM inv
+
+Lethrinus ornatus, Lethrinus nebulosus, Lethrinus microdon, Lethrinus harak, Lethrinus olivaceus,
+Lethrinus lentjan, Lethrinus erythracanthus, Wattsia mossambica, Gymnocranius grandoculis,
+Lethrinus xanthochilus, Lethrinus rubrioperculatus,
+Saurida tumbil, Saurida undosquamis, Harpadon nehereus
+Chamos chanos, Panfasius pangasius, Netuma thalassina, Diodon, hystrix, Arothron stellatus
+Acanthopagrus latus, Acanthopagrus berda, Rhabdosargus sarba, Pampus argenteus, Pampus
+chinensis, Acanthurus triostegus, Acanthurus leucosternon,
+Siganus canaliculatus, Siganus guttatu, Siganus fuscescens, Siganus argenteus, Siganus corallinus,
+Siganus lineatus, Siganus puelloides, Myripristis murdjan, Kyphosus cinerascens, Monotaxis
+grandoculis, Sillago sihama, Sillago aeolus, Sillago chondropus, Sillaginopsis panijus, Gymnocranius
+griseus, Scatophagus argus, Mugil cephalus, Chelon planiceps, Chelon macrolepis, Moolgarda seheli
+Liza subviridis, Valamugil cunnesius, Valamugil speigleri, Cynoglossus arel, Cynoglossus puncticeps,
+Cynoglossus lingua, Cynoglossus bilineatus, Arius maculatus, Arius venosus, Mene maculata,
+Caesio caerulaurea, Caesio lunaris
+Acanthurus auranticavus, Acanthurus bariene, Acanthurus dussumieri, Acanthurus guttatus,
+Acanthurus lineatus, Acanthurus mata, Acanthurus nigricans, Acanthurus nigricauda, Acanthurus
+nigrofuscus, Acanthurus tennentii, Acanthurus thompsoni, Acanthurus xanthopterus, Aluterus
+monoceros, Aluterus scriptus, Scarus festivus, Scarus ghobban, Scarus prasiognathos, Scarus quoyi
+Scarus rubroviolaceus, Scarus tricolor, Chelonodon patoca, Arothron immaculatus, Platax orbicularis,
+Cynoglossus lida
+Chelmon rostratus, Chaetodon plebeius, Chaetodon vagabundus, Polydactylus multiradiatus,
+Polydactylus multiradiatu, Nemipterus furcosus, Triacanthus biaculeatus, Liza parsia, Plotosus
+lineatus,
+Centropyge bicolor, Nuchequula blochii, Nuchequula gerreoides, Secutor ruconius, Nuchequula
+blochii, Nuchequula gerreoides, Secutor ruconius, Leiognathus daura, Leiognathus brevirostris, Gazza
+minuta, Equulites leuciscus, Eubleekeria splendens, Leiognathus equulus, Photopectoralis bindus,
+Secutor insidiator
+
+SM pisc
+
+Gerres filamentosus, Pentaprion longimanus, Gerres oyena, Selaroides leptolepis, Selar boops,
+Pterocaesio pisang, Johnius coitor, Grammatobothus polyophthalmus, Engyprosopon grandisquama,
+Petroscirtes breviceps, Amphiprion ocellaris, Atherinomorus lacunosus, Pseudocheilinus hexataenia,
+Halichoeres melanurus, Thalassoma amblycephalum, Apogon coccineus, Apogon crassiceps, Apogon
+doryssa, Apogon ellioti, Fusigobius maximus, Periophthalmodon schlosseri, Oxyurichthys microlepis,
+Paramonacanthus japonicus, Paramonacanthus curtorhynchos, Aseraggodes umbratilis, Pardachirus
+pavoninus, Upeneus sulphureus, Upeneus moluccensis, Upeneus vittatus
+Argyrops spinifer, Saurida gracilis, Dactyloptena orientalis, Atule mate, Priacanthus macracanthus,
+Priacanthus tayenus, Priacanthus hamrur, Pseudorhombus arsius, Pseudorhombus javanicus,
+Psettodes erumei, Glossogobius giuris, Abalistes stellaris, Scomberoides tol, Naucrates ductor,
+Drepane punctata, Drepane longimana, Taractichthys steindachneri, Neoniphon sammara, Sciades
+sona, Terapon theraps, Terapon jarbua, Pterois miles, Pterois russelii, Pterois volitans, Scorpaenopsis
+diabolus, Scorpaenopsis oxycephala, Brachirus orientalis, Synaptura albomaculata,
+Diagramma pictum, Pomadasys argenteus, Pomadasys maculatus, Pomadasys argyreus, Pomadasys
+furcatus, Pomadasys olivaceus, Plectorhinchus pictus, Plectorhinchus albovittatus, Plectorhinchus
+chaetodonoides, Plectorhinchus gibbosus, Plectorhinchus lineatus, Plectorhinchus picus,
+Plectorhinchus vittatus,
+Nemipterus peronei, Nemipterus bathybius, Nemipterus bipunctatus, Nemipterus randalli,
+Nemipterus hexodon, Nemipterus japonicus, Nemipterus nematophorus, Parascolopsis inermis,
+
+S. Guénette, 2013
+
+Functional group
+
+Indian Mackerel
+Hilsa
+Small pelagics
+
+Bay of Bengal model
+
+45
+
+Species list
+Scolopsis bilineata, Scolopsis vosmeri, Scolopsis xenochrous, Onigocia macrolepis, Synodus hoshinonis
+Brachypleura novaezeelandiae, Dendrophysa russelii, Eleotris fusca, Ambassis gymnocephalus,
+Filimanus heptadactyla, Polynemus paradiseus, Syngnathoides biaculeatus, Ephippus orbis, Ariomma
+indicum, Dendrochirus biocellatus, Dendrochirus brachypterus, Dendrochirus zebra, Pterois
+antennata, Pterois radiata, Scorpaenodes albaiensis
+Rastrelliger kanagurta, Rastrelliger brachysoma, Rastrelliger faughni
+Tenualosa ilisha, Tenualosa toli, Hilsa kelee, Ilisha melastoma, Ilisha filigera, Ilisha megaloptera,
+Ilisha elongata, Gudusia chapra
+Anodontostoma chacunda, Sardinella longiceps, Sardinella fimbriata, Dussumieria elopsoides,
+Nematalosa nasus, Herklotsichthys quadrimaculatus, Spratelloides delicatulus, Sardinella gibbosa,
+Sardinella melanura, Sardinella albella, Sardinella lemuru, Opisthopterus tardoore, Spratelloides
+gracilis, Amblygaster sirm, Dussumieria acuta, Raconda russeliana, Escualosa thoracata,
+Bregmaceros mcclellandi
+Coilia reynaldi, Thryssa vitrirostris, Coilia dussumieri, Setipinna taty, Stolephorus commersonnii,
+Thryssa dussumieri, Thryssa mystax, Encrasicholina devisi, Encrasicholina heteroloba, Stolephorus
+insularis, Thryssa baelama, Stolephorus waitei, Stolephorus indicus, Thryssa hamiltonii, Coilia
+ramcarati, Encrasicholina punctifer
+Atropus atropos, Lactarius lactarius, Pellona ditchela, Alepes melanoptera, Hemiramphus convexus,
+Rhynchorhamphus georgii, Cheilopogon spilopterus, Parexocoetus mento, Exocoetus volitans,
+Hirundichthys coromandelensis, Cheilopogon abei, Cheilopogon atrisignis, Cheilopogon cyanopterus,
+Cheilopogon furcatus, Cheilopogon nigricans, Cheilopogon suttoni, Hyporhamphus limbatus,
+Hyporhamphus unicuspis, Hyporhamphus balinensis, Zenarchopterus dispar
+
+S bathy
+ML bathy
+jellyfish
+cephalopods
+Macrobenthos
+Meiobenthos
+zooplankton
+
+Myctophidae, Stomiidae, Diretmidae
+e.g. Pontinus macrocephalus, Arctozenus risso, Nemichthys scolopaceus, Lampris guttatus,
+Alepisaurus ferox, Trachipterus jacksonensis
+e.g. Cephea, Rhizostomatidae, Rhopilema, Scyphozoa (based on catches)
+Sepia sp, Loligo sp, Octopus vulgaris
+shrimps, prawns, lobsterx, crabs, molluscs, worms, small benthic crustaceans
+e,g, benthic copepods
+copepods, fish and invertebrate eggs, euphausiids, chaetognats, siphonophora
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+46
+
+A2 Catch, effort and CPUEs
+A2.1 Total catch (t/km2/year) per fleet and functional group as input in Ecopath for year 1978.
+BET= bigeye tuna, YFT= yellowfin tuna. The total catch in t is divided by the area of the entire study area.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+
+Group name
+Oceanic sharks
+Coastal elasmobranch
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+S bathy
+ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Milkfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Bigeye tuna
+Yellowfin tuna
+Marlins
+Detritus
+Sum
+
+Region1
+0.001
+0.001198
+0.005722
+0.001283
+0
+0
+0
+0.000251
+0.000448
+0.000877
+0.000341
+0.00075
+0.000348
+0.000223
+3.07E-07
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.012441
+
+Region3
+0.0035
+0.006461
+0.004945
+0.012144
+0.000112
+0.013
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.026994
+0.029437
+0.031914
+0.046784
+0.042999
+0.006744
+0.043341
+0.031763
+0.070085
+0.010223
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.380447
+
+Region 2
+industrial
+0.008082
+0.008798
+0.001569
+0.002552
+0.000134
+0.003117
+0
+0.000632
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.01281
+0.004471
+0.023344
+0.011675
+0.002048
+0.025159
+0.005138
+0.041264
+0.001875
+0
+0
+0
+0.016928
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.169596
+
+Region 2
+small-scale
+0.00391
+0.009074
+0.004825
+0.01328
+0
+0.003597
+0
+0.00258
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.049802
+0.01644
+0.08478
+0.065067
+0.012956
+0.067588
+0.026823
+0.035892
+0.014206
+0
+0
+0
+0.004008
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.414828
+
+Hilsa
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.03662
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.036623
+
+BET
+
+YFT
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.004
+0
+0
+0
+0.004
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0065
+0
+0
+0.0065
+
+Marlins
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0011
+0
+0.0011
+
+Total
+0.016493
+0.025531
+0.01706
+0.02926
+0.000246
+0.019715
+0
+0.003463
+0.000448
+0.000877
+0.000341
+0.00075
+0.000348
+0.000223
+3.07E-07
+0
+0
+0.062613
+0.020911
+0.108124
+0.076742
+0.015004
+0.092747
+0.031961
+0.077156
+0.016081
+0
+0
+0.036623
+0.04793
+0.029437
+0.031914
+0.046784
+0.042999
+0.006744
+0.043341
+0.031763
+0.070085
+0.010223
+0
+0
+0
+0
+0
+0
+0.004
+0.0065
+0.0011
+0
+1.025534
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+47
+
+A2.2. Effort in horse power days for the east coast of India (Bhathal 2013) and relative effort as used for
+region 2 in Ecosim.
+Marine fishing effort in horse power days
+Small-scale
+
+Industrial
+
+Large trawlers
+
+Relative effort for region 2
+Industrial only
+Small-scale
+All industrial a
+b
+1
+1
+1
+
+1978
+95,482,790
+53,782,186
+2,315,460
+1979
+102,335,975
+57,186,311
+2,970,688
+1.072
+1980
+108,636,178
+61,228,736
+4,283,750
+1.138
+1981
+112,113,803
+64,684,161
+4,307,393
+1.174
+1982
+117,647,129
+70,187,123
+4,497,938
+1.232
+1983
+124,238,927
+76,740,390
+3,256,759
+1.301
+1984
+130,951,700
+83,406,468
+3,084,113
+1.371
+1985
+143,445,594
+95,821,044
+4,101,788
+1.502
+1986
+150,505,299
+102,733,189
+4,496,053
+1.576
+1987
+154,487,496
+108,202,947
+2,053,794
+1.618
+1988
+181,710,800
+136,865,740
+2,451,666
+1.903
+1989
+212,923,659
+166,580,613
+2,758,574
+2.230
+1990
+246,342,990
+196,892,566
+3,010,675
+2.580
+1991
+293,766,283
+235,343,022
+2,909,193
+3.077
+1992
+320,745,757
+257,653,290
+2,780,838
+3.359
+1993
+347,515,519
+283,497,874
+2,596,934
+3.640
+1994
+401,001,786
+335,259,000
+2,355,627
+4.200
+1995
+440,934,984
+370,550,807
+1,910,840
+4.618
+1996
+481,578,826
+406,553,257
+1,544,876
+5.044
+1997
+522,935,045
+443,268,084
+1,203,612
+5.477
+1998
+565,479,216
+480,696,473
+896,642
+5.922
+1999
+608,737,772
+518,839,247
+929,483
+6.375
+2000
+608,737,772
+518,839,247
+889,852
+6.375
+2001
+608,737,772
+518,839,247
+894,039
+6.375
+2002
+608,737,772
+518,839,247
+891,919
+6.375
+2003
+608,737,772
+518,839,247
+905,565
+6.375
+2004
+608,737,772
+518,839,247
+919,428
+6.375
+2005
+608,737,772
+518,839,247
+918,256
+6.375
+a includes large trawlers; used in the Ecosim model section
+b excludes large trawlers; used to generate Ecosim results found in Appendix A6.
+
+1.072
+1.168
+1.230
+1.331
+1.426
+1.542
+1.781
+1.911
+1.965
+2.483
+3.019
+3.563
+4.247
+4.643
+5.100
+6.018
+6.640
+7.275
+7.923
+8.585
+9.265
+9.265
+9.265
+9.265
+9.265
+9.265
+9.265
+
+1.063
+1.138
+1.203
+1.305
+1.427
+1.551
+1.782
+1.910
+2.012
+2.545
+3.097
+3.661
+4.376
+4.791
+5.271
+6.234
+6.890
+7.559
+8.242
+8.938
+9.647
+9.647
+9.647
+9.647
+9.647
+9.647
+9.647
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+48
+
+A2.3. Biomass, catch, and fishing effort directed to hilsa compiled for Bangladesh, the extrapolation for
+1978-1986, and the resulting fishing effort time series used in Ecosim (relative value).
+Both catches and biomass densities are for the entire study area.
+Effort in number of
+boats a
+Nonmotorized motorized
+
+Extrapolation back to 1978
+Nonmotorized
+Motorized
+
+Total
+
+Relative
+effort b
+
+Biomass
+2
+t/km c
+
+Catches
+2
+t/km
+0.037
+0.036
+0.035
+0.035
+0.035
+0.036
+0.037
+0.037
+0.043
+0.046
+0.044
+0.046
+0.047
+0.049
+0.055
+0.057
+0.049
+0.055
+0.058
+0.056
+0.055
+0.054
+0.055
+0.061
+0.056
+0.051
+0.059
+0.061
+0.062
+0.060
+0.062
+0.062
+0.073
+
+3633
+3639
+7272
+1
+1978
+3678
+3684
+7362
+1.012
+1979
+3723
+3729
+7451
+1.025
+1980
+3768
+3774
+7541
+1.037
+1981
+3812
+3818
+7631
+1.049
+1982
+3857
+3863
+7721
+1.062
+1983
+3902
+3908
+7810
+1.074
+1984
+3947
+3953
+7900
+1.086
+1985
+3992
+3998
+7990
+1.099
+1986
+8080
+1.111
+1987
+4037
+4043
+0.219
+9470
+1.302
+1988
+5186
+4284
+0.200
+10861
+1.494
+1989
+6336
+4525
+0.219
+12252
+1.685
+1990
+7486
+4766
+0.253
+13643
+1.876
+1991
+8635
+5007
+0.230
+15033
+2.067
+1992
+9785
+5248
+0.223
+16424
+2.259
+1993
+10935
+5490
+0.212
+17815
+2.450
+1994
+12084
+5731
+0.195
+19205
+2.641
+1995
+13234
+5972
+0.191
+20596
+2.832
+1996
+14383
+6213
+0.181
+21987
+3.024
+1997
+15533
+6454
+0.163
+23378
+3.215
+1998
+16683
+6695
+0.126
+24768
+3.406
+1999
+17832
+6936
+0.175
+26159
+3.597
+2000
+18982
+7177
+0.122
+26509
+3.645
+2001
+20132
+6377
+0.152
+27899
+3.837
+2002
+21281
+6618
+0.130
+29290
+4.028
+2003
+22431
+6859
+0.132
+30681
+4.219
+2004
+23581
+7100
+0.159
+32072
+4.410
+2005
+24730
+7341
+0.156
+33462
+4.602
+2006
+25880
+7582
+0.153
+5.522
+2007
+0.165
+5.522
+2008
+0.178
+5.522
+2009
+0.193
+5.522
+2010
+0.213
+a from (BOBLME 2012)
+b the time series was continued to 2010 by assuming constant effort from 2006 to 2010 (Rishi Sharma, pers.
+comm., IOTC)
+c Rishi Sharma, pers. comm., IOTC, based on results of single species model described in (BOBLME 2012)
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+49
+
+A2.4 Effort by large pelagic fleet contributed by Rishi Sharma, IOTC.
+Striped Marlin
+Year
+Taiwan
+Japan
+1960
+1961
+1962
+1963
+1964
+1965
+1966
+1967
+1968
+1969
+1970
+1971
+1.38
+1972
+1.43
+1973
+2.62
+1974
+2.39
+1975
+2.68
+1976
+2.36
+1977
+5.64
+1978
+4.49
+1979
+3.99
+1980
+2.93
+4.41
+1981
+2.47
+2.76
+1982
+1.54
+2.47
+1983
+0.99
+1.39
+1984
+1.35
+2.39
+1985
+1.63
+2.49
+1986
+2.12
+2.44
+1987
+1.37
+1.10
+1988
+1.06
+0.83
+1989
+0.79
+0.60
+1990
+0.46
+0.50
+1991
+1.10
+0.88
+1992
+1.02
+0.84
+1993
+0.83
+0.76
+1994
+1.78
+0.92
+1995
+1.43
+0.99
+1996
+1.21
+0.77
+1997
+1.05
+0.57
+1998
+0.68
+0.29
+1999
+0.88
+0.50
+2000
+0.62
+0.35
+2001
+0.73
+0.31
+2002
+0.65
+0.25
+2003
+0.58
+0.17
+2004
+0.61
+0.11
+2005
+0.37
+0.11
+2006
+0.30
+0.17
+2007
+0.15
+0.14
+2008
+0.31
+0.22
+2009
+0.16
+0.21
+2010
+0.41
+0.93
+2011
+0.42
+1.12
+a based on the Japanese index
+
+Blue Marlin
+Taiwan
+Japan
+
+1.05
+1.25
+1.03
+1.15
+1.42
+1.15
+1.49
+1.26
+1.03
+0.77
+0.57
+0.70
+0.88
+0.78
+0.76
+0.86
+0.89
+1.15
+1.04
+1.33
+1.15
+1.02
+1.06
+0.96
+0.86
+0.83
+0.78
+0.62
+0.79
+0.87
+1.11
+1.40
+
+1.49
+2.04
+2.34
+2.10
+1.66
+1.90
+2.69
+2.06
+1.58
+2.32
+1.80
+1.69
+2.17
+1.98
+2.29
+1.65
+1.54
+1.31
+0.93
+0.83
+0.81
+0.95
+0.98
+1.23
+0.80
+0.66
+0.94
+0.82
+0.77
+0.75
+0.50
+0.42
+0.37
+0.35
+0.30
+0.43
+0.44
+0.35
+0.36
+0.54
+0.70
+
+marlins
+a
+
+1.44
+1.74
+2.48
+2.24
+2.17
+2.13
+4.17
+3.28
+2.79
+3.37
+2.28
+2.08
+1.78
+2.18
+2.39
+2.04
+1.32
+1.07
+0.77
+0.67
+0.85
+0.90
+0.87
+1.07
+0.90
+0.71
+0.76
+0.55
+0.64
+0.55
+0.41
+0.33
+0.27
+0.23
+0.20
+0.30
+0.29
+0.29
+0.29
+0.74
+0.91
+
+Bigeye
+1.42
+1.44
+1.47
+1.28
+1.35
+1.15
+1.27
+1.25
+1.13
+1.18
+1.11
+0.86
+1.03
+0.97
+1.02
+1.02
+1.46
+2.07
+2.08
+1.61
+1.45
+0.99
+1.26
+1.30
+0.94
+0.85
+0.96
+1.12
+0.95
+1.02
+0.83
+1.02
+0.65
+0.92
+0.96
+0.75
+0.82
+0.68
+0.64
+0.73
+0.58
+0.63
+0.51
+0.59
+0.66
+0.73
+0.67
+0.57
+0.59
+0.45
+0.48
+0.82
+
+Yellowfin
+
+0.54
+0.63
+0.49
+0.67
+0.53
+0.53
+0.53
+0.63
+0.48
+0.42
+0.51
+0.33
+0.29
+0.37
+0.42
+0.38
+0.24
+0.29
+0.28
+0.24
+0.34
+0.33
+0.34
+0.34
+0.30
+0.38
+0.26
+0.39
+0.19
+0.19
+0.20
+0.15
+0.14
+0.12
+0.14
+0.11
+0.14
+0.18
+0.10
+0.08
+0.07
+0.10
+0.06
+0.10
+0.08
+0.04
+0.04
+0.03
+0.03
+
+Kawakawa
+
+0.86
+1.09
+0.75
+1.41
+0.82
+1.16
+1.01
+0.91
+
+Skipjack
+
+1.46
+1.37
+1.37
+1.43
+1.34
+1.37
+1.37
+1.34
+1.28
+1.31
+1.23
+1.11
+1.07
+0.97
+0.93
+0.83
+0.93
+0.88
+1.00
+0.68
+0.80
+0.78
+0.55
+0.51
+0.46
+0.37
+0.28
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+50
+
+A3 Diet compositions
+A3.1 Source of fish diets.
+References labeled FB paired with a number correspond to Fishbase document number; FB, items are species for
+which there is only a list of food items.
+Species
+Indian mackerel
+Rastrelliger kanagurta
+Rastrelliger kanagurta
+Hilsa
+Tenualosa ilisha
+Tenualosa ilisha
+Oceanic sharks
+Pteroplatytrygon violacea
+Carcharhinus falciformis
+Alopias superciliosus
+Alopias vulpinus
+Alopias vulpinus
+Isurus oxyrinchus
+Isurus oxyrinchus
+Prionace glauca
+Prionace glauca
+Isurus paucus
+Centrophorus squamosus
+Coastal elasmobranch
+Rhizoprionodon acutus
+Carcharhinus limbatus
+Galeocerdo cuvier
+Himantura uarnak
+Mustelus manazo
+Tuna-like
+Thunnus albacares
+Katsuwonus pelamis
+Thunnus obesus
+Xiphias gladius
+Xiphias gladius
+Xiphias gladius
+Makaira nigricans
+Istiompax indica
+Istiophorus platypterus
+Acanthocybium solandri
+Coastal scombrids
+Scomberomorus commerson
+Scomberomorus commerson
+Euthynnus affinis
+Euthynnus affinis
+Sarda orientalis
+Thunnus tonggol
+ML bathy
+Alepisaurus ferox
+Arctozenus risso
+Nemichthys scolopaceus
+Carangids
+Carangoides chrysophrys
+Alectis indica
+
+Location
+
+Source
+FB
+FB
+
+Bangladesh, freshwater to marine
+marine, Bangladesh
+
+FB 4837
+(Dutta et al. 2013)
+
+NW Atlantic
+NW Atlantic
+NW Atlantic
+Monterey Bay California
+NW Atlantic
+S Africa
+
+FB, items
+FB 37512
+FB 37512
+FB 37512
+FB, items
+FB 37512
+FB 37512
+FB 37512
+FB 28071
+FB 37512
+FB 12473
+
+Australia
+South Africa 1978-91
+NW Atlantic
+Kuwait
+Japan
+
+FB 13356
+FB 26970
+FB 37512
+food items +FB 37858
+FB 47252
+
+Andaman sea
+Mozambique 1989
+Solomon Is. June 1993
+North BOB
+Algeria, Annaba Gulf 1986-87
+North +Tropical Atlantic
+SW equatorial Atlantiqc 1992-1993
+Malaysia east coast 93-94
+Malaysia 1993-94
+G Mexico USA
+
+(Panjarat 1999)
+FB 9035
+FB 28765
+(Nootmorn et al. 2008)
+FB 419911
+FB 76866
+FB 51769
+FB 53850
+FB 53850
+FB 28119
+
+Solomon Is
+Malaysia east coast 1993-94
+Solomon Is
+Taiwan 2000-2001
+Malaysia
+
+FB 30531
+FB 53850
+FB 30531
+FB 53677
+FB, items
+FB 53850
+
+Hawaii may 1990
+Kuril Is 87-92
+USA Newfoundland
+
+FB 12036
+FB 41668
+FB 37512
+
+New Caledonia 1985-98
+
+FB 55797
+FB, items
+
+NW Atlantic USA
+NW Atlantic USA
+NW Atlantic USA
+
+S. Guénette, 2013
+
+Selar crumenophthalmus
+Decapterus russelli
+Megalaspis cordyla
+Caranx sexfasciatus
+Caranx melampygus
+Alectis ciliaris
+Elagatis bipinnulata
+Carangoides ferdau
+Carangoides ferdau
+L pisc
+Albula vulpes
+Tylosurus crocodilus
+crocodilus
+Chirocentrus dorab
+Sphyraena jello
+Sphyraena jello
+Sphyraena barracuda
+Sphyraena obtusata
+Sphyraena obtusata
+Brotula multibarbata
+Rachycentron canadum
+Trichiurus lepturus
+Lepturacanthus savala
+Coryphaena hippurus
+Pomatomus saltatrix
+Megalops cyprinoides
+L pisc comm
+Lethrinus rubrioperculatus
+Lethrinus xanthochilus
+Lutjanus bohar
+Epinephelus polyphekadion
+Variola louti
+Etelis coruscans
+Lutjanus johnii
+Lutjanus malabaricus
+Lutjanus sebae
+Aprion virescens
+Etelis carbunculus
+Pristipomoides filamentosus
+Pristipomoides auricilla
+Lutjanus vitta
+Lutjanus fulvus
+Lutjanus carponotatus
+Lutjanus quinquelineatus
+Saurida tumbil
+Cephalopholis miniata
+Epinephelus areolatus
+Epinephelus areolatus
+Epinephelus coioides
+Epinephelus malabaricus
+Lethrinus nebulosus
+Lethrinus nebulosus
+Lutjanus argentimaculatus
+Pristipomoides sieboldii
+Pristipomoides zonatus
+Pristipomoides zonatus
+Lethrinus harak
+
+Bay of Bengal model
+
+51
+
+Thailand 1985
+Manila Bay, Philippines
+Solomon Is
+Malaysia
+Hawaii
+Columbia
+Brazil
+Malaysia 93-94
+New Caledonia 85-97
+
+FB 26908
+FB 761
+FB 30531
+FB 53850
+FB 6057
+FB 56479
+FB 89206
+FB 53850
+FB 55797
+
+Florida
+Solomon Is
+
+FB 30204
+FB 30531
+
+Solomon Is
+Malaysia 1993-94
+
+Malaysia 1993-94
+Brazil
+New Caledonia
+
+FB 30531
+FB 53850
+FB, items
+FB 33
+FB 53850
+FB 30531
+FB 13550
+FB 53850
+FB 4424
+FB, items
+FB 53850
+FB 42756
+FB 55797
+
+New Caledonia 85-97
+New Caledonia 85-97
+New Caledonia 85-97
+New Caledonia 85-97
+New Caledonia 85-97
+Hawaii
+Gulf Carpentaria, Australia
+Malaysia
+Australia
+Hawaii
+Hawaii
+East coast Malaysia
+N Marianas 1984
+Australia
+New Caledonia
+Australia
+New Caledonia
+India, 1964-1968
+Egypt, Red Sea, 1978-83
+New Caledonia 1985-97
+Australia, Gulf Carpentaria 1990
+New Caledonia 1985-97
+New Caledonia 1985-97
+New Caledonia 1985-97
+Australia, Gulf Carpentaria 1990
+New Caledonia 1985-1997
+Hawaii 1987-89
+Hawaii 1987-90
+N Marianas Pathfinder reef
+New Caledonia 1985-97
+
+FB 55797
+FB 55797
+FB 55797
+FB 55797
+FB 55797
+FB 8925
+FB 6932
+FB 53850
+FB 6932
+FB 8925
+FB 8926
+FB 53850
+FB 13792
+FB 6932
+FB 55797
+FB 26866
+FB 55797
+FB 6931
+FB 6775
+FB 55797
+FB 6932
+FB 55797
+FB 55797
+FB 55797
+FB 6932
+FB 55797
+FB 8925
+FB 8926
+FB 13792
+FB 55797
+
+Puerto Rico 1958-1961
+Malaysia 1993-94
+Solomon Is
+Hawaii
+Malaysia
+W India, 1978
+
+S. Guénette, 2013
+
+Saurida undosquamis
+Gymnocranius grandoculis
+Lutjanus gibbus
+Lutjanus kasmira
+Lutjanus fulviflamma
+S pelagics
+Sardinella gibbosa
+Stolephorus indicus
+Stolephorus insularis
+Thryssa mystax
+Herklotsichthys
+quadrimaculatus
+Encrasicholina devisi
+Spratelloides delicatulus
+Spratelloides gracilis
+Amblygaster sirm
+SM inv
+Upeneus sulphureus
+Pampus argenteus
+Pampus argenteus
+Pampus chinensis
+Acanthopagrus berda
+Acanthopagrus latus
+Mugil cephalus
+Gerres filamentosus
+Myripristis murdjan
+Myripristis murdjan
+Monotaxis grandoculis
+Siganus fuscescens
+Siganus guttatus
+Sillago sihama
+Moolgarda seheli
+Cynoglossus arel
+Chaetodon plebeius
+Chaetodon vagabundus
+Nuchequula gerreoides
+Secutor ruconius
+Grammatobothus
+polyophthalmus
+Gazza minuta
+Petroscirtes breviceps
+Centropyge bicolor
+Atherinomorus lacunosus
+Pentaprion longimanus
+Pseudocheilinus hexataenia
+Halichoeres melanurus
+Thalassoma amblycephalum
+Scatophagus argus
+Selaroides leptolepis
+Pterocaesio pisang
+Upeneus moluccensis
+Upeneus vittatus
+Nemipterus furcosus
+Equulites leuciscus
+Photopectoralis bindus
+Pentaprion longimanus
+Acanthurus lineatus
+
+Bay of Bengal model
+
+52
+
+India, NW BOB
+New Caledonia 85-87
+Malaysia 85-97
+New Caledonia 85-97
+New Caledonia
+
+FB 6931
+FB 55797
+FB 55797
+FB 55797
+FB, items
+
+Singapore
+Solomon Is
+Kuwait
+Kiribati 89-91
+
+FB, items
+FB 51145
+FB 32754
+items + FB 37858
+FB 9004
+
+Solomon Is
+Solomon Is
+Solomon Is
+Indonesia
+
+FB 32754
+FB 32754
+FB 32754
+FB 823
+
+Red Sea 1984
+Orissa, India BOB 1972
+Orissa, India BOB 1973
+
+FB 6292
+FB 37087
+FB 37087
+FB, items
+FB, items
+FB 37858
+FB 50467
+FB 55797
+FB 13550
+FB 78108
+FB 13550
+FB, items
+FB, items
+FB 9638
+FB, items
+FB 5260
+FB 6110
+FB 6110
+FB 51145
+FB 26569
+FB 55797
+
+Kuwait NW Arabian sea
+Spain Valencia, summer
+New Caledonia
+Hawaii
+Madagascar
+Hawaii 69-70
+
+Australia 78
+India
+Ryukyu Is
+Ryukyu Is
+Singapore
+China
+New Caledonia 85-97
+Solomon Is
+
+Marshall Is 1972
+Thailand
+Ryukyu Is
+Ryukyu Is
+Ryukyu Is
+New Caledonia 85-97
+Thailand 1985
+Japan
+New Caledonia 85-97
+New Caledonia 85-97
+Australia 1990
+Thailand
+Thailand
+Thailand
+Guam
+
+FB 30531
+FB, items
+FB, items
+FB 13784
+FB 26908
+FB 6110
+FB 6110
+FB 6110
+FB 55797
+FB 26908
+FB 36318
+FB 55797
+FB 55797
+FB 6932
+FB 26908
+FB 26908
+FB 26908
+FB 6155
+
+S. Guénette, 2013
+
+Acanthurus nigrofuscus
+Acanthurus xanthopterus
+Apogon crassiceps
+Apogon ellioti
+Scarus ghobban
+Scarus quoyi
+Aluterus monoceros
+Aluterus scriptus
+SM pisc
+Argyrops spinifer
+Dendrochirus brachypterus
+Dendrochirus zebra
+Plectorhinchus gibbosus
+Onigocia macrolepis
+Abalistes stellaris
+Eleotris fusca
+Nemipterus hexodon
+Atule mate
+Neoniphon sammara
+Pomadasys argenteus
+Nemipterus peronii
+Diagramma pictum
+Diagramma pictum
+Priacanthus tayenus
+Priacanthus hamrur
+Psettodes erumei
+Plectorhinchus pictus
+Milkfish plus
+Netuma thalassina
+Netuma thalassina
+Diodon hystrix
+Arothron stellatus
+
+Bay of Bengal model
+
+53
+
+Ryuku Is
+NA
+NA
+G. Thailand 1985
+Ryulu Is, Philippines
+Philippines 1991
+Colombia
+Puerto Rico
+
+FB 6110
+FB, items
+FB, items
+FB 26908
+FB6110, FB43166
+FB 43166
+FB 46593
+FB 33
+
+Australia Gulf Carpentaria 1990
+New Caledonia 85-97
+Ryuku Is
+New Caledonia 85-97
+New Caledonia 85-97
+New Caledonia 85-97
+Japan 1998
+Australia 1990
+Thailand
+Madagascar
+New Caledonia 85-97
+Australia, Gulf Carpentaria 1990
+New Caledonia 1985-98
+Australia Gulf Carpentaria
+Gulf Thailand
+India east coast 1993
+India Porto novo 1972-73
+East coast Peninsular Malaysia 93-94
+
+FB 6932
+FB 55797
+FB 6110
+FB 55797
+FB 55797
+FB 55797
+FB 54520
+FB 6932
+FB 26908
+FB 78108
+FB 55797
+FB 6932
+FB 55797
+FB 6932
+FB 26908
+FB 30941
+FB 6003
+FB 53850
+
+Kuwait Arabian Gulf
+Australia, G Carpentaria 1990
+Hawaii
+New Caledonia 1985-97
+
+FB 37858,
+FB 6932
+FB 3921
+FB 55797
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+54
+
+A3.2 Original diet matrix
+
+1
+0.0066
+0.0129
+0.0834
+0.0111
+0.0100
+0.1605
+0.0379
+0.0658
+0.0027
+0.0007
+0.0012
+0.0006
+0.0019
+0.0030
+0.0012
+0.0004
+0.0024
+0.0188
+0.0050
+0.0082
+0.0041
+0.0013
+0.0128
+0.0210
+0.0000
+0.0080
+0.0029
+0.0166
+
+2
+0.0295
+0.0581
+0.0018
+0.0018
+0.0000
+0.0110
+0.0000
+0.0053
+0.0032
+0.0008
+0.0010
+0.0005
+0.0038
+0.0032
+0.0000
+0.0000
+0.0000
+0.0222
+0.0058
+0.0072
+0.0037
+0.0010
+0.0261
+0.0224
+0.0646
+0.0233
+0.0000
+0.0000
+
+4
+0
+0
+0
+0
+0
+0.0322
+0.0177
+0
+0.0003
+0.0059
+0.0093
+0
+0.0084
+0.0010
+0.0037
+0
+0.0004
+0.0023
+0.0409
+0.0641
+0
+1.5E-06
+0.0580
+0.0071
+0.0198
+0.0064
+0
+0.0002
+
+5
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+29 2,3 Hilsa
+
+0.0413
+
+0.0208 0.0226 0.0168
+
+0
+
+30
+31
+32
+33
+34
+
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+
+0.0290
+0.0607
+0.0163
+0.0264
+0.0133
+
+0.0226
+0.0718
+0.0188
+0.0232
+0.0121
+
+0.0327
+0.0106
+0.1884
+0.1843
+0.0000
+
+0
+0
+0
+0
+0
+
+6
+7
+8
+0
+0
+0
+0
+0
+0
+0
+0 0.0019
+0
+0 0.0019
+0
+0
+0
+0.075
+0 0.0640
+0.017
+0 0.0691
+0
+0 0.0290
+0
+0 0.0093
+0.0025
+0
+0
+0.0019
+0 0.0066
+0
+0
+0
+0.0037
+0 0.0053
+0.0037
+0 0.0106
+0.0460
+0 0.1961
+0
+0
+0
+0 0.4585 0.1509
+0
+0 0.0041
+0.0174
+0
+0
+0.0086
+0 0.0029
+0
+0
+0
+0
+0
+0
+0.0254
+0 0.0024
+0.0254
+0 0.0048
+0.1076
+0
+0
+0
+0 0.0884
+0.0104
+0
+0
+0 0.2067 0.0680
+0.0100
+33128
+0
+0
+0.0250
+82821
+0 0.0019
+0
+0 0.0068
+0.0563
+0
+0
+0.0240
+0 0.0049
+0
+0
+0
+
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Bigeye tuna
+Yellowfin tuna
+Marlins
+Detritus
+Import
+
+0.0041
+0.0415
+0.0679
+0.0001
+0.0257
+0.0092
+0.0538
+0.0021
+0.0144
+0.0466
+0.0016
+0
+0
+0
+0.0405
+0.0043
+
+0.0034
+0.0844
+0.0725
+0.2091
+0.0755
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0086
+0.0809
+
+0.0221
+0.0403
+0.0432
+0.0000
+0.0000
+0.0000
+0.0122
+0
+0.0008
+0.0000
+0.0002
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0.0821
+0 0.0039
+0
+0
+0.0821
+0 0.0078
+0
+0
+0.3483
+0
+0
+0
+0
+0.0268
+0 0.1432
+0
+0
+0
+0
+0
+0
+0
+0 0.3348 0.1101
+0
+0
+0
+0
+0
+0 0.0117
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0010
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0092
+0
+0 0.0058
+0
+0
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+Prey
+Oceanic shark
+Coastal shark ray
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+1 S bathy
+1 ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Mikfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+
+3
+0
+0
+0.0306
+0.0426
+0.0000
+0.1124
+0.0561
+0.0246
+0.0005
+0.0084
+0.0083
+0
+0.0018
+0.0019
+0.0000
+0.0000
+0.0005
+0.0033
+0.0582
+0.0569
+0.0000
+0.0068
+0.0125
+0.0133
+0.0000
+0.0000
+0.0000
+0.0038
+
+0.0619
+0.0075
+0.1324
+0.2075
+0
+4.7752
+6E-06
+0.1876
+0.0229
+0.0640
+0.0207
+0
+0.0007
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+9
+0
+0
+0.0030
+0
+0
+0.0666
+0.0147
+0.0028
+0.0316
+0.1747
+0.2702
+0.0225
+0.1548
+0.0496
+0.1840
+0
+0.0245
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+10
+0
+0
+0
+0
+0.0125
+0.0631
+0.0271
+0
+0.0152
+0.0729
+0.2290
+0.0110
+0.2371
+0.0837
+0.1737
+0.0004
+0.0533
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+11
+0
+0
+0
+0
+0
+0.0002
+0
+0
+0
+0.0188
+0.0223
+0
+0.0188
+0.0123
+0.1940
+0.0101
+0.6810
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+12
+0
+0
+0
+0
+0
+0.0236
+0.0414
+0.0027
+0.0121
+0.0541
+0.0859
+0.0120
+0.1604
+0.1097
+0.4633
+0
+0.0345
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+13
+0
+0
+0
+0
+0.0053
+0.0016
+0
+0
+0
+0.0044
+0.0170
+0.0004
+0.0078
+0.0072
+0.5940
+0.0473
+0.1307
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+14
+0
+0
+0
+0
+0
+0.0103
+0.0010
+0
+0.0013
+0.0645
+0.0800
+0.0045
+0.0869
+0.0373
+0.7013
+0.0001
+0.0123
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+15
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.05
+0.20
+0.10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0340
+0 0.0345
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0 0.0003 0.1161 0.0001
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0084
+0 0.0327
+0
+0.0001
+0 0.0010 0.0002
+
+0
+0
+0
+0
+0
+0
+0
+0.10
+0
+0
+0
+0
+0
+0
+0.55
+0
+
+S. Guénette, 2013
+
+Prey \ predator
+1 Oceanic shark
+2 Coastal shark ray
+3 Tuna-like
+4 Coastal scombrids
+5 Jellyfish
+6 Cephalopods
+7 1 S bathy
+8 1 ML bathy
+9 1 L pisc
+10 1 Carangids
+11 1 S pelagics
+12 1 L pisc comm
+13 1 SM inv
+14 1 SM pisc
+15 1 Macrobenthos
+16 1 Meiobenthos
+17 1 Zooplankton
+18 2 L pisc
+19 2 Carangids
+20 2 S pelagics
+21 2 L pisc comm
+22 2 Mikfish plus
+23 2 SM inv
+24 2 SM pisc
+25 2 Crustaceans
+26 2 Macrobenthos
+27 2 Meiobenthos
+28 2 Zooplankton
+29 2,3 Hilsa
+30 2,3 Indian mackerel
+31 3 L pisc
+32 3 Carangids
+33 3 S pelagics
+34 3 L pisc comm
+35 3 Milkfish plus
+36 3 SM inv
+37 3 SM pisc
+38 3 Crustaceans
+39 3 Macrobenthos
+40 3 Meiobenthos
+41 3 Zooplankton
+42 1 Phytoplankton
+43 2 Phytoplankton
+44 3 Phytoplankton
+45 Benthic plants
+46 Bigeye tuna
+47 Yellowfin tuna
+48 Marlins
+49 Detritus
+50 Import
+
+Bay of Bengal model
+
+55
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.9
+0
+0
+0
+0
+0
+0
+0.1
+0
+
+0
+0
+0.0030
+0
+0
+0.0666
+0.0147
+0.0028
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0316
+0.1352
+0.2410
+0.0225
+0.0329
+0.1220
+0.0496
+0.1610
+0.0229
+0
+0.0245
+0.0395
+0.0292
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0010
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0.0125
+0.0631
+0.0271
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0152
+0.0153
+0.1579
+0.0110
+0.0001
+0.2370
+0.0837
+0.1183
+0.0554
+0.0004
+0.0533
+0.0576
+0.0711
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0117
+0
+0
+0
+0
+0
+0.0092
+0
+
+0
+0
+0
+0
+0
+0.0002
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0032
+0.0139
+0
+0
+0.0188
+0.0123
+0.1609
+0.0331
+0.0101
+0.6810
+0.0155
+0.0084
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0340
+0
+0
+0
+0
+0
+0.0084
+0.0001
+
+0
+0
+0
+0
+0
+0.0236
+0.0414
+0.0027
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0121
+0.0414
+0.0606
+0.0120
+0.0128
+0.1476
+0.1097
+0.2796
+0.1837
+0
+0.0345
+0.0127
+0.0253
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0003
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0.0206
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0260
+0
+0.0260
+0
+0.2440
+0.6571
+0
+0.0003
+0.0260
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0.0053
+0.0016
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0019
+0.0150
+0.0004
+0
+0.0078
+0.0072
+0.1701
+0.4239
+0.0473
+0.1307
+0.0025
+0.0020
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0345
+0
+0.1161
+0
+0
+0
+0.0327
+0.0010
+
+0
+0
+0
+0
+0
+0.0103
+0.0010
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0013
+0.0473
+0.0590
+0.0045
+0.0027
+0.0842
+0.0373
+0.4933
+0.2080
+0.0001
+0.0123
+0.0172
+0.0210
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0001
+0
+0
+0
+0
+0.0002
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.05
+0
+0.40
+0.15
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.40
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.05
+0.20
+0.10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.10
+0
+0
+0
+0
+0
+0.55
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.9
+0
+0
+0
+0
+0
+0.1
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.2928
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0046
+0
+0.4974
+0.0079
+0.0160
+0
+0
+0
+0
+0.1814
+
+S. Guénette, 2013
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+
+Prey \ predator
+Oceanic shark
+Coastal shark ray
+Tuna-like
+Coastal scombrids
+Jellyfish
+Cephalopods
+1 S bathy
+1 ML bathy
+1 L pisc
+1 Carangids
+1 S pelagics
+1 L pisc comm
+1 SM inv
+1 SM pisc
+1 Macrobenthos
+1 Meiobenthos
+1 Zooplankton
+2 L pisc
+2 Carangids
+2 S pelagics
+2 L pisc comm
+2 Mikfish plus
+2 SM inv
+2 SM pisc
+2 Crustaceans
+2 Macrobenthos
+2 Meiobenthos
+2 Zooplankton
+2,3 Hilsa
+2,3 Indian mackerel
+3 L pisc
+3 Carangids
+3 S pelagics
+3 L pisc comm
+3 Milkfish plus
+3 SM inv
+3 SM pisc
+3 Crustaceans
+3 Macrobenthos
+3 Meiobenthos
+3 Zooplankton
+1 Phytoplankton
+2 Phytoplankton
+3 Phytoplankton
+Benthic plants
+Detritus
+Import
+
+Bay of Bengal model
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.1509
+0.0541
+0.1260
+0.0277
+0.0277
+0
+0
+0
+0
+0
+0
+0
+0
+0.1976
+0.0709
+0.1650
+0
+0.0541
+0.0709
+0
+0
+0
+
+0
+0
+0.0030
+0
+0
+0.0666
+0.0147
+0.0028
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0395
+0.0292
+0.0316
+0.1352
+0.2410
+0.0225
+0.0329
+0.1220
+0.0496
+0.1610
+0.0229
+0
+0.0245
+0
+0
+0
+0.0010
+0
+0
+
+0
+0
+0
+0
+0.0125
+0.0631
+0.0271
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0576
+0.0711
+0.0152
+0.0153
+0.1579
+0.0110
+0.0001
+0.2370
+0.0837
+0.1183
+0.0554
+0.0004
+0.0533
+0
+0
+0.0117
+0
+0
+0
+
+0
+0
+0
+0
+0
+0.0002
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0155
+0.0084
+0
+0.0032
+0.0139
+0
+0
+0.0188
+0.0123
+0.1609
+0.0331
+0.0101
+0.6810
+0
+0
+0.0340
+0
+0
+0
+
+0
+0
+0
+0
+0
+0.0236
+0.0414
+0.0027
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0127
+0.0253
+0.0121
+0.0414
+0.0606
+0.0120
+0.0128
+0.1476
+0.1097
+0.2796
+0.1837
+0
+0.0345
+0
+0
+0
+0.0003
+0
+0
+
+0
+0
+0
+0
+0
+0.0206
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0260
+0
+0
+0
+0
+0.0260
+0
+0.0260
+0
+0.2440
+0.6571
+0
+0.0003
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0.0053
+0.0016
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0025
+0.0020
+0
+0.0019
+0.0150
+0.0004
+0
+0.0078
+0.0072
+0.1701
+0.4239
+0.0473
+0.1307
+0
+0
+0.0345
+0.1161
+0
+0
+
+56
+
+37
+
+39
+
+40
+
+41
+
+46
+
+47
+
+48
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0103
+0
+0
+0.0010
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.0172
+0
+0
+0.0210
+0
+0
+0.0013
+0
+0
+0.0473
+0
+0
+0.0590
+0
+0
+0.0045
+0
+0
+0.0027
+0
+0
+0.0842
+0
+0
+0.0373
+0
+0
+0.4933 0.05
+0
+0.2080
+0 0.05
+0.0001 0.40 0.20
+0.0123 0.15 0.10
+0
+0
+0
+0
+0
+0
+0
+0 0.10
+0.0001
+0
+0
+0
+0
+0
+0
+0
+0
+
+38
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0.9
+0
+0
+0
+
+0
+0
+0.0216
+0.0216
+0
+0.0610
+0.1946
+0.3243
+0.0021
+0.0021
+0.0021
+0
+0.0021
+0.0011
+0.0010
+0
+0
+0.0148
+0.0148
+0.0148
+0
+0
+0.0148
+0.0074
+0.0071
+0
+0
+0
+0.0324
+0.0216
+0.0479
+0.0479
+0.0479
+0
+0
+0.0479
+0.0240
+0.0229
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0.7741
+0.0152
+0
+0
+0.0005
+0.0005
+0
+0.0020
+0.0012
+0
+0
+0
+0
+0.0035
+0.0035
+0
+0.0131
+0.0136
+0.0080
+0
+0
+0
+0
+0.0152
+0.0152
+0
+0.0112
+0.0112
+0
+0.0424
+0.0440
+0.0258
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0.0313
+0.0744
+0
+0.1976
+0
+0.0588
+0.0025
+0.0040
+0.0075
+0
+0.0021
+0.0016
+0.0010
+0
+0
+0.0170
+0.0277
+0.0514
+0
+0
+0.0143
+0.0107
+0.0071
+0
+0
+0
+0
+0.0450
+0.0550
+0.0896
+0.1663
+0
+0
+0.0462
+0.0346
+0.0231
+0
+0
+0
+0
+0
+0
+0
+0.0156
+0.0156
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+A4. Calculation of natural mortality.
+The calculation is based on growth parameters and Pauly’s equation (Mp) and maximum age and Hoenig’s
+equation (Mh). See Excel spreadsheet Appendix 4.xls.
+
+57
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+58
+
+A5 Marine and inland catches by country for hilsa.
+Table A6. Catches of hilsa as compiled by the UBC Fisheries Centre Sea Around Us Project Team (SAUP) and the
+inland catch from FAO statistics, compared with the catches for Bangladesh (BGD) compiled for the BOBLME stock
+assessement (BOB BGD). The shaded cells indicate extrapolation.
+Year
+
+Bangladesh
+
+1950
+1951
+1952
+1953
+1954
+1955
+1956
+1957
+1958
+1959
+1960
+1961
+1962
+1963
+1964
+1965
+1966
+1967
+1968
+1969
+1970
+1971
+1972
+1973
+1974
+1975
+1976
+1977
+1978
+1979
+1980
+1981
+1982
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998
+1999
+2000
+2001
+2002
+2003
+2004
+2005
+2006
+
+6,270
+6,602
+6,940
+7,278
+7,617
+7,955
+8,292
+8,630
+10,765
+12,899
+15,044
+17,200
+19,332
+21,469
+23,606
+25,744
+27,880
+30,016
+32,152
+34,288
+36,414
+38,560
+40,695
+42,831
+44,976
+47,101
+49,251
+51,384
+53,521
+55,653
+57,786
+59,917
+62,052
+64,183
+66,314
+84,012
+98,799
+122,489
+123,829
+130,118
+131,103
+135,265
+148,066
+153,614
+142,882
+152,228
+159,564
+154,682
+146,340
+165,849
+165,444
+182,233
+179,519
+160,421
+217,702
+233,594
+34,165
+
+SAUP, marine catch
+India
+Malaysia
+302
+332
+332
+342
+367
+425
+262
+288
+19,638
+25,714
+33,653
+8,456
+11,808
+8,946
+11,091
+11,470
+10,905
+8,745
+9,559
+9,333
+11,399
+13,117
+14,770
+9,734
+8,329
+6,361
+8,682
+9,665
+40,892
+33,881
+26,129
+21,793
+19,758
+25,172
+27,798
+22,871
+25,104
+27,478
+24,876
+28,083
+28,252
+38,139
+43,654
+47,218
+43,385
+45,664
+54,611
+53,670
+51,174
+43,915
+46,577
+48,784
+50,654
+43,558
+47,885
+36,531
+37,061
+
+426
+417
+493
+435
+385
+382
+388
+379
+413
+410
+513
+615
+661
+1,071
+992
+1,128
+1,377
+1,768
+1,959
+1,878
+1,842
+2,091
+2,060
+2,463
+3,103
+2,940
+2,859
+3,364
+3,535
+3,347
+4,222
+4,043
+4,867
+5,104
+4,569
+7,020
+7,119
+7,572
+6,503
+7,408
+11,086
+8,822
+10,963
+10,198
+10,084
+9,481
+9,062
+9,245
+8,995
+8,642
+10,650
+9,647
+9,806
+10,815
+11,976
+16,478
+17,810
+
+Total
+6,998
+7,351
+7,765
+8,055
+8,369
+8,762
+8,943
+9,298
+30,815
+39,023
+49,211
+26,271
+31,801
+31,487
+35,689
+38,341
+40,161
+40,529
+43,670
+45,498
+49,655
+53,768
+57,526
+55,028
+56,408
+56,402
+60,791
+64,414
+97,948
+92,881
+88,137
+85,754
+86,677
+94,460
+98,680
+113,903
+131,022
+157,539
+155,208
+165,608
+170,441
+182,226
+202,683
+211,030
+196,351
+207,373
+223,237
+217,597
+206,509
+218,406
+222,671
+240,664
+239,979
+214,794
+277,563
+286,603
+289,036
+
+FAO, inland catch a
+Bangladesh
+India
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+90,000
+90,000
+90,000
+90,000
+90,000
+90,000
+90,000
+73,328
+94,133
+91,167
+78,551
+81,641
+82,168
+84,806
+96,596
+96,950
+71,370
+84,420
+90,240
+83,230
+81,634
+73,809
+79,165
+75,060
+68,250
+62,944
+71,001
+77,499
+78,273
+
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+...
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+39,298
+47,255
+36,478
+49,441
+48,302
+44,519
+53,729
+44,810
+41,129
+64,599
+38,984
+36,724
+20,391
+15,409
+16,216
+
+sum inland + marine
+regions
+Bangladesh
+2+3
+
+227,246
+222,179
+217,435
+215,052
+215,975
+223,758
+227,978
+226,529
+264,453
+288,004
+273,057
+286,547
+291,907
+306,330
+338,577
+355,235
+304,199
+341,234
+361,779
+345,346
+341,872
+337,025
+342,965
+380,323
+347,213
+314,462
+368,955
+379,511
+383,525
+
+143,521
+145,653
+147,786
+149,917
+152,052
+154,183
+156,314
+157,340
+192,932
+213,656
+202,380
+211,759
+213,271
+220,071
+244,662
+250,564
+214,252
+236,648
+249,804
+237,912
+227,974
+239,658
+244,609
+257,293
+247,769
+223,365
+288,703
+311,093
+312,438
+
+BOB BGD b
+
+194,981
+183,501
+191,962
+226,351
+182,167
+188,462
+197,830
+192,531
+213,535
+207,285
+214,434
+205,739
+214,519
+219,532
+229,714
+220,593
+199,032
+255,839
+275,862
+277,123
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+2007
+231,689
+29,024
+20,332
+281,045
+82,445
+11,721
+375,211
+2008
+235,630
+26,702
+20,536
+282,868
+89,900
+14,233
+387,001
+2009
+238,999
+24,127
+16,315
+279,441
+95,970
+12,381
+387,792
+2010
+233,860
+81,609
+16,399
+331,868
+115,179
+7,260
+454,307
+a
+shaded area are extrapolated from the earlier year of estimation: 1984 in Bangladesh and 1992 in India
+b
+catches for inland and marine catches estimated for Bangladesh (BOBLME 2012)
+
+59
+
+314,134
+325,530
+334,969
+349,039
+
+280,328
+290,000
+298,458
+312,612
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+60
+
+A6. Alternative fitting results with Ecosim
+Fitting of data using the Indian relative industrial effort excluding large trawlers (region 2) labeled “industrial only”
+in A2.2. The most remarkable difference with the other fitting exercise is the trend in Hilsa biomass.
+
+Figure A6.1. Observed (dots) and predicted (lines) relative abundance (B or CPUE) and catches (C) for hilsa, marlins, yellowfin
+tuna (YFT) and bigeye tuna (BET). The numbers besides the name is the sum of squares. The region 2 industrial fleet includes
+industrial vessels only (Industrial only time series in A2.2).
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+Figure A6.2. Observed (dots) and predicted (lines) catches for other species. The numbers besides the name is the sum of
+squares. The region 2 industrial fleet includes industrial vessels only (Industrial only time series in A2.2).
+
+61
+
+S. Guénette, 2013
+
+Bay of Bengal model
+
+62
+
+fishing
+
+total
+predation
+
+small scale
+industrial
+
+small scale
+
+industrial
+
+Figure A6.3. Predicted trends in biomass, catches, and mortality (lines) and observed catches (dots) for the functional group 2 L
+pisc. The solid green areas represent the catch or fishing mortality caused by the each of the fleet in region 2. The region 2
+industrial fleet includes industrial vessels only (Industrial only time series in A2.2).
+
+

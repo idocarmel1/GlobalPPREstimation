@@ -23,9 +23,51 @@ Bulk inputs are **referenced, not copied**. The catch archives and the article a
 to gigabytes between them; duplicating those per ecosystem would add nothing and cost a lot.
 `metadata.json` carries relative paths to the real files.
 
+`npp.json` contains records keyed by year. `INDEX.csv` and metadata report the
+number of available NPP years and their first/last years. The canonical annual
+source takes precedence over the older 2019 CSV, including explicit missing rows.
+The annual extractor uses the supplied gap-filled Antoine–Morel baseline and
+coverage-matched model ratios; the older CSV remains a separate reference and
+must not be treated as an equivalent annual rerun. Ensemble model counts and
+identities are recorded because availability differs across years and regions.
+At a fixed catch basis, 2019 PPR/NPP ratios can change through the denominator
+while SPPR and the 1:9 conversion are unchanged. The separately documented
+landings/all-catch/discards views also change the evaluated numerator. The fresh
+2019 extraction reproduces the comparable supplied
+gap-filled reference values; `NPPExtraction/output/reconciliation_2019.json` and
+its CSV distinguish this reproduction check from the change in denominator basis.
+The Black Sea uses the imported project's documented own-coverage fallback and
+retains blank values for algorithms without regional retrievals.
+
 Built by `tools/build_ecosystem_data.py` (the base workbook) and
 `tools/build_model_workbook.py` (the model workbooks). `tools/verify_model_workbook.py`
 checks the latter, including the formulas nothing else evaluates.
+
+After an NPP extraction, refresh and verify from the repository root:
+
+```powershell
+python tools/build_ecosystem_data.py --force
+python tools/build_model_workbook.py
+python tools/build_network_atlas.py
+python tools/build_time_series.py
+python tools/verify_annual_npp.py
+```
+
+Run these between extraction jobs so they use one completed input snapshot.
+The final check verifies annual arrays, source hashes, workbook NPP cells and
+matching-year ratios, and writes `data/annual_npp_validation.json`.
+For a release while extraction continues, `PPR_ANNUAL_NPP_PATH` can select an
+immutable repository-relative CSV snapshot. Every builder and verifier uses the
+same override, and the exports record its actual path and hash. Unset it for the
+final canonical rebuild. The September 11 expansion provides all 366 identities
+with 22 annual ensembles (1998–2019). The 25,211-row canonical CSV contains 5,938
+complete, 2,112 partial and 17,161 unsupported blank rows, with no failures or
+pending rows. All 11,310 original rows remain identical field-for-field, and the
+two no-catch identities retain their legacy 2019 cells. The earlier task-1/4
+snapshot and archived-scope `extraction_coverage.json` are historical.
+`NPPExtraction/output/regional_expansion/publication_verification.json` records
+preservation and the new canonical hash; `data/annual_npp_validation.json` records
+current workbook/map/graph parity after rebuilding.
 
 ## Two kinds of workbook, and why they are separate
 
@@ -39,7 +81,8 @@ models are never averaged. An ecosystem with no extracted model has a clear miss
 | **Catch** | taxon × year, tonnes, 1950–2019, with functional and commercial group |
 | **SPPR** | the simple per-taxon `(1/TE)^(TL-1)` |
 | **PPR** | taxon × year, catch × SPPR |
-| **NPP** | the five satellite estimates plus the ensemble, 2019 |
+| **NPP** | annual satellite estimates and ensemble, with missing years, status and provenance |
+| **Final mappings** | one row per catch taxon/model/group, exact numeric weight, basis, confidence and evidence; unresolved taxa retained |
 | **sppr_all / sppr_inner / sppr_PP** | per-group SPPR, one row per model and exact group name |
 | **Recycling** | `b`, `rho living`, convergence, health status and diagnostic configuration |
 
@@ -51,6 +94,7 @@ every column inside belongs to that model and none needs a model prefix.
 | **Summary** | identity, coverage, and per-year catch, PPR and PPR/NPP under a headline method |
 | **Catch** | taxon × year, as above |
 | **Taxon-Group Map** | each taxon's group, weights, confidence (coloured) and the reasoning |
+| **Final mappings** | exact resolved numeric weights and evidence, one row per taxon/group |
 | **SPPR** | taxon × method — the simple per-taxon value and the model's, side by side |
 | **PPR by method** | method × year, summed over every taxon |
 | **PPR by taxon** | taxon × method for one year, chosen from a dropdown |
@@ -94,14 +138,15 @@ rows exist to size that effect, not to be used as estimates.
 
 ## Coverage — what actually exists
 
-364 ecosystems have catch data. Beyond that the picture thins out fast, and the workbooks
-are honest about it rather than hiding the gaps.
+There are 366 atlas identities and 364 catch-bearing workbooks. Annual NPP is
+independent of article/model availability; model and mapping coverage remain
+separate, smaller sets.
 
 | asset | ecosystems |
 | --- | --- |
 | catch, per taxon per year, 1950–2019 | **364** |
 | archived source articles | 109 |
-| net primary production | 82 |
+| annual net primary production, 1998–2019 | 366 input identities; 364 catch-bearing workbooks |
 | an extracted Ecopath model and SPPR results | 10 |
 | a taxon-to-group mapping | 8 |
 | **a model workbook, i.e. PPR by method** | **8** |
@@ -172,9 +217,10 @@ own `groups_df`, since a mismatch there would produce confident fiction.
 - **Complete source verification everywhere.** Seven pilot models now have reviewed
   taxonomy/member/profile records. Source-only evidence remains incomplete for some groups;
   inference and unresolved catch remain labelled, with geographic/period mismatches recorded.
-- **NPP for EEZs.** The NPP dataset covers LME and High Seas only.
-- **NPP over time.** A single 2019 value, so `ppr_over_npp_percent` uses a constant
-  denominator across all years. Treat the trend in that column as driven by PPR alone.
+- **NPP outside available source years.** The annual extraction project targets every
+  archived ecosystem and catch year, including EEZs. Years before the satellite
+  record, failed downloads and unprocessed years remain explicitly unavailable.
+  See `NPPExtraction/output/annual_npp.csv` for current coverage and provenance.
 
 ## Scope, comparison and map rules
 
@@ -182,7 +228,9 @@ own `groups_df`, since a mismatch there would produce confident fiction.
 primary producers only. Older scalar methods without a PP decomposition remain blank
 in that scope. The simple trophic chain is an unpartitioned reference, not a PP-only
 component. Raw PPR stays in wet-weight PP equivalents. PPR/NPP divides by **9** to compare
-with carbon NPP, whose 2019 denominator stays fixed across catch years.
+with carbon NPP for the matching year. A missing denominator leaves the ratio blank.
+The map and graph offer an explicit earliest-year proxy for earlier years; source
+workbooks retain the actual annual inputs, without applying that display option.
 
 `atlas_selection.json` explicitly gates the ten selected-article pilot ecosystems and
 selected source overlays. `tools/build_network_atlas.py` verifies model workbooks before
@@ -195,3 +243,33 @@ its payload matches the published **1980** model. Guinea covers 111,932 km² off
 Guinea, not the whole Guinea Current LME. Okhotsk `NE` means new detailed Ecopath model,
 not northeastern. Read each model's source-check/profile before treating a regional
 catch application as the original study's spatial or historical footprint.
+
+The legacy 2019 fallback now selects the file's existing `scaled_*` regional estimates, as specified in `NPPExtraction/METHODS.md` section 6.2. Its older `npp_*` and `ens_*` fields contain common-mask comparisons. Canonical annual `npp_*` fields already contain the intended regional values and are never scaled again. Blank scaled legacy cells remain unavailable.
+
+`unidentified_taxa.json` lists the exact residual catch labels used by the optional atlas sensitivities, including evidence and reference coefficients. The default workbook calculations and mappings are preserved. See [the sensitivity method](../docs/UNIDENTIFIED_CATCH.md).
+
+## Atlas catch bases and discard-routing response
+
+The atlas and linked graphs now default to PPR evaluated on retained landings.
+All-catch and discards-only views evaluate their respective taxon vectors directly.
+The existing base/model workbooks retain their total-catch calculations as source
+audits; they are not a download of a different selected atlas numerator. Plotted
+CSV downloads record the actual selected basis.
+
+The network export retains its rounded source-workbook catch matrix for independent
+validation, and adds full-source-precision total catch, landings and discards.
+The annual export keeps all three calculations, each using the same verified
+coefficients and explicitly recorded coverage. No regional retained fraction is
+substituted for the taxon-level sum.
+
+Only the landings view offers an optional discard-routing sensitivity envelope.
+Versioned group responses from `research/discard_sensitivity_2026_09_10/results/`
+require exact tested source hashes and compatible fixed mapping weights. They
+apply coefficient changes to the same landings at observed annual D/(L+D), with
+no extrapolation or interpolation across invalid points. Every endpoint uses the
+same selected annual NPP. Source-model zero harvest, untested methods/models,
+invalid coefficients and total-only reference methods remain explicitly unassessed.
+This is a scenario range, not a confidence interval or a complete uncertainty model.
+
+`discard_views_validation.json` records cross-checks of the actual map and graph
+exports across catch bases, source scopes, years and unidentified treatments.

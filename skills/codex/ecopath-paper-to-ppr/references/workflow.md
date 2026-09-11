@@ -1,6 +1,8 @@
 # From an Ecopath paper to PPR
 
-One pipeline, four stages. Each has a workflow file; read the one you are in.
+Four model stages, followed by integration when requested. Each has a workflow
+file; read the one you are in. Extraction and taxonomy remain distinct artifacts
+even when this skill completes both during one source reading.
 
 Resolve this skill's directory as `<skill-root>` and the GlobalPPREstimation
 checkout as `<repo-root>`. Bundled `scripts/`, `references/`, `assets/` and
@@ -28,15 +30,9 @@ tools with the checkout as working directory as well as an absolute script path.
 
 ## Why these are one skill
 
-Stages 1 and 4 both require reading the same paper closely enough to know what each
-functional group *is*. Run separately, that reading happens twice, and the second time it
-happens without the extractor's notes — which is how three finished mappings ended up
-resting on taxonomic guesswork while the group list sat extracted and exact a directory
-away.
-
-Stage 2 is the fix and it is why the combination pays. Group membership is cheap to record
-while you are already reading the basic-input table and the diet matrix, and expensive to
-reconstruct months later from the same PDF. Captured once, it flows: `Taxonomy.xlsx` ->
+Stages 1 and 4 both depend on the source's definition of each functional group.
+Record membership while reading the parameters, with table purpose and provenance
+intact. Captured once, it flows: `Taxonomy.xlsx` ->
 `taxon_descr` in the database JSON -> the `groups_df` column the mapper reads -> `explicit
 member` evidence instead of inference.
 
@@ -53,6 +49,7 @@ Do not run stages the user did not ask for.
 | an extracted model, no `Taxonomy.xlsx` | membership for a later mapping | stage 2 |
 | a database JSON | per-group SPPR | stage 3 |
 | an SPPR workbook and a catch series | PPR per taxon | stage 4 |
+| catch/TL data or satellite NPP, with or without an Ecopath model | independent simple PPR, NPP-only or atlas integration | `references/integration-contract.md`; skip unrequested model stages |
 
 ## Stage 1 — extract
 
@@ -73,8 +70,7 @@ bookkeeping:
 
 ## Stage 2 — capture the taxonomy
 
-`references/group-taxonomy.md`. This is new work relative to running the two skills apart,
-and it is the point of combining them.
+`references/group-taxonomy.md` records membership as a separate reusable artifact.
 
 `Taxonomy.xlsx` is three columns — `seq`, `group_name`, `taxon_descr` — and the database
 JSON already reads it if it is present. Write it while the paper is open. If the paper has
@@ -123,6 +119,14 @@ catch and are apportioned across the groups they span, not discarded;
 
 ## Rules that hold across every stage
 
+When integration is requested, read `references/integration-contract.md` for
+central **Final mappings**, all-identity simple PPR, regional NPP reproduction,
+NPP-only/global-denominator views, missing-year policy, exact-byte provenance,
+reference-use records, carbon units, three catch bases and discard sensitivity.
+For mortality-rate/flow comparisons, fleet fate and experimental source boundaries,
+read `references/mortality-and-discards.md`. Numerical/source/physical validity and
+ecological interpretation are separate; retain existing method failure gates.
+
 **A plausible-looking wrong number survives review forever.** A diet proportion parsed one
 column left, a P/B read off the row above, a family assigned to the wrong feeding guild:
 all of these validate, balance and join cleanly. Every stage here is built to make mistakes
@@ -162,3 +166,5 @@ right.
 | `references/prose-extraction.md` | values stated in text and footnotes |
 | `references/table-layouts.md` | mapping an unfamiliar table onto EwE fields |
 | `references/source-bundle.md` | assembling papers and supplements |
+| `references/integration-contract.md` | workbooks, annual NPP, catch bases, routing responses and final verification |
+| `references/mortality-and-discards.md` | mortality rates versus flows, discard/offal provenance and experimental boundaries |

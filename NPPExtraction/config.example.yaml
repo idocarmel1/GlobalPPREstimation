@@ -1,0 +1,82 @@
+# ppr-npp run configuration. See METHODS.md for what every choice does to the numbers.
+
+# ---------------------------------------------------------------- what to compute
+year: 2019
+
+# Years read for the water mask and the fill climatology. Must contain `year`.
+# Wider is better for the climatology but costs ~780 MB of downloads per extra year.
+window_years: [2017, 2018, 2019, 2020, 2021]
+
+# Any subset of: lme (66), highseas (18), eez (282).
+layers: [lme, highseas, eez]
+
+# Grid the gap-filled baseline is computed on. Must be the reference model's native grid.
+baseline_grid: 4km
+
+# ---------------------------------------------------------------- where things live
+raw_dir: data/raw     # downloaded product files (large; safe to keep out of git)
+work_dir: data/work   # coverage arrays, water mask, accumulators (rebuildable)
+out_dir: data/out     # the CSVs and the workbook
+
+# Also fetch each region's published Sea Around Us metrics (shelf area, inshore fishing
+# area, coral share, their own NPP value). One HTTP request per region: 282 for EEZs.
+# Required if you want the SAU comparison columns or the benthic module.
+fetch_sau_reference: true
+
+http_timeout_s: 180
+http_retries: 4
+
+# ---------------------------------------------------------------- completing the year
+# Stages run in order; each only sees pixel-months the previous ones could not supply.
+# Set all three switches false to reproduce a conventional "observed months only" total.
+fill:
+  # No sunrise anywhere in that month at that latitude -> 0. A physical zero, not a gap.
+  # Turning this off makes polar night a gap, which the later stages will then try to fill
+  # with production that cannot exist.
+  dark_is_zero: true
+
+  # Fill from the pixel's own mean for that month over the donor years.
+  use_climatology: true
+  # null = window_years minus `year`. Give an explicit list to pin it.
+  climatology_years: null
+
+  # Rescale that fill by the region-month ratio of target year to climatology, measured on
+  # the pixels where both exist, so the fill carries the target year's anomaly.
+  anomaly_rescale: true
+  anomaly_clip: [0.5, 2.0]
+
+  # Spatial fill from the nearest pixel that has a value, scaled down by the ratio of
+  # top-of-atmosphere insolation so light is never borrowed from a brighter latitude.
+  use_nearest_neighbour: true
+  # Beyond this distance the source is effectively the ice edge and the fill is an
+  # over-estimate, so it is tracked separately as `nn_far`.
+  nn_split_km: 200
+  # Include those far fills in the headline number. Default false: they are an upper bound.
+  nn_far_in_central: false
+  # Longitude columns wrapped each side before the distance transform, so a cell east of
+  # the dateline can be served by one west of it.
+  nn_wrap_pad: 240
+  # Ceiling on any filled value, mg C m-2 d-1 (the product's own valid_max).
+  value_max: 10000.0
+
+# ---------------------------------------------------------------- the algorithm ensemble
+ensemble:
+  models: [antoinemorel, vgpm, eppley, cbpm, cafe]
+  # Common grid the cross-model comparison runs on. Must be reachable from every model's
+  # native grid by exact integer-factor reduction.
+  grid: 12th
+  # Ratios are taken against this model, and its gap-filled total is the baseline the
+  # ratios are applied to.
+  reference_model: antoinemorel
+  # If the all-models common mask covers less than this share of a region's water area,
+  # fall back to own-coverage ratios over whichever models cover the region at all.
+  # Needed because some OSU products do not cover the Black Sea or the Persian Gulf.
+  min_common_mask_pct: 5.0
+
+# ---------------------------------------------------------------- optional add-on
+# OFF BY DEFAULT and nothing in the main outputs depends on it. A first-order scoping
+# estimate of benthic and macrophyte production, per-region values within about a factor
+# of two. See npp/benthic.py for every parameter and citation, METHODS.md section 8 for
+# the discussion of what actually reaches a fish.
+benthic:
+  enabled: false

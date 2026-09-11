@@ -7,10 +7,10 @@ filename prefix, NPP by layer plus region id. This script joins all of it on `un
 
     data/<unit_id>/metadata.json     identity, geography, coverage, pointers to bulk sources
     data/<unit_id>/npp.json          net primary production by satellite model, when known
-    data/<unit_id>/<unit_id>.xlsx    the five-sheet summary a human actually opens
+    data/<unit_id>/<unit_id>.xlsx    the ecosystem workbook a human actually opens
 
-This workbook holds only what is true of the ecosystem regardless of any Ecopath model:
-catch, the trophic-chain SPPR and PPR, and NPP. Everything model-specific lives in
+This workbook holds catch, trophic-chain SPPR and PPR, annual NPP, and final taxon
+mappings identified separately by model. Model-specific PPR lives in
 `data/<unit_id>/models/<model_stem>.xlsx`, one workbook per model, built by
 `tools/build_model_workbook.py`. Keeping them apart is not tidiness: an ecosystem with two
 published models has two different answers for PPR, and a single sheet holding both invites
@@ -20,7 +20,7 @@ Bulk inputs are referenced by relative path rather than copied. The catch archiv
 the article archive together run to gigabytes; duplicating them per ecosystem would add
 nothing and cost a great deal.
 
-The workbook deliberately stays small: five sheets, few columns. Sheets that have no
+The workbook keeps model identities distinct. Sheets that have no
 data for an ecosystem say so in one line rather than appearing empty.
 """
 from __future__ import annotations
@@ -36,6 +36,10 @@ from pathlib import Path
 
 import openpyxl
 from ppr_scopes import add_group_scope_sheets
+from npp_data import load_npp as load_annual_npp, npp_for_year, source_paths
+from build_model_workbook import (sheet_npp as annual_npp_sheet, build_taxon_sppr,
+                                  final_mapping_rows, sheet_final_mappings, mio, CATCH_DP,
+                                  save_workbook_atomic)
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
@@ -49,12 +53,10 @@ REGION_TABLES = [
 ]
 ARCHIVE = ROOT / "PPRAtlas" / "archive" / "regions"
 ATLAS_REGIONS = ROOT / "PPRAtlas" / "data" / "regions.csv"
-NPP_CSV = ROOT / "NPPExtraction" / "NPP_2019_filled_SAU_regions.csv"
 SPPR_DIR = ROOT / "PPREstimation" / "output" / "top10"
 MODEL_JSON_DIR = ROOT / "PPREstimation" / "real_models" / "global_cover_jsons"
 
 TRANSFER_EFFICIENCY = 0.1
-NPP_LAYER_PREFIX = {"lme": "LME", "eez": "EEZ", "highseas": "HS"}
 
 HEADER = Font(bold=True)
 
@@ -78,18 +80,43 @@ def load_atlas_regions() -> dict[str, dict]:
 
 
 def load_npp() -> dict[str, dict]:
-    if not NPP_CSV.exists():
-        return {}
-    out = {}
-    with NPP_CSV.open(encoding="utf-8-sig") as fh:
-        for r in csv.DictReader(fh):
-            prefix = NPP_LAYER_PREFIX.get(r.get("layer", ""))
-            if not prefix:
-                continue
-            try:
-                out[f"{prefix}_{int(r['region_id']):03d}"] = r
-            except (ValueError, KeyError):
-                continue
+    return load_annual_npp(ROOT)
+
+
+def npp_coverage(npp):
+    years = sorted(int(y) for y in ((npp or {}).get('annual') or {'2019': npp})
+                   if (npp_for_year(npp, y) or {}).get('ens_median_tC_yr') not in (None, ''))
+    return {'has_npp': bool(years), 'npp_years_available': len(years),
+            'npp_from': years[0] if years else None, 'npp_to': years[-1] if years else None}
+
+
+def load_final_mappings(unit):
+    """Resolve only this unit's available mapping sources, using model arithmetic."""
+    books = [book for book in mio.model_workbooks(ROOT, unit)
+             if (mio.mapping_dir(ROOT, unit) / f'{book.stem}.csv').exists()]
+    if not books:
+        return []
+    taxa, _years = mio.read_catch(ROOT, unit)
+    totals = {t: sum(round(v, CATCH_DP) for v in e['by_year'].values())
+              for t, e in taxa.items()}
+    out = []
+    for book in books:
+        mapping = mio.mapping_dir(ROOT, unit) / f'{book.stem}.csv'
+        if not mapping.exists():
+            continue
+        rows = mio.read_mapping_csv(mapping)
+        groups = {g['group_name']: g for g in mio.read_groups(book)}
+        methods, sppr = mio.read_methods(book)
+        for r in rows:
+            for name in mio.parse_groups_cell(r.get('group')):
+                if name.lower() != 'unresolved' and name not in groups:
+                    raise ValueError(f'{book.stem}: mapped group {name!r} absent from model')
+        seen = {r['taxon'] for r in rows}
+        rows += [{'taxon': t, 'group': 'Unresolved', 'confidence': 'unresolved',
+                  'evidence': 'none', 'explanation': 'No mapping row recorded for this catch taxon.'}
+                 for t in taxa if t not in seen]
+        resolved = build_taxon_sppr(rows, methods, sppr, groups, totals)
+        out.extend(final_mapping_rows(unit, book.stem, taxa, resolved, totals))
     return out
 
 
@@ -230,39 +257,8 @@ def sheet_ppr(wb, rows, years, tl):
     finish(ws, len(head), freeze="C5")
 
 
-def sheet_npp(wb, npp):
-    ws = wb.create_sheet("NPP")
-    if not npp:
-        ws.append(["No net primary production estimate is available for this ecosystem."])
-        ws.append(["NPP currently covers LME and High Seas units only, not EEZs."])
-        return
-    ws.append(["Net primary production, 2019, tonnes carbon per year"])
-    ws["A1"].font = HEADER
-    ws.append([])
-    ws.append(["satellite_model", "npp_tC_yr"])
-    for c in ws[3]:
-        c.font = HEADER
-    for key, label in [
-        ("npp_antoinemorel_tC_yr", "Antoine-Morel"),
-        ("npp_vgpm_tC_yr", "VGPM"),
-        ("npp_eppley_tC_yr", "Eppley"),
-        ("npp_cbpm_tC_yr", "CbPM"),
-        ("npp_cafe_tC_yr", "CAFE"),
-    ]:
-        v = npp.get(key)
-        if v:
-            ws.append([label, float(v)])
-    ws.append([])
-    for key, label in [
-        ("ens_median_tC_yr", "ensemble median"),
-        ("ens_min_tC_yr", "ensemble min"),
-        ("ens_max_tC_yr", "ensemble max"),
-        ("water_area_km2", "water area (km2)"),
-    ]:
-        v = npp.get(key)
-        if v:
-            ws.append([label, float(v)])
-    finish(ws, 2)
+def sheet_npp(wb, npp, years=()):
+    return annual_npp_sheet(wb, npp, years)
 
 
 def sheet_summary(wb, unit, meta, rows, years, tl, npp, models):
@@ -285,11 +281,12 @@ def sheet_summary(wb, unit, meta, rows, years, tl, npp, models):
         ws.append([k, v])
     ws.append([])
 
-    npp_median = float(npp["ens_median_tC_yr"]) if npp and npp.get("ens_median_tC_yr") else None
     ws.append(["year", "catch_tonnes", "ppr_tonnes", "ppr_over_npp_percent"])
     for c in ws[ws.max_row]:
         c.font = HEADER
     for y in years:
+        annual = npp_for_year(npp, y) or {}
+        npp_median = float(annual['ens_median_tC_yr']) if annual.get('ens_median_tC_yr') not in (None, '') else None
         catch = sum(r["by_year"].get(y, 0.0) for r in rows)
         ppr = sum(
             r["by_year"].get(y, 0.0) * (1.0 / TRANSFER_EFFICIENCY) ** (tl[r["taxon"]] - 1.0)
@@ -298,11 +295,11 @@ def sheet_summary(wb, unit, meta, rows, years, tl, npp, models):
         )
         ratio = round(100.0 * ppr / 9.0 / npp_median, 4) if npp_median else None
         ws.append([y, round(catch, 3), round(ppr, 3), ratio])
-    ws.append(['PPR/NPP converts wet-weight PP to carbon at 9:1; NPP is the fixed 2019 ensemble median.'])
-    if npp_median is None:
-        ws.append([])
-        ws.append(["PPR/NPP is blank because no NPP estimate exists for this ecosystem."])
+    ws.append(['PPR/NPP converts wet-weight PP to carbon at 9:1 and uses the matching year\'s NPP ensemble median.'])
+    ws.append(['PPR/NPP is blank for years without NPP; see NPP for availability and provenance.'])
     finish(ws, 4)
+    for column, width in [('A', 30), ('C', 22), ('D', 30)]:
+        ws.column_dimensions[column].width = width
 
 
 def finish(ws, ncols, freeze=None):
@@ -351,12 +348,13 @@ def build_unit(unit, atlas, npp_all, force=False):
             "catch_years": [years[0], years[-1]] if years else None,
             "taxa": len(rows),
             "taxa_with_trophic_level": sum(1 for r in rows if r["taxon"] in tl),
-            "has_npp": npp is not None,
+            **npp_coverage(npp),
             "ecopath_models": len(models),
             "models_mapped": len(mapped),
             "model_workbooks": len(built),
         },
         "sources": {
+            "npp": [f'../../{p}' for p in source_paths(ROOT)],
             "catch": f"../../SeaAroundUsExtraction/data/catch_by_taxon_year/{unit}.csv.gz",
             "articles": f"../../PPRAtlas/archive/regions/{unit}" if articles else None,
             "sppr_workbooks": [f"../../PPREstimation/output/top10/{m['model']}.xlsx" for m in models],
@@ -376,6 +374,8 @@ def build_unit(unit, atlas, npp_all, force=False):
     (d / "metadata.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
     if npp:
         (d / "npp.json").write_text(json.dumps(npp, indent=2, ensure_ascii=False), encoding="utf-8")
+    elif (d / 'npp.json').exists():
+        (d / 'npp.json').unlink()
 
     if book.exists() and not force:
         return meta
@@ -383,14 +383,17 @@ def build_unit(unit, atlas, npp_all, force=False):
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
     sheet_catch(wb, rows, years)
+    sheet_final_mappings(wb, load_final_mappings(unit))
     sheet_sppr(wb, unit, models, tl)
     add_group_scope_sheets(wb, [p for p in sorted(SPPR_DIR.glob('*.xlsx'))
                                if unit_from_model_filename(p.name) == unit])
     sheet_ppr(wb, rows, years, tl)
-    sheet_npp(wb, npp)
+    sheet_npp(wb, npp, years)
     sheet_summary(wb, unit, meta, rows, years, tl, npp, models)
-    wb.save(book)
-    wb.close()
+    try:
+        save_workbook_atomic(wb, book)
+    finally:
+        wb.close()
     return meta
 
 
@@ -431,6 +434,9 @@ def main() -> int:
                 "models_mapped": c["models_mapped"],
                 "model_workbooks": c["model_workbooks"],
                 "has_npp": int(c["has_npp"]),
+                "npp_years_available": c.get('npp_years_available', int(c['has_npp'])),
+                "npp_from": c.get('npp_from', 2019 if c['has_npp'] else None),
+                "npp_to": c.get('npp_to', 2019 if c['has_npp'] else None),
             }
         )
         if i % 25 == 0 or i == len(units):
@@ -445,6 +451,11 @@ def main() -> int:
         for r in index:
             for key in ('taxa', 'taxa_with_tl', 'articles', 'ecopath_models', 'models_mapped', 'model_workbooks', 'has_npp'):
                 r[key] = int(r[key])
+            # Older index rows describe legacy 2019 coverage until those units rebuild.
+            r['npp_years_available'] = int(r.get('npp_years_available') or (1 if r['has_npp'] else 0))
+            for key in ('npp_from', 'npp_to'):
+                value = r.get(key)
+                r[key] = int(value) if value not in (None, '') else (2019 if r['has_npp'] else None)
     with index_path.open("w", newline="", encoding="utf-8-sig") as fh:
         w = csv.DictWriter(fh, fieldnames=list(index[0].keys()))
         w.writeheader()

@@ -7,6 +7,7 @@ totals. The output retains missing identities and failed methods explicitly.
 from __future__ import annotations
 
 import argparse
+from atomic_output import write_text_atomic
 import csv
 import hashlib
 import json
@@ -18,21 +19,19 @@ from pathlib import Path
 import openpyxl
 
 from build_ecosystem_data import load_catch, load_trophic_levels
+from unidentified_catch import metadata as unidentified_metadata, coefficients as treatment_coefficients, VERSION, RULE
+from npp_data import (load_npp, annual_arrays, annual_metadata, source_paths,
+                      METHODS, ANNUAL_PATH)
+from discard_data import (read_catch_components,annual_values,annual_totals,
+                          catch_basis_metadata,BASES,POLICY)
 
 ROOT = Path(__file__).resolve().parents[1]
 SIMPLE = 'simple trophic chain'
-NPP_METHODS = [
-    {'id': 'npp_antoinemorel_tC_yr', 'label': 'Antoine–Morel'},
-    {'id': 'npp_vgpm_tC_yr', 'label': 'VGPM'},
-    {'id': 'npp_eppley_tC_yr', 'label': 'Eppley'},
-    {'id': 'npp_cbpm_tC_yr', 'label': 'CbPM'},
-    {'id': 'npp_cafe_tC_yr', 'label': 'CAFE'},
-    {'id': 'ens_median_tC_yr', 'label': 'Regional ensemble median'},
-]
+NPP_METHODS = [dict(method) for method in METHODS]
 for _method in NPP_METHODS:
-    _method['note'] = ('2019 regional ensemble median; aggregation sums regional medians.'
+    _method['note'] = ('Annual regional ensemble median; aggregation sums regional medians.'
                        if _method['id'] == 'ens_median_tC_yr'
-                       else '2019 NPP, tonnes carbon per year.')
+                       else 'Year-specific NPP, tonnes carbon per year.')
 
 
 def finite(value):
@@ -104,15 +103,75 @@ def export_models(network_unit, years):
                     if method == SIMPLE:
                         continue
                     coefficients = [row[index] for row in source_scope['values']]
-                    methods[method] = annual_method(
-                        years, network_unit['years'], network_unit['catch'], coefficients,
-                        source_scope['status'].get(method, 'unavailable: no verified method status'))
+                    status=source_scope['status'].get(method, 'unavailable: no verified method status')
+                    methods[method] = model_basis_values(network_unit,years,coefficients,status)
+                    attach_sensitivity(methods[method],source_model,scope,method,'method',network_unit.get('years',[]),years)
+                    for treatment in ('zero', 'simple'):
+                        status = source_scope['status'].get(method, 'unavailable: no verified method status')
+                        if status == 'ok' and treatment == 'simple' and scope != 'all':
+                            status = 'unavailable: reference trophic-chain SPPR has no source decomposition'
+                        if status == 'ok' and 'unidentified' not in network_unit:
+                            status = 'unavailable: unidentified-catch classification metadata is missing; rebuild the network export'
+                        revised = treatment_coefficients(network_unit['taxa'], coefficients,
+                            network_unit.get('unidentified', {}).get('taxa', []), treatment)
+                        revised_record=model_basis_values(network_unit,years,revised,status)
+                        attach_sensitivity(revised_record,source_model,scope,method,treatment,network_unit.get('years',[]),years)
+                        methods[method]['unidentified_' + treatment] = revised_record
                 model['scopes'][scope] = {'methods': methods}
         models.append(model)
     default_index = network_unit.get('default_model')
     default = (models[default_index]['id'] if isinstance(default_index, int)
                and 0 <= default_index < len(models) else None)
     return models, default
+
+
+def model_basis_values(unit,years,coefficients,status):
+    """New exports use classified landings; old fixtures retain their audit API."""
+    if unit.get('catch_basis_policy')!=POLICY:
+        return annual_method(years,unit['years'],unit['catch'],coefficients,status)
+    result={}
+    for basis,field in BASES.items():
+        matrix=unit.get(field,[[None]*len(unit['years']) for _ in coefficients])
+        item=annual_values(years,unit['years'],matrix,coefficients,status)
+        totals=annual_totals(matrix,unit['years'])
+        lookup=dict(zip(unit['years'],totals))
+        item['catch']=[lookup.get(y) for y in years]
+        result[basis]=item
+    return {**result['landings'],'catch_basis':'landings',
+            'catch_bases':{basis:result[basis] for basis in ('catch','discards')}}
+
+
+def attach_sensitivity(record,model,scope,method,treatment,source_years,years):
+    annual=model.get('discard_sensitivity',{}).get(scope,{}).get(method,{}).get(treatment)
+    if annual is not None:
+        lookup=dict(zip(source_years,annual))
+        record['sensitivity']=[lookup.get(year) for year in years]
+    else:
+        record['sensitivity_unavailable']=model.get('discard_sensitivity_unavailable',{}).get(scope,{}).get(method,
+            'No compatible tested discard-routing response is available.')
+
+
+def simple_basis_values(components,years,trophic_levels,metadata,treatment='method'):
+    taxa=components['taxa']
+    original=[10**(trophic_levels[t]-1) if finite(trophic_levels.get(t)) else None for t in taxa]
+    coeff=(original if treatment=='method' else treatment_coefficients(taxa,original,metadata.get('taxa',[]),treatment))
+    unit={**components,'catch_basis_policy':POLICY}
+    result=model_basis_values(unit,years,coeff,'ok')
+    result['sensitivity_unavailable']='External fixed taxon-TL benchmark; discard-routing ecological uncertainty is not assessed.'
+    return result
+
+
+def simple_zero_annual(rows, years, trophic_levels, metadata):
+    affected = {r['name'] for r in metadata['taxa']}
+    normal = [r for r in rows if r['taxon'] not in affected]
+    zero = simple_annual(normal, years, trophic_levels)
+    for i, year in enumerate(years):
+        if affected:
+            zero['ppr'][i] = zero['ppr'][i] if zero['ppr'][i] is not None else 0
+            zero['covered_catch'][i] = round(sum(row['by_year'].get(year, 0) for row in rows
+                if row['taxon'] in affected or finite(trophic_levels.get(row['taxon']))), 3)
+    zero['catch'] = [round(sum(row['by_year'].get(y, 0) for row in rows), 3) if rows else None for y in years]
+    return zero
 
 
 def load_identities(root):
@@ -151,22 +210,6 @@ def load_identities(root):
         record['pilot'] = unit in selection
         record['note'] = selection.get(unit, {}).get('note', '')
     return dict(sorted(identities.items())), sets
-
-
-def load_npp(root):
-    values = {}
-    prefix = {'lme': 'LME', 'highseas': 'HS', 'eez': 'EEZ'}
-    with (root / 'NPPExtraction/NPP_2019_filled_SAU_regions.csv').open(encoding='utf-8-sig', newline='') as stream:
-        for row in csv.DictReader(stream):
-            if row['layer'] not in prefix:
-                continue
-            unit = f"{prefix[row['layer']]}_{int(row['region_id']):03d}"
-            record = {}
-            for method in NPP_METHODS:
-                value = float(row[method['id']]) if row.get(method['id'], '').strip() else None
-                record[method['id']] = value if finite(value) and value >= 0 else None
-            values[unit] = record
-    return values
 
 
 def read_base_summary(path):
@@ -229,26 +272,42 @@ def audit_models(root, network, years, audit):
                 workbook.close()
 
 
+def graph_years(catch_years, npp):
+    """NPP-only dates must not disappear because there was no catch that year."""
+    return sorted(set(catch_years) | {int(year) for record in npp.values()
+                                    for year in record.get('annual', {})})
+
+
 def build():
     units, sets = load_identities(ROOT)
     npp = load_npp(ROOT)
     network = json.loads((ROOT / 'PPRAtlas/data/network_ppr.json').read_text(encoding='utf-8'))
+    if network.get('catch_basis_policy')!=POLICY:
+        raise ValueError('Rebuild the network export with full-precision landings/catch/discards before building time series.')
     audit = {'status': 'ok', 'sources': [], 'simple_annual_values_checked': 0,
              'model_annual_values_checked': 0, 'model_hashes_verified': 0,
              'flagged_annual_values_excluded': 0, 'missing_catch': [], 'samples': {}}
     for path in ('SeaAroundUsExtraction/global_output/tables/units.json',
                  'SeaAroundUsExtraction/eez_output/tables/units.json',
                  'data/atlas_selection.json', 'PPRAtlas/data/regions.csv',
-                 'PPRAtlas/data/network_ppr.json', 'NPPExtraction/NPP_2019_filled_SAU_regions.csv'):
+                 'PPRAtlas/data/network_ppr.json', *source_paths(ROOT)):
         audit['sources'].append(verified_hash(ROOT, path))
     all_years = set()
     for count, (unit, record) in enumerate(units.items(), 1):
         rows, years = load_catch(unit)
         trophic_levels = load_trophic_levels(unit)
         record['_years'] = years
+        record['_components']=read_catch_components(ROOT,unit,[r['taxon'] for r in rows],years)
+        record['_trophic_levels']=trophic_levels
+        record['catch_basis_policy']=POLICY
         all_years.update(years)
         record['simple'] = simple_annual(rows, years, trophic_levels)
-        record['npp'] = npp.get(unit, {method['id']: None for method in NPP_METHODS})
+        record['unidentified'] = unidentified_metadata(rows, years, trophic_levels)
+        record['unidentified']['catch_bases']=catch_basis_metadata(record['unidentified'],
+            [r['taxon'] for r in rows],years,record['_components'])
+        # The zero sensitivity retains catch tonnage and treats its coefficient as
+        # known zero, including explicitly unidentified labels with no reference TL.
+        record['_simple_zero'] = simple_zero_annual(rows, years, trophic_levels, record['unidentified'])
         record['sources'] = {}
         if not rows:
             audit['missing_catch'].append(unit)
@@ -273,16 +332,30 @@ def build():
                     # Deliver the exact persisted decimal, after independent recomputation.
                     record['simple'][key][index] = summary[year][key]
                     audit['simple_annual_values_checked'] += 1
-        if not any(value is not None for value in record['npp'].values()):
-            record['note'] = (record['note'] + ' No 2019 NPP estimate is available.').strip()
         if count % 75 == 0:
             print(f'Checked annual source totals for {count}/{len(units)} ecosystems', flush=True)
-    years = sorted(all_years)
+    years = graph_years(all_years, npp)
     for unit, record in units.items():
+        record['npp'] = annual_arrays(npp.get(unit), years)
+        record['npp_metadata'] = annual_metadata(npp.get(unit))
+        if not any(finite(value) for values in record['npp'].values() for value in values):
+            record['note'] = (record['note'] + ' No annual NPP estimate is available.').strip()
         source_years = record.pop('_years')
         lookup = {year: index for index, year in enumerate(source_years)}
-        record['simple'] = {key: [values[lookup[year]] if year in lookup else None for year in years]
-                            for key, values in record['simple'].items()}
+        # Source workbook total-catch checks above remain independent. Published
+        # series now use full-precision classified taxon vectors for each basis.
+        components=record.pop('_components');tl=record.pop('_trophic_levels')
+        record.pop('_simple_zero')
+        record['simple']=simple_basis_values(components,years,tl,record['unidentified'])
+        for treatment in ('simple','zero'):
+            record['simple']['unidentified_'+treatment]=simple_basis_values(components,years,tl,record['unidentified'],treatment)
+        record['catch_accounting']=components['catch_accounting']
+        for basis,data in record['unidentified']['catch_bases'].items():
+            record['unidentified']['catch_bases'][basis]={key:[values[lookup[y]] if y in lookup else None for y in years] for key,values in data.items()}
+        record['catch_accounting']['classification_status']=[components['catch_accounting']['classification_status'][lookup[y]] if y in lookup else 'missing_catch' for y in years]
+        for key in ('catch', 'missing_simple_catch'):
+            values = record['unidentified'][key]
+            record['unidentified'][key] = [values[lookup[y]] if y in lookup else None for y in years]
         record['models'], record['default_model'] = export_models(network['units'].get(unit, {}), years)
     audit_models(ROOT, network, years, audit)
     methods = [{'id': SIMPLE, 'label': 'Trophic chain · catch-taxon TL (TE 0.1)',
@@ -301,7 +374,7 @@ def build():
     counts = {'units': len(units), 'years': len(years),
               'with_catch': sum(any(finite(v) for v in u['simple']['catch']) for u in units.values()),
               'with_simple_ppr': sum(any(finite(v) for v in u['simple']['ppr']) for u in units.values()),
-              'with_npp': sum(any(finite(v) for v in u['npp'].values()) for u in units.values()),
+              'with_npp': sum(any(finite(v) for values in u['npp'].values() for v in values) for u in units.values()),
               'models': sum(len(u['models']) for u in units.values()),
               'verified_models': sum(m['verified'] for u in units.values() for m in u['models'])}
     audit['counts'] = counts
@@ -310,15 +383,19 @@ def build():
     for unit in ('LME_013', 'LME_035', 'LME_047', 'EEZ_711', 'HS_018'):
         record = units[unit]
         audit['samples'][unit] = {str(year): {key: values[years.index(year)]
-                                             for key, values in record['simple'].items()}
+                                             for key, values in record['simple'].items() if isinstance(values, list)}
                                   for year in (1950, 1980, 2019)}
-    payload = {'schema_version': 1, 'years': years, 'npp_year': 2019,
-               'npp_policy': 'The 2019 regional NPP value is reused for every catch year.',
+    from global_npp_reference import build_global_npp_reference
+    global_npp = build_global_npp_reference(ROOT, years)
+    payload = {'schema_version': 4, 'years': years, 'npp_year': None, 'npp_source': ANNUAL_PATH,
+               'global_npp': global_npp,
+               'catch_basis_policy':POLICY,
+               'npp_policy': 'Year-specific NPP; unavailable years remain blank. An explicit display option may use the earliest available year for earlier years only, labeled as a proxy.',
                'units_note': 'PPR is tonnes wet-weight-equivalent primary production; NPP is tonnes carbon. Convert PPR to carbon at 9:1 for ratios.',
                'model_note': 'Each model uses its fixed published coefficients across catch years. Distinct models are alternatives and are never averaged.',
                'scopes': network['scopes'], 'npp_methods': NPP_METHODS, 'ppr_methods': methods,
                'sets': sets, 'units': units, 'coverage': counts,
-               'sources': audit['sources'][:6],
+               'sources': audit['sources'][:5 + len(source_paths(ROOT))],
                'validation': {'report': '../../data/time_series_validation.json',
                               'simple_annual_values_checked': audit['simple_annual_values_checked'],
                               'model_annual_values_checked': audit['model_annual_values_checked'],
@@ -337,12 +414,16 @@ def main():
         if not destination.exists() or destination.read_text(encoding='utf-8') != text:
             raise ValueError('The annual export is missing or differs from its verified sources')
     else:
-        destination.write_text(text, encoding='utf-8')
-        (ROOT / 'data/time_series_validation.json').write_text(
-            json.dumps(audit, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8')
+        write_text_atomic(destination, text)
+        write_text_atomic(ROOT / 'data/time_series_validation.json',
+            json.dumps(audit, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
+        inventory = {'classifier_version': VERSION, 'rule_description': RULE,
+                     'units': {unit: record['unidentified']['taxa'] for unit, record in payload['units'].items()}}
+        write_text_atomic(ROOT / 'data/unidentified_taxa.json',
+            json.dumps(inventory, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
         sys.path.insert(0, str(ROOT / 'PPRAtlas'))
         from atlas.render import render_time_series
-        (ROOT / 'PPRAtlas/trends.html').write_text(render_time_series(ROOT / 'PPRAtlas'), encoding='utf-8')
+        write_text_atomic(ROOT / 'PPRAtlas/trends.html', render_time_series(ROOT / 'PPRAtlas'))
     print(json.dumps({'status': 'ok', **audit['counts'],
                       'simple_annual_values_checked': audit['simple_annual_values_checked'],
                       'model_annual_values_checked': audit['model_annual_values_checked'],

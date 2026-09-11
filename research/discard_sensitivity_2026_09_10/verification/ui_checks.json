@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "scope": "Task G source UI before coordinated production rebuild",
+  "date": "2026-09-10",
+  "browser_verified": false,
+  "browser_note": "No atlas browser check performed by this agent. The main task owns atlas browser QA. Standalone research report file navigation was blocked and was not retried indirectly.",
+  "checks": {
+    "node_syntax": ["PPRAtlas/atlas/network_view.js", "PPRAtlas/atlas/time_series_view.js"],
+    "url_state_fixtures": "Map and trend defaults landings/uncertainty=1, explicit discards/0 and catch/1 agree.",
+    "band_segmentation_fixtures": "Missing central, missing bound, reversed bounds, invalid status, hidden response and nonadjacent years do not bridge. All catch, discards, hidden preference and normalized results have no band.",
+    "real_export_dom_stub_states": 12,
+    "real_export_dom_stub_matrix": "LME_034, 2018–2019; three catch bases × show/hide × PPR/ratio, using PPRAtlas/data/time_series.json and the actual aggregation helper. Checks control state, URL state, visibility and successful chart creation. This is not visual browser verification.",
+    "selected_map_csv_states": 12,
+    "selected_map_csv_matrix": "Three catch bases × PPR/ratio × true zero/unavailable. True zero remains zero; unavailable or hidden interval endpoints remain blank.",
+    "existing_node_metric_tests": {"passed": 12, "failed": 0, "files": ["tests/test_time_series_metrics.cjs", "tests/test_network_metrics.cjs"]},
+    "git_diff_check": "passed; line-ending warnings only"
+  },
+  "limitations": ["Inline fixture scripts were executed as read-only shell input, not committed as standalone tests.", "The existing time-series export preceded the coordinated final rebuild; band segmentation and CSV edge cases were separately exercised with explicit fixtures."]
+}

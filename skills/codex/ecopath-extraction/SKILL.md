@@ -45,5 +45,11 @@ paper statements, inherited information and explicit project conventions.
 
 Use [ecopath-model.md](references/ecopath-model.md) for equations and balance
 verdicts. Report findings and limitations, with file/page/table provenance.
+For mortality-rate/flow comparisons, fleet returns, offal or routing experiments,
+read [mortality-and-discards.md](references/mortality-and-discards.md). Keep source
+evidence separate from importer omissions and experimental assumptions.
 An extraction-only request stops here; taxonomy and downstream PPR are separate
 stages of the combined skill.
+In GlobalPPREstimation, the source-bundle reference also covers the root article
+reference/use log and exact-byte evidence. Independent simple PPR or NPP coverage
+does not itself require extracting an Ecopath model.

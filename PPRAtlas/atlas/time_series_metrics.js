@@ -5,18 +5,24 @@
   else root.PPRTimeSeries=api;
 })(typeof globalThis==='object'?globalThis:this, function() {
   'use strict';
+  const annualNPP=typeof module==='object' && module.exports?require('./annual_npp.js'):globalThis.PPRAnnualNPP;
+  const sensitivity=typeof module==='object' && module.exports?require('./discard_sensitivity.js'):globalThis.PPRDiscardSensitivity;
+  const nppSeries=typeof module==='object' && module.exports?require('./time_series_npp.js'):globalThis.PPRTimeSeriesNPP;
   const finite=v=>typeof v==='number' && Number.isFinite(v);
-  const sample=(v,i)=>Array.isArray(v)?v[i]:v;
 
   function aggregate(db,state) {
+    if(state.mode==='npp')return nppSeries.aggregate(db,state);
     const years=state.years || db.years;
     const indices=years.map(y=>db.years.indexOf(Number(y)));
     const ids=[...new Set(state.units || [])];
     const method=db.ppr_methods.find(m=>m.id===state.method);
     const ratio=state.mode==='ratio';
+    const globalNPP=ratio&&state.npp_scope==='global';
+    const treatment=state.unidentified||'method';
+    const catchBasis=sensitivity.basis(state);
     const gaps=state.allow_gaps && ids.length===1;
     const validRequest=indices.every(i=>i>=0) && years.length>0 && method &&
-      method.scopes.includes(state.scope) && (!ratio || db.npp_methods.some(m=>m.id===state.npp));
+      method.scopes.includes(state.scope) && ['catch','landings','discards'].includes(catchBasis) && (!ratio || globalNPP || db.npp_methods.some(m=>m.id===state.npp));
     const included=[],excluded=[],records=[],modelIds={};
     for(const id of ids) {
       const unit=db.units[id];let reason=null,record=null;
@@ -35,44 +41,88 @@
           else if(record.status!=='ok') reason=`Method unavailable: ${record.status}.`;
         }
       }
+      if(!reason && !['method','zero','simple'].includes(treatment))reason='Unknown unidentified-catch treatment.';
+      if(!reason && treatment==='simple' && state.scope!=='all')reason='Reference-TL sensitivity is total-only; select All sources. No source decomposition is available.';
+      if(!reason && treatment!=='method'){
+        record=record?.['unidentified_'+treatment];
+        if(!record)reason='Unidentified-catch sensitivity is unavailable in this export.';
+        else if(record.status && record.status!=='ok')reason=`Sensitivity unavailable: ${record.status}.`;
+      }
+      if(!reason&&catchBasis!=='landings'){
+        const selected=record?.catch_bases?.[catchBasis];
+        if(!selected)reason='Catch classification unavailable for this basis.';
+        else record={...record,...selected};
+      }
       const present=i=>finite(record?.ppr?.[i]) && record.ppr[i]>=0;
       if(!reason && (!record || !(gaps?indices.some(present):indices.every(present))))
         reason='PPR lacks a complete annual series.';
-      const nppPresent=i=>finite(sample(unit?.npp?.[state.npp],i)) && sample(unit.npp[state.npp],i)>0 && present(i);
-      if(!reason && ratio && !(gaps?indices.some(nppPresent):indices.every(nppPresent)))
-        reason='NPP unavailable or nonpositive for one or more years.';
+      // Missing NPP years leave gaps for the whole fixed cohort; never shrink it year by year.
+      const nppValues=unit?.npp?.[state.npp];
+      if(!reason && ratio && !globalNPP && !(Array.isArray(nppValues)?nppValues.some(annualNPP.positive):annualNPP.positive(nppValues)))
+        reason='NPP unavailable or nonpositive for every exported year.';
       if(reason) excluded.push({id,name:unit?.name || id,reason});
       else {included.push(id);records.push({unit,record});}
     }
     const points=years.map((year,k)=>{
       const i=indices[k];
-      if(!records.length || records.some(r=>!finite(r.record.ppr[i]) || r.record.ppr[i]<0 || ratio && (!finite(sample(r.unit.npp[state.npp],i)) || sample(r.unit.npp[state.npp],i)<=0)))
-        return {year:Number(year),value:null,ppr:null,npp:null,catch:null,covered_catch:null,coverage:null};
+      const provenance=ratio?nppSeries.point(db,included,state,year):{};
+      if(!records.length || records.some(r=>!finite(r.record.ppr[i]) || r.record.ppr[i]<0))
+        return {year:Number(year),value:null,ppr:null,npp:null,catch:null,covered_catch:null,coverage:null,...provenance};
       // Audited input totals are wet weight; plot and CSV masses use carbon.
       const ppr=records.reduce((sum,r)=>sum+r.record.ppr[i],0) / 9;
-      const npp=ratio?records.reduce((sum,r)=>sum+sample(r.unit.npp[state.npp],i),0):null;
-      const catches=records.map(r=>r.unit.simple?.catch?.[i]);
+      const npp=ratio?provenance.npp:null;
+      const catches=records.map(r=>(catchBasis==='landings'?r.unit.simple:r.unit.simple?.catch_bases?.[catchBasis])?.catch?.[i]);
       const covered=records.map(r=>r.record.covered_catch?.[i]);
       const totalCatch=catches.every(finite)?catches.reduce((a,b)=>a+b,0):null;
       const coveredCatch=covered.every(finite)?covered.reduce((a,b)=>a+b,0):null;
-      return {year:Number(year),value:ratio?100*ppr/npp:ppr,ppr,npp,catch:totalCatch,covered_catch:coveredCatch,
+      const affected=records.map(r=>(r.unit.unidentified?.catch_bases?.[catchBasis]||r.unit.unidentified)?.catch?.[i]),missingSimple=records.map(r=>(r.unit.unidentified?.catch_bases?.[catchBasis]||r.unit.unidentified)?.missing_simple_catch?.[i]);
+      const unidentifiedCatch=affected.every(finite)?affected.reduce((a,b)=>a+b,0):null;
+      const allCatch=records.map(r=>(r.unit.simple?.catch_bases?.catch||r.unit.simple)?.catch?.[i]);
+      const discarded=records.map(r=>r.unit.simple?.catch_bases?.discards?.catch?.[i]);
+      const totalAll=allCatch.every(finite)?allCatch.reduce((a,b)=>a+b,0):null;
+      const totalDiscarded=discarded.every(finite)?discarded.reduce((a,b)=>a+b,0):null;
+      const band=sensitivity.combine(records.map(r=>routedBand(r,i)));
+      if(records.length===1&&routedBand(records[0],i))Object.assign(band,routedBand(records[0],i));
+      band.discard_fraction=totalAll>0&&finite(totalDiscarded)?totalDiscarded/totalAll:null;
+      return {year:Number(year),value:ratio?(npp===null?null:100*ppr/npp):ppr,ppr,npp,catch:totalCatch,covered_catch:coveredCatch,...provenance,
+        catch_basis:catchBasis,total_catch_all:totalAll,total_discards:totalDiscarded,
+        sensitivity:sensitivity.display(band,state,npp),
+        unidentified_catch:unidentifiedCatch,unidentified_share:totalCatch>0 && unidentifiedCatch!==null?unidentifiedCatch/totalCatch:null,
+        unidentified_missing_simple_catch:missingSimple.every(finite)?missingSimple.reduce((a,b)=>a+b,0):null,
         coverage:totalCatch>0 && coveredCatch!==null?coveredCatch/totalCatch:null};
     });
-    return {points,included,excluded,selected:ids.length,npp_year:db.npp_year,
+    return {points,included,excluded,selected:ids.length,npp_year:db.npp_year,npp_source:db.npp_source,
+      npp_scope:nppSeries.scope(state),npp_reference:ratio?nppSeries.reference(db,included,state):null,npp_method:globalNPP?'atlas_ensemble':state.npp,
+      unidentified_taxa:Object.fromEntries(included.map(id=>[id,db.units[id].unidentified?.taxa||[]])),
+      unidentified_classifier:Object.fromEntries(included.map(id=>[id,db.units[id].unidentified?.classifier_version||null])),
       model_ids:Object.fromEntries(included.filter(id=>modelIds[id]).map(id=>[id,modelIds[id]])),
-      annual_npp:ratio && records.some(r=>Array.isArray(r.unit.npp[state.npp])),
-      reason:!validRequest?'Unknown year, method or unsupported source scope.':ids.length?'':'Select at least one ecosystem.'};
+      annual_npp:ratio && (db.npp_year==null || ids.some(id=>Array.isArray(db.units[id]?.npp?.[state.npp]))),
+      reason:!validRequest?'Unknown year, method or unsupported source scope.':!ids.length?'Select at least one ecosystem.':
+        ratio && included.length && !points.some(p=>finite(p.value))?(globalNPP?'The fixed global atlas NPP reference is unavailable in every selected year.':'Annual NPP is unavailable for at least one included ecosystem in every selected year.'):''};
   }
+
+  const routedBand=(entry,index)=>entry.record.sensitivity?.[index]||
+    (entry.record.sensitivity_unavailable?sensitivity.unavailable(entry.record.sensitivity_unavailable):null);
 
   function toCSV(result,state) {
     const escape=value=>value==null?'':`"${String(value).replaceAll('"','""')}"`;
-    const header='year,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,ppr_method,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids';
+    const header='year,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,ppr_method,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids,npp_fill_policy,npp_estimated,npp_substituted_ids,npp_source_years,npp_source,npp_provenance'+unidentifiedHeader+discardHeader+nppSeries.csvHeader;
     return header+'\n'+result.points.map(p=>[p.year,p.value,p.ppr,p.npp,p.catch,p.covered_catch,p.coverage,
-      result.included.length,result.selected,state.mode,state.method,state.scope,state.mode==='ratio'?state.npp:null,
-      state.mode==='ratio' && !result.annual_npp?result.npp_year:null,result.included.join(';'),JSON.stringify(state.models||{}),JSON.stringify(result.model_ids)].map(escape).join(',')).join('\n')+'\n';
+      result.included.length,result.selected,state.mode,state.mode==='npp'?null:state.method,state.mode==='npp'?null:state.scope,state.mode==='ratio'||state.mode==='npp'?result.npp_method||state.npp:null,
+      state.mode==='ratio' && !result.annual_npp?result.npp_year:null,result.included.join(';'),JSON.stringify(state.mode==='npp'?{}:state.models||{}),JSON.stringify(result.model_ids),...nppCSV(p,result,state),...unidentifiedCSV(p,result,state),...discardCSV(p,state),...nppSeries.csv(p,result,state)].map(escape).join(',')).join('\n')+'\n';
   }
 
+  const nppCSV=(point,result,state)=>state.mode==='ratio'||state.mode==='npp'?[state.npp_fill==='earliest'?'earliest':'observed',Boolean(point.npp_estimated),(point.npp_substituted_ids||[]).join(';'),JSON.stringify(point.npp_source_years||{}),point.npp_source||result.npp_source,JSON.stringify(point.npp_provenance||{})]:[null,null,null,null,null,null];
+  const unidentifiedHeader=',unidentified_treatment,unidentified_catch_tonnes,unidentified_catch_share,unidentified_missing_reference_catch_tonnes,unidentified_taxa,unidentified_classifier';
+  const unidentifiedCSV=(point,result,state)=>state.mode==='npp'?Array(6).fill(null):[state.unidentified||'method',point.unidentified_catch,point.unidentified_share,point.unidentified_missing_simple_catch,JSON.stringify(result.unidentified_taxa||{}),JSON.stringify(result.unidentified_classifier||{})];
+  const discardHeader=',catch_basis,sensitivity_visible,discard_fraction,total_catch_tonnes,discards_tonnes,sensitivity_status,sensitivity_lower,sensitivity_upper,sensitivity_min_tC,sensitivity_max_tC,sensitivity_routes,sensitivity_excluded_routes,sensitivity_reason,sensitivity_type';
+  const discardCSV=(point,state)=>state.mode==='npp'?Array(14).fill(null):[sensitivity.basis(state),sensitivity.enabled(state),point.sensitivity?.discard_fraction,point.total_catch_all,point.total_discards,point.sensitivity?.status,point.sensitivity?.lower,point.sensitivity?.upper,point.sensitivity?.min_tC,point.sensitivity?.max_tC,JSON.stringify(point.sensitivity?.route_ppr_tC||{}),JSON.stringify(point.sensitivity?.excluded_routes||{}),point.sensitivity?.reason,point.sensitivity?.uncertainty_type];
+
   function compare(db,state) {
+    if(state.mode==='npp'){
+      const result=nppSeries.aggregate(db,state);
+      return {...result,series:[{method:'npp',...result}],baseline:null,baseline_model_ids:{},normalized:false};
+    }
     const methods=[...new Set(state.methods || [])];
     const ids=[...new Set(state.units || [])];
     const baseline=state.baseline || null;
@@ -135,6 +185,7 @@
               !finite(point.value)?`Method ${method} is unavailable for ${point.year}.`:
                 `Normalized value is not finite for ${point.year}.`);
         return {...point,value,unnormalized_value:point.value,
+          ...(normalized?{sensitivity:sensitivity.unavailable('Discard sensitivity is not defined for a normalized comparison of methods.')} : {}),
           baseline_value:baselineValue,baseline_ppr:reference?.ppr ?? null,
           baseline_covered_catch:reference?.covered_catch ?? null,unavailable_reason:pointReason};
       });
@@ -144,6 +195,7 @@
           `Baseline ${baseline} has no positive matching annual values.`:'')};
     });
     return {series,included:common,excluded,selected:ids.length,points:series[0].points,
+      npp_scope:nppSeries.scope(state),npp_reference:state.mode==='ratio'?nppSeries.reference(db,common,state):null,npp_method:state.npp_scope==='global'?'atlas_ensemble':state.npp,
       baseline,baseline_model_ids:baselineResult?.model_ids || {},normalized,reason:sharedReason ||
         (normalized && !series.some(result=>usable(result))?`Baseline ${baseline} has no positive matching annual values.`:''),
       npp_year:db.npp_year,annual_npp:series.some(result=>result.annual_npp) || Boolean(baselineResult?.annual_npp)};
@@ -153,15 +205,16 @@
     if(result.series.length===1 && !result.normalized)
       return toCSV(result.series[0],{...state,method:result.series[0].method});
     const escape=value=>value==null?'':`"${String(value).replaceAll('"','""')}"`;
-    const header='year,ppr_method,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids,baseline_method,baseline_model_ids,baseline_value,baseline_ppr_tonnes_carbon,baseline_covered_catch_tonnes,unnormalized_value,normalized,unavailable_reason';
+    const header='year,ppr_method,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids,baseline_method,baseline_model_ids,baseline_value,baseline_ppr_tonnes_carbon,baseline_covered_catch_tonnes,unnormalized_value,normalized,unavailable_reason,npp_fill_policy,npp_estimated,npp_substituted_ids,npp_source_years,npp_source,npp_provenance'+unidentifiedHeader+discardHeader+nppSeries.csvHeader;
     const rows=result.series.flatMap(series=>series.points.map(point=>[
       point.year,series.method,point.value,point.ppr,point.npp,point.catch,point.covered_catch,point.coverage,
-      series.included.length,series.selected,state.mode,state.scope,state.mode==='ratio'?state.npp:null,
+      series.included.length,series.selected,state.mode,state.scope,state.mode==='ratio'?series.npp_method||state.npp:null,
       state.mode==='ratio' && !series.annual_npp?series.npp_year:null,series.included.join(';'),
       JSON.stringify(state.models || {}),JSON.stringify(series.model_ids),result.baseline,JSON.stringify(result.baseline_model_ids || {}),
       point.baseline_value,point.baseline_ppr,point.baseline_covered_catch,point.unnormalized_value,
-      result.normalized,point.unavailable_reason || series.reason].map(escape).join(',')));
+      result.normalized,point.unavailable_reason || series.reason,...nppCSV(point,series,state),...unidentifiedCSV(point,series,state),...discardCSV(point,state),...nppSeries.csv(point,series,state)].map(escape).join(',')));
     return header+'\n'+rows.join('\n')+(rows.length?'\n':'');
   }
-  return {aggregate,toCSV,compare,comparisonToCSV,finite};
+  const comparisonToJSON=(result,state)=>JSON.stringify({schema_version:1,units:state.mode==='npp'?'tonnes carbon/year':result.normalized?'dimensionless multiple':state.mode==='ratio'?'percent':'tonnes carbon/year',state,result},null,2)+'\n';
+  return {aggregate,toCSV,compare,comparisonToCSV,comparisonToJSON,finite};
 });

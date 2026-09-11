@@ -22,6 +22,8 @@ run repository `tools/` commands from that checkout.
 3. Search papers and supplements for the model's species membership. Transcribe
    any member table to `<stem>.members.csv` before assigning taxa. Inspect actual
    `taxon_descr` values; older models may be blank, newer ones may be populated.
+   Distinguish exhaustive composition from diet-study examples; absence alone
+   neither excludes a species nor requires a composite weight.
 4. Work in catch-tonnage order. A documented member or synonym takes precedence
    over Sea Around Us habitat/size classes. For coarse labels, read
    [coarse-taxa-playbook.md](references/coarse-taxa-playbook.md) and specify the
@@ -33,6 +35,13 @@ run repository `tools/` commands from that checkout.
 6. Write the group dictionary and provenance notes. If PPR integration is requested,
    run repository `tools/build_model_workbook.py --units <unit>` and
    `tools/verify_model_workbook.py --units <unit>`.
+
+For central **Final mappings**, exact numeric weights, annual NPP, independent
+simple PPR, NPP-only/global-denominator views, provenance or discard sensitivity, read
+[integration-contract.md](references/integration-contract.md). When workbook
+integration is requested, rebuild central and model workbooks and verify their
+mapping parity after mapping changes.
+Independent catch/TL PPR and satellite NPP do not require a new model mapping.
 
 Preserve every catch taxon and exact group strings. Follow the shared validator's
 catch restrictions, including its harvested-algae exception; detritus and diet

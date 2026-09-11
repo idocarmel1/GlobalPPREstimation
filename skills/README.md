@@ -15,6 +15,23 @@ Codex uses concise entry points, the complete workflows in `references/`, and
 Scripts, scientific references, examples and templates are shared byte-for-byte.
 The combined skill includes its examples, so it does not depend on a sibling skill.
 
+## Knowledge refresh — 2026-09-10
+
+All three project skills were refreshed in both agent distributions, and all six
+`.skill` archives were rebuilt. The refresh records source-table scope, mortality
+rates versus flows, central **Final mappings**, annual NPP reproduction and units,
+separate catch bases, and the limits of optional discard-routing sensitivity.
+The full paper-to-PPR chain includes taxonomy; an extraction-only request still
+stops after extraction.
+
+[The refresh report](../docs/SKILL_KNOWLEDGE_REFRESH.md) records the baseline gaps,
+seven supported retrieval scenarios, validation and installation evidence. The
+mapping validator still cannot encode evidence scope or precedence, and a
+composite can pass its membership check with only one overlapping group. Reconcile
+source tables before populating `members.csv`, then review every candidate and
+its spatial weights independently. The expanded carbon-conversion literature
+review and new model coverage remain deferred.
+
 ## Using the distributions
 
 Choose one agent directory. Copy the **three individual skill folders**, not their
@@ -24,10 +41,14 @@ project skills use `.claude/skills/`; Codex personal skills use `$CODEX_HOME/ski
 accept `.skill` uploads. Codex primarily uses the unpacked folders; its archives
 are portable copies containing the same resources and metadata.
 
-This reorganization does not change globally installed skills. In this checkout,
-read `skills/codex/<name>/SKILL.md` for Codex or `skills/claude/<name>/SKILL.md` for
-Claude. If an installed copy already exists, replace it deliberately from the
-chosen distribution rather than assuming it has picked up repository changes.
+Repository rebuilds do not automatically update installed skills. The
+2026-09-10 refresh deliberately updated the existing
+`C:\Users\idoca\.agents\skills\ecopath-extraction` copy after backing it up,
+while preserving its existing interface metadata. The paths and verified file
+hashes are in [the installation record](../data/installed_skill_refresh.json).
+No new global skills were installed. In this checkout, read
+`skills/codex/<name>/SKILL.md` for Codex or `skills/claude/<name>/SKILL.md` for
+Claude; do not assume another installed copy has picked up repository changes.
 
 Resolve bundled script paths from the skill's own directory. Resolve repository
 tools and data from the GlobalPPREstimation checkout. `GLOBALPPR_ROOT` tells mapping
@@ -38,8 +59,8 @@ relative script path resolve differently.
 
 | Change | Edit here |
 | --- | --- |
-| Extraction workflow, scripts, references or templates | `claude/ecopath-extraction/` |
-| Mapping workflow, scripts, references or examples | `claude/ewe-species-to-group-mapper/` |
+| Extraction workflow, scripts, references or templates, including mortality/discard source accounting | `claude/ecopath-extraction/` |
+| Mapping workflow, scripts, references or examples, including the annual PPR/NPP integration contract | `claude/ewe-species-to-group-mapper/` |
 | Combined router and taxonomy stage | `combined-src/` |
 | Codex entry points and interface metadata | `codex-src/<skill>/` |
 
@@ -70,3 +91,10 @@ For SPPR use `tools/run_sppr.py`, including for one-model runs. The combined ski
 now also documents `tools/apply_taxonomy.py` for Ecobase JSONs without an extraction
 folder. Neither tool is bundled as a standalone skill helper: both need this
 repository's algorithm and inputs.
+
+The September11 follow-up adds all-identity simple PPR, regional NPP independent
+of catch, NPP-only and fixed global-atlas views, physical-support limits, verified
+source/cache lineage and the article reference/use log. Mapping-only and
+extraction-only requests retain their stage boundaries. See
+[`docs/SKILL_KNOWLEDGE_REFRESH.md`](../docs/SKILL_KNOWLEDGE_REFRESH.md) for the
+independent retrieval checks and installed-skill backup record.

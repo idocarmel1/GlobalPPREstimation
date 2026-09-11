@@ -1,27 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PPR through time · Global PPR estimation</title>
+<title>PPR and NPP through time · Global PPR estimation</title>
 <style>/* TIME_SERIES_CSS */</style></head>
 <body>
 <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">≈</span><span>GLOBAL PPR<span class="brand-sub">Sea Around Us × Ecopath</span></span></a><nav aria-label="View"><a href="index.html">Map</a><a href="trends.html" aria-current="page">Time series</a></nav></header>
 <main>
-  <div class="intro"><div><p class="eyebrow">ANNUAL PRIMARY PRODUCTION REQUIRED</p><h1>PPR through time</h1><p id="selectionTitle" class="subtitle"></p></div><button id="chooseEcosystems" class="primary" aria-haspopup="dialog">Choose ecosystems</button></div>
+  <div class="intro"><div><p class="eyebrow">ANNUAL PRODUCTION AND FISHERIES REQUIREMENTS</p><h1>PPR and NPP through time</h1><p id="selectionTitle" class="subtitle"></p></div><button id="chooseEcosystems" class="primary" aria-haspopup="dialog">Choose ecosystems</button></div>
   <section class="chart-card" aria-label="Time-series explorer">
     <div class="controls">
-      <div class="field"><label for="metric">Measure</label><select id="metric"><option value="ppr">PPR</option><option value="ratio">PPR / NPP</option></select></div>
+      <div class="field"><label for="catchBasis">Catch used for PPR</label><select id="catchBasis"><option value="landings">Landings only (default)</option><option value="catch">All catch · landings + discards</option><option value="discards">Discards only</option></select></div>
+      <div class="field"><label for="uncertainty">Discard-routing sensitivity envelope</label><select id="uncertainty"><option value="1">Show where assessed</option><option value="0">Hide envelope</option></select></div>
+      <div class="field"><label for="metric">Measure</label><select id="metric"><option value="ppr">PPR</option><option value="ratio">PPR / NPP</option><option value="npp">NPP through time</option></select></div>
       <div class="field method"><label id="pprMethodsLabel" for="pprMethod">PPR calculations</label><button id="pprMethod" class="method-select" aria-haspopup="dialog" aria-labelledby="pprMethodsLabel pprMethodText"><span id="pprMethodText"></span><span aria-hidden="true">⌄</span></button></div>
       <div class="field"><label for="baselineMethod">Divide by baseline</label><select id="baselineMethod"></select></div>
       <div class="field"><label for="sourceScope">Source scope</label><select id="sourceScope"><option value="all">All sources</option><option value="inner">Inner sources</option><option value="PP">Primary producers (PP)</option></select></div>
+      <div class="field"><label for="nppScope">NPP denominator</label><select id="nppScope"><option value="selected">Selected ecosystems</option><option value="global">Global atlas NPP</option></select></div>
       <div class="field"><label for="nppMethod">NPP calculation</label><select id="nppMethod"></select></div>
+      <div class="field"><label for="nppFill">Missing historical NPP</label><select id="nppFill"><option value="observed">Actual annual data only</option><option value="earliest">Use earliest available year for earlier gaps</option></select></div>
+      <div class="field treatment"><label for="unidentifiedTreatment">Unidentified catch treatment</label><select id="unidentifiedTreatment"><option value="method">Selected method’s own SPPR (default)</option><option value="zero">Sensitivity: zero PPR, retain catch</option><option value="simple">Sensitivity: reference-TL simple chain (all sources)</option></select></div>
     </div>
     <div class="plot-heading"><div><h2 id="chartTitle">Annual PPR</h2><p id="cohortSummary" aria-live="polite"></p><div class="period"><label for="fromYear">From</label><select id="fromYear" aria-label="First year"></select><label for="toYear">to</label><select id="toYear" aria-label="Last year"></select></div></div><div class="readout"><span id="focusYear"></span><strong id="focusValue"></strong></div></div>
     <div class="plot-wrap" id="plotWrap"><svg id="chart" role="img" aria-labelledby="svgTitle svgDesc"><title id="svgTitle">Annual PPR</title><desc id="svgDesc"></desc></svg><div id="emptyState" class="empty" hidden><strong>No estimate for this selection</strong><p id="emptyReason"></p><button id="emptyChoose">Choose ecosystems</button></div></div>
     <div class="scrubber"><label for="inspectYear">Inspect year</label><input id="inspectYear" type="range" step="1"><output for="inspectYear" id="inspectValue"></output></div>
     <div id="seriesLegend" class="series-legend" aria-label="Selected method values" hidden></div>
-    <div class="chart-footer"><p id="coverage"></p><button class="text-button" id="downloadCSV">Download plotted data ↓</button></div>
+    <div id="sensitivityReadout" class="sensitivity-readout" aria-live="polite"></div>
+    <div class="chart-footer"><p id="coverage"></p><div class="downloads"><button class="text-button" id="downloadCSV">Download CSV ↓</button><button class="text-button" id="downloadJSON">Download JSON ↓</button></div></div>
   </section>
-  <div class="context"><p id="calculationNote"></p><p id="nppNote" hidden></p><p id="setNote"></p></div>
+  <div class="context"><p id="calculationNote"></p><p id="unidentifiedNote"></p><p id="nppNote" hidden></p><p id="sensitivityNote"></p><p id="setNote"></p></div>
   <details id="coverageDetails"><summary id="coverageDetailsTitle">Coverage and sources</summary><div id="coverageBody"></div></details>
 </main>
 <dialog id="methodDialog" aria-labelledby="methodDialogTitle">
@@ -29,11 +35,11 @@
   <p class="dialog-hint">Select one or more methods. Each selection adds a curve to the same graph.</p>
   <div class="picker-actions"><span id="methodCount" aria-live="polite"></span><button id="selectAllMethods" class="text-button">Select all</button><button id="clearMethods" class="text-button">Clear all</button></div>
   <div id="methodList" class="ecosystem-list"></div>
-  <div class="dialog-footer"><p>A single curve keeps its shaded area. Multiple curves use separate colors.</p><button class="primary" id="doneMethods">Show graph</button></div>
+  <div class="dialog-footer"><p>Each method uses a separate color. Shaded sensitivity bands appear only for assessed landings estimates.</p><button class="primary" id="doneMethods">Show graph</button></div>
 </dialog>
 <dialog id="ecosystemDialog" aria-labelledby="dialogTitle">
   <div class="dialog-heading"><div><p class="eyebrow">DEFINE YOUR ESTIMATE</p><h2 id="dialogTitle">Ecosystems</h2></div><button id="closeEcosystems" aria-label="Close ecosystem selection">✕</button></div>
-  <p class="dialog-hint">The graph sums your selection. Each model version is used separately.</p>
+  <p class="dialog-hint" id="ecosystemHint">The graph sums your selection. Each model version is used separately.</p>
   <div class="picker-controls"><div class="field"><label for="ecosystemSet">Ecosystem set</label><select id="ecosystemSet"></select></div><div class="field"><label for="ecosystemSearch">Find an ecosystem</label><input id="ecosystemSearch" type="search" placeholder="Name or ID…"></div></div>
   <div class="picker-actions"><span id="pickerCount" aria-live="polite"></span><button id="selectVisible" class="text-button">Select visible</button><button id="clearSelection" class="text-button">Clear all</button></div>
   <div id="ecosystemList" class="ecosystem-list"></div>

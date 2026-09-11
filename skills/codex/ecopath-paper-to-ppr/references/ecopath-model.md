@@ -25,8 +25,9 @@ group. It is not a simulation. Ecosim adds time dynamics on top of a balanced
 Ecopath model; Ecospace adds space. The models in this corpus are Ecopath
 parameterisations — the mass-balance snapshot is the thing being extracted.
 
-Everything is in **t·km⁻² wet weight** for biomass and **year⁻¹** for rates, with
-flows in t·km⁻²·year⁻¹.
+The usual biomass convention in this corpus is **t·km⁻² wet weight**, with
+**year⁻¹** rates and t·km⁻²·year⁻¹ flows. Confirm each source's units; some
+models use carbon, dry biomass or energy. Record any conversion explicitly.
 
 ## Master equation 1: production
 
@@ -60,6 +61,11 @@ Written per unit biomass, the same equation is a mortality budget:
 
 with predation mortality `M2_i = Σ_j B_j (Q/B)_j DC_ji / B_i`, fishing mortality
 `F_i = Y_i / B_i`, and other mortality `M0_i = (P/B)_i (1 − EE_i)`.
+
+Here `M0_i` is a rate. The repository calculator's `model.M0` attribute is instead
+the flow `B_i * (P/B)_i * (1-EE_i)`. Natural mortality in an article can also include
+predation. Read `references/mortality-and-discards.md` before comparing those values
+or changing a source parameter.
 
 Rearranged, this gives the check that catches most extraction errors:
 

@@ -26,6 +26,7 @@ import sys
 from pathlib import Path
 
 import openpyxl
+from npp_data import load_npp, npp_for_year
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "skills" / "claude" / "ewe-species-to-group-mapper" / "scripts"))
@@ -55,9 +56,49 @@ def grid(ws):
     return [list(r) for r in ws.iter_rows(values_only=True)]
 
 
+def check_annual_npp(wb, npp):
+    """Independently check annual source parity and both Summary denominators."""
+    bad = []
+    if 'NPP' not in wb or 'Summary' not in wb:
+        return ['missing annual NPP or Summary sheet']
+    rows = grid(wb['NPP'])
+    header = next((r for r in rows if r[0] == 'year'), None)
+    if header is None:
+        return ['NPP sheet does not contain annual records']
+    by_year = {r[0]: dict(zip(header, r)) for r in rows if isinstance(r[0], int)}
+    numeric = [k for k in header if k and k.endswith('_tC_yr')]
+    for year, row in by_year.items():
+        source = npp_for_year(npp, year)
+        for key in numeric:
+            expected = source.get(key)
+            expected = float(expected) if expected not in (None, '') else None
+            actual = row[key]
+            if ((actual is None) != (expected is None) or
+                    (actual is not None and abs(actual - expected) > max(1e-6, abs(expected) * 1e-12))):
+                bad.append(f'NPP sheet {year} {key}: {actual} != source {expected}')
+    summary = grid(wb['Summary'])
+    for row in summary:
+        if not isinstance(row[0], int):
+            continue
+        year = row[0]
+        if year not in by_year:
+            bad.append(f'NPP sheet missing catch year {year}')
+        denominator = npp_for_year(npp, year).get('ens_median_tC_yr')
+        denominator = float(denominator) if denominator not in (None, '') else None
+        for numerator_index, ratio_index in ((2, 4), (3, 5)):
+            numerator, actual = row[numerator_index], row[ratio_index]
+            expected = (round(100 * numerator / 9.0 / denominator, 4)
+                        if denominator and numerator is not None else None)
+            if ((actual is None) != (expected is None) or
+                    (actual is not None and abs(actual - expected) > 0.00011)):
+                bad.append(f'Summary {year} column {ratio_index + 1}: ratio {actual} != annual ratio {expected}')
+    return bad
+
+
 def check(path: Path, unit: str) -> list:
     bad = []
     wbf = openpyxl.load_workbook(path)                     # formulas as written
+    bad.extend(check_annual_npp(wbf, load_npp(ROOT).get(unit)))
     for need in ("Catch", "SPPR", "PPR by method", "PPR by taxon", "Taxon-Group Map",
                  "Model groups"):
         if need not in wbf.sheetnames:

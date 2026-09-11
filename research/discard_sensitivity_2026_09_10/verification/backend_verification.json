@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "production_files": [
+    {
+      "path": "tools/discard_data.py",
+      "sha256": "406d80979fb40ec126bb263e2b84046f311a5a4b2cb3adaaf201592c7b6742ed"
+    },
+    {
+      "path": "tools/build_network_atlas.py",
+      "sha256": "c790bbd720a2592d3c6d9bcc1088b962a6a1533c0f9f6686a1a4605d70e95c23"
+    },
+    {
+      "path": "tools/build_time_series.py",
+      "sha256": "d2b071ebf4963e849203b4a7027a92c36afca239aae9e80d8ebef15c1d1f0564"
+    },
+    {
+      "path": "tests/test_discard_data.py",
+      "sha256": "59610829c7be106712d1e7431f86296a3795c2328f832c5d5d5c9a7f73c58487"
+    }
+  ],
+  "focused_test_command": "python -X utf8 -m pytest tests/test_discard_data.py tests/test_time_series_export.py tests/test_unidentified_catch.py -q",
+  "focused_tests_passed": 29,
+  "final_study_output_tests_passed": 10,
+  "python_compile_passed": true,
+  "workbook_smoke": "network_backend_smoke.json",
+  "workbook_smoke_npp_source": "NPPExtraction/output/snapshots/annual_npp_for_task14.csv",
+  "workbook_smoke_verified_workbooks": 10,
+  "note": "Read-only export_network and export_models smoke. Source-workbook validator unchanged. Final zero-covered-mass edge guard additionally verified by focused tests. Shared atlas JSON and workbooks were not written by this backend task.",
+  "supported_method_scope_counts": {
+    "Humboldt": 5,
+    "Guinea": 12,
+    "Bay": 14,
+    "Okhotsk": 0
+  },
+  "guardrails": [
+    "Exact model JSON and upstream coefficient-workbook SHA-256",
+    "Fixed mapping weighted baseline parity with persisted six-decimal precision anchor",
+    "No interpolation across invalid/intermediate computed points or unsupported intervals",
+    "Missing selected catch boundary fails closed",
+    "Named routes evaluated on identical positive landed support",
+    "Source validity and per-route evidence retained",
+    "Unidentified treatment support remains consistent",
+    "NPP separate from PPR sensitivity",
+    "Older network policy cannot enter a new production time-series build"
+  ]
+}

@@ -6,6 +6,10 @@ that, `data/README.md` and the skill files are the working references.
 
 Last updated: 2026-09-07.
 
+Update 2026-09-10: the annual NPP work supersedes this handoff's fixed-2019
+denominator convention. Follow `NPPExtraction/README.md`, `data/README.md` and
+`docs/INTEGRATION_COMPLETION.md` for the current pipeline and completion status.
+
 ---
 
 ## 1. What the project is trying to answer
@@ -584,3 +588,25 @@ Focused numerical tests and browser checks cover single/two/three curves,
 shading, normalization, failed/empty selections, model changes and saved links.
 Source JSON and XLSX, PPREstimation/Jensen behavior, pilot selection and the
 fixed 2019 NPP convention remain unchanged.
+
+## 18. Annual NPP, catch bases and final skills — 2026-09-10
+
+This update supersedes the fixed-2019 convention and earlier task status above.
+All 1998–2019 satellite history has been processed for 166 catch-bearing archived
+ecosystems, with unsupported catch years explicitly blank. All 364 central and
+ten mapped model workbooks and both atlas exports use stable final inputs.
+`Final mappings` preserves 4,042 exact assignment/weight rows in central/model books.
+
+Map and graph offer landings (default), all catch and discards, evaluated from
+their own taxon vectors. The optional landings routing envelope uses validated
+model-specific scenario responses; all catch and discards have no routing band.
+The three-basis audit passes 16,200 cases. Missing NPP never becomes zero; optional
+early-year proxies retain their actual source year. CSVs retain carbon PPR and
+available carbon bounds even when ratio values are unavailable.
+
+All three project skills and six packages have been refreshed after the other
+agents finished. The existing installed extraction skill was backed up and
+updated. See `SKILL_KNOWLEDGE_REFRESH.md` for scope and evidence. The current task
+list, verification counts and limitations are in `INTEGRATION_COMPLETION.md`;
+`ANNUAL_NPP_HANDOFF.md` contains final coverage and rebuild instructions.
+Carbon conversion literature review and coverage expansion remain deferred.

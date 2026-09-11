@@ -4,14 +4,8 @@ The standalone extraction workflow leaves taxonomy to this stage. A full PPR
 pipeline also needs the model's group membership, so capture it while the paper
 is open. An explicitly extraction-only request still stops at stage 1.
 
-What that omission costs, measured on the first three finished mappings: `taxon_descr` null
-for every group in every extracted model, so all three mappings rested on taxonomic
-containment and habitat inference rather than a documented member list, and all three
-stalled near 78 % of catch tonnage. Each spent an hour re-reading a PDF the extractor had
-already read.
-
-You are already reading the basic-input table and the diet matrix. Write down what the
-groups contain while you are there.
+Record membership during the same source reading as the parameters. The resulting
+evidence should remain usable by a later mapper without reconstructing its origin.
 
 ## The file
 
@@ -58,6 +52,26 @@ scope; then regenerate the mapping work order from the refreshed workbook.
 ## What to write in `taxon_descr`
 
 Whatever the paper actually supports, in this order of preference.
+
+First identify what a table establishes: exhaustive composition, selected example
+members, catch allocation, or species used in diet studies. Preserve that scope
+in the description and provenance. A diet-study list is not automatically an
+exhaustive membership inventory. Absence from it neither excludes a catch taxon
+nor requires a weighted assignment. Weights are needed when several supported
+groups or spatial pools remain, even for an explicitly named member.
+
+For Guénette's Bay of Bengal report, A3.1 (pp.50–53) lists diet-study sources;
+A1.1 (pp.37–41) allocates catch names and A1.3 (pp.43–45) describes composition.
+Dedicated yellowfin/bigeye groups are supported elsewhere even where A3.1 says
+“Tuna-like.” The repository's `data/LME_034/validation/guenette-a31-review/REVIEW.md`
+records this comparison; it does not validate regional weights. Confirm synonyms
+against an authority and retain author-distinguished taxa when authorities differ.
+
+Keep an unreconciled diet-study list in its own source-audit table. The mapping
+validator treats `members.csv` group placements as authoritative and has no
+table-scope or precedence field. Reconcile the exact model's composition before
+putting a diet example into that file. Its overlap check cannot validate every
+candidate in a composite or the weights between geographic pools.
 
 **A species list, if the paper gives one.** Copy it. Semicolon-separated, scientific names,
 the paper's spelling. This is the whole point and everything else is a substitute.

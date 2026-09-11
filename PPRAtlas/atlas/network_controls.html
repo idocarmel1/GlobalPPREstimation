@@ -1,8 +1,11 @@
 <div class="section-title">PPR estimation</div>
+<div class="field"><label for="mapCatchBasis">Catch used for PPR</label><select id="mapCatchBasis"><option value="landings">Landings only (default)</option><option value="catch">All catch · landings + discards</option><option value="discards">Discards only</option></select></div>
+<div class="field"><label for="mapUncertainty">Discard-routing sensitivity envelope</label><select id="mapUncertainty"><option value="1">Show where assessed</option><option value="0">Hide envelope</option></select><p class="network-note" id="mapSensitivityHelp">Available for landings only; this is a scenario range, not a confidence interval.</p></div>
 <div class="field"><label for="metricMode">Color ecosystems by</label><select id="metricMode">
-  <option value="ppr">PPR estimate</option><option value="ratio">Ratio of two methods</option>
+  <option value="ppr">PPR estimate</option><option value="npp_ratio">PPR / NPP (%)</option><option value="ratio">Ratio of two methods</option>
   <option value="b">Recycling · b</option><option value="rho_living">Recycling · rho living</option>
 </select></div>
+<div class="field"><label for="mapUnidentified">Unidentified catch treatment</label><select id="mapUnidentified"><option value="method">Selected method’s own SPPR (default)</option><option value="zero">Sensitivity: zero PPR, retain catch</option><option value="simple">Sensitivity: reference-TL simple chain (all sources)</option></select></div>
 <div id="pprOptions">
   <div class="field"><label for="scopeFilter">SPPR source scope</label><select id="scopeFilter">
     <option value="all">All · includes imports</option><option value="inner">Inner · excludes imports</option>
@@ -11,7 +14,11 @@
   <div class="field"><label for="methodFilter" id="methodLabel">Estimation method</label><select id="methodFilter"></select></div>
   <div class="field" id="denominatorField" hidden><label for="denominatorFilter">Divide by method</label><select id="denominatorFilter"></select></div>
 </div>
+<div id="nppOptions">
+  <div class="field"><label for="mapNppMethod">NPP calculation</label><select id="mapNppMethod"></select></div>
+  <div class="field"><label for="mapNppFill">Missing historical NPP</label><select id="mapNppFill"><option value="observed">Actual annual data only</option><option value="earliest">Use earliest available year for earlier gaps</option></select></div>
+</div>
 <div class="field" id="recyclingOptions" hidden><label for="teFilter">SPPR_new transfer efficiency</label><select id="teFilter"><option value="GE">GE</option><option value="TE">TE · EE repair enabled</option></select></div>
 <p id="metricHelp" class="network-note"></p>
 <div class="legend-card" id="networkLegend"><b id="metricLegendTitle">PPR estimate</b><div class="grad" id="metricGradient"></div><div class="legend-labels"><span id="metricLow"></span><span id="metricMiddle"></span><span id="metricHigh"></span></div></div>
-<p class="network-note">Color is limited to the 10 selected-article pilot ecosystems. Gray means unselected or unavailable. Select an ecosystem to inspect its model, catch coverage and scientific limits.</p>
+<p class="network-note">Simple trophic chain uses catch-taxon trophic levels wherever catch data are available, without extracted articles or Ecopath models. Other methods require a verified selected model. Gray means the chosen calculation or annual NPP is unavailable. The pilot filter selects the model study set independently of simple-chain availability.</p>

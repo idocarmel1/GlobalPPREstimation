@@ -95,3 +95,10 @@ def test_excel_decimal_precision_is_tolerated_but_numeric_changes_are_rejected()
     module.assert_annual_equal(10556726916726.766, 10556726916726.77, 'Source writer 16-digit storage')
     with pytest.raises(ValueError, match='annual total differs'):
         module.assert_annual_equal(10556726916727.766, 10556726916726.77, 'changed coefficient')
+
+
+def test_graph_years_include_npp_records_without_a_matching_catch_year():
+    assert exporter().graph_years({2000, 2001}, {
+        'no_catch': {'annual': {'1998': {}, '2005': {}}},
+        'legacy_only': {'annual': {'2019': {}}},
+    }) == [1998, 2000, 2001, 2005, 2019]

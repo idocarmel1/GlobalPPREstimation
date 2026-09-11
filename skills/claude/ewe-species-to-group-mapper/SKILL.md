@@ -144,7 +144,11 @@ group whether or not catch lands on it; the notes carry the model's area, the ax
 supplements you did and did not get, and the judgement calls a reviewer should push back
 on.
 
-### 7. Merge
+### 7. Integrate when requested
+
+For a mapping-only request, finish with the validated mapping files and report.
+When the requested deliverable includes PPR workbooks or repository integration,
+run the following commands for the requested unit:
 
 ```bash
 python tools/build_model_workbook.py --units LME_047
@@ -156,6 +160,16 @@ because every PPR derived from that row would be fiction. It writes one workbook
 under `data/<unit>/models/`, plus `<model_stem>.resolved.csv` recording the weights it
 actually used. The verifier then re-derives the workbook's formulas by hand and checks the
 per-taxon and aggregate sheets against each other.
+
+Both that model workbook and the central `data/<unit>/<unit>.xlsx` expose exact
+numeric weights in **Final mappings**. Refresh the central workbook with
+`python -X utf8 tools/build_ecosystem_data.py --units <unit> --force` after mapping
+changes and run `python -X utf8 tools/verify_final_mappings.py` for parity.
+The `.resolved.csv` displays weights to six decimals; use the sheet for full
+persisted precision. Read `references/integration-contract.md` when integrating
+annual NPP, independent simple PPR, NPP-only/global-denominator views, catch bases,
+unidentified treatments, source provenance or discard sensitivity. These atlas
+paths do not require creating a model mapping when the requested estimate is independent.
 
 ## Output
 
