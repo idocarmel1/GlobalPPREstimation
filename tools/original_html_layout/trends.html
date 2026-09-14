@@ -1,0 +1,1158 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PPR and NPP through time · Global PPR estimation</title>
+<style>:root{--ink:#183945;--muted:#5d7480;--teal:#087a80;--line:#d9e4e7;--paper:#f4f7f7;--light:#edf5f4;font-family:Manrope,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--paper);font-size:14px}
+.controls .treatment{grid-column:1/-1}
+.downloads{display:flex;flex-wrap:wrap;gap:6px 18px;flex-shrink:0}
+.sensitivity-readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:12px;padding:0 28px 20px}.sensitivity-card{min-width:0;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:11px;line-height:1.55;color:var(--muted)}.sensitivity-card b{color:var(--ink)}.sensitivity-card p{margin:6px 0}.sensitivity-card details{font-size:10px;overflow-wrap:anywhere}.sensitivity-card ul{padding-left:17px}.sensitivity-interval{display:block;width:100%;max-width:260px;height:34px}.sensitivity-card summary{margin-top:7px}
+.period{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin:9px 0 6px}.period select{border:1px solid var(--line);border-radius:5px;background:white;padding:5px 8px;font-size:11px}
+.method-select{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;border:1px solid var(--line);border-radius:6px;background:white;padding:10px;font-size:12px;min-height:38px;text-align:left}.method-select span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.series-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:12px 22px;padding:4px 30px 20px}.series-key{display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:11px;align-items:start;min-width:0}.series-key svg{margin-top:5px}.series-key b{font-weight:600;overflow-wrap:anywhere}.series-key output{display:block;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums;line-height:1.5}#methodDialog{width:min(640px,94vw)}#methodList{height:min(410px,48vh)}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit;color:inherit}button,a,select,input{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #dcad45;outline-offset:3px}[hidden]{display:none!important}a{color:var(--teal)}button{border:1px solid var(--line);background:white;border-radius:8px;padding:10px 14px}button:hover{background:var(--light)}.primary{background:var(--teal);color:white;border-color:var(--teal);font-weight:650;padding:12px 18px}.primary:hover{background:#07646b}.text-button{background:none;border:0;padding:5px 0;color:var(--teal);font-size:12px;white-space:nowrap}.site-header{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:auto;padding:24px 40px;border-bottom:1px solid var(--line)}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);font-weight:750;font-size:13px;letter-spacing:1.5px}.brand-mark{display:grid;place-items:center;width:38px;height:38px;background:var(--teal);color:white;border-radius:50%;font-size:28px;line-height:1}.brand-sub{display:block;letter-spacing:0;font-size:11px;font-weight:400;color:var(--muted);margin-top:4px}nav{display:flex;border:1px solid var(--line);padding:4px;border-radius:10px;gap:4px;background:white}nav a{text-decoration:none;color:var(--muted);padding:8px 19px;border-radius:6px;font-size:13px}nav a[aria-current]{color:white;background:var(--ink)}main{max-width:1320px;margin:0 auto;padding:34px 32px 50px}.intro{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:26px}.eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:700;color:var(--teal);margin:0 0 10px}h1{font-weight:600;letter-spacing:-1.2px;font-size:36px;margin:0 0 8px}h2{font-size:18px;font-weight:650;margin:0}.subtitle{margin:0;color:var(--muted);font-size:14px}.chart-card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 7px 30px #18394505}.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:21px 26px;border-bottom:1px solid var(--line);background:#fbfdfd}.field{min-width:0}.field label{display:block;color:var(--muted);font-weight:600;font-size:11px;margin-bottom:7px;letter-spacing:.15px}.field select,.field input{width:100%;border:1px solid var(--line);border-radius:6px;background:white;padding:10px 28px 10px 10px;font-size:12px;min-height:38px}.field select:disabled{background:#f1f4f5;color:#7a8b94}.plot-heading{display:flex;justify-content:space-between;align-items:start;padding:26px 30px 5px;gap:15px}.plot-heading p{font-size:12px;color:var(--muted);margin:8px 0}.readout{text-align:right;min-width:170px}.readout span{display:block;color:var(--muted);font-size:11px;letter-spacing:.5px}.readout strong{display:block;font-size:24px;font-weight:600;color:var(--teal);margin-top:4px;font-variant-numeric:tabular-nums}.plot-wrap{position:relative;height:360px;margin:0 18px}#chart{display:block;width:100%;height:100%;overflow:visible;touch-action:pan-y}.empty{position:absolute;inset:20px 10%;display:flex;justify-content:center;align-items:center;text-align:center;flex-direction:column;background:#ffffffed}.empty strong{font-size:20px;font-weight:600}.empty p{color:var(--muted);max-width:440px;line-height:1.6}.scrubber{display:flex;align-items:center;gap:15px;margin:0 32px 17px;font-size:11px;color:var(--muted)}.scrubber input{flex:1;accent-color:var(--teal);min-width:0}.scrubber output{font-variant-numeric:tabular-nums;min-width:30px}.chart-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:13px 28px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}.chart-footer p{margin:0;line-height:1.6}.context{padding:15px 2px 6px;color:var(--muted);font-size:11px;line-height:1.65}.context p{margin:4px 0}#nppNote{color:#7d601e}details{font-size:12px;color:var(--muted);line-height:1.65}summary{cursor:pointer;display:list-item;width:fit-content;color:var(--ink)}#coverageBody{margin-top:15px;display:grid;grid-template-columns:1fr 1fr;gap:22px}#coverageBody h3{font-size:12px;margin:0 0 8px;color:var(--ink)}#coverageBody ul{margin:0;padding-left:18px}#coverageBody li{margin-bottom:7px;overflow-wrap:anywhere}dialog{border:1px solid var(--line);border-radius:14px;width:min(760px,94vw);max-height:88vh;padding:0;box-shadow:0 20px 80px #082a3c33;color:var(--ink)}dialog::backdrop{background:#122f4580;backdrop-filter:blur(3px)}.dialog-heading{display:flex;align-items:center;justify-content:space-between;padding:24px 26px 10px}.dialog-heading h2{font-size:26px}.dialog-heading button{border:0}.dialog-hint{color:var(--muted);font-size:12px;margin:0;padding:0 26px 18px}.picker-controls{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:0 26px 18px}.picker-actions{display:flex;gap:18px;align-items:center;padding:10px 26px;background:var(--paper);font-size:12px}.picker-actions span{flex:1}.ecosystem-list{height:350px;overflow-y:auto;padding:0 26px}.ecosystem-row{display:grid;grid-template-columns:1fr;gap:7px;border-bottom:1px solid #e8eef0;padding:12px 0}.ecosystem-row label{display:flex;align-items:start;gap:10px;cursor:pointer;line-height:1.5;font-size:13px}.ecosystem-row input{accent-color:var(--teal);margin-top:4px}.ecosystem-row small{display:block;font-size:10px;color:var(--muted)}.ecosystem-row select{font-size:11px;width:calc(100% - 25px);margin-left:25px;padding:8px;border:1px solid var(--line);border-radius:5px;background:#fbfdfd}.dialog-footer{display:flex;justify-content:space-between;align-items:center;padding:17px 26px;gap:20px;border-top:1px solid var(--line)}.dialog-footer p{font-size:11px;color:var(--muted);margin:0;max-width:460px;line-height:1.5}
+@media(min-height:900px){.plot-wrap{height:430px}}@media(max-width:820px){.controls{grid-template-columns:1fr 1fr}.site-header{padding:18px 22px}main{padding:26px 18px}h1{font-size:30px}.intro{align-items:start}.plot-heading{padding:23px 22px 5px}.plot-wrap{height:340px;margin:0 8px}.readout strong{font-size:20px}}@media(max-width:500px){.site-header{padding:15px}.brand{font-size:11px;gap:7px;letter-spacing:1px}.brand-mark{width:29px;height:29px;font-size:22px}.brand-sub{font-size:9px}nav a{padding:8px 10px;font-size:11px}main{padding:24px 12px}.intro{display:block;margin-bottom:20px}.intro button{margin-top:15px;width:100%}h1{font-size:29px}.eyebrow{font-size:9px}.controls{gap:13px;padding:16px}.plot-heading{display:block;padding:20px 17px 0}.plot-heading h2{font-size:16px}.readout{text-align:left;margin:8px 0 0;display:flex;gap:10px;align-items:baseline}.readout strong{font-size:21px}.plot-wrap{height:290px}.scrubber{margin:0 18px 15px;gap:9px}.chart-footer{padding:13px 17px;display:block}.chart-footer button{margin-top:10px}#coverageBody{grid-template-columns:1fr}.picker-controls{grid-template-columns:1fr;padding:0 18px 15px}.dialog-heading{padding:20px 18px 10px}.dialog-hint{padding:0 18px 15px}.picker-actions{padding:10px 18px;gap:12px}.ecosystem-list{height:270px;padding:0 18px}.dialog-footer{padding:15px 18px}.dialog-footer p{max-width:160px}.dialog-footer button{white-space:nowrap}dialog{max-height:94vh}}
+
+.reference-warning{border-left:3px solid #b88020;background:#fff9e9;padding:10px 13px}
+
+.group-dialog{width:min(1120px,95vw);max-width:1120px;max-height:92vh;padding:22px;border:1px solid #cfdee5;border-radius:14px;color:#153945;background:#fff;box-shadow:0 16px 70px #15394540;font:13px/1.5 Manrope,Arial,sans-serif}.group-dialog::backdrop{background:#15394580}.group-heading,.group-actions,.group-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}.group-heading h2{font-size:24px;margin:0}.group-dialog button{font:inherit;cursor:pointer;border:1px solid #bed2da;border-radius:7px;padding:7px 12px;background:#fff;color:#164554}.group-dialog button:hover{background:#edf6f6}.group-dialog button:focus-visible,.group-dialog input:focus-visible,.group-dialog select:focus-visible{outline:3px solid #d2a630;outline-offset:2px}.group-close{font-size:24px!important;line-height:1}.group-controls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:14px;margin:20px 0 8px}.group-controls label,.group-search{display:flex;flex-direction:column;gap:5px;font-size:12px;color:#406675}.group-dialog select,.group-dialog input[type=search],.group-dialog input[type=number]{min-width:0;box-sizing:border-box;border:1px solid #c5d8e0;border-radius:6px;padding:8px;background:white;color:#153945;font:inherit}.group-context,.group-hint,.group-storage{font-size:11px;color:#567682}.group-search{max-width:420px;margin:14px 0}.group-actions{justify-content:flex-start;flex-wrap:wrap}.group-actions span{margin-right:auto;font-weight:600}.group-table-wrap{max-height:45vh;overflow:auto;border:1px solid #d5e3e8;border-radius:8px;margin-top:12px}.group-dialog table{width:100%;border-collapse:separate;border-spacing:0;table-layout:auto;font-size:12px}.group-dialog thead{position:sticky;top:0;background:#eef5f7;z-index:1}.group-dialog th,.group-dialog td{padding:8px;border-bottom:1px solid #e3ecef;text-align:left;vertical-align:middle}.group-dialog th:first-child,.group-dialog td:first-child{width:48px;text-align:center}.group-dialog td:nth-child(2){min-width:180px}.group-dialog input[type=checkbox]{width:17px;height:17px;accent-color:#087d86}.group-dialog th input{display:block;width:100%;min-width:75px;max-width:140px;margin:3px 0;padding:4px!important;font-size:11px!important}.group-sort{border:0!important;background:transparent!important;padding:0!important;text-align:left;font-weight:700!important;white-space:nowrap}.group-sort[data-direction=asc]::after{content:' ↑'}.group-sort[data-direction=desc]::after{content:' ↓'}.group-number{text-align:right!important;font-variant-numeric:tabular-nums}.group-dialog tbody tr:hover{background:#f2f9f9}.group-footer{margin-top:12px}.group-footer p{font-size:11px;color:#567682;max-width:820px}.group-dialog .group-done{background:#087d86;color:white;min-width:100px}.group-dialog .group-done:hover{background:#056670}.group-filter-launch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.group-filter-launch button{border:1px solid #bad3da;border-radius:7px;padding:9px;background:white;color:#174b59;font:inherit;cursor:pointer}.group-filter-launch small{font-size:11px;color:#567682}@media(max-width:700px){.group-dialog{padding:14px}.group-controls{grid-template-columns:1fr}.group-heading h2{font-size:20px}.group-table-wrap{max-height:40vh}.group-footer{align-items:flex-start}.group-actions{gap:6px}.group-actions span{flex-basis:100%}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">≈</span><span>GLOBAL PPR<span class="brand-sub">Sea Around Us × Ecopath</span></span></a><nav aria-label="View"><a href="index.html">Map</a><a href="trends.html" aria-current="page">Time series</a></nav></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">ANNUAL PRODUCTION AND FISHERIES REQUIREMENTS</p><h1>PPR and NPP through time</h1><p id="selectionTitle" class="subtitle"></p></div><button id="chooseEcosystems" class="primary" aria-haspopup="dialog">Choose ecosystems</button></div>
+  <section class="chart-card" aria-label="Time-series explorer">
+    <div class="controls">
+      <div class="field"><label for="catchBasis">Catch used for PPR</label><select id="catchBasis"><option value="landings">Landings only (default)</option><option value="catch">All catch · landings + discards</option><option value="discards">Discards only</option></select></div>
+      <div class="field"><label for="uncertainty">Discard-routing sensitivity envelope</label><select id="uncertainty"><option value="1">Show where assessed</option><option value="0">Hide envelope</option></select></div>
+      <div class="field"><label for="metric">Measure</label><select id="metric"><option value="ppr">PPR</option><option value="ratio">PPR / NPP</option><option value="npp">NPP through time</option></select></div>
+      <div class="field method"><label id="pprMethodsLabel" for="pprMethod">PPR calculations</label><button id="pprMethod" class="method-select" aria-haspopup="dialog" aria-labelledby="pprMethodsLabel pprMethodText"><span id="pprMethodText"></span><span aria-hidden="true">⌄</span></button></div>
+      <div class="field"><label for="baselineMethod">Divide by baseline</label><select id="baselineMethod"></select></div>
+      <div class="field"><label for="sourceScope">Source scope</label><select id="sourceScope"><option value="all">All sources</option><option value="inner">Inner sources</option><option value="PP">Primary producers (PP)</option></select></div>
+      <div class="field"><label for="nppScope">NPP denominator</label><select id="nppScope"><option value="selected">Selected ecosystems</option><option value="global">Global atlas NPP</option></select></div>
+      <div class="field"><label for="nppMethod">NPP calculation</label><select id="nppMethod"></select></div>
+      <div class="field"><label for="nppFill">Missing historical NPP</label><select id="nppFill"><option value="observed">Actual annual data only</option><option value="earliest">Use earliest available year for earlier gaps</option></select></div>
+      <div class="field treatment"><label for="unidentifiedTreatment">Unidentified catch treatment</label><select id="unidentifiedTreatment"><option value="method">Selected method’s own SPPR (default)</option><option value="zero">Sensitivity: zero PPR, retain catch</option><option value="simple">Sensitivity: reference-TL simple chain (all sources)</option></select></div>
+      <div class="field treatment group-filter-launch"><button id="openGroupFilter" type="button" aria-haspopup="dialog">Choose model groups</button><small id="groupFilterSummary">All model groups included</small></div>
+    </div>
+    <div class="plot-heading"><div><h2 id="chartTitle">Annual PPR</h2><p id="cohortSummary" aria-live="polite"></p><div class="period"><label for="fromYear">From</label><select id="fromYear" aria-label="First year"></select><label for="toYear">to</label><select id="toYear" aria-label="Last year"></select></div></div><div class="readout"><span id="focusYear"></span><strong id="focusValue"></strong></div></div>
+    <div class="plot-wrap" id="plotWrap"><svg id="chart" role="img" aria-labelledby="svgTitle svgDesc"><title id="svgTitle">Annual PPR</title><desc id="svgDesc"></desc></svg><div id="emptyState" class="empty" hidden><strong>No estimate for this selection</strong><p id="emptyReason"></p><button id="emptyChoose">Choose ecosystems</button></div></div>
+    <div class="scrubber"><label for="inspectYear">Inspect year</label><input id="inspectYear" type="range" step="1"><output for="inspectYear" id="inspectValue"></output></div>
+    <div id="seriesLegend" class="series-legend" aria-label="Selected method values" hidden></div>
+    <div id="sensitivityReadout" class="sensitivity-readout" aria-live="polite"></div>
+    <div class="chart-footer"><p id="coverage"></p><div class="downloads"><button class="text-button" id="downloadCSV">Download CSV ↓</button><button class="text-button" id="downloadJSON">Download JSON ↓</button></div></div>
+  </section>
+  <div class="context"><p id="calculationNote"></p><p id="unidentifiedNote"></p><p id="nppNote" hidden></p><p id="sensitivityNote"></p><p id="setNote"></p></div>
+  <details id="coverageDetails"><summary id="coverageDetailsTitle">Coverage and sources</summary><div id="coverageBody"></div></details>
+</main>
+<dialog id="methodDialog" aria-labelledby="methodDialogTitle">
+  <div class="dialog-heading"><div><p class="eyebrow">COMPARE ESTIMATION METHODS</p><h2 id="methodDialogTitle">PPR calculations</h2></div><button id="closeMethods" aria-label="Close method selection">✕</button></div>
+  <p class="dialog-hint">Select one or more methods. Each selection adds a curve to the same graph.</p>
+  <div class="picker-actions"><span id="methodCount" aria-live="polite"></span><button id="selectAllMethods" class="text-button">Select all</button><button id="clearMethods" class="text-button">Clear all</button></div>
+  <div id="methodList" class="ecosystem-list"></div>
+  <div class="dialog-footer"><p>Each method uses a separate color. Shaded sensitivity bands appear only for assessed landings estimates.</p><button class="primary" id="doneMethods">Show graph</button></div>
+</dialog>
+<dialog id="ecosystemDialog" aria-labelledby="dialogTitle">
+  <div class="dialog-heading"><div><p class="eyebrow">DEFINE YOUR ESTIMATE</p><h2 id="dialogTitle">Ecosystems</h2></div><button id="closeEcosystems" aria-label="Close ecosystem selection">✕</button></div>
+  <p class="dialog-hint" id="ecosystemHint">The graph sums your selection. Each model version is used separately.</p>
+  <div class="picker-controls"><div class="field"><label for="ecosystemSet">Ecosystem set</label><select id="ecosystemSet"></select></div><div class="field"><label for="ecosystemSearch">Find an ecosystem</label><input id="ecosystemSearch" type="search" placeholder="Name or ID…"></div></div>
+  <div class="picker-actions"><span id="pickerCount" aria-live="polite"></span><button id="selectVisible" class="text-button">Select visible</button><button id="clearSelection" class="text-button">Clear all</button></div>
+  <div id="ecosystemList" class="ecosystem-list"></div>
+  <div class="dialog-footer"><p id="pickerNote"></p><button class="primary" id="doneEcosystems">Show graph</button></div>
+</dialog>
+<script>const SERIES_DB=__PPR_DATA__;</script>
+<script>/* Shared annual denominator lookup. Substitution is an explicit display policy. */
+(function(root,factory){
+  const api=factory();
+  if(typeof module==='object' && module.exports)module.exports=api;
+  else root.PPRAnnualNPP=api;
+})(typeof globalThis==='object'?globalThis:this,function(){
+  const positive=value=>typeof value==='number' && Number.isFinite(value) && value>0;
+  function resolve(years,values,year,policy='observed',metadata={},options={}){
+    const acceptable=options.allowZero?value=>typeof value==='number'&&Number.isFinite(value)&&value>=0:positive;
+    const index=years.indexOf(Number(year)),annual=Array.isArray(values);
+    const raw=annual?values[index]:values;
+    let sourceYear=Number(year),value=raw,substituted=false;
+    if(index>=0 && annual && raw==null && policy==='earliest'){
+      const first=years.map((y,i)=>({year:Number(y),value:values[i]})).filter(p=>acceptable(p.value)).sort((a,b)=>a.year-b.year)[0];
+      if(first && Number(year)<first.year){value=first.value;sourceYear=first.year;substituted=true;}
+    }
+    const valid=index>=0 && acceptable(value);
+    return {value:valid?value:null,source_year:valid?sourceYear:null,substituted:valid && substituted,
+      status:valid?(substituted?'earliest_year_estimate':'observed'):'unavailable',
+      metadata:metadata[String(valid?sourceYear:year)]||null};
+  }
+  return {resolve,positive};
+});
+
+/* Display/aggregation of verified response exports; no food-web solving here. */
+(function(root,factory){
+  const api=factory();
+  if(typeof module==='object'&&module.exports)module.exports=api;
+  else root.PPRDiscardSensitivity=api;
+})(typeof globalThis==='object'?globalThis:this,function(){
+  'use strict';
+  const finite=v=>typeof v==='number'&&Number.isFinite(v);
+  const basis=state=>state.catch_basis||'landings';
+  const enabled=state=>basis(state)==='landings'&&state.uncertainty!==false&&state.uncertainty!=='0';
+  const unavailable=reason=>({status:'not_assessed',min_tC:null,max_tC:null,lower:null,upper:null,reason});
+  function display(band,state,denominator=null){
+    if(!enabled(state))return {...unavailable(basis(state)==='landings'?'Sensitivity hidden.':'Sensitivity is available for the landings view only.'),discard_fraction:band?.discard_fraction??null,hidden:true};
+    if(!band)return unavailable('No tested compatible discard response for this model, method and scope.');
+    const ratio=state.mode==='npp_ratio'||state.mode==='ratio';
+    if(band.status!=='assessed'||!finite(band.min_tC)||!finite(band.max_tC))return {...band,lower:null,upper:null};
+    if(ratio&&!(finite(denominator)&&denominator>0))return {...band,lower:null,upper:null,reason:'Annual NPP unavailable; carbon PPR endpoints remain in the export.'};
+    const scale=ratio?100/denominator:1;
+    return {...band,lower:band.min_tC*scale,upper:band.max_tC*scale,hidden:false};
+  }
+  function combine(bands){
+    if(!bands.length||bands.some(b=>b?.status!=='assessed'))return unavailable('A compatible discard response is not assessed for every included ecosystem.');
+    // Sum the same named route across the complete cohort, never independent
+    // extrema that could mix different physical conventions among ecosystems.
+    const names=['SC','SM','SE','SR'].filter(name=>bands.every(b=>finite(b.route_ppr_tC?.[name])));
+    if(names.length<2)return unavailable('Fewer than two valid routing scenarios are shared by the complete ecosystem cohort.');
+    const routes=Object.fromEntries(names.map(name=>[name,bands.reduce((sum,b)=>sum+b.route_ppr_tC[name],0)]));
+    const values=Object.values(routes);
+    return {status:'assessed',min_tC:Math.min(...values),max_tC:Math.max(...values),route_ppr_tC:routes,
+      valid_routes:names,excluded_routes:['SC','SM','SE','SR'].filter(n=>!names.includes(n)),
+      interpolated:bands.some(b=>b.interpolated),uncertainty_type:'Discard-routing sensitivity envelope; not a confidence interval',
+      construction_invariant:bands.every(b=>b.construction_invariant),
+      sources:bands.map(b=>({model_id:b.model_id,source_hash:b.source_hash,study_version:b.study_version,discard_fraction:b.discard_fraction})),
+      reason:'The same named routes are summed across every included ecosystem; unsupported routes are excluded explicitly.'};
+  }
+  return {basis,enabled,display,combine,unavailable,finite};
+});
+
+/* Retain the original catch allocations when selecting model groups. */
+(function(root,factory){
+  const api=factory();
+  if(typeof module==='object'&&module.exports)module.exports=api;
+  else root.PPRGroups=api;
+})(typeof globalThis==='object'?globalThis:this,function(){
+  'use strict';
+  const finite=v=>typeof v==='number'&&Number.isFinite(v);
+  const valid=v=>finite(v)&&v>=0;
+  const key=(unitId,model)=>unitId+'::'+model.id;
+  function selection(model,ids){
+    const list=model?.group_data?.groups||[];
+    const names=new Set(Array.isArray(ids)?ids:list.map(g=>g.id));
+    const indices=list.flatMap((g,i)=>names.has(g.id)?[i]:[]);
+    return {ids:indices.map(i=>list[i].id),indices,count:indices.length,total:list.length,
+      active:Array.isArray(ids)&&list.length>0&&indices.length<list.length,empty:indices.length===0};
+  }
+  const active=(model,ids)=>selection(model,ids).active;
+  const inputs=unit=>unit.group_inputs?{...unit,...unit.group_inputs}:unit;
+  function mcAcceptanceFailure(model,method){
+    const d=method?.startsWith('MC_')?model.mc_diagnostics?.[method]:null;
+    if(!d||!finite(d.n_samples)||!finite(d.n_accepted)||d.n_samples<=0||d.n_accepted<0||d.n_accepted>d.n_samples||d.n_accepted/d.n_samples>=.8)return null;
+    return `MC acceptance: ${d.n_accepted} of ${d.n_samples} runs accepted (${Number((100*d.n_accepted/d.n_samples).toFixed(2))}%), below the 80% minimum.`;
+  }
+  const unavailable=status=>({value:null,coverage:null,catch:null,status});
+  function evaluate(unit,model,state,ids){
+    const source=inputs(unit),selected=selection(model,ids),data=model.group_data;
+    if(!model.verified)return unavailable('Mapping workbook not verified');
+    const scope=(model.taxon_scopes||model.scopes)?.[state.scope];
+    const ratio=state.mode==='ratio',methods=ratio?[state.method,state.denominator]:[state.method];
+    if(!scope||!Array.isArray(scope.methods))return unavailable('Group taxon inputs unavailable for this scope');
+    for(const method of methods){
+      const failure=mcAcceptanceFailure(model,method);
+      if(failure)return unavailable(failure);
+      if(!scope.methods.includes(method)||scope.status?.[method]!=='ok')return unavailable(method+': '+(scope.status?.[method]||'unavailable'));
+    }
+    const yi=(source.years||[]).indexOf(Number(state.year));
+    if(yi<0)return unavailable('Catch or year unavailable');
+    const basis=state.catch_basis||'landings',treatment=state.unidentified||'method';
+    if(!['catch','landings','discards'].includes(basis))return unavailable('Unknown catch basis');
+    if(!['method','zero','simple'].includes(treatment))return unavailable('Unknown unidentified-catch treatment');
+    if(treatment==='simple'&&state.scope!=='all')return unavailable('Reference-TL sensitivity is total-only; select All sources. No source decomposition is available.');
+    if(treatment!=='method'&&!source.unidentified)return unavailable('Unidentified-catch sensitivity unavailable in this export');
+    const matrix=(basis==='catch'?(source.full_precision_catch||source.catch):source[basis])||(!source.catch_basis_policy?source.catch:null);
+    if(!matrix)return unavailable('Catch classification unavailable for this basis');
+    if(matrix.some(row=>!valid(row?.[yi])))return unavailable('Catch amounts are missing or invalid for this basis and year');
+    if(!data?.mappings)return unavailable('Group catch allocations unavailable');
+    const retained=new Set(selected.indices),affected=new Map((source.unidentified?.taxa||[]).map(t=>[t.name,t]));
+    let numerator=0,denominator=0,total=0,support=0,unidentified=0,missingSimple=0;
+    const fractions=matrix.map((_,i)=>(data.mappings[i]||[]).reduce((sum,[g,w])=>sum+(retained.has(g)&&valid(w)?w:0),0));
+    const coefficient=(i,method,residual)=>{
+      const j=scope.methods.indexOf(method),baseline=scope.values?.[i]?.[j],fraction=fractions[i];
+      // Selection cannot restore an unsupported original taxon coefficient.
+      if(!valid(baseline))return null;
+      if(residual&&treatment!=='method')return treatment==='zero'?0:valid(residual.simple_sppr)?residual.simple_sppr*fraction:null;
+      if(method==='simple trophic chain')return valid(source.simple_sppr?.[i])?source.simple_sppr[i]*fraction:null;
+      const column=data.methods.indexOf(method),values=data.scopes?.[state.scope];
+      if(column<0||!values)return null;
+      let sum=0;
+      for(const [g,w] of data.mappings[i]||[]){
+        if(!retained.has(g)||w===0)continue;
+        const v=values[g]?.[column];if(!valid(w)||!valid(v))return null;
+        sum+=w*v;
+      }
+      return Math.round(sum*1e6)/1e6;
+    };
+    matrix.forEach((years,i)=>{
+      const c=years[yi],fraction=fractions[i],residual=affected.get(source.taxa?.[i]);
+      total+=c*fraction;
+      if(residual){unidentified+=c*fraction;if(!valid(residual.simple_sppr))missingSimple+=c*fraction;}
+      if(fraction===0)return;
+      const a=coefficient(i,state.method,residual),b=ratio?coefficient(i,state.denominator,residual):0;
+      if(!valid(a)||!valid(b))return;
+      numerator+=c*a;denominator+=c*b;support+=c*fraction;
+    });
+    if(total>0&&support===0)return unavailable('No catch with available method values');
+    if(ratio&&denominator===0)return unavailable('Zero denominator on common catch');
+    const selectedTotal=matrix=>Array.isArray(matrix)&&matrix.every(row=>valid(row?.[yi]))?matrix.reduce((sum,row,i)=>sum+row[yi]*fractions[i],0):null;
+    return {value:ratio?numerator/denominator:numerator/9,numerator:numerator/9,ppr_wet:numerator,denominator:ratio?denominator/9:null,
+      catch:support,total_catch:total,coverage:total>0?support/total:null,catch_basis:basis,
+      total_catch_all:selectedTotal(source.full_precision_catch||source.catch),total_discards:selectedTotal(source.discards),
+      unidentified_catch:source.unidentified?unidentified:null,unidentified_share:source.unidentified&&total>0?unidentified/total:null,
+      unidentified_missing_simple_catch:source.unidentified?missingSimple:null,
+      sensitivity:{status:'not_assessed',min_tC:null,max_tC:null,lower:null,upper:null,reason:'Discard-routing sensitivity for this group subset is not assessed.'},
+      status:selected.empty?'No groups selected':'ok',group_selection:selected};
+  }
+  function rows(unit,model,options){
+    const data=model?.group_data;if(!data)return [];
+    const column=data.methods.indexOf(options.method);
+    return data.groups.map((g,i)=>{
+      const result=evaluate(unit,model,{...options,mode:'ppr'},[g.id]);
+      return {...g,sppr_all:data.scopes?.all?.[i]?.[column]??null,sppr_inner:data.scopes?.inner?.[i]?.[column]??null,ppr:result.value};
+    });
+  }
+  return {key,selection,active,rows,evaluate,inputs,mcAcceptanceFailure};
+});
+
+/* Compact preferences shared by the two standalone pages. No data requests. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupSettings=api;})(globalThis,function(){
+  'use strict';
+  const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
+  function clean(value){
+    const data={version:1,selections:{},models:{},tables:{}};
+    if(!object(value))return data;
+    if(typeof value.last_unit==='string')data.last_unit=value.last_unit;
+    for(const [key,ids] of Object.entries(value.selections||{}))if(Array.isArray(ids))data.selections[key]=[...new Set(ids.filter(id=>typeof id==='string'))];
+    for(const [key,id] of Object.entries(value.models||{}))if(typeof id==='string')data.models[key]=id;
+    for(const [key,table] of Object.entries(value.tables||{}))if(object(table))data.tables[key]=table;
+    return data;
+  }
+  function create({env=globalThis,view='map'}={}){
+    const address=new URL(env.location.href),folder=new URL('.',address).pathname;
+    const key='GlobalPPR:group-settings:v1:'+folder,viewKey=key+':'+view;
+    let data=clean(null),storageAvailable=true;
+    const read=k=>{try{return env.localStorage.getItem(k);}catch{storageAvailable=false;return null;}};
+    try{data=clean(JSON.parse(read(key)||'null'));}catch{/* Invalid preferences start with all groups. */}
+    const current=new URLSearchParams(address.search);
+    const params=new URLSearchParams(current.toString()||read(viewKey)||'');
+    if(current.has('group_settings')){
+      try{data=clean(JSON.parse(current.get('group_settings')));}catch{/* A malformed link never executes content. */}
+    }
+    const listeners=[];
+    const store={data,params,get storageAvailable(){return storageAvailable;},
+      save(p){
+        try{
+          env.localStorage.setItem(key,JSON.stringify(store.data));storageAvailable=true;
+          if(p){const own=new URLSearchParams(p);own.delete('group_settings');env.localStorage.setItem(viewKey,own.toString());}
+        }catch{storageAvailable=false;}
+        try{if(env.history){const url=new URL(env.location.href);store.attach(url.searchParams);env.history.replaceState(null,'',url.href);}}catch{/* Some local-file browsers restrict history. */}
+        store.shareLinks();
+      },
+      attach(p){p.set('group_settings',JSON.stringify(store.data));return p;},
+      link(href){const url=new URL(href,env.location.href);store.attach(url.searchParams);return url.href;},
+      shareLinks(){
+        if(!env.document)return;
+        for(const link of env.document.querySelectorAll('a[href]')){
+          const url=new URL(link.getAttribute('href'),env.location.href);
+          if(new URL('.',url).href!==new URL('.',env.location.href).href||!/(?:index|trends)\.html$/.test(url.pathname))continue;
+          store.attach(url.searchParams);link.href=url.href;
+        }
+      },
+      subscribe(listener){listeners.push(listener);}
+    };
+    env.addEventListener?.('storage',event=>{
+      if(event.key!==key||!event.newValue)return;
+      try{store.data=clean(JSON.parse(event.newValue));for(const listener of listeners)listener(store.data);}catch{/* Ignore invalid external preferences. */}
+    });
+    store.save();
+    return store;
+  }
+  return {create,clean};
+});
+
+/* Shared group picker. Model data and calculations are embedded by the renderer. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupDialog=api;})(globalThis,function(){
+  'use strict';
+  const numeric=['te','tl','sppr_all','sppr_inner','ppr'];
+  const finite=v=>typeof v==='number'&&Number.isFinite(v);
+  const bounds=v=>v===''||v==null?null:Number(v);
+  function filterRows(rows,table={}){
+    const query=String(table.query||'').trim().toLowerCase();
+    return rows.filter(row=>(!query||row.name.toLowerCase().includes(query))&&numeric.every(key=>{
+      const range=table.ranges?.[key]||{},min=bounds(range.min),max=bounds(range.max);
+      return (!finite(min)&&!finite(max))||(finite(row[key])&&(!finite(min)||row[key]>=min)&&(!finite(max)||row[key]<=max));
+    }));
+  }
+  function sortRows(rows,key='name',direction='asc'){
+    return [...rows].sort((a,b)=>{
+      const av=a[key],bv=b[key];
+      if(key!=='name'){
+        if(!finite(av)||!finite(bv))return finite(av)?-1:finite(bv)?1:a.name.localeCompare(b.name);
+      }
+      const order=key==='name'?String(av).localeCompare(String(bv)):av-bv;
+      return order?(direction==='desc'?-order:order):a.name.localeCompare(b.name);
+    });
+  }
+  function create({units,store,getContext,onChange}){
+    const doc=document,el=(tag,text,className)=>{const node=doc.createElement(tag);if(text!=null)node.textContent=text;if(className)node.className=className;return node;};
+    const available=Object.entries(units).filter(([,u])=>u.models?.some(m=>m.verified&&m.group_data));
+    const dialog=el('dialog',null,'group-dialog');dialog.id='groupDialog';dialog.setAttribute('aria-labelledby','groupDialogTitle');
+    const heading=el('div',null,'group-heading'),title=el('h2','Groups included in PPR');title.id='groupDialogTitle';
+    const close=el('button','×','group-close');close.type='button';close.setAttribute('aria-label','Close group selection');close.onclick=()=>dialog.close();heading.append(title,close);dialog.append(heading);
+    const controls=el('div',null,'group-controls');
+    const selectField=(label,id)=>{const field=el('label',label),select=el('select');select.id=id;field.append(select);controls.append(field);return select;};
+    const ecosystems=selectField('Ecosystem','groupEcosystem'),models=selectField('Model','groupModel'),methods=selectField('Method for SPPR and PPR columns','groupReferenceMethod');
+    const fill=(select,items)=>{select.replaceChildren(...items.map(([value,text])=>{const option=el('option',text);option.value=value;return option;}));};
+    fill(ecosystems,available.map(([id,u])=>[id,(u.name||u.label||id)+' ('+id+')']));
+    dialog.append(controls);
+    const contextNote=el('p',null,'group-context');contextNote.id='groupContext';dialog.append(contextNote);
+    const searchLabel=el('label','Find groups by name','group-search'),search=el('input');search.type='search';search.id='groupSearch';search.placeholder='Group name';searchLabel.append(search);dialog.append(searchLabel);
+    const actions=el('div',null,'group-actions'),count=el('span');count.id='groupSelectedCount';count.setAttribute('aria-live','polite');
+    const button=(text,id)=>{const b=el('button',text);b.id=id;b.type='button';actions.append(b);return b;};
+    actions.append(count);const all=button('Select all','groupSelectAll'),matching=button('Select matching','groupSelectMatching'),none=button('Clear all','groupClearAll');dialog.append(actions);
+    const hint=el('p','Filters narrow the table. Select matching applies those rows; checkboxes change the comparison immediately.','group-hint');dialog.append(hint);
+    const wrap=el('div',null,'group-table-wrap'),table=el('table');table.setAttribute('aria-label','Model groups and selection');
+    const head=el('thead'),header=el('tr'),filters=el('tr'),body=el('tbody');body.id='groupTableBody';
+    const columns=[['selected','Include'],['name','Group name'],['te','TE'],['tl','TL'],['sppr_all','SPPR_all'],['sppr_inner','SPPR_inner'],['ppr','Catch-related PPR (t C)']];
+    const rangeInputs={},sortButtons={};
+    for(const [key,label] of columns){
+      const th=el('th');th.scope='col';const filter=el('th');
+      if(key==='selected')th.textContent=label;
+      else {const b=el('button',label,'group-sort');b.type='button';b.dataset.column=key;sortButtons[key]=b;th.append(b);b.onclick=()=>{const prefs=preferences();prefs.direction=prefs.sort===key&&prefs.direction==='asc'?'desc':'asc';prefs.sort=key;store.save();renderRows();};}
+      if(numeric.includes(key)){
+        rangeInputs[key]={};
+        for(const bound of ['min','max']){const input=el('input');input.type='number';input.step='any';input.placeholder=bound==='min'?'Min':'Max';input.setAttribute('aria-label',label+' '+(bound==='min'?'minimum':'maximum'));input.dataset.column=key;input.dataset.bound=bound;
+          input.oninput=()=>{const prefs=preferences();prefs.ranges||={};prefs.ranges[key]||={};prefs.ranges[key][bound]=input.value;store.save();renderRows();};rangeInputs[key][bound]=input;filter.append(input);}
+      }
+      header.append(th);filters.append(filter);
+    }
+    head.append(header,filters);table.append(head,body);wrap.append(table);dialog.append(wrap);
+    const footer=el('div',null,'group-footer'),explanation=el('p','One group selection per model applies to all estimation methods in both views. TE = GE × EE from the model inputs; it is separate from fixed-TE assumptions in some methods. Excluded catch is not reassigned.');
+    const done=el('button','Done','group-done');done.id='groupDone';done.onclick=()=>dialog.close();footer.append(explanation,done);dialog.append(footer);
+    const storage=el('p',null,'group-storage');dialog.append(storage);doc.body.append(dialog);
+    const current=()=>{const unit=units[ecosystems.value];return {unit,model:unit?.models.find(m=>m.id===models.value)};};
+    const key=()=>ecosystems.value+'::'+models.value;
+    function preferences(){return store.data.tables[key()]||=( {query:'',ranges:{},sort:'name',direction:'asc'} );}
+    function selection(){const {model}=current();return new Set(store.data.selections[key()]??model?.group_data.groups.map(g=>g.id)??[]);}
+    function sourceRows(){const {unit,model}=current();return model?PPRGroups.rows(unit,model,{...getContext(),method:methods.value}):[];}
+    function visibleRows(){const prefs=preferences();return sortRows(filterRows(sourceRows(),prefs),prefs.sort,prefs.direction);}
+    function notify(){store.save();onChange();store.shareLinks();renderCount();}
+    function renderCount(){const {model}=current(),selected=selection();count.textContent=`${selected.size} of ${model?.group_data.groups.length||0} groups selected · ${visibleRows().length} matching`;
+      storage.textContent=store.storageAvailable?'Selections are saved automatically in this browser.':'Browser saving is unavailable. Navigation links still carry the current selections.';}
+    function setSelection(ids){const {model}=current();if(!model)return;const allIds=model.group_data.groups.map(g=>g.id);if(ids.length===allIds.length&&allIds.every(id=>ids.includes(id)))delete store.data.selections[key()];else store.data.selections[key()]=ids;notify();renderRows();}
+    function renderRows(){
+      const selected=selection(),rows=visibleRows();body.replaceChildren();
+      for(const [index,row] of rows.entries()){
+        const tr=el('tr');tr.dataset.groupId=row.id;const checkCell=el('td'),check=el('input');check.type='checkbox';check.checked=selected.has(row.id);check.setAttribute('aria-label','Include '+row.name);
+        check.onchange=()=>{const ids=selection();if(check.checked)ids.add(row.id);else ids.delete(row.id);const {model}=current();if(ids.size===model.group_data.groups.length)delete store.data.selections[key()];else store.data.selections[key()]=[...ids];notify();};checkCell.append(check);tr.append(checkCell);
+        for(const [key] of columns.slice(1)){const cell=el('td',key==='name'?row.name:finite(row[key])?row[key].toLocaleString(undefined,{maximumSignificantDigits:6}):'Unavailable');if(key!=='name'){cell.className='group-number';cell.title=finite(row[key])?String(row[key]):'No value in this source';}tr.append(cell);}body.append(tr);
+      }
+      if(!rows.length){const tr=el('tr'),cell=el('td','No groups match these filters.');cell.colSpan=7;tr.append(cell);body.append(tr);}
+      for(const [column,b] of Object.entries(sortButtons)){const sorted=preferences().sort===column;b.parentElement.setAttribute('aria-sort',sorted?(preferences().direction==='desc'?'descending':'ascending'):'none');b.dataset.direction=sorted?preferences().direction:'';}
+      renderCount();
+    }
+    function loadModel(){
+      const {unit,model}=current();if(!model)return;const prefs=preferences(),context=getContext();
+      const names=[...new Set([...model.group_data.methods,'simple trophic chain'])];fill(methods,names.map(id=>[id,id]));methods.value=names.includes(prefs.method)?prefs.method:names.includes(context.method)?context.method:names[0];prefs.method=methods.value;
+      search.value=prefs.query||'';for(const [column,inputs] of Object.entries(rangeInputs))for(const [bound,input] of Object.entries(inputs))input.value=prefs.ranges?.[column]?.[bound]??'';
+      const diagnostic=PPRGroups.mcAcceptanceFailure(model,methods.value),status=(model.taxon_scopes||model.scopes)?.[context.scope]?.status?.[methods.value];
+      contextNote.textContent=`${context.year} · ${context.catch_basis==='catch'?'All catch':context.catch_basis==='discards'?'Discards':'Landings'} · PPR source: ${context.scope||'all'} · Values describe each group before selection. NPP remains the ecosystem total.`+(diagnostic?' '+diagnostic:status&&status!=='ok'?' PPR unavailable: '+status+'.':'');
+      if(methods.value==='simple trophic chain')contextNote.textContent+=' Simple-chain SPPR is taxon-specific; choose a model method to use the group SPPR columns.';
+      renderRows();
+    }
+    function loadEcosystem(){const unit=units[ecosystems.value];if(!unit)return;const modelList=unit.models.filter(m=>m.verified&&m.group_data);fill(models,modelList.map(m=>[m.id,m.label||m.id]));const defaultId=typeof unit.default_model==='number'?unit.models[unit.default_model]?.id:unit.default_model;const chosen=store.data.models[ecosystems.value]||defaultId;models.value=modelList.some(m=>m.id===chosen)?chosen:modelList[0].id;loadModel();}
+    ecosystems.onchange=()=>{store.data.last_unit=ecosystems.value;loadEcosystem();store.save();};
+    models.onchange=()=>{store.data.models[ecosystems.value]=models.value;loadModel();notify();};
+    methods.onchange=()=>{preferences().method=methods.value;store.save();loadModel();};
+    search.oninput=()=>{preferences().query=search.value;store.save();renderRows();};
+    all.onclick=()=>{const prefs=preferences();prefs.query='';prefs.ranges={};delete store.data.selections[key()];notify();loadModel();};
+    matching.onclick=()=>setSelection(visibleRows().map(r=>r.id));none.onclick=()=>setSelection([]);
+    dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
+    return {open(unitId){if(!available.length)return;const chosen=unitId||store.data.last_unit;if(available.some(([id])=>id===chosen))ecosystems.value=chosen;store.data.last_unit=ecosystems.value;loadEcosystem();store.save();dialog.showModal();},refresh(){if(dialog.open)loadModel();},summary(){const count=Object.keys(store.data.selections).length;return count?`${count} model${count===1?'':'s'} with group selections`:'All model groups included';},available:available.length};
+  }
+  return {create,filterRows,sortRows};
+});
+
+/* Graph-only NPP sums and fixed-reference lookup, independent of PPR availability. */
+(function(root,factory){
+  const api=factory();
+  if(typeof module==='object'&&module.exports)module.exports=api;
+  else root.PPRTimeSeriesNPP=api;
+})(typeof globalThis==='object'?globalThis:this,function(){
+  'use strict';
+  const finite=v=>typeof v==='number'&&Number.isFinite(v);
+  const valid=v=>finite(v)&&v>=0;
+  const scope=state=>state.mode==='ratio'&&state.npp_scope==='global'?'global':'selected';
+  function resolve(years,values,year,policy,metadata={},positiveOnly=false){
+    const usableValue=v=>valid(v)&&(!positiveOnly||v>0);
+    const i=years.indexOf(Number(year)),annual=Array.isArray(values);
+    const raw=annual?values[i]:values;
+    let value=raw,sourceYear=Number(year),substituted=false;
+    if(i>=0&&annual&&raw==null&&policy==='earliest'){
+      const first=years.map((y,j)=>({year:Number(y),value:values[j]})).filter(p=>usableValue(p.value)).sort((a,b)=>a.year-b.year)[0];
+      if(first&&Number(year)<first.year){value=first.value;sourceYear=first.year;substituted=true;}
+    }
+    const usable=i>=0&&usableValue(value);
+    return {value:usable?value:null,source_year:usable?sourceYear:null,substituted:usable&&substituted,metadata:metadata[String(usable?sourceYear:year)]||null};
+  }
+  function reference(db,ids,state){
+    if(scope(state)==='global'){
+      const source=db.global_npp||{};
+      return {...source,values:undefined,metadata:undefined,id:source.id||'global_atlas_npp',label:source.label||'Global atlas NPP',unit_ids:source.unit_ids||[],method:'atlas_ensemble'};
+    }
+    const ensemble=state.npp?.startsWith('ens_');
+    return {id:'selected_ecosystems',label:'Selected ecosystems',unit_ids:[...ids],method:state.npp,
+      ensemble_convention:ensemble?'Sum of regional '+(state.npp.includes('median')?'ensemble medians':state.npp.includes('min')?'ensemble minima':'ensemble maxima')+'; each region retains its available algorithm support. This is not an ensemble statistic of global model totals.':'Sum of the selected regional NPP calculation.',
+      geography:'Selected ecosystem identities; boundaries may overlap. This regional sum is not a unique world-ocean total.',
+      overlap_policy:'Original selected regional totals retained; overlapping selections are not deduplicated.',source:db.npp_source};
+  }
+  function fields(ref,state,year,value,available,missing,provenance,extra={}){
+    return {npp:value,npp_denominator:state.mode==='ratio'?value:null,npp_scope:scope(state),
+      npp_reference_id:ref.id,npp_reference_ids:ref.unit_ids,npp_ensemble_convention:ref.ensemble_convention,
+      npp_method:ref.method,npp_source:ref.source,npp_available_ids:available,npp_missing_ids:missing,
+      npp_provenance:provenance,npp_reference_metadata:extra.metadata||null,
+      npp_estimated:extra.estimated||false,npp_substituted_ids:extra.substituted||[],npp_source_years:extra.sourceYears||{},
+      npp_status:value===null?'unavailable':extra.metadata?.coverage_limited?'coverage_limited':extra.estimated?'earliest_year_estimate':'available',
+      npp_reason:value===null?(extra.reason||'Annual NPP unavailable for the complete reference geography.'):extra.metadata?.coverage_limited?extra.reason||'Coverage-limited source-water estimate.':'',
+      npp_reference_geography:ref.geography,npp_overlap_policy:ref.overlap_policy};
+  }
+  function point(db,ids,state,year){
+    const ref=reference(db,ids,state);
+    if(scope(state)==='global'){
+      const source=db.global_npp||{},resolved=resolve(db.years,source.values,year,state.npp_fill,source.metadata,true);
+      const metadata=resolved.metadata;
+      // The producer certifies the fixed geography. Explicitly incomplete rows
+      // never become denominators even if an available-region subtotal is present.
+      const incomplete=metadata?.complete===false||['incomplete','unsupported','unavailable','failed'].includes(metadata?.status);
+      const value=!incomplete&&finite(resolved.value)&&resolved.value>0?resolved.value:null;
+      return fields(ref,state,year,value,metadata?.available_ids||[],metadata?.missing_ids||(value===null?ref.unit_ids:[]),{[ref.id]:metadata||null},
+        {metadata,estimated:value!==null&&resolved.substituted,substituted:value!==null&&resolved.substituted?[ref.id]:[],sourceYears:value!==null?{[ref.id]:resolved.source_year}:{},reason:metadata?.reason||'The fixed global atlas NPP reference is unavailable for this year.'});
+    }
+    const resolved=ids.map(id=>resolve(db.years,db.units[id]?.npp?.[state.npp],year,state.npp_fill,db.units[id]?.npp_metadata,state.mode==='ratio'));
+    const available=ids.filter((id,i)=>valid(resolved[i].value)),missing=ids.filter(id=>!available.includes(id));
+    let value=ids.length&&!missing.length?resolved.reduce((sum,item)=>sum+item.value,0):null;
+    if(state.mode==='ratio'&&!(value>0))value=null;
+    return fields(ref,state,year,value,available,missing,Object.fromEntries(ids.map((id,i)=>[id,resolved[i].metadata])),
+      {estimated:resolved.some(r=>r.substituted),substituted:ids.filter((id,i)=>resolved[i].substituted),sourceYears:Object.fromEntries(ids.filter((id,i)=>resolved[i].source_year!==null).map(id=>[id,resolved[ids.indexOf(id)].source_year]))});
+  }
+  function aggregate(db,state){
+    const years=state.years||db.years,ids=[...new Set(state.units||[])];
+    const validRequest=years.length>0&&years.every(y=>db.years.includes(Number(y)))&&db.npp_methods.some(m=>m.id===state.npp);
+    const included=validRequest?ids.filter(id=>db.units[id]):[];
+    const excluded=ids.filter(id=>!included.includes(id)).map(id=>({id,name:db.units[id]?.name||id,reason:!validRequest?'Unknown NPP calculation or year.':'Ecosystem is absent from this export.'}));
+    const points=years.map(year=>{
+      const npp=point(db,included,{...state,mode:'npp'},year);
+      return {year:Number(year),value:npp.npp,ppr:null,catch:null,covered_catch:null,coverage:null,...npp,
+        sensitivity:{hidden:true,status:'not_applicable',reason:'Discard-routing sensitivity does not apply to NPP.'}};
+    });
+    const ref=reference(db,included,{...state,mode:'npp'});
+    return {points,included,excluded,selected:ids.length,model_ids:{},annual_npp:true,npp_year:null,npp_source:db.npp_source,npp_scope:'selected',npp_reference:ref,npp_method:state.npp,
+      reason:!validRequest?'Unknown NPP calculation or year.':!ids.length?'Select at least one ecosystem.':!points.some(p=>valid(p.value))?'Annual NPP is unavailable for the complete selected region set in every selected year.':''};
+  }
+  const csvHeader=',npp_denominator_scope,npp_denominator_tonnes_carbon,npp_reference_id,npp_reference_ids,npp_ensemble_convention,npp_reference_geography,npp_overlap_policy,npp_available_ids,npp_missing_ids,npp_reference_metadata,npp_status,npp_reason';
+  const csv=(p,result,state)=>state.mode==='ratio'||state.mode==='npp'?[p.npp_scope,p.npp_denominator,p.npp_reference_id,JSON.stringify(p.npp_reference_ids||[]),p.npp_ensemble_convention,typeof p.npp_reference_geography==='string'?p.npp_reference_geography:JSON.stringify(p.npp_reference_geography||{}),p.npp_overlap_policy,JSON.stringify(p.npp_available_ids||[]),JSON.stringify(p.npp_missing_ids||[]),JSON.stringify(p.npp_reference_metadata||{}),p.npp_status,p.npp_reason]:Array(12).fill(null);
+  return {aggregate,point,reference,scope,csvHeader,csv};
+});
+
+/* Pure aggregation shared by the browser and numerical checks. */
+(function(root, factory) {
+  const api=factory();
+  if(typeof module==='object' && module.exports) module.exports=api;
+  else root.PPRTimeSeries=api;
+})(typeof globalThis==='object'?globalThis:this, function() {
+  'use strict';
+  const annualNPP=typeof module==='object' && module.exports?require('./annual_npp.js'):globalThis.PPRAnnualNPP;
+  const sensitivity=typeof module==='object' && module.exports?require('./discard_sensitivity.js'):globalThis.PPRDiscardSensitivity;
+  const nppSeries=typeof module==='object' && module.exports?require('./time_series_npp.js'):globalThis.PPRTimeSeriesNPP;
+  const groups=typeof module==='object' && module.exports?require('./group_metrics.js'):globalThis.PPRGroups;
+  const finite=v=>typeof v==='number' && Number.isFinite(v);
+  const MC_MIN_ACCEPTANCE=.8;
+
+  function mcAcceptanceFailure(model,method) {
+    const diagnostic=method.startsWith('MC_')?model.mc_diagnostics?.[method]:null;
+    if(!diagnostic)return null;
+    const {n_samples:total,n_accepted:accepted}=diagnostic;
+    if(!finite(total)||!finite(accepted)||total<=0||accepted<0||accepted>total)return null;
+    if(accepted/total>=MC_MIN_ACCEPTANCE)return null;
+    return `MC acceptance: ${accepted} of ${total} runs accepted (${Number((100*accepted/total).toFixed(2))}%), below the 80% minimum.`;
+  }
+
+  function aggregate(db,state) {
+    if(state.mode==='npp')return nppSeries.aggregate(db,state);
+    const years=state.years || db.years;
+    const indices=years.map(y=>db.years.indexOf(Number(y)));
+    const ids=[...new Set(state.units || [])];
+    const method=db.ppr_methods.find(m=>m.id===state.method);
+    const ratio=state.mode==='ratio';
+    const globalNPP=ratio&&state.npp_scope==='global';
+    const treatment=state.unidentified||'method';
+    const catchBasis=sensitivity.basis(state);
+    const gaps=state.allow_gaps && ids.length===1;
+    const validRequest=indices.every(i=>i>=0) && years.length>0 && method &&
+      method.scopes.includes(state.scope) && ['catch','landings','discards'].includes(catchBasis) && (!ratio || globalNPP || db.npp_methods.some(m=>m.id===state.npp));
+    const included=[],excluded=[],records=[],modelIds={};
+    for(const id of ids) {
+      const unit=db.units[id];let reason=null,record=null,mcRejected=false;
+      const chosen=state.models?.[id] ?? unit?.default_model;
+      const selectedModel=unit?.models?.find(m=>m.id===chosen);
+      const selectedGroups=selectedModel?state.group_selections?.[groups.key(id,selectedModel)]:undefined;
+      const groupSubset=groups.active(selectedModel,selectedGroups);
+      if(!validRequest) reason='Unknown year, method or unsupported source scope.';
+      else if(!unit) reason='Ecosystem is absent from this export.';
+      else if(method.kind==='taxon') {
+        record=unit.simple;
+        if(groupSubset&&!selectedModel.verified)reason='Model has no verified PPR workbook.';
+      }
+      else {
+        const model=selectedModel;
+        if(!model) reason='No model selected or model unavailable.';
+        else if(!model.verified) reason='Model has no verified PPR workbook.';
+        else {
+          modelIds[id]=model.id;
+          record=model.scopes?.[state.scope]?.methods?.[state.method];
+          const mcFailure=mcAcceptanceFailure(model,state.method);
+          if(mcFailure){reason=mcFailure;mcRejected=true;}
+          else if(!record) reason='Method unavailable for this model and scope.';
+          else if(record.status!=='ok') reason=`Method unavailable: ${record.status}.`;
+        }
+      }
+      if(!reason && !['method','zero','simple'].includes(treatment))reason='Unknown unidentified-catch treatment.';
+      if(!reason && treatment==='simple' && state.scope!=='all')reason='Reference-TL sensitivity is total-only; select All sources. No source decomposition is available.';
+      if(!reason && treatment!=='method'){
+        record=record?.['unidentified_'+treatment];
+        if(!record)reason='Unidentified-catch sensitivity is unavailable in this export.';
+        else if(record.status && record.status!=='ok')reason=`Sensitivity unavailable: ${record.status}.`;
+      }
+      if(!reason&&catchBasis!=='landings'){
+        const selected=record?.catch_bases?.[catchBasis];
+        if(!selected)reason='Catch classification unavailable for this basis.';
+        else record={...record,...selected};
+      }
+      const present=i=>finite(record?.ppr?.[i]) && record.ppr[i]>=0;
+      if(!reason && (!record || !(gaps?indices.some(present):indices.every(present))))
+        reason='PPR lacks a complete annual series.';
+      if(!reason&&groupSubset){
+        const values=db.years.map((year,i)=>present(i)?groups.evaluate(unit,selectedModel,{...state,year,mode:'ppr'},selectedGroups):{value:null,status:'PPR lacks a complete annual series.'});
+        const available=i=>finite(values[i].value);
+        if(!(gaps?indices.some(available):indices.every(available)))reason=values[indices.find(i=>!available(i))]?.status||'Group subset unavailable.';
+        else {
+          modelIds[id]=selectedModel.id;
+          record={...record,ppr:values.map(v=>finite(v.value)?v.ppr_wet:null),covered_catch:values.map(v=>v.catch),group_values:values,
+            sensitivity:undefined,sensitivity_unavailable:'Discard-routing sensitivity for this group subset is not assessed.'};
+        }
+      }
+      // Missing NPP years leave gaps for the whole fixed cohort; never shrink it year by year.
+      const nppValues=unit?.npp?.[state.npp];
+      if(!reason && ratio && !globalNPP && !(Array.isArray(nppValues)?nppValues.some(annualNPP.positive):annualNPP.positive(nppValues)))
+        reason='NPP unavailable or nonpositive for every exported year.';
+      if(reason) excluded.push({id,name:unit?.name || id,reason,...(mcRejected?{code:'mc_acceptance'}:{})});
+      else {included.push(id);records.push({unit,record});}
+    }
+    const points=years.map((year,k)=>{
+      const i=indices[k];
+      const provenance=ratio?nppSeries.point(db,included,state,year):{};
+      if(!records.length || records.some(r=>!finite(r.record.ppr[i]) || r.record.ppr[i]<0))
+        return {year:Number(year),value:null,ppr:null,npp:null,catch:null,covered_catch:null,coverage:null,...provenance};
+      // Audited input totals are wet weight; plot and CSV masses use carbon.
+      const ppr=records.reduce((sum,r)=>sum+r.record.ppr[i],0) / 9;
+      const npp=ratio?provenance.npp:null;
+      const catches=records.map(r=>r.record.group_values?r.record.group_values[i].total_catch:(catchBasis==='landings'?r.unit.simple:r.unit.simple?.catch_bases?.[catchBasis])?.catch?.[i]);
+      const covered=records.map(r=>r.record.covered_catch?.[i]);
+      const totalCatch=catches.every(finite)?catches.reduce((a,b)=>a+b,0):null;
+      const coveredCatch=covered.every(finite)?covered.reduce((a,b)=>a+b,0):null;
+      const affected=records.map(r=>r.record.group_values?r.record.group_values[i].unidentified_catch:(r.unit.unidentified?.catch_bases?.[catchBasis]||r.unit.unidentified)?.catch?.[i]),missingSimple=records.map(r=>r.record.group_values?r.record.group_values[i].unidentified_missing_simple_catch:(r.unit.unidentified?.catch_bases?.[catchBasis]||r.unit.unidentified)?.missing_simple_catch?.[i]);
+      const unidentifiedCatch=affected.every(finite)?affected.reduce((a,b)=>a+b,0):null;
+      const allCatch=records.map(r=>r.record.group_values?r.record.group_values[i].total_catch_all:(r.unit.simple?.catch_bases?.catch||r.unit.simple)?.catch?.[i]);
+      const discarded=records.map(r=>r.record.group_values?r.record.group_values[i].total_discards:r.unit.simple?.catch_bases?.discards?.catch?.[i]);
+      const totalAll=allCatch.every(finite)?allCatch.reduce((a,b)=>a+b,0):null;
+      const totalDiscarded=discarded.every(finite)?discarded.reduce((a,b)=>a+b,0):null;
+      const band=sensitivity.combine(records.map(r=>routedBand(r,i)));
+      if(records.length===1&&routedBand(records[0],i))Object.assign(band,routedBand(records[0],i));
+      if(records.some(r=>r.record.group_values))Object.assign(band,sensitivity.unavailable('Discard-routing sensitivity for this group subset is not assessed.'));
+      band.discard_fraction=totalAll>0&&finite(totalDiscarded)?totalDiscarded/totalAll:null;
+      return {year:Number(year),value:ratio?(npp===null?null:100*ppr/npp):ppr,ppr,npp,catch:totalCatch,covered_catch:coveredCatch,...provenance,
+        ...(records.some(r=>r.record.group_values)?{status:records.every(r=>r.record.group_values?.[i]?.group_selection?.empty)?'No groups selected':'ok'}:{}),
+        catch_basis:catchBasis,total_catch_all:totalAll,total_discards:totalDiscarded,
+        sensitivity:sensitivity.display(band,state,npp),
+        unidentified_catch:unidentifiedCatch,unidentified_share:totalCatch>0 && unidentifiedCatch!==null?unidentifiedCatch/totalCatch:null,
+        unidentified_missing_simple_catch:missingSimple.every(finite)?missingSimple.reduce((a,b)=>a+b,0):null,
+        coverage:totalCatch>0 && coveredCatch!==null?coveredCatch/totalCatch:null};
+    });
+    return {points,included,excluded,selected:ids.length,npp_year:db.npp_year,npp_source:db.npp_source,
+      npp_scope:nppSeries.scope(state),npp_reference:ratio?nppSeries.reference(db,included,state):null,npp_method:globalNPP?'atlas_ensemble':state.npp,
+      unidentified_taxa:Object.fromEntries(included.map(id=>[id,db.units[id].unidentified?.taxa||[]])),
+      unidentified_classifier:Object.fromEntries(included.map(id=>[id,db.units[id].unidentified?.classifier_version||null])),
+      model_ids:Object.fromEntries(included.filter(id=>modelIds[id]).map(id=>[id,modelIds[id]])),
+      annual_npp:ratio && (db.npp_year==null || ids.some(id=>Array.isArray(db.units[id]?.npp?.[state.npp]))),
+      reason:!validRequest?'Unknown year, method or unsupported source scope.':!ids.length?'Select at least one ecosystem.':
+        ratio && included.length && !points.some(p=>finite(p.value))?(globalNPP?'The fixed global atlas NPP reference is unavailable in every selected year.':'Annual NPP is unavailable for at least one included ecosystem in every selected year.'):''};
+  }
+
+  const routedBand=(entry,index)=>entry.record.sensitivity?.[index]||
+    (entry.record.sensitivity_unavailable?sensitivity.unavailable(entry.record.sensitivity_unavailable):null);
+
+  function toCSV(result,state) {
+    const escape=value=>value==null?'':`"${String(value).replaceAll('"','""')}"`;
+    const header='year,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,ppr_method,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids,npp_fill_policy,npp_estimated,npp_substituted_ids,npp_source_years,npp_source,npp_provenance'+unidentifiedHeader+discardHeader+nppSeries.csvHeader+groupCSVHeader(state);
+    return header+'\n'+result.points.map(p=>[p.year,p.value,p.ppr,p.npp,p.catch,p.covered_catch,p.coverage,
+      result.included.length,result.selected,state.mode,state.mode==='npp'?null:state.method,state.mode==='npp'?null:state.scope,state.mode==='ratio'||state.mode==='npp'?result.npp_method||state.npp:null,
+      state.mode==='ratio' && !result.annual_npp?result.npp_year:null,result.included.join(';'),JSON.stringify(state.mode==='npp'?{}:state.models||{}),JSON.stringify(result.model_ids),...nppCSV(p,result,state),...unidentifiedCSV(p,result,state),...discardCSV(p,state),...nppSeries.csv(p,result,state),...groupCSV(state)].map(escape).join(',')).join('\n')+'\n';
+  }
+
+  const groupCSVHeader=state=>Object.keys(state.group_selections||{}).length?',group_selections':'';
+  const groupCSV=state=>Object.keys(state.group_selections||{}).length?[JSON.stringify(state.group_selections)]:[];
+
+  const nppCSV=(point,result,state)=>state.mode==='ratio'||state.mode==='npp'?[state.npp_fill==='earliest'?'earliest':'observed',Boolean(point.npp_estimated),(point.npp_substituted_ids||[]).join(';'),JSON.stringify(point.npp_source_years||{}),point.npp_source||result.npp_source,JSON.stringify(point.npp_provenance||{})]:[null,null,null,null,null,null];
+  const unidentifiedHeader=',unidentified_treatment,unidentified_catch_tonnes,unidentified_catch_share,unidentified_missing_reference_catch_tonnes,unidentified_taxa,unidentified_classifier';
+  const unidentifiedCSV=(point,result,state)=>state.mode==='npp'?Array(6).fill(null):[state.unidentified||'method',point.unidentified_catch,point.unidentified_share,point.unidentified_missing_simple_catch,JSON.stringify(result.unidentified_taxa||{}),JSON.stringify(result.unidentified_classifier||{})];
+  const discardHeader=',catch_basis,sensitivity_visible,discard_fraction,total_catch_tonnes,discards_tonnes,sensitivity_status,sensitivity_lower,sensitivity_upper,sensitivity_min_tC,sensitivity_max_tC,sensitivity_routes,sensitivity_excluded_routes,sensitivity_reason,sensitivity_type';
+  const discardCSV=(point,state)=>state.mode==='npp'?Array(14).fill(null):[sensitivity.basis(state),sensitivity.enabled(state),point.sensitivity?.discard_fraction,point.total_catch_all,point.total_discards,point.sensitivity?.status,point.sensitivity?.lower,point.sensitivity?.upper,point.sensitivity?.min_tC,point.sensitivity?.max_tC,JSON.stringify(point.sensitivity?.route_ppr_tC||{}),JSON.stringify(point.sensitivity?.excluded_routes||{}),point.sensitivity?.reason,point.sensitivity?.uncertainty_type];
+
+  function compare(db,state) {
+    if(state.mode==='npp'){
+      const result=nppSeries.aggregate(db,state);
+      return {...result,series:[{method:'npp',...result}],baseline:null,baseline_model_ids:{},normalized:false};
+    }
+    const methods=[...new Set(state.methods || [])];
+    const ids=[...new Set(state.units || [])];
+    const baseline=state.baseline || null;
+    const normalized=baseline!==null;
+    const usable=result=>result.points.some(point=>finite(point.value));
+    const unavailableReason=result=>result.reason ||
+      [...new Set(result.excluded.map(item=>item.reason))].join(' ') || 'No usable annual values.';
+    const initial=new Map([...new Set([...methods,...(baseline?[baseline]:[])])]
+      .map(method=>[method,aggregate(db,{...state,method})]));
+
+    // Keep the established single-method result and download exactly as before.
+    if(methods.length===1 && !normalized) {
+      const result=initial.get(methods[0]);
+      return {...result,series:[{method:methods[0],...result}],baseline:null,baseline_model_ids:{},normalized:false};
+    }
+    if(!methods.length) {
+      const empty=aggregate(db,{...state,method:state.method || db.ppr_methods[0]?.id,units:[]});
+      return {...empty,series:[],selected:ids.length,baseline,baseline_model_ids:{},normalized,
+        excluded:ids.map(id=>({id,name:db.units[id]?.name || id,reason:'No calculation method selected.'})),
+        reason:'Select at least one calculation method.'};
+    }
+
+    const active=methods.filter(method=>usable(initial.get(method)));
+    const baselineInitial=baseline?initial.get(baseline):null;
+    const baselineFailure=baseline && !usable(baselineInitial)?
+      `Baseline ${baseline} unavailable: ${unavailableReason(baselineInitial)}`:'';
+    const constraints=[...new Set([...active,...(baseline?[baseline]:[])])];
+    // A selected MC method's quality failures remain exclusions even if none of
+    // its ecosystems qualify, so hiding that curve cannot restore failed models.
+    const mcRejected=new Set([...initial.values()].flatMap(result=>
+      result.excluded.filter(item=>item.code==='mc_acceptance').map(item=>item.id)));
+    const common=!active.length || baselineFailure?[]:
+      ids.filter(id=>!mcRejected.has(id)&&constraints.every(method=>initial.get(method).included.includes(id)));
+    const excluded=ids.filter(id=>!common.includes(id)).map(id=>{
+      const causes=[...initial.keys()].flatMap(method=>{
+        const exclusion=initial.get(method).excluded.find(item=>item.id===id);
+        if(constraints.length&&!constraints.includes(method)&&exclusion?.code!=='mc_acceptance')return [];
+        return exclusion?[`${method===baseline?'Baseline':'Method'} ${method}: ${exclusion.reason}`]:[];
+      });
+      return {id,name:db.units[id]?.name || id,
+        reason:causes.join(' ') || baselineFailure || 'No common ecosystem cohort across the selected methods.'};
+    });
+    const sharedReason=!ids.length?'Select at least one ecosystem.':baselineFailure ||
+      (!active.length?'No selected calculation method has an available series.':
+        !common.length?'No common ecosystem cohort across the selected methods.':'');
+    const baselineResult=baseline && common.length?
+      aggregate(db,{...state,method:baseline,units:common}):null;
+
+    const series=methods.map(method=>{
+      const original=initial.get(method),isActive=active.includes(method);
+      const result=isActive?aggregate(db,{...state,method,units:common}):original;
+      const reason=isActive?sharedReason:
+        [unavailableReason(original),baselineFailure].filter(Boolean).join(' ');
+      const points=result.points.map((point,index)=>{
+        const reference=baselineResult?.points[index];
+        const baselineValue=reference?.value ?? null;
+        let value=point.value;
+        if(normalized) {
+          value=finite(value) && finite(baselineValue) && baselineValue>0?value/baselineValue:null;
+          if(!finite(value)) value=null;
+        }
+        const pointReason=finite(value)?'':reason ||
+          (normalized && !finite(baselineValue)?`Baseline ${baseline} is unavailable for ${point.year}.`:
+            normalized && baselineValue<=0?`Baseline ${baseline} is zero or nonpositive for ${point.year}.`:
+              !finite(point.value)?`Method ${method} is unavailable for ${point.year}.`:
+                `Normalized value is not finite for ${point.year}.`);
+        return {...point,value,unnormalized_value:point.value,
+          ...(normalized?{sensitivity:sensitivity.unavailable('Discard sensitivity is not defined for a normalized comparison of methods.')} : {}),
+          baseline_value:baselineValue,baseline_ppr:reference?.ppr ?? null,
+          baseline_covered_catch:reference?.covered_catch ?? null,unavailable_reason:pointReason};
+      });
+      return {...result,method,points,selected:ids.length,
+        ...(isActive?{included:common,excluded}:{}),
+        reason:reason || (normalized && !points.some(point=>finite(point.value))?
+          `Baseline ${baseline} has no positive matching annual values.`:'')};
+    });
+    return {series,included:common,excluded,selected:ids.length,points:series[0].points,
+      npp_scope:nppSeries.scope(state),npp_reference:state.mode==='ratio'?nppSeries.reference(db,common,state):null,npp_method:state.npp_scope==='global'?'atlas_ensemble':state.npp,
+      baseline,baseline_model_ids:baselineResult?.model_ids || {},normalized,reason:sharedReason ||
+        (normalized && !series.some(result=>usable(result))?`Baseline ${baseline} has no positive matching annual values.`:''),
+      npp_year:db.npp_year,annual_npp:series.some(result=>result.annual_npp) || Boolean(baselineResult?.annual_npp)};
+  }
+
+  function comparisonToCSV(result,state) {
+    if(result.series.length===1 && !result.normalized)
+      return toCSV(result.series[0],{...state,method:result.series[0].method});
+    const escape=value=>value==null?'':`"${String(value).replaceAll('"','""')}"`;
+    const header='year,ppr_method,value,ppr_tonnes_carbon,npp_tonnes_carbon,catch_tonnes,covered_catch_tonnes,catch_coverage,included_ecosystems,selected_ecosystems,metric,source_scope,npp_method,npp_baseline_year,included_ids,model_overrides,model_ids,baseline_method,baseline_model_ids,baseline_value,baseline_ppr_tonnes_carbon,baseline_covered_catch_tonnes,unnormalized_value,normalized,unavailable_reason,npp_fill_policy,npp_estimated,npp_substituted_ids,npp_source_years,npp_source,npp_provenance'+unidentifiedHeader+discardHeader+nppSeries.csvHeader+groupCSVHeader(state);
+    const rows=result.series.flatMap(series=>series.points.map(point=>[
+      point.year,series.method,point.value,point.ppr,point.npp,point.catch,point.covered_catch,point.coverage,
+      series.included.length,series.selected,state.mode,state.scope,state.mode==='ratio'?series.npp_method||state.npp:null,
+      state.mode==='ratio' && !series.annual_npp?series.npp_year:null,series.included.join(';'),
+      JSON.stringify(state.models || {}),JSON.stringify(series.model_ids),result.baseline,JSON.stringify(result.baseline_model_ids || {}),
+      point.baseline_value,point.baseline_ppr,point.baseline_covered_catch,point.unnormalized_value,
+      result.normalized,point.unavailable_reason || series.reason,...nppCSV(point,series,state),...unidentifiedCSV(point,series,state),...discardCSV(point,state),...nppSeries.csv(point,series,state),...groupCSV(state)].map(escape).join(',')));
+    return header+'\n'+rows.join('\n')+(rows.length?'\n':'');
+  }
+  const comparisonToJSON=(result,state)=>JSON.stringify({schema_version:1,units:state.mode==='npp'?'tonnes carbon/year':result.normalized?'dimensionless multiple':state.mode==='ratio'?'percent':'tonnes carbon/year',state,result},null,2)+'\n';
+  return {aggregate,toCSV,compare,comparisonToCSV,comparisonToJSON,finite};
+});
+</script>
+<script>/* No network requests: the published page also works when opened as a local file. */
+(() => {
+  'use strict';
+  const db=SERIES_DB, $=id=>document.getElementById(id), finite=PPRTimeSeries.finite;
+  const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'trends'});
+  const params=groupStore?.params||new URLSearchParams(location.search);
+  const initialSet=db.sets.find(s=>s.id===(params.get('set')||'global')) || db.sets[0];
+  const initialMethods=params.has('methods')?params.get('methods').split(',').filter(Boolean):params.getAll('method').filter(Boolean);
+  let models={...groupStore?.data.models};try {const parsed=JSON.parse(params.get('models')||'{}');if(parsed && !Array.isArray(parsed) && typeof parsed==='object') models={...parsed,...models};} catch { /* Invalid optional model overrides remain unset. */ }
+  const state={units:params.has('units')?[...new Set(params.get('units').split(',').filter(Boolean))]:[...initialSet.units],
+    set:params.has('units')?'custom':initialSet.id,methods:[...new Set(params.has('methods')?initialMethods:initialMethods.length?initialMethods:['simple trophic chain'])],baseline:params.get('baseline')||null,
+    scope:params.get('scope')||'all',mode:['ratio','npp'].includes(params.get('metric'))?params.get('metric'):'ppr',npp_scope:params.get('npp_scope')==='global'?'global':'selected',
+    catch_basis:['catch','discards'].includes(params.get('catch_basis'))?params.get('catch_basis'):'landings',uncertainty:params.get('uncertainty')==='0'?'0':'1',
+    npp:params.get('npp')||'ens_median_tC_yr',npp_fill:params.get('npp_fill')==='earliest'?'earliest':'observed',unidentified:['zero','simple'].includes(params.get('unidentified'))?params.get('unidentified'):'method',models};
+  let result,geometry,focus=Math.max(0,db.years.indexOf(Number(params.get('year')||db.years.at(-1))));
+  state.group_selections=groupStore?.data.selections||{};
+  const methodInfo=id=>db.ppr_methods.find(m=>m.id===id);
+  const methodLabel=id=>id==='npp'?`NPP · ${nppInfo()?.label||state.npp}`:methodInfo(id)?.label||id;
+  const relevantMethods=()=>[...new Set([...state.methods,...(state.baseline?[state.baseline]:[])])];
+  const hasGroupSubset=()=>state.units.some(id=>{const unit=db.units[id],model=unit?.models.find(m=>m.id===(state.models[id]??unit.default_model));return model&&typeof PPRGroups!=='undefined'&&PPRGroups.active(model,state.group_selections?.[PPRGroups.key(id,model)]);});
+  const usesModels=()=>state.mode!=='npp'&&(relevantMethods().some(id=>methodInfo(id)?.kind==='model')||hasGroupSubset());
+  const taxonOnly=()=>relevantMethods().length>0 && relevantMethods().every(id=>methodInfo(id)?.kind==='taxon');
+  const hasValues=()=>result.series.some(s=>s.points.some(p=>finite(p.value)));
+  const nppInfo=()=>db.npp_methods.find(m=>m.id===state.npp);
+  const catchBasisLabel=()=>({landings:'Landings',catch:'All catch',discards:'Discards'})[state.catch_basis];
+  if(state.mode!=='npp'&&taxonOnly())state.scope='all';
+  const singleYears=state.mode!=='npp'&&state.units.length===1?db.years.filter((year,i)=>finite(db.units[state.units[0]]?.simple?.catch?.[i])):[];
+  state.from=db.years.includes(Number(params.get('from')))?Number(params.get('from')):(singleYears[0]??db.years[0]);
+  state.to=db.years.includes(Number(params.get('to')))?Number(params.get('to')):(singleYears.at(-1)??db.years.at(-1));
+  if(state.from>state.to)[state.from,state.to]=[state.to,state.from];
+  const fmt=v=>v==null?'Unavailable':v.toLocaleString(undefined,{maximumSignificantDigits:5});
+  function element(tag,text,className) {const el=document.createElement(tag);if(text!=null)el.textContent=text;if(className)el.className=className;return el;}
+  function options(select,items,value) {
+    select.replaceChildren(...items.map(item=>{const option=element('option',item.label||item.id);option.value=item.id;return option;}));
+    if(!items.some(item=>item.id===value)){const option=element('option',`${value} · unavailable`);option.value=value;select.appendChild(option);}
+    select.value=value;
+  }
+  options($('baselineMethod'),[{id:'',label:'None'},...db.ppr_methods],state.baseline||'');
+  options($('nppMethod'),db.npp_methods,state.npp);
+  options($('ecosystemSet'),[...db.sets,{id:'custom',label:'Custom selection'}],state.set);
+  const yearOptions=db.years.map(year=>({id:String(year),label:String(year)}));
+  options($('fromYear'),yearOptions,String(state.from));options($('toYear'),yearOptions,String(state.to));
+  $('metric').value=state.mode;$('sourceScope').value=state.scope;$('nppFill').value=state.npp_fill;$('unidentifiedTreatment').value=state.unidentified;
+  $('catchBasis').value=state.catch_basis;$('uncertainty').value=state.uncertainty;
+  $('nppScope').value=state.npp_scope;
+  $('inspectYear').min=0;$('inspectYear').max=db.years.length-1;
+
+  function methodParams(p) {
+    if(state.methods.length===1)p.set('method',state.methods[0]);else p.set('methods',state.methods.join(','));
+    if(state.baseline)p.set('baseline',state.baseline);
+    return p;
+  }
+  function saveURL() {
+    const p=new URLSearchParams();
+    if(state.set==='custom')p.set('units',state.units.join(','));else p.set('set',state.set);
+    p.set('metric',state.mode);methodParams(p);p.set('scope',state.scope);p.set('npp',state.npp);
+    p.set('npp_fill',state.npp_fill);p.set('npp_scope',state.npp_scope);
+    p.set('unidentified',state.unidentified);
+    p.set('catch_basis',state.catch_basis);p.set('uncertainty',state.uncertainty);
+    const overrides=Object.fromEntries(Object.entries(state.models).filter(([id])=>state.units.includes(id)));
+    if(Object.keys(overrides).length)p.set('models',JSON.stringify(overrides));
+    p.set('year',result.points[focus].year);p.set('from',state.from);p.set('to',state.to);
+    if(groupStore){Object.assign(groupStore.data.models,state.models);groupStore.save(p);groupStore.attach(p);groupStore.shareLinks();}
+    try {history.replaceState(null,'','?'+p.toString());} catch { /* Some local-file browsers restrict history. */ }
+  }
+  function update() {
+    const priorYear=result?.points[focus]?.year??Number(params.get('year')||db.years.at(-1));
+    state.years=db.years.filter(y=>y>=state.from && y<=state.to);
+    state.allow_gaps=state.units.length===1;
+    result=PPRTimeSeries.compare(db,state);
+    focus=result.points.findIndex(p=>p.year===priorYear);if(focus<0)focus=result.points.length-1;
+    $('inspectYear').max=result.points.length-1;
+    const ratio=state.mode==='ratio', nppOnly=state.mode==='npp', globalNPP=ratio&&state.npp_scope==='global', single=state.units.length===1;
+    const name=single?(db.units[state.units[0]]?.name||state.units[0]):db.sets.find(s=>s.id===state.set)?.label||'Custom selection';
+    $('selectionTitle').textContent=`${name} · ${state.from}–${state.to}`;
+    $('chooseEcosystems').textContent=`${state.units.length} ecosystem${single?'':'s'} · Change`;
+    $('pprMethodText').textContent=state.methods.length===1?methodLabel(state.methods[0]):`${state.methods.length} methods selected`;
+    $('pprMethod').title=state.methods.map(methodLabel).join('\n');
+    $('chartTitle').textContent=nppOnly?'Annual NPP · selected ecosystems':catchBasisLabel()+' · '+(result.normalized?`${ratio?'PPR / NPP':'PPR'} relative to baseline`:ratio?`PPR as a share of ${globalNPP?'global atlas':'selected ecosystems’'} NPP`:'Annual primary production required');
+    if(!nppOnly&&state.unidentified!=='method')$('chartTitle').textContent+=' · unidentified-catch sensitivity';
+    $('cohortSummary').textContent=`${result.included.length} of ${result.selected} selected ecosystems included · ${result.included.length===result.selected?'Same':'Partial, fixed'} coverage across plotted years`;
+    if(!nppOnly&&state.methods.length>1)$('cohortSummary').textContent+=' · Same ecosystems across available curves';
+    if(globalNPP)$('cohortSummary').textContent+=' · Numerator cohort only; global NPP reference stays fixed';
+    if(result.included.length && result.series.some(s=>s.points.some(p=>p.value===null)))$('cohortSummary').textContent+=' · Gaps mark unavailable values';
+    $('nppMethod').disabled=(!ratio&&!nppOnly)||globalNPP;$('nppFill').disabled=!ratio&&!nppOnly;$('sourceScope').disabled=nppOnly||taxonOnly();
+    options($('nppMethod'),globalNPP?[{id:'global_reference_ensemble',label:'Global atlas reference ensemble'}]:db.npp_methods,globalNPP?'global_reference_ensemble':state.npp);
+    $('nppScope').disabled=!ratio;$('pprMethod').disabled=nppOnly;$('baselineMethod').disabled=nppOnly;$('catchBasis').disabled=nppOnly;$('unidentifiedTreatment').disabled=nppOnly;
+    $('nppMethod').title=globalNPP?'Global atlas NPP uses its fixed reference ensemble. Your selected regional calculation is retained for other modes.':'';
+    $('nppScope').title='Selected ecosystems: PPR relative to their own production. Global atlas NPP: selected PPR as a share of a fixed atlas production reference.';
+    $('uncertainty').disabled=nppOnly||state.catch_basis!=='landings'||result.normalized;
+    $('sensitivityNote').hidden=nppOnly;$('unidentifiedNote').hidden=nppOnly;
+    $('sensitivityNote').textContent=state.catch_basis!=='landings'?'Discard-routing envelopes are available for landings only.':result.normalized?'Discard-routing sensitivity is not assessed for normalized method comparisons.':state.uncertainty==='0'?'Discard-routing sensitivity envelope hidden.':'Shading shows hypothetical discard-routing scenarios on the same landings, with the same NPP denominator when displayed. The annual discard fraction comes from the catch data; uniform allocation within each source model is an assumption. This is not a confidence interval. Missing or invalid responses leave gaps; a routing-invariant reference does not establish zero ecological uncertainty.';
+    $('nppNote').hidden=!ratio&&!nppOnly;
+    const reference=result.npp_reference||db.global_npp;
+    const historical=state.npp_fill==='earliest'?'Earlier missing years use the earliest available NPP for this calculation: a constant historical estimate, not measured historical change. Internal and later gaps remain blank. Dashed curve portions mark substituted estimates.':'Unavailable years remain blank; no historical NPP is inferred.';
+    $('nppNote').textContent=globalNPP?`Coverage-limited atlas reference · Global atlas NPP · ${reference?.ensemble_convention||'Reference ensemble unavailable'}. ${reference?.geography||'A fixed atlas geography, not total world ocean NPP.'} ${reference?.coverage_warning||'Source-window water masks exclude never-retrieved cells; central NPP excludes far nearest-neighbour fills.'} The denominator is independent of ecosystem and PPR-method selections. Missing annual reference calculations leave a gap. ${historical}`:result.annual_npp?`Annual NPP · ${nppInfo()?.label||state.npp}. ${nppOnly?'Sum of the selected ecosystems, independent of catch and Ecopath-model availability.':'PPR and NPP use the same fixed ecosystem cohort.'} A year is blank when any included ecosystem lacks NPP. ${historical}`:`Fixed ${db.npp_year} NPP repeated for every year · ${nppInfo()?.label||state.npp}. This graph does not represent historical changes in NPP.`;
+    if((ratio||nppOnly)&&!globalNPP&&state.npp.startsWith('ens_'))$('nppNote').textContent+=' Ensemble model support can change by ecosystem and year, including years with only one model. Inspect the model counts and names under Coverage and sources.';
+    if(nppOnly){
+      if(state.npp.startsWith('ens_'))$('nppNote').textContent+=` Sum of regional ensemble ${state.npp.includes('median')?'medians':state.npp.includes('min')?'minima':'maxima'} across each region’s available models; this is not an ensemble statistic of global model totals.`;
+      $('nppNote').textContent+=' Selected boundaries may overlap: their regional totals are summed without spatial deduplication, so this is not a unique world-ocean total.';
+    }
+    $('nppNote').baseNote=$('nppNote').textContent;$('nppNote').className=globalNPP?'reference-warning':'';
+    $('calculationNote').textContent=taxonOnly()?'PPR (tonnes carbon) = catch × (1 / 0.1)^(catch-taxon TL − 1) ÷ 9. Trophic levels are held fixed across years.':`PPR (tonnes carbon) = annual catch × SPPR ÷ 9, using ${state.scope==='PP'?'primary-producer':state.scope} sources. Model coefficients, trophic levels and taxon mappings are held fixed across years; missing taxa are excluded.`;
+    $('calculationNote').textContent=$('calculationNote').textContent.replace('= catch ×','= '+catchBasisLabel().toLowerCase()+' ×').replace('= annual catch ×','= annual '+catchBasisLabel().toLowerCase()+' ×');
+    if(typeof hasGroupSubset!=='undefined'&&hasGroupSubset())$('calculationNote').textContent+=' Selected groups retain their original model mapping weights; excluded catch is not reassigned.';
+    if(ratio) $('calculationNote').textContent+=` PPR / NPP = 100 × selected PPR carbon / ${globalNPP?'fixed global atlas NPP reference':'NPP of the same included ecosystems'} (%). Wet-weight PPR is converted to carbon once, at 1/9.`;
+    if(!nppOnly&&(state.methods.length>1 || result.normalized))$('calculationNote').textContent+=' Available curves use the same ecosystems; the catch taxa covered by each method may differ.';
+    if(result.normalized)$('calculationNote').textContent+=` Each curve is divided by ${methodLabel(state.baseline)} in the same year and ecosystems. Values are dimensionless multiples (×); missing or zero baselines leave gaps.${ratio?' The common NPP denominator cancels in this comparison.':''}`;
+    if(nppOnly)$('calculationNote').textContent='NPP = sum of annual regional net primary production in tonnes carbon per year. One curve represents the chosen NPP calculation for the selected ecosystems. NPP is already carbon; no wet-weight conversion or PPR baseline is applied.';
+    $('unidentifiedNote').textContent=state.unidentified==='method'?'Unidentified catch uses the selected method’s own SPPR, including its existing mappings.':state.unidentified==='zero'?'Sensitivity: explicitly unidentified / NEI catch is assigned zero PPR; its tonnage remains in total catch and coverage. This is a zero-cost scenario, not an estimated correction.':'Sensitivity: explicitly unidentified / NEI catch uses each taxon’s reference-TL simple-chain SPPR at TE=0.1. Missing reference coefficients remain uncovered. This total-only fallback is available for All sources; it has no PP, detritus or imported-source attribution.';
+    $('unidentifiedNote').textContent+=' Only explicit residual labels are classified; named genera and families are retained unless their catch label or common name explicitly says unidentified / NEI. See Coverage and sources for the exact list and classifier.';
+    const set=db.sets.find(s=>s.id===state.set);
+    $('setNote').textContent=nppOnly?'Availability depends on annual NPP source data, independently of catch or PPR availability.':single?(db.units[state.units[0]]?.note||''):(set?.note||'Sum of selected ecosystems. Regional boundaries may overlap; this sum is not spatially deduplicated.');
+    $('emptyState').hidden=hasValues();
+    $('emptyReason').textContent=result.reason || (result.excluded.length?`${result.excluded[0].reason} See coverage below, or change the method, model or ecosystem set.`:'Select an ecosystem to plot its annual estimate.');
+    // Missing plotted ratios still have carbon totals, bounds and reasons to export.
+    $('downloadCSV').disabled=!result.series.some(s=>s.points.length);$('downloadJSON').disabled=$('downloadCSV').disabled;$('inspectYear').disabled=!hasValues();
+    renderCoverage();draw();saveURL();
+    if(typeof groupStore!=='undefined'&&groupStore)$('groupFilterSummary').textContent=Object.keys(groupStore.data.selections).length?`${Object.keys(groupStore.data.selections).length} models with group selections`:'All model groups included';
+  }
+
+  function renderCoverage() {
+    const nppOnly=state.mode==='npp',globalNPP=state.mode==='ratio'&&state.npp_scope==='global';
+    $('coverageDetailsTitle').textContent=`Coverage and sources · ${result.included.length} included, ${result.excluded.length} excluded`;
+    const included=element('div'),excluded=element('div');
+    included.appendChild(element('h3',globalNPP?'PPR numerator ecosystems':'Included ecosystems'));
+    const list=element('ul');
+    for(const id of result.included){
+      const unit=db.units[id], li=element('li');
+      const link=element('a',`${unit.name} (${id})`),p=methodParams(new URLSearchParams({units:id,scope:state.scope,metric:state.mode,npp:state.npp,npp_fill:state.npp_fill,npp_scope:state.npp_scope,unidentified:state.unidentified,catch_basis:state.catch_basis,uncertainty:state.uncertainty,from:state.from,to:state.to}));
+      if(state.models[id])p.set('models',JSON.stringify({[id]:state.models[id]}));
+      link.href='trends.html?'+p.toString();li.appendChild(link);
+      if(!nppOnly&&(relevantMethods().some(id=>methodInfo(id)?.kind==='model')||result.series.some(series=>series.model_ids?.[id]))){
+        const model=unit.models.find(m=>m.id===(state.models[id]??unit.default_model));
+        li.appendChild(document.createTextNode(' · '+(model?.label||model?.id||'No model')));
+        if(model?.workbook){li.appendChild(document.createTextNode(' · '));const source=element('a','Source workbook · total-catch calculation and mappings');source.href='../'+model.workbook.split('/').map(encodeURIComponent).join('/');li.appendChild(source);}
+      }
+      if(unit.sources?.workbook){li.appendChild(document.createTextNode(' · '));const source=element('a',nppOnly?'Ecosystem source workbook · annual NPP':'Ecosystem source workbook · total-catch calculation');source.href='../'+unit.sources.workbook.split('/').map(encodeURIComponent).join('/');li.appendChild(source);}
+      if((state.mode==='ratio'||nppOnly)&&!globalNPP){const support=element('div');support.id='nppAvailability_'+id;li.appendChild(support);}
+      if(!nppOnly){
+      const audit=element('details'),taxa=unit.unidentified?.taxa||[];
+      audit.appendChild(element('summary',`Unidentified catch audit · ${taxa.length} classified taxa`));
+      audit.appendChild(element('p',unit.unidentified?`${unit.unidentified.classifier_version}: ${unit.unidentified.rule_description}`:'Classifier metadata unavailable in this export.'));
+      const auditYear=element('p');auditYear.id='unidentifiedAvailability_'+id;audit.appendChild(auditYear);
+      const auditList=element('ul');
+      for(const taxon of taxa)auditList.appendChild(element('li',`${taxon.name}${taxon.common_name && taxon.common_name!==taxon.name?' ('+taxon.common_name+')':''} · ${taxon.reason} · reference TL ${fmt(taxon.reference_tl)} · simple SPPR ${fmt(taxon.simple_sppr)}`));
+      if(!taxa.length)auditList.appendChild(element('li','No explicitly unidentified catch taxa in the inventory.'));
+      audit.appendChild(auditList);li.appendChild(audit);
+      }
+      list.appendChild(li);
+    }
+    if(!result.included.length)list.appendChild(element('li','None for this selection.'));
+    included.appendChild(list);
+    excluded.appendChild(element('h3','Excluded from every plotted year'));
+    const misses=element('ul');
+    result.excluded.forEach(item=>misses.appendChild(element('li',`${item.name} (${item.id}) · ${item.reason}`)));
+    if(!result.excluded.length)misses.appendChild(element('li','None.'));
+    excluded.appendChild(misses);
+    if(!nppOnly){const inventory=element('a','Complete unidentified-catch classifier and inventory');inventory.href='../data/unidentified_taxa.json';excluded.appendChild(inventory);}
+    const unavailable=result.series.filter(s=>!s.points.some(p=>finite(p.value)));
+    if(unavailable.length){
+      excluded.appendChild(element('h3','Unavailable curves'));
+      const failures=element('ul');
+      unavailable.forEach(s=>failures.appendChild(element('li',`${methodLabel(s.method)} · ${seriesReason(s)}`)));
+      excluded.appendChild(failures);
+    }
+    if(state.mode==='ratio'||nppOnly) {
+      const note=element('p','NPP source: annual regional estimates with availability and provenance. '),link=element('a','Annual NPP source data');
+      link.href='../'+(db.npp_source||'NPPExtraction/output/annual_npp.csv').split('/').map(encodeURIComponent).join('/');note.appendChild(link);excluded.appendChild(note);
+      const missing=element('details'),missingSummary=element('summary'),missingList=element('ul');
+      missing.id='nppMissingDetails';missingSummary.id='nppMissingSummary';missingList.id='nppMissingList';
+      missing.append(missingSummary,missingList);excluded.appendChild(missing);
+      if(!globalNPP&&state.npp==='ens_median_tC_yr')excluded.appendChild(element('p','Regional ensemble median: sum of each included region’s median across its available NPP models. Model counts and identities can change by year; a one-model median is not a five-model ensemble. The inspected year’s support is listed for each ecosystem.'));
+      if(globalNPP){
+        const reference=result.npp_reference||db.global_npp;
+        excluded.appendChild(element('h3','Fixed global atlas NPP reference'));
+        excluded.appendChild(element('p',`${reference?.label||'Unavailable reference'} · ${reference?.ensemble_convention||'No ensemble metadata'}. ${reference?.geography||''} ${reference?.overlap_policy||''}`));
+        const annual=element('p');annual.id='globalNPPAvailability';excluded.appendChild(annual);
+        const details=element('details'),regions=element('ul'),ids=reference?.unit_ids||[];
+        details.appendChild(element('summary',`${ids.length} fixed reference regions · independent of PPR selection`));
+        for(const id of ids)regions.appendChild(element('li',`${db.units[id]?.name||id} (${id})`));
+        details.appendChild(regions);excluded.appendChild(details);
+        if(reference?.source)excluded.appendChild(element('p','Reference provenance: '+(typeof reference.source==='string'?reference.source:JSON.stringify(reference.source))));
+      }
+    }
+    $('coverageBody').replaceChildren(included,excluded);
+  }
+
+  const NS='http://www.w3.org/2000/svg';
+  function svg(tag,attrs={},text) {const el=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))el.setAttribute(k,v);if(text!=null)el.textContent=text;return el;}
+  const palette=['#087a80','#c26724','#7155a3','#3976b5','#b64065','#63832b','#7d6251'];
+  const lineStyle=index=>({color:palette[index%palette.length],dash:['none','8 4','2 4'][Math.floor(index/palette.length)%3]});
+  const displayValue=value=>!finite(value)?'Unavailable':result.normalized?`${fmt(value)}×`:state.mode==='ratio'?`${fmt(value)}%`:`${fmt(value)} t C${state.mode==='npp'?' / yr':''}`;
+  function seriesReason(series){return series.reason||[...new Set(series.excluded.map(item=>item.reason))].join(' ')||'No matching annual value.';}
+  const showSensitivity=()=>state.mode!=='npp'&&state.catch_basis==='landings'&&state.uncertainty!=='0'&&!result.normalized;
+  const routeLabel=name=>({SC:'Catch removal',SM:'Mortality-to-detritus proxy',SE:'External loss',SR:'Documented discard return'})[name]||name;
+  const assessedSensitivity=point=>showSensitivity()&&finite(point?.value)&&point?.sensitivity?.status==='assessed'&&!point.sensitivity.hidden&&finite(point.sensitivity.lower)&&finite(point.sensitivity.upper)&&point.sensitivity.lower<=point.sensitivity.upper;
+  function sensitivitySegments(points){
+    const segments=[];let segment=[];
+    points.forEach((point,i)=>{
+      if(!assessedSensitivity(point)){if(segment.length)segments.push(segment);segment=[];return;}
+      if(segment.length&&point.year!==segment.at(-1).year+1){segments.push(segment);segment=[];}
+      segment.push({...point,i});
+    });
+    if(segment.length)segments.push(segment);
+    return segments;
+  }
+  function renderSensitivityReadout(){
+    const container=$('sensitivityReadout');container.hidden=!showSensitivity();container.replaceChildren();
+    if(container.hidden)return;
+    result.series.forEach((series,index)=>{
+      const point=series.points[focus],band=point.sensitivity,item=element('div',null,'sensitivity-card');
+      item.appendChild(element('b',`${methodLabel(series.method)} · discard-routing sensitivity`));
+      if(!assessedSensitivity(point)){item.appendChild(element('p','Not assessed. '+(band?.reason||point.unavailable_reason||'No compatible response is available for this selection.')));container.appendChild(item);return;}
+      item.appendChild(element('p',`${displayValue(band.lower)}–${displayValue(band.upper)} · circle marks the central landings estimate.`));
+      const minimum=Math.min(band.lower,point.value),maximum=Math.max(band.upper,point.value),span=maximum-minimum,x=value=>span?12+196*(value-minimum)/span:110;
+      const interval=svg('svg',{viewBox:'0 0 220 28',class:'sensitivity-interval',role:'img','aria-label':`Scenario range ${displayValue(band.lower)} to ${displayValue(band.upper)}; central estimate ${displayValue(point.value)}`});
+      interval.append(svg('line',{x1:12,x2:208,y1:14,y2:14,stroke:'#d9e4e7'}),svg('line',{x1:x(band.lower),x2:x(band.upper),y1:14,y2:14,stroke:lineStyle(index).color,'stroke-width':6}),svg('line',{x1:x(band.lower),x2:x(band.lower),y1:6,y2:22,stroke:lineStyle(index).color}),svg('line',{x1:x(band.upper),x2:x(band.upper),y1:6,y2:22,stroke:lineStyle(index).color}),svg('circle',{cx:x(point.value),cy:14,r:4.5,fill:'#183945',stroke:'white'}));item.appendChild(interval);
+      const context=[];
+      if(finite(band.discard_fraction))context.push(`Discards / all catch: ${fmt(100*band.discard_fraction)}%.`);
+      if(band.interpolated)context.push('Interpolated between valid tested fractions.');
+      if(band.construction_invariant)context.push('Routing-invariant by construction; this does not establish zero ecological uncertainty.');
+      if(band.reason)context.push(band.reason);
+      if(context.length)item.appendChild(element('p',context.join(' ')));
+      const details=element('details'),sources=band.sources||[{model_id:band.model_id,source_hash:band.source_hash,study_version:band.study_version,discard_fraction:band.discard_fraction}],list=element('ul');
+      details.appendChild(element('summary','Routes, exclusions and source'));
+      for(const source of sources)list.appendChild(element('li',`${source.model_id||'Selected model'} · ${source.study_version||'Study version unavailable'} · discards / all catch ${finite(source.discard_fraction)?fmt(100*source.discard_fraction)+'%':'unavailable'} · source SHA-256 ${source.source_hash||'unavailable'}`));
+      for(const [name,value]of Object.entries(band.route_ppr_tC||{}))list.appendChild(element('li',`${routeLabel(name)} (${name}): ${fmt(value)} t C on the same landings.`));
+      const exclusions=Array.isArray(band.excluded_routes)?band.excluded_routes.map(name=>[name,'Unavailable in part of the selected cohort']):Object.entries(band.excluded_routes||{});
+      for(const [name,reason]of exclusions)list.appendChild(element('li',`${routeLabel(name)} (${name}) excluded: ${reason}`));
+      details.appendChild(list);item.appendChild(details);container.appendChild(item);
+    });
+  }
+  function draw() {
+    const chart=$('chart'),box=$('plotWrap').getBoundingClientRect(),w=Math.max(280,box.width),h=box.height;
+    const margin={left:w<500?60:77,right:25,top:31,bottom:43};
+    const width=w-margin.left-margin.right,height=h-margin.top-margin.bottom;
+    const values=result.series.flatMap(s=>s.points.flatMap(p=>assessedSensitivity(p)?[p.value,p.sensitivity.upper]:[p.value])).filter(finite),max=values.length?Math.max(...values):1;
+    const raw=(max||1)*1.08/4,power=10**Math.floor(Math.log10(raw)),fraction=raw/power;
+    const step=(fraction<=1?1:fraction<=2?2:fraction<=2.5?2.5:fraction<=5?5:10)*power;
+    const ymax=Math.ceil((max||1)*1.04/step)*step;
+    const factor=result.normalized||state.mode==='ratio'?1:ymax>=1e9?1e9:ymax>=1e6?1e6:ymax>=1e3?1e3:1;
+    const unit=result.normalized?'Multiple of baseline (×)':state.mode==='ratio'?`PPR / ${state.npp_scope==='global'?'global atlas ':''}NPP (%)`:`${factor===1e9?'Billion ':factor===1e6?'Million ':factor===1e3?'Thousand ':''}tonnes carbon${state.mode==='npp'?' per year':''}`;
+    const x=i=>margin.left+(result.points.length<2?.5:i/(result.points.length-1))*width;
+    const y=v=>margin.top+height*(1-v/ymax);
+    geometry={x,y,margin,width,height,w,h};
+    chart.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    chart.replaceChildren(svg('title',{id:'svgTitle'},$('chartTitle').textContent),svg('desc',{id:'svgDesc'},`${state.from} to ${state.to}. ${result.included.length} ecosystems included. ${result.series.map(s=>methodLabel(s.method)).join('; ')}.${result.normalized?' Divided by '+methodLabel(state.baseline)+'.':''} Use the Inspect year slider to read exact values, or download the plotted data.`));
+    chart.appendChild(svg('text',{x:margin.left,y:15,fill:'#5d7480','font-size':10},unit));
+    for(let tick=0;tick<=ymax+step/100;tick+=step){
+      const py=y(tick);chart.appendChild(svg('line',{x1:margin.left,y1:py,x2:w-margin.right,y2:py,stroke:'#e5edef','stroke-dasharray':tick?'3 4':'none'}));
+      chart.appendChild(svg('text',{x:margin.left-10,y:py+4,'text-anchor':'end',fill:'#5d7480','font-size':11},Number((tick/factor).toPrecision(3)).toLocaleString()));
+    }
+    const spacing=w<500?20:10;
+    result.points.forEach((p,i)=>{if(i===0 || p.year%spacing===0 || i===result.points.length-1 && p.year%spacing>=spacing/2){
+      chart.appendChild(svg('text',{x:x(i),y:h-20,'text-anchor':'middle',fill:'#5d7480','font-size':11},p.year));
+    }});
+    chart.appendChild(svg('text',{x:margin.left+width/2,y:h-2,'text-anchor':'middle',fill:'#5d7480','font-size':10},'Year'));
+    result.series.forEach((series,index)=>{
+      const style=lineStyle(index),group=svg('g',{'data-method':series.method,'aria-label':methodLabel(series.method)});
+      for(const points of sensitivitySegments(series.points)){
+        if(points.length===1){const p=points[0];group.appendChild(svg('line',{x1:x(p.i),x2:x(p.i),y1:y(p.sensitivity.lower),y2:y(p.sensitivity.upper),stroke:style.color,'stroke-width':5,opacity:'.25','data-sensitivity-band':'isolated'}));continue;}
+        const path=points.map((p,i)=>`${i?'L':'M'}${x(p.i)},${y(p.sensitivity.upper)}`).join(' ')+' '+[...points].reverse().map(p=>`L${x(p.i)},${y(p.sensitivity.lower)}`).join(' ')+' Z';
+        group.appendChild(svg('path',{d:path,fill:style.color,opacity:'.16','data-sensitivity-band':'true'}));
+      }
+      const segments=[];let segment=[];
+      series.points.forEach((p,i)=>{
+        if(finite(p.value)){
+          const point={i,value:p.value,estimated:Boolean(p.npp_estimated)};
+          if(segment.length && segment.at(-1).estimated!==point.estimated){segments.push(segment);segment=[{...segment.at(-1),estimated:point.estimated}];}
+          segment.push(point);
+        }else if(segment.length){segments.push(segment);segment=[];}
+      });
+      if(segment.length)segments.push(segment);
+      for(const points of segments){
+        const path=points.map((p,i)=>`${i?'L':'M'}${x(p.i)},${y(p.value)}`).join(' ');
+        group.appendChild(svg('path',{d:path,fill:'none',stroke:style.color,'stroke-width':2.6,'stroke-dasharray':points[0].estimated?'5 5':style.dash,'stroke-linecap':'round','stroke-linejoin':'round','data-curve':'true','data-npp-estimate':String(points[0].estimated)}));
+        if(points.length===1)group.appendChild(svg('circle',{cx:x(points[0].i),cy:y(points[0].value),r:3,fill:style.color}));
+      }
+      chart.appendChild(group);
+    });
+    if(values.length){
+      chart.appendChild(svg('line',{id:'focusLine',y1:margin.top,y2:margin.top+height,stroke:'#598d93','stroke-dasharray':'3 4'}));
+      result.series.forEach((series,index)=>chart.appendChild(svg('circle',{id:'focusDot'+index,r:4.5,fill:lineStyle(index).color,stroke:'white','stroke-width':2})));
+    }
+    inspect(focus);
+  }
+  function globalCoverageDescription(metadata={}){
+    const coverage=metadata.coverage||{},waterPct=metadata.water_area_pct_of_polygon??coverage.water_area_pct_of_polygon;
+    const parts=['Coverage-limited atlas reference.'];
+    if(finite(waterPct))parts.push(`Source-supported water mask: ${fmt(waterPct)}% of the reference polygon${finite(coverage.water_area_km2)&&finite(coverage.polygon_area_km2)?` (${fmt(coverage.water_area_km2)} of ${fmt(coverage.polygon_area_km2)} km²)`:''}.`);
+    else parts.push('Annual supported-water area is unavailable.');
+    const waterDays=coverage.central_support_pct_of_water_pixel_days,polygonDays=coverage.central_support_pct_of_polygon_pixel_days;
+    if(finite(waterDays)||finite(polygonDays))parts.push(`Central estimate’s day-weighted included area: ${[finite(waterDays)?`${fmt(waterDays)}% of supported water pixel-days`:null,finite(polygonDays)?`${fmt(polygonDays)}% of reference polygon pixel-days`:null].filter(Boolean).join('; ')}.`);
+    if(finite(coverage.excluded_far_pct_of_water_pixel_days))parts.push(`Far-fill exclusion: ${fmt(coverage.excluded_far_pct_of_water_pixel_days)}% of supported water pixel-days.`);
+    parts.push('These are source-support measures, not observed world-ocean coverage.');
+    return parts.join(' ');
+  }
+  function inspect(index) {
+    focus=Math.max(0,Math.min(result.points.length-1,Number(index)));
+    const p=result.points[focus];
+    const multiple=result.series.length>1;
+    $('focusYear').textContent=p.year;$('focusValue').textContent=multiple?`${result.series.filter(s=>finite(s.points[focus].value)).length} of ${result.series.length} curves`:displayValue(p.value);
+    const descriptions=result.series.map(s=>`${methodLabel(s.method)}: ${displayValue(s.points[focus].value)}`);
+    $('inspectYear').value=focus;$('inspectYear').setAttribute('aria-valuetext',`${p.year}: ${descriptions.join('; ')||'No methods selected'}`);$('inspectValue').value=p.year;
+    if(state.mode==='npp'){
+      const available=p.npp_available_ids?.length??(p.npp===null?'Unknown':result.included.length);
+      $('coverage').textContent=`${p.year} · Annual NPP for ${available} of ${result.included.length} selected ecosystems. Catch and Ecopath-model availability do not restrict this curve.`;
+    }else{
+    $('coverage').textContent=multiple?`${p.year} · Catch coverage is reported separately for each method below its value. Catch is measured in tonnes wet weight.`:p.coverage==null?(p.value===null?`${p.year} · No value is available.`:'Catch coverage unavailable.'): `${p.year} · ${fmt(p.coverage*100)}% of included ecosystems’ catch has a PPR coefficient (${fmt(p.covered_catch)} of ${fmt(p.catch)} tonnes).`;
+    const affected=result.series.find(s=>s.points[focus].unidentified_share!=null)?.points[focus]||p;
+    $('coverage').textContent=$('coverage').textContent.replace(/catch/gi,catchBasisLabel().toLowerCase());
+    $('coverage').textContent+=affected.unidentified_share==null?' Unidentified-catch share unavailable.':` Explicitly unidentified / NEI: ${fmt(100*affected.unidentified_share)}% of ${catchBasisLabel().toLowerCase()} (${fmt(affected.unidentified_catch)} tonnes).`;
+    if(state.unidentified==='simple' && affected.unidentified_missing_simple_catch>0)$('coverage').textContent+=` ${fmt(affected.unidentified_missing_simple_catch)} tonnes of that catch lack a reference coefficient and remain uncovered.`;
+    for(const id of result.included){
+      const target=$('unidentifiedAvailability_'+id),unit=db.units[id],i=db.years.indexOf(p.year);if(!target)continue;
+      const audit=unit.unidentified?.catch_bases?.[state.catch_basis]||(state.catch_basis==='landings'?unit.unidentified:null),basis=state.catch_basis==='landings'?unit.simple:unit.simple?.catch_bases?.[state.catch_basis];
+      const catchValue=audit?.catch?.[i],total=basis?.catch?.[i],missing=audit?.missing_simple_catch?.[i];
+      target.textContent=`${p.year}: ${fmt(catchValue)} tonnes explicitly unidentified / NEI${total>0 && catchValue!=null?' · '+fmt(100*catchValue/total)+'% of '+catchBasisLabel().toLowerCase():''}. Missing reference coefficient: ${fmt(missing)} tonnes.`;
+    }
+    }
+    if(state.mode==='ratio'||state.mode==='npp'){
+      const point=result.series.find(s=>s.points[focus].npp_estimated)?.points[focus]||p;
+      const globalNPP=state.mode==='ratio'&&state.npp_scope==='global',label=globalNPP?'Fixed global atlas NPP denominator':state.mode==='ratio'?'Selected-cohort NPP denominator':'Selected NPP total';
+      $('coverage').textContent+=point.npp===null?` ${label} unavailable. ${point.npp_reason||'Fixed reference coverage is incomplete.'}`:` ${label}: ${fmt(point.npp)} t C / yr.`;
+      const missingIds=point.npp_missing_ids||[];
+      if(missingIds.length)$('coverage').textContent+=missingIds.length>5?` Missing NPP for ${missingIds.length} ecosystems; see Coverage and sources.`:` Missing NPP: ${missingIds.join(', ')}.`;
+      $('nppMissingDetails').hidden=!missingIds.length;
+      $('nppMissingSummary').textContent=`${p.year} · ${missingIds.length} ecosystems missing annual NPP`;
+      $('nppMissingList').replaceChildren(...missingIds.map(id=>element('li',`${db.units[id]?.name||id} (${id})`)));
+      if(point.npp_estimated)$('coverage').textContent+=` Historical estimate: substituted NPP for ${(point.npp_substituted_ids||[]).map(id=>`${id} from ${point.npp_source_years?.[id]??'an earlier reference year'}`).join(', ')}.`;
+      if(globalNPP){
+        const metadata=point.npp_reference_metadata||{},target=$('globalNPPAvailability'),modelNames=metadata.model_names||metadata.available_models||[];
+        const coverageDescription=globalCoverageDescription(metadata);
+        $('coverage').textContent+=' '+coverageDescription;
+        $('nppNote').textContent=$('nppNote').baseNote+` Inspected ${p.year}${point.npp_estimated?' (historical substitution)':''}: `+coverageDescription;
+        if(target)target.textContent=`${p.year}: ${coverageDescription} ${fmt(point.npp)} t C / yr · ${metadata.model_count??metadata.n_models??'unknown number of'} computed NPP model total(s)${modelNames.length?' ('+modelNames.join(', ')+')':''}; calculation status: ${metadata.calculation_complete||metadata.complete?'complete':(metadata.status||'not recorded').replaceAll('_',' ')}. ${metadata.reason||''}${point.npp_estimated?' Historical substitution: '+JSON.stringify(point.npp_source_years||{}):''}`;
+      }
+      for(const id of result.included){
+        const target=$('nppAvailability_'+id);if(!target)continue;
+        const metadata=point.npp_provenance?.[id],sourceYear=point.npp_source_years?.[id];
+        const available=metadata?.available_models,names=Array.isArray(available)?available.join(', '):available;
+        target.textContent=`NPP ${p.year}: ${sourceYear==null?'unavailable':point.npp_substituted_ids?.includes(id)?'historical estimate using '+sourceYear:'annual source value'}`;
+        if(state.npp.startsWith('ens_'))target.textContent+=` · ${metadata?.n_models??'unknown number of'} NPP model(s)${names?' ('+names+')':''}${metadata?.ensemble_basis?' · '+metadata.ensemble_basis:''}`;
+      }
+    }
+    $('seriesLegend').hidden=!multiple;
+    if(multiple)$('seriesLegend').replaceChildren(...result.series.map((series,index)=>{
+      const point=series.points[focus],style=lineStyle(index),item=element('div',null,'series-key'),key=svg('svg',{width:26,height:10,viewBox:'0 0 26 10','aria-hidden':'true'});
+      key.appendChild(svg('line',{x1:0,x2:26,y1:5,y2:5,stroke:style.color,'stroke-width':2.6,'stroke-dasharray':style.dash}));
+      const text=element('div');text.appendChild(element('b',methodLabel(series.method)));
+      const coverage=point.coverage==null?catchBasisLabel()+' coverage unavailable':`${fmt(point.coverage*100)}% ${catchBasisLabel().toLowerCase()} coverage`;
+      const output=element('output',`${displayValue(point.value)}${point.npp_estimated?' · Historical NPP estimate':''} · ${coverage}`);
+      if(!finite(point.value))output.appendChild(element('span',` · ${point.unavailable_reason||seriesReason(series)}`));
+      text.appendChild(output);item.append(key,text);return item;
+    }));
+    renderSensitivityReadout();
+    if($('focusLine')){
+      const px=geometry.x(focus);$('focusLine').setAttribute('x1',px);$('focusLine').setAttribute('x2',px);
+      result.series.forEach((series,index)=>{const dot=$('focusDot'+index),value=series.points[focus].value;dot.style.display=finite(value)?'':'none';if(finite(value)){dot.setAttribute('cx',px);dot.setAttribute('cy',geometry.y(value));}});
+    }
+  }
+  $('chart').addEventListener('pointermove',event=>{if(!hasValues())return;const rect=$('chart').getBoundingClientRect(),px=(event.clientX-rect.left)*geometry.w/rect.width;inspect(Math.round((px-geometry.margin.left)/geometry.width*(result.points.length-1)));});
+  $('inspectYear').addEventListener('input',event=>inspect(event.target.value));
+  $('inspectYear').addEventListener('change',saveURL);
+  for(const [id,key,other,otherId] of [['fromYear','from','to','toYear'],['toYear','to','from','fromYear']]){
+    $(id).addEventListener('change',()=>{state[key]=Number($(id).value);if(state.from>state.to){state[other]=state[key];$(otherId).value=state[other];}update();});
+  }
+  function methodsChanged(){if(state.mode!=='npp'&&taxonOnly()){state.scope='all';$('sourceScope').value='all';}update();}
+  for(const [id,key] of [['metric','mode'],['baselineMethod','baseline'],['sourceScope','scope'],['nppMethod','npp'],['nppFill','npp_fill'],['nppScope','npp_scope'],['unidentifiedTreatment','unidentified'],['catchBasis','catch_basis'],['uncertainty','uncertainty']]){
+    $(id).addEventListener('change',()=>{state[key]=$(id).value||null;methodsChanged();});
+  }
+
+  function renderMethods(){
+    const catalog=[...db.ppr_methods,...state.methods.filter(id=>!methodInfo(id)).map(id=>({id,label:id,kind:'unknown',scopes:[]}))];
+    $('methodList').replaceChildren(...catalog.map((method,index)=>{
+      const row=element('div',null,'ecosystem-row'),label=element('label'),check=element('input');
+      check.type='checkbox';check.id='method_'+index;check.checked=state.methods.includes(method.id);
+      const text=element('span',method.label||method.id);
+      text.appendChild(element('small',method.kind==='taxon'?'Catch-taxon trophic levels · all sources':method.kind==='model'?'Ecopath model · '+method.scopes.join(', '):'Unknown method · unavailable'));
+      label.append(check,text);row.appendChild(label);
+      check.addEventListener('change',()=>{if(check.checked)state.methods.push(method.id);else state.methods=state.methods.filter(id=>id!==method.id);methodsChanged();$('methodCount').textContent=`${state.methods.length} selected`;});
+      return row;
+    }));
+    $('methodCount').textContent=`${state.methods.length} selected`;
+  }
+  $('pprMethod').addEventListener('click',()=>{renderMethods();$('methodDialog').showModal();});
+  for(const id of ['closeMethods','doneMethods'])$(id).addEventListener('click',()=>$('methodDialog').close());
+  $('selectAllMethods').addEventListener('click',()=>{state.methods=db.ppr_methods.map(m=>m.id);methodsChanged();renderMethods();});
+  $('clearMethods').addEventListener('click',()=>{state.methods=[];methodsChanged();renderMethods();});
+
+  const ordered=Object.entries(db.units).sort((a,b)=>a[1].name.localeCompare(b[1].name));
+  const visibleUnits=()=>{const query=$('ecosystemSearch').value.trim().toLowerCase();return ordered.filter(([id,u])=>`${u.name} ${id} ${u.type}`.toLowerCase().includes(query));};
+  function custom() {state.set='custom';$('ecosystemSet').value='custom';}
+  function renderPicker() {
+    $('ecosystemHint').textContent=state.mode==='npp'?'The graph sums annual NPP for your selection. Catch data and Ecopath models are not required.':'The graph sums your selection. Each model version is used separately.';
+    const selected=new Set(state.units),network=usesModels(),rows=visibleUnits().map(([id,unit])=>{
+      const row=element('div',null,'ecosystem-row'),label=element('label'),check=element('input');check.type='checkbox';check.id='pick_'+id;check.value=id;check.checked=selected.has(id);
+      const text=element('span',unit.name);text.appendChild(element('small',`${id} · ${unit.type}${unit.pilot?' · Selected pilot':''}${state.mode!=='npp'&&!unit.simple?.ppr?.some(finite)?' · No catch estimate':''}`));
+      label.append(check,text);row.appendChild(label);
+      check.addEventListener('change',()=>{if(check.checked)state.units.push(id);else state.units=state.units.filter(v=>v!==id);const scroll=$('ecosystemList').scrollTop;custom();update();renderPicker();$('ecosystemList').scrollTop=scroll;$('pick_'+id).focus({preventScroll:true});});
+      if(network && selected.has(id) && unit.models.length){
+        const select=element('select');select.setAttribute('aria-label',`Ecopath model for ${unit.name}`);
+        options(select,unit.models.map(m=>({id:m.id,label:(m.label||m.id)+(m.verified?'':' · no verified PPR')})),state.models[id]??unit.default_model);
+        select.addEventListener('change',()=>{state.models[id]=select.value;update();});row.appendChild(select);
+      }
+      return row;
+    });
+    $('ecosystemList').replaceChildren(...(rows.length?rows:[element('p','No ecosystems match your search.')]));
+    $('pickerCount').textContent=`${state.units.length} selected · ${rows.length} visible`;
+    $('pickerNote').textContent=state.mode==='npp'?'NPP uses all selected ecosystems with annual NPP data, including those without catch data or an Ecopath model. A missing annual value leaves a gap for the fixed selection.':network?'Choose one Ecopath model per ecosystem. Failed methods and ecosystems without a verified model are excluded.':'You can select ecosystems without selected articles for the catch-taxon TL estimate. Map pilot coloring is unchanged.';
+  }
+  function openPicker(){renderPicker();$('ecosystemDialog').showModal();}
+  $('chooseEcosystems').addEventListener('click',openPicker);$('emptyChoose').addEventListener('click',openPicker);
+  for(const id of ['closeEcosystems','doneEcosystems'])$(id).addEventListener('click',()=>$('ecosystemDialog').close());
+  $('ecosystemSearch').addEventListener('input',renderPicker);
+  $('ecosystemSet').addEventListener('change',()=>{const set=db.sets.find(s=>s.id===$('ecosystemSet').value);state.set=$('ecosystemSet').value;if(set)state.units=[...set.units];update();renderPicker();});
+  $('selectVisible').addEventListener('click',()=>{state.units=[...new Set([...state.units,...visibleUnits().map(([id])=>id)])];custom();update();renderPicker();});
+  $('clearSelection').addEventListener('click',()=>{state.units=[];custom();update();renderPicker();});
+  function download(format){
+    const content=format==='csv'?PPRTimeSeries.comparisonToCSV(result,state):PPRTimeSeries.comparisonToJSON(result,state);
+    const url=URL.createObjectURL(new Blob([typeof content==='string'?content:JSON.stringify(content,null,2)],{type:format==='csv'?'text/csv;charset=utf-8':'application/json;charset=utf-8'})),link=element('a');
+    link.href=url;link.download=`${state.mode==='npp'?'npp':`ppr-${state.catch_basis}-${state.mode}${state.mode==='ratio'?'-'+state.npp_scope:''}${result.normalized?'-relative':''}`}-${state.set}-${state.from}-${state.to}.${format}`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+  $('downloadCSV').addEventListener('click',()=>download('csv'));$('downloadJSON').addEventListener('click',()=>download('json'));
+  new ResizeObserver(()=>{if(result)draw();}).observe($('plotWrap'));
+  const groupDialog=groupStore?PPRGroupDialog.create({units:db.units,store:groupStore,
+    getContext:()=>({...state,year:result?.points[focus]?.year??db.years[focus],method:state.methods[0]||'simple trophic chain'}),
+    onChange:()=>{state.group_selections=groupStore.data.selections;Object.assign(state.models,groupStore.data.models);update();}
+  }):null;
+  if(groupDialog){
+    $('openGroupFilter').addEventListener('click',()=>groupDialog.open(state.units.length===1?state.units[0]:undefined));
+    groupStore.subscribe(()=>{state.group_selections=groupStore.data.selections;Object.assign(state.models,groupStore.data.models);update();groupDialog.refresh();});
+  }
+  update();
+})();
+</script>
+</body></html>

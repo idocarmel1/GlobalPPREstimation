@@ -1,0 +1,29 @@
+scope:
+  name: eez
+  unit_index: spatial/eez_units.csv
+  raw_directory: raw_data/SAU_downloads
+  output_directory: eez_output
+method:
+  transfer_efficiency: 0.1
+  apply_wet_weight_to_carbon_divisor: false
+analysis:
+  year: null
+  include_catch_types: [Landings, Discards]
+  include_reporting_status: [Reported, Unreported]
+  matching:
+    min_genus_species: 2
+    allow_commercial_group_fallback: true
+    allow_functional_group_fallback: true
+spatial_flags:
+  low_overlap_threshold: 0.10
+  containment_threshold: 0.90
+  prefer_ratio: 1.20
+  review_ratio: 1.10
+sea_around_us:
+  api_base_url: https://api.seaaroundus.org/api/v1
+  data_version_expected: '50.1'
+  catch_download:
+    measure: tonnage
+    dimension: taxon
+    limit: 10
+    scientific_names: false

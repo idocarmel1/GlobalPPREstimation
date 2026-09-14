@@ -1,0 +1,53 @@
+method:
+  transfer_efficiency: 0.1
+  apply_wet_weight_to_carbon_divisor: false
+
+analysis:
+  year: null
+  include_catch_types:
+    - Landings
+    - Discards
+  include_reporting_status:
+    - Reported
+    - Unreported
+  matching:
+    min_genus_species: 2
+    allow_commercial_group_fallback: true
+    allow_functional_group_fallback: true
+
+pilot_units:
+  - unit_id: LME_013
+    sau_region: lme
+    sau_region_id: 13
+    name: Humboldt Current
+    rationale: High-volume, low-trophic-level small-pelagic fishery
+  - unit_id: LME_001
+    sau_region: lme
+    sau_region_id: 1
+    name: East Bering Sea
+    rationale: High-volume mixed fishery
+  - unit_id: LME_022
+    sau_region: lme
+    sau_region_id: 22
+    name: North Sea
+    rationale: Diverse industrial shelf fishery
+  - unit_id: LME_038
+    sau_region: lme
+    sau_region_id: 38
+    name: Indonesian Sea
+    rationale: Diverse tropical fishery with fish and invertebrates
+  - unit_id: HS_071
+    sau_region: highseas
+    sau_region_id: 71
+    name: Pacific, Western Central
+    rationale: Tuna-dominated high-seas fishery
+
+sea_around_us:
+  api_base_url: https://api.seaaroundus.org/api/v1
+  data_version_expected: "50.1"
+  catch_download:
+    measure: tonnage
+    dimension: taxon
+    limit: 10
+    scientific_names: false
+

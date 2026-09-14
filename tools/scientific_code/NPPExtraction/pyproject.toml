@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ppr-npp"
+version = "1.0.0"
+description = "Satellite net primary production aggregated to Sea Around Us regions (LME, high seas, EEZ) from five ocean-colour algorithms"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.24", "pandas>=2.0", "scipy>=1.10",
+  "xarray>=2023.1", "netCDF4>=1.6", "pyhdf>=0.11",
+  "geopandas>=0.13", "shapely>=2.0", "exactextract>=0.2", "pyproj>=3.4",
+  "openpyxl>=3.1", "PyYAML>=6.0",
+  "certifi>=2024.2.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+npp = "npp.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["npp*"]

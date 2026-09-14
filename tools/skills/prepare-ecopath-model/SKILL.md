@@ -1,0 +1,20 @@
+---
+name: prepare-ecopath-model
+description: Find, archive, extract and assess Ecopath models for a Global PPR region; maintain paper/model metadata and prepare a selected model. Use with one region directory or workbook, including paper-only and EcoBase-input requests.
+---
+
+Resolve the project as the ancestor containing Project.xlsx. Resolve a regional workbook as `<region>/<region>.xlsx`. Read its Overview before work. The schema is in `../../../README.md#workbook-reference`; the public table reader/writer is `../../workbooks.py`.
+
+Use the maintained domain resources under `../original_skill_resources/claude/ecopath-extraction/` for paper extraction and `../original_skill_resources/combined-src/` for taxonomy. Read only relevant references. Their old integration paths describe the original checkout; use the workbook contract below for new outputs. Never invoke the original broad SPPR exporter as a shell command.
+
+For discovery, place papers and supplements in the region's `papers/<paper_id>/`. Record citation, year, modeled periods, model identities, geographic coverage and its evidential basis in Project.xlsx / Papers and Models & coverage. A paper can contain several models; record each distinct extracted model. Do not infer a coverage percentage from a marker or bounding box. Missing evidence stays missing. Distinguish candidate availability, geographic applicability, model health and adoption.
+
+For extraction, write source-faithful EwE tables under `models/<model_id>/extracted_tables/` and the source database JSON to `models/<model_id>/model.json`. Preserve unknown source values separately from loader defaults and corrections. Place substantial page/cell evidence with those source tables; put functional-group taxonomy in the regional Selected model groups sheet. For EcoBase input, keep its accession and source period explicit; a local filename is not proof of model identity.
+
+Model selection is owned by regional Overview: selected_model_id, model_path and selection_rationale. Write the rationale beside the model selection using the existing fields. Recommend a model when selection is not authorized; when the user selected it or authorized your choice, record it. Do not edit the generated project selection separately. Preserve prior model-specific outputs in their model folder when changing a selection. Clear stale model-result blocks and mark processing incomplete until SPPR and matching are prepared for the new model.
+
+Use `python tools/run_region.py --region <workbook> --stage sppr` for a named selected-model run. This imports the preserved scientific engine through a bounded wrapper. Monte Carlo reruns are new realizations. Then use the calculate-regional-ppr skill for matching and integration. Do not replace historical model identity caveats with a clean-looking year or silently adopt a validation experiment as production.
+
+For a paper extraction, read `../original_skill_resources/claude/ecopath-extraction/SKILL.md` and apply its scientific workflow: establish exact groups and table layouts, inspect coordinate-based PDF extraction, sweep prose/footnotes and biomass accumulation, distinguish unknowns from loader defaults, validate the import tables, check mass balance, and verify the database JSON round trip. Retain every required import table and page/cell evidence under the model's extracted_tables directory. Put the model's structural profile, exclusions and review findings in regional Diagnostics and central source/model records instead of creating another project index or project guide.
+
+When taxonomy or the full paper-to-PPR chain is requested, read `../original_skill_resources/claude/ecopath-paper-to-ppr/SKILL.md` and its `references/group-taxonomy.md`. Capture group membership once while reading the sources; retain the taxonomy for JSON taxon_descr and the regional Selected model groups sheet. The JSON-only EcoBase route is supported too. Read its `references/source-bundle.md` to distinguish a source's archived presence from verified numerical use. Use the new regional CLI and workbook contract instead of the old repository output paths and selection files.
