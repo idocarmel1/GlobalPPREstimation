@@ -181,7 +181,7 @@ def migrate(source, dest, units=None):
         elif rel.startswith('research/'):
             target=dest/'original_research_archive'/p.relative_to(source)
         elif rel.startswith('graphify-out/'):
-            target=dest/'original_research_archive/knowledge_graph'/p.name
+            target=dest/'tools/knowledge_graph'/p.relative_to(source/'graphify-out')
         else:target=dest/'original_research_archive/legacy'/p.relative_to(source)
         copy(p,target)
     # Distribution sources retain exact bytes; separate from the maintained new entry points.

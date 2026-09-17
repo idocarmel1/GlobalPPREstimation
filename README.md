@@ -15,9 +15,11 @@ tools/                          Calculation and map-generation Python scripts
   scientific_code/              Original SPPR, catch-extraction and NPP implementations
   scientific_helpers/           Shared scientific integration functions
   workflow_checks/              Automated checks of calculations and update behavior
+  knowledge_graph/              Preserved knowledge graph and local Graphify support files
 common_reference_data/          Geography, taxonomy references and EcoBase model library
 interactive_map/                Generated map, time-series and source-archive HTML pages
 original_research_archive/      Original reports, experiments, outputs and provenance ledgers
+  research/                     Research studies, including discard sensitivity and mean-TE comparisons
 ```
 
 There is one project-level Markdown guide. Required SKILL.md files, skill references and original research documents stay within their own folders. Historical filenames and instructions inside preserved sources describe the original layout; use this guide and the three current skills for the active workflow.
@@ -86,7 +88,9 @@ The workbook schema and ownership rules are included below. The three skill entr
 
 ## Preservation
 
-The original checkout was not changed. original_research_archive/migration.csv lists source files, retained paths, sizes and SHA-256 hashes. Historical outputs, experiments and knowledge-graph artifacts remain under original_research_archive. They are evidence, not current working tables. The NPP raw satellite cache may live outside the original checkout; preserved extraction documentation records its acquisition. No claim is made that externally cached bytes are bundled here.
+original_research_archive/migration.csv lists source files, retained paths, sizes and SHA-256 hashes. Historical outputs and experiments remain under original_research_archive, with local research studies consolidated in original_research_archive/research. Knowledge-graph artifacts live in tools/knowledge_graph; their source paths describe the pre-reorganization layout until the graph is refreshed. These preserved artifacts are evidence, not current working tables. Graphify caches, converted intermediates and machine-specific interpreter/root settings remain local and are excluded from Git. The NPP raw satellite cache may live outside the original checkout; preserved extraction documentation records its acquisition. No claim is made that externally cached bytes are bundled here.
+
+The expanded discard-sensitivity study's results/group_sppr.csv is stored with Git LFS. Install Git LFS and run `git lfs pull` after cloning to obtain that file's full contents before auditing or using it.
 
 The migration preserves current saved model results, annual NPP, catch-basis and unidentified-treatment outputs. Archived source caveats still apply. No historical TL gaps or model/source conflicts were repaired by moving data. Tests and verification reports describe checks actually run, separately from historical reports.
 

@@ -1,0 +1,40 @@
+"""One-time deterministic adaptation of the frozen runner within this namespace."""
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+p=root/'src/run_study.py'
+s=p.read_text(encoding='utf-8')
+s=s.replace('from metrics import fixed_support_ppr,decompose','from metrics import fixed_support_ppr,decompose\nfrom catalog import enrich')
+a=s.index("        meta.update(native_units=")
+b=s.index("        default,default_ledger",a)
+s=s[:a]+'''        meta=enrich(meta,base)
+        changes+=source_adjustments(base,meta)
+        fate,sr_info=sr_destination(base,model_id) if meta['cohort']=='original_reference' else (None,None)
+        meta['sr_routing']=sr_info
+'''+s[b:]
+s=s.replace("        meta['source_validity']='accounting_baseline_with_inferred_accumulation' if meta['baseline_diagnostics']['negative_living_accumulation'] else 'source_rounding_tolerance'","")
+s=s.replace('def run():','def run(only_model=None):\n    OUTPUT=ROOT/\'results/models\'/only_model if only_model else ROOT/\'results\'\n    OUTPUT.mkdir(parents=True,exist_ok=True)')
+s=s.replace('    for path in model_paths():','    for path in model_paths():\n        if only_model and path.stem!=only_model: continue')
+s=s.replace("ROOT/'results/", "OUTPUT/'")
+s=s.replace("        checks+=compare_saved(base,meta,raw_outputs)",'''        checks+=compare_saved(base,meta,raw_outputs)
+        for method,frame in raw_outputs.items():
+            if frame is None:
+                checks.append(dict(model_id=model_id,method=method,provenance='fresh_unmodified_vs_adapter',passed=None,reason='Unmodified calculator method unavailable'))
+                continue
+            try:
+                with warnings.catch_warnings(),contextlib.redirect_stdout(io.StringIO()):
+                    warnings.simplefilter('ignore')
+                    adapted=calculate(default,method,standard)
+                av=frame.to_numpy(float);bv=adapted.reindex(index=frame.index,columns=frame.columns).to_numpy(float)
+                mask=np.isfinite(av)&np.isfinite(bv)
+                checks.append(dict(model_id=model_id,method=method,provenance='fresh_unmodified_vs_adapter',
+                    passed=bool(np.array_equal(np.isfinite(av),np.isfinite(bv)) and np.allclose(av[mask],bv[mask],rtol=2e-7,atol=1e-7)),
+                    max_absolute_error=float(np.max(np.abs(av[mask]-bv[mask]))) if mask.any() else None,
+                    compared_cells=int(mask.sum()),nonfinite_cells=int((~mask).sum())))
+            except Exception as e:
+                checks.append(dict(model_id=model_id,method=method,provenance='fresh_unmodified_vs_adapter',passed=False,reason=str(e)))''')
+s=s.replace("elif method=='SPPR_1986': fingerprint='weights_'+str(np.round(weights.values,13).tolist())", "elif method=='SPPR_1986': fingerprint=('zero_catch_' if calc.catch.sum()==0 else 'positive_catch_')+str(np.round(weights.values,13).tolist())")
+s=s.replace("study_version='2026-09-10.discard-routing.v1'", "study_version='2026-09-10.discard-routing.expanded.v2'")
+s=s.replace("'SR':'H remains fishery mortality with explicit source-supported return of D. Only Humboldt destination established; offal intermediary transfers are explicit.'", "'SR':'Only the separately identified original Humboldt reference has a verified destination. Unavailable for every added model.'")
+s=s.replace("if __name__=='__main__': run()", "if __name__=='__main__':\n    import argparse\n    parser=argparse.ArgumentParser();parser.add_argument('--model',required=True)\n    run(parser.parse_args().model)")
+p.write_text(s,encoding='utf-8')
+print('Generalized private runner')

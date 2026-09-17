@@ -36,7 +36,7 @@ def verify(source,root):
     kept=0
     ledger=root/'original_research_archive/migration.csv'
     if ledger.exists():
-        for r in csv.DictReader(ledger.open()):
+        for r in csv.DictReader(ledger.open(encoding='utf-8', newline='')):
             path=root/r['retained_path']
             if not path.is_file() or sha(path)!=r['sha256']:raise AssertionError(f'Retention mismatch: {r["original_path"]}')
             kept+=1
