@@ -15,7 +15,7 @@ tools/                          Calculation and map-generation Python scripts
   scientific_code/              Original SPPR, catch-extraction and NPP implementations
   scientific_helpers/           Shared scientific integration functions
   workflow_checks/              Automated checks of calculations and update behavior
-  knowledge_graph/              Preserved knowledge graph and local Graphify support files
+  knowledge_graph/              Current architecture and research knowledge graph
 common_reference_data/          Geography, taxonomy references and EcoBase model library
 interactive_map/                Generated map, time-series and source-archive HTML pages
 original_research_archive/      Original reports, experiments, outputs and provenance ledgers
@@ -88,7 +88,7 @@ The workbook schema and ownership rules are included below. The three skill entr
 
 ## Preservation
 
-original_research_archive/migration.csv lists source files, retained paths, sizes and SHA-256 hashes. Historical outputs and experiments remain under original_research_archive, with local research studies consolidated in original_research_archive/research. Knowledge-graph artifacts live in tools/knowledge_graph; their source paths describe the pre-reorganization layout until the graph is refreshed. These preserved artifacts are evidence, not current working tables. Graphify caches, converted intermediates and machine-specific interpreter/root settings remain local and are excluded from Git. The NPP raw satellite cache may live outside the original checkout; preserved extraction documentation records its acquisition. No claim is made that externally cached bytes are bundled here.
+original_research_archive/migration.csv lists source files, retained paths, sizes and SHA-256 hashes. Historical outputs and experiments remain under original_research_archive, with local research studies consolidated in original_research_archive/research. The current knowledge graph lives in tools/knowledge_graph; the pre-refresh graph is preserved under original_research_archive/reorganization_history/knowledge_graph_before_refresh_2026_09_17. The graph indexes current code and reviewed research evidence, with repository-relative source paths; REFRESH_SCOPE.md states its coverage and limits. Query it with `graphify query "your question" --graph tools/knowledge_graph/graph.json`. Graphify caches, converted intermediates and machine-specific interpreter/root settings remain local and are excluded from Git. The NPP raw satellite cache may live outside the original checkout; preserved extraction documentation records its acquisition. No claim is made that externally cached bytes are bundled here.
 
 The expanded discard-sensitivity study's results/group_sppr.csv is stored with Git LFS. Install Git LFS and run `git lfs pull` after cloning to obtain that file's full contents before auditing or using it.
 
