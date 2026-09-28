@@ -1,5 +1,5 @@
-const fs=require('fs'),path=require('path'),assert=require('assert');
-const original=process.argv[2]||path.resolve(__dirname,'../../original_research_archive/legacy/PPRAtlas');
+const fs=require('fs'),path=require('path'),assert=require('assert'),zlib=require('zlib');
+const context=process.argv[2]||path.resolve(__dirname,'../../common_reference_data/atlas_source_context');
 const current=process.argv[3]||path.resolve(__dirname,'../../interactive_map');
 const modules=path.resolve(__dirname,'../original_html_layout/calculation_modules');
 const metric=require(path.join(modules,'network_metrics.js'));
@@ -8,7 +8,8 @@ function data(file,variable){const text=fs.readFileSync(file,'utf8'),marker='con
 // The map shares a script block with additional declarations: use the next declaration boundary.
 function map(file){const text=fs.readFileSync(file,'utf8'),start=text.indexOf('const DB=')+9;let depth=0,string=false,escape=false,end=start;
 for(;end<text.length;end++){const c=text[end];if(string){if(escape)escape=false;else if(c==='\\')escape=true;else if(c==='"')string=false;}else if(c==='"')string=true;else if(c==='{'||c==='[')depth++;else if(c==='}'||c===']'){depth--;if(!depth){end++;break;}}}return JSON.parse(text.slice(start,end));}
-const old=map(path.join(original,'index.html')).network,next=map(path.join(current,'index.html')).network;
+function reference(name){return JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(context,name))).toString('utf8'));}
+const old=reference('catalog.json.gz').network,next=map(path.join(current,'index.html')).network;
 let checks=0;
 function same(a,b,label){if(a==null||b==null)assert.equal(a,b,label);else assert(Math.abs(a-b)<=1e-9+1e-12*Math.max(Math.abs(a),Math.abs(b)),label+': '+a+' != '+b);checks++;}
 for(const [id,u] of Object.entries(old.units)){
@@ -19,9 +20,9 @@ for(const [id,u] of Object.entries(old.units)){
  }
  if(oldm?.group_data?.groups.length){const selected=oldm.group_data.groups.slice(0,8).map(g=>g.id);const state={unit_id:id,mode:'ppr',scope:'all',method:'new_GE',year:2019,catch_basis:'landings',group_selections:{[id+'::'+oldm.id]:selected}};same(metric.evaluate(u,u.default_model,state).value,metric.evaluate(v,v.default_model,state).value,id+' group subset');}
 }
-const a=data(path.join(original,'trends.html'),'SERIES_DB'),b=data(path.join(current,'trends.html'),'SERIES_DB');
+const a=reference('time_series.json.gz'),b=data(path.join(current,'trends.html'),'SERIES_DB');
 for(const method of a.ppr_methods)for(const scope of method.scopes)for(const mode of ['ppr','ratio']){
  const state={units:Object.keys(old.units),method:method.id,scope,mode,npp:'ens_median_tC_yr',npp_scope:'selected',npp_fill:'observed',catch_basis:'landings',years:[1998,2005,2019]};
  const x=times.aggregate(a,state),y=times.aggregate(b,state);for(let i=0;i<x.points.length;i++)same(x.points[i].value,y.points[i].value,'trend '+method.id+'/'+scope+'/'+mode+'/'+i);
 }
-console.log('Original JavaScript numerical parity passed: '+checks+' map, subset and trend values');
+console.log('Retained source-context JavaScript numerical parity passed: '+checks+' map, subset and trend values');

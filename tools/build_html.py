@@ -6,14 +6,24 @@ from original_atlas_data import datasets
 
 DISPLAY_FIELDS=['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']
 LINK_UPDATES={"../data/unidentified_taxa.json":"data/unidentified_taxa.json"}
+OSM_BASEMAP="L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:10,opacity:.55,attribution:'© OpenStreetMap · Sea Around Us polygons'}).addTo(map);"
 
 def linked_layout(template):
     for old,new in LINK_UPDATES.items():template=template.replace(old,new)
+    if OSM_BASEMAP in template:
+        source=Path(__file__).resolve().parents[1]/'common_reference_data/geography/basemaps/ne_50m_land.geojson'
+        land=json.dumps(json.loads(source.read_text(encoding='utf-8')),ensure_ascii=False,separators=(',',':'),allow_nan=False).replace('</',r'<\/')
+        # Streets require a real web origin; bundled land remains the file-mode
+        # and service-failure fallback. The frozen historical template is untouched.
+        basemap=Path(__file__).with_name('map_basemap.js').read_text(encoding='utf-8').replace('__LAND_DATA__',land)
+        template=template.replace('zoomControl:true,minZoom:1}',
+            "zoomControl:true,minZoom:1,maxZoom:['http:','https:'].includes(location.protocol)?18:10}",1)
+        template=template.replace(OSM_BASEMAP,basemap,1)
     return template
 
 def atomic_text(path,text):
     path.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(dir=path.parent,suffix=path.suffix);os.close(fd)
-    try:Path(tmp).write_text(text,encoding='utf-8');os.replace(tmp,path)
+    try:Path(tmp).write_text(text,encoding='utf-8',newline='\n');os.replace(tmp,path)
     finally:
         if os.path.exists(tmp):os.unlink(tmp)
 
@@ -30,7 +40,7 @@ def build(workbook,output=None):
                 for k in ['filename','file_label']:
                     if isinstance(f.get(k),str):f[k]=html.escape(f[k],quote=True)
     for name,payload in [('index.html',display),('trends.html',series)]:
-        template=linked_layout((layouts/name).read_text())
+        template=linked_layout((layouts/name).read_text(encoding='utf-8'))
         value=json.dumps(payload,ensure_ascii=False,separators=(',',':'),allow_nan=False).replace('</',r'<\/')
         page=template.replace('__PPR_DATA__',value)
         page=page.replace('</head>',f'<meta name="ppr-project-sha256" content="{fingerprint}"></head>',1)
@@ -41,13 +51,13 @@ def build(workbook,output=None):
     # Preserve the original download links, using current metadata where appropriate.
     data=directory/'data';data.mkdir(exist_ok=True)
     atomic_text(data/'unidentified_taxa.json',json.dumps({'description':'Current unidentified-catch metadata embedded in these atlas pages.','units':{u:r.get('unidentified') for u,r in catalog['network']['simple_units'].items()}},ensure_ascii=False,separators=(',',':')))
-    old=root/'original_research_archive/legacy/PPRAtlas/data'
+    context=root/'common_reference_data/atlas_source_context'
     for name in ['eez_searches.csv','lme_searches.csv']:
-        if (old/name).exists():shutil.copy2(old/name,data/name)
+        shutil.copy2(context/name,data/name)
     for name,rr in [('articles.csv',records(project,'Papers','Papers')),('files.csv',catalog.get('files',[]))]:
         headers=list(dict.fromkeys(k for r in rr for k in r))
         with (data/name).open('w',newline='',encoding='utf-8') as f:
-            w=csv.DictWriter(f,fieldnames=headers);w.writeheader();w.writerows({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()} for r in rr)
+            w=csv.DictWriter(f,fieldnames=headers,lineterminator='\n');w.writeheader();w.writerows({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()} for r in rr)
     print(f'Original-format pages rebuilt: {directory}/index.html, trends.html and archive/index.html',flush=True)
 
 if __name__=='__main__':

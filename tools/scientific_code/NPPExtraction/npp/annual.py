@@ -1,4 +1,4 @@
-"""Archive/catch-year extraction. Run ``python -m npp.annual --help``.
+"""Annual extraction for current regions. Run ``python -m npp.annual --help``.
 
 Canonical numbers use the supplied gap-filled baseline and coverage-matched ratios.
 Only complete source years are processed; no target-year extrapolation is performed.
@@ -16,11 +16,11 @@ import re
 import shutil
 import statistics
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from urllib.parse import urljoin, urlencode
 import xml.etree.ElementTree as ET
 
-from .config import Config, MODELS, EnsembleConfig
+from .config import Config, MODELS, REPOSITORY_ROOT
 from .http import download, get_json, get_text
 from .sources import copernicus, osu
 
@@ -47,12 +47,16 @@ def atomic_json(path, obj):
 
 
 def archive_grid(root: Path, missing: list | None = None) -> list[tuple[str, int]]:
+    """Actual catch years; retain the historical layout for callers reproducing it."""
     rows = []
     missing = missing if missing is not None else []
-    for p in sorted((Path(root) / "PPRAtlas/archive/regions").iterdir()):
+    current = (Path(root) / "regions").is_dir()
+    region_root = Path(root) / ("regions" if current else "PPRAtlas/archive/regions")
+    for p in sorted(region_root.iterdir()):
         if not p.is_dir() or not re.fullmatch(r"(?:LME|EEZ|HS)_\d+", p.name):
             continue
-        catch = Path(root) / "SeaAroundUsExtraction/data/catch_by_taxon_year" / (p.name + ".csv.gz")
+        catch = (p / "raw" / (p.name + ".csv.gz") if current else
+                 Path(root) / "SeaAroundUsExtraction/data/catch_by_taxon_year" / (p.name + ".csv.gz"))
         if not catch.exists():
             missing.append({"unit_id": p.name, "status": "no_catch", "reason": "catch file absent"})
             continue
@@ -193,7 +197,8 @@ def prepare_regions(root, grid, raw, work):
         present = {int(f["properties"]["region_id"]) for f in fc["features"]}
         if present != ids:
             raise ValueError(f"source polygons missing archived {layer} IDs: {sorted(ids-present)}")
-        dest = raw / f"sau_{layer}.geojson"
+        dest = work / "geometry" / f"sau_{layer}.geojson"
+        dest.parent.mkdir(parents=True, exist_ok=True)
         encoded = json.dumps(fc, sort_keys=True).encode()
         if not dest.exists() or dest.read_bytes() != encoded:
             dest.write_bytes(encoded)
@@ -206,11 +211,30 @@ def prepare_regions(root, grid, raw, work):
 
 
 def fetch_year(cfg, catalog, workers, out):
+    raw_root = Path(cfg.raw_dir).resolve()
+    originals = {}
+    source_manifest = raw_root.parent / "source_manifest.json"
+    if source_manifest.exists():
+        for rec in json.loads(source_manifest.read_text(encoding="utf-8"))["files"]:
+            relative = Path(rec["path"])
+            path = (raw_root / relative).resolve()
+            if (relative.is_absolute() or PureWindowsPath(rec["path"]).drive or
+                    ".." in PureWindowsPath(rec["path"]).parts or not path.is_relative_to(raw_root)):
+                raise ValueError(f"source manifest path must be raw-relative: {rec['path']}")
+            if not rec.get("url"):
+                continue  # Geometry is verified separately, never a monthly download job.
+            if path in originals and (originals[path]["url"], originals[path]["sha256"]) != (rec["url"], rec["sha256"]):
+                raise ValueError(f"conflicting source manifest URL/SHA-256 for {relative}")
+            originals[path] = rec
     previous = {}
     for saved in sorted(out.glob("downloads_*.json")):
         for rec in json.loads(saved.read_text(encoding="utf-8")):
             if rec.get("status") == "downloaded":
                 previous[Path(rec["path"]).name] = rec
+    for path, original in originals.items():
+        recent = previous.get(path.name, {})
+        if recent.get("url") == original["url"] and recent.get("sha256") != original["sha256"]:
+            raise ValueError(f"conflicting runtime and original SHA-256 for {path.name}; use a separate source release/workspace")
     jobs = []
     for y in sorted(set(cfg.window_years) | set(cfg.donor_years())):
         for month in range(1, 13):
@@ -225,6 +249,31 @@ def fetch_year(cfg, catalog, workers, out):
         model, y, month, url, dest = job
         rec = {"model": model, "year": y, "month": month, "url": url, "path": str(dest)}
         try:
+            original = originals.get(dest.resolve())
+            if original:
+                if url != original["url"]:
+                    raise ValueError(f"original source URL differs for {dest.name}; use a separate source release/workspace")
+                if dest.exists():
+                    with dest.open("rb") as fh:
+                        digest = hashlib.file_digest(fh, "sha256").hexdigest()
+                    if digest != original["sha256"]:
+                        raise ValueError(f"original source SHA-256 differs for {dest.name}; restore the Git LFS original or use a separate source release/workspace")
+                else:
+                    # Validate a missing original before publishing bytes at its tracked path.
+                    candidate = dest.with_name(dest.name + ".original-download")
+                    try:
+                        download(url, candidate, cfg.http_timeout_s, cfg.http_retries, overwrite=True)
+                        with candidate.open("rb") as fh:
+                            digest = hashlib.file_digest(fh, "sha256").hexdigest()
+                        if digest != original["sha256"]:
+                            raise ValueError(f"downloaded original source SHA-256 differs for {dest.name}; use a separate source release/workspace")
+                        if dest.exists():
+                            raise ValueError(f"original source appeared during download: {dest.name}; retry without concurrent writers")
+                        candidate.replace(dest)
+                    finally:
+                        candidate.unlink(missing_ok=True)
+                rec.update(status="downloaded", bytes=dest.stat().st_size, sha256=digest)
+                return rec
             known = previous.get(dest.name, {})
             reuse = False
             if dest.exists() and known.get("url") == url:
@@ -280,7 +329,7 @@ def extract_year(cfg, work_root, output, manifest):
         rec = {"unit_id": unit, "year": cfg.year, "ensemble_basis": row["ensemble_basis"],
                "method": METHOD, "window_years": ";".join(map(str, cfg.window_years)), "config_key": key,
                "water_area_km2": number(row["water_area_km2"]),
-               "provenance": f"NPPExtraction/output/years/{cfg.year}/{key}/provenance.json"}
+               "provenance": (cfg.out_dir / "provenance.json").resolve().as_posix()}
         statuses = {}
         for m in MODELS:
             value = number(row.get(f"scaled_{m}_tC_yr"))
@@ -329,25 +378,29 @@ def snapshot_code(output):
         with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
             for p in files:
                 z.write(p, "npp/" + p.relative_to(Path(__file__).parent).as_posix())
-    return {"snapshot": f"NPPExtraction/output/reproducibility/{dest.name}", "sha256": hashes}
+    return {"snapshot": dest.resolve().as_posix(), "sha256": hashes}
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["plan", "probe", "run"])
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--root", type=Path, default=REPOSITORY_ROOT)
     parser.add_argument("--years", help="comma-separated years or inclusive start:end; default every catch year")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--refresh-sources", action="store_true")
     parser.add_argument("--config", type=Path, help="optional scientific configuration; annual bounds remain enforced")
     args = parser.parse_args(argv)
-    root = args.root.resolve(); project = root / "NPPExtraction"; output = project / "output"
+    root = args.root.resolve(); project = root / "common_reference_data/npp"; output = project / "output"
     output.mkdir(parents=True, exist_ok=True)
     runtime_code = snapshot_code(output)
     catalog_path = output / "source_catalog.json"
-    if args.action == "probe" or args.refresh_sources or not catalog_path.exists():
+    if args.action == "probe" or args.refresh_sources:
         catalog, meta = discover_sources(output)
     else:
+        if not catalog_path.exists():
+            catalog_path = root / "common_reference_data/npp/source_catalog.json"
+        if not catalog_path.exists():
+            raise FileNotFoundError("No saved source catalog; run 'probe' or pass --refresh-sources to discover sources")
         saved = json.loads(catalog_path.read_text(encoding="utf-8")); catalog, meta = saved["sources"], saved["metadata"]
     print(json.dumps({"source_full_years": meta.get("full_years"), "errors": meta.get("errors")}), flush=True)
     if args.action == "probe":
@@ -358,21 +411,30 @@ def main(argv=None):
     selected = sorted({y for _, y in grid})
     if args.years:
         selected = ([int(v) for v in args.years.split(",")] if ":" not in args.years else list(range(int(args.years.split(":")[0]), int(args.years.split(":")[1]) + 1)))
+    supported = full_years(catalog["antoinemorel"])
+    years = [y for y in selected if y in supported]
+    catch_year_rows = len(grid)
+    region_root = root / "regions"
+    if region_root.is_dir():
+        # NPP depends on region geometry, independently of catch availability.
+        units = [p.name for p in sorted(region_root.iterdir())
+                 if p.is_dir() and re.fullmatch(r"(?:LME|EEZ|HS)_\d+", p.name)]
+        grid = sorted(set(grid) | {(unit, year) for unit in units for year in years})
     values = {}
     canonical = output / "annual_npp.csv"
     if canonical.exists():
         with canonical.open(encoding="utf-8", newline="") as fh:
             values = {(r["unit_id"], int(r["year"])): r for r in csv.DictReader(fh) if r["status"] not in ("pending", "unsupported", "source_error")}
+        grid = sorted(set(grid) | set(values))
     write_annual(canonical, grid, values, catalog, meta["errors"])
-    supported = full_years(catalog["antoinemorel"])
-    years = [y for y in selected if y in supported]
-    plan = {"archive_units": len({u for u, _ in grid}), "catch_year_rows": len(grid), "selected_supported_years": years,
+    plan = {"archive_units": len({u for u, _ in grid}), "catch_year_rows": catch_year_rows,
+            "annual_rows": len(grid), "selected_supported_years": years,
             "unsupported_selected_years": [y for y in selected if y not in supported], "method": METHOD,
             "free_disk_bytes": shutil.disk_usage(project).free}
     atomic_json(output / "run_plan.json", plan); print(json.dumps(plan), flush=True)
     if args.action == "plan":
         return 0
-    raw = project / "data/raw"; work = project / "data/work"
+    raw = project / "raw"; work = project / "work"
     raw.mkdir(parents=True, exist_ok=True); work.mkdir(parents=True, exist_ok=True)
     failures = []
     try:
@@ -384,7 +446,8 @@ def main(argv=None):
         try:
             models = [m for m in MODELS if year in full_years(catalog[m])]
             cfg = Config.load(args.config, year=year, window_years=bounded_window(year, supported), layers=layers,
-                              raw_dir=raw, work_dir=work, out_dir=output, fetch_sau_reference=False)
+                              raw_dir=raw, work_dir=work, out_dir=output, geometry_dir=work / "geometry",
+                              fetch_sau_reference=False)
             cfg.ensemble.models = models
             if cfg.ensemble.reference_model != "antoinemorel" or cfg.baseline_grid != "4km":
                 raise ValueError("annual runner requires the supplied native Antoine-Morel 4km baseline")
@@ -394,7 +457,7 @@ def main(argv=None):
             print(f"Extracting {year}: models={models}; window={cfg.window_years}", flush=True)
             manifest = fetch_year(cfg, catalog, args.workers, output)
             records = extract_year(cfg, work, output, manifest)
-            provenance = f"NPPExtraction/output/years/{year}/{completion_key(cfg, manifest)}/provenance.json"
+            provenance = (output / "years" / str(year) / completion_key(cfg, manifest) / "provenance.json").as_posix()
             if records:
                 provenance = records[0]["provenance"]
                 provenance_path = root / provenance
@@ -408,7 +471,7 @@ def main(argv=None):
             failures.append(failure)
             for unit, y in grid:
                 if y == year:
-                    values[(unit, year)] = {**failure, "provenance": f"NPPExtraction/output/downloads_{year}.json"}
+                    values[(unit, year)] = {**failure, "provenance": (output / f"downloads_{year}.json").as_posix()}
             print(f"FAILED {year}: {exc}", flush=True)
         write_annual(canonical, grid, values, catalog, meta["errors"])
         atomic_json(output / "failed_jobs.json", failures)

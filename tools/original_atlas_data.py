@@ -1,18 +1,65 @@
 """Adapt the current workbooks to the original atlas data interfaces.
 
-Archived exports supply immutable source context and alternative-model evidence.
+Compressed reference payloads supply immutable source context and alternative-model evidence.
 Project.xlsx owns published annual totals and metadata. Current regional workbooks
 own selected-model details; changed inputs never inherit old detail calculations.
 """
-import copy,csv,json,math,html
+import copy,csv,gzip,json,math,html
 from pathlib import Path
 from collections import defaultdict
 from workbooks import *
 from regional import result_hash,inputs
 
 def embedded(path,variable):
-    text=Path(path).read_text();start=text.index('const '+variable+'=')+len('const '+variable+'=')
+    text=Path(path).read_text(encoding='utf-8');start=text.index('const '+variable+'=')+len('const '+variable+'=')
     value,end=json.JSONDecoder().raw_decode(text[start:]);return value,text[:start]+'__PPR_DATA__'+text[start+end:]
+
+def source_context(root):
+    context=Path(root)/'common_reference_data/atlas_source_context'
+    with gzip.open(context/'catalog.json.gz','rt',encoding='utf-8') as source:catalog=json.load(source)
+    with gzip.open(context/'time_series.json.gz','rt',encoding='utf-8') as source:series=json.load(source)
+    return catalog,series
+
+class SourcePaths:
+    """Resolve historical references without rewriting scientific source workbooks."""
+    def __init__(self,root):
+        self.root=Path(root);self.paths={}
+        for file,old,new in [
+            ('original_research_archive/migration.csv','original_path','retained_path'),
+            ('common_reference_data/provenance/archive_relocation.csv','old_path','new_path')]:
+            path=self.root/file
+            if path.exists():
+                with path.open(encoding='utf-8-sig',newline='') as source:
+                    self.paths.update({r[old]:r[new] or None for r in csv.DictReader(source)})
+
+    def resolve(self,value):
+        normalized=value.replace('\\','/')
+        candidates=[normalized,normalized.removeprefix('../'),'PPRAtlas/'+normalized]
+        match=next((p for p in candidates if p in self.paths),None)
+        if match is None:
+            if normalized.startswith('archive/regions/'):
+                parts=('regions/'+normalized[len('archive/regions/'):]).split('/')
+                return '/'.join(parts[:2]+['papers']+parts[2:])
+            return value
+        seen=set()
+        while match in self.paths:
+            target=self.paths[match]
+            if target is None:return None
+            if target==match:return target
+            if match in seen:raise ValueError(f'cyclic source relocation: {value}')
+            seen.add(match);match=target
+        return match
+
+    def rewrite(self,value,key=None):
+        if isinstance(value,dict):return {k:self.rewrite(v,k) for k,v in value.items()}
+        if isinstance(value,list):
+            rewritten=[self.rewrite(v,key) for v in value]
+            # Removed interface artifacts retain their audit record, but are not links.
+            return [v for v in rewritten if not isinstance(v,dict) or 'relative_path' not in v or v['relative_path'] is not None]
+        if not isinstance(value,str):return value
+        path=self.resolve(value)
+        if path is not None and path!=value and key=='relative_path':return '../'+path.removeprefix('../')
+        return path
 
 def branch(record,treatment,basis):
     target=record if treatment=='method' else record.setdefault('unidentified_'+treatment,{})
@@ -80,8 +127,8 @@ def detail_from_book(book,unit,model_id):
     return inp,model
 
 def datasets(workbook):
-    root=workbook.parent;old=root/'original_research_archive/legacy/PPRAtlas'
-    catalog,_=embedded(old/'index.html','DB');network=catalog.pop('network')
+    root=workbook.parent
+    catalog,series=source_context(root);network=catalog.pop('network')
     for collection in ['regions','articles']:
         for r in catalog[collection]:
             for k in ['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']:
@@ -89,7 +136,6 @@ def datasets(workbook):
             for f in r.get('material_files',[]):
                 for k in ['filename','file_label']:
                     if isinstance(f.get(k),str):f[k]=html.unescape(f[k])
-    series,_=embedded(old/'trends.html','SERIES_DB')
     project=read_book(workbook);region_rows=records(project,'Regions & status','Regions')
     geometry=unchunks(rows(project,'Map geography','Geometry'));meta=unchunks(rows(project,'Definitions & build','Metadata'))
     for key,value in meta.items():
@@ -160,14 +206,5 @@ def datasets(workbook):
             if paper.get(field) is None:paper[field]=''
         papers.append(paper)
     catalog.update({'regions':newregions,'articles':papers,'network':network,'source_workbook':'../'+workbook.name})
-    # Paths embedded in the old data are resolved through the preservation ledger.
-    with (root/'original_research_archive/migration.csv').open() as f:ledger={r['original_path']:r['retained_path'] for r in csv.DictReader(f)}
-    def rewrite(value,key=None):
-        if isinstance(value,dict):return {k:rewrite(v,k) for k,v in value.items()}
-        if isinstance(value,list):return [rewrite(v,key) for v in value]
-        if not isinstance(value,str):return value
-        path=ledger.get(value) or ledger.get('PPRAtlas/'+value)
-        if not path and value.startswith('archive/regions/'):path='regions/'+value[len('archive/regions/'):];parts=path.split('/');path='/'.join(parts[:2]+['papers']+parts[2:])
-        if path:return '../'+path if key=='relative_path' else path
-        return value
-    return rewrite(catalog),rewrite(series),project
+    paths=SourcePaths(root)
+    return paths.rewrite(catalog),paths.rewrite(series),project

@@ -11,6 +11,8 @@ import yaml
 
 LAYERS = ("lme", "highseas", "eez")
 MODELS = ("antoinemorel", "vgpm", "eppley", "cbpm", "cafe")
+REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
+NPP_DATA_ROOT = REPOSITORY_ROOT / "common_reference_data" / "npp"
 
 MODEL_LABELS = {
     "antoinemorel": "Antoine-Morel",
@@ -97,9 +99,11 @@ class Config:
     window_years: list[int] = field(default_factory=lambda: [2017, 2018, 2019, 2020, 2021])
     layers: list[str] = field(default_factory=lambda: list(LAYERS))
     baseline_grid: str = "4km"
-    raw_dir: Path = Path("data/raw")
-    work_dir: Path = Path("data/work")
-    out_dir: Path = Path("data/out")
+    raw_dir: Path = NPP_DATA_ROOT / "raw"
+    work_dir: Path = NPP_DATA_ROOT / "work"
+    out_dir: Path = NPP_DATA_ROOT / "output" / "single_year"
+    #: Optional generated geometry selection, kept outside the shared raw source cache.
+    geometry_dir: Path | None = None
     fill: FillConfig = field(default_factory=FillConfig)
     ensemble: EnsembleConfig = field(default_factory=EnsembleConfig)
     benthic: BenthicConfig = field(default_factory=BenthicConfig)
@@ -114,6 +118,10 @@ class Config:
         raw: dict[str, Any] = {}
         if path is not None:
             raw = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
+            # YAML paths follow the configuration file, never the caller's CWD.
+            for key in ("raw_dir", "work_dir", "out_dir", "geometry_dir"):
+                if raw.get(key) is not None:
+                    raw[key] = (Path(path).resolve().parent / raw[key]).resolve()
         raw.update({k: v for k, v in overrides.items() if v is not None})
         if "year" in raw and "window_years" not in raw:
             raw["window_years"] = list(range(raw["year"] - 2, raw["year"] + 3))
@@ -122,8 +130,8 @@ class Config:
             "ensemble": EnsembleConfig(**(raw.pop("ensemble", None) or {})),
             "benthic": BenthicConfig(**(raw.pop("benthic", None) or {})),
         }
-        for key in ("raw_dir", "work_dir", "out_dir"):
-            if key in raw:
+        for key in ("raw_dir", "work_dir", "out_dir", "geometry_dir"):
+            if raw.get(key) is not None:
                 raw[key] = Path(raw[key])
         known = {f.name for f in dataclasses.fields(cls)}
         unknown = set(raw) - known
@@ -175,7 +183,7 @@ class Config:
             for p in sorted(Path(__file__).parent.rglob("*.py"))
         }
         payload["geometries"] = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                                 for p in sorted(Path(self.raw_dir).glob("*.geojson"))}
+                                 for p in sorted(Path(self.geometry_dir or self.raw_dir).glob("*.geojson"))}
         source_years = set(self.window_years) | set(self.donor_years()) | {self.year}
         payload["inputs"] = [(str(p.relative_to(self.raw_dir)), p.stat().st_size, p.stat().st_mtime_ns)
                              for p in sorted(Path(self.raw_dir).rglob("*"))
@@ -184,7 +192,7 @@ class Config:
         return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
 
     def geojson_path(self, layer: str) -> Path:
-        return Path(self.raw_dir) / f"sau_{layer}.geojson"
+        return Path(self.geometry_dir or self.raw_dir) / f"sau_{layer}.geojson"
 
     def sau_reference_path(self, layer: str) -> Path:
         return Path(self.raw_dir) / f"sau_{layer}_metrics.csv"

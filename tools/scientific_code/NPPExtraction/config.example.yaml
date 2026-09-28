@@ -14,9 +14,11 @@ layers: [lme, highseas, eez]
 baseline_grid: 4km
 
 # ---------------------------------------------------------------- where things live
-raw_dir: data/raw     # downloaded product files (large; safe to keep out of git)
-work_dir: data/work   # coverage arrays, water mask, accumulators (rebuildable)
-out_dir: data/out     # the CSVs and the workbook
+# Relative paths are resolved from this YAML file, independent of the working directory.
+# Original raw payloads are versioned with Git LFS; run git lfs pull after cloning.
+raw_dir: ../../../common_reference_data/npp/raw
+work_dir: ../../../common_reference_data/npp/work
+out_dir: ../../../common_reference_data/npp/output/single_year
 
 # Also fetch each region's published Sea Around Us metrics (shelf area, inshore fishing
 # area, coral share, their own NPP value). One HTTP request per region: 282 for EEZs.

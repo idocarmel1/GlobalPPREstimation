@@ -13,12 +13,22 @@ Built as the denominator for primary-production-required (PPR) work.
 **For the GlobalPPREstimation annual workflow, start with
 [`ANNUAL.md`](ANNUAL.md).** It includes Windows/Linux fresh-checkout installation,
 source discovery, resumable extraction, and the canonical annual output contract.
+Current code lives under `tools/scientific_code/NPPExtraction`; shared sources and
+rebuildable runtime products live under `common_reference_data/npp/`. The annual
+launcher is `python tools/run_npp.py plan --years 1998:2019` from the repository root.
+It resolves paths independently of the current working directory and includes every
+current region identity, including NPP-only regions. New outputs remain separate from
+the frozen research release.
+Original files under `common_reference_data/npp/raw/` are versioned with Git LFS.
+After cloning, run `git lfs pull` and `python tools/verify_npp_sources.py` before use.
+Decoded rasters, work files and runtime output are ignored rebuildable products.
+
 The published history covers **all 366 ecosystems over 1998–2019**, independently
-of catch or article availability. The [expansion publication proof](output/regional_expansion/publication_verification.json)
+of catch or article availability. The [expansion publication proof](../../../original_research_archive/research/npp_extraction_2026_09/output/regional_expansion/publication_verification.json)
 records exact preservation of all 11,310 earlier rows. The earlier
-[`output/extraction_coverage.json`](output/extraction_coverage.json) is the historical
+[`output/extraction_coverage.json`](../../../original_research_archive/research/npp_extraction_2026_09/output/extraction_coverage.json) is the historical
 archive-subset audit. The fixed global-atlas union also has all 22 annual records;
-see [its definition](../docs/GLOBAL_ATLAS_NPP_REFERENCE.md).
+see [its archived definition](../../../original_research_archive/research/workflow_development_2026_09/docs/GLOBAL_ATLAS_NPP_REFERENCE.md).
 The 366-region figures and percentages below describe the supplied **2019 reference
 run**, not measured percentages for every year of the expanded annual history.
 
@@ -29,6 +39,9 @@ silently, and the figures a re-run should reproduce.
 ---
 
 ## Install
+
+From `tools/scientific_code/NPPExtraction` (the full root-level Windows setup is in
+[`ANNUAL.md`](ANNUAL.md)):
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
@@ -72,6 +85,11 @@ table = baseline_table(cfg, run_baseline(cfg))
 ## Outputs
 
 In `out_dir`:
+
+The default is `common_reference_data/npp/output/single_year/` at the repository root.
+Raw input defaults to `common_reference_data/npp/raw/`; rebuildable work is under
+`common_reference_data/npp/work/`. YAML path values are resolved relative to the YAML
+file. Copy the example alongside itself or adjust its relative paths when moving it.
 
 | file | contents |
 |---|---|

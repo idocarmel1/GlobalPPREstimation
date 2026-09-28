@@ -104,7 +104,7 @@ def migrate(source, dest, units=None):
            'selected_paper_ids':';'.join(choice.get('selected_articles',[])), 'production_eligible':bool(choice),
            'catch_basis':'landings','transfer_efficiency':0.1,'taxon_detail_year':2019,
            'source_note':u.get('note'),'calculation_status':'migrated saved results; unavailable methods retained',
-           'source_region_workbook':f'original_research_archive/legacy/data/{unit}/{unit}.xlsx',
+           'source_region_workbook':f'original_research_archive/research/pre_reorganization/data/{unit}/{unit}.xlsx',
            'npp_policy':'Annual observed support; unsupported years stay blank; no earliest-year proxy by default'}
         b['Overview']['Settings']=(['field','value'],list(map(list,o.items())))
         unidentified={r['name'] for r in u.get('unidentified',{}).get('taxa',[])}
@@ -182,7 +182,7 @@ def migrate(source, dest, units=None):
             target=dest/'original_research_archive'/p.relative_to(source)
         elif rel.startswith('graphify-out/'):
             target=dest/'tools/knowledge_graph'/p.relative_to(source/'graphify-out')
-        else:target=dest/'original_research_archive/legacy'/p.relative_to(source)
+        else:target=dest/'original_research_archive/research/pre_reorganization'/p.relative_to(source)
         copy(p,target)
     # Distribution sources retain exact bytes; separate from the maintained new entry points.
     for sub in ['PPREstimation','NPPExtraction','SeaAroundUsExtraction']:

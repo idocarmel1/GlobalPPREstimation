@@ -1,175 +1,162 @@
-# Reproduce annual NPP for all atlas ecosystems
+# Annual NPP extraction in the current repository
 
-The supplied `ppr-npp.zip` was imported into this directory without changing its two
-original 2019 reference CSVs. The archive workflow supplies the original base;
-the separate regional expansion supplies every missing supported identity/year.
-NPP availability is independent of catch and articles. NPP-only rows do not create
-invented catch values.
+The active implementation is `tools/scientific_code/NPPExtraction`. Run it through
+`tools/run_npp.py` or install this package and use `python -m npp.annual`.
+Both entry points resolve the repository independently of the working directory.
 
-## Completed extraction — September 11, 2026
+The annual workflow reads region identities from `regions/<unit_id>/` and actual
+catch years from `regions/<unit_id>/raw/<unit_id>.csv.gz`. For each selected complete
+source year, it includes every current region, including regions without catch.
+It does not invent catch values. The current repository contains 366 identities.
 
-All **366 identities have annual ensemble NPP for 1998–2019**: 8,052 values,
-including the retained legacy 2019 cells for no-catch HS_018 and LME_064. The
-canonical CSV contains **25,211** rows spanning 1950–2019: **5,938 complete**,
-**2,112 partial**, and **17,161 unsupported** rows with blank NPP. There are no
-pending, failed, source-error or missing ensemble rows. Its SHA-256 is
-`961278ae7c39a898b4282fbb9b426ff2235eabca496553abe4b3330d34605dbe`.
+## Runtime locations
 
-The [publication proof](output/regional_expansion/publication_verification.json)
-checks all 11,310 original rows field-for-field. Expansion added 4,398 newly
-computed supported records and reused 14 already computed original cells.
-The [independent publication review](../data/regional_npp_publication_review.json)
-checks all 366 × 22 positive annual ensembles. The older
-[archive coverage audit](output/extraction_coverage.json) and
-[workbook refresh audit](output/workbook_refresh.json) retain the preceding
-archived-subset release as historical evidence. Current cross-output comparisons
-are in `data/annual_npp_validation.json` at the repository root.
+All paths below are relative to the repository root:
 
-Early 1998–2002 estimates use one model; some later regions have fewer than five
-usable model estimates. Preserve annual counts, identities and ensemble basis.
-The cache contains 1,104 distinct monthly source files totaling 32.05 GB, including
-neighboring-year inputs. Annual provenance links to exact code and full-geometry
-snapshots. Completing calculation does not establish full satellite-water coverage.
-The separately verified [fixed atlas-union reference](../docs/GLOBAL_ATLAS_NPP_REFERENCE.md)
-also covers all 22 years and uses a different ensemble aggregation convention.
+| Location | Purpose |
+|---|---|
+| `common_reference_data/npp/raw/` | Original monthly downloads and source geometry, versioned with Git LFS |
+| `common_reference_data/npp/decoded/` | Rebuildable exact float32 Copernicus raster cache |
+| `common_reference_data/npp/work/` | Rebuildable coverage, masks, annual accumulators and selected geometry |
+| `common_reference_data/npp/output/` | New annual CSV, download manifests, source catalog and provenance |
+| `common_reference_data/npp/output/single_year/` | Standalone `npp.cli` CSVs and workbook |
 
-The fresh 2019 extraction was also compared with all 82 overlapping legacy regions.
-The 405 finite model pairs across 81 regions agree with the legacy `scaled_*` values
-to a maximum relative difference of `3.46e-8`. The Black Sea's previously blank
-scaled entries now use the supplied algorithm's own-coverage fallback; its
-three-model median is 62,028,266.28 tC/year. See
-[the reconciliation](output/reconciliation_2019.json). The older common-mask
-headline values are a different quantity and must not be mixed with these totals.
+The decoder already derives its cache as `raw_dir.parent / decoded`; the new raw
+location therefore places it in the shared NPP runtime tree automatically. Generated
+annual geometry selections go under `work/geometry`, preserving raw geometry bytes.
+No runtime output is written into the historical archive.
 
-## Fresh checkout setup
+The original source files are included in Git through Git LFS, not replaced with
+download URLs. After cloning, install Git LFS and run `git lfs pull` from the repository
+root before verification or extraction. `tools/verify_npp_sources.py` checks the local
+payloads against the source manifest; LFS pointer text is not usable scientific data.
+Only decoded, work and runtime output directories are ignored and rebuildable.
 
-Run from `NPPExtraction` using Python 3.11–3.13 (Python 3.13 tested on Windows):
+The published September 2026 annual CSV and its original helper, snapshots and audit
+records remain frozen under
+[`original_research_archive/research/npp_extraction_2026_09`](../../../original_research_archive/research/npp_extraction_2026_09/).
+The current runner creates a separate extraction. It does not replace that published
+release, copy its values into a new run, refresh regional workbooks or publish results.
+The historical expansion helper remains an archived reproduction artifact; the current
+runner directly includes all region identities and does not require that helper.
 
-```powershell
-python -m venv .venv
-.venv/Scripts/python.exe -m pip install -e ".[test]"
-.venv/Scripts/python.exe -m pytest tests -q
-```
+## Installation
 
-On Linux/macOS use `.venv/bin/python` in place of `.venv/Scripts/python.exe`.
-`requirements-lock.txt` records the versions tested in this Windows Python 3.13 run;
-install it with `python -m pip install -r requirements-lock.txt` and then
-`python -m pip install -e . --no-deps` to reproduce that dependency set.
-Use Python 3.13 for the tested environment. The locked NumPy/SciPy versions require
-Python 3.12 or newer; on Python 3.11, the editable install above resolves compatible
-earlier dependency versions instead of using this lock file.
-Current Windows Python 3.13 wheels include the HDF4 library through `pyhdf`; a separate
-Conda environment is unnecessary. On platforms lacking a wheel, install the platform's
-HDF4 development package before installing `pyhdf`. HTTPS certificate verification
-uses the system trust store plus Certifi roots and is never disabled.
-The NetCDF4/HDF4 native readers on Windows can reject existing files in Unicode paths.
-The package handles this through NetCDF4's in-memory API and temporary ASCII HDF4
-paths; the Hebrew repository path was tested using actual downloaded files.
-
-### Requested full recomputation
-
-Before a new regional extraction, use a versioned helper with uncached source-byte
-validation and a fresh plan/cache identity. The completed regional helper retains
-its historical metadata cache so that the executed code remains reproducible;
-size and modification time alone cannot prove unchanged content. The independent
-post-extraction check `python -X utf8 tools/verify_regional_npp_sources.py` (from the
-repository root) directly hashed all1,104 planned monthly files/32,049,287,447 bytes
-with zero mismatches. Its report is `data/regional_npp_source_bytes_validation.json`.
-This validates current source bytes without claiming every past boundary was
-checked uncached. Preserve the completed helper, plan and execution snapshots.
-
-Validate shipped results before choosing to recompute them. Use an isolated
-checkout or separate output workspace for a full recomputation. The archive-only
-writer replaces its canonical CSV; **do not run it over an expanded all-366 release**.
-In the reproduction workspace, create the original archive/catch base first:
+From the repository root, using Python 3.13 (the tested Windows environment):
 
 ```powershell
-.venv/Scripts/python.exe -m npp.annual plan --refresh-sources
-.venv/Scripts/python.exe -m npp.annual run
+python -m venv tools/scientific_code/NPPExtraction/.venv
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe -m pip install -r tools/scientific_code/NPPExtraction/requirements-lock.txt
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe -m pip install -e tools/scientific_code/NPPExtraction --no-deps
 ```
 
-Then, from the repository root, prepare a fresh regional expansion plan and run
-its extraction and checked publication:
+On Linux/macOS, use `.venv/bin/python` for the interpreter path. For a compatible
+unlocked environment with Python 3.11 or newer, install the package with its test extra
+instead: `python -m pip install -e "tools/scientific_code/NPPExtraction[test]"`.
+The locked NumPy/SciPy versions require Python 3.12 or newer. HDF4 support is supplied
+by the tested Windows `pyhdf` wheel; other platforms may need the HDF4 system library.
+Unicode repository paths are supported by the native-reader workarounds.
+
+## Plan, verify and run
+
+Commands below run from the repository root. An absolute path to `tools/run_npp.py`
+works from another directory with the same default data locations.
 
 ```powershell
-NPPExtraction/.venv/Scripts/python.exe -X utf8 tools/expand_regional_npp.py plan
-NPPExtraction/.venv/Scripts/python.exe -u -X utf8 tools/expand_regional_npp.py extract --years 1998:2019
-NPPExtraction/.venv/Scripts/python.exe -X utf8 tools/expand_regional_npp.py publish
+# Offline plan using a saved source catalog; writes a separate runtime plan and CSV.
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe tools/run_npp.py plan --years 1998:2019
+
+# Verify shared original source bytes before a recomputation.
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe tools/verify_npp_sources.py
+
+# Full extraction: substantial disk, memory and runtime required.
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe -u tools/run_npp.py run --years 1998:2019
 ```
 
-Review complete annual records before publication. The plan freezes the original
-CSV, source configurations, raw-file hashes, scientific geometry and executed code.
-Resumption requires their exact identity and complete validated checkpoints; after
-publication, the canonical CSV intentionally differs from the extraction baseline.
-Do not start a competing raster worker or mutate frozen inputs. For the separate
-fixed-union run, follow its linked reproduction guide and serialize raster work.
-See [regional execution and preservation details](../docs/REGIONAL_NPP_EXPANSION_HANDOFF.md).
+`plan` uses `common_reference_data/npp/output/source_catalog.json`, falling back to
+the frozen shared source catalog if the runtime copy is absent. It does not contact
+source servers unless `--refresh-sources` is explicitly supplied. If neither catalog
+exists, it requests a source probe instead of silently downloading metadata.
+`probe` explicitly discovers source availability and writes the runtime catalog:
 
-Use `--refresh-sources` to discover a new source release. Use `--config path.yaml` for
-fill settings; annual source windows are clipped to available complete years.
-The default is the supplied five-year centered window (two neighboring years each
-side), shortened at the source boundaries. There is no extrapolation to earlier target
-years. The optional atlas earliest-available-year display is a downstream estimate and
-is never written into the canonical extraction file.
+```powershell
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe tools/run_npp.py probe
+```
 
-## Scientific meaning
+Fresh clones reuse original monthly files through the tracked
+`common_reference_data/npp/source_manifest.json`; ignored runtime download manifests
+are not required. Each reuse checks the catalog URL and freshly hashes the raw bytes.
+Size and modification time cannot bypass this check. An existing manifest-listed
+original with a different hash or URL is preserved and the run fails explicitly;
+restore the Git LFS original or use a separate source release/workspace. A missing
+original may be downloaded at its recorded URL, but its SHA-256 must match before it
+is placed at the original path. New files outside the original manifest retain the
+existing download/resume behavior.
 
-`output/annual_npp.csv` retains actual catch-year rows and all supported NPP-only
-identity/year rows, with five
-`npp_<model>_tC_yr` fields and median/minimum/maximum across the finite models. Values
-are annual tonnes of carbon. The canonical annual fields correspond to the ZIP's
-`scaled_<model>_tC_yr`: gap-filled Antoine–Morel baseline multiplied by the model ratio
-on common coverage; sparse common coverage uses the original own-coverage fallback.
-The original CSV `npp_*` and `scaled_*` fields differ, so those 2019 CSVs remain
-references and are not silently seeded into the annual product.
+Historical `downloads_<year>.json` records under
+`original_research_archive/research/npp_extraction_2026_09/output/` may optionally be
+copied into runtime output. The versioned default catalog is
+`common_reference_data/npp/source_catalog.json`.
+Keep the archive unchanged and do not copy its annual CSV. Runtime and original
+metadata with conflicting hashes for the same URL cause an explicit error.
+Do not run a second raster worker concurrently against the same runtime directories.
 
-`n_models`, `available_models`, `ensemble_basis`, `model_status`, `window_years`, and
-`method` disclose changing ensemble membership and gap-fill context. A one-model
-median equals that model and is not a five-model ensemble. The neighboring-year fill
-estimates missing satellite pixels within a supported target year; it does not create
-annual data before the satellite record. Existing spatial fill and polar-night methods
-are retained; see `METHODS.md`.
-The minimum–maximum range is the spread across available algorithms, not a statistical
-confidence interval; a one-model range cannot represent total NPP uncertainty.
+Without `--years`, selected years are the union of actual catch years. Unsupported
+catch years retain blank NPP rows; each selected supported year adds every identity.
+Use `--years start:end` or comma-separated years for an explicit range, especially for
+NPP beyond the catch record. Previously extracted runtime NPP-only years are retained
+when planning or running another range. `--root` selects a different repository-shaped
+workspace, placing all new annual runtime outputs under that root.
 
-All missing numeric cells are blank, including unsupported early years, failed downloads,
-and models without regional retrievals. `status` distinguishes `unsupported`, `pending`,
-`source_error`, `failed`, `partial`, `missing`, and `complete`. `complete` means all five
-algorithms yielded a value for that region, not that all pixels were observed directly.
+`--config path.yaml` changes scientific settings. The annual runner enforces the native
+Antoine-Morel 4 km reference baseline, available model membership and complete source
+years. Its centered five-year source window is clipped at source boundaries. There is
+no extrapolation to an unsupported target year. YAML directory paths are relative to
+the YAML file; absolute paths remain absolute. Annual runtime paths are set by `--root`.
+Standalone CLI path overrides remain relative to the caller's working directory.
 
-## Availability, checkpoints, and resource needs
+## Scientific output contract
 
-The live September 10, 2026 native listings show complete Copernicus years 1998–2024.
-The four OSU MODIS algorithms have different missing months: VGPM/Eppley list complete
-2003–2021 and 2023 (April 2022 is absent); CbPM lists complete 2003–2021; CAFE lists
-complete 2003–2023. Partial 1997/2002/2024 series are not annualized. Always consult
-`output/source_catalog.json` for the exact model/year/month URLs and discovery time;
-the source catalog is the availability authority, rather than the ranges in this text.
+`common_reference_data/npp/output/annual_npp.csv` contains actual catch-year rows plus
+selected supported identity/year rows, with five `npp_<model>_tC_yr` fields and the
+median/minimum/maximum of finite models. Values are annual tonnes of carbon. The
+scientific aggregation, gap filling, polar-night handling and model-ratio algorithms
+are unchanged; see [`METHODS.md`](METHODS.md).
 
-2019 requires approximately 3.9 GB Copernicus data for the 2017–2021 window plus four
-OSU model years. The Copernicus native sample is ~780 MB/year; OSU sample is ~17 MB
-per model/month. A full historical run needs tens of GB and substantial computation.
-The native 4 km baseline can require several GB of RAM; the four-worker setting applies
-only to downloads, while raster computations run one year at a time.
-Exact float32 decoded Copernicus rasters are cached as read-only memory maps under
-`data/decoded/`, outside the original source cache. This preserves every value and NaN
-while avoiding repeated decompression across overlapping five-year windows; allow about
-45–50 GB extra disk for the full history. File size and modification time bind these
-derived files to sources, whose URL and SHA-256 are verified by the annual runner.
+Each model estimate scales the gap-filled Antoine-Morel baseline by the model ratio
+on common coverage, with the existing own-coverage fallback when common coverage is
+sparse. Neighboring years fill missing pixels within a supported target year; they do
+not create observations outside the satellite record. The minimum-maximum range is
+model spread, not a statistical confidence interval. A one-model median is that model,
+not a five-model ensemble.
 
-Raw monthly files and coverage caches are under ignored `data/`. Download files are
-atomic and content length checked. `output/downloads_<year>.json` records URLs, sizes,
-SHA-256 hashes, and failures. Resume reuses completed source files and only recomputes
-when scientific configuration, code, relevant input file metadata, or source hashes/URLs change. Completed
-annual stage outputs live under `output/years/<year>/<configuration-key>/`; the record's
-`provenance` points to the exact configuration and source hashes. `failed_jobs.json`
-records failures from the latest run. Expanded HDF files are removed after a successful
-year; the compressed originals remain reusable. On resume, existing sources must match
-the saved URL and SHA-256; changed releases or corrupted local files are downloaded again.
+`n_models`, `available_models`, `ensemble_basis`, `model_status`, `window_years` and
+`method` expose coverage and ensemble membership. Missing numeric cells are blank,
+never zero. Status distinguishes `unsupported`, `pending`, `source_error`, `failed`,
+`partial`, `missing` and `complete`. Complete means five usable algorithm estimates,
+not complete satellite-water coverage. Regions absent after geometry repair receive
+explicit missing records. `archive_without_catch.json` retains the historical filename
+but now reports current region identities lacking catch rows.
 
-`output/archive_without_catch.json` documents archived identities without catch rows.
-The supplied numerical 2019 regression tests skip until pointed at a complete original
-366-region extraction; the annual archive subset intentionally has fewer regions.
+Annual checkpoints are stored under `output/years/<year>/<configuration-key>/`;
+records point to the actual runtime provenance path. The key includes scientific
+configuration, geometry, code, source metadata, URL and content hashes. Relocation
+therefore invalidates old derived checkpoints intentionally. Raw source files remain
+reusable after validation. Expanded HDF copies are removed after a completed year.
 
-Sources: [Copernicus product](https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L4_MY_009_104/services),
-[OSU Ocean Productivity](https://orca.science.oregonstate.edu/).
+A historical extraction needs tens of GB for source files, several GB of RAM and
+substantial computation. The full decoded cache can need roughly 45-50 GB more.
+`--workers` controls concurrent downloads only; annual raster calculations are serial.
+
+## Verification
+
+```powershell
+tools/scientific_code/NPPExtraction/.venv/Scripts/python.exe -m pytest tools/scientific_code/NPPExtraction/tests -q
+```
+
+The suite includes current-layout paths, offline planning, NPP-only identity membership,
+raw geometry preservation, source-reader checks, synthetic annual integration and exact
+numeric accumulator parity with the frozen supplied ZIP. The 23 published-2019 numerical
+checks need a completed full-region single-year extraction; set `NPP_OUT_DIR` to it.
+Without those outputs, they skip. Planning and tests do not establish that a full raster
+recomputation has completed or that newly generated results reproduce the frozen release.

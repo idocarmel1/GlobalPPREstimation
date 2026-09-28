@@ -19,10 +19,11 @@ import os
 from pathlib import Path
 
 import pytest
+from npp.config import Config
 
 REPO = Path(__file__).resolve().parents[1]
 EXPECTED = json.loads((REPO / "reference" / "expected_2019.json").read_text())
-OUT = Path(os.environ.get("NPP_OUT_DIR", REPO / "data" / "out"))
+OUT = Path(os.environ.get("NPP_OUT_DIR", Config().out_dir))
 YEAR = EXPECTED["year"]
 
 pytestmark = pytest.mark.skipif(

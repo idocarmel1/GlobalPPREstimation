@@ -13,7 +13,7 @@ def verify(workbook,html):
         path=directory/filename;data,layout=embedded(path,variable)
         marker=f'<meta name="ppr-project-sha256" content="{fingerprint}">'
         assert marker in layout,f'{filename}: stale project-workbook fingerprint'
-        assert layout.replace(marker,'')==linked_layout((templates/filename).read_text()),f'{filename}: layout or JavaScript differs from original template beyond allowed file-link updates'
+        assert layout.replace(marker,'')==linked_layout((templates/filename).read_text()),f'{filename}: layout or JavaScript differs from original template beyond allowed file-link and bundled-basemap updates'
         pages[filename]=data
     b=read_book(workbook);ts=pages['trends.html'];checks=0
     for r in records(b,'Regional PPR','Annual'):
@@ -37,7 +37,7 @@ def verify(workbook,html):
         for f in a.get('material_files',[]):
             assert (directory/f['relative_path']).is_file(),f['relative_path']
     assert (directory/'data/unidentified_taxa.json').is_file()
-    print(f'Original map/time-series layouts and JavaScript match (only file links updated); {checks} annual cells and NPP match Project.xlsx; selected models, source files and archive page verified')
+    print(f'Original map/time-series layouts and JavaScript match (only file links and bundled basemap updated); {checks} annual cells and NPP match Project.xlsx; selected models, source files and archive page verified')
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--workbook',type=Path,required=True);ap.add_argument('--html',type=Path,required=True);a=ap.parse_args();verify(a.workbook.resolve(),a.html.resolve())

@@ -13,7 +13,8 @@ from npp.regions import Coverage
 
 
 def test_optimized_coverage_and_accumulator_match_original_exactly(tmp_path):
-    archive = Path(__file__).resolve().parents[1] / 'ppr-npp.zip'
+    archive = (Path(__file__).resolve().parents[4] /
+               'tools/scientific_code/NPPExtraction/reference/ppr-npp.zip')
     with zipfile.ZipFile(archive) as z:
         source = z.read('ppr-npp/npp/aggregate.py').decode()
     old = types.ModuleType('npp._original_aggregate')
