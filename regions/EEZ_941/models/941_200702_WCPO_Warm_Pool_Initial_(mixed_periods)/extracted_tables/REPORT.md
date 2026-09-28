@@ -1,0 +1,48 @@
+# WCP-2007 initial extraction
+
+The initial 24-group configuration is extracted as source evidence. The authors explicitly describe it as unbalanced (p14). It is not a separate balanced candidate, and no SPPR run or source completion is admitted for it. Its detritus biomass, EE and TL are not reported in the initial tables.
+
+## Identity and scope
+
+- Allain, Nicol, Essington, Okey, Olson and Kirby (2007), *An Ecopath with Ecosim model of the Western and Central Pacific Ocean warm pool pelagic ecosystem*, WCPFC-SC3-EB SWG/IP-8, 42 PDF pages.
+- Source: [local PDF](../../../papers/WCP-2007/download-0adcf55e.pdf), SHA-256 `0adcf55ef7760865786bc2774b1fb147a6461a6fe0b128a943c8fce27c23f52f`. Original PDF, metadata, footprint and source README are preserved.
+- Model ID: `941_200702_WCPO_Warm_Pool_Initial_(mixed_periods)`. Local numeric identifier 200702; it is not an EcoBase accession. Group numbers are assigned in the source's active row order because the tables print names without group numbers.
+- Spatial domain: fixed 110-180 E, 15 N-15 S, 26.964 million km2 (p7). Broad warm-pool pelagic ecosystem, not the Gilbert Islands EEZ. No local coverage percentage inferred. Turtles, marine mammals and birds excluded (p7). Two producers, one detrital/microbial pool; top fish life stages and forage habitat/taxonomic subdivisions.
+- Temporal support is mixed: YFT/BET and bycatch catches 1995-2004; SKJ catches and original forage biomass 1993-2002 (pp38,42); diet stomach observations 2001-2007 (p40). The 2005/2006 labels refer to stock-assessment editions, not a common model period. `mixed_periods` deliberately avoids inventing a model year.
+- Two tabulated parameter sets were preserved separately: initial 24 groups and final 31 groups. The three Ecosim perturbations (p22) and sensitivity curves are not separate Ecopath parameter sets. No production selection, matching, annual PPR, NPP or workbook changes were made.
+
+## Source mapping and precision
+
+- Table 1, p9: taxonomy and initial/final membership. Table 3, p11: paired initial/final inputs and GS. Table 4, pp12-13: prey rows by predator columns, paired Initial/Final labels and coloured additions/removals. Table 5, p14: four-fleet landings. Table 6, p19: final balanced-model estimates and trophic levels.
+- Final source name spine uses Table 6 verbatim, including `baby SKJ`, `M Meso fish+other`, `M meso mollusc`, `Meso fish + other`, and `Mesozpk`. Table 3 abbreviations `M Meso fish` and `Meso fish` are aligned to the same source row; capitalization differs for Baby/baby SKJ between tables. Initial-active names use the same source-union row order.
+- Every printed numeric token in Tables 3-6 has page, row, column and display-coordinate evidence in [cell_evidence.json](../../../papers/WCP-2007/extraction_evidence/cell_evidence.json). [source_tables.json](../../../papers/WCP-2007/extraction_evidence/source_tables.json) retains paired tables, including removed and added rows. Page images 9,11,12,13,14,19 were inspected. Rotated pages 12-13 were parsed using transformed bounding boxes, never text-flow position.
+- Decimal strings preserve exact printed digits, including Small BET diet entries 0.000101 and 0.000431 for Small YFT diet. Sparse blank diet cells mean absent links; no nonzero cell was rounded or renormalized in the canonical model.
+- Biomass units: source tons/km2; PB/QB year^-1; catches tons/km2/year. No catch-area division or wet-carbon conversion was performed. Appendix 1 uses wet-mass biomass. No censored or less-than parameter cells occur in Tables 3-6.
+- Table 6 blue cells are model outputs: all TL and P/Q; biomass for final small tuna stages and forage groups; QB for final small tuna stages; EE for groups other than the forage groups fixed to 0.95/0.98. Flags distinguish these from original inputs. Published calculated values remain source evidence.
+
+## Prose and missingness audit
+
+- p7 explicitly excludes imports/exports from the living system, routes all dead organisms to the single detritus pool, and exports unused detritus by sedimentation. Diet import is 0. Detritus import is 0. Living-to-detritus routing is 1. Detritus self routing is not specified in the source import table; it remains blank. No multi-pool split was invented.
+- p8 says general default GS=0.2, but Table 3 and p17 explicitly revise final Mesozpk to 0.35 and Microzpk to 0.4. The specific final values prevail. Producer/detritus GS cells are blank in Table 3 and remain unspecified/inapplicable.
+- p15 explicitly states BA/B=0 for the final tuna multi-stanza setup; carried for BET, YFT, SKJ and their smaller stages, including baby SKJ. The import file retains rate form only. Canonical absolute BA=0 is the exact conversion 0*B because this engine ignores the rate field. Other groups retain unknown BA (`-9999`), not zero. Initial-stage BA is unknown. Figures and text contain no additional group-specific numeric BA in the model period.
+- The same p15 multi-stanza specification gives VBGF K=0.3 for BET, 0.32 for YFT, 0.8 for SKJ, recruitment power=1, Wmaturity/Winf=0 and no fixed fecundity. Canonical vbk carries the species K for each final stanza; source stage ages/size thresholds are retained in taxonomy. The current engine does not execute native EwE stanza links. Unreported vbk and prices remain -9999.
+- Table 5 is labelled fisheries landings, not total catch. Fleet cells are preserved. Discards are not quantified; Discards.csv remains blank. Computation uses available landings and documented default zero for unknown catch, not demonstrated total catches. The printed three-decimal totals (including 0 for small positive catches) are retained in raw evidence; canonical positive totals are exact sums of the fleet figures. Exact sum = 0.0540203 tons/km2/year, printed total 0.054.
+- Appendix p42 qualifies the fleet/domain labels: the SKJ values in the Longline column are actually pole-and-line catches; YFT/BET data use stock-assessment region 3, SKJ region 5. Purse-seine bycatch from the whole WCPFC area is assumed by the authors to have the same per-km2 catch in WCPO, and all such bycatch is assigned to FAD-associated fishing. Fleet headers remain verbatim; these are source assumptions, not project spatial corrections.
+- Table 5 has initial-active group rows. Final new baby/forage groups have no explicitly printed fleet catch; canonical catch remains unknown for these ten groups. Initial zero-catch aggregate forage rows are not numerically redistributed into the new groups. The numerical loader supplies zeros separately.
+- Habitat fraction, migration, prices and unreported flows are unknown in canonical fields. Biomass is already a whole-model-area density. No values were borrowed from a later 44/46-group warm-pool model.
+- Detritus appendix p33 cites a previous estimate about 130 g wet mass/m2; Table 3 final and Table 6 explicitly use 100 tons/km2. Final 100 is retained, initial biomass stays blank; the predecessor estimate is not treated as an initial input.
+- Taxonomy.xlsx and taxonomy.csv preserve Table 1 names/spellings and the scope of its example lists (many end in ellipses); no external synonym normalization or species matching was performed. Baby SKJ definition conflicts: Table 1 <24 cm/0.25 kg and p15 <10 cm. Table 1 is recorded as group definition, with both statements disclosed. `+other` in Table 6 is broader than Table 1's named fish examples, so no exhaustive membership is claimed.
+
+## Validation and conversion
+
+- All eight EwE imports exist, plus taxonomy, the intermediate extraction JSON (`extracted_tables/model.json`), converter database output, canonical `model.json`, reconstruction workbooks and logs.
+- `VALIDATION.txt` records structural validation; final: 0 errors / 2 warnings; initial: 0 errors / 5 warnings. Warnings identify unreported basal GS, detritus self fate, and initial missing detritus basic inputs, BA and TL. They are not filled to silence warnings.
+- `MASS_BALANCE_SOURCE.txt` is the source-table audit. `MASS_BALANCE.md` is the converter-result audit and can reflect converter normalization. `MASS_BALANCE_CANONICAL.md` and `.json` audit restored source values. Their findings are separate from diagnose_sppr's computational model-input and PP-budget checks.
+- The converter silently normalizes diet columns, inserts habitat_area=1, drops P/Q/TL and may omit an entirely blank basic-input row. Its original output is retained. `converter_to_canonical_audit.json` records restoration of exact diets, unknown habitat/catch/BA values, P/Q/TL, input/output flags, and the initial Detritus row. Canonical initial JSON contains all 24 groups; the retained converter audit has only 23 because of that omission.
+- `CANONICAL_reconstructed.xlsx` is rebuilt from canonical JSON; converter reconstruction is retained separately. Engine-named JSON beside `model.json` is an exact-byte loader alias required by the filename parser, not another candidate.
+
+## Scientific admission
+
+The initial 24-group configuration is extracted as source evidence. The authors explicitly describe it as unbalanced (p14). It is not a separate balanced candidate, and no SPPR run or source completion is admitted for it. Its detritus biomass, EE and TL are not reported in the initial tables.
+
+No source values were changed to force balance. The initial configuration is excluded on the paper's own admission; the final set's table inconsistency requires review before usable PPR. The source's claimed balance and this reconstruction's computed failure are both retained.

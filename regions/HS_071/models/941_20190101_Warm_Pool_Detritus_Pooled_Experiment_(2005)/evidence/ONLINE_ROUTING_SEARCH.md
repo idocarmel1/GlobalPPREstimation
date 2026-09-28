@@ -1,0 +1,19 @@
+# Griffiths2019 numerical detritus routing: bounded online source review
+
+The search found **no recoverable numerical routing matrix or exact native 46-group/2005 model in the verified available sources**. This is not proof that no native model exists. Qualitative descriptions of the fishery-discard pathway do exist. The user's conditional authorization therefore supports a separate pooled-detritus experiment, with the original reconstruction retained.
+
+Verified on 28 September 2026:
+
+| Primary or author source | Finding and limitation |
+|---|---|
+| [Publisher DOI page](https://onlinelibrary.wiley.com/doi/10.1111/fog.12389) | Supporting Information lists the single `fog12389-sup-0001-AppendixS1-S4.docx` (3.9 MB); no additional native model/data link found. Earlier direct supplement downloading was access-blocked; the user-supplied exact DOCX is now archived and fully parsed. |
+| [Author-posted Appendix S1–S4](https://www.researchgate.net/profile/Shane-Griffiths/publication/325700136_Griffiths_FOG-17-1431_Early_View_Supp_Info/data/5b9feef0299bf13e6038a3f9/Warm-Pool-Ecopath-FAD-Griffiths-et-al-2018-APPENDICES.pdf) | Online 68-page text and supplied DOCX give S1 parameters, initial S2, final S3, S4 fleets and Ecosim material. No numerical detritus-fate split is identified. Unassimilated food appears in the equation definition, without group-specific fractions. Direct author-PDF byte retrieval previously returned access errors; numerical extraction uses the archived DOCX and independently rendered PDF. |
+| [University of Canberra publication record](https://researchprofiles.canberra.edu.au/en/publications/just-a-fad-ecosystem-impacts-of-tuna-purse-seine-fishing-associat/) | Access document links to the DOI; other links are bibliographic. No native model attachment found. |
+| [EcoBase model catalogue](https://ecobase.ecopath.org/) | Warm Pool/Western Tropical Pacific entry is Godinot and Allain 2003, period 1990–2001; a Griffiths entry is the different 2004 ETBF model. Neither identifies this 46-group/2005 source. The [Western Tropical Pacific model link](https://ecobase.ecopath.org/php/protect/base_model.php?action=base&ident=&lang=&model=436&pass=&provenance=web) yielded a minimal page, not a recoverable matching native model. No authentication bypass was attempted. |
+| [BMIS author manuscript](https://www.bmis-bycatch.org/system/files/zotero_attachments/library_1/MQDAAXEY%20-%20Griffiths%20et%20al.%20-%202019%20-%20Just%20a%20FAD%20Ecosystem%20impacts%20of%20tuna%20purse-seine%20.pdf) | Main p99 describes discards as suspended food available to predators. This establishes ecological intent but supplies neither numerical natural/unused-production routing nor a fleet-return fraction. Aggregate trophic-level flow results cannot reconstruct group-specific routes uniquely. |
+
+Targeted searches included DOI plus detritus; title plus Ecopath/model/data; Warm Pool Griffiths detritus fate; supplement filename; title plus detritus/routing; and Griffiths2019 Warm Pool ewemdb. No additional relevant exact-model native file was found. Irrelevant search hits were excluded. The earlier source-search audit remains historical evidence rather than being replaced.
+
+The exact DOCX has ten XML tables. The values 2.000 in later tables are Ecosim vulnerability settings, not detritus routing; final diet is S3. All paragraphs and tables were inventoried. Source unknowns stay unknown in the 46-group canonical file.
+
+Two distinct limitations must remain separate: (1) the source does not supply the numerical split between its two detritus pools, which the multi-pool loader requires; (2) the current calculator's detritus routing handles natural other mortality plus egestion, not a separate fleet-discard return. Pooling permits the documented single-pool default but does not recover or validate that fleet pathway.

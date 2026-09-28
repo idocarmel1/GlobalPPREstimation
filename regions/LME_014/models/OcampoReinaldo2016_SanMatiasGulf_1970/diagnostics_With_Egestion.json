@@ -1,0 +1,90 @@
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 42.53966926020408,
+    "q_max_rel_residual": 3.2355150344839743,
+    "dc_rows_sum_to_1": false,
+    "dc_max_deviation": 0.002000000000000224,
+    "n_negative_catch": 0,
+    "n_zero_catch": 27,
+    "total_catch": 0.0,
+    "has_catch": false,
+    "has_ee_issues": true,
+    "n_ee0": 1,
+    "n_ee_marginal": 5,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      3
+    ],
+    "ee_marginal_groups": [
+      9,
+      6,
+      4,
+      2,
+      1
+    ]
+  },
+  "divergence": {
+    "status": "OK",
+    "solve_error": null,
+    "b": 0.6276758114276763,
+    "b_converges": true,
+    "rho_living": 0.2839909090909091,
+    "living_converges": true,
+    "sppr_det": {
+      "26": 8.275008962123971
+    },
+    "max_sppr_det": 8.275008962123971,
+    "max_sppr_group": {
+      "seq": 2,
+      "tl": 4.027011590644043,
+      "sppr": 480.12918206808445,
+      "inv_te": 11.045364891518739
+    },
+    "max_tl_group": {
+      "seq": 14,
+      "tl": 4.305696445664703,
+      "sppr": 86.22897986815148,
+      "inv_te": 1.5790697674418606
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "FAIL",
+    "is_balanced": false,
+    "inflow": 445.212747649,
+    "outflow": 790.1458259309783,
+    "rel_gap": 0.7747601121114328
+  },
+  "footprint": {
+    "ppr_all": 0.0,
+    "ppr_inner": 0.0,
+    "ppr_pp_only": 0.0,
+    "npp": 375.585,
+    "ppr2npp": 0.0,
+    "ppr2npp_pp_only": 0.0
+  },
+  "config": {
+    "TE_option": "With Egestion",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "single_detritus",
+    "would_pool": false,
+    "model": "OcampoReinaldo2016_SanMatiasGulf_1970 (1970)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 42.5 exceeds fail threshold 0.1",
+    "diet rows deviate from 1 by up to 0.002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+    "total catch is 0: every footprint number is identically 0 (the divergence diagnostics are unaffected)",
+    "1 group(s) with EE=0 (all production is non-predatory death): 3 (Other rays). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "5 group(s) with 0 < EE < 0.001: 9 (Narrownose smooth-hound), 6 (Large sharks), 4 (Large rays), 2 (Sea Lions), 1 (Dolphins). Their SPPR ~ 1/te is near-singular",
+    "PP balance gap 77.476% exceeds fail threshold 5.0%"
+  ]
+}

@@ -60,13 +60,21 @@ class WorkflowTests(unittest.TestCase):
   self.assertEqual(len(list((self.path.parent/'models/previous_results').glob('*.xlsx'))),1)
  def test_partial_update_preserves_metadata_and_other_regions(self):
   from update_project import update
+  import gzip,json
   root=self.path.parent
+  context=root/'common_reference_data/atlas_source_context';context.mkdir(parents=True)
+  with gzip.open(context/'catalog.json.gz','wt',encoding='utf-8') as f:json.dump({'curated_region_ids':['LME_001','LME_002']},f)
   set_setting(self.b,'region_name','Example');set_setting(self.b,'region_type','LME')
   recalculate(self.b,self.path);write_book(self.path,self.b)
   project={'Papers':{'Papers':(['unit_id','title'],[['LME_001','Manually reviewed title']])},'Models & coverage':{'Models':(['unit_id','model_id','coverage'],[['LME_001','m',73]])},'Regions & status':{'Regions':(['unit_id','name','type','selected_model_id','selection_rationale','status','workbook','sha256','production_eligible'],[['LME_002','Other','LME',None,None,'pending','other.xlsx','x',False]])},'Regional PPR':{'Annual':(['unit_id',*ANNUAL_HEADER],[['LME_002','', 'all',SIMPLE,'landings','method','ppr','ok',*([7]*70)]])},'Definitions & build':{}}
   write_book(root/'Project.xlsx',project);update(root,[self.path]);p=read_book(root/'Project.xlsx')
-  self.assertEqual(rows(p,'Papers','Papers'),[['LME_001','Manually reviewed title']])
+  self.assertEqual(records(p,'Papers','Papers')[0]['title'],'Manually reviewed title')
+  self.assertEqual(records(p,'Papers','Papers')[0]['atlas_region_rank'],1)
   self.assertEqual(rows(p,'Models & coverage','Models')[0][2],73)
   self.assertEqual(next(r for r in rows(p,'Regional PPR','Annual') if r[0]=='LME_002')[8],7)
+  update(root,[self.path]);p=read_book(root/'Project.xlsx')
+  self.assertEqual(records(p,'Papers','Papers')[0]['atlas_region_rank'],1)
+  other=next(r for r in records(p,'Regions & status','Regions') if r['unit_id']=='LME_002')
+  self.assertEqual(other['name'],'Other');self.assertIsNone(other['atlas_region_rank'])
 
 if __name__=='__main__':unittest.main()

@@ -1,0 +1,53 @@
+test_changed_bytes_downgrade_verification_and_preserve_prior_assessment (tools.workflow_checks.test_paper_files.PaperFileTests.test_changed_bytes_downgrade_verification_and_preserve_prior_assessment) ... FAIL
+test_downloads_replace_stale_empty_inventory_without_changing_scores (tools.workflow_checks.test_paper_files.PaperFileTests.test_downloads_replace_stale_empty_inventory_without_changing_scores) ... ok
+test_map_total_includes_discovered_sources_and_deduplicates_shared_files (tools.workflow_checks.test_paper_files.PaperFileTests.test_map_total_includes_discovered_sources_and_deduplicates_shared_files) ... ok
+test_native_eweaccdb_attachment_is_discovered_as_model (tools.workflow_checks.test_paper_files.PaperFileTests.test_native_eweaccdb_attachment_is_discovered_as_model) ... ok
+test_original_model_json_is_linked_but_administrative_json_is_not (tools.workflow_checks.test_paper_files.PaperFileTests.test_original_model_json_is_linked_but_administrative_json_is_not) ... ok
+test_removing_last_file_clears_all_presence_statuses (tools.workflow_checks.test_paper_files.PaperFileTests.test_removing_last_file_clears_all_presence_statuses) ... FAIL
+test_retains_verified_provenance_deduplicates_and_drops_missing_links (tools.workflow_checks.test_paper_files.PaperFileTests.test_retains_verified_provenance_deduplicates_and_drops_missing_links) ... ok
+test_retrieval_logs_are_excluded_from_new_and_existing_sources (tools.workflow_checks.test_paper_files.PaperFileTests.test_retrieval_logs_are_excluded_from_new_and_existing_sources) ... FAIL
+test_same_publication_can_link_source_archived_under_another_region (tools.workflow_checks.test_paper_files.PaperFileTests.test_same_publication_can_link_source_archived_under_another_region) ... ok
+
+======================================================================
+FAIL: test_changed_bytes_downgrade_verification_and_preserve_prior_assessment (tools.workflow_checks.test_paper_files.PaperFileTests.test_changed_bytes_downgrade_verification_and_preserve_prior_assessment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\test_paper_files.py", line 30, in test_changed_bytes_downgrade_verification_and_preserve_prior_assessment
+    self.assertEqual(record['sha256'],atlas.sha(path))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'e2dc7dcc254d1b9d2b42ebf1fb0a7630e49255fd1f7fe3c5e220fb7ff837982b' != '4c7b4a1ca9b86f241c0b720e99da7aefa0b8a741120941618ebd45e42a5b9d0c'
+- e2dc7dcc254d1b9d2b42ebf1fb0a7630e49255fd1f7fe3c5e220fb7ff837982b
++ 4c7b4a1ca9b86f241c0b720e99da7aefa0b8a741120941618ebd45e42a5b9d0c
+
+
+======================================================================
+FAIL: test_removing_last_file_clears_all_presence_statuses (tools.workflow_checks.test_paper_files.PaperFileTests.test_removing_last_file_clears_all_presence_statuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\test_paper_files.py", line 45, in test_removing_last_file_clears_all_presence_statuses
+    self.assertEqual(paper[key],'not_found')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'local_file_present' != 'not_found'
+- local_file_present
++ not_found
+
+
+======================================================================
+FAIL: test_retrieval_logs_are_excluded_from_new_and_existing_sources (tools.workflow_checks.test_paper_files.PaperFileTests.test_retrieval_logs_are_excluded_from_new_and_existing_sources)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\test_paper_files.py", line 16, in test_retrieval_logs_are_excluded_from_new_and_existing_sources
+    self.assertEqual(paper['material_files'],[])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'relative_path': '../regions/LME_022/pap[546 chars]22'}] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+{'relative_path': '../regions/LME_022/papers/P/accession_retrieval.json', 'role': 'model', 'article_id': 'P__LME_022', 'unit_id': 'LME_022'}
+
+Diff is 673 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.376s
+
+FAILED (failures=3)

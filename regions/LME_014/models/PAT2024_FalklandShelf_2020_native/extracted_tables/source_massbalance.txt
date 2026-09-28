@@ -1,0 +1,53 @@
+  # group                                B      P/B      Q/B      EE  EE calc    P/Q    catch
+  1 Baleen Whales                   0.0125      0.8       10       -        0   0.08        -
+  2 Benthic Crustaceans                  -      2.5       11     0.9        -  0.2270.0001592
+  3 Blue Whiting                   0.01146     0.49      2.7       -     1.03  0.181 0.000344
+  4 Dogfish                          0.051     0.32      3.7       -   0.0267 0.08650.0004356
+  5 Flounder                       0.00048     0.65      3.1       -   0.0806   0.211.331e-05
+  6 Grenadier                            -     0.16      2.8     0.8        - 0.05710.0008363
+  7 Hake Austral                     0.003     0.34      1.8       -    0.274  0.1890.0002791
+  8 Hake Common                       1.18    0.245      2.3       -    0.977  0.107   0.2176
+  9 Hoki                            0.3133    0.301      2.3       -     1.04  0.131  0.03861
+ 10 I. argentinus                    1.321      6.5       16       -     0.15  0.406   0.3451
+ 11 Jellyfish                            -        6       15    0.95        -    0.4 8.98e-06
+ 12 Kelp                               100        7        -       -        0      -        -
+ 13 Kingclip                       0.04658     0.12      1.6       -     1.52  0.075 0.008317
+ 14 Large Demersal Fish                  -     0.35      2.7     0.8        -   0.130.0003477
+ 15 Large Zoobenthos                     -      1.1       10    0.65        -   0.11        -
+ 16 D. gahi ASC                       0.27      3.5       11       -    0.759  0.318   0.1501
+ 17 D. gahi SSC                      0.515      3.5       11       -    0.727  0.318   0.1547
+ 18 Myctophidae                          -      0.6        5    0.98        -   0.12        -
+ 19 Octopods                             -        2        5    0.95        -    0.41.079e-05
+ 20 Pelagic Fish                     0.655    0.373      5.6       -     1.32 0.0666 0.003947
+ 21 Penguins                      0.009117      1.5       65       -    0.397 0.0231 6.59e-09
+ 22 Phytoplankton                        -       80        -     0.4        -      -        -
+ 23 Red Cod                         0.1133     0.26      2.9       -     1.06 0.0897 0.007129
+ 24 Rock Cod                        0.1112     0.37      3.2       -    0.978  0.116 0.004066
+ 25 Seabirds                          0.02    1.223       70       -   0.0356 0.0175 6.73e-07
+ 26 Seals and Sea Lion             0.02106      0.4    17.44       -  0.00218 0.0229 4.64e-07
+ 27 Sharks                          0.0003     0.08     0.85       -   0.0417 0.0941    1e-06
+ 28 Skates                         0.06647    0.218      2.1       -    0.769  0.104 0.007079
+ 29 Small Demersal Fish                  -     0.37      6.5    0.95        - 0.0569    4e-05
+ 30 Small Zoobenthos                     -        3       11    0.85        -  0.2730.0001041
+ 31 Squid                                -      3.5       10     0.9        -   0.351.929e-05
+ 32 Toothed Whales and Dolphins      0.002     0.42    10.46       -   0.0133 0.0402        -
+ 33 Toothfish juv                        -    0.585        1    0.85        -  0.585 0.001443
+ 34 Zooplankton                          -       25     93.5     0.7        -  0.2670.0001041
+ 35 Discards                       0.00586        -        -       -        -      -        -
+ 36 Detritus                             -        -        -       0        -      -        -
+
+NOTE  12 consumer(s) lack B or Q/B, so predation on their prey is under-counted and the EE check below is a lower bound: 2 (Benthic Crustaceans), 6 (Grenadier), 11 (Jellyfish), 14 (Large Demersal Fish), 15 (Large Zoobenthos), 18 (Myctophidae)
+NOTE  detritus pools (2): inflow ~716.2, consumption ~0.2298 t/km2/yr, implied EE ~0.000 (indicative — export not separated, and it uses recomputed EE where the paper gave none)
+WARN  group 12 (Kelp): only 2 of B/P-B/Q-B/EE given (B, PB) — Ecopath needs three. Sweep the prose for the missing one before accepting this.
+WARN  group 22 (Phytoplankton): only 2 of B/P-B/Q-B/EE given (PB, EE) — Ecopath needs three. Sweep the prose for the missing one before accepting this.
+WARN  group 25 (Seabirds): P/Q = 0.017 outside the usual 0.02-0.5 range — check the P/B and Q/B columns
+WARN  group 33 (Toothfish juv): P/Q = 0.585 outside the usual 0.02-0.5 range — check the P/B and Q/B columns
+ERROR group 3 (Blue Whiting): recomputed EE = 1.030 > 1 — consumption+catch+BA (0.005783) exceeds production (0.005615)
+ERROR group 9 (Hoki): recomputed EE = 1.038 > 1 — consumption+catch+BA (0.09793) exceeds production (0.09431)
+ERROR group 13 (Kingclip): recomputed EE = 1.524 > 1 — consumption+catch+BA (0.008516) exceeds production (0.005589)
+ERROR group 20 (Pelagic Fish): recomputed EE = 1.321 > 1 — consumption+catch+BA (0.3228) exceeds production (0.2443)
+ERROR group 23 (Red Cod): recomputed EE = 1.061 > 1 — consumption+catch+BA (0.03127) exceeds production (0.02946)
+
+5 error(s), 4 warning(s), 2 note(s)
+Check each error against a rendered image of the source page before changing anything. Do not adjust numbers to make this pass.
+

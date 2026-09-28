@@ -1,3 +1,11 @@
+## Verified extraction update 2026-09-28
+
+The main PDF is present and its exact bytes are verified in the model source manifest. The identified publisher supplement remains unavailable for exact-byte download (HTTP401 bot check). The earlier source availability and quality narrative below is an inherited historical assessment and is superseded by this update.
+
+Candidate: `49_20192013_Western_North_Pacific_Watari_(2013)`; 41 groups; modeled year 2013. USER-PREFERRED SOURCE because of more detailed group structure; exact model not selected; missing detritus routing and source censoring require resolution.
+
+Source-faithful extracted tables, taxonomy, canonical JSON, validation and candidate-only diagnostics: [extraction report](../../models/49_20192013_Western_North_Pacific_Watari_(2013)/extracted_tables/REPORT.md). No exact model was selected for production.
+
 # Ecosystem modeling in the western North Pacific using Ecopath, with a focus on small pelagic fishes
 
 Watari et al. (2019)

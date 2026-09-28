@@ -3,6 +3,7 @@ import argparse
 from pathlib import Path
 from workbooks import *
 from regional import comparison_tables,result_hash
+from atlas_ranks import apply_atlas_ranks, ensemble_ids
 
 def update(root, paths, all_regions=False):
     project_path=root/'Project.xlsx'; p=read_book(project_path)
@@ -35,7 +36,7 @@ def update(root, paths, all_regions=False):
         for table in b.get('Diagnostics',{}):
             for r in records(b,'Diagnostics',table):outputs['Diagnostics & sensitivity','Diagnostics'][1].append([unit,table,clean(r)])
     for (sheet,table),(header,new) in outputs.items():
-        old=[] if all_regions else [r for r in rows(p,sheet,table) if r[0] not in units]
+        old=[] if all_regions else [[r.get(k) for k in header] for r in records(p,sheet,table) if r.get('unit_id') not in units]
         p.setdefault(sheet,{})[table]=(header,sorted(old+new,key=lambda r:tuple(str(x or '') for x in r[:7])))
     # Selection columns are derived; the rest of the central model metadata is untouched.
     choices={r[0]:(r[3],r[4]) for r in rows(p,'Regions & status','Regions')}
@@ -50,6 +51,7 @@ def update(root, paths, all_regions=False):
     if 'selected' in ph and 'article_id' in ph:
         for r in pr:r[ph.index('selected')]=r[ph.index('article_id')] in selected_papers
     p['Definitions & build']['Last build']=(['field','value'],[['schema_version',1],['regional_workbooks',len(rows(p,'Regions & status','Regions'))],['mode','all' if all_regions else 'partial']])
+    apply_atlas_ranks(p, ensemble_ids(root))
     write_book(project_path,p)
     print(f'Updated {len(units)} regions; central source metadata preserved.',flush=True)
 

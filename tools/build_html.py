@@ -10,6 +10,8 @@ OSM_BASEMAP="L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{m
 
 def linked_layout(template):
     for old,new in LINK_UPDATES.items():template=template.replace(old,new)
+    template=template.replace('<span>Verified files</span>','<span>Local files</span>')
+    template=template.replace("files.filter(f=>f.status==='downloaded_verified').map(f=>f.sha256)","files.map(f=>f.sha256||f.relative_path)")
     if OSM_BASEMAP in template:
         source=Path(__file__).resolve().parents[1]/'common_reference_data/geography/basemaps/ne_50m_land.geojson'
         land=json.dumps(json.loads(source.read_text(encoding='utf-8')),ensure_ascii=False,separators=(',',':'),allow_nan=False).replace('</',r'<\/')
@@ -54,7 +56,7 @@ def build(workbook,output=None):
     context=root/'common_reference_data/atlas_source_context'
     for name in ['eez_searches.csv','lme_searches.csv']:
         shutil.copy2(context/name,data/name)
-    for name,rr in [('articles.csv',records(project,'Papers','Papers')),('files.csv',catalog.get('files',[]))]:
+    for name,rr in [('articles.csv',catalog['articles']),('files.csv',catalog.get('files',[]))]:
         headers=list(dict.fromkeys(k for r in rr for k in r))
         with (data/name).open('w',newline='',encoding='utf-8') as f:
             w=csv.DictWriter(f,fieldnames=headers,lineterminator='\n');w.writeheader();w.writerows({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()} for r in rr)

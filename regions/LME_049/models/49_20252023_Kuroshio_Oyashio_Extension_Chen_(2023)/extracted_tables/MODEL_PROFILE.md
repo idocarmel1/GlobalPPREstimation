@@ -1,0 +1,1 @@
+Axis: taxonomic/size guilds. Study area148–164°E and35–45°N, high-seas Kuroshio–Oyashio Extension; June–August2023 survey,36 sampled trawl stations of76 planned,50–150m trawl depth. Partial LME relationship; no freshly verified percentage coverage.

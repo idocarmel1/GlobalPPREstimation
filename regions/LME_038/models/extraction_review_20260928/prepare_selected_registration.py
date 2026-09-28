@@ -1,0 +1,12 @@
+from pathlib import Path
+import json
+OUT=Path(__file__).parent;ROOT=next(p for p in OUT.parents if (p/'Project.xlsx').exists())
+old=json.loads((OUT/'central_metadata_proposal.json').read_text(encoding='utf8'));m=dict(old['model_rows_to_register'][0]);mid='38_38003_Java_Sea_normalized_BA_completed_(mid1970s)'
+m.update(model_id=mid,model_path=f'regions/LME_038/models/{mid}/model.json',selected=False,selection_rationale='Registered pending updater adoption from regional Overview: best available model; required diet normalization and BA completion.',variant='USER-SELECTED DERIVED: Macrozoobenthos diet0.660 normalized proportionally;28 signed computational BA completions persisted. Source38001 unchanged.',availability='Selected derived model;22 methods completed; GE/egestion OK; TE WARN Marine mammals near-zero transfer efficiency; source as printed remains invalid.')
+m['coverage_note']+=' Full-LME application is an extrapolation; best available model is the user rationale, not verified spatial coverage.'
+report='regions/LME_038/models/extraction_review_20260928/EXTRACTION_AND_SPPR_REPORT.md';selected_report=f'regions/LME_038/models/{mid}/SELECTED_MODEL_REPORT.md'
+p={'paper_updates':[{'article_id':'INDO-1999__LME_038','changes':{'recommendation':'User selected derived model38003: best available model. Required proportional normalization of Macrozoobenthos diet0.660 to1 plus computational BA completion for all28 groups; original printed model38001 preserved. TE WARN retained.','notes':report+' ; '+selected_report,'loadability_class':'Printed source fails strict admission; user-authorized normalized and BA-completed derived model selected','loadability_evidence':f'Derived model {mid}; exact loaded-state roundtrip0 differences. Full28 source taxonomies retained. Fresh bounded22-method run; source/derived/engine conventions documented.'}}],'model_rows_to_register':[m]}
+(OUT/'selected_registration_proposal.json').write_text(json.dumps(p,indent=2),encoding='utf8')
+s=(OUT/'register_central_metadata.py').read_text(encoding='utf8').replace('central_metadata_proposal.json','selected_registration_proposal.json').replace('CENTRAL_REGISTRATION_VERIFICATION.json','SELECTED_REGISTRATION_VERIFICATION.json').replace('Project_before_LME038_registration_','Project_before_LME038_selected_registration_')
+(OUT/'register_selected_metadata.py').write_text(s,encoding='utf8')
+print('Prepared narrow source/derived registration')

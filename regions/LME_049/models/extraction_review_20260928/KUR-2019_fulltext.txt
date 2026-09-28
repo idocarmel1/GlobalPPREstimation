@@ -1,0 +1,2758 @@
+
+=== PDF PAGE 1 ===
+Inter-Research Science Center
+Ecosystem modeling in the western North Pacific using Ecopath, with a focus on small 
+pelagic fishes
+ 
+Author(s): Shingo Watari, Hiroto Murase, Shiroh Yonezaki, Makoto Okazaki, Hidetada 
+Kiyofuji, Tsutomu Tamura, Takashi Hakamada, Yu Kanaji and Toshihide Kitakado
+ 
+Source: Marine Ecology Progress Series , May 16 2019, Vol. 617/618 (May 16 2019), pp. 295-
+305
+ 
+Published by: Inter-Research Science Center 
+Stable URL: https://www.jstor.org/stable/10.2307/26789798
+ 
+REFERENCES 
+Linked references are available on JSTOR for this article: 
+https://www.jstor.org/stable/10.2307/26789798?seq=1&cid=pdf-
+reference#references_tab_contents 
+You may need to log in to JSTOR to access the linked references.
+JSTOR is a not-for-profit service that helps scholars, researchers, and students discover, use, and build upon a wide 
+range of content in a trusted digital archive. We use information technology and tools to increase productivity and 
+facilitate new forms of scholarship. For more information about JSTOR, please contact support@jstor.org. 
+ 
+Your use of the JSTOR archive indicates your acceptance of the Terms & Conditions of Use, available at 
+https://about.jstor.org/terms
+Inter-Research Science Center is collaborating with JSTOR to digitize, preserve and extend access to 
+Marine Ecology Progress Series
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 2 ===
+MARINE ECOLOGY PROGRESS SERIES
+Mar Ecol Prog Ser
+Vol. 617-618: 295–305, 2019
+https://doi.org/10.3354/meps12508
+Published May 16§
+1. INTRODUCTION
+Small pelagic fishes (also called forage fishes), such
+as Japanese sardine Sardinops melanostictus, Japan-
+ese anchovy Engraulis japonicus, rounded herring
+Etrumeus teres, Pacific saury Cololabis saira, Japan-
+ese jack mackerel Trachurus japonicus, chub mack-
+erel Scomber japonicus, and spotted mackerel S.
+australasicus, are economically important to Japan.
+Production quantities and monetary values in 2013
+constituted 45% and 32% of the total marine fish
+production of Japan (MAFF 2015). Since 1996, stocks
+have been assessed by the Fisheries Agency of Japan
+and Japan Fisheries Research and Education Agency
+using single-species models, such as virtual popula-
+tion analysis (Ichinokawa et al. 2017).
+© The authors 2019. Open Access under Creative Commons by
+Attribution Licence. Use, distribution and reproduction are un -
+restricted. Authors and original publication must be credited. 
+Publisher: Inter-Research · www.int-res.com
+*Corresponding author: swatari@affrc.go.jp
+§Advance View was available online March 1, 2018
+Ecosystem modeling in the western North Pacific
+using Ecopath, with a focus on small pelagic fishes
+Shingo Watari1,*, Hiroto Murase2, Shiroh Yonezaki2, Makoto Okazaki2, 
+Hidetada Kiyofuji3, Tsutomu Tamura4, Takashi Hakamada4, Yu Kanaji2, 
+Toshihide Kitakado5
+1National Research Institute of Fisheries Science, Japan Fisheries Research and Education Agency, 2-12-4 Fukuura, 
+Kanazawa, Yokohama, Kanagawa 236-8648, Japan
+2National Research Institute of Far Seas Fisheries (Yokohama Laboratory), Japan Fisheries Research and Education Agency, 
+2-12-4 Fukuura, Kanazawa, Yokohama, Kanagawa 236-8648, Japan
+3National Research Institute of Far Seas Fisheries (Shimizu Laboratory), Japan Fisheries Research and Education Agency, 
+5-7-1 Orido, Shimizu, Shizuoka, Shizuoka 424-8633, Japan
+4The Institute of Cetacean Research, 4-5 Toyomicho, Chuo, Tokyo 104-0055, Japan
+5Tokyo University of Marine Science and Technology, 4-5-7 Konan, Minato, Tokyo 108-8477, Japan
+ABSTRACT: Small pelagic fishes like sardine, anchovy, and mackerel play important commercial
+and ecological roles in the western North Pacific. We present a static, mass-balance ‘Ecopath’
+model for this region, focusing on small pelagic fish species, as an initial step to evaluate the role
+of these fishes in this ecosystem. Our quasi sub-model structure has 3 blocks (coastal Oyashio,
+coastal Kuroshio, and offshore) that were established to take sub-regional differences of bottom
+topography and oceanography into consideration. This model consists of 41 functional groups and
+assumes that some species are endemic to a single block, while some migrating species occur in 2
+or 3 blocks. We evaluated the quality of our model using pedigree and pre-balance diagnostics.
+The impact of fisheries on the marine ecosystem assessed by both the L-index, i.e. the index of loss
+in secondary production due to fisheries exploitation, and the impact of fisheries targeting small
+pelagic fishes on the total production of small pelagic fishes, are compared with other ecosystems.
+Both ecological indices indicate that the western North Pacific ecosystem is not overexploited. Our
+static mass-balanced Ecopath model will contribute to expanding ecological knowledge of the
+western North Pacific.
+KEY WORDS:  Ecosystem model · Ecopath · Quasi sub-model structure · Western North Pacific ·
+Small pelagic fishes · Forage fish · Fishing impact
+Contribution to the Theme Section ‘Drivers of dynamics of small pelagic fish resources: 
+biology, management and human factors’
+OPEN
+PEN
+ ACCESS
+CCESS
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 3 ===
+Mar Ecol Prog Ser 617–618: 295–305, 2019
+Commercial catch histories of small pelagic fishes
+in the western North Pacific off Japan have fluctu-
+ated drastically since the 1900s, with quasi-decadal
+alterations in species composition (so-called species
+replacement) in response to oceanographic changes
+(Yatsu et al. 2001, Takasuka et al. 2008). Development
+of multispecies ecosystem models, such as ‘Ecopath’
+(Christensen & Walters 2004), have been widely used
+to address structure and function of marine ecosys-
+tems and to evaluate the effects of fisheries. Ecopath
+provides a static, mass-balanced snapshot of an eco-
+system that can deal with multispecies and multifleet
+data. Although Pikitch et al. (2014) reviewed 72 inter-
+national, published Ecopath models, and assessed
+the global contribution of forage fish to marine fish-
+eries and ecosystems, they did not include models for
+the western North Pacific, as none was then available.
+The Oyashio Current (a subarctic current with cold,
+low-salinity water) influences the northern part of the
+western North Pacific off Japan, while the Kuro shio
+Current (the subtropical western boundary current
+with warm high-salinity water) and the Kuroshio ex -
+tension influence the southern part. The area be -
+tween the Oyashio and the Kuroshio extension is
+called the Kuroshio−Oyashio transition (inter-frontal)
+zone (area) (Fig. 1). This zone is also referred to as
+the subarctic−subtropical transition zone.
+Among small pelagic fishes in the western North
+Pacific, round herring and Japanese jack mackerel
+occur only in coastal areas. Although Japanese sar-
+dine and anchovy generally occur in coastal areas,
+when they are abundant, their distribution can also
+extend from the coast to 180° E offshore (Giannoulaki
+et al. 2014). The western North Pacific spawning area
+for Japanese sardine and anchovy is located in coastal
+waters of southern Japan where the influence of the
+Kuroshio is strong. Eggs, larvae, and juveniles of
+Japanese sardine and anchovy are transported from
+the spawning area to the Kuroshio−Oyashio transi-
+tion zone by the Kuroshio and its extension, with the
+transition zone serving as a feeding ground. Pacific
+saury, chub, and spotted mackerel all have similar
+migration patterns. Spatial heterogeneity must be
+considered when constructing ecosystem models for
+small pelagic fishes in the western North Pacific
+because their geographical distribution is large.
+The primary objective of this study was to construct
+an Ecopath model for waters of the western North
+Pacific off Japan, focusing on small pelagic fishes,
+using data from 2013. To construct such a model,
+we followed guidelines outlined by Heymans et al.
+(2016); notably, quality of input data was assessed by
+pedigree (sensu Gaichas et al. 2015), while a series of
+pre-balance diagnostics, ‘PREBAL’ (Link 2010), were
+conducted to evaluate the initial static energy budget.
+Various ecosystem network analysis indicators were
+used, such as mixed trophic impact (MTI), to assess
+the role of small pelagic fishes in the ecosystem. We
+also compared the role of small pelagic fishes in
+waters off the western North Pacific of Japan with
+other ecosystems.
+2. METHODS
+2.1. Basic model
+The program Ecopath with Ecosim (EwE, version
+6.5.0) was used to construct an ecosystem model for
+the western North Pacific. Ecopath was used to rep -
+resent mass-balanced trophic structure (Chris tensen
+et al. 2005). Ecopath estimates trophic mass-balance
+linkages using data for biomass, production ratio,
+consumption ratio, diet composition, and landings.
+This relationship can be ex pressed as:
+(1)
+where Bi and Bj are the biomass of functional group i
+and j, respectively; (P/B)i is the production per biomass
+ratio of i, which is equivalent to the total mortality co -
+efficient Z by Allen (1971); EEi is ecotrophic efficiency
+( / )
+(
+/ )
+0
+1
+B P B EE
+Y
+B Q B DC
+i
+i
+i
+i
+j
+j
+ji
+j
+n
+∑
+−
+−
+=
+=
+296
+Fig. 1. Western North Pacific Ecopath modeling area with
+schematic oceano graphic structures: OYC: coastal Oyashio
+(186 128 km2); KC: coastal Kuroshio (186 220 km2); OF: off-
+shore (540 754 km2). Arrows in red, blue, and green indicate
+the Kuroshio Current, Oyashio Current, and Kuroshio exten-
+sion, respectively. The dashed oval between the Oyashio
+and Kuroshio extension indicates the Kuroshio−Oyashio 
+transition zone
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 4 ===
+Watari et al.: Dynamics of drivers of small pelagic fish resources
+of i, which is described as the proportion of the produc-
+tion that is utilized in the system; Yi is landing of i;
+(Q/B)i is consumption per biomass of i; and DCji is diet
+composition for predator j feeding on prey i. Ecopath
+requires DCji and Yi for all functional groups. Three of
+the 4 parameters of Bi, (P/B)i, (Q/B)i, and EEi must be
+known for each functional group, while the fourth pa-
+rameter can be estimated using a system of equations.
+The mass-balance was taken following guidelines of
+Heymans et al. (2016).
+2.2. Modeled area
+A quasi sub-model structure with 3 geographical
+areas (blocks), namely coastal Oyashio (OYC), coastal
+Kuroshio (KC), and offshore (OF), was established
+that took sub-regional differences of bottom topogra-
+phy and oceanography throughout the modeled area
+into consideration (Fig. 1). We adopted an approach
+similar to that attempted in the Mediterranean Sea
+(Piroddi et al. 2015). To separate each western North
+Pacific area within the full single model, we assigned
+a habitat area which corresponded to the fraction of
+the total area where the functional groups occurred.
+KC and OYC (186 220 and 186 128 km2, respectively)
+were set around  continental shelf areas where off-
+shore bottom trawl fisheries operated. OF (540754 km2)
+was bound by the easternmost line of the OYC, 30° N,
+50° N and 150° E, and serves as a feeding ground for
+small pelagic fishes. It was assumed that some species
+were en demic to a single block (e.g. demersal fishes),
+while highly migratory species (e.g. tunas, whales)
+oc curred in 2 or 3 blocks. Blocks are connected by
+some small pelagic fishes (Japanese sardine, Japanese
+anchovy, Pacific saury, chub mackerel, and  spotted
+mackerel) which migrate among the blocks. The
+ modeled year (2013) was chosen for being data rich
+relative to other years.
+2.3. Functional groups
+We defined 41 functional groups, including living
+animals and detritus. Eleven commercially important
+species were classified into single-species functional
+groups: skipjack Katsuwonus pelamis, yellowtail Seri-
+ola quinqueradiata, Japanese sardine, Japanese an-
+chovy, Pacific saury, chub mackerel, spotted mack-
+erel, round herring, jack mackerel, walleye pollock
+Gadus chalcogrammus (also known as Alaska pol-
+lock), and Pacific cod Gadus macrocephalus. Other
+species were classified into functional groups that
+ included several species (based on ecological sim -
+ilarities, such as niche overlap): baleen whales,
+toothed whales, seabirds, sharks, tunas, miscellaneous
+piscivores, righteye flounders, flatfishes, miscella-
+neous bottom fishes, sea breams, demersal piscivores,
+mesopelagic fishes, epipelagic cephalopods, meso-
+pelagic cephalo pods, benthos, zooplankton, phyto-
+plankton, and de tritus. Krill was considered a single
+functional group as in situ biomass estimates were
+available for the study area, but other zooplankters
+were aggregated as ‘zooplankton’ because species-
+specific biomass was not available for the study area.
+For each of the 3 geographical areas, the block to
+which each functional group belonged was based on
+available biological habitat. Some species, such as
+small pelagic fishes, occurred in more than 1 block.
+Details of  functional groups are presented in Table 1
+and in Supplement 1 at www.int-res. com/ articles/
+suppl/ m617 p295 _ supp. pdf.
+2.4. Input parameters
+Basic input parameters, i.e. biomass (B), production
+per biomass (P/B), consumption per biomass (Q/B),
+diet composition (DC), and landings (Y), of each
+functional group were obtained from the literature
+(Table 2; detailed information is provided in Supple-
+ment 1). Even though the modeled area was divided
+into 3 blocks, Ecopath required biomass of species i
+in the total area (Bi) rather than for the habitat area
+(B’i). To obtain Bi, B’i was multiplied by fraction of
+habitat area relative to the total area (H’i):
+(2)
+Fractions for OYC, KC, and OF were assigned 0.2,
+0.2, and 0.6, respectively.
+In principle, these basic input parameters were
+obtained from each habitat area. Where data for
+ species/ functional groups were collected at scales
+coarser than the size of our 3 blocks, we allocated
+data in proportions to the area of the blocks, although
+such an approach was not ideal. Either Bi or EEi was
+estimated for each functional group.
+2.5. Input data quality and pre-balance diagnostics
+Input data quality was ranked based on pedigree
+(Gaichas et al. 2015) into 1 of 8 categories, from high (1)
+to low (8) (Table S2-1 in Supplement 2). Our model’s
+initial static energy budget was checked based on pre-
+balance diagnostics (PREBAL) comprising 17 criteria,
+B
+B
+H
+i
+i
+i
+=
+×
+’
+’
+297
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 5 ===
+Mar Ecol Prog Ser 617–618: 295–305, 2019
+and the results were ranked into 1 of 3 categories:
+‘good,’ ‘acceptable,’ and ‘caution’ (Link 2010).
+2.6. Ecosystem characteristics
+Summary statistics of the constructed model were
+extracted from Ecopath. MTI was used to assess the
+positive or negative effect of changes in biomass of a
+group on the biomass of other groups in the steady
+state ecosystem (Christensen et al. 2005).
+MTI is calculated by constructing an n ×
+n matrix, where j and i represent the
+interaction between impacting group j
+and impacted group i:
+(3)
+where DCji is the diet composition term
+which expresses how much species i
+contributes to the diet of j, while FCij is a
+host composition term giving the propor-
+tion of the predation on i that is due to j
+as pre dator. MTI allows the quantifica-
+tion of impacts that change in the bio-
+mass of a group (including fisheries) has
+on the biomass of other groups in the
+ecosystem. System biomass and total
+commercial catches fractionated by tro -
+phic level were also calculated. Trophic
+levels were  calculated for each consumer
+functional group as the length of the dif-
+ferent consumption pathways, and ex -
+pressed in roman numerals (Lindeman
+1942).
+Characteristics of the ecosystem and
+the impact of fisheries were evaluated
+by using the L-index (L, Libralato et al.
+2008), which expresses loss in secondary
+production due to fisheries exploitation;
+it is calculated as:
+(4)
+where PPR is primary production re -
+quired excluding detritus groups in the
+sense of Libralato et al. (2008) and repre-
+sents primary production needed to sup-
+port the production of a fishery; TE is
+transfer efficiency, TLc is mean trophic
+level of landing, and P1 is primary pro-
+duction. Mean trophic level in this calcu-
+lation indicates the weighted average of
+the preys’ trophic levels (Odum & Heald
+1975). Sustainability of fishing in our modeled area
+was assessed based on Psust (the probability of an eco-
+system being sustainably fished) as described by Li-
+bralato et al. (2008), wherein 51 ecosystems divided
+into 2 groups were analyzed, namely overexploited
+(Group 1) and sustainably fished (Group 2) ecosys-
+tems. Psust is expressed as:
+(5)
+=
+−
+DC
+FC
+ji
+ji
+ij
+MTI
+= −
+⋅
+⋅
+−
+L
+P
+c
+PPR TE
+lnTE
+TL
+1
+1
+(
+)
+(
+)
+(
+L)
+sust
+2
+2
+1
+P
+P L
+L
+P L
+L
+P L
+=
+>
+>
++
+<
+298
+No.     Group name (distribution)                     Category
+1         Baleen whales (OYC & OF)                   Cetaceans
+2         Toothed whales (all)
+3         Seabirds (all)                                           Seabirds
+4         Sharks (all)                                              Elasmobranchs
+5         Tunas (all)                                                Tunas
+6         Skipjack (all)
+7         Miscellaneous piscivores (all)                Miscellaneous piscivores
+8         Yellowtail (OYC & KC)
+9         Japanese sardine (all)                            Small pelagic fishes
+10       Japanese anchovy (all)
+11       Pacific saury (all)
+12       Chub mackerel (all)
+13       Spotted mackerel (all)
+14       Round herring (KC)
+15       Jack mackerel (OYC & KC)
+16       Righteye flounders (OYC)                      Demersal fishes
+17       Walleye pollock (OYC)
+18       Pacific cod (OYC)
+19       Miscellaneous bottom fishes (OYC)
+20       Flatfishes (KC)
+21       Seabreams (KC)
+22       Demersal piscivores (KC)
+23       Miscellaneous bottom fishes (KC)
+24       Mesopelagic fishes (OYC)                     Mesopelagic fishes
+25       Mesopelagic fishes (KC)
+26       Mesopelagic fishes (OF)
+27       Epipelagic cephalopods (all)                  Cephalopods
+28       Mesopelagic cephalopods (all)
+29       Benthos (OYC)                                        Benthos
+30       Benthos (KC)
+31       Krill (OYC)                                              Krill
+32       Krill (OF)
+33       Zooplankton (OYC)                                Zooplankton
+34       Zooplankton (KC)
+35       Zooplankton (OF)
+36       Phytoplankton (OYC)                             Phytoplankton
+37       Phytoplankton (KC)
+38       Phytoplankton (OF)
+39       Detritus (OYC)                                        Detritus
+40       Detritus (KC)
+41       Detritus (OF)
+Table 1. Western North Pacific Ecopath model functional groups in
+coastal Oyashio (OYC), coastal Kuroshio (KC), and offshore (OF) regions. 
+Parentheses indicate distributions of each functional group
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 6 ===
+Watari et al.: Dynamics of drivers of small pelagic fish resources
+where P(L1 < L) is the number of cases within Group
+1 that have index values lower than a chosen value L.
+P(L2 > L) is the number of cases within Group 2 that
+have index values larger than a chosen value of L. An
+L value corresponding to Psust level of 0.5 (L50%) indi-
+cates an intermediate state between an overex-
+ploited and sustainably fished ecosystem; the esti-
+mated L50% was 0.054. Accordingly, L corresponding
+to Psust levels of 0.75 (L75%) and 0.95 (L95%) were
+defined as reference values for moderate and low
+risks of ecosystem overfishing, with corresponding L
+of 0.021 and 0.007, respectively.
+2.7. Assessing roles of small pelagic fishes 
+in the static ecosystem
+Proportions of catches of small pelagic fishes, the
+total support service contribution of small pelagic
+fishes to ecosystem predator production (Sz), and the
+support service contribution of small pelagic fishes to
+the catch of other commercially targeted species (Sc),
+were used to investigate the importance and contri-
+bution of  forage fish to the ecosystem (Pikitch et al.
+2014). The values of Sz and Sc were calculated as
+ follows:
+299
+No. Group name (distribution)
+Trophic Habitat 
+Biomass in Biomass Production Consumption Ecotrophic Landings 
+level
+area 
+habitat area (t km−2)
+per biomass per biomass 
+efficiency
+(t km−2)
+(fraction)
+(t km−2)
+(yr−1)
+(yr−1)
+1
+Baleen whales (OYC & OF)
+3.19
+0.80
+0.16
+0.13
+0.07
+5.10
+0.08
+<0.01
+2
+Toothed whales (all)
+4.08
+1.00
+0.25
+0.25
+0.08
+8.16
+0.01
+<0.01
+3
+Seabirds (all)
+4.13
+1.00
+<0.01
+<0.01
+0.12
+36.67
+0.00
+–
+4
+Sharks (all)
+4.27
+1.00
+0.20
+0.20
+0.39
+2.19
+0.09
+0.01
+5
+Tunas (all)
+4.21
+1.00
+0.04
+0.04
+0.33
+6.75
+0.75
+0.01
+6
+Skipjack (all)
+4.22
+1.00
+0.09
+0.09
+0.46
+16.20
+0.77
+0.03
+7
+Miscellaneous piscivores (all)
+4.00
+1.00
+0.53
+0.53
+0.52
+5.00
+0.62
+0.02
+8
+Yellowtail (OYC & KC)
+3.99
+0.40
+0.27
+0.11
+0.93
+3.10
+0.56
+0.06
+9
+Japanese sardine (all)
+2.88
+1.00
+0.78
+0.78
+0.69
+2.30
+0.98
+0.14
+10
+Japanese anchovy (all)
+3.02
+1.00
+0.68
+0.68
+2.96
+9.87
+0.96
+0.20
+11
+Pacific saury (all)
+3.02
+1.00
+0.94
+0.94
+1.25
+4.17
+0.79
+0.46
+12
+Chub mackerel (all)
+3.31
+1.00
+1.49
+1.49
+0.66
+2.20
+0.74
+0.25
+13
+Spotted mackerel (all)
+3.31
+1.00
+0.86
+0.86
+0.64
+2.13
+0.97
+0.11
+14
+Round herring (KC)
+3.00
+0.20
+0.35
+0.07
+3.60
+12.00
+0.45
+0.04
+15
+Jack mackerel (OYC & KC)
+3.49
+0.40
+0.16
+0.07
+1.52
+5.07
+0.96
+0.04
+16
+Righteye flounders (OYC)
+3.66
+0.20
+0.82
+0.16
+0.42
+1.40
+0.97
+0.02
+17
+Walleye pollock (OYC)
+3.34
+0.20
+4.89
+0.98
+0.44
+1.47
+0.26
+0.08
+18
+Pacific cod (OYC)
+3.91
+0.20
+1.50
+0.30
+0.45
+1.51
+0.79
+0.03
+19
+Miscellaneous bottom fishes (OYC)
+3.10
+0.20
+3.03
+0.61
+0.45
+1.51
+0.87
+0.03
+20
+Flatfishes (KC)
+3.66
+0.20
+0.06
+0.01
+0.56
+1.87
+0.95
+<0.01
+21
+Seabreams (KC)
+3.78
+0.20
+0.08
+0.02
+0.41
+1.36
+0.45
+<0.01
+22
+Demersal piscivores (KC)
+3.80
+0.20
+0.28
+0.06
+0.70
+2.32
+0.95
+0.01
+23
+Miscellaneous bottom fishes (KC)
+3.11
+0.20
+2.08
+0.42
+0.70
+2.32
+0.97
+0.02
+24
+Mesopelagic fishes (OYC)
+3.11
+0.20
+5.94
+1.19
+1.50
+6.00
+0.90
+–
+25
+Mesopelagic fishes (KC)
+3.06
+0.20
+4.99
+1.00
+1.50
+6.00
+0.90
+<0.01
+26
+Mesopelagic fishes (OF)
+3.02
+0.60
+1.44
+0.87
+1.50
+6.00
+0.90
+–
+27
+Epipelagic cephalopods (all)
+3.32
+1.00
+0.68
+0.68
+2.56
+7.30
+0.95
+0.11
+28
+Mesopelagic cephalopods (all)
+3.33
+1.00
+0.52
+0.52
+3.50
+13.64
+0.95
+–
+29
+Benthos (OYC)
+2.22
+0.20
+7.72
+1.54
+3.44
+11.47
+0.90
+0.01
+30
+Benthos (KC)
+2.22
+0.20
+13.70
+2.74
+3.22
+10.73
+0.61
+0.01
+31
+Krill (OYC)
+2.10
+0.20
+19.31
+3.86
+2.56
+12.05
+0.88
+0.03
+32
+Krill (OF)
+2.10
+0.60
+8.05
+4.83
+2.56
+12.05
+0.50
+–
+33
+Zooplankton (OYC)
+2.00
+0.20
+35.65
+7.13
+5.80
+19.33
+0.31
+–
+34
+Zooplankton (KC)
+2.00
+0.20
+29.02
+5.80
+5.80
+19.33
+0.36
+–
+35
+Zooplankton (OF)
+2.00
+0.60
+41.88
+25.13
+5.80
+19.33
+0.13
+–
+36
+Phytoplankton (OYC)
+1.00
+0.20
+13.56
+2.71
+153.78
+–
+0.41
+–
+37
+Phytoplankton (KC)
+1.00
+0.20
+10.01
+2.00
+128.27
+–
+0.45
+–
+38
+Phytoplankton (OF)
+1.00
+0.60
+9.04
+5.42
+153.78
+–
+0.63
+–
+39
+Detritus (OYC)
+1.00
+0.20
+47.91
+9.58
+–
+–
+–
+–
+40
+Detritus (KC)
+1.00
+0.20
+30.18
+6.04
+–
+–
+–
+–
+41
+Detritus (OF)
+1.00
+0.60
+47.50
+28.50
+–
+–
+–
+–
+Table 2. Basic input and output parameters for the western North Pacific Ecopath model. Functional groups were de fined in coastal Oyashio 
+(OYC), coastal Kuroshio (KC), and offshore (OF) regions. Values in bold are model estimates
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 7 ===
+Mar Ecol Prog Ser 617–618: 295–305, 2019
+(6)
+(7)
+where Dji is predator group j’s respective diet
+dependence on small pelagic fishes, Pj is total annual
+production of predator j that preys on small pelagic
+fishes, and Yj is landing of j. In an evaluation of
+global trends in Sz and Sc, Pikitch et al. (2014) in -
+cluded krill in their definition of forage fish; we cal-
+culated both Sz and Sc including and excluding krill,
+to enable comparison with Pikitch et al. (2014), and to
+assess the role of fish species, respectively.
+3. RESULTS
+3.1. Basic input parameters
+Basic input and estimated parameters are summa-
+rized in Table 2. When we estimated parameters with
+Ecopath at earlier stages of thermodynamic balancing,
+the ecotrophic efficiency (EEi) of several functional
+groups (including miscellaneous piscivores, Japanese
+sardine, Pacific cod and krill [OF]) ex ceeded 1.0, indi-
+cating predation and landings ex ceeded production.
+To achieve thermodynamic balance in the model, some
+adjustment of predator group DC values (sharks, tu-
+nas, skipjack, miscellaneous piscivores, yellowtail,
+Pacific cod, demersal piscivores, mesopelagic fishes,
+and cephalopods) was performed to achieve mass-
+balance through the system (Table 3). DC values were
+adjusted as pedigree scores were generally high (i.e.
+low reliability) when compared with other parameters,
+such as B or P/B. Mean trophic levels by species/
+functional group ranged from 1.0 to 4.3; predators at
+mean trophic  levels greater than 4.0 included toothed
+whales,  seabirds, sharks, tunas, skipjack, and miscel-
+laneous piscivores (Fig. 2, Table 2).
+3.2. Quality of Ecopath model
+Pedigree indices B and P/B for small pelagic spe-
+cies and demersal fish species, commercially impor-
+tant and targeted for stock assessment, ranked lower
+(i.e. high reliability) than mesopelagic fishes and
+cephalopods, for which data were scarce. Pedigree
+indices for Q/B and DC were generally imprecise
+(i.e. high scores) across functional groups. Pedigree
+indices for each species/functional group are shown
+in Supplement 2 (see Supplement 1 for reasoning for
+assignment). PREBAL diagnostics resulted in either
+‘good’ or ‘acceptable’ outcomes for the energy bud -
+get parameter. Results of PREBAL are presented in
+ Supplement 3.
+3.3. Ecosystem characteristics
+Values of MTI revealed that changes in small pelagic
+fish biomass impacted most functional groups, includ-
+ing top predators and the small pelagic fishes them-
+selves (Table S4-1 in Supplement 4). The MTI indi-
+cated a positive impact of small pelagic fishes on
+fisheries (range 0.014 to 0.199, average 0.066). This
+impact is 3 times larger than the impact of all func-
+tional groups on fisheries (range −0.074 to 0.199, aver-
+age 0.019). Changes in zooplankton and krill biomass
+had a positive impact on most fish functional groups,
+including small pelagic and top-predator fishes (range
+−0.081 to 0.400, average 0.022); more positive impacts
+were shown for small pelagic fishes (range −0.067 to
+0.400, average 0.043). Fisheries had a negative impact
+on most groups (range −0.828 to 0.454, average −0.126),
+except functional groups subject to low fishing pres-
+sure, such as mesopelagic fishes and miscellaneous
+piscivores (range 0.053 to 0.454, average 0.211).
+Fractions of biomass and commercial catch for
+trophic levels I−VIII are shown in Fig. 3; the highest
+total catch and biomass were reported for trophic
+levels III and II, respectively. It should be noted that
+most small pelagic fishes would be included in
+trophic level III.
+The western North Pacific Ecopath summary statis-
+tics are presented in Table 4. L of the western North
+Pacific ecosystem was 0.0548, which was comparable
+with the L50% (0.054) reported by Libralato et al. (2008).
+3.4. Assessing roles of small pelagic fishes 
+in the static ecosystem
+Values of small pelagic fish contribution to sup-
+ported production (Sz), supported catch (Sc), and catch
+of small pelagic fishes including krill (as in the case of
+Pikitch et al. 2014) were 4.77, 0.51, and 1.33 (t km−2),
+respectively, whereas the values of Sz, Sc, and catch of
+small pelagic fishes excluding krill were 0.67, 0.14,
+and 1.22 (t km−2), respectively. Values of Sz and Sc in-
+cluding krill were 7.1 times and 3.6 times greater than
+those values excluding them. The proportions of catch
+of small pelagic fishes to the sum of Sz, Sc, and catch of
+small pelagic fishes excluding, and then including
+krill, were 0.21 and 0.60, respectively.
+∑
+∑
+=
+S
+D P
+z
+ji
+j
+i
+j
+∑
+∑
+=
+S
+D Y
+c
+ji
+j
+i
+j
+300
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 8 ===
+Watari et al.: Dynamics of drivers of small pelagic fish resources
+301
+No 
+Group name 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+1 Baleen whales (OYC & OF) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+2 Toothed whales (all) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+3 Seabirds (all) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+4 Sharks (all) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+5 Tunas (all) 
+0 
+0 
+0 
+0 0.001 0.001 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+6 Skipjack (all) 
+0 
+0 
+0 
+0 0.001 0.001 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+7 Miscellaneous piscivores (all) 
+0 
+0 
+0 
+0 
+0.09 
+0.09 0.001 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+8 Yellowtail (OYC & KC) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+9 Japanese sardine (all) 
+0.01 0.01 
+0.10 
+0.06 
+0.09 
+0.05 0.04 0.05 
+0 
+0 
+0 0.01 0.01 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 0.06 
+0 
+0 
+0 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+10 Japanese anchovy (all) 
+0.05 0.05 
+0.10 
+0.06 
+0.09 
+0.05 0.04 0.11 
+0 
+0 
+0 0.24 0.24 
+0 0.19 
+0 
+0 
+0 
+0 
+0 
+0 0.06 
+0 
+0 
+0 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+11 Pacific saury (all) 
+0.02 0.02 
+0.10 
+0.06 
+0.09 0.089 0.07 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+12 Chub mackerel  (all) 
+0.01 0.011 
+0.10 
+0.06 
+0.09 0.089 0.08 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+13 Spotted mackerel (all) 
+0.01 0.011 
+0.10 
+0.06 
+0.09 0.089 0.06 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+14 Round herring (KC) 
+0 
+0 0.004 0.005 0.005 0.005 0.005 0.005 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.005 
+0 
+0 
+0 
+0 0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+15 Jack mackerel (OYC & KC) 
+0.01 0.001 0.003 0.005 0.001 0.001 0.005 0.005 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.005 
+0 
+0 
+0 
+0 0.005 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+16 Righteye flounders (OYC) 
+0 
+0 
+0 
+0.06 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+17 Walleye pollock (OYC) 
+0 
+0 
+0 
+0.06 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+18 Pacific cod (OYC) 
+0 
+0 
+0 0.058 
+0 
+0 0.01 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.06 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+19 Miscellaneous bottom fishes (OYC) 
+0 
+0 
+0 
+0.06 
+0 
+0 0.02 0.09 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.20 
+0 0.10 
+0 
+0 
+0 0.06 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+20 Flatfishes (KC) 
+0 
+0 
+0 
+0.01 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+21 Seabreams (KC) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+22 Demersal piscivores (KC) 
+0 
+0 
+0 
+0.06 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+23 Miscellaneous bottom fishes (KC) 
+0 
+0 
+0 
+0.06 
+0 
+0 0.069 0.08 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.20 0.20 0.11 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+24 Mesopelagic fishes (OYC) 
+0 0.10 
+0.10 0.064 0.091 
+0.12 0.12 0.10 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.10 0.10 0.21 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.04 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+25 Mesopelagic fishes (KC) 
+0 0.10 
+0.10 0.064 0.085 
+0.11 0.12 0.10 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.10 0.10 0.11 
+0 
+0 
+0 
+0 0.04 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+26 Mesopelagic fishes (OF) 
+0 0.19 
+0.10 0.064 0.091 
+0.12 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.04 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+27 Epipelagic cephalopods (all) 
+0.01 0.20 
+0.10 0.064 0.091 0.091 0.09 0.105 
+0 
+0 
+0 0.01 0.01 
+0 0.10 0.10 
+0 0.11 
+0 0.10 0.10 0.06 
+0 
+0 
+0 
+0 0.03 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+28 Mesopelagic cephalopods (all) 
+0 0.20 
+0.10 0.064 0.091 0.091 0.09 0.11 
+0 
+0 
+0 0.01 0.01 
+0 0.10 0.10 0.10 0.21 
+0 0.10 0.10 0.06 
+0 
+0 
+0 
+0 0.03 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+29 Benthos (OYC) 
+0 0.051 
+0 
+0 
+0 
+0 0.09 0.10 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.20 0.30 0.21 0.30 
+0 
+0 
+0 
+0 0.25 
+0 
+0 
+0 
+0 0.10 
+0 
+0 
+0 
+0 
+0 
+0 
+30 Benthos (KC) 
+0 0.051 
+0 
+0 
+0 
+0 0.09 0.10 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.30 0.45 0.41 0.50 
+0 0.25 
+0 
+0 
+0 
+0 0.10 
+0 
+0 
+0 
+0 
+0 
+31 Krill (OYC) 
+0.10 
+0 0.001 0.001 0.001 0.001 
+0 
+0 0.10 0.10 0.10 0.10 0.10 
+0 0.20 0.20 0.30 0.11 0.30 
+0 
+0 
+0 
+0 0.50 
+0 
+0 0.20 0.20 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+32 Krill (OF) 
+0.50 
+0 0.001 0.001 0.001 0.001 
+0 
+0 0.20 0.10 0.10 0.20 0.20 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.19 0.20 0.20 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+33 Zooplankton (OYC) 
+0.14 
+0 0.001 
+0 0.001 0.001 
+0 
+0 0.10 0.15 0.15 0.10 0.10 
+0 0.20 0.10 0.20 
+0 0.40 
+0 
+0 
+0 
+0 0.25 
+0 
+0 0.12 0.15 0.10 
+0 0.10 
+0 
+0 
+0 
+0 
+34 Zooplankton (KC) 
+0 
+0 0.001 
+0 0.001 0.001 
+0 
+0 0.10 0.15 0.15 0.10 0.10 1.00 0.20 
+0 
+0 
+0 
+0 0.20 
+0 
+0 0.50 
+0 0.75 
+0 0.115 0.05 
+0 0.10 
+0 
+0 
+0 
+0 
+0 
+35 Zooplankton (OF) 
+0.14 
+0 0.001 
+0 0.001 0.001 
+0 
+0 0.35 0.50 0.50 0.23 0.23 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.81 0.12 0.15 
+0 
+0 
+0 0.10 
+0 
+0 
+0 
+36 Phytoplankton (OYC) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.10 
+0 0.70 
+0 1.00 
+0 
+0 
+37 Phytoplankton (KC) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.10 
+0 
+0 
+0 1.00 
+0 
+38 Phytoplankton (OF) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.05 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.70 
+0 
+0 1.00 
+39 Detritus (OYC) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.70 
+0 0.20 
+0 
+0 
+0 
+0 
+40 Detritus (KC) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.70 
+0 
+0 
+0 
+0 
+0 
+41 Detritus (OF) 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 0.20 
+0 
+0 
+0 
+Table 3. Proportions of diet composition for the western North Pacific Ecopath model. Functional groups (numbered) were defined in coastal Oyashio (OYC), coastal 
+Kuroshio (KC), and offshore (OF) regions (in parentheses). Values in bold indicate adjusted diet composition to achieve thermodynamic balancing
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 9 ===
+Mar Ecol Prog Ser 617–618: 295–305, 2019
+4. DISCUSSION
+Our Ecopath model represents the first published
+account for the western North Pacific to focus on
+small pelagic fishes, and serves as a basis for un der -
+standing the role of these fishes in this eco system.
+The balanced model follows general ecological and
+fisheries principles based on the results of PREBAL.
+Pedigree ranking revealed that reliable B and P/B
+data were available for commercial functional groups,
+whereas comparably reliable data for non-commer-
+cial functional groups such as seabirds, mesopelagic
+fishes, and mesopelagic cephalopods, were not.
+Pedigree ranking also revealed Q/B and DC data
+quality to be low for most functional and poorly stud-
+ied groups, except for some cetaceans. B and P/B are
+available from stock assessment data for fisheries
+302
+Benthos
+(OYC)
+Benthos
+(KC)
+Krill
+(OYC)
+Krill
+(OF)
+Zooplankton
+(OYC)
+Zooplankton
+(KC)
+Zooplankton
+(OF)
+Phytoplankton
+(OYC)
+Phytoplankton
+(KC)
+Phytoplankton
+(OF)
+Detritus
+(OYC)
+Detritus
+(KC)
+Detritus
+(OF)
+Trophic levels
+3
+2
+1
+4
+Fig. 2. Estimated food web for the western North Pacific Ecopath model. Bubble colors indicate spatial block allocation of species/
+groups (where OYC: coastal Oyashio, KC: coastal Kuroshio, and OF: offshore regions); bubble size indicates relative biomass
+0
+20
+40
+60
+Total biomass 
+(t km-2)
+0
+0.5
+1
+1.5
+VIII
+VII
+VI
+V
+IV
+III
+II
+I
+Total catch 
+Fig. 3. System biomass (left panel) and total catch (right
+panel) fractionated by trophic levels I−VIII for the western
+North Pacific. Black and grey bars indicate living animals 
+and detritus, respectively
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 10 ===
+Watari et al.: Dynamics of drivers of small pelagic fish resources
+management. Although the constructed model could
+be used as a basis for strategic management consid-
+erations at the ecosystem level (e.g. broader effect of
+harvesting on ecosystems), it would not be suitable
+for tactical management considerations (e.g. setting
+catch quotas for a particular species) given the qual-
+ity of input data. Continued data collection is impor-
+tant to improve data quality and the model.
+Ecopath models traditionally have been constructed
+as closed ecosystems. The complex oceanographic
+conditions in the western North Pacific, and differ-
+ences in the distribution patterns of species within
+the region, required us to incorporate heterogeneity
+by using a quasi (in the sense that our 3 blocks were
+not entirely independent) sub-model structure. Each
+block in our modeled area took bottom topography,
+oceanography, and the distribution patterns of func-
+tional groups into consideration—an approach simi-
+lar to that of Piroddi et al. (2015) for the Mediterran-
+ean Sea. The time scale of our model is 1 yr, with
+input parameters being average values for 1 yr. Con-
+sequently, seasonal distribution patterns of migratory
+species and seasonal or spatial differences in diet
+composition are not incorporated. Therefore, a single
+DC value is used for each prey−predator
+relationship, and differences in DC values
+among the  different blocks are not consid-
+ered. Predation pressure may be seasonally
+high within certain blocks where prey and
+predator distributions overlap, but biologi-
+cal features like this are not fully accounted
+for in our model. Although spatially explicit
+ecosystem models like ‘Atlantis’ (Fulton et
+al. 2011) can  handle finer-scale spatiotem-
+poral resolution, such models require fine-
+scale biological data that are not available
+for most of the species distributed in our
+modeled area. Given the limited nature of
+some of our input data, we consider a quasi
+sub-model structure using Ecopath with 3
+geographical blocks to be a more appropri-
+ate approach. However, future efforts should
+be made to collect finer-scale input data.
+For 2013, the total landings of all fishes
+from Japanese waters were 2.4 Mt, while
+total landings of small pelagic fishes from
+the western North Pacific coast of Japan
+were 1.1 Mt. Commercial fisheries targeting
+small pelagic fishes off the western North
+Pacific coast of Japan represent some of the
+most important fisheries for Japan, amount-
+ing to 45% of total landings. The proportion-
+ally high catch of trophic level III species
+to other trophic levels identifies the significance of
+small pelagic fishes to current  fisheries (Fig. 3).
+Our estimated L (0.0548) for the western North
+Pacific is comparable to the L50% of Libralato et al.
+(2008), according to which we determined the state
+of this ecosystem (for the year 2013) to be intermedi-
+ate between overexploited and sustainably fished.
+Estimated EE values of some commercially ex -
+ploited species/functional groups, including small
+pelagic fishes, were higher than 0.9. Reported EE
+values for sardine and anchovy elsewhere through-
+out the Pacific Ocean are: 0.95 for the eastern sub-
+tropical Pacific Ocean (Olson & Watters 2003), 0.80
+for the northern California Current (Field et al. 2006),
+and 0.14−0.85 for the northern Humboldt Current
+(Tam et al. 2008). With the possible exception of the
+northern Humboldt Current, our values are similar.
+High EE values for small pelagic fishes in these eco-
+systems mean that these fish are of considerable
+importance and are highly utilized in both food chains
+and fisheries.
+Pikitch et al. (2014) compared the total support
+service contribution of small pelagic fishes (including
+krill) to ecosystem predator production (Sz), and the
+303
+Value
+Unit
+Ecosystem feature
+Area (coastal Oyashio: OYC)
+186.220
+km2
+Area (coastal Kuroshio: KC)
+186.128
+km2
+Area (offshore: OF)
+540.754
+km2
+Functional groups
+41
+Number
+Indicator
+Sum of all consumption
+948.85
+t km−2 yr−1
+Sum of all exports
+1.021.03
+t km−2 yr−1
+Sum of all respiratory flows
+486.42
+t km−2 yr−1
+Sum of all flows into detritus
+1.073.24
+t km−2 yr−1
+Total system throughput
+3.529.54
+t km−2 yr−1
+Sum of all production
+1.780.12
+t km−2 yr−1
+Mean trophic level of the catch
+3.20
+Unitless
+Gross efficiency
+(catch/net primary production)
+0.00114
+Unitless
+Calculated total net primary production
+1.507.46
+t km−2 yr−1
+Total primary production / total respiration
+3.10
+Unitless
+Net system production
+1.021.04
+t km−2 yr−1
+Total primary production / total biomass
+20.31
+Unitless
+Total biomass / total throughput
+0.02
+yr−1
+Total biomass (excluding detritus)
+74.21
+t km−2
+Total catch
+1.71
+t km−2 yr−1
+Connectance index
+0.19
+Unitless
+System omnivory index
+0.10
+Unitless
+L-index
+0.0548
+Unitless
+Primary production required (PPR)
+excluding detritus
+10.94
+%
+Table 4. Western North Pacific Ecopath model summary statistics
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 11 ===
+Mar Ecol Prog Ser 617–618: 295–305, 2019
+support service contribution of small pelagic fishes to
+the catch of other commercially targeted species (Sc),
+for 72 ecosystems. Values of Sz and Sc estimated by
+our model rank the western North Pacific among the
+top 10 of these ecosystems (Figs. 3 & 5 in Pikitch et al.
+2014). This suggests that the contribution of small
+pelagic fishes (including krill) to both predator pro-
+duction and commercial catch of other species in the
+western North Pacific is high compared with many
+other ecosystems (for which comparable data are
+available).
+Pikitch et al. (2014) summarized Sz by latitude into
+‘tropical-subtropical,’ ‘temperate,’ and ‘high latitude’
+groups, for which they reported Sz values of 1.18, 1.81,
+and 3.79 t km−2 yr−1, respectively. At 4.77 t km−2 yr−1,
+the western North Pacific supports more production
+than any one of these groups. Our model can be clas-
+sified to the temperate group in the sense of Pikitch
+et al. (2014). Most ecosystems formerly classified as
+‘temperate’ were ‘non-upwelling coastal areas’ or
+‘semi enclosed areas’ (Pikitch et al. 2014), in contrast
+to our situation where the western North Pacific rep-
+resents an open ocean ecosystem. The proportion of
+catch of small pelagic fishes to the sum of Sz, Sc, and
+catch of small pelagic fishes including krill is 0.21 in
+our study. Although absolute values cannot be read
+from Pikitch et al. (2014), all of these values appear
+lower than averages for ‘tropical-subtropical,’ ‘tem-
+perate,’ and ‘upwelling’ ecosystems reported in that
+paper. The total production of small pelagic fishes
+allocated for services exceeded the direct catch of
+small pelagic fishes in our modeled area, indicating
+that Sz is higher than for other latitude groups, and
+suggesting that the impact of fisheries targeting
+small pelagic fishes (including krill) on the total pro-
+duction of small pelagic fishes (including krill) is
+small relative to other studied ecosystems investi-
+gated by Pikitch et al. (2014). In contrast, the propor-
+tion of catch of small pelagic fishes to the sum of Sz,
+Sc, and catch of small pelagic fishes excluding krill is
+0.60—quite different from those including krill in the
+analysis. Accordingly, if concerned about the role of
+small pelagic fishes in ecosystems, it might be pru-
+dent to exclude krill from the analysis.
+Our static, mass-balanced Ecopath model is a first
+step towards understanding the ecosystem of the
+western North Pacific. However, the ability to fore-
+cast using a time-dynamic ecosystem model (e.g.
+Eco sim) would be of greater value to fisheries and
+environmental managers and stakeholders. Develop-
+ment of such an EwE model requires fitting of time
+series data (e.g. biomass or landing data) to incorpo-
+rate density dependence, which best is done by eval-
+uating how the EwE model can reproduce historical
+dynamics (Heymans et al. 2016). However, we need
+to construct Ecopath models for past years and collect
+these time series data for this approach. Time series
+data are available for landings of each functional
+group by block, and phytoplankton and zooplankton
+biomass by block, but not for biomass or catch per
+unit effort by block for many fish functional groups. If
+these steps are complete, we think that simulation of
+the quasi sub-model structure by Ecosim would be
+possible. This approach will contribute the logical
+next step for expanding our ecological knowledge of
+the western North Pacific.
+Acknowledgements. Data used in the paper were assem-
+bled in collaboration with the following: Drs. Mikihiko Kai,
+Kazuhiro Oshima, and Yasuko Senba of the National Re -
+search Institute of Far Seas Fisheries (Shimizu Laboratory);
+Drs. Takahiko Kameda, Kazuya Nashida, Kyohei Segawa,
+and Akinori Takasuka of the National Research Institute of
+Fisheries Science; Dr. Seiji Ohshimo at Sekai National Fish-
+eries Research Institute; and Dr. Toshikazu Yano at Tohoku
+National Fisheries Research Institute. We thank the collabo-
+rators and also Dr. Simone Libralato at the Istituto Nazionale
+di Oceanografia e di Geofisica Sperimentale for detailed
+advice on the L-index. This study was supported by the
+Fisheries Agency of Japan, Japan Fisheries Research and
+Education Agency, and the Institute of Ceta cean Research.
+Comments from 4 anonymous reviewers greatly improved
+the manuscript. A part of the present study was supported
+by grants to S.W. from the Ministry of Education, Culture,
+Sports, Science and Technology, Japan (SKED: The Study of
+Kuroshio Ecosystem Dynamics for  Sustainable Fisheries).
+LITERATURE CITED
+Allen RR (1971) Relation between production and biomass.
+J Fish Res Board Can 28: 1573−1581
+Christensen V, Walters CJ (2004) Ecopath with Ecosim: 
+methods, capabilities and limitations. Ecol Model 172: 
+109−139
+Christensen V, Walters CJ, Pauly D (2005) Ecopath with
+Ecosim: a user’s guide. Fisheries Center, University of
+British Columbia, Vancouver
+Field J, Francis R, Aydin K (2006) Top-down modeling and
+bottom-up dynamics: linking a fisheries-based ecosys-
+tem model with climate hypotheses in the Northern
+ California Current. Prog Oceanogr 68: 238−270
+Fulton EA, Link JS, Kaplan IC, Savina-Rolland M and others
+(2011) Lessons in modelling and management of marine
+ecosystems: the Atlantis experience. Fish Fish 12: 171−188
+Gaichas S, Aydin K, Francis RC (2015) Wasp waist or beer
+belly? Modeling food web structure and energetic con-
+trol in Alaskan marine ecosystems, with implications for
+fishing and environmental forcing. Prog Oceanogr 138: 
+1−17
+Giannoulaki M, Schismenou E, Pyrounaki M, Tsagarakis K
+(2014) Habitat characterization and migrations. In: Ganias
+K (ed) Biology and ecology of sardines and anchovies.
+CRC Press, Boca Raton, FL, p 190−241
+304
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms
+
+
+=== PDF PAGE 12 ===
+Watari et al.: Dynamics of drivers of small pelagic fish resources
+Heymans JJ, Coll M, Link JS, Mackinson S, Steenbeek J,
+Walters C, Christensen V (2016) Best practice in Ecopath
+with Ecosim food-web models for ecosystem-based man-
+agement. Ecol Model 331: 173−184
+Ichinokawa M, Okamura H, Kurota H (2017) The status of
+Japanese fisheries relative to fisheries around the world.
+ICES J Mar Sci 74: 1277−1287
+Libralato S, Coll M, Tudela S, Palomera I, Pranovi F (2008)
+Novel index for quantification of ecosystem effects of
+fishing as removal of secondary production. Mar Ecol
+Prog Ser 355: 107−129
+Lindeman RL (1942) The trophic-dynamic aspect of ecology.
+Ecology 23: 399−417
+Link JS (2010) Adding rigor to ecological network models by
+evaluating a set of pre-balance diagnostics: a plea for
+PREBAL. Ecol Model 221: 1580−1591
+MAFF (Ministry of Agriculture, Forestry and Fisheries of
+Japan) (2015) Annual statistics of fisheries and aquacul-
+ture production. Norin-toukei-kyokai, Tokyo (in Japan-
+ese)
+Odum WE, Heald EJ (1975) The detritus-based food web of
+an estuarine mangrove community. In: Cronin LE (ed)
+Estuarine research. Academic Press, New York, NY,
+p 265−286
+Olson RJ, Watters GM (2003) A model of the pelagic ecosys-
+tem in the eastern tropical Pacific Ocean. Inter-Am Trop
+Tuna Comm Bull 22: 135−218
+Pikitch EK, Rountos KJ, Essington TE, Santora C and others
+(2014) The global contribution of forage fish to marine
+fisheries and ecosystems. Fish Fish 15: 43−64
+Piroddi C, Coll M, Steenbeek J, Moy DM, Christensen V
+(2015) Modelling the Mediterranean marine ecosystem
+as a whole: addressing the challenge of complexity. Mar
+Ecol Prog Ser 533: 47−65
+Takasuka A, Oozeki Y, Kubota H (2008) Multi-species re -
+gime shifts reflected in spawning temperature optima of
+small pelagic fish in the western North Pacific. Mar Ecol
+Prog Ser 360: 211−217
+Tam J, Taylor MH, Blaskovic V, Espinoza P and others
+(2008) Trophic modeling of the northern Humboldt
+Current Ecosystem. I. comparing trophic linkages un -
+der La Niña and El Niño conditions. Prog Oceanogr 79: 
+352−365
+Yatsu A, Nishida H, Ishida M, Tomosada A, Kinoshita T,
+Wada T (2001) Trajectories of catch and stock abundance
+of dominant small pelagic fishes and common squid
+with vsome related environmental indices around Japan.
+PICES Sci Rep 18: 175−178
+305
+Editorial responsibility: Richard Brodeur (Guest Editor),
+Newport, Oregon, USA
+Submitted: August 15, 2017; Accepted: January 25, 2018
+Proofs received from author(s): February 21, 2018
+This content downloaded from 
+154.59.125.206 on Fri, 04 Sep 2026 12:33:08 UTC 
+All use subject to https://about.jstor.org/terms

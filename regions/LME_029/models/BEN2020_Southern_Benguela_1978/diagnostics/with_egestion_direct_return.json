@@ -1,0 +1,81 @@
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.23960893055555557,
+    "q_max_rel_residual": 0.023242318055667854,
+    "dc_rows_sum_to_1": false,
+    "dc_max_deviation": 0.00019999999999997797,
+    "n_negative_catch": 0,
+    "n_zero_catch": 18,
+    "total_catch": 2.94626,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 1,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      37
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "OK",
+    "solve_error": null,
+    "b": 0.23990644111796144,
+    "b_converges": true,
+    "rho_living": 0.5350691613450536,
+    "living_converges": true,
+    "sppr_det": {
+      "49": 1.3984000682178923
+    },
+    "max_sppr_det": 1.3984000682178923,
+    "max_sppr_group": {
+      "seq": 43,
+      "tl": 3.865488786426137,
+      "sppr": 49842.36591536054,
+      "inv_te": 506.0582914572863
+    },
+    "max_tl_group": {
+      "seq": 37,
+      "tl": 4.791232426474727,
+      "sppr": 9753.199207325786,
+      "inv_te": 8.0
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": false,
+    "inflow": 13270.9395721,
+    "outflow": 13276.58579886173,
+    "rel_gap": 0.0004254579512667005
+  },
+  "footprint": {
+    "ppr_all": 388.6678591041598,
+    "ppr_inner": 388.66689910415977,
+    "ppr_pp_only": 156.7407882278669,
+    "npp": 13269.27,
+    "ppr2npp": 0.029290752174321553,
+    "ppr2npp_pp_only": 0.011812314334388167
+  },
+  "config": {
+    "TE_option": "With Egestion",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "single_detritus",
+    "would_pool": false,
+    "model": "Southern_Benguela_PQ_completed (1978)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.24 exceeds fail threshold 0.1",
+    "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+    "1 group(s) with EE=0 (all production is non-predatory death): 37 (Apex Chondrichthyans). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+  ]
+}

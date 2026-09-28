@@ -1,0 +1,173 @@
+{
+  "scenario": "baseline",
+  "input_sha256": "d21f8703b0461c1a390021684ab291fdfa9c15f254babc77fa6a6e2176333155",
+  "changes": [
+    {
+      "seq": 11,
+      "group": "Small BET",
+      "B": 0.00241,
+      "QB": 26.159,
+      "old_PB": 0.834,
+      "new_PB": 0.834,
+      "PB_percent_change": 0.0,
+      "old_EE": 0.644,
+      "new_EE": 0.644,
+      "BA": 0.0,
+      "BA_over_B_per_year": 0.0,
+      "old_M0": 0.0007155386399999998,
+      "new_M0": 0.0007155386399999998,
+      "new_P_over_Q": 0.031881952674031884,
+      "normalized_predation": 0.001292222328773431,
+      "raw_source_predation": 0.0012922586,
+      "catch": 0.0013975,
+      "raw_source_diet_solution": {
+        "PB": 0.834,
+        "EE": 0.644,
+        "BA": 0.0
+      },
+      "omitted_fishing_turnover_hypothesis_PB": 1.4138755186721992
+    },
+    {
+      "seq": 12,
+      "group": "Small YFT",
+      "B": 0.0128,
+      "QB": 33.964,
+      "old_PB": 1.983,
+      "new_PB": 1.983,
+      "PB_percent_change": 0.0,
+      "old_EE": 0.849,
+      "new_EE": 0.849,
+      "BA": 0.0,
+      "BA_over_B_per_year": 0.0,
+      "old_M0": 0.003832742400000001,
+      "new_M0": 0.003832742400000001,
+      "new_P_over_Q": 0.058385349193263464,
+      "normalized_predation": 0.021584622798285293,
+      "raw_source_predation": 0.021593107838999998,
+      "catch": 0.006973,
+      "raw_source_diet_solution": {
+        "PB": 1.983,
+        "EE": 0.849,
+        "BA": 0.0
+      },
+      "omitted_fishing_turnover_hypothesis_PB": 2.5277656250000002
+    }
+  ],
+  "is_model_balanced": false,
+  "negative_respiration_groups": [],
+  "negative_growth_groups": [
+    27,
+    22,
+    21,
+    16,
+    15,
+    8,
+    4
+  ],
+  "remaining_production_residuals": [
+    {
+      "seq": 14,
+      "group": "baby SKJ",
+      "absolute": 7.025902897866976e-05,
+      "relative": 0.0004264584460010304
+    },
+    {
+      "seq": 13,
+      "group": "Small SKJ",
+      "absolute": -7.4564427597414995e-06,
+      "relative": -0.00015137956659090352
+    },
+    {
+      "seq": 12,
+      "group": "Small YFT",
+      "absolute": 0.007007965198285292,
+      "relative": 0.27609545189916207
+    },
+    {
+      "seq": 11,
+      "group": "Small BET",
+      "absolute": 0.001395320968773431,
+      "relative": 0.69421025939751
+    },
+    {
+      "seq": 7,
+      "group": "SKJ",
+      "absolute": -5.570347488101368e-05,
+      "relative": -0.00032334382179592463
+    },
+    {
+      "seq": 6,
+      "group": "YFT",
+      "absolute": -1.155280000000175e-05,
+      "relative": -0.0009407334965715725
+    },
+    {
+      "seq": 5,
+      "group": "BET",
+      "absolute": -1.1202999999999994e-05,
+      "relative": -0.007279402209226768
+    }
+  ],
+  "methods": {
+    "GE": {
+      "status": "FAIL",
+      "model_input_status": "FAIL",
+      "p_max_rel_residual": 0.69421025939751,
+      "q_max_rel_residual": 0.02213277863593876,
+      "balance_status": "FAIL",
+      "PP_relative_gap": 0.19223339891662936,
+      "ppr_all": 695.357921547069,
+      "divergence_status": "OK",
+      "n_negative_sources": 0,
+      "juvenile_SPPR": {
+        "11": 37948.65913628954,
+        "12": 22740.28544532981
+      },
+      "warnings": [
+        "model input not mass-balanced: max relative residual 0.694 exceeds fail threshold 0.1",
+        "PP balance gap 19.223% exceeds fail threshold 5.0%"
+      ]
+    },
+    "TE": {
+      "status": "FAIL",
+      "model_input_status": "FAIL",
+      "p_max_rel_residual": 0.69421025939751,
+      "q_max_rel_residual": 0.02213277863593876,
+      "balance_status": "FAIL",
+      "PP_relative_gap": 0.10852621048747735,
+      "ppr_all": 1114.7805534138572,
+      "divergence_status": "WARN",
+      "n_negative_sources": 0,
+      "juvenile_SPPR": {
+        "11": 27951.86756844593,
+        "12": 11668.570791075868
+      },
+      "warnings": [
+        "model input not mass-balanced: max relative residual 0.694 exceeds fail threshold 0.1",
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "rho(A_LL)=0.8243 is within 0.3 of divergence (max SPPR 1.81e+06 at group 10 (Small Sharks), TL 5.21)",
+        "PP balance gap 10.853% exceeds fail threshold 5.0%"
+      ]
+    },
+    "With Egestion": {
+      "status": "FAIL",
+      "model_input_status": "FAIL",
+      "p_max_rel_residual": 0.69421025939751,
+      "q_max_rel_residual": 0.02213277863593876,
+      "balance_status": "WARN",
+      "PP_relative_gap": 0.0439313912510823,
+      "ppr_all": 172.49814689835867,
+      "divergence_status": "WARN",
+      "n_negative_sources": 0,
+      "juvenile_SPPR": {
+        "11": 8035.856375077304,
+        "12": 5323.9296133945345
+      },
+      "warnings": [
+        "model input not mass-balanced: max relative residual 0.694 exceeds fail threshold 0.1",
+        "b=0.7684 is within 0.3 of divergence (max sppr_det 4.68 PP-units per unit detritus)",
+        "PP balance gap 4.393% exceeds 1.0%"
+      ]
+    }
+  }
+}

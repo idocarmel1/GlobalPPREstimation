@@ -1,0 +1,35 @@
+{
+  "parent_model_id": "49_20192013_Western_North_Pacific_Watari_(2013)",
+  "experimental_model_id": "49_2019201301_Watari_Detritus_Pooled_Experiment_(2013)",
+  "source_model_sha256": "7448c7ac1a4f8aebdc3aa27d236adc31c8bd7600dd39591271b9f2ce22615eb7",
+  "derived_model_sha256": "ce1c22a1e20e2a5de8a8ac75e6ddb00c3f0db619849354df9f1527277e36d15c",
+  "production_workbook_before_sha256": "57ee2b9469172a8680946f3454ba38f1af8f6cfdf0015a945256218cbcf1f0d1",
+  "publication_sources": [
+    {
+      "path": "regions\\LME_049\\papers\\KUR-2019\\Watari-Ecosystemmodelingwestern-2019.pdf",
+      "bytes": 1297312,
+      "sha256": "c029cdec3fedfbf810ecc494adaffdb0898e1bd9762a875e3d54b2c933198547"
+    }
+  ],
+  "source_area_km2": 913102,
+  "biomass_units": "t/km2 total model area",
+  "biomass_derivation": "9.58 + 6.04 + 28.50 = 44.12; no second habitat scaling",
+  "derived_pool_habitat": "1.00 defines whole-domain pooled representation; B_habitat=44.12 is derived, not printed",
+  "assumptions": [
+    "All living mortality and egestion routed to sole detritus pool by existing single-pool loader default.",
+    "Full retention and cross-block mixing of recycling; actual external losses and original three-pool routing unknown.",
+    "No detritus EE average. Unknown EE retained.",
+    "Unknown internal detritus transfers not invented or duplicated; original detritus diet rows absent.",
+    "Canonical diets are not normalized; censored seabird B and catch remain unknown with original bounds in sidecar."
+  ],
+  "checks": {
+    "all_35_consumer_scalar_parameters_catches_unchanged": true,
+    "all_3_phytoplankton_groups_exactly_unchanged": true,
+    "all_consumer_diet_totals_exactly_unchanged": true,
+    "only_three_detritus_prey_rows_aggregated": true,
+    "unknown_fates_preserved": true,
+    "no_added_catch_or_import": true,
+    "n_groups": 39,
+    "detritus_B_sum": "44.12"
+  }
+}

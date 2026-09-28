@@ -1,0 +1,42 @@
+{
+  "model_id": "PAT2024_FalklandShelf_2020_published_tables",
+  "model_sha256": "46fc74ade5812a17260ab3bdcdee534412e7c79430984063647df6c0222ad4b8",
+  "diagnostics": {
+    "GE": {
+      "execution": "not_run",
+      "reason": "Loader failed before diagnose_sppr: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [35, 36]."
+    },
+    "TE": {
+      "execution": "not_run",
+      "reason": "Loader failed before diagnose_sppr: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [35, 36]."
+    },
+    "With Egestion": {
+      "execution": "not_run",
+      "reason": "Loader failed before diagnose_sppr: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [35, 36]."
+    }
+  },
+  "source_admission": "See source_report.md; no adoption authorized",
+  "loader_alias": {
+    "path": "regions\\LME_014\\models\\PAT2024_FalklandShelf_2020_published_tables\\loader_input\\14_140001_PAT2024_FalklandShelf_2020_published_tables_(2020).json",
+    "reason": "Legacy parser requires numeric id and parenthesized year; 140001 is local diagnostic placeholder, not EcoBase accession. JSON values unchanged; ASCII escapes only."
+  },
+  "strict_loader": {
+    "exception_type": "ValueError",
+    "message": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [35, 36]."
+  },
+  "loader_configuration": {
+    "underdetermined": false,
+    "zero_catch": true,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "normalize_DC": false,
+    "DC_tol": 0.001,
+    "detritus_pooling": false
+  },
+  "loader_exception": {
+    "type": "ValueError",
+    "message": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [35, 36].",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_014\\models\\extraction_review_20260928\\run_direct_diagnostics.py\", line 39, in <module>\n    pc=PPRCalculator.from_modeldata(md,normalize_DC=False,DC_tol=tol)\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 598, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [35, 36].\n"
+  },
+  "warnings": []
+}

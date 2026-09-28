@@ -1,4 +1,38 @@
-# Knowledge graph refresh — 2026-09-28
+# Knowledge graph completion refresh — 2026-09-28
+
+The current graph indexes the final regional selection review, extraction lessons, active workflow revisions and changed registry/map adapter code in the working tree based on commit `e7ec04a426c6090196357c7c11ac717ecab63f4a`. Exact source hashes, rather than commit identity alone, establish freshness. This refresh contains **402 explicitly selected files, 455,045 words, 3,682 nodes, 6,460 edge pairs, 18 hyperedges and 275 communities**. The corpus remains below the broad-scan warning thresholds. No broad raw-data scan was performed.
+
+## Current evidence and scope
+
+The 18 new regional and comparison reports cover the final 23-of-25 model-selection snapshot, Pacific WCP option1/Griffiths comparison, California, Falklands, North Sea, Celtic Sea, Mediterranean, Benguela, Visayan Sea, Java Sea, Kuroshio and Sea of Japan. Historical preselection statements are explicitly distinguished from the latest selection summary. Model extraction, numerical runnability, diagnostic health, user adoption and regional integration remain separate concepts. Graph inclusion is not a scientific validation or endorsement of a selected failing model.
+
+Seven active documents were semantically re-extracted: README, all three current SKILL.md files, and the missing-data-recovery, reconstruction-audit and direct-diagnostics references. Online recovery is represented as an evidence search with source/version lineage and a bounded search log; a failed search does not prove worldwide absence of data. The project-specific direct diagnostic options remain GE, TE and With Egestion, excluding global. Source values, derived parameters, authorized experimental repairs and constructor defaults remain distinct. Preserved original skill resources were not edited or represented as the current project instructions.
+
+Eight current code files were parsed, including atlas all-catch ranks, paper/native-model file discovery, workbook/updater changes and focused workflow checks. The final adapter revision excludes administrative retrieval metadata, invalidates inherited verification when source bytes change, and recalculates file-presence flags after removal. AST import endpoints were resolved to known modules where unique; an otherwise missing explicit imported-module endpoint was represented from its actual import evidence. Dependency internals were not parsed.
+
+All 3,470 unchanged-source node records, 6,245 separately attributed relationships and 12 unchanged-source hyperedges were preserved. Changed files were re-extracted, and 51 uniquely matched entities kept their prior IDs. Six old entities needed by unchanged evidence remain flagged `retained_for_unchanged_source_evidence`; these are historical-reference anchors, not claims that their former instructions are current. No source was intentionally deleted. The exact delta is in refresh_audit.json, source scope in .graphifyignore, and portable content hashes in source_hashes.json and manifest.json.
+
+## Verification and limits
+
+completion_verification.json records source and manifest hashes, graph endpoints, unchanged evidence/attributes, HTML payload parity, inline JavaScript syntax and named-concept retrieval results. These checks do not claim browser interaction coverage. No scientific model, PPR equation, parameter set, workbook or regional selection was changed by this graph refresh. Raw PDFs, source model JSON/data tables, workbooks, generated map payloads and giant corpora are outside the selected semantic scope; representative retained reports and current code document their contracts and scientific limitations. The graph does not constitute an independent re-extraction of all original papers or an online source search.
+
+Semantic extraction used the host agent because no Gemini key was configured. Measured semantic token counts and monetary cost are unavailable in the host tools, and cost.json records this honestly. Benchmark context sizes are estimates only, not measured savings or answer-quality evidence. Temporary build fragments are removed after verification; intentional caches remain excluded from Git.
+
+Query from the repository root:
+
+```text
+graphify query "Regional model selection review" --graph tools/knowledge_graph/graph.json
+graphify query "Missing data online recovery" --graph tools/knowledge_graph/graph.json
+graphify query "LME049 Watari pooled detritus 2013 diagnostics" --graph tools/knowledge_graph/graph.json
+graphify query "LME026 Mediterranean routing" --graph tools/knowledge_graph/graph.json
+graphify query "Source faithful reconstruction" --graph tools/knowledge_graph/graph.json
+```
+
+The following sections preserve earlier refresh history. Their counts and then-current behavior describe those earlier snapshots, not the current totals above.
+
+---
+
+# Earlier graph refresh history — 2026-09-28
 
 This graph indexes the NPP reorganization and subsequent archive cleanup working tree, based on commit 6cac3d5c195e4c0fc98966208dd997ad6d66016e. Its explicit source corpus contains 378 files and 431,059 words. .graphifyignore contains the selected file allowlist; source_hashes.json and manifest.json record portable repository-relative paths and exact indexed content hashes. Commit identity alone does not establish freshness.
 

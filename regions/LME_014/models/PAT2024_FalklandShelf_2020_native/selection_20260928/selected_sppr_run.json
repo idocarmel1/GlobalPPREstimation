@@ -1,0 +1,72 @@
+{
+  "n_models": 1,
+  "n_written": 1,
+  "n_skipped": 0,
+  "n_failed": 0,
+  "n_timeout": 0,
+  "report": "C:\\Users\\idoca\\AppData\\Local\\Temp\\tmpmh4rhf14\\out\\sppr_export_report.txt",
+  "entries": [
+    {
+      "source_file": "PAT2024_FalklandShelf_2020_native.json",
+      "model_label": "PAT2024_FalklandShelf_2020_native",
+      "output": "C:\\Users\\idoca\\AppData\\Local\\Temp\\tmpmh4rhf14\\out\\PAT2024_FalklandShelf_2020_native.xlsx",
+      "issues": [
+        {
+          "kind": "warning",
+          "method": "new_TE_EEfix",
+          "detail": "RuntimeWarning: 1 group(s) have TE=0 because EE=0 (M0=p): 1 (Baleen Whales). Their consumed PP is dropped, so the TE SPPR will not balance (multi-DET: re-credit not applied)."
+        },
+        {
+          "kind": "warning",
+          "method": "new_TE_EEfix",
+          "detail": "RuntimeWarning: 3 group(s) have near-zero TE (0 < EE << 1): 32 (Toothed Whales and Dolphins), 26 (Seals and Sea Lion), 25 (Seabirds). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+        },
+        {
+          "kind": "health_warning",
+          "method": null,
+          "detail": "[GE] 1 group(s) with EE=0 (all production is non-predatory death): 1 (Baleen Whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+        },
+        {
+          "kind": "warning",
+          "method": null,
+          "detail": "[diagnose_sppr TE] RuntimeWarning: 1 group(s) have TE=0 because EE=0 (M0=p): 1 (Baleen Whales). Their consumed PP is dropped, so the TE SPPR will not balance (multi-DET: re-credit not applied)."
+        },
+        {
+          "kind": "warning",
+          "method": null,
+          "detail": "[diagnose_sppr TE] RuntimeWarning: 3 group(s) have near-zero TE (0 < EE << 1): 32 (Toothed Whales and Dolphins), 26 (Seals and Sea Lion), 25 (Seabirds). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+        },
+        {
+          "kind": "health_warning",
+          "method": null,
+          "detail": "[TE] 1 group(s) with EE=0 (all production is non-predatory death): 1 (Baleen Whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+        },
+        {
+          "kind": "health_warning",
+          "method": null,
+          "detail": "[TE] TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)"
+        },
+        {
+          "kind": "health_warning",
+          "method": null,
+          "detail": "[TE] 3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [32, 26, 25]"
+        },
+        {
+          "kind": "health_warning",
+          "method": null,
+          "detail": "[With Egestion] 1 group(s) with EE=0 (all production is non-predatory death): 1 (Baleen Whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+        },
+        {
+          "kind": "sppr_balance",
+          "method": "new_TE_EEfix",
+          "detail": "inflow 971.637 != outflow 971.515"
+        }
+      ],
+      "n_methods": 3,
+      "n_ok": 3,
+      "n_timeout": 0,
+      "health_summary": "GE=WARN, TE=WARN, With Egestion=WARN",
+      "mc_summary": ""
+    }
+  ]
+}

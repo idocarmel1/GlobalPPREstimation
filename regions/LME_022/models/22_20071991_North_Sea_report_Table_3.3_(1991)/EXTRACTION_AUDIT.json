@@ -1,0 +1,27 @@
+{
+  "candidate_folder": "22_20071991_North_Sea_report_Table_3.3_(1991)",
+  "group_count": 68,
+  "checks": [
+    "329 printed core values matched database JSON",
+    "908 source diet slots including zeros/import matched without normalization",
+    "All group names, source BA unknowns and taxonomy carried through",
+    "All database exports equal retained fleet landings plus discards",
+    "Eight import tables and database round-trip workbook retained"
+  ],
+  "roundtrip_sheets": [
+    "Metadata",
+    "Basic input",
+    "Diet composition",
+    "Landings",
+    "Taxonomy",
+    "Detritus fate"
+  ],
+  "roundtrip_core_and_diet_cells_verified": 5032,
+  "known_conversion_conventions": [
+    "Blank habitat fraction becomes1 in converter; source CSV remains blank",
+    "Blank diet/import/catch becomes0 in converter representation; source CSV distinguishes blank and zero",
+    "Printed rounded P/Q retained in source basic-input CSV; converter GE=-9999 so engine derives PB/QB",
+    "Only diagnostic loader normalizes diets and supplies missing defaults/flow completion; not a source correction"
+  ],
+  "strict_diet_admission": "FAIL: 33 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 58 (Shrimp)=1.0260, 55 (Nephrops)=1.1150, 54 (Large crabs)=1.4680, 53 (Gelatinous zooplankton)=1.0690, 51 (Carnivorous zooplankton)=0.9960, 49 (Squid & cuttlefish)=0.9680, 46 (Large demersal fish)=1.0030, 44 (Dragonets)=1.0030, 43 (Halibut)=1.0010, 42 (Megrim)=1.0010, 41 (Turbot and brill)=1.0020, 37 (Flounder)=1.0010, 34 (Plaice)=1.0010, 26 (Monkfish)=1.0030, 25 (Other gadoids (small))=1.0020, 24 (Other gadoids (large))=1.2340, 23 (Norway pout)=0.8050, 22 (Blue whiting)=0.3870, 21 (Hake)=1.5390, 20 (Saithe (adult))=1.5300, 19 (Juvenile Saithe (0-3; 0-40cm))=0.4030, 18 (Haddock (adult))=0.6380, 17 (Juvenile Haddock (0-1; 0-20cm))=0.9250, 16 (Whiting (adult))=1.4910, 15 (Juvenile Whiting (0-1; 0-20cm))=0.6240, 14 (Cod (adult))=0.7840, 13 (Juvenile Cod(0-2; 0-40cm))=0.5620, 12 (Skate + cuckoo ray)=1.0050, 10 (Starry ray + others)=1.0010, 6 (Spurdog)=0.9810, 5 (Juvenile sharks)=1.0230, 2 (Toothed whales)=1.0010, 1 (Baleen whales)=0.9990."
+}

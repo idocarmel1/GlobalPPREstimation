@@ -1,0 +1,127 @@
+{
+  "unit_id": "LME_022",
+  "status": "APPLIED; see CENTRAL_REGISTRATION_VERIFICATION.json",
+  "preserve": [
+    "All other rows/cells, including ranks, scores and user edits",
+    "Existing paper selected flags and regional Overview unchanged",
+    "No catch matching, annual PPR/PPR-NPP or HTML refresh"
+  ],
+  "paper_updates": [
+    {
+      "article_id": "NS-2025__LME_022",
+      "changes": {
+        "functional_groups": 25,
+        "model_years": "1890–1895 and 1991–1995",
+        "extraction_readiness": "Two source-faithful parameter/diet/fleet/taxonomy extractions completed; unknown BA and GS remain source unknowns.",
+        "model_file_status": "Two local extracted JSON candidates and complete import tables; source diet rounding preserved.",
+        "full_model_loadable": "Engine load tested with normalization/defaults/unknown-flow completion; native EwE application import not tested.",
+        "loadability_evidence": "regions/LME_022/models/extraction_review_20260928/EXTRACTION_AND_SPPR_REPORT.md; both candidate diagnostics isolated from production. Strict diet admission passes; TE diagnostics fail in both candidates.",
+        "notes": "Extraction 2026-09-28: two 25-group models preserved separately. No model selection. Table S2 describes main species rather than exhaustive group membership. Supplement workbook contains four tables plus one methods DOCX; not four separately archived files. USER-PREFERRED MODEL (explicit user instruction, 2026-09-28): 22_20251990_East_Coast_of_Scotland_(1991-1995); user rationale: \"least SPPR failures\". GE and WithEgestion diagnostics are OK; TE remains FAIL. Candidate preference only: production Overview and computed results are not adopted. Earlier Mackinson/Daskalov paper preference is retained as history and superseded by this exact-model preference.",
+        "coverage_note": "East-coast Scotland subregional shelf model. Inherited 0.1 target coverage is not validated by this extraction; no area fraction inferred from bounding box.",
+        "recommendation": "USER-PREFERRED MODEL (explicit user instruction, 2026-09-28): 22_20251990_East_Coast_of_Scotland_(1991-1995); user rationale: \"least SPPR failures\". GE and WithEgestion diagnostics are OK; TE remains FAIL. Candidate preference only: production Overview and computed results are not adopted. Earlier Mackinson/Daskalov paper preference is retained as history and superseded by this exact-model preference."
+      }
+    },
+    {
+      "article_id": "LME022-Mackinson-2007__LME_022",
+      "changes": {
+        "functional_groups": 68,
+        "model_years": "1991 (printed model); 1991–1992 (EcoBase457 registry); 1973 version mentioned, complete inputs unavailable",
+        "extraction_readiness": "Printed model extracted without correcting severe diet/PQ conflicts; EcoBase457 separately archived and diagnosed as a numerical variant.",
+        "model_file_status": "Source-faithful printed JSON plus separate EcoBase457 candidate; no complete 1973 static model located.",
+        "full_model_loadable": "Printed source fails strict diet admission; wrapper computes only after normalization/completion. EcoBase457 passes strict diet admission; native EwE import not tested.",
+        "loadability_evidence": "regions/LME_022/models/extraction_review_20260928/EXTRACTION_AND_SPPR_REPORT.md; paper versus repository comparison and per-candidate diagnostic workbooks retained.",
+        "notes": "HISTORICAL SOURCE PREFERENCE (earlier on 2026-09-28): USER-PREFERRED SOURCE (2026-09-28): user considers spatial fit better and documentation very detailed. Exact model choice remains pending. This preference is distinct from numerical validity. Printed model has 19 consumer diet sums outside ±0.01 and gelatinous zooplankton PB/QB conflict. EcoBase457 is a distinct numerical repository variant, not equivalent printed extraction. EcoBase628 advertises a 1973 model but currently exposes zero groups/fleets; no parameters invented. LATEST USER INSTRUCTION: USER-PREFERRED MODEL (explicit user instruction, 2026-09-28): 22_20251990_East_Coast_of_Scotland_(1991-1995); user rationale: \"least SPPR failures\". GE and WithEgestion diagnostics are OK; TE remains FAIL. Candidate preference only: production Overview and computed results are not adopted. Earlier Mackinson/Daskalov paper preference is retained as history and superseded by this exact-model preference. LATER DEBUGGING REQUESTED (explicit user instruction, 2026-09-28): 457_457_North_Sea_(1991), why did the flow-balancing test fail? Independent source mass balance passes, but standard engine input/flow checks fail. Discards group68 stored P=0.2981897135 versus recomputed P=-99.7018102865; original JSON supplies detritus_import=100 and immigration=100. Relative overall balance gaps: GE2.9109828, TE0.12447885, WithEgestion2.8741747. Cause remains unresolved; source representation, loader handling and computation have not been disentangled. No debugging experiment or source/engine repair performed in this update.",
+        "coverage_note": "ICES IV North Sea model, approximately 570000 km2 in report. Basin-scale intent independently supported; exact polygon overlap with LME022 not established.",
+        "correction_notes": "Extraction uses final balanced Table3.3 (printed27–28), not initial Table3.1. Report requested citation2007, copyright2008. Severe printed diet and gelatinous QB inconsistencies retained, not repaired.",
+        "recommendation": "Earlier paper preference retained as history; current exact-model preference is 22_20251990_East_Coast_of_Scotland_(1991-1995). EcoBase457 is flagged for later debugging, not adopted."
+      }
+    }
+  ],
+  "model_rows_to_register": [
+    {
+      "unit_id": "LME_022",
+      "model_id": "22_20251890_East_Coast_of_Scotland_(1890-1895)",
+      "model_path": "regions/LME_022/models/22_20251890_East_Coast_of_Scotland_(1890-1895)/model.json",
+      "source_filename": "22_20251890_East_Coast_of_Scotland_(1890-1895).json",
+      "selected": false,
+      "selection_rationale": null,
+      "paper_ids": "NS-2025__LME_022",
+      "model_year": 1890,
+      "variant": "Published historical ECS model",
+      "model_area_km2": null,
+      "availability": "Extracted candidate; bounded SPPR evidence retained; not selected. See candidate report for strict source admission versus transformed computation.",
+      "publication_year": 2025,
+      "model_years": "1890–1895",
+      "target_coverage_ratio": null,
+      "coverage_class": "subregional",
+      "doi": "10.3389/fmars.2025.1646031",
+      "coverage_note": "East-coast Scotland shelf fishing grounds, including Orkney/Shetland; subset of North Sea. No verified author polygon/area ratio. Inherited paper 0.1 coverage ratio is not newly validated.",
+      "atlas_region_rank": 11
+    },
+    {
+      "unit_id": "LME_022",
+      "model_id": "22_20251990_East_Coast_of_Scotland_(1991-1995)",
+      "model_path": "regions/LME_022/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model.json",
+      "source_filename": "22_20251990_East_Coast_of_Scotland_(1991-1995).json",
+      "selected": false,
+      "selection_rationale": null,
+      "paper_ids": "NS-2025__LME_022",
+      "model_year": 1991,
+      "variant": "Published modern ECS model",
+      "model_area_km2": null,
+      "availability": "Extracted candidate; bounded SPPR evidence retained; not selected. See candidate report for strict source admission versus transformed computation. USER-PREFERRED MODEL (explicit user instruction, 2026-09-28): 22_20251990_East_Coast_of_Scotland_(1991-1995); user rationale: \"least SPPR failures\". GE and WithEgestion diagnostics are OK; TE remains FAIL. Candidate preference only: production Overview and computed results are not adopted. Earlier Mackinson/Daskalov paper preference is retained as history and superseded by this exact-model preference.",
+      "publication_year": 2025,
+      "model_years": "1991–1995",
+      "target_coverage_ratio": null,
+      "coverage_class": "subregional",
+      "doi": "10.3389/fmars.2025.1646031",
+      "coverage_note": "East-coast Scotland shelf fishing grounds, including Orkney/Shetland; subset of North Sea. No verified author polygon/area ratio. Inherited paper 0.1 coverage ratio is not newly validated.",
+      "atlas_region_rank": 11
+    },
+    {
+      "unit_id": "LME_022",
+      "model_id": "22_20071991_North_Sea_report_Table_3.3_(1991)",
+      "model_path": "regions/LME_022/models/22_20071991_North_Sea_report_Table_3.3_(1991)/model.json",
+      "source_filename": "22_20071991_North_Sea_report_Table_3.3_(1991).json",
+      "selected": false,
+      "selection_rationale": null,
+      "paper_ids": "LME022-Mackinson-2007__LME_022",
+      "model_year": 1991,
+      "variant": "Printed balanced Table 3.3 with printed Table 3.4 diets; source defects retained",
+      "model_area_km2": 570000,
+      "availability": "Extracted candidate; bounded SPPR evidence retained; not selected. See candidate report for strict source admission versus transformed computation.",
+      "publication_year": 2007,
+      "model_years": "1991",
+      "target_coverage_ratio": null,
+      "coverage_class": "intended_full",
+      "doi": null,
+      "coverage_note": "Report domain ICES IV, approximately 570000 km2. Whole North Sea spatial intent; exact LME overlap ratio not established from a digital author boundary.",
+      "atlas_region_rank": 11
+    },
+    {
+      "unit_id": "LME_022",
+      "model_id": "457_457_North_Sea_(1991)",
+      "model_path": "regions/LME_022/models/457_457_North_Sea_(1991)/model.json",
+      "source_filename": "457_457_North_Sea_(1991).json",
+      "selected": false,
+      "selection_rationale": null,
+      "paper_ids": "LME022-Mackinson-2007__LME_022",
+      "model_year": 1991,
+      "variant": "EcoBase accession 457 numerical repository variant; not identical to report tables",
+      "model_area_km2": 570000,
+      "availability": "Extracted candidate; bounded SPPR evidence retained; not selected. See candidate report for strict source admission versus transformed computation. LATER DEBUGGING REQUESTED (explicit user instruction, 2026-09-28): 457_457_North_Sea_(1991), why did the flow-balancing test fail? Independent source mass balance passes, but standard engine input/flow checks fail. Discards group68 stored P=0.2981897135 versus recomputed P=-99.7018102865; original JSON supplies detritus_import=100 and immigration=100. Relative overall balance gaps: GE2.9109828, TE0.12447885, WithEgestion2.8741747. Cause remains unresolved; source representation, loader handling and computation have not been disentangled. No debugging experiment or source/engine repair performed in this update.",
+      "publication_year": 2007,
+      "model_years": "1991–1992 (registry); 1991 (local filename)",
+      "target_coverage_ratio": null,
+      "coverage_class": "intended_full",
+      "doi": null,
+      "coverage_note": "Report domain ICES IV, approximately 570000 km2. Whole North Sea spatial intent; exact LME overlap ratio not established from a digital author boundary.",
+      "atlas_region_rank": 11
+    }
+  ],
+  "unavailable_model": {
+    "accession": 628,
+    "nominal_period": 1973,
+    "reason": "Report mentions fitted 1973 version; no complete static tables/native file located; live EcoBase record has zero groups and fleets. Not an extracted model and not assigned invented JSON."
+  }
+}

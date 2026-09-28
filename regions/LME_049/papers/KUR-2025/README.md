@@ -1,3 +1,11 @@
+## Verified extraction update 2026-09-28
+
+The main PDF is present and its exact bytes are verified in the model source manifest. The author DOCX supplement is present; all five tables were inspected. The earlier source availability and quality narrative below is an inherited historical assessment and is superseded by this update.
+
+Candidate: `49_20252023_Kuroshio_Oyashio_Extension_Chen_(2023)`; 25 groups; modeled year 2023. Complementary 2023 candidate; not selected. Fifty-four censored diet cells remain unresolved; conditional GE/TE/With Egestion diagnostics FAIL and both MC methods accept0/100.
+
+Source-faithful extracted tables, taxonomy, canonical JSON, validation and candidate-only diagnostics: [extraction report](../../models/49_20252023_Kuroshio_Oyashio_Extension_Chen_(2023)/extracted_tables/REPORT.md). No exact model was selected for production.
+
 # Ecosystem structure and trophodynamics in the Kuroshio–Oyashio Extension area
 
 Gan et al. (2025)

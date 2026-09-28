@@ -20,6 +20,76 @@ def source_context(root):
     with gzip.open(context/'time_series.json.gz','rt',encoding='utf-8') as source:series=json.load(source)
     return catalog,series
 
+def reconcile_paper_files(root,papers):
+    """Refresh local availability without treating presence as model validation.
+
+    Only original files directly in a paper folder are discovered; extracted
+    tables, metadata and working files are not downloadable source evidence.
+    Existing identity/retrieval assessments are retained on known files.
+    """
+    root=Path(root).resolve()
+    model_extensions={'.json','.ewe','.ewemdb','.eweaccdb','.mdb','.accdb'}
+    extensions={'.pdf','.doc','.docx','.xls','.xlsx','.zip','.csv','.tif','.tiff','.png','.jpg','.jpeg'}|model_extensions
+    administrative={'metadata.json','retrieval.json','source-facts.json','accession_retrieval.json','supplement_retrieval_log.json'}
+    fingerprints={}
+    def fingerprint(path):
+        if path not in fingerprints:fingerprints[path]=(sha(path),path.stat().st_size)
+        return fingerprints[path]
+    source_folders=defaultdict(list)
+    for directory in sorted((root/'regions').glob('*/papers/*')):
+        if directory.is_dir():source_folders[directory.name].append(directory)
+    for paper in papers:
+        source_id=paper.get('source_article_id') or paper['article_id'].split('__')[0]
+        folder=root/'regions'/paper['unit_id']/'papers'/source_id
+        found={}
+        for record in paper.get('material_files',[]):
+            path=(root/'interactive_map'/record['relative_path']).resolve()
+            if path.is_relative_to(root) and path.name not in administrative and path.is_file() and path.stat().st_size:
+                current=dict(record);current_hash,current_size=fingerprint(path)
+                changed=bool(record.get('sha256') and record['sha256']!=current_hash)
+                unproven=record.get('status')=='downloaded_verified' and not record.get('sha256')
+                if changed or unproven:
+                    previous={k:record.get(k) for k in ['sha256','size_bytes','status','identity_status','validation']}
+                    if record.get('prior_file_assessment'):previous['earlier_assessment']=record['prior_file_assessment']
+                    current.update(prior_file_assessment=previous,status='local_file_present',identity_status='not_reassessed',
+                                   validation='Current local bytes differ from, or cannot be tied to, the prior assessment; scientific identity not reassessed.')
+                current.update(sha256=current_hash,size_bytes=current_size)
+                current.setdefault('status','local_file_present')
+                found[path]=current
+        # A single publication can support multiple regional entries. Reuse its
+        # exact source ID when that region has no original files of its own.
+        folders=[folder] if folder.is_dir() and any(p.is_file() and p.name not in administrative and p.suffix.lower() in extensions and p.stat().st_size for p in folder.iterdir()) else source_folders.get(source_id,[])
+        for directory in folders:
+            for path in sorted(directory.iterdir()):
+                if not path.is_file() or path.name in administrative or path.suffix.lower() not in extensions or not path.stat().st_size:continue
+                path=path.resolve()
+                if path in found:continue
+                supplement=any(s in path.stem.lower() for s in ['mmc','supplement','supporting','appendix'])
+                role='model' if path.suffix.lower() in model_extensions else 'supplement' if supplement else 'main' if path.suffix.lower()=='.pdf' else 'source'
+                current_hash,current_size=fingerprint(path)
+                found[path]={'filename':path.name,'role':role,'file_label':('Model source' if role=='model' else 'Supplement' if supplement else 'Paper' if role=='main' else 'Source file')+' '+path.suffix[1:].upper(),
+                             'status':'local_file_present','validation':'Local non-empty file; scientific identity and model loadability not reassessed.',
+                             'sha256':current_hash,'size_bytes':current_size}
+        material=[]
+        for path,record in found.items():
+            record.update({'relative_path':'../'+path.relative_to(root).as_posix(),'article_id':paper['article_id'],'unit_id':paper['unit_id']})
+            material.append(record)
+        paper['material_files']=material
+        paper['downloaded_file_count']=len(material)
+        paper['download_status']='local_files_available' if material else 'no_verified_file'
+        paper['main_file_status']='local_file_present' if any(f.get('role')=='main' for f in material) else 'not_found'
+        paper['supplement_status']='local_file_present' if any(f.get('role')=='supplement' for f in material) else 'not_found'
+        paper['model_file_status']='local_file_present' if any(f.get('role')=='model' for f in material) else 'not_found'
+        if material:
+            if not paper.get('download_failure_reason') or paper['download_failure_reason'].startswith('No source file verified in this archive.'):
+                paper['download_failure_reason']=''
+            # The numeric quality score is a historical scientific assessment,
+            # not something that can be recomputed from file existence alone.
+            stale='E — no verified downloadable file'
+            if stale in paper.get('loadability_class','') or stale in paper.get('quality_rationale',''):
+                paper['loadability_class']='Local sources available; model loadability not reassessed'
+                paper['quality_rationale']='Historical score (not reassessed after local file discovery). '+paper.get('quality_rationale','').replace(stale+'. ','').replace(stale,'')
+
 class SourcePaths:
     """Resolve historical references without rewriting scientific source workbooks."""
     def __init__(self,root):
@@ -207,4 +277,7 @@ def datasets(workbook):
         papers.append(paper)
     catalog.update({'regions':newregions,'articles':papers,'network':network,'source_workbook':'../'+workbook.name})
     paths=SourcePaths(root)
-    return paths.rewrite(catalog),paths.rewrite(series),project
+    catalog=paths.rewrite(catalog)
+    reconcile_paper_files(root,catalog['articles'])
+    catalog['files']=[dict(f) for paper in catalog['articles'] for f in paper['material_files']]
+    return catalog,paths.rewrite(series),project

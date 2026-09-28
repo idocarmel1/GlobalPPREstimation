@@ -1,0 +1,27 @@
+{
+  "candidate_folder": "22_20251990_East_Coast_of_Scotland_(1991-1995)",
+  "group_count": 25,
+  "checks": [
+    "97 printed core values matched database JSON",
+    "232 source diet slots including zeros/import matched without normalization",
+    "All group names, source BA unknowns and taxonomy carried through",
+    "All database exports equal retained fleet landings plus discards",
+    "Eight import tables and database round-trip workbook retained"
+  ],
+  "roundtrip_sheets": [
+    "Metadata",
+    "Basic input",
+    "Diet composition",
+    "Landings",
+    "Taxonomy",
+    "Detritus fate"
+  ],
+  "roundtrip_core_and_diet_cells_verified": 775,
+  "known_conversion_conventions": [
+    "Blank habitat fraction becomes1 in converter; source CSV remains blank",
+    "Blank diet/import/catch becomes0 in converter representation; source CSV distinguishes blank and zero",
+    "Printed rounded P/Q retained in source basic-input CSV; converter GE=-9999 so engine derives PB/QB",
+    "Only diagnostic loader normalizes diets and supplies missing defaults/flow completion; not a source correction"
+  ],
+  "strict_diet_admission": "PASS"
+}

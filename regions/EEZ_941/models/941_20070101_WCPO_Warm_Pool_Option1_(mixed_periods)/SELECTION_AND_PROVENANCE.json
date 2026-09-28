@@ -1,0 +1,127 @@
+{
+  "unit_id": "EEZ_941",
+  "selected_model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+  "selected": true,
+  "rationale": "USER SELECTED 2026-09-28: WCP-2007 option 1 (D_fixed_M0) for HS_071, EEZ_941 and EEZ_598. Explicit experimental variant preserves juvenile other-mortality flows and changes Small BET P/B to 1.4129713563375232, EE to 0.7898725981469387; Small YFT P/B to 2.5304972811160384, EE to 0.8816702937266387. GE, TE and With Egestion all WARN; PP-budget checks OK, but strict mass balance remains false (adult BET residual 0.727940%). This is an adopted surrogate, not an author-confirmed correction or a region-specific native EwE model. Original source remains preserved. Griffiths 2019 source and pooled variant are retained for later investigation of failures, not selected.",
+  "experimental_source": "regions/EEZ_941/models/941_200701_WCPO_Warm_Pool_Final_(mixed_periods)/balance_investigation/correction_scenarios/D_fixed_M0/941_200701_WCPO_Warm_Pool_Final_(mixed_periods).json",
+  "input_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+  "parameter_changes": [
+    {
+      "seq": 11,
+      "group": "Small BET",
+      "B": 0.00241,
+      "QB": 26.159,
+      "old_PB": 0.834,
+      "new_PB": 1.4129713563375232,
+      "PB_percent_change": 69.42102593975099,
+      "old_EE": 0.644,
+      "new_EE": 0.7898725981469387,
+      "BA": 0.0,
+      "BA_over_B_per_year": 0.0,
+      "old_M0": 0.0007155386399999998,
+      "new_M0": 0.0007155386399999997,
+      "new_P_over_Q": 0.05401473130997069,
+      "normalized_predation": 0.001292222328773431,
+      "raw_source_predation": 0.0012922586,
+      "catch": 0.0013975,
+      "raw_source_diet_solution": {
+        "PB": 1.412986406639004,
+        "EE": 0.7898748363006337,
+        "BA": 0.0
+      },
+      "omitted_fishing_turnover_hypothesis_PB": 1.4138755186721992
+    },
+    {
+      "seq": 12,
+      "group": "Small YFT",
+      "B": 0.0128,
+      "QB": 33.964,
+      "old_PB": 1.983,
+      "new_PB": 2.5304972811160384,
+      "PB_percent_change": 27.609545189916208,
+      "old_EE": 0.849,
+      "new_EE": 0.8816702937266387,
+      "BA": 0.0,
+      "BA_over_B_per_year": 0.0,
+      "old_M0": 0.003832742400000001,
+      "new_M0": 0.0038327424000000015,
+      "new_P_over_Q": 0.0745052785630679,
+      "normalized_predation": 0.021584622798285293,
+      "raw_source_predation": 0.021593107838999998,
+      "catch": 0.006973,
+      "raw_source_diet_solution": {
+        "PB": 2.531160174921875,
+        "EE": 0.8817012834799195,
+        "BA": 0.0
+      },
+      "omitted_fishing_turnover_hypothesis_PB": 2.5277656250000002
+    }
+  ],
+  "diagnostic_summary": {
+    "GE": {
+      "status": "WARN",
+      "model_input_status": "WARN",
+      "p_max_rel_residual": 0.007279402209226768,
+      "q_max_rel_residual": 0.00046102880658427267,
+      "balance_status": "OK",
+      "PP_relative_gap": 0.0009785787909092304,
+      "ppr_all": 560.2590047738723,
+      "divergence_status": "OK",
+      "n_negative_sources": 0,
+      "juvenile_SPPR": {
+        "11": 18742.832270139104,
+        "12": 16179.501241050195
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001"
+      ]
+    },
+    "TE": {
+      "status": "WARN",
+      "model_input_status": "WARN",
+      "p_max_rel_residual": 0.007279402209226768,
+      "q_max_rel_residual": 0.00046102880658427267,
+      "balance_status": "OK",
+      "PP_relative_gap": 0.0013470116895900148,
+      "ppr_all": 1000.8140966883949,
+      "divergence_status": "WARN",
+      "n_negative_sources": 0,
+      "juvenile_SPPR": {
+        "11": 12113.146275403124,
+        "12": 8805.134342069407
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001",
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "rho(A_LL)=0.8243 is within 0.3 of divergence (max SPPR 1.58e+06 at group 10 (Small Sharks), TL 5.21)"
+      ]
+    },
+    "With Egestion": {
+      "status": "WARN",
+      "model_input_status": "WARN",
+      "p_max_rel_residual": 0.007279402209226768,
+      "q_max_rel_residual": 0.00046102880658427267,
+      "balance_status": "OK",
+      "PP_relative_gap": 0.00024524208026195226,
+      "ppr_all": 152.11941958938405,
+      "divergence_status": "WARN",
+      "n_negative_sources": 0,
+      "juvenile_SPPR": {
+        "11": 4343.886779364558,
+        "12": 4068.481875424795
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001",
+        "b=0.7626 is within 0.3 of divergence (max sppr_det 4.55 PP-units per unit detritus)"
+      ]
+    }
+  },
+  "strict_balance": false,
+  "region_coverage": {
+    "intersection_km2": 1047049.5380076497,
+    "percent_target_region_covered": 99.71577014694302,
+    "percent_gross_model_domain_in_region": 4.0960487882221255,
+    "area_refinement_difference_percent": -6.664298710139105e-06
+  },
+  "regional_results_status": "pending; selection does not imply full catch coverage"
+}

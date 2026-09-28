@@ -1,0 +1,89 @@
+{
+  "method": "Reproducible comparison of published study rectangles with stored region polygons.\n\nThis measures the explicitly stated study domain, not an inferred study polygon.\nArea uses WGS84 geodesic rings after densifying straight lon/lat segments to 0.05\u00b0.\nIt retains the gross domain denominator; land is not silently subtracted.\n",
+  "regions": {
+    "HS_071": {
+      "title": "Pacific, Western Central",
+      "source": "common_reference_data/geography/HighSeas.geojson",
+      "sha256": "e69e075876dc450dc02d42aab94d8e0473467eb7beaa850fd733265fe0d43b63",
+      "area_km2": 5192782.731978336
+    },
+    "EEZ_941": {
+      "title": "Kiribati (Gilbert Islands)",
+      "source": "common_reference_data/geography/EEZs.geojson",
+      "sha256": "fb7c7d4acb47a7cf51554dde9c10501e6eaa1ed91731d61328c94d10e4304986",
+      "area_km2": 1050034.0482400106
+    },
+    "EEZ_598": {
+      "title": "Papua New Guinea",
+      "source": "common_reference_data/geography/EEZs.geojson",
+      "sha256": "fb7c7d4acb47a7cf51554dde9c10501e6eaa1ed91731d61328c94d10e4304986",
+      "area_km2": 2398837.591200241
+    }
+  },
+  "domains": {
+    "Griffiths2019": {
+      "bounds": [
+        140,
+        -15,
+        180,
+        10
+      ],
+      "source": "doi:10.1111/fog.12389; study area text and Figure 1",
+      "reported_ocean_area_km2": 11543000,
+      "computed_gross_area_km2": 12202880.445980625,
+      "overlap": {
+        "HS_071": {
+          "intersection_km2": 1510912.4909749865,
+          "percent_target_region_covered": 29.096393378264104,
+          "percent_gross_model_domain_in_region": 12.381605291172459,
+          "area_refinement_difference_percent": -6.364049635559497e-06,
+          "percent_reported_model_ocean_area_in_region": 13.089426414060354
+        },
+        "EEZ_941": {
+          "intersection_km2": 1047049.5380076497,
+          "percent_target_region_covered": 99.71577014694302,
+          "percent_gross_model_domain_in_region": 8.580347424058605,
+          "area_refinement_difference_percent": -6.664298710139105e-06,
+          "percent_reported_model_ocean_area_in_region": 9.070861457226457
+        },
+        "EEZ_598": {
+          "intersection_km2": 2393843.564081634,
+          "percent_target_region_covered": 99.79181470488345,
+          "percent_gross_model_domain_in_region": 19.617036933850454,
+          "area_refinement_difference_percent": -6.455249591047369e-06,
+          "percent_reported_model_ocean_area_in_region": 20.73848708378787
+        }
+      }
+    },
+    "WCP2007": {
+      "bounds": [
+        110,
+        -15,
+        180,
+        15
+      ],
+      "source": "SC3-EB-IP-8, study area",
+      "computed_gross_area_km2": 25562428.382649165,
+      "overlap": {
+        "HS_071": {
+          "intersection_km2": 2989904.566214892,
+          "percent_target_region_covered": 57.57807943325609,
+          "percent_gross_model_domain_in_region": 11.696480950316635,
+          "area_refinement_difference_percent": -4.16679778991741e-06
+        },
+        "EEZ_941": {
+          "intersection_km2": 1047049.5380076497,
+          "percent_target_region_covered": 99.71577014694302,
+          "percent_gross_model_domain_in_region": 4.0960487882221255,
+          "area_refinement_difference_percent": -6.664298710139105e-06
+        },
+        "EEZ_598": {
+          "intersection_km2": 2398837.591200241,
+          "percent_target_region_covered": 100.0,
+          "percent_gross_model_domain_in_region": 9.384232027143726,
+          "area_refinement_difference_percent": -6.39538086530939e-06
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Axis: taxonomic guilds plus spatial pools. OYC coastal Oyashio (186128 km²), KC coastal Kuroshio (186220 km²), OF offshore (540754 km²); total 913102 km². Paper assigns rounded habitat fractions0.2/0.2/0.6; multi-block groups span these pools. Regional representativeness is partial; no freshly verified percent LME coverage.

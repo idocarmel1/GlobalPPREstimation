@@ -1,0 +1,358 @@
+# Full direct SPPR diagnostic returns
+
+Model: CAL-2016_California_Current_2000-2014
+
+Source admission and loader transformations are documented in extracted_tables/REPORT.md and staging_transformations.json. Returns below are verbatim serialized nested outputs; no extra configurations were invoked.
+
+## GE
+
+```json
+{
+  "status": "WARN",
+  "model_input": {
+    "status": "WARN",
+    "is_model_balanced": true,
+    "p_max_rel_residual": 4.3394468967112197e-16,
+    "q_max_rel_residual": 2.1926925158451112e-16,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 3.000000026176508e-09,
+    "n_negative_catch": 0,
+    "n_zero_catch": 59,
+    "total_catch": 2.1728714398,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 21,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      92,
+      91,
+      90,
+      89,
+      88,
+      87,
+      86,
+      80,
+      72,
+      71,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.18583401006644024,
+    "b_converges": true,
+    "rho_living": 0.45450426854884096,
+    "living_converges": true,
+    "sppr_det": {
+      "93": 1.5136036256769407
+    },
+    "max_sppr_det": 1.5136036256769407,
+    "max_sppr_group": {
+      "seq": 71,
+      "tl": 2.4954859981485153,
+      "sppr": 975379.563056569,
+      "inv_te": 585.183875400212
+    },
+    "max_tl_group": {
+      "seq": 77,
+      "tl": 4.399872432010036,
+      "sppr": 84793.4899095541,
+      "inv_te": 419.61904761904754
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      91,
+      90,
+      89,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ]
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": true,
+    "inflow": 4028.2120682244563,
+    "outflow": 4028.2120682244554,
+    "rel_gap": 2.257812365310282e-16
+  },
+  "footprint": {
+    "ppr_all": 336.31750712735544,
+    "ppr_inner": 335.9590910014655,
+    "ppr_pp_only": 219.8994829659262,
+    "npp": 4017.7139532242286,
+    "ppr2npp": 0.08361946492777496,
+    "ppr2npp_pp_only": 0.05473248855595012
+  },
+  "config": {
+    "TE_option": "GE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "single_detritus",
+    "would_pool": false,
+    "model": "Author_solved_California_Current (2000-2014)"
+  },
+  "warnings": [
+    "21 group(s) with EE=0 (all production is non-predatory death): 92 (Brown Pelican), 91 (Caspian tern), 90 (Pigeon Guillemot), 89 (Murrelet), 88 (Pelagic cormorant), 87 (Double corm.), 86 (Brandt's corm.), 80 (Juv. Ele. Seal), 72 (Resident Orcas), 71 (Transient Orcas), 70 (Leach's S. Petrel), 69 (Shearwater), 68 (Fulmar), 67 (Albatross), 66 (Kittiwake), 65 (Western Gull), 64 (Cali. gull), 63 (Tufted Puffin), 62 (Rhino. auklet), 61 (Cassin's auklet), 60 (Common murre). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "14 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [91, 90, 89, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]"
+  ]
+}
+```
+
+## TE
+
+```json
+{
+  "status": "WARN",
+  "model_input": {
+    "status": "WARN",
+    "is_model_balanced": true,
+    "p_max_rel_residual": 4.3394468967112197e-16,
+    "q_max_rel_residual": 2.1926925158451112e-16,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 3.000000026176508e-09,
+    "n_negative_catch": 0,
+    "n_zero_catch": 59,
+    "total_catch": 2.1728714398,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 21,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      92,
+      91,
+      90,
+      89,
+      88,
+      87,
+      86,
+      80,
+      72,
+      71,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.0,
+    "b_converges": true,
+    "rho_living": 0.5620959658114126,
+    "living_converges": true,
+    "sppr_det": {
+      "93": 1.1321961430133616
+    },
+    "max_sppr_det": 1.1321961430133616,
+    "max_sppr_group": {
+      "seq": 82,
+      "tl": 3.269447540204926,
+      "sppr": 2413763.658429115,
+      "inv_te": 14977.816094494658
+    },
+    "max_tl_group": {
+      "seq": 77,
+      "tl": 4.399872432010036,
+      "sppr": 1227241.317021103,
+      "inv_te": 1762.3563493356726
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      85,
+      84,
+      83,
+      82,
+      77,
+      76,
+      75,
+      74
+    ]
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": true,
+    "inflow": 4028.2120682244563,
+    "outflow": 4028.2120682244545,
+    "rel_gap": 4.515624730620564e-16
+  },
+  "footprint": {
+    "ppr_all": 1266.624614562858,
+    "ppr_inner": 1264.608618425879,
+    "ppr_pp_only": 869.0478602380678,
+    "npp": 4017.7139532242286,
+    "ppr2npp": 0.31475825137103813,
+    "ppr2npp_pp_only": 0.21630406503694818
+  },
+  "config": {
+    "TE_option": "TE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": null,
+    "would_pool": false,
+    "model": "Author_solved_California_Current (2000-2014)"
+  },
+  "warnings": [
+    "21 group(s) with EE=0 (all production is non-predatory death): 92 (Brown Pelican), 91 (Caspian tern), 90 (Pigeon Guillemot), 89 (Murrelet), 88 (Pelagic cormorant), 87 (Double corm.), 86 (Brandt's corm.), 80 (Juv. Ele. Seal), 72 (Resident Orcas), 71 (Transient Orcas), 70 (Leach's S. Petrel), 69 (Shearwater), 68 (Fulmar), 67 (Albatross), 66 (Kittiwake), 65 (Western Gull), 64 (Cali. gull), 63 (Tufted Puffin), 62 (Rhino. auklet), 61 (Cassin's auklet), 60 (Common murre). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+    "8 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [85, 84, 83, 82, 77, 76, 75, 74]"
+  ]
+}
+```
+
+## With Egestion
+
+```json
+{
+  "status": "WARN",
+  "model_input": {
+    "status": "WARN",
+    "is_model_balanced": true,
+    "p_max_rel_residual": 4.3394468967112197e-16,
+    "q_max_rel_residual": 2.1926925158451112e-16,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 3.000000026176508e-09,
+    "n_negative_catch": 0,
+    "n_zero_catch": 59,
+    "total_catch": 2.1728714398,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 21,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      92,
+      91,
+      90,
+      89,
+      88,
+      87,
+      86,
+      80,
+      72,
+      71,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.20092064324057768,
+    "b_converges": true,
+    "rho_living": 0.3636034148390729,
+    "living_converges": true,
+    "sppr_det": {
+      "93": 1.5927966110296028
+    },
+    "max_sppr_det": 1.5927966110296028,
+    "max_sppr_group": {
+      "seq": 71,
+      "tl": 2.4954859981485153,
+      "sppr": 328664.62220236764,
+      "inv_te": 468.1471003201695
+    },
+    "max_tl_group": {
+      "seq": 77,
+      "tl": 4.399872432010036,
+      "sppr": 29935.999345683515,
+      "inv_te": 335.69523809523804
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      91,
+      89,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      60
+    ]
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": true,
+    "inflow": 4028.2120682244563,
+    "outflow": 4028.2120682244554,
+    "rel_gap": 2.257812365310282e-16
+  },
+  "footprint": {
+    "ppr_all": 143.15455023381912,
+    "ppr_inner": 142.92623287802311,
+    "ppr_pp_only": 95.04818764936735,
+    "npp": 4017.7139532242286,
+    "ppr2npp": 0.03557401909195759,
+    "ppr2npp_pp_only": 0.023657280920432594
+  },
+  "config": {
+    "TE_option": "With Egestion",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "single_detritus",
+    "would_pool": false,
+    "model": "Author_solved_California_Current (2000-2014)"
+  },
+  "warnings": [
+    "21 group(s) with EE=0 (all production is non-predatory death): 92 (Brown Pelican), 91 (Caspian tern), 90 (Pigeon Guillemot), 89 (Murrelet), 88 (Pelagic cormorant), 87 (Double corm.), 86 (Brandt's corm.), 80 (Juv. Ele. Seal), 72 (Resident Orcas), 71 (Transient Orcas), 70 (Leach's S. Petrel), 69 (Shearwater), 68 (Fulmar), 67 (Albatross), 66 (Kittiwake), 65 (Western Gull), 64 (Cali. gull), 63 (Tufted Puffin), 62 (Rhino. auklet), 61 (Cassin's auklet), 60 (Common murre). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "12 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [91, 89, 70, 69, 68, 67, 66, 65, 64, 63, 62, 60]"
+  ]
+}
+```
