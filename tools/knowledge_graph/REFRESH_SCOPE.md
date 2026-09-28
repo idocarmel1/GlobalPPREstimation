@@ -1,3 +1,31 @@
+# Knowledge graph: single combined skill refresh — 2026-09-28
+
+The current graph indexes the final consolidation into **one active project skill**, `tools/skills/original_skill_resources/combined-src/SKILL.md` (`ecopath-paper-to-ppr`). Its preparation, recovery, reconstruction audit, taxonomy, diagnostics, regional calculation and project integration documents are internal references. The preserved Claude/Codex distributions and their multi-skill builders are historical resources; their presence does not make them active project entry points. No personal installed copy is claimed updated.
+
+The working-tree refresh is based on commit `dbd094391c0ebb794a115dd86325853be21e141a`. Exact source hashes establish content freshness. Scope: **402 selected files, 454,279 words, 3,673 nodes, 6,444 edge pairs, 17 hyperedges and 262 communities**. Ten changed/new documents were semantically extracted. Six obsolete active-source paths were removed from the live allowlist and manifest; their hashes remain in refresh_audit.json as retirement evidence. The smaller graph results from replacing retired instruction entities, not deleting unchanged scientific evidence.
+
+All 3,614 unchanged-source node attributes, 6,487 separately attributed relationships and 14 hyperedges were preserved. Six prior concepts are retained only because unchanged historical evidence refers to their IDs. These anchors are explicitly labelled `Former reference`, have `authority=former`, and retain historical path/hash/location separately from a null live source path. They must not be interpreted as current instructions. The earlier regional extraction, selection and diagnostic findings remain unchanged, including the final 23-of-25 selection snapshot and unresolved scientific caveats.
+
+## Verification and limits
+
+All 402 source/manifest hashes, every graph endpoint and 44 local links in the changed documents passed. The HTML node/edge payload counts match the graph and inline JavaScript passes syntax checking. Seven focused retrieval checks pass for the combined entry, requested-stage boundaries, online recovery, direct diagnostics, historical distributions, regional selections and the Mediterranean routing block. These checks do not claim browser interaction or general semantic-search accuracy. Graphify's generic phrase `single active project skill` retrieves unrelated Active SPPR concepts; use the exact node ID below or the requested-stage phrase for the combined workflow.
+
+No scientific computation, parameter repair, workbook/model selection, map rebuild or independent online search was performed in this graph refresh. Original papers, raw data and generated map payloads remain outside the selected semantic scope; retained reports and code provide evidence and contracts. Source/runtime defaults, diagnostic failure and user adoption remain separate. Online recovery instructions preserve source lineage and a bounded search record rather than assuming an unsuccessful search proves data absence. Project diagnostics remain the requested direct GE, TE and With Egestion options, excluding global.
+
+Semantic extraction used the host agent. Measured token usage and monetary cost are unavailable and recorded as such. Benchmark figures estimate context sizes only. No new API key was required. Temporary build artifacts are removed after verification; intentional caches remain local and ignored.
+
+```text
+graphify query "combined_src_skill_ecopath_paper_to_ppr_single_active_project_skill" --graph tools/knowledge_graph/graph.json
+graphify query "Requested-stage boundaries within one pipeline skill" --graph tools/knowledge_graph/graph.json
+graphify query "Missing data online recovery reference" --graph tools/knowledge_graph/graph.json
+graphify query "Full direct diagnose_sppr three-method contract" --graph tools/knowledge_graph/graph.json
+graphify query "Historical Claude Codex distributions and multi-skill builders" --graph tools/knowledge_graph/graph.json
+```
+
+Evidence: completion_verification.json, refresh_audit.json, source_hashes.json and manifest.json. The following sections are historical refresh records. Their references to three active skills describe the former arrangement and are superseded by the single combined entry above.
+
+---
+
 # Knowledge graph completion refresh — 2026-09-28
 
 The current graph indexes the final regional selection review, extraction lessons, active workflow revisions and changed registry/map adapter code in the working tree based on commit `e7ec04a426c6090196357c7c11ac717ecab63f4a`. Exact source hashes, rather than commit identity alone, establish freshness. This refresh contains **402 explicitly selected files, 455,045 words, 3,682 nodes, 6,460 edge pairs, 18 hyperedges and 275 communities**. The corpus remains below the broad-scan warning thresholds. No broad raw-data scan was performed.

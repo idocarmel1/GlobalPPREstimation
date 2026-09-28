@@ -11,7 +11,7 @@ Project.xlsx                    Central metadata, project status and regional ma
 README.md                       This project guide, including setup and workbook schema
 regions/                        One workbook and its supporting files per region
 tools/                          Calculation and map-generation Python scripts
-  skills/                       Three current research workflows and all original resources
+  skills/                       One combined pipeline skill and retained scientific resources
   scientific_code/              Original SPPR, catch-extraction and NPP implementations
   scientific_helpers/           Shared scientific integration functions
   workflow_checks/              Automated checks of calculations and update behavior
@@ -27,7 +27,7 @@ original_research_archive/      Original reports, experiments, outputs and prove
   research/                     Research studies, including discard sensitivity and mean-TE comparisons
 ```
 
-There is one project-level Markdown guide. Required SKILL.md files, skill references and original research documents stay within their own folders. Historical filenames and instructions inside preserved sources describe the original layout; use this guide and the three current skills for the active workflow.
+There is one project-level Markdown guide. Required SKILL.md files, skill references and original research documents stay within their own folders. Historical filenames and instructions inside preserved sources describe the original layout; use this guide and the [combined pipeline skill](tools/skills/original_skill_resources/combined-src/SKILL.md) for the active workflow.
 
 ## Python dependencies
 
@@ -54,7 +54,7 @@ Install the basic packages using the first command below. Install the additional
 | 8 | Prepare NPP and PPR/NPP | regional NPP and PPR–NPP |
 | 9 | Consolidate and visualize | Project.xlsx; interactive_map/index.html |
 
-The three skills cover model preparation (2–4), regional calculations (1, 5–8), and project/map refresh (9). Each accepts one regional folder/workbook or the project workbook. The tools directory contains the workbook reader/writer, calculations, updater, HTML generator/template, migration/verification utilities, and the preserved scientific engines. Shared geography is stored once; the HTML's geometry is embedded in Project.xlsx. Detailed views also use regional workbooks and preserved source context, as described below.
+The single [ecopath-paper-to-ppr skill](tools/skills/original_skill_resources/combined-src/SKILL.md) covers model preparation (2–4), regional calculations (1, 5–8), and project/map refresh (9). It accepts one regional folder/workbook or the project workbook and routes to stage references within the same skill. A request for one stage runs only that stage. The tools directory contains the workbook reader/writer, calculations, updater, HTML generator/template, migration/verification utilities, and the preserved scientific engines. Shared geography is stored once; the HTML's geometry is embedded in Project.xlsx. Detailed views also use regional workbooks and preserved source context, as described below.
 
 ## Install and refresh
 
@@ -75,7 +75,7 @@ The first updater command refreshes one region; the second is the all-region alt
 2. Register the model in Project.xlsx / Models & coverage and its paper metadata in Papers.
 3. Enter selected_model_id, model_path and selection_rationale in the regional Overview.
    Run `python tools/run_region.py --region <region-folder> --stage prepare-selection` to record a new selection as pending. This archives the preceding workbook and clears model-dependent results. You can then refresh Project.xlsx immediately, even before SPPR and matching are ready.
-4. Use the prepare-ecopath-model and calculate-regional-ppr skills for the required stages.
+4. Use the [combined pipeline skill](tools/skills/original_skill_resources/combined-src/SKILL.md) for the required stages.
 5. Refresh the project and HTML after regional results are ready. A selection without calculated results can be recorded, but never borrows results from a previous model.
 
 ```
@@ -90,9 +90,9 @@ python tools/run_region.py --region regions/LME_028 --stage export-taxon-ppr --b
 
 Matching itself is an evidence-based research task performed by the skill. The calculation command validates its explicit weights; it does not invent assignments. The SPPR engine is preserved under tools/scientific_code/PPREstimation. Never run its broad batch script directly; the regional wrapper limits the run to the selected JSON. Fresh Monte Carlo runs vary. New regional calculations invalidate historical discard-sensitivity bounds until reassessed.
 
-For ordinary diagnostic reports, the project default is only full direct `PPRCalculator.diagnose_sppr()` returns for GE, TE and With Egestion, excluding global and Monte Carlo. The generic SPPR wrapper above runs a broader inventory; it is not the direct-only route. Follow [direct diagnostics](tools/skills/calculate-regional-ppr/references/direct-diagnostics.md) with the exact audited computational input and settings, and reuse adequate retained results when possible.
+For ordinary diagnostic reports, the project default is only full direct `PPRCalculator.diagnose_sppr()` returns for GE, TE and With Egestion, excluding global and Monte Carlo. The generic SPPR wrapper above runs a broader inventory; it is not the direct-only route. Follow [direct diagnostics](tools/skills/original_skill_resources/combined-src/references/direct-diagnostics.md) with the exact audited computational input and settings, and reuse adequate retained results when possible.
 
-The workbook schema and ownership rules are included below. The three skill entry points are in tools/skills/. Their scientific source resources are preserved under tools/skills/original_skill_resources; original integration paths there are historical and superseded by the workbook contract.
+The workbook schema and ownership rules are included below. The only active project skill entry point is `tools/skills/original_skill_resources/combined-src/SKILL.md`. Its current references define execution; retained scientific resources under tools/skills/original_skill_resources supply the domain procedures, templates and helpers. Original integration paths in archived distributions are superseded by the workbook contract.
 
 ## Preservation
 
@@ -147,11 +147,7 @@ Historical defaults and scientific limits are retained in archived source report
 
 When given one regional folder or workbook, resolve its project by finding the ancestor containing Project.xlsx. Read the Workbook reference section above and that region's Overview. Keep the requested work scoped to the supplied region and requested research stage.
 
-Use the relevant project skill:
-
-- `tools/skills/prepare-ecopath-model/SKILL.md`: papers, extraction, candidate assessment and selection.
-- `tools/skills/calculate-regional-ppr/SKILL.md`: catch, classic PPR, SPPR, matching, PPR and NPP.
-- `tools/skills/update-ppr-project/SKILL.md`: consolidate regional workbooks and rebuild the standalone HTML.
+Use [ecopath-paper-to-ppr](tools/skills/original_skill_resources/combined-src/SKILL.md) for all requested pipeline stages. Its [model preparation](tools/skills/original_skill_resources/combined-src/references/model-preparation.md), [regional calculation](tools/skills/original_skill_resources/combined-src/references/regional-calculation.md) and [project integration](tools/skills/original_skill_resources/combined-src/references/project-integration.md) documents are references within one skill, not separate skills. Extraction-only, diagnostics-only, matching-only and registry-only requests retain their scope. The three former project entry points have been removed after integration.
 
 Selected-model identity and rationale belong in regional Overview. Central paper and model metadata belong in Project.xlsx. Use the workbook reader/writer to preserve unrelated blocks. Recalculate stale results through the regional workflow; do not edit fingerprints to suppress validation errors. A newly selected model can remain pending without numerical results.
 
@@ -159,19 +155,21 @@ Read historical papers, reports and skill resources as evidence. Their original 
 
 For every regional candidate processed, retain a full model-specific direct SPPR report and compact results record with regional evidence. Default to GE, TE and With Egestion only; global, other methods and Monte Carlo require a broader request. Keep the diagnostic report to full returned objects or exact NOT_RUN/exception/timeout/unsupported records. Put source admission, source-versus-runtime transformations, taxonomy, geography and scientific interpretation in separate extraction/investigation evidence. Preserve overall grades, component grades and strict balance flags distinctly, checking all biological groups including unfished groups. Report Monte Carlo settings/draws only when it was requested and run. Reuse sufficient retained diagnostics. Selection may be recorded for an explicitly chosen FAIL or NOT_RUN model; its failed/unavailable numerical results remain unavailable.
 
-If data are missing, actively search online following [missing-data recovery](tools/skills/prepare-ecopath-model/references/missing-data-recovery.md), including official publisher repositories/APIs and verified predecessor lineage. Apply the [reconstruction audit](tools/skills/prepare-ecopath-model/references/reconstruction-audit.md) across source, converter, canonical and loaded states. Do not mistake imputed biomass or residual BA for measurements. Use source-supported coupled equations for determined unknowns, retain native-equation limitations, and verify the exact saved computational state before integration. The active skills carry these current rules; archived originals remain unchanged historical resources.
+If data are missing, actively search online following [missing-data recovery](tools/skills/original_skill_resources/combined-src/references/missing-data-recovery.md), including official publisher repositories/APIs and verified predecessor lineage. Apply the [reconstruction audit](tools/skills/original_skill_resources/combined-src/references/reconstruction-audit.md) across source, converter, canonical and loaded states. Do not mistake imputed biomass or residual BA for measurements. Use source-supported coupled equations for determined unknowns, retain native-equation limitations, and verify the exact saved computational state before integration. The combined skill carries these current rules. Its source and taxonomy reference were explicitly updated during consolidation; the other archived scientific resources remain historical evidence.
 
-## Original skills completeness
+## Skill resources and combined workflow
 
-All 201 files from the original skills directory are retained byte for byte in tools/skills/original_skill_resources/, including the Claude and Codex variants, combined workflow, scripts, examples, reference documents, workbook/CSV templates, assets and packaged .skill files. The three current entry points route to those scientific workflows while adapting their output locations to the regional workbook structure. The file-by-file audit is original_research_archive/skill_resource_audit.csv.
+The original migration retained all 201 skill-resource files, including Claude/Codex variants, scripts, examples, templates and packaged archives; original_research_archive/skill_resource_audit.csv records that historical snapshot. The user subsequently requested one active skill. `tools/skills/original_skill_resources/combined-src/SKILL.md` and its taxonomy reference were updated in place, and the three newer project skills were integrated as references and removed. Historical audit hashes describe the earlier snapshot, not the intentionally revised combined source or resource README.
 
-| Current skill | Original capabilities retained |
+| Combined skill reference | Capabilities |
 |---|---|
-| prepare-ecopath-model | Source inventory, coordinate-based extraction, parameter/prose checks, import templates, validation, mass balance, JSON round trip, taxonomy capture and EcoBase taxonomy route |
-| calculate-regional-ppr | SPPR health checks, exact membership evidence, model structure, coarse-taxon apportionment, catch coverage and validation, classic PPR, annual NPP and discard/source conventions |
-| update-ppr-project | Integration contract, common-catch comparisons, stable regional cohorts, NPP-only/global denominators, provenance, missing values and sensitivity interpretation |
+| model-preparation.md and group-taxonomy.md | Source recovery, coordinate-based extraction, import tables, balance/reconstruction audit, JSON round trip, taxonomy, EcoBase and model selection |
+| regional-calculation.md and direct-diagnostics.md | SPPR diagnostics, evidence-based catch matching, coverage, model comparison, classic PPR, annual NPP and source/discard conventions |
+| project-integration.md | Regional consolidation, registry ownership, map/graph refresh, common-catch comparisons, provenance and missing-result checks |
 
-Original scripts that expect the old checkout layout require adapting their I/O to this package before use. They are preserved resources, not alternative active status/configuration files. Their scientific checks must be retained when adapting a workflow.
+The original scientific scripts, templates, examples and detailed extraction/mapping references remain available at the paths linked by the combined skill. Other SKILL.md files and .skill packages inside archived Claude/Codex distributions are historical resources, not additional current entry points. Do not run the historical multi-skill builder to refresh the active workflow. Read [the resource guide](tools/skills/original_skill_resources/README.md) for this distinction. These repository changes do not automatically update separately installed personal skills.
+
+Original scripts expecting the old checkout layout require adapting their I/O to this package before use. Preserve their scientific checks while using the current regional workbook contract.
 
 ## Validation and scientific limits
 
@@ -207,4 +205,4 @@ During restoration, exact template comparisons passed, 2,065,140 annual output c
 
 ## Reorganization in Git
 
-The reorganization was applied to the original repository in five commits: (1) preserve and relocate source evidence, (2) consolidate regional workbooks, (3) centralize tools and three workflow skills, (4) add Project.xlsx, and (5) restore the original-format HTML pages and this guide. The migration ledger records original paths, retained paths and SHA-256 hashes. The map and time-series remain separate pages with their original online dependencies and links to supporting files.
+The reorganization was applied to the original repository in five commits: (1) preserve and relocate source evidence, (2) consolidate regional workbooks, (3) centralize tools and three workflow skills, (4) add Project.xlsx, and (5) restore the original-format HTML pages and this guide. The three workflow entry points from that migration were subsequently consolidated back into the original combined skill at the user’s request. The migration ledger records original paths, retained paths and SHA-256 hashes. The map and time-series remain separate pages with their original online dependencies and links to supporting files.

@@ -21,10 +21,10 @@ evidence should remain usable by a later mapper without reconstructing its origi
 **last** column as the description, so the column order matters and a fourth column would
 be read instead. Three columns, in that order.
 
-`scripts/write_taxonomy.py` writes it from a CSV or a dict so the shape cannot drift:
+`<skill-root>/scripts/write_taxonomy.py` writes it from a CSV or a dict so the shape cannot drift:
 
 ```bash
-python scripts/write_taxonomy.py <model_dir>/taxonomy.csv <model_dir>/Taxonomy.xlsx
+python "<skill-root>/scripts/write_taxonomy.py" "<model_dir>/taxonomy.csv" "<model_dir>/Taxonomy.xlsx"
 ```
 
 Then rebuild the database JSON. `taxon_descr` appears in it, and from there in the
@@ -32,22 +32,11 @@ Then rebuild the database JSON. `taxon_descr` appears in it, and from there in t
 
 ## Existing database JSON with no extraction folder
 
-Ecobase models may have only a finished JSON. Do not invent an eight-file extraction
-to fit the workbook route. Read the JSON's `group` array and create
-`data/<unit>/mapping/<model-stem>.taxonomy.csv` with `seq,group_name,taxon_descr`,
-one row for every group. Match names exactly, preserve group numbers, and record
-the model profile and any paper member table beside the taxonomy CSV.
+Ecobase models may have only a finished JSON. Do not invent an eight-file extraction to fit the workbook route. Read the JSON's `group` array and retain `taxonomy.csv` under the region's `models/<model_id>/` folder, with `seq,group_name,taxon_descr` for every group. Verify the actual JSON schema, identifiers and order; match names exactly and preserve group numbers. Keep table-purpose, membership and source evidence beside the taxonomy.
 
-```text
-python "<repo-root>/tools/apply_taxonomy.py" "<taxonomy.csv>" --model "<model-stem>" --json-dir "<json-dir>" --check
-python "<repo-root>/tools/apply_taxonomy.py" "<taxonomy.csv>" --model "<model-stem>" --json-dir "<json-dir>" --out "<patched-json-dir>"
-python "<repo-root>/tools/run_sppr.py" --models "<model-stem>" --json-dir "<patched-json-dir>" --out "<staged-sppr-dir>" --compare
-```
+Apply supported `taxon_descr` values by verified group identity in the intended model variant; preserve all numerical fields and retain original bytes/hash. Independently compare group coverage, sequence and every changed field after saving. Follow [the reconstruction audit](reconstruction-audit.md), then [direct diagnostics](direct-diagnostics.md) only when that stage is requested or affected published coefficients need refreshing. Do not silently modify a published canonical source or relabel earlier SPPR outputs.
 
-The application tool checks group-name coverage; independently check each `seq`
-against the source JSON. Inspect `groups_df` and `model_health` in the result.
-Replacing the repository JSON/workbook is a separate choice within the requested
-scope; then regenerate the mapping work order from the refreshed workbook.
+Candidate taxonomy stays with its model. Populate regional Selected model groups only for the selected model. For a JSON-only taxonomy request, no SPPR or annual calculation is implied. There is no current `tools/apply_taxonomy.py` or `tools/run_sppr.py`; their archived commands are superseded by this route and the current regional tools.
 
 ## What to write in `taxon_descr`
 
@@ -63,8 +52,7 @@ groups or spatial pools remain, even for an explicitly named member.
 For Guénette's Bay of Bengal report, A3.1 (pp.50–53) lists diet-study sources;
 A1.1 (pp.37–41) allocates catch names and A1.3 (pp.43–45) describes composition.
 Dedicated yellowfin/bigeye groups are supported elsewhere even where A3.1 says
-“Tuna-like.” The repository's `data/LME_034/validation/guenette-a31-review/REVIEW.md`
-records this comparison; it does not validate regional weights. Confirm synonyms
+“Tuna-like.” The retained Bay of Bengal source audit records this comparison; locate its current path using the project provenance relocation ledger. It does not validate regional weights. Confirm synonyms
 against an authority and retain author-distinguished taxa when authorities differ.
 
 Keep an unreconciled diet-study list in its own source-audit table. The mapping
@@ -104,14 +92,13 @@ In rough order of yield:
 - the **supplement**, especially for guild-structured models. The East China Sea membership
   table is a `.docx` data sheet, not a table in the PDF. A `.docx` is a zip of XML, so
   `zipfile` plus `word/document.xml` reads it when `python-docx` is unavailable
-- the diet composition matrix — prey row labels name taxa, and a group's diet constrains
-  which families can be in it
+- the diet composition matrix — inspect prey identities and trophic context, but do not treat what a group eats as evidence of which taxa belong to that predator group
 - the methods section, where groups are usually justified as they are introduced
 - figure captions and table footnotes
 - the **predecessor model**. "Based on", "adapted from", "following" — then read that paper.
   Mark it `inherited_model`, not as the focal paper's own statement
 
-Make real download attempts for supplements you can identify but do not have. Record the
+Use [online recovery](missing-data-recovery.md), including publisher attachments, official repositories and verified predecessor lineage. Make real download attempts for supplements you can identify but do not have. Record the
 filename, the URL and the result. Never write a member list you did not read.
 
 ## Also record the model's shape
@@ -148,6 +135,4 @@ The taxonomy artifact has a row for every group, including `not documented`
 where appropriate: `Taxonomy.xlsx` for an extraction folder, or
 `<model-stem>.taxonomy.csv` for a JSON-only model. The database JSON has been rebuilt
 or patched through the applicable route. After the requested SPPR run, inspect
-`groups_df` for the recorded `taxon_descr` values. When the refreshed workbook is
-placed in the repository, regenerate the stage 4 work order so it shows that
-membership instead of an empty-field warning.
+`groups_df` for the recorded `taxon_descr` values. For an adopted model, carry the verified membership into regional Selected model groups and use it in PPR / Matching. Follow [regional calculation](regional-calculation.md) for authorized dependent refreshes; no legacy work-order file is required.

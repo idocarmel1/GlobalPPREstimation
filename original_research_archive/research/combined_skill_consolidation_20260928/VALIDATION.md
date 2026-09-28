@@ -1,0 +1,9 @@
+# Combined skill consolidation validation
+
+The existing ecopath-paper-to-ppr identity and combined-src entry point now provide the single active project pipeline. Three former entry-point folders were removed after their complete instructions and three detailed references were integrated. Retained domain scripts/templates and archived distributions are unchanged; no personal installation or portable package was updated.
+
+Baseline review found that the old source entry depended on generated-distribution references missing from its own directory and used obsolete repository commands. The current entry explicitly resolves retained domain resources and uses the current regional workbook workflow.
+
+An independent read-only reviewer passed three scenarios: full extraction with missing diet/routing and direct three-option diagnostics; explicit selection of a failing model with old results followed by registry refresh; matching-only with one-group containment and unresolved high-tonnage labels. It confirmed former capability coverage and no dangling current-document links. Its three scope/command clarifications were applied: --root belongs to update_project.py only, HTML generation is conditional on a requested map refresh, and calculation requires authorized calculation scope.
+
+Automated checks passed current Markdown and literal relative-resource links, absent obsolete entry-point folders, no active references to removed paths, skill frontmatter validation, and exact preservation of recovery/reconstruction/direct-diagnostic text apart from the relocated link. Counts and source hashes are in validation.json. These checks are instruction/path validation, not new scientific extractions or diagnostic runs. Registry workbooks, selected models, scientific outputs and the interactive map are unchanged by this documentation consolidation. The knowledge graph refresh has its own verification report.

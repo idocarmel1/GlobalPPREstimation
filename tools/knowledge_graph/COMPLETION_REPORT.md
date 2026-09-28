@@ -1,11 +1,11 @@
-# Completion graph refresh
+# Combined-skill graph refresh
 
-PASS: the graph now covers 402 selected files, 455,045 words, 3,682 nodes, 6,460 edge pairs and 18 hyperedges.
+PASS: **3,673 nodes, 6,444 edge pairs and 17 hyperedges** from 402 explicitly selected files.
 
-- Added 18 representative regional/comparison reports and re-extracted seven active workflow documents, including online missing-data recovery, source/runtime audits and direct three-option diagnostics.
-- Parsed eight current code files, including the final reviewed paper-file reconciliation corrections.
-- Preserved all 3,470 unchanged-source node attributes, 6,245 separately attributed relationships and 12 unchanged hyperedges.
-- Checked all 402 source/manifest hashes, every graph endpoint, HTML node/edge payload parity and JavaScript syntax.
-- Five named-concept retrieval checks passed: selections, online recovery, Watari pooled detritus, Mediterranean routing block and source-faithful reconstruction.
+- Re-extracted ten current documents, with one active `ecopath-paper-to-ppr` entry and its internal stage/detail references.
+- Removed six obsolete active-source paths from the allowlist and manifest; retained explicit historical provenance for six referenced former concepts.
+- Preserved all 3,614 unchanged-source node attributes, 6,487 attributed relationships and 14 hyperedges.
+- Verified all 402 source/manifest hashes, graph endpoints, 44 local links, HTML payload parity and JavaScript syntax.
+- Seven targeted retrieval checks passed. Use the exact combined-entry ID or requested-stage phrase; Graphify's generic active-skill phrase can return unrelated Active SPPR nodes.
 
-The graph distinguishes the final 23/25 selection record from historical candidate reports, and numerical runnability from diagnostic health and adoption. No scientific calculation, workbook edit or model selection was performed by this refresh. No browser interaction test or independent re-extraction of original source papers is claimed. Token usage/cost telemetry is unavailable. Exact scope and historical-anchor limitations: [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Evidence: [completion_verification.json](completion_verification.json), [refresh_audit.json](refresh_audit.json), [source_hashes.json](source_hashes.json).
+No scientific rerun, workbook/model selection change or browser-interaction test occurred. Token/cost telemetry is unavailable. Scope and historical-authority rules: [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Detailed evidence: [completion_verification.json](completion_verification.json), [refresh_audit.json](refresh_audit.json), [source_hashes.json](source_hashes.json).

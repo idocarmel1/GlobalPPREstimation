@@ -1,100 +1,34 @@
-# PPR skills for Claude and Codex
+# Combined PPR workflow and retained scientific resources
 
-Both directories contain the same three skills and a `.skill` archive for each.
+The project's **single active skill** is [ecopath-paper-to-ppr](combined-src/SKILL.md). The original `combined-src` entry point now includes the current regional workbook workflow and the lessons from the September 2026 extractions. Use it for the full pipeline or any requested subset.
 
-| Skill | Claude | Codex | Purpose |
-| --- | --- | --- | --- |
-| Ecopath extraction | [SKILL.md](claude/ecopath-extraction/SKILL.md) | [SKILL.md](codex/ecopath-extraction/SKILL.md) | Paper → import files, database JSON and provenance |
-| Species-to-group mapper | [SKILL.md](claude/ewe-species-to-group-mapper/SKILL.md) | [SKILL.md](codex/ewe-species-to-group-mapper/SKILL.md) | Catch taxa → model groups → PPR |
-| Ecopath paper to PPR | [SKILL.md](claude/ecopath-paper-to-ppr/SKILL.md) | [SKILL.md](codex/ecopath-paper-to-ppr/SKILL.md) | Extraction, taxonomy, SPPR and mapping, or a requested subset |
-
-Claude keeps the detailed workflow in each standalone `SKILL.md`, with the combined
-skill routing to stage references. Its archives contain no OpenAI metadata.
-Codex uses concise entry points, the complete workflows in `references/`, and
-`agents/openai.yaml` for names, invocation prompts and existing interface settings.
-Scripts, scientific references, examples and templates are shared byte-for-byte.
-The combined skill includes its examples, so it does not depend on a sibling skill.
-
-## Knowledge refresh — 2026-09-10
-
-All three project skills were refreshed in both agent distributions, and all six
-`.skill` archives were rebuilt. The refresh records source-table scope, mortality
-rates versus flows, central **Final mappings**, annual NPP reproduction and units,
-separate catch bases, and the limits of optional discard-routing sensitivity.
-The full paper-to-PPR chain includes taxonomy; an extraction-only request still
-stops after extraction.
-
-[The refresh report](../docs/SKILL_KNOWLEDGE_REFRESH.md) records the baseline gaps,
-seven supported retrieval scenarios, validation and installation evidence. The
-mapping validator still cannot encode evidence scope or precedence, and a
-composite can pass its membership check with only one overlapping group. Reconcile
-source tables before populating `members.csv`, then review every candidate and
-its spatial weights independently. The expanded carbon-conversion literature
-review and new model coverage remain deferred.
-
-## Using the distributions
-
-Choose one agent directory. Copy the **three individual skill folders**, not their
-parent, into that agent's skill location when installation is wanted. Claude Code
-project skills use `.claude/skills/`; Codex personal skills use `$CODEX_HOME/skills`
-(normally `~/.codex/skills/`). The Claude archives are ready for interfaces that
-accept `.skill` uploads. Codex primarily uses the unpacked folders; its archives
-are portable copies containing the same resources and metadata.
-
-Repository rebuilds do not automatically update installed skills. The
-2026-09-10 refresh deliberately updated the existing
-`C:\Users\idoca\.agents\skills\ecopath-extraction` copy after backing it up,
-while preserving its existing interface metadata. The paths and verified file
-hashes are in [the installation record](../data/installed_skill_refresh.json).
-No new global skills were installed. In this checkout, read
-`skills/codex/<name>/SKILL.md` for Codex or `skills/claude/<name>/SKILL.md` for
-Claude; do not assume another installed copy has picked up repository changes.
-
-Resolve bundled script paths from the skill's own directory. Resolve repository
-tools and data from the GlobalPPREstimation checkout. `GLOBALPPR_ROOT` tells mapping
-helpers where the data are; it does not change the working directory or make a
-relative script path resolve differently.
-
-## Editing and rebuilding
+## Current editing locations
 
 | Change | Edit here |
-| --- | --- |
-| Extraction workflow, scripts, references or templates, including mortality/discard source accounting | `claude/ecopath-extraction/` |
-| Mapping workflow, scripts, references or examples, including the annual PPR/NPP integration contract | `claude/ewe-species-to-group-mapper/` |
-| Combined router and taxonomy stage | `combined-src/` |
-| Codex entry points and interface metadata | `codex-src/<skill>/` |
+|---|---|
+| Combined entry point, stage routing and scope | [combined-src/SKILL.md](combined-src/SKILL.md) |
+| Source preparation, extraction and selection | [model-preparation.md](combined-src/references/model-preparation.md) |
+| Missing data and supplements online | [missing-data-recovery.md](combined-src/references/missing-data-recovery.md) |
+| Source, conversion and loaded-state audit | [reconstruction-audit.md](combined-src/references/reconstruction-audit.md) |
+| Group taxonomy and JSON-only models | [group-taxonomy.md](combined-src/references/group-taxonomy.md) |
+| Direct GE, TE and With Egestion diagnostics | [direct-diagnostics.md](combined-src/references/direct-diagnostics.md) |
+| Catch matching, comparisons and regional PPR/NPP | [regional-calculation.md](combined-src/references/regional-calculation.md) |
+| Registry, map and knowledge graph | [project-integration.md](combined-src/references/project-integration.md) |
 
-`claude/ecopath-paper-to-ppr/` and all of `codex/` are generated. Do not edit their
-copied resources directly. The Claude source directories are also runnable skills;
-they are the common domain source so a correction is made once.
+The former prepare-ecopath-model, calculate-regional-ppr and update-ppr-project skill folders were removed after their instructions and references were integrated here. Their capabilities remain stages of this combined skill.
 
-From the repository root:
+The current skill is repository-dependent: run it from this checkout, resolving Project.xlsx and the project README as described in its entry point. References to retained domain resources resolve within this tree; do not copy only combined-src into a personal skill directory and assume the neighboring dependencies travel with it. No personal installation is changed by a repository update.
 
-```text
-python skills/build_combined_skill.py
-python skills/build_combined_skill.py --check
-```
+## Retained scientific resources
 
-The builder assembles both complete distributions and all six archives with stable
-archive metadata. `--check` writes nothing and fails for stale or missing files,
-unexpected skills or stale archives. `build_skill.py` remains a compatibility
-entry point to the same builder. Tests also verify resource and archive parity.
+`claude/ecopath-extraction/` retains the detailed extraction workflow, eight-file templates, validators, converter helpers and scientific references. `claude/ewe-species-to-group-mapper/` retains mapping procedures, structure/coarse-taxon guidance, examples and validation helpers. The former assembled `claude/ecopath-paper-to-ppr/references/` also retains source-bundle, integration and mortality/discard references. The active combined stage references link the needed resources explicitly. Resolve scripts and embedded paths in those documents against their own original skill directory, then adapt their historical repository I/O to the current workbook contract.
 
-The old `skills/<skill>/` directories now live under `skills/claude/`; active
-integration imports and commands have been updated. Older handoff examples and
-historical design documents use the old paths. The former
-`ecopath-extraction-gpt.skill` is superseded by `codex/ecopath-extraction.skill`;
-its PDF portability and unknown-value documentation improvements were preserved
-in the common extraction resources.
+Capture taxonomy once during source reading and reuse it for exact model-group matching. Preserve unknown values, source-table purpose, spatial scope, original inputs and configuration-specific diagnostic limitations. The current combined instructions govern execution where retained documents use old paths or broader diagnostics.
 
-For SPPR use `tools/run_sppr.py`, including for one-model runs. The combined skill
-now also documents `tools/apply_taxonomy.py` for Ecobase JSONs without an extraction
-folder. Neither tool is bundled as a standalone skill helper: both need this
-repository's algorithm and inputs.
+## Historical distributions and audits
 
-The September11 follow-up adds all-identity simple PPR, regional NPP independent
-of catch, NPP-only and fixed global-atlas views, physical-support limits, verified
-source/cache lineage and the article reference/use log. Mapping-only and
-extraction-only requests retain their stage boundaries. See
-[`docs/SKILL_KNOWLEDGE_REFRESH.md`](../docs/SKILL_KNOWLEDGE_REFRESH.md) for the
-independent retrieval checks and installed-skill backup record.
+The `claude/`, `codex/` and `codex-src/` skill entry points and six `.skill` archives record earlier distributions. They are retained resources, not extra active project skills. The historical `build_combined_skill.py` and compatibility builder assemble those former three-skill distributions; they are not the refresh command for this current combined workflow. Do not run them to publish or validate the active combined source. No current portable package or installed personal copy is claimed by this consolidation.
+
+The original 201-file preservation audit and earlier refresh reports describe their dated snapshots. The current combined SKILL.md, taxonomy reference and this README were intentionally revised; six project-stage/detail references were added. Other original scientific scripts, templates, examples and distribution files remain unchanged. Historical commands such as tools/run_sppr.py, tools/apply_taxonomy.py and old data/top10 paths are superseded by the current instructions; do not recreate the old project layout to follow them.
+
+For ongoing work, use the [project README](../../../README.md) and the [combined skill](combined-src/SKILL.md). Validate relative resources and requested-stage behavior after edits, then refresh the current knowledge graph when requested.

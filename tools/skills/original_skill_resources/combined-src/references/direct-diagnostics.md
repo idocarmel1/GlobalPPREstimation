@@ -4,7 +4,7 @@ This project's default is GE, TE and With Egestion only. Global, broad inventori
 
 ## Admission and execution
 
-1. Read source and transformation evidence for the selected or explicitly named candidate. Confirm canonical and computational-input identities. Apply the [reconstruction audit](../../prepare-ecopath-model/references/reconstruction-audit.md), including missing biology, native-equation limitations and post-loader mutations.
+1. Read source and transformation evidence for the selected or explicitly named candidate. Confirm canonical and computational-input identities. Apply the [reconstruction audit](reconstruction-audit.md), including missing biology, native-equation limitations and post-loader mutations.
 2. Use the audited candidate-specific constructor/settings or reproduce them in a bounded regional script. Do not silently substitute stock defaults, change diet tolerance, normalize, solve new BA, pool groups or repair parameters. Authorized variants retain their own identities and changes ledgers.
 3. If construction fails, retain the exception and report each unexecuted option as NOT_RUN. A source balance check does not substitute for a diagnostic return. After successful construction, call the actual method:
 
