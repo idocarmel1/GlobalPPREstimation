@@ -21,6 +21,7 @@
     h2,h3{font-family:Manrope;margin:0}.section-title{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin:18px 0 8px}.section-title:first-child{margin-top:0}
     .search{position:relative}.search input{width:100%;padding:10px 12px 10px 34px;border:1px solid var(--line);border-radius:9px;background:#f7fbfc;outline:none}.search:before{content:'⌕';position:absolute;left:12px;top:8px;color:#69808f;font-size:20px}.search input:focus{border-color:#52aeb5;box-shadow:0 0 0 3px rgba(62,169,177,.13)}
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field label{font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}.field select{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;background:#fff}
+    .rank-selection{grid-template-columns:repeat(2,minmax(0,1fr))}.rank-selection .field{min-width:0}#rankCustomField{grid-column:1/-1}#rankCustom{width:100%}
     .range-row{display:flex;align-items:center;gap:10px}.range-row input{flex:1;accent-color:var(--teal)}.range-val{font:700 12px Manrope;background:#e8f5f6;color:#0b6b73;padding:4px 7px;border-radius:6px;min-width:34px;text-align:center}
     .checks{display:grid;gap:7px}.check{display:flex;align-items:center;gap:8px;font-size:12px}.check input{accent-color:var(--teal)}
     .region-list{display:grid;gap:5px}.region-btn{display:grid;grid-template-columns:31px 1fr auto;align-items:center;gap:7px;border:1px solid transparent;background:#f7fafb;border-radius:8px;padding:7px 8px;text-align:left;cursor:pointer;color:var(--ink)}.region-btn:hover,.region-btn.active{border-color:#72bdc3;background:#e9f5f6}.rank{height:27px;width:27px;display:grid;place-items:center;border-radius:50%;background:#dcecf0;font:700 10px Manrope}.region-btn b{font-size:12px}.region-btn small{font-size:10px;color:var(--muted)}.qdot{width:9px;height:9px;border-radius:50%}
@@ -48,7 +49,13 @@
       <div class="section-title">Find an ecosystem or article</div><div class="search"><input id="search" placeholder="Search names, authors, titles…"></div>
       <div class="section-title">Year</div><div class="field"><select id="yearFilter" aria-label="Year"></select></div><p id="yearTotal" style="font-size:11px;color:#647b8b"></p><div class="section-title">Filters</div>
       <div class="grid2"><div class="field"><label>Region type</label><select id="typeFilter"><option value="all">All region types</option><option value="EEZ">EEZ only</option><option value="LME">LME only</option><option value="High Seas">High Seas only</option></select></div><div class="field"><label for="rankSetFilter">Ecosystem set</label><select id="rankSetFilter"><option value="atlas">Atlas ensemble (167)</option><option value="all">All 366</option></select></div></div>
-      <div class="grid2"><div class="field"><label for="rankFilter">Ecosystems to display</label><select id="rankFilter"><option value="10">Top 10</option><option value="25">Top 25</option><option value="50">Top 50</option><option value="all" selected>All</option><option value="custom">Other number</option></select></div><div class="field" id="rankCustomField" hidden><label for="rankCustom">Number to display</label><input id="rankCustom" type="number" min="1" step="1" value="100" aria-describedby="rankCustomHelp"><small id="rankCustomHelp">Enter a positive whole number.</small></div></div><div class="section-title">Map layers</div><div class="checks"><label class="check"><input id="showRegions" type="checkbox" checked> Ecosystem boundaries + current ranks</label><label class="check"><input id="colorRegionsByPpr" type="checkbox"> Color polygons by selected metric</label></div>
+      <div class="grid2 rank-selection">
+        <div class="field"><label for="rankFilter">Ecosystems to display</label><select id="rankFilter"><option value="10">Top 10</option><option value="25">Top 25</option><option value="50">Top 50</option><option value="all" selected>All</option><option value="custom">Other number</option></select></div>
+        <div class="field"><label for="rankBasisFilter">Select top by</label><select id="rankBasisFilter" aria-describedby="rankBasisHelp"><option value="metric">Selected metric</option><option value="simple_2019">2019 simple-chain PPR</option></select></div>
+        <div class="field" id="rankCustomField" hidden><label for="rankCustom">Number to display</label><input id="rankCustom" type="number" min="1" step="1" value="100" aria-describedby="rankCustomHelp"><small id="rankCustomHelp">Enter a positive whole number.</small></div>
+      </div>
+      <p id="rankBasisHelp" class="network-note" hidden>Top ecosystems use 2019 simple-chain PPR for all catch, including discards, with all taxa included. Colors and numbered ranks follow the selected metric and year. Selecting All shows the full ecosystem set.</p>
+      <div class="section-title">Map layers</div><div class="checks"><label class="check"><input id="showRegions" type="checkbox" checked> Ecosystem boundaries + current ranks</label><label class="check"><input id="colorRegionsByPpr" type="checkbox"> Color polygons by selected metric</label></div>
 
       <div class="section-title">Map metric</div>
 
@@ -592,10 +599,10 @@ if (typeof module !== 'undefined') module.exports = PPRMetrics;
   else root.PPRMapRanking=api;
 })(typeof globalThis==='object'?globalThis:this,function(){
   const finite=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0;
-  function rank(regions,ids){
+  function rank(regions,ids,selectionValues=null){
     for(const r of regions){
       r.inRankingSet=ids===null||ids.has(r.unit_id);
-      r.ppr_rank=null;r.rank_position=null;r.global_ppr_share=null;
+      r.ppr_rank=null;r.rank_position=null;r.selection_position=null;r.global_ppr_share=null;
       r.cumulative_ppr_share=null;r.cumulative_before_share=null;
     }
     regions.sort((a,b)=>Number(b.inRankingSet)-Number(a.inRankingSet)||
@@ -615,6 +622,12 @@ if (typeof module !== 'undefined') module.exports = PPRMetrics;
       });
       start=end;
     }
+    // Selection may use a fixed reference while metric ranks and colors stay current.
+    if(selectionValues){
+      members.filter(r=>finite(selectionValues[r.unit_id]))
+        .sort((a,b)=>selectionValues[b.unit_id]-selectionValues[a.unit_id]||a.unit_id.localeCompare(b.unit_id))
+        .forEach((r,i)=>{r.selection_position=i+1;});
+    }else members.forEach(r=>{r.selection_position=r.rank_position;});
     return {total,available:available.length,size:members.length,
       extent:available.length?[available[available.length-1].networkResult.value,available[0].networkResult.value]:[0,1]};
   }
@@ -622,7 +635,7 @@ if (typeof module !== 'undefined') module.exports = PPRMetrics;
     if(!region.inRankingSet)return false;
     if(limit==='all')return true;
     const count=Number(limit==='custom'?custom:limit);
-    return Number.isSafeInteger(count)&&count>0&&region.rank_position!==null&&region.rank_position<=count;
+    return Number.isSafeInteger(count)&&count>0&&region.selection_position!==null&&region.selection_position<=count;
   }
   return {rank,visible};
 });
@@ -635,7 +648,12 @@ const defaultMethod=['inner','PP'].includes(mapParams.get('scope'))||['ratio','b
 const metricState = {year:DB.year,scope:['all','inner','PP'].includes(mapParams.get('scope'))?mapParams.get('scope'):'all',mode:['ppr','npp','ratio','npp_ratio','b','rho_living'].includes(mapParams.get('metric'))?mapParams.get('metric'):'ppr',method:mapParams.get('method')||defaultMethod,denominator:mapParams.get('denominator')||'new_TE_EEfix',te:mapParams.get('te')==='TE'?'TE':'GE',
   catch_basis:['catch','discards'].includes(mapParams.get('catch_basis'))?mapParams.get('catch_basis'):'landings',uncertainty:mapParams.get('uncertainty')==='0'?'0':'1',
   npp:mapParams.get('npp')||'ens_median_tC_yr',npp_fill:mapParams.get('npp_fill')==='earliest'?'earliest':'observed',unidentified:['zero','simple'].includes(mapParams.get('unidentified'))?mapParams.get('unidentified'):'method'};
-const rankState={set:mapParams.get('rank_set')==='all'?'all':'atlas',limit:['10','25','50','all','custom'].includes(mapParams.get('limit'))?mapParams.get('limit'):'all',custom:mapParams.get('count')||'100'};
+const rankState={set:mapParams.get('rank_set')==='all'?'all':'atlas',limit:['10','25','50','all','custom'].includes(mapParams.get('limit'))?mapParams.get('limit'):'all',custom:mapParams.get('count')||'100',basis:mapParams.get('rank_basis')==='simple_2019'?'simple_2019':'metric'};
+// Fixed, model-independent reference: current display settings must never enter this calculation.
+const referencePpr2019=Object.fromEntries(regions.map(r=>[r.unit_id,PPRMetrics.evaluate(null,null,{
+  year:2019,mode:'ppr',scope:'all',method:'simple trophic chain',catch_basis:'catch',unidentified:'method',
+  simple_unit:network.simple_units?.[r.unit_id]
+}).value]));
 const curatedIds=new Set(DB.curated_region_ids||[]);
 const chosenModels = Object.fromEntries(Object.entries(network.units).map(([id,u])=>[id,u.default_model]));
 metricState.group_selections=groupStore?.data.selections||{};
@@ -880,13 +898,15 @@ function applyYear(year) {
     r.total_catch_tonnes=r.networkResult.total_catch??(metricState.catch_basis==='catch'?annual?.[r.unit_id]?.[1]??null:null);
     r['data availability']=r.networkResult.value==null?'unavailable':isIndependentSimple()&&!r.networkResult.group_selection?.active?'catch_trophic_levels':'pilot';
   });
-  const summary=PPRMapRanking.rank(regions,rankState.set==='atlas'?curatedIds:null);
+  const summary=PPRMapRanking.rank(regions,rankState.set==='atlas'?curatedIds:null,rankState.basis==='simple_2019'?referencePpr2019:null);
+  $('rankBasisHelp').hidden=rankState.basis!=='simple_2019';
+  $('rankBasisFilter').title=rankState.basis==='simple_2019'?'2019 simple-chain PPR · all catch, including discards':'Selected metric';
   colorExtent=summary.extent;
   regionGroup.clearLayers();markerGroup.clearLayers();regions.forEach(addRegion);
   $('yearTotal').textContent=`${summary.available} of ${summary.size} ecosystems in the selected set have this result. ${metricState.mode==='npp'?'NPP does not require catch or an Ecopath model.':isIndependentSimple()?'Simple chain uses available catch and catch-taxon TL independently of articles.':'Ecopath methods require a verified selected model; models remain separate.'} Ranks use the full set before display filters. ${rankState.set==='all'?'The all-ecosystem sum includes overlapping regions.':''}`;
   if(isIndependentSimple()&&regions.some(r=>r.networkResult?.group_selection?.active))$('yearTotal').textContent=$('yearTotal').textContent.replace('independently of articles','with model catch allocations where group selections are active');
   updateLegend();if(selectedId)renderDetails(regionById[selectedId]);refresh();
-  const params=new URLSearchParams(location.search);params.set('rank_set',rankState.set);params.set('limit',rankState.limit);if(rankState.limit==='custom')params.set('count',rankState.custom);else params.delete('count');params.set('metric',metricState.mode);params.set('year',DB.year);params.set('npp',metricState.npp);params.set('npp_fill',metricState.npp_fill);
+  const params=new URLSearchParams(location.search);params.set('rank_set',rankState.set);params.set('rank_basis',rankState.basis);params.set('limit',rankState.limit);if(rankState.limit==='custom')params.set('count',rankState.custom);else params.delete('count');params.set('metric',metricState.mode);params.set('year',DB.year);params.set('npp',metricState.npp);params.set('npp_fill',metricState.npp_fill);
   for(const key of ['scope','method','denominator','te','unidentified','catch_basis','uncertainty'])params.set(key,metricState[key]);
   const overrides=Object.fromEntries(Object.entries(chosenModels).filter(([id,index])=>index!==network.units[id].default_model).map(([id,index])=>[id,network.units[id].models[index].id]));
   if(Object.keys(overrides).length)params.set('models',JSON.stringify(overrides));else params.delete('models');
@@ -921,9 +941,9 @@ passRegion=function(r){
   const select=$('rankFilter'),previous=select.value;
   try{select.value='all';return priorPassRegion(r);}finally{select.value=previous;}
 };
-$('rankSetFilter').value=rankState.set;$('rankFilter').value=rankState.limit;$('rankCustom').value=rankState.custom;
+$('rankSetFilter').value=rankState.set;$('rankFilter').value=rankState.limit;$('rankCustom').value=rankState.custom;$('rankBasisFilter').value=rankState.basis;
 $('rankCustomField').hidden=rankState.limit!=='custom';
-for(const [id,key,event] of [['rankSetFilter','set','change'],['rankFilter','limit','change'],['rankCustom','custom','input']]){
+for(const [id,key,event] of [['rankSetFilter','set','change'],['rankFilter','limit','change'],['rankCustom','custom','input'],['rankBasisFilter','basis','change']]){
   $(id).addEventListener(event,()=>{
     rankState[key]=$(id).value;$('rankCustomField').hidden=rankState.limit!=='custom';applyYear(DB.year);
   });

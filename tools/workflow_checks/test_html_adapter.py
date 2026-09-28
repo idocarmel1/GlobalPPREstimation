@@ -7,6 +7,12 @@ from build_html import atomic_text,linked_layout
 from workbooks import YEARS
 
 class HtmlAdapterTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('node'),'Node is required for the map selection check')
+    def test_map_reference_selection_preserves_metric_ranks(self):
+        check=Path(__file__).with_name('check_map_selection.js')
+        result=subprocess.run([shutil.which('node'),str(check)],capture_output=True,text=True,encoding='utf-8')
+        self.assertEqual(result.returncode,0,result.stderr)
+
     def test_bundled_basemap_embeds_geometry_and_keeps_scientific_payload(self):
         root=Path(__file__).resolve().parents[2]
         template=root/'tools/original_html_layout/index.html';before=template.read_bytes()
