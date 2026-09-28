@@ -30,7 +30,7 @@ def export_taxon(book,output):
         writer=csv.writer(f);writer.writerow(['model_id','taxon','scope','method','catch_basis','status',*YEARS])
         for r in records(book,'PPR','Taxon SPPR'):
             st=status.get((r['scope'],r['method']),'unavailable');v=r['sppr']
-            writer.writerow([r['model_id'],r['taxon'],r['scope'],r['method'],basis,st,*[c*v if st=='ok' and finite(c) and finite(v) else None for c in catch.get((r['taxon'],basis),[None]*70)]])
+            writer.writerow([r['model_id'],r['taxon'],r['scope'],r['method'],basis,st,*[c*v if numeric_status(st) and finite(c) and finite(v) else None for c in catch.get((r['taxon'],basis),[None]*70)]])
 
 def sppr(book,path,timeout):
     o=overview(book);selected=o.get('selected_model_id')

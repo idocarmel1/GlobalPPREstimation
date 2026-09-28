@@ -1,0 +1,4723 @@
+
+PDF PAGE 1
+1 
+DRAFT DOCUMENT – DO NOT CITE WITHOUT PERMISSION OF AUTHORS 
+1 
+ 
+2 
+Food Web Models and Data for Studying the Interactions 
+between Marine Mammals and Fisheries 
+ 
+3 
+LYNE MORISSETTE1, 2, KRISTIN KASCHNER3, JENNY LYNN MELGO1 AND LEAH R. GERBER1 
+4 
+Contact email: lyne.morissette@globetrotter.net 
+5 
+ 
+6 
+1School of Life Sciences, Arizona State University, Box 874501 Tempe, AZ, 85287-4501, USA; Phone: 480 
+7 
+727 3109;  
+8 
+2Institut des Sciences de la Mer de Rimouski, 310, Allée des Ursulines, C.P. 3300, Rimouski, QC, G5L 2Y9, 
+9 
+Canada; Tel. 418-723-1986 #1981; 
+10 
+3Evolutionary Biology & Ecology Lab, Institute of Biology I (Zoology), Albert-Ludwigs-University 
+11 
+Freiburg, Germany.  
+12 
+ABSTRACT 
+13 
+We are developing ecosystem models to examine the trophic interactions between marine mammals and fisheries in (1) 
+14 
+Northwest Africa, (2) the Caribbean, and (3) the tropical South Pacific. Food web models are being constructed using 
+15 
+Ecopath and Ecosim (EwE, www.ecopath.org) to examine the potential impact of a reduction in the abundance of great 
+16 
+whales on fishery yield. An extensive literature search is being conducted to synthesize available data about ecological 
+17 
+parameters and trophic interactions for marine mammals, fish and invertebrates to parameterize models for our three study 
+18 
+areas. Models will allow us to characterize the structure and function of these ecosystems in terms of biomass, mortalities, 
+19 
+consumption rates, food habits and fisheries. Faced with sparse data for our study regions, we are explicitly accounting for 
+20 
+uncertainty in input data, ecosystem structure, model accuracy, marine mammal feeding rates, abundance estimates, and 
+21 
+consumption in breeding areas. In addition, we are conducting an extensive sensitivity analysis to examine the effects of 
+22 
+model parameters and changes in model assumptions. The predictability of our models is validated with time series of 
+23 
+biomass for important species of the system. We then use our model as a predictive framework for examining the 
+24 
+ecosystem impacts of changes in the abundance of large whales, including changes in fishery yield. 
+25 
+In this paper we present preliminary results from our Northwest Africa model, which includes the Large Marine Ecosystem 
+26 
+(LME) of the Canary Current, located on the eastern part of the Atlantic Ocean, and bounded by the coasts of Morocco, 
+27 
+Mauritania, Senegal, Guinea-Bissau, the Canary Islands (Spain), Gambia, Cape Verde and Western Sahara.  The model 
+28 
+includes 10 marine mammal groups and 17 additional groups comprised of fish, seabirds, invertebrates, benthos, and 
+29 
+plankton.  Both local and foreign fleets are also included the model. Preliminary results indicate that: 1) The overlap 
+30 
+between prey species consumed by marine mammal and species targeted in fisheries is low; and 2) Given a wide range of 
+31 
+assumptions about whale abundances, diet composition and food consumption in breeding areas, we consistently found 
+32 
+that: (a) Whale consumption is several orders of magnitude lower than total fishery catches; (b) Food intake of whales in 
+33 
+our study area is two orders of magnitude lower than the amounts taken by other trophic groups (e.g. pelagic fishes); and 
+34 
+(c) In preliminary simulations, reducing whale biomass does not influence the biomass of commercially important fish, nor 
+35 
+any other species of the food web.  While our results are preliminary, we expect that our modeling approach will begin to 
+36 
+answer questions about the competition between whales and commercial fisheries in these regions, and will allow the 
+37 
+identification of data gaps and additional research needs.  
+38 
+KEYWORDS: COMPETITION, ECOPATH WITH ECOSIM, FISHERIES, MARINE MAMMALS, PREDATION, 
+39 
+TROPHIC IMPACTS, MARINE MAMMAL-FISHERIES INTERACTION, ECOSYSTEM MODELING  
+40 
+INTRODUCTION 
+41 
+In recent years, there has been much debate about the potential impacts of large whales on marine 
+42 
+ecosystems (Tamura and Ohsumi, 2000; Anonymous, 2001; Struck, 2001; Mori ad Butterworth 2006; Holt, 
+43 
+2007; Jackson, 2007) and it has been proposed that whales are the culprits behind decreased fish stocks 
+44 
+(e.g. Tamura and Ohsumi, 2000). According to Tamura and Ohsumi (2000), the total annual prey 
+45 
+consumption by cetaceans in the world is estimated to be 249-436 million tons, representing three to six 
+46 
+times the amount taken in marine fisheries. The implication of this estimate is that this biomass represents a 
+47 
+surplus resource that would be directly available for human consumption if cetacean numbers were to be 
+48 
+
+
+PDF PAGE 2
+2 
+reduced. The rationale for such arguments is questionable in light of documented overfishing occurring on 
+1 
+a global scale (Jackson et al., 2001; Pauly et al., 2002; Baum et al., 2003; Myers and Worm 2003), the lack 
+2 
+of scientific evidence for existing large-scale competition between marine mammals and fisheries 
+3 
+(Kaschner, 2004; Morissette, 2007, Alder et al., in press), and the unpredictable consequences of culling 
+4 
+(Paine et al., 1998; Scheffer et al., 2001). Nonetheless, the “whales eat fish” issue has become a significant 
+5 
+point of contention at recent International Whaling Commission (IWC) meetings. 
+6 
+Little is known about the ecological consequences of the removal of whales in terms of their past 
+7 
+roles as consumers in food chains and as prey and carrion (Katona and Whitehead, 1988; Springer et al., 
+8 
+2003). Evidence suggests that ocean ecosystems throughout the world have experienced a dramatic shift in 
+9 
+ecosystem structure as a result of the removal of large whales as well as extensive fishing activities (see 
+10 
+Estes et al., 2007). To understand the impact of whales on commercial fisheries, it is necessary to analyze 
+11 
+the situation in the context of ecosystems as there are a large number of indirect and direct interactions 
+12 
+through which these two groups might influence each other (Bax, 1998; IWC, 2004; Morissette et al., 
+13 
+2006). When complex trophic interactions are taken into consideration, culling of marine mammals does 
+14 
+not always benefit the fish stocks (Punt and Butterworth, 1995; Plagányi and Butterworth, 2002; Morissette 
+15 
+in prep.). By feeding on other species that could be competing with fisheries, marine mammals and other 
+16 
+high-level predators may actually increase fisheries yield (Punt and Butterworth, 1995; Walters and 
+17 
+Kitchell, 2001). Only by considering all possible direct and indirect trophic linkages can the effect of the 
+18 
+partial or complete removal of large whales on current fisheries yields be reliably assessed. 
+19 
+Here, we examine the scientific evidence for the assertion that commercial fisheries are negatively 
+20 
+impacted by whales in tropical waters. Our approach is to develop food web models using Ecopath and 
+21 
+Ecosim (EWE, www.ecopath.org), which allows us to characterize the structure and function of these 
+22 
+ecosystems in terms of biomass, mortalities, consumption rates, food habits, general ecosystem indicators 
+23 
+and fisheries. Our analyses focus on three regions where the “whales eat fish” assertion has become a 
+24 
+political and management issue. Our study includes three areas: (1) northwest Africa, (2) the Caribbean and 
+25 
+(3) the tropical South Pacific.  In this paper we present preliminary results from the northwest African 
+26 
+model. While competition between marine mammals and fisheries might occur in areas that represent 
+27 
+important marine mammal feeding grounds (NAMMCO, 1997; Tamura et al., 1998; Folkow et al., 2000; 
+28 
+Sigurjónsson et al., 2000; Kaschner, 2004), our focal areas are primarily breeding sites for baleen whales 
+29 
+thus we do not expect that the great whales have the potential to significantly impact fisheries (Lockyer 
+30 
+1981). Nonetheless, to incorporate the possibility for unusual feeding events, we consider a range of 
+31 
+scenarios for whale biomass, feeding rates as well as the trophic levels that are targeted by whales. While 
+32 
+there is great uncertainty in many model parameters for our focal areas, we propose that models could be 
+33 
+developed and refined as data become available (Walters et al., 1997; Currie, 2007; Hammill and Stenson, 
+34 
+2007) rather than engaging in discussions about the interactions between whales and fish in the absence of 
+35 
+data. Furthermore, models may be used to consider the range of plausible outcomes emerging from various 
+36 
+assumptions about uncertainty in parameters. In this way our models provide useful starting points for 
+37 
+understanding the interaction between whales and fisheries in tropical waters. In collaboration with Pew-
+38 
+Lenfest Ocean Program, we recently convened a regional workshop have been held in Northwest Africa to 
+39 
+access local data resources and expertise and to gain feedback from scientists and other local stakeholders 
+40 
+that will allow us to improve our models (Appendix 1). Similar workshops are planned for the other focal 
+41 
+areas during summer and fall 2008. Here we describe our modelling approach and preliminary results for 
+42 
+Northwest Africa. 
+43 
+MATERIAL AND METHODS 
+44 
+Our study area was selected because the “whales eat fish” conflict has become a management 
+45 
+controversy in this region (Busby, 2004, Fig. 1). For instance, a recent symposium in northwest Africa 
+46 
+concluded that:  
+47 
+“We, participants of African countries and members of the IWC, gathered in Rabat on 11 and 12 
+48 
+February 2008 for the symposium on the sustainable utilization of living marine resources in the 
+49 
+African region...Considering the natural competition existing between the whale species and the 
+50 
+inhabitants of developing countries in the use of living marine resources, notably the stocks of 
+51 
+small pelagic species...invite the contracting parties to pay particular attention to scientific 
+52 
+research and to give priority to objective decisions based on science” (Symposium on the 
+53 
+
+
+PDF PAGE 3
+3 
+Sustainable Utilization of Living Marine Resources of the African Region, Rabat, 11-12 February, 
+1 
+2008). 
+2 
+While it may seem intuitive that whales do not impact fisheries in tropical breeding areas, the 
+3 
+‘whales eat fish issue’ has become very relevant in the policy management context in these areas, including 
+4 
+Northwest Africa. 
+5 
+Study area and cetacean species 
+6 
+Our study area is located off the coast of Africa, bounded by Morocco, Mauritania, Senegal, 
+7 
+Guinea-Bissau, the Canary Islands (Spain), Gambia, Cape Verde and Western Sahara (Fig. 1). This area is 
+8 
+defined by the United States National Oceanic and Atmospheric Administration (NOAA) as the Canary 
+9 
+Current large marine ecosystem (LME), and is included in the Food and Agriculture Organization’s 
+10 
+(FAO’s) Eastern Central Atlantic (Major Fishing Area 34), mainly covering subdivision 34.1 (Northern 
+11 
+coastal), and part of subdivision 34.2 (Northern oceanic). The specific area of this model covers latitudes 
+12 
+from 8.5 N to 35.97 N, and longitudes from 30W to 6.5W, for a total area of 3,561,028.537km2 (Fig. 1). 
+13 
+Our study area includes the continental shelf as well as the deeper offshore waters. 
+14 
+The northwest coast of Africa is characterised by the presence of the Canary Current, which flows 
+15 
+along the African coast from north to south between 30°N and 10°N and offshore to 20°W (Fedoseev, 
+16 
+1970). As a consequence, one major characteristic of this ecosystem is that it represents a major upwelling 
+17 
+zone and is also supported by other seasonal nutrient enrichments. Climate is the primary force driving the 
+18 
+dynamics of this ecosystem, with intensive fishing as the secondary driving force (Bas, 1993).   
+19 
+The geographical and oceanographic characteristics of our study area represent unique 
+20 
+environmental conditions, supporting significant biodiversity of both resident and migratory cetacean 
+21 
+species (Brown and Lockyer 1984; Klinowska, 1991; Northridge, 1991; Jefferson et al., 1993; Perry et al., 
+22 
+1999; Perrin et al., 2002). Baleen whales that occur in terms of significant biomass include sei 
+23 
+(Balaenoptera borealis), Bryde’s (B. brydei), humpback (Megaptera novaeangliae), minke (Balaenoptera 
+24 
+acutorostrata) and fin (B. physalus) whales. Other baleen whales such as blue whales (B. musculus) are 
+25 
+known to be present, but are likely to be less abundant (Kaschner, 2004). In terms of biomass, sperm 
+26 
+whales (Physeter macrocephalus) are probably the most important toothed whale species. Other odontocete 
+27 
+species include killer whales (Orcinus orca) and beaked whales (such as Mesoplodon densirostris, M. 
+28 
+europaeus, and Ziphius caviostris,). Finally, there are also communities of small delphinids (Table 1). 
+29 
+Northwest African waters represent a tropical breeding environment for most baleen whales 
+30 
+(Brodie, 1975; Sergeant, 1977; Brown & Lockyer, 1984; Corkeron & Connor, 1999; Perry et al., 1999, 
+31 
+Clapham, 2002; Jann et al., 2003). Indeed, except for the Bryde’s whale which is known to occur in these 
+32 
+areas year round, minke, blue, fin, sei and humpback whales spend their feeding season in the subpolar and 
+33 
+polar waters of the Northern or Southern Hemisphere. It should also be noted that for species such as 
+34 
+minke, fin and possibly sei whales the low latitudes of our focal area likely represent the extreme limits of 
+35 
+their equator-bound breeding migrations. In general, most baleen whales only spend about a third of the 
+36 
+year in their breeding grounds, where they are known to either fast or eat at a considerably reduce rate 
+37 
+(Chittleborough, 1965; Sergeant, 1977; Best, 1982; Brown and Lockyer, 1984; Horwood, 1990, Kenney et 
+38 
+al., 1995; Perry et al., 1999; Clapham, 2002; Perrin, 2002; Mohammed, 2003) (Lockyer, 1981). 
+39 
+Consequently, average amounts consumed in breeding areas have been estimated to amount to about 10% 
+40 
+or less of that in the feeding ground (Lockyer, 1981). Sperm whales are also known to be migratory; adult 
+41 
+males in particular undertake vast journeys to their summer feeding grounds in polar waters of both 
+42 
+hemispheres. However, unlike the baleen whales, this toothed whale is not known to alter its feeding 
+43 
+behaviour in tropical waters (Whitehead, 2002). Although some of the other toothed whale species might 
+44 
+undertake small migrations or seasonal inshore-offshore movements, these are not known to be associated 
+45 
+with changes in feeding patterns. 
+46 
+Whaling is known to occur in Northwest African waters (Reeves, 2002), but to our knowledge no 
+47 
+official data on current actual harvests are available. The only record available documents aboriginal 
+48 
+subsistence whaling in Equatorial Guinea, where Indigenous Africans principally target Humpback whales 
+49 
+(and mainly calves). No estimate is available on the annual take, but Aguilar (1985) guessed that it was 
+50 
+approximately three humpback whales annually. These whales are assumed to be part of a Southern 
+51 
+Hemisphere population of humpback whales (Reeves, 2002). 
+52 
+
+
+PDF PAGE 4
+4 
+In terms of fisheries, the area off the coast of Northwest Africa is generally thought to be 
+1 
+overexploited for most coastal demersal species (Samb and Mendy, 2004). As a result, fishing effort has 
+2 
+shifted to small pelagics, such as sardinellas. Despite the fact that acoustic surveys show a relatively stable 
+3 
+abundance for this species, Samb and Mendy (2004) suggest that this shift in target species needs further 
+4 
+investigation because sardinellas have an important role in maintaining the structure of the food web. The 
+5 
+Northwest African ecosystem supports both local and foreign fleets, representing an average of 2 million 
+6 
+tons of fish caught annually in the system (Sea Around Us, 2008). From 1987 to 2004, local fleets generally 
+7 
+caught the majority of this biomass, but the proportion of local vs. foreign catches varied from a minimum 
+8 
+of 53.1% taken by local fleets in 1990 to a maximum of 81.7%  taken in 1994.  Demersal fisheries have 
+9 
+increased substantially over the last few decades (Gascuel et al., 2007), but few studies describe catches 
+10 
+and fishing effort (Gascuel et al., 2007). 
+11 
+Ecosystem models 
+12 
+Ecopath is a widely used software program that provides a dynamic capability for exploring past 
+13 
+and future impacts of fishing and environmental disturbances as well as for exploring optimal fishing 
+14 
+policies. While there are a number of modeling approaches available (Morissette, 2007; Plagányi, 2007), 
+15 
+we use Ecopath for our study given the good representation of predator-prey interactions and the inclusion 
+16 
+of different routines to take account of the estimation uncertainty associated with model inputs (Plagányi 
+17 
+and Butterworth, 2004). The model’s simplicity and its ability to accurately identify ecological 
+18 
+relationships is also appropriate for our questions relating to the interaction between whales and fisheries. 
+19 
+Using this model, each trophic group in the model is represented by one balanced equation and 
+20 
+requires six input parameters: biomass (Bi), production to biomass ratio (Pi/Bi), consumption to biomass 
+21 
+ratio (Qi/Bi), ecotrophic efficiency (EEi), diet composition (ΣDCij) and catch by the fisheries. Algorithms 
+22 
+included in the model also allow for the estimation of one missing parameter in each group (Bi, Qi/Bi, Pi/Bi, 
+23 
+or EEi; Christensen and Pauly 1992).  Ecopath models are based on mass balance principles, assuming that 
+24 
+production of a given prey group (i) is equal to the biomass lost to fishing or export, predation, and natural 
+25 
+mortality other than predation (other mortality). This mass balance can be expressed as: 
+26 
+Consumption = production + respiration + unassimilated food  
+ 
+ 
+       (1) 
+27 
+and 
+28 
+Production = predation + fishing mortality + other mortality 
+ 
+ 
+ 
+       (2) 
+29 
+where consumption is composed of consumption within the system and consumption of imports 
+30 
+(i.e., consumption “outside the system”), and production may be consumed by predators, be exported from 
+31 
+the system or contribute to the detritus (Jarre-Teichmann, 1998).  The terms of these equations may be 
+32 
+replaced by: 
+33 
+Production by i =  Bi * Pi/Bi, 
+ 
+ 
+ 
+ 
+ 
+ 
+       (3) 
+34 
+Predatory losses of i =  
+(B j "Qi Bi
+j#
+" DCij), and 
+ (4) 
+35 
+Other losses of i =  
+(1-EEi) * Bi * Pi/Bi 
+ 
+ 
+ 
+ 
+       (5) 
+36 
+For any species or group of species of the system, this leads to the linear equation: 
+37 
+Bi * Pi/Bi * EEi – (ΣBj * Qj/Bj * DCij) - Exi = 0 
+ 
+ 
+ 
+ 
+       (6) 
+38 
+where i indicates a component (stock, species, group of species) of the model, j indicates any of the 
+39 
+predators of i, Bi indicates the biomass of i, Pi/Bi indicates the production/biomass ratio, which is equivalent 
+40 
+to total mortality (Z) under the most circumstances (Allen, 1971), Qi/Bi indicates the food consumption per 
+41 
+unit biomass of i, DCij indicates the contribution of i to the diet of j (in terms of mass), EEi indicates the 
+42 
+ecotrophic efficiency of i, or the fraction of production that is consumed or caught within the system, and 
+43 
+Exi indicates the export of i from the system (by emigration or fisheries catch).   
+44 
+In most cases, when all the information to run an Ecopath model is assembled, the model does not 
+45 
+balance due to the inconsistencies in model parameters.  In this case, the values of one or more of the terms 
+46 
+can be changed iteratively until a balance is obtained. Indeed, there is more than one way to construct an 
+47 
+Ecopath model and there is no unique solution to any model. However, if uncertainty associated with 
+48 
+
+
+PDF PAGE 5
+5 
+specific input parameters is low, then the number of plausible solutions is reduced. For the less certain 
+1 
+parameters, sensitivity analyses can be used to examine impacts on model results. 
+2 
+The original food web model for our Northwest African model was previously developed by Samb 
+3 
+and Mendy (2004) but adapted and averaged from six other published models for coastal ecosystems of 
+4 
+Northwest Africa: Cape Verde (Stobberup et al. 2004), Gambia (Mendy 2004), Guinea (Diallo et al. 2004), 
+5 
+Guinea-Bissau (Amorim et al. 2004), Mauritania (Sidi and Guénette 2004), and Morocco (Stanford et al. 
+6 
+2001). To examine the impact of whales on our three focal ecosystems, we modified their structure so that 
+7 
+we could more readily compare changes between the three areas and incorporate additional details where 
+8 
+necessary. Given the focus of our study, cetacean groups were included in these ecosystem models at a 
+9 
+higher taxonomic resolution by expanding their trophic representation to ten trophic groups. Species 
+10 
+relevant to IWC discussions or with a distinctly different diet than other species were assigned to a unique 
+11 
+trophic group (e.g., all great whales including minke, fin, humpback, sei, Bryde’s, blue and sperm whales 
+12 
+but also killer whales), and other species were included as aggregated groups (i.e. o beaked whales or 
+13 
+dolphins). We aggregated non-marine mammal trophic groups specified in earlier models into fewer 
+14 
+distinct functional groups, following the criteria developed by Essington (2006). These groups were defined 
+15 
+on the basis of similarities of food habits, habitats, and biological variables.  
+16 
+Input data 
+17 
+Consumption estimates 
+18 
+We used a basic food consumption model based on Trites et al. (1997). This model was used to 
+19 
+generate the biomasses and consumption (Q/B) ratios needed for each Ecopath group. Annual food 
+20 
+consumption was calculated as: 
+21 
+ 
+Qi = 365*
+Ni,sRi,s
+s"
+ 
+(7) 
+22 
+where the annual average food consumption Q of species i was assumed to be 365 times the daily 
+23 
+food consumption. Daily food consumption is calculated based on the number of individuals N of the sex s 
+24 
+of a species i, and a weight-specific daily ration R consumed by an individual with a species- and sex-
+25 
+specific mean body mass. Uncertainty on the annual food consumption parameter was addressed by 
+26 
+increasing or decreasing the biomass to 10, 50, 500 and 1000 % of its initial to determine the impact on the 
+27 
+outcomes of our analysis. 
+28 
+Abundance and biomass estimates  
+29 
+Reliable abundance estimates are lacking for almost all cetacean species in our three study areas. 
+30 
+Estimates of local abundance were therefore based on the proportion of the global estimated abundance of 
+31 
+each species that fell within the study area weighted by the relative suitability of the habitat in each of the 
+32 
+study areas for each species. Species-specific global abundance estimates were compiled from the literature 
+33 
+and are summarized in Appendix B of Kaschner (2004). Suitability of habitat for each species was 
+34 
+predicted using a relative environmental suitability (RES) model (Kaschner et al., 2006). Density estimates 
+35 
+derived this way were ground-truthed using survey data from surveys conducted in the vicinity of our study 
+36 
+areas or in similar types of habitat to the extent possible (Table 2). To facilitate comparison, observed 
+37 
+abundance estimates were converted into density estimates by digitizing the survey area and calculating the 
+38 
+area using GIS tools. We only included surveys that were conducted in similar habitats as Northwest 
+39 
+African waters (i.e. the subtropical or tropical waters of known baleen whale breeding areas). Sex ratios as 
+40 
+well as mean species and sex-specific body mass were obtained from Trites and Pauly (1998).  
+41 
+Feeding rate models 
+42 
+The annual food consumption calculated above also depends on the feeding rate of each species, 
+43 
+representing an index of daily ration expressed as percent of body weight (Sergeant, 1969). This parameter 
+44 
+is not only fundamental to describing animal energetics, but is also important for studies of energy flow 
+45 
+through the food web in the ecosystem (Ohizumi and Miyazaki, 1998). For all cetaceans (except baleen 
+46 
+whales), we used the empirical model developed by Innes et al. (1987) to estimate food consumption.  This 
+47 
+model was later modified by Trites et al. (1997) to account for the difference between consumption for 
+48 
+
+
+PDF PAGE 6
+6 
+growth and for maintenance and then applied to all marine mammal species.  Food intake of specific 
+1 
+species per day was calculated as follows: 
+2 
+ 
+8.0
+s,i
+1.0
+W
+*
+R s
+i, =
+  
+(8) 
+3 
+where R is the daily food intake of an individual of sex s belonging to species i and W is the mean 
+4 
+body weight of that individual, in kilograms. 
+5 
+For all baleen whales, daily food intake was estimated based on a model by Armstrong and 
+6 
+Siegfried (1991) for food consumption of minke whales in the Antarctic. These authors suggested a 
+7 
+modification to the empirical model of Innes et al. (1986) equation for baleen whales to account for larger 
+8 
+body sizes and seasonal variation in food intake. This approach was later used to estimate food 
+9 
+consumption of whales around Iceland (Sigurjónsson and Víkingsson, 1997) and represents one of the 
+10 
+methods used by Tamura (2003) to estimate global food intake of cetaceans. This feeding rate is calculated 
+11 
+as: 
+12 
+ 
+67
+.0
+,
+,
+*
+42
+.0
+s
+i
+s
+i
+W
+R
+=
+ 
+(9) 
+13 
+Annual food consumption for each marine mammal species was then divided by the biomass 
+14 
+estimates in order to estimate consumption to biomass (Q/B) ratios used in the Ecopath model.  To account 
+15 
+for the fact that most feeding activity occurs outside the system, we set a high diet proportion as ‘import’ in 
+16 
+the Ecopath diet consumption matrix (Christensen et al., 2005).  Lockyer (1981) showed that most baleen 
+17 
+whales feed considerably less in their breeding grounds than they would in feeding areas. She proposed that 
+18 
+the average amounts consumed off breeding areas probably amount to about 10% or less of that in the 
+19 
+feeding ground. The 10% estimate is thought represent the maximum for baleen whales consumption in 
+20 
+breeding areas (e.g. Brown & Lockyer, 1984; Horwood, 1990). Following Mohammed (2003), we thus 
+21 
+assumed that 10% of the annual food intake was consumed for of all baleen whales, except for Bryde’s 
+22 
+whale.  Because Bryde’s whales are known to remain in subtropical and tropical waters all year round, we 
+23 
+did not reduce their annual food consumption estimates (i.e., we assumed they take 100 % of the total 
+24 
+annual food intake in our study area). 
+25 
+ 
+26 
+Diet compositions for marine mammal groups 
+27 
+We found very few quantitative descriptions of diet for cetaceans in general, especially in tropical 
+28 
+areas such as Northwest Africa where these whales are generally breeding (vs. feeding). For minke whales, 
+29 
+since no diet study has been conducted in Northwest African countries, we used a set of six papers 
+30 
+published in the literature about the diet of minke whales in the North Atlantic (Lydersen et al. 1991; 
+31 
+Nørdoy and Blix, 1992; Haug et al. 1995; Haug et al. 1996; Olsen and Holst 2001 [two different areas]; 
+32 
+Sivertsen 2006; Smout and Lindstrom 2007). The average diet was used as an input in our Ecopath model, 
+33 
+while minimum and maximum values were used as ranges for calibration. 
+34 
+For fin whales, we used the study by Sigurjónsson and Víkingsson (1997) on the feeding of fin 
+35 
+whales in Icelandic waters. Fin whales were mostly feeding on zooplankton, but fish remains were also 
+36 
+found in their stomach. Diet information humpback whales were based on Mitchel (1973). However, since 
+37 
+this study only listed proportions of “krill” and “fish” as prey in the diet, we used a more recent study by 
+38 
+Witteveen et al. (2006) to distribute “fish” prey into more precise categories. Consequently, the diet of 
+39 
+humpback whales used in the Northwest Africa model was mainly composed of zooplankton, coastal 
+40 
+pelagic, and coastal demersal fish.  Information on the diet of Bryde’s whales and sei whales come from the 
+41 
+same study by Best (2001). Their diet composition is mainly made up of zooplankton, but also includes fish 
+42 
+species, mainly coastal pelagics.  
+43 
+For sperm whales, most publications on diet indicate that they feed primarily on cephalopods 
+44 
+(Kawakami 1980; Clarke et al. 1993; González et al. 1994; Roberts 2003). However, a study by Best 
+45 
+(1999) also includes fish prey in the diet. In any case, no information was available specifically for the 
+46 
+Northwest Africa region, and we thus used an average diet based on all information available in North 
+47 
+Atlantic waters. The average diet was used as an input in our Ecopath model, while minimum and 
+48 
+
+
+PDF PAGE 7
+7 
+maximum values were used as ranges for calibration.  Diet composition of killer whales was based on a 
+1 
+model by Sidi and Guénette (2004) for Mauritania (after a study by Paul et al. 1998), who estimated that 
+2 
+killer whales mainly feed on dolphins, coastal demersals, and cephalopods. 
+3 
+Information on the diet of beaked whales species were available for all three species included in 
+4 
+our model. The diet was calculated as a weighted average of these three diets, based on our estimates that 
+5 
+Cuvier’s, Blainville’s, and Gervais’ beaked whales consume 66, 24 and 10 percent, respectively, of the 
+6 
+food consumed by all beaked whales in our study area (Kaschner 2004, Kaschner et al, 2006). The resulting 
+7 
+diet composition is mainly comprised of cephalopods and bathydemersal predators. Here again, the average 
+8 
+diet was used as an input in our Ecopath model, while minimum and maximum values were used as ranges 
+9 
+for calibration.  Finally, diet information about dolphins was taken directly from the initial model by Samb 
+10 
+and Mendy (2004). The diet was based on Northridge (1984) and mainly composed of coastal fish as well 
+11 
+as zooplankton. 
+12 
+Catch data time series 
+13 
+Fisheries catch data for all three study areas were obtained from the Sea Around Us database (Sea 
+14 
+Around Us, 2008). Time series of annual total catches taken between 1987 and 2004 were specified by the 
+15 
+respective countries fishing in the area and by the taxa that were taken. We categorized taxa into different 
+16 
+functional groups using available information about life history, ecology and habitat preferences of the 
+17 
+taxa. Catches were then divided into local and foreign fisheries. Local fisheries were defined as all 
+18 
+countries bordering on our study area, disregardful of whether or not catches were taken within each 
+19 
+countries own EEZ waters or in adjacent waters. All other fishing countries were defined as foreign fleets. 
+20 
+Uncertainty 
+21 
+Pedigree of our input data 
+22 
+The pedigree of a model represents a summary of the coded statements quantifying the uncertainty 
+23 
+related to each input value in Ecopath models. For each input parameter, a choice can be made to describe 
+24 
+the kind of data used, and the confidence we have in these data. The routine uses percent ranges of 
+25 
+uncertainty based on a set of qualitative choices relative to the origin of biomass, P/B, Q/B, catch and diet 
+26 
+input or model estimates (model estimates have a high range of uncertainty). When these choices are made 
+27 
+for each single input values, an overall pedigree of the model is calculated as the average of the individual 
+28 
+pedigree values (Pauly et al., 2000). This overall pedigree is may be used as a basis for comparison with 
+29 
+other models (Christensen and Walters, 2004), allowing comparison to models with a different degrees of 
+30 
+trophic compartmentalization. The overall pedigree for each model is then calculated as: 
+31 
+ 
+! =
+=
+n
+i
+p
+i
+n
+1
+,
+"
+"
+ 
+ 
+ 
+ 
+   (10) 
+32 
+Addressing uncertainty 
+33 
+Using models to illustrate the dynamics of marine mammals in an ecosystem context represents a 
+34 
+great challenge, due to the large amount of uncertainty in estimating parameters (Taylor et al. 2000). 
+35 
+Moreover, modeling ecosystems introduces uncertainties regarding model structure (Plagányi and 
+36 
+Butterworth 2004, Morissette 2005, 2007; Plagányi 2007). Indeed, when using models, it is difficult to 
+37 
+distinguish between errors which are related with the model structure and those which are due to the 
+38 
+improper choice of parameter values (Schartau et al. 2001). Sources of uncertainty are virtually infinite in 
+39 
+ecosystem modelling. The degree of predictability of ecosystem models is itself uncertain (Hilborn 1987). 
+40 
+Another source of uncertainty can be called “predictable uncertainty” (Silvert 2004), which arises from the 
+41 
+known stochastic nature of the environment (e.g., climate fluctuation that follows a historical pattern). A 
+42 
+more fundamental source of uncertainty (and one much more difficult to take into account) is called 
+43 
+“structural uncertainty” (Silvert 2004). Our lack of knowledge on marine ecosystems and fisheries is a good 
+44 
+example of that (Gomes 1993).  
+45 
+
+
+PDF PAGE 8
+8 
+In ecosystem modelling, there are different approaches to reach a balanced scenario. As a result, it 
+1 
+is very important to examine how sensitive model results (or outputs) are to changes in the way it was 
+2 
+constructed and balanced. Our models include such sensitivity analyses to test if the results are robust or if 
+3 
+they are sensitive to changes in the way the models are constructed, or changes in the value of input 
+4 
+parameters, in a way that a trivial change could radically affect the results. 
+5 
+We tested different scenarios to explore the impacts of changing assumptions on the feeding rates, 
+6 
+biomass, and diet of the marine mammal groups in our model. For feeding rates estimates, along with the 
+7 
+10% used in our “best” model (based on Lockyer, 1981), we also examined the impact of increasingly high 
+8 
+feeding rates (up to 50%) for baleen whales in breeding areas. Similarly, we tested different scenarios by 
+9 
+increasing the initial whale biomass (assuming abundance estimates could be wrong) as described above. 
+10 
+We also considered a lower biomass for fish and invertebrates, using only 10% of the initial biomass for 
+11 
+these groups, expecting the impact from marine mammals would be more important on small biomasses of 
+12 
+fish. Finally, we also explored the possibility that whale feed on different prey types in breeding areas that 
+13 
+they do in feeding areas (where most of the diet information is available). This allowed us to examine the 
+14 
+potential impacts of changes in model assumptions on model results.  
+15 
+One useful approach to validate ecosystem models is to fit the model’s dynamic behaviour to 
+16 
+independent time series of catch or biomass data (Christensen et al., 2004). We employed this approach for 
+17 
+our study, using available time series that we collated from the literature and from the Sea Around Us 
+18 
+database. Our model can be refined based as additional time series data become available. Using models 
+19 
+that can reproduce observed historical response to disturbances such as fishing allowed us to gain 
+20 
+confidence when analyzing the possible impact of removing marine mammals in these ecosystems. 
+21 
+As an additional test of the model’s performance, we used the Monte Carlo tool in Ecosim to vary 
+22 
+Ecopath’s biomass parameters for whales and fish groups. For this sensitivity analysis, groups were 
+23 
+allowed to vary +/- 20% from their Ecopath biomass values, and the Monte Carlo was drawn from a 
+24 
+uniform distribution. This routine allowed us to test the sensitivity of initial biomass parameters and 
+25 
+generate error estimates for predictions. 
+26 
+ 
+27 
+Analyses and Simulations 
+28 
+Comparison of diets and total intakes 
+29 
+Diet composition of marine mammal species and fisheries catches were standardized to express 
+30 
+diets and catches as proportions of each of the 27 trophic groups in our Ecopath model. Diet and catch 
+31 
+composition were then compared between marine mammals and fisheries. Similarly, the Ecopath allowed 
+32 
+us to calculate the total consumption by marine mammals as an annual rate, which could then be compared 
+33 
+to the total catch from fisheries. 
+34 
+Overlap estimates 
+35 
+Using the diet compositions and total consumptions from Ecopath, we then calculated the extent 
+36 
+of overlap in terms of resource use between different marine mammal functional groups and fisheries. The 
+37 
+assessment of overlap between marine mammal food consumption and fisheries catches was performed 
+38 
+using a modified version of an ecological niche overlap index (Morissette 2007, after Kaschner 2004), 
+39 
+derived from or related to the ‘competition coefficients’ of the Lotka-Volterra equations by Morisita (1959) 
+40 
+and Horn (1966). This index originally only considered the qualitative overlap of resource utilization of two 
+41 
+players exploiting the same resources (i.e., the similarity of marine mammal diet and fisheries catch 
+42 
+composition), but ignored the quantity of resources consumed. We therefore modified this index by 
+43 
+introducing a weighting factor to provide a measure of the relative importance of each area for either 
+44 
+fisheries or marine mammals based on overall quantity of catch or food taken by either consumer in this 
+45 
+cell, leading to:   
+46 
+ 
+"j, l =
+2
+pl, kpj, k
+k#
+pl, k
+2 + pj, k
+2
+k#
+$ 
+% 
+& 
+& 
+& 
+' 
+( 
+) 
+) 
+) 
+* pQl * pCj
+(
+) 
+(11) 
+47 
+
+
+PDF PAGE 9
+9 
+where αj,l describes the quantitative overlap between a fishery j and a marine mammal group l in 
+1 
+each ecosystem, and the first term expresses the qualitative similarity in diet/catch composition between the 
+2 
+marine mammal group l and fisheries j sharing the prey k as the ratio of ‘niche proximity’ to ‘niche 
+3 
+breadth’ (MacArthur and Levins, 1967), with pl,k and pj,k representing the proportions of each prey in the 
+4 
+diet or catch. This term is multiplied by the product of the proportion of total food consumption by 
+5 
+mammal group Q and the total fisheries’ catches C taken within the ecosystem. 
+6 
+Ecosystem indices  
+7 
+The mixed trophic impact (MTI) routine of the Ecopath program allows assessment of the direct 
+8 
+and indirect interactions between species in the ecosystem. This routine synthesizes the effects that a small 
+9 
+change in the biomass of a group will have on the biomass of other groups in a system (Ulanowicz and 
+10 
+Puccia, 1990). The approach is derived from Leontief economic input-output analysis, and quantifies all the 
+11 
+direct and indirect trophic impacts of all groups in the system based on the assumption that the direct 
+12 
+impact between group i and group j can be estimated from the difference between the proportion that group 
+13 
+i contributes to the diet of group j, and the proportion that group i takes from the production of group j 
+14 
+(Christensen, 1995). The MTI for living groups is calculated by constructing a matrix, where the i,jth 
+15 
+element representing the interaction between the impacting group i and the impacted group j is: 
+16 
+ 
+i
+j
+ij
+ij
+FC
+DC
+MTI
+,
+!
+=
+ 
+(12) 
+17 
+where DCij is the diet composition term expressing how much j contributes to the diet of i, and 
+18 
+FCj,i is a host composition term giving the proportion of the predation on j that is due to i as a predator. 
+19 
+When calculating the host compositions, the fishing fleets are included as "predators". 
+20 
+The TL is based on Lindeman’s (1942) concept of trophic levels, but can be fractional (e.g., 1.3, 
+21 
+2.7, etc.) as suggested by Odum and Heald (1975). A routine assigns definitional trophic levels (TL) of one 
+22 
+to producers and detritus. For the remaining species of the ecosystem, TL is calculated as: 
+23 
+ 
+!
+"
+#
+$
+%
+&
++
+=
+'
+i
+j
+j
+TL
+p
+TL
+*
+1
+ 
+(13) 
+24 
+where pj is the proportion (in weight) of each prey group in the diet of its predator. TLj is the 
+25 
+trophic level of each prey group j. 
+26 
+The mean trophic level of marine mammals’ consumption (TLQ) and of fisheries catch (TLC) were 
+27 
+derived from Ecopath outputs. The TLC is a dimensionless index computed by Ecopath to measure 
+28 
+ecosystem health (Christensen et al. 2005), and is an indicator of the ecosystem health and the state of the 
+29 
+fisheries (Pauly and Watson 2005). The mean trophic level of the catch is calculated from: 
+30 
+ 
+!
+"#
+$
+%&
+'
+"#
+$
+%&
+'
+!
+=
+i
+Y
+Y
+i
+C
+i
+TL
+TL
+ 
+(14) 
+31 
+where Yi is the total landings of species i (in tons), ΣY is the sum of landings for all species, and 
+32 
+TLi is the trophic level for species i. 
+33 
+Similarly, Morissette (2007) developed an approach to calculate the trophic level of consumption 
+34 
+(TLQ) by marine mammals using an equation derived from the TLC, and modified to represent the 
+35 
+consumption by marine mammals and make it comparable with the fisheries catch: 
+36 
+ 
+!
+""
+"
+#
+$
+%%
+%
+&
+'
+""
+"
+#
+$
+%%
+%
+&
+'
+!
+!
+(
+=
+=
+=
+i
+Q
+Q
+i
+Q
+n
+j
+j
+n
+j
+ij
+TL
+TL
+1
+1
+ 
+(15) 
+37 
+where Qij is the consumption of prey i (in tons) by marine mammal j, Qj is the total consumption 
+38 
+of all species by marine mammal j, and TLi is the trophic level for species i. Eq. 15 represents the average 
+39 
+
+
+PDF PAGE 10
+10 
+trophic level on which marine mammals feed, i.e., the average TL of each species, multiplied by their 
+1 
+proportion in the consumption matrix (tonnes per km-2 per year that marine mammals consume). 
+2 
+ 
+3 
+Dynamic simulations  
+4 
+Ecosim is a dynamic simulation tool embedded in the EwE software which enables efficient 
+5 
+modelling of the biomass changes at the ecosystem level. The model behaviour is based on a ‘foraging 
+6 
+arena’ theory (Walters and Martell, 2004), which assumes that predator and prey behaviours cause 
+7 
+partitioning of prey populations, which are either available or unavailable to predators. There is continuous 
+8 
+change between these two stages for any given potential prey, whether it is hiding from predation in some 
+9 
+refuge, or it is out to feed. This availability of prey to predators is called ‘vulnerability’ in Ecosim. 
+10 
+Mackinson et al. (2003) demonstrated the importance of setting the vulnerabilities to fit model predictions 
+11 
+to time-series data, as Ecosim predictions are very sensitive to this parameter. Using default values for v has 
+12 
+strong implications for assumptions about species abundance relative to their carrying capacity (Morissette, 
+13 
+2007). 
+14 
+Instead of using default vulnerability settings across the predation matrix, v’s were adjusted to fit 
+15 
+to time series of biomass for each species or trophic group for which it was available in the three 
+16 
+ecosystems. Vulnerabilities were adjusted based on the specific ecology of each species or trophic groups 
+17 
+(if their behaviour, niche, or diet make them more or less vulnerable to predators). 
+18 
+A hunting pattern which generated a dramatic increase in cetacean mortality was employed in 
+19 
+order to drive their populations close to extinction.  Vasconcellos et al. (1997) showed that for fish species, 
+20 
+a 5-fold increase in anthropogenic predation leads to serious depletion in a group. Also, such an extreme 
+21 
+scenario is routinely applied to many fish populations and often associated with stock collapse (Patterson, 
+22 
+1992). For marine mammals, Morissette (2007) proposed that the same kind of increase in anthropogenic 
+23 
+mortality is needed to simulate a crash in marine mammal biomass.  Thus, we employed a similar approach 
+24 
+for our analysis. A 19 years simulation was performed (from 1986 to 2004), and the biomass trends before 
+25 
+and after the removal of whales were compared. 
+26 
+ 
+27 
+PRELIMINARY RESULTS  
+28 
+Data quality and overall pedigree of the model 
+29 
+The pedigree of our model is 0.615 which is above average of Ecopath models published between 
+30 
+1990 and 2006 (n = 200 models, pedigree ranging from 0.151 to 0.676; Morissette, 2007). Moreover, this is 
+31 
+one of only a few models that include detailed information about cetaceans (see Martell et al. 2002; 
+32 
+Guénette et al. 2006; Aydin and Mueter 2007). 
+33 
+For the Northwest African model, the sensitivity analysis tool of Ecopath was conduced on 
+34 
+biomass, production, consumption and ecotrophic efficiency (EE) inputs and it suggests that the sensitivity 
+35 
+of these estimated parameters to a change in input values is relatively low. Indeed, a 50% change in any of 
+36 
+the input parameters of any trophic group generate an overall response of ± 35% in the estimated 
+37 
+parameters of other groups. The most impacted parameter seems to be the EE, which is particularly 
+38 
+sensitive to a change in the production inputs. 
+39 
+Our results are preliminary because we hope to obtain additional time series data for Northwest 
+40 
+Africa to strengthen the fit of our model. As data become available, we will further examine the sensitivity 
+41 
+of our conclusions to different parameters and assumptions. Nonetheless, our preliminary results are robust 
+42 
+to a wide range of assumptions about model structure and parameters, thus we do not anticipate that our 
+43 
+final results will dramatically diverge from what is reported here.   
+44 
+Ecosystem indices 
+45 
+The primary production required (PPR) to sustain the consumption of any marine mammal species 
+46 
+is lower than PPR to sustain the fisheries for all scenarios (Table 3). Globally, PPR for fisheries is two 
+47 
+orders of magnitude higher than PPR for most baleen whales species (Table 3; see also Pauly and 
+48 
+
+
+PDF PAGE 11
+11 
+Christensen, 1995). In terms of percentage of the PPR, dolphins, sperm whales and killer whales have the 
+1 
+highest marine mammal PPR, but this is still 60% lower than the PPR for fisheries (10% versus 32%). Fin 
+2 
+and humpback whales have the lowest PPR (they require less than 1% of the total primary production of the 
+3 
+system). 
+4 
+In the Northwest African ecosystem, baleen whales feed on lower trophic level species (on 
+5 
+average 2.4 compared to 2.8 for fisheries; Table 3). TLQ has higher values than TLC for beaked whales and 
+6 
+sperm whales, which feed mainly (more than 90% of their diet) on cephalopods (TL = 3.12). The largest 
+7 
+discrepancy between TLQ and TLC is observed between fisheries and baleen whales and fin whales, where 
+8 
+the TLC is about 40% larger than the TLQ (2.8 versus 2.0). 
+9 
+Marine mammal consumption is diverse and represents a great array of marine organisms, while 
+10 
+the catches are much more concentrated on clupeids, which represents more than 50% of the catch 
+11 
+composition for either local or foreign fleets (Fig. 2). While marine mammals can consume different prey 
+12 
+groups, more than 75% of the catches from local fleets in Northwest Africa are composed of four prey 
+13 
+groups: clupeids, other coastal pelagics, coastal demersals, and cephalopods. Foreign fleets are even less 
+14 
+diversified, spending more than 75% of their catch on only two groups: clupeids and other coastal pelagics. 
+15 
+When comparing the total amounts of each prey groups taken by either cetaceans or fisheries (Fig. 
+16 
+3), we see that except for mesopelagics, cephalopods and zooplankton, the fisheries catches are always 
+17 
+substantially larger than what is eaten by cetaceans. Commercially important species such as coastal 
+18 
+demersals, clupeids, other coastal pelagics, and coastal tunas are much more taken (by an order of 
+19 
+magnitude) by fisheries than by cetaceans’ consumption. The highest discrepancy between marine 
+20 
+mammals consumption and fisheries catch was estimated for large pelagics, where the fisheries (0.0127 
+21 
+t*km-2) catch 50 times more than cetaceans consume (0.0003 t*km-2). Finally, some prey groups, such as 
+22 
+sharks, rays, and coastal tunas are exclusively targeted by fisheries (but not consumed by marine 
+23 
+mammals).  
+24 
+Mixed trophic impacts (MTI) show the overall impacts of marine mammals or fisheries on other 
+25 
+groups of the foodweb, due to direct and indirect interactions. The MTI of marine mammals and fishery in 
+26 
+the model of Northwest Africa model show that both marine mammals and fishery have an overall negative 
+27 
+impact on all other species of the ecosystem (MM = -0.04; local fleets = -1.17; foreign fleets = -0.89). The 
+28 
+MTI of baleen whales is three orders of magnitudes smaller than the MTI from fisheries for any species 
+29 
+(Fig. 4C), and has an overall positive effect on most fish species of the ecosystem (due to the fact that 
+30 
+toothed whales feed on top predators and thus release predation on other fish species). The groups that are 
+31 
+mostly impacted by marine mammal consumption (all species included) are cephalopods and mesopelagic 
+32 
+predators (Fig. 4B). When only baleen whales are considered (Fig. 4C), the most impacted species are 
+33 
+mesopelagic predators, coastal demersals, and other coastal pelagics. In contrast to fisheries where this 
+34 
+effect is negligible (Fig. 4A), we see some cases of beneficial predation by marine mammals on species 
+35 
+such as large pelagics, bathydemersal predators, sharks, rays, coastal tunas, coastal demrsals, and clupeids. 
+36 
+The same phenomenon is observed for the MTI of baleen whales on large pelagics, bathydemersal 
+37 
+predators, clupeids, and cephalopods. Local and foreign fisheries are actually positively related to the 
+38 
+presence of killer whales in the ecosystem (MTI of 0.0039 and 0.0015 for killer whales on local and foreign 
+39 
+fleets, respectively). 
+40 
+The same MTI analysis for the fishery shows that the negatively impacted groups of the Northwest 
+41 
+African ecosystem are sharks, rays, and coastal tunas (Fig. 4A). Conversely, other fish groups such as 
+42 
+coastal demersals and clupeids are positively related to fisheries when indirect effects are included. 
+43 
+Assuming an increased feeding rate for baleen whales in breeding areas of 50% (instead than the 
+44 
+10% proposed by Lockyer 1981), the MTI of baleen whales was still two orders of magnitudes lower than 
+45 
+the MTI of fisheries on any other trophic group in the ecosystem. 
+46 
+Similarly, even when assuming whales biomasses that are an order of magnitude higher (1000% of 
+47 
+original biomass), the MTI of baleen whales was still one order of magnitude lower than the MTI of 
+48 
+fisheries on any other trophic group in the Northwest African ecosystem. 
+49 
+
+
+PDF PAGE 12
+12 
+Dynamic simulations 
+1 
+We first ran our Northwest Africa model with the real time series of fishing mortality (F), and then 
+2 
+compared the model’s predictions when removing baleen whales. Here, we illustrate this approach by 
+3 
+presenting preliminary results for cephalopods (a commercially important species group for which we have 
+4 
+a good fit). The same analysis was done for all the trophic groups of the ecosystem. In general, after 
+5 
+simulating marine mammal extirpation in the ecosystem, we found no significant change in biomass 
+6 
+compared to the initial scenario with marine mammals included in the ecosystem (see an example for 
+7 
+cephalopods in Fig. 5, and overall simulation results in Fig. 6). To be conservative, we then examined the 
+8 
+assumption of a 50% feeding rate in breeding areas (compared to the common 10% proposed by Lockyer 
+9 
+[1981]). For this scenario, we found a slight increase of biomass (less than 1%) for large pelagics, 
+10 
+mesopelagic predators, bathydemersal predators, after 21 years. These are the only species for which we 
+11 
+see a positive change. 
+12 
+Given the high uncertainty associated with our cetacean abundance estimates, we also tested the 
+13 
+impact of substantial increases in baleen whale biomass (up to one order of magnitude higher) on model 
+14 
+results. Even under the most extreme scenario, we found no important effect on the biomasses of 
+15 
+commercially important fish, basically because the baleen whales are not consuming significant amounts in 
+16 
+these tropical breeding areas. Regardless of the initial biomass estimate, our “best model” scenario shows 
+17 
+that even a complete removal of baleen whales does not lead to a measurable increase in fish biomass.  
+18 
+To investigate alternative management scenarios, we also conducted simulations that assumed 
+19 
+substantial reductions in fishing effort of either foreign or local fleets. Reducing fishing effort (F, or if 
+20 
+effort was not available reducing the catch, C) for all commercially important species by 50 % resulted in a 
+21 
+reduction in total biomass in the ecosystem. This result reflects the complex dynamics of the system and the 
+22 
+potentially counterintuitive interactions between all predators and prey. However, for some species such as 
+23 
+large pelagics, a reduction in fishing effort results in a higher biomass. Because the large pelagics represent 
+24 
+important top predators in the ecosystem (TL = 3.31), such an increase is likely to create an increase of 
+25 
+predation on the lower trophic levels.  This may explain the overall decrease in biomass in the system under 
+26 
+these assumptions. Conversely, a simulation with a fishing effort increased by 50% resulted in a decline in 
+27 
+biomass for most commercially important species, suggesting that the ecosystem is currently heavily 
+28 
+exploited.  
+29 
+ 
+30 
+DISCUSSION 
+31 
+Strengths and weaknesses of our modelling efforts 
+32 
+Our study sites occur in low latitude breeding areas for baleen whales, thus it was not expected a 
+33 
+priori that there is a significant ecological interaction between whales and fisheries. Our goal is use the best 
+34 
+available scientific data and estimates of uncertainty in these data to understand the plausible range of 
+35 
+potential interactions between whales and fisheries in this region.  The ‘whales eat fish’ issue is one 
+36 
+directed towards many species of whales, and the many different prey they feed on. Consequently, debate is 
+37 
+an ecosystem issue, and is more complex than the simple predator-prey relationship. Indirect effects such as 
+38 
+competition, predation, and even beneficial predation (Morissette et al. 2006) can occur and move the 
+39 
+simplistic view of a predator eating its prey to an ecosystem framework where many species are taken into 
+40 
+account (i.e., from a predator eating a prey, but also a competitor of that prey for the same food resources). 
+41 
+In order to address such issues involving many species, an ecological modelling approach is 
+42 
+crucial. The need of ecosystem models to specifically address the interactions between cetaceans and 
+43 
+fisheries have been pointed out at the IWC Modelling workshop on cetacean-fishery competition held in La 
+44 
+Jolla, California in June 2002, where it was proposed that “cetaceans form just one part of the system that 
+45 
+needs to be modelled in order to try to answer the IWC questions posed in the terms of reference of this 
+46 
+workshop” (IWC, 2004). Other conclusions from this workshop include recommendations that: 1) 
+47 
+modelling approaches must explicitly allow for uncertainty in all aspects of their use including model 
+48 
+specification and assumptions; 2) they should be used to determine data requirements in terms of quality 
+49 
+and quantity; 3) they should include consideration of how they might be validated, and 4) they should try 
+50 
+taking into account the effects of short- medium- and long-term ecosystem changes. The authors also 
+51 
+propose that fisheries must be modelled realistically, particularly taking into account uncertainty in data; 
+52 
+
+
+PDF PAGE 13
+13 
+the level of detail and realism required for reasonable single species management may be insufficient for 
+1 
+multispecies analyses. We have embraced these recommendations in our approach, and we hope that our 
+2 
+results will provide initial insights about the interactions between whales and fisheries in tropical waters.   
+3 
+In their review of the strengths and weaknesses of the EwE approach, Plagányi and Butterworth 
+4 
+(2004) listed a variety of caveats and the problems they pose when interpreting modelling outputs. In this 
+5 
+study, we addressed several of these issues. First of all, the ‘steady state’ and life history assumptions used 
+6 
+as a starting point in Ecosim might lead to tenuous extrapolations when moved far from ‘equilibrium’. To 
+7 
+address that issue, we performed different levels of sensitivity analysis in order to validate the inputs and 
+8 
+outcomes of our models with observed data. Plagányi and Butterworth also mention the risk of errors in the 
+9 
+choice of representative diet composition when aggregating functional groups. Consequently, we carefully 
+10 
+selected the key species of each or our aggregated trophic group, based on local documentation on the 
+11 
+abundance and trophic importance or the species. Moreover, for aggregated groups of marine mammals 
+12 
+(beaked whales, and dolphins), we calculated the diet as a weighted average of all species, based on their 
+13 
+total consumption in the ecosystem. Finally, one major problem with such easily accessible and user-
+14 
+friendly software is that there is a potential for the misuse and misinterpretation of model applications. 
+15 
+Preset parameter values are almost certainly not appropriate in all ecosystems, and users need to bear in 
+16 
+mind that all Ecosim models are not created equally. Because the level of confidence attached to the Ecosim 
+17 
+predictions is in large part a product of the quality of the input data and the level of statistical testing, we 
+18 
+put great efforts in using the most robust approach, with the best available data, a validation by local 
+19 
+experts, and multiple levels of uncertainty analyses. 
+20 
+Using ecosystem modelling to address the natural dynamics of marine systems in the context of a 
+21 
+‘whale eat fish’ issue helps to identify major shortcomings in the data and provides important reference 
+22 
+points for more specific research on ecosystems. Such an ecosystem point of view also allows an 
+23 
+understanding of the inter-connections between the species groups, and indicates which species play a key 
+24 
+role in the food webs. From a management point of view, knowing that impacting one group will cause 
+25 
+changes in another can provide tools for long-term and multispecies management. Using ecosystem models 
+26 
+allow us to identify knowledge gaps, and to pursue research on particularly important species or functions 
+27 
+of the ecosystem and the species within. 
+28 
+Due to the general complexity of marine ecosystems, the use of ecosystem modelling to study the 
+29 
+dynamics between a predator and its prey is crucial. Indeed, putting all the available biological information 
+30 
+for each species in an ecosystem context enables a global overview, and helps to verify that all information 
+31 
+collected for a given species is compatible with information on other species. Moreover, using a common 
+32 
+modeling technique and model structure for our three study areas allowed us not only to compare the three 
+33 
+ecosystems, but also to compare these tropical areas with other ecosystem models where whales are 
+34 
+important for the structure of the food web (Morissette 2007).  
+35 
+ 
+36 
+Challenges associated with data scarcity 
+37 
+As indicated above, the kind of data required for ecosystem modelling is very limited for our study 
+38 
+areas. Notably the lack of dedicated surveys and existing abundance estimates of cetacean species in the 
+39 
+area greatly hamper the estimation of cetacean biomass and consequently food consumption. However, as 
+40 
+shown in Table 2, the predicted density estimates used in our model appear reasonable for most species 
+41 
+given the range of observed densities in survey areas representing similar types of habitat. The extremely 
+42 
+high densities of humpback whales reported in a few areas around Africa were observed in coastal waters 
+43 
+where this species is known to aggregate during its breeding season (Clapham 2002). Given that our study 
+44 
+area includes a large proportion of offshore water, the lower density estimate used in the model probably 
+45 
+represents an appropriate average estimate. Similarly the highest density for fin whales has been reported 
+46 
+from the Mediterranean where there is a resident population of fin whales, which likely shows different 
+47 
+aggregation and movement patterns than the North Atlantic populations (Notarbartolo-di-Sciara et al. 
+48 
+2003). 
+49 
+It should be noted that our results are preliminary and may change based on expert advice obtained 
+50 
+from regional workshops in each study area. These will represent important steps for validating the models 
+51 
+with local experts and also for gathering additional data fill the gaps in our knowledge. Additional data that 
+52 
+are available may thus be included in the model, and such an inclusion will improve the predictive ability 
+53 
+of our model simulations. Specific data that would enhance the quality of our model include: 
+54 
+• 
+Local diet information for the key species of our fish groups (in % of wet weight); 
+55 
+
+
+PDF PAGE 14
+14 
+• 
+Local time series of biomass (in tones*km-2) from the 1980s and beyond, for any important 
+1 
+species (marine mammals, fish, crabs, cephalopods, plankton) of the ecosystem; 
+2 
+• 
+Local time series of effort from the 1980s and beyond, for any important species (marine 
+3 
+mammals, fish, crabs, cephalopods, plankton) of the ecosystem; 
+4 
+• 
+Consumption rates (yr-1) and diet information (% of wet weight) for marine mammals when they 
+5 
+are breeding off the coast of Northwest Africa; 
+6 
+• 
+Estimates of total mortality (Z) for fish species in the area, which could be transformed into P/B 
+7 
+ratios; 
+8 
+• 
+Any data about species abundance, biomass or fishery yield in the NW Africa ecosystem. 
+9 
+However, we do not expect major sources of data to emerge, suggesting that our general results would 
+10 
+not dramatically change with data availability. This also underscores the general problem of data paucity in 
+11 
+these areas and the possible effects of the assumptions we had to make. 
+12 
+Applying time series of catch to larger or more global areas comes with several caveats (Reg Watson, 
+13 
+Sea Around Us Project [SAUP], pers. comm.). In our case, time series of biomass found for Northwest 
+14 
+Africa were very local, and most of the time applied to one particular country, while our time series of 
+15 
+catches (driving the Ecosim predictions) were from the SAUP database and representing the whole area. 
+16 
+Consequently, it was difficult to find a good fit between models predictions, global fisheries catches, and 
+17 
+biomass trends.  Nonetheless, even though data are sparse, we can make reasonable assumptions about 
+18 
+some basic things such as feeding rates, diets, and biomass, and explore a wide range of possible scenarios. 
+19 
+These tested variations did not generate different patterns in terms of whales interacting with fisheries. 
+20 
+Would fisheries’ catch increase if whales are removed from tropical ecosystems? 
+21 
+The role of marine mammals in ecosystems has received growing attention in recent years, and the 
+22 
+use of models to try to understand this complex dynamics is growing (Mori and Butterworth 2004, 2005, 
+23 
+2006; Morissette et al. 2006; Aydin and Mueter 2007). Our results suggest that, for a wide range of model 
+24 
+assumptions, reducing the abundance of whales would not lead to an increase in fishery yield in Northwest 
+25 
+African waters. We applied a novel approach to corroborate what was proposed by previous authors before 
+26 
+(Yodzis 2001; Kaschner 2004): great whales, despite their large size and their recurrent presence in tropical 
+27 
+waters, likely do not influence local fish populations because they generally do not feed in these areas. 
+28 
+Nonetheless, it is possible that some migratory fish of the Northwest African coast could be affected by 
+29 
+these whales in their feeding grounds. However, like other species of whales (e.g., sperm whales) that do 
+30 
+not appear to modify feeding rates in tropical waters, these cetaceans tend to feed on different trophic levels 
+31 
+than what is targeted by fisheries. It should be noted that our results about the potential overlap between 
+32 
+whales and fisheries are specific to tropical waters. Competition between marine mammals and fisheries 
+33 
+has been documented in some areas such as the Bering Sea, the east coast of North America, the Benguela 
+34 
+upwelling system off southwest Africa, the North Sea, the Gulf of Thailand, and the Strait of Georgia 
+35 
+(Morissette 2007).  However, it is generally marine mammals other than the great whales that experience 
+36 
+significant competition with fisheries in these areas. Also, as we have shown in this study, due to complex 
+37 
+ecosystem dynamics it is far from clear whether there is a direct relationship between marine mammal 
+38 
+predation and loss to fisheries. Thus, even in areas for which there is overlap, it remains unclear if culling 
+39 
+marine mammals would improve fishery yield (Yodzis 2001, Morissette 2007). In the management context, 
+40 
+the controversies that have led to the idea that reducing whale abundance will increase fishery yield have 
+41 
+largely focused on tropical breeding areas.  In light of the low relative abundance of whales and their low 
+42 
+consumption rates in these areas, the removal of whales in these areas is unlikely to benefit fisheries.  
+43 
+44 
+
+
+PDF PAGE 15
+15 
+ACKNOWLEDGEMENTS 
+1 
+We gratefully acknowledge the Lenfest Ocean Program for supporting this research.  Authors would like to 
+2 
+thank Didier Gascuel, Martial Laurans, and Reg Watson who made their data available for the construction 
+3 
+of these models.  Thanks to Sonja Kromann of the US National Marine Mammal Laboratory and Arizona 
+4 
+State University Librarians for their reference mining assistance. Survey density estimates were extracted 
+5 
+from the global marine mammal survey database compiled with the help of Catriona Stephenson, Nicola 
+6 
+Quick and Fiona Sharpe from CREEM, St. Andrews University as part of the ERMC(S)/Sonar 
+7 
+S2117/SAFESIMM project funded by BAE Integrated System Technologies (Insyte). We appreciate the 
+8 
+participants to the May 2008 workshop in Dakar entitled “Whale and fish interactions: are great whales a 
+9 
+threat to fisheries?” for providing input and comments on the methods and data used for the construction 
+10 
+of this model. We are grateful for the support and insight provided by Jean-Claude Brêthes, Villy 
+11 
+Christensen, Daniel Pauly, and Chiara Piroddi, in model construction and analysis.    
+12 
+13 
+
+
+PDF PAGE 16
+16 
+REFERENCES 
+1 
+Alder, J, Campbell, B., Karpouzi, V., Kaschner, K , and Pauly, D. (in press). Forage Fish: from Ecosystems to Markets. Ann. Rev. 
+2 
+Enviro & Resources, 33. 
+3 
+Aguilar, A. 1985. Compartmentation and reliability of sampling procedures in organochlorine pollution surveys of cetaceans. 
+4 
+Residue Rev. 95:91-114. 
+5 
+Allen, K.R. 1971. Relation between production and biomass. J. Fish. Res. Board Can. 28:1573-1581. 
+6 
+Amorim, P., Duarte, G., Guerra, M. Morato, T., and Stobberup, K.A. 2004. Preliminary Ecopath model of the Guinea-Bissau 
+7 
+continental shelf ecosystem (NW Africa), pp. 95-112. In Palomares, M.L.D., and Pauly, D. (eds.) West African marine 
+8 
+ecosystems: models and fisheries impacts. Fisheries Centre Research Reports 12(7). 
+9 
+Anonymous. 2001. Increasing competition between fisheries and whales. Japan's whale research in the Western North Pacific 
+10 
+(JARPA II). Fisheries Agency. 
+11 
+Armstrong, A.J. and Siegfried, W.R. 1991. Consumption of Antarctic krill by minke whales. Antarct. Sci. 3(1):13-8. 
+12 
+Aydin, K. and Mueter, F. 2007. The Bering Sea – A dynamic food web perspective. Deep-Sea Res. II 54:2501-2525. 
+13 
+Bas, C., 1993. Long-term Variability in the Food Chains, Biomass Yields, and Oceanography of the Canary Current Ecosystem. pp. 
+14 
+94-103. In: Sherman, K., Alesander, D.G., Gold, B.D. (eds.), Large Marine Ecosystems: Stress, Mitigation, and Sustainability. 
+15 
+American Association for the Advancement of Science, Washington DC. 376 pp. 
+16 
+Baum, J.K., Myers, R.A., Kehler, D.G., Worm, B., Harley, J. and Doherty, P.A. 2003. Collapse and conservation on shark 
+17 
+populations in the Northwest Atlantic. Science 299:389-392. 
+18 
+Bax, N.J. 1998. The significance and prediction of predation in marine fisheries. ICES J. Mar. Sci. 55: 997-1030. 
+19 
+Best, P. 1982. Seasonal abundance, feeding, reproduction, age and growth in minke whales off Durban. Rep. Int. Whal. Commn. 
+20 
+32:759-786. 
+21 
+Brodie, P.F. 1975. Cetacean energetics, an overview of intraspecific size variation. Ecol. 56:152-161. 
+22 
+Brown, S.G. and Lockyer, C.H. 1984. Whales. pp. 717-781. In: Laws, R.M. (ed.) Antarctic Ecology Vol. 2. Academic Press, 
+23 
+London. 345-850 pp. 
+24 
+Busby, L. 2004. Vote buying at the International Whaling Commission. pp.87-88. In:: Transparency international (eds.) Global 
+25 
+Corruption Report 2004, Special Focus: Political Corruption. Pluto Press, London & Sterling, VA, USA. x+349pp. 
+26 
+Chittleborough, R.G. 1965. Dynamics of two populations of the humpback whale, Megaptera novaeangliae (Borowski). Mar. 
+27 
+Freshw. Res. 16:33-128. 
+28 
+Christensen, V. and Pauly, D. 1992. The ECOPATH II – software for balancing steady-state ecosystem models and calculating 
+29 
+network characteristics. Ecol. Model. 61:169-185.  
+30 
+Christensen, V. 1995. Ecosystem maturity - towards quantification. Ecol. Model. 77: 3-32. 
+31 
+Christensen, V. and Walters, C.J. 2004. Ecopath with Ecosim: methods, capabilities and limitations. Ecol. Model. 172:109-139. 
+32 
+Christensen, V., Walters, C.J. and Pauly, D. 2005. Ecopath with Ecosim: a User’s Guide. Fisheries Centre, University of British 
+33 
+Columbia, Vancouver. November 2005 edition. 154 pp. 
+34 
+Clapham, P.J. 2002. Humpback whale - Megaptera novaeangliae. pp. 589-592. In: Perrin, W.F., Würsig, B. and Thewissen, JG.M. 
+35 
+(eds.) Encyclopedia of Marine Mammals. San Diego, California. xxxviii+1414pp. 
+36 
+Corkeron, P.J. and Connor, R.C. 1999. Why do baleen whales migrate? Mar. Mamm. Sci.15:1228–1245. 
+37 
+Currie, D. 2007. Whales, Sustainability and International Environmental Governance. RECIEL 16:45-57. 
+38 
+Diallo, I., Cissé, I., and Bah, A. 2004. Modèle trophique du système côtier du plateau continental Guinéen, pp. 113-123. In 
+39 
+Palomares, M.L.D. and Pauly, D. (Eds.) West African marine ecosystems: models and fisheries impacts. Fisheries Centre Research 
+40 
+Reports 12(7).  
+41 
+Essington, T.E., 2006. Pelagic Ecosystem Response to a Century of Commercial Fishing and Whaling. pp. 38-49. In: Estes, J.A., 
+42 
+DeMaster, D.P., Doak, D.F., Williams, T.M., and Brownell Jr. R.L. (eds.) Whales, Whaling, and Ocean Ecosystems. University of 
+43 
+California Press, Berkeley CA. xvi+402pp. 
+44 
+Estes, J.A., DeMaster, D.P., Doak, D.F., Williams, T.M. and Brownell Jr., R.L. 2007. Whales, Whaling, and Ocean Ecosystems. 
+45 
+University of California Press. xvi+418 pp. 
+46 
+Fedoseev, A., 1970. Geostrophic circulation of surface waters on the shelf of north-west Africa. Rapp. P.-V. Reun. Cons. Int. 
+47 
+Explor. Mer., 159, 32-37. 
+48 
+Folkow, L.P., Haug, T., Nilssen, K.T. and Nordøy, E.S. 2000. Estimated food consumption of minke whales (Balaenoptera 
+49 
+acutorostrata) in Northeast Atlantic waters in 1992-1995. NAMMCO Sci. Publ. 2:65-81. 
+50 
+Gascuel, D. Labrosse, P., Meissa, B., Taleb Sidi, M.O. and Guénette, S. 2007. Decline of demersal resources in North-West Africa: 
+51 
+an analysis of Mauritania trawl-survey data over the past 25 years. Afr. J. Mar. Sci. 29(3): 331-345. 
+52 
+
+
+PDF PAGE 17
+17 
+Gomes, M.C. 1993. Predictions under uncertainty: Fish assemblages and food webs on the Grand Banks of Newfoundland. ISER, 
+1 
+Memorial University press, St. John’s, Newfoundland. 220 p. 
+2 
+Guénette, S. Heymans, S.J.J., Christensen, V. and Trites, A. 2006. Ecosystem models show combined effects of fishing, predation, 
+3 
+competition, and ocean productivity on Steller sea lions (Eumetopias jubatus) in Alaska. Can. J. Fish. Aquat. Sci. 63:2495-2517. 
+4 
+Hammill, M.O. and Stenson, G.B. 2007. Application of the precautionary approach and conservation reference points to 
+5 
+management of Atlantic seals. ICES J. Mar. Sci. 64:702-706. 
+6 
+Hilborn, R. 1987. Living with uncertainty in resource management. N. Amer. J. Fish. Man. 7: 1-5. 
+7 
+Holt, S.J. 2007. Whaling: Will the Phoenix rise again? Mar. Pollut. Bull. 54:1081-1086. 
+8 
+Horn, H.S. 1966. Measurements of 'overlap' in comparative ecological studies. Am. Nat. 100:419-424. 
+9 
+Horwood, J. 1990. Biology and exploitation of the minke whale. CRC Press, 239pp. 
+10 
+Innes S., Lavigne, D.M., Eagle, W.M. and Kovacs, K.M. 1986. Estimating feeding rates of marine mammals from heart mass to 
+11 
+body mass ratios. Mar. Mamm. Sci.2: 227-229. 
+12 
+Innes, S., Lavigne, D.M. Earle, W.M. and Kovacs, K.M. 1987. Feeding rates of seals and whales. J. Anim. Ecol. 56:115-130. 
+13 
+International Whaling Commission (IWC). 2004. Report of the Modelling Workshop on Cetacean-Fishery Competition. J. Cetacean 
+14 
+Res. Manage. 6 (Suppl.): 413-426. 
+15 
+Jackson, J.B.C., Kirby, M.X., Berger, W.H., Bjorndal, K.A, Botsford, L.W., Bourque, B.J., Bradbury, R.H., Cooker, R., Erlandson, J. 
+16 
+Estes, J.A., Hughes, T.P., Kidwell, S., Lange, C.B., Lenihan, H.S., Pondolfi, J.M., Peterson, C.H., Steneck, R.S., Tegner, M.J., and 
+17 
+Warner, R.R. 2001. Historical overfishing and the recent collapse of coastal ecosystems. Science 293:629-638. 
+18 
+Jackson, J.B.C. 2007. When ecological pyramids were upside down. pp. 23-37. In: Estes, J.A., DeMaster, D.P., Doak, D.F., 
+19 
+Williams, T.M. and Brownell Jr., R.S. (eds.) Whales, Whaling, and Ocean Ecosystems. University of California Press, Berkeley 
+20 
+and Los Angeles, California. xvi+418 pp. 
+21 
+Jann, B., Allen, J., Carrillo, M., Hanquet, S., Katona, S.K., Martin, A.R., Reeves, R.R., Seton, R., Stevick, P.T. and Wenzel, F.W. 
+22 
+2003. Migration of a humpback whale (Megaptera novaeangliae) between the Cape Verde Islands and Iceland. J. Cetacean. Res. 
+23 
+Manage. 5:125-129. 
+24 
+Jarre-Teichmann, A. 1998. The potential role of mass balance models for the management of upwelling ecosystems. Ecol. Appl. 
+25 
+8(Suppl.1):93-103. 
+26 
+Jefferson, T.A., Leatherwood, S. and Webberm, M.A. 1993. Marine mammals of the world.  FAO Species identification guide. 
+27 
+UNEP/FAO, Rome. 320 pp. 
+28 
+Kaschner, K. 2004. Modelling and mapping of resource overlap between marine mammals and fisheries on a global scale. Ph.D., 
+29 
+University of British Columbia. 184pp. 
+30 
+Kaschner, K., Watson, Reg, Trites, A.W. and Pauly, D. 2006. Mapping worldwide distributions of marine mammals using a Relative 
+31 
+Environmental Suitability (RES) model. Mar. Ecol. Prog. Ser. 316:285-310. 
+32 
+Katona, S. and Whitehead, H. 1988. Are cetaceans ecologically important? Oceanogr. Mar. Biol. Annu. Rev. 26:553-568. 
+33 
+Kenney, R.D, Scott, G.P., Thompson, T.J. and Winn, H.E. 1997. Estimates of prey consumption and trophic impacts of cetaceans in 
+34 
+the USA Northeast Continental Shelf ecosystem. J Northw. Atl. Fish Sci. 22:155-171. 
+35 
+Klinowska, M. 1991. Dolphins, Porpoises and Whales of the World: the IUCN red data book. IUCN, Gland, Switzerland. 429pp. 
+36 
+Lindeman, R.L. 1942. The trophic-dynamic aspect of ecology. Ecology 23:399-418. 
+37 
+Lockyer, C. 1981. Growth and energy budgets of large baleen whales from the southern hemisphere. pp. 379-488. In: FAO 
+38 
+Fisheries Series 5; Mammals In: the Sea. Vol. 3. FAO United Nations, Rome. 504pp. 
+39 
+MacArthur, R.H. and Levins, R. 1967. The limiting similarity, convergence and divergence of coexisting species. Amer. Nat. 
+40 
+101:377-385. 
+41 
+Mackinson, S., Blanchard, J.L., Pinnegar, J.K., and Scott, R. 2003. Consequences of alternative functional response formulations in 
+42 
+models exploring whale-fishery interactions. Mar. Mamm. Sci. 19:661-681. 
+43 
+Martell, S.J., Beattie, A.I., Walters, C.J., Nayar, T., and Briese, R. 2002. Simulating fisheries management strategies in the Gulf of 
+44 
+Georgia ecosystem using Ecopath with Ecosim. pp. 16-23 In Pitcher. T. and K. Cochrane (eds.) The use of ecosystem models to 
+45 
+investigate multispecies management strategies for capture fisheries. Fisheries Centre Research Reports 10(2). 
+46 
+Mendy, A.N. 2004. A trophic model of the Gambian continental shelf system in 1986, pp. 81-94 In Palomares, M.L.D. and Pauly, D. 
+47 
+(Eds.) West African marine ecosystems: models and fisheries impacts. Fisheries Centre Research Reports 12(7). 
+48 
+Miller, A.R. and Dolsak, N. 2007. Issue linkages in international environmental policy: The International Whaling Commission and 
+49 
+Japanese development aid. Global Environ. Politics 7:69-96. 
+50 
+Mitchell, E. 1973. Draft report on humpback whales taken under specific scientific permit by eastern Canadian land stations, 1969-
+51 
+1971. Rep. Int. Whal. Comm. 23: 138-154. 
+52 
+Mohammed, E. 2003. A generic marine ecosystem model for the Southeastern Caribbean in the late 1990s: application to Grenada 
+53 
+
+
+PDF PAGE 18
+18 
+and the Grenadines. pp. 191-225. In: Zeller, D., Booth, S., Mohammed, E., and Pauly, D. (eds.) From Mexico to Brazil: Central 
+1 
+Atlantic fisheries catch trends and ecosystem models. Fisheries Centre Research Reports Vol. 11(6). Fisheries Centre, University 
+2 
+of British Columbia, Vancouver, Canada. 264 pp. 
+3 
+Mori, M., and Butterworth, D.S. 2004. Consideration of multispecies interactions in the Antarctic: a preliminary model of the minke 
+4 
+whale -blue whale - krill interactions. Afr. J. Mar. Sci. 26: 245–259 23  
+5 
+Mori, M., and Butterworth, D.S. 2006. A first step towards modelling the krill-predator dynamics of the Antarctic ecosystem. 
+6 
+CCAMLR Science 13:217-277. 
+7 
+Morisita, M. 1959. Measuring of interspecific association and similarities between communities. Mem.  Fac. Sci. Kyushu Univ. Ser. 
+8 
+E3:64-80. 
+9 
+Morissette, L. 2005. Addressing uncertainty in ecosystem modelling. Pages 127142 In Levner, E, Linkov, I. and Proth, J.M. (eds.). 
+10 
+Strategic management of marine ecosystems. NATO Science Series: IV: Earth and environmental sciences, Volume 50. Springer-
+11 
+Verlag, Heidelberg, Germany. 
+12 
+Morissette, L. 2007. Complexity, cost and quality of ecosystem models and their impact on resilience: a comparative analysis, with 
+13 
+emphasis on marine mammals and the Gulf of St. Lawrence. PhD thesis, Zoology, University of British Columbia, Vancouver BC, 
+14 
+Canada.259 pp. 
+15 
+Morissette, L., Hammill, M.O. and C. Savenkoff. 2006. The trophic role of marine mammals in the Northern Gulf of St. Lawrence. 
+16 
+Mar. Mamm. Sci. 22:74-103. 
+17 
+Morissette, L. Melgo, J.L., Kaschner, K. and Gerber, L. in preparation. Food web models and data for studying the interactions 
+18 
+between marine mammals and fisheries in the Northwest African Ecosystem. Fisheries Centre Research Reports. 
+19 
+Myers, R.A. and Worm, B. 2003. Rapid worldwide depletion of predatory fish communities. Nature 423:280-283. 
+20 
+National Oceanographic and Atmospheric Administration (NOAA). 2007. ECOPATH modeling: precursor to an ecosystem 
+21 
+approach to fisheries management. World Wide Web site http://celebrating200years.noaa.gov/breakthroughs/ecopath/ from 
+22 
+NOAA [Visited April 2008]. 
+23 
+North Atlantic Marine Mammal Commission (NAMMCO).1997. Report of the 5th Meeting of the Scientific Committee, Tromsø, 
+24 
+Norway, 10–14 March 1997. 105 pp. 
+25 
+Northridge, S.P. 1991. An updated world review of interactions between marine mammals and fisheries. FAO Fish. Tech. Pap. 
+26 
+251(Suppl. 1). 58pp. 
+27 
+Notarbartolo-di-Sciara, G., Zanardelli, M., Jahoda, M., Panigada, S., and Airoldi, S. 2003. The fin whale, Balaenoptera physalus (L. 
+28 
+1758), in the Mediterranean Sea. Mammal Review 33:105-150 
+29 
+Odum, W.E. and E.J. Heald. 1975. The detritus-based food web of an estuarine mangrove community. pp 265-286. In: Wiley, M. 
+30 
+(ed.). Estuarine research, Vol. 1. Academic Press, New York. 541 pp. 
+31 
+Ohizumi, H. and Miyazaki, N. 1998. Feeding rate and daily energy intake of Dall’s porpoise in the northeastern Sea of Japan. Proc. 
+32 
+NIPR Symp. Polar Biol. 11:74–81. 
+33 
+Paine, R.T., Tegner, M.J., and Johnson, E.A. 1998. Compounded perturbations yield ecological surprises. Ecosystems 1:535-545. 
+34 
+Patterson, K. 1992. Fisheries for small pelagic species: an empirical approach to management targets. Rev. Fish Biol. Fish. 2:321-
+35 
+338. 
+36 
+Plagányi, É.E. 2007. Models for an ecosystem approach to fisheries. FAO fisheries technical paper 477. 126 p. 
+37 
+Plagányi, É.E. and Butterworth, D.S. 2002. Competition with fisheries. pp. 268-273. In: Perrin, W.F., Würsig, B., and Thewissen, 
+38 
+H.G.M. (eds.) Encyclopedia of Marine Mammals. Academic Press, San Diego. xxxvii+1414pp. 
+39 
+Plagányi, É.E. and Butterworth, D.S. 2004. A critical look at the potential of Ecopath with Ecosim to assist in practical fisheries 
+40 
+management. Afr. J.  Mar. Sci. 26:261-287. 
+41 
+Pauly, D., Christensen, V., Guénette, S. Pitcher, T.J., Sumaila, U.R., Walters, C.J., Watson, R. and Zeller, D. 2002. Towards 
+42 
+sustainability in world fisheries. Nature 418:689-695. 
+43 
+Pauly, D. Christensen, V. and Walters, C. 2000. Ecopath, Ecosim and Ecospace as tools for evaluating ecosystem impact of fisheries. 
+44 
+ICES J. Mar. Sci. 57:607-706. 
+45 
+Perrin, W.F., Würsig, B. and Thewissen, J.G.M (eds.). 2002. Encyclopedia of Marine Mammals. San Diego, California. 
+46 
+xxxviii+1414pp. 
+47 
+Perry, S.L., DeMaster, D.P., and Silber, G.K. 1999. The great whales: History and status of six species listed as endangered under 
+48 
+the U.S. Endangered Species Act of 1973. Mar. Fish. Rev. 61(1):1-74. 
+49 
+Punt, A.E. and Butterworth, D.S. 1995. The effects of future consumption by the Cape fur seal on catches and catch rates of the 
+50 
+Cape hakes. 4. Modelling the biological interaction between Cape fur seals Arctocephalus pusillus pusillus and the Cape hakes 
+51 
+Merluccius capensis and M. paradoxus. South S. Afr. J. Mar. Sci.16:255-285. 
+52 
+Reeves, R.R. 2002. The origins and character of ‘aboriginal subsistence’ whaling: a global review. Mammal Rev. 32(2):71-106. 
+53 
+Samb, B. and Mendy, A.N. 2004. Dynamique du réseau trophique de l’écosystème Sénégambien en 1990. pp. 57-70. In: Palomares, 
+54 
+
+
+PDF PAGE 19
+19 
+M.L.D. and Pauly, D. (eds) West African marine ecosystems: models and fisheries impacts. Fisheries Centre Research Reports 
+1 
+12(7). Fisheries Centre, University of British Columbia, Vancouver, Canada. 221 pp. 
+2 
+Schartau, M., Oschlies, A., and Willebrand, J. 2001. Parameter estimates of a zero-dimensional ecosystem model applying the 
+3 
+adjoint method. Deep-Sea Res. II 48:1773-1802. 
+4 
+Scheffer, M., Carpenter, S., Foley, J.A., Folke, C. and Walker, B. 2001. Catastrophic shifts in ecosystems. Nature 413:591-596. 
+5 
+Sea Around Us. 2008. A global database on marine fisheries and ecosystems. World Wide Web site www.seaaroundus.org. 
+6 
+Fisheries Centre, University British Columbia, Vancouver (British Columbia, Canada). [Visited February 2008] 
+7 
+Sergeant, D.E. 1969. Feeding rates of cetacea. Fiskeridir. Skr. Ser. Havunders. 15: 246-258. 
+8 
+Sergeant, D.E. 1977. Stocks of fin whales Balaenoptera physalus L. in the North Atlantic Ocean. Rep. Int. Whal. Commn. 27: 460–
+9 
+473. 
+10 
+Sidi, M.T. and Guénette, S. 2004. Modèle trophique de la ZEE mauritanienne: comparaison de deux périodes (1987 et 1998). pp 12-
+11 
+38 In Palomares, M.L.D. and Pauly, D. (Eds.) West African marine ecosystems : models and fisheries impacts. Fisheries Centre 
+12 
+Research Reports 12(7). 
+13 
+Sigurjónsson, J., and Víkingsson, G.A. 1997. Seasonal abundance of and estimated food consumption by cetaceans in Icelandic and 
+14 
+adjacent waters. J. Northwest. Atl. Fish. Sci., 22: 271-287. 
+15 
+Sigurjónsson, J., Galan, A., and Víkingsson, G.A. 2000. A note on stomach contents of minke whales (Balaenoptera acutorostrata) 
+16 
+in Icelandic waters. NAMMCO Sci. Publ.2:82-91. 
+17 
+Silvert, W. 2004. Managing uncertainty in ecosystem model dynamics and the implications and feasibility of spceific management 
+18 
+scenarios. EFEP Work Package 5, Final Report (Deliverable 5) 65 p. 
+19 
+Springer, A.M., Estes, J.A., van Vliet, G.B., Williams, T.M., Doak, D.F., Danner, E.M., Forney, K.A., and Pfister, B. 2003. 
+20 
+Sequential megafaunal collapse in the North Pacific Ocean; an ongoing legacy of industrial whaling? Proc. Natl. Acad. Sci. 100: 
+21 
+12 223-12 228. 
+22 
+Stanford, R., Lunn, K., and Guénette, S. 2001. A preliminary ecosystem model for the Atlantic coast of Morocco in the mid-1980s. 
+23 
+pp 314-344 In Guénette, S., Christensen, V., and Pauly, D (Eds.). Fisheries impacts on North Atlantic Ecosystems: models and 
+24 
+analyses. Fisheries Centre Research Reports 9(4). 
+25 
+Stobberup, K.A., Ramos, V.D.M., and Coelho, M.L. 2004. Ecopath model of the Cape Verde coastal ecosystem, pp. 39-56 In 
+26 
+Palomares, M.L.D. and Pauly, D. (Eds.) West African marine ecosystems: models and fisheries impacts. Fisheries Centre Research 
+27 
+Reports 12(7). 
+28 
+Struck, D. 2001. Japan blames whales for lower fish catch. International Herald Tribune. 28-29 July 2001. 
+29 
+Tamura, T. 2003. Regional assessments of prey consumption and competition by marine cetaceans in the world. In Responsible 
+30 
+Fisheries in the Marine Ecosystem. pp. 143-170. In: Sinclair, M. and Valdimarsson, G. (eds). Responsible Fisheries in the Marine 
+31 
+Ecosystem. Fishery Industries Division, CAB International: FAO, Rome (Italy) and Wallingford (United Kingdom). 448 pp. 
+32 
+Tamura, T. and Ohsumi, S. 2000. Regional assessments of prey consumption by marine cetaceans in the world. Publ. The Institute of 
+33 
+Cetacean Research (ICR), Tokyo, Japan. 45 pp. 
+34 
+Tamura, T., Fujise, Y. and Shimazaki, K. 1998. Diet of minke whales Balaenoptera acutorostrata in the northwestern part of the 
+35 
+North Pacific in summer 1994 and 1995. Fish. Sci. 64(1):71-76. 
+36 
+Taylor, B.L., Wade, P.R., De Master, D.P., and Barlow, J. 2000. Incorporating uncertainty into management models for marine 
+37 
+mammals. Cons. Biol. 14:1243-1252. 
+38 
+Trites, A.W. and Pauly, D. 1998. Estimating mean body masses of marine mammals from maximum body lengths. Can. J. Zool. 76: 
+39 
+86-896. 
+40 
+Trites, A.W., Christensen. V, and Pauly, D. 1997. Competition between fisheries and marine mammals for prey and primary 
+41 
+production in the Pacific Ocean. J. Northwest. Atl. Fish. Sci. 22:173-187. 
+42 
+Ulanowicz, R.E., and C.J. Puccia. 1990. Mixed trophic impacts in ecosystems. Coenoses 5:7-16 
+43 
+Vasconcellos, V., Mackinson, S., Sloman, K., and Pauly, D. 1997. The stability of trophic mass-balance models of marine 
+44 
+ecosystems: a comparative analysis. Ecol. Model.100: 125-143. 
+45 
+Walters, C. and Kitchell, J.F. 2001. Cultivation/depensation effects on juvenile survival and recruitment: implications for the theory 
+46 
+of fishing. Can. J. Fish. Aquat. Sci. 58:1-12. 
+47 
+Walters, C. and Martell, S. 2004. Fisheries ecology and management. Princeton University Press, Princeton, New Jersey. 428 pp. 
+48 
+Walters, C., Christensen, V., and D. Pauly. 1997. Structuring dynamic models of exploited ecosystems from trophic mass-balance 
+49 
+assessments. Rev. Fish  Biol. Fish. 7: 139-172. 
+50 
+Whitehead, H. 2002. Sperm Whale. pp. 1165-1172. In: Perrin, W.F., Würsig, B., and Thewissen, H.G.M. (eds.) Encyclopedia of 
+51 
+Marine Mammals. Academic Press, San Diego. xxxviii+1414pp. 
+52 
+Yodzis, P. 2001. Must top predators be culled for the sake of fisheries? Trends in Ecology and Evolution 16(2):78-84. 
+53 
+
+
+PDF PAGE 20
+20 
+Table 1: List of trophic groups and species included in the Ecopath model for Northwest Africa. Species in 
+1 
+bold represent the key species (the species assumed to represent the whole group in terms of ecological 
+2 
+parameters such as Q/B, P/B, and diet composition) for each trophic group. 
+3 
+ 
+4 
+Ecopath group 
+Species 
+1. Minke whales 
+Balaenoptera acutorostrata 
+2. Fin whales 
+Balaenoptera physalus 
+3. Humpback whales 
+Megaptera novaeangliae 
+4. Sei whales 
+Balaenoptera borealis 
+5. Bryde’s whales 
+Balaenoptera brydei 
+6. Sperm whales 
+Physeter macrocephalus 
+7. Killer whales 
+Orcinus orca 
+8. Other baleen whales 
+B. musculus 
+9. Beaked whales 
+Mesoplodon densirostris, M. europaeus, Ziphius caviostris 
+10. Dolphins 
+Delphinus delphis, Feresa attenuate, Globicephala macrorhynchus, Grampus 
+griseus, Kogia breviceps, Kogia simus, Lagenodelphis hosei, Peponocephala 
+electra, Pseudorca crassidens, Sousa teuszii, Stenella attenuate, Stenella clymene, 
+Stenella coeruleoalba, Stenella frontalis, Stenella longisrostris, Steno bredanensis, 
+Tursiops truncates 
+11. Seabirds 
+Actitis hypoleucos, Calidris ferruginea, Calonectris diomedea, Ceryle rudis, 
+Chlidonias niger, Halcyon malimbica, Limosa lapponica, Numenius phaeopus, 
+Oceanites oceanicus, Pagrodama nivea, Pelecanus rufescens, Phalacrocorax 
+africanus, Phoenicopterus rubber, Pluvialis squatarola, Sterna caspia, Sterna 
+hirundo 
+12. Large pelagics 
+Acanthocybium solandri, Brama brama, Centrolophidae, Coryphaena hippurus, 
+Cubiceps gracilis, Istiophoridae, Istiophorus albicans, Istiophorus platypterus, 
+Katsuwonus pelamis, Makaira nigricans, Ranzania laevis, Ruvettus pretiosus, 
+Schedophilus medusophagus, Tetrapturus albidus, Tetrapturus pfluegeri, Thunnus 
+alalunga, Thunnus albacares, Thunnus obesus, Thunnus thynnus, Xiphias gladius 
+13. Mesopelagics predators 
+Aphanopus carbo, Astronesthes niger, Atherina presbyter, Benthosema glaciale, 
+Borostomias elucens, Chauliodus danae, Diplospinus multistriatus, Evermannella 
+balbo, Lampris guttatus, Lepidocybium flavobrunneum, Leptostomias gladiator, 
+Maurolicus muelleri, Micromesistius poutassou, Micromesistius poutassou, Mora 
+moro, Moridae, Myctophum asperum, Myctophum nitidulum, Myctophum 
+punctatum, Nealotus tripes, Photonectes margarita, Polyacanthonotus challengeri, 
+Rhadinesthes decimus, Sternoptyx diaphana, Stomias boa boa, Stomiidae, 
+Trachichthyidae, Trachyrincus scabrus, Vinciguerria nimbaria, Xenodermichthys 
+copei 
+14. Bathydemersal predators 
+Beryx sp., Beryx decadactylus, Caelorinchus caelorhincus caelorhincus, Caproidae, 
+Chimaera monstrosa, Coryphaenoides rupestris, Coryphaenoides zaniophorus, 
+Gadiformes, Gempylidae, Helicolenus dactylopterus dactylopterus, Lophiidae, 
+Lophius budegassa, Lophius piscatorius, Lophius vaillanti, Lotidae, Merlucciidae, 
+Merluccius merluccius, Merluccius polli, Merluccius senegalensis, Muraena 
+helena, Nezumia aequalis, Nezumia sclerorhynchus, Phycidae, Phycis blennoides, 
+Phycis phycis, Polyprion americanus, Pristis pectinata, Spectrunculus grandis, 
+Synaphobranchus kaupii 
+
+
+PDF PAGE 21
+21 
+15. Sharks 
+Alopias sp., Alopias superciliosus, Alopias vulpinus, Alopiidae, Carcharhinidae, 
+Carcharhinus falciformis, Carcharhinus limbatus, Carcharhinus longimanus, 
+Carcharhinus obscurus, Carcharhinus plumbeus, Centrolophidae, Centrophorus 
+granulosus, Centroscyllium fabricii, Centrophorus squamosus, Centrophorus uyato, 
+Centroscymnus coelolepis, Centroscymnus cryptacanthus, Centroscymnus 
+crepidater, Cetorhinus maximus, Dalatias licha, Deania calcea, Elasmobranchii, 
+Etmopteridae, Etmopterus princes, Etmopterus pusillus, Galeorhinus galeus, Galeus 
+melastomus, Galeus polli, Ginglymostoma cirratum, Hexanchus griseus, Isurus sp., 
+Isurus oxyrinchus, Lamna nasus, Lamnidae, Mustelus asterias, Mustelus mustelus, 
+Prionace glauca, Pristidae, Rhizoprionodon acutus, Scyliorhinidae, Scyliorhinus 
+canicula, Scyliorhinus stellaris, Sphyrna lewini, Sphyrna zygaena, Sphyrnidae, 
+Squalidae, Squalus acanthias, Squalus blainville, Squalus megalops, Squatina 
+squatina, Squatinidae, Triakidae 
+16. Rays 
+Dasyatidae, Dasyatis margarita, Dasyatis pastinaca, Dipturus batis, Dipturus 
+oxyrinchus, Gymnura altavela, Leucoraja naevus, Myliobatidae, Myliobatis aquila, 
+Raja clavata, Raja miraletus, Raja montagui, Raja straeleni, Rajidae, Rajiformes, 
+Rhinobatidae, Rhinobatos cemiculus, Rhinobatos rhinobatos, Rhinoptera bonasus, 
+Rhinoptera marginata, Torpedinidae, Torpedo sp. 
+17. Costal tunas 
+Auxis rochei, Auxis thazard, Euthynnus alletteratus, Orcynopsis unicolor, Sarda 
+sarda,Scomberomorus tritor 
+
+
+PDF PAGE 22
+22 
+18. Coastal demersals 
+Acanthuridae, Albula vulpes, Ammodytidae, Anthias anthias, Aphia minuta, Apogon 
+imberbis, Apogonidae, Argentina sphyraena, Argyrosomus regius, Ariomma bondi, 
+Ariidae, Ariomma melanum, Arius heudelotii, Arnoglossus laterna, Aulopus 
+cadenati, Balistidae, Boops boops, Bothidae, Bothus podas, Brachydeuterus auritus, 
+Brotula barbata, Campogramma glaycos, Capros aper, Cepola macrophthalma, 
+Chaetodon hoefleri, Charis charis, Chelidonichthys obscurus, Chlorophthalmus 
+agassizi, Conger conger, Congridae, Ctenolabrus rupestris, Cynoglossidae, 
+Cynoglossus senegalensis, Dentex  angolensis, Dentex  canariensis, Dentex  dentex, 
+Dentex  gibbosus, Dentex  macrophthalmus, Dentex  maroccanus, Dicentrarchus 
+sp.,Dicentrarchus labrax, Dicologlossa cuneata, Diplodus bellottii, Diplodus 
+cervinus cervinus, Diplodus sargus cadenati, Diplodus vulgaris, Drepane africana, 
+Echeneidae, Emmelichthyidae, Epinephelus  marginatus, Epinephelus aeneus, 
+Epinephelus goreensis, Eucinostomus melanopterus, Fistularia tabacaria, 
+Gaidropsarus sp., Galeoides sp., Galeoides decadactylus, Gerres nigri, Gobius 
+niger, Gobius paganellus, Haemulidae, Halobatrachus didactylus, Labridae, 
+Lepidorhombus sp., Lepidotrigla cadmani, Lepidotrigla dieuzeidei, Lethrinus 
+atlanticus, Lithognathus mormyrus, Liza aurata, Liza dumerili,  Liza falcipinnis, 
+Liza grandisquamis, Liza ramado, Lutjanus sp., Lutjanus goreensis, 
+Macroramphosus scolopax, Molva sp., Microchirus sp., Microchirus boscanion, 
+Microchirus variegates, Monochirus hispidus, Mugilidae,  Mugil capurrii, Mugil 
+cephalus, Mullidae, Mullus  barbatus, Mullus sp., Mullus surmuletus, Muraenidae, 
+Mycteroperca rubra, Oblada melanura, Plectorhinchus macrolepis, Pagrus sp., 
+Pagrus pagrus, Pagrus caeruleostictus, Pagellus sp., Pagellus bellottii bellottii, 
+Pagellus acarne, Pagellus bogaraveo, Pagellus erythrinus, Pegusa lascaris, 
+Pentanemus quinquarius, Platichthys flesus, Plectorhinchus macrolepis, 
+Plectorhinchus mediterraneus, Pleuronectidae, Pleuronectiformes, Pleuronectes 
+platessus, Polynemidae, Pomacentridae, Polydactylus quadrifilis, Pontinus kuhlii, 
+Pomadasys jubelini, Pomadasys incisus, Pomadasys perotaei, Pomadasys rogerii, 
+Pseudotolithus typus, Pseudotolithus senegalensis, Pseudotolithus elongatus, 
+Pseudotolithus senegallus, Pseudupeneus prayensis, Pteroscion peli, Pseudupeneus 
+prayensis, Rachycentron canadum, Sarpa salpa, Saurida brasiliensis, Scaridae, 
+Sciaenidae, Sciaena umbra, Schedophilus pemarco, Scophthalmidae, Scophthalmus 
+rhombus, Serranidae, Selene dorsalis, Scorpaenidae, Scorpaena maderensis, 
+Scorpaena notata, Syacium guineensis, Soleidae, Solea senegalensis, Solea solea, 
+Sparidae,  Sparus auratus,  Sparus caeruleostictus, Spondyliosoma cantharus, 
+Stephanolepis hispidus, Stromateus fiatola, Symphodus mediterraneus, Symphodus 
+melops, Synagrops microlepis, Synaptura lusitanica lusitanica, Trachinus draco, 
+Trachinocephalus myops, Triglidae, Tetraodontidae, Trisopterus minutus, 
+Trisopterus luscus, Umbrina cirrosa, Umbrina canariensis, Zeus faber, Zenopsis 
+conchifer 
+19. Clupeids 
+Alosa alosa, Clupeidae, Clupeiformes, Engraulis encrasicolus, Ethmalosa 
+fimbriata, Ilisha Africana, Sardina pilchardus, Sardinella sp., Sardinella aurita, 
+Sardinella maderensis, Sprattus sprattus 
+20. Other coastal pelagics 
+Alectis alexandrinus, Aphanopus intermedius, Belonidae, Carangidae, Caranx sp., 
+Caranx hippos, Caranx rhonchus, Caranx senegallus, Cheilopogon heterurus, 
+Chloroscombrus chrysurus, Decapterus sp., Decapterus punctatus, Dicentrarchus 
+punctatus, Elops lacerta, Exocoetidae, Exocoetus obtusirostris, Hemiramphidae, 
+Hemiramphus sp., Lepidopus caudatus, Lichia amia, Pomatomus saltatrix, 
+Promethichthys pometheus, Regalecus glesne, Scomber sp., Scomber japonicus, 
+Scomber scombrus, Scomberesox saurus saurus, Scomberomorus sp., Scombridae, 
+Seriola sp., Sphyraena sp., Sphyraena barracuda, Spicara sp., Trachinotus sp., 
+Trachinotus ovatus, Trachurus sp., Trachurus mediterraneus, Trachurus picturatus, 
+Trachurus trachurus, Trachurus trecae, Trichiuridae, Trichiurus lepturus, 
+Tylosurus acus acus 
+
+
+PDF PAGE 23
+23 
+21. Cephalopods 
+Alloteuthis subulata, Cephalopoda, Illex coindetii, Loliginidae, Loligo sp., Loligo 
+vulgaris, Octopodidae, Octopus vulgaris, Ommastrephidae, Sepia bertheloti, Sepia 
+elobyana, Sepia officinalis, Sepia orbignyana, Sepiidae, Teuthida, Todarodes 
+sagittatus 
+22. Crustaceans 
+Aristeidae, Aristeus antennatus, Aristeus varidens, Brachyura, Calappa 
+rubroguttata, Cancer pagurus, Carcinus maenas, Crangon sp., Crangon crangon, 
+Crangonidae, Geryon sp., Geryon maritae, Homarus gammarus, Leucosiidae, Maja 
+squinado, Metapenaeus, Munidae, Natantian decapods, Necora puber, Nephrops 
+norvegicus, Paguridae, Palaemonidae, Palinurus sp., Palinurus elephas, Palinurus 
+mauritanicus, Panulirus regius, Panulirus sp., Parapenaeopsis sp., Parapenaeopsis 
+atlantica, Parapanaeus longirostris, Penaeidae, Penaeus sp., Penaeus  kerathurus, 
+Penaeus notialis, Pleoticus robustus, Plesionika heterocarpus, Plesiopenaeus 
+edwardsianus, Portunidae, Scyllaridae,  
+23. Benthos 
+Anthozoa, Arca sp., Arcidae, Bivalvia, Cardiidae, Cardium edule, Chama crenulata, 
+Conidae, Crassostrea sp., Crepidula porcellana, Cymbium sp, Donacidae, Donax 
+sp., Epizoanthidae, Gastropoda, Glycymerididae, Haliotidae, Haliotis tuberculata, 
+Modiolus sp., Murex sp., Muricidae, Mytilidae, Naticidae, Ostrea edulis, Patella sp., 
+Pecten maximus, Pectinidae, Porifera, Pyura dura, Ruditapes decussates, Solen sp., 
+Solenidae, Tapes sp., Thais haemastoma, Veneridae, Venus rosalina, Venus 
+verrucosa, Volutidae 
+24. Benthic producers 
+Algae, benthic bacteria 
+25. Zooplankton 
+Copepoda, Hydrozoa, Scyphozoa, fish larvae, eggs 
+26. Phytoplankton 
+Different diatoms species, and a mixture of autotrophic and mixotrophic organisms 
+including: Cryptophytes, dinoflagellates, prasinophytes, and prymnesiophytes 
+27. Detritus 
+Non-living particulate organic material, including the bodies of dead organisms or 
+fragments of organisms or fecal material. 
+ 
+1 
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 24
+24 
+Table 2: Comparison of predicted cetacean densities in study area and observed densities in similar habitats (subtropical & tropical waters). A = aerial surveys, S 
+1 
+= ship based surveys.  Density estimates that are corrected for animals missed on the track-line are indicated in the G(0) corrected column. All other observed 
+2 
+estimates might represent underestimations. Bold observed density values represent lowest and highest observed estimates, respectively for each species.  
+3 
+Common Name
+Estimated density  
+[animals / 1000 
+km2]
+Observed density    
+[animals / 1000 km2]
+CV 
+G(0) 
+corrected
+Geographic area
+Survey 
+years
+Survey 
+type
+Source
+Blue whale
+0.03
+0.07
+0.24
+no
+Eastern Tropical Pacific
+1986-1990
+S
+Wade & Gerrodette, 1993
+Blue whale
+0.03
+1.10
+0.33
+yes
+NE Pacific, Baja California
+1993
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+0.00
+0.00
+yes
+NE Pacific, west coast US
+1996
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+3.11
+0.28
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Blue whale
+0.03
+0.95
+0.44
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Blue whale
+0.03
+0.11
+0.99
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Blue whale
+0.03
+3.27
+0.24
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Blue whale
+0.03
+1.26
+0.27
+yes
+NE Pacific, California offshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+4.96
+0.13
+yes
+NE Pacific, California inshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+0.76
+0.50
+no
+SW Indian Ocean, Madagaskar plateau (southern block)
+1996
+S
+Best et al 2003
+Blue whale
+0.03
+0.82
+0.65
+no
+SW Indian Ocean, Madagaskar plateau (northern block)
+1996
+S
+Best et al 2003
+Brydes whale
+0.49
+0.11
+0.61
+no
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1996-2001
+S
+Mullin and Fulling, 2004
+Bryde's whale
+0.49
+0.67
+0.20
+no
+Eastern Tropical Pacific
+1986-1990
+S
+Wade & Gerrodette, 1993
+Bryde's whale
+0.49
+0.67
+0.21
+no
+Eastern Tropical Pacific
+1998
+S
+Gerrodette & Forcada, 2002
+Bryde's whale
+0.49
+0.50
+0.24
+no
+Eastern Tropical Pacific
+1999
+S
+Gerrodette & Forcada, 2002
+Bryde's whale
+0.49
+0.48
+0.20
+no
+Eastern Tropical Pacific
+2000
+S
+Gerrodette & Forcada, 2002
+Bryde's whale
+0.49
+0.19
+0.45
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2006
+Bryde's whale
+0.49
+0.06
+0.53
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Bryde's whale
+0.49
+0.02
+1.01
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Bryde's whale
+0.49
+0.09
+1.09
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1991-1994
+S
+Hansen et al. 1995
+Bryde's whale
+0.49
+0.04
+0.85
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1991-1994
+S
+Davis & Fargion, 1996
+Bryde's whale
+0.49
+0.05
+1.07
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1996-1997
+S
+Davis et al, 2000
+Bryde's whale
+0.49
+0.43
+1.05
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I EPA survey)
+1996-1997
+S
+Davis et al, 2000
+Fin whale
+0.00
+0.00
+yes
+NOAA 91-96 California inshore
+1991
+A
+Forney et al, 1995
+Fin whale
+0.22
+16.09
+0.22
+no
+NW Mediterranean
+1992
+S
+Forcada et al 1995
+Fin whale
+0.22
+3.18
+0.34
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Fin whale
+0.22
+3.92
+0.56
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Fin whale
+0.22
+0.07
+0.72
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2003
+Fin whale
+0.22
+0.19
+1.01
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Fin whale
+0.22
+1.97
+0.35
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Fin whale
+0.22
+0.07
+1.15
+no
+NW Atlantic, US east coast, south of Maryland
+1998
+S
+Mullin, 2003
+Fin whale
+0.22
+1.85
+0.48
+no
+NW Atlantic, Virginia Capes
+2002
+S
+Garrison et al, 2003
+4 
+ 
+5 
+ 
+6 
+7 
+
+
+PDF PAGE 25
+25 
+Table 2 (cont.): 
+1 
+Common Name
+Estimated density  
+[animals / 1000 
+km2]
+Observed density    
+[animals / 1000 km2]
+CV 
+G(0) 
+corrected
+Geographic area
+Survey 
+years
+Survey 
+type
+Source
+Humpback whale
+0.10
+1.22
+0.41
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Humpback whale
+0.10
+3.50
+0.21
+yes
+NE Pacific, California inshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+0.03
+0.37
+yes
+NE Pacific, California offshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+1.46
+0.42
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Humpback whale
+0.10
+0.00
+0.00
+yes
+NE Pacific, Baja California
+1993
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+0.66
+0.41
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Humpback whale
+0.10
+0.14
+0.72
+yes
+NE Pacific, west coast US
+1996
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+1.81
+0.44
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow. 2003
+Humpback whale
+0.10
+0.89
+0.49
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Humpback whale
+0.10
+7.44
+0.48
+no
+SE Atlantic, Gabon waters (northern strata)
+2002
+A
+Rosenbaum et al, 2004
+Humpback whale
+0.10
+24.34
+0.31
+no
+SE Atlantic, Gabon waters (southern strata)
+2002
+A
+Rosenbaum et al, 2004
+Humpback whale
+0.10
+46.49
+0.47
+no
+SW Indian Ocean, Madagaskar (eastern block)
+1994
+S
+Best et al, 1996
+Humpback whale
+0.10
+112.32
+0.27
+no
+SW Indian Ocean, Madagaskar (southern block)
+1994
+S
+Best et al, 1996
+Humpback whale
+0.10
+67.47
+0.15
+no
+SW Indian Ocean, Mozambique
+2003
+S
+Findlay et al, 2004
+Minke whale
+1.28
+0.42
+0.68
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Minke whale
+1.28
+0.28
+0.62
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Minke whale
+1.28
+0.27
+0.44
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Minke whale
+1.28
+0.93
+0.51
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Minke whale
+1.28
+0.86
+0.77
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Minke whale
+1.28
+0.03
+1.29
+no
+NW Atlantic, US east coast, south of Maryland
+1998
+S
+Mullin, 2003
+Sei whale
+0.10
+0.06
+0.53
+yes
+NE Pacific, west coast US
+1991
+S
+Barlow, 2003
+Sei whale
+0.10
+0.05
+0.79
+yes
+NE Pacific, west coast US
+1991
+S
+Barlow, 2003
+Sei whale
+0.10
+0.10
+0.73
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Sei whale
+0.10
+0.03
+1.01
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Sei whale
+0.10
+0.03
+1.06
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2003
+Killer whale
+0.11
+0.44
+0.37
+no
+Eastern Tropical Pacific
+1986-1990
+S
+Wade & Gerrodette, 1993
+Killer whale
+0.11
+0.31
+0.76
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Killer whale
+0.11
+0.25
+0.69
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Killer whale
+0.11
+0.55
+0.50
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Killer whale
+0.11
+0.74
+0.61
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Killer whale
+0.11
+0.58
+0.73
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Killer whale
+0.11
+0.14
+0.98
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2006
+Killer whale
+0.11
+0.69
+0.42
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1991-1994
+S
+Hansen et al. 1995
+Killer whale
+0.11
+0.79
+0.48
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1991-1994
+S
+Davis & Fargion, 1996
+Killer whale
+0.11
+0.17
+1.01
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1996-1997
+S
+Davis et al, 2000
+Killer whale
+0.11
+0.37
+0.49
+no
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1996-2001
+S
+Mullin and Fulling, 2004
+2 
+ 
+3 
+ 
+4 
+ 
+5 
+ 
+6 
+ 
+7 
+
+
+PDF PAGE 26
+26 
+Table 2 (cont.): 
+1 
+Common Name
+Estimated density  
+[animals / 1000 
+km2]
+Observed density    
+[animals / 1000 km2]
+CV 
+G(0) 
+corrected
+Geographic area
+Survey 
+years
+Survey 
+type
+Source
+Sperm whale
+1.09
+1.33
+0.22
+yes
+Eastern Tropical Pacific
+1986-1990
+A & S
+Wade & Gerrodette, 1993
+Sperm whale
+1.09
+0.92
+0.38
+no
+Eastern Tropical Pacific
+1998
+S
+Gerrodette & Forcada, 2002
+Sperm whale
+1.09
+1.24
+0.60
+no
+Eastern Tropical Pacific
+1999
+S
+Gerrodette & Forcada, 2002
+Sperm whale
+1.09
+0.19
+0.73
+no
+Eastern Tropical Pacific
+2000
+S
+Gerrodette & Forcada, 2002
+Sperm whale
+1.09
+3.36
+0.81
+yes
+Northeastern Tropical Pacific
+1997
+S
+Barlow & Taylor, 2005
+Sperm whale
+1.09
+4.10
+0.36
+no
+Northeastern Tropical Pacific
+1997-2000
+S
+Barlow & Taylor, 2005
+Sperm whale
+1.09
+0.20
+1.07
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Sperm whale
+1.09
+3.42
+0.99
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Sperm whale
+1.09
+1.41
+0.40
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Sperm whale
+1.09
+0.47
+0.56
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Sperm whale
+1.09
+1.90
+0.59
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Sperm whale
+1.09
+0.90
+0.13
+yes
+NE Pacific, Hawaiin waters
+1993-1998
+A
+Mobley et al, 2000
+Sperm whale
+1.09
+2.79
+0.81
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2006
+Sperm whale
+1.09
+2.06
+0.51
+no
+NW Atlantic, US east coast, south of Maryland
+1998
+S
+Mullin, 2003
+Sperm whale
+1.09
+1.14
+0.85
+no
+NW Atlantic, Virginia Capes
+2002
+S
+Garrison et al, 2003
+Sperm whale
+1.09
+2.31
+0.31
+yes
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1991-1994
+S
+Hanson et al, 1995
+sperm whale
+1.09
+1.31
+0.31
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1991-1994
+S
+Hansen et al. 1995
+sperm whale
+1.09
+1.74
+0.30
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1991-1994
+S
+Davis & Fargion, 1996
+sperm whale
+1.09
+0.96
+0.45
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1996-1997
+S
+Davis et al, 2000
+sperm whale
+1.09
+1.62
+0.56
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1996-1997
+S
+Davis et al, 2000
+Sperm whale
+1.09
+0.85
+0.57
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I EPA survey)
+1996-1997
+S
+Davis et al, 2000
+Sperm whale
+1.09
+3.80
+0.23
+no
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1996-2001
+S
+Mullin and Fulling, 2004
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 27
+27 
+Table 3. Primary production required (PPR) and mean trophic level (TL) for fisheries’ catches and marine 
+1 
+mammal consumption off the coast of Northwest Africa. 
+2 
+ 
+PPR 
+PPR 
+(% of total PP) 
+Mean TL 
+of the catch / 
+consumption 
+Northwest Africa 
+ 
+ 
+ 
+Fisheries 
+94.93 
+0.42 
+2.80 
+Minke whales 
+1.06 
+< 0.01 
+2.54 
+Fin whales 
+ 0.24 
+< 0.01 
+2.01 
+Humpback whales 
+ 0.19 
+< 0.01 
+2.44 
+Bryde’s whales 
+ 53.87 
+ 0.24 
+2.39 
+Sei whales 
+ 0.05 
+< 0.01 
+2.02 
+Sperm whales 
+ 62.37 
+ 0.28 
+3.12 
+Killer whales 
+ 63.18 
+ 0.28 
+2.94 
+Baleen whales 
+ 0.04 
+< 0.01 
+2.00 
+Beaked whales 
+ 1.38 
+ 0.01 
+3.21 
+Dolphins 
+ 62.91 
+ 0.28 
+2.54 
+3 
+
+
+PDF PAGE 28
+28 
+List of Figures  
+1 
+ 
+2 
+Figure 1. Map showing A) the studies areas that were the focus of this project, and B) the spatial 
+3 
+boundaries of the Northwest African area for which the results are presented here. The coordinates of the 
+4 
+Northwest African area are 8.5N - 36N and 30W - 6.5W, covering a total area of approximately 3,6 million 
+5 
+km2. 
+6 
+ 
+7 
+Figure 2: Comparison of proportional diet compositions of different marine mammals groups and catch 
+8 
+composition of different fishing fleets. 
+9 
+ 
+10 
+Figure 3: Comparison of total annual fisheries catches (grey bars) and cetacean consumption (black bars), 
+11 
+per trophic group in Northwest Africa. 
+12 
+ 
+13 
+Figure 4. Mixed trophic impacts of fisheries (A), baleen whales (B) and all marine mammals (C) on the 
+14 
+species groups of the Northwest Africa model. Bars below zero represent a negative impact, while bars 
+15 
+above zero represent a positive impact. Note that the scale of the y-axis had to be reduced by two orders of 
+16 
+magnitude for marine mammals in order to see the effect on the impacted groups. 
+17 
+ 
+18 
+Figure 5. Simulation of biomass changes for cephalopods after the removal of all baleen whales from the 
+19 
+ecosystem of Northwest Africa. Grey lines represent biomass trends over 21 years with marine mammals, 
+20 
+while black dashed lines show the biomass trends after the removal of baleen whales. The time series of 
+21 
+observed biomass data for cephalopods is also shown on the graph. 
+22 
+ 
+23 
+Figure 6. Biomass change after a 21-year simulation in the Northwest African ecosystem, with all marine 
+24 
+mammals (grey) and without baleen whales (white). 
+25 
+26 
+
+
+PDF PAGE 29
+29 
+Figure 1 
+1 
+ 
+2 
+ 
+3 
+ 
+4 
+ 
+5 
+8.5N - 36N 
+30W - 6.5W 
+Total Area:  
+3,561,029 km2 
+A) 
+B) 
+
+
+PDF PAGE 30
+30 
+Figure 2 
+1 
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 31
+31 
+Figure 2 (cont.) 
+1 
+2 
+ 
+3 
+
+
+PDF PAGE 32
+32 
+Figure 3 
+1 
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 33
+33 
+Figure 4 
+ 
+ 
+ 
+ 
+ 
+ 
+A) 
+B) 
+C) 
+
+
+PDF PAGE 34
+34 
+Figure 5.  
+ 
+ 
+
+
+PDF PAGE 35
+35 
+Figure 6.  
+ 
+ 
+
+
+PDF PAGE 36
+www.wwfsenegal.org  
+9639 Sacré-Coeur III 
+BP 22 928 Dakar 
+Sénégal  
+Tel : +221 33 869 37 00 
+Recent studies have proposed that whales are the culprits behind 
+decreased fish populations and as a result they should be culled.  
+The rationale for such arguments is questionable in light of docu-
+mented overfishing occurring on a global scale, the lack of scien-
+tific evidence for existing large-scale competition between marine 
+mammals and fisheries, and the unpredictable consequences of 
+culling.  Nonetheless, the “whales eat fish” issue has become a 
+significant point of contention.  
+To understand the impact of whales on fisheries, it is necessary to 
+analyze the situation in the context of ecosystems in order to con-
+sider the complex indirect and direct interactions through which 
+these two groups might influence each other.  To this end the Len-
+fest Ocean Program is conducting a project to examine the scien-
+tific evidence for the assertion that commercial fisheries are nega-
+tively impacted by whales.  
+As the project is underway, but not concluded, we are organizing 
+the Dakar Workshop in order to share preliminary findings con-
+cerning a study area located off the coast of Northwest Africa. 
+Highlights:  
+ 
+Area under review: the area defined by NOAA as the Canary 
+Current Large Marine Ecosystem (CCLME). 
+ 
+Morocco, Mauritania, Senegal, Guinea-Bissau, the Canary 
+Islands, Gambia, Cape Verde and Western Saharan Coastline. 
+Dakar Novotel 
+Avenue Abdoulaye Fadiga, 
+BP 2073, 
+18524 DAKAR, 
+SENEGAL 
+08 & 09 May 2008 
+Contact person:  
+Dr. Mamadou Diallo 
+(221) 33 869 37 00 
+mdiallo@wwfsenegal.org 
+Whales & Fish Interactions:  
+Are Great Whales a Threat to Fisheries?  
+ 
+Organised by  
+WWF WAMER & the Lenfest Ocean Program 
+WWF WAMER 
+www.lenfestocean.org 
+1025 F Street NW 
+Washington, DC 20004 
+United States of America 
+Tel: +202-552-2131 
+The Lenfest Ocean Program 
+APPENDIX 1
+
+
+PDF PAGE 37
+WEDNESDAY 7th MAY
+WEDNESDAY 7th MAY 
+20h00  EVENING DINNER RECEPTION FOR WORKSHOP PARTICIPANTS 
+THURSDAY 8th MAY
+THURSDAY 8th MAY 
+09h00 
+OPENING SESSION 
+Welcome Address – Dr. Papa Samba Diouf,  Coordinator, WWF WAMER  
+Introduction -  Dr. Margaret Bowman, Director, Lenfest Ocean Program 
+Opening remarks by His Excellency Mr. Souleymane Ndéné Ndiaye, State 
+Minister of Maritime Economy, Fisheries and Aquaculture of Senegal (tbc) 
+10h00  COFFEE BREAK 
+10h30  SESSION 1 MORNING – PRESENTATION OF LENFEST OCEAN PROGRAM 
+ 
+SCIENTIFIC REVIEW 
+Presentation and adoption of the draft programme -  Dr. Mamadou Diallo, 
+Program Manager, WWF WAMER 
+Whales and Fish interactions: the Scientific and Policy Debate – Dr. Daniel 
+Pauly, Professor and Director of the  Fisheries Centre, Univeristy of British 
+Colombia, Canada  
+Modelling & Methodology - Dr. Lyne Morissette, Lenfest Ocean Program 
+Preliminary results 1: Ecosystem structure and trophic interactions - Dr. Lyne 
+Morissette &  Dr. Kristin Kaschner (LOP) 
+ 
+Diet composition of marine mammals vs fisheries catch composition 
+ 
+Total catches vs total consumption by Marine Mammals 
+ 
+Mixed trophic impacts 
+ 
+Overlap index 
+13h00-14h00 LUNCH 
+14h30  SESSION 1 AFTERNOON– PRESENTATION OF PEW SCIENTIFIC RE-
+VIEW (CONT.) 
+Preliminary results 2: Dynamic simulations (the „what if‟ scenarios) - Dr. Lyne 
+Morissette & Dr. Kristin Kaschner 
+ 
+What happens to fish stocks when whales are eradicated? 
+ 
+Would a massive cull of baleen whales benefit pelagic and inshore fisher-
+ies? 
+ 
+Testing of different assumptions 
+Preliminary results 3: Implications for management and policy 
+15h45-16h00  COFFEE BREAK  
+Discussion 1: Model structure and data collection  
+Discussion 2: Exploration of potential alternative scenarios   
+General discussion and conclusion 
+17h30  END OF DAY 1 WORK SESSION 
+09 MAY
+09 MAY 
+09h00  MORNING – TOWARDS SCIENCE-POLICY SYNERGY 
+Welcome to additional Day 2 participants - Dr. Bakhayokho Workshop Facilita-
+tor 
+Outline of Day 1 discussions - Dr. Margaret Bowman 
+Implications in the policy context - Dr. Mamadou Dallio 
+Intervention by His Excellency Mr. Lamine Thiam, President of the Environ-
+ment Parliamentary Network of the Senegalese National Assembly 
+Discussion 
+Wrap up and conclusion 
+13h00 
+ LUNCH 
+16h00  AFTERNOON – PRESS BRIEFING 
+Whales & Fish Interactions:  
+Are Great Whales a Threat to Fisheries?  
+ 
+Organised by  
+WWF WAMER & the Lenfest Ocean Program 
+Dakar Novotel 
+Avenue Abdoulaye Fadiga, 
+BP 2073, 
+18524 DAKAR, 
+SENEGAL 
+08 & 09 May 2008 
+Contact person:  
+Dr. Mamadou Diallo 
+(221) 33 869 37 00 
+
+
+PDF PAGE 38
+24 
+Table 2: Comparison of predicted cetacean densities in study area and observed densities in similar habitats (subtropical & tropical waters). A = aerial surveys, S 
+1 
+= ship based surveys.  Density estimates that are corrected for animals missed on the track-line are indicated in the G(0) corrected column. All other observed 
+2 
+estimates might represent underestimations. Bold observed density values represent lowest and highest observed estimates, respectively for each species.  
+3 
+Common Name
+Estimated density  
+[animals / 1000 
+km2]
+Observed density    
+[animals / 1000 km2]
+CV 
+G(0) 
+corrected
+Geographic area
+Survey 
+years
+Survey 
+type
+Source
+Blue whale
+0.03
+0.07
+0.24
+no
+Eastern Tropical Pacific
+1986-1990
+S
+Wade & Gerrodette, 1993
+Blue whale
+0.03
+1.10
+0.33
+yes
+NE Pacific, Baja California
+1993
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+0.00
+0.00
+yes
+NE Pacific, west coast US
+1996
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+3.11
+0.28
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Blue whale
+0.03
+0.95
+0.44
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Blue whale
+0.03
+0.11
+0.99
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Blue whale
+0.03
+3.27
+0.24
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Blue whale
+0.03
+1.26
+0.27
+yes
+NE Pacific, California offshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+4.96
+0.13
+yes
+NE Pacific, California inshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Blue whale
+0.03
+0.76
+0.50
+no
+SW Indian Ocean, Madagaskar plateau (southern block)
+1996
+S
+Best et al 2003
+Blue whale
+0.03
+0.82
+0.65
+no
+SW Indian Ocean, Madagaskar plateau (northern block)
+1996
+S
+Best et al 2003
+Brydes whale
+0.49
+0.11
+0.61
+no
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1996-2001
+S
+Mullin and Fulling, 2004
+Bryde's whale
+0.49
+0.67
+0.20
+no
+Eastern Tropical Pacific
+1986-1990
+S
+Wade & Gerrodette, 1993
+Bryde's whale
+0.49
+0.67
+0.21
+no
+Eastern Tropical Pacific
+1998
+S
+Gerrodette & Forcada, 2002
+Bryde's whale
+0.49
+0.50
+0.24
+no
+Eastern Tropical Pacific
+1999
+S
+Gerrodette & Forcada, 2002
+Bryde's whale
+0.49
+0.48
+0.20
+no
+Eastern Tropical Pacific
+2000
+S
+Gerrodette & Forcada, 2002
+Bryde's whale
+0.49
+0.19
+0.45
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2006
+Bryde's whale
+0.49
+0.06
+0.53
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Bryde's whale
+0.49
+0.02
+1.01
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Bryde's whale
+0.49
+0.09
+1.09
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1991-1994
+S
+Hansen et al. 1995
+Bryde's whale
+0.49
+0.04
+0.85
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1991-1994
+S
+Davis & Fargion, 1996
+Bryde's whale
+0.49
+0.05
+1.07
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1996-1997
+S
+Davis et al, 2000
+Bryde's whale
+0.49
+0.43
+1.05
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I EPA survey)
+1996-1997
+S
+Davis et al, 2000
+Fin whale
+0.00
+0.00
+yes
+NOAA 91-96 California inshore
+1991
+A
+Forney et al, 1995
+Fin whale
+0.22
+16.09
+0.22
+no
+NW Mediterranean
+1992
+S
+Forcada et al 1995
+Fin whale
+0.22
+3.18
+0.34
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Fin whale
+0.22
+3.92
+0.56
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Fin whale
+0.22
+0.07
+0.72
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2003
+Fin whale
+0.22
+0.19
+1.01
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Fin whale
+0.22
+1.97
+0.35
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Fin whale
+0.22
+0.07
+1.15
+no
+NW Atlantic, US east coast, south of Maryland
+1998
+S
+Mullin, 2003
+Fin whale
+0.22
+1.85
+0.48
+no
+NW Atlantic, Virginia Capes
+2002
+S
+Garrison et al, 2003
+4 
+ 
+5 
+ 
+6 
+7 
+
+
+PDF PAGE 39
+25 
+Table 2 (cont.): 
+1 
+Common Name
+Estimated density  
+[animals / 1000 
+km2]
+Observed density    
+[animals / 1000 km2]
+CV 
+G(0) 
+corrected
+Geographic area
+Survey 
+years
+Survey 
+type
+Source
+Humpback whale
+0.10
+1.22
+0.41
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Humpback whale
+0.10
+3.50
+0.21
+yes
+NE Pacific, California inshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+0.03
+0.37
+yes
+NE Pacific, California offshore
+1991-1996
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+1.46
+0.42
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Humpback whale
+0.10
+0.00
+0.00
+yes
+NE Pacific, Baja California
+1993
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+0.66
+0.41
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Humpback whale
+0.10
+0.14
+0.72
+yes
+NE Pacific, west coast US
+1996
+S
+Calambokidis & Barlow, 2004
+Humpback whale
+0.10
+1.81
+0.44
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow. 2003
+Humpback whale
+0.10
+0.89
+0.49
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Humpback whale
+0.10
+7.44
+0.48
+no
+SE Atlantic, Gabon waters (northern strata)
+2002
+A
+Rosenbaum et al, 2004
+Humpback whale
+0.10
+24.34
+0.31
+no
+SE Atlantic, Gabon waters (southern strata)
+2002
+A
+Rosenbaum et al, 2004
+Humpback whale
+0.10
+46.49
+0.47
+no
+SW Indian Ocean, Madagaskar (eastern block)
+1994
+S
+Best et al, 1996
+Humpback whale
+0.10
+112.32
+0.27
+no
+SW Indian Ocean, Madagaskar (southern block)
+1994
+S
+Best et al, 1996
+Humpback whale
+0.10
+67.47
+0.15
+no
+SW Indian Ocean, Mozambique
+2003
+S
+Findlay et al, 2004
+Minke whale
+1.28
+0.42
+0.68
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Minke whale
+1.28
+0.28
+0.62
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Minke whale
+1.28
+0.27
+0.44
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Minke whale
+1.28
+0.93
+0.51
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Minke whale
+1.28
+0.86
+0.77
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Minke whale
+1.28
+0.03
+1.29
+no
+NW Atlantic, US east coast, south of Maryland
+1998
+S
+Mullin, 2003
+Sei whale
+0.10
+0.06
+0.53
+yes
+NE Pacific, west coast US
+1991
+S
+Barlow, 2003
+Sei whale
+0.10
+0.05
+0.79
+yes
+NE Pacific, west coast US
+1991
+S
+Barlow, 2003
+Sei whale
+0.10
+0.10
+0.73
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Sei whale
+0.10
+0.03
+1.01
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Sei whale
+0.10
+0.03
+1.06
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2003
+Killer whale
+0.11
+0.44
+0.37
+no
+Eastern Tropical Pacific
+1986-1990
+S
+Wade & Gerrodette, 1993
+Killer whale
+0.11
+0.31
+0.76
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Killer whale
+0.11
+0.25
+0.69
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Killer whale
+0.11
+0.55
+0.50
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Killer whale
+0.11
+0.74
+0.61
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Killer whale
+0.11
+0.58
+0.73
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Killer whale
+0.11
+0.14
+0.98
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2006
+Killer whale
+0.11
+0.69
+0.42
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1991-1994
+S
+Hansen et al. 1995
+Killer whale
+0.11
+0.79
+0.48
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1991-1994
+S
+Davis & Fargion, 1996
+Killer whale
+0.11
+0.17
+1.01
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1996-1997
+S
+Davis et al, 2000
+Killer whale
+0.11
+0.37
+0.49
+no
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1996-2001
+S
+Mullin and Fulling, 2004
+2 
+ 
+3 
+ 
+4 
+ 
+5 
+ 
+6 
+ 
+7 
+
+
+PDF PAGE 40
+26 
+Table 2 (cont.): 
+1 
+Common Name
+Estimated density  
+[animals / 1000 
+km2]
+Observed density    
+[animals / 1000 km2]
+CV 
+G(0) 
+corrected
+Geographic area
+Survey 
+years
+Survey 
+type
+Source
+Sperm whale
+1.09
+1.33
+0.22
+yes
+Eastern Tropical Pacific
+1986-1990
+A & S
+Wade & Gerrodette, 1993
+Sperm whale
+1.09
+0.92
+0.38
+no
+Eastern Tropical Pacific
+1998
+S
+Gerrodette & Forcada, 2002
+Sperm whale
+1.09
+1.24
+0.60
+no
+Eastern Tropical Pacific
+1999
+S
+Gerrodette & Forcada, 2002
+Sperm whale
+1.09
+0.19
+0.73
+no
+Eastern Tropical Pacific
+2000
+S
+Gerrodette & Forcada, 2002
+Sperm whale
+1.09
+3.36
+0.81
+yes
+Northeastern Tropical Pacific
+1997
+S
+Barlow & Taylor, 2005
+Sperm whale
+1.09
+4.10
+0.36
+no
+Northeastern Tropical Pacific
+1997-2000
+S
+Barlow & Taylor, 2005
+Sperm whale
+1.09
+0.20
+1.07
+yes
+NE Pacific, California waters
+1991
+A
+Forney & Barlow, 1993
+Sperm whale
+1.09
+3.42
+0.99
+yes
+NE Pacific, California inshore
+1991-1992
+A
+Forney et al, 1995
+Sperm whale
+1.09
+1.41
+0.40
+yes
+NE Pacific, west coast US
+1991-1993
+S
+Barlow, 2003
+Sperm whale
+1.09
+0.47
+0.56
+yes
+NE Pacific, west coast US
+1996
+S
+Barlow, 2003
+Sperm whale
+1.09
+1.90
+0.59
+yes
+NE Pacific, west coast US
+2001
+S
+Barlow, 2003
+Sperm whale
+1.09
+0.90
+0.13
+yes
+NE Pacific, Hawaiin waters
+1993-1998
+A
+Mobley et al, 2000
+Sperm whale
+1.09
+2.79
+0.81
+yes
+NE Pacific, Hawaiin waters
+2002
+S
+Barlow, 2006
+Sperm whale
+1.09
+2.06
+0.51
+no
+NW Atlantic, US east coast, south of Maryland
+1998
+S
+Mullin, 2003
+Sperm whale
+1.09
+1.14
+0.85
+no
+NW Atlantic, Virginia Capes
+2002
+S
+Garrison et al, 2003
+Sperm whale
+1.09
+2.31
+0.31
+yes
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1991-1994
+S
+Hanson et al, 1995
+sperm whale
+1.09
+1.31
+0.31
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1991-1994
+S
+Hansen et al. 1995
+sperm whale
+1.09
+1.74
+0.30
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1991-1994
+S
+Davis & Fargion, 1996
+sperm whale
+1.09
+0.96
+0.45
+no
+NW Atlantic, northern Gulf of Mexico (Oceanic Surveys)
+1996-1997
+S
+Davis et al, 2000
+sperm whale
+1.09
+1.62
+0.56
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I survey)
+1996-1997
+S
+Davis et al, 2000
+Sperm whale
+1.09
+0.85
+0.57
+no
+NW Atlantic, northern Gulf of Mexico (GulfCet I EPA survey)
+1996-1997
+S
+Davis et al, 2000
+Sperm whale
+1.09
+3.80
+0.23
+no
+NW Atlantic, northern Gulf of Mexico (SEFSC)
+1996-2001
+S
+Mullin and Fulling, 2004
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 41
+27 
+Table 3. Primary production required (PPR) and mean trophic level (TL) for fisheries’ catches and marine 
+1 
+mammal consumption off the coast of Northwest Africa. 
+2 
+ 
+PPR 
+PPR 
+(% of total PP) 
+Mean TL 
+of the catch / 
+consumption 
+Northwest Africa 
+ 
+ 
+ 
+Fisheries 
+94.93 
+0.42 
+2.80 
+Minke whales 
+1.06 
+< 0.01 
+2.54 
+Fin whales 
+ 0.24 
+< 0.01 
+2.01 
+Humpback whales 
+ 0.19 
+< 0.01 
+2.44 
+Bryde’s whales 
+ 53.87 
+ 0.24 
+2.39 
+Sei whales 
+ 0.05 
+< 0.01 
+2.02 
+Sperm whales 
+ 62.37 
+ 0.28 
+3.12 
+Killer whales 
+ 63.18 
+ 0.28 
+2.94 
+Baleen whales 
+ 0.04 
+< 0.01 
+2.00 
+Beaked whales 
+ 1.38 
+ 0.01 
+3.21 
+Dolphins 
+ 62.91 
+ 0.28 
+2.54 
+3 
+
+
+PDF PAGE 42
+28 
+List of Figures  
+1 
+ 
+2 
+Figure 1. Map showing A) the studies areas that were the focus of this project, and B) the spatial 
+3 
+boundaries of the Northwest African area for which the results are presented here. The coordinates of the 
+4 
+Northwest African area are 8.5N - 36N and 30W - 6.5W, covering a total area of approximately 3,6 million 
+5 
+km2. 
+6 
+ 
+7 
+Figure 2: Comparison of proportional diet compositions of different marine mammals groups and catch 
+8 
+composition of different fishing fleets. 
+9 
+ 
+10 
+Figure 3: Comparison of total annual fisheries catches (grey bars) and cetacean consumption (black bars), 
+11 
+per trophic group in Northwest Africa. 
+12 
+ 
+13 
+Figure 4. Mixed trophic impacts of fisheries (A), baleen whales (B) and all marine mammals (C) on the 
+14 
+species groups of the Northwest Africa model. Bars below zero represent a negative impact, while bars 
+15 
+above zero represent a positive impact. Note that the scale of the y-axis had to be reduced by two orders of 
+16 
+magnitude for marine mammals in order to see the effect on the impacted groups. 
+17 
+ 
+18 
+Figure 5. Simulation of biomass changes for cephalopods after the removal of all baleen whales from the 
+19 
+ecosystem of Northwest Africa. Grey lines represent biomass trends over 21 years with marine mammals, 
+20 
+while black dashed lines show the biomass trends after the removal of baleen whales. The time series of 
+21 
+observed biomass data for cephalopods is also shown on the graph. 
+22 
+ 
+23 
+Figure 6. Biomass change after a 21-year simulation in the Northwest African ecosystem, with all marine 
+24 
+mammals (grey) and without baleen whales (white). 
+25 
+26 
+
+
+PDF PAGE 43
+29 
+Figure 1 
+1 
+ 
+2 
+ 
+3 
+ 
+4 
+ 
+5 
+8.5N - 36N 
+30W - 6.5W 
+Total Area:  
+3,561,029 km2 
+A) 
+B) 
+
+
+PDF PAGE 44
+30 
+Figure 2 
+1 
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 45
+31 
+Figure 2 (cont.) 
+1 
+2 
+ 
+3 
+
+
+PDF PAGE 46
+32 
+Figure 3 
+1 
+ 
+2 
+ 
+3 
+
+
+PDF PAGE 47
+33 
+Figure 4 
+ 
+ 
+ 
+ 
+ 
+ 
+A) 
+B) 
+C) 
+
+
+PDF PAGE 48
+34 
+Figure 5.  
+ 
+ 
+
+
+PDF PAGE 49
+35 
+Figure 6.  
+ 
+ 
+
+
+PDF PAGE 50
+ 
+CONCLUSIONS OF THE LENFEST OCEAN PROGRAM‐WWF WAMER JOINT 
+WORKSHOP  
+“WHALES AND FISH INTERACTIONS: ARE THE GREAT WHALES A THREAT TO 
+FISHERIES?” 
+DAKAR, SENEGAL, 08‐09 MAY, 2008 
+ 
+1. The Workshop “Whales and Fish Interactions: Are Great Whales a Threat to 
+Fisheries?” took place on 08‐09 May 2008 in Dakar. The opening ceremony was 
+chaired by His Excellency M. Souleymane Ndéné Ndiaye, Minister of State, 
+Minister for Maritime Economy, Fisheries and Aquaculture. The Workshop was 
+heightened by the participation of a delegation of Senegalese Parliamentarians 
+member of the Parliamentarians’ Network for the Protection of the 
+Environment.  It gathered scientific experts from the West African sub‐region 
+and elsewhere, and high level civil servants with responsibilities in fisheries 
+management. The purpose of the workshop was to examine the work 
+undertaken by the Lenfest Ocean Program on whales and fish interactions and 
+to make recommendations for the continuation of this work. 
+ 
+2. The work on‐going under the aegis of the Lenfest Ocean Program1 in 
+cooperation with the WWF West African Marine Eco‐Region Office (WWF‐
+WAMER2) constitutes an important step for a better understanding of the role 
+of cetaceans, particularly the great whales, in the ecosystem of the West 
+African sub‐region. 
+ 
+3. On the basis of detailed presentations on the work underway, the workshop 
+participants made recommendations to the Lenfest team to improve the data 
+and analysis of the project.  This  requires taking account of additional data 
+currently available in several countries in the sub‐region, separating in the 
+simulations the Bryde’s whales and sei whales from the other baleen whales, 
+and applying a 100% feeding rate to the Bryde’s whale because it is resident in 
+the study area. Data on illegal, unregulated or unreported (IUU) fishing should 
+also be taken into account. It would also be useful to publish or make otherwise 
+publicly available  the sightings data collected during joint Japan‐West African 
+line transect surveys  of cetaceans off Northwest African coasts so that they can 
+be incorporated into the analysis, as well as  where available stomach content 
+analysis from whale strandings or other non‐lethal methods for analysis of 
+feeding habits. 
+ 
+                                          
+1 http://www.lenfestocean.org  
+2 http://www.panda.org/about_wwf/where_we_work/africa/solutions_by_region/wamer/index.cfm  
+ADDENDUM - MORISSETTE et al.
+
+
+PDF PAGE 51
+ 
+4. The workshop welcomes the fact that the Lenfest study is largely based on the 
+best available data  published by scientific experts from the sub‐region, and 
+that Lenfest scientific experts have come to Dakar in a spirit of collaboration  in 
+order to identify opportunities for work in common and for the sharing of 
+additional data with a view to improving the quality of the results and seeking 
+to partner with  scientists from the sub‐region. 
+ 
+5. In order to secure transparent partnerships, scientific cooperation requests 
+should be communicated in advance and in writing to the local scientific 
+institutions and NGOs likely to hold them. 
+ 
+6. The importance of capacity building and financial support for local researchers 
+from within the sub‐region must be emphasized and reminded to 
+intergovernmental, governmental and non‐governmental institutions.  The 
+study of whale strandings in the sub‐region is an example of a regional research 
+opportunity that is currently lacking resources.   
+ 
+7. The workshop appreciates the fact that the Lenfest scientists plan to present 
+their preliminary results to the Scientific Committee of the International 
+Whaling Commission in June 2008 in Santiago, Chile.  It is hoped that the data 
+from Japanese‐West African scientific sighting surveys will be available for them 
+to be taken into account.  
+ 
+8. The research results presented at the workshop are preliminary, but they 
+suggest no competition between great whales and local or foreign fisheries in 
+the sub‐region.  Recognizing the shortage of data available in the sub‐region, 
+the Lenfest scientists tested the significance of their data assumptions by 
+making extreme assumptions, and still found that their analysis suggested no 
+competition between whales and fisheries in the sub‐region. The comments 
+collected at the workshop will be taken into account to improve data and 
+model quality and the accuracy of the results. 
+ 
+9. Noting that  with the current state of knowledge it is not possible to conclude  
+whether  great whales have an effect on fisheries in the sub‐region, it is 
+important to improve the characterization of the Canary Current ecosystem and 
+to clarify the role of whales in it.  
+ 
+10. The participants appreciate the active participation of Senegalese 
+Parliamentarians at the workshop, especially their contributions about the need 
+to respect all of nature’s creatures so they can live in balance, the need to 
+respect local fishing communities and their culture and the need to provide 
+information accessible to the general public. 
+ 
+
+
+PDF PAGE 52
+ 
+11. At the end of the day, the final goal must be restoring the balance of marine 
+ecosystems, including the recovery of fisheries and marine biodiversity 
+including the great whales, and having in mind the well‐being of humans whose 
+economy and lives depend on healthy marine ecosystems. 
+ 
+ 
+ 
+Dr. Papa Samba Diouf, 
+Regional Coordinator, 
+WWF WAMER, 
+Sacré-Coeur III, 
+BP 22 928 Dakar, 
+Sénégal. 
+ 
+Tel. +221 33 869 37 00                        
+Fax. +221 33 869 37 02 
+psdiouf@wwfsenegal.org  
+ 
+Dr. Margaret B. Bowman, 
+Director, 
+Lenfest Ocean Program, 
+1025 F Street NW, 
+Washington, DC2004, 
+USA. 
+ 
+Tel: +1 202 552 2131 
+ 
+mbowman@pewtrusts.org  
+ 
+ 
+  
+ 

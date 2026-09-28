@@ -1,0 +1,38 @@
+{
+  "input_sha256": "f2288b46fd0a6d0bced15d0209e92e24f19f2d1a7eb20ec194da716a6768b84b",
+  "constructor": {
+    "underdetermined": false,
+    "zero_catch": false,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001
+  },
+  "diagnostic": {
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0
+  },
+  "python": "3.13.9",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "engine_sha256": {
+    "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+    "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "constructor_warnings": [],
+  "diagnostic_python_warnings": {
+    "GE": [],
+    "TE": [
+      "1 group(s) have TE=0 because EE=0 (M0=p): 37 (Apex Chondrichthyans). Their consumed PP is re-credited to detritus (fix_EE_0_cases=True) so the TE SPPR stays PP-balanced.",
+      "2 group(s) have near-zero TE (0 < EE << 1): 42 (Cape Cormorant), 41 (Cape Gannet). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+    ],
+    "With Egestion": []
+  },
+  "persisted_input_reload_equal": true,
+  "state_unchanged_by_diagnostics": true
+}

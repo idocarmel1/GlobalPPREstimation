@@ -7,6 +7,22 @@ from build_html import atomic_text,linked_layout
 from workbooks import YEARS
 
 class HtmlAdapterTests(unittest.TestCase):
+    def test_flattened_diagnostic_config_keeps_method_identity(self):
+        book={'Diagnostics':{'model_health':(['config_TE_option','status','divergence_b','divergence_rho_living','model_input_is_model_balanced','balance_is_balanced'],[['TE','FAIL',1.2,1.1,False,False]])}}
+        _,model=detail_from_book(book,'U','m')
+        self.assertEqual(model['health']['TE']['b'],1.2)
+        self.assertEqual(model['health']['TE']['rho_living'],1.1)
+        self.assertIn('TE: FAIL',original_atlas_data.review_flags(book))
+
+    @unittest.skipUnless(shutil.which('node'),'Node required')
+    def test_provisional_display_is_numeric_and_flagged(self):
+        root=Path(__file__).resolve().parents[2]
+        rendered=linked_layout((root/'tools/original_html_layout/index.html').read_text(encoding='utf-8'))
+        with tempfile.TemporaryDirectory() as directory:
+            page=Path(directory)/'index.html';atomic_text(page,rendered)
+            trend=Path(directory)/'trends.html';atomic_text(trend,linked_layout((root/'tools/original_html_layout/trends.html').read_text(encoding='utf-8')))
+            result=subprocess.run([shutil.which('node'),str(Path(__file__).with_name('check_provisional.js')),str(page),str(trend)],capture_output=True,text=True,encoding='utf-8')
+            self.assertEqual(result.returncode,0,result.stderr)
     @unittest.skipUnless(shutil.which('node'),'Node is required for the map selection check')
     def test_map_reference_selection_preserves_metric_ranks(self):
         check=Path(__file__).with_name('check_map_selection.js')

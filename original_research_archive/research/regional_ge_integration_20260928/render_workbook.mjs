@@ -1,0 +1,12 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+const require=createRequire('C:/Users/idoca/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json');
+const {FileBlob,SpreadsheetFile}=await import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
+const root=process.cwd(),out=path.join(root,'original_research_archive/research/regional_ge_integration_20260928');
+const workbook=await SpreadsheetFile.importXlsx(await FileBlob.load(path.join(root,'regions/LME_022/LME_022.xlsx')));
+console.log((await workbook.inspect({kind:'region',sheetId:'Overview',range:'A1:B24',maxChars:2000,tableMaxRows:6})).ndjson);
+const preview=await workbook.render({sheetName:'Overview',range:'A1:B24',scale:1,format:'png'});
+await fs.writeFile(path.join(out,'LME022_overview.png'),new Uint8Array(await preview.arrayBuffer()));
+console.log('Rendered current regional Overview. Authoritative numerical checks use the project Python calculator.');

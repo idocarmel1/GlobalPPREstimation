@@ -1,0 +1,255 @@
+# Full direct SPPR diagnostic returns
+
+## GE
+
+```json
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.35377062030617057,
+    "q_max_rel_residual": 0.2293081807792822,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 2.220446049250313e-16,
+    "n_negative_catch": 0,
+    "n_zero_catch": 17,
+    "total_catch": 1.50896762603,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 2,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      4,
+      3
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.520120212441459,
+    "b_converges": true,
+    "rho_living": 0.41833433056049174,
+    "living_converges": true,
+    "sppr_det": {
+      "53": 529.2924913087925,
+      "54": 1.5836679463653913
+    },
+    "max_sppr_det": 529.2924913087925,
+    "max_sppr_group": {
+      "seq": 4,
+      "tl": 4.684950129065173,
+      "sppr": 32030.74875002839,
+      "inv_te": 85.7142857142857
+    },
+    "max_tl_group": {
+      "seq": 4,
+      "tl": 4.684950129065173,
+      "sppr": 32030.74875002839,
+      "inv_te": 85.7142857142857
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "FAIL",
+    "is_balanced": false,
+    "inflow": 1887.2120036502063,
+    "outflow": 1318.5709619310119,
+    "rel_gap": 0.30131275162479926
+  },
+  "footprint": {
+    "ppr_all": 639.2209772422239,
+    "ppr_inner": 638.9429561465745,
+    "ppr_pp_only": 159.09902883644347,
+    "npp": 1886.786,
+    "ppr2npp": 0.33864092490964764,
+    "ppr2npp_pp_only": 0.08432277366720098
+  },
+  "config": {
+    "TE_option": "GE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "multi_detritus",
+    "would_pool": false,
+    "model": "Celtic_Sea_Hernvann_Routing_Experiment (1985)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.354 exceeds fail threshold 0.1",
+    "2 group(s) with EE=0 (all production is non-predatory death): 4 (Toothed cetaceans / Seals), 3 (Baleen whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "max sppr_det=529 >= 10: converged, but detritus is implausibly expensive",
+    "PP balance gap 30.131% exceeds fail threshold 5.0%"
+  ]
+}
+```
+
+## TE
+
+```json
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.35377062030617057,
+    "q_max_rel_residual": 0.2293081807792822,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 2.220446049250313e-16,
+    "n_negative_catch": 0,
+    "n_zero_catch": 17,
+    "total_catch": 1.50896762603,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 2,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      4,
+      3
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "FAIL",
+    "solve_error": "ValueError: TE_RETURN_UNSUPPORTED: native TE direct-PP detritus scaling has no donor-return term; a faithful positive-discard-return coefficient calculation is unavailable",
+    "b": null,
+    "b_converges": null,
+    "rho_living": null,
+    "living_converges": null,
+    "sppr_det": {},
+    "max_sppr_det": null,
+    "max_sppr_group": null,
+    "max_tl_group": null,
+    "n_negative_sources": null,
+    "expect_negatives": true,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "FAIL",
+    "is_balanced": null,
+    "inflow": null,
+    "outflow": null,
+    "rel_gap": null
+  },
+  "footprint": {
+    "ppr_all": null,
+    "ppr_inner": null,
+    "ppr_pp_only": null,
+    "npp": null,
+    "ppr2npp": null,
+    "ppr2npp_pp_only": null
+  },
+  "config": {
+    "TE_option": "TE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": null,
+    "would_pool": false,
+    "model": "Celtic_Sea_Hernvann_Routing_Experiment (1985)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.354 exceeds fail threshold 0.1",
+    "2 group(s) with EE=0 (all production is non-predatory death): 4 (Toothed cetaceans / Seals), 3 (Baleen whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "SPPR_new failed on this configuration -- ValueError: TE_RETURN_UNSUPPORTED: native TE direct-PP detritus scaling has no donor-return term; a faithful positive-discard-return coefficient calculation is unavailable"
+  ]
+}
+```
+
+## With Egestion
+
+```json
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.35377062030617057,
+    "q_max_rel_residual": 0.2293081807792822,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 2.220446049250313e-16,
+    "n_negative_catch": 0,
+    "n_zero_catch": 17,
+    "total_catch": 1.50896762603,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 2,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      4,
+      3
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.7618995011264189,
+    "b_converges": true,
+    "rho_living": 0.32649934960252724,
+    "living_converges": true,
+    "sppr_det": {
+      "53": 257.01852139038647,
+      "54": 3.576448181216814
+    },
+    "max_sppr_det": 257.01852139038647,
+    "max_sppr_group": {
+      "seq": 4,
+      "tl": 4.684950129065173,
+      "sppr": 12316.172383059838,
+      "inv_te": 68.57142857142856
+    },
+    "max_tl_group": {
+      "seq": 4,
+      "tl": 4.684950129065173,
+      "sppr": 12316.172383059838,
+      "inv_te": 68.57142857142856
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "FAIL",
+    "is_balanced": false,
+    "inflow": 1887.2120036502063,
+    "outflow": 1984.8423627190766,
+    "rel_gap": 0.0517325869483851
+  },
+  "footprint": {
+    "ppr_all": 304.2580302135252,
+    "ppr_inner": 304.04307761969943,
+    "ppr_pp_only": 51.353956140444,
+    "npp": 1886.786,
+    "ppr2npp": 0.16114338224880798,
+    "ppr2npp_pp_only": 0.027217689838934567
+  },
+  "config": {
+    "TE_option": "With Egestion",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "multi_detritus",
+    "would_pool": false,
+    "model": "Celtic_Sea_Hernvann_Routing_Experiment (1985)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.354 exceeds fail threshold 0.1",
+    "2 group(s) with EE=0 (all production is non-predatory death): 4 (Toothed cetaceans / Seals), 3 (Baleen whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "b=0.7619 is within 0.3 of divergence (max sppr_det 257 PP-units per unit detritus)",
+    "max sppr_det=257 >= 10: converged, but detritus is implausibly expensive",
+    "PP balance gap 5.173% exceeds fail threshold 5.0%"
+  ]
+}
+```

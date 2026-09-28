@@ -1,0 +1,238 @@
+{
+  "GE": {
+    "status": "OK",
+    "model_input": {
+      "status": "OK",
+      "is_model_balanced": true,
+      "p_max_rel_residual": 5.595882180570346e-15,
+      "q_max_rel_residual": 1.8140899095182296e-16,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 2.220446049250313e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 13,
+      "total_catch": 0.01639519,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.0,
+      "b_converges": true,
+      "rho_living": 0.5388057853462784,
+      "living_converges": true,
+      "sppr_det": {
+        "39": 1.6891659563118504
+      },
+      "max_sppr_det": 1.6891659563118504,
+      "max_sppr_group": {
+        "seq": 4,
+        "tl": 5.069087318707821,
+        "sppr": 135895.05289403893,
+        "inv_te": 340.0
+      },
+      "max_tl_group": {
+        "seq": 10,
+        "tl": 5.222426188733585,
+        "sppr": 15375.06290286142,
+        "inv_te": 7.799999999999999
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": true,
+      "inflow": 554.13488464,
+      "outflow": 554.1348846399995,
+      "rel_gap": 8.206437881670198e-16
+    },
+    "footprint": {
+      "ppr_all": 45.60875338699004,
+      "ppr_inner": 45.606296931399136,
+      "ppr_pp_only": 45.606296931399136,
+      "npp": 554.122932,
+      "ppr2npp": 0.08230357254263417,
+      "ppr2npp_pp_only": 0.08230357254263417
+    },
+    "config": {
+      "TE_option": "GE",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "det_collapse_mode": "never",
+      "explicit_TE": false,
+      "method": "single_detritus",
+      "would_pool": false,
+      "model": "Eastern_tropical_Pacific (1993-1997)"
+    },
+    "warnings": []
+  },
+  "TE": {
+    "status": "FAIL",
+    "model_input": {
+      "status": "OK",
+      "is_model_balanced": true,
+      "p_max_rel_residual": 5.595882180570346e-15,
+      "q_max_rel_residual": 1.8140899095182296e-16,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 2.220446049250313e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 13,
+      "total_catch": 0.01639519,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "FAIL",
+      "solve_error": null,
+      "b": 0.0,
+      "b_converges": true,
+      "rho_living": 0.6272053418305539,
+      "living_converges": true,
+      "sppr_det": {
+        "39": 0.033545761873494576
+      },
+      "max_sppr_det": 0.033545761873494576,
+      "max_sppr_group": {
+        "seq": 5,
+        "tl": 4.905390005380793,
+        "sppr": 882423.9583652419,
+        "inv_te": 1883.5616438356165
+      },
+      "max_tl_group": {
+        "seq": 10,
+        "tl": 5.222426188733585,
+        "sppr": 195295.8650439792,
+        "inv_te": 15.599999999999998
+      },
+      "n_negative_sources": 3,
+      "expect_negatives": false,
+      "near_singular_te": [
+        6,
+        5,
+        4,
+        2,
+        1
+      ]
+    },
+    "balance": {
+      "status": "FAIL",
+      "is_balanced": false,
+      "inflow": 554.13488464,
+      "outflow": 1525.4643137144997,
+      "rel_gap": 1.7528754388122214
+    },
+    "footprint": {
+      "ppr_all": -49019459793741.58,
+      "ppr_inner": -49018295190642.89,
+      "ppr_pp_only": -49018295190642.89,
+      "npp": 554.122932,
+      "ppr2npp": -88461047828.7206,
+      "ppr2npp_pp_only": -88461047828.7206
+    },
+    "config": {
+      "TE_option": "TE",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "det_collapse_mode": "never",
+      "explicit_TE": false,
+      "method": null,
+      "would_pool": false,
+      "model": "Eastern_tropical_Pacific (1993-1997)"
+    },
+    "warnings": [
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "3 basal source column(s) contain negative SPPR",
+      "5 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [6, 5, 4, 2, 1]",
+      "PP balance gap 175.288% exceeds fail threshold 5.0%"
+    ]
+  },
+  "With Egestion": {
+    "status": "OK",
+    "model_input": {
+      "status": "OK",
+      "is_model_balanced": true,
+      "p_max_rel_residual": 5.595882180570346e-15,
+      "q_max_rel_residual": 1.8140899095182296e-16,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 2.220446049250313e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 13,
+      "total_catch": 0.01639519,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.0,
+      "b_converges": true,
+      "rho_living": 0.37877148280354855,
+      "living_converges": true,
+      "sppr_det": {
+        "39": 1.7907367110254107
+      },
+      "max_sppr_det": 1.7907367110254107,
+      "max_sppr_group": {
+        "seq": 1,
+        "tl": 4.681404296704122,
+        "sppr": 14040.677779530573,
+        "inv_te": 566.6625
+      },
+      "max_tl_group": {
+        "seq": 10,
+        "tl": 5.222426188733585,
+        "sppr": 1279.1680133849195,
+        "inv_te": 5.537999999999999
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": true,
+      "inflow": 554.13488464,
+      "outflow": 554.1348846400001,
+      "rel_gap": 2.0516094704175496e-16
+    },
+    "footprint": {
+      "ppr_all": 4.564237527690542,
+      "ppr_inner": 4.563058893272554,
+      "ppr_pp_only": 4.563058893272554,
+      "npp": 554.122932,
+      "ppr2npp": 0.00823474111927307,
+      "ppr2npp_pp_only": 0.00823474111927307
+    },
+    "config": {
+      "TE_option": "With Egestion",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "det_collapse_mode": "never",
+      "explicit_TE": false,
+      "method": "single_detritus",
+      "would_pool": false,
+      "model": "Eastern_tropical_Pacific (1993-1997)"
+    },
+    "warnings": []
+  }
+}

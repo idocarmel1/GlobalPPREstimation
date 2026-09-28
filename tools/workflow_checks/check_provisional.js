@@ -1,0 +1,32 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync(process.argv[2],'utf8');
+const start=html.indexOf('/* Shared annual denominator lookup.'),end=html.indexOf('/* Rank the full chosen geography;');
+const context={};vm.createContext(context);vm.runInContext(html.slice(start,end),context);
+const evaluate=vm.runInContext('PPRMetrics.evaluate',context);
+const model={id:'m',verified:true,scopes:{all:{methods:['new_GE'],status:{new_GE:'provisional: diagnostic FAIL; review pending'},values:[[9],[-18]]}}};
+const unit={years:[2019],taxa:['a','b'],catch:[[2],[3]],full_precision_catch:[[2],[3]],models:[model]};
+const state={mode:'ppr',scope:'all',method:'new_GE',year:2019,catch_basis:'catch',unidentified:'method'};
+let result=evaluate(unit,0,state);
+assert.equal(result.value,-4,'Provisional finite coefficients include negative values and convert carbon exactly once');
+assert.match(result.status,/provisional:.*FAIL/,'Preserve diagnostic warning beside numeric result');
+result=evaluate(unit,0,{...state,mode:'npp_ratio',npp_fill:'earliest',npp_data:{years:[2019,2020],values:[null,100]}});
+assert.match(result.status,/provisional:.*FAIL.*Estimated using 2020 NPP/,'NPP substitution must retain scientific warnings');
+model.scopes.all.status.new_GE='FAIL: not authorized for provisional display';
+assert.equal(evaluate(unit,0,state).value,null,'Ordinary FAIL stays unavailable');
+model.scopes.all.status.new_GE='provisional: missing coefficients';model.scopes.all.values=[[null],[null]];
+assert.equal(evaluate(unit,0,state).value,null,'Provisional status cannot create missing coefficients');
+model.verified=false;
+assert.equal(evaluate(unit,0,state).value,null,'Mapping check is not bypassed');
+console.log('Provisional map checks passed: numeric signs, carbon, flags, unavailable and mapping checks.');
+if(process.argv[3]){
+ const trend=fs.readFileSync(process.argv[3],'utf8'),start=trend.indexOf('/* Shared annual denominator lookup.');
+ const ctx={};vm.createContext(ctx);vm.runInContext(trend.slice(start,trend.indexOf('</script>',start)),ctx);
+ const record={status:'provisional: diagnostic FAIL',ppr:[-36],catch:[5],covered_catch:[5]};
+ const db={years:[2019],ppr_methods:[{id:'new_GE',kind:'model',scopes:['all']}],npp_methods:[],units:{U:{name:'U',default_model:'m',models:[{id:'m',verified:true,review_flags:['GE FAIL'],scopes:{all:{methods:{new_GE:record}}}}],simple:{catch:[5]}}}};
+ const state={units:['U'],method:'new_GE',scope:'all',mode:'ppr',catch_basis:'landings',unidentified:'method'};
+ const out=ctx.PPRTimeSeries.aggregate(db,state);
+ assert.equal(out.points[0].value,-4,'Signed provisional annual PPR is shown, carbon once');
+ assert.match(out.points[0].status,/provisional:/);assert.equal(out.review_flags[0],'GE FAIL');
+ const csv=ctx.PPRTimeSeries.toCSV(out,state);assert.match(csv,/result_status,diagnosis_flags/);assert.match(csv,/GE FAIL/);
+ console.log('Provisional trend checks passed: signed totals, flags and exported status.');
+}

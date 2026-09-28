@@ -1,0 +1,101 @@
+{
+  "search_date": "2026-09-29",
+  "scope": [
+    "HS_077",
+    "EEZ_941",
+    "EEZ_598",
+    "HS_071"
+  ],
+  "target": "Catch-mass fractions matching ETP 80/90/150cm and WCPO tuna 43/120/124cm, relevant regional polygons, gear mixtures and historical years through2019. Source definitions do not themselves establish caught-fish size.",
+  "queries": [
+    "site.iattc.org 2019 catch length frequency yellowfin bigeye 90 cm 80 cm high seas eastern Pacific",
+    "site.wcpfc.int public domain size composition 2019 Kiribati Papua New Guinea catch length frequency",
+    "site.spc.int tuna fisheries 2019 catch length frequency size data public",
+    "site.iattc.org public domain data catch size composition gear length frequency",
+    "site.meetings.wcpfc.int 2020 Kiribati size 2019 annual report",
+    "site.meetings.wcpfc.int 2020 Papua New Guinea length 2019",
+    "site.iattc.org 2019 length-frequency 2020 fishery",
+    "site.wcpfc.int size data public download length",
+    "site.meetings.wcpfc.int SC16 Kiribati 2020 report",
+    "site.meetings.wcpfc.int SC16 Papua New Guinea 2020 report",
+    "WCPFC size data download2026",
+    "site.spc.int public domain size data tuna download"
+  ],
+  "sources": [
+    {
+      "url": "https://www.iattc.org/en-us/Data/Public-domain",
+      "date": "Public file catalogue updated Dec2025-June2026",
+      "region": "HS_077",
+      "scope": "EPO; gear/flag/grid catch data and purse-seine billfish measurements",
+      "outcome": "Public catalogue reviewed via web search; raw HTTP retrieval403. Tuna catch tables do not supply length bins. Billfish observer measurements apply to purse-seine vessels, not all gear or HS077 catch. No HS077 all-fleet catch-mass split established.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://www.iattc.org/getattachment/bbcc847b-99df-4576-8e9c-f72fc68caa96/No-19-2021_Tunas-billfishes-and-other-pelagic-species-in-the-eastern-Pacific-Ocean-in-2020.pdf",
+      "date": "2021, fishery2020 with2015-2019 comparisons",
+      "region": "HS_077",
+      "scope": "EPO tuna fisheries, size composition Section5",
+      "outcome": "Opened via web tool; direct PDF HTTP403. Length sampling informs landed-fish composition; distributions separated by gear/set. Report-wide EPO frequency material does not supply HS077 all-fleet 2019 mass fractions at exact model cutoffs. Could inform future spatial/fleet raising, but not defensibly substituted as observed regional weights.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://www.iattc.org/GetAttachment/d27ac796-46e6-453d-a8bf-d75ffe63c8e0/No-21-2022_Status-of-the-tuna-and-billfish-stocks-in-2019.pdf",
+      "date": "2022 report on2019 stocks",
+      "region": "HS_077",
+      "scope": "Stock assessment size inputs and survey size standardization",
+      "outcome": "Primary search text shows2cm bins and fishery-specific catch composition; survey length data instead represent abundance and receive catch-rate raising. No HS077 matched all-fleet mass allocation recovered; cannot combine raw counts or survey composition directly.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://www.wcpfc.int/public-size-data",
+      "date": "accessed2026-09-29",
+      "region": "EEZ_941; EEZ_598; HS_071",
+      "scope": "Former public size data endpoint",
+      "outcome": "HTTP404; followed current official endpoint below.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://www.wcpfc.int/public-domain-aggregated-size-length-data",
+      "date": "updated2025-10-06",
+      "region": "EEZ_941; EEZ_598; HS_071",
+      "scope": "WCPO aggregated size/length data and metadata",
+      "outcome": "HTTP200; retained HTML. Download requires registration and no dataset link exposed. No account created or registration submitted. Relevant data exist, but their regional/gear sampling, units, coverage and mass fractions could not be inspected in this run.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://pacificcommunity.github.io/scidata-standard/size-composition/",
+      "date": "accessed2026-09-29",
+      "region": "EEZ_941; EEZ_598; HS_071",
+      "scope": "SPC official size-composition submission schema",
+      "outcome": "Records are fish counts by length/weight class, gear, flag, fleet, time and spatial cell; schema is not a catch-mass share dataset. Would require sampling/raising checks and conversion before allocation.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://www.wcpfc.int/sustainability/scientific-data/wcpfc-public-domain-aggregated-catcheffort-data-download-page",
+      "date": "updated2026-04-30",
+      "region": "EEZ_941; EEZ_598; HS_071",
+      "scope": "1950-2024 fishery catch/effort at1degree or5degree resolution",
+      "outcome": "Catch/effort data can support fleet weighting but does not establish caught-fish size fractions alone. Regional/year length data and consistent sampling expansion still required.",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://meetings.wcpfc.int/file/7715/download",
+      "date": "2020 report covering2019 fisheries",
+      "region": "EEZ_941",
+      "scope": "Kiribati national fleet and coastal-state reporting",
+      "outcome": "Downloaded1453250-byte PDF and extracted text;26pages. Reports catch/effort and port sampling programme; no usable regional catch-at-length mass table at43/120/124cm found. National fleet reporting is not equivalent to Gilbert Islands EEZ catch.",
+      "local_file": "online/Kiribati_2020.pdf",
+      "usable_for_observed_weights": false
+    },
+    {
+      "url": "https://meetings.wcpfc.int/file/7705/download",
+      "date": "2020-07-10 report covering2019 fisheries",
+      "region": "EEZ_598",
+      "scope": "PNG national and coastal-state fishery reporting",
+      "outcome": "Downloaded PDF and extracted text;32pages. Operational/observer/port sampling coverage and catches found; no usable EEZ catch-at-length mass table at43/120/124cm found. Coverage counts alone do not supply stage shares.",
+      "local_file": "online/PNG_2020.pdf",
+      "usable_for_observed_weights": false
+    }
+  ],
+  "decision": "No directly usable observed regional catch-mass fractions recovered after targeted primary-source search. Proceed with explicitly assumed historical model-catch proxy; preserve infant-missing/assumed-zero distinction and source/model limitations. This is not a claim that size data do not exist."
+}

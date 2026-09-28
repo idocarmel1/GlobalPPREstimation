@@ -1,0 +1,266 @@
+# Full direct SPPR diagnostic returns
+
+## GE
+
+```json
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.23960893055555557,
+    "q_max_rel_residual": 0.023242318055667854,
+    "dc_rows_sum_to_1": false,
+    "dc_max_deviation": 0.00019999999999997797,
+    "n_negative_catch": 0,
+    "n_zero_catch": 18,
+    "total_catch": 2.94626,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 1,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      37
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "OK",
+    "solve_error": null,
+    "b": 0.21224719297288935,
+    "b_converges": true,
+    "rho_living": 0.6688364516813169,
+    "living_converges": true,
+    "sppr_det": {
+      "49": 1.3192476447835848
+    },
+    "max_sppr_det": 1.3192476447835848,
+    "max_sppr_group": {
+      "seq": 43,
+      "tl": 3.865488786426137,
+      "sppr": 217022.41958745618,
+      "inv_te": 632.5728643216079
+    },
+    "max_tl_group": {
+      "seq": 37,
+      "tl": 4.791232426474727,
+      "sppr": 41893.771264619165,
+      "inv_te": 10.0
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": false,
+    "inflow": 13270.9395721,
+    "outflow": 13277.379595399025,
+    "rel_gap": 0.0004852725961139777
+  },
+  "footprint": {
+    "ppr_all": 1131.5698800508183,
+    "ppr_inner": 1131.5686800508183,
+    "ppr_pp_only": 447.15311945038025,
+    "npp": 13269.27,
+    "ppr2npp": 0.0852773875315536,
+    "ppr2npp_pp_only": 0.03369839632853806
+  },
+  "config": {
+    "TE_option": "GE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "single_detritus",
+    "would_pool": false,
+    "model": "Southern_Benguela_PQ_completed (1978)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.24 exceeds fail threshold 0.1",
+    "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+    "1 group(s) with EE=0 (all production is non-predatory death): 37 (Apex Chondrichthyans). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+  ]
+}
+```
+
+## TE
+
+```json
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.23960893055555557,
+    "q_max_rel_residual": 0.023242318055667854,
+    "dc_rows_sum_to_1": false,
+    "dc_max_deviation": 0.00019999999999997797,
+    "n_negative_catch": 0,
+    "n_zero_catch": 18,
+    "total_catch": 2.94626,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 1,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      37
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.0,
+    "b_converges": true,
+    "rho_living": 0.9993252200973268,
+    "living_converges": true,
+    "sppr_det": {
+      "49": 1.0991906650402294
+    },
+    "max_sppr_det": 1.0991906650402294,
+    "max_sppr_group": {
+      "seq": 43,
+      "tl": 3.865488786426137,
+      "sppr": 285240138.0880231,
+      "inv_te": 999.3252200973268
+    },
+    "max_tl_group": {
+      "seq": 37,
+      "tl": 4.791232426474727,
+      "sppr": 0.0,
+      "inv_te": null
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      42,
+      41
+    ]
+  },
+  "balance": {
+    "status": "FAIL",
+    "is_balanced": false,
+    "inflow": 13270.9395721,
+    "outflow": 11994.514391610126,
+    "rel_gap": 0.09618197517629808
+  },
+  "footprint": {
+    "ppr_all": 1877.2304774227518,
+    "ppr_inner": 1877.2291440894187,
+    "ppr_pp_only": 815.6347940018256,
+    "npp": 13269.27,
+    "ppr2npp": 0.1414719230288794,
+    "ppr2npp_pp_only": 0.06146794767171258
+  },
+  "config": {
+    "TE_option": "TE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": null,
+    "would_pool": false,
+    "model": "Southern_Benguela_PQ_completed (1978)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.24 exceeds fail threshold 0.1",
+    "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+    "1 group(s) with EE=0 (all production is non-predatory death): 37 (Apex Chondrichthyans). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+    "rho(A_LL)=0.9993 is within 0.3 of divergence (max SPPR 2.85e+08 at group 43 (Other seabirds), TL 3.87)",
+    "2 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [42, 41]",
+    "PP balance gap 9.618% exceeds fail threshold 5.0%"
+  ]
+}
+```
+
+## With Egestion
+
+```json
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 0.23960893055555557,
+    "q_max_rel_residual": 0.023242318055667854,
+    "dc_rows_sum_to_1": false,
+    "dc_max_deviation": 0.00019999999999997797,
+    "n_negative_catch": 0,
+    "n_zero_catch": 18,
+    "total_catch": 2.94626,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 1,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      37
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "OK",
+    "solve_error": null,
+    "b": 0.23990644111796144,
+    "b_converges": true,
+    "rho_living": 0.5350691613450536,
+    "living_converges": true,
+    "sppr_det": {
+      "49": 1.3984000682178923
+    },
+    "max_sppr_det": 1.3984000682178923,
+    "max_sppr_group": {
+      "seq": 43,
+      "tl": 3.865488786426137,
+      "sppr": 49842.36591536054,
+      "inv_te": 506.0582914572863
+    },
+    "max_tl_group": {
+      "seq": 37,
+      "tl": 4.791232426474727,
+      "sppr": 9753.199207325786,
+      "inv_te": 8.0
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": []
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": false,
+    "inflow": 13270.9395721,
+    "outflow": 13276.58579886173,
+    "rel_gap": 0.0004254579512667005
+  },
+  "footprint": {
+    "ppr_all": 388.6678591041598,
+    "ppr_inner": 388.66689910415977,
+    "ppr_pp_only": 156.7407882278669,
+    "npp": 13269.27,
+    "ppr2npp": 0.029290752174321553,
+    "ppr2npp_pp_only": 0.011812314334388167
+  },
+  "config": {
+    "TE_option": "With Egestion",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": "single_detritus",
+    "would_pool": false,
+    "model": "Southern_Benguela_PQ_completed (1978)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 0.24 exceeds fail threshold 0.1",
+    "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+    "1 group(s) with EE=0 (all production is non-predatory death): 37 (Apex Chondrichthyans). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+  ]
+}
+```
