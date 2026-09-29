@@ -1,5 +1,7 @@
 # Finding missing model data online
 
+Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
+
 Use this reference when the local source bundle lacks diets, parameters, taxonomy, fleet catches, routing, a native model, or a compatible model version. Source discovery is part of extraction: do not stop at a missing local attachment when authorized online research can resolve it. Preserve useful extraction work while searching.
 
 ## Search in evidence order

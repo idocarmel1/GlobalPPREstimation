@@ -9,6 +9,8 @@ This is the project's single active workflow skill. Use it for a complete pipeli
 
 Resolve `<skill-root>` as the directory containing this file and `<repo-root>` as the ancestor containing `Project.xlsx`. Read the [project guide and workbook contract](../../../../README.md#workbook-reference) and the named regional workbook's Overview. This entry point lives in the original `combined-src` directory; its updated instructions supersede archived Claude/Codex copies. Repository commands run from `<repo-root>`. Relative links resolve from the document containing them.
 
+Read the [evidence, execution and adoption contract](references/evidence-handoff.md) for each requested stage. Its inventory and reconciliation checks are required for a complete handoff; incomplete evidence and unadopted review proposals must remain explicit. Existing explicit run authorization is respected without redundant confirmation.
+
 ## Choose the requested stages
 
 | Input or request | Read and perform |

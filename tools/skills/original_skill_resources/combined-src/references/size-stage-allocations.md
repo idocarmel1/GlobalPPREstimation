@@ -1,5 +1,7 @@
 # Size, stage and cohort allocations
 
+Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
+
 Use with regional-calculation.md when caught taxa occur in multiple source groups. Repository paths below start at `<repo-root>`. This procedure implements the user-authorized assumption workflow; do not infer permission to select another model or repair its biology. Existing session authorization remains sufficient.
 
 ## Scope and evidence
