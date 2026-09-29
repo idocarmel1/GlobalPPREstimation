@@ -1,5 +1,7 @@
 # Regional SPPR, matching, PPR and NPP
 
+Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
+
 Paths in this reference are relative to this file unless stated as project-root paths. Paths inside retained domain documents remain relative to their own original skill directory; their old integration commands are superseded by this combined workflow.
 
 Resolve the region workbook and project from the supplied single path. Read Overview and the relevant sheet blocks with `../../../../workbooks.py`. See `../../../../../README.md#workbook-reference`. Preserve unrelated sheets and central paper metadata. Do not create status/configuration sidecar JSON files.

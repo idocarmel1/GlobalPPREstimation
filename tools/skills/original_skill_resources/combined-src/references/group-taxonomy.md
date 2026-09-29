@@ -1,5 +1,7 @@
 # Stage 2 — capture what is in each group
 
+Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
+
 The standalone extraction workflow leaves taxonomy to this stage. A full PPR
 pipeline also needs the model's group membership, so capture it while the paper
 is open. An explicitly extraction-only request still stops at stage 1.

@@ -1,5 +1,7 @@
 # Direct SPPR diagnostics and exact runtime state
 
+Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
+
 This project's default is GE, TE and With Egestion only. Global, broad inventories and Monte Carlo require a broader request. A narrower explicit request controls scope. Reuse retained full returns when exact input/configuration and engine identity meet the request; report formatting need not rerun science.
 
 ## Admission and execution
