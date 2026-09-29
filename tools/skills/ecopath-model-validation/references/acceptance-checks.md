@@ -16,7 +16,7 @@ Use these checks on a produced report. They are also review scenarios for evalua
 - **Units:** catch tonnes and PPR tonnes C are labeled; the configured conversion occurs once; classic/simple-chain values are independent of GE/TE mapping.
 - **Order:** appendix rows sort by full-precision numeric simple-chain PPR descending; unavailable values are last; taxon name breaks ties.
 - **Geography:** A and B use the correct denominators; approximation is labeled and grounded in the correct figures; missing coordinates alone did not prevent a defensible estimate.
-- **Document:** manual cells and edited hyperlinks/deletions are preserved; all seven appendix columns and sources are present; every rendered page was inspected.
+- **Document:** manual cells and edited hyperlinks/deletions are preserved; all seven linked Excel appendix columns and a separate Sources sheet are present; every rendered page was inspected.
 - **Delivery:** remaining evidence gaps and unperformed checks are reported honestly; regional workbooks, model inputs, selections and generated maps remain unchanged during a report-only run.
 
 ## Review scenarios
@@ -69,3 +69,17 @@ The researcher has deleted long diagnostics and links, written manual group-excl
 ### Validation test approved but fresh science needed
 
 The user approves testing this validation skill on a region. Its saved coefficients are stale relative to the selected JSON. Complete independent source/mapping/figure review, explain the mismatch and proposed affected-stage rerun, and ask for explicit confirmation. Do not treat the validation-test approval as permission to recompute. If the user declines, deliver an appropriately limited report.
+
+## Revised report and adopted mapping gates
+
+- Full taxon appendix is Excel: frozen/filterable headers, numeric unrounded PPR order, missing last, readable wrapping and explicit unresolved weights.
+- Mapping/coverage is outside the main Word table. Each of the two rule tables has exactly Plain-language rule | Confidence | PPR percentage, full descriptions and descriptive source links. Each independently sums to 100% of the same known-PPR universe, with no double counting.
+- Approved fallback uses established eligible groups, then complete model catch proportions, then complete model biomass proportions. Both carry Medium allocation confidence. Test incomplete catch, all-zero catch, valid zero candidates, unusable biomass and missing membership; never drop candidates to make weights sum.
+- Record actual fields/values/totals/proportions and assumptions in canonical adopted records; preserve the separate assumed flag.
+- Check the actual map controls and visible result as well as its payload and adopted data. A workbook match alone is not UI verification.
+- Explicitly authorized adoption/dependent arithmetic is permitted; fresh extraction or group-SPPR runs still require their own scoped authorization.
+
+
+## Coverage preference and concise uncertainty
+
+Apply the template guide’s Very low broad-category and closest-analogue rules before leaving a meaningful placement unresolved. Prefer near-complete coverage with visible assumptions; retain Unresolved only when no meaningful group or numerical allocation can be justified. Direct applicable source geographic catch quantities can support High allocation confidence; geographic overlap alone cannot. Include all five confidence categories and the Very low coverage share. Name every unresolved taxon with a short reason, or state none; group and flag Very low cases compactly. Keep skill, approval, integration, hashes and test details in supporting evidence rather than validation prose.

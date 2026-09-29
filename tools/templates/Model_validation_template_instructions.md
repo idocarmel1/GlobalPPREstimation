@@ -1,8 +1,8 @@
 # Model validation template filling guide
 
-Template version 3, 29 September 2026. Use with `Model_validation_template.docx`.
+Template version 5, 30 September 2026. Use with `Model_validation_template.docx`.
 
-This guide accompanies the reusable template. It is not a skill and is not part of the filled report. The report follows the researcher's edited `regions/LME_036/Model_validation.docx`, with the subsequently agreed mapping summary and appendix. Examples below illustrate rules; they are not newly verified classifications or results for LME036.
+This guide accompanies the reusable template. It is not a skill and is not part of the filled report. The report follows the researcher's edited `regions/LME_036/Model_validation.docx`, with the subsequently agreed mapping section and linked Excel appendix. Examples below illustrate rules; they are not newly verified classifications or results for LME036.
 
 ## Scope and evidence
 
@@ -29,7 +29,7 @@ Use the template's field order, allowing tables to flow over pages. Repeat table
 | SPPR calculation | Preserve researcher choices and reasons, excluded groups and the scope of exclusion, and any adjustments. Leave manual placeholders when unfilled. |
 | GE diagnostics | Identify every SPPR source column containing negative values and list the affected groups for each column, using source/group names and IDs. Also report rho_living, b, and detritus SPPR by named pool. |
 | TE diagnostics | Identify every SPPR source column containing negative values and list the affected groups for each column, using source/group names and IDs. Also report rho_living and detritus SPPR by named pool. Do not interpret an omitted or conventionally zero recycling term as evidence of no recycling. |
-| Taxon mapping and coverage | Follow the summary specification below. |
+| Taxon mapping and coverage | A separate section after the main validation tables. Follow the specification below. |
 | Geographic fit | Follow the approximation rules below. |
 | Temporal fit | Model period, catch years, and the material consequence of transferring fixed coefficients or weights across years. |
 | Other | Optional important additional issue only. Keep empty when none is warranted; do not restore deleted process/provenance paragraphs. |
@@ -42,14 +42,18 @@ For negative SPPR findings, inspect the **per-source SPPR matrix for the corresp
 
 ## Taxon mapping and coverage summary
 
-The single merged row contains:
+Use a separate Word section, outside the main validation tables. It contains:
 
 1. **Reference:** selected year and catch basis, including what the basis comprises.
 2. **Totals:** number of model groups; number of catch taxa; total catch in tonnes; total simple-trophic-chain PPR in tonnes C.
-3. A four-row table: **High, Medium, Low, Unresolved**, with columns **Taxa (n), Catch (%), Simple-chain PPR (%)**.
-4. **Membership evidence:** concise source references and a detailed mapping report or appendix reference.
-5. **Weights and assumptions:** short allocation rules, evidence references and affected confidence categories.
+3. A five-row table: **High, Medium, Low, Very low, Unresolved**, with columns **Taxa (n), Catch (%), Simple-chain PPR (%)**.
+4. **Group assignment rules:** a table with the exact columns **Plain-language rule | Confidence | PPR percentage**.
+5. **Allocation weight rules:** a separate table with the same exact columns. Include every actually used rule, split by its component confidence when one rule occurs at multiple levels. Use full human-readable descriptions, without M/W codes or numbered-reference shorthand. Put descriptive source links nearby. Link the Excel appendix and its Sources sheet.
 6. A missing-PPR note when needed: number of affected taxa and their catch share. Omit the note when all coefficients are available.
+
+Each rule-table percentage is the share of known independent simple-chain PPR for taxa using that rule. Ecopath allocation weights do not generate classic PPR. Each table partitions the same complete known-PPR universe once; unresolved or not-applicable records must be explicit. Each table sums to 100% independently; never add the tables together. The confidence column describes the assessed component (membership or weights), while the five-category summary uses the weakest necessary component. Use at least four decimal places when useful; show a smaller positive share as a nonzero value or a stated threshold.
+
+**Map reconciliation is a completion gate.** Trace the current generated payload and the actual browser controls/result for the same region, year, basis, units, source scope, unidentified treatment, taxon/group filters and missing-value policy. Record the unrounded value and visible rounding. A workbook annual match alone does not verify the UI. If a group subset is active, distinguish its allocated simple-chain view from the independent all-taxon universe and select/record the intended view explicitly. Diagnose and fix the underlying authorized data/display mismatch; never paste a map number into prose. Use the same verified denominator in Word and Excel.
 
 Counting and denominator rules:
 
@@ -67,6 +71,14 @@ Counting and denominator rules:
 
 Assess **membership confidence** and **allocation-weight confidence** separately in the supporting record. The report and appendix show the weaker required confidence. An online search is a way to obtain evidence; it does not by itself establish high confidence. Researcher approval does not raise evidential confidence.
 
+### Coverage preference and the Very low category
+
+Prefer approaching 100% catch coverage through transparent assumptions over leaving taxa unresolved merely because a mapping is uncertain. A practical taxonomic or ecological connection is sufficient for a provisional **Very low** assignment when stronger evidence is unavailable. This is a coverage preference, not a claim of greater scientific correctness. Never change group SPPR, fabricate observations or classify a weak analogue as a documented source member.
+
+For broad labels, include compatible named groups as well as residual pools; do not restrict them to residual pools without justification. For an absent explicit species or habitat compartment, use the closest represented taxonomic/ecological analogue and record the mismatch. Source-model catch proportions, then biomass, can weight those candidate sets. Preserve better-supported existing mappings. Use Unresolved only when no meaningful group/analogue can be chosen, source evidence contradicts every candidate, or no usable numerical allocation can be justified. An arbitrary group selected solely to reach 100% is not an analogue.
+
+Very low is below Low and above Unresolved. Apply the weakest-component rule in the order High > Medium > Low > Very low > Unresolved. Record actual source membership separately from assumed analogue membership and report the share of coverage dependent on Very low assignments.
+
 ### Membership rules
 
 | Rule | Confidence | Example and boundary |
@@ -76,9 +88,12 @@ Assess **membership confidence** and **allocation-weight confidence** separately
 | M3 Unambiguous documented group fit | High | The model defines a group as all members of a family; an authoritative source confirms the catch species belongs to that family. All relevant size, stage, habitat and geographic criteria must also be satisfied, with no competing group. |
 | M4 Extension from listed representatives | Medium | A group lists several species from a family, and another related species is included on supported taxonomic/ecological grounds. The unlisted membership remains an explicit assumption. |
 | M5 Supported ecological assignment | Medium | Documented size and habitat support Small demersal fish, but the model does not directly enumerate the species. State the assumed group boundary. |
-| M6 Partial or conflicting ecological fit | Low | A benthopelagic species is assigned to a demersal group despite an equally plausible pelagic group or incomplete group definitions. If no defensible choice exists, use M8 instead. |
-| M7 Broad catch category with assumed composition | Medium or low | Marine fishes nei is allocated using a regional composition study: medium for a representative matching study; low for a weak spatial/temporal proxy. Record the components and transfer assumption. Unsupported composition is M8. |
-| M8 No defensible assignment | Unresolved | A mixed catch category spans several groups and no evidence supports its composition or a suitable group. Known candidates may be listed without claiming a resolved assignment. |
+| M6 Partial or conflicting ecological fit | Low | A benthopelagic species is assigned to a demersal group despite an equally plausible pelagic group or incomplete group definitions. If only a weak but meaningful analogue exists, use M11 Very low; use M8 only when no meaningful choice exists. |
+| M7 Broad catch category with assumed composition | Medium or low | Marine fishes nei is allocated using a regional composition study: medium for a representative matching study; low for a weak spatial/temporal proxy. Record the components and transfer assumption. When only a broad model-pool composition proxy is available, use M10 Very low; do not require measured composition to avoid Unresolved. |
+| M9 Assumed eligible group set | Medium | Taxonomy, ecology and exact model definitions establish the eligible groups for an explicitly authorized model-proportion fallback. Record included/excluded groups and any material membership uncertainty. Use M6 Low for partial evidence or M10/M11 Very low for a weak but meaningful approximation; use M8 only when no meaningful placement exists. |
+| M10 Broad-category approximation | Very low | The label spans named and residual groups; allocate among a recorded taxonomically/ecologically plausible set using a stated composition proxy. The exact catch composition remains unknown. |
+| M11 Closest represented analogue | Very low | Map an oceanic or deep-water fish to the closest represented functional fish group when the model lacks its exact habitat. State the habitat/geographic mismatch and why this group is the closest usable analogue. |
+| M8 No meaningful assignment | Unresolved | No taxonomic/ecological connection or usable analogue can be established, every candidate is contradicted, or no allocation can be justified. Name the taxon and specific remaining obstacle. |
 
 ### Allocation-weight rules
 
@@ -88,12 +103,25 @@ Assess **membership confidence** and **allocation-weight confidence** separately
 | W2 Directly measured allocation | High | Catch-at-age observations determine juvenile/adult proportions for the relevant taxon, area, period, catch basis and model stage threshold. |
 | W3 Measured allocation transferred | Medium | Observed stage proportions for one suitable survey year are applied to nearby years with a documented representativeness assumption. |
 | W4 Source-model catch proportions | Medium | Juvenile/adult hairtail group catches provide a proxy split for regional hairtail catch. It is an assumption about the target catch, not a direct observation of its composition. |
-| W5 Indirect biological/fishery proxy | Medium or low | Biomass proportions inform catch allocation: medium with supporting selectivity evidence; low when similar catchability is weakly supported. Record why the proxy is informative. |
+| W5 Indirect biological/fishery proxy | Medium or low | A proxy outside the approved model-proportion fallback has a documented biological or fishery basis. Explain its applicability; do not use this older rule to downgrade the approved biomass fallback automatically. |
+| W9 Approved model-biomass fallback | Medium | If model catch cannot supply complete usable proportions for the independently established eligible set, use model biomass proportions under the explicit composition/catchability assumption. Retain raw values, total, weights and rejected catch attempt. |
 | W6 Weak transfer or substantial mismatch | Low | Weights from a distant fishery are transferred despite different practices, or stage definitions do not align well. An irreconcilable mismatch belongs under W8. |
-| W7 Equal or judgment-based split | Low if defensible; otherwise unresolved | A 50:50 split has an explicit biological rationale but little quantitative evidence: low. Choosing equal weights only to complete a calculation: unresolved. |
-| W8 No defensible complete allocation | Unresolved | Juvenile/adult membership is known, but no observations or justified proxy support the required proportions. Keep weights `?`. |
+| W7 Supported judgment-based split | Low | A 50:50 split has a specific biological rationale but little quantitative evidence. If only a weak last-resort judgment can be justified, use W11 Very low; use W8 only when no numerical assumption is defensible. |
+| W10 Direct source geographic allocation | High | Applicable source data quantify the taxon’s caught mass across geographic strata corresponding to model groups: 80 t and 20 t give 80% and 20%. Record area boundaries, group correspondence, period, basis and quantities. Document any density-to-mass or area-weighted conversion. Geographic range overlap or visual map overlap alone is not measured catch composition; transfers or approximations receive lower confidence. |
+| W11 Explicit last-resort allocation | Very low | No usable measured/catch/biomass proportions exist, but a transparent expert allocation can still be justified among meaningful candidates. Record its numerical rule and reason, including any justified equal-share assumption. Never present it as observed. |
+| W8 No usable allocation | Unresolved | No observed or assumed numerical split can be justified even under W11. Keep weights `?`. |
 
-Document separately any transfer across years, areas, taxa, landings/discards or stage definitions. A source-model proportion fixed across all catch years is ordinarily W4 with a temporal assumption; a serious unsupported transfer can lower it to W6 or W8. Do not infer high confidence from numerical precision or from weights summing to one.
+### Approved fallback for unresolved taxa
+
+Under explicit adoption authorization, establish eligible groups from taxonomy, ecology and model definitions before allocating. Do not use all groups indiscriminately, infer membership from numerical availability or silently drop a candidate with missing values. Prefer supported direct composition evidence, including source geographic allocation under W10. For the approved assumption route, first use **model catch proportions**, and only if they cannot provide complete usable weights use **model biomass proportions**. Both allocation routes are **Medium**, explicitly assumption-based; approval is authorization to use the assumption, not independent scientific validation.
+
+A usable field has finite nonnegative values for every candidate and a strictly positive total. Preserve genuine zero candidates; missing sentinels and defaults are not observed zeros. Record candidate IDs/names, inclusion/exclusion rationale, exact source fields/values/units, period/basis, total, proportions, fallback trigger and transfer assumptions. If direct membership is uncertain, assess the M10/M11 Very low alternatives before leaving it unresolved; if both numerical source fields fail, assess a documented W11 allocation. Retain `?` only when no meaningful assignment/allocation can be justified. Other material membership uncertainty still lowers overall confidence under the weakest-component rule. The helper `tools/skills/original_skill_resources/combined-src/scripts/assumed_allocation.py` computes only reviewed proportions and never infers membership or edits model coefficients.
+
+Document separately any transfer across years, areas, taxa, landings/discards or stage definitions. A source-model proportion fixed across all catch years is ordinarily W4 with a temporal assumption; for proxies outside the approved fallback, a serious unsupported transfer can lower it to W6 or W8. For the approved catch/biomass fallback, retain Medium allocation confidence and assess material group or stage-boundary conflicts separately as membership uncertainty; an incomplete strict-membership set can instead use a disclosed M10/M11 Very low approximation when a meaningful candidate set is available. Do not infer high confidence from numerical precision or from weights summing to one.
+
+### Short report findings
+
+List every unresolved taxon with a brief specific reason, or state that none remain. Clearly flag Very low decisions, grouping taxa that share the same assumption and naming all affected taxa in the short grouped table or its linked Excel rows. Report their catch/PPR share so high coverage is not mistaken for high confidence. Keep this section concise and scientific: no skill-edit history, approval narrative, integration status, tool/test logs, hashes or other internal workflow details. Detailed provenance and verification belong in supporting evidence.
 
 ### Combining confidence and preserving uncertainty
 
@@ -110,7 +138,7 @@ For each taxon retain membership rule/source/confidence; allocation rule/source/
 
 ## Appendix of all taxon mappings
 
-Use the landscape appendix and repeat its header on every page. One row per catch taxon, including unresolved and zero-catch records in the defined universe. **Sort numerically by simple-chain PPR in descending order**, using the unrounded values, with unavailable PPR last; use taxon name to break ties. State this ordering above the table along with the year, catch basis, PPR method, units and applicable source references.
+The full appendix is a linked Excel workbook, not a Word table. Use frozen headers, an autofilter, deliberate column widths, wrapped text and readable row heights. Include a separate descriptive Sources sheet as requested. One row per catch taxon, including unresolved and zero-catch records in the defined universe. **Sort numerically by simple-chain PPR in descending order**, using the unrounded values, with unavailable PPR last; use taxon name to break ties. State this ordering above the table along with the year, catch basis, PPR method, units and applicable source references.
 
 | Column | Content |
 |---|---|
@@ -119,12 +147,12 @@ Use the landscape appendix and repeat its header on every page. One row per catc
 | Catch (t) | Catch in the selected reference year and basis. Unknown catch remains `?`, not zero, and prevents an unqualified complete total. |
 | Simple-chain PPR (t C) | Independent simple-chain PPR, or `?` if unavailable. Genuine calculated zero remains zero. |
 | Mapped group names and weights | Exact model-group names and percentages, for example `Juvenile hairtail (80%); Adult hairtail (20%)`. Resolved weights sum to 100%, allowing rounding. Use `Juvenile hairtail (?); Adult hairtail (?)` for known candidates with unresolved weights; use `Unresolved` when no candidate is established. Identify tentative candidates as such. |
-| Confidence level | High, Medium, Low or Unresolved under the combined rules. |
+| Confidence level | High, Medium, Low, Very low or Unresolved under the combined rules. |
 | Reason | Brief membership justification and, where required, weight justification, with source IDs and the consequential assumption. |
 
-Example reason: `Membership explicit in source [1, Table X]; weights use source-model catch proportions [2], assumed constant across years (M1/W4).`
+Example reason: `Membership is explicit in Cheung Appendix 6.1; weights use the selected model group catches, assumed constant across years. See Sources and the allocation evidence.`
 
-Put full source references beneath the appendix table, using the same short IDs as the summary and reasons. Include TL/simple-chain method sources as well as membership and weight evidence. Preserve useful hyperlinks. Put extended uncertainty discussion in the detailed supporting report.
+Put full descriptive source references and links on the separate Sources sheet. Avoid numbered-reference shorthand in the readable coverage section. Include TL/simple-chain method sources as well as membership and weight evidence. Preserve useful hyperlinks. Put extended uncertainty discussion in the detailed supporting report.
 
 ## Geographic fit and figures
 
@@ -143,5 +171,7 @@ Put full source references beneath the appendix table, using the same short IDs 
 - For a new filled report, use working relative local links to the regional workbook, actual selected model, paper and needed evidence. If supporting reports must be copied into `validation_reports/<model_id>/`, copy rather than move originals; keep referenced assets and record their source paths. Do not fabricate a pre-existing report.
 - Save a new filled report beside the regional workbook as `Model_validation_<model_id>.docx`, unless the user chooses another path. Do not overwrite researcher documents without authorization. A template revision updates the template, not a regional report.
 - Verify identifiers, model/version consistency, source targets, count totals, category shares, weight sums, missing values, units and appendix-summary agreement. Preserve manual fields and user edits. Read-only verification or report arithmetic does not authorize a scientific rerun.
-- Render the final document and inspect every page. Check table widths, repeating headers, readable figures, captions, page flow and the landscape appendix. Keep QA renders outside the delivered report files.
+- Render the final document and inspect every page. Check table widths, repeating headers, readable figures, captions, page flow and the linked Excel appendix. Verify its numeric types, complete taxon set, full-precision sort order, filters/frozen headers, weights, totals, formula results if any, and readability. Keep QA renders outside the delivered report files.
 - Follow the user's current review gate. A request to draft or revise a template or skill ends with that artifact for review; it does not itself authorize a regional test run.
+
+Sort group-assignment rule rows by unrounded PPR percentage, highest first. Add a final Sum row only if the unrounded total differs from 100% beyond numerical rounding tolerance (1e-8 percentage points); show and explain the actual shortfall/overcount rather than changing the denominator. Omit the Sum row when the total is 100%. In a blank template, request descending order without inventing values.

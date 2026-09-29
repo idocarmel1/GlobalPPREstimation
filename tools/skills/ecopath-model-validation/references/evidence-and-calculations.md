@@ -125,3 +125,14 @@ Keep a short record of boundary definitions, figure/page, map orientation/scale 
 A visual estimate is acceptable when the figure supports it. Record approximate percentages or a defensible range, how it was judged, and the main boundary uncertainty. Never compare the raw areas of screenshots at different scales or treat a bounding rectangle as the actual shelf/study polygon. Reserve Not determined for evidence too ambiguous to support an estimate.
 
 Do not insert the earlier LME036 visual estimates into another model or region. Even for LME036, establish that the same figure and target boundary are being reviewed, and distinguish the researcher's estimate from a fresh independent area measurement.
+
+## Approved fallback and readable coverage
+
+Apply the template guide’s Medium catch-first then biomass fallback only after establishing eligible groups. Retain the rejected catch attempt, actual source fields/values/units and normalized proportions, membership uncertainty and transfer assumptions. Canonical PPR / Matching and the companion Mapping review/Allocation assumptions retain adopted classifications and separate assumption flags. A report-only task still cannot adopt proposals; an explicitly authorized adoption must propagate dependent calculations and map outputs before completion.
+
+For each of membership and allocation, aggregate known simple-chain PPR by actual rule and component confidence. Each taxon contributes once to each separate table, not once per group. Include unresolved/not applicable and all used rules. Tables must reconcile independently to the same full known-PPR denominator. Capture actual map controls, filters, payload calculation, visible display rounding and exact value; diagnose differences rather than copying a displayed number.
+
+
+## Coverage preference and concise uncertainty
+
+Apply the template guide’s Very low broad-category and closest-analogue rules before leaving a meaningful placement unresolved. Prefer near-complete coverage with visible assumptions; retain Unresolved only when no meaningful group or numerical allocation can be justified. Direct applicable source geographic catch quantities can support High allocation confidence; geographic overlap alone cannot. Include all five confidence categories and the Very low coverage share. Name every unresolved taxon with a short reason, or state none; group and flag Very low cases compactly. Keep skill, approval, integration, hashes and test details in supporting evidence rather than validation prose.

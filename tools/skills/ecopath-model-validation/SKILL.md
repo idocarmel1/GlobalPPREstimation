@@ -1,18 +1,18 @@
 ---
 name: ecopath-model-validation
-description: Use when creating, updating, or reviewing a regional Ecopath model validation record in GlobalPPREstimation, including GE/TE diagnostics, taxon mapping confidence and catch/PPR coverage, geographic fit, and the Word mapping appendix. Full extraction or scientific recalculation belongs to the paper-to-PPR workflow.
+description: Use when creating, updating, or reviewing a regional Ecopath model validation record in GlobalPPREstimation, including GE/TE diagnostics, taxon mapping confidence and catch/PPR coverage, geographic fit, and the linked Excel mapping appendix. Full extraction or scientific recalculation belongs to the paper-to-PPR workflow.
 ---
 
 # Ecopath model validation
 
-Produce a concise, evidence-based Word validation record for one region and one exact model version, using the agreed template. The record supports researcher review; it does not approve the model or change scientific results.
+Produce a concise, evidence-based Word validation record for one region and one exact model version, using the agreed template. The record supports researcher review; it does not approve the model. Explicitly authorized mapping adoption and dependent recalculation follow the adoption gate below; an ordinary report request remains read-only scientifically.
 
 ## Resources and precedence
 
 Resolve this directory as `skill_root`; its third parent is the repository root containing `Project.xlsx`, `regions` and `tools`. Resolve relative links from the file containing them, not the current working directory.
 
 - Read the [project workbook contract](../../../README.md#workbook-reference).
-- Read the complete [template filling guide](../../templates/Model_validation_template_instructions.md). It owns field definitions, confidence rules M1–M8/W1–W8/C1–C6, examples, denominator conventions, appendix ordering and geographic approximation rules.
+- Read the complete [template filling guide](../../templates/Model_validation_template_instructions.md). It owns field definitions, confidence rules M1–M11/W1–W11/C1–C6, examples, denominator conventions, appendix ordering and geographic approximation rules.
 - Use [Model_validation_template.docx](../../templates/Model_validation_template.docx) as the report layout. Do not fork a second template or duplicate the full guide inside this skill.
 - Read [evidence and calculations](references/evidence-and-calculations.md) before collecting or aggregating evidence, then [document production](references/document-production.md) before authoring. Apply [acceptance checks](references/acceptance-checks.md) before delivery.
 - Consult the [paper-to-PPR entry point](../original_skill_resources/combined-src/SKILL.md) and only the relevant scientific references for interpretation. Its execution commands are not automatically authorized by a validation request.
@@ -68,13 +68,17 @@ Apply the guide's membership and weight rules separately; the weaker necessary c
 
 A report may identify that a stored confidence label is too strong and assign a lower **review confidence** with a reason. Preserve the stored label in supporting evidence and leave the workbook untouched. Proposed new mappings/weights remain proposals, excluded from the adopted mapping summary until authorized; uncertainties in existing decisions can still be documented now.
 
+For an explicitly approved fallback, apply the guide’s eligible-group catch-first then biomass hierarchy, with Medium allocation confidence for both. Record exact candidate decisions, fields/values/proportions and assumptions in adopted records. Prefer a meaningful M10/M11 Very low placement over leaving an uncertain taxon unresolved. Applicable direct geographic source quantities support High allocation confidence; otherwise retain the catch/biomass hierarchy and consider a justified W11 last resort. Only genuinely undecidable placements/allocations remain unresolved. Approval already given for the stated adoption/dependent arithmetic does not require a second permission request and does not authorize fresh extraction or group-SPPR regeneration.
+
 ### 5. Calculate the summary and appendix
 
-Use the same audit rows for both outputs. Calculate catch and independent simple-chain PPR totals, the four confidence categories and their shares. The simple-chain coefficient comes from the classic-PPR data, not GE/TE SPPR or an Ecopath group's TL. Apply the documented carbon conversion exactly once.
+Use the same audit rows for both outputs. Calculate catch and independent simple-chain PPR totals, the five confidence categories (High, Medium, Low, Very low, Unresolved) and their shares. The simple-chain coefficient comes from the classic-PPR data, not GE/TE SPPR or an Ecopath group's TL. Apply the documented carbon conversion exactly once.
 
 Include unresolved taxa in the catch denominator and, whenever their simple-chain PPR is known, in that PPR denominator. Disclose missing coefficients and their catch share; unknown is not zero. Count a split taxon once. Distinguish source ecological groups from synthetic computational imports.
 
-Create the seven-column appendix: **Taxon name; TL; Catch (t); Simple-chain PPR (t C); Mapped group names and weights; Confidence level; Reason.** Sort by unrounded simple-chain PPR numerically descending, with unavailable values last and taxon name breaking ties. State year, basis, method and units once above it; place full sources beneath it.
+Create the linked Excel workbook with a separate descriptive Sources sheet and the seven-column appendix: **Taxon name; TL; Catch (t); Simple-chain PPR (t C); Mapped group names and weights; Confidence level; Reason.** Sort by unrounded simple-chain PPR numerically descending, with unavailable values last and taxon name breaking ties. State year, basis, method and units once above it; put full descriptive sources on the Sources sheet. Freeze headers, enable filtering and verify widths/wrapping.
+
+Move mapping and coverage outside the main validation table. Include the five-category summary and separate group-assignment/allocation tables with exact columns **Plain-language rule | Confidence | PPR percentage**. Describe actual rules in words, split component confidence levels, and account for the full known-PPR universe once per table. Explain that these are two views of the same taxa and cannot be added. Trace and reconcile the actual map controls/payload/display with this denominator; an annual-workbook check alone is insufficient.
 
 ### 6. Assess geography and time
 
@@ -84,10 +88,10 @@ Use the figure matching this particular model, not another study within the same
 
 ### 7. Produce and verify the report
 
-Apply the [paper-to-PPR evidence and adoption gate](../original_skill_resources/combined-src/references/evidence-handoff.md#review-to-adoption-completion-gate). Final report classifications, mappings and figures must agree with adopted regional data and the map. If review differs from adoption, keep a keyed discrepancy ledger and label the report a pending-alignment draft; report-only reclassification is not completed validation. Changing data or publishing requires explicit adoption authorization. The evidence index is provenance, not configuration authority.
+Apply the [evidence handoff contract](../original_skill_resources/combined-src/references/evidence-handoff.md) and the [approved adoption and denominator checks](references/document-production.md#approved-adoption-and-denominator-checks). Final report classifications, mappings and figures must agree with adopted regional data and the map. If review differs from adoption, keep a keyed discrepancy ledger and label the report a pending-alignment draft; report-only reclassification is not completed validation. Changing data or publishing requires explicit adoption authorization. The evidence index is provenance, not configuration authority.
 
 Follow the document-production reference. Fill a copy of the current template, or minimally update the explicitly authorized edited report. Copy needed evidence without moving originals; retain useful relative links and source IDs. Keep extended method/rule instructions out of the filled report.
 
-Verify count/share arithmetic, mapping completeness, exact source-to-group negative pairings, appendix ordering, units, evidence links and preservation of manual entries. Render and inspect every page, including the landscape appendix. Fix layout defects before delivery.
+Verify count/share arithmetic, mapping completeness, exact source-to-group negative pairings, appendix ordering, units, evidence links and preservation of manual entries. Render and inspect every page, including the separate coverage section; also inspect the Excel appendix. Fix layout defects before delivery.
 
-Deliver the Word file and a short statement of material evidence gaps and checks actually performed. Do not claim fresh extraction, recalculation, approval or a successful regional test unless it happened within the authorized scope. Stop at any user-requested review point.
+Keep the report scientific and concise: name unresolved taxa and their specific reasons (or state none), flag Very low assignments and their coverage share, and omit skill/integration/test narratives. Deliver the Word file, linked Excel appendix and a short statement of material evidence gaps and checks actually performed. Do not claim fresh extraction, recalculation, approval or a successful regional test unless it happened within the authorized scope. Stop at any user-requested review point.

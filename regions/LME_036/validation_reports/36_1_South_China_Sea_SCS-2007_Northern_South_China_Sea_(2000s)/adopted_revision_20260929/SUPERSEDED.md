@@ -1,0 +1,1 @@
+This folder records the mapping state adopted on 29 September 2026. It is retained as historical provenance. The current regional workbook, Word report and map use [the 30 September coverage revision](../adopted_revision_20260930/reconciliation.md). Hashes and verification results in this historical folder describe its original outputs, not the current files.

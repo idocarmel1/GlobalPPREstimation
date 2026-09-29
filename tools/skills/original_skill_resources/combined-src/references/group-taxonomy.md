@@ -9,6 +9,13 @@ is open. An explicitly extraction-only request still stops at stage 1.
 Record membership during the same source reading as the parameters. The resulting
 evidence should remain usable by a later mapper without reconstructing its origin.
 
+This stage records what the source actually says. Later catch mapping also permits
+explicit broad-category and closest-analogue assignments under the unified
+[broader mapping definitions](regional-calculation.md#broader-mapping-definitions-and-confidence).
+Keep those assumptions in the mapping review with Very low confidence; do not add
+them to source `taxon_descr` as though the paper documented their membership.
+Missing exact source membership is not, by itself, a reason to leave catch unresolved.
+
 ## The file
 
 `Taxonomy.xlsx`, one sheet, three columns, one row per group in `seq` order:
