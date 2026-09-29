@@ -6,17 +6,27 @@ Project.xlsx owns central paper and model metadata. Regional Overview owns selec
 
 Serialize central writes through one coordinator. Agents deliver patches validated against current headers and stable region/article/model keys, with portable evidence paths. Re-read/check the live workbook hash before applying a staged update. Preserve backups and unrelated records; compare by keys/content rather than row position because the updater sorts. Never overwrite a newer workbook from a stale snapshot.
 
-For a requested registry refresh, resolve the regional path and its containing project:
+For every saved model-selection change, update the affected region in Project.xlsx and rebuild the web pages as part of completing that selection; no separate refresh request is needed unless the user explicitly defers it. This covers first selections, replacements and cleared selections, including blocked or NOT_RUN models. Use the actual readiness status and preserve unavailable results. The same commands apply to an independently requested registry/map refresh.
+
+Resolve the regional path and its containing project:
 
 ```
 python tools/update_project.py --region regions/LME_028/LME_028.xlsx
 ```
 
-Only when map refresh is also requested, rebuild the pages:
+After a selection change, always rebuild the map, time-series and archive pages. For registry-only changes unrelated to selection, rebuild when requested:
 
 ```
 python tools/build_html.py --workbook Project.xlsx --output interactive_map/index.html
 ```
+
+Verify the generated pages against the saved workbook:
+
+```
+python tools/verify_html.py --workbook Project.xlsx --html interactive_map/index.html
+```
+
+Then check the affected region in the refreshed browser view: model dropdown, result or explicit unavailable status, diagnosis flags, and its time-series view must agree with the new selection. Generated defaults alone are insufficient: the map remembers browser model choices and URL overrides, which can keep an old model selected after a rebuild. If a remembered choice still points to the former project selection, switch that region to the newly selected model through the visible controls and verify the result; preserve unrelated browser preferences. Distinguish this saved project-selection workflow from a temporary exploratory dropdown choice, which does not change regional Overview or require rebuilding the files. Record the selection change, refresh and verification outcome in the existing selection evidence or handoff.
 
 For a full refresh use `--all` instead of `--region`. Commands are run from the project root or use absolute script/input paths. `--root` is an option of update_project.py; build_html.py uses `--workbook` and `--output`. The updater preserves central paper/model metadata and replaces the complete set of generated records for updated regions. The all-region build removes orphaned generated rows. Neither command executes SPPR or performs matching.
 
