@@ -1,7 +1,5 @@
 # Model preparation and selection
 
-Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
-
 Paths in this reference are relative to this file unless stated as project-root paths. Paths inside retained domain documents remain relative to their own original skill directory; their old integration commands are superseded by this combined workflow.
 
 Resolve the project as the ancestor containing Project.xlsx. Resolve a regional workbook as `<region>/<region>.xlsx`. Read its Overview before work. The schema is in `../../../../../README.md#workbook-reference`; the public table reader/writer is `../../../../workbooks.py`.

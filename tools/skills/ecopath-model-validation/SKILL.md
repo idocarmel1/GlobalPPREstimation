@@ -84,8 +84,6 @@ Use the figure matching this particular model, not another study within the same
 
 ### 7. Produce and verify the report
 
-Apply the [paper-to-PPR evidence and adoption gate](../original_skill_resources/combined-src/references/evidence-handoff.md#review-to-adoption-completion-gate). Final report classifications, mappings and figures must agree with adopted regional data and the map. If review differs from adoption, keep a keyed discrepancy ledger and label the report a pending-alignment draft; report-only reclassification is not completed validation. Changing data or publishing requires explicit adoption authorization. The evidence index is provenance, not configuration authority.
-
 Follow the document-production reference. Fill a copy of the current template, or minimally update the explicitly authorized edited report. Copy needed evidence without moving originals; retain useful relative links and source IDs. Keep extended method/rule instructions out of the filled report.
 
 Verify count/share arithmetic, mapping completeness, exact source-to-group negative pairings, appendix ordering, units, evidence links and preservation of manual entries. Render and inspect every page, including the landscape appendix. Fix layout defects before delivery.
