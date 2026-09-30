@@ -18,6 +18,7 @@ Use these checks on a produced report. They are also review scenarios for evalua
 - **Geography:** A and B use the correct denominators; approximation is labeled and grounded in the correct figures; missing coordinates alone did not prevent a defensible estimate.
 - **Document:** concise findings follow the edited template; no restored repeated status/provenance/method prose; manual cells and edited hyperlinks/deletions are preserved; all seven linked Excel appendix columns and a separate Sources sheet are present; every rendered page was inspected.
 - **Delivery:** remaining evidence gaps and unperformed checks are reported honestly; regional workbooks, model inputs, selections and generated maps remain unchanged during a report-only run.
+- **Portability:** all repository-local hyperlink targets in current deliverables are relative to their containing file, resolve to versioned files/directories, and work with the same directory structure under another repository root. Check Word relationships/fields and anchors, Excel relationships/formulas, and Hyperlink Base; reject machine-specific bases/paths. Preserve public URLs and internal anchors, document content, formulas and formatting. A resolved Office tooltip alone is not an absolute-path failure.
 
 ## Review scenarios
 

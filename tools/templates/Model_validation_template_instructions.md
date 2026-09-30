@@ -1,6 +1,6 @@
 # Model validation template filling guide
 
-Template version 6, 30 September 2026. Use with `Model_validation_template.docx`.
+Template version 7, 30 September 2026. Use with `Model_validation_template.docx`.
 
 This guide accompanies the reusable template. It is not a skill and is not part of the filled report. The report follows the researcher's edited LME_036 report, now retained as `regions/LME_036/Model_validation_36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s).docx`, with the subsequently agreed mapping section and linked Excel appendix. Examples below illustrate rules; they are not newly verified classifications or results for LME036.
 
@@ -176,6 +176,9 @@ Put full descriptive source references and links on the separate Sources sheet. 
 
 ## Links, output and verification
 
+- **Purpose: portable repository downloads.** Every repository-local hyperlink in the Word report, Excel appendix and current supporting documents must be relative to the file containing the link, so the complete repository can be cloned or downloaded to another user's folder without breaking navigation. For example, a report in `regions/LME_036/` links to `LME_036.xlsx`, `LME036_taxon_mapping_appendix.xlsx`, `papers/.../source.pdf` or `../../Project.xlsx`. Preserve external web/DOI URLs and internal document/sheet anchors; they are not filesystem paths.
+- Inspect stored hyperlink targets, including Office relationship targets, Word hyperlink fields/anchors, Excel hyperlink formulas and any Hyperlink Base property. Do not infer an absolute stored path merely from an Office tooltip showing the resolved destination. Do not save drive letters, UNC paths, `file://` URLs, localhost URLs, or a machine-specific absolute Hyperlink Base for repository evidence. Preserve valid escaping and PDF-page/sheet fragments; do not change a link's intended destination or visible label while making it portable.
+- Resolve each local target from the delivered file's directory and verify it exists in the versioned repository (or a tracked directory), rather than only on the current machine. Rebase links when moving a deliverable. For evidence outside the repository, retain an appropriate permitted copy in the regional evidence folder or use its stable public source URL; never invent a destination. Check a relocated copy with the repository's relative directory structure intact, including representative document-to-workbook and evidence links. Preserve frozen historical baselines as evidence; verify the current deliverables. Keep portability checks in supporting verification, not scientific report prose.
 - Keep the user's edited destinations and purposeful deletions. Use concise descriptive link labels and avoid repeated links with no additional value. Preserve URL fragments such as a regional view or a PDF page.
 - For a new filled report, use working relative local links to the regional workbook, actual selected model, paper and needed evidence. If supporting reports must be copied into `validation_reports/<model_id>/`, copy rather than move originals; keep referenced assets and record their source paths. Do not fabricate a pre-existing report.
 - Save a new filled report beside the regional workbook as `Model_validation_<model_id>.docx`, unless the user chooses another path. Do not overwrite researcher documents without authorization. A template revision updates the template, not a regional report.
