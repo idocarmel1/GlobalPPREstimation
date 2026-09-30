@@ -24,7 +24,7 @@ When copying existing evidence into the model's validation folder, copy required
 
 Read only explicitly permitted documents. Inventory their paragraphs, table cells, manual entries and full hyperlink targets. Word may split a URL between its relationship target and a `w:anchor`; retain both. For local links, resolve relative to the output document's directory, not the repository root.
 
-Manual cells are **SPPR calculation**, **Open issues and next action**, and **Review and reproducibility**. Preserve researcher text and formatting in these cells when updating a record. Preserve the researcher's Article/Model selection rationales as well. Use semantic field labels or stable bookmarks to locate cells; row numbers shift when the other-models or mapping sections change.
+Manual cells are **SPPR calculation**, **Open issues and next action**, and **Review and reproducibility**. The default review entry is researcher name and date. Remove unused prompts in filled cells and preserve researcher notes in Other; do not replicate one region's actions, names, dates or timing notes as defaults elsewhere. Preserve researcher text and formatting in these cells when updating a record. Preserve the researcher's Article/Model selection rationales as well. Use semantic field labels or stable bookmarks to locate cells; row numbers shift when the other-models or mapping sections change.
 
 Do not restore introductions, the removed long diagnostic paragraphs, repeated provenance warnings, deleted links, or the completion-instructions section. Retain important newly discovered limitations in a concise finding or supporting report. Do not insert old regional examples as generic template content.
 
@@ -44,11 +44,11 @@ Follow the template field order:
 8. Geographic evidence figures.
 9. Linked Excel appendix, with the seven columns and separate Sources sheet; no full taxon table in Word.
 
-Use short, useful entries. The mapping summary has the year/basis, group/taxon counts, catch/PPR totals, and High/Medium/Low/Very low/Unresolved rows. Retain Membership evidence and Weights and assumptions lines, plus a missing-PPR note only when needed. Avoid a separate Catch coverage row.
+Use short, useful entries. The mapping summary has short paragraphs for year/basis/scope, group/taxon counts, PPR total and method name, followed by High/Medium/Low/Very low/Unresolved rows. Keep total catch and routine formula/conversion/treatment details in the appendix or evidence. Retain Membership evidence and Weights and assumptions lines, plus a missing-PPR note only when needed. Avoid a separate Catch coverage row.
 
 The negative-SPPR findings must pair each source column with its affected groups. Preserve names and IDs even when the list expands the GE or TE cell. If a large list needs a supporting detail table, retain explicit per-column group information in the delivered report or its clearly referenced diagnostic attachment; never reduce the finding to an unpaired count.
 
-Geographic percentages must identify whether they are calculated, approximately digitized or visually estimated. Include the definitions of A and B. Remove legacy caption wording prohibiting estimates. Keep readable source figures and captions together; use separate pages when an image needs the space.
+The geographic cell contains labelled A/B percentages/ranges and an approximate qualifier where applicable. Keep equations and estimation-method detail in the guide/supporting evidence. Remove legacy caption wording prohibiting estimates. Keep readable source figures and captions together; use separate pages when an image needs the space.
 
 ## Appendix layout and content
 

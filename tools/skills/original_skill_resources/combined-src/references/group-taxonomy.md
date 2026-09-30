@@ -138,7 +138,23 @@ Two of those lines exist because leaving them out has already cost real errors:
   put into stratum 2 by default, silently attributing an entire LME's catch to one
   sub-area.
 
-## When you are done
+## Reassessing membership confidence
+
+Use the validation guide's component rules. Review all requested taxa, including previously High/Medium and zero-catch rows; retain an evidence-backed old/new decision for each exact catch label. Confidence can increase when a prior uncertainty is resolved and decrease when a relevant contradiction is found. Do not promote a whole family from one representative species, or penalize a broad rank without checking its actual reported scope.
+
+Read the operative group criteria: taxon, habitat, depth, species maximum size versus individual size, length unit and life-stage boundary. Verify a taxon's fit against competing named and residual pools. A fully explicit generic definition can support High membership without enumerating every species. A supported but assumed extension remains Medium. Missing evidence for a stage split within one eligible pair belongs to allocation confidence; it is not automatically uncertainty about membership in the combined pair.
+
+Use provider common names, functional/commercial categories and the regional species universe to interpret a catch label; retain the provider record as evidence. A fisheries reporting category may be narrower than the entire global taxonomic order or family. Neither the label alone nor provider metadata alone proves all biological criteria. Test relevant regional exceptions, not only global outliers. Resolve historical family usage with source members and authoritative taxonomy before declaring a modern-name contradiction.
+
+Keep spatial/temporal applicability distinct from membership. A broad pelagic guild may include an offshore species even if the shelf model's coefficient transfer remains uncertain. Conversely, a concrete habitat/depth mismatch or competing group warrants reduced membership confidence. Do not infer an undocumented merger of source pools from a shortened group name; compare the selected version's definitions and parameter/catch tables, and preserve unresolved structure as a limitation.
+
+Retain review evidence and exact source locators alongside taxonomy. Confidence-only revisions must preserve group IDs and numerical weights. Keep proposed group-set corrections explicit until authorized adoption; assess confidence for the currently adopted mapping in the meantime.
+
+## Nearby-model mapping fallback
+
+Before leaving a focal-model mapping unresolved or relying on a weak analogue, consider mappings from geographically nearby models when no better direct mapping can be supported. Prefer a donor with a similar ecosystem, taxon assemblage, habitat/depth and modeled period. Read its actual mapping evidence and group definitions, then crosswalk those definitions to the selected model's groups; proximity and a matching group name alone are insufficient. A donor mapping is transfer evidence, not an explicit statement by the focal source. Record donor model/version, area, exact taxon, original assignment and source locator, the receiving candidates, similarities, mismatches and why the transfer is the best available fallback. Assess membership confidence from the strength of that transfer under the validation guide. Do not automatically inherit the donor's confidence, stage fractions or coefficients.
+
+## Final taxonomy checks
 
 The taxonomy artifact has a row for every group, including `not documented`
 where appropriate: `Taxonomy.xlsx` for an extraction folder, or

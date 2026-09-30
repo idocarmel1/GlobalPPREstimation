@@ -29,6 +29,12 @@ class HtmlAdapterTests(unittest.TestCase):
         result=subprocess.run([shutil.which('node'),str(check)],capture_output=True,text=True,encoding='utf-8')
         self.assertEqual(result.returncode,0,result.stderr)
 
+    @unittest.skipUnless(shutil.which('node'),'Node is required for the model-switch check')
+    def test_map_model_switch_preserves_open_selection(self):
+        check=Path(__file__).with_name('check_map_model_switch.js')
+        result=subprocess.run([shutil.which('node'),str(check)],capture_output=True,text=True,encoding='utf-8')
+        self.assertEqual(result.returncode,0,result.stderr)
+
     def test_bundled_basemap_embeds_geometry_and_keeps_scientific_payload(self):
         root=Path(__file__).resolve().parents[2]
         template=root/'tools/original_html_layout/index.html';before=template.read_bytes()

@@ -12,11 +12,11 @@ Use these checks on a produced report. They are also review scenarios for evalua
 - **Diagnostics:** rho_living, GE b and detritus-pool SPPR come from matching retained fields; failures/unsupported results are not silently promoted.
 - **Mapping:** all catch labels in the defined universe appear once; exact group IDs are valid; weights and stage assumptions are evidenced; unresolved weights remain `?`; review confidence follows the weakest required component.
 - **Totals:** category counts sum to the appendix count; category catches/PPR reconcile to the same row data; percentages use the stated full-catch or known-PPR denominator and reconcile within rounding tolerance.
-- **Missing data:** unknown catch/PPR is not zero; missing coefficient counts and catch shares are visible; unresolved model mappings with known PPR still contribute to PPR totals.
+- **Missing data:** missing catch is unknown; genuine zero catch gives zero annual PPR even with a missing TL/coefficient; positive catch with a missing coefficient remains unknown; missing inputs are disclosed concisely; unresolved model mappings with known PPR still contribute to PPR totals.
 - **Units:** catch tonnes and PPR tonnes C are labeled; the configured conversion occurs once; classic/simple-chain values are independent of GE/TE mapping.
 - **Order:** appendix rows sort by full-precision numeric simple-chain PPR descending; unavailable values are last; taxon name breaks ties.
 - **Geography:** A and B use the correct denominators; approximation is labeled and grounded in the correct figures; missing coordinates alone did not prevent a defensible estimate.
-- **Document:** manual cells and edited hyperlinks/deletions are preserved; all seven linked Excel appendix columns and a separate Sources sheet are present; every rendered page was inspected.
+- **Document:** concise findings follow the edited template; no restored repeated status/provenance/method prose; manual cells and edited hyperlinks/deletions are preserved; all seven linked Excel appendix columns and a separate Sources sheet are present; every rendered page was inspected.
 - **Delivery:** remaining evidence gaps and unperformed checks are reported honestly; regional workbooks, model inputs, selections and generated maps remain unchanged during a report-only run.
 
 ## Review scenarios
@@ -83,3 +83,17 @@ The user approves testing this validation skill on a region. Its saved coefficie
 ## Coverage preference and concise uncertainty
 
 Apply the template guide’s Very low broad-category and closest-analogue rules before leaving a meaningful placement unresolved. Prefer near-complete coverage with visible assumptions; retain Unresolved only when no meaningful group or numerical allocation can be justified. Direct applicable source geographic catch quantities can support High allocation confidence; geographic overlap alone cannot. Include all five confidence categories and the Very low coverage share. Name every unresolved taxon with a short reason, or state none; group and flag Very low cases compactly. Keep skill, approval, integration, hashes and test details in supporting evidence rather than validation prose.
+
+## Zero catch without TL or coefficient
+
+A row with recorded catch 0 and missing TL/coefficient contributes exactly 0 annual PPR; retain the missing TL/coefficient and sort with numeric zero rows. A row with positive catch and no coefficient has unknown PPR and sorts after numeric rows. A row with missing catch remains unknown. If all missing coefficients belong to zero-catch taxa, the annual total is complete and does not need the known-subtotal qualifier. Verify all three cases and the unchanged coefficient-availability mask.
+
+## Careful confidence reassessment
+
+- A source explicitly includes a taxon in a juvenile/adult pair, but two passages disagree about the cutoff. Retain supported membership in the union; record split uncertainty in allocation. Do not automatically downgrade both components.
+- A small-species pool uses maximum TL at 30 cm. A regional member reaches 35 cm FL: it cannot qualify as a small species. A reported 28 cm FL alone does not prove maximum TL below 30 cm. Do not silently change groups during confidence-only review.
+- A provider's broad scientific label denotes a documented fisheries reporting category. Resolve its common name and regional contents before importing unrelated global members as counterexamples; do not let provider metadata override a verified local conflict.
+- A modern family name differs from the historical source, but an explicit source member and an authoritative taxonomic bridge establish continuity. Do not downgrade solely because nomenclature changed.
+- A source says it assumed 90% juvenile catch. Reproducing 90% does not establish observed mass composition or High allocation confidence.
+- Verify all old/new component decisions, including downgrades from High/Medium. Confirm the weakest-component rule, all taxon keys, unchanged groups/weights for confidence-only adoption, and reconciled category/rule totals. Distinguish proposed mapping corrections from adopted confidence changes.
+- If no better focal-model mapping is available, an evidenced nearby-model mapping may be transferred through an explicit group-definition crosswalk. Verify donor identity, ecological/geographic compatibility, receiving group IDs and transfer confidence; identical names or proximity alone do not establish membership. Assess receiving weights independently and never copy donor SPPR as part of a mapping fallback.

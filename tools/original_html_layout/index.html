@@ -130,11 +130,11 @@ regions.forEach(addRegion);articles.forEach(addArticle);
 function regionHasDownload(r){return (byUnit[r.unit_id]||[]).some(a=>Number(a.downloaded_file_count)>0)}
 function passRegion(r){const rank=document.querySelector('#rankFilter').value,type=document.querySelector('#typeFilter').value,download=document.querySelector('#downloadFilter').value,q=document.querySelector('#search').value.toLowerCase().trim(),hasDownload=regionHasDownload(r);return (rank==='all'||(r.ppr_rank!==null&&r.ppr_rank<=Number(rank)))&&(type==='all'||r.region_type===type)&&(download==='all'||(download==='with'&&hasDownload)||(download==='without'&&!hasDownload))&&(!q||`${r.region_name} ${r.unit_id}`.toLowerCase().includes(q)||(byUnit[r.unit_id]||[]).some(a=>`${a.title} ${a.authors}`.toLowerCase().includes(q)))}
 function passArticle(a){const minQ=+document.querySelector('#qualityFilter').value,q=document.querySelector('#search').value.toLowerCase().trim();return a.quality_score_100>=minQ&&(!q||`${a.title} ${a.authors} ${a.region_name}`.toLowerCase().includes(q))}
-function refresh(){
+function refresh({preserveSelection=false}={}){
   regionGroup.clearLayers(); markerGroup.clearLayers(); articleGroup.clearLayers();
   if(document.querySelector('#showRegions').checked)regions.filter(passRegion).forEach(r=>{regionLayers[r.unit_id].eachLayer(l=>l.setStyle(baseRegionStyle(r)));regionLayers[r.unit_id].addTo(regionGroup);regionMarkers[r.unit_id].addTo(markerGroup)});
   if(document.querySelector('#showArticles').checked)articles.filter(a=>a.geometry&&passArticle(a)&&passRegion(regionById[a.unit_id])).filter((a,i,all)=>all.findIndex(b=>b.footprint_key===a.footprint_key)===i).forEach(a=>articleLayers[a.article_id].addTo(articleGroup));
-  renderList(); if(selectedId&&(!regionById[selectedId]||!passRegion(regionById[selectedId]))){selectedId=null;document.querySelector('#details').innerHTML='<p>Select a region from the filtered results.</p>'}
+  renderList(); if(selectedId&&(!regionById[selectedId]||(!preserveSelection&&!passRegion(regionById[selectedId])))){selectedId=null;document.querySelector('#details').innerHTML='<p>Select a region from the filtered results.</p>'}
 }
 function renderList(){const el=document.querySelector('#regionList');el.innerHTML='';regions.filter(passRegion).forEach(r=>{const t=pprNorm(r),b=document.createElement('button');b.className='region-btn'+(selectedId===r.unit_id?' active':'');b.innerHTML=`<span class="rank" style="background:${pprColor(r)};color:${t<.24||t>.76?'white':'#1e2830'}">${r.ppr_rank??'—'}</span><span><b>${r.region_name}</b><br><small>#${r.ppr_rank??'—'} · ${pct(r.cumulative_ppr_share)} cumulative PPR${regionHasDownload(r)?' · file ✓':''}</small></span><span class="qdot" style="background:${r.best_quality_score?qualityColor(r.best_quality_score):'#b7c4ca'}"></span>`;b.onclick=()=>selectRegion(r.unit_id);el.appendChild(b)})}
 function selectRegion(id){selectedId=id;const r=regionById[id],lyr=regionLayers[id];Object.values(regionLayers).forEach((x)=>x.eachLayer(l=>l.setStyle(baseRegionStyle(l.feature.properties))));if(lyr){lyr.eachLayer(l=>l.setStyle(baseRegionStyle(r)));try{map.fitBounds(lyr.getBounds(),{padding:[35,35],maxZoom:6})}catch(e){}}renderDetails(r);renderList();document.querySelector('#details').classList.add('open')}
@@ -889,7 +889,7 @@ function updateLegend() {
     $('metricHelp').textContent+=' Color = 1 − cumulative share before this ecosystem, ranked highest first across the selected set. Equal values share a color.';
   }
 }
-function applyYear(year) {
+function applyYear(year,{preserveSelection=true}={}) {
   DB.year=Number(year);metricState.year=DB.year;
   const annual=DB.annual[String(year)];
   regions.forEach(r=>{
@@ -905,7 +905,8 @@ function applyYear(year) {
   regionGroup.clearLayers();markerGroup.clearLayers();regions.forEach(addRegion);
   $('yearTotal').textContent=`${summary.available} of ${summary.size} ecosystems in the selected set have this result. ${metricState.mode==='npp'?'NPP does not require catch or an Ecopath model.':isIndependentSimple()?'Simple chain uses available catch and catch-taxon TL independently of articles.':'Ecopath methods require a verified selected model; models remain separate.'} Ranks use the full set before display filters. ${rankState.set==='all'?'The all-ecosystem sum includes overlapping regions.':''}`;
   if(isIndependentSimple()&&regions.some(r=>r.networkResult?.group_selection?.active))$('yearTotal').textContent=$('yearTotal').textContent.replace('independently of articles','with model catch allocations where group selections are active');
-  updateLegend();if(selectedId)renderDetails(regionById[selectedId]);refresh();
+  // Recalculation can remove a result from the displayed ranking; keep its model controls usable.
+  updateLegend();if(selectedId)renderDetails(regionById[selectedId]);refresh({preserveSelection});
   const params=new URLSearchParams(location.search);params.set('rank_set',rankState.set);params.set('rank_basis',rankState.basis);params.set('limit',rankState.limit);if(rankState.limit==='custom')params.set('count',rankState.custom);else params.delete('count');params.set('metric',metricState.mode);params.set('year',DB.year);params.set('npp',metricState.npp);params.set('npp_fill',metricState.npp_fill);
   for(const key of ['scope','method','denominator','te','unidentified','catch_basis','uncertainty'])params.set(key,metricState[key]);
   const overrides=Object.fromEntries(Object.entries(chosenModels).filter(([id,index])=>index!==network.units[id].default_model).map(([id,index])=>[id,network.units[id].models[index].id]));
@@ -945,7 +946,7 @@ $('rankSetFilter').value=rankState.set;$('rankFilter').value=rankState.limit;$('
 $('rankCustomField').hidden=rankState.limit!=='custom';
 for(const [id,key,event] of [['rankSetFilter','set','change'],['rankFilter','limit','change'],['rankCustom','custom','input'],['rankBasisFilter','basis','change']]){
   $(id).addEventListener(event,()=>{
-    rankState[key]=$(id).value;$('rankCustomField').hidden=rankState.limit!=='custom';applyYear(DB.year);
+    rankState[key]=$(id).value;$('rankCustomField').hidden=rankState.limit!=='custom';applyYear(DB.year,{preserveSelection:false});
   });
 }
 const groupDialog=groupStore?PPRGroupDialog.create({

@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-09-30T09:38:34.957418+00:00",
+  "status": "fixed_verified_uncommitted",
+  "root": "C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation",
+  "changed_files": [
+    "tools/original_html_layout/index.html",
+    "tools/workflow_checks/check_map_model_switch.js",
+    "tools/workflow_checks/test_html_adapter.py",
+    "interactive_map/index.html"
+  ],
+  "reproduction": {
+    "ecosystem": "LME_036 South China Sea",
+    "from_model": "2000s",
+    "to_model": "1970s",
+    "settings": {
+      "metric": "ppr",
+      "method": "SPPR_1995_TEmean",
+      "year": 2019,
+      "catch_basis": "landings",
+      "scope": "all",
+      "rank_set": "all",
+      "rank_basis": "metric",
+      "limit": "10",
+      "search": "South China Sea",
+      "groups": "all"
+    },
+    "before": {
+      "model_selector_count": 0,
+      "details": "Select a region from the filtered results.",
+      "filtered_list_empty": true
+    },
+    "cause": "1970s result is unavailable for this method, so rank_position is null and passRegion fails. applyYear then calls refresh, which clears selectedId and replaces the entire detail panel.",
+    "scientific_unavailable_reason": "SPPR_1995_TEmean: IMPLAUSIBLE - up to 28x the trophic-chain estimate; the solve is near-singular for this model",
+    "no_repro_controls": [
+      "new_GE, All display, fixed 2019 simple-chain ranking: both model choices remain usable",
+      "Choose model groups dialog: both model switches keep the dialog open with 39 of 39 groups"
+    ]
+  },
+  "fix": "Preserve the selected region during applyYear recalculation, even when the updated result falls outside display filters. Explicit search/type/download/ranking filters keep their existing deselection behavior. No calculation or scientific availability gate changed.",
+  "tests": {
+    "red_before_fix": {
+      "exit_code": 1,
+      "assertion": "Switching to an unavailable model must retain the selected ecosystem",
+      "actual": null,
+      "expected": "LME_036"
+    },
+    "permanent_regression": {
+      "file": "tools/workflow_checks/check_map_model_switch.js",
+      "source_template_exit_code": 0,
+      "generated_map_exit_code": 0,
+      "coverage": [
+        "unavailable model retains open details and selector",
+        "unavailable result remains null",
+        "Top 10 list still excludes unavailable model",
+        "switch back restores available result",
+        "finite result at rank 11 retains open details",
+        "explicit rank-filter change clears excluded selection",
+        "explicit search change clears nonmatching selection"
+      ]
+    },
+    "workflow_suite": {
+      "command": "python -m unittest discover -s tools/workflow_checks -v",
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 18.528,
+      "log": "model_switch_workflow_tests.log",
+      "warning": "Existing openpyxl warning in native-table fixture: In write-only mode you must add table columns manually"
+    },
+    "generated_inline_script_syntax": {
+      "compiled": 1,
+      "errors": 0
+    },
+    "git_diff_check_exit_code": 0
+  },
+  "browser": {
+    "url": "http://127.0.0.1:8877/interactive_map/index.html",
+    "tool": "CUA",
+    "fixed_reproduction": {
+      "model_selector_visible": true,
+      "selected_model_index": "0",
+      "result": "Unavailable",
+      "diagnostic_preserved": true,
+      "filtered_list_empty": true
+    },
+    "switch_back": {
+      "selected_model_index": "1",
+      "result": "500,500,000 t C",
+      "region_returns_to_filtered_list": true
+    },
+    "explicit_rank_filter_clears_selection": true,
+    "explicit_search_filter_clears_selection": true,
+    "console_errors": [],
+    "screenshot": "model_switch_fixed_unavailable.png",
+    "restored": {
+      "selected_model": "2000s",
+      "selected_model_index": "1",
+      "year": 2019,
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "scope": "all",
+      "rank_basis": "simple_2019",
+      "limit": "all",
+      "search": "South China Sea",
+      "groups": "all",
+      "result": "49,310,000 t C",
+      "other_override_preserved": "LME_013: 13_2_Northern_Humboldt_Current_(1995-1998)"
+    },
+    "viewport_override_reset": true
+  },
+  "rebuild": {
+    "generator": "build_html.linked_layout + atomic_text",
+    "only_expected_shell_changes": true,
+    "embedded_payload_sha256": "d6ff1eb1384d31f358ea9ecadc9876bd987e01271f0ca0058fde0fd698246b47",
+    "embedded_payload_unchanged": true,
+    "project_meta_unchanged": true,
+    "map_sha256": "3aa322a5cd31ef8ad97a1dda29b8fc0169af6abb762d33b46abfa9576afd6147"
+  },
+  "scope": {
+    "scientific_payload_changed": false,
+    "workbooks_or_scientific_reports_changed": false,
+    "confidence_evidence_changed": false,
+    "committed": false,
+    "pushed": false
+  }
+}
