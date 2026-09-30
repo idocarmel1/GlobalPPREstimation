@@ -1,0 +1,627 @@
+{
+  "schema_version": 1,
+  "run_id": "LME032_validation_20260930_zeroBA_mapping_v7",
+  "region_id": "LME_032",
+  "model_id": "32_1_Arabian_Sea_off_Karnataka_(2000)",
+  "variant_id": "published_balanced_diet_source_zero_BA",
+  "source_identity": {
+    "citation": "Mohamed et al. (2008), CMFRI Bulletin51",
+    "article_id": "ARAB-2005__LME_032",
+    "doi": null,
+    "path": "../../papers/ARAB-2005/CMFRI-Bulletin-51-88a9c885.pdf",
+    "sha256": "88a9c885c47a50f93916823c4616d1aa4ee4c0204baba7220cf3f0fa260c1ec9",
+    "locators": "Study printed8/PDF18; group membership printed11–12/PDF21–22; landings printed13/PDF23; basic parameters and zero BA printed21/PDF31; balanced diet printed53/PDF63."
+  },
+  "computational_input_identity": {
+    "path": "../../models/32_1_Arabian_Sea_off_Karnataka_(2000)/model.json",
+    "sha256": "acd27c446200819ecf2767e6cb36f8d986eafdc8ed9fcd2d28c39a46aef74f70",
+    "runtime_provenance": "diagnostics/adopted_provenance.json"
+  },
+  "methods": [
+    "EwE_TE_EE",
+    "EwE_TE_noEE",
+    "MC_new_GE",
+    "MC_new_TE_EEfix",
+    "SPPR_1986",
+    "SPPR_1995_TE0.1",
+    "SPPR_1995_TEmean",
+    "SPPR_1995_TEmean_catch",
+    "SPPR_2015",
+    "Ulanowicz_TE",
+    "Ulanowicz_globalTEmean",
+    "Ulanowicz_globalTEmean_catch",
+    "new_GE",
+    "new_TE_EEfix",
+    "new_TE_noEEfix",
+    "new_WithEgestion",
+    "simple trophic chain",
+    "sym_GE_asDC",
+    "sym_GE_asPP",
+    "sym_TE_asDC",
+    "sym_TE_asPP",
+    "sym_WithEgestion_asDC",
+    "sym_WithEgestion_asPP"
+  ],
+  "options": {
+    "direct": {
+      "TE_option": [
+        "GE",
+        "TE",
+        "With Egestion"
+      ],
+      "short": false,
+      "flat": false,
+      "return_sppr": true,
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "fix_EE_0_cases": true
+    },
+    "constructor": {
+      "underdetermined": true,
+      "zero_catch": true,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": true,
+      "DC_tol": 0.001
+    },
+    "reference": {
+      "year": 2019,
+      "catch_basis": "landings",
+      "method": "simple trophic chain",
+      "scope": "all",
+      "unidentified": "method",
+      "groups": "all",
+      "units": "t C",
+      "unrounded_ppr_tC": 514724666.46114403,
+      "visible_four_significant_digit_value": "514,700,000 t C"
+    },
+    "numeric_tolerances": "qa/final_scientific_checks.json"
+  },
+  "required_roles": [
+    "original_regional_workbook",
+    "original_computational_input",
+    "original_catch_coefficients_npp_snapshot",
+    "original_group_coefficients",
+    "direct_GE_return_matrices_coefficients",
+    "loaded_computational_state",
+    "effective_settings_and_runtime",
+    "direct_TE_return_matrices_coefficients",
+    "direct_WithEgestion_return_matrices_coefficients",
+    "group_coefficient_comparison",
+    "geographic_denominators_and_uncertainty",
+    "region_figure",
+    "source_study_figure",
+    "mapping_discrepancy_and_assumptions",
+    "allocation_quantities_and_candidates",
+    "arithmetic_universe_and_coverage",
+    "ecological_search_record",
+    "regional_lineage_weight_reconstruction",
+    "taxonomy_lineages",
+    "taxonomy_authority_responses",
+    "published_basic_inputs",
+    "published_landings",
+    "published_balanced_diet",
+    "source_reconciliation",
+    "visible_browser_verification",
+    "scientific_and_adoption_reconciliation",
+    "global_map_trend_archive_verification",
+    "retained_final_map_payload",
+    "native_excel_recalculation",
+    "relocated_local_link_verification",
+    "shared_integration_reconciliation",
+    "retained_selected_project_rows",
+    "preserved_template_and_manual_rows",
+    "artifact_visual_verification",
+    "workflow_stage_availability",
+    "source_PDF",
+    "adopted_computational_input",
+    "adopted_group_coefficients",
+    "source_group_taxonomy_contract",
+    "adopted_regional_workbook",
+    "frozen_catch_download",
+    "frozen_taxon_metadata",
+    "validation_DOCX",
+    "linked_Excel_appendix",
+    "template_input",
+    "filling_guide",
+    "evidence_readme",
+    "regional_report_index"
+  ],
+  "artifacts": [
+    {
+      "role": "original_regional_workbook",
+      "path": "baseline/LME_032.xlsx",
+      "sha256": "70ce2de22a0e4a8189c74e2dffae88054a705c8b00a992e71079a39ffdf41fd8",
+      "availability": "present"
+    },
+    {
+      "role": "original_computational_input",
+      "path": "baseline/model_original.json",
+      "sha256": "d03e515e5778bf525d2f45c410f3b682f2d250f54454d130d0124fc82797f61e",
+      "availability": "present"
+    },
+    {
+      "role": "original_catch_coefficients_npp_snapshot",
+      "path": "baseline/snapshot.json",
+      "sha256": "141f14a9a899106be8503f9fd1e0d5dc89a208a6095e28e0a7a5caef5227dc17",
+      "availability": "present"
+    },
+    {
+      "role": "original_group_coefficients",
+      "path": "baseline/sppr_source.xlsx",
+      "sha256": "6b54cb6ab8fb81b300cf56074df28a74f1fba251a4a75a59e09f536f51a0f90d",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_adopted_direct_diagnostics_py",
+      "path": "diagnostics/adopted_direct_diagnostics.py",
+      "sha256": "5fc182a10a884f532b2167eae1a90aa3034820a53612acf4d77f9e121df6870c",
+      "availability": "present"
+    },
+    {
+      "role": "direct_GE_return_matrices_coefficients",
+      "path": "diagnostics/adopted_GE.json",
+      "sha256": "46906898cae695687db94d7848fed5291efd07d7a81dbd72451b2555d4d62317",
+      "availability": "present"
+    },
+    {
+      "role": "loaded_computational_state",
+      "path": "diagnostics/adopted_loaded_state.json",
+      "sha256": "853f6f299e2968aa482085173beba03534023b2063e6b6410fd553916a895270",
+      "availability": "present"
+    },
+    {
+      "role": "effective_settings_and_runtime",
+      "path": "diagnostics/adopted_provenance.json",
+      "sha256": "9fe88ba383f1d640882cd6f73b6b7ffe15ba647caa5c8f7717895d9f4a3ecb8e",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_adopted_summary_json",
+      "path": "diagnostics/adopted_summary.json",
+      "sha256": "0a1ff9f03931f339c8d2ff2729940b3b56518840fe29563dc371c6394cb02058",
+      "availability": "present"
+    },
+    {
+      "role": "direct_TE_return_matrices_coefficients",
+      "path": "diagnostics/adopted_TE.json",
+      "sha256": "cee3e9c59f33b529287f836a4149422efbbcda33f88ad7f5c5cbd87d6e10e362",
+      "availability": "present"
+    },
+    {
+      "role": "direct_WithEgestion_return_matrices_coefficients",
+      "path": "diagnostics/adopted_With_Egestion.json",
+      "sha256": "58e1fb61ec78c900cdb645b81e5f2a7fea398800346fc41f6b2fea75183c082e",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_comparison_summary_json",
+      "path": "diagnostics/comparison_summary.json",
+      "sha256": "a85c9095ba18a4233ab013ab89ae3cebfe4f12412624fd3f9db34690bf79c90f",
+      "availability": "present"
+    },
+    {
+      "role": "group_coefficient_comparison",
+      "path": "diagnostics/group_coefficient_comparison.json",
+      "sha256": "f79f996a1dd49267407098f44e8759182e23f35a35579cf6525fd4abd6542a9d",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_runtime_provenance_json",
+      "path": "diagnostics/runtime_provenance.json",
+      "sha256": "7b00bf3ee581b5b2bf96376f74b6f66c4a96a6eee27439abf47b463ec0e3c0d1",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_saved_input_GE_json",
+      "path": "diagnostics/saved_input_GE.json",
+      "sha256": "6aedd98441190ddd338b626ad4776602e1baab6df94c9093f6503dfdcd4020aa",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_saved_input_state_json",
+      "path": "diagnostics/saved_input_state.json",
+      "sha256": "3aca896752eba1533e44e28e880c59ef58c9aa4a04efd49afcea564793b5c641",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_saved_input_TE_json",
+      "path": "diagnostics/saved_input_TE.json",
+      "sha256": "9d4b4e68ba25f0fa2579a42960e8c09af729f9c891291f0276014c9212bdb429",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_saved_input_With_Egestion_json",
+      "path": "diagnostics/saved_input_With_Egestion.json",
+      "sha256": "c2a583ffe14bcb6553610cc31ff8c38d04b22c5ec9c23fe9d31507991f9e3966",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_source_zero_ba_GE_json",
+      "path": "diagnostics/source_zero_ba_GE.json",
+      "sha256": "b0076680e3a0ba1ce2ff30cadab20c57bac12f2147cd828ec21ee73b408c501b",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_source_zero_ba_state_json",
+      "path": "diagnostics/source_zero_ba_state.json",
+      "sha256": "36263b47813689820b6b3074a0eb07ff95f72e658ba439def4e29ade0e665372",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_source_zero_ba_TE_json",
+      "path": "diagnostics/source_zero_ba_TE.json",
+      "sha256": "eab49200fa6a88caadaba5e614e6c7e9062a5799268de42fa79483d6881d0892",
+      "availability": "present"
+    },
+    {
+      "role": "support_diagnostics_source_zero_ba_With_Egestion_json",
+      "path": "diagnostics/source_zero_ba_With_Egestion.json",
+      "sha256": "c2ae69d6fe299265a96dec38abda18c2584aeb872ccfe07b64b2fd41cc0ee06b",
+      "availability": "present"
+    },
+    {
+      "role": "support_geography_assess_geography_py",
+      "path": "geography/assess_geography.py",
+      "sha256": "1837882bf573681ad0400963a158054b6d4ece158eec85c5a784d900b65e9649",
+      "availability": "present"
+    },
+    {
+      "role": "geographic_denominators_and_uncertainty",
+      "path": "geography/geography_assessment.json",
+      "sha256": "a03baf394e08f531376db807a709190affcfb61fbc2050a8de6ef38519b2e46a",
+      "availability": "present"
+    },
+    {
+      "role": "region_figure",
+      "path": "geography/region_boundary.png",
+      "sha256": "b5bee41fce925ef24a69c9370065a6a7bd0fb675d86b4a33ffe57ee35064a537",
+      "availability": "present"
+    },
+    {
+      "role": "source_study_figure",
+      "path": "geography/source_study_area.png",
+      "sha256": "724b4f3c26aca431cea053085017223595eb702739c771ac5624defb99ff73d7",
+      "availability": "present"
+    },
+    {
+      "role": "mapping_discrepancy_and_assumptions",
+      "path": "mapping/adopted_taxon_audit.json",
+      "sha256": "6768bc1cbfb177d07db8d82a4f08165ffe744d5aa70a60eefb97aab9221c4723",
+      "availability": "present"
+    },
+    {
+      "role": "allocation_quantities_and_candidates",
+      "path": "mapping/allocation_evidence.json",
+      "sha256": "dc3dbbfe20a122ad4a3cbdbf200f3fe1fbcbc5b8925d9f950e21ae13af5acff3",
+      "availability": "present"
+    },
+    {
+      "role": "support_mapping_build_review_py",
+      "path": "mapping/build_review.py",
+      "sha256": "50f4d2d7db380a386f0888227f61984e208a12f8479d445e51cfd90cb97ae3d7",
+      "availability": "present"
+    },
+    {
+      "role": "arithmetic_universe_and_coverage",
+      "path": "mapping/coverage_summary.json",
+      "sha256": "a90d0fd57cb34b92c48b7d8cf7ec0ffcedcf0a1a776dbe39c19c53379aa11895",
+      "availability": "present"
+    },
+    {
+      "role": "ecological_search_record",
+      "path": "mapping/ecological_source_checks.json",
+      "sha256": "f4f0428649606ca5365687ad80021c924f2c3ab5248fa0560c0f8475d7fe80de",
+      "availability": "present"
+    },
+    {
+      "role": "support_mapping_query_taxonomy_py",
+      "path": "mapping/query_taxonomy.py",
+      "sha256": "b9ef1041f45a569f34de08569b3bbba81b00dd8cb5b7521a6e5a5d6f59093712",
+      "availability": "present"
+    },
+    {
+      "role": "regional_lineage_weight_reconstruction",
+      "path": "mapping/retained_weight_reconstruction.json",
+      "sha256": "a2a23097006eb0b240f6caa1368944c2df5e23950948a251e9cef62d64b9c832",
+      "availability": "present"
+    },
+    {
+      "role": "taxonomy_lineages",
+      "path": "mapping/taxonomy_lookup.json",
+      "sha256": "4e2b22cc9f7471a75d2e58a62c490c963d1b1a21699f04a45161bb2bfa71d426",
+      "availability": "present"
+    },
+    {
+      "role": "taxonomy_authority_responses",
+      "path": "mapping/WoRMS_response.json",
+      "sha256": "cdc251e7cee1976a6db3929614b5f45ca5dc676b1d510e0033d8b5ab815fd1e1",
+      "availability": "present"
+    },
+    {
+      "role": "support_source_adopt_mapping_py",
+      "path": "source/adopt_mapping.py",
+      "sha256": "720e0d8f18a09959d6b81b1c25ac59bc6458fb9358d006aeccd280ad531f8038",
+      "availability": "present"
+    },
+    {
+      "role": "support_source_audit_source_runtime_py",
+      "path": "source/audit_source_runtime.py",
+      "sha256": "b1f62a3c6ed0c3ac4bf1d0929738fd5a1be3f4fff97b1f9fc098d2e4f41a2f8f",
+      "availability": "present"
+    },
+    {
+      "role": "support_source_baseline_model_json",
+      "path": "source/baseline_model.json",
+      "sha256": "166656ca8bf8946741c28506d0473b43e19cba8483317bdddef62895e79352e0",
+      "availability": "present"
+    },
+    {
+      "role": "support_source_paper_text_txt",
+      "path": "source/paper_text.txt",
+      "sha256": "46592367cb36388843c9f2b3e4f2b8021c34684193fe51fe9cb3b6b46726de95",
+      "availability": "present"
+    },
+    {
+      "role": "published_basic_inputs",
+      "path": "source/published_balanced_basic.csv",
+      "sha256": "6899496ae228beb394c0611a8a3b6b56bc037db609f09300190feeebabaf2eb1",
+      "availability": "present"
+    },
+    {
+      "role": "published_landings",
+      "path": "source/published_landings.csv",
+      "sha256": "4cccd47dca39dc271571fc6b03a3a305a0b015e8eb2df2f42a0a5ee164cb99df",
+      "availability": "present"
+    },
+    {
+      "role": "published_balanced_diet",
+      "path": "source/published_modified_diet_cells.csv",
+      "sha256": "05ffa78f43a5486cb2d7be38fe257018e9f9428a984d8db1df492cfa638429de",
+      "availability": "present"
+    },
+    {
+      "role": "support_source_source_table_audit_py",
+      "path": "source/source_table_audit.py",
+      "sha256": "a0cd7a274c3f353ecaf5abc4983fcb89770d860f8341dd1d2edd2c86b3845c9f",
+      "availability": "present"
+    },
+    {
+      "role": "source_reconciliation",
+      "path": "source/source_table_reconciliation.json",
+      "sha256": "741a9800ae819dd7bc72c8e7fd832809c184a2b6bda06a85b0f6a076190691c6",
+      "availability": "present"
+    },
+    {
+      "role": "support_source_zero_ba_source_variant_json",
+      "path": "source/zero_ba_source_variant.json",
+      "sha256": "8e197e6ae560d9b65cb88da6266b304340aa92afc0e7f6385ce1a8bd4052e1b0",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_artifact_md",
+      "path": "qa/artifact.md",
+      "sha256": "156ff23fadb6e7b91b1fec3fd3fa0ef035b0b932c56ffe9e8d3fbeea9c249e55",
+      "availability": "present"
+    },
+    {
+      "role": "visible_browser_verification",
+      "path": "qa/browser_verification.json",
+      "sha256": "07c6190d14179f146b6067edc466a0800938769957ed75138b72131cbad22e6a",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_build_handoff_py",
+      "path": "qa/build_handoff.py",
+      "sha256": "424f4ef785acb93c115288636cfec150950bb9c043a11a511165f06ef614e14d",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_central_metadata_adoption_json",
+      "path": "qa/central_metadata_adoption.json",
+      "sha256": "b51cf14667e7dbda5f313d4aa727507b5b4fe463f515fc4599435cf691957deb",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_check_shared_integration_py",
+      "path": "qa/check_shared_integration.py",
+      "sha256": "e1a1668d4115e1b90e787f6d9b4fb58f41e587e79ba6beb785e469cc59cacc72",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_classic_annual_comparison_json",
+      "path": "qa/classic_annual_comparison.json",
+      "sha256": "32885db8a150c841f0d7f86820eadbac811c6833d24a4dbd384f208f66486475",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_final_checks_py",
+      "path": "qa/final_checks.py",
+      "sha256": "f683794ff076ab067f8a4fc5510612ef355ce0c7f02be16a19c6ebc4f0d7acd0",
+      "availability": "present"
+    },
+    {
+      "role": "scientific_and_adoption_reconciliation",
+      "path": "qa/final_scientific_checks.json",
+      "sha256": "41572b3729afca67fd8b128fd31551cb4cd869979d00c1e00d07ba4d7448b78d",
+      "availability": "present"
+    },
+    {
+      "role": "global_map_trend_archive_verification",
+      "path": "qa/global_html_verification.json",
+      "sha256": "74aac311c7db7caa8b3abc52f3586b19f26ca465f334c2650a3b7fc229e4df6b",
+      "availability": "present"
+    },
+    {
+      "role": "retained_final_map_payload",
+      "path": "qa/map_payload.json",
+      "sha256": "9a00f4e063909201040fc8504cf362148abe140a5b4164490698ee84430efb13",
+      "availability": "present"
+    },
+    {
+      "role": "native_excel_recalculation",
+      "path": "qa/native_excel_check.json",
+      "sha256": "6aae2baeb8c4407d5a1244163e2b42f778bf223b223d11b263d65b5570e80c60",
+      "availability": "present"
+    },
+    {
+      "role": "relocated_local_link_verification",
+      "path": "qa/portable_links.json",
+      "sha256": "5fa09ece1f52ce5d6305f66dd63c99fc6220ab4ebcf80cd3f482de34467add94",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_portable_links_py",
+      "path": "qa/portable_links.py",
+      "sha256": "ce148334bad4258c796e55e2f453ee8128a5bb8378809fd5d666ccf8bab0915d",
+      "availability": "present"
+    },
+    {
+      "role": "support_qa_report_pages_json",
+      "path": "qa/report_pages.json",
+      "sha256": "be65ff2e893741a60a139c72fea1ec6b498a18061f9ccf219f5443a87544467f",
+      "availability": "present"
+    },
+    {
+      "role": "shared_integration_reconciliation",
+      "path": "qa/shared_integration.json",
+      "sha256": "b478869cb771b4f68527d895fb4d30b275a97ef869088a98552bd85691c83ed9",
+      "availability": "present"
+    },
+    {
+      "role": "retained_selected_project_rows",
+      "path": "qa/shared_project_snapshot.json",
+      "sha256": "cab019e67888f1e6c4f085aecf9ec266e59ab53981ce54f779b354149558272d",
+      "availability": "present"
+    },
+    {
+      "role": "preserved_template_and_manual_rows",
+      "path": "qa/template_fidelity.json",
+      "sha256": "b984a592157cab8de6fd080d05dde088d0e21531810965081d232e93420454a1",
+      "availability": "present"
+    },
+    {
+      "role": "artifact_visual_verification",
+      "path": "qa/visual_verification.json",
+      "sha256": "dd119ef5703e2c15d80ed66f9e4a690217f46613cddfffb7e0abdd0f88f48fa2",
+      "availability": "present"
+    },
+    {
+      "role": "workflow_stage_availability",
+      "path": "qa/workflow_stages.json",
+      "sha256": "39ad675096f540e173372009200c0dd0eb917e05b4517359716df675d65b8e0b",
+      "availability": "present"
+    },
+    {
+      "role": "source_PDF",
+      "path": "../../papers/ARAB-2005/CMFRI-Bulletin-51-88a9c885.pdf",
+      "sha256": "88a9c885c47a50f93916823c4616d1aa4ee4c0204baba7220cf3f0fa260c1ec9",
+      "availability": "present"
+    },
+    {
+      "role": "adopted_computational_input",
+      "path": "../../models/32_1_Arabian_Sea_off_Karnataka_(2000)/model.json",
+      "sha256": "acd27c446200819ecf2767e6cb36f8d986eafdc8ed9fcd2d28c39a46aef74f70",
+      "availability": "present"
+    },
+    {
+      "role": "adopted_group_coefficients",
+      "path": "../../models/32_1_Arabian_Sea_off_Karnataka_(2000)/sppr_source.xlsx",
+      "sha256": "18e7ca27420604c479184b789c1bd3f241f0a2e4e70e84fb10fcf0a4467721cd",
+      "availability": "present"
+    },
+    {
+      "role": "source_group_taxonomy_contract",
+      "path": "../../models/32_1_Arabian_Sea_off_Karnataka_(2000)/source_evidence/mapping/32_1_Arabian_Sea_off_Karnataka_(2000).taxonomy.csv",
+      "sha256": "9787720746c86743e535ea1c83bcf61a8a17d7a7bf569eb92d904dfe5e74eefd",
+      "availability": "present"
+    },
+    {
+      "role": "adopted_regional_workbook",
+      "path": "../../LME_032.xlsx",
+      "sha256": "cab4f3d06ec6217247a7e22e5ec5c32709ff3ba58c98f45dbd56654f613873e3",
+      "availability": "present"
+    },
+    {
+      "role": "frozen_catch_download",
+      "path": "../../raw/LME_032-catch.zip",
+      "sha256": "191cea89ad903593ddce05bd5533a4cfdab3262a73dd9ebb1fd4e1d9a01184c9",
+      "availability": "present"
+    },
+    {
+      "role": "frozen_taxon_metadata",
+      "path": "../../raw/LME_032-exploited.json",
+      "sha256": "e161fee5963ac56ab21b9455ae1a0946175132109a7f1a9ba6b8e0769e6b3f7c",
+      "availability": "present"
+    },
+    {
+      "role": "validation_DOCX",
+      "path": "../../Model_validation_32_1_Arabian_Sea_off_Karnataka_(2000).docx",
+      "sha256": "c3463bf35d4bdb5e966aea4ef4d11ecd9c525e32847af1fa7301a0d1cb3acb1f",
+      "availability": "present"
+    },
+    {
+      "role": "linked_Excel_appendix",
+      "path": "../../LME032_taxon_mapping_appendix.xlsx",
+      "sha256": "844485d1494ef704e997e5f530822f572ef63b969789a75e12fa553334a242f6",
+      "availability": "present"
+    },
+    {
+      "role": "template_input",
+      "path": "../../../../tools/templates/Model_validation_template.docx",
+      "sha256": "d3aca1a596bf9476789aa919fbbc4b0f578fed7a0eb625d3d290b8db66c5b1f0",
+      "availability": "present"
+    },
+    {
+      "role": "filling_guide",
+      "path": "../../../../tools/templates/Model_validation_template_instructions.md",
+      "sha256": "8eb5291833391a3d02368dd2e5ce66872ad1bd1cead5256fbbd0404133bdc0df",
+      "availability": "present"
+    },
+    {
+      "role": "evidence_readme",
+      "path": "README.md",
+      "sha256": "8f3c7ad6cd6a312715d6c06ccd7f3ca915c1e7fcb70c421b1d00e6b2920af296",
+      "availability": "present"
+    },
+    {
+      "role": "regional_report_index",
+      "path": "../../reports_index.md",
+      "sha256": "2f5e4e3d147539cda9206dc5a98587f6433c44079a4eba95939aad5b4faaed6c",
+      "availability": "present"
+    },
+    {
+      "role": "native_EwE_database_roundtrip",
+      "availability": "inapplicable",
+      "reason": "Existing JSON route validated against source tables; no native EwE database was required or tested.",
+      "acquisition_status": "not_applicable_to_selected_JSON_route"
+    },
+    {
+      "role": "author_digitized_study_polygon",
+      "availability": "missing",
+      "reason": "No defensible author digital polygon located; approximate coverage uses published study area and landmarks.",
+      "acquisition_status": "unavailable_after_source_review"
+    },
+    {
+      "role": "fresh_NPP_download",
+      "availability": "inapplicable",
+      "reason": "Existing independent annual NPP outputs are adequate and verified unchanged.",
+      "acquisition_status": "reused_existing_supported_outputs"
+    }
+  ],
+  "reconciliation": {
+    "source_parameter_catch_diet_reconciled": true,
+    "full_direct_matrices_and_scopes_reconciled": true,
+    "all_taxa_weights_confidences_and_denominator_reconciled": true,
+    "shared_project_map_trends_reconciled": true,
+    "native_appendix_values_reconciled": true,
+    "visible_result_roundings_reconciled": true,
+    "template_manual_rows_preserved": true,
+    "relocated_local_links_verified": true
+  },
+  "limitations": "Inventory integrity is separate from scientific balance and geographic/mapping uncertainty. Three direct formulations remain WARN. No native EwE or author digital-polygon claim."
+}

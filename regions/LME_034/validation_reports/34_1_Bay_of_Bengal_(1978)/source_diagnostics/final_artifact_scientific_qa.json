@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-09-30",
+  "scope": "read-only final scientific consistency QA;no deliverable rewrite or scientific solver execution",
+  "deliverables": {
+    "report": {
+      "path": "../../../Model_validation_34_1_Bay_of_Bengal_(1978).docx",
+      "sha256": "e437a59981fb55dac12919ab03e8d942d96057da6745ee233cd5a7ecbc5565d0"
+    },
+    "appendix": {
+      "path": "../../../LME034_taxon_mapping_appendix.xlsx",
+      "sha256": "36e0a5249f7157585e7c30e3aa2f6c88c435519155a29a2a753044959698de30"
+    }
+  },
+  "evidence_basis": {
+    "canonical_sha256": "3620cd1219f6db2356a644e515c0eb391bce199440126f671053d8a247032192",
+    "source_pdf_sha256": "84f3dc3dc64213b2f84c8bb2cf4bb1979f4023fbd00d2b996846dee66f497907",
+    "source_audit": "source_audit.json",
+    "direct_summary": "direct_summary.json",
+    "complete_matrix_sources": [
+      "GE/SPPR.npy",
+      "TE/SPPR.npy",
+      "With_Egestion/SPPR.npy"
+    ],
+    "adopted_taxon_audit": "../adopted_taxon_audit.json",
+    "mapping_source_manifest": "../mapping_review/sources_read.json"
+  },
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "Exact inspected artifact identities",
+      "status": "PASS",
+      "details": {
+        "report_sha256": "e437a59981fb55dac12919ab03e8d942d96057da6745ee233cd5a7ecbc5565d0",
+        "appendix_sha256": "36e0a5249f7157585e7c30e3aa2f6c88c435519155a29a2a753044959698de30"
+      }
+    },
+    {
+      "check": "Canonical model remains identical to direct evidence",
+      "status": "PASS",
+      "details": {
+        "current_canonical_sha256": "3620cd1219f6db2356a644e515c0eb391bce199440126f671053d8a247032192",
+        "direct_evidence_sha256": "3620cd1219f6db2356a644e515c0eb391bce199440126f671053d8a247032192"
+      }
+    },
+    {
+      "check": "Automatic field inventory",
+      "status": "PASS",
+      "details": {
+        "fields_checked": [
+          "Region",
+          "Catch source",
+          "Selected article",
+          "Other known articles",
+          "Selected model",
+          "Other models from the same article",
+          "Selection rationale",
+          "Model extraction",
+          "GE diagnostics",
+          "TE diagnostics",
+          "Geographic fit",
+          "Temporal fit",
+          "Other"
+        ],
+        "mapping_section_checked_separately": true
+      }
+    },
+    {
+      "check": "Model, source period and inventory",
+      "status": "PASS",
+      "details": {
+        "model_id": "34_1_Bay_of_Bengal_(1978)",
+        "source_ecological_groups": 49,
+        "loaded_computational_groups": 50,
+        "source_area_km2": 6205051,
+        "source_identity": "December2013 local62-page report;2014 distribution distinguished"
+      }
+    },
+    {
+      "check": "Published, canonical and derived reconstruction distinguished",
+      "status": "PASS",
+      "details": {
+        "location": "Word Model extraction",
+        "source_closure_maximum": "canonical diet residual at3Meiobenthos is77.3012757% of production",
+        "published_inputs": "Table16;Table17/A3.2 omissions",
+        "canonical_transforms": "nonzero-column normalization and all-zero Meiobenthos detritus diet",
+        "derived_loaded_state": "closure BA and forced detritus EE1",
+        "full_default_ledger": "GE/transformation_ledger.json; GE/runtime_identity.json"
+      }
+    },
+    {
+      "check": "GE complete matrix strict sign finding",
+      "status": "PASS",
+      "details": {
+        "method": "GE",
+        "shape": [
+          50,
+          6
+        ],
+        "entries": 300,
+        "strict_negative_entries": 0,
+        "nonfinite_entries": 0,
+        "row_ids": "all50exactrows",
+        "basal_column_ids": [
+          50,
+          49,
+          45,
+          44,
+          43,
+          42
+        ],
+        "basal_column_names": [
+          "diet_import",
+          "Detritus",
+          "Benthic plants",
+          "3 Phytoplankton",
+          "2 Phytoplankton",
+          "1 Phytoplankton"
+        ]
+      }
+    },
+    {
+      "check": "TE complete matrix strict sign finding",
+      "status": "PASS",
+      "details": {
+        "method": "TE",
+        "shape": [
+          50,
+          6
+        ],
+        "entries": 300,
+        "strict_negative_entries": 0,
+        "nonfinite_entries": 0,
+        "row_ids": "all50exactrows",
+        "basal_column_ids": [
+          50,
+          49,
+          45,
+          44,
+          43,
+          42
+        ],
+        "basal_column_names": [
+          "diet_import",
+          "Detritus",
+          "Benthic plants",
+          "3 Phytoplankton",
+          "2 Phytoplankton",
+          "1 Phytoplankton"
+        ]
+      }
+    },
+    {
+      "check": "With Egestion complete matrix strict sign finding",
+      "status": "PASS",
+      "details": {
+        "method": "With Egestion",
+        "shape": [
+          50,
+          6
+        ],
+        "entries": 300,
+        "strict_negative_entries": 0,
+        "nonfinite_entries": 0,
+        "row_ids": "all50exactrows",
+        "basal_column_ids": [
+          50,
+          49,
+          45,
+          44,
+          43,
+          42
+        ],
+        "basal_column_names": [
+          "diet_import",
+          "Detritus",
+          "Benthic plants",
+          "3 Phytoplankton",
+          "2 Phytoplankton",
+          "1 Phytoplankton"
+        ]
+      }
+    },
+    {
+      "check": "GE diagnostic scalars and scientific interpretation",
+      "status": "PASS",
+      "details": {
+        "location": "Word GE diagnostics",
+        "displayed_rho": 0.7405556,
+        "exact_rho": 0.7405555555555556,
+        "displayed_named_detritus_sppr": 1.6787253,
+        "exact_named_detritus_sppr": 1.678725315186284,
+        "display_rounding_tolerance": 5e-08,
+        "returned_status": "WARN",
+        "strict_model_input_balance": true,
+        "strict_loaded_balance": true,
+        "displayed_b": 0.3145061,
+        "exact_b": 0.3145061031202901
+      }
+    },
+    {
+      "check": "TE diagnostic scalars and scientific interpretation",
+      "status": "PASS",
+      "details": {
+        "location": "Word TE diagnostics",
+        "displayed_rho": 0.7844868,
+        "exact_rho": 0.7844868173258005,
+        "displayed_named_detritus_sppr": 0.7954499,
+        "exact_named_detritus_sppr": 0.7954499490366773,
+        "display_rounding_tolerance": 5e-08,
+        "returned_status": "WARN",
+        "strict_model_input_balance": true,
+        "strict_loaded_balance": true,
+        "TE_b_omitted": true,
+        "no_claim_of_absent_physical_recycling": true
+      }
+    },
+    {
+      "check": "Provisional source-fidelity and transfer caveats",
+      "status": "PASS",
+      "details": {
+        "Word_fields": [
+          "Other",
+          "Temporal fit",
+          "Catch source"
+        ],
+        "current_reconstruction_source_faithful": false,
+        "native_author_model_recovered": false,
+        "1978_total_catch_to2019_landings": "assumed transfer;Medium allocation"
+      }
+    },
+    {
+      "check": "Manual research fields and no claimed approval",
+      "status": "PASS",
+      "details": {
+        "SPPR_calculation": "unfilled manual",
+        "Open_issues": "unfilled manual",
+        "Review": "unfilled researcher name/date",
+        "researcher_approval_claimed": false
+      }
+    },
+    {
+      "check": "Other automatic context fields",
+      "status": "PASS",
+      "details": {
+        "selection_rationale": "unknown comparative reasons retained",
+        "other_static_models": "none identified;source states/scenarios distinguished",
+        "geography": "agrees with separate geography review;approximate containment/area ratio;no exactauthorpolygon claim",
+        "other_articles": "2014guide and unverified2019inventory distinguished from verified Dutta2023/Karim2018"
+      }
+    },
+    {
+      "check": "All appendix taxon rows and independent simple-chain arithmetic",
+      "status": "PASS",
+      "details": {
+        "Taxon_mapping_range": "A7:G321",
+        "rows": 315,
+        "exact_universe": 315,
+        "sorted_by_unrounded_numeric_PPR_then_taxon": true,
+        "max_catch_delta_t": 0.0,
+        "max_independent_PPR_delta_tC": 0.0,
+        "row_errors": []
+      }
+    },
+    {
+      "check": "Zero-catch, missing input and total disclosures",
+      "status": "PASS",
+      "details": {
+        "zero_landings_labels": 28,
+        "missing_TL_coefficient_labels": 27,
+        "positive_catch_unknown_PPR": [],
+        "independent_total_landings_t": 6452157.579298264,
+        "independent_total_simple_chain_PPR_tC": 379324412.0465857,
+        "Word_display": "379,324,412.047"
+      }
+    },
+    {
+      "check": "Word/appendix confidence counts and shares",
+      "status": "PASS",
+      "details": {
+        "categories_compared": 5,
+        "independent_weakest_component_summary": true,
+        "mismatching_categories": [],
+        "total_categories_taxa": 315
+      }
+    },
+    {
+      "check": "Independent rule table denominators and confidence",
+      "status": "PASS",
+      "details": {
+        "component_tables": 2,
+        "each_sums_to_one": true,
+        "arithmetic_matches_adopted_rule_summaries": true,
+        "errors": []
+      }
+    },
+    {
+      "check": "Every candidate density and allocation weight",
+      "status": "PASS",
+      "details": {
+        "Allocation_evidence_range": "A7:O678",
+        "candidate_rows": 672,
+        "taxa": 315,
+        "max_loaded_vs_canonical_catch_delta": 0.0,
+        "common_denominator_km2": 6205051,
+        "source_basis": "1978 total landings+discards",
+        "W4_scope": "assumed pooled composition transfer;Medium",
+        "errors": []
+      }
+    },
+    {
+      "check": "Descriptive primary Sources coverage",
+      "status": "PASS",
+      "details": {
+        "Sources_range": "A7:D120",
+        "source_entries": 114,
+        "primary_manifest_web_entries": 6,
+        "missing_primary_urls": [],
+        "WoRMS_file_record_counts": {
+          "taxonomy_authority_records.json": 33,
+          "taxonomy_exception_records.json": 37,
+          "taxonomy_extension_records.json": 18,
+          "taxonomy_final_exception_records.json": 7
+        },
+        "missing_read_WoRMS_record_urls": [],
+        "four_local_WoRMS_files_covered_via_manifest": true,
+        "direct_local_WoRMS_file_links": [
+          "taxonomy_final_exception_records.json"
+        ],
+        "supports_and_limitations_present_for_every_entry": true
+      }
+    },
+    {
+      "check": "Source link targets",
+      "status": "PASS",
+      "details": {
+        "relative_local_links_checked": 28,
+        "external_links_preserved": 102,
+        "issues": [],
+        "network_refetch_performed": false
+      }
+    },
+    {
+      "check": "Numeric record types and native row filters",
+      "status": "PASS",
+      "details": {
+        "catch_and_PPR_numeric": true,
+        "native_table_filters": [
+          {
+            "sheet": "Taxon mapping",
+            "table": "TaxonMapping",
+            "ref": "A6:G321",
+            "autoFilter": "A6:G321"
+          },
+          {
+            "sheet": "Sources",
+            "table": "EvidenceSources",
+            "ref": "A6:D120",
+            "autoFilter": "A6:D120"
+          },
+          {
+            "sheet": "Allocation evidence",
+            "table": "CandidateAllocation",
+            "ref": "A6:O678",
+            "autoFilter": "A6:O678"
+          },
+          {
+            "sheet": "Coverage",
+            "table": "ConfidenceShares",
+            "ref": "A7:D12",
+            "autoFilter": null
+          },
+          {
+            "sheet": "Coverage",
+            "table": "MembershipShares",
+            "ref": "A15:C22",
+            "autoFilter": null
+          },
+          {
+            "sheet": "Coverage",
+            "table": "WeightShares",
+            "ref": "A25:C27",
+            "autoFilter": null
+          }
+        ],
+        "layout_rendering": "owned by root;not repeated in this read-only scientific QA"
+      }
+    }
+  ],
+  "errors": [],
+  "notes": [
+    {
+      "type": "document_scope",
+      "finding": "The concise report does not enumerate source-consistent Table15 GS, default zero migration or default closed one-pool detritus routing. It makes no claim that these defaults were published; complete default/derived identities remain in the linked reconstruction evidence and direct ledger."
+    },
+    {
+      "type": "source_navigation",
+      "finding": "All four retained WoRMS record files are named by the linked sources_read.json manifest, and all successfully read record URLs have individual Sources entries. Only taxonomy_final_exception_records.json has a direct local-file Sources hyperlink. This is complete scientific source coverage via the manifest, not four direct local-file entries."
+    },
+    {
+      "type": "precision_limit",
+      "finding": "Allocation evidence calls six printed Total/component-sum discrepancies rounding. They are immaterial display-scale differences (five1e-6 and one3e-6), consistent with rounding/internal printed precision. Exact unrounded author-native totals are unavailable; this wording does not establish that native precision was recovered."
+    },
+    {
+      "type": "resolved_template_residue",
+      "finding": "The earlier report SHA9300e50c15b9aefda8adb823484ee17ad2c13f7fb727055fb24ad453a9502972 contained unused rIdValidation1 pointing to [Excel_appendix.xlsx]. Root removed the orphan template relationship and rebuilt the report. The current package was reread and all stored hyperlink targets rechecked; no residual missing local target remains. This reviewer did not edit either deliverable."
+    }
+  ],
+  "scientific_eligibility": {
+    "numerical_scenario_reproducible": true,
+    "source_fidelity_verified": false,
+    "author_native_model_recovered": false,
+    "researcher_approval_claimed": false,
+    "approval_or_production_validation_conferred_by_this_QA": false
+  },
+  "deliverables_unchanged": {
+    "report": true,
+    "appendix": true
+  }
+}

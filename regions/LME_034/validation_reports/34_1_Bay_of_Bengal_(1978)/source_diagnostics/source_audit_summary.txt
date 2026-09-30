@@ -1,0 +1,38 @@
+LME_034 / 34_1_Bay_of_Bengal_(1978) — source reconstruction audit, 30 September2026
+
+The existing reconstruction and coefficients are reproducible. Source-faithful balanced-model reconstruction remains incomplete because published diet tables omit material fractions. No numerical source correction was adopted.
+
+Exact inputs
+Canonical model.json SHA256:3620cd1219f6db2356a644e515c0eb391bce199440126f671053d8a247032192
+Guénette December2013 report SHA256:84f3dc3dc64213b2f84c8bb2cf4bb1979f4023fbd00d2b996846dee66f497907
+Source: An exploratory ecosystem model of the Bay of Bengal Large Marine Ecosystem, Sylvie Guénette. Static Ecopath baseline1978; preliminary Ecosim interval1978–2010. The source cautions against quantitative management use of temporal simulations.
+
+Source parameter checks
+All49 ecological groups match balanced Table16 p24 for habitat fraction, habitat-area biomass, P/B, Q/B and EE where reported. Whole-study-area biomass in the JSON equals habitat fraction × habitat-area biomass. Differences from printed whole-area biomass retain that product; Benthic plants shows an internal display discrepancy (printed0.784, product0.784771). Table15 p23 is the unbalanced input table and was retained separately, including every blank, printed zero and known input. Its consumer unassimilated-food fraction0.2 and basal fraction0 match the canonical GS. The source has no measured BA or migration values for the retained reconstruction. Allzero detritus routing is completed by the loader as a closed single detritus pool.
+
+Material diet limitations
+Balanced Table17 pp25–27 covers44 consumer predator columns, including Bigeye tuna46, Yellowfin tuna47 and Marlins48. In the final block, named Detritus and Import are misnumbered46/47; verified identities are ecological Detritus49 and synthetic diet_import50. Separate biological prey46/47/48 rows are omitted. The named rows are therefore joined by identity, not by their misprinted numeric labels.
+
+Published consumer sums with consequential deficits are Indian mackerel30:0.9452; 3Carangids32:0.9905; 3Spelagics33:0.9912; 3SMinv36:0.9664; 3Crustaceans38:0.60; 3Macrobenthos39:0.45; 3Meiobenthos40:0; 3Zooplankton41:0.90. Coastal elasmobranch2 sums0.9989, a smaller display deficit. Existing canonical diets normalize nonzero consumer sums and supply Detritus1 for the allzero3Meiobenthos diet. These are derived assumptions. AppendixA3.2 original diets p56 repeats the malformed region3 basal rows and does not recover the missing balanced fractions. Source prose pp19–22 supplies no missing fractions. No residual was relabeled as recovered detritus, import or prey diet.
+
+Independent production closure
+Using printed unnormalized diets, groups1–45 have production-relative closure residuals no larger than0.003676 (about0.37%, consistent with published precision). After existing canonical normalization, closure BA reaches−30.298235t/km²/year for3Meiobenthos (−77.3013% of production),−42.4190% for3Macrobenthos,−23.5961% for3Zooplankton and−22.7953% for3Crustaceans. The exporter constructor derives these non-source BA values, so its strict model balance=True describes that scenario. It does not establish observed stock change or fidelity to the author's native steady-state model. Detritus EE0.332 is also replaced by computational EE1. The only biomass1 placeholder is for synthetic diet_import50; ecological biomasses are retained.
+
+Catch and model-catch allocation
+AppendixA2.1 p46 explicitly divides every1978 fleet/group catch total by the entire6,205,051km² study area. All49 canonical export/catch values equal sums of printed fleet components within floating arithmetic tolerance1e-14. Six printed Total cells differ from these sums: Oceanic sharks, Tuna-like, Coastal scombrids, Cephalopods and2Lpisc by1e-6t/km²/year; Hilsa by3e-6. These are consistent with printed-component/total rounding and source display precision; no material catch transcription mismatch was found. Exact unrounded native totals remain unavailable. Shared study-area units make C_i/sum(C_candidates) usable for model-catch proxy allocation without separate regional area multipliers. Transfer from1978 whole-study total catch to the assessed LME/year/landings remains an assumed allocation with Medium confidence; numerical compatibility does not establish contemporary spatial catch composition.
+
+Fresh diagnostic reproduction
+Constructor: ModelData(exactJSON), then PPRCalculator.from_modeldata(underdetermined=True,zero_catch=True,zero_biomass_accum=False,default_gs=True,weight_flow=1,weight_guess=1,normalize_DC=True,DC_tol=0.001). Each method was called once with full report and return_sppr=True; closed detritus, theta1, externalSPPR0, collapse never, detritusTE1, EE0 fixTrue and default thresholds. Each completed in about2–3seconds. No global or MonteCarlo method was run.
+
+GE:WARN; rho_living0.7405555555555556; recyclingb0.3145061031202901; DetritusSPPR1.678725315186284.
+TE:WARN; rho_living0.7844868173258005; b0 by the no-recycling-matrix convention; DetritusSPPR0.7954499490366773.
+WithEgestion:OK; rho_living0.5924444444444446; recyclingb0.4125579735832401; DetritusSPPR2.0329789609817794.
+
+All three full SPPR matrices contain50 groups ×6 sources (diet_import, Detritus, Benthic plants and three phytoplankton pools). All900 entries across options were finite and nonnegative, including unfished groups. Every matrix/mask/ordered axis was reopened; lossless full-returnJSON equals the returned DataFrames exactly. All57 saved scalar fields per option match. All150 scope/group coefficients per option match saved coefficients at rtol/atol1e-10: max absolute differencesGE4.547e-13, TE3.638e-12, WithEgestion4.547e-13. Loaded numerical fields differ only by Excel floating representation (max2.274e-13). Diagnostics do not mutate scientific loaded state.
+
+Evidence status
+The initial comparison writer raised a NumPyBoolean encoding error after successful diagnostic returns had already been retained. Encoding/comparison was repaired from those exact returns; no diagnostic was run again. Final execution_status.json clearly separates successful scientific returns and encoding verification from historical postprocessing errors. All returned diagnostic warnings are retained. External constructor warning capture was lost in initial postprocessing and is explicitly unavailable.
+
+Primary native recovery identified BOBLME19dec2013.ewemdb in the author user guide and BOBLME5sep2014.zip in the official2014 workshop report. Official BOBLME host variants fail DNS, the workshop GoogleSite redirects to sign-in, and the current public EcoBase catalogue has other Bay of Bengal models but no focal Guénette1978 record. The bounded search and HTTP attempts are retained. No author native balanced model was recovered. Diagnostic evidence completeness passes; source-fidelity completeness remains false with missing role author_native_balanced_model. Existing coefficients can be described as provisional reproduction of the normalized, derived-BA scenario; this audit supports no production-valid source-fidelity claim.
+
+Detailed evidence:source_audit.json; native_recovery_search.json; direct_summary.json; direct_reports.txt; per-option full_return.json/.pkl/.txt, SPPR/A/L arrays and masks, axes, runtime_identity.json, transformation_ledger.json and saved comparisons. Portable inventories:diagnostic_evidence_index.json and evidence_index.json; results:diagnostic_completeness.json and source_completeness.json.
