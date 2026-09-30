@@ -837,7 +837,7 @@ renderDetails = function(r) {
   };
   if(!unit){panel.innerHTML=`<p>${escapeMetric(result?.status||(independent?'Catch-taxon inputs are unavailable for this ecosystem.':'No Ecopath model is selected for this ecosystem.'))}</p>`;appendNpp(panel,r.unit_id);panel.appendChild(trendLink());old.replaceWith(panel);return}
   const idx=chosenModels[r.unit_id],model=independent?null:modelUnit?.models[idx];
-  panel.innerHTML=`${independent?'':'<div class="field"><label for="modelFilter">Ecopath model for this ecosystem</label><select id="modelFilter"></select></div>'}<div class="network-value">${resultText(r)}</div><div class="network-note">${metricName()} ${['ppr','ratio','npp_ratio'].includes(metricState.mode)?'· '+metricState.scope+' · '+DB.year+' · '+escapeMetric(metricState.method):'· '+metricState.te}</div><p class="network-status">${escapeMetric(result.status)}</p>`;
+  panel.innerHTML=`${modelUnit?.models?.length?'<div class="field"><label for="modelFilter">Ecopath model for this ecosystem</label><select id="modelFilter"></select></div>':''}<div class="network-value">${resultText(r)}</div><div class="network-note">${metricName()} ${['ppr','ratio','npp_ratio'].includes(metricState.mode)?'· '+metricState.scope+' · '+DB.year+' · '+escapeMetric(metricState.method):'· '+metricState.te}</div><p class="network-status">${escapeMetric(result.status)}</p>`;
   const sel=panel.querySelector('select');
   if(sel){modelUnit.models.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m.label||m.id.replaceAll('_',' ');o.selected=i===idx;sel.appendChild(o)});
     sel.addEventListener('change',()=>{chosenModels[r.unit_id]=Number(sel.value);applyYear(DB.year)});}
