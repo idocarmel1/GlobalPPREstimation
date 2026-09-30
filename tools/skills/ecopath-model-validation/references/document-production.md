@@ -8,6 +8,8 @@ For a new regional record, the default output is:
 
 `regions/<unit_id>/Model_validation_<model_id>.docx`
 
+Save its final Excel taxon-mapping appendix in `regions/<unit_id>/` as well, beside the report and regional workbook. Link by relative filename; project-root `outputs` is not a final regional deliverable location.
+
 Supporting evidence belongs under:
 
 `regions/<unit_id>/validation_reports/<model_id>/`
