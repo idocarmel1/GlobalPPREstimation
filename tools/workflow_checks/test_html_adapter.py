@@ -1,4 +1,4 @@
-import gzip,hashlib,json,shutil,subprocess,tempfile,unittest,sys
+import copy,gzip,hashlib,json,shutil,subprocess,tempfile,unittest,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from original_atlas_data import fill_annual,detail_from_book
@@ -7,6 +7,34 @@ from build_html import atomic_text,linked_layout
 from workbooks import YEARS
 
 class HtmlAdapterTests(unittest.TestCase):
+    def test_group_efficiencies_use_current_selection_and_retained_alternative(self):
+        from workbooks import write_book
+        import openpyxl
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);region=root/'regions/U';region.mkdir(parents=True)
+            write_book(region/'U.xlsx',{
+                'Overview':{'Settings':(['field','value'],[['selected_model_id','current']])},
+                'Selected model groups':{'Groups':(['group_name','ge','ee'],[['Fish',.25,0],['Missing',None,None]])}})
+            source=region/'models/alternative/sppr_source.xlsx';source.parent.mkdir(parents=True)
+            book=openpyxl.Workbook();sheet=book.active;sheet.title='groups_df'
+            sheet.append(['group_name','ge','ee']);sheet.append(['Fish',.4,.8]);book.save(source);book.close()
+            units={'U':{'models':[
+                {'id':'current','group_data':{'groups':[{'id':'Fish','te':0},{'id':'Missing','te':None}]}},
+                {'id':'alternative','group_data':{'groups':[{'id':'Fish','te':.32}]}},
+                {'id':'absent','group_data':{'groups':[{'id':'Fish','te':None}]}},
+            ]}}
+            before=copy.deepcopy(units)
+            original_atlas_data.add_group_efficiencies(root,units)
+            current,alternative,absent=units['U']['models']
+            self.assertEqual((current['group_data']['groups'][0]['ge'],current['group_data']['groups'][0]['ee']),(.25,0))
+            self.assertEqual((alternative['group_data']['groups'][0]['ge'],alternative['group_data']['groups'][0]['ee']),(.4,.8))
+            self.assertIsNone(current['group_data']['groups'][1]['ge'])
+            self.assertIsNone(absent['group_data']['groups'][0]['ee'])
+            for model in units['U']['models']:
+                for group in model['group_data']['groups']:
+                    group.pop('ge');group.pop('ee')
+            self.assertEqual(units,before,'Enrichment preserves TE and all existing data')
+
     @unittest.skipUnless(shutil.which('node'), 'Node required for calculation boundary')
     def test_reviewed_source_mapping_without_coefficients_keeps_group_controls(self):
         book={

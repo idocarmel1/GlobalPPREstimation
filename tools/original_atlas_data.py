@@ -9,7 +9,45 @@ from pathlib import Path
 from collections import defaultdict
 from workbooks import *
 from regional import result_hash,inputs
-from researcher_review import approved_review
+from researcher_review import approved_review,table_rows
+from zipfile import ZipFile
+
+def add_group_efficiencies(root,units):
+    """Expose stored GE/EE without recalculating any existing model values."""
+    def number(value):
+        try: value=float(value)
+        except (TypeError,ValueError): return None
+        return value if math.isfinite(value) else None
+    def indexed(rows):
+        result={}
+        for row in rows:
+            name=row.get('group_name')
+            if not name:continue
+            if name in result:raise ValueError('Duplicate efficiency source group: '+name)
+            result[name]={key:number(row.get(key)) for key in ['ge','ee']}
+        return result
+    for unit_id,unit in units.items():
+        models=[m for m in unit.get('models',[]) if m.get('group_data')]
+        if not models:continue
+        regional=Path(root)/'regions'/unit_id/(unit_id+'.xlsx')
+        selected=None;current={}
+        if regional.is_file():
+            with ZipFile(regional) as archive:
+                settings={r.get('field'):r.get('value') for _,r in table_rows(archive,'Overview','Settings')[3]}
+                selected=settings.get('selected_model_id')
+                current=indexed(r for _,r in table_rows(archive,'Selected model groups','Groups')[3])
+        for model in models:
+            values=current if model['id']==selected else {}
+            if model['id']!=selected:
+                source=Path(root)/'regions'/unit_id/'models'/model['id']/'sppr_source.xlsx'
+                if source.is_file():
+                    book=openpyxl.load_workbook(source,read_only=True,data_only=False)
+                    try:
+                        rows=iter(book['groups_df'].values);headers=next(rows)
+                        values=indexed(dict(zip(headers,row)) for row in rows)
+                    finally:book.close()
+            for group in model['group_data']['groups']:
+                group.update(values.get(group['id'],{'ge':None,'ee':None}))
 
 def embedded(path,variable):
     text=Path(path).read_text(encoding='utf-8');start=text.index('const '+variable+'=')+len('const '+variable+'=')
@@ -214,7 +252,7 @@ def detail_from_book(book,unit,model_id):
     for r in records(book,'PPR','Matching'):
         if r.get('group') in indices:assign[r['taxon']].append([indices[r['group']],r['weight']])
     values={(r['group'],r['scope'],r['method']):r['sppr'] for r in coeff}
-    gd={'groups':[{'id':r['group_name'],'name':r['group_name'],'tl':r.get('tl'),'te':r['ge']*r['ee'] if finite(r.get('ge')) and finite(r.get('ee')) else None} for r in groups],
+    gd={'groups':[{'id':r['group_name'],'name':r['group_name'],'tl':r.get('tl'),'ge':r.get('ge'),'ee':r.get('ee'),'te':r['ge']*r['ee'] if finite(r.get('ge')) and finite(r.get('ee')) else None} for r in groups],
         'methods':methods,'scopes':{scope:[[values.get((g,scope,m)) for m in methods] for g in group_names] for scope in ['all','inner','PP']},
         'mappings':[assign[t] for t in taxa],'te_definition':'Stored source-group GE × EE; no EE repair or solver recalculation.',
         'provenance':{'workbook':f'regions/{unit}/{unit}.xlsx','groups_sheet':'Selected model groups','mapping_sheet':'PPR'}}
@@ -344,4 +382,7 @@ def datasets(workbook):
     catalog=paths.rewrite(catalog)
     reconcile_paper_files(root,catalog['articles'])
     catalog['files']=[dict(f) for paper in catalog['articles'] for f in paper['material_files']]
-    return catalog,paths.rewrite(series),project
+    series=paths.rewrite(series)
+    add_group_efficiencies(root,catalog['network']['units'])
+    add_group_efficiencies(root,series['units'])
+    return catalog,series,project

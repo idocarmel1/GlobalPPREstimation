@@ -2,7 +2,7 @@
 import argparse,copy,csv,html,importlib.util,json,os,re,shutil,tempfile,zipfile
 from pathlib import Path
 from workbooks import sha,records
-from original_atlas_data import datasets
+from original_atlas_data import datasets,add_group_efficiencies
 from provisional_display import provisional_layout
 from researcher_review import reviewed_layout,approved_review,register_review,table_rows
 
@@ -31,8 +31,8 @@ def atomic_text(path,text):
     finally:
         if os.path.exists(tmp):os.unlink(tmp)
 
-def relayout(workbook,directory=None):
-    """Refresh presentation using byte-preserved embedded data from the same workbook."""
+def relayout(workbook,directory=None,group_efficiencies=False):
+    """Refresh presentation, optionally adding stored GE/EE to embedded groups."""
     directory=directory or workbook.parent/'interactive_map'
     fingerprint=sha(workbook);layouts=Path(__file__).with_name('original_html_layout')
     outputs=[]
@@ -42,14 +42,19 @@ def relayout(workbook,directory=None):
         if not recorded or recorded.group(1)!=fingerprint:
             raise ValueError(name+': embedded data does not match Project.xlsx; run a full build')
         start=old.index('const '+variable+'=')+len('const '+variable+'=')
-        _,end=json.JSONDecoder().raw_decode(old,start)
+        payload,end=json.JSONDecoder().raw_decode(old,start)
+        value=old[start:end]
+        if group_efficiencies:
+            units=payload['network']['units'] if variable=='DB' else payload['units']
+            add_group_efficiencies(workbook.parent,units)
+            value=json.dumps(payload,ensure_ascii=False,separators=(',',':'),allow_nan=False).replace('</',r'<\/')
         template=linked_layout((layouts/name).read_text(encoding='utf-8'))
-        page=template.replace('__PPR_DATA__',old[start:end])
+        page=template.replace('__PPR_DATA__',value)
         page=page.replace('</head>',f'<meta name="ppr-project-sha256" content="{fingerprint}"></head>',1)
         outputs.append((directory/name,page))
     if sha(workbook)!=fingerprint:raise ValueError('Project.xlsx changed during layout refresh')
     for path,page in outputs:atomic_text(path,page)
-    print('Map and trends layouts refreshed; embedded data and project fingerprint preserved.',flush=True)
+    print('Map and trends layouts refreshed; '+('stored group GE/EE added; ' if group_efficiencies else 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
 
 def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None):
     """Refresh only registered review metadata after a bounded central registration.
@@ -164,8 +169,8 @@ def build(workbook,output=None):
     print(f'Original-format pages rebuilt: {directory}/index.html, trends.html and archive/index.html',flush=True)
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--workbook',type=Path,default=Path(__file__).resolve().parents[1]/'Project.xlsx');ap.add_argument('--output',type=Path,help='Output directory, or a map filename with sibling trends.html and archive/index.html');ap.add_argument('--layout-only',action='store_true',help='Refresh map/trends presentation only, retaining data that matches the project fingerprint');a=ap.parse_args()
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--workbook',type=Path,default=Path(__file__).resolve().parents[1]/'Project.xlsx');ap.add_argument('--output',type=Path,help='Output directory, or a map filename with sibling trends.html and archive/index.html');ap.add_argument('--layout-only',action='store_true',help='Refresh map/trends presentation only, retaining data that matches the project fingerprint');ap.add_argument('--group-efficiencies',action='store_true',help='Also expose stored GE/EE during a layout-only refresh');a=ap.parse_args()
     if a.layout_only:
         directory=(a.output.parent if a.output and a.output.suffix=='.html' else a.output)
-        relayout(a.workbook.resolve(),directory.resolve() if directory else None)
+        relayout(a.workbook.resolve(),directory.resolve() if directory else None,a.group_efficiencies)
     else:build(a.workbook.resolve(),a.output.resolve() if a.output else None)

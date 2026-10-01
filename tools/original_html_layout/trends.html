@@ -277,7 +277,7 @@
 /* Shared group picker. Model data and calculations are embedded by the renderer. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupDialog=api;})(globalThis,function(){
   'use strict';
-  const numeric=['te','tl','sppr_all','sppr_inner','ppr'];
+  const numeric=['ge','ee','te','tl','sppr_all','sppr_inner','ppr'];
   const finite=v=>typeof v==='number'&&Number.isFinite(v);
   const bounds=v=>v===''||v==null?null:Number(v);
   function filterRows(rows,table={}){
@@ -317,7 +317,7 @@
     const hint=el('p','Filters narrow the table. Select matching applies those rows; checkboxes change the comparison immediately.','group-hint');dialog.append(hint);
     const wrap=el('div',null,'group-table-wrap'),table=el('table');table.setAttribute('aria-label','Model groups and selection');
     const head=el('thead'),header=el('tr'),filters=el('tr'),body=el('tbody');body.id='groupTableBody';
-    const columns=[['selected','Include'],['name','Group name'],['te','TE'],['tl','TL'],['sppr_all','SPPR_all'],['sppr_inner','SPPR_inner'],['ppr','Catch-related PPR (t C)']];
+    const columns=[['selected','Include'],['name','Group name'],['ge','GE'],['ee','EE'],['te','TE'],['tl','TL'],['sppr_all','SPPR_all'],['sppr_inner','SPPR_inner'],['ppr','Catch-related PPR (t C)']];
     const rangeInputs={},sortButtons={};
     for(const [key,label] of columns){
       const th=el('th');th.scope='col';const filter=el('th');
@@ -351,7 +351,7 @@
         check.onchange=()=>{const ids=selection();if(check.checked)ids.add(row.id);else ids.delete(row.id);const {model}=current();if(ids.size===model.group_data.groups.length)delete store.data.selections[key()];else store.data.selections[key()]=[...ids];notify();};checkCell.append(check);tr.append(checkCell);
         for(const [key] of columns.slice(1)){const cell=el('td',key==='name'?row.name:finite(row[key])?row[key].toLocaleString(undefined,{maximumSignificantDigits:6}):'Unavailable');if(key!=='name'){cell.className='group-number';cell.title=finite(row[key])?String(row[key]):'No value in this source';}tr.append(cell);}body.append(tr);
       }
-      if(!rows.length){const tr=el('tr'),cell=el('td','No groups match these filters.');cell.colSpan=7;tr.append(cell);body.append(tr);}
+      if(!rows.length){const tr=el('tr'),cell=el('td','No groups match these filters.');cell.colSpan=columns.length;tr.append(cell);body.append(tr);}
       for(const [column,b] of Object.entries(sortButtons)){const sorted=preferences().sort===column;b.parentElement.setAttribute('aria-sort',sorted?(preferences().direction==='desc'?'descending':'ascending'):'none');b.dataset.direction=sorted?preferences().direction:'';}
       renderCount();
     }
