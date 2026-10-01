@@ -128,10 +128,12 @@ def read_report(root, report, model_id):
         return result
     fields = {}
     confidence = None
+    confidence_table = None
     for table in document.findall(f'.//{{{W}}}body/{{{W}}}tbl'):
         rows = [[cell for cell in row.findall(f'{{{W}}}tc')] for row in table.findall(f'{{{W}}}tr')]
         if rows and text(rows[0][0]) == 'Overall confidence':
             confidence = [[text(cell) for cell in row] for row in rows]
+            confidence_table = table
         for cells in rows:
             if len(cells) == 2:
                 fields[text(cells[0])] = {'text': '\n'.join(text(p) for p in cells[1].findall(f'{{{W}}}p')),
@@ -146,13 +148,23 @@ def read_report(root, report, model_id):
     name, day, month, year = match.groups()
     references = []
     capture = False
-    for paragraph in document.findall(f'.//{{{W}}}body/{{{W}}}p'):
-        value = text(paragraph)
+    # Walk body children in order: a paragraph-only scan skips the boundary
+    # table and leaks later rule summaries and geographic evidence into the map.
+    for element in document.find(f'{{{W}}}body'):
+        if capture and element is confidence_table:
+            break
+        if element.tag != f'{{{W}}}p':
+            continue
+        value = text(element)
         if value == 'Taxon mapping and coverage':
             capture = True
         elif capture:
-            if value.startswith('Excel taxon appendix'):
-                break
+            # The map supplies its own appendix link. Identify the Word link
+            # by its target, since its visible label varies between reports.
+            if any(unquote(urlsplit(targets.get(link.get(f'{{{R}}}id'), '')).path)
+                   .lower().endswith('_taxon_mapping_appendix.xlsx')
+                   for link in element.findall(f'{{{W}}}hyperlink')):
+                continue
             references.append(value)
     if not confidence or len(confidence) != 6:
         raise ValueError('Expected the reviewed five-category confidence table')
