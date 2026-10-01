@@ -15,11 +15,13 @@ assert.deepEqual(model.researcher_review,sm.researcher_review);
 const review=model.researcher_review;
 assert.equal(review.status,'Validated by researcher');
 assert.equal(review.researcher_name,'Ido Carmel');assert.equal(review.review_date,'2026-10-01');
-assert.equal(review.report_sha256,'cea0b847d09f84b97ef403342eaa716a6fa4f328fc9983f13f6f00ccf38800ac');
+const root=require('node:path').resolve(__dirname,'../..');
+assert.equal(review.report_sha256,require('node:crypto').createHash('sha256')
+  .update(fs.readFileSync(require('node:path').join(root,review.report_path))).digest('hex'));
 assert.deepEqual(model.display_ppr_excluded_group_ids,['Marine Mammals']);
 assert.deepEqual(sm.display_ppr_excluded_group_ids,['Marine Mammals']);
 assert.equal(review.sections[4].appendix_path,'regions/LME_032/LME032_taxon_mapping_appendix.xlsx');
-assert.deepEqual(review.sections[4].table[2],['Medium','205','48.5275%','64.2253%']);
+assert.deepEqual(review.sections[4].table[2],['Medium','205','49%','64%']);
 assert(review.sections[1].rows[0].text.includes('rho_living = 0.58'));
 assert(review.sections[1].rows[1].text.includes('(34) marine mammals'));
 assert(review.note.includes('marine mammals are excluded from displayed PPR'));

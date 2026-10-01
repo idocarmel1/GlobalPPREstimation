@@ -7,6 +7,7 @@ Use this handoff when the user authorizes adopting an actual researcher-signed W
 1. Read the **latest final DOCX**, not an earlier edited baseline or registration script's frozen values. The supported signature is `Researcher name: <real name> | review date: dd/mm/yyyy` plus the researcher's actual `MODEL VALIDATED` decision in **Review and reproducibility**. Verify the exact selected model ID. `read_report(root, report, model_id)` in [researcher_review.py](../../../researcher_review.py) returns `(name, ISO_date, summary)` and rejects missing signatures or mismatched models.
 2. Preserve the source's paragraphs, hyperlink segments, rounded numbers and manual `w:br`, `w:cr` and `w:tab` breaks. The parser's segments preserve those breaks; joining only `w:t` text would lose them. Do not correct researcher prose or restore deleted diagnostics, prompts or links while registering. Keep any scientific discrepancy in separate supporting evidence.
    For **Taxon mapping confidence**, transfer only the introductory text above the **Overall confidence** table and that table itself, following the LME036 presentation. Read DOCX body children in document order and stop at the actual table; a paragraph-only scan skips this boundary. Omit the separate appendix/Sources link paragraph (identify its workbook target, not its varying label); the map already supplies the appendix link. Do not include subsequent component summaries, group-assignment or allocation rules, Very low decisions, or geographic evidence. Verify the introduction and table directly against their Word positions, rather than relying only on equality with the parser output.
+   **Before registration or updating the map**, verify numeric percentages in every final Word table use two significant digits and an explicit `%`, following the template guide. Run bundled Python with `tools/validation_percentage_format.py --check <final.docx>` (or call `verify_report(Path(...))`); resolve any format failure within the authorized Word-edit scope before proceeding. After registration, require the map and trends confidence tables to match the checked Word values exactly; do not round them independently in the browser or modify scientific data to match display rounding.
 3. Derive proposed display exclusions anew from the source SPPR calculation notes and the authorized review scope. Resolve names against **Selected model groups / Groups** in the exact regional workbook and verify **Overview / Settings.selected_model_id**. Use its actual `seq` identifiers for registration; the saved display IDs are the corresponding exact group names. Do not reuse numbers in prose as identifiers without checking the model, join by row position, invent a group, or substitute a vaguely similar group.
 4. If the signed source declares no removals, the applicable list is `[]`; retain the ordinary no-exclusion note. A removed-group label absent from the selected model requires clarification, or an explicitly documented and authorized empty applicable-exclusion override. Preserve the source label and use an honest computed note explaining the absence. Do not silently turn unresolved or partly matched exclusions into an empty list. `register_review` can compute an absent-group note for a wholly absent declared list, but the caller must establish and document applicability; this helper is not permission to discard a source decision.
 
@@ -26,12 +27,14 @@ from pathlib import Path
 root = Path.cwd().resolve()
 sys.path.insert(0, str(root / 'tools'))
 from researcher_review import read_report, register_review
+from validation_percentage_format import verify_report
 from build_html import refresh_reviews
 
 project = root / 'Project.xlsx'
 unit_id = '<exact unit ID>'
 model_id = '<exact selected model ID>'
 report = root / 'regions' / unit_id / f'Model_validation_{model_id}.docx'
+verify_report(report)  # Every numeric table percentage: two significant digits and %.
 name, date, source_summary = read_report(root, report, model_id)
 excluded_seq = []  # Replace only with source-approved, exact Groups.seq values.
 # [] is valid only after establishing that no applicable exclusions remain.

@@ -48,6 +48,8 @@ Use one flowing Field / Entry grid without the automatic report's forced split/c
 
 Use a compact first verdict paragraph (`OK`, or a material warning/failure), followed by sign/metric paragraphs and a relevant balance finding when supported. Preserve the researcher's short verdict, rounding and manual breaks; do not expand `OK` into generic diagnostic prose. Round new display values appropriately, retaining full precision in evidence/calculations.
 
+Apply the filling guide's two-significant-digit percentage format to every table, including percentage values in table notes. Keep the percent sign, missing-value meaning, qualifiers and non-percentage numbers. Run `tools/validation_percentage_format.py --check <final.docx>` before delivery and before any authorized signed-review map handoff.
+
 The negative-SPPR findings must pair each source column with its affected groups. Preserve names and IDs even when the list expands the GE or TE cell. If a large list needs a supporting detail table, retain explicit per-column group information in the delivered report or its clearly referenced diagnostic attachment; never reduce the finding to an unpaired count.
 
 The geographic cell contains labelled A/B percentages/ranges and an approximate qualifier where applicable. Keep equations and estimation-method detail in the guide/supporting evidence. Remove legacy caption wording prohibiting estimates. Keep readable source figures and captions together; use separate pages when an image needs the space.
