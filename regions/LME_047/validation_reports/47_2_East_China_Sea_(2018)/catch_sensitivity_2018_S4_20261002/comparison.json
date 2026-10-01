@@ -1,0 +1,374 @@
+{
+  "time_utc": "2026-10-01T22:06:03.810545+00:00",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "scope": "Unadopted isolated sensitivity. Regional landings and mappings fixed. BA scenario changes catch only in source JSON; M0 scenario explicitly changes M0/EE in loaded state, with living BA fixed.",
+  "source_hashes": {
+    "canonical_model": "31b1f6c360ce1d454db528e050100e5521cbf663cdb9d3001f0f39724a14ed16",
+    "supplement": "7491f315070536a302de3f0567b763449c561287df7c9196abb661c571a02215",
+    "article": "e60d0358c8aeac1f2bb816e550fc182238808d56649c579726f9c30cc86ac4c2",
+    "regional_workbook": "2706a0821ac8890a9ddb06122e724bf44cd87f26d51b00023b00fad193581486"
+  },
+  "engine_directory": "../direct_diagnostics/engine",
+  "engine_hashes": {
+    "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "constructor_settings": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001
+  },
+  "diagnostic_settings": {
+    "short": false,
+    "flat": false,
+    "return_sppr": true,
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never"
+  },
+  "S4_locator": "Supplement Table S4; Type 6; 2018 row (M1997 Ecosim time series)",
+  "S4_catch_wet_tonnes_per_km2_per_year": {
+    "8": 0.22,
+    "9": 0.86,
+    "10": 0.28,
+    "11": 0.16,
+    "13": 0.39,
+    "14": 0.62,
+    "16": 0.24,
+    "17": 0.39,
+    "18": 0.31,
+    "19": 0.62,
+    "20": 0.0,
+    "21": 0.13
+  },
+  "S4_total": 4.22,
+  "assumptions": [
+    "S4 2018 time-series catch is used as a sensitivity proxy for M2018, not asserted to be its exact static Ecopath vector.",
+    "Groups with no Type 6 series retain the baseline zero placeholders; these are not observed zeros.",
+    "Large yellow croakers use the printed 0.00; rounding does not establish an exact zero.",
+    "Missing biomass accumulation is recomputed by the existing loader; no source biological parameters are changed.",
+    "Regional reference: 2019 SAU landings, scope all, unidentified method; also retain 2018 reference for comparison.",
+    "new TE means new_TE_EEfix; wet-weight PPR divided by nine exactly once."
+  ],
+  "M0_scenario_definition": "M0_new=M0_baseline-(catch_new-catch_baseline); living BA fixed; EE=1-M0/P; derived detritus inflow and BA recomputed.",
+  "M0_scenario_negative_M0_groups": [
+    {
+      "seq": 21,
+      "group": "Small yellow croakers",
+      "M0_baseline": 0.0020051200000000017,
+      "M0_scenario": -0.12799488,
+      "EE_baseline": 0.99,
+      "EE_scenario": 1.6383402489626557
+    },
+    {
+      "seq": 19,
+      "group": "Omnivores",
+      "M0_baseline": 0.2504696940000001,
+      "M0_scenario": -0.3695303059999999,
+      "EE_baseline": 0.826,
+      "EE_scenario": 1.25671079090311
+    },
+    {
+      "seq": 18,
+      "group": "Benthivores/piscivores",
+      "M0_baseline": 0.024307152000000023,
+      "M0_scenario": -0.285692848,
+      "EE_baseline": 0.952,
+      "EE_scenario": 1.5641655058560542
+    },
+    {
+      "seq": 13,
+      "group": "Piscivores",
+      "M0_baseline": 0.3054337,
+      "M0_scenario": -0.08456630000000004,
+      "EE_baseline": 0.32400000000000007,
+      "EE_scenario": 1.1871660488020805
+    },
+    {
+      "seq": 10,
+      "group": "Cephalopods",
+      "M0_baseline": 0.14482800000000012,
+      "M0_scenario": -0.1351719999999999,
+      "EE_baseline": 0.946,
+      "EE_scenario": 1.0503997017151379
+    },
+    {
+      "seq": 9,
+      "group": "Shrimps",
+      "M0_baseline": 0.0029376000000000024,
+      "M0_scenario": -0.8570624,
+      "EE_baseline": 0.998,
+      "EE_scenario": 1.5835119825708062
+    },
+    {
+      "seq": 8,
+      "group": "Crabs",
+      "M0_baseline": 0.0009612000000000009,
+      "M0_scenario": -0.2190388,
+      "EE_baseline": 0.996,
+      "EE_scenario": 1.9115222638368705
+    }
+  ],
+  "results": {
+    "no_catch": {
+      "new_GE": {
+        "diagnostic_status": "WARN",
+        "regional_2019_ppr_wet_tonnes": 218662093.5219306,
+        "regional_2019_ppr_tonnes_C": 24295788.1691034,
+        "regional_2018_ppr_wet_tonnes": 212406388.65921092,
+        "regional_2018_ppr_tonnes_C": 23600709.851023436,
+        "accepted_regional_2019_ppr_wet_tonnes": 218662093.5219306,
+        "model_native_ppr_wet_tonnes_per_km2_per_year": 0.0
+      },
+      "new_TE_EEfix": {
+        "diagnostic_status": "WARN",
+        "regional_2019_ppr_wet_tonnes": 1242724059.6307094,
+        "regional_2019_ppr_tonnes_C": 138080451.07007882,
+        "regional_2018_ppr_wet_tonnes": 1240725536.8238575,
+        "regional_2018_ppr_tonnes_C": 137858392.9804286,
+        "accepted_regional_2019_ppr_wet_tonnes": 1242724059.630709,
+        "model_native_ppr_wet_tonnes_per_km2_per_year": 0.0
+      }
+    },
+    "catch_from_S4": {
+      "new_GE": {
+        "diagnostic_status": "WARN",
+        "regional_2019_ppr_wet_tonnes": 218662093.5219306,
+        "regional_2019_ppr_tonnes_C": 24295788.1691034,
+        "regional_2018_ppr_wet_tonnes": 212406388.65921092,
+        "regional_2018_ppr_tonnes_C": 23600709.851023436,
+        "accepted_regional_2019_ppr_wet_tonnes": 218662093.5219306,
+        "model_native_ppr_wet_tonnes_per_km2_per_year": 189.11544153831554
+      },
+      "new_TE_EEfix": {
+        "diagnostic_status": "WARN",
+        "regional_2019_ppr_wet_tonnes": 1242724059.6307094,
+        "regional_2019_ppr_tonnes_C": 138080451.07007882,
+        "regional_2018_ppr_wet_tonnes": 1240725536.8238575,
+        "regional_2018_ppr_tonnes_C": 137858392.9804286,
+        "accepted_regional_2019_ppr_wet_tonnes": 1242724059.630709,
+        "model_native_ppr_wet_tonnes_per_km2_per_year": 1113.6995307810928
+      }
+    },
+    "catch_from_S4_M0": {
+      "new_GE": {
+        "diagnostic_status": "WARN",
+        "regional_2019_ppr_wet_tonnes": 213340436.4264148,
+        "regional_2019_ppr_tonnes_C": 23704492.93626831,
+        "regional_2018_ppr_wet_tonnes": 207219875.9549061,
+        "regional_2018_ppr_tonnes_C": 23024430.661656234,
+        "accepted_regional_2019_ppr_wet_tonnes": 218662093.5219306,
+        "model_native_ppr_wet_tonnes_per_km2_per_year": 184.46951780567298
+      },
+      "new_TE_EEfix": {
+        "diagnostic_status": "WARN",
+        "regional_2019_ppr_wet_tonnes": 686732683.166902,
+        "regional_2019_ppr_tonnes_C": 76303631.4629891,
+        "regional_2018_ppr_wet_tonnes": 668199599.3091078,
+        "regional_2018_ppr_tonnes_C": 74244399.9232342,
+        "accepted_regional_2019_ppr_wet_tonnes": 1242724059.630709,
+        "model_native_ppr_wet_tonnes_per_km2_per_year": 596.7810981212566
+      }
+    }
+  },
+  "differences": {
+    "new_GE": {
+      "max_absolute_SPPR_change": 0.0,
+      "regional_2019_difference_tonnes_C": 0.0,
+      "regional_2019_change_percent": 0.0,
+      "M0_scenario": {
+        "max_absolute_SPPR_change": 592.9056506360848,
+        "regional_2019_difference_tonnes_C": -591295.2328350879,
+        "regional_2019_change_percent": -2.4337355459290277
+      }
+    },
+    "new_TE_EEfix": {
+      "max_absolute_SPPR_change": 0.0,
+      "regional_2019_difference_tonnes_C": 0.0,
+      "regional_2019_change_percent": 0.0,
+      "M0_scenario": {
+        "max_absolute_SPPR_change": 530.891754450283,
+        "regional_2019_difference_tonnes_C": -61776819.60708971,
+        "regional_2019_change_percent": -44.739728997363024
+      }
+    }
+  },
+  "loaded_field_changes": [
+    {
+      "seq": 21,
+      "group": "Small yellow croakers",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.13
+    },
+    {
+      "seq": 21,
+      "group": "Small yellow croakers",
+      "field": "biomass_accum",
+      "no_catch": 0.13490312744744742,
+      "catch_from_S4": 0.0049031274474474335
+    },
+    {
+      "seq": 19,
+      "group": "Omnivores",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.62
+    },
+    {
+      "seq": 19,
+      "group": "Omnivores",
+      "field": "biomass_accum",
+      "no_catch": 0.41901301886192965,
+      "catch_from_S4": -0.20098698113807034
+    },
+    {
+      "seq": 18,
+      "group": "Benthivores/piscivores",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.31
+    },
+    {
+      "seq": 18,
+      "group": "Benthivores/piscivores",
+      "field": "biomass_accum",
+      "no_catch": 0.4673226058559579,
+      "catch_from_S4": 0.1573226058559579
+    },
+    {
+      "seq": 17,
+      "group": "Planktivores/piscivores",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.39
+    },
+    {
+      "seq": 17,
+      "group": "Planktivores/piscivores",
+      "field": "biomass_accum",
+      "no_catch": 1.0568002238421137,
+      "catch_from_S4": 0.6668002238421138
+    },
+    {
+      "seq": 16,
+      "group": "Planktivores/Benthivores",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.24
+    },
+    {
+      "seq": 16,
+      "group": "Planktivores/Benthivores",
+      "field": "biomass_accum",
+      "no_catch": 1.2964582215735738,
+      "catch_from_S4": 1.0564582215735738
+    },
+    {
+      "seq": 14,
+      "group": "Hairtails",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.62
+    },
+    {
+      "seq": 14,
+      "group": "Hairtails",
+      "field": "biomass_accum",
+      "no_catch": 1.3355857763423773,
+      "catch_from_S4": 0.7155857763423772
+    },
+    {
+      "seq": 13,
+      "group": "Piscivores",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.39
+    },
+    {
+      "seq": 13,
+      "group": "Piscivores",
+      "field": "biomass_accum",
+      "no_catch": 0.13069479469469475,
+      "catch_from_S4": -0.25930520530530526
+    },
+    {
+      "seq": 11,
+      "group": "Planktivores",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.16
+    },
+    {
+      "seq": 11,
+      "group": "Planktivores",
+      "field": "biomass_accum",
+      "no_catch": 1.9160829556900794,
+      "catch_from_S4": 1.7560829556900792
+    },
+    {
+      "seq": 10,
+      "group": "Cephalopods",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.28
+    },
+    {
+      "seq": 10,
+      "group": "Cephalopods",
+      "field": "biomass_accum",
+      "no_catch": 0.6009422441675789,
+      "catch_from_S4": 0.32094224416757866
+    },
+    {
+      "seq": 9,
+      "group": "Shrimps",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.86
+    },
+    {
+      "seq": 9,
+      "group": "Shrimps",
+      "field": "biomass_accum",
+      "no_catch": 0.8904153387859126,
+      "catch_from_S4": 0.030415338785912627
+    },
+    {
+      "seq": 8,
+      "group": "Crabs",
+      "field": "catch",
+      "no_catch": 0.0,
+      "catch_from_S4": 0.22
+    },
+    {
+      "seq": 8,
+      "group": "Crabs",
+      "field": "biomass_accum",
+      "no_catch": 0.23218573893893896,
+      "catch_from_S4": 0.012185738938938956
+    }
+  ],
+  "protected_file_hashes_before": {
+    "regions\\LME_047\\models\\47_2_East_China_Sea_(2018)\\model.json": "31b1f6c360ce1d454db528e050100e5521cbf663cdb9d3001f0f39724a14ed16",
+    "regions\\LME_047\\LME_047.xlsx": "2706a0821ac8890a9ddb06122e724bf44cd87f26d51b00023b00fad193581486",
+    "regions\\LME_047\\Model_validation_47_2_East_China_Sea_(2018).docx": "32b12742484e0d47b07f87693fe522e6a1b1750db1cad7d1cc9c836ce4d2e5a2",
+    "Project.xlsx": "da6061d9763e45a433a0f5f4a209d54a2e2501b733f2910b0a7f4422dc35aefd",
+    "tools\\knowledge_graph\\graph.json": "08fc9b77a2a07f44d7600b24100f85257a0c31137f4b505f3266a670e9373d6b"
+  },
+  "protected_file_hashes_after": {
+    "regions\\LME_047\\models\\47_2_East_China_Sea_(2018)\\model.json": "31b1f6c360ce1d454db528e050100e5521cbf663cdb9d3001f0f39724a14ed16",
+    "regions\\LME_047\\LME_047.xlsx": "2706a0821ac8890a9ddb06122e724bf44cd87f26d51b00023b00fad193581486",
+    "regions\\LME_047\\Model_validation_47_2_East_China_Sea_(2018).docx": "32b12742484e0d47b07f87693fe522e6a1b1750db1cad7d1cc9c836ce4d2e5a2",
+    "Project.xlsx": "da6061d9763e45a433a0f5f4a209d54a2e2501b733f2910b0a7f4422dc35aefd",
+    "tools\\knowledge_graph\\graph.json": "08fc9b77a2a07f44d7600b24100f85257a0c31137f4b505f3266a670e9373d6b"
+  },
+  "protected_files_unchanged": true
+}

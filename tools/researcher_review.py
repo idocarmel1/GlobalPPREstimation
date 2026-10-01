@@ -137,7 +137,7 @@ def read_report(root, report, model_id):
                 fields[text(cells[0])] = {'text': '\n'.join(text(p) for p in cells[1].findall(f'{{{W}}}p')),
                                           'paragraphs': paragraphs(cells[1])}
     selected = fields.get('Selected model', {}).get('text', '')
-    if not re.match(re.escape(model_id) + r'(?=$|[.\s])', selected):
+    if not re.match(re.escape(model_id) + r'(?=$|[.;\s])', selected):
         raise ValueError('Review document identifies a different model')
     manual = fields['Review and reproducibility']['text']
     match = re.search(r'Researcher name:\s*([^|\n]+)\s*\|\s*review date:\s*(\d{2})/(\d{2})/(\d{4})', manual)

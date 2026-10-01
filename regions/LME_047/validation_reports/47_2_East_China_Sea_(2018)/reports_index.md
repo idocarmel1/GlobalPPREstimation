@@ -91,3 +91,13 @@ Selected model `47_2_East_China_Sea_(2018)`. Regional package complete; shared m
 ## Coordinator reconciliation — 1 October 2026
 
 Regional review and shared result reconciliation are complete. Earlier pending coordinator tasks in the regional handoff describe its historical release stage. Current reports, appendices, preserved scientific inputs, limits and verification are indexed in [the 23-region coordinator record](<../../../../original_research_archive/research/selected_regions_validation_20260930/final_validation_status.md>). Scientific approval is not implied; graph and Git closeout are tracked separately.
+
+
+## Template version 8 report update — 1 October 2026
+
+[Report-only update and verification](template_v8_update_20261001.json): updated the existing Word record to the current layout, retained manual rows and all visible link destinations, sorted group-assignment rules by unrounded PPR share, and added the exact 26-taxon Very low decisions table. All eight final pages inspected. The Excel appendix, regional workbook, selected model, Project/map and knowledge graph were unchanged. Researcher review and map update are deferred to the user’s subsequent instruction. Earlier DOCX hashes and page counts describe their historical versions.
+
+
+## Researcher signoff and map update — 2 October 2026
+
+[Signed-review registration and preservation checks](researcher_review_20261002/verification.json): registered Ido Carmel’s 1 October signed validation of the selected M2018 model. Updated Project and map/trends review metadata; Marine mammals (23) excluded from displayed PPR and Sharks (22) retained. Word edits, regional science, saved diagnostics, archive and graph preserved. S4 catch experiments remain unadopted.
