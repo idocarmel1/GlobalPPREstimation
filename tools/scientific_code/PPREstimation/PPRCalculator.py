@@ -473,8 +473,11 @@ class PPRCalculator:
         the constraints that involve a free variable (consumption balance, production balance,
         EE bounds [0, 0.95], GS bounds [0.10, 0.35]), and minimizes a weighted sum of a
         parsimony (minimum total flow) penalty and a deviation-from-guess penalty. On failure
-        the original guesses are kept and a message is printed. Detritus rows are rebalanced
-        from flow_to_det / det_fate afterwards.
+        a message is printed and the group's unsolved cells remain missing; guesses are not
+        written back. Subsequent _fill_properties applies its existing runtime fallbacks.
+        Afterwards predation is refreshed from final consumer q, detritus rows from routed
+        flow_to_det, and ratios/rates from the final flows. Known living-group flows are not
+        rebalanced: a change in prey predation can expose a production-balance residual.
 
         Args:
             df (pd.DataFrame): per-group parameter table with possible NaNs to be solved.
@@ -484,26 +487,17 @@ class PPRCalculator:
                 Defaults to 0.0.
 
         Returns:
-            pd.DataFrame: the table with solved flows and recomputed ee/gs/ge/flow_to_det and
-            rebalanced detritus rows.
+            pd.DataFrame: the table with solved flows, refreshed predation and detritus flows,
+            and recomputed ee/gs/ge/pb/qb/flow_to_det. This is not a coupled food-web solve.
         """
         df_out = df.copy()
 
         def _finalize_outputs(df_final):
-            # EE
-            df_final.loc[:, 'ee'] = np.where(
-                df_final.loc[:, 'p'] != 0, 
-                1 - (df_final.loc[:, 'M0'] / df_final.loc[:, 'p']), 
-                0
-            )
-            # GS
-            df_final.loc[:, 'gs'] = np.where(
-                df_final.loc[:, 'q'] != 0, 
-                df_final.loc[:, 'egestion'] / df_final.loc[:, 'q'], 
-                0
-            )
-            # GE
-            df_final['ge'] = np.where(df_final['q'] != 0, df_final['p'] / df_final['q'], 0)
+            # Predation is derived from consumer consumption, not an independently known
+            # flow. LIM may have filled q after the deterministic pass built predation.
+            Z = self._DC.mul(df_final['q'].fillna(0), axis='index')
+            Z.loc[df_final['trophic_info'] != 'Regular', :] = 0
+            df_final['predation'] = Z.sum(axis=0)
             
             # Flow to Detritus
             df_final['flow_to_det'] = df_final['M0'] + df_final['egestion']
@@ -525,7 +519,15 @@ class PPRCalculator:
                 df_final.loc[det_seqs, 'q'] = df_final['flow_to_det'].sum()
                 df_final['det_export'] = 0.0
             df_final.loc[det_seqs, 'p'] = df_final.loc[det_seqs, 'q']
-            df_final.loc[det_seqs, 'biomass_accum'] = df_final.loc[det_seqs, 'p'] - (df.loc[det_seqs, 'predation'] + df.loc[det_seqs, 'net_migration'])
+            df_final.loc[det_seqs, 'biomass_accum'] = df_final.loc[det_seqs, 'p'] - (df_final.loc[det_seqs, 'predation'] + df_final.loc[det_seqs, 'net_migration'])
+
+            # Derive parameters only after the final detritus p/q are established. Leave
+            # unsolved flow cells missing; runtime fallback behavior is unchanged.
+            df_final['ee'] = np.where(df_final['p'] != 0, 1 - df_final['M0'] / df_final['p'], 0)
+            df_final['gs'] = np.where(df_final['q'] != 0, df_final['egestion'] / df_final['q'], 0)
+            df_final['ge'] = np.where(df_final['q'] != 0, df_final['p'] / df_final['q'], 0)
+            df_final['pb'] = (df_final['p'] / df_final['biomass']).fillna(0)
+            df_final['qb'] = (df_final['q'] / df_final['biomass']).fillna(0)
 
             return df_final
 

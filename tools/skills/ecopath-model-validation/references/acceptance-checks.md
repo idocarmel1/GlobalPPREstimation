@@ -9,13 +9,14 @@ Use these checks on a produced report. They are also review scenarios for evalua
 - **Identity:** each diagnostic and group lookup belongs to the same exact model/configuration, or its limitation is explicit. Source, canonical and loaded-state facts are distinguished.
 - **Selection:** Article and Model reasons are separate and documented or `?`; known other models from the same article are described.
 - **Negative SPPR:** each affected source column is paired with every affected group by names/IDs. GE and TE are separate. Positive row totals do not hide negative entries; missing matrices do not become a verified absence. A saved zero-negative-count is diagnostic evidence, not an independent inspection of the full matrix; verify the retained array and its axes before claiming that inspection.
-- **Diagnostics:** rho_living, GE b and detritus-pool SPPR come from matching retained fields; failures/unsupported results are not silently promoted.
+- **Diagnostics:** concise verdicts and meaningful paragraph/break structure are retained; readable display rounding does not change unrounded evidence or calculations. rho_living, GE b and detritus-pool SPPR come from matching retained fields; failures/unsupported results are not silently promoted.
 - **Mapping:** all catch labels in the defined universe appear once; exact group IDs are valid; weights and stage assumptions are evidenced; unresolved weights remain `?`; review confidence follows the weakest required component.
 - **Totals:** category counts sum to the appendix count; category catches/PPR reconcile to the same row data; percentages use the stated full-catch or known-PPR denominator and reconcile within rounding tolerance.
 - **Missing data:** missing catch is unknown; genuine zero catch gives zero annual PPR even with a missing TL/coefficient; positive catch with a missing coefficient remains unknown; missing inputs are disclosed concisely; unresolved model mappings with known PPR still contribute to PPR totals.
 - **Units:** catch tonnes and PPR tonnes C are labeled; the configured conversion occurs once; classic/simple-chain values are independent of GE/TE mapping.
 - **Order:** appendix rows sort by full-precision numeric simple-chain PPR descending; unavailable values are last; taxon name breaks ties.
 - **Geography:** A and B use the correct denominators; approximation is labeled and grounded in the correct figures; missing coordinates alone did not prevent a defensible estimate.
+- **Very low decisions:** the separate two-column Affected taxa / Why confidence is very low table covers the exact appendix's Very low taxa once, grouping only shared evidenced reasons; both component rule tables remain. No regional examples are defaulted into another report.
 - **Document:** concise findings follow the edited template; no restored repeated status/provenance/method prose; manual cells and edited hyperlinks/deletions are preserved; all seven linked Excel appendix columns and a separate Sources sheet are present; every rendered page was inspected.
 - **Accepted parameters:** where the user protects existing scientific inputs, before/after comparisons confirm their preservation; source discrepancies remain documented concerns rather than automatic repairs. Missing coefficients are not filled to increase mapping coverage.
 - **Hyperlink appearance:** every visible DOCX/Excel link is blue and underlined at the effective run/cell level. Styling-only edits preserve content, destinations and scientific inputs and receive brief appearance checks.
@@ -79,7 +80,7 @@ The user approves testing this validation skill on a region. Its saved coefficie
 - Mapping/coverage is outside the main Word table. Each of the two rule tables has exactly Plain-language rule | Confidence | PPR percentage, full descriptions and descriptive source links. Each independently sums to 100% of the same known-PPR universe, with no double counting.
 - Approved fallback uses established eligible groups, then complete model catch proportions, then complete model biomass proportions. Both carry Medium allocation confidence. Test incomplete catch, all-zero catch, valid zero candidates, unusable biomass and missing membership; never drop candidates to make weights sum.
 - Record actual fields/values/totals/proportions and assumptions in canonical adopted records; preserve the separate assumed flag.
-- Check the actual map controls and visible result as well as its payload and adopted data. A workbook match alone is not UI verification.
+- For an authorized adoption or requested map comparison, check actual controls/result and payload against adopted data. A workbook match alone is not UI verification. Ordinary drafting can reuse matching recorded evidence and does not authorize a map update.
 - Explicitly authorized adoption/dependent arithmetic is permitted; fresh extraction or group-SPPR runs still require their own scoped authorization.
 
 
@@ -100,3 +101,7 @@ A row with recorded catch 0 and missing TL/coefficient contributes exactly 0 ann
 - A source says it assumed 90% juvenile catch. Reproducing 90% does not establish observed mass composition or High allocation confidence.
 - Verify all old/new component decisions, including downgrades from High/Medium. Confirm the weakest-component rule, all taxon keys, unchanged groups/weights for confidence-only adoption, and reconciled category/rule totals. Distinguish proposed mapping corrections from adopted confidence changes.
 - If no better focal-model mapping is available, an evidenced nearby-model mapping may be transferred through an explicit group-definition crosswalk. Verify donor identity, ecological/geographic compatibility, receiving group IDs and transfer confidence; identical names or proximity alone do not establish membership. Assess receiving weights independently and never copy donor SPPR as part of a mapping fallback.
+
+## Signed-review metadata handoff
+
+Apply [researcher signoff and map](researcher-signoff-and-map.md) only within explicit adoption authorization. Verify the latest actual marker/name/date and model, fresh Word hash, paragraph/manual break fidelity, applicable exact Groups exclusions, fixed confidence reference and both page payloads/fingerprints. Use the bounded refresh replay gate, preserve other regions and science, and verify only source-to-map information for notes-only changes. A subsequent Word edit cannot reuse the old registration. Never infer approval from healthy numbers, a draft or file existence.

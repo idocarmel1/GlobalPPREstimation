@@ -1,0 +1,171 @@
+{
+  "run_id": "LME034_source_restoration_20261001",
+  "started_utc": "2026-10-01T16:05:20.521701+00:00",
+  "canonical_model_sha256": "3c938197320d07b04435be65bb9515a7d2b86cec865813591f881f589ddc64a7",
+  "methods": [
+    "SPPR_1986",
+    "SPPR_1995_TE0.1",
+    "SPPR_1995_TEmean",
+    "Ulanowicz_globalTEmean",
+    "Ulanowicz_TE",
+    "EwE_TE_noEE",
+    "EwE_TE_EE",
+    "SPPR_2015",
+    "new_TE_noEEfix",
+    "new_TE_EEfix",
+    "new_GE",
+    "new_WithEgestion",
+    "sym_TE_asPP",
+    "sym_TE_asDC",
+    "sym_GE_asPP",
+    "sym_GE_asDC",
+    "sym_WithEgestion_asPP",
+    "sym_WithEgestion_asDC",
+    "MC_new_GE",
+    "MC_new_TE_EEfix",
+    "SPPR_1995_TEmean_catch",
+    "Ulanowicz_globalTEmean_catch"
+  ],
+  "mc_samples": 75,
+  "method_timeout_seconds": 180,
+  "constructor": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "normalize_DC": true,
+    "DC_tol": 0.001
+  },
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "create_PPRS_excel.py": "86fafff4d66fa81d960c69a4971d9de6cb5a5125f50631530c277213c6771032"
+  },
+  "finished_utc": "2026-10-01T16:13:46.193049+00:00",
+  "seconds": 505.46761789999437,
+  "method_status": {
+    "SPPR_1986": "ok",
+    "SPPR_1995_TE0.1": "ok",
+    "SPPR_1995_TEmean": "ok",
+    "Ulanowicz_globalTEmean": "ok",
+    "Ulanowicz_TE": "ok",
+    "EwE_TE_noEE": "ok",
+    "EwE_TE_EE": "ok",
+    "SPPR_2015": "ok",
+    "new_TE_noEEfix": "ok",
+    "new_TE_EEfix": "ok",
+    "new_GE": "ok",
+    "new_WithEgestion": "ok",
+    "sym_TE_asPP": "ok",
+    "sym_TE_asDC": "ok",
+    "sym_GE_asPP": "ok",
+    "sym_GE_asDC": "ok",
+    "sym_WithEgestion_asPP": "ok",
+    "sym_WithEgestion_asDC": "ok",
+    "MC_new_GE": "ok",
+    "MC_new_TE_EEfix": "ok",
+    "SPPR_1995_TEmean_catch": "ok",
+    "Ulanowicz_globalTEmean_catch": "ok"
+  },
+  "issues": [
+    {
+      "kind": "negative_sppr",
+      "method": "sym_TE_asDC",
+      "detail": "96 negative SPPR cell(s), min -1.62079e+25"
+    },
+    {
+      "kind": "negative_sppr",
+      "method": "sym_WithEgestion_asDC",
+      "detail": "104 negative SPPR cell(s), min -1.2638e+24"
+    },
+    {
+      "kind": "health_warning",
+      "method": null,
+      "detail": "[GE] rho(A_LL)=0.7406 is within 0.3 of divergence (max SPPR 9.19e+03 at group 2 (Coastal elasmobranch), TL 4.08)"
+    },
+    {
+      "kind": "health_warning",
+      "method": null,
+      "detail": "[TE] TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)"
+    },
+    {
+      "kind": "health_warning",
+      "method": null,
+      "detail": "[TE] rho(A_LL)=0.7845 is within 0.3 of divergence (max SPPR 2.31e+04 at group 1 (Oceanic sharks), TL 4.24)"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "SPPR_1986",
+      "detail": "inflow 1882.5 != outflow 306173"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "SPPR_1995_TE0.1",
+      "detail": "inflow 1882.5 != outflow 958.764"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "SPPR_1995_TEmean",
+      "detail": "inflow 1882.5 != outflow 872.499"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "Ulanowicz_globalTEmean",
+      "detail": "inflow 1882.5 != outflow 2292.4"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "Ulanowicz_TE",
+      "detail": "inflow 1882.5 != outflow 1129.05"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "EwE_TE_noEE",
+      "detail": "inflow 1882.5 != outflow 71.8308"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "EwE_TE_EE",
+      "detail": "inflow 1882.5 != outflow 1216.28"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "sym_TE_asDC",
+      "detail": "inflow 1882.5 != outflow -3.05608e+22"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "sym_GE_asDC",
+      "detail": "inflow 1882.5 != outflow 1931.5"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "sym_WithEgestion_asDC",
+      "detail": "inflow 1882.5 != outflow -1.31237e+18"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "MC_new_GE",
+      "detail": "inflow 1882.5 != outflow 2339.75"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "MC_new_TE_EEfix",
+      "detail": "inflow 1882.5 != outflow 2342.38"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "SPPR_1995_TEmean_catch",
+      "detail": "inflow 1882.5 != outflow 895.896"
+    },
+    {
+      "kind": "sppr_balance",
+      "method": "Ulanowicz_globalTEmean_catch",
+      "detail": "inflow 1882.5 != outflow 997.378"
+    }
+  ],
+  "fresh_sppr_sha256": "d109d42a66a233df17e91dc4723f1edf342a64c4cbb69d6d4809e06baa0defd6",
+  "parent_numpy_python_seed": 20261001,
+  "monte_carlo_worker_seed": "Unspecified native worker RNG. Parent seed does not seed the spawned worker; these75-draw outputs are retained run-specific stochastic estimates."
+}

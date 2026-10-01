@@ -22,13 +22,13 @@ When copying existing evidence into the model's validation folder, copy required
 
 ## Preserve the researcher's document
 
-Read only explicitly permitted documents. Inventory their paragraphs, table cells, manual entries and full hyperlink targets. Word may split a URL between its relationship target and a `w:anchor`; retain both. For local links, resolve relative to the output document's directory, not the repository root.
+Read only explicitly permitted documents. Inventory their paragraphs, table cells, manual entries and full hyperlink targets, retaining paragraph boundaries plus manual `w:br`, `w:cr` and `w:tab` characters. Word may split a URL between its relationship target and a `w:anchor`; retain both. For local links, resolve relative to the output document's directory, not the repository root.
 
-Manual cells are **SPPR calculation**, **Open issues and next action**, and **Review and reproducibility**. The default review entry is researcher name and date. Remove unused prompts in filled cells and preserve researcher notes in Other; do not replicate one region's actions, names, dates or timing notes as defaults elsewhere. Preserve researcher text and formatting in these cells when updating a record. Preserve the researcher's Article/Model selection rationales as well. Use semantic field labels or stable bookmarks to locate cells; row numbers shift when the other-models or mapping sections change.
+Manual cells are **SPPR calculation**, **Open issues and next action**, and **Review and reproducibility**. The default review entry is blank researcher name and date (dd/mm/yyyy); never prefill a person, date or validation marker. Remove unused prompts in filled cells and preserve researcher notes in Other; do not replicate one region's actions, names, dates or timing notes as defaults elsewhere. Preserve researcher text and formatting in these cells when updating a record. Preserve the researcher's Article/Model selection rationales as well. Use semantic field labels or stable bookmarks to locate cells; row numbers shift when the other-models or mapping sections change.
 
 Do not restore introductions, the removed long diagnostic paragraphs, repeated provenance warnings, deleted links, or the completion-instructions section. Retain important newly discovered limitations in a concise finding or supporting report. Do not insert old regional examples as generic template content.
 
-When a user-edited record is the layout/content authority, distill its structure and intended editable areas before editing a copy. Use the documents skill's reference-preservation workflow. Prefer small OOXML changes when they preserve styles, relationships and manual-cell XML. Never attach to an active Word document to obtain unsaved edits unless that interaction was explicitly requested and permitted.
+When a user-edited record is the layout/content authority, distill its structure and intended editable areas before editing a copy. Use the documents skill's reference-preservation workflow. For narrow updates, patch only the authorized XML fragments and preserve every other ZIP part, styles, relationships, row/cell/run properties and manual-cell XML. Avoid wholesale DOCX reserialization; verify reversible fragment changes or an equivalent targeted before/after preservation proof. Never attach to an active Word document to obtain unsaved edits unless that interaction was explicitly requested and permitted.
 
 ## Main report
 
@@ -36,15 +36,17 @@ Follow the template field order:
 
 1. Region; Catch source; Selected article; Other known articles.
 2. Selected model; Other models from the same article; Selection rationale with Article and Model entries.
-3. Model extraction; manual SPPR calculation.
-4. GE diagnostics; TE diagnostics.
+3. Model extraction; GE diagnostics; TE diagnostics.
+4. Manual SPPR calculation, following both diagnostic rows in the same flowing grid.
 5. Geographic fit; Temporal fit; optional Other.
 6. Manual Open issues and next action; manual Review and reproducibility.
-7. Separate Taxon mapping and coverage section, including confidence and two readable rule tables.
+7. Separate Taxon mapping and coverage section, including confidence, two readable rule tables and the additional two-column Very low decisions table.
 8. Geographic evidence figures.
 9. Linked Excel appendix, with the seven columns and separate Sources sheet; no full taxon table in Word.
 
-Use short, useful entries. The mapping summary has short paragraphs for year/basis/scope, group/taxon counts, PPR total and method name, followed by High/Medium/Low/Very low/Unresolved rows. Keep total catch and routine formula/conversion/treatment details in the appendix or evidence. Retain Membership evidence and Weights and assumptions lines, plus a missing-PPR note only when needed. Avoid a separate Catch coverage row.
+Use one flowing Field / Entry grid without the automatic report's forced split/continued title. Keep Other and Open issues blank when no entry is warranted. Use short, useful entries. The mapping summary has short paragraphs for year/basis/scope, group/taxon counts, PPR total and method name, followed by High/Medium/Low/Very low/Unresolved rows. Keep total catch and routine formula/conversion/treatment details in the appendix or evidence. Retain Membership evidence and Weights and assumptions lines, plus a missing-PPR note only when needed. Avoid a separate Catch coverage row.
+
+Use a compact first verdict paragraph (`OK`, or a material warning/failure), followed by sign/metric paragraphs and a relevant balance finding when supported. Preserve the researcher's short verdict, rounding and manual breaks; do not expand `OK` into generic diagnostic prose. Round new display values appropriately, retaining full precision in evidence/calculations.
 
 The negative-SPPR findings must pair each source column with its affected groups. Preserve names and IDs even when the list expands the GE or TE cell. If a large list needs a supporting detail table, retain explicit per-column group information in the delivered report or its clearly referenced diagnostic attachment; never reduce the finding to an unpaired count.
 
@@ -87,6 +89,6 @@ Current explicit authorization overrides the ordinary report-only scope. After a
 
 ## Coverage preference and concise uncertainty
 
-Apply the template guide’s Very low broad-category and closest-analogue rules before leaving a meaningful placement unresolved. Prefer near-complete coverage with visible assumptions; retain Unresolved only when no meaningful group or numerical allocation can be justified. Direct applicable source geographic catch quantities can support High allocation confidence; geographic overlap alone cannot. Include all five confidence categories and the Very low coverage share. Name every unresolved taxon with a short reason, or state none; group and flag Very low cases compactly. Keep skill, approval, integration, hashes and test details in supporting evidence rather than validation prose.
+Apply the template guide’s Very low broad-category and closest-analogue rules before leaving a meaningful placement unresolved. Prefer near-complete coverage with visible assumptions; retain Unresolved only when no meaningful group or numerical allocation can be justified. Direct applicable source geographic catch quantities can support High allocation confidence; geographic overlap alone cannot. Include all five confidence categories and the Very low coverage share. Name every unresolved taxon with a short reason, or state none. Add **Very low decisions** after the rule summaries/uncertainty text, with exact columns **Affected taxa | Why confidence is very low**; enumerate all Very low taxa exactly once and group only shared evidenced reasons. Use the current exact-model appendix, preserving both existing rule-summary tables. Omit the decision table when no Very low cases exist. Keep skill, approval, integration, hashes and test details in supporting evidence rather than validation prose.
 
 Sort group-assignment rule rows by unrounded PPR percentage, highest first. Add a final Sum row only if the unrounded total differs from 100% beyond numerical rounding tolerance (1e-8 percentage points); show and explain the actual shortfall/overcount rather than changing the denominator. Omit the Sum row when the total is 100%. In a blank template, request descending order without inventing values.

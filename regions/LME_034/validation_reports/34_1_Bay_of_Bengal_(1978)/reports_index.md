@@ -1,4 +1,16 @@
-# Current complete-candidate follow-up
+# Final researcher diet completion —1October2026
+
+Current model, scientific outputs and shared pages use the explicit eight-group Detritus completions. See the [manual-document summary](detritus_completion_20261001/handoff_summary.md), [completion layer](detritus_completion_20261001/researcher_completion_layer.json), [all22 methods](detritus_completion_20261001/refresh_configuration.json) and [current evidence index](detritus_completion_20261001/evidence_index.json). Older releases below preserve historical input hashes, returns and review context. User validation DOCX and notebooks remain under researcher editing.
+
+---
+
+# Current source-diet restoration — 1 October 2026
+
+Canonical diets now preserve printed, unnormalized Table17 values. The researcher-authored group40 Meiobenthos→Detritus=1 edit remains explicitly retained. Source omissions for prey46–48 are unknown; their own diets are retained. Runtime normalization is separate and issues the existing warning. The [restoration ledger](source_restoration_20261001/table17_source_ledger.json) and [source/runtime comparison](source_restoration_20261001/source_runtime_separation.json) govern this correction. Earlier input hashes, coefficients and verification below describe their historical releases. Researcher Word documents and notebooks remain unchanged.
+
+---
+
+# Historical complete-candidate follow-up
 
 Current mappings, arithmetic and Office evidence are recorded in the [follow-up](broad_candidate_followup.json), [independent calculations](broad_candidate_calculations_verification.json), [method-specific exposure](broad_candidate_method_exposure.json) and [handoff](coordination_handoff.json). Accepted scientific inputs, classic results and manual review fields remain preserved. Shared final browser verification remains pending. Earlier review records below retain historical numbers and hashes; they do not supersede this follow-up.
 

@@ -9,6 +9,7 @@ from pathlib import Path
 from collections import defaultdict
 from workbooks import *
 from regional import result_hash,inputs
+from researcher_review import approved_review
 
 def embedded(path,variable):
     text=Path(path).read_text(encoding='utf-8');start=text.index('const '+variable+'=')+len('const '+variable+'=')
@@ -263,6 +264,7 @@ def datasets(workbook):
                 for k in ['filename','file_label']:
                     if isinstance(f.get(k),str):f[k]=html.unescape(f[k])
     project=read_book(workbook);region_rows=records(project,'Regions & status','Regions')
+    model_metadata={(r['unit_id'],r['model_id']):r for r in records(project,'Models & coverage','Models')}
     geometry=unchunks(rows(project,'Map geography','Geometry'));meta=unchunks(rows(project,'Definitions & build','Metadata'))
     for key,value in meta.items():
         if key in series:series[key]=value
@@ -307,6 +309,10 @@ def datasets(workbook):
                     model.update({'workbook':region['workbook'],'workbook_sha256':region['sha256'],'source':sourcefile})
                     model['review_flags']=review_flags(book)
                     model['review_note']=overview(book).get('source_note') or overview(book).get('calculation_status') or ''
+                    review=approved_review(root,model_metadata.get((unit,selected)),book)
+                    if review:
+                        model['researcher_review']=copy.deepcopy(review)
+                        model['display_ppr_excluded_group_ids']=review['excluded_group_ids'][:]
             if nm is not None:
                 if changed:nm.pop('discard_sensitivity',None);nm['discard_sensitivity_unavailable']={}
                 for scope,s in sm['scopes'].items():

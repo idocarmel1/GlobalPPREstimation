@@ -81,6 +81,12 @@ def write_book(path, book):
             for header, _ in blocks.values():
                 if 'atlas_region_rank' in header:
                     s.column_dimensions[get_column_letter(header.index('atlas_region_rank')+1)].width = 22
+                for field in ['researcher_review_status','researcher_name','researcher_review_date','validation_report_path',
+                              'validation_report_sha256','reviewed_model_sha256','reviewed_calculation_input_sha256','researcher_review_summary']:
+                    if field in header:
+                        dimension=s.column_dimensions[get_column_letter(header.index(field)+1)]
+                        dimension.width=65 if field=='validation_report_path' else 28
+                        dimension.hidden=field.endswith('sha256') or field=='researcher_review_summary'
         if title=='Overview':
             s.column_dimensions['A'].width=34;s.column_dimensions['B'].width=110;s.freeze_panes='B3'
         row_number=0
@@ -100,12 +106,17 @@ def write_book(path, book):
                 row_number+=1
                 if title=='Overview':s.row_dimensions[row_number].height=max(24,16*math.ceil(len(str(record[1] or ''))/95))
                 vals = []
-                for value in record:
+                researcher_validated = (native_tables and title=='Models & coverage' and name=='Models'
+                    and 'researcher_review_status' in header
+                    and record[header.index('researcher_review_status')]=='Validated by researcher')
+                for field_index,value in enumerate(record):
                     v = clean(value)
                     if isinstance(v,str):
                         if len(v)>32767: raise ValueError(f'{title}/{name}: text exceeds Excel cell limit')
                         c=WriteOnlyCell(s,value=v); c.data_type='s'
                         if title=='Overview':c.alignment=Alignment(wrap_text=True,vertical='top')
+                        if researcher_validated and header[field_index] in ['model_id','researcher_review_status']:
+                            c.font=Font(name='Calibri',size=11,bold=True,color='187344')
                         vals.append(c)
                     else:
                         c=WriteOnlyCell(s,value=v)

@@ -76,7 +76,9 @@ canonical=np.zeros((50,49))
 for pred,g in groups.items():
     entries=(g.get('diet_descr') or {}).get('diet',[])
     if isinstance(entries,dict): entries=[entries]
-    for d in entries: canonical[int(float(d['prey_seq']))-1,pred-1]=float(d['proportion'])
+    for d in entries:
+        value=float(d['proportion'])
+        canonical[int(float(d['prey_seq']))-1,pred-1]=0. if value==-9999 else value
     canonical[49,pred-1]=float(g['diet_imp'])
 diet_changes=[];norm_rows=[]
 for pred,g in groups.items():
@@ -85,14 +87,16 @@ for pred,g in groups.items():
     mismatch=np.abs(normalized-canonical[:,pred-1]); maxdiff=float(mismatch.max())
     norm_rows.append({'seq':pred,'group':g['group_name'],'source_sum':s,'factor':factor,
                      'canonical_sum':float(canonical[:,pred-1].sum()),'normalization_max_abs_difference':maxdiff,
-                     'reproducible_as_source_normalization':maxdiff<1e-12})
+                     'reproducible_as_source_normalization':maxdiff<1e-12,
+                     'raw_source_max_abs_difference':float(np.abs(diet[:,pred-1]-canonical[:,pred-1]).max()),
+                     'researcher_override':pred==40})
     for prey in range(1,51):
         delta=float(canonical[prey-1,pred-1]-diet[prey-1,pred-1])
         if delta:
             diet_changes.append({'predator_seq':pred,'predator_name':g['group_name'],'prey_seq':prey,
               'prey_name':groups.get(prey,{}).get('group_name','diet_import'),'source':float(diet[prey-1,pred-1]),
               'canonical':float(canonical[prey-1,pred-1]),'difference':delta,'factor':factor,
-              'locator':locators.get((prey,pred),{'page':27,'reason':'omitted biological prey row implies zero in final block'})})
+              'locator':locators.get((prey,pred),{'page':27,'reason':'biological prey row absent; source unknown; zero only in numerical comparison view'})})
 
 # Read Table15 and catch A2.1 by word position: retains blank and zero distinctions.
 with pdfplumber.open(SOURCE) as pdf:
@@ -160,8 +164,10 @@ report={'schema_version':1,'model_id':'34_1_Bay_of_Bengal_(1978)',
  'Table16 printed whole-area biomass is a rounded display; canonical uses printed habitat-area biomass × habitat fraction',
  'Benthic plants printed B0.784 versus product0.784771 (ordinary nearest three-decimal product would0.785), recorded as source display inconsistency'],
  'appendix_A32_comparison':'Original diet matrix finalblock p56 repeats malformed region3 detritus/import row zeros; does not recover missing balanced diets. Predator46/47/48 columns exist, biological prey46/47/48 rows omitted.',
- 'correction_eligibility':'No evidence-supported numerical diet correction recovered; retain canonical as existing normalized assumption variant only, with source limitations',
- 'audit_state':'Balanced Table16 parameters/habitat products and all Table17 cells checked; Table15 fields/blanks/GS/detritus imports retained separately; all49 A2.1 catch totals/fleet components compared; native recovery pending'}
+ 'correction_eligibility':'2026-10-01: original Table17 proportions restored without normalization; researcher-authored group40 Detritus1 explicitly retained. Biological prey46–48 omitted in final block remain unknown, canonical -9999; arithmetic view is zero only for loader compatibility.',
+ 'source_missing_diet_cell_ledger':'../source_restoration_20261001/table17_source_ledger.json',
+ 'researcher_overrides':[{'predator_seq':40,'prey_seq':49,'source_proportion':0,'canonical_proportion':1,'reason':'intentional researcher edit explicitly retained on2026-10-01'}],
+ 'audit_state':'Current raw canonical diets checked against all printed Table17 cells, with group40 researcher override distinguished; Table16 parameters/habitat products, Table15 blanks and GS, all49 A2.1 catch totals retained; native recovery pending'}
 closure=[]
 consumer_q=np.array([float(groups[i]['biomass'])*float(groups[i]['qb']) if int(groups[i]['pp'])==0 else 0 for i in range(1,50)])
 for label,dc in [('source_diet',diet),('canonical_diet',canonical)]:
@@ -174,7 +180,7 @@ for label,dc in [('source_diet',diet),('canonical_diet',canonical)]:
              'closure_BA_with_zero_migration':float(remainder),'production_relative_residual':float(remainder/production),
              'source_BA_available':False})
 report['independent_production_closure']=closure
-report['steady_state_limitation']='Loaded strict balance is achieved with constructor-derived BA; source printed parameters/diets do not supply observed BA. Diet normalization materially increases residuals (max77.3% production) relative to unnormalized printed diets (~0.37% for groups1–45).'
+report['steady_state_limitation']='Canonical JSON now preserves raw printed Table17 diets except researcher group40 Detritus1. The calculator separately normalizes nonzero diet rows and derives BA; strict runtime balance does not establish observed BA or source steady state. Historical normalized input changed closure materially; preserved baseline and current runtime transformation ledger document the distinction.'
 (OUT/'source_audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps({'parameter_mismatches':report['parameter_mismatches'],'biomass_product_mismatches':report['biomass_product_mismatches'],
  'diet_normalization_nonmatching':[x for x in norm_rows if not x['reproducible_as_source_normalization']],

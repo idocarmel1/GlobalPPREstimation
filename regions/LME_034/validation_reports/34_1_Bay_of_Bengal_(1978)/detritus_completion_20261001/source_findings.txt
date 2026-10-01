@@ -1,0 +1,47 @@
+Final LME034 source/diet findings —1October2026
+
+Final adopted researcher scenario
+
+Selected model: **34_1_Bay_of_Bengal_(1978)**. The final canonical input preserves the printed Table 17 values except the eight explicitly authorized Detritus corrections below. These corrections represent the researcher’s assumption that detritus-feeding cells were omitted from the published table; they are not literal author-reported values. Original printed values, the preceding raw reconstruction and the final researcher input remain separately traceable.
+
+| Predator group | Printed source diet total | Final Detritus share | Final diet total including Import |
+|---|---:|---:|---:|
+| 30 2-3 Indian mackerel | 0.9452 | 0.0548 | 1 |
+| 32 3 Carangids | 0.9905 | 0.0095 | 1 |
+| 33 3 S pelagics | 0.9912 | 0.0088 | 1 |
+| 36 3 SM inv | 0.9664 | 0.0336 | 1 |
+| 38 3 Crustaceans | 0.60 | 0.40 | 1 |
+| 39 3 Macrobenthos | 0.45 | 0.55 | 1 |
+| 40 3 Meiobenthos | 0 | 1 | 1 |
+| 41 3 Zooplankton | 0.90 | 0.10 | 1 |
+
+The pre-existing group 40 Meiobenthos→Detritus=1 edit was retained exactly. Source justification is strongest for the benthic/plankton groups: the region 2 Detritus shares for Crustaceans=.40, Macrobenthos=.55, Meiobenthos=1 and Zooplankton=.10 exactly equal the missing portions of their region 3 counterparts. Regional2 Carangids=.0092, S pelagics=.0084 and SM inv=.0327 provide supporting analogy, but differ from the final residual completions .0095/.0088/.0336. Indian mackerel=.0548 has no paired regional-predator analogue. The full report text and AppendixA 3.2 supply no explicit quantitative recovery of these residuals.
+
+Meiobenthos remains a consumer: Table 16 p24 reports TL2, PB9, QB60 and P/Q=.15 for all three regional groups, consistent with the benthic-animal discussion p19. A zero printed diet does not support primary-producer classification. Table 17 p26 directly assigns Detritus=1 to the other two meiobenthos groups; p27 and AppendixA 3.2 p56 leave group 40’s known diet entries zero.
+
+Groups46 Bigeye tuna,47 Yellowfin tuna and 48 Marlins retain their own original predator diets, including Import, with totals .99998/.9996/.99946. Their biological prey rows are explicit zeros on pp25–26 but absent on p27:45 source cells remain unknown, represented by 42 canonical-9999 sentinels and 3 cells within the unchanged group 40 override. Loader zeros do not establish source biological zeros. The named Detritus/Import rows incorrectly numbered46/47 on p27 map to prey49/50; missing biological prey values were not reassigned to those pools.
+
+ModelData retains the final printed-plus-researcher proportions without renormalizing them. The existing PPRCalculator configuration normalizes a separate copy. The completed eight groups now total1; loading still emits one diet warning for group 2 Coastal elasmobranch=.9989 at tolerance .001. Loading does not alter the canonical JSON or original ModelData. All non-diet values, detritus-fate routing and other printed diet values remain unchanged.
+
+All 22 existing methods were refreshed with their retained scientific settings, including 75 draws for each Monte Carlo method. The two MC methods initially reached180 seconds and were retried alone with 600-second execution allowances; the 20 completed method columns were preserved exactly. Native spawned-worker seeds remain unspecified, so MC outputs are new stochastic estimates rather than repetitions of old random draws.
+
+| Direct diagnostic | Status | Recycling gain b | Living spectral radius |
+|---|---|---:|---:|
+| GE | OK | 0.17450061 | 0.585823443 |
+| TE | OK | 0 | 0.62583232 |
+| With Egestion | OK | 0.283768118 | 0.468658754 |
+
+All 900 direct SPPR source contributions are finite and nonnegative. TE records structural b=0; this does not establish observed absence of ecosystem recycling. Direct matrix/source-scope sums reconcile with the final SPPR export. The native constructor still derives biomass accumulation and completes detritus EE from .332 to1, so strict computational balance does not establish author-native fidelity or observed accumulation. Method-specific negative-result/budget flags remain recorded for the other formulations. Production eligibility remains false; these are provisional researcher-scenario outputs.
+
+Catch, ClassicPPR, NPP, mappings and allocation assumptions are preserved exactly in the regional workbook. Central records outside LME034 and the completed region 32/36 reviews are protected. Validation DOCX files and notebooks are not edited; the researcher is updating Word manually. The model-folder legacy_ppr.xlsx is a historical migrated result, retained unchanged and explicitly labeled in LEGACY_OUTPUT_PROVENANCE.md; active final coefficients use sppr_source.xlsx.
+
+Final canonical SHA256: `4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a`.
+Original PDF SHA256: `84f3dc3dc64213b2f84c8bb2cf4bb1979f4023fbd00d2b996846dee66f497907`.
+
+Evidence: [completion layer](researcher_completion_layer.json), [source ledger](table17_source_ledger.json), [loading verification](current_source_verification.json), [all 22 run configuration](refresh_configuration.json), [direct/export reconciliation](direct_current_export_reconciliation.json), [regional adoption](regional_adoption.json), [central integration](central_integration.json), [portable evidence index](evidence_index.json).
+
+Observed symbolic-method limitations:
+- `sym_TE_asDC`: 86 negative SPPR cell(s), min -1.30781e+25.
+- `sym_WithEgestion_asDC`: 96 negative SPPR cell(s), min -5.63555e+23.
+
+TE’s structural b=0 occurs because that formulation has no detritus recycling matrix and writes mortality-derived SPPR off as lost, as captured in the engine’s health warning. This warning remains recorded despite the direct diagnostic status being OK.

@@ -1,6 +1,6 @@
 ---
 name: ecopath-model-validation
-description: Use when creating, updating, or reviewing a regional Ecopath model validation record in GlobalPPREstimation, including GE/TE diagnostics, taxon mapping confidence and catch/PPR coverage, geographic fit, and the linked Excel mapping appendix. Full extraction or scientific recalculation belongs to the paper-to-PPR workflow.
+description: Use when creating, updating, or reviewing a regional Ecopath model validation record in GlobalPPREstimation, including GE/TE diagnostics, taxon mapping confidence and catch/PPR coverage, geographic fit, the linked Excel mapping appendix, and an explicitly authorized signed-review handoff to Project/map. Full extraction or scientific recalculation belongs to the paper-to-PPR workflow.
 ---
 
 # Ecopath model validation
@@ -24,6 +24,8 @@ Current user instructions and edits govern the task. If an older document or pip
 When the user accepts existing manual scientific parameters, preserve those inputs throughout authorized review and recalculation. Record their provenance and source differences without restoring paper values, normalizing diets or rebalancing. Mapping authorization permits evidence-supported taxonomy, group membership, allocation and confidence changes; it does not override a parameter-preservation instruction. Compare protected inputs before and after, and report remaining scientific concerns explicitly.
 
 ## Scope and review boundaries
+
+For an explicitly authorized adoption of a researcher-signed final report, follow [researcher signoff and map](references/researcher-signoff-and-map.md): register the actual source and refresh only its review metadata. Signoff and this adoption are distinct from drafting a report.
 
 An ordinary validation request authorizes reading relevant permitted evidence, checking sources, performing report arithmetic, preparing supporting review records, and generating the Word report. It does **not** authorize running extraction or SPPR again, changing catch/mappings/weights/TLs, selecting another model, updating workbook results, or refreshing the project/map.
 
@@ -61,7 +63,7 @@ Populate article/model fields and known alternatives. Keep Article and Model sel
 
 For **each of GE and TE**, inspect the corresponding saved per-source SPPR matrix. List every column containing negative SPPR and the affected group names/IDs under that column. A positive row total can conceal a negative contribution. Check all retained groups, including unfished groups, and do not silently apply researcher exclusion notes to saved matrices. Use the detailed identity and missing-data rules in the evidence reference.
 
-Report rho_living, GE recycling parameter b, and named detritus-pool SPPR from matching saved diagnostics. Keep the cells to sign findings and numerical diagnostics. Record exact status, unavailable matrices and verification details in supporting evidence; place a material timing/configuration note once in Other when needed. Do not imply new verification or conceal a material failure. Recommend a confirmed fresh run when a material gap cannot be resolved from existing evidence; use the approval rules above. Preserve the manual SPPR calculation, open-issues and review cells.
+Report rho_living, GE recycling parameter b, and named detritus-pool SPPR from matching saved diagnostics. Use compact verdict, sign and metric paragraphs, with readable rounded display values and relevant balance findings. Preserve researcher rounding and manual breaks. Keep the cells to material scientific findings and numerical diagnostics. Record exact status, unavailable matrices and verification details in supporting evidence; place a material timing/configuration note once in Other when needed. Do not imply new verification or conceal a material failure. Recommend a confirmed fresh run when a material gap cannot be resolved from existing evidence; use the approval rules above. Preserve the manual SPPR calculation, open-issues and review cells.
 
 ### 4. Review all taxon mappings
 
@@ -81,7 +83,7 @@ Include unresolved taxa in the catch denominator and, whenever their simple-chai
 
 Create the linked Excel workbook with a separate descriptive Sources sheet and the seven-column appendix: **Taxon name; TL; Catch (t); Simple-chain PPR (t C); Mapped group names and weights; Confidence level; Reason.** Sort by unrounded simple-chain PPR numerically descending, with unavailable values last and taxon name breaking ties. State year, basis, method and units once above it; put full descriptive sources on the Sources sheet. Freeze headers, enable filtering and verify widths/wrapping.
 
-Move mapping and coverage outside the main validation table. Include the five-category summary and separate group-assignment/allocation tables with exact columns **Plain-language rule | Confidence | PPR percentage**. Describe actual rules in words, split component confidence levels, and account for the full known-PPR universe once per table. Check internally that these are two views of the same taxa and cannot be added; do not repeat this explanation in the report. Trace and reconcile the actual map controls/payload/display with this denominator; an annual-workbook check alone is insufficient.
+Move mapping and coverage outside the main validation table. After the confidence/rule summaries, include the separate **Very low decisions** table (**Affected taxa | Why confidence is very low**) from the exact current appendix, covering every Very low taxon once; do not replace the rule tables or borrow another model's reasons. Include the five-category summary and separate group-assignment/allocation tables with exact columns **Plain-language rule | Confidence | PPR percentage**. Describe actual rules in words, split component confidence levels, and account for the full known-PPR universe once per table. Check internally that these are two views of the same taxa and cannot be added; do not repeat this explanation in the report. For authorized adoption or a requested map comparison, trace and reconcile the actual map controls/payload/display with this denominator; an annual-workbook check alone is insufficient. Reuse adequate saved matching evidence for ordinary drafting and preserve its scope.
 
 ### 6. Assess geography and time
 
@@ -96,5 +98,7 @@ Apply the [evidence handoff contract](../original_skill_resources/combined-src/r
 Follow the document-production reference. Fill a copy of the current template, or minimally update the explicitly authorized edited report. Copy needed evidence without moving originals; retain useful relative links and source IDs. Keep extended method/rule instructions out of the filled report.
 
 Verify count/share arithmetic, mapping completeness, exact source-to-group negative pairings, appendix ordering, units, evidence links and preservation of manual entries. Render and inspect every page, including the separate coverage section; also inspect the Excel appendix. Fix layout defects before delivery.
+
+After an explicitly authorized researcher signoff adoption, use the [bounded Project/map handoff](references/researcher-signoff-and-map.md); any later Word edit requires fresh registration and source-to-map equality checks. Do not start new scientific validations or a full rebuild for a notes-only sync.
 
 Keep the report scientific and concise: name unresolved taxa and their specific reasons (or state none), flag Very low assignments and their coverage share, and omit skill/integration/test narratives. Deliver the Word file, linked Excel appendix and a short statement of material evidence gaps and checks actually performed. Do not claim fresh extraction, recalculation, approval or a successful regional test unless it happened within the authorized scope. Stop at any user-requested review point.

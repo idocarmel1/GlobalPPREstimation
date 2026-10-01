@@ -11,9 +11,14 @@
   function selection(model,ids){
     const list=model?.group_data?.groups||[];
     const names=new Set(Array.isArray(ids)?ids:list.map(g=>g.id));
-    const indices=list.flatMap((g,i)=>names.has(g.id)?[i]:[]);
+    const excluded=new Set(model?.display_ppr_excluded_group_ids||[]);
+    const catch_indices=list.flatMap((g,i)=>names.has(g.id)||excluded.has(g.id)?[i]:[]);
+    const indices=list.flatMap((g,i)=>names.has(g.id)&&!excluded.has(g.id)?[i]:[]);
     return {ids:indices.map(i=>list[i].id),indices,count:indices.length,total:list.length,
-      active:Array.isArray(ids)&&list.length>0&&indices.length<list.length,empty:indices.length===0};
+      catch_indices,requested_ids:catch_indices.map(i=>list[i].id),
+      researcher_excluded:list.filter(g=>excluded.has(g.id)).map(g=>g.id),
+      manual_active:Array.isArray(ids)&&catch_indices.length<list.length,
+      active:list.length>0&&indices.length<list.length,empty:indices.length===0};
   }
   const active=(model,ids)=>selection(model,ids).active;
   const inputs=unit=>unit.group_inputs?{...unit,...unit.group_inputs}:unit;
@@ -45,9 +50,12 @@
     if(!matrix)return unavailable('Catch classification unavailable for this basis');
     if(matrix.some(row=>!valid(row?.[yi])))return unavailable('Catch amounts are missing or invalid for this basis and year');
     if(!data?.mappings)return unavailable('Group catch allocations unavailable');
-    const retained=new Set(selected.indices),affected=new Map((source.unidentified?.taxa||[]).map(t=>[t.name,t]));
+    const retained=new Set(selected.indices),catchRetained=new Set(selected.catch_indices),affected=new Map((source.unidentified?.taxa||[]).map(t=>[t.name,t]));
     let numerator=0,denominator=0,total=0,support=0,unidentified=0,missingSimple=0;
     const fractions=matrix.map((_,i)=>(data.mappings[i]||[]).reduce((sum,[g,w])=>sum+(retained.has(g)&&valid(w)?w:0),0));
+    // Researcher exclusions affect displayed PPR only. Manual group selections
+    // retain their existing catch/coverage behavior, without reallocating weights.
+    const catchFractions=matrix.map((_,i)=>(data.mappings[i]||[]).reduce((sum,[g,w])=>sum+(catchRetained.has(g)&&valid(w)?w:0),0));
     const coefficient=(i,method,residual)=>{
       const j=scope.methods.indexOf(method),baseline=scope.values?.[i]?.[j],fraction=fractions[i];
       // Selection cannot restore an unsupported original taxon coefficient.
@@ -65,7 +73,7 @@
       return Math.round(sum*1e6)/1e6;
     };
     matrix.forEach((years,i)=>{
-      const c=years[yi],fraction=fractions[i],residual=affected.get(source.taxa?.[i]);
+      const c=years[yi],fraction=catchFractions[i],residual=affected.get(source.taxa?.[i]);
       total+=c*fraction;
       if(residual){unidentified+=c*fraction;if(!valid(residual.simple_sppr))missingSimple+=c*fraction;}
       if(fraction===0)return;
@@ -75,7 +83,7 @@
     });
     if(total>0&&support===0)return unavailable('No catch with available method values');
     if(ratio&&denominator===0)return unavailable('Zero denominator on common catch');
-    const selectedTotal=matrix=>Array.isArray(matrix)&&matrix.every(row=>valid(row?.[yi]))?matrix.reduce((sum,row,i)=>sum+row[yi]*fractions[i],0):null;
+    const selectedTotal=matrix=>Array.isArray(matrix)&&matrix.every(row=>valid(row?.[yi]))?matrix.reduce((sum,row,i)=>sum+row[yi]*catchFractions[i],0):null;
     return {value:ratio?numerator/denominator:numerator/9,numerator:numerator/9,ppr_wet:numerator,denominator:ratio?denominator/9:null,
       catch:support,total_catch:total,coverage:total>0?support/total:null,catch_basis:basis,
       total_catch_all:selectedTotal(source.full_precision_catch||source.catch),total_discards:selectedTotal(source.discards),
