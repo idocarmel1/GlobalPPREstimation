@@ -1,6 +1,12 @@
 """Explicit research-preview support without modifying retained historical templates."""
 
 def provisional_layout(text):
+    # Availability labels describe mapping/coefficient gates, not scientific
+    # approval. Diagnostic flags remain separately visible.
+    text=text.replace('a verified selected model', 'available coefficients for the selected model')
+    text=text.replace('Mapping workbook not verified', 'Selected model has no usable taxon mapping')
+    text=text.replace('Model has no verified PPR workbook.', 'Selected model has no usable taxon mapping.')
+    text=text.replace('no verified PPR', 'no usable taxon mapping')
     text=text.replace(':unit.note;panel.appendChild(notes);',":('Retained selection rationale: '+(unit.note||''));panel.appendChild(notes);")
     text=text.replace("single?(db.units[state.units[0]]?.note||''):","single?('Retained selection rationale: '+(db.units[state.units[0]]?.note||'')):")
     text=text.replace('generated ${DB.generated_on}', 'source archive date ${DB.generated_on}')

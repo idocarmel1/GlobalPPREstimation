@@ -1,0 +1,13 @@
+# Mediterranean validation template contract
+
+Reference: `tools/templates/Model_validation_template.docx`; SHA-256 `d3aca1a596bf9476789aa919fbbc4b0f578fed7a0eb625d3d290b8db66c5b1f0`. Filling guide version 7, 30 September 2026.
+
+The retained template has one portrait A4 section, 7562215 by 10689590 EMU, with margins 594360 EMU on each side. Its four reference pages were rendered in an independently created hidden Word instance, read-only, and rasterized through bundled PDFium. All four page PNGs were inspected. The reference contains a title and context table, diagnostics/manual table, coverage and two rule tables, and two geographic figure components. Retain these components and their actual paragraph/run/table styles. Rule rows may be cloned and content may flow to an additional page without changing geometry.
+
+Editable slots: report title, region/catch/source/model context, separate Article and Model rationales, extraction findings, GE/TE unavailable findings, A/B approximate geography, period transfer, scientific Other, coverage paragraphs/category table, exact three-column component-rule tables, descriptive evidence links, and the two figure images/captions. Locate table cells by the Field label and the coverage/figure components by template paragraphs and table identity. The completed record has 2019 landings, all taxon labels, no group filter and independent simple-chain PPR.
+
+Preserve-only slots: entire SPPR calculation, Open issues and next action, and Review and reproducibility rows including XML properties and hyperlinks. Preserve template styles, theme, numbering, section geometry, headers, footers and unrelated package parts. The template remains unchanged. Final package patch permits document.xml, document.xml.rels and content types plus new media; all other original ZIP parts are restored byte for byte. Manual rows are compared using exclusive C14N.
+
+Appendix: exactly seven specified columns and separate descriptive Sources sheet, numeric catch/TL/PPR, unrounded descending PPR with taxon tie-break, frozen headers and filtering. Source rows contain portable repository links or public authoritative URLs. No scientific source/model parameters are authored by this artifact builder.
+
+Fidelity gates: no altered manual row, no unrelated package-part change, correct A4 section, template fonts/tables, no clipped text/figures, repeating table headers, all report pages visually inspected, both appendix sheets visually inspected, every local link relative and existing, every hyperlink blue and underlined. Shared-project/browser reconciliation is coordinator-owned and reported separately in coordination handoff.

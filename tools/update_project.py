@@ -6,10 +6,11 @@ from regional import comparison_tables,result_hash
 from atlas_ranks import apply_atlas_ranks, ensemble_ids
 
 def update(root, paths, all_regions=False):
-    project_path=root/'Project.xlsx'; p=read_book(project_path)
+    project_path=root/'Project.xlsx'; source_hashes={project_path:sha(project_path)};p=read_book(project_path)
     loaded=[]
     modelids={(r['unit_id'],r['model_id']) for r in records(p,'Models & coverage','Models')}
     for path in paths:
+        source_hashes[path]=sha(path)
         b=read_book(path);o=validate_region(b,path)
         if o.get('calculation_result_sha256')!=result_hash(b):raise ValueError(f'{path}: generated results changed outside the regional calculation; refresh first')
         if o.get('selected_model_id') and (o['unit_id'],o['selected_model_id']) not in modelids:raise ValueError(f"{o['unit_id']}: register selected model for this region in Project.xlsx / Models & coverage first")
@@ -53,10 +54,15 @@ def update(root, paths, all_regions=False):
         for r in pr:r[ph.index('selected')]=r[ph.index('article_id')] in selected_papers
     p['Definitions & build']['Last build']=(['field','value'],[['schema_version',1],['regional_workbooks',len(rows(p,'Regions & status','Regions'))],['mode','all' if all_regions else 'partial']])
     apply_atlas_ranks(p, ensemble_ids(root))
+    for source,reviewed_hash in source_hashes.items():
+        if sha(source)!=reviewed_hash:raise ValueError(f'{source}: changed during project integration; reload current inputs before retrying')
     write_book(project_path,p)
     print(f'Updated {len(units)} regions; central source metadata preserved.',flush=True)
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__);g=ap.add_mutually_exclusive_group(required=True);g.add_argument('--all',action='store_true');g.add_argument('--region',type=Path,nargs='+');ap.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1]);a=ap.parse_args()
-    root=a.root.resolve();paths=sorted((root/'regions').glob('*/*.xlsx')) if a.all else [p.resolve() for p in a.region]
+    root=a.root.resolve()
+    # Reports and mapping appendices live beside each regional workbook.
+    # Only <unit>/<unit>.xlsx is a canonical regional calculation input.
+    paths=sorted(p for p in (root/'regions').glob('*/*.xlsx') if p.stem==p.parent.name) if a.all else [p.resolve() for p in a.region]
     update(root,paths,a.all)

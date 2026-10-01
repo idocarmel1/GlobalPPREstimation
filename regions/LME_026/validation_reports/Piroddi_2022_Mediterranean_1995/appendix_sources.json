@@ -1,0 +1,142 @@
+[
+  {
+    "id": "ARTICLE",
+    "title": "Piroddi et al. (2022), Modelling the Mediterranean Sea ecosystem at high spatial resolution to inform ecosystem-based management, Scientific Reports12:19680",
+    "supports": "71-group basin-wide 1995 baseline; dynamic 1995\u20132016 applications. Study footprint and timing; no missing routing repair.",
+    "locator": "Main paper pp7\u20139; Figures3\u20134",
+    "target": "papers/MED-2022/s41598-022-18017-x-75a92a71.pdf#page=7"
+  },
+  {
+    "id": "S2",
+    "title": "Piroddi et al. (2022), parameter-bearing Word supplement, Table S2",
+    "supports": "Exact source membership and species compositions. Every taxon record retains selected group IDs and exact source row/text; modern family boundaries can span multiple historical pools.",
+    "locator": "DOCX table2; per-taxon one-based row locators",
+    "target": "papers/MED-2022/41598_2022_18017_MOESM2_ESM-7d26163a.docx"
+  },
+  {
+    "id": "XLSX",
+    "title": "Piroddi et al. (2022), parameter-bearing Excel supplement",
+    "supports": "Basic input, diets, landings/discards per37 fleet entries. Units t/km2 per baseline annual step; proportions are transferred proxy mixtures.",
+    "locator": "Source workbook sheets and9546-cell extraction evidence",
+    "target": "papers/MED-2022/41598_2022_18017_MOESM1_ESM-75e4d6d3.xlsx"
+  },
+  {
+    "id": "ACCEPTED",
+    "title": "Accepted canonical Piroddi_2022_Mediterranean_1995 model",
+    "supports": "Exact preserved group strings and source_fisheries; inventory initialization only. Missing values stay unknown; missing routing prevents coefficients.",
+    "locator": "group[]; source_fisheries.landings/discards",
+    "target": "models/Piroddi_2022_Mediterranean_1995/model.json"
+  },
+  {
+    "id": "ROUNDTRIP",
+    "title": "Lossless extraction/source roundtrip",
+    "supports": "Source-to-canonical verification; no normalization or balancing. Validation of transcription does not prove a runnable model.",
+    "locator": "SOURCE_ROUNDTRIP and retained9546-cell audit",
+    "target": "models/Piroddi_2022_Mediterranean_1995/extracted_tables/SOURCE_ROUNDTRIP.xlsx"
+  },
+  {
+    "id": "TAXONOMY",
+    "title": "Independent all522 Mediterranean taxon membership review",
+    "supports": "M1\u2013M11 evidence, explicit source entries, accepted synonyms, taxonomy bridges, candidate sets and assumptions. Zero-catch labels included; no inferred weights.",
+    "locator": "records keyed by exact taxon; TableS2 and authoritative locators",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_audit/taxonomy_mapping_proposals.json"
+  },
+  {
+    "id": "WORMS",
+    "title": "World Register of Marine Species, retained catch-name API responses, retrieved30 September2026",
+    "supports": "Authoritative accepted names, synonyms and parent taxonomy; nomenclature does not alone establish residual ecological group membership. Individual Aphia URLs retained per record.",
+    "locator": "Catch labels522; raw API responses and retrieved identities",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_audit/worms_api_evidence.json"
+  },
+  {
+    "id": "WORMS-SOURCE",
+    "title": "World Register of Marine Species, retained source-name API responses",
+    "supports": "1166 source-name terms used to crosswalk historical source representatives and modern taxonomic families. All requests retained.",
+    "locator": "Source species terms; exact returned classifications",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_audit/worms_source_api_evidence.json"
+  },
+  {
+    "id": "ECOLOGY",
+    "title": "Authoritative ecological/biological evidence retained in membership audit",
+    "supports": "Supports uncertain residual and analogue candidates, provider category context and explicit assumptions. M10/M11 remain Very low.",
+    "locator": "Per-source public URLs and per-taxon evidence",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_audit/ecology_web_evidence.json"
+  },
+  {
+    "id": "ALLOC",
+    "title": "All candidate quantities and adopted allocation ledger",
+    "supports": "W1 sole-group allocation High; W4 complete source catches and W9 complete accepted biomass Medium proxies. Keep zero candidates, missing-data triggers and four retained total-removal stage splits.",
+    "locator": "records by exact taxon; raw fleet values, sums, biomass and weights",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/allocation_evidence.json"
+  },
+  {
+    "id": "SEARCH",
+    "title": "Primary-source composition/size-stage search,30 September2026",
+    "supports": "Reviewed GFCM material did not provide compatible observed basin-wide2019 mass fractions or model Adult/Recruit cutoffs. No High observed split adopted.",
+    "locator": "Queries, source scope, exclusions and decision",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/allocation_search.json"
+  },
+  {
+    "id": "GFCM-AGE",
+    "title": "GFCM2021 Adriatic anchovy/sardine benchmark meeting",
+    "supports": "Age inputs for GSAs17\u201318,2000\u20132019 exist; a sub-basin assessment and uncertain age matrix do not establish full-basin2019 caught-mass stage fractions.",
+    "locator": "Executive summary, data discussions",
+    "target": "https://www.fao.org/gfcm/technical-meetings/detail/en/c/1395453/"
+  },
+  {
+    "id": "GFCM-DATA",
+    "title": "GFCM public stock-assessment data and information",
+    "supports": "Public portal provides stock/area material; no matched all-basin taxa-mixture or quantitative source stage definition recovered.",
+    "locator": "Public assessment portal",
+    "target": "https://www.fao.org/gfcm/data/public-data-and-information/fisheries-and-aquaculture-data/stock-assessment-data-and-information/en"
+  },
+  {
+    "id": "CATCH",
+    "title": "Sea Around Us frozen regional catch extract",
+    "supports": "Catch tonnes1950\u20132019 and exact522 labels; reference2019landings. Preserve original input values and unidentified flags.",
+    "locator": "LME26 catch extract; authoritative workbook Catch table",
+    "target": "raw/LME_026.csv.gz"
+  },
+  {
+    "id": "CLASSIC",
+    "title": "Preserved regional classic/simple trophic-chain coefficients",
+    "supports": "Independent wet-weight PPR coefficient; calculate catch*coefficient/9 once.40 missing coefficients have zero2019landings; total is complete.",
+    "locator": "Classic PPR / Taxa and Annual; year2019",
+    "target": "LME_026.xlsx"
+  },
+  {
+    "id": "DIAGNOSTICS",
+    "title": "Retained exact selected-model direct diagnostic report",
+    "supports": "GE,TE and With Egestion NOT_RUN: no routing across Discards70/Detritus71. No negative-SPPR matrix/rho/b/per-pool coefficient can be assessed.",
+    "locator": "Strict source and documented-default constructor failure",
+    "target": "models/Piroddi_2022_Mediterranean_1995/diagnostics/DIRECT_SPPR_REPORT.md"
+  },
+  {
+    "id": "BALANCE",
+    "title": "Independent source-only mass-balance audit",
+    "supports": "Conditional fin-whale catch/production conflict and source unknown fields remain limitations; no biological/routing correction applied.",
+    "locator": "MASS_BALANCE.md; source arithmetic and assumptions",
+    "target": "models/Piroddi_2022_Mediterranean_1995/extracted_tables/MASS_BALANCE.md"
+  },
+  {
+    "id": "BOUNDARY",
+    "title": "Project marine LME26 geographic boundary",
+    "supports": "Mediterranean target polygon. Existing target-copy model footprint is not independent study-area evidence.",
+    "locator": "LMEs.geojson feature26",
+    "target": "../../common_reference_data/geography/LMEs.geojson"
+  },
+  {
+    "id": "GEOGRAPHY",
+    "title": "Documented Mediterranean geographic assessment",
+    "supports": "Approximate overlap A and B95\u2013100% from author whole-basin statements and Figure4 marine mask/sub-basins. Coastal cells/straits uncertain; no exact polygon overlap claimed.",
+    "locator": "SourceFigure4h,p9 and target polygon",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/geography/geographic_assessment.json"
+  },
+  {
+    "id": "ADOPTED",
+    "title": "Adopted all-taxon review, exact keyed changes and confidence",
+    "supports": "All522 rows, separate membership/allocation confidence, weakest-component overall confidence, fixed2019 arithmetic.",
+    "locator": "Exact taxon keys; full precision quantities and evidence",
+    "target": "validation_reports/Piroddi_2022_Mediterranean_1995/adopted_taxon_audit.json"
+  }
+]

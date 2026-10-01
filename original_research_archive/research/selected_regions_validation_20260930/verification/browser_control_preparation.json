@@ -1,0 +1,65 @@
+{
+  "status": "Control discovery only against pre-refresh pages; no final-result verification claimed.",
+  "server": "http://127.0.0.1:8877",
+  "browser": "Codex in-app browser 2; hidden",
+  "tabs": {
+    "map": "1",
+    "trends": "2"
+  },
+  "trends": {
+    "ecosystem_dialog": [
+      "chooseEcosystems",
+      "ecosystemDialog",
+      "ecosystemSearch",
+      "ecosystemSet",
+      "clearSelection",
+      "selectVisible",
+      "closeEcosystems"
+    ],
+    "controls": [
+      "catchBasis",
+      "uncertainty",
+      "metric",
+      "pprMethod",
+      "baselineMethod",
+      "sourceScope",
+      "nppScope",
+      "nppMethod",
+      "nppFill",
+      "unidentifiedTreatment",
+      "openGroupFilter",
+      "fromYear",
+      "toYear",
+      "inspectYear"
+    ],
+    "display": [
+      "focusValue",
+      "inspectValue"
+    ],
+    "exports": [
+      "downloadCSV",
+      "downloadJSON"
+    ]
+  },
+  "required_final_checks": [
+    "Reload after Project fingerprint/build verification",
+    "Explicitly choose each canonical selected model; existing local preferences include old LME013 Northern Humboldt alternative",
+    "All 23 default reference results and method availability; LME022 total catch differs from other reference defaults",
+    "Map/trends actual controls: year, catch basis, method, source scope, unidentified handling, groups, NPP and sensitivity availability",
+    "Article source metadata/geometry and source archive links",
+    "Preserve FAIL/NOT_RUN/unsupported/production-ineligible status and missing values",
+    "LME035 retained join ID mentions1963; visible source/review text must identify the accepted scientific1980payload and unavailable focal10–50m footprint. LME052 NE must not be presented as northeastern."
+  ],
+  "browser_transport_note": "Initial trends create returned a frame-size error after tab creation. Existing tab recovered via documented browser.tabs.get, using focused read-only DOM observations instead of giant full state output.",
+  "LME047_WARN_eligibility_check": {
+    "case": "Annual status ok is a calculation availability flag, while GE/TE/With Egestion diagnostics remain WARN and accepted production_eligible remains true. Verify visible review flags in map and trend source panels and exported diagnosis_flags. No invented strict-balance failure.",
+    "expected_classic_2019_landings_tC": 370210805.58009297,
+    "model_2019_landings_tC": {
+      "new_GE": 24295788.1691034,
+      "new_TE_EEfix": 138080451.07007876,
+      "new_WithEgestion": 13265798.321822489
+    },
+    "regional_proof": "regions/LME_047/validation_reports/47_2_East_China_Sea_(2018)/expected_integrated_ui.json",
+    "root_numeric_effects": "verification/mapping_effects_LME_047.json"
+  }
+}

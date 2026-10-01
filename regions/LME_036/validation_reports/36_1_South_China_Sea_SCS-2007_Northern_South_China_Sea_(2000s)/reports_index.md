@@ -1,3 +1,11 @@
+# Current regional validation package
+
+The [current handoff](coordination_handoff.json), [source review](source_review.md), [adopted taxon audit](selected_regions_review_20260930/taxon_audit_adopted.json) and [audit field guide](selected_regions_review_20260930/audit_schema.md) describe the released regional review. Current overall confidence is `review_confidence`; inherited fields in the audit preserve earlier decisions. The [residual-fish follow-up](residual_fish_scope_followup.json), [independent regional checks](residual_scope_independent_QA.json) and [serialization proof](xml_cell_order_followup.json) supersede earlier candidate sets, affected values and file identities where specified. Accepted scientific parameters and researcher fields are preserved. GE/TE remain WARN and With Egestion OK; regional review completion is not model approval.
+
+Shared workbook integration has occurred; final generated-page, browser, graph and Git verification remains pending coordinator. The sections below describe historical template tests and retained source copies. Their pending-alignment wording, evidence gaps and hashes belong to those earlier stages.
+
+---
+
 # Supporting reports index
 
 Completed-template test for `36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)`, 29 September 2026. Originals were copied, never moved. Scientific text is preserved; explicit navigation was added only to selected copies. Hashes below describe original bytes. Source reconstruction is a separate candidate, not the selected runtime.
@@ -74,3 +82,7 @@ Outstanding scientific evidence: no verified study-domain polygon, no full selec
 ## Independent validation skill test 29 September 2026
 
 New analysis, not historical evidence or adopted science. [Draft evidence review](independent_review_20260929/review_evidence.md), [taxon audit](independent_review_20260929/taxon_audit.csv), [arithmetic](independent_review_20260929/arithmetic.json), [alignment mismatches](independent_review_20260929/alignment_mismatches.csv), [future alignment proposal](independent_review_20260929/future_alignment_proposal.md). The Word draft is beside the regional workbook and is explicitly pending alignment. No original assets moved or scientific inputs changed. Existing source figures and links were retained; newly generated QA renders are temporary only.
+
+## Coordinator reconciliation — 1 October 2026
+
+Regional review and shared result reconciliation are complete. Earlier pending coordinator tasks in the regional handoff describe its historical release stage. Current reports, appendices, preserved scientific inputs, limits and verification are indexed in [the 23-region coordinator record](<../../../../original_research_archive/research/selected_regions_validation_20260930/final_validation_status.md>). Scientific approval is not implied; graph and Git closeout are tracked separately.

@@ -70,13 +70,15 @@ Check portrait body and separate coverage-section layout, table widths, readable
 
 Apply the filling guide's [portable-link rules](../../../templates/Model_validation_template_instructions.md#links-output-and-verification). Verify repository-local targets are stored relative to the containing DOCX/XLSX/supporting document, exist in the versioned repository, and still resolve after relocation. Inspect relationships, hyperlink fields/formulas and Hyperlink Base; preserve web URLs, internal anchors and URI-escaped fragments. A tooltip may display an absolute resolved path even when the stored link is relative. Do not reopen every remote reference merely to claim that formatting links work; distinguish destination verification from evidence retrieval.
 
+Make all visible hyperlink text blue and underlined in both DOCX and Excel, including linked source labels, internal links and HYPERLINK formulas. Verify effective run/cell formatting rather than relying only on a named Hyperlink style. For styling-only corrections, preserve destinations, researcher content, values, formulas and layout; use brief structural and rendered appearance checks without a scientific rerun.
+
 Use targeted before/after checks for the relevant allowed scientific inputs to confirm a report-only run did not change them. Never inspect excluded files for this check. Preserve the edited researcher original and master template. No workbook writer, SPPR solver, project updater or map builder is part of ordinary document production.
 
 ## Delivery
 
 Return the Word report and linked Excel appendix with a brief statement of material gaps and what was verified. Detailed audit files are linked from the report as needed; QA screenshots, temporary PDFs and builders are not deliverables by default. Offer no claim that the model is approved, that a pipeline was rerun, or that historical evidence was freshly reproduced unless supported.
 
-When the user asks to review a skill/template before a regional test, deliver those requested artifacts and stop. When the later test is authorized, apply this skill to the specified region, preserving any continuing file exclusions and using a new output path that protects researcher work. If that validation reveals a need for a fresh scientific run, recommend the necessary scope, explain why, and ask for explicit confirmation before starting it. Authorization for a validation test is not authorization for a scientific rerun.
+When the user asks to review a skill/template before a regional test, deliver those requested artifacts and stop. When the later test is authorized, apply this skill to the specified region, preserving any continuing file exclusions and using a new output path that protects researcher work. If that validation reveals a need for a fresh scientific run, explain the necessary scope and why; obtain confirmation unless explicit session authorization already covers that run. Authorization for a validation test alone is not authorization for a scientific rerun.
 
 ## Approved adoption and denominator checks
 

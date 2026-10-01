@@ -1,0 +1,270 @@
+{
+  "project_sha256_at_review": "ce0b658e76432e13b4c8c38a2ef5b985a54f9d9b7b44e478224539dbb32e51fa",
+  "regional_proposal_original_snapshot": "81c201b01db1025d7840e05531bd334427e07b9a626c9497a75c923f2533a791",
+  "scope": "LME037 reviewed conditional availability, source lineage and approximate expanded Visayan baseline coverage; preserve selected1997model, accepted scientific inputs, historical scores and unselected2018 endpoint.",
+  "regional_inputs": [
+    {
+      "path": "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+      "sha256": "354362a01ac47803defefa5505e37a8f6a7c30c6669f84664758ca71ec396a8b"
+    },
+    {
+      "path": "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/coordination_handoff.json",
+      "sha256": "2f8a8bd5801ecb83f146dee24fa46241e9f0ef7a32864337243e1004ce9a9db6"
+    },
+    {
+      "path": "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+      "sha256": "dda293e173b468bae0dda5806861b9dcb41b98439c0859521d21259168682ba9"
+    },
+    {
+      "path": "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/geography/geographic_assessment.json",
+      "sha256": "d94ee696d5f0f7169bf7a7b3c78bbcf2424ceb5516c46e79a5ca61973cd708d0"
+    },
+    {
+      "path": "regions/LME_037/LME_037.xlsx",
+      "sha256": "750142a8a67165ac25288e89a67f32a5405d9bbcd04d3bd217daba3cdb7229e4"
+    },
+    {
+      "path": "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json",
+      "sha256": "c5e00f4bf099d5df2e069294dcaca24acead141b001ab6107470dd891eb954af"
+    }
+  ],
+  "patches": [
+    {
+      "sheet": "Models & coverage",
+      "table": "Models",
+      "key": {
+        "unit_id": "LME_037",
+        "model_id": "Bacalso2026_Visayan_Sea_1997_baseline"
+      },
+      "field": "availability",
+      "expected_old": "selected; retained diagnostics GE WARN (audited defaults), TE WARN (audited defaults), With Egestion WARN (audited defaults); regional matching and model PPR pending; evidence: regions/LME_037/models/Bacalso2026_Visayan_Sea_1997_baseline/diagnostics/DIRECT_SPPR_REPORT.md",
+      "proposed": "selected; all 250 catch labels independently reassessed; complete source catch-proxy mappings and dependent arithmetic available; GE/TE/With Egestion remain WARN under audited defaults, strict balance false and TE near-singular Seabirds; production admission unresolved; 2018 unselected and NOT_RUN. Evidence: regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/coordination_handoff.json",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Models & coverage",
+      "table": "Models",
+      "key": {
+        "unit_id": "LME_037",
+        "model_id": "Bacalso2026_Visayan_Sea_1997_baseline"
+      },
+      "field": "target_coverage_ratio",
+      "expected_old": null,
+      "proposed": 0.015915567699833707,
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Models & coverage",
+      "table": "Models",
+      "key": {
+        "unit_id": "LME_037",
+        "model_id": "Bacalso2026_Visayan_Sea_1997_baseline"
+      },
+      "field": "coverage_note",
+      "expected_old": "Visayan Sea and included outside municipal waters; model area 16728.5 km2 (Visayan Sea proper 12521.8 km2). Subregional candidate in existing LME_037 assignment; no verified digital boundary or LME overlap fraction. 2026 article explicitly reuses Bacalso, Romagnoni and Wolff (2023), DOI 10.3389/fmars.2023.1099400. Official 2023 Word supplement DOI 10.3389/fmars.2023.1099400.s001, Table S2 pp7-8 supplies 33-prey x 30-consumer diet (990 cells), Table S3 pp9-11 supplies catch. 191 populated baseline parameter cells agree across the articles after documented reef habitat scaling; 2026 Table 1 full-model-area values used. Model labelled 1997; underlying survey 1996-1997, with inconsistent 1997-1998 wording in 2026 methods recorded. Direct diagnose_sppr(short=False,flat=False), GE/TE/With Egestion only: all WARN, strict input/budget balanced false; PP budget gaps 0.3110%, 0.3612%, 0.3353%. TE flags near-singular seabirds. Exact canonical source fails stock diet tolerance; DC_tol=0.0021 preserves source diets, but unknown diet import then causes a diagnostic axis exception. Separate documented diagnostic staging sets missing diet import to zero and uses loader GS/living BA/migration and single-detritus defaults. Loader changes detritus EE 0.44 to 1 and derives detritus BA 682.68614643 t/km2/year. These are runtime assumptions, not altered published inputs; canonical JSON and original source files remain unchanged. No diet normalization or source parameter repair performed. Unselected and not production-admitted. Supplement: https://frontiersin.figshare.com/articles/dataset/21959183 ; https://ndownloader.figshare.com/files/38954888",
+      "proposed": "Selected local Visayan 1997 baseline; all 250 catch labels reviewed and conditional GE/TE/With Egestion arithmetic available. Approximate marine overlap: A 1–2% of the full Sulu-Celebes target, B 90–100% of the study (trace A 1.59156%, B 98.04861%; not author GIS). The model explicitly includes commercial waters plus both inside-domain and outside-domain municipal waters of all 33 municipalities/cities (2023 §2.1, PDF 2), with a reported area of 16,728.5 km². The 2026 §2.2 baseline reuse supports that extent; its dashed figure is indicative. The 2023 Figure 1 envelope is registered to the 2026 graticule; reconstructed marine area is 16,457.4 km². Accepted 1997 parameters match 2026 Table 1; diet/catch lineage matches the 2023 supplement. The later 2004/2009/2014 surveys in Table S3 support membership, not observed 1997 stage caught-mass shares. All direct methods remain WARN, strict input/budget balance false, and TE Seabirds near singular. Canonical and runtime assumptions remain accepted. Numerical availability does not establish whole-LME applicability or production admission. The 2018 endpoint remains unselected and NOT_RUN. Evidence: regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "target_coverage_ratio",
+      "expected_old": null,
+      "proposed": 0.015915567699833707,
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "geometry_method",
+      "expected_old": "No defensible digital study boundary located",
+      "proposed": "Approximate 2023 baseline Figure 1 commercial plus inside-domain and outside-domain municipal envelope (explicit §2.1, PDF 2), affine-registered to the 2026 native graticule; ordered coastline, consistent Natural Earth 1:50 million land mask, WGS84 geodesic area and nine inside/outside water controls.",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "geometry_confidence",
+      "expected_old": "unavailable",
+      "proposed": "low",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "geometry_note",
+      "expected_old": "No defensible digital study boundary located; review study map before spatial overlay.",
+      "proposed": "Marine trace 16,457.4 km² versus reported baseline 16,728.5 km²; overlap 16,136.3 km². Native figure, calibrated vertices, exact baseline extent definition and nine source-visible controls retained. Dark-green non-domain municipal waters are explicitly included by 2023 §2.1. Reported-area denominator is a sensitivity scenario, not a second measured polygon. Approximate raster envelope/coastline/registration uncertainty: A 1–2%, B 90–100%; not author GIS or statistical intervals. Land masking uses Natural Earth 1:50 million scale, not 50-metre resolution.",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "coverage_note",
+      "expected_old": "Visayan Sea and included outside municipal waters; model area 16728.5 km2 (Visayan Sea proper 12521.8 km2). Subregional candidate in existing LME_037 assignment; no verified digital boundary or LME overlap fraction. 2026 article explicitly reuses Bacalso, Romagnoni and Wolff (2023), DOI 10.3389/fmars.2023.1099400. Official 2023 Word supplement DOI 10.3389/fmars.2023.1099400.s001, Table S2 pp7-8 supplies 33-prey x 30-consumer diet (990 cells), Table S3 pp9-11 supplies catch. 191 populated baseline parameter cells agree across the articles after documented reef habitat scaling; 2026 Table 1 full-model-area values used. Model labelled 1997; underlying survey 1996-1997, with inconsistent 1997-1998 wording in 2026 methods recorded.",
+      "proposed": "Selected local Visayan 1997 baseline; all 250 catch labels reviewed and conditional GE/TE/With Egestion arithmetic available. Approximate marine overlap: A 1–2% of the full Sulu-Celebes target, B 90–100% of the study (trace A 1.59156%, B 98.04861%; not author GIS). The model explicitly includes commercial waters plus both inside-domain and outside-domain municipal waters of all 33 municipalities/cities (2023 §2.1, PDF 2), with a reported area of 16,728.5 km². The 2026 §2.2 baseline reuse supports that extent; its dashed figure is indicative. The 2023 Figure 1 envelope is registered to the 2026 graticule; reconstructed marine area is 16,457.4 km². Accepted 1997 parameters match 2026 Table 1; diet/catch lineage matches the 2023 supplement. The later 2004/2009/2014 surveys in Table S3 support membership, not observed 1997 stage caught-mass shares. All direct methods remain WARN, strict input/budget balance false, and TE Seabirds near singular. Canonical and runtime assumptions remain accepted. Numerical availability does not establish whole-LME applicability or production admission. The 2018 endpoint remains unselected and NOT_RUN. Evidence: regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "loadability_class",
+      "expected_old": "D — reconstruction not yet audited",
+      "proposed": "D — historical screening class retained; source reconstruction audited, direct diagnostics conditional WARN",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "full_model_loadable",
+      "expected_old": "Canonical source requires declared diagnostic defaults; GE WARN; TE WARN; With Egestion WARN. No production admission. 2018 not runnable.",
+      "proposed": "Selected 1997 source reconstruction and all 250 mappings audited; exact declared runtime defaults reproduce retained GE/TE/With Egestion WARN. Strict balance false; local-to-LME suitability and production admission unresolved. The 2018 endpoint remains unselected and NOT_RUN.",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "quality_rationale",
+      "expected_old": "Original screening scores retained without recalculation; historical provisional scores are not a new model-quality assessment. Updated evidence: Direct diagnose_sppr(short=False,flat=False), GE/TE/With Egestion only: all WARN, strict input/budget balanced false; PP budget gaps 0.3110%, 0.3612%, 0.3353%. TE flags near-singular seabirds. Exact canonical source fails stock diet tolerance; DC_tol=0.0021 preserves source diets, but unknown diet import then causes a diagnostic axis exception. Separate documented diagnostic staging sets missing diet import to zero and uses loader GS/living BA/migration and single-detritus defaults. Loader changes detritus EE 0.44 to 1 and derives detritus BA 682.68614643 t/km2/year. These are runtime assumptions, not altered published inputs; canonical JSON and original source files remain unchanged. No diet normalization or source parameter repair performed. Unselected and not production-admitted.",
+      "proposed": "Original screening scores/cap retained without recalculation; historical score does not establish current scientific approval. Current evidence: all 191 populated source parameter cells independently match canonical; 2023 diet/catch lineage verified; 2026 Table S3 baseline membership crosswalk reviewed. Exact declared runtime defaults and all full-source matrix entries/scopes audited; GE/TE/Egestion WARN, strict balance false, TE near-singular unfished Seabirds. All 250 mappings support conditional numerical results with explicit membership/allocation confidence. The complete Visayan baseline extent includes non-domain municipal waters and covers approximately 1–2% of the target. Whole-LME applicability is unresolved.",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "documentation_evidence",
+      "expected_old": "2026 article explicitly reuses Bacalso, Romagnoni and Wolff (2023), DOI 10.3389/fmars.2023.1099400. Official 2023 Word supplement DOI 10.3389/fmars.2023.1099400.s001, Table S2 pp7-8 supplies 33-prey x 30-consumer diet (990 cells), Table S3 pp9-11 supplies catch. 191 populated baseline parameter cells agree across the articles after documented reef habitat scaling; 2026 Table 1 full-model-area values used. Model labelled 1997; underlying survey 1996-1997, with inconsistent 1997-1998 wording in 2026 methods recorded. Evidence: regions/LME_037/models/extraction_review_20260928/BASELINE_PARAMETER_CROSSWALK.json; regions/LME_037/models/extraction_review_20260928/WORD_RENDER_CELL_CROSSCHECK.json; recovered source DOWNLOAD_MANIFEST.json",
+      "proposed": "2026 article explicitly reuses Bacalso, Romagnoni and Wolff (2023), DOI 10.3389/fmars.2023.1099400. Official 2023 Word supplement DOI 10.3389/fmars.2023.1099400.s001, Table S2 pp7-8 supplies 33-prey x 30-consumer diet (990 cells), Table S3 pp9-11 supplies catch. 191 populated baseline parameter cells agree across the articles after documented reef habitat scaling; 2026 Table 1 full-model-area values used. Model labelled 1997; underlying survey 1996-1997, with inconsistent 1997-1998 wording in 2026 methods recorded. Evidence: regions/LME_037/models/extraction_review_20260928/BASELINE_PARAMETER_CROSSWALK.json; regions/LME_037/models/extraction_review_20260928/WORD_RENDER_CELL_CROSSCHECK.json; recovered source DOWNLOAD_MANIFEST.json\n2026-10-01 review: all 191 source cells independently reread; main PDF 5 baseline-purpose passage and supplement Table S3 PDF 8–14 crosswalk; 250-label taxonomy/candidate/allocation audit; complete 136-entry per-source matrices for GE/TE/Egestion and 306 scope coefficients reconciled. No new solver or Monte Carlo expansion. Baseline extent explicitly includes non-domain municipal waters under 2023 §2.1 (PDF 2), reused by 2026 §2.2 (PDF 3). Evidence: regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/evidence_index.json",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "loadability_evidence",
+      "expected_old": "regions/LME_037/models/Bacalso2026_Visayan_Sea_1997_baseline/extracted_tables/REPORT.md; regions/LME_037/models/Bacalso2026_Visayan_Sea_1997_baseline/diagnostics/DIRECT_SPPR_REPORT.md; regions/LME_037/models/extraction_review_20260928/VERIFICATION.json",
+      "proposed": "regions/LME_037/models/Bacalso2026_Visayan_Sea_1997_baseline/extracted_tables/REPORT.md; regions/LME_037/models/Bacalso2026_Visayan_Sea_1997_baseline/diagnostics/DIRECT_SPPR_REPORT.md; regions/LME_037/models/extraction_review_20260928/VERIFICATION.json; regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/matrix_inspection.json; regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/calculation_verification.json",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "article_id": "LME037-Bacalso-2026__LME_037",
+        "unit_id": "LME_037"
+      },
+      "field": "notes",
+      "expected_old": "\n2026-09-28 extraction audit: Direct diagnose_sppr(short=False,flat=False), GE/TE/With Egestion only: all WARN, strict input/budget balanced false; PP budget gaps 0.3110%, 0.3612%, 0.3353%. TE flags near-singular seabirds. Exact canonical source fails stock diet tolerance; DC_tol=0.0021 preserves source diets, but unknown diet import then causes a diagnostic axis exception. Separate documented diagnostic staging sets missing diet import to zero and uses loader GS/living BA/migration and single-detritus defaults. Loader changes detritus EE 0.44 to 1 and derives detritus BA 682.68614643 t/km2/year. These are runtime assumptions, not altered published inputs; canonical JSON and original source files remain unchanged. No diet normalization or source parameter repair performed. Unselected and not production-admitted. 2018 endpoint unselected and NOT_RUN: no matching realized diet/flow, catch and BA model export; group 15 biomass is censored (<0.001), so a complete reliable standalone 2018 model cannot be reconstructed. 1997 diet is not silently reused for 2018.\n[2026-09-28 user selection update] Selected under the user instruction to select all top-25 regions except LME_048 and EEZ_938. Available 1997 baseline reconstructed from verified 2023 diet/catch supplement lineage and matching 2026 parameter cells. GE/TE/With Egestion WARN only under documented runtime defaults and diet tolerance; source JSON preserved. Local Visayan Sea spatial suitability and exact production admission remain unresolved. The 2018 endpoint remains NOT_RUN and unselected.",
+      "proposed": "\n2026-09-28 extraction audit: Direct diagnose_sppr(short=False,flat=False), GE/TE/With Egestion only: all WARN, strict input/budget balanced false; PP budget gaps 0.3110%, 0.3612%, 0.3353%. TE flags near-singular seabirds. Exact canonical source fails stock diet tolerance; DC_tol=0.0021 preserves source diets, but unknown diet import then causes a diagnostic axis exception. Separate documented diagnostic staging sets missing diet import to zero and uses loader GS/living BA/migration and single-detritus defaults. Loader changes detritus EE 0.44 to 1 and derives detritus BA 682.68614643 t/km2/year. These are runtime assumptions, not altered published inputs; canonical JSON and original source files remain unchanged. No diet normalization or source parameter repair performed. Historical extraction-audit status: unselected then; current 1997 baseline selected, not production-admitted. 2018 endpoint unselected and NOT_RUN: no matching realized diet/flow, catch and BA model export; group 15 biomass is censored (<0.001), so a complete reliable standalone 2018 model cannot be reconstructed. 1997 diet is not silently reused for 2018.\n[2026-09-28 user selection update] Selected under the user instruction to select all top-25 regions except LME_048 and EEZ_938. Available 1997 baseline reconstructed from verified 2023 diet/catch supplement lineage and matching 2026 parameter cells. GE/TE/With Egestion WARN only under documented runtime defaults and diet tolerance; source JSON preserved. Local Visayan Sea spatial suitability and exact production admission remain unresolved. The 2018 endpoint remains NOT_RUN and unselected.\n2026-10-01: all 250 labels reviewed; no unresolved labels; 96 complete source catch-proxy splits at Medium allocation and 72 Very low overall records. Original scientific inputs and WARN/NOT_RUN retained. Current-template Word report and linked 250-row Excel appendix reside in the regional directory.",
+      "evidence": [
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/shared_metadata_proposals.json",
+        "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md",
+        "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+      ]
+    }
+  ],
+  "geometry_patches": [
+    {
+      "unit_id": "LME_037",
+      "key": "article:LME037-Bacalso-2026__LME_037",
+      "action": "insert",
+      "expected_old_geometry_sha256": null,
+      "replacement_geojson": "regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/geography/study_area_reconstructed.geojson",
+      "replacement_file_sha256": "3229220394ed7a45ff8e1b8f1cee07ebf6b0460d7a3ca38bddf15e871c41595e",
+      "replacement_geometry_sha256": "5c2db93fea1e7db6b98c2fd3008cc4394cd3c4a2fe204b848e1b2d3b1ea8e97d",
+      "geometry_role": "Approximate expanded baseline study marine extent, including non-domain municipal waters explicitly modeled in2023methods and reused by2026baseline; source raster registration plus Natural Earth1:50million land mask; not author GIS. No target-region or PPR multiplier change.",
+      "evidence": "original_research_archive/research/selected_regions_validation_20260930/verification/LME_037_geography_coordinator_review.json"
+    }
+  ]
+}

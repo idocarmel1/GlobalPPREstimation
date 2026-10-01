@@ -1,0 +1,116 @@
+{
+  "status": "PASS independent source-prose bounds, retained geometries, geodesic areas and controls; final regional package pending",
+  "source_review": "Coordinator read Buchary1999 PDF29/printed20 and visually inspected Figure2.1/PDF30. Approximate prose bounds are3S–6deg50minS,105deg50minE and116deg30min–117deg30minE. Figure is bathymetry/context, not an explicit study polygon.",
+  "method": "Independent WGS84 ellipsoidal areas; Natural Earth1:50million land mask. Target calculation boundary is unchanged.",
+  "target_area_km2": 2267635.6378392735,
+  "scenarios": [
+    {
+      "east": 116.5,
+      "area": 441114.36163909273,
+      "intersection_area": 439052.4811223565,
+      "A": 19.361685528134917,
+      "B": 99.53257461192723
+    },
+    {
+      "east": 117.5,
+      "area": 488277.39083688083,
+      "intersection_area": 486215.83757015294,
+      "A": 21.441532733779304,
+      "B": 99.57779055401387
+    }
+  ],
+  "controls": [
+    {
+      "name": "central Java Sea",
+      "longitude": 111,
+      "latitude": -5,
+      "expected": true,
+      "actual": true,
+      "independent_actual": true
+    },
+    {
+      "name": "western offshore water",
+      "longitude": 107,
+      "latitude": -4.5,
+      "expected": true,
+      "actual": true,
+      "independent_actual": true
+    },
+    {
+      "name": "eastern offshore water",
+      "longitude": 116,
+      "latitude": -5.5,
+      "expected": true,
+      "actual": true,
+      "independent_actual": true
+    },
+    {
+      "name": "north of approximate bounds",
+      "longitude": 111,
+      "latitude": -2.5,
+      "expected": false,
+      "actual": false,
+      "independent_actual": false
+    },
+    {
+      "name": "Banda Sea outside",
+      "longitude": 125,
+      "latitude": -5,
+      "expected": false,
+      "actual": false,
+      "independent_actual": false
+    },
+    {
+      "name": "Java land",
+      "longitude": 110,
+      "latitude": -7.5,
+      "expected": false,
+      "actual": false,
+      "independent_actual": false
+    },
+    {
+      "name": "Sumatra land",
+      "longitude": 105,
+      "latitude": -4.5,
+      "expected": false,
+      "actual": false,
+      "independent_actual": false
+    }
+  ],
+  "limits": "Source471000km2 is reported context. Latitudinal bounds may truncate coastline-following waters; east-bound scenarios are sensitivity bounds, not statistical uncertainty. A/B describe an approximate reconstruction and do not scale catch/PPR.",
+  "files": [
+    {
+      "path": "common_reference_data/geography/LMEs.geojson",
+      "sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423"
+    },
+    {
+      "path": "common_reference_data/geography/basemaps/ne_50m_land.geojson",
+      "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b"
+    },
+    {
+      "path": "regions/LME_038/papers/BUCHARY-1991/ubc_1999-0254.pdf.pdf",
+      "sha256": "eb2c504f176b230153cfd4caa0fc6671e02c5d1cdc0fd2bc0561d3590759f53d"
+    },
+    {
+      "path": "regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/geography/source_figure2_1_landscape.png",
+      "sha256": "2c5a79eff6da9f7709957396810dce9e9ffde111bd2fb8084327074568e82f35"
+    },
+    {
+      "path": "regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/geography/geographic_assessment.json",
+      "sha256": "bac56be58a83fac795b77154b10e373a96e1f4b4600382993443b86a80d67d59"
+    },
+    {
+      "path": "regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/geography/reconstructed_study_bounds.geojson",
+      "sha256": "6e51852045996e4b360cb7241362ef98482f4676f161cc6f73cab6cdf5a1c9c3"
+    },
+    {
+      "path": "regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/geography/target_region.geojson",
+      "sha256": "2293852ed3188b89fd8e60fa1d4609a46c4ddbf144de3854036812673c65f4a3"
+    },
+    {
+      "path": "regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/geography/target_region.png",
+      "sha256": "4a951c9eb4184123f75b5561a26f0c06704ed904d426f52d7f9ee710c7840cde"
+    }
+  ],
+  "visual_comparison": "Source Figure2.1 and final two-scenario target overlay visually inspected; approximate prose bounds and plotted controls are consistent. Coastline clipping limitation remains explicit."
+}

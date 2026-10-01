@@ -1,0 +1,16 @@
+{
+  "purpose": "Coordinator-only metadata and article-geometry transaction guard",
+  "tests": [
+    {
+      "command": "python -X utf8 test_reviewed_geometry.py before implementation",
+      "result": "2 expected AttributeErrors, new helper absent"
+    },
+    {
+      "command": "python -X utf8 -m unittest discover -s original_research_archive/research/selected_regions_validation_20260930 -p test_*.py",
+      "result": "3 tests passed; precise numerical metadata, stale geometry rejection, regional geometry exclusion and unrelated chunk preservation"
+    }
+  ],
+  "script_sha256": "b29242f6a9c2abcf711562c0b8664a3b929fc8c441192c5cf4b8bae076954a4e",
+  "test_sha256": "7dbb5ca440ba27df68b0693113e51fb38851085d7ac89095ef492830d468ee78",
+  "scientific_inputs": "No scientific calculation or parameter changes; only explicitly reviewed central metadata and article geometry are permitted."
+}

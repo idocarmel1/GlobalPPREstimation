@@ -1,10 +1,105 @@
-import sys,tempfile,unittest,shutil,subprocess
+import sys,tempfile,unittest,shutil,subprocess,json
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import original_atlas_data as atlas
 
 
 class PaperFileTests(unittest.TestCase):
+    def test_declared_article_folder_is_discovered_when_source_id_is_an_alias(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_038/papers/BUCHARY-1991';folder.mkdir(parents=True)
+            path=folder/'thesis1999.pdf';path.write_bytes(b'%PDF-thesis')
+            paper={'article_id':'INDO-1999__LME_038','unit_id':'LME_038','source_article_id':'INDO-1999',
+                   'article_dir':folder.relative_to(root).as_posix(),'material_files':[]}
+            atlas.reconcile_paper_files(root,[paper])
+            self.assertEqual(paper['main_file_status'],'local_file_present')
+            self.assertEqual([f['relative_path'] for f in paper['material_files']],['../'+path.relative_to(root).as_posix()])
+
+    def test_declared_article_folder_follows_relocation_and_rejects_escape(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_038/papers/Buchary';folder.mkdir(parents=True)
+            (folder/'thesis.pdf').write_bytes(b'%PDF-thesis')
+            provenance=root/'common_reference_data/provenance';provenance.mkdir(parents=True)
+            (provenance/'archive_relocation.csv').write_text('old_path,new_path\nold-thesis-folder,'+folder.relative_to(root).as_posix()+'\n')
+            paper={'article_id':'P__LME_038','unit_id':'LME_038','article_dir':'old-thesis-folder'}
+            atlas.reconcile_paper_files(root,[paper])
+            self.assertEqual(paper['main_file_status'],'local_file_present')
+            with self.assertRaisesRegex(ValueError,'outside the repository'):
+                atlas.reconcile_paper_files(root,[{'article_id':'P__LME_038','unit_id':'LME_038','article_dir':'../outside'}])
+
+    def test_file_discovery_preserves_a_specific_current_loadability_assessment(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_038/papers/P';folder.mkdir(parents=True)
+            (folder/'thesis.pdf').write_bytes(b'%PDF-thesis')
+            assessment='Printed source fails strict admission; accepted derived model selected'
+            paper={'article_id':'P__LME_038','unit_id':'LME_038','loadability_class':assessment,
+                   'quality_rationale':'E — no verified downloadable file. Historical score; source assessed later.'}
+            atlas.reconcile_paper_files(root,[paper])
+            self.assertEqual(paper['loadability_class'],assessment)
+            self.assertNotIn('E — no verified downloadable file',paper['quality_rationale'])
+            self.assertIn('Historical score',paper['quality_rationale'])
+
+    def test_file_discovery_preserves_missing_scientific_assessments(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_038/papers/P';folder.mkdir(parents=True)
+            (folder/'thesis.pdf').write_bytes(b'%PDF-thesis')
+            paper={'article_id':'P__LME_038','unit_id':'LME_038','loadability_class':None,'quality_rationale':None}
+            atlas.reconcile_paper_files(root,[paper])
+            self.assertEqual(paper['main_file_status'],'local_file_present')
+            self.assertIsNone(paper['loadability_class'])
+            self.assertIsNone(paper['quality_rationale'])
+
+    def test_reviewed_context_role_follows_the_source_relocation_ledger(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_035/papers/P';folder.mkdir(parents=True)
+            path=folder/'related.pdf';path.write_bytes(b'%PDF-context')
+            reference=root/'common_reference_data';provenance=reference/'provenance';provenance.mkdir(parents=True)
+            old='old/source-context.pdf';new=path.relative_to(root).as_posix()
+            (provenance/'archive_relocation.csv').write_text('old_path,new_path\n'+old+','+new+'\n')
+            override={'path':old,'sha256':atlas.sha(path),'role':'context',
+                      'file_label':'Reviewed context','evidence':'Exact original source identity.'}
+            (reference/'paper_file_roles.json').write_text(json.dumps({'schema_version':1,'files':[override]}))
+            paper={'article_id':'P__LME_035','unit_id':'LME_035','material_files':[
+                {'relative_path':'../'+old,'role':'main','sha256':atlas.sha(path)}]}
+            paper=atlas.SourcePaths(root).rewrite(paper)
+            atlas.reconcile_paper_files(root,[paper])
+            self.assertEqual(paper['material_files'][0]['relative_path'],'../'+new)
+            self.assertEqual(paper['material_files'][0]['role'],'context')
+            self.assertEqual(paper['main_file_status'],'not_found')
+
+    def test_reviewed_context_pdf_does_not_count_as_missing_focal_article(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_035/papers/Christensen-1998';folder.mkdir(parents=True)
+            path=folder/'Pauly-Chuenpagdee-2003.pdf';path.write_bytes(b'%PDF-related-publication')
+            reference=root/'common_reference_data';reference.mkdir()
+            override={'path':path.relative_to(root).as_posix(),'sha256':atlas.sha(path),
+                      'role':'context','file_label':'Context: Pauly and Chuenpagdee (2003)',
+                      'evidence':'Different publication, retained only for geographical context.'}
+            (reference/'paper_file_roles.json').write_text(json.dumps({'schema_version':1,'files':[override]}))
+            paper={'article_id':'Christensen-1998__LME_035','unit_id':'LME_035'}
+            atlas.reconcile_paper_files(root,[paper])
+            self.assertEqual(paper['material_files'][0]['role'],'context')
+            self.assertEqual(paper['material_files'][0]['file_label'],override['file_label'])
+            self.assertEqual(paper['main_file_status'],'not_found')
+            self.assertEqual(paper['downloaded_file_count'],1)
+            before=paper.copy();atlas.reconcile_paper_files(root,[paper]);self.assertEqual(paper,before)
+
+    def test_changed_context_bytes_cannot_inherit_review_or_become_focal_pdf(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'regions/LME_035/papers/P';folder.mkdir(parents=True)
+            path=folder/'related.pdf';path.write_bytes(b'%PDF-old')
+            reference=root/'common_reference_data';reference.mkdir()
+            override={'path':path.relative_to(root).as_posix(),'sha256':atlas.sha(path),
+                      'role':'context','file_label':'Reviewed context','evidence':'Reviewed original bytes.'}
+            (reference/'paper_file_roles.json').write_text(json.dumps({'schema_version':1,'files':[override]}))
+            path.write_bytes(b'%PDF-changed')
+            paper={'article_id':'P__LME_035','unit_id':'LME_035'}
+            atlas.reconcile_paper_files(root,[paper]);record=paper['material_files'][0]
+            self.assertEqual(record['role'],'source')
+            self.assertEqual(record['identity_status'],'not_reassessed')
+            self.assertEqual(paper['main_file_status'],'not_found')
+            self.assertIn('changed',record['validation'])
+
     def test_retrieval_logs_are_excluded_from_new_and_existing_sources(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);folder=root/'regions/LME_022/papers/P';folder.mkdir(parents=True)

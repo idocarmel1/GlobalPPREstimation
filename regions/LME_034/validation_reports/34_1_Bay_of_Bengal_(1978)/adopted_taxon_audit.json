@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "LME034_validation_20260930",
+  "run_id": "LME034_mixed_guild_reuse_20260930",
   "model_id": "34_1_Bay_of_Bengal_(1978)",
   "reference_year": 2019,
   "catch_basis": "landings",
@@ -79,7 +79,7 @@
         "eligible_set_or_extension",
         "pooled1978catch_to_taxon_and_year_basis_transfer"
       ],
-      "reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Milkfish plus includes coastal catfishes, so it is also compatible with the broad demersal label. Containment and composition remain approximations; this is not a representative composition study. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
+      "reason": "All source-listed named and residual bony-fish pools compatible with this broad reporting scope are retained. Separately reported tuna/billfish categories do not establish their absence from unidentified fish. The provider functional bin does not override actual A1.3 membership. Named tunas/billfish3,46–48, coastal scombrids4, small bathypelagics7, Hilsa29 and Indian mackerel30 are included. Dedicated elasmobranchs1/2 are outside FAO Osteichthyes scope. Maldives shelf9–14 remain excluded on source p7–9/A1.2 geography, without excluding region1 open water. Mixed large-piscivore18/31 pools retain their actual bony members despite Pristis. Unmeasured composition and full-guild transfer keep membership Very low. Complete A2.1 1978 landings plus discards normalized to the common whole-study-area denominator are used as W4 Medium pooled catch weights. Sum=0.787016 t/km²/year. Source-zero7 is retained. The proportions are assumed fixed across 1950–2019, geographic fisheries and all catch bases; they are not observed constituent fractions. Accepted biological parameters remain unchanged.",
       "sources": [
         {
           "id": "G2013",
@@ -90,40 +90,696 @@
           "id": "G2013",
           "locator": "A2.1 p46; Table16 p24; model.json group.export; Selected model groups/Groups catch",
           "supports": "allocation proxy quantities, common area denominator, transfer assumptions"
+        },
+        {
+          "id": "NOAA-PILOTFISH",
+          "url": "https://apps-afsc.fisheries.noaa.gov/ichthyo/LHDataLH.php?GSID=Naucrates%21ductor",
+          "supports": "Naucrates epipelagic oceanic ecology; no Bay of Bengal catch composition",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-SCAD",
+          "url": "https://www.fao.org/4/x6029e/x6029e04.htm",
+          "supports": "Section4.1.2 includes Atule mate among pelagic scads; Tanzania ecology only, no transferred quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-PAMPUS",
+          "url": "https://www.fao.org/4/i1555e/i1555e00.pdf#page=27",
+          "supports": "PDF27 lists Pampus argenteus as pelagic for west Peninsular Malaysia/Straits of Malacca; no residual caught fractions",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-FUSILIERS",
+          "url": "https://www.fao.org/4/t0046e/T0046E02.pdf",
+          "supports": "Family biology: midwater schooling caesionids, including source-listed Caesio caerulaurea and C. lunaris; no allocation quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-MILKFISH",
+          "url": "https://www.fao.org/fishery/docs/DOCUMENT/aquaculture/CulturedSpecies/file/en/en_milkfish.htm",
+          "supports": "Adult Chanos schooling coastal/island ecology supports compatibility; do not use pelagic eggs alone to map landed adults",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-LACTARIUS",
+          "url": "https://www.fao.org/4/x2400e/x2400e50.pdf#page=1",
+          "supports": "PDF1/printed2649: historical Perciformes:Percoidei:Lactariidae, coastal schools over softbottom<100m, bottom-living invertebrate/fish feeding",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-ATROPUS",
+          "url": "https://www.fao.org/4/r7066e/r7066e10.pdf",
+          "supports": "Atropus coastal and near-surface ecology, bottom-trawl fisheries; compatibility, not residual composition",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-HISTORICAL",
+          "url": "https://www.fao.org/4/t0726e/t0726e00.htm",
+          "supports": "1994 Sri Lanka guide distinguishes historical orders and places Carangidae/Lactariidae/Scombridae/Stromateidae in historical Perciformes",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FISHBASE-PONTINUS",
+          "url": "https://fishbase.se/summary/Pontinus_macrocephalus.html",
+          "supports": "Authority account cites Masuda1984 for demersal upper-slope ecology; modern order is not historical catch-category proof",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FISHBASE-CARANGOIDES",
+          "url": "https://www.fishbase.se/summary/Carangoides_equula.html",
+          "supports": "Authority account states benthopelagic shelf/slope ecology for source-listed Carangoides equula; secondary compilation, no composition quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
         }
       ],
-      "candidate_inclusion_rationale": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Milkfish plus includes coastal catfishes, so it is also compatible with the broad demersal label. Containment and composition remain approximations; this is not a representative composition study.",
+      "candidate_inclusion_rationale": "All source-listed named and residual bony-fish pools compatible with this broad reporting scope are retained. Separately reported tuna/billfish categories do not establish their absence from unidentified fish. The provider functional bin does not override actual A1.3 membership. Named tunas/billfish3,46–48, coastal scombrids4, small bathypelagics7, Hilsa29 and Indian mackerel30 are included. Dedicated elasmobranchs1/2 are outside FAO Osteichthyes scope. Maldives shelf9–14 remain excluded on source p7–9/A1.2 geography, without excluding region1 open water. Mixed large-piscivore18/31 pools retain their actual bony members despite Pristis. Unmeasured composition and full-guild transfer keep membership Very low.",
       "candidate_exclusions": [
         {
-          "groups": [
-            "1 L pisc",
-            "1 Carangids",
-            "1 S pelagics",
-            "1 L pisc comm",
-            "1 SM inv",
-            "1 SM pisc"
-          ],
-          "reason": "Maldives shelf-fish habitat outside LME034; this exclusion does not extend to every region1 open-water compartment"
+          "seq": 1,
+          "group": "Oceanic sharks",
+          "reason": "Dedicated cartilaginous group is outside the verified ISSCAAP39/FAO Osteichthyes target scope."
         },
         {
-          "groups": [
-            "1 Macrobenthos",
-            "1 Meiobenthos"
-          ],
-          "reason": "For these landed benthic categories retain the documented region2/3 coastal-fishery scope assumption; A1.2 defines region1benthos on the full region1area, so blanket total-area exclusion is not established"
+          "seq": 2,
+          "group": "Coastal elasmobranch",
+          "reason": "Dedicated cartilaginous group is outside the verified ISSCAAP39/FAO Osteichthyes target scope."
         },
         {
-          "groups": [
-            "Detritus",
-            "diet_import",
-            "Phytoplankton",
-            "Benthic plants",
-            "Meiobenthos"
-          ],
-          "reason": "No source supports reporting this landed taxon as a basal/import/meiofauna pool; modeled plankton zero-catch candidates are retained where the Malacostraca reporting scope requires them"
+          "seq": 5,
+          "group": "Jellyfish",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 6,
+          "group": "Cephalopods",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 9,
+          "group": "1 L pisc",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 10,
+          "group": "1 Carangids",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 11,
+          "group": "1 S pelagics",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 12,
+          "group": "1 L pisc comm",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 13,
+          "group": "1 SM inv",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 14,
+          "group": "1 SM pisc",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 15,
+          "group": "1 Macrobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 16,
+          "group": "1 Meiobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 17,
+          "group": "1 Zooplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 25,
+          "group": "2 Crustaceans",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 26,
+          "group": "2 Macrobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 27,
+          "group": "2 Meiobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 28,
+          "group": "2 Zooplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 38,
+          "group": "3 Crustaceans",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 39,
+          "group": "3 Macrobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 40,
+          "group": "3 Meiobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 41,
+          "group": "3 Zooplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 42,
+          "group": "1 Phytoplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 43,
+          "group": "2 Phytoplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 44,
+          "group": "3 Phytoplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 45,
+          "group": "Benthic plants",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 49,
+          "group": "Detritus",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
         }
       ],
       "proposed_groups": [
+        {
+          "group": "Tuna-like",
+          "seq": 3,
+          "weight": 0.021678085324821857,
+          "source_printed_catch_density": 0.017061,
+          "native_model_catch_density": 0.017061,
+          "loaded_model_catch_density": 0.017061,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 105864.375111,
+          "source_biomass_density": 0.15,
+          "zero_candidate": false
+        },
+        {
+          "group": "Coastal scombrids",
+          "seq": 4,
+          "weight": 0.03717713489941755,
+          "source_printed_catch_density": 0.029259,
+          "native_model_catch_density": 0.029259,
+          "loaded_model_catch_density": 0.029259,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 181553.587209,
+          "source_biomass_density": 0.104039,
+          "zero_candidate": false
+        },
+        {
+          "group": "S bathy",
+          "seq": 7,
+          "weight": 0.0,
+          "source_printed_catch_density": 0.0,
+          "native_model_catch_density": 0.0,
+          "loaded_model_catch_density": 0.0,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 0.0,
+          "source_biomass_density": 2.78472,
+          "zero_candidate": true
+        },
+        {
+          "group": "ML bathy",
+          "seq": 8,
+          "weight": 0.0044001646726368965,
+          "source_printed_catch_density": 0.003463,
+          "native_model_catch_density": 0.003463,
+          "loaded_model_catch_density": 0.003463,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 21488.091613,
+          "source_biomass_density": 0.22923,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 L pisc",
+          "seq": 18,
+          "weight": 0.07955619707858544,
+          "source_printed_catch_density": 0.062612,
+          "native_model_catch_density": 0.062612,
+          "loaded_model_catch_density": 0.062612,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 388510.65321200003,
+          "source_biomass_density": 0.150654,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 Carangids",
+          "seq": 19,
+          "weight": 0.02656998078819236,
+          "source_printed_catch_density": 0.020911,
+          "native_model_catch_density": 0.020911,
+          "loaded_model_catch_density": 0.020911,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 129753.821461,
+          "source_biomass_density": 0.17,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 S pelagics",
+          "seq": 20,
+          "weight": 0.13738475456661617,
+          "source_printed_catch_density": 0.108124,
+          "native_model_catch_density": 0.108124,
+          "loaded_model_catch_density": 0.108124,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 670914.934324,
+          "source_biomass_density": 0.263364,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 L pisc comm",
+          "seq": 21,
+          "weight": 0.09751008874025432,
+          "source_printed_catch_density": 0.076742,
+          "native_model_catch_density": 0.076742,
+          "loaded_model_catch_density": 0.076742,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 476188.02384200005,
+          "source_biomass_density": 0.15028,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 Milkfish plus",
+          "seq": 22,
+          "weight": 0.019064415462963905,
+          "source_printed_catch_density": 0.015004,
+          "native_model_catch_density": 0.015004,
+          "loaded_model_catch_density": 0.015004,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 93100.585204,
+          "source_biomass_density": 0.139536,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 SM inv",
+          "seq": 23,
+          "weight": 0.11784639702369455,
+          "source_printed_catch_density": 0.092747,
+          "native_model_catch_density": 0.092747,
+          "loaded_model_catch_density": 0.092747,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 575499.865097,
+          "source_biomass_density": 0.4123180000000001,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 SM pisc",
+          "seq": 24,
+          "weight": 0.04061035607916485,
+          "source_printed_catch_density": 0.031961,
+          "native_model_catch_density": 0.031961,
+          "loaded_model_catch_density": 0.031961,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 198319.63501100003,
+          "source_biomass_density": 0.298962,
+          "zero_candidate": false
+        },
+        {
+          "group": "2-3 Hilsa",
+          "seq": 29,
+          "weight": 0.04653018490094229,
+          "source_printed_catch_density": 0.03662,
+          "native_model_catch_density": 0.03662,
+          "loaded_model_catch_density": 0.03662,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 227228.96762,
+          "source_biomass_density": 0.3504,
+          "zero_candidate": false
+        },
+        {
+          "group": "2-3 Indian mackerel",
+          "seq": 30,
+          "weight": 0.06090092196346707,
+          "source_printed_catch_density": 0.04793,
+          "native_model_catch_density": 0.04793,
+          "loaded_model_catch_density": 0.04793,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 297408.09443,
+          "source_biomass_density": 0.2774,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 L pisc",
+          "seq": 31,
+          "weight": 0.03740330565071104,
+          "source_printed_catch_density": 0.029437,
+          "native_model_catch_density": 0.029437,
+          "loaded_model_catch_density": 0.029437,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 182658.086287,
+          "source_biomass_density": 0.184482,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 Carangids",
+          "seq": 32,
+          "weight": 0.04055063683584577,
+          "source_printed_catch_density": 0.031914,
+          "native_model_catch_density": 0.031914,
+          "loaded_model_catch_density": 0.031914,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 198027.997614,
+          "source_biomass_density": 0.3885,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 S pelagics",
+          "seq": 33,
+          "weight": 0.05944478892424042,
+          "source_printed_catch_density": 0.046784,
+          "native_model_catch_density": 0.046784,
+          "loaded_model_catch_density": 0.046784,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 290297.105984,
+          "source_biomass_density": 0.6215999999999999,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 L pisc comm",
+          "seq": 34,
+          "weight": 0.05463548390375799,
+          "source_printed_catch_density": 0.042999,
+          "native_model_catch_density": 0.042999,
+          "loaded_model_catch_density": 0.042999,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 266810.98794900003,
+          "source_biomass_density": 0.163392,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 Milkfish plus",
+          "seq": 35,
+          "weight": 0.008569076105187187,
+          "source_printed_catch_density": 0.006744,
+          "native_model_catch_density": 0.006744,
+          "loaded_model_catch_density": 0.006744,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 41846.863944,
+          "source_biomass_density": 0.178044,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 SM inv",
+          "seq": 36,
+          "weight": 0.05507003669556908,
+          "source_printed_catch_density": 0.043341,
+          "native_model_catch_density": 0.043341,
+          "loaded_model_catch_density": 0.043341,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 268933.115391,
+          "source_biomass_density": 0.888,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 SM pisc",
+          "seq": 37,
+          "weight": 0.04035877288390579,
+          "source_printed_catch_density": 0.031763,
+          "native_model_catch_density": 0.031763,
+          "loaded_model_catch_density": 0.031763,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 197091.034913,
+          "source_biomass_density": 0.67932,
+          "zero_candidate": false
+        },
+        {
+          "group": "Bigeye tuna",
+          "seq": 46,
+          "weight": 0.005082488793112211,
+          "source_printed_catch_density": 0.004,
+          "native_model_catch_density": 0.004,
+          "loaded_model_catch_density": 0.004,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 24820.204,
+          "source_biomass_density": 0.014,
+          "zero_candidate": false
+        },
+        {
+          "group": "Yellowfin tuna",
+          "seq": 47,
+          "weight": 0.008259044288807343,
+          "source_printed_catch_density": 0.0065,
+          "native_model_catch_density": 0.0065,
+          "loaded_model_catch_density": 0.0065,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 40332.8315,
+          "source_biomass_density": 0.022,
+          "zero_candidate": false
+        },
+        {
+          "group": "Marlins",
+          "seq": 48,
+          "weight": 0.001397684418105858,
+          "source_printed_catch_density": 0.0011,
+          "native_model_catch_density": 0.0011,
+          "loaded_model_catch_density": 0.0011,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 6825.556100000001,
+          "source_biomass_density": 0.003,
+          "zero_candidate": false
+        }
+      ],
+      "allocation_total": 0.787016,
+      "allocation_formula": "weight = loaded candidate catch / sum(all reviewed candidate catches)",
+      "catch_attempt": {
+        "usable": true,
+        "candidate_values": [
+          {
+            "group": "Tuna-like",
+            "catch": 0.017061
+          },
+          {
+            "group": "Coastal scombrids",
+            "catch": 0.029259
+          },
+          {
+            "group": "S bathy",
+            "catch": 0.0
+          },
+          {
+            "group": "ML bathy",
+            "catch": 0.003463
+          },
+          {
+            "group": "2 L pisc",
+            "catch": 0.062612
+          },
+          {
+            "group": "2 Carangids",
+            "catch": 0.020911
+          },
+          {
+            "group": "2 S pelagics",
+            "catch": 0.108124
+          },
+          {
+            "group": "2 L pisc comm",
+            "catch": 0.076742
+          },
+          {
+            "group": "2 Milkfish plus",
+            "catch": 0.015004
+          },
+          {
+            "group": "2 SM inv",
+            "catch": 0.092747
+          },
+          {
+            "group": "2 SM pisc",
+            "catch": 0.031961
+          },
+          {
+            "group": "2-3 Hilsa",
+            "catch": 0.03662
+          },
+          {
+            "group": "2-3 Indian mackerel",
+            "catch": 0.04793
+          },
+          {
+            "group": "3 L pisc",
+            "catch": 0.029437
+          },
+          {
+            "group": "3 Carangids",
+            "catch": 0.031914
+          },
+          {
+            "group": "3 S pelagics",
+            "catch": 0.046784
+          },
+          {
+            "group": "3 L pisc comm",
+            "catch": 0.042999
+          },
+          {
+            "group": "3 Milkfish plus",
+            "catch": 0.006744
+          },
+          {
+            "group": "3 SM inv",
+            "catch": 0.043341
+          },
+          {
+            "group": "3 SM pisc",
+            "catch": 0.031763
+          },
+          {
+            "group": "Bigeye tuna",
+            "catch": 0.004
+          },
+          {
+            "group": "Yellowfin tuna",
+            "catch": 0.0065
+          },
+          {
+            "group": "Marlins",
+            "catch": 0.0011
+          }
+        ],
+        "total": 0.787016,
+        "rejected_reason": null,
+        "zero_provenance": "A2.1p46 explicitly lists zero for group7; no missing values defaulted to zero in these candidate catches"
+      },
+      "allocation_period_transfer": "Fixed1978structure applied to2019landings and, if adopted, all retained years/bases; geographic fishery distribution and residual composition can change",
+      "group_set_changed": true,
+      "weights_changed": true,
+      "confidence_changed": true,
+      "adoption_state": "adopted in regional workbook; source reconstruction remains provisional",
+      "catch_t": 1291002.164893921,
+      "ppr_tC": 27332821.244565286,
+      "membership_rule_plain": "Broad reporting category approximated by compatible named and residual groups",
+      "allocation_rule_plain": "Source-model catch proportions transferred across taxon composition, years and catch bases",
+      "adoption_date": "2026-09-30",
+      "review_run_id": "LME034_mixed_guild_reuse_20260930",
+      "readable_reason": "All source-listed named and residual bony-fish pools compatible with this broad reporting scope are retained. Separately reported tuna/billfish categories do not establish their absence from unidentified fish. The provider functional bin does not override actual A1.3 membership. Named tunas/billfish3,46–48, coastal scombrids4, small bathypelagics7, Hilsa29 and Indian mackerel30 are included. Dedicated elasmobranchs1/2 are outside FAO Osteichthyes scope. Maldives shelf9–14 remain excluded on source p7–9/A1.2 geography, without excluding region1 open water. Mixed large-piscivore18/31 pools retain their actual bony members despite Pristis. Unmeasured composition and full-guild transfer keep membership Very low. Complete A2.1 1978 landings plus discards normalized to the common whole-study-area denominator are used as W4 Medium pooled catch weights. Sum=0.787016 t/km²/year. Source-zero7 is retained. The proportions are assumed fixed across 1950–2019, geographic fisheries and all catch bases; they are not observed constituent fractions. Accepted biological parameters remain unchanged.",
+      "reuse_previous_groups": [
         {
           "group": "2 L pisc comm",
           "seq": 21,
@@ -285,67 +941,9 @@
           "zero_candidate": false
         }
       ],
-      "allocation_total": 0.43335,
-      "allocation_formula": "weight = loaded candidate catch / sum(all reviewed candidate catches)",
-      "catch_attempt": {
-        "usable": true,
-        "candidate_values": [
-          {
-            "group": "2 L pisc comm",
-            "catch": 0.076742
-          },
-          {
-            "group": "3 L pisc comm",
-            "catch": 0.042999
-          },
-          {
-            "group": "2 SM pisc",
-            "catch": 0.031961
-          },
-          {
-            "group": "3 SM pisc",
-            "catch": 0.031763
-          },
-          {
-            "group": "2 SM inv",
-            "catch": 0.092747
-          },
-          {
-            "group": "3 SM inv",
-            "catch": 0.043341
-          },
-          {
-            "group": "2 L pisc",
-            "catch": 0.062612
-          },
-          {
-            "group": "3 L pisc",
-            "catch": 0.029437
-          },
-          {
-            "group": "2 Milkfish plus",
-            "catch": 0.015004
-          },
-          {
-            "group": "3 Milkfish plus",
-            "catch": 0.006744
-          }
-        ],
-        "total": 0.43335,
-        "rejected_reason": null
-      },
-      "allocation_period_transfer": "Fixed1978structure applied to2019landings and, if adopted, all retained years/bases; geographic fishery distribution and residual composition can change",
-      "group_set_changed": true,
-      "weights_changed": true,
-      "confidence_changed": true,
-      "adoption_state": "adopted in regional workbook; source reconstruction remains provisional",
-      "catch_t": 1291002.164893921,
-      "ppr_tC": 27332821.244565286,
-      "membership_rule_plain": "Broad reporting category approximated by compatible named and residual groups",
-      "allocation_rule_plain": "Source-model catch proportions transferred across taxon composition, years and catch bases",
-      "adoption_date": "2026-09-30",
-      "review_run_id": "LME034_validation_20260930",
-      "readable_reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Milkfish plus includes coastal catfishes, so it is also compatible with the broad demersal label. Containment and composition remain approximations; this is not a representative composition study. Pooled 1978 source-model catch proportions supply the split (A2.1 p46). Fixed composition/catchability is assumed for 2019 landings and the other retained years/bases. Detailed sources and transfer limits: Sources; full old/adopted decision: linked taxon audit."
+      "reuse_previous_reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Milkfish plus includes coastal catfishes, so it is also compatible with the broad demersal label. Containment and composition remain approximations; this is not a representative composition study. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
+      "reuse_review_date": "2026-09-30",
+      "broad_candidate_followup": "broad_candidate_followup.json"
     },
     {
       "model_id": "34_1_Bay_of_Bengal_(1978)",
@@ -7198,7 +7796,7 @@
         "eligible_set_or_extension",
         "pooled1978catch_to_taxon_and_year_basis_transfer"
       ],
-      "reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Carangids includes benthopelagic Parastromateus niger and remains a compatible regional component. Containment and composition remain approximations; this is not a representative composition study. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
+      "reason": "Interpret the provider Perch-likes/Medium demersals label as a historical fisheries reporting concept, with unknown constituent composition. Retain compatible L pisc comm, SM pisc, SM inv, L pisc and Carangids, and include Small pelagics because its source-listed Lactarius and Atropus are historical perciforms with coastal/bottom-associated ecology. FAO printed2649 explicitly places Lactariidae under Perciformes: Percoidei. Bathy examples are outside the historical order; modern classification of Pontinus does not establish historical residual membership. The eligible whole guilds contain other orders, so their catches proxy an assumed reporting mixture rather than measured perciform-only composition. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
       "sources": [
         {
           "id": "G2013",
@@ -7209,40 +7807,531 @@
           "id": "G2013",
           "locator": "A2.1 p46; Table16 p24; model.json group.export; Selected model groups/Groups catch",
           "supports": "allocation proxy quantities, common area denominator, transfer assumptions"
+        },
+        {
+          "id": "NOAA-PILOTFISH",
+          "url": "https://apps-afsc.fisheries.noaa.gov/ichthyo/LHDataLH.php?GSID=Naucrates%21ductor",
+          "supports": "Naucrates epipelagic oceanic ecology; no Bay of Bengal catch composition",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-SCAD",
+          "url": "https://www.fao.org/4/x6029e/x6029e04.htm",
+          "supports": "Section4.1.2 includes Atule mate among pelagic scads; Tanzania ecology only, no transferred quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-PAMPUS",
+          "url": "https://www.fao.org/4/i1555e/i1555e00.pdf#page=27",
+          "supports": "PDF27 lists Pampus argenteus as pelagic for west Peninsular Malaysia/Straits of Malacca; no residual caught fractions",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-FUSILIERS",
+          "url": "https://www.fao.org/4/t0046e/T0046E02.pdf",
+          "supports": "Family biology: midwater schooling caesionids, including source-listed Caesio caerulaurea and C. lunaris; no allocation quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-MILKFISH",
+          "url": "https://www.fao.org/fishery/docs/DOCUMENT/aquaculture/CulturedSpecies/file/en/en_milkfish.htm",
+          "supports": "Adult Chanos schooling coastal/island ecology supports compatibility; do not use pelagic eggs alone to map landed adults",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-LACTARIUS",
+          "url": "https://www.fao.org/4/x2400e/x2400e50.pdf#page=1",
+          "supports": "PDF1/printed2649: historical Perciformes:Percoidei:Lactariidae, coastal schools over softbottom<100m, bottom-living invertebrate/fish feeding",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-ATROPUS",
+          "url": "https://www.fao.org/4/r7066e/r7066e10.pdf",
+          "supports": "Atropus coastal and near-surface ecology, bottom-trawl fisheries; compatibility, not residual composition",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-HISTORICAL",
+          "url": "https://www.fao.org/4/t0726e/t0726e00.htm",
+          "supports": "1994 Sri Lanka guide distinguishes historical orders and places Carangidae/Lactariidae/Scombridae/Stromateidae in historical Perciformes",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FISHBASE-PONTINUS",
+          "url": "https://fishbase.se/summary/Pontinus_macrocephalus.html",
+          "supports": "Authority account cites Masuda1984 for demersal upper-slope ecology; modern order is not historical catch-category proof",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FISHBASE-CARANGOIDES",
+          "url": "https://www.fishbase.se/summary/Carangoides_equula.html",
+          "supports": "Authority account states benthopelagic shelf/slope ecology for source-listed Carangoides equula; secondary compilation, no composition quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
         }
       ],
-      "candidate_inclusion_rationale": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Carangids includes benthopelagic Parastromateus niger and remains a compatible regional component. Containment and composition remain approximations; this is not a representative composition study.",
+      "candidate_inclusion_rationale": "Interpret the provider Perch-likes/Medium demersals label as a historical fisheries reporting concept, with unknown constituent composition. Retain compatible L pisc comm, SM pisc, SM inv, L pisc and Carangids, and include Small pelagics because its source-listed Lactarius and Atropus are historical perciforms with coastal/bottom-associated ecology. FAO printed2649 explicitly places Lactariidae under Perciformes: Percoidei. Bathy examples are outside the historical order; modern classification of Pontinus does not establish historical residual membership. The eligible whole guilds contain other orders, so their catches proxy an assumed reporting mixture rather than measured perciform-only composition.",
       "candidate_exclusions": [
         {
-          "groups": [
-            "1 L pisc",
-            "1 Carangids",
-            "1 S pelagics",
-            "1 L pisc comm",
-            "1 SM inv",
-            "1 SM pisc"
-          ],
-          "reason": "Maldives shelf-fish habitat outside LME034; this exclusion does not extend to every region1 open-water compartment"
+          "seq": 1,
+          "group": "Oceanic sharks",
+          "reason": "Explicit assumption: residual Other fishes/Perch-likes reporting class excludes separately identified Sharks and rays; do not claim measured absence."
         },
         {
-          "groups": [
-            "1 Macrobenthos",
-            "1 Meiobenthos"
-          ],
-          "reason": "For these landed benthic categories retain the documented region2/3 coastal-fishery scope assumption; A1.2 defines region1benthos on the full region1area, so blanket total-area exclusion is not established"
+          "seq": 2,
+          "group": "Coastal elasmobranch",
+          "reason": "Explicit assumption: residual Other fishes/Perch-likes reporting class excludes separately identified Sharks and rays; do not claim measured absence."
         },
         {
-          "groups": [
-            "Detritus",
-            "diet_import",
-            "Phytoplankton",
-            "Benthic plants",
-            "Meiobenthos"
-          ],
-          "reason": "No source supports reporting this landed taxon as a basal/import/meiofauna pool; modeled plankton zero-catch candidates are retained where the Malacostraca reporting scope requires them"
+          "seq": 3,
+          "group": "Tuna-like",
+          "reason": "Explicit assumption for non-scombroid residuals: separately reported Tuna and billfishes class is outside the Other fishes/medium-demersal mixture. Not inferred from catch positivity."
+        },
+        {
+          "seq": 4,
+          "group": "Coastal scombrids",
+          "reason": "For demersal/Perch-likes approximations, exclude these exclusively coastal pelagic scombrid pools under the operative medium-demersal reporting interpretation; not an observed absence."
+        },
+        {
+          "seq": 5,
+          "group": "Jellyfish",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 6,
+          "group": "Cephalopods",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 7,
+          "group": "S bathy",
+          "reason": "A1.3 Myctophidae/Stomiidae/Diretmidae are deep pelagic and outside the historical Perciformes concept; genuine zero is not itself an exclusion rationale."
+        },
+        {
+          "seq": 8,
+          "group": "ML bathy",
+          "reason": "Named A1.3 exemplars lie outside historical Perciformes; modern Pontinus/Scorpaenoidei placement is not historical reporting evidence."
+        },
+        {
+          "seq": 9,
+          "group": "1 L pisc",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 10,
+          "group": "1 Carangids",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 11,
+          "group": "1 S pelagics",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 12,
+          "group": "1 L pisc comm",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 13,
+          "group": "1 SM inv",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 14,
+          "group": "1 SM pisc",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 15,
+          "group": "1 Macrobenthos",
+          "reason": "Region1 benthos uses full EEZ area perA1.2; exclude from landed Malacostraca under retained regional2/3 coastal-fishery proxy, not a blanket Maldives-area exclusion."
+        },
+        {
+          "seq": 16,
+          "group": "1 Meiobenthos",
+          "reason": "Region1 benthos uses full EEZ area perA1.2; exclude from landed Malacostraca under retained regional2/3 coastal-fishery proxy, not a blanket Maldives-area exclusion."
+        },
+        {
+          "seq": 17,
+          "group": "1 Zooplankton",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 22,
+          "group": "2 Milkfish plus",
+          "reason": "Historical Perciformes residual excludes Chanos (Gonorynchiformes), catfish (Siluriformes), puffers/porcupinefish (Tetraodontiformes); no compatible historical perciform constituent is listed."
+        },
+        {
+          "seq": 25,
+          "group": "2 Crustaceans",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 26,
+          "group": "2 Macrobenthos",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 27,
+          "group": "2 Meiobenthos",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 28,
+          "group": "2 Zooplankton",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 29,
+          "group": "2-3 Hilsa",
+          "reason": "Hilsa/clupeoid pool is pelagic and outside historical Perciformes; no compatible demersal constituent is documented."
+        },
+        {
+          "seq": 30,
+          "group": "2-3 Indian mackerel",
+          "reason": "For demersal/Perch-likes approximations, exclude these exclusively coastal pelagic scombrid pools under the operative medium-demersal reporting interpretation; not an observed absence."
+        },
+        {
+          "seq": 35,
+          "group": "3 Milkfish plus",
+          "reason": "Historical Perciformes residual excludes Chanos (Gonorynchiformes), catfish (Siluriformes), puffers/porcupinefish (Tetraodontiformes); no compatible historical perciform constituent is listed."
+        },
+        {
+          "seq": 38,
+          "group": "3 Crustaceans",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 39,
+          "group": "3 Macrobenthos",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 40,
+          "group": "3 Meiobenthos",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 41,
+          "group": "3 Zooplankton",
+          "reason": "Organism/reporting mismatch for finfish residual; for Malacostraca non-crustacean/microfaunal pools have no supported landed composition. Fish eggs in Zoo do not establish a landed finfish candidate."
+        },
+        {
+          "seq": 42,
+          "group": "1 Phytoplankton",
+          "reason": "Basal plants/detritus do not represent the landed organism/reporting class; no supported taxonomic or feeding analogue."
+        },
+        {
+          "seq": 43,
+          "group": "2 Phytoplankton",
+          "reason": "Basal plants/detritus do not represent the landed organism/reporting class; no supported taxonomic or feeding analogue."
+        },
+        {
+          "seq": 44,
+          "group": "3 Phytoplankton",
+          "reason": "Basal plants/detritus do not represent the landed organism/reporting class; no supported taxonomic or feeding analogue."
+        },
+        {
+          "seq": 45,
+          "group": "Benthic plants",
+          "reason": "Basal plants/detritus do not represent the landed organism/reporting class; no supported taxonomic or feeding analogue."
+        },
+        {
+          "seq": 46,
+          "group": "Bigeye tuna",
+          "reason": "Explicit assumption for non-scombroid residuals: separately reported Tuna and billfishes class is outside the Other fishes/medium-demersal mixture. Not inferred from catch positivity."
+        },
+        {
+          "seq": 47,
+          "group": "Yellowfin tuna",
+          "reason": "Explicit assumption for non-scombroid residuals: separately reported Tuna and billfishes class is outside the Other fishes/medium-demersal mixture. Not inferred from catch positivity."
+        },
+        {
+          "seq": 48,
+          "group": "Marlins",
+          "reason": "Explicit assumption for non-scombroid residuals: separately reported Tuna and billfishes class is outside the Other fishes/medium-demersal mixture. Not inferred from catch positivity."
+        },
+        {
+          "seq": 49,
+          "group": "Detritus",
+          "reason": "Basal plants/detritus do not represent the landed organism/reporting class; no supported taxonomic or feeding analogue."
         }
       ],
       "proposed_groups": [
+        {
+          "group": "2 L pisc comm",
+          "seq": 21,
+          "weight": 0.1239103231692057,
+          "source_printed_catch_density": 0.076742,
+          "native_model_catch_density": 0.076742,
+          "loaded_model_catch_density": 0.076742,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 476188.02384200005,
+          "source_biomass_density": 0.15028,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 L pisc comm",
+          "seq": 34,
+          "weight": 0.06942769260577879,
+          "source_printed_catch_density": 0.042999,
+          "native_model_catch_density": 0.042999,
+          "loaded_model_catch_density": 0.042999,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 266810.98794900003,
+          "source_biomass_density": 0.163392,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 SM pisc",
+          "seq": 24,
+          "weight": 0.05160535090056271,
+          "source_printed_catch_density": 0.031961,
+          "native_model_catch_density": 0.031961,
+          "loaded_model_catch_density": 0.031961,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 198319.63501100003,
+          "source_biomass_density": 0.298962,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 SM pisc",
+          "seq": 37,
+          "weight": 0.05128565316024446,
+          "source_printed_catch_density": 0.031763,
+          "native_model_catch_density": 0.031763,
+          "loaded_model_catch_density": 0.031763,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 197091.034913,
+          "source_biomass_density": 0.67932,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 SM inv",
+          "seq": 23,
+          "weight": 0.14975255717826377,
+          "source_printed_catch_density": 0.092747,
+          "native_model_catch_density": 0.092747,
+          "loaded_model_catch_density": 0.092747,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 575499.865097,
+          "source_biomass_density": 0.4123180000000001,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 SM inv",
+          "seq": 36,
+          "weight": 0.0699798977936012,
+          "source_printed_catch_density": 0.043341,
+          "native_model_catch_density": 0.043341,
+          "loaded_model_catch_density": 0.043341,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 268933.115391,
+          "source_biomass_density": 0.888,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 L pisc",
+          "seq": 18,
+          "weight": 0.10109552988285823,
+          "source_printed_catch_density": 0.062613,
+          "native_model_catch_density": 0.062612,
+          "loaded_model_catch_density": 0.062612,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 388510.65321200003,
+          "source_biomass_density": 0.150654,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 L pisc",
+          "seq": 31,
+          "weight": 0.04753001202903114,
+          "source_printed_catch_density": 0.029437,
+          "native_model_catch_density": 0.029437,
+          "loaded_model_catch_density": 0.029437,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 182658.086287,
+          "source_biomass_density": 0.184482,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 Carangids",
+          "seq": 19,
+          "weight": 0.03376363357472127,
+          "source_printed_catch_density": 0.020911,
+          "native_model_catch_density": 0.020911,
+          "loaded_model_catch_density": 0.020911,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 129753.821461,
+          "source_biomass_density": 0.17,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 Carangids",
+          "seq": 32,
+          "weight": 0.05152946305311342,
+          "source_printed_catch_density": 0.031914,
+          "native_model_catch_density": 0.031914,
+          "loaded_model_catch_density": 0.031914,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 198027.997614,
+          "source_biomass_density": 0.3885,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 S pelagics",
+          "seq": 20,
+          "weight": 0.17458080037459534,
+          "source_printed_catch_density": 0.108124,
+          "native_model_catch_density": 0.108124,
+          "loaded_model_catch_density": 0.108124,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 670914.934324,
+          "source_biomass_density": 0.263364,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 S pelagics",
+          "seq": 33,
+          "weight": 0.07553908627802401,
+          "source_printed_catch_density": 0.046784,
+          "native_model_catch_density": 0.046784,
+          "loaded_model_catch_density": 0.046784,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 290297.105984,
+          "source_biomass_density": 0.6215999999999999,
+          "zero_candidate": false
+        }
+      ],
+      "allocation_total": 0.619335,
+      "allocation_formula": "weight = loaded candidate catch / sum(all reviewed candidate catches)",
+      "catch_attempt": {
+        "usable": true,
+        "candidate_values": [
+          {
+            "group": "2 L pisc comm",
+            "catch": 0.076742
+          },
+          {
+            "group": "3 L pisc comm",
+            "catch": 0.042999
+          },
+          {
+            "group": "2 SM pisc",
+            "catch": 0.031961
+          },
+          {
+            "group": "3 SM pisc",
+            "catch": 0.031763
+          },
+          {
+            "group": "2 SM inv",
+            "catch": 0.092747
+          },
+          {
+            "group": "3 SM inv",
+            "catch": 0.043341
+          },
+          {
+            "group": "2 L pisc",
+            "catch": 0.062612
+          },
+          {
+            "group": "3 L pisc",
+            "catch": 0.029437
+          },
+          {
+            "group": "2 Carangids",
+            "catch": 0.020911
+          },
+          {
+            "group": "3 Carangids",
+            "catch": 0.031914
+          },
+          {
+            "group": "2 S pelagics",
+            "catch": 0.108124
+          },
+          {
+            "group": "3 S pelagics",
+            "catch": 0.046784
+          }
+        ],
+        "total": 0.619335,
+        "rejected_reason": null,
+        "zero_provenance": "A2.1p46 explicitly lists zero for group7; no missing values defaulted to zero in these candidate catches"
+      },
+      "allocation_period_transfer": "Fixed1978structure applied to2019landings and, if adopted, all retained years/bases; geographic fishery distribution and residual composition can change",
+      "group_set_changed": true,
+      "weights_changed": true,
+      "confidence_changed": true,
+      "adoption_state": "adopted in regional workbook; source reconstruction remains provisional",
+      "catch_t": 40651.45036384639,
+      "ppr_tC": 1530500.7104858002,
+      "membership_rule_plain": "Broad reporting category approximated by compatible named and residual groups",
+      "allocation_rule_plain": "Source-model catch proportions transferred across taxon composition, years and catch bases",
+      "adoption_date": "2026-09-30",
+      "review_run_id": "LME034_mixed_guild_reuse_20260930",
+      "readable_reason": "Interpret the provider Perch-likes/Medium demersals label as a historical fisheries reporting concept, with unknown constituent composition. Retain compatible L pisc comm, SM pisc, SM inv, L pisc and Carangids, and include Small pelagics because its source-listed Lactarius and Atropus are historical perciforms with coastal/bottom-associated ecology. FAO printed2649 explicitly places Lactariidae under Perciformes: Percoidei. Bathy examples are outside the historical order; modern classification of Pontinus does not establish historical residual membership. The eligible whole guilds contain other orders, so their catches proxy an assumed reporting mixture rather than measured perciform-only composition. Pooled 1978 whole-guild catch proportions are assumed constant across taxon mixtures, years and catch bases; they are not observed constituent fractions. Sources and linked audit retain the complete candidates and exclusions.",
+      "reuse_previous_groups": [
         {
           "group": "2 L pisc comm",
           "seq": 21,
@@ -7404,67 +8493,8 @@
           "zero_candidate": false
         }
       ],
-      "allocation_total": 0.464427,
-      "allocation_formula": "weight = loaded candidate catch / sum(all reviewed candidate catches)",
-      "catch_attempt": {
-        "usable": true,
-        "candidate_values": [
-          {
-            "group": "2 L pisc comm",
-            "catch": 0.076742
-          },
-          {
-            "group": "3 L pisc comm",
-            "catch": 0.042999
-          },
-          {
-            "group": "2 SM pisc",
-            "catch": 0.031961
-          },
-          {
-            "group": "3 SM pisc",
-            "catch": 0.031763
-          },
-          {
-            "group": "2 SM inv",
-            "catch": 0.092747
-          },
-          {
-            "group": "3 SM inv",
-            "catch": 0.043341
-          },
-          {
-            "group": "2 L pisc",
-            "catch": 0.062612
-          },
-          {
-            "group": "3 L pisc",
-            "catch": 0.029437
-          },
-          {
-            "group": "2 Carangids",
-            "catch": 0.020911
-          },
-          {
-            "group": "3 Carangids",
-            "catch": 0.031914
-          }
-        ],
-        "total": 0.464427,
-        "rejected_reason": null
-      },
-      "allocation_period_transfer": "Fixed1978structure applied to2019landings and, if adopted, all retained years/bases; geographic fishery distribution and residual composition can change",
-      "group_set_changed": true,
-      "weights_changed": true,
-      "confidence_changed": true,
-      "adoption_state": "adopted in regional workbook; source reconstruction remains provisional",
-      "catch_t": 40651.45036384639,
-      "ppr_tC": 1530500.7104858002,
-      "membership_rule_plain": "Broad reporting category approximated by compatible named and residual groups",
-      "allocation_rule_plain": "Source-model catch proportions transferred across taxon composition, years and catch bases",
-      "adoption_date": "2026-09-30",
-      "review_run_id": "LME034_validation_20260930",
-      "readable_reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Carangids includes benthopelagic Parastromateus niger and remains a compatible regional component. Containment and composition remain approximations; this is not a representative composition study. Pooled 1978 source-model catch proportions supply the split (A2.1 p46). Fixed composition/catchability is assumed for 2019 landings and the other retained years/bases. Detailed sources and transfer limits: Sources; full old/adopted decision: linked taxon audit."
+      "reuse_previous_reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Carangids includes benthopelagic Parastromateus niger and remains a compatible regional component. Containment and composition remain approximations; this is not a representative composition study. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
+      "reuse_review_date": "2026-09-30"
     },
     {
       "model_id": "34_1_Bay_of_Bengal_(1978)",
@@ -10142,7 +11172,7 @@
         "eligible_set_or_extension",
         "pooled1978catch_to_taxon_and_year_basis_transfer"
       ],
-      "reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Hilsa, Indian mackerel and Coastal scombrids are named coastal pelagic pools; L pisc contains pelagic barracudas/needlefishes/dolphinfish. Their exclusion cannot be proven by the medium-pelagic metadata alone. Containment and composition remain approximations; this is not a representative composition study. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
+      "reason": "All source-listed named and residual bony-fish pools compatible with this broad reporting scope are retained. Separately reported tuna/billfish categories do not establish their absence from unidentified fish. The provider functional bin does not override actual A1.3 membership. The pelagic approximation includes named tunas/billfish3,46–48 and source-zero small bathypelagics7; predominantly reef/demersal commercial piscivores21/34 remain outside this pelagic set. Dedicated elasmobranchs1/2 are outside FAO Osteichthyes scope. Maldives shelf9–14 remain excluded on source p7–9/A1.2 geography, without excluding region1 open water. Mixed large-piscivore18/31 pools retain their actual bony members despite Pristis. Unmeasured composition and full-guild transfer keep membership Very low. Complete A2.1 1978 landings plus discards normalized to the common whole-study-area denominator are used as W4 Medium pooled catch weights. Sum=0.667275 t/km²/year. Source-zero7 is retained. The proportions are assumed fixed across 1950–2019, geographic fisheries and all catch bases; they are not observed constituent fractions. Accepted biological parameters remain unchanged.",
       "sources": [
         {
           "id": "G2013",
@@ -10153,40 +11183,666 @@
           "id": "G2013",
           "locator": "A2.1 p46; Table16 p24; model.json group.export; Selected model groups/Groups catch",
           "supports": "allocation proxy quantities, common area denominator, transfer assumptions"
+        },
+        {
+          "id": "NOAA-PILOTFISH",
+          "url": "https://apps-afsc.fisheries.noaa.gov/ichthyo/LHDataLH.php?GSID=Naucrates%21ductor",
+          "supports": "Naucrates epipelagic oceanic ecology; no Bay of Bengal catch composition",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-SCAD",
+          "url": "https://www.fao.org/4/x6029e/x6029e04.htm",
+          "supports": "Section4.1.2 includes Atule mate among pelagic scads; Tanzania ecology only, no transferred quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-PAMPUS",
+          "url": "https://www.fao.org/4/i1555e/i1555e00.pdf#page=27",
+          "supports": "PDF27 lists Pampus argenteus as pelagic for west Peninsular Malaysia/Straits of Malacca; no residual caught fractions",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-FUSILIERS",
+          "url": "https://www.fao.org/4/t0046e/T0046E02.pdf",
+          "supports": "Family biology: midwater schooling caesionids, including source-listed Caesio caerulaurea and C. lunaris; no allocation quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-MILKFISH",
+          "url": "https://www.fao.org/fishery/docs/DOCUMENT/aquaculture/CulturedSpecies/file/en/en_milkfish.htm",
+          "supports": "Adult Chanos schooling coastal/island ecology supports compatibility; do not use pelagic eggs alone to map landed adults",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-LACTARIUS",
+          "url": "https://www.fao.org/4/x2400e/x2400e50.pdf#page=1",
+          "supports": "PDF1/printed2649: historical Perciformes:Percoidei:Lactariidae, coastal schools over softbottom<100m, bottom-living invertebrate/fish feeding",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-ATROPUS",
+          "url": "https://www.fao.org/4/r7066e/r7066e10.pdf",
+          "supports": "Atropus coastal and near-surface ecology, bottom-trawl fisheries; compatibility, not residual composition",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FAO-HISTORICAL",
+          "url": "https://www.fao.org/4/t0726e/t0726e00.htm",
+          "supports": "1994 Sri Lanka guide distinguishes historical orders and places Carangidae/Lactariidae/Scombridae/Stromateidae in historical Perciformes",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FISHBASE-PONTINUS",
+          "url": "https://fishbase.se/summary/Pontinus_macrocephalus.html",
+          "supports": "Authority account cites Masuda1984 for demersal upper-slope ecology; modern order is not historical catch-category proof",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
+        },
+        {
+          "id": "FISHBASE-CARANGOIDES",
+          "url": "https://www.fishbase.se/summary/Carangoides_equula.html",
+          "supports": "Authority account states benthopelagic shelf/slope ecology for source-listed Carangoides equula; secondary compilation, no composition quantities",
+          "retrieved": "2026-09-30",
+          "verification": "Opened directly via web tool; CSIRO duplicate pilotfish account errored and is not relied upon"
         }
       ],
-      "candidate_inclusion_rationale": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Hilsa, Indian mackerel and Coastal scombrids are named coastal pelagic pools; L pisc contains pelagic barracudas/needlefishes/dolphinfish. Their exclusion cannot be proven by the medium-pelagic metadata alone. Containment and composition remain approximations; this is not a representative composition study.",
+      "candidate_inclusion_rationale": "All source-listed named and residual bony-fish pools compatible with this broad reporting scope are retained. Separately reported tuna/billfish categories do not establish their absence from unidentified fish. The provider functional bin does not override actual A1.3 membership. The pelagic approximation includes named tunas/billfish3,46–48 and source-zero small bathypelagics7; predominantly reef/demersal commercial piscivores21/34 remain outside this pelagic set. Dedicated elasmobranchs1/2 are outside FAO Osteichthyes scope. Maldives shelf9–14 remain excluded on source p7–9/A1.2 geography, without excluding region1 open water. Mixed large-piscivore18/31 pools retain their actual bony members despite Pristis. Unmeasured composition and full-guild transfer keep membership Very low.",
       "candidate_exclusions": [
         {
-          "groups": [
-            "1 L pisc",
-            "1 Carangids",
-            "1 S pelagics",
-            "1 L pisc comm",
-            "1 SM inv",
-            "1 SM pisc"
-          ],
-          "reason": "Maldives shelf-fish habitat outside LME034; this exclusion does not extend to every region1 open-water compartment"
+          "seq": 1,
+          "group": "Oceanic sharks",
+          "reason": "Dedicated cartilaginous group is outside the verified ISSCAAP39/FAO Osteichthyes target scope."
         },
         {
-          "groups": [
-            "1 Macrobenthos",
-            "1 Meiobenthos"
-          ],
-          "reason": "For these landed benthic categories retain the documented region2/3 coastal-fishery scope assumption; A1.2 defines region1benthos on the full region1area, so blanket total-area exclusion is not established"
+          "seq": 2,
+          "group": "Coastal elasmobranch",
+          "reason": "Dedicated cartilaginous group is outside the verified ISSCAAP39/FAO Osteichthyes target scope."
         },
         {
-          "groups": [
-            "Detritus",
-            "diet_import",
-            "Phytoplankton",
-            "Benthic plants",
-            "Meiobenthos"
-          ],
-          "reason": "No source supports reporting this landed taxon as a basal/import/meiofauna pool; modeled plankton zero-catch candidates are retained where the Malacostraca reporting scope requires them"
+          "seq": 5,
+          "group": "Jellyfish",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 6,
+          "group": "Cephalopods",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 9,
+          "group": "1 L pisc",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 10,
+          "group": "1 Carangids",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 11,
+          "group": "1 S pelagics",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 12,
+          "group": "1 L pisc comm",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 13,
+          "group": "1 SM inv",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 14,
+          "group": "1 SM pisc",
+          "reason": "A1.2 assigns these fish pools to region1 shelf only; source p7/Fig1 and retained regional geography place the Maldives shelf outside LME034. This does not exclude region1 open water."
+        },
+        {
+          "seq": 15,
+          "group": "1 Macrobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 16,
+          "group": "1 Meiobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 17,
+          "group": "1 Zooplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 21,
+          "group": "2 L pisc comm",
+          "reason": "For pelagic residual, source p15 defines commercial demersal/reef groups (groupers/snappers/croakers/emperors/lizardfish); no comparably explicit pelagic constituent establishes expansion. Record this operative reporting assumption."
+        },
+        {
+          "seq": 25,
+          "group": "2 Crustaceans",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 26,
+          "group": "2 Macrobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 27,
+          "group": "2 Meiobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 28,
+          "group": "2 Zooplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 34,
+          "group": "3 L pisc comm",
+          "reason": "For pelagic residual, source p15 defines commercial demersal/reef groups (groupers/snappers/croakers/emperors/lizardfish); no comparably explicit pelagic constituent establishes expansion. Record this operative reporting assumption."
+        },
+        {
+          "seq": 38,
+          "group": "3 Crustaceans",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 39,
+          "group": "3 Macrobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 40,
+          "group": "3 Meiobenthos",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 41,
+          "group": "3 Zooplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 42,
+          "group": "1 Phytoplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 43,
+          "group": "2 Phytoplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 44,
+          "group": "3 Phytoplankton",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 45,
+          "group": "Benthic plants",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
+        },
+        {
+          "seq": 49,
+          "group": "Detritus",
+          "reason": "Source group has no compatible landed bony fish for this reporting scope; actual A1.3 definition reviewed. Fish eggs alone do not establish a landed-fish pool."
         }
       ],
       "proposed_groups": [
+        {
+          "group": "Tuna-like",
+          "seq": 3,
+          "weight": 0.02556816904574576,
+          "source_printed_catch_density": 0.017061,
+          "native_model_catch_density": 0.017061,
+          "loaded_model_catch_density": 0.017061,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 105864.375111,
+          "source_biomass_density": 0.15,
+          "zero_candidate": false
+        },
+        {
+          "group": "Coastal scombrids",
+          "seq": 4,
+          "weight": 0.0438484882544678,
+          "source_printed_catch_density": 0.029259,
+          "native_model_catch_density": 0.029259,
+          "loaded_model_catch_density": 0.029259,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 181553.587209,
+          "source_biomass_density": 0.104039,
+          "zero_candidate": false
+        },
+        {
+          "group": "S bathy",
+          "seq": 7,
+          "weight": 0.0,
+          "source_printed_catch_density": 0.0,
+          "native_model_catch_density": 0.0,
+          "loaded_model_catch_density": 0.0,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 0.0,
+          "source_biomass_density": 2.78472,
+          "zero_candidate": true
+        },
+        {
+          "group": "ML bathy",
+          "seq": 8,
+          "weight": 0.005189764340039714,
+          "source_printed_catch_density": 0.003463,
+          "native_model_catch_density": 0.003463,
+          "loaded_model_catch_density": 0.003463,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 21488.091613,
+          "source_biomass_density": 0.22923,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 L pisc",
+          "seq": 18,
+          "weight": 0.09383237795511597,
+          "source_printed_catch_density": 0.062612,
+          "native_model_catch_density": 0.062612,
+          "loaded_model_catch_density": 0.062612,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 388510.65321200003,
+          "source_biomass_density": 0.150654,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 Carangids",
+          "seq": 19,
+          "weight": 0.03133790416245176,
+          "source_printed_catch_density": 0.020911,
+          "native_model_catch_density": 0.020911,
+          "loaded_model_catch_density": 0.020911,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 129753.821461,
+          "source_biomass_density": 0.17,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 S pelagics",
+          "seq": 20,
+          "weight": 0.1620381401970702,
+          "source_printed_catch_density": 0.108124,
+          "native_model_catch_density": 0.108124,
+          "loaded_model_catch_density": 0.108124,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 670914.934324,
+          "source_biomass_density": 0.263364,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 Milkfish plus",
+          "seq": 22,
+          "weight": 0.02248548199767712,
+          "source_printed_catch_density": 0.015004,
+          "native_model_catch_density": 0.015004,
+          "loaded_model_catch_density": 0.015004,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 93100.585204,
+          "source_biomass_density": 0.139536,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 SM inv",
+          "seq": 23,
+          "weight": 0.1389936682776966,
+          "source_printed_catch_density": 0.092747,
+          "native_model_catch_density": 0.092747,
+          "loaded_model_catch_density": 0.092747,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 575499.865097,
+          "source_biomass_density": 0.4123180000000001,
+          "zero_candidate": false
+        },
+        {
+          "group": "2 SM pisc",
+          "seq": 24,
+          "weight": 0.04789779326364693,
+          "source_printed_catch_density": 0.031961,
+          "native_model_catch_density": 0.031961,
+          "loaded_model_catch_density": 0.031961,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 198319.63501100003,
+          "source_biomass_density": 0.298962,
+          "zero_candidate": false
+        },
+        {
+          "group": "2-3 Hilsa",
+          "seq": 29,
+          "weight": 0.054879922071110115,
+          "source_printed_catch_density": 0.03662,
+          "native_model_catch_density": 0.03662,
+          "loaded_model_catch_density": 0.03662,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 227228.96762,
+          "source_biomass_density": 0.3504,
+          "zero_candidate": false
+        },
+        {
+          "group": "2-3 Indian mackerel",
+          "seq": 30,
+          "weight": 0.07182945562174517,
+          "source_printed_catch_density": 0.04793,
+          "native_model_catch_density": 0.04793,
+          "loaded_model_catch_density": 0.04793,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 297408.09443,
+          "source_biomass_density": 0.2774,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 L pisc",
+          "seq": 31,
+          "weight": 0.04411524483908434,
+          "source_printed_catch_density": 0.029437,
+          "native_model_catch_density": 0.029437,
+          "loaded_model_catch_density": 0.029437,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 182658.086287,
+          "source_biomass_density": 0.184482,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 Carangids",
+          "seq": 32,
+          "weight": 0.04782735753624817,
+          "source_printed_catch_density": 0.031914,
+          "native_model_catch_density": 0.031914,
+          "loaded_model_catch_density": 0.031914,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 198027.997614,
+          "source_biomass_density": 0.3885,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 S pelagics",
+          "seq": 33,
+          "weight": 0.07011202277921397,
+          "source_printed_catch_density": 0.046784,
+          "native_model_catch_density": 0.046784,
+          "loaded_model_catch_density": 0.046784,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 290297.105984,
+          "source_biomass_density": 0.6215999999999999,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 Milkfish plus",
+          "seq": 35,
+          "weight": 0.010106777565471507,
+          "source_printed_catch_density": 0.006744,
+          "native_model_catch_density": 0.006744,
+          "loaded_model_catch_density": 0.006744,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 41846.863944,
+          "source_biomass_density": 0.178044,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 SM inv",
+          "seq": 36,
+          "weight": 0.06495223108913117,
+          "source_printed_catch_density": 0.043341,
+          "native_model_catch_density": 0.043341,
+          "loaded_model_catch_density": 0.043341,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 268933.115391,
+          "source_biomass_density": 0.888,
+          "zero_candidate": false
+        },
+        {
+          "group": "3 SM pisc",
+          "seq": 37,
+          "weight": 0.04760106402907347,
+          "source_printed_catch_density": 0.031763,
+          "native_model_catch_density": 0.031763,
+          "loaded_model_catch_density": 0.031763,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 197091.034913,
+          "source_biomass_density": 0.67932,
+          "zero_candidate": false
+        },
+        {
+          "group": "Bigeye tuna",
+          "seq": 46,
+          "weight": 0.005994529991382864,
+          "source_printed_catch_density": 0.004,
+          "native_model_catch_density": 0.004,
+          "loaded_model_catch_density": 0.004,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 24820.204,
+          "source_biomass_density": 0.014,
+          "zero_candidate": false
+        },
+        {
+          "group": "Yellowfin tuna",
+          "seq": 47,
+          "weight": 0.009741111235997153,
+          "source_printed_catch_density": 0.0065,
+          "native_model_catch_density": 0.0065,
+          "loaded_model_catch_density": 0.0065,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 40332.8315,
+          "source_biomass_density": 0.022,
+          "zero_candidate": false
+        },
+        {
+          "group": "Marlins",
+          "seq": 48,
+          "weight": 0.0016484957476302876,
+          "source_printed_catch_density": 0.0011,
+          "native_model_catch_density": 0.0011,
+          "loaded_model_catch_density": 0.0011,
+          "source_catch_unit": "t wet catch / whole-study-area km2 / year",
+          "source_period": 1978,
+          "source_basis": "total landings+discards",
+          "common_area_km2": 6205051,
+          "source_field": "A2.1 Total; canonical group.export; Selected model groups/Groups catch",
+          "source_caught_mass_t": 6825.556100000001,
+          "source_biomass_density": 0.003,
+          "zero_candidate": false
+        }
+      ],
+      "allocation_total": 0.667275,
+      "allocation_formula": "weight = loaded candidate catch / sum(all reviewed candidate catches)",
+      "catch_attempt": {
+        "usable": true,
+        "candidate_values": [
+          {
+            "group": "Tuna-like",
+            "catch": 0.017061
+          },
+          {
+            "group": "Coastal scombrids",
+            "catch": 0.029259
+          },
+          {
+            "group": "S bathy",
+            "catch": 0.0
+          },
+          {
+            "group": "ML bathy",
+            "catch": 0.003463
+          },
+          {
+            "group": "2 L pisc",
+            "catch": 0.062612
+          },
+          {
+            "group": "2 Carangids",
+            "catch": 0.020911
+          },
+          {
+            "group": "2 S pelagics",
+            "catch": 0.108124
+          },
+          {
+            "group": "2 Milkfish plus",
+            "catch": 0.015004
+          },
+          {
+            "group": "2 SM inv",
+            "catch": 0.092747
+          },
+          {
+            "group": "2 SM pisc",
+            "catch": 0.031961
+          },
+          {
+            "group": "2-3 Hilsa",
+            "catch": 0.03662
+          },
+          {
+            "group": "2-3 Indian mackerel",
+            "catch": 0.04793
+          },
+          {
+            "group": "3 L pisc",
+            "catch": 0.029437
+          },
+          {
+            "group": "3 Carangids",
+            "catch": 0.031914
+          },
+          {
+            "group": "3 S pelagics",
+            "catch": 0.046784
+          },
+          {
+            "group": "3 Milkfish plus",
+            "catch": 0.006744
+          },
+          {
+            "group": "3 SM inv",
+            "catch": 0.043341
+          },
+          {
+            "group": "3 SM pisc",
+            "catch": 0.031763
+          },
+          {
+            "group": "Bigeye tuna",
+            "catch": 0.004
+          },
+          {
+            "group": "Yellowfin tuna",
+            "catch": 0.0065
+          },
+          {
+            "group": "Marlins",
+            "catch": 0.0011
+          }
+        ],
+        "total": 0.667275,
+        "rejected_reason": null,
+        "zero_provenance": "A2.1p46 explicitly lists zero for group7; no missing values defaulted to zero in these candidate catches"
+      },
+      "allocation_period_transfer": "Fixed1978structure applied to2019landings and, if adopted, all retained years/bases; geographic fishery distribution and residual composition can change",
+      "group_set_changed": true,
+      "weights_changed": true,
+      "confidence_changed": true,
+      "adoption_state": "adopted in regional workbook; source reconstruction remains provisional",
+      "catch_t": 7107.6613613311,
+      "ppr_tC": 176800.79705997065,
+      "membership_rule_plain": "Broad reporting category approximated by compatible named and residual groups",
+      "allocation_rule_plain": "Source-model catch proportions transferred across taxon composition, years and catch bases",
+      "adoption_date": "2026-09-30",
+      "review_run_id": "LME034_mixed_guild_reuse_20260930",
+      "readable_reason": "All source-listed named and residual bony-fish pools compatible with this broad reporting scope are retained. Separately reported tuna/billfish categories do not establish their absence from unidentified fish. The provider functional bin does not override actual A1.3 membership. The pelagic approximation includes named tunas/billfish3,46–48 and source-zero small bathypelagics7; predominantly reef/demersal commercial piscivores21/34 remain outside this pelagic set. Dedicated elasmobranchs1/2 are outside FAO Osteichthyes scope. Maldives shelf9–14 remain excluded on source p7–9/A1.2 geography, without excluding region1 open water. Mixed large-piscivore18/31 pools retain their actual bony members despite Pristis. Unmeasured composition and full-guild transfer keep membership Very low. Complete A2.1 1978 landings plus discards normalized to the common whole-study-area denominator are used as W4 Medium pooled catch weights. Sum=0.667275 t/km²/year. Source-zero7 is retained. The proportions are assumed fixed across 1950–2019, geographic fisheries and all catch bases; they are not observed constituent fractions. Accepted biological parameters remain unchanged.",
+      "reuse_previous_groups": [
         {
           "group": "2 S pelagics",
           "seq": 20,
@@ -10332,63 +11988,9 @@
           "zero_candidate": false
         }
       ],
-      "allocation_total": 0.413591,
-      "allocation_formula": "weight = loaded candidate catch / sum(all reviewed candidate catches)",
-      "catch_attempt": {
-        "usable": true,
-        "candidate_values": [
-          {
-            "group": "2 S pelagics",
-            "catch": 0.108124
-          },
-          {
-            "group": "3 S pelagics",
-            "catch": 0.046784
-          },
-          {
-            "group": "2 Carangids",
-            "catch": 0.020911
-          },
-          {
-            "group": "3 Carangids",
-            "catch": 0.031914
-          },
-          {
-            "group": "2 L pisc",
-            "catch": 0.062612
-          },
-          {
-            "group": "3 L pisc",
-            "catch": 0.029437
-          },
-          {
-            "group": "2-3 Hilsa",
-            "catch": 0.03662
-          },
-          {
-            "group": "2-3 Indian mackerel",
-            "catch": 0.04793
-          },
-          {
-            "group": "Coastal scombrids",
-            "catch": 0.029259
-          }
-        ],
-        "total": 0.413591,
-        "rejected_reason": null
-      },
-      "allocation_period_transfer": "Fixed1978structure applied to2019landings and, if adopted, all retained years/bases; geographic fishery distribution and residual composition can change",
-      "group_set_changed": true,
-      "weights_changed": true,
-      "confidence_changed": true,
-      "adoption_state": "adopted in regional workbook; source reconstruction remains provisional",
-      "catch_t": 7107.6613613311,
-      "ppr_tC": 176800.79705997065,
-      "membership_rule_plain": "Broad reporting category approximated by compatible named and residual groups",
-      "allocation_rule_plain": "Source-model catch proportions transferred across taxon composition, years and catch bases",
-      "adoption_date": "2026-09-30",
-      "review_run_id": "LME034_validation_20260930",
-      "readable_reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Hilsa, Indian mackerel and Coastal scombrids are named coastal pelagic pools; L pisc contains pelagic barracudas/needlefishes/dolphinfish. Their exclusion cannot be proven by the medium-pelagic metadata alone. Containment and composition remain approximations; this is not a representative composition study. Pooled 1978 source-model catch proportions supply the split (A2.1 p46). Fixed composition/catchability is assumed for 2019 landings and the other retained years/bases. Detailed sources and transfer limits: Sources; full old/adopted decision: linked taxon audit."
+      "reuse_previous_reason": "A1.1 pp39–40 and source p9 leave this residual catch category unresolved biologically and redistribute it among fish groups; no measured constituent composition is supplied. Use the provider habitat/commercial category as an explicit coarse restriction, including compatible named pools as well as generic pools. Hilsa, Indian mackerel and Coastal scombrids are named coastal pelagic pools; L pisc contains pelagic barracudas/needlefishes/dolphinfish. Their exclusion cannot be proven by the medium-pelagic metadata alone. Containment and composition remain approximations; this is not a representative composition study. Use complete source-model catch proportions for the independently reviewed eligible set. Source A2.1 p46 quantities are total1978 landings+discards normalized by one common whole-study-area denominator; ratios equal ratios of caught mass. They are pooled model catch proxies, not direct taxon-specific2019landings observations (W10 does not apply). Assume pooled catchability/composition and fixed transfer across years, regions and catch bases. The prior deliberate biomass rationale (long-term geographic proxy despite available1978 catches) is retained in the old explanation; current catch-first hierarchy instead prefers the complete usable model catches. Biomass was not rejected for missing data.",
+      "reuse_review_date": "2026-09-30",
+      "broad_candidate_followup": "broad_candidate_followup.json"
     },
     {
       "model_id": "34_1_Bay_of_Bengal_(1978)",
@@ -48889,5 +50491,15 @@
       }
     ]
   },
-  "proposal_sha256": "f9d65013d35b99515ba955e4f2652edcec8e23fcdac54bbb3cf8c892764a68c1"
+  "proposal_sha256": "f9d65013d35b99515ba955e4f2652edcec8e23fcdac54bbb3cf8c892764a68c1",
+  "reuse_review": {
+    "date": "2026-09-30",
+    "scope": "All49groups against all5M10 broad labels; prior315-taxon source/taxonomy review reused; no locally present donorW5",
+    "changed_taxa": [
+      "Marine pelagic fishes not identified",
+      "Marine fishes not identified",
+      "Perciformes"
+    ],
+    "initial_review_evidence": "mapping_review/audit_decisions.json remains the frozen initial review proposal"
+  }
 }

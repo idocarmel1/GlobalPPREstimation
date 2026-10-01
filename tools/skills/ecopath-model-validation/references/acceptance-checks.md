@@ -1,14 +1,14 @@
 # Acceptance checks
 
-Use these checks on a produced report. They are also review scenarios for evaluating this skill; their presence is not evidence that a regional test has run. Do not execute the deferred LME036 test before the user's review and authorization.
+Use these checks on a produced report. They are also review scenarios for evaluating this skill; their presence is not evidence that a regional test has run. Follow the user's current scope and authorization for regional execution.
 
 ## Before delivery
 
 - **Scope:** region/model/year/basis match the request; exclusions were respected; no unrequested scientific execution or adoption occurred.
-- **Fresh-run recommendation:** any necessary scientific rerun has a specific reason and proposed scope; the user was asked and explicitly confirmed that run before execution. Skill approval or a validation-test request was not substituted for this confirmation.
+- **Fresh-run authorization:** any necessary scientific rerun has a specific reason, concrete setup and explicit session authorization covering its scope; an uncovered run received confirmation before execution. Skill approval or an ordinary validation-test request was not substituted for authorization.
 - **Identity:** each diagnostic and group lookup belongs to the same exact model/configuration, or its limitation is explicit. Source, canonical and loaded-state facts are distinguished.
 - **Selection:** Article and Model reasons are separate and documented or `?`; known other models from the same article are described.
-- **Negative SPPR:** each affected source column is paired with every affected group by names/IDs. GE and TE are separate. Positive row totals do not hide negative entries; missing matrices do not become a verified absence.
+- **Negative SPPR:** each affected source column is paired with every affected group by names/IDs. GE and TE are separate. Positive row totals do not hide negative entries; missing matrices do not become a verified absence. A saved zero-negative-count is diagnostic evidence, not an independent inspection of the full matrix; verify the retained array and its axes before claiming that inspection.
 - **Diagnostics:** rho_living, GE b and detritus-pool SPPR come from matching retained fields; failures/unsupported results are not silently promoted.
 - **Mapping:** all catch labels in the defined universe appear once; exact group IDs are valid; weights and stage assumptions are evidenced; unresolved weights remain `?`; review confidence follows the weakest required component.
 - **Totals:** category counts sum to the appendix count; category catches/PPR reconcile to the same row data; percentages use the stated full-catch or known-PPR denominator and reconcile within rounding tolerance.
@@ -17,6 +17,8 @@ Use these checks on a produced report. They are also review scenarios for evalua
 - **Order:** appendix rows sort by full-precision numeric simple-chain PPR descending; unavailable values are last; taxon name breaks ties.
 - **Geography:** A and B use the correct denominators; approximation is labeled and grounded in the correct figures; missing coordinates alone did not prevent a defensible estimate.
 - **Document:** concise findings follow the edited template; no restored repeated status/provenance/method prose; manual cells and edited hyperlinks/deletions are preserved; all seven linked Excel appendix columns and a separate Sources sheet are present; every rendered page was inspected.
+- **Accepted parameters:** where the user protects existing scientific inputs, before/after comparisons confirm their preservation; source discrepancies remain documented concerns rather than automatic repairs. Missing coefficients are not filled to increase mapping coverage.
+- **Hyperlink appearance:** every visible DOCX/Excel link is blue and underlined at the effective run/cell level. Styling-only edits preserve content, destinations and scientific inputs and receive brief appearance checks.
 - **Delivery:** remaining evidence gaps and unperformed checks are reported honestly; regional workbooks, model inputs, selections and generated maps remain unchanged during a report-only run.
 - **Portability:** all repository-local hyperlink targets in current deliverables are relative to their containing file, resolve to versioned files/directories, and work with the same directory structure under another repository root. Check Word relationships/fields and anchors, Excel relationships/formulas, and Hyperlink Base; reject machine-specific bases/paths. Preserve public URLs and internal anchors, document content, formulas and formatting. A resolved Office tooltip alone is not an absolute-path failure.
 
@@ -32,7 +34,7 @@ A saved diagnostic says two negative source columns, but no contribution matrix 
 
 ### Strong membership and assumed stage weights
 
-A source explicitly identifies the species, but its juvenile/adult weights come from source-model catches and are transferred across all catch years. Membership can be High; W4 weights are Medium with the transfer assumption unless mismatch warrants lower confidence. Overall confidence is no higher than Medium. Count the taxon once.
+A source explicitly identifies the species, but its juvenile/adult weights come from source-model catches and are transferred across all catch years. Membership can be High; the approved W4 catch-proportion fallback carries Medium allocation confidence with its transfer assumption documented. Assess a proxy outside that fallback under its applicable rule, including W5/W6 when reporting or fishery mismatch weakens it. Overall confidence follows the weakest necessary component. Count the taxon once.
 
 ### Unsupported equal split
 

@@ -1,0 +1,1969 @@
+{
+  "methods": [
+    {
+      "method": "GE",
+      "recipient_count": 25,
+      "source_count": 3,
+      "recipient_axis": [
+        25,
+        24,
+        1,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "source_axis": [
+        25,
+        24,
+        1
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Phytoplankton"
+      ],
+      "all_entries_examined": 75,
+      "negative_entries": [],
+      "unavailable_entries": [],
+      "diagnostic": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 1.5425323774682077e-16,
+          "q_max_rel_residual": 1.9869763304253363e-16,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 2.220446049250313e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 25,
+          "total_catch": 0.0,
+          "has_catch": false,
+          "has_ee_issues": true,
+          "n_ee0": 2,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [
+            23,
+            22
+          ],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.19875674399437,
+          "b_converges": true,
+          "rho_living": 0.6874103217047791,
+          "living_converges": true,
+          "sppr_det": {
+            "24": 1.408757040692501
+          },
+          "max_sppr_det": 1.408757040692501,
+          "max_sppr_group": {
+            "seq": 23,
+            "tl": 3.927593614047865,
+            "sppr": 25092.13216512237,
+            "inv_te": 599.9999999999999
+          },
+          "max_tl_group": {
+            "seq": 22,
+            "tl": 4.2033779072366135,
+            "sppr": 341.5790450007066,
+            "inv_te": 6.4
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 3574.8,
+          "outflow": 3574.800000000001,
+          "rel_gap": 2.5441834557819407e-16
+        },
+        "footprint": {
+          "ppr_all": 0.0,
+          "ppr_inner": 0.0,
+          "ppr_pp_only": 0.0,
+          "npp": 3574.8,
+          "ppr2npp": 0.0,
+          "ppr2npp_pp_only": 0.0
+        },
+        "config": {
+          "TE_option": "GE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "single_detritus",
+          "would_pool": false,
+          "model": "East_China_Sea (2018)"
+        },
+        "warnings": [
+          "total catch is 0: every footprint number is identically 0 (the divergence diagnostics are unaffected)",
+          "2 group(s) with EE=0 (all production is non-predatory death): 23 (Marine mammals), 22 (Sharks). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+        ]
+      },
+      "group_coefficient_parity": [
+        {
+          "group": "diet_import",
+          "scope": "all",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "diet_import",
+          "scope": "inner",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "diet_import",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "all",
+          "direct": 1.408757040692501,
+          "saved": 1.408757040692501,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "inner",
+          "direct": 1.408757040692501,
+          "saved": 1.408757040692501,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "all",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "inner",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "PP",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "all",
+          "direct": 25092.13216512237,
+          "saved": 25092.13216512237,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "inner",
+          "direct": 25092.13216512237,
+          "saved": 25092.13216512237,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "PP",
+          "direct": 13957.116343414018,
+          "saved": 13957.11634341402,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "all",
+          "direct": 341.5790450007066,
+          "saved": 341.5790450007066,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "inner",
+          "direct": 341.5790450007066,
+          "saved": 341.5790450007066,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "PP",
+          "direct": 183.81398286069327,
+          "saved": 183.8139828606933,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "all",
+          "direct": 23.329373221916367,
+          "saved": 23.32937322191637,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "inner",
+          "direct": 23.329373221916367,
+          "saved": 23.32937322191637,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "PP",
+          "direct": 13.049236167972468,
+          "saved": 13.04923616797247,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "all",
+          "direct": 34.53194948665107,
+          "saved": 34.53194948665107,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "inner",
+          "direct": 34.53194948665107,
+          "saved": 34.53194948665107,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "PP",
+          "direct": 17.54789376013859,
+          "saved": 17.54789376013859,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "all",
+          "direct": 33.84485074387791,
+          "saved": 33.84485074387791,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "inner",
+          "direct": 33.84485074387791,
+          "saved": 33.84485074387791,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "PP",
+          "direct": 18.55487477123937,
+          "saved": 18.55487477123937,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "all",
+          "direct": 88.98770274181007,
+          "saved": 88.98770274181007,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "inner",
+          "direct": 88.98770274181007,
+          "saved": 88.98770274181007,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "PP",
+          "direct": 46.89772508520219,
+          "saved": 46.89772508520219,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "all",
+          "direct": 151.23529652539185,
+          "saved": 151.2352965253918,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "inner",
+          "direct": 151.23529652539185,
+          "saved": 151.2352965253918,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "PP",
+          "direct": 83.41959175174648,
+          "saved": 83.41959175174648,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "all",
+          "direct": 48.29323899850962,
+          "saved": 48.29323899850962,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "inner",
+          "direct": 48.29323899850962,
+          "saved": 48.29323899850962,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "PP",
+          "direct": 29.737184859583035,
+          "saved": 29.73718485958304,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "all",
+          "direct": 81.11081053935048,
+          "saved": 81.11081053935048,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "inner",
+          "direct": 81.11081053935048,
+          "saved": 81.11081053935048,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "PP",
+          "direct": 43.417352865139264,
+          "saved": 43.41735286513926,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "all",
+          "direct": 23.98466872560105,
+          "saved": 23.98466872560105,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "inner",
+          "direct": 23.98466872560105,
+          "saved": 23.98466872560105,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "PP",
+          "direct": 13.469586866840483,
+          "saved": 13.46958686684048,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "all",
+          "direct": 86.49763496057093,
+          "saved": 86.49763496057093,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "inner",
+          "direct": 86.49763496057093,
+          "saved": 86.49763496057093,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "PP",
+          "direct": 46.87221539463142,
+          "saved": 46.87221539463142,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "all",
+          "direct": 20.771069589285435,
+          "saved": 20.77106958928544,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "inner",
+          "direct": 20.771069589285435,
+          "saved": 20.77106958928544,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "PP",
+          "direct": 8.28201714503336,
+          "saved": 8.28201714503336,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "all",
+          "direct": 22.644217112582353,
+          "saved": 22.64421711258235,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "inner",
+          "direct": 22.644217112582353,
+          "saved": 22.64421711258235,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "PP",
+          "direct": 12.197051150990605,
+          "saved": 12.1970511509906,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "all",
+          "direct": 19.49372503250305,
+          "saved": 19.49372503250305,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "inner",
+          "direct": 19.49372503250305,
+          "saved": 19.49372503250305,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "PP",
+          "direct": 11.477017050330202,
+          "saved": 11.4770170503302,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "all",
+          "direct": 8.984976172462176,
+          "saved": 8.984976172462176,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "inner",
+          "direct": 8.984976172462176,
+          "saved": 8.984976172462176,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "PP",
+          "direct": 2.6066823529411765,
+          "saved": 2.606682352941176,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "all",
+          "direct": 6.943250926495549,
+          "saved": 6.943250926495549,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "inner",
+          "direct": 6.943250926495549,
+          "saved": 6.943250926495549,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "PP",
+          "direct": 1.8891920313725485,
+          "saved": 1.889192031372549,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "all",
+          "direct": 5.235762673246502,
+          "saved": 5.235762673246502,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "inner",
+          "direct": 5.235762673246502,
+          "saved": 5.235762673246502,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "PP",
+          "direct": 2.7,
+          "saved": 2.7,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "all",
+          "direct": 6.066689672585397,
+          "saved": 6.066689672585397,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "inner",
+          "direct": 6.066689672585397,
+          "saved": 6.066689672585397,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "PP",
+          "direct": 3.143844316453923,
+          "saved": 3.143844316453923,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "all",
+          "direct": 7.421784179594505,
+          "saved": 7.421784179594505,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "inner",
+          "direct": 7.421784179594505,
+          "saved": 7.421784179594505,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "PP",
+          "direct": 1.7555891429767256,
+          "saved": 1.755589142976726,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "all",
+          "direct": 4.447805851402822,
+          "saved": 4.447805851402822,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "inner",
+          "direct": 4.447805851402822,
+          "saved": 4.447805851402822,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "PP",
+          "direct": 0.9393001345895019,
+          "saved": 0.9393001345895019,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "all",
+          "direct": 5.088346326083362,
+          "saved": 5.088346326083362,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "inner",
+          "direct": 5.088346326083362,
+          "saved": 5.088346326083362,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "all",
+          "direct": 4.490508448831001,
+          "saved": 4.490508448831001,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "inner",
+          "direct": 4.490508448831001,
+          "saved": 4.490508448831001,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "PP",
+          "direct": 2.8,
+          "saved": 2.8,
+          "matches": true
+        }
+      ],
+      "all_saved_scoped_coefficients_match": true
+    },
+    {
+      "method": "TE",
+      "recipient_count": 25,
+      "source_count": 3,
+      "recipient_axis": [
+        25,
+        24,
+        1,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "source_axis": [
+        25,
+        24,
+        1
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Phytoplankton"
+      ],
+      "all_entries_examined": 75,
+      "negative_entries": [],
+      "unavailable_entries": [],
+      "diagnostic": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 1.5425323774682077e-16,
+          "q_max_rel_residual": 1.9869763304253363e-16,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 2.220446049250313e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 25,
+          "total_catch": 0.0,
+          "has_catch": false,
+          "has_ee_issues": true,
+          "n_ee0": 2,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [
+            23,
+            22
+          ],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "WARN",
+          "solve_error": null,
+          "b": 0.0,
+          "b_converges": true,
+          "rho_living": 0.784123563218391,
+          "living_converges": true,
+          "sppr_det": {
+            "24": 0.7181544359811457
+          },
+          "max_sppr_det": 0.7181544359811457,
+          "max_sppr_group": {
+            "seq": 13,
+            "tl": 3.910284660341106,
+            "sppr": 950.366948215751,
+            "inv_te": 11.571725915406175
+          },
+          "max_tl_group": {
+            "seq": 22,
+            "tl": 4.2033779072366135,
+            "sppr": 0.0,
+            "inv_te": null
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 3574.8,
+          "outflow": 3574.800000000001,
+          "rel_gap": 2.5441834557819407e-16
+        },
+        "footprint": {
+          "ppr_all": 0.0,
+          "ppr_inner": 0.0,
+          "ppr_pp_only": 0.0,
+          "npp": 3574.8,
+          "ppr2npp": 0.0,
+          "ppr2npp_pp_only": 0.0
+        },
+        "config": {
+          "TE_option": "TE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": null,
+          "would_pool": false,
+          "model": "East_China_Sea (2018)"
+        },
+        "warnings": [
+          "total catch is 0: every footprint number is identically 0 (the divergence diagnostics are unaffected)",
+          "2 group(s) with EE=0 (all production is non-predatory death): 23 (Marine mammals), 22 (Sharks). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "rho(A_LL)=0.7841 is within 0.3 of divergence (max SPPR 950 at group 13 (Piscivores), TL 3.91)"
+        ]
+      },
+      "group_coefficient_parity": [
+        {
+          "group": "diet_import",
+          "scope": "all",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "diet_import",
+          "scope": "inner",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "diet_import",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "all",
+          "direct": 0.7181544359811457,
+          "saved": 0.7181544359811457,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "inner",
+          "direct": 0.7181544359811457,
+          "saved": 0.7181544359811457,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "all",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "inner",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "PP",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "all",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "inner",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "all",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "inner",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "all",
+          "direct": 71.73801404592396,
+          "saved": 71.73801404592396,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "inner",
+          "direct": 71.73801404592396,
+          "saved": 71.73801404592396,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "PP",
+          "direct": 53.26269143520284,
+          "saved": 53.26269143520284,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "all",
+          "direct": 285.291543682362,
+          "saved": 285.291543682362,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "inner",
+          "direct": 285.291543682362,
+          "saved": 285.291543682362,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "PP",
+          "direct": 206.24067688106308,
+          "saved": 206.2406768810631,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "all",
+          "direct": 123.16090973264491,
+          "saved": 123.1609097326449,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "inner",
+          "direct": 123.16090973264491,
+          "saved": 123.1609097326449,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "PP",
+          "direct": 90.62919366093547,
+          "saved": 90.62919366093547,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "all",
+          "direct": 291.5796788887791,
+          "saved": 291.5796788887791,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "inner",
+          "direct": 291.5796788887791,
+          "saved": 291.5796788887791,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "PP",
+          "direct": 211.07996081624785,
+          "saved": 211.0799608162478,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "all",
+          "direct": 708.8172903415177,
+          "saved": 708.8172903415177,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "inner",
+          "direct": 708.8172903415177,
+          "saved": 708.8172903415177,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "PP",
+          "direct": 525.0482353838455,
+          "saved": 525.0482353838455,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "all",
+          "direct": 212.5647707436883,
+          "saved": 212.5647707436883,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "inner",
+          "direct": 212.5647707436883,
+          "saved": 212.5647707436883,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "PP",
+          "direct": 162.093760116292,
+          "saved": 162.093760116292,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "all",
+          "direct": 309.37397777669946,
+          "saved": 309.3739777766995,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "inner",
+          "direct": 309.37397777669946,
+          "saved": 309.3739777766995,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "PP",
+          "direct": 226.19234742490997,
+          "saved": 226.19234742491,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "all",
+          "direct": 322.3019909657627,
+          "saved": 322.3019909657627,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "inner",
+          "direct": 322.3019909657627,
+          "saved": 322.3019909657627,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "PP",
+          "direct": 239.29491944368894,
+          "saved": 239.2949194436889,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "all",
+          "direct": 950.366948215751,
+          "saved": 950.366948215751,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "inner",
+          "direct": 950.366948215751,
+          "saved": 950.366948215751,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "PP",
+          "direct": 701.3339926356434,
+          "saved": 701.3339926356434,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "all",
+          "direct": 97.67668127732841,
+          "saved": 97.67668127732841,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "inner",
+          "direct": 97.67668127732841,
+          "saved": 97.67668127732841,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "PP",
+          "direct": 62.74079189047579,
+          "saved": 62.74079189047579,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "all",
+          "direct": 60.16724917752825,
+          "saved": 60.16724917752825,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "inner",
+          "direct": 60.16724917752825,
+          "saved": 60.16724917752825,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "PP",
+          "direct": 44.378930526184035,
+          "saved": 44.37893052618404,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "all",
+          "direct": 57.563431953487765,
+          "saved": 57.56343195348776,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "inner",
+          "direct": 57.563431953487765,
+          "saved": 57.56343195348776,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "PP",
+          "direct": 43.41780600630447,
+          "saved": 43.41780600630447,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "all",
+          "direct": 14.312461453172208,
+          "saved": 14.31246145317221,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "inner",
+          "direct": 14.312461453172208,
+          "saved": 14.31246145317221,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "PP",
+          "direct": 8.013251062020991,
+          "saved": 8.013251062020991,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "all",
+          "direct": 7.482974480269197,
+          "saved": 7.482974480269197,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "inner",
+          "direct": 7.482974480269197,
+          "saved": 7.482974480269197,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "PP",
+          "direct": 3.1955986277753365,
+          "saved": 3.195598627775337,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "all",
+          "direct": 5.022236458825235,
+          "saved": 5.022236458825235,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "inner",
+          "direct": 5.022236458825235,
+          "saved": 5.022236458825235,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "PP",
+          "direct": 3.3962264150943393,
+          "saved": 3.396226415094339,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "all",
+          "direct": 95.0580619882578,
+          "saved": 95.0580619882578,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "inner",
+          "direct": 95.0580619882578,
+          "saved": 95.0580619882578,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "PP",
+          "direct": 61.100458212391295,
+          "saved": 61.1004582123913,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "all",
+          "direct": 8.518022119712366,
+          "saved": 8.518022119712366,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "inner",
+          "direct": 8.518022119712366,
+          "saved": 8.518022119712366,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "PP",
+          "direct": 3.9155460124381487,
+          "saved": 3.915546012438149,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "all",
+          "direct": 4.825320825037597,
+          "saved": 4.825320825037597,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "inner",
+          "direct": 4.825320825037597,
+          "saved": 4.825320825037597,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "PP",
+          "direct": 1.9192657490136011,
+          "saved": 1.919265749013601,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "all",
+          "direct": 5.614569151238523,
+          "saved": 5.614569151238523,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "inner",
+          "direct": 5.614569151238523,
+          "saved": 5.614569151238523,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "all",
+          "direct": 13.364180011596257,
+          "saved": 13.36418001159626,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "inner",
+          "direct": 13.364180011596257,
+          "saved": 13.36418001159626,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "PP",
+          "direct": 10.21897810218978,
+          "saved": 10.21897810218978,
+          "matches": true
+        }
+      ],
+      "all_saved_scoped_coefficients_match": true
+    },
+    {
+      "method": "With Egestion",
+      "recipient_count": 25,
+      "source_count": 3,
+      "recipient_axis": [
+        25,
+        24,
+        1,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "source_axis": [
+        25,
+        24,
+        1
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Phytoplankton"
+      ],
+      "all_entries_examined": 75,
+      "negative_entries": [],
+      "unavailable_entries": [],
+      "diagnostic": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 1.5425323774682077e-16,
+          "q_max_rel_residual": 1.9869763304253363e-16,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 2.220446049250313e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 25,
+          "total_catch": 0.0,
+          "has_catch": false,
+          "has_ee_issues": true,
+          "n_ee0": 2,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [
+            23,
+            22
+          ],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.21831014953392205,
+          "b_converges": true,
+          "rho_living": 0.5499282573638238,
+          "living_converges": true,
+          "sppr_det": {
+            "24": 1.4874664347370579
+          },
+          "max_sppr_det": 1.4874664347370579,
+          "max_sppr_group": {
+            "seq": 23,
+            "tl": 3.927593614047865,
+            "sppr": 10854.994898869618,
+            "inv_te": 479.9999999999999
+          },
+          "max_tl_group": {
+            "seq": 22,
+            "tl": 4.2033779072366135,
+            "sppr": 142.5896487335615,
+            "inv_te": 5.12
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 3574.8,
+          "outflow": 3574.8000000000015,
+          "rel_gap": 3.8162751836729114e-16
+        },
+        "footprint": {
+          "ppr_all": 0.0,
+          "ppr_inner": 0.0,
+          "ppr_pp_only": 0.0,
+          "npp": 3574.8,
+          "ppr2npp": 0.0,
+          "ppr2npp_pp_only": 0.0
+        },
+        "config": {
+          "TE_option": "With Egestion",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "single_detritus",
+          "would_pool": false,
+          "model": "East_China_Sea (2018)"
+        },
+        "warnings": [
+          "total catch is 0: every footprint number is identically 0 (the divergence diagnostics are unaffected)",
+          "2 group(s) with EE=0 (all production is non-predatory death): 23 (Marine mammals), 22 (Sharks). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed"
+        ]
+      },
+      "group_coefficient_parity": [
+        {
+          "group": "diet_import",
+          "scope": "all",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "diet_import",
+          "scope": "inner",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "diet_import",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "all",
+          "direct": 1.4874664347370579,
+          "saved": 1.487466434737058,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "inner",
+          "direct": 1.4874664347370579,
+          "saved": 1.487466434737058,
+          "matches": true
+        },
+        {
+          "group": "Detritus",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "all",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "inner",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Phytoplankton",
+          "scope": "PP",
+          "direct": 1.0,
+          "saved": 1,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "all",
+          "direct": 10854.994898869618,
+          "saved": 10854.99489886962,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "inner",
+          "direct": 10854.994898869618,
+          "saved": 10854.99489886962,
+          "matches": true
+        },
+        {
+          "group": "Marine mammals",
+          "scope": "PP",
+          "direct": 5913.371792781005,
+          "saved": 5913.371792781005,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "all",
+          "direct": 142.5896487335615,
+          "saved": 142.5896487335615,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "inner",
+          "direct": 142.5896487335615,
+          "saved": 142.5896487335615,
+          "matches": true
+        },
+        {
+          "group": "Sharks",
+          "scope": "PP",
+          "direct": 74.39756045019006,
+          "saved": 74.39756045019006,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "all",
+          "direct": 12.796171765347207,
+          "saved": 12.79617176534721,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "inner",
+          "direct": 12.796171765347207,
+          "saved": 12.79617176534721,
+          "matches": true
+        },
+        {
+          "group": "Small yellow croakers",
+          "scope": "PP",
+          "direct": 7.032447938090624,
+          "saved": 7.032447938090624,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "all",
+          "direct": 18.322460345568686,
+          "saved": 18.32246034556869,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "inner",
+          "direct": 18.322460345568686,
+          "saved": 18.32246034556869,
+          "matches": true
+        },
+        {
+          "group": "Large yellow croakers",
+          "scope": "PP",
+          "direct": 8.94636198233495,
+          "saved": 8.94636198233495,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "all",
+          "direct": 17.544570398317113,
+          "saved": 17.54457039831711,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "inner",
+          "direct": 17.544570398317113,
+          "saved": 17.54457039831711,
+          "matches": true
+        },
+        {
+          "group": "Omnivores",
+          "scope": "PP",
+          "direct": 9.380012618150353,
+          "saved": 9.380012618150353,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "all",
+          "direct": 43.714139856358486,
+          "saved": 43.71413985635849,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "inner",
+          "direct": 43.714139856358486,
+          "saved": 43.71413985635849,
+          "matches": true
+        },
+        {
+          "group": "Benthivores/piscivores",
+          "scope": "PP",
+          "direct": 21.99621474812012,
+          "saved": 21.99621474812012,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "all",
+          "direct": 74.44517949885949,
+          "saved": 74.44517949885949,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "inner",
+          "direct": 74.44517949885949,
+          "saved": 74.44517949885949,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/piscivores",
+          "scope": "PP",
+          "direct": 40.2348668019993,
+          "saved": 40.2348668019993,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "all",
+          "direct": 31.50907685254535,
+          "saved": 31.50907685254535,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "inner",
+          "direct": 31.50907685254535,
+          "saved": 31.50907685254535,
+          "matches": true
+        },
+        {
+          "group": "Planktivores/Benthivores",
+          "scope": "PP",
+          "direct": 18.974591710750417,
+          "saved": 18.97459171075042,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "all",
+          "direct": 30.017651381152803,
+          "saved": 30.0176513811528,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "inner",
+          "direct": 30.017651381152803,
+          "saved": 30.0176513811528,
+          "matches": true
+        },
+        {
+          "group": "Bombay duck",
+          "scope": "PP",
+          "direct": 15.53468239348877,
+          "saved": 15.53468239348877,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "all",
+          "direct": 11.84261966914985,
+          "saved": 11.84261966914985,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "inner",
+          "direct": 11.84261966914985,
+          "saved": 11.84261966914985,
+          "matches": true
+        },
+        {
+          "group": "Hairtails",
+          "scope": "PP",
+          "direct": 6.556847550415896,
+          "saved": 6.556847550415896,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "all",
+          "direct": 43.1903950950187,
+          "saved": 43.1903950950187,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "inner",
+          "direct": 43.1903950950187,
+          "saved": 43.1903950950187,
+          "matches": true
+        },
+        {
+          "group": "Piscivores",
+          "scope": "PP",
+          "direct": 22.74722526220849,
+          "saved": 22.74722526220849,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "all",
+          "direct": 12.782114410511003,
+          "saved": 12.782114410511,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "inner",
+          "direct": 12.782114410511003,
+          "saved": 12.782114410511,
+          "matches": true
+        },
+        {
+          "group": "Benthivores",
+          "scope": "PP",
+          "direct": 4.771106759075687,
+          "saved": 4.771106759075687,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "all",
+          "direct": 14.451743462843648,
+          "saved": 14.45174346284365,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "inner",
+          "direct": 14.451743462843648,
+          "saved": 14.45174346284365,
+          "matches": true
+        },
+        {
+          "group": "Planktivores",
+          "scope": "PP",
+          "direct": 7.56265641732159,
+          "saved": 7.56265641732159,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "all",
+          "direct": 11.74721888569978,
+          "saved": 11.74721888569978,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "inner",
+          "direct": 11.74721888569978,
+          "saved": 11.74721888569978,
+          "matches": true
+        },
+        {
+          "group": "Cephalopods",
+          "scope": "PP",
+          "direct": 6.806361711285757,
+          "saved": 6.806361711285757,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "all",
+          "direct": 6.548469173132041,
+          "saved": 6.548469173132041,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "inner",
+          "direct": 6.548469173132041,
+          "saved": 6.548469173132041,
+          "matches": true
+        },
+        {
+          "group": "Shrimps",
+          "scope": "PP",
+          "direct": 1.7598343529411764,
+          "saved": 1.759834352941176,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "all",
+          "direct": 4.96278789092686,
+          "saved": 4.96278789092686,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "inner",
+          "direct": 4.96278789092686,
+          "saved": 4.96278789092686,
+          "matches": true
+        },
+        {
+          "group": "Crabs",
+          "scope": "PP",
+          "direct": 1.2868188922980388,
+          "saved": 1.286818892298039,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "all",
+          "direct": 4.301951666021363,
+          "saved": 4.301951666021363,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "inner",
+          "direct": 4.301951666021363,
+          "saved": 4.301951666021363,
+          "matches": true
+        },
+        {
+          "group": "Other invertebrates",
+          "scope": "PP",
+          "direct": 2.1599999999999997,
+          "saved": 2.16,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "all",
+          "direct": 4.333901844354896,
+          "saved": 4.333901844354896,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "inner",
+          "direct": 4.333901844354896,
+          "saved": 4.333901844354896,
+          "matches": true
+        },
+        {
+          "group": "Echinoderms",
+          "scope": "PP",
+          "direct": 2.2462072827435406,
+          "saved": 2.246207282743541,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "all",
+          "direct": 5.692213492872085,
+          "saved": 5.692213492872085,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "inner",
+          "direct": 5.692213492872085,
+          "saved": 5.692213492872085,
+          "matches": true
+        },
+        {
+          "group": "Benthic Crustaceans",
+          "scope": "PP",
+          "direct": 1.2735194222880433,
+          "saved": 1.273519422288043,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "all",
+          "direct": 3.391443391553568,
+          "saved": 3.391443391553568,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "inner",
+          "direct": 3.391443391553568,
+          "saved": 3.391443391553568,
+          "matches": true
+        },
+        {
+          "group": "Mollusks",
+          "scope": "PP",
+          "direct": 0.6831488447071465,
+          "saved": 0.6831488447071465,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "all",
+          "direct": 4.2981119666432,
+          "saved": 4.2981119666432,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "inner",
+          "direct": 4.2981119666432,
+          "saved": 4.2981119666432,
+          "matches": true
+        },
+        {
+          "group": "Polychaetes",
+          "scope": "PP",
+          "direct": 0.0,
+          "saved": 0,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "all",
+          "direct": 3.667967777347575,
+          "saved": 3.667967777347575,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "inner",
+          "direct": 3.667967777347575,
+          "saved": 3.667967777347575,
+          "matches": true
+        },
+        {
+          "group": "Zooplankton",
+          "scope": "PP",
+          "direct": 2.2399999999999998,
+          "saved": 2.24,
+          "matches": true
+        }
+      ],
+      "all_saved_scoped_coefficients_match": true
+    }
+  ],
+  "basis": "All75 entries per method, every source/recipient including unfished25groups; A and L retained with axes/masks in direct_solutions.json. Count alone not substituted for matrix inspection."
+}

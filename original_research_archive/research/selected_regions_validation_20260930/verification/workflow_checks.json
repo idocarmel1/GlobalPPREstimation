@@ -1,0 +1,44 @@
+{
+  "baseline_tests": {
+    "count": 43,
+    "passed": true,
+    "evidence": "baseline_workflow_tests.txt"
+  },
+  "source_inventory_mapping_fix": {
+    "regression_cases": 2,
+    "observed_before": "Unknown group for a; Unknown group for b",
+    "after": "Both cases pass; invalid names still rejected, unavailable coefficients remain unknown, source parameters and NOT_RUN diagnostics preserved.",
+    "workflow_tests": 45,
+    "passed": true,
+    "evidence": "blocked_mapping_workflow_tests.txt"
+  },
+  "scope": "Pipeline behavior checks using isolated fixtures. No scientific solver or real regional recalculation was invoked by these tests.",
+  "integration_freshness_guard": {
+    "regression_cases": [
+      "Project.xlsx changed while integrating",
+      "Regional workbook changed while integrating"
+    ],
+    "observed_before": "Both isolated cases saved despite concurrent edits; expected ValueError was not raised.",
+    "after": "Both reject the central write, preserving the newly edited workbook.",
+    "workflow_tests": 46,
+    "passed": true,
+    "evidence": "integration_freshness_workflow_tests.txt",
+    "scope": "Isolated fixture workbooks; production Project.xlsx not modified."
+  },
+  "mapping_controls_without_coefficients": {
+    "observed_before": "Adapter marked known mapped source groups unverified because TaxonSPPR was empty; regression failed.",
+    "after": "Group mapping controls enabled. Actual JavaScript calculator returns10 tC for mapped-group independent simple-chain fixture, unavailable GE, and retained NOT_RUN. No coefficients generated.",
+    "workflow_tests": 47,
+    "passed": true,
+    "evidence": "mapping_display_workflow_tests.txt",
+    "scope": "Fixture adapter and real calculator checks; integrated browser verification remains pending."
+  },
+  "canonical_region_discovery": {
+    "observed_before": "All-region CLI attempted to validate adjacent taxon appendix as a regional input and failed filename/unit identity.",
+    "after": "Canonical <unit>/<unit>.xlsx discovery succeeds; adjacent appendix bytes preserved.",
+    "workflow_tests": 48,
+    "passed": true,
+    "evidence": "canonical_discovery_workflow_tests.txt",
+    "scope": "Actual CLI against temporary fixture repository; no shared production writes."
+  }
+}

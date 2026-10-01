@@ -2,6 +2,8 @@
 
 Read with the [template guide](../../../templates/Model_validation_template_instructions.md). The guide defines confidence categories and report fields; this reference explains how to obtain and check their inputs.
 
+After a bounded workbook XML edit, verify the saved file through the unmodified project reader and freshness checks in a fresh process. Keep worksheet row and cell addresses ascending and unique. An alternate reader can recover out-of-order cells that the actual pipeline reader silently drops; agreement with that alternate reader alone does not establish usable workbook identity. Correct serialization without changing stored scientific values, then recheck canonical input/result hashes and current evidence identities.
+
 ## Locate evidence without changing scientific state
 
 From the repository root, use the read-only `read_book`, `records` and `overview` functions in `tools/workbooks.py`. Workbook sheets contain `@table` blocks, not a single rectangular table per sheet. The reader rejects authoritative formula cells rather than using stale cached values. If reading fails, report the issue and use an explicit, documented read-only investigation; do not save/recalculate the workbook to make it readable.
@@ -20,6 +22,8 @@ From the repository root, use the read-only `read_book`, `records` and `overview
 | Geography | Region boundary provenance and the source figure/domain for the selected model; inspect images before estimating. |
 
 Discover actual files by listing the specified model/paper/report directories and following recorded paths. Do not assume that a generic `sppr_source.xlsx` contains the full contribution matrix merely from its name. Do not execute archived builders or calculators as a way to inspect their outputs.
+
+Check publication identity separately from folder location and file presence. A preliminary report or related chapter retained in the selected article's folder must not be presented as its available original PDF. Preserve the focal-source gap and label contextual material explicitly in the report and shared archive. The atlas uses exact-hash reviewed roles in `common_reference_data/paper_file_roles.json` for such exceptions; changed bytes require a fresh identity assessment.
 
 The [pipeline reconstruction reference](../../original_skill_resources/combined-src/references/reconstruction-audit.md) distinguishes source, loader and computational state. Use it for source-fidelity interpretation, without running its extraction/conversion stages. The [direct-diagnostics reference](../../original_skill_resources/combined-src/references/direct-diagnostics.md) explains returned outcomes and configuration identity; validation alone does not call the solver.
 
@@ -50,7 +54,7 @@ Before each fresh scientific run:
 1. Complete available read-only investigation and independent report sections. Identify the exact model/input and unresolved finding.
 2. Present a concrete recommendation: why the run is necessary; why saved evidence is insufficient; stages/methods/settings; expected outputs and comparison; proposed input changes, if any; and whether results would only be retained for review or adopted into workbook/project/map outputs.
 3. Ask explicitly, for example: `The saved TE diagnostic reports two negative source columns, but its contribution matrix was not retained, so I cannot identify the affected groups. I recommend rerunning TE diagnostics on the verified saved input and retaining the labeled matrix for review. This proposal does not include changing inputs or adopting new regional results. Shall I proceed with this run?` Adapt the wording and scope to the actual evidence.
-4. Wait for explicit confirmation for that proposal. Broad interest in validation, skill approval and silence are not confirmation. If confirmed, invoke the current paper-to-PPR workflow for exactly the approved scope and preserve both old and fresh identities. If the required scope expands, explain and ask again before the additional run.
+4. Check whether explicit session authorization already covers that concrete run. If it does, explain the setup and proceed; otherwise wait for confirmation of the proposal. Broad interest in validation, skill approval and silence are not confirmation. Invoke the current paper-to-PPR workflow only within the authorized scope and preserve both old and fresh identities. If the required execution exceeds that scope, explain and ask before the additional run.
 5. If declined/deferred, keep the unsupported finding explicit and retain the recommendation in the handoff/supporting review. Do not put a new decision in a manual researcher field.
 
 The same approval rule applies to a fresh scientific substage as to a full paper-to-PPR run. A regional **validation test** may use saved evidence and report arithmetic, but permission for that test does not by itself authorize fresh extraction, SPPR execution or changes to scientific results.
@@ -65,7 +69,7 @@ The same approval rule applies to a fresh scientific substage as to a full paper
 6. Check the derived number of affected columns against the saved `divergence.n_negative_sources`, when present. A mismatch can indicate different inputs, sign conventions, filtering or misaligned labels; investigate before describing the findings as equivalent.
 7. Inspect nonfinite/missing entries separately. Zero negative entries in an incomplete matrix is not evidence of a completely negative-free matrix.
 
-If the matrix is absent but a matching saved diagnostic reports a count, preserve that limited finding, for example `Saved diagnostic reports two affected source columns; matrix unavailable to identify columns/groups.` For a complete matrix with no negative entries, use the preferred report wording `No negative SPPR entries across the basal-source columns`. If only the matching saved diagnostic reports zero, use the concise sign finding in Word and retain the diagnostic attribution, configuration and missing-matrix limitation here in supporting evidence. Do not describe that as a new independent matrix check. Avoid the shorthand `0 negative source columns`. This sign check alone does not establish an overall diagnostic pass. Recommend a fresh diagnostic run when needed to obtain the required detail, explain the reason, and always ask for confirmation before running the solver.
+If the matrix is absent but a matching saved diagnostic reports a count, preserve that limited finding, for example `Saved diagnostic reports two affected source columns; matrix unavailable to identify columns/groups.` For a complete matrix with no negative entries, use the preferred report wording `No negative SPPR entries across the basal-source columns`. If only the matching saved diagnostic reports zero, use the concise sign finding in Word and retain the diagnostic attribution, configuration and missing-matrix limitation here in supporting evidence. Do not describe that as a new independent matrix check. Avoid the shorthand `0 negative source columns`. This sign check alone does not establish an overall diagnostic pass. Recommend a fresh diagnostic run when needed to obtain the required detail, explain the reason, and follow the rerun decision and approval rules above, including existing explicit session authorization.
 
 Example using fictional IDs, deliberately out of order:
 
@@ -87,6 +91,8 @@ Check duplicate taxon/basis keys. Only sum genuinely disjoint, documented catch 
 
 Join the classic coefficient and model mapping by exact keys with explicit unmatched lists. Join groups by ID, not spreadsheet row order. Validate every referenced group belongs to the model under review. Read allocation ledgers for stage definitions, source catch proportions, zero candidates, transfer periods and catch-basis assumptions.
 
+Check supplementary composition, trait and indicator-input tables as well as canonical taxon descriptions. When the source methods explicitly link such a table to the selected baseline groups, it can supply additional membership evidence. Verify the version and group crosswalk, representative versus exhaustive scope, survey periods and combined stage headings. Trait sizes and within-group catch shares do not automatically establish allocation between model stages.
+
 The supporting row record needs these semantic fields; an equivalent table structure is acceptable:
 
 - Exact taxon label, reference year/basis, catch tonnes, TL, classic SPPR coefficient, simple-chain PPR tonnes C, missing-value flags and input locations.
@@ -99,6 +105,8 @@ Apply the [guide's rules](../../../templates/Model_validation_template_instructi
 Search source definitions and authoritative online evidence where needed. Record queries/references and outcomes proportionately; online searching alone does not increase confidence. For stage composition, verify taxon, caught-mass basis, region/fishery, period, stage threshold and catch basis. Unsupported geographic or temporal transfers can lower confidence. Do not infer catch proportions directly from biomass without assessing the assumption.
 
 If a defensible replacement mapping is found, retain it as a proposed correction and explain the current uncertainty. A report-only task does not adopt it in the workbook or use it to inflate the adopted summary. The report's review confidence can change while the stored scientific inputs stay unchanged.
+
+For broad residual reporting labels, the presence of a separate named catch category does not establish that its species are absent from the unidentified category. Use actual source membership and local reporting evidence when defining exclusions. A provider functional tag alone is not an exhaustive boundary: generic marine-fish and finfish categories can include named, pelagic and bathyal bony groups. Preserve independently supported habitat, stage and geographic exclusions; a broad label is not permission to use every group indiscriminately. Record the complete eligible set, genuine zeros, composition proxy and fixed-transfer assumptions.
 
 ## Arithmetic and sorting
 
@@ -116,11 +124,21 @@ If catch itself is missing, mark totals as known subtotals and make the denomina
 
 Keep all unresolved mappings in these denominators whenever their catch/PPR is known. The mapping summary describes confidence in assignments, not the fraction with finite GE/TE coefficients. Do not substitute an old GE/TE supported-catch statistic for these measures.
 
+When an exceptional coefficient or regional result makes an assumption consequential, inspect the main taxon contributions for that method using the same year, basis, scope and unidentified treatment. A small classic-PPR share can coexist with a dominant GE or TE contribution. Retain method-specific exposure separately from the required classic-PPR summary and state a material dependency concisely in the report. Reassess the mapping from source evidence and alternatives, never merely to reduce an extreme result; preserve accepted scientific coefficients and genuine diagnostic failures.
+
 Use full-precision values for calculations and descending appendix sorting; round only displayed values. Missing PPR sorts after every known numeric value, including zero; use taxon name for ties. Derive summary totals from these same rows and verify they reconcile. Do not filter low-PPR or unresolved records out of the appendix.
 
 ## Geographic evidence
 
 Keep a short record of boundary definitions, figure/page, map orientation/scale and the interpretation of the study-area line. Use appropriate geographic area calculations for compatible polygons. If digitizing an image, retain landmarks/control points and the estimated boundary; exclude land consistently with the study definition.
+
+Establish the modeled domain from the exact baseline's methods as well as figure legends. A model can explicitly include adjacent municipal waters outside the named geographic domain; a later indicative map can show a narrower area. Resolve this distinction before accepting or rejecting a trace, cite the model's stated extent, and retain differences between geographic, administrative and modeled boundaries.
+
+Verify the ordered coastline path against the source figure, especially around peninsulas, channels and bays. Test representative water points visibly inside and outside the source boundary. A valid polygon and a land mask can still hide a misplaced edge that excludes intended water; masking land cannot repair that omission. Recompute areas and displayed footprints after a supported correction, retaining the original figure and the approximation limits.
+
+Calibrate principal outline vertices against visible graticule anchors in the original-resolution image. Retain real bends and distinguish the boundary stroke from overlaid point markers; a marker center may obscure the actual join. Record pixel coordinates, anchors and source interpretation limits. Small pixel-fit residuals do not establish equivalent geographic accuracy.
+
+Image segmentation can mistake place markers, labels or grid lines for geographic holes. Compare these interruptions with adjacent visible boundaries, record the reviewed annotation boxes and any approximate coastline interpolation, and test nearby water points. Preserve the original source image. If the source's reported area differs from the traced area, clearly label reuse of the traced intersection with the reported denominator as a sensitivity calculation; it does not supply a second measured overlap.
 
 A visual estimate is acceptable when the figure supports it. Record approximate percentages or a defensible range, how it was judged, and the main boundary uncertainty. Never compare the raw areas of screenshots at different scales or treat a bounding rectangle as the actual shelf/study polygon. Reserve Not determined for evidence too ambiguous to support an estimate.
 
@@ -129,6 +147,8 @@ Do not insert the earlier LME036 visual estimates into another model or region. 
 ## Approved fallback and readable coverage
 
 Apply the template guide’s Medium catch-first then biomass fallback only after establishing eligible groups. Retain the rejected catch attempt, actual source fields/values/units and normalized proportions, membership uncertainty and transfer assumptions. Canonical PPR / Matching and the companion Mapping review/Allocation assumptions retain adopted classifications and separate assumption flags. A report-only task still cannot adopt proposals; an explicitly authorized adoption must propagate dependent calculations and map outputs before completion.
+
+Before concluding that source catch is unavailable, inspect relevant supplementary time-series tables as well as static parameter tables. A named year's absolute-catch series may support a qualified composition proxy even when accepted static inputs have missing catches, but it does not become the selected model's native catch export. Verify the table's own type-code definitions, units, year, group-name/ID crosswalk, catch basis and complete eligible vector; document version differences and rounded or censored zeros. Never join tables by row position when group order differs. Preserve accepted catch parameters and keep unsupported candidates on the complete-biomass fallback.
 
 For each of membership and allocation, aggregate known simple-chain PPR by actual rule and component confidence. Each taxon contributes once to each separate table, not once per group. Include unresolved/not applicable and all used rules. Tables must reconcile independently to the same full known-PPR denominator. Capture actual map controls, filters, payload calculation, visible display rounding and exact value; diagnose differences rather than copying a displayed number.
 

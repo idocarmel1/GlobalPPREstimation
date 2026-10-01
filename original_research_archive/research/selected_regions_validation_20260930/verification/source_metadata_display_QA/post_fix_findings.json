@@ -1,0 +1,45 @@
+{
+  "review_status": "PASS bounded post-fix review; no blocking issue remains in the two reviewed changes",
+  "final_model_approval": "provisional",
+  "pre_fix_findings_retained": "findings.json",
+  "resolved_findings": [
+    "QA-METADATA-1",
+    "QA-SOURCE-1"
+  ],
+  "reviewed_source_sha256": {
+    "original_research_archive/research/selected_regions_validation_20260930/apply_reviewed_metadata.py": "96b4268ddf28cf571a7dcf23cd4d9938a50c47949be6dda09981caf5481bc96a",
+    "original_research_archive/research/selected_regions_validation_20260930/test_reviewed_source_insert.py": "fc512546e9b2b9ff8d78eabfb740c2fc432d10f58eed0d9a4b7c196b18af218f",
+    "tools/original_atlas_data.py": "268c8d8e5fa06aeaf43602ce3f9d20a5212fd77e4427a10e9a34e4cb75db607a",
+    "tools/workflow_checks/test_paper_files.py": "f0fdb2dd55f0b3ce6e8cb8ea8911627772c60c8d0872c75060b91b7e63a648ee",
+    "common_reference_data/paper_file_roles.json": "28e9d554e75e744d56a61a435438b849e0c5cf658184724efe51067a980070cd"
+  },
+  "tests": [
+    {
+      "command": "python -m unittest test_reviewed_source_insert test_metadata_roundtrip test_coordinator_metadata test_reviewed_geometry -v",
+      "working_directory": "original_research_archive/research/selected_regions_validation_20260930",
+      "result": "15 tests passed; exit 0"
+    },
+    {
+      "command": "python -m unittest tools.workflow_checks.test_paper_files tools.workflow_checks.test_html_adapter -v",
+      "result": "27 tests passed; exit 0"
+    },
+    {
+      "command": "Original qa_probes.py rerun without changing fixtures, redirecting only result filename",
+      "result": "Both prior reproductions now pass protective expectations; existing/stale/shared provenance and actual LME035/LME027 context cases still pass",
+      "evidence": "post_fix_probe_results.json"
+    },
+    {
+      "command": "Three synthetic relocation registry guard probes",
+      "result": "Retired entry skipped; path escape rejected; duplicate resolved path rejected",
+      "evidence": "post_fix_guard_results.json"
+    }
+  ],
+  "fix_verification": {
+    "QA-METADATA-1": "After copy2 the full checks.items() loop now detects a changed regional handoff and rejects before write_book; the inserted record is absent afterward.",
+    "QA-SOURCE-1": "Registry paths now use the same SourcePaths resolver as material_files. Identical relocated context bytes remain context and main_file_status remains not_found."
+  },
+  "remaining_gaps": [
+    "Central adoption and final built-map/archive browser verification remain root-owned and outside this read-only review.",
+    "This approval covers only the reviewed source/metadata guards; scientific model approval remains provisional."
+  ]
+}

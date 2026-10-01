@@ -1,0 +1,10 @@
+{
+  "project_sha256": "779d2095f4c68702d85a8a10c956242d052ba5bccbc124f4a0d8fe3b3c5db69e",
+  "observed_failure": "Exact comparison rejected27LME013Annual rows containing760last-digit differences.",
+  "cause": "Source workbook retained values beyond16significant digits; openpyxl write_book serializes numeric cells with %.16g. All760differences exactly match that transformation.",
+  "max_absolute_difference_wet_t": 9.5367431640625e-07,
+  "max_relative_difference": 4.756318756752521e-16,
+  "fix": "Verification compares unmodified values first; on mismatch, permits only exact installed XLSX writer serialization of expected finite floats. Actual values, strings/status/identifiers/missingness are not normalized. No parameter/workbook/result change.",
+  "tests": "Observed failing actual760cellcase before fix;5testsPASSafter, including substantive numeric mismatch, identity/status/missing, duplicate/lost and exact-row behavior.",
+  "full_integration_recheck": "PASS: 51870annualcells; verification/integrated_tables_EEZ_598_LME_013_LME_024.json"
+}

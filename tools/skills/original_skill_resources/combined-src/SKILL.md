@@ -5,7 +5,7 @@ description: Use when working on the Global PPR pipeline, from Ecopath papers, s
 
 # From an Ecopath paper to regional PPR
 
-This is the project's single active workflow skill. Use it for a complete pipeline or a requested stage; extraction-only, diagnostics-only, matching-only and registry-only requests retain their boundaries. Independent classic PPR or NPP does not require an Ecopath model.
+This is the project's active scientific pipeline skill. Use it for a complete pipeline or a requested stage; extraction-only, diagnostics-only, matching-only and registry-only requests retain their boundaries. The separate [model-validation skill](../../ecopath-model-validation/SKILL.md) governs review packages. Independent classic PPR or NPP does not require an Ecopath model.
 
 Resolve `<skill-root>` as the directory containing this file and `<repo-root>` as the ancestor containing `Project.xlsx`. Read the [project guide and workbook contract](../../../../README.md#workbook-reference) and the named regional workbook's Overview. This entry point lives in the original `combined-src` directory; its updated instructions supersede archived Claude/Codex copies. Repository commands run from `<repo-root>`. Relative links resolve from the document containing them.
 

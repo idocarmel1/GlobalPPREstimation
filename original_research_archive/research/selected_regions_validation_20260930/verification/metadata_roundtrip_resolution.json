@@ -1,0 +1,13 @@
+{
+  "initial_failure": "Metadata batch03 exact reopen equality failed after saved write.",
+  "root_cause": "openpyxl numeric cell serialization uses16 significant digits; only two reviewed target_coverage_ratio values changed from0.46879416652121647 to0.4687941665212165, a5.551115123125783e-17 binary tail.",
+  "minimal_fix": "Normalize only newly proposed numeric metadata to the writer precision; retain original proposal and stored value in receipt. Exact unrelated-content comparison remains unchanged.",
+  "regression_red": "metadata_roundtrip_red.txt",
+  "regression_green": "metadata_roundtrip_green.txt",
+  "saved_workbook_recovery": "metadata_batch_03_plan_applied.json",
+  "recovery_cells_compared": 3155124,
+  "intended_changed_cells": 21,
+  "cache_refreshed_after_proof": true,
+  "scientific_rerun": false,
+  "scientific_parameter_changes": false
+}

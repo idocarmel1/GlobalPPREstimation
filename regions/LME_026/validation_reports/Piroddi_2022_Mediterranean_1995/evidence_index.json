@@ -1,0 +1,678 @@
+{
+  "schema_version": 1,
+  "run_id": "LME026_selected_model_validation_20260930",
+  "region_id": "LME_026",
+  "model_id": "Piroddi_2022_Mediterranean_1995",
+  "variant_id": "exact accepted source1995 + documented diagnostic-only staging; no biological/routing corrections",
+  "source_identity": {
+    "accepted_baseline_workbook": {
+      "path": "../../../../original_research_archive/research/selected_regions_validation_20260930/baseline/LME_026/LME_026.xlsx",
+      "sha256": "71ca4f707f9fbff61c29cda2c2a0c6fd8320f681a477c1cec5b29557a035758b"
+    },
+    "accepted_baseline_model": {
+      "path": "../../../../original_research_archive/research/selected_regions_validation_20260930/baseline/LME_026/accepted_model.json",
+      "sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e"
+    },
+    "canonical_model": {
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/model.json",
+      "sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e"
+    },
+    "reviewed_original_workbook": {
+      "path": "../../LME_026.xlsx",
+      "sha256": "71ca4f707f9fbff61c29cda2c2a0c6fd8320f681a477c1cec5b29557a035758b",
+      "historical_identity": true
+    },
+    "source_pdf": {
+      "path": "../../papers/MED-2022/s41598-022-18017-x-75a92a71.pdf",
+      "sha256": "75a92a71a8925282375920beb6aa5acdea22af658e43d08a6f97363136511fad"
+    },
+    "source_xlsx": {
+      "path": "../../papers/MED-2022/41598_2022_18017_MOESM1_ESM-75e4d6d3.xlsx",
+      "sha256": "75e4d6d3437d9c1fafe41f8ae936192f6328e0cf4a6c9a2885be3cf297679882"
+    },
+    "source_docx": {
+      "path": "../../papers/MED-2022/41598_2022_18017_MOESM2_ESM-7d26163a.docx",
+      "sha256": "7d26163aa9f7868524e4c116940d0ada6ba4162c4a45bbdaaf8b193392aa5e84"
+    },
+    "current_runtime_admission": {
+      "path": "current_constructor_check.json",
+      "sha256": "a7026389a426410f03071f83ff94a1dec79105d5b3f637b8a7dc7c89d355aa26"
+    }
+  },
+  "computational_input_identity": {
+    "canonical_model": {
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/model.json",
+      "sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e"
+    },
+    "strict_input": {
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/26_2602022_Mediterranean_Piroddi_Source_(1995).json",
+      "sha256": "c4f398bd0cf9b16cc6c8bb60c9192637ce5bb8b4b956d00989b76fc197c573f1"
+    },
+    "documented_staging_input": {
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/26_2602022_Mediterranean_Piroddi_(1995).json",
+      "sha256": "40a7d003fefc4f19c0c931856928086c09f851abac541e4b3a58110e1ac98eb0"
+    },
+    "current_engine": {
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7"
+    },
+    "defaults_and_settings": {
+      "strict_source": {
+        "status": "EXCEPTION",
+        "exception_type": "ValueError",
+        "exception": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].",
+        "settings": {
+          "zero_catch": false,
+          "zero_biomass_accum": false,
+          "default_gs": false
+        },
+        "input_sha256": "c4f398bd0cf9b16cc6c8bb60c9192637ce5bb8b4b956d00989b76fc197c573f1",
+        "traceback": "Traceback (most recent call last):\n  File \"[repository]\\regions\\LME_026\\validation_reports\\Piroddi_2022_Mediterranean_1995\\check_constructor.py\", line 15, in <module>\n    calc=PPRCalculator.from_modeldata(data,underdetermined=False,normalize_DC=False,**settings)\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 608, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].\n",
+        "matches_retained_exception": true
+      },
+      "documented_loader_defaults": {
+        "status": "EXCEPTION",
+        "exception_type": "ValueError",
+        "exception": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].",
+        "settings": {
+          "zero_catch": false,
+          "zero_biomass_accum": true,
+          "default_gs": true
+        },
+        "input_sha256": "40a7d003fefc4f19c0c931856928086c09f851abac541e4b3a58110e1ac98eb0",
+        "traceback": "Traceback (most recent call last):\n  File \"[repository]\\regions\\LME_026\\validation_reports\\Piroddi_2022_Mediterranean_1995\\check_constructor.py\", line 15, in <module>\n    calc=PPRCalculator.from_modeldata(data,underdetermined=False,normalize_DC=False,**settings)\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 608, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].\n",
+        "matches_retained_exception": true
+      }
+    },
+    "regional_inputs_sha256": "ab7a1b488b7fc40520b53720f3d1cb3bfb02fcba967f2e4baf218cb3bacea0f8",
+    "regional_results_sha256": "b9d835261fbda50740ad96b6397b65db2440bac76b8a44a895e95b23bb0dfd7c"
+  },
+  "methods": [
+    "independent simple trophic chain / preserved coefficient /9 once",
+    "regional recalculation",
+    "strict source constructor admission",
+    "documented-default constructor admission"
+  ],
+  "required_roles": [
+    "source_pdf",
+    "source_xlsx",
+    "source_docx",
+    "canonical_input",
+    "source_roundtrip",
+    "source_cell_evidence",
+    "source_verification",
+    "source_balance",
+    "diagnostic_executed_code",
+    "strict_diagnostic_input",
+    "staged_diagnostic_input",
+    "staging_transformations",
+    "loader_admission",
+    "diagnostic_status_and_null_return",
+    "loader_groups",
+    "loader_diet",
+    "loader_detritus_fate",
+    "current_constructor_admission",
+    "membership_all522",
+    "taxonomy_authority",
+    "source_taxonomy_authority",
+    "ecology_evidence",
+    "allocation_all_candidates",
+    "allocation_search",
+    "adopted_taxon_audit",
+    "mapping_changes",
+    "coverage_arithmetic",
+    "geographic_assessment",
+    "regional_workbook",
+    "report",
+    "appendix",
+    "portable_link_checks",
+    "parameter_preservation",
+    "reconciliation",
+    "document_template_integrity",
+    "visual_qa",
+    "regional_calculation_execution",
+    "coordination_handoff"
+  ],
+  "artifacts": [
+    {
+      "role": "source_pdf",
+      "availability": "present",
+      "path": "../../papers/MED-2022/s41598-022-18017-x-75a92a71.pdf",
+      "sha256": "75a92a71a8925282375920beb6aa5acdea22af658e43d08a6f97363136511fad"
+    },
+    {
+      "role": "source_xlsx",
+      "availability": "present",
+      "path": "../../papers/MED-2022/41598_2022_18017_MOESM1_ESM-75e4d6d3.xlsx",
+      "sha256": "75e4d6d3437d9c1fafe41f8ae936192f6328e0cf4a6c9a2885be3cf297679882"
+    },
+    {
+      "role": "source_docx",
+      "availability": "present",
+      "path": "../../papers/MED-2022/41598_2022_18017_MOESM2_ESM-7d26163a.docx",
+      "sha256": "7d26163aa9f7868524e4c116940d0ada6ba4162c4a45bbdaaf8b193392aa5e84"
+    },
+    {
+      "role": "canonical_input",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/model.json",
+      "sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e"
+    },
+    {
+      "role": "source_roundtrip",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/SOURCE_ROUNDTRIP.xlsx",
+      "sha256": "7aecff6384d2a698ba46ce0e78bd8f552e77c17683cfbeca0329a5dc223278dc"
+    },
+    {
+      "role": "source_cell_evidence",
+      "availability": "present",
+      "path": "../../extraction_review_20260928/cell_evidence.json",
+      "sha256": "f8faf8f73761132ce063dbcbc2385a5c5b28ff6c3b5c0586c18091c6681174e0"
+    },
+    {
+      "role": "source_verification",
+      "availability": "present",
+      "path": "../../extraction_review_20260928/VERIFICATION.json",
+      "sha256": "87dbe28b1d7b6e23f05f212d3654598b0b71b26181a023127c61ad8e701986c2"
+    },
+    {
+      "role": "source_balance",
+      "availability": "present",
+      "path": "../../extraction_review_20260928/independent_source_balance.json",
+      "sha256": "1ce8af29fe9d8c5f17be90a00246202febddf66043c49359639f1d51918d6468"
+    },
+    {
+      "role": "diagnostic_executed_code",
+      "availability": "present",
+      "path": "../../extraction_review_20260928/audit_diagnostics.py",
+      "sha256": "5534bd5a8af3dd5ed6d60e10fa3ad75f389a72af7c56773f2a2bc46954e9e20f"
+    },
+    {
+      "role": "strict_diagnostic_input",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/26_2602022_Mediterranean_Piroddi_Source_(1995).json",
+      "sha256": "c4f398bd0cf9b16cc6c8bb60c9192637ce5bb8b4b956d00989b76fc197c573f1"
+    },
+    {
+      "role": "staged_diagnostic_input",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/26_2602022_Mediterranean_Piroddi_(1995).json",
+      "sha256": "40a7d003fefc4f19c0c931856928086c09f851abac541e4b3a58110e1ac98eb0"
+    },
+    {
+      "role": "staging_transformations",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/staging_transformations.json",
+      "sha256": "b10a82ab2e912f90129bad510411cb19df4b3bafad29582694e62f5bc0eb4e3f"
+    },
+    {
+      "role": "loader_admission",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_audit.json",
+      "sha256": "4a6403e2045f1472b254f9f429457ef2d74007f9e1046c4cdc88246fa4174410"
+    },
+    {
+      "role": "diagnostic_status_and_null_return",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/diagnostics_results.json",
+      "sha256": "529314c8ee687ca4e711b81ca4b81d00b480730762924014ee3c250fa013358e"
+    },
+    {
+      "role": "loader_groups",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_groups_before_defaults.csv",
+      "sha256": "88dd061dea180b08f76f93839d28ad2044dcc829f5eed65b69d44a4406687052"
+    },
+    {
+      "role": "loader_diet",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_diet.csv",
+      "sha256": "3151defa864e606996996ddcc80020d537ef88d9e0fea0652b29218ec9c229da"
+    },
+    {
+      "role": "loader_detritus_fate",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_detritus_fate.csv",
+      "sha256": "45d1bde587358eabccd3961dbcdfa45a6cfcb24b24c1d36f2366b43c9d9aa152"
+    },
+    {
+      "role": "current_constructor_admission",
+      "availability": "present",
+      "path": "current_constructor_check.json",
+      "sha256": "a7026389a426410f03071f83ff94a1dec79105d5b3f637b8a7dc7c89d355aa26"
+    },
+    {
+      "role": "membership_all522",
+      "availability": "present",
+      "path": "taxonomy_audit/taxonomy_mapping_proposals.json",
+      "sha256": "b893c1ba222e0604ab4da66a16b77f82f3f0dc996d2836c36fef8d65a514881d"
+    },
+    {
+      "role": "taxonomy_authority",
+      "availability": "present",
+      "path": "taxonomy_audit/worms_api_evidence.json",
+      "sha256": "702802770938d44627c4b3ccec799aad0b1b5c713e44b081415e75e7d97cff27"
+    },
+    {
+      "role": "source_taxonomy_authority",
+      "availability": "present",
+      "path": "taxonomy_audit/worms_source_api_evidence.json",
+      "sha256": "91fc313d836f0200514748f050e2e99872fc20b149706e4e74b13e863ef42fa7"
+    },
+    {
+      "role": "ecology_evidence",
+      "availability": "present",
+      "path": "taxonomy_audit/ecology_web_evidence.json",
+      "sha256": "170206c041cd3bd0503ef70b096cfa2bc0979d2523650d634e9057751a2618d5"
+    },
+    {
+      "role": "allocation_all_candidates",
+      "availability": "present",
+      "path": "allocation_evidence.json",
+      "sha256": "661e0313ee2285949b5e279703b41fdf5cf59064235583ae55eaabade09b3c78"
+    },
+    {
+      "role": "allocation_search",
+      "availability": "present",
+      "path": "allocation_search.json",
+      "sha256": "31c7eebcd795122c6e5d6fe1dae05275b103898e192431dcc3fe37497bf3d72a"
+    },
+    {
+      "role": "adopted_taxon_audit",
+      "availability": "present",
+      "path": "adopted_taxon_audit.json",
+      "sha256": "a39faed8a28aa58dcc9c11be00ca24af0ab94dc79d9160526b8d48cce6ce6517"
+    },
+    {
+      "role": "mapping_changes",
+      "availability": "present",
+      "path": "mapping_changes.json",
+      "sha256": "11cc5bf950467dbd359af8f6bf6dc248de37605aec58678893dc21bddd124948"
+    },
+    {
+      "role": "coverage_arithmetic",
+      "availability": "present",
+      "path": "coverage_summary.json",
+      "sha256": "e8e7bd5fc3b3b3f229fea8d3b2f2e156cbb4f4d2b0db5941a25cf69aa1cf4a64"
+    },
+    {
+      "role": "geographic_assessment",
+      "availability": "present",
+      "path": "geography/geographic_assessment.json",
+      "sha256": "35f3e7720fdee55477b37f88aebeb629dab5cc3c4bc31797e11e757c4ad6ea12"
+    },
+    {
+      "role": "regional_workbook",
+      "availability": "present",
+      "path": "../../LME_026.xlsx",
+      "sha256": "94c54212811967ade70cad8cf72b3c213046a746ffbec81b829969b7d4152c2e"
+    },
+    {
+      "role": "report",
+      "availability": "present",
+      "path": "../../Model_validation_Piroddi_2022_Mediterranean_1995.docx",
+      "sha256": "8ee1f0c407de40d1673260fb8215809d5be52a27be07197cd012c1fd3022898b"
+    },
+    {
+      "role": "appendix",
+      "availability": "present",
+      "path": "../../LME026_taxon_mapping_appendix.xlsx",
+      "sha256": "69b11b1563d4c96ded4f1d82b5a90b86d002303ad03e3457369b7cd7b5faf5fe"
+    },
+    {
+      "role": "portable_link_checks",
+      "availability": "present",
+      "path": "qa/hyperlink_audit.json",
+      "sha256": "9b3b9f71e14c05b7c503d62fc715c28662ce319fb9305a7b636c9cb748de9772"
+    },
+    {
+      "role": "parameter_preservation",
+      "availability": "present",
+      "path": "qa/protected_input_checks.json",
+      "sha256": "8d1009c4aec1e41cd629efa65912436ac1294b6ae10c9921d7420135ca6db79e"
+    },
+    {
+      "role": "reconciliation",
+      "availability": "present",
+      "path": "qa/reconciliation.json",
+      "sha256": "40485629fb7ccbdccc81a57542dc96fded8ee93f5032b79a028c1d9b47fd9b8e"
+    },
+    {
+      "role": "document_template_integrity",
+      "availability": "present",
+      "path": "qa/docx_integrity.json",
+      "sha256": "6862f073a6d5d88340601ad02aca5bba623da6fd155c97bcf262e602d1865d7a"
+    },
+    {
+      "role": "visual_qa",
+      "availability": "present",
+      "path": "qa/visual_qa.json",
+      "sha256": "abae796770f4211541a0bb923ee442e23e8b4692685d752a71561071fa6d32a4"
+    },
+    {
+      "role": "regional_calculation_execution",
+      "availability": "present",
+      "path": "qa/calculation_execution.json",
+      "sha256": "ce42e71765808df1ccc921a1321ef5c9e0a3ec20c6981602e61422bdb13f6136"
+    },
+    {
+      "role": "coordination_handoff",
+      "availability": "present",
+      "path": "coordination_handoff.json",
+      "sha256": "5d5b9bb9c60ded86da81e8045a7d52d91dc33ddf477bf1ca1207f41b0849844e"
+    },
+    {
+      "role": "current_executed_code/adopt_mapping.py",
+      "availability": "present",
+      "path": "adopt_mapping.py",
+      "sha256": "bd4f1ba22c50885ba93e4fea8f0e4745ae17ef98a89f101441b0f00c08026d55"
+    },
+    {
+      "role": "current_executed_code/calculate_region.py",
+      "availability": "present",
+      "path": "calculate_region.py",
+      "sha256": "7a61ba400469b2e95b2ebe3c3f2c0d991178d6deb952b8d9a70fcc364af7c800"
+    },
+    {
+      "role": "current_executed_code/check_constructor.py",
+      "availability": "present",
+      "path": "check_constructor.py",
+      "sha256": "771c0559ec60dffaa7a4da1101457f9a0b4d607d1be00b701ceff290437f8485"
+    },
+    {
+      "role": "current_executed_code/finalize_audit.py",
+      "availability": "present",
+      "path": "finalize_audit.py",
+      "sha256": "370399489d8091f207f655fca2f046d8b716b813ae92972ac9154c6ff64cf6ea"
+    },
+    {
+      "role": "current_executed_code/build_appendix.mjs",
+      "availability": "present",
+      "path": "build_appendix.mjs",
+      "sha256": "f7d5a42f5a7f81c1f3a22fdea4d63bc49e17316f639b3e93301db6727f7bb91b"
+    },
+    {
+      "role": "current_executed_code/patch_appendix_links.py",
+      "availability": "present",
+      "path": "patch_appendix_links.py",
+      "sha256": "5a638d8677db6e3559afb23aaa67d6a9ad18e03f61281eebd795f2695bbd953f"
+    },
+    {
+      "role": "current_executed_code/build_report.py",
+      "availability": "present",
+      "path": "build_report.py",
+      "sha256": "75cf45f79893871d594b723af390e0ce88c1e9bb0710972da55e54540f380b32"
+    },
+    {
+      "role": "current_executed_code/render_word.ps1",
+      "availability": "present",
+      "path": "render_word.ps1",
+      "sha256": "9f3da5341fc5d2dcfac32710d6ed3c4491948d028de3696de5545fdff43b4ba1"
+    },
+    {
+      "role": "current_executed_code/prepare_geography.py",
+      "availability": "present",
+      "path": "prepare_geography.py",
+      "sha256": "8d6d0a23cf3d2c607238c18a9a2e3bd6943c9c2e94aecc55bd2d4937f7ee43d3"
+    },
+    {
+      "role": "current_executed_code/verify_deliverables.py",
+      "availability": "present",
+      "path": "verify_deliverables.py",
+      "sha256": "d0493d4c0aa3c9844319612aee70efe5a2edae7d97541cd7ed7d57fb6c3b4616"
+    },
+    {
+      "role": "current_executed_code/build_handoff.py",
+      "availability": "present",
+      "path": "build_handoff.py",
+      "sha256": "55a394f32e265dac2d64b2bad424ad2cb66a2ec703d80b6acfeb1d88cd5d74f2"
+    },
+    {
+      "role": "ecopath_import/Basic_input.csv",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Basic_input.csv",
+      "sha256": "cfcc6711d9563fc98ce315bd0c761cc9819dc0979bebad89370c551b20aa38e5"
+    },
+    {
+      "role": "ecopath_import/Biomass_accumulation.csv",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Biomass_accumulation.csv",
+      "sha256": "265c3d7fc996679c5ba28871b8c022804e64fd819179af45746853a505824634"
+    },
+    {
+      "role": "ecopath_import/Detritus_fate.csv",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Detritus_fate.csv",
+      "sha256": "f5dc25b951119f686a1b9c73f6d3422e62266488578a294db486abb4be589ae8"
+    },
+    {
+      "role": "ecopath_import/Diet_composition.csv",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Diet_composition.csv",
+      "sha256": "12ea68c39580822a6ae1c5b92b0a8c2a2fcb02fdcef5753cdca317d81a483d6c"
+    },
+    {
+      "role": "ecopath_import/Discards.csv",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Discards.csv",
+      "sha256": "e3f34e9dbd25d7c6f6cf34b5c35df7631ac821793b2b458e3f3247c9b07ea7b1"
+    },
+    {
+      "role": "ecopath_import/Landings.csv",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Landings.csv",
+      "sha256": "16e0d1c129b2bdff61de70b9bc75849fddeedfdbde1abe557780884f11d13336"
+    },
+    {
+      "role": "ecopath_import/Metadata.xlsx",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Metadata.xlsx",
+      "sha256": "e5266628b110f00bf1c4a6bae58b49f12f2ad52975ecf63128db9601ebbd158a"
+    },
+    {
+      "role": "ecopath_import/Taxonomy.xlsx",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/Taxonomy.xlsx",
+      "sha256": "6b150d3f481c3af334ec37e1b5a7d8fbd65844ee67a9872e3c2468e084579320"
+    },
+    {
+      "role": "ecopath_import/TL.xlsx",
+      "availability": "present",
+      "path": "../../models/Piroddi_2022_Mediterranean_1995/extracted_tables/TL.xlsx",
+      "sha256": "8989b451abff4db08417a5b6843e0baf445477eaef3318cd071e91ab67142c45"
+    },
+    {
+      "role": "rendered_report/report_page_1.png",
+      "availability": "present",
+      "path": "qa/report_page_1.png",
+      "sha256": "5c43f775ccea13a0ae0c10e614a8a739f85b1a8a110e606ec8ea7227b6cc6d15"
+    },
+    {
+      "role": "rendered_report/report_page_2.png",
+      "availability": "present",
+      "path": "qa/report_page_2.png",
+      "sha256": "52497dd7dd4fd731953416fc63e7f6465386423578945fb6c3eec6a181452ab5"
+    },
+    {
+      "role": "rendered_report/report_page_3.png",
+      "availability": "present",
+      "path": "qa/report_page_3.png",
+      "sha256": "3507bd326cb755ff7df7973021fa4a9184d02df498b01c9ee3b4353452e98177"
+    },
+    {
+      "role": "rendered_report/report_page_4.png",
+      "availability": "present",
+      "path": "qa/report_page_4.png",
+      "sha256": "c64601bd421b3ccb0a4727b2402c283030b8c1dd156e10bffc05b751fff3be1d"
+    },
+    {
+      "role": "rendered_report/report_page_5.png",
+      "availability": "present",
+      "path": "qa/report_page_5.png",
+      "sha256": "f7babe16ec6a20e023aef2430bbc5648111a91b049904a9ee18b0b2e43e605eb"
+    },
+    {
+      "role": "rendered_report/report_page_6.png",
+      "availability": "present",
+      "path": "qa/report_page_6.png",
+      "sha256": "eaeecf88585232d48340efc03a4e6087fc6ba1ee334aa0727478d7d9217178e1"
+    },
+    {
+      "role": "geographic_pixels/target_region.png",
+      "availability": "present",
+      "path": "geography/target_region.png",
+      "sha256": "35b6b975ca1eb624762f6798a8f80c7325b0ec003ac8babfbb0e423f0ca2bc92"
+    },
+    {
+      "role": "geographic_pixels/study_area_figure_4h.png",
+      "availability": "present",
+      "path": "geography/study_area_figure_4h.png",
+      "sha256": "088456d9deedb788129d9cbd1896c0d5fd45b7a1278e7bbed44dd6ed35eca5db"
+    },
+    {
+      "role": "geographic_pixels/study_domain_figure_4a.png",
+      "availability": "present",
+      "path": "geography/study_domain_figure_4a.png",
+      "sha256": "9c8fc450b3e883958f45659a09fd02ac491bcd2489ad7b908cf91031b9078247"
+    },
+    {
+      "role": "geographic_pixels/source_page_9.png",
+      "availability": "present",
+      "path": "geography/source_page_9.png",
+      "sha256": "8d079cf89b0f29704c57f37905825d3c325623874447928ec8c1018e7ef1bae5"
+    },
+    {
+      "role": "appendix_preview/appendix_top.png",
+      "availability": "present",
+      "path": "qa/appendix_top.png",
+      "sha256": "02e8927fd0d7ee81fbbadf3d64c037df7ceb19a0f6ce8d9e9e043a233efc8f0b"
+    },
+    {
+      "role": "appendix_preview/appendix_middle.png",
+      "availability": "present",
+      "path": "qa/appendix_middle.png",
+      "sha256": "4793609db1669ee938c9216b9974740ef2806b86f41b0ebdf8fc0e824bc329e9"
+    },
+    {
+      "role": "appendix_preview/appendix_bottom.png",
+      "availability": "present",
+      "path": "qa/appendix_bottom.png",
+      "sha256": "5c14bbbc7e149642aec4965f9a2ea3f3e12c81ce98499a7e1c6795ba7e90d40f"
+    },
+    {
+      "role": "appendix_preview/appendix_longest.png",
+      "availability": "present",
+      "path": "qa/appendix_longest.png",
+      "sha256": "497d0b803b2f91c722051b32df58b7e4fa82bd324fe5624fd36fdc9f8564e5be"
+    },
+    {
+      "role": "appendix_preview/sources_top.png",
+      "availability": "present",
+      "path": "qa/sources_top.png",
+      "sha256": "c4e30d5eff283dd1f16a535a8270af8b8f7a10d89c1acd4302a91a4de4897de6"
+    },
+    {
+      "role": "appendix_preview/sources_bottom.png",
+      "availability": "present",
+      "path": "qa/sources_bottom.png",
+      "sha256": "dd7dfbd328dbba65b55501caa0da49c6dfed0110fdcc1fe680ac258ccbb2bbee"
+    },
+    {
+      "role": "appendix_preview/sources_final_links.png",
+      "availability": "present",
+      "path": "qa/sources_final_links.png",
+      "sha256": "c7f99033428b871ef167c40f29e17f01636282fbf3bcd01bb7b33bdba428dae8"
+    },
+    {
+      "role": "GE/full_numerical_return_and_basal_matrix",
+      "availability": "failed",
+      "reason": "Constructor admission fails before diagnose_sppr; routing70/71 absent. Retained diagnostic status and current bounded admission contain matching exceptions and explicit nulls.",
+      "acquisition_status": "Existing retained outputs reopened and current constructor admission checked; methods not executed",
+      "required_for_numerical_method": true
+    },
+    {
+      "role": "TE/full_numerical_return_and_basal_matrix",
+      "availability": "failed",
+      "reason": "Constructor admission fails before diagnose_sppr; routing70/71 absent. Retained diagnostic status and current bounded admission contain matching exceptions and explicit nulls.",
+      "acquisition_status": "Existing retained outputs reopened and current constructor admission checked; methods not executed",
+      "required_for_numerical_method": true
+    },
+    {
+      "role": "With Egestion/full_numerical_return_and_basal_matrix",
+      "availability": "failed",
+      "reason": "Constructor admission fails before diagnose_sppr; routing70/71 absent. Retained diagnostic status and current bounded admission contain matching exceptions and explicit nulls.",
+      "acquisition_status": "Existing retained outputs reopened and current constructor admission checked; methods not executed",
+      "required_for_numerical_method": true
+    },
+    {
+      "role": "per_pool_coefficients",
+      "availability": "inapplicable",
+      "reason": "No model method ran; missing construction prerequisite. No absence-of-negative or numerical result claim is made.",
+      "acquisition_status": "Explicit unavailability recorded in current_constructor_check.json and report"
+    },
+    {
+      "role": "rho_living",
+      "availability": "inapplicable",
+      "reason": "No model method ran; missing construction prerequisite. No absence-of-negative or numerical result claim is made.",
+      "acquisition_status": "Explicit unavailability recorded in current_constructor_check.json and report"
+    },
+    {
+      "role": "GE_b",
+      "availability": "inapplicable",
+      "reason": "No model method ran; missing construction prerequisite. No absence-of-negative or numerical result claim is made.",
+      "acquisition_status": "Explicit unavailability recorded in current_constructor_check.json and report"
+    },
+    {
+      "role": "negative_source_group_pairings",
+      "availability": "inapplicable",
+      "reason": "No model method ran; missing construction prerequisite. No absence-of-negative or numerical result claim is made.",
+      "acquisition_status": "Explicit unavailability recorded in current_constructor_check.json and report"
+    },
+    {
+      "role": "annual_model_PPR",
+      "availability": "inapplicable",
+      "reason": "No model method ran; missing construction prerequisite. No absence-of-negative or numerical result claim is made.",
+      "acquisition_status": "Explicit unavailability recorded in current_constructor_check.json and report"
+    },
+    {
+      "role": "bounded_reporting_scope_followup",
+      "path": "elasmobranch_scope_followup.json",
+      "sha256": "48ec3b0505de877b1d6c2c9e2fc157368f7a7ddea2bd23654a1c839399670027",
+      "availability": "present",
+      "note": "Exact-target rationale correction; numerical equivalence and no parameter change."
+    }
+  ],
+  "reconciliation": {
+    "all522_exact_taxon_keys": true,
+    "all71_source_groups_match_accepted": true,
+    "weights_all_candidates_valid": true,
+    "weakest_component_confidence": true,
+    "independent_arithmetic_matches_workbook": true,
+    "protected_parameters_and_raw_inputs_unchanged": true,
+    "NOT_RUN_preserved": true,
+    "report_and_appendix_links_relative": true,
+    "manual_fields_preserved": true,
+    "all_report_pages_and_appendix_sheets_inspected": true
+  },
+  "scientific_numerical_evidence_complete": false,
+  "reason": "Review package evidence is complete, model numerical stage cannot execute without source routing; missing method returns/matrices are explicit failed/inapplicable roles, not available results.",
+  "coordinator_browser_verification": "pending; outside regional write ownership",
+  "taxonomy_rank_followup": {
+    "repair": {
+      "path": "regions/LME_026/validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_rank_followup/repair_verification.json",
+      "sha256": "0b4e13d0d7daf2f111c675652def09b2cb36196df43d719f9f159cb30e0d0f82"
+    },
+    "primary_authority": {
+      "path": "regions/LME_026/validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_rank_followup/primary_authority_verification.json",
+      "sha256": "8572076c8982bf1df1f19bedc1643bd650786cb9135b883c314b35664797c864"
+    },
+    "appearance": {
+      "path": "regions/LME_026/validation_reports/Piroddi_2022_Mediterranean_1995/taxonomy_rank_followup/appearance_verification.json",
+      "sha256": "244cbe2e96af1473794d6d20dc5493ecf4570651ef32dafa5cdf218c3e077d2e"
+    },
+    "previous_full_QA_is_historical_for_changed_views": true,
+    "current_changed_views_reverified": true,
+    "numerical_membership_weights_confidence_and_regional_values_unchanged": true
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "date": "2026-09-30",
+  "unit_id": "EEZ_598",
+  "purpose": "Regional stage composition and independent primary taxonomy/ecology review",
+  "queries": [
+    "site.wcpfc.int Papua New Guinea 2020 annual report 2019 tuna length frequency size catch",
+    "site.spc.int Papua New Guinea 2019 catch length 43 120 124 tuna"
+  ],
+  "sources": [
+    {
+      "url": "https://meetings.wcpfc.int/file/7705/download",
+      "material": "Papua New Guinea2020 WCPFC annual report; locally retained PDF and extracted text independently reviewed",
+      "retrieval": "Full retained PDF/text; primary web PDF reopened",
+      "applicability": "2019 fisheries reporting but vessel-size categories, observer/port coverage and flag-fleet totals do not provide all-fleet PNG-EEZ caught-mass shares at43/120/124cm",
+      "decision": "Reject as measured allocation weights; retain bounded search evidence"
+    },
+    {
+      "url": "https://www.wcpfc.int/sustainability/scientific-data",
+      "material": "Current scientific-data public page; full page retrieved",
+      "applicability": "Public fish-length data are described, without recovered taxon/year/EEZ/fleet/caught-mass denominators at source thresholds",
+      "decision": "Useful acquisition lead, no adopted numeric shares"
+    },
+    {
+      "url": "https://meetings.wcpfc.int/meetings/sc08?order=field_doc_issue_date&sort=desc",
+      "material": "Search snippet names2012ST-IP-06 Decomposition of Tuna Length Frequency Data from Port Sampling in Papua New Guinea; direct listing returned internal error",
+      "retrieval": "Snippet only; listing inaccessible",
+      "applicability": "Historical port sample lead; not recovered2019 all-fleet EEZ caught-mass shares",
+      "decision": "No numeric allocation adopted; no absence-of-data inference"
+    },
+    {
+      "url": "https://www.spc.int/updates/blog/2019/09/help-us-to-find-out-how-tuna-age-and-how-fast-they-grow-and-win-usd-100",
+      "material": "Search snippet about2019 tagging",
+      "retrieval": "Search snippet only",
+      "applicability": "Tagging/fish-growth study; no total caught-mass stage denominator",
+      "decision": "Not used for weights"
+    },
+    {
+      "url": "https://www.wcpfc.int/sites/default/files/2025-11/Yearbook_2025.pdf",
+      "material": "Search excerpt of PNG longline totals by species/year",
+      "retrieval": "Search excerpt only; no claim of full PDF read",
+      "applicability": "Flag-fleet/species totals do not supply residual-family composition or exact stage shares",
+      "decision": "Not used for regional proportions"
+    }
+  ],
+  "independent_taxonomy_ecology_sources": [
+    {
+      "label": "source definitions",
+      "title": "Allain et al. (2007), final Table 1, PDF9; stage prose PDF15; geography PDF7 and Figure 1 PDF3",
+      "target": "papers/WCP-2007/download-0adcf55e.pdf#page=9",
+      "supports": "Final-model memberships, overlap, stages and study area; initial blue groups are excluded; infant cutoff conflict retained."
+    },
+    {
+      "label": "source catch and biomass",
+      "title": "Allain et al. (2007), Tables 3/5/6, PDF11/14/19; accepted option1 raw JSON",
+      "target": "models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods).json",
+      "supports": "Raw landings density and biomass. Source missing export (-9999) differs from genuine zero and runtime default. Biomass fallback assumes catch composition/catchability follows model biomass."
+    },
+    {
+      "label": "catch classification",
+      "title": "EEZ_598 workbook Catch/Catch, 2019 landings; Sea Around Us labels and ecological categories",
+      "target": "EEZ_598.xlsx",
+      "supports": "Exact regional reporting labels and provider common/functional/commercial groups; category size is not an observed individual measurement."
+    },
+    {
+      "label": "classic coefficient",
+      "title": "EEZ_598 workbook Classic PPR/Taxa: saved independent TL/coefficient and recorded provenance",
+      "target": "EEZ_598.xlsx",
+      "supports": "Independent simple-chain coefficient, TL and source fields are unchanged. Annual tonnes C = catch × saved wet-weight coefficient / 9 once."
+    },
+    {
+      "label": "billfish synonyms",
+      "title": "NCBI Taxonomy: Istiompax indica (13603), Kajikia audax (13721); WoRMS corroborating entries",
+      "target": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=13603",
+      "supports": "Full NCBI entries independently read 2026-09-30: Makaira indica and Tetrapturus audax synonyms. Kajikia entry13721 is separately linked. WoRMS corroboration was previously indexed/read in EEZ_941 review with direct timeout/403; not claimed as a fresh full retrieval here."
+    },
+    {
+      "label": "FAO tuna ecology",
+      "title": "FAO: introduction to tuna and billfish biology (Y0490E), vertical habitat and life histories",
+      "target": "https://www.fao.org/4/y0490e/y0490e04.htm",
+      "supports": "Full relevant text read 2026-09-30: bigeye/bluefin deep diving, albacore intermediate habitat; supports weak analogue only, not caught-size shares."
+    },
+    {
+      "label": "FAO family identification",
+      "title": "FAO historical Scombridae identification sheet; retained Chirocentridae evidence",
+      "target": "https://www.fao.org/docrep/pdf/009/e9163e/e9163e4c.pdf#page=5",
+      "supports": "Scombridae PDF5 independently read 2026-09-30, including Scomber/Scomberomorus/Thunnus/Katsuwonus/Acanthocybium. Chirocentrus coastal-pelagic ecology is retained EEZ_941 source evidence, independently compared with PNG provider categories; no claim of regional composition."
+    },
+    {
+      "label": "FAO octopod ecology",
+      "title": "FAO identification guide Y4160E, printed pp.217–219 (PDF2–4), Argonautidae/Bolitaenidae/Octopodidae",
+      "target": "https://www.fao.org/4/y4160e/y4160e13.pdf#page=4",
+      "supports": "Relevant PDF2–4 independently read 2026-09-30: surface pelagic Argonautidae, meso/bathypelagic Bolitaenidae and benthic Octopodidae. Supports full order-level candidate review and actual habitat mismatch; no composition shares."
+    },
+    {
+      "label": "diagnostics",
+      "title": "Exact accepted option1 retained full direct diagnostic returns and group × source matrices",
+      "target": "../EEZ_941/evidence/2026-09-28_integration/direct_diagnostics.json",
+      "supports": "GE/TE/With Egestion WARN, strict mass balance false, PP budget OK. Full source matrix checked independently in this review; no fresh solver executed."
+    },
+    {
+      "label": "reconstruction provenance",
+      "title": "Original final source reconstruction audit and selected option1 provenance",
+      "target": "../EEZ_941/models/941_200701_WCPO_Warm_Pool_Final_(mixed_periods)/extracted_tables/REPORT.md",
+      "supports": "31 source groups plus synthetic import; loader conventions, source initial/final distinctions, native multistanza and author-confirmation limits; original final reconstruction FAIL differs from accepted variant."
+    },
+    {
+      "label": "stage data search",
+      "title": "Retained 2026-09-29 WCPFC/SPC public size-data search and Papua New Guinea 2020 annual report",
+      "target": "validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/source_review.md#stage-allocation",
+      "supports": "No relevant all-fleet PNG-EEZ 2019 caught-mass shares at exact source stage thresholds recovered. This is not evidence such data do not exist."
+    },
+    {
+      "label": "FAO penaeid ecology",
+      "title": "FAO penaeid shrimp manual, Section2; Penaeus monodon profile",
+      "target": "https://www.fao.org/4/ac006e/AC006E02.htm",
+      "supports": "2026-09-30 full relevant text: coastal/benthic penaeid habitat; taxonomy/ecology only, no regional stage shares."
+    },
+    {
+      "label": "FAO gastropod ecology",
+      "title": "FAO marine-snail restocking manual Section2.2",
+      "target": "https://www.fao.org/4/ag150e/ag150e03.htm",
+      "supports": "2026-09-30 full relevant text: reef-flat/subtidal Trochus grazing; real mismatch to pelagic gastropod forage."
+    },
+    {
+      "label": "FAO piscivore ecology",
+      "title": "FAO cobia profile; family identification Chirocentrus",
+      "target": "https://www.fao.org/fishery/docs/DOCUMENT/aquaculture/CulturedSpecies/file/en/en_cobia.htm",
+      "supports": "2026-09-30 cobia profile read: offshore/coastal carnivory, fish/crab/shrimp/squid feeding. Chirocentrus FAO source reused with independent provider comparison."
+    },
+    {
+      "label": "FAO lobster taxonomy",
+      "title": "FAO Marine Lobsters of the World Vol13 (1991), Palinuridae/Panulirus",
+      "target": "https://www.fao.org/4/t0411e/t0411e00.htm",
+      "supports": "2026-09-30 catalogue family/genera reviewed; provider benthic lobster reporting differs from source epipelagic forage."
+    },
+    {
+      "label": "FAO shark taxonomy",
+      "title": "FAO Field Identification Guide to Sharks and Rays (2005), printed45/PDF22, Carcharhinidae/Galeocerdo/Prionace",
+      "target": "https://www.fao.org/4/y5945e/y5945e03.pdf#page=22",
+      "supports": "2026-09-30 relevant full page read: historical Carcharhinidae includes Galeocerdo and Prionace, bridging tiger shark and complete reported family to source pools. No regional composition measurement."
+    }
+  ],
+  "allocation_decision": "No applicable observed regional caught-mass weights recovered. Complete source model catches, then complete biological biomass, supply explicit Medium composition assumptions; separate membership confidence can be weaker. Accepted infantSKJ uncaught exception remains explicit. This bounded search does not establish that data do not exist."
+}

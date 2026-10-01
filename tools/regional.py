@@ -47,7 +47,10 @@ def recalculate(book,path):
         if r.get('group'):
             if not finite(r['weight']) or r['weight']<0:raise ValueError('Mapping weights must be nonnegative numbers')
             mappings[r['taxon']].append((r['group'],r['weight']))
+    # Source membership remains reviewable when a constructor is blocked or a
+    # particular source group has no saved coefficient. Missing SPPR stays unknown.
     known={g for g,s,m in groups}
+    known.update(r['group_name'] for r in records(book,'Selected model groups','Groups') if r.get('group_name'))
     for t,assign in mappings.items():
         if t not in taxa:raise ValueError(f'Mapped taxon absent from Catch: {t}')
         if len({g for g,w in assign})!=len(assign):raise ValueError(f'Duplicate group mapping for {t}')
@@ -99,7 +102,9 @@ def recalculate(book,path):
     set_setting(book,'results_model_id',selected)
     if selected:set_setting(book,'results_model_sha256',sha(Path(path).parent/o['model_path']))
     set_setting(book,'calculation_input_sha256',input_hash(book))
-    set_setting(book,'calculation_status','recalculated; historical sensitivity bounds invalidated and require reassessment')
+    status=('mapping and independent results refreshed; model SPPR unavailable (no saved coefficients); retained diagnostics apply'
+            if selected and not groups else 'recalculated; historical sensitivity bounds invalidated and require reassessment')
+    set_setting(book,'calculation_status',status)
     taxon_detail(book);set_result_hash(book)
 
 def comparison_tables(book):

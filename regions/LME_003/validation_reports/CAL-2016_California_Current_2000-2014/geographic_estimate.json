@@ -1,0 +1,97 @@
+{
+  "definitions": {
+    "A": "area(R intersect S) / area(R)",
+    "B": "area(R intersect S) / area(S)"
+  },
+  "R": {
+    "path": "common_reference_data/geography/LMEs.geojson",
+    "sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+    "area_km2": 2215101.475920325,
+    "bounds": [
+      -132.112,
+      21.837,
+      -108.755,
+      47.903
+    ]
+  },
+  "S": {
+    "published_area_km2": 302000,
+    "reconstruction_area_km2": 232510.06060961037,
+    "path": "geography/reviewed_study_bounds_reconstruction.geojson",
+    "method": "Manual coarse coastal corridor from northern Vancouver Island (50.8N) to Punta Eugenia(27.8N), guided by source extent; Natural Earth land masked. This is a bounds reconstruction, not source GIS or exact bathymetry. No vertices fitted to target PPR/area.",
+    "marine_mask_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+    "polygon_sha256": "7c4a9f813b8c4e17ba450f10a4863f1343aa9479791c9e87142d990a9608b0cd"
+  },
+  "approximate_polygon_intersection_km2": 180924.11286912204,
+  "denominator_scenarios": [
+    {
+      "scenario": "same reconstructed polygons/intersection",
+      "R_area_km2": 2215101.475920325,
+      "S_area_km2": 232510.06060961037,
+      "intersection_km2": 180924.11286912204,
+      "A": 0.08167757316578561,
+      "B": 0.7781345563919391
+    },
+    {
+      "scenario": "fixed reconstructed intersection, published S denominator",
+      "R_area_km2": 2215101.475920325,
+      "S_area_km2": 302000,
+      "intersection_km2": 180924.11286912204,
+      "A": 0.08167757316578561,
+      "B": 0.5990864664540465,
+      "limitation": "Coarse corridor is not the complete exact published302000km2 domain; this deliberately exposes the denominator discrepancy."
+    },
+    {
+      "scenario": "conditional uniform scaling of S and its overlap",
+      "R_area_km2": 2215101.475920325,
+      "S_area_km2": 302000,
+      "intersection_km2": 234996.6360303656,
+      "A": 0.10608842916902024,
+      "B": 0.7781345563919391,
+      "extra_assumption": "Preserves the reconstructed B while expanding its S area. Implies a different overlap and is not an independent same-polygon cross-check."
+    }
+  ],
+  "source_Canada_area_check": {
+    "Canada_domain_km2": 29500,
+    "source": "Appendix B Dogfish paragraph",
+    "target_northernmost_latitude": 47.903,
+    "inference": "Canadian source domain lies north of target47.903N; excluding its29500km2 gives source-area upper B approximately90.23%, before other boundary losses. A at that upper B approximately12.30%.",
+    "exact_retained_source": {
+      "seq": 49,
+      "group_name": "Dogfish",
+      "taxon_descr": "Appendix B: Dogfish. The dogfish functional group contains both Spiny dogfish (Squalus acanthias) and Brown catsharks (Apristurus brunneus) though the large majority of biomass is Spiny dogfish. The Spiny dogfish estimate came from the 2011 stock assessment (Gertseva and Taylor 2011) for a total U.S. estimate of 215,988 mt. Brown cat shark biomass came from the NWFSC trawl surveys, suggesting 9,961 mt. Scaling up both dogfish and brown catshark biomass to the entire domain by taking the densities in the U.S. and applying them to a Canada total area of 29,500 km2, gives a final density for the entire group of 0.859 mt/km2. Total catch came from taking a 10-year average of catch in the United States for a total of 1,780.6 mt (Gertseva and Taylor, 2012). Canada catch from Fisheries and Oceans Canada totaled 268.7 mt for dogfish and cat sharks. This led to a final yield density of 0.0047 mt/km2. We assumed no Mexican catch since Bradburn et al. 2011 stated that dogfish are rare south of Point Conception. The PB value of 0.0694 came from natural mortality and fishing mortality from the 2011 assessment. For QB, Field cites a range of 2.5-5. Using a lognormal distribution and taking 2.5 to 5 as the 95% confidence interval, this led to an average QB of 3.61 with a CV of 0.21 to be used when pulling parameters from distributions to create multiple Ecopath models.  ",
+      "appendix_heading": "Dogfish",
+      "heading_paragraph_zero_based": 228,
+      "source_paragraphs": [
+        {
+          "paragraph_zero_based": 229,
+          "text": "The dogfish functional group contains both Spiny dogfish (Squalus acanthias) and Brown catsharks (Apristurus brunneus) though the large majority of biomass is Spiny dogfish. The Spiny dogfish estimate came from the 2011 stock assessment (Gertseva and Taylor 2011) for a total U.S. estimate of 215,988 mt. Brown cat shark biomass came from the NWFSC trawl surveys, suggesting 9,961 mt. Scaling up both dogfish and brown catshark biomass to the entire domain by taking the densities in the U.S. and applying them to a Canada total area of 29,500 km2, gives a final density for the entire group of 0.859 mt/km2. Total catch came from taking a 10-year average of catch in the United States for a total of 1,780.6 mt (Gertseva and Taylor, 2012). Canada catch from Fisheries and Oceans Canada totaled 268.7 mt for dogfish and cat sharks. This led to a final yield density of 0.0047 mt/km2. We assumed no Mexican catch since Bradburn et al. 2011 stated that dogfish are rare south of Point Conception. The PB value of 0.0694 came from natural mortality and fishing mortality from the 2011 assessment. For QB, Field cites a range of 2.5-5. Using a lognormal distribution and taking 2.5 to 5 as the 95% confidence interval, this led to an average QB of 3.61 with a CV of 0.21 to be used when pulling parameters from distributions to create multiple Ecopath models.  "
+        },
+        {
+          "paragraph_zero_based": 231,
+          "text": "Diet came from mainly Brodeur et al. (1987) and Bigman (2013), with some additional information from Brodeur et al. (2009) (though there may be overlap between the Brodeur studies). There is also dogfish diet available in Miller (2006) but over 80% of the diet was unidentified, so we did not include this study in our final diet. We also considered the diet for Dogfish from the Field (2004) model though this diet included data from regions outside the model domain (mainly Puget Sound). The Brodeur diet studies included dogfish taken off the coasts of Washington and Oregon while the Bigman study was located in California. This was important to consider since the Bigman thesis had very little herring in the diet (and substantially more anchovy and sardine) versus the substantial amount of herring in the diet in Washington/Oregon. Combining these two regions into a single diet gave a final diet of 0.3% amphipods, 4% epibenthic fauna, 23% euphuasiids, 0.5% carnivorous zooplankton, 5% large jellies, 1.5% pandalid shrimp, 1.5% benthic shrimp, 3% Dungeness crab, 7% benthic fish, 0.1% surf perches, 4% cephalopod, 2% market squid, 5% sardine, 4.5% anchovy, 5% herring, 0.1% sandlance, 0.1% whitebait smelt, 1% other smelt, 1% saury, 2% juvenile rockfish, 2% juvenile hake, 2% juvenile flatfish, 1.25% juvenile roundfish, 0.1% yellowtail rockfish, 0.1% shortbelly rockfish, 0.1% petrale sole, 15.5% hake, 1.25% lingcod, 0.2% arrowtooth flounder, 6% small flatfish, 0.4% detritus, and 0.5% input consumption. "
+        }
+      ]
+    }
+  },
+  "adopted_estimate": {
+    "A_percent_range": [
+      8,
+      13
+    ],
+    "B_percent_range": [
+      60,
+      90
+    ],
+    "precision": "Conservative rounded judgment range spanning coarse fixed-denominator scenarios and source geography/Canadian area upper check. Not a measured overlap or statistical CI. Exact2000m geometry unavailable."
+  },
+  "source_figure_limit": "Dark shading is selected current model, white dotted domain is older models. Image shading visually continues south of the stated Punta Eugenia limit; explicit source prose/caption bounds govern reconstruction; discrepancy retained.",
+  "inherited_footprint": {
+    "path": "papers/CAL-2016/footprint.geojson",
+    "sha256": "26bac46685ae0a33ab6cec1ac797d773873e5c4bea833d7e424880a52f78ce9d",
+    "conflict": "Inherited geometry equals intended target-region envelope and is not independent source study GIS. Do not use it to claim A/B100%.",
+    "shared_action": "Coordinator must review replacing displayed article footprint with approximate bounds reconstruction and label provenance."
+  },
+  "source_pdf_sha256": "e8f7f13015dcf9a694b65befb23dec91ecf2d2f63917d6aadbeae9b03c40864f",
+  "source_passage": "geography/source_domain_passage.txt"
+}

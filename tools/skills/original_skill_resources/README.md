@@ -1,12 +1,13 @@
 # Combined PPR workflow and retained scientific resources
 
-The project's **single active skill** is [ecopath-paper-to-ppr](combined-src/SKILL.md). The original `combined-src` entry point now includes the current regional workbook workflow and the lessons from the September 2026 extractions. Use it for the full pipeline or any requested subset.
+The project's active pipeline skill is [ecopath-paper-to-ppr](combined-src/SKILL.md). The original `combined-src` entry point includes the current regional workbook workflow and the lessons from the September 2026 extractions. Use it for the full pipeline or any requested subset. Use the separate [ecopath-model-validation skill](../ecopath-model-validation/SKILL.md) for model review packages and their evidence requirements.
 
 ## Current editing locations
 
 | Change | Edit here |
 |---|---|
 | Combined entry point, stage routing and scope | [combined-src/SKILL.md](combined-src/SKILL.md) |
+| Model validation and review packages | [ecopath-model-validation/SKILL.md](../ecopath-model-validation/SKILL.md) |
 | Source preparation, extraction and selection | [model-preparation.md](combined-src/references/model-preparation.md) |
 | Missing data and supplements online | [missing-data-recovery.md](combined-src/references/missing-data-recovery.md) |
 | Source, conversion and loaded-state audit | [reconstruction-audit.md](combined-src/references/reconstruction-audit.md) |

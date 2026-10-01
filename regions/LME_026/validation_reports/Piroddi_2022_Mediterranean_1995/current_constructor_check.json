@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-30",
+  "scope": "Bounded constructor admission only; diagnose_sppr not called; no parameter writes, Monte Carlo or coefficient generation",
+  "canonical_model_sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e",
+  "canonical_unchanged": true,
+  "engine_sha256": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7"
+  },
+  "normalize_DC": false,
+  "underdetermined": false,
+  "admission": {
+    "strict_source": {
+      "status": "EXCEPTION",
+      "exception_type": "ValueError",
+      "exception": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].",
+      "settings": {
+        "zero_catch": false,
+        "zero_biomass_accum": false,
+        "default_gs": false
+      },
+      "input_sha256": "c4f398bd0cf9b16cc6c8bb60c9192637ce5bb8b4b956d00989b76fc197c573f1",
+      "traceback": "Traceback (most recent call last):\n  File \"[repository]\\regions\\LME_026\\validation_reports\\Piroddi_2022_Mediterranean_1995\\check_constructor.py\", line 15, in <module>\n    calc=PPRCalculator.from_modeldata(data,underdetermined=False,normalize_DC=False,**settings)\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 608, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].\n",
+      "matches_retained_exception": true
+    },
+    "documented_loader_defaults": {
+      "status": "EXCEPTION",
+      "exception_type": "ValueError",
+      "exception": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].",
+      "settings": {
+        "zero_catch": false,
+        "zero_biomass_accum": true,
+        "default_gs": true
+      },
+      "input_sha256": "40a7d003fefc4f19c0c931856928086c09f851abac541e4b3a58110e1ac98eb0",
+      "traceback": "Traceback (most recent call last):\n  File \"[repository]\\regions\\LME_026\\validation_reports\\Piroddi_2022_Mediterranean_1995\\check_constructor.py\", line 15, in <module>\n    calc=PPRCalculator.from_modeldata(data,underdetermined=False,normalize_DC=False,**settings)\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[repository]\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 608, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].\n",
+      "matches_retained_exception": true
+    }
+  },
+  "methods": [
+    {
+      "method": "GE",
+      "status": "NOT_RUN",
+      "direct_return": null,
+      "basal_source_matrix": null,
+      "rho_living": null,
+      "b": null,
+      "pool_70_sppr": null,
+      "pool_71_sppr": null
+    },
+    {
+      "method": "TE",
+      "status": "NOT_RUN",
+      "direct_return": null,
+      "basal_source_matrix": null,
+      "rho_living": null,
+      "b": null,
+      "pool_70_sppr": null,
+      "pool_71_sppr": null
+    },
+    {
+      "method": "With Egestion",
+      "status": "NOT_RUN",
+      "direct_return": null,
+      "basal_source_matrix": null,
+      "rho_living": null,
+      "b": null,
+      "pool_70_sppr": null,
+      "pool_71_sppr": null
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "lessons": [
+    {
+      "id": "accepted-parameters",
+      "basis": "Explicit user instruction",
+      "rule": "Protect accepted scientific parameters across mapping adoption and reruns; document source differences without repair.",
+      "applies_to": "All 23 regions",
+      "verification": "Frozen accepted JSONs and workbook protected-table fingerprints under baseline/."
+    },
+    {
+      "id": "mapping-inventory-not-coefficients",
+      "basis": "LME026 constructor-blocked source inventory and two reproduced regression failures",
+      "rule": "Recognize accepted Groups as mapping candidates independently of coefficient availability; retain unavailable SPPR and NOT_RUN diagnostics.",
+      "evidence": "verification/workflow_checks.json",
+      "applies_to": "LME026 and any partial/missing coefficient rows"
+    },
+    {
+      "id": "catch-zero-provenance",
+      "basis": "WCPO initial Table 5 versus final added groups; loader fills missing values with zero",
+      "rule": "Reject incomplete source-catch proxies; distinguish explicit observed/assumed zero from loader default; assess complete biomass next. Preserve accepted numerical inputs.",
+      "evidence": "../../../regions/EEZ_941/models/941_200701_WCPO_Warm_Pool_Final_(mixed_periods)/extracted_tables/REPORT.md",
+      "applies_to": "All allocation reviews; especially EEZ941, EEZ598, HS071",
+      "rounded_source_zero_case": {
+        "unit_id": "LME_050",
+        "evidence": "../../../regions/LME_050/validation_reports/50_502013_Coastal_Kyoto_Inoue_(2013)/source_review.md",
+        "finding": "Supplement S4 Stingray and Ivory shell round to 0.000 in displayed totals, but detailed fleets sum to positive 0.000005 and 0.000010. Missing source rows29–38 remain unknown. Read precision and detailed components before treating a displayed zero as exact. Accepted loaded catches remain unchanged.",
+        "applicability": "An additional verified example of the existing complete-catch/missing-versus-zero rule; earlier reviews already retain censored, missing and rounded source quantities. No new cross-region numerical correction is demonstrated."
+      }
+    },
+    {
+      "id": "effective-hyperlink-style",
+      "basis": "Existing package named styles did not ensure every link was blue and underlined",
+      "rule": "Check effective run/cell appearance including formulas and internal links. Styling-only changes need brief structural and rendered checks.",
+      "evidence": "existing_package_link_style_changes.json",
+      "applies_to": "All 23 Office packages"
+    },
+    {
+      "id": "integration-write-freshness",
+      "basis": "Two simulated concurrent-edit cases reproduced unsafe central save before the guard",
+      "rule": "Recheck central and supplied regional workbook hashes immediately before saving; reject changed inputs and reconcile latest keyed state.",
+      "evidence": "verification/workflow_checks.json",
+      "applies_to": "All coordinator Project.xlsx integrations"
+    },
+    {
+      "id": "honor-existing-scoped-run-authorization",
+      "basis": "Explicit user authorization for necessary pipeline stages; validation gate wording conflicted with unified workflow and prompted redundant clarification for missing LME036 matrices.",
+      "rule": "Explain concrete evidence gap and run setup, then proceed under existing explicit authorization. Uncovered execution still requires confirmation. Parameter preservation remains binding.",
+      "applies_to": "All23 reviews; ordinary report-only requests retain their narrower scope."
+    },
+    {
+      "id": "mapping-controls-without-coefficients",
+      "basis": "Mediterranean accepted group inventory has valid mappings but constructor prevents SPPR; adapter regression hid group controls",
+      "rule": "Expose valid mapping controls and group-filtered classic estimates independently of Ecopath coefficients; keep missing methods unavailable and diagnosis unchanged.",
+      "evidence": "verification/workflow_checks.json",
+      "applies_to": "LME026 and other mapping-available/coefficient-unavailable selections"
+    },
+    {
+      "id": "source-matrices-not-summary-counts",
+      "basis": "LME036 prior evidence retained zero-negative diagnostic count but no full per-source matrices; necessary direct rerun recovered them with accepted inputs unchanged.",
+      "rule": "Inspect actual retained arrays and axes for independent source-entry verification; a saved count alone is not that inspection.",
+      "applies_to": "All23 reports; LME032/LME034 actual retained matrices independently checked and adequate",
+      "evidence": "verification/reused_032_034_matrix_checks.json"
+    },
+    {
+      "id": "explicit-text-encoding",
+      "basis": "Independent LME026 inventory check found exactly two restored taxon_descr mismatches: a nonbreaking space and em dash were decoded through Windows cp1255; all numerical protected inputs passed.",
+      "rule": "Use explicit UTF-8 for retained JSON/text I/O and compare restored source text, not only numbers. Diagnose bytes; no global historical replacement.",
+      "evidence": "verification/first_new_reviews_input_check.json",
+      "applies_to": "All new regional builders; LME026 corrected and source-exact inventory independently verified."
+    },
+    {
+      "id": "canonical-regional-discovery",
+      "rule": "Discover <unit>/<unit>.xlsx for all-region integration; adjacent validation appendices are not pipeline inputs.",
+      "basis": "Actual CLI regression reproduced after adjacent report workbooks were added.",
+      "evidence": "verification/workflow_checks.json",
+      "applies_to": "Shared integration"
+    },
+    {
+      "id": "complete-mixed-guild-candidates",
+      "basis": "Independent EEZ598 and HS071 reviews; root verified Allain2007 Table1PDF9 group24 Myctophidae/Maurolicus/Sternoptyx and group26 Paralepididae/Scopelarchidae/Diretmidae/Chiasmodontidae.",
+      "rule": "Review mixed guild definitions for every relevant organism type. A broad pelagic label cannot exclude fish-bearing deep-water groups solely through provider maximum-size bins. Include meaningful candidates with disclosed uncertainty; explicitly justify exclusions. This does not require indiscriminate use of all model groups.",
+      "applies_to": "WCPO Marine pelagic fishes not identified in EEZ941/EEZ598/HS071; other regional candidate sets require their own source review.",
+      "evidence": "../../../regions/EEZ_941/papers/WCP-2007/download-0adcf55e.pdf#page=9",
+      "status": "EEZ941 corrected and independently verified (workbook4340c15...); HS071 adopted; EEZ598 review follows own evidence. Final shared reconciliation pending.",
+      "followup_evidence": "verification/EEZ_941_pelagic_followup.json"
+    },
+    {
+      "id": "bounds-without-original-study-map",
+      "basis": "HS077 lead and independent coordinator inspection of the89-page Olson & Watters2003 source: PDF7 scope bounds; the four English figures on PDF18–21 are sensitivity/dynamics, not maps.",
+      "rule": "Retain the actual geographic bounds passage; disclose the absence of an original study map and label any reconstructed boundary as a reconstruction. Do not substitute an unrelated figure.",
+      "evidence": "../../../regions/HS_077/papers/ETP-2003/Olson_Watters_2003_ETP-c037fcbc.pdf",
+      "applies_to": "HS077; other sources only when their actual figure inventory establishes the same condition."
+    },
+    {
+      "id": "identified-catch-proxy-reporting-applicability",
+      "basis": "LME032 bounded W5 review and independent raw SAU v50.1 reproduction of all reporting distributions for Siluriformes and Pleuronectiformes.",
+      "rule": "For donor-based W5 proxies, compare target/donor country, gear, sector, reporting basis and periods. Preserve supported numerical weights when no better split is established; use lower confidence for demonstrated applicability mismatch. Matching distributions do not reveal residual composition. Approved model-catch/biomass fallback confidence is unaffected.",
+      "evidence": "verification/LME_032_independent_reporting_strata.json",
+      "applies_to": "All donor-based W5 reviews; local evidence is required. LME032 two confidence corrections; no numerical change.",
+      "donor_selector_clarification": {
+        "finding": "Root independently read historical build_model_workbook.py lines154–187 and756–759. The LME035 builder pools every singly assigned taxon by source guild and all retained years; target family/genus does not constrain donor lineage. Reproduce actual query before describing donor population.",
+        "evidence": "regions/LME_035/validation_reports/35_412_Gulf_of_Thailande_(1963)/identified_catch_proxy_review.json",
+        "completed_applicability": "Complete: verification/w5_donor_selector_completed_applicability.json. Four released regions retain W5 routes; California13 independently reproduced exactly from actual builder/raw catch. No further correction justified."
+      }
+    },
+    {
+      "id": "positive-analogue-rationale-without-diet-matching-rule",
+      "basis": "California Benthic fish source definition is explicitly a catch-all containing multiple benthic taxa; the WCPO Epi fish source list contains mixed coastal/reef families. Their pooled diets do not define an exclusive taxonomic membership boundary. Coordinator checked accepted source definitions and WCPO Table 1 visually.",
+      "rule": "Record the positive source-based taxonomic OR ecological connection, alternatives and mismatches for M11. Diet can inform analogue choice but matching diets is not required. Do not force an arbitrary mapping for coverage or reject a meaningful weak analogue simply because its energy pathway differs. Preserve explicit source membership and accepted scientific parameters.",
+      "evidence": "verification/ecological_analogue_lesson_applicability_open.json",
+      "applies_to": "All pending reviews; completed 032/026/036/WCPO retain decisions verified locally. California final handoff adopted explicit Very low analogues after alternatives were assessed; follow-up closed."
+    },
+    {
+      "id": "separate-source-footprint-payload-reconciliation",
+      "basis": "The live adapter reads article polygons from Project.xlsx Map geography, independently of Papers coverage text. HS077 inherited target envelope conflicts with source bounds; LME034 target envelope omits the documented extended study area.",
+      "rule": "Check the actual article polygon after a geographic metadata correction. Use keyed geometry updates or clear a misleading placeholder if no defensible source reconstruction exists; preserve historical files and avoid changing scientific region boundaries.",
+      "evidence": "verification/article_geometry_review_queue.json",
+      "applies_to": "All selected article display checks; root owns shared geometry integration."
+    },
+    {
+      "id": "recover-legacy-derived-scope-status-contamination",
+      "basis": "California lead found legacy wrong unavailable states; coordinator independently confirmed36 baseline method/zero PPR rows carrying the simple-reference-only reason. Current calculator filters prior method status correctly but does not infer missing review decisions.",
+      "rule": "Inspect Annual statuses by method, scope, basis and unidentified treatment. The reason simple reference has no source decomposition belongs only to PP/inner unidentified=simple. Recover contaminated model rows only from exact verified method diagnostics and scoped coefficient identity, retain keyed before/after evidence and rerun dependent arithmetic. Do not promote true FAIL/NOT_RUN or unavailable coefficients. No parameter or group-coefficient mutation is needed.",
+      "evidence": "verification/LME_003_prior_scope_status_contamination.json",
+      "applies_to": "All pending reviews. Seven previously released packages passed independent scope-status audit; LME034 separately passed all 1782 Annual statuses. California recovery completed and root-protected inputs verified."
+    },
+    {
+      "id": "source-availability-versus-retrieval-history",
+      "basis": "California central supplement_status still said not_found although the exact publisher Appendix A XLSX and Appendix B DOCX had been recovered and audited. Root inspected their contents and retained publisher retrieval records.",
+      "rule": "Reconcile current material availability against exact retained source identity and hashes. Preserve historical retrieval counts unless independently re-audited. File availability does not establish source fidelity, model loadability or scientific approval; retain those distinctions in metadata and display.",
+      "evidence": "verification/metadata_batch_04_plan_applied.json",
+      "applies_to": "All selected source metadata reviews. Patagonia and Falkland leads notified; pending lead brief updated.",
+      "declared_folder_followup": {
+        "finding": "LME038 authenticated article_dir points to BUCHARY-1991 while source_article_id is INDO-1999. ID-only discovery incorrectly hid the verified1999 thesis. An independent regression also showed a stale missing-file quality phrase could erase a specific current loadability assessment.",
+        "adopted_change": "Honor recorded source directory through relocation and repository-containment checks; preserve specific or missing scientific assessments. Current source discovery is distinct from publication identity and model validity.",
+        "verification": "verification/article_folder_current_data_check.json",
+        "regression": "verification/article_folder_final_workflow_tests.txt",
+        "completed_applicability": "All196 current paper records reconciled; only legacy no-file classes changed to the existing neutral discovery label. Java exact thesis hash recovered and specific source-invalid/derived-selected assessment preserved. Final generated/browser verification pending."
+      }
+    },
+    {
+      "id": "reporting-label-scope",
+      "basis": "Root found shared candidate-set prose treating Elasmobranchii like Chondrichthyes in five released packages plus active LME014. Current provider common name and FAO taxonomy establish the narrower sharks/rays/skates scope.",
+      "rule": "Check each exact target label rationale independently even when candidate sets coincide. A source guild mixing eligible sharks with chimaeras can remain a candidate; disclose that source-composition mismatch without claiming chimaeras belong to Elasmobranchii. Local evidence governs any numerical changes.",
+      "evidence": "verification/elasmobranch_reporting_scope_followup.json",
+      "applies_to": "All pending reviews. Five released-package Elasmobranchii rationale/Office/identity follow-ups are closed with unchanged scientific tables; exact hashes and portability checks retained in verification/elasmobranch_reporting_scope_handoff.json.",
+      "cephalopod_scope_followup": {
+        "evidence": "verification/cephalopod_reporting_scope_lesson.json",
+        "rule": "Check exact reporting name, rank and source members separately. Broad Octopoda pelagic examples do not establish narrow Octopus/Octopodidae membership; conversely narrow benthic cuttlefish evidence does not exclude adult pelagic bobtails from a reporting category that explicitly includes them. Keep ecological analogues distinct from observed local source membership.",
+        "completed_applicability": {
+          "path": "verification/cephalopod_label_scope_inventory.json",
+          "sha256": "089ed1f17253ff8184f2a397d168d172229c4bbcc06965e745a17ef83800dac2",
+          "regions": 20,
+          "rows": 92,
+          "additional_correction_demonstrated": false
+        }
+      }
+    },
+    {
+      "id": "method-exposure-distinct-from-classic-confidence-shares",
+      "basis": "Falkland accepted Sharks27 TE coefficient is63225811.23002985; its Very low Prionace analogue contributes97.013321% of reference TE despite much smaller classic-PPR share. Coordinator independently reproduced all reference available method totals and contributions in eleven reviewed regions.",
+      "rule": "When extreme coefficients/results warrant a limitation, inspect largest method-specific contributors under exact controls. Keep those shares distinct from required independent classic-PPR confidence tables. Review mapping evidence without choosing groups to lower a result; preserve accepted coefficients and diagnostics.",
+      "evidence": "verification/method_exposure_LME_014_EEZ_941_EEZ_598_HS_071_HS_077_LME_003_LME_013_LME_026_LME_032_LME_034_LME_036.json",
+      "normalization_followup": "verification/method_exposure_LME_036.json normalizes stored very_low spelling; no scientific data changed.",
+      "applies_to": "All pending reviews; LME014 lead adding explicit97%TE limitation. Completed reviews checked in coordinator exposure evidence; final cross-region limitations will use exact method-specific values."
+    },
+    {
+      "id": "bony-fish-reporting-scope",
+      "basis": "Official current SAU responses assign exact keys100039/100139/100239/100339 to ISSCAAP39; Elasmobranchii200004 belongs to38. Root visually inspected FAO2001 Northeast Atlantic capture PDFpage3 (printed397): all four corresponding residual labels are Osteichthyes/39, sharks/rays/chimaeras are separate38. Retained historical exploited entries match the relevant keys and common names.",
+      "rule": "Interpret these four exact fisheries reporting categories within bony-fish scope. Exclude dedicated cartilaginous-only source groups; retain a mixed source group if actual bony members establish local eligibility and disclose pooling mismatch. Keep supported habitat/source boundaries and Very low broad-composition uncertainty. A documented provider/local departure may override the reporting convention, but generic English fish/finfish breadth is not such evidence.",
+      "evidence": "verification/residual_fish_reporting_scope_review.json",
+      "applies_to": "All pending leads must check the retained provider key; active022/024 notified. Released packages receive source-specific applicability checks and affected mapping/result updates, including032/034/036 if needed."
+    },
+    {
+      "id": "functional-metadata-is-not-exhaustive-membership",
+      "basis": "SAU2016printedp19 distinguishes taxonomic reporting from ecological functional groupings. CurrentAPI generic marinefish/finfish residuals are Mediumdemersals, despite broader verified bony reporting names;FAOinvertebrate names remain broad Crustacea/Invertebrata.",
+      "rule": "Use functional metadata as ecological evidence, not an exhaustive boundary by itself. Resolve actual local source members/stages and broader names; label ecological proxy assumptions explicitly. Do not erase eligible mixed guilds or copy a local restriction into all regions.",
+      "evidence": "verification/invertebrate_reporting_scope_review.json",
+      "applies_to": "All active/pending reviews; root retained seven applicability decisions in invertebrate_reporting_scope_root_retention.json. Four QA-owned reviews assess local scope; no blanket numerical exclusion adopted.",
+      "broader_bony_candidate_followup": "verification/broad_fish_complete_candidates_followup.json"
+    },
+    {
+      "id": "coastal-trace-water-control-points",
+      "basis": "Coordinator source-figure comparison found a valid Celtic Sea draft polygon cutting a Western English Channel water notch. Correct ordered coastline restores three source-visible water controls; independent geodesic/control-point check passed.",
+      "rule": "Compare ordered coastline with original source; test representative water points inside/outside around channels and peninsulas. Polygon validity and land masking do not establish source fidelity. Correct approximate areas and displayed footprint, retain limits.",
+      "evidence": "verification/LME_024_geography_coordinator_review.json",
+      "applies_to": "Active and pending reconstructed-boundary reviews. Coordinator will revisit completed boundary reconstructions proportionately; scientific target polygons and accepted parameters remain unchanged.",
+      "completed_package_followup": {
+        "path": "verification/coastal_trace_lesson_completed_package_review.json",
+        "regions": 12,
+        "water_controls": 19,
+        "result": "Reviewed; no further boundary correction supported by this bounded check."
+      },
+      "additional_verified_case": {
+        "unit_id": "LME_029",
+        "evidence": "verification/LME_029_geography_coordinator_review.json",
+        "finding": "Color segmentation initially treated Cape Agulhas and Cape Town place markers as water exclusions. Bounded source-visible coastline interpolation corrected them; independent WGS84 areas and11 controls pass. Reported-area denominator remains a sensitivity scenario."
+      },
+      "graticule_calibration_case": {
+        "unit_id": "LME_028",
+        "evidence": "verification/LME_028_geography_coordinator_review.json",
+        "finding": "Independent native-raster graticule calibration corrected the western vertex9.15N to8.84N and retained two real boundary bends. Recheck source vertices as well as valid geometry/area/water controls; calibrated pixel precision is not geographic accuracy."
+      },
+      "modeled_domain_prose_case": {
+        "unit_id": "LME_037",
+        "evidence": "verification/LME_037_geography_coordinator_review.json",
+        "finding": "2023 methods explicitly include non-domain municipal waters;2026 reuses baseline with indicative figure. Independent source reading resolves apparent conflict in favor of expanded baseline extent, with no geometry correction. Read methods alongside map legends before excluding areas.",
+        "completed_applicability": "Existing16 source/domain records reviewed during completed coastal/source inventory and root geometry checks; no demonstrated analogous unresolved boundary conflict. LME035 contextual extent already distinguished from focal study. Pending leads receive this rule."
+      },
+      "decorative_boundary_overlay_case": {
+        "unit_id": "LME_049",
+        "evidence": "verification/LME_049_geography_coordinator_review.json",
+        "finding": "Five bounded native current/oval crossings restored intended study water; no prior geometry removed and14 independent controls pass. Native source printed area is retained separately; identical reviewed geometry retained in the regional package; shared display pending."
+      },
+      "conflicting_area_denominators_case": {
+        "unit_id": "LME_050",
+        "evidence": "verification/LME_050_geography_coordinator_review.json",
+        "finding": "Native main text reports2230km²; supplemental seven depth bins total1223km² despite whole-area biomass denominator language; independently calibrated figure trace is1680.96km². Keep all three distinct and report the contradiction. Neither published number establishes a replacement polygon, precise overlap bound or authority to rescale accepted biomass.",
+        "applicability": "Reinforces the existing reported-versus-traced area distinction; no blanket adjustment to other completed boundaries."
+      }
+    },
+    {
+      "id": "canonical-reader-after-xml-edits",
+      "basis": "Coordinator found two598 Matching rows with cells A,B,E,F,G,C,D. Alternate reader retained confidence/evidence/explanation, but canonical openpyxl reader dropped those fields, failing input freshness.",
+      "rule": "Keep worksheet rows and cell addresses ascending and unique; verify final saved workbooks through unpatched project reader, validate_region and result_hash in a fresh process. Bounded serialization corrections must preserve all stored cell values.",
+      "evidence": "verification/serialization_order/README.md",
+      "applies_to": "Every current/pending regional release; read-only applicability audit of23 selected workbooks requested.",
+      "completed_review_followup": "Five repairs passed exact XML cell/value preservation and canonical freshness; all23 ordering snapshot clean at recorded hashes. Active writers and final global freeze checked separately."
+    },
+    {
+      "id": "supplementary-membership-beyond-short-lists",
+      "basis": "Root independently read original main PDF page5 section2.3.1 and Supplement TableS3 page8. Main text explicitly supplies group taxonomic composition/traits to baseline, using surveys2004/2009/2014.",
+      "rule": "Expand source membership search to supplementary composition, trait or indicator tables when explicitly connected to exact baseline group/version. Keep traits, within-group catch contributions and between-stage allocations distinct.",
+      "evidence": "verification/supplementary_membership_table_lesson.json",
+      "applies_to": "Active/pending regional source inventories; completed16-package bounded applicability review recorded.",
+      "completed_package_applicability": "Bounded16-package source-inventory review complete; no additional demonstrated overlooked accessible source; unavailable013 supplements and027 final publication remain explicit limitations. See verification/supplementary_membership_table_lesson.json.",
+      "main_supplement_identity_conflict_case": {
+        "unit_id": "LME_050",
+        "evidence": "../../../regions/LME_050/validation_reports/50_502013_Coastal_Kyoto_Inoue_(2013)/source_review.md",
+        "finding": "Main paper printed585 explicitly identifies Tuna#8 as Thunnus orientalis for both years, while S3 lists T.thynnus. Direct main-source membership supports orientalis M1/High; retain the conflicting supplement identity and do not invent a synonym or alter model parameters. Main and supplementary group numbers also reverse Sole/Dragonet29/30, requiring verified name joins.",
+        "applicability": "Local evidence updates050. Existing source-version/name-join review remains required; this does not establish a global hierarchy that always favors main text."
+      }
+    },
+    {
+      "id": "context-file-not-focal-publication",
+      "basis": "Root identified Pauly-Chuenpagdee2003 under Christensen1998 and Morissette2008preliminary under CAN2009; PDF discovery formerly classified both as focal main files. Original first pages independently read.",
+      "rule": "Keep related/preliminary material linkable with its own publication identity; retain unavailable focal-PDF status. Bind reviewed source roles to exact file hashes and re-assess changed bytes.",
+      "evidence": "verification/contextual_source_file_roles.json",
+      "applies_to": "All active/pending source inventories and final archive reconciliation. Completed027 gap already documented; display role now corrected. No regional scientific reruns or artifact content changes.",
+      "related_chapter_case": {
+        "unit_id": "LME_052",
+        "evidence": "verification/LME_052_related_source_role.json",
+        "finding": "Exact2020Chaikina report chapter explicitly based on2004BSc thesis. Root, lead and independent reviewer confirm identity from native PDF24footnote. Related chapter supports qualified model-source review but is not the original thesis; exact-hash display role now labels it context and does not claim main-file availability. Historical scientific scores/loadability remain unchanged."
+      }
+    },
+    {
+      "id": "supplementary-absolute-catch-proxy",
+      "basis": "Root independently read native LME047 S4 caption/type codes and2018 quantities, main methods and S1/main-group crosswalk. S4 supplies source catch proxies omitted from accepted static inputs but does not reproduce nativeM2018catch identity.",
+      "rule": "Inspect applicable time-series supplements before rejecting source catch. Verify table type/year/units/basis, exact group-name/ID join, complete candidate vectors and rounded/censored zeros. Keep source-series proxy distinct from static export and preserve accepted scientific parameters.",
+      "evidence": "verification/supplementary_catch_timeseries_lesson.json",
+      "applies_to": "Active and pending regional source reviews; bounded18-package source inventory applicability completed without a demonstrated additional correction. Unavailable source gaps remain explicit."
+    },
+    {
+      "id": "exact-name-authority-rank",
+      "basis": "LME052 exact-name WoRMS response and independent fresh primary authority verification; earlier026/027/028 citations used the first genus record for a fisheries-family label.",
+      "rule": "Resolve exact-name multi-hit records by provider reporting rank and source usage; retain historical family-to-accepted-subfamily bridges. Never choose the first spelling match without rank verification. Correcting a citation does not by itself justify a numerical change.",
+      "evidence": "../../../regions/LME_052/models/52_1_Sea_of_Okhotsk_NE_(1980)/source_evidence/mapping/52_1_Sea_of_Okhotsk_NE_(1980).taxonomy-sources.json",
+      "source_records": {
+        "historical_family_AphiaID": 125557,
+        "accepted_subfamily_AphiaID": 151787,
+        "rejected_genus_misspelling_AphiaID": 398089
+      },
+      "applies_to": "All selected regional reviews and future exact-name taxonomy lookups",
+      "completed_review_revisit": {
+        "status": "complete",
+        "regions": 23,
+        "evidence": "verification/taxonomy_rank_followup/coordinator_acceptance.json",
+        "final052_appendix_check": "verification/final_LME052_package_QA/final_package_QA_receipt.json",
+        "result": "Only026/027/028 demonstrated selected authority-rank errors; evidence pointers corrected without changing membership, weights, confidence, accepted parameters or scientific results. Raw multiple-hit responses retained."
+      }
+    }
+  ],
+  "completed_reviews_revisit": "All23 regional packages released. Completed applicability checks and region-specific evidence are retained per lesson; no blanket scientific parameter corrections. Final shared/browser/graph/Git verification pending."
+}

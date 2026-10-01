@@ -1,0 +1,320 @@
+{
+  "unit_id": "LME_022",
+  "selected_model_id": "22_20251990_East_Coast_of_Scotland_(1991-1995)",
+  "canonical_model_path": "regions/LME_022/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model.json",
+  "canonical_sha256": "5cda503a847a6ea9bdcda077c184ac20119e0d8b47b064f93b72b72e3d7df691",
+  "baseline_workbook_sha256": "b8cb2f30d8992509ce60e6ae19540d9ebd827f971080facd8f0b52508e57c13a",
+  "final_workbook_sha256": "012a6a95643ddd8513c03fbb97124bc76f63b22b0784fd8a5ca6b68412d16780",
+  "regional_status": "complete; ownership released",
+  "shared_integration_status": "pending coordinator",
+  "browser_verification_status": "pending coordinator",
+  "scientific_approval": "not established; whole-region/source/runtime/temporal limitations remain; TE FAIL retained",
+  "artifacts": {
+    "regional_workbook": {
+      "path": "regions/LME_022/LME_022.xlsx",
+      "sha256": "012a6a95643ddd8513c03fbb97124bc76f63b22b0784fd8a5ca6b68412d16780"
+    },
+    "word_report": {
+      "path": "regions/LME_022/Model_validation_22_20251990_East_Coast_of_Scotland_(1991-1995).docx",
+      "sha256": "cc748124c1fd590c7e923dec56f68389136363a03c461ef729de36fb4c509d9a"
+    },
+    "excel_appendix": {
+      "path": "regions/LME_022/LME022_taxon_mapping_appendix.xlsx",
+      "sha256": "10120c5751c8311684f8354bfe2dc893b971acaf00211973bbab50609676d6c1"
+    }
+  },
+  "evidence_manifest": {
+    "path": "regions/LME_022/validation_reports/22_20251990_East_Coast_of_Scotland_(1991-1995)/evidence_manifest.json",
+    "sha256": "e9f6c51e71ecfe56fcca3a8c7e94bb8a2619720479f0d573fc3916cde06551ed"
+  },
+  "mapping_changes": {
+    "path": "regions/LME_022/validation_reports/22_20251990_East_Coast_of_Scotland_(1991-1995)/mapping_changes.json",
+    "sha256": "401a14df9632d421a56eaabf1c39472882e1732154bb9c08edc0e8e51c172d82",
+    "reviewed_labels": 384,
+    "initial_resolved_labels": 72,
+    "final_mapped_labels": 372,
+    "unresolved_labels": 12,
+    "confidence_counts": {
+      "High": 99,
+      "Medium": 160,
+      "Low": 3,
+      "Very low": 110,
+      "Unresolved": 12
+    },
+    "complete_candidate_reviews": "26groups per label, source inventory including all biological and synthetic groups",
+    "component_confidence_and_weakest_rule": "taxon_audit.json",
+    "source_numeric_allocation": "allocation_evidence.json;W1single/W4complete source1991–1995landings/W9complete biomass when candidate sourcecatch missing",
+    "provider_scope_corrections": "reporting_scope_correction_impact.json; demersal/decapod scope excludes plankton; bony_reporting_scope_correction_impact.json and official SAU/FAO bridge exclude dedicated Sharks21 from four ISSCAAP39 residual labels"
+  },
+  "protected_parameter_verification": {
+    "all_full_blocks_identical_to_baseline": {
+      "Catch": true,
+      "Classic PPR": true,
+      "NPP": true,
+      "Selected model groups": true
+    },
+    "canonical_bytes_identical": true,
+    "accepted_runtime_reused_unchanged": true,
+    "coordinator_audit": "accepted_input_verification.json",
+    "no_source_parameter_restoration_or_rebalance": true,
+    "overview_basis_and_year_preserved": {
+      "catch_basis": "catch",
+      "taxon_detail_year": 2019
+    },
+    "selected_paper_ids": "remains null; expected-old root alignment proposal provided"
+  },
+  "diagnostics": {
+    "reused_exact_full_returns": true,
+    "new_solver_run": false,
+    "all_source_recipient_entries_including_unfished_reviewed": true,
+    "methods": [
+      {
+        "method": "GE",
+        "overall_status": "OK",
+        "rho_living": 0.21208967414456642,
+        "b": 0.06994711631486064,
+        "detritus_sppr": {
+          "Detritus": 1.0832908006109492
+        },
+        "strict_mass_balance": true,
+        "sha256": "ed3a0ab5456046d922896d03eeccdd8b9c718539746b41c7a2f13743f8717e80",
+        "saved_full_direct_return": "../../models/regional_ge_integration_20260928/direct_new_GE.json"
+      },
+      {
+        "method": "TE",
+        "overall_status": "FAIL",
+        "rho_living": 1.1127784447112168,
+        "b": 0.0,
+        "detritus_sppr": {
+          "Detritus": 0.8104489294778254
+        },
+        "strict_mass_balance": true,
+        "sha256": "09d788eb388eb4d8a3becb1c6a0b2fb2b8b23e0daaed37916f62dba08cbab8b0",
+        "saved_full_direct_return": "../../models/regional_ge_integration_20260928/direct_new_TE_EEfix.json"
+      },
+      {
+        "method": "With Egestion",
+        "overall_status": "OK",
+        "rho_living": 0.16967173931565332,
+        "b": 0.09714913145852609,
+        "detritus_sppr": {
+          "Detritus": 1.2094885030862663
+        },
+        "strict_mass_balance": true,
+        "sha256": "c9f22e5a19600bdb220026986495000328c3875e25dcd0b42fa4e83a22a80b14",
+        "saved_full_direct_return": "../../models/regional_ge_integration_20260928/direct_new_WithEgestion.json"
+      }
+    ],
+    "negative_source_sppr": [
+      {
+        "source_seq": 25,
+        "source_name": "Detritus",
+        "recipient_seq": 22,
+        "recipient_name": "Seabirds",
+        "value": -460709.19237909134
+      },
+      {
+        "source_seq": 1,
+        "source_name": "Phytoplankton",
+        "recipient_seq": 22,
+        "recipient_name": "Seabirds",
+        "value": -1916160.3191561818
+      }
+    ],
+    "source_limitations": [
+      "Printed source balance indeterminate without Turbot/Ling BA",
+      "Accepted diet normalization/GS defaults/residualBA preserved",
+      "Source excludes discards; target total catch includes them",
+      "Source Main Species representative and broad guild nomenclature/pooled diet limits retained",
+      "Geographic/temporal whole-region transfer remains provisional"
+    ]
+  },
+  "calculations": {
+    "reference_year": 2019,
+    "catch_basis": "catch",
+    "independent_classic_ppr_tC": 188909420.82919472,
+    "total_catch_tonnes": 2717260.6982051707,
+    "confidence_summary": [
+      {
+        "label": "High",
+        "taxa": 99,
+        "catch_tonnes": 2337483.1074979454,
+        "ppr_tC": 173949672.66062146,
+        "catch_percentage": 86.02351290922952,
+        "ppr_percentage": 92.08099410664154
+      },
+      {
+        "label": "Medium",
+        "taxa": 160,
+        "catch_tonnes": 52654.104946287,
+        "ppr_tC": 7636545.266895371,
+        "catch_percentage": 1.9377641969011865,
+        "ppr_percentage": 4.042437499080613
+      },
+      {
+        "label": "Low",
+        "taxa": 3,
+        "catch_tonnes": 791.9741037822,
+        "ppr_tC": 47145.45796491272,
+        "catch_percentage": 0.029146047867446866,
+        "ppr_percentage": 0.024956647348752387
+      },
+      {
+        "label": "Very low",
+        "taxa": 110,
+        "catch_tonnes": 326268.0997814091,
+        "ppr_tC": 7269728.118651442,
+        "catch_percentage": 12.007243176811064,
+        "ppr_percentage": 3.848261291968321
+      },
+      {
+        "label": "Unresolved",
+        "taxa": 12,
+        "catch_tonnes": 63.4118757471,
+        "ppr_tC": 6329.325061515443,
+        "catch_percentage": 0.0023336691907767768,
+        "ppr_percentage": 0.003350454960760372
+      }
+    ],
+    "missing_classic_coefficients": 72,
+    "positive_catch_missing_classic_ppr": 0,
+    "wet_to_carbon": "saved wet coefficient×catch/9 exactly once; annual wet PPR likewise converts at presentation/ratio",
+    "verification": {
+      "exact_identity": true,
+      "full_protected_blocks_identical_to_baseline": {
+        "Catch": true,
+        "Classic PPR": true,
+        "NPP": true,
+        "Selected model groups": true
+      },
+      "input_and_result_freshness_hashes_match": true,
+      "all384_exact_taxa_once": true,
+      "weights_sum1": true,
+      "allocation_candidate_weights_recomputed": 123,
+      "weakest_component_confidence": true,
+      "classic_calculation_and_confidence_percentages": true,
+      "scoped_coefficients_verified": 3456,
+      "model_annual_year_cells_verified": 4410,
+      "npp_ratio_year_cells_verified": 37800,
+      "max_annual_wet_difference": 5.960464477539063e-08,
+      "annual_status_contamination": [],
+      "appendix_numeric_types_and_sort": true,
+      "appendix_frozen_headers_and_filter": true,
+      "all_visible_hyperlinks_blue_underlined": true,
+      "relative_local_targets_verified_after_relocation": 40,
+      "hyperlinks_verified": 47,
+      "source_ids_complete": true,
+      "browser_status": "pending coordinator"
+    },
+    "largest_method_contributors": "method_contribution_exposure.json; broadly unidentified fish≈12–13%method PPR, distinct from classic confidence shares",
+    "browser_expected_values": "browser_expected_values.json"
+  },
+  "geography": {
+    "A_region_covered_by_study_percent": 39.54526621361738,
+    "B_study_covered_by_region_percent": 99.8432657449034,
+    "provisional_A_range_percent": [
+      37,
+      42
+    ],
+    "provisional_B_range_percent": [
+      99,
+      100
+    ],
+    "reconstructed_study_area_km2": 276921.0021594073,
+    "target_area_km2": 699165.7878743997,
+    "intersection_km2": 276486.97208946676,
+    "source_pdf_sha256": "aa2228c7174b72641f07a4ff6c613970a520ebdc9f044f13e1164254ae842ea8",
+    "target_boundary_sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+    "land_boundary_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+    "old_article_footprint_sha256": "d375ace5990baae8e74869d60b86581785a057ce26ae3dfeb0de5d7f245036c0",
+    "limitations": "Coarse source map grid/red outline and1:50m coast mask; historical fishing grounds/400m shelf condition not exactly recovered. Target boundary remains distinct.",
+    "confidence": "low approximate source-red-outline marine trace;±0.1degree sensitivity, not statistical interval",
+    "reconstruction_path": "regions/LME_022/validation_reports/22_20251990_East_Coast_of_Scotland_(1991-1995)/geography/study_area_reconstructed.geojson",
+    "reconstruction_sha256": "7b680080392938d6afca48fcf2f82c51c1c26eff1f9c0d5fb87871c13c03f94e",
+    "current_shared_geometry_proposal": "central_metadata_proposals.json",
+    "historical_local_footprint_preserved": true,
+    "target_region_unchanged": true
+  },
+  "visual_and_link_qa": {
+    "document_renderer": "Preferred render_docx.py diagnosed missing soffice.exe. Task-owned hidden native Word opened read-only with macros disabled, exported PDF, then closed only its own instance. Scientific Python rasterized pages.",
+    "docx_pages": 7,
+    "all_pages_rendered_and_visually_inspected": true,
+    "page_qa_images": [
+      "qa/report_page_1.png",
+      "qa/report_page_2.png",
+      "qa/report_page_3.png",
+      "qa/report_page_4.png",
+      "qa/report_page_5.png",
+      "qa/report_page_6.png",
+      "qa/report_page_7.png"
+    ],
+    "appendix_sheets": [
+      "Taxon mapping",
+      "Sources"
+    ],
+    "representative_ranges": {
+      "top": "Taxon mapping!A1:G12",
+      "middle": "Taxon mapping!A195:G200",
+      "bottom": "Taxon mapping!A386:G391",
+      "longest": "Taxon mapping!A360:G361",
+      "sources_top": "Sources!A1:D10",
+      "sources_bottom": "Sources!A11:D21"
+    },
+    "all_sheets_and_representative_long_rows_visually_inspected": true,
+    "layout_result": "Readable wrapped text and all figures. No clipped rows, orphan headers or blank image placeholders; repeated table headers, filters and frozen panes retained.",
+    "hyperlinks": "All47 visible hyperlinks explicitly blue0563C1/single underline;40 relative local destinations resolve after relocated repository-shaped tree. No absolute local links or nonempty HyperlinkBase.",
+    "template_fidelity": "Manual researcher rows, section geometry and unrelated ZIP parts retained byte-for-byte, document_fidelity.json.",
+    "final_report_sha256": "cc748124c1fd590c7e923dec56f68389136363a03c461ef729de36fb4c509d9a",
+    "final_appendix_sha256": "10120c5751c8311684f8354bfe2dc893b971acaf00211973bbab50609676d6c1"
+  },
+  "shared_metadata_proposals": {
+    "path": "regions/LME_022/validation_reports/22_20251990_East_Coast_of_Scotland_(1991-1995)/central_metadata_proposals.json",
+    "sha256": "b0d6dd01a825a0e5c7455ea2008ca73a138b3fefc4402392a2d9ecfab43def9a",
+    "authenticated_project_sha256": "a4b955b272d8d0fda20fc2ee0b3efff735cb65e6c13ce0a96730e220fe21a4b4",
+    "field_count": 19,
+    "geometry_count": 1,
+    "overview_linkage_proposal": {
+      "field": "selected_paper_ids",
+      "expected_old": null,
+      "proposed_new": "NS-2025__LME_022",
+      "reason": "Root may align metadata linkage; accepted model identity/basis/year unchanged."
+    },
+    "expected_old_values_included": true,
+    "root_must_revalidate_latest_keys_before_write": true
+  },
+  "transferable_lessons": [
+    {
+      "finding": "Use actual provider reporting common-name/habitat and official code bridge before expanding broad candidate sets; exact ISSCAAP39 residual fish labels use bony scope, while Malacostraca is not equivalent to decapod residuals.",
+      "evidence": "reporting_scope_correction_impact.json;bony_reporting_scope_correction_impact.json;reporting_scope_sources/"
+    },
+    {
+      "finding": "Dedicated source stock groups must join broader taxonomy candidate sets; Gadidae spans seven groups and Scophthalmidae includes both Flatfishes and Turbot.",
+      "evidence": "taxon_audit.json;candidate_review/taxonomy_primary_records.json"
+    },
+    {
+      "finding": "Source blanks/defaulted zero cannot support catch shares; keep candidate and use complete biomass fallback.",
+      "evidence": "supplement_cells.json;allocation_evidence.json"
+    },
+    {
+      "finding": "Unfished source-matrix negatives remain method failure even with finite caught-taxon totals; review largest method contributors separately.",
+      "evidence": "matrix_inspection.json;method_contribution_exposure.json"
+    },
+    {
+      "finding": "Same paper contains distinct1890s/1990s static models; simulation endpoint is not static modelyear.",
+      "evidence": "source_review.md"
+    }
+  ],
+  "descendants": {
+    "spawned": 1,
+    "active": 0,
+    "status": "candidate_review closed; reserved slot released",
+    "scope_and_limitations": "descendant_review_closure.json"
+  },
+  "genuine_blockers": [],
+  "remaining_root_work": [
+    "Revalidate expected-old source metadata/geometry and Overview selected-paper linkage, synchronize current article footprint without modifying target or accepted science",
+    "Consolidate refreshed regional results/coefficients/NPP/mapping into latest Project state; rebuild/reconcile map, trends, archive and graph",
+    "Perform actual browser values/control/source/geometry/provisional-status checks",
+    "Perform shared tests and root-owned staging/commit/push verification"
+  ]
+}

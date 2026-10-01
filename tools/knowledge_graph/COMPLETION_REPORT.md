@@ -1,11 +1,9 @@
-# Combined-skill graph refresh
+# All 23 selected-region graph refresh
 
-PASS: **3,673 nodes, 6,444 edge pairs and 17 hyperedges** from 402 explicitly selected files.
+PASS: 4,491 nodes, 7,789 edge pairs, 7,939 separately attributed evidence records and 21 hyperedges across 466 explicitly selected files.
 
-- Re-extracted ten current documents, with one active `ecopath-paper-to-ppr` entry and its internal stage/detail references.
-- Removed six obsolete active-source paths from the allowlist and manifest; retained explicit historical provenance for six referenced former concepts.
-- Preserved all 3,614 unchanged-source node attributes, 6,487 attributed relationships and 14 hyperedges.
-- Verified all 402 source/manifest hashes, graph endpoints, 44 local links, HTML payload parity and JavaScript syntax.
-- Seven targeted retrieval checks passed. Use the exact combined-entry ID or requested-stage phrase; Graphify's generic active-skill phrase can return unrelated Active SPPR nodes.
+All 23 regional indexes and seven workflow/scientific-limit topics passed source-specific retrieval checks. All 46 regional index/review sources are represented. Full-byte and manifest hashes, endpoints, preserved historical evidence, local document links, HTML payloads and JavaScript syntax were verified.
 
-No scientific rerun, workbook/model selection change or browser-interaction test occurred. Token/cost telemetry is unavailable. Scope and historical-authority rules: [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Detailed evidence: [completion_verification.json](completion_verification.json), [refresh_audit.json](refresh_audit.json), [source_hashes.json](source_hashes.json).
+This graph update does not alter scientific inputs or approve models. Derived community IDs were recomputed; all other protected node attributes and unchanged-source evidence were preserved. Token usage and cost are unavailable. Benchmark reductions are estimates only.
+
+[Interactive graph](graph.html) · [Audit report](GRAPH_REPORT.md) · [Scope](REFRESH_SCOPE.md) · [Verification](completion_verification.json) · [Source hashes](source_hashes.json)

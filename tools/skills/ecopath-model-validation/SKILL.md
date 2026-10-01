@@ -21,13 +21,15 @@ Resolve this directory as `skill_root`; its third parent is the repository root 
 
 Current user instructions and edits govern the task. If an older document or pipeline reference conflicts with this report's agreed format, apply the current template guide. In particular, geographic approximation is allowed and the report has GE and TE rows only.
 
+When the user accepts existing manual scientific parameters, preserve those inputs throughout authorized review and recalculation. Record their provenance and source differences without restoring paper values, normalizing diets or rebalancing. Mapping authorization permits evidence-supported taxonomy, group membership, allocation and confidence changes; it does not override a parameter-preservation instruction. Compare protected inputs before and after, and report remaining scientific concerns explicitly.
+
 ## Scope and review boundaries
 
 An ordinary validation request authorizes reading relevant permitted evidence, checking sources, performing report arithmetic, preparing supporting review records, and generating the Word report. It does **not** authorize running extraction or SPPR again, changing catch/mappings/weights/TLs, selecting another model, updating workbook results, or refreshing the project/map.
 
 Reuse adequate saved outputs. When they are insufficient, **recommend a fresh scientific paper-to-PPR run if necessary**. Explain the specific gap or conflict, why further read-only review cannot resolve it, the smallest sufficient stages, the expected result and which files/results would be created or affected. Use the [rerun decision and approval rules](references/evidence-and-calculations.md#when-to-recommend-a-fresh-scientific-run).
 
-**Always ask the user before each proposed fresh scientific run and wait for explicit confirmation of that run.** A validation request, a recommendation to rerun, or approval of this skill does not authorize execution. Once the user confirms the concrete proposal, execute only that approved scope through the current paper-to-PPR workflow; do not ask again for the same approved run. A further or expanded run requires a new explanation and confirmation. Keep proposed numerical repairs and adoption into workbooks/maps explicit in the proposal; approval to recompute is not blanket approval to change the model or publish results.
+**Ask the user before a fresh scientific run that is not already covered by explicit session authorization, and wait for confirmation.** An ordinary validation request, a recommendation to rerun, or approval of this skill does not authorize execution. When the user explicitly authorizes necessary runs within a defined regional validation/integration scope, explain the concrete gap and setup and proceed within that scope without requesting the same authorization again. Further execution outside the authorized scope requires a new explanation and confirmation. Keep numerical repairs and adoption into workbooks/maps distinct: approval to recompute is not blanket approval to change accepted model parameters or publish results.
 
 Finish independent validation work from existing evidence before the approval request, and keep only dependent findings pending. If the user declines or defers the run, deliver the available report with those limitations and the recommendation recorded.
 

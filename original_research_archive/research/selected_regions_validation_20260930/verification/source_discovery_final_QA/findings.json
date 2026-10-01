@@ -1,0 +1,93 @@
+{
+  "review_status": "PASS bounded independent review; no concrete blocking issue identified in the new delta",
+  "scope": "Declared article_dir alias/SourcePaths relocation, resolved-path deduplication/containment, preservation of specific loadability_class during stale legacy E rationale cleanup, nullable assessments. Previously reviewed role-registry guards reused, not reapproved.",
+  "reviewed_source_sha256": {
+    "tools/original_atlas_data.py": "c16259462bf42439d308c9b9e8bc1bc3bc190de2e496492e6e1c626eb87afee6",
+    "tools/workflow_checks/test_paper_files.py": "b8843d2944e4bf8fa85139cb07bfeb6b68d0976afe28f4bb36996dc2c87735a4",
+    "common_reference_data/paper_file_roles.json": "28e9d554e75e744d56a61a435438b849e0c5cf658184724efe51067a980070cd",
+    "common_reference_data/provenance/archive_relocation.csv": "214fb767049b77f5ea9ecf2dcecf5e950ce45642cf5a4570674320c1647cbb49",
+    "original_research_archive/migration.csv": "3adc74a2b5b382c46c4308c52c49a2bfb3151979cf4ae8aab0a52ab65d4a7070"
+  },
+  "sources_unchanged_during_run": true,
+  "checks": {
+    "focused_tests": {
+      "tests_run": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true
+    },
+    "independent_probe_groups": 5,
+    "independent_probes_all_passed": true,
+    "specific_assessment_matrix_cases": 7
+  },
+  "actual_java_case": {
+    "project_sha256": "e5d25ced23722d74c9b3f32c4c4cdaac0a09563a92a1e4d83c7219db47fd977d",
+    "paper_records": 196,
+    "article_id": "INDO-1999__LME_038",
+    "source_article_id": "INDO-1999",
+    "article_dir": "regions/LME_038/papers/BUCHARY-1991",
+    "loadability_class_preserved": "Printed source fails strict admission; user-authorized normalized and BA-completed derived model selected",
+    "quality_score_preserved": 25,
+    "material_files": [
+      {
+        "filename": "ubc_1999-0254.pdf.pdf",
+        "role": "main",
+        "file_label": "Paper PDF",
+        "status": "local_file_present",
+        "validation": "Local non-empty file; scientific identity and model loadability not reassessed.",
+        "sha256": "eb2c504f176b230153cfd4caa0fc6671e02c5d1cdc0fd2bc0561d3590759f53d",
+        "size_bytes": 9888860,
+        "relative_path": "../regions/LME_038/papers/BUCHARY-1991/ubc_1999-0254.pdf.pdf",
+        "article_id": "INDO-1999__LME_038",
+        "unit_id": "LME_038"
+      }
+    ],
+    "idempotent": true
+  },
+  "root_evidence_read": [
+    {
+      "path": "original_research_archive/research/selected_regions_validation_20260930/verification/article_folder_current_data_check.json",
+      "sha256": "47c77918a21265d0924433d9a3392e1ff91d574749945a038a1a51f382bf02a7"
+    },
+    {
+      "path": "original_research_archive/research/selected_regions_validation_20260930/verification/article_folder_final_workflow_tests.txt",
+      "sha256": "c6b7567a6810cff85d7f07fb118f7da9b5615cbe3923fab0df945a98e665c3cc"
+    },
+    {
+      "path": "original_research_archive/research/selected_regions_validation_20260930/verification/shared_code_regression_suite.json",
+      "sha256": "afe626e4f1e9f8c434f0d81e4f809a77f4bef777930c3e5200347b26593938e8"
+    },
+    {
+      "path": "original_research_archive/research/selected_regions_validation_20260930/verification/source_metadata_display_QA/post_fix_findings.json",
+      "sha256": "2aea0c00dc149ce3744bc206ea7aa7ff10740b09ff3afc1dc2bdc77c4fedd6c0"
+    }
+  ],
+  "findings": [],
+  "manual_review_conclusions": [
+    "Declared folder resolution uses the existing relocation ledger, then enforces repository containment before source discovery/paper mutation.",
+    "Resolved paths are deduplicated across declared and canonical folders and preexisting material links. Distinct originals from both folders remain accessible.",
+    "Specific scientific loadability remains unchanged when only quality_rationale contains the stale availability class. Null, empty and absent assessment values remain null/empty/absent.",
+    "Legacy availability-only loadability is replaced with explicitly unassessed local presence; quality_score_100 and substantive retrieval history remain unchanged.",
+    "Actual INDO-1999__LME_038 resolves to the retained BUCHARY-1991 thesis with its exact reviewed hash and explicit provisional loadability."
+  ],
+  "reproduce_command": "C:/Users/idoca/miniconda3/python.exe -u -Xutf8 -B original_research_archive/research/selected_regions_validation_20260930/verification/source_discovery_final_QA/qa_probes.py",
+  "evidence": [
+    "probe_results.json",
+    "focused_paper_file_tests.txt",
+    "qa_probes.py",
+    "knowledge_graph_query.txt"
+  ],
+  "limitations": [
+    "The current graph located the relevant source resolver/function but predates this delta; current code and live probes supply the review evidence.",
+    "This bounded review does not repeat all56workflow or22coordinator tests; root retained logs were inspected and the16relevant existing tests were rerun.",
+    "No pipeline build or writer was run; final generated atlas/browser alignment remains root-owned.",
+    "Filesystem availability does not establish original publication identity or scientific model validity. No model approval claimed."
+  ],
+  "writes_scope": [
+    "original_research_archive/research/selected_regions_validation_20260930/work/source_discovery_final_qa/",
+    "original_research_archive/research/selected_regions_validation_20260930/verification/source_discovery_final_QA/"
+  ],
+  "descendants": [],
+  "ownership_released": true
+}

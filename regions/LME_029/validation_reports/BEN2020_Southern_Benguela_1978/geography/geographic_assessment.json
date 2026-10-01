@@ -1,0 +1,158 @@
+{
+  "target_area_km2": 1458328.8319649822,
+  "traced_study_area_km2": 278823.2835180427,
+  "reported_study_area_km2": 220000,
+  "overlap_km2": 143158.77722290895,
+  "A_pct": 9.816632167246798,
+  "B_traced_pct": 51.34391052877946,
+  "B_reported_area_pct": 65.07217146495861,
+  "report_A_range_pct": [
+    8,
+    12
+  ],
+  "report_B_range_pct": [
+    50,
+    65
+  ],
+  "source": "Shannon2020 Figure1/PDF3 blue shaded area; geographical grid tracing",
+  "coordinate_calibration": {
+    "x15E": 262,
+    "x20E": 528,
+    "x25E": 793,
+    "y30S": 411,
+    "y35S": 677
+  },
+  "water_controls": [
+    {
+      "longitude": 15.1,
+      "latitude": -30.1,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "offshore south of Orange River"
+    },
+    {
+      "longitude": 17.8,
+      "latitude": -33.9,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "water west of Cape Town"
+    },
+    {
+      "longitude": 18.35,
+      "latitude": -33.96,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "water west of Cape Town marker"
+    },
+    {
+      "longitude": 18.65,
+      "latitude": -34.25,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "False Bay water east of Cape peninsula"
+    },
+    {
+      "longitude": 20,
+      "latitude": -34.9,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "water south of Cape Agulhas place marker"
+    },
+    {
+      "longitude": 19.9,
+      "latitude": -35.3,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "Agulhas Bank"
+    },
+    {
+      "longitude": 24.5,
+      "latitude": -34.25,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "south coast shelf water"
+    },
+    {
+      "longitude": 27.5,
+      "latitude": -33.5,
+      "expected_inside": true,
+      "actual_inside": true,
+      "description": "west of East London"
+    },
+    {
+      "longitude": 14,
+      "latitude": -27,
+      "expected_inside": false,
+      "actual_inside": false,
+      "description": "northern Benguela"
+    },
+    {
+      "longitude": 21,
+      "latitude": -38,
+      "expected_inside": false,
+      "actual_inside": false,
+      "description": "outside offshore boundary"
+    },
+    {
+      "longitude": 28.7,
+      "latitude": -32.9,
+      "expected_inside": false,
+      "actual_inside": false,
+      "description": "east of source boundary"
+    }
+  ],
+  "all_water_controls_pass": true,
+  "limitations": "Source raster and approximate coastline; roughly 1–3 km image resolution; no author digital polygon. Compare geodesic areas, not raw pixels. Source figure trace area 278823km2 differs from reported 220000km2; B denominator sensitivity spans 51–65%. The target LME ends near Cape Agulhas while study includes the south coast to East London. Range is an approximate sensitivity bracket, not a statistical interval. Legacy rectangle and 50% estimate are not source polygons. The reported-area scenario divides the same traced intersection by 220000 km2; it does not establish a second measured polygon.",
+  "boundary_source": "common_reference_data/geography/LMEs.geojson",
+  "annotation_repairs": [
+    {
+      "marker": "Cape Agulhas",
+      "pixel_box": [
+        519,
+        658,
+        539,
+        677
+      ],
+      "interpolated_coast_pixels": [
+        [
+          519,
+          664
+        ],
+        [
+          529,
+          669
+        ],
+        [
+          539,
+          662
+        ]
+      ],
+      "reason": "Black/white place marker overlaps source-blue water; replace demonstrated annotation notch using adjacent visible coastline. This is an approximate coast interpolation, not author coordinates."
+    },
+    {
+      "marker": "Cape Town",
+      "pixel_box": [
+        436,
+        611,
+        451,
+        629
+      ],
+      "interpolated_coast_pixels": [
+        [
+          440,
+          611
+        ],
+        [
+          442,
+          621
+        ],
+        [
+          446,
+          629
+        ]
+      ],
+      "reason": "Black/white place marker overlaps source-blue water; replace demonstrated annotation notch using adjacent visible coastline. This is an approximate coast interpolation, not author coordinates."
+    }
+  ],
+  "reported_denominator_scenario_note": "Same traced intersection divided by the source-stated 220000 km2. Sensitivity scenario only; no second measured polygon is claimed."
+}

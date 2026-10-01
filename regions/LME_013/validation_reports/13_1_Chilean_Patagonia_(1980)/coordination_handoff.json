@@ -1,0 +1,422 @@
+{
+  "unit_id": "LME_013",
+  "selected_model_id": "13_1_Chilean_Patagonia_(1980)",
+  "canonical_model_path": "regions/LME_013/models/13_1_Chilean_Patagonia_(1980)/model.json",
+  "canonical_sha256": "552e5dc426c7731d77593317da6ca3928fc42635672aa55ecc1cdc47b464c9f7",
+  "baseline_workbook_sha256": "a45b2989ca40328c134c36718bacca5efa30fc522688ded957045b8542e8b586",
+  "final_workbook_sha256": "62d8bbb0efc60b9ccc9a83e44898d3980fb147fcc13e4d6ad3263f60c011f6a3",
+  "regional_status": "complete; ownership released",
+  "shared_integration_status": "pending coordinator",
+  "browser_verification_status": "pending coordinator",
+  "scientific_approval": "not established; provisional mapping and runtime results, geographic/temporal transfer and source concerns retained",
+  "artifacts": {
+    "regional_workbook": {
+      "path": "regions/LME_013/LME_013.xlsx",
+      "sha256": "62d8bbb0efc60b9ccc9a83e44898d3980fb147fcc13e4d6ad3263f60c011f6a3",
+      "bytes": 978968
+    },
+    "word_report": {
+      "path": "regions/LME_013/Model_validation_13_1_Chilean_Patagonia_(1980).docx",
+      "sha256": "5a10779093247bfe20d7a7a53486cfe1a2f7a3cc40097f775d3a7b81cab3f02a"
+    },
+    "excel_appendix": {
+      "path": "regions/LME_013/LME013_taxon_mapping_appendix.xlsx",
+      "sha256": "ded0b9cc3ebaa1637778620f025da6ca93877da9d604f289668aacfe4967a57f"
+    }
+  },
+  "evidence_manifest": {
+    "path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/evidence_manifest.json",
+    "sha256": "ed0cb3eafa0b791f0406c546c4ab498f7a263799eb4e203a07f6dc1d12e412f1"
+  },
+  "mapping_changes": {
+    "path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/mapping_changes.json",
+    "sha256": "ba76196e2c518f96380079141785684a5d352bef62ecfa6246b795abecec7198",
+    "reviewed_labels": 218,
+    "initial_resolved_labels": 10,
+    "final_mapped_labels": 218,
+    "confidence_counts": {
+      "High": 66,
+      "Medium": 31,
+      "Low": 0,
+      "Very low": 121,
+      "Unresolved": 0
+    },
+    "component_rules_and_weakest_confidence": "taxon_audit.json",
+    "allocation": "allocation_evidence.json; singleW1, source1980 Hoki landingsW4, other complete candidate biomassW9; missing source catch does not mean zero"
+  },
+  "authorized_metadata_linkage_correction": {
+    "key": "Overview/selected_paper_ids",
+    "expected_old": "HUM-2018__LME_013",
+    "adopted": "HUM-2026__LME_013"
+  },
+  "accepted_input_verification": {
+    "exact_identity": true,
+    "full_protected_blocks_identical_to_baseline": {
+      "Catch": true,
+      "Classic PPR": true,
+      "NPP": true,
+      "Selected model groups": true
+    },
+    "input_and_result_freshness_hashes_match": true,
+    "all218_exact_taxa_once": true,
+    "weights_sum1": true,
+    "allocation_candidate_weights_recomputed": 45,
+    "weakest_component_confidence": true,
+    "classic_calculation_and_confidence_percentages": true,
+    "scoped_coefficients_verified": 1962,
+    "model_annual_year_cells_verified": 4410,
+    "npp_ratio_year_cells_verified": 37800,
+    "max_annual_wet_difference": 9.5367431640625e-07,
+    "annual_status_contamination": [],
+    "appendix_numeric_types_and_sort": true,
+    "appendix_frozen_headers_and_filter": true,
+    "all_visible_hyperlinks_blue_underlined": true,
+    "relative_local_targets_verified_after_relocation": 32,
+    "hyperlinks_verified": 41,
+    "source_ids_complete": true,
+    "browser_status": "pending coordinator"
+  },
+  "diagnostics": {
+    "reused_exact_full_returns": true,
+    "new_solver_run": false,
+    "methods": [
+      {
+        "method": "GE",
+        "overall_status": "WARN",
+        "rho_living": 0.35789473684210527,
+        "b": 0.021043375049329724,
+        "detritus_sppr": {
+          "Detritus": 1.0452603491133765
+        },
+        "strict_mass_balance": true,
+        "sha256": "0f06972e5392c23c1912521ee6c503e9705ecccb687c5f9cb3d45290ccbd2788",
+        "saved_full_direct_return": "../../models/regional_ge_integration_20260928/direct_new_GE.json"
+      },
+      {
+        "method": "TE",
+        "overall_status": "WARN",
+        "rho_living": 0.5422647527910686,
+        "b": 0.0,
+        "detritus_sppr": {
+          "Detritus": 0.9937119157415673
+        },
+        "strict_mass_balance": true,
+        "sha256": "a78b9ad13ef72a2b34e515be5bd8f52fafb382eb15f04e5bedee9780fb1a2801",
+        "saved_full_direct_return": "../../models/regional_ge_integration_20260928/direct_new_TE_EEfix.json"
+      },
+      {
+        "method": "With Egestion",
+        "overall_status": "WARN",
+        "rho_living": 0.28631578947368425,
+        "b": 0.021281496544058653,
+        "detritus_sppr": {
+          "Detritus": 1.0508980396830592
+        },
+        "strict_mass_balance": true,
+        "sha256": "92daee75ef99178c8f0b267ca03a8ab206771b11226e6aa124ddb62846ed218a",
+        "saved_full_direct_return": "../../models/regional_ge_integration_20260928/direct_new_WithEgestion.json"
+      }
+    ],
+    "all_source_and_recipient_entries_including_unfished_reviewed": true,
+    "negative_source_sppr": [],
+    "source_limitations": [
+      "SupplementsS1–S7 absent/not acquired; partial source reconstruction",
+      "Sea-lion canonical diet1.002 preserved, accepted runtime normalization at0.001 retained",
+      "Accepted inferred BA, GS/detritus/routing/import/missing-catch defaults preserved",
+      "Printed source precision and Skates EE/BA indeterminacy disclosed",
+      "All computational balances apply to transformed accepted runtime; overallWARN retained"
+    ]
+  },
+  "calculations": {
+    "reference_year": 2019,
+    "catch_basis": "landings",
+    "independent_classic_ppr_tC": 277099551.4346593,
+    "catch_tonnes": 7166264.971576691,
+    "confidence_summary": [
+      {
+        "label": "High",
+        "taxa": 66,
+        "catch_tonnes": 4990999.895213658,
+        "ppr_tC": 35707460.801577,
+        "catch_percentage": 69.64576268124732,
+        "ppr_percentage": 12.88614890089308
+      },
+      {
+        "label": "Medium",
+        "taxa": 31,
+        "catch_tonnes": 970862.1075012251,
+        "ppr_tC": 74526173.47667475,
+        "catch_percentage": 13.547672481437987,
+        "ppr_percentage": 26.895089902102637
+      },
+      {
+        "label": "Low",
+        "taxa": 0,
+        "catch_tonnes": 0.0,
+        "ppr_tC": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_percentage": 0.0
+      },
+      {
+        "label": "Very low",
+        "taxa": 121,
+        "catch_tonnes": 1204402.9688618078,
+        "ppr_tC": 166865917.15640756,
+        "catch_percentage": 16.806564837314692,
+        "ppr_percentage": 60.21876119700429
+      },
+      {
+        "label": "Unresolved",
+        "taxa": 0,
+        "catch_tonnes": 0.0,
+        "ppr_tC": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_percentage": 0.0
+      }
+    ],
+    "very_low_squid_exposure": [
+      {
+        "taxon": "Doryteuthis gahi",
+        "catch_percentage": 0.16076569535681462,
+        "ppr_percentage": 0.0732163228041815,
+        "group": "Small pelagic fish (100.000000%)"
+      },
+      {
+        "taxon": "Dosidicus gigas",
+        "catch_percentage": 9.801179426476581,
+        "ppr_percentage": 38.87701119477537,
+        "group": "Small pelagic fish (100.000000%)"
+      },
+      {
+        "taxon": "Teuthida",
+        "catch_percentage": 0.0,
+        "ppr_percentage": 0.0,
+        "group": "Small pelagic fish (100.000000%)"
+      }
+    ],
+    "carbon_conversion": "saved wet classic coefficient×catch/9 exactly once; model annual wetPPR similarly converted at presentation/ratio",
+    "browser_expected_values": "browser_expected_values.json",
+    "missing_classic_coefficients": 34,
+    "positive_catch_missing_classic_ppr": 0
+  },
+  "geography": {
+    "A_region_covered_by_study_percent": 7.156536527058043,
+    "B_study_covered_by_region_percent": 94.36111352199659,
+    "B_reported_study_area_denominator_percent": 63.17828706505982,
+    "approximate_A_percent": [
+      7,
+      11
+    ],
+    "approximate_B_percent": [
+      60,
+      95
+    ],
+    "confidence": "low; source-map shading trace,3–4km effective resolution,1:50m land; inner-fjord and reported-vs-traced area mismatch",
+    "offshore_distance": "35nauticalmiles; not a fixed longitude offset",
+    "central_geometry_key_old": "article:HUM-2026__LME_013",
+    "central_geometry_key_new": "article:HUM-2026__LME_013",
+    "paper_footprint_key_old": "HUM-2026_08a30f57690d",
+    "paper_footprint_key_new": "HUM-2026_08a30f57690d",
+    "reconstruction_path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/geography/study_area_reconstructed.geojson",
+    "reconstruction_sha256": "17b8e9e51d0e23784380f64d58a70e5f5e8590e799d78dd2010625b0960d42ef",
+    "source_pdf_sha256": "62518e94a728b22c2851531c534781f7d606ccbb70a3c80826bb53a2aac2ac57",
+    "target_boundary_sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+    "land_boundary_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+    "old_local_footprint_preserved": true,
+    "old_local_footprint_sha256": "f72939644a75a5068fbf8d2416b59c957957eb8d5ac7554a77b1990206f1cabe",
+    "shared_replacement": "central_metadata_proposals.json; replace current central source-article geometry while preserving target and historical local evidence"
+  },
+  "visual_and_link_qa": {
+    "document_renderer": "Preferred render_docx.py diagnosed missing soffice; owned hidden native Word opened read-only and exported PDF; scientific Python rasterized pages. User application instances untouched.",
+    "docx_pages": 7,
+    "all_pages_rendered_and_visually_inspected": true,
+    "page_qa_images": [
+      "qa/report_page_1.png",
+      "qa/report_page_2.png",
+      "qa/report_page_3.png",
+      "qa/report_page_4.png",
+      "qa/report_page_5.png",
+      "qa/report_page_6.png",
+      "qa/report_page_7.png"
+    ],
+    "appendix_sheets": [
+      "Taxon mapping",
+      "Sources"
+    ],
+    "representative_ranges": {
+      "top": "Taxon mapping!A1:G12",
+      "middle": "Taxon mapping!A113:G118",
+      "bottom": "Taxon mapping!A219:G225",
+      "longest": "Taxon mapping!A8:G9",
+      "sources_top": "Sources!A1:D10",
+      "sources_bottom": "Sources!A11:D20"
+    },
+    "all_sheets_and_representative_long_rows_visually_inspected": true,
+    "layout_result": "Readable text/figures, no clipped rows or orphan allocation header; repeated table headers, wrapped rows, filters and frozen headers retained.",
+    "hyperlinks": "All41 visible links have explicit blue0563C1 and single underline;32 local destinations resolve under relocated repository tree. No absolute local link or HyperlinkBase.",
+    "template_fidelity": "document_fidelity.json; manual rows and section geometry/unrelated ZIP parts retained",
+    "final_report_sha256": "3f91700a87b6be6bf54932832a7b7aa3d893d07e9b466f291329061e2ead639b",
+    "final_appendix_sha256": "af9236702d8cd6a422659bb6af71b4588270049f0ad7bff0b161e4d67d02c14f"
+  },
+  "shared_metadata_proposals": {
+    "path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/central_metadata_proposals.json",
+    "sha256": "bdac90655e5cfdaea935ce342babd3d4c32afa49f783101576e930ed1cb788a1",
+    "authenticated_project_sha256": "066b41ec12bbeb391e4c6fffec7c44bf88b3d199c28c54af0015e85c369d6f5b",
+    "field_count": 26,
+    "geometry_count": 1,
+    "expected_old_values_included": true,
+    "integration": "pending coordinator; root must revalidate current keyed values"
+  },
+  "transferable_lessons": [
+    "Broad source Benthos is an operative habitat pool, but broad modern classes/orders require explicit reporting-composition assumptions where pelagic exceptions exist.",
+    "Large pelagic squid may have a partial active-nekton M11 connection, but body size, predatory role, habitat and alternative source pools must be compared; high catch/PPR exposure must stay prominent.",
+    "GeographicA andB require separate denominators. Source-traced area and reported study area can yield very differentB; disclose sensitivity, coastline resolution and historical footprint conflict.",
+    "Missing source catch defaulted to zero is not a genuine zero; complete biomass fallback applies when complete candidate catch shares cannot be established."
+  ],
+  "descendants": {
+    "spawned": 0,
+    "active": 0,
+    "status": "none; no slot granted"
+  },
+  "remaining_root_work": [
+    "Integrate keyed source metadata and central article geometry, preserving selected scientific parameters and unrelated regions",
+    "Consolidate central annual/coefficients/NPP/mapping; build and reconcile current map/trends/archive/graph",
+    "Verify generated browser values, controls, source links, restored current article polygon and disclosed provisional limitations",
+    "Stage/commit only root-owned integrated work and regional package as appropriate"
+  ],
+  "elasmobranch_scope_followup": {
+    "path": "regions\\LME_013\\validation_reports\\13_1_Chilean_Patagonia_(1980)\\elasmobranch_scope_followup.json",
+    "sha256": "d6141975aee3ff3a78de9da201e63d7e798b074ac2ea97a2bd85838fe5012fd2",
+    "prior_handoff_sha256": "c73c9a955d04730bd6ab5862095a5aceac81d7a812f16c6f8f1b2ae666fc90e1",
+    "rationale_only": true,
+    "mappings_weights_confidence_and_scientific_numbers_unchanged": true,
+    "shared_reintegration_pending_coordinator": true,
+    "all_scientific_tables_and_numerical_mappings_exactly_unchanged": true,
+    "complete_before_after_in_memory_calculations_identical": true,
+    "targeted_appendix_row_visual_check": "passed",
+    "effective_blue_underlined_links_and_relocation": "passed",
+    "regional_validation_freshness": "passed after documented numerical equivalence; existing result hash retained",
+    "prior_receipts": "Earlier numerical/matrix/artifact receipts retain their historical execution/file hashes. Current identities and exact numerical reuse proof are in this follow-up evidence; no broad taxon review or new solver execution was performed."
+  },
+  "residual_fish_scope_current_release": {
+    "status": "complete; ownership released",
+    "date": "2026-09-30",
+    "prior_handoff_sha256": "00763db67ab8466cefcd836b81bad0ac6d7913301e6ab8e92e94e33617c540c5",
+    "changed_target_labels": [
+      "Marine fishes not identified",
+      "Marine finfishes not identified",
+      "Marine groundfishes not identified",
+      "Marine pelagic fishes not identified"
+    ],
+    "local_adopted_candidate_sets": [
+      {
+        "key": {
+          "unit_id": "LME_013",
+          "model_id": "13_1_Chilean_Patagonia_(1980)",
+          "taxon": "Marine fishes not identified",
+          "taxon_key": 100039
+        },
+        "eligible_group_ids": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13
+        ]
+      },
+      {
+        "key": {
+          "unit_id": "LME_013",
+          "model_id": "13_1_Chilean_Patagonia_(1980)",
+          "taxon": "Marine finfishes not identified",
+          "taxon_key": 100139
+        },
+        "eligible_group_ids": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13
+        ]
+      },
+      {
+        "key": {
+          "unit_id": "LME_013",
+          "model_id": "13_1_Chilean_Patagonia_(1980)",
+          "taxon": "Marine groundfishes not identified",
+          "taxon_key": 100239
+        },
+        "eligible_group_ids": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          13
+        ]
+      },
+      {
+        "key": {
+          "unit_id": "LME_013",
+          "model_id": "13_1_Chilean_Patagonia_(1980)",
+          "taxon": "Marine pelagic fishes not identified",
+          "taxon_key": 100339
+        },
+        "eligible_group_ids": [
+          6
+        ]
+      }
+    ],
+    "evidence": {
+      "path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/residual_fish_scope_followup.json",
+      "sha256": "604d9a38b9d027521271f98b32a4757d3d991f8b3e252e13ff012de10e02d2d7",
+      "bytes": 132811
+    },
+    "independent_QA": {
+      "path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/residual_scope_independent_QA.json",
+      "sha256": "6cb2fc0b1ada20c595180876b0571fb6201da63797fb81ced05fc6f7ed48b878",
+      "bytes": 19092
+    },
+    "workbook_input_sha256": "627428adcf0aa56736495a04917b70d550a9e82d880a75fbde1e08036f9caf45",
+    "workbook_result_sha256": "403030cf723e2b6bf04f68b946cb9f407c53774fc6dee4f17366cbd6805769a7",
+    "actual_recalculation": {
+      "function": "tools/regional.py recalculate",
+      "code_sha256": "8c1041824bc9ebd80426eacea78783a408d5662a04883eb66f2b281f035638d0",
+      "Group_SPPR_table_sha256_preserved": "cc947e0b16ab0d187370fcda6fecf9d1b8af69aa60c483cf97e619a238d9757e",
+      "accepted_model_sha256_preserved": "552e5dc426c7731d77593317da6ca3928fc42635672aa55ecc1cdc47b464c9f7",
+      "full_source_matrices_and_diagnostic_statuses_reused_unchanged": true,
+      "source_and_canonical_bytes_unchanged": "See accepted baseline comparator and follow-up file hashes; current diagnostic returns were not rerun.",
+      "Classic_Annual_TL_coefficients_and_independent_bounds_exactly_retained": true,
+      "all_non_target_matching_exactly_preserved": true,
+      "workbook_cells_changed": 5549,
+      "OOXML_nonworksheet_parts_preserved": true
+    },
+    "invertebrate_retention": "invertebrate_reporting_scope_retention.json",
+    "prior_receipt_interpretation": "Earlier verification values/identities remain evidence of prior regional adoption; this keyed follow-up supersedes them for target mappings, affected arithmetic and current Office identities. No historical identity was promoted to current freshness.",
+    "shared_actions_pending": "Coordinator metadata/Project/cache/generated pages/browser/Git integration; numerical scientific approval remains subject to retained diagnostics and uncertainty."
+  },
+  "xml_cell_order_current_release": {
+    "status": "complete; ownership released",
+    "prior_release": {
+      "workbook_sha256": "73a7c57f32876348d30d7cf5035d017d370086f051b100fa9e1c99db876b9f94",
+      "handoff_sha256": "835d5ea122ebeefbebb525b821645fe09eb5d4aa99d5bae0af0dcb0d06e7fbb8",
+      "interpretation": "Historical previous release had correct complete XML values but noncanonical cell order; only serialization is superseded."
+    },
+    "proof": {
+      "path": "regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/xml_cell_order_followup.json",
+      "sha256": "9555de14e370df111f86a7128b90064760486255d60392cebf4e0f9264993677"
+    },
+    "current_workbook_sha256": "62d8bbb0efc60b9ccc9a83e44898d3980fb147fcc13e4d6ad3263f60c011f6a3",
+    "input_sha256_unchanged": "627428adcf0aa56736495a04917b70d550a9e82d880a75fbde1e08036f9caf45",
+    "result_sha256_unchanged": "403030cf723e2b6bf04f68b946cb9f407c53774fc6dee4f17366cbd6805769a7",
+    "DOCX_appendix_unchanged": true,
+    "scientific_mapping_diagnostic_runtime_values_exact": true,
+    "fresh_unpatched_canonical_reader_and_validate_region": "PASS",
+    "no_solver_or_numeric_rerun": true,
+    "shared_pending": "Coordinator workbook-hash consolidation; no shared files mutated."
+  }
+}

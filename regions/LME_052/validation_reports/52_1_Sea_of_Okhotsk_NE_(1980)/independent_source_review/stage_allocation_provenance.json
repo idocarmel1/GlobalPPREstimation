@@ -1,0 +1,162 @@
+{
+  "selected_model_id": "52_1_Sea_of_Okhotsk_NE_(1980)",
+  "canonical_sha256": "61b6176affe6051948b3ec972fe87d95dabd8d98b66744b4c7350fcf303b9099",
+  "native_observation": {
+    "locator": "Chaikina Table 1 PDF27 / printed26",
+    "adult_or_nonjuvenile_group": 6,
+    "juvenile_group": 7,
+    "B": [
+      2.475,
+      2.119
+    ],
+    "group_catch_table_recovered": false,
+    "age_or_length_cutoff_recovered": false,
+    "B_not_observed_caught_mass": true
+  },
+  "accepted_export": {
+    "all_29_groups": "0",
+    "observed_zero_catch_demonstrated": false
+  },
+  "historical_proxy": {
+    "builder": "original_research_archive/research/size_allocation_20260929/lme_east/build_proposals.py",
+    "builder_sha256": "c328c30d5dde388cd01b1522265d3cbe8ccdd0581ef0caa450e48aec686a0b07",
+    "native_code_locators": [
+      {
+        "line": 21,
+        "text": "groups=[gg[i] for i in ids];catches=[float(cg[i]['export']) for i in ids]"
+      },
+      {
+        "line": 24,
+        "text": "pr={'taxon':taxon,'rule':'assumed_adult_only_no_catch_basis' if sum(catches)==0 else 'model_catch_proportions_proxy','action':action,'evidence':f'{cp.as_posix()} group.export; exact matching loaded catch values verified; regional workbook Selected model groups/Groups; online_search_audit.json LME{num:03}; source taxonomy definitions retained in canonical taxon_descr.','definition':definition,'limitations':'Assumed fixed stage allocation across catch years; model-group aggregate catches need not represent species-specific, regional, annual or gear-specific size composition. No biomass weighting or SAU speciesmaxsize used. Source and numerical diagnostic limitations remain.','source_period':{35:'1980 by source identity audit; inherited filename says 1963',36:'2000s',37:'1997 Visayan baseline',38:'mid1970s',52:'1980'}[num],'candidates':[{'group':g['group_name'],'seq':i,'source_catch':y,'weight':w,'source_definition':cg[i].get('taxon_descr'),'numeric_sppr_exists':any(s.get('group')==g['group_name'] and isinstance(s.get('sppr'),(int,float)) for s in d['sppr'])} for i,g,y,w in zip(ids,groups,catches,weights)],'existing_matching':bytax[taxon],'source_path':cp.as_posix(),'source_sha256':pair['canonical_sha256'],'catch_units':'model t wet weight km^-2 yr^-1; ratios dimensionless','online_search_audit':'online_search_audit.json#'+str(num)}"
+      },
+      {
+        "line": 45,
+        "text": "prop('Gadus chalcogrammus',[7,6],'Same species juvenile/adult pollock; model age/length threshold absent from available chapter. All model catches zero; adult-only is expressly assumed.',[0.0,1.0],'replace_existing_biomass_stage_weights')"
+      }
+    ],
+    "selected_proposal": {
+      "taxon": "Gadus chalcogrammus",
+      "rule": "assumed_adult_only_no_catch_basis",
+      "action": "replace_existing_biomass_stage_weights",
+      "evidence": "regions/LME_052/models/52_1_Sea_of_Okhotsk_NE_(1980)/model.json group.export; exact matching loaded catch values verified; regional workbook Selected model groups/Groups; online_search_audit.json LME052; source taxonomy definitions retained in canonical taxon_descr.",
+      "definition": "Same species juvenile/adult pollock; model age/length threshold absent from available chapter. All model catches zero; adult-only is expressly assumed.",
+      "limitations": "Assumed fixed stage allocation across catch years; model-group aggregate catches need not represent species-specific, regional, annual or gear-specific size composition. No biomass weighting or SAU speciesmaxsize used. Source and numerical diagnostic limitations remain.",
+      "source_period": "1980",
+      "candidates": [
+        {
+          "group": "Juv. pollock",
+          "seq": 7,
+          "source_catch": 0.0,
+          "weight": 0.0,
+          "source_definition": "Juvenile walleye pollock; age/length boundary not documented in the available chapter.",
+          "numeric_sppr_exists": true
+        },
+        {
+          "group": "Walleye pollock",
+          "seq": 6,
+          "source_catch": 0.0,
+          "weight": 1.0,
+          "source_definition": "Walleye pollock, adult/nonjuvenile compartment; Table 1 separates Juv. pollock. Scientific-name crosswalk Gadus chalcogrammus is a taxonomic interpretation.",
+          "numeric_sppr_exists": true
+        }
+      ],
+      "existing_matching": [
+        {
+          "model_id": "52_1_Sea_of_Okhotsk_NE_(1980)",
+          "taxon": "Gadus chalcogrammus",
+          "group": "Walleye pollock",
+          "weight": 0.5387461906835002,
+          "confidence": "medium",
+          "evidence": "composite_split",
+          "explanation": "Walleye pollock and juvenile pollock are the same taxon at different life stages in Table 1. Catch has no age split and model catch is zero throughout; use model biomass."
+        },
+        {
+          "model_id": "52_1_Sea_of_Okhotsk_NE_(1980)",
+          "taxon": "Gadus chalcogrammus",
+          "group": "Juv. pollock",
+          "weight": 0.4612538093164998,
+          "confidence": "medium",
+          "evidence": "composite_split",
+          "explanation": "Walleye pollock and juvenile pollock are the same taxon at different life stages in Table 1. Catch has no age split and model catch is zero throughout; use model biomass."
+        }
+      ],
+      "source_path": "regions/LME_052/models/52_1_Sea_of_Okhotsk_NE_(1980)/model.json",
+      "source_sha256": "61b6176affe6051948b3ec972fe87d95dabd8d98b66744b4c7350fcf303b9099",
+      "catch_units": "model t wet weight km^-2 yr^-1; ratios dimensionless",
+      "online_search_audit": "online_search_audit.json#52"
+    },
+    "proposals_sha256": "f127d8b6d36acfd77debd7ab880deca6273e92009636a4011088fb84b6e6bb2b",
+    "search_audit_sha256": "ea74b7426e9844cc1359846e4dcecdd06a8109de8450ff5a2f0d55cb4ea65fe4",
+    "baseline_audit_sha256": "83dfbf77b7e24daa3695578d14ec67103cdac3be500a8f6dfb65ad75023bbba2",
+    "actual_computation": "Reads accepted group.export and checks the loaded values; then passes hard-coded weights [0,1] in juvenile/adult order. No observed donor catch strata are selected.",
+    "interpretation": "Adult-only is expressly assumed. Accepted export zeros cannot establish an observed all-adult catch."
+  },
+  "reviewed_current_fallback": {
+    "group_order": [
+      6,
+      7
+    ],
+    "weights": [
+      0.5387461906835002,
+      0.4612538093164998
+    ],
+    "membership": [
+      "M3",
+      "High"
+    ],
+    "allocation": [
+      "W9",
+      "Medium"
+    ],
+    "calculation": "2.475/(2.475+2.119) and 2.119/(2.475+2.119)",
+    "assumptions": "Complete source biomass is the approved catch-composition/catchability proxy. Equal catchability and fixed source proportions across years/bases are assumed; no stage threshold or caught age composition is inferred."
+  },
+  "source_search": [
+    {
+      "source": "Native Chaikina chapter, all PDF24–35 text plus Tables1–4",
+      "result": "No stage cutoff or complete group/stage catch observation. Aggregate 1980s catch and local fishing density do not supply either stage fraction."
+    },
+    {
+      "source": "Native PICES1996 Shuntov/Dulepova PDF267–275 / printed263–271 and Belyaev/Zhigalin PDF308–315 / printed304–311",
+      "result": "Regional fishery, biomass and ecosystem context. No recovered NE-stage cutoff or applicable observed adult/juvenile catch mass."
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0165783696005619",
+      "doi": "10.1016/S0165-7836(96)00561-9",
+      "scope_read": "Publisher abstract indexed by search, not native full article",
+      "result": "1991–94 commercial catch length/age summaries concern a later fishery and lack the source model boundary or complete stage wet-mass shares."
+    },
+    {
+      "url": "https://russianpollock.com/upload/iblock/b38/summary-tinro-soo-observers-2019.pdf",
+      "scope_read": "Prior search snippets; current HTTPS byte retrieval failed certificate hostname verification",
+      "result": "No archived native observer PDF or usable group-boundary mass fraction; see primary_retrieval_attempts.json."
+    },
+    {
+      "url": "https://osci.ru/ru/nauka/article/100610/view",
+      "scope_read": "Prior search snippets; current HTTPS byte retrieval failed certificate hostname verification",
+      "result": "No full native study or applicable stage fraction recovered."
+    },
+    {
+      "url": "https://apps-afsc.fisheries.noaa.gov/Plan_Team/2023/EBSPollock.pdf",
+      "scope_read": "Historical query record, not independently recovered for this review",
+      "result": "Eastern Bering Sea assessment is not an Okhotsk observation and is not transferred as a measured stage split."
+    }
+  ],
+  "query_bound_impact": {
+    "source_biomass": [
+      2.475,
+      2.119
+    ],
+    "weights": [
+      0.5387461906835002,
+      0.4612538093164998
+    ],
+    "catch_scope": "2019 all-source landings, all taxa, no group filter",
+    "catch_tonnes": 1713630.325285,
+    "total_catch_tonnes": 3503234.404718595,
+    "catch_share_percent": 48.91566270806395,
+    "allocation_confidence": "Medium",
+    "stage_caught_mass_or_cutoff_recovered": false
+  },
+  "limitation": "Unrecovered evidence is an availability gap, not a claim that usable catch composition never exists. No accepted parameter or export correction is proposed."
+}

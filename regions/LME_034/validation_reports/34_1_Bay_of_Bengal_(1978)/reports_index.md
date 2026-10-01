@@ -1,3 +1,25 @@
+# Current complete-candidate follow-up
+
+Current mappings, arithmetic and Office evidence are recorded in the [follow-up](broad_candidate_followup.json), [independent calculations](broad_candidate_calculations_verification.json), [method-specific exposure](broad_candidate_method_exposure.json) and [handoff](coordination_handoff.json). Accepted scientific inputs, classic results and manual review fields remain preserved. Shared final browser verification remains pending. Earlier review records below retain historical numbers and hashes; they do not supersede this follow-up.
+
+---
+
+Current reuse addendum — 30 September 2026
+
+The source-specific candidate-completeness follow-up adopted three narrow mixed-fish mapping corrections and recalculated dependent regional outputs while preserving accepted scientific inputs, classic PPR, catch and NPP. Confidence counts remain 66 High, 244 Medium and 5 Very low. The current report and appendix have passed local arithmetic, manual-field, hyperlink and visual checks. Shared Project, generated displays and browser alignment remain pending coordinator integration. The inherited footprint is a retained historical intended-envelope placeholder, not the extended author study boundary; its shared display removal is pending coordinator. The source-based approximate A≈100% / B≈59% assessment and original Figure1 remain valid with their stated limits.
+
+- [Current mixed-guild decisions and complete 49-group candidate review](mixed_guild_reuse_addendum.json)
+- [Current arithmetic and Office checks](reuse_arithmetic_and_office_checks.json)
+- [Accepted-input preservation](reuse_accepted_input_checks.json)
+- [Current rendered layout review](reuse_layout_verification.json)
+- [Current portable evidence index](reuse_evidence_index.json)
+- [Current evidence completeness and explicit unavailable roles](reuse_evidence_completeness.json)
+- [Coordinator handoff](coordination_handoff.json)
+
+The earlier narrative and verification artifacts below are retained historical evidence of the initial adoption. Their shared-integration checks and frozen hashes describe that earlier state. They do not certify the current reuse changes or supply a recovered author-native balanced model.
+
+---
+
 # LME_034 validation evidence
 
 Validation 30 September 2026; selected 1978 Bay of Bengal model. This review reassessed all 315 exact catch labels and adopted 35 candidate-set corrections, 245 allocation changes and 9 overall-confidence changes. It reused adequate saved group coefficients and retained classic/catch/NPP inputs, ran one direct diagnostic call for each default GE/TE/With Egestion configuration, and recalculated dependent annual outputs across the retained years, catch bases, scopes and unidentified treatments.
@@ -45,3 +67,7 @@ Source-diagnostics/evidence_index.json and source_completeness.json explicitly r
 - [Root completeness result](evidence_completeness.json)
 
 Both rule summaries and confidence shares reconcile to the 315-row independent simple-chain universe. All 126,630 retained annual cells were independently checked; all 28 local Office links resolved after physical relocation. Every page of the 6-page report and representative regions of all 4 appendix sheets were visually inspected. Selected-source metadata notes now describe the audited reconstruction and unverified native fidelity; historical quality scores and selection rationale remain unchanged.
+
+## Coordinator reconciliation — 1 October 2026
+
+Regional review and shared result reconciliation are complete. Earlier pending coordinator tasks in the regional handoff describe its historical release stage. Current reports, appendices, preserved scientific inputs, limits and verification are indexed in [the 23-region coordinator record](<../../../../original_research_archive/research/selected_regions_validation_20260930/final_validation_status.md>). Scientific approval is not implied; graph and Git closeout are tracked separately.

@@ -1,0 +1,3755 @@
+{
+  "schema_version": 1,
+  "unit_id": "HS_071",
+  "region_name": "Pacific, Western Central high seas",
+  "status": "regional validation/adoption complete; shared integration and browser reconciliation pending coordinator",
+  "selected_model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+  "model_identity": {
+    "path": "models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods).json",
+    "baseline_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+    "final_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+    "accepted_variant": "D_fixed_M0",
+    "source_group_count": 31,
+    "runtime_group_count": 32,
+    "no_scientific_parameter_changes": true
+  },
+  "baseline_workbook_sha256": "fbbe8018801966db24656784eb3250431575f4e04489a33894e00778fe2f97ac",
+  "final_workbook_sha256": "51861f2a403630ff27ce7fc97e66718cc09e6c423326babbcadab5146463bbb4",
+  "final_input_sha256": "d4a658bbe97a79a6d2a066b2c4bced50c07af7370887bebc1b221ab0687e4887",
+  "final_result_sha256": "7c1d57e70bcf1a2cdf04b129cd699f6a34c96338875d05c1551c9210211c6263",
+  "baseline_final_protected_checks": [
+    {
+      "sheet": "Catch",
+      "table": "Catch",
+      "unchanged": true
+    },
+    {
+      "sheet": "Classic PPR",
+      "table": "Taxa",
+      "unchanged": true
+    },
+    {
+      "sheet": "Classic PPR",
+      "table": "Annual",
+      "unchanged": true
+    },
+    {
+      "sheet": "Classic PPR",
+      "table": "commercial comparison",
+      "unchanged": true
+    },
+    {
+      "sheet": "Classic PPR",
+      "table": "functional comparison",
+      "unchanged": true
+    },
+    {
+      "sheet": "Selected model groups",
+      "table": "Groups",
+      "unchanged": true
+    },
+    {
+      "sheet": "Selected model groups",
+      "table": "Group SPPR",
+      "unchanged": true
+    },
+    {
+      "sheet": "NPP",
+      "table": "NPP",
+      "unchanged": true
+    },
+    {
+      "sheet": "NPP",
+      "table": "Provenance",
+      "unchanged": true
+    }
+  ],
+  "classic_ratios_exactly_preserved": true,
+  "adopted_mapping_decisions": [
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Acanthocybium solandri"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Acanthocybium solandri",
+          "group": "Piscivorous fish",
+          "weight": 1,
+          "confidence": "high",
+          "evidence": "Allain et al. 2007 Table 1 p9 explicitly names wahoo Acanthocybium solandri.",
+          "explanation": "Explicit species membership; one supported model group."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 8,
+          "name": "Piscivorous fish",
+          "weight": 1.0,
+          "raw_catch": 0.00038,
+          "biomass": 0.025,
+          "loaded_catch": 0.00038,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "No split required",
+      "allocation_confidence": "High",
+      "overall_confidence": "High",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Table 1 explicitly names wahoo and includes Coryphaenidae; each catch label fits the piscivorous group without a required split. Entire taxon assigned to the sole eligible group."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Alopias"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Alopias",
+          "group": "Other Sharks",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Other Sharks: Large Alopiidae; Carcharhinidae; Lamnidae; Sphyrnidae. [Table 1, PDF p9; group names aligned to Table 6.] | Small Sharks: Small sharks, same species as large groups Blue Shark and Other Sharks. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Pooled shark-group catch ratio is assumed transferable to the supported taxon; source gives no numerical WCPO shark cutoff.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 4,
+          "name": "Other Sharks",
+          "weight": 1.0,
+          "raw_catch": 9.23e-05,
+          "biomass": 0.0012,
+          "loaded_catch": 9.23e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Unambiguous documented group fit",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Source Other Sharks explicitly includes Alopiidae, Carcharhinidae, Lamnidae and Sphyrnidae; Small Sharks covers the same species. The provider reports sharks, not rays/chimaeras; size uncertainty concerns allocation within this union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Carangidae"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Carangidae",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: overlapping groups and/or larval/juvenile epipelagic groups require allocation; whole-region benthic catch is not automatically pelagic membership."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 8,
+          "name": "Piscivorous fish",
+          "weight": 0.008512087163772558,
+          "raw_catch": 0.00038,
+          "biomass": 0.025,
+          "loaded_catch": 0.00038,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 16,
+          "name": "Epi fish",
+          "weight": 0.7242083758937691,
+          "raw_catch": null,
+          "biomass": 2.127,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 17,
+          "name": "Epi small fish",
+          "weight": 0.2672795369424583,
+          "raw_catch": null,
+          "biomass": 0.785,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        }
+      ],
+      "membership_rule": "Assumed eligible group set",
+      "membership_confidence": "Medium",
+      "allocation_rule": "Approved model-biomass fallback",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Carangidae occurs in both Piscivorous fish and Epi fish; Epi small fish is the latter larval/juvenile pool. Genus/species membership is consistent with the family, but unresolved trophic/size boundaries require this eligible-set inference. Catch attempt rejected: one or more candidate raw catches missing (-9999), although runtime loads zero. Complete model biomass proportions assumed to represent caught composition/catchability across species, stages, region, years and bases."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Carcharhinus falciformis"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Carcharhinus falciformis",
+          "group": "Other Sharks",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Other Sharks: Large Alopiidae; Carcharhinidae; Lamnidae; Sphyrnidae. [Table 1, PDF p9; group names aligned to Table 6.] | Small Sharks: Small sharks, same species as large groups Blue Shark and Other Sharks. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Pooled shark-group catch ratio is assumed transferable to the supported taxon; source gives no numerical WCPO shark cutoff.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 4,
+          "name": "Other Sharks",
+          "weight": 1.0,
+          "raw_catch": 9.23e-05,
+          "biomass": 0.0012,
+          "loaded_catch": 9.23e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Unambiguous documented group fit",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Source Other Sharks explicitly includes Alopiidae, Carcharhinidae, Lamnidae and Sphyrnidae; Small Sharks covers the same species. The provider reports sharks, not rays/chimaeras; size uncertainty concerns allocation within this union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Carcharhinus longimanus"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Carcharhinus longimanus",
+          "group": "Other Sharks",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Other Sharks: Large Alopiidae; Carcharhinidae; Lamnidae; Sphyrnidae. [Table 1, PDF p9; group names aligned to Table 6.] | Small Sharks: Small sharks, same species as large groups Blue Shark and Other Sharks. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Pooled shark-group catch ratio is assumed transferable to the supported taxon; source gives no numerical WCPO shark cutoff.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 4,
+          "name": "Other Sharks",
+          "weight": 1.0,
+          "raw_catch": 9.23e-05,
+          "biomass": 0.0012,
+          "loaded_catch": 9.23e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Unambiguous documented group fit",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Source Other Sharks explicitly includes Alopiidae, Carcharhinidae, Lamnidae and Sphyrnidae; Small Sharks covers the same species. The provider reports sharks, not rays/chimaeras; size uncertainty concerns allocation within this union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Coryphaena hippurus"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Coryphaena hippurus",
+          "group": "Piscivorous fish",
+          "weight": 1,
+          "confidence": "high",
+          "evidence": "Allain et al. 2007 Table 1 p9: Coryphaenidae; ITIS TSN 168791 https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=0168791",
+          "explanation": "Explicit family membership; one supported model group without a stated size split for Coryphaenidae."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 8,
+          "name": "Piscivorous fish",
+          "weight": 1.0,
+          "raw_catch": 0.00038,
+          "biomass": 0.025,
+          "loaded_catch": 0.00038,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "No split required",
+      "allocation_confidence": "High",
+      "overall_confidence": "High",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Table 1 explicitly names wahoo and includes Coryphaenidae; each catch label fits the piscivorous group without a required split. Entire taxon assigned to the sole eligible group."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Elasmobranchii"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Elasmobranchii",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 3,
+          "name": "Blue Shark",
+          "weight": 0.6093948370715193,
+          "raw_catch": 0.000144,
+          "biomass": 0.016,
+          "loaded_catch": 0.000144,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 4,
+          "name": "Other Sharks",
+          "weight": 0.39060516292848074,
+          "raw_catch": 9.23e-05,
+          "biomass": 0.0012,
+          "loaded_catch": 9.23e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Broad-category approximation",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Elasmobranchii reports sharks, rays and skates; chimaeras are outside this target scope (FAO 3.1.1). Blue Shark, Other Sharks and Small Sharks supply a weak represented-shark proxy; unrepresented rays/skates remain an unknown component. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Istiompax indica"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Istiompax indica",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 2,
+          "name": "Other Billfish",
+          "weight": 1.0,
+          "raw_catch": 0.0002331,
+          "biomass": 0.0052,
+          "loaded_catch": 0.0002331,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 9,
+          "name": "Small Billfish",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0106,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Verified synonym",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "billfish synonyms",
+        "catch classification"
+      ],
+      "reason": "NCBI current entries connect Istiompax indica to source Makaira indica and Kajikia audax to source Tetrapturus audax. Both occur in Other Billfish and its small-stage union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Istiophoridae"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Istiophoridae",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: shark/billfish large and small pools require regional size weights."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 2,
+          "name": "Other Billfish",
+          "weight": 1.0,
+          "raw_catch": 0.0002331,
+          "biomass": 0.0052,
+          "loaded_catch": 0.0002331,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 9,
+          "name": "Small Billfish",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0106,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Assumed eligible group set",
+      "membership_confidence": "Medium",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Source lists the locally relevant marlin/sailfish/spearfish members; the family reporting category is approximated by Other Billfish plus Small Billfish, excluding separate Xiphias. Exact unidentified family composition and historical taxonomic scope are not measured. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Isurus"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Isurus",
+          "group": "Other Sharks",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Other Sharks: Large Alopiidae; Carcharhinidae; Lamnidae; Sphyrnidae. [Table 1, PDF p9; group names aligned to Table 6.] | Small Sharks: Small sharks, same species as large groups Blue Shark and Other Sharks. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Pooled shark-group catch ratio is assumed transferable to the supported taxon; source gives no numerical WCPO shark cutoff.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 4,
+          "name": "Other Sharks",
+          "weight": 1.0,
+          "raw_catch": 9.23e-05,
+          "biomass": 0.0012,
+          "loaded_catch": 9.23e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Unambiguous documented group fit",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Source Other Sharks explicitly includes Alopiidae, Carcharhinidae, Lamnidae and Sphyrnidae; Small Sharks covers the same species. The provider reports sharks, not rays/chimaeras; size uncertainty concerns allocation within this union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Kajikia audax"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Kajikia audax",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 2,
+          "name": "Other Billfish",
+          "weight": 1.0,
+          "raw_catch": 0.0002331,
+          "biomass": 0.0052,
+          "loaded_catch": 0.0002331,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 9,
+          "name": "Small Billfish",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0106,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Verified synonym",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "billfish synonyms",
+        "catch classification"
+      ],
+      "reason": "NCBI current entries connect Istiompax indica to source Makaira indica and Kajikia audax to source Tetrapturus audax. Both occur in Other Billfish and its small-stage union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Katsuwonus pelamis"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Katsuwonus pelamis",
+          "group": "SKJ",
+          "weight": 0.9540229885057472,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: SKJ: Katsuwonus pelamis larger than 100% maturity class 43 cm / 0.75 y (9 months) / 1.6 kg. [Table 1, PDF p9; group names aligned to Table 6.] | Small SKJ: Katsuwonus pelamis smaller than 100% maturity class 43 cm / 0.75 y (9 months) / 1.6 kg and larger than 24 cm / 3 months / 0.25 kg. [Table 1, PDF p9; group names aligned to Table 6.] | baby SKJ: Katsuwonus pelamis from hatching to recruitment: 0-3 months, smaller than 24 cm / 0.25 kg. Table 1 definition; p15 alternatively describes less than 10 cm. Conflict retained, Table 1 used. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; baby SKJ export is missing (-9999), not an observed zero. Explicit assumption: none of regional catch belongs to un-recruited 0-3-month baby stage; normalize reported adult and Small SKJ catches. Table 1 <24 cm definition conflicts with p15 <10 cm prose; retained without numerical reconciliation.. See PPR / Allocation assumptions."
+        },
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Katsuwonus pelamis",
+          "group": "Small SKJ",
+          "weight": 0.04597701149425287,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: SKJ: Katsuwonus pelamis larger than 100% maturity class 43 cm / 0.75 y (9 months) / 1.6 kg. [Table 1, PDF p9; group names aligned to Table 6.] | Small SKJ: Katsuwonus pelamis smaller than 100% maturity class 43 cm / 0.75 y (9 months) / 1.6 kg and larger than 24 cm / 3 months / 0.25 kg. [Table 1, PDF p9; group names aligned to Table 6.] | baby SKJ: Katsuwonus pelamis from hatching to recruitment: 0-3 months, smaller than 24 cm / 0.25 kg. Table 1 definition; p15 alternatively describes less than 10 cm. Conflict retained, Table 1 used. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; baby SKJ export is missing (-9999), not an observed zero. Explicit assumption: none of regional catch belongs to un-recruited 0-3-month baby stage; normalize reported adult and Small SKJ catches. Table 1 <24 cm definition conflicts with p15 <10 cm prose; retained without numerical reconciliation.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 7,
+          "name": "SKJ",
+          "weight": 0.9540229885057472,
+          "raw_catch": 0.03569,
+          "biomass": 0.0842,
+          "loaded_catch": 0.03569,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 13,
+          "name": "Small SKJ",
+          "weight": 0.04597701149425287,
+          "raw_catch": 0.00172,
+          "biomass": 0.0194,
+          "loaded_catch": 0.00172,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 14,
+          "name": "baby SKJ",
+          "weight": 0.0,
+          "raw_catch": null,
+          "biomass": 0.00659,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Explicit skipjack adult, small and infant source compartments. Table 1 and PDF15 disagree on the infant boundary; this is an allocation limitation within the verified species union. Accepted historical landings proxy retained: infant catch is missing in source, explicitly assumed uncaught for this existing skipjack split. Not a measured zero. Stage cutoff conflict retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Marine fishes not identified"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Marine fishes not identified",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 1,
+          "name": "Swordfish",
+          "weight": 0.000399901801890869,
+          "raw_catch": 7.14e-05,
+          "biomass": 0.0036,
+          "loaded_catch": 7.14e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 2,
+          "name": "Other Billfish",
+          "weight": 0.0005776359360645885,
+          "raw_catch": 0.0002331,
+          "biomass": 0.0052,
+          "loaded_catch": 0.0002331,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.00017995581085089105,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 6,
+          "name": "YFT",
+          "weight": 0.0008875598325300122,
+          "raw_catch": 0.0065,
+          "biomass": 0.00799,
+          "loaded_catch": 0.0065,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 7,
+          "name": "SKJ",
+          "weight": 0.009353258810891992,
+          "raw_catch": 0.03569,
+          "biomass": 0.0842,
+          "loaded_catch": 0.03569,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 8,
+          "name": "Piscivorous fish",
+          "weight": 0.0027770958464643685,
+          "raw_catch": 0.00038,
+          "biomass": 0.025,
+          "loaded_catch": 0.00038,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 9,
+          "name": "Small Billfish",
+          "weight": 0.0011774886389008922,
+          "raw_catch": 0.0,
+          "biomass": 0.0106,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.00026771203959916507,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 12,
+          "name": "Small YFT",
+          "weight": 0.0014218730733897567,
+          "raw_catch": 0.006973,
+          "biomass": 0.0128,
+          "loaded_catch": 0.006973,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 13,
+          "name": "Small SKJ",
+          "weight": 0.00215502637685635,
+          "raw_catch": 0.00172,
+          "biomass": 0.0194,
+          "loaded_catch": 0.00172,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 14,
+          "name": "baby SKJ",
+          "weight": 0.0007320424651280075,
+          "raw_catch": null,
+          "biomass": 0.00659,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 16,
+          "name": "Epi fish",
+          "weight": 0.23627531461718843,
+          "raw_catch": null,
+          "biomass": 2.127,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 17,
+          "name": "Epi small fish",
+          "weight": 0.08720080957898117,
+          "raw_catch": null,
+          "biomass": 0.785,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 20,
+          "name": "M Meso fish+other",
+          "weight": 0.3781293704545884,
+          "raw_catch": null,
+          "biomass": 3.404,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 22,
+          "name": "Meso fish + other",
+          "weight": 0.07042715066633638,
+          "raw_catch": null,
+          "biomass": 0.634,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 24,
+          "name": "HM Bathy forage",
+          "weight": 0.20028415244701023,
+          "raw_catch": 0.0,
+          "biomass": 1.803,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        },
+        {
+          "id": 26,
+          "name": "Bathy forage",
+          "weight": 0.007753651603328516,
+          "raw_catch": 0.0,
+          "biomass": 0.0698,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Broad-category approximation",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Approved model-biomass fallback",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Exact SAU key 100039 is bony-fish reporting scope (ISSCAAP 39 / FAO Osteichthyes). Allain Table 1 (PDF 9) supports the complete named and pooled bony-fish union: groups 1, 2, 5–9, 11–14, 16, 17, 20, 22, 24 and 26. Dedicated sharks 3, 4 and 10 and invertebrate-only 25 are excluded. Mixed pools 24 and 26 contain actual bony fish; their full biomass also includes invertebrates. Separate named reporting and a demersal functional tag do not demonstrate absence. Unknown residual composition and regional transfer retain Very low membership (M10). Complete source catches were attempted: exports for 14, 16, 17, 20 and 22 are missing (-9999); loaded zeros are not observed zeros. Complete accepted biomass (t/km²; denominator 9.00221) supplies W9 proportions, Medium allocation. Small Billfish 9 has genuine zero catch but positive biomass and remains eligible. Whole-pool composition/catchability is assumed fixed across 1950–2019 and landings, catch and discards. Sources: source definitions; source catch and biomass; Residual fish reporting scope.",
+      "current_reporting_scope_followup": "residual_fish_scope_followup.json"
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Marine pelagic fishes not identified"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Marine pelagic fishes not identified",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 1,
+          "name": "Swordfish",
+          "weight": 0.000399901801890869,
+          "raw_catch": 7.14e-05,
+          "biomass": 0.0036,
+          "loaded_catch": 7.14e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 2,
+          "name": "Other Billfish",
+          "weight": 0.0005776359360645885,
+          "raw_catch": 0.0002331,
+          "biomass": 0.0052,
+          "loaded_catch": 0.0002331,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.00017995581085089105,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 6,
+          "name": "YFT",
+          "weight": 0.0008875598325300122,
+          "raw_catch": 0.0065,
+          "biomass": 0.00799,
+          "loaded_catch": 0.0065,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 7,
+          "name": "SKJ",
+          "weight": 0.009353258810891992,
+          "raw_catch": 0.03569,
+          "biomass": 0.0842,
+          "loaded_catch": 0.03569,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 8,
+          "name": "Piscivorous fish",
+          "weight": 0.0027770958464643685,
+          "raw_catch": 0.00038,
+          "biomass": 0.025,
+          "loaded_catch": 0.00038,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 9,
+          "name": "Small Billfish",
+          "weight": 0.0011774886389008922,
+          "raw_catch": 0.0,
+          "biomass": 0.0106,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.00026771203959916507,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 12,
+          "name": "Small YFT",
+          "weight": 0.0014218730733897567,
+          "raw_catch": 0.006973,
+          "biomass": 0.0128,
+          "loaded_catch": 0.006973,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 13,
+          "name": "Small SKJ",
+          "weight": 0.00215502637685635,
+          "raw_catch": 0.00172,
+          "biomass": 0.0194,
+          "loaded_catch": 0.00172,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 14,
+          "name": "baby SKJ",
+          "weight": 0.0007320424651280075,
+          "raw_catch": null,
+          "biomass": 0.00659,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 16,
+          "name": "Epi fish",
+          "weight": 0.23627531461718843,
+          "raw_catch": null,
+          "biomass": 2.127,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 17,
+          "name": "Epi small fish",
+          "weight": 0.08720080957898117,
+          "raw_catch": null,
+          "biomass": 0.785,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 20,
+          "name": "M Meso fish+other",
+          "weight": 0.3781293704545884,
+          "raw_catch": null,
+          "biomass": 3.404,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 22,
+          "name": "Meso fish + other",
+          "weight": 0.07042715066633638,
+          "raw_catch": null,
+          "biomass": 0.634,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 24,
+          "name": "HM Bathy forage",
+          "weight": 0.20028415244701023,
+          "raw_catch": 0.0,
+          "biomass": 1.803,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        },
+        {
+          "id": 26,
+          "name": "Bathy forage",
+          "weight": 0.007753651603328516,
+          "raw_catch": 0.0,
+          "biomass": 0.0698,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Broad-category approximation",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Approved model-biomass fallback",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Exact SAU key 100339 is bony-fish reporting scope (ISSCAAP 39 / FAO Osteichthyes). Allain Table 1 (PDF 9) supports the complete named and pooled bony-fish union: groups 1, 2, 5–9, 11–14, 16, 17, 20, 22, 24 and 26. Dedicated sharks 3, 4 and 10 and invertebrate-only 25 are excluded. Mixed pools 24 and 26 contain actual bony fish; their full biomass also includes invertebrates. Separate named reporting and a demersal functional tag do not demonstrate absence. Unknown residual composition and regional transfer retain Very low membership (M10). Complete source catches were attempted: exports for 14, 16, 17, 20 and 22 are missing (-9999); loaded zeros are not observed zeros. Complete accepted biomass (t/km²; denominator 9.00221) supplies W9 proportions, Medium allocation. Small Billfish 9 has genuine zero catch but positive biomass and remains eligible. Whole-pool composition/catchability is assumed fixed across 1950–2019 and landings, catch and discards. Sources: source definitions; source catch and biomass; Residual fish reporting scope.",
+      "current_reporting_scope_followup": "residual_fish_scope_followup.json"
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Prionace glauca"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Prionace glauca",
+          "group": "Blue Shark",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Blue Shark: Large Prionace glauca. [Table 1, PDF p9; group names aligned to Table 6.] | Small Sharks: Small sharks, same species as large groups Blue Shark and Other Sharks. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Pooled shark-group catch ratio is assumed transferable to the supported taxon; source gives no numerical WCPO shark cutoff.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 3,
+          "name": "Blue Shark",
+          "weight": 1.0,
+          "raw_catch": 0.000144,
+          "biomass": 0.016,
+          "loaded_catch": 0.000144,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Prionace glauca is the explicit Blue Shark member; Small Sharks covers the same species. The pooled juvenile catch is a proxy for this taxon. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Scombridae"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Scombridae",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: overlapping groups and/or larval/juvenile epipelagic groups require allocation; whole-region benthic catch is not automatically pelagic membership."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.0005273420333918184,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 6,
+          "name": "YFT",
+          "weight": 0.0026009029918522405,
+          "raw_catch": 0.0065,
+          "biomass": 0.00799,
+          "loaded_catch": 0.0065,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 7,
+          "name": "SKJ",
+          "weight": 0.02740876494542661,
+          "raw_catch": 0.03569,
+          "biomass": 0.0842,
+          "loaded_catch": 0.03569,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 8,
+          "name": "Piscivorous fish",
+          "weight": 0.008137994342466334,
+          "raw_catch": 0.00038,
+          "biomass": 0.025,
+          "loaded_catch": 0.00038,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.0007845026546137546,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 12,
+          "name": "Small YFT",
+          "weight": 0.004166653103342763,
+          "raw_catch": 0.006973,
+          "biomass": 0.0128,
+          "loaded_catch": 0.006973,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 13,
+          "name": "Small SKJ",
+          "weight": 0.006315083609753875,
+          "raw_catch": 0.00172,
+          "biomass": 0.0194,
+          "loaded_catch": 0.00172,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 14,
+          "name": "baby SKJ",
+          "weight": 0.002145175308674126,
+          "raw_catch": null,
+          "biomass": 0.00659,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 16,
+          "name": "Epi fish",
+          "weight": 0.6923805586570356,
+          "raw_catch": null,
+          "biomass": 2.127,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        },
+        {
+          "id": 17,
+          "name": "Epi small fish",
+          "weight": 0.2555330223534429,
+          "raw_catch": null,
+          "biomass": 0.785,
+          "loaded_catch": 0,
+          "catch_state": "missing sentinel; runtime default zero"
+        }
+      ],
+      "membership_rule": "Broad-category approximation",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Approved model-biomass fallback",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "FAO family identification",
+        "catch classification"
+      ],
+      "reason": "Provider category includes mackerels, tunas and bonitos. Named tuna stages and residual scombrid pools are approximated together; unlisted taxa and exact composition remain unknown. Wahoo is represented in Piscivorous fish; source data do not identify this family catch mix. Catch attempt rejected: one or more candidate raw catches missing (-9999), although runtime loads zero. Complete model biomass proportions assumed to represent caught composition/catchability across species, stages, region, years and bases."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Sphyrna"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Sphyrna",
+          "group": "Other Sharks",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Other Sharks: Large Alopiidae; Carcharhinidae; Lamnidae; Sphyrnidae. [Table 1, PDF p9; group names aligned to Table 6.] | Small Sharks: Small sharks, same species as large groups Blue Shark and Other Sharks. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Pooled shark-group catch ratio is assumed transferable to the supported taxon; source gives no numerical WCPO shark cutoff.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 4,
+          "name": "Other Sharks",
+          "weight": 1.0,
+          "raw_catch": 9.23e-05,
+          "biomass": 0.0012,
+          "loaded_catch": 9.23e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 10,
+          "name": "Small Sharks",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0118,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Unambiguous documented group fit",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Source Other Sharks explicitly includes Alopiidae, Carcharhinidae, Lamnidae and Sphyrnidae; Small Sharks covers the same species. The provider reports sharks, not rays/chimaeras; size uncertainty concerns allocation within this union. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Thunnus alalunga"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus alalunga",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.3695014662756598,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.6304985337243402,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Closest represented analogue",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "FAO tuna ecology",
+        "catch classification"
+      ],
+      "reason": "Neither species is a source member. Bigeye adult/small compartments are a weak Thunnus analogue: FAO records deeper use by albacore and bluefin/bigeye, but species, temperature and maturity thresholds differ. Yellowfin/skipjack and generic forage are excluded from this explicit closest-analogue assumption. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Thunnus albacares"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus albacares",
+          "group": "YFT",
+          "weight": 0.4824463742299414,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: YFT: Thunnus albacares larger than maturity class 120 cm / 2.25 y (27 months) / 33 kg. [Table 1, PDF p9; group names aligned to Table 6.] | Small YFT: Thunnus albacares smaller than maturity class 120 cm / 2.25 y (27 months) / 33 kg and larger than 24 cm / 3 months / 0.33 kg. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.. See PPR / Allocation assumptions."
+        },
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus albacares",
+          "group": "Small YFT",
+          "weight": 0.5175536257700587,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: YFT: Thunnus albacares larger than maturity class 120 cm / 2.25 y (27 months) / 33 kg. [Table 1, PDF p9; group names aligned to Table 6.] | Small YFT: Thunnus albacares smaller than maturity class 120 cm / 2.25 y (27 months) / 33 kg and larger than 24 cm / 3 months / 0.33 kg. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 6,
+          "name": "YFT",
+          "weight": 0.4824463742299414,
+          "raw_catch": 0.0065,
+          "biomass": 0.00799,
+          "loaded_catch": 0.0065,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 12,
+          "name": "Small YFT",
+          "weight": 0.5175536257700587,
+          "raw_catch": 0.006973,
+          "biomass": 0.0128,
+          "loaded_catch": 0.006973,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Explicit yellowfin adult/small compartments, divided at 120 cm (50% maturity); regional caught-size shares are unobserved. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Thunnus maccoyii"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus maccoyii",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.3695014662756598,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.6304985337243402,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Closest represented analogue",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "CCSBT southern bluefin",
+        "FAO tuna ecology",
+        "catch classification"
+      ],
+      "reason": "Southern bluefin is absent from the final source model. CCSBT describes temperate southern-hemisphere distribution and deep oceanic use; the bigeye adult/small pair is the closest represented deep-diving Thunnus analogue. Species, thermal range and maturity thresholds differ substantially; this is a weak taxonomic/functional assumption, not native warm-pool membership. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Thunnus obesus"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus obesus",
+          "group": "BET",
+          "weight": 0.3695014662756598,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: BET: Thunnus obesus larger than maturity class 124 cm / 3.85 y (46.2 months) / 43 kg. [Table 1, PDF p9; group names aligned to Table 6.] | Small BET: Thunnus obesus smaller than maturity class 124 cm / 3.85 y (46.2 months) / 43 kg and larger than 20 cm / 3 months / 0.18 kg. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.. See PPR / Allocation assumptions."
+        },
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus obesus",
+          "group": "Small BET",
+          "weight": 0.6304985337243402,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: BET: Thunnus obesus larger than maturity class 124 cm / 3.85 y (46.2 months) / 43 kg. [Table 1, PDF p9; group names aligned to Table 6.] | Small BET: Thunnus obesus smaller than maturity class 124 cm / 3.85 y (46.2 months) / 43 kg and larger than 20 cm / 3 months / 0.18 kg. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.3695014662756598,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.6304985337243402,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Explicit bigeye adult/small compartments, divided at 124 cm (50% maturity); regional caught-size shares are unobserved. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Thunnus orientalis"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Thunnus orientalis",
+          "group": null,
+          "weight": null,
+          "confidence": "unresolved",
+          "evidence": "Allain et al. 2007 Table 1 p9; retained taxonomy.csv",
+          "explanation": "Unresolved: source does not establish a unique group and regional allocation; no catch weights invented."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 5,
+          "name": "BET",
+          "weight": 0.3695014662756598,
+          "raw_catch": 0.000819,
+          "biomass": 0.00162,
+          "loaded_catch": 0.000819,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 11,
+          "name": "Small BET",
+          "weight": 0.6304985337243402,
+          "raw_catch": 0.0013975,
+          "biomass": 0.00241,
+          "loaded_catch": 0.0013975,
+          "catch_state": "source numeric positive"
+        }
+      ],
+      "membership_rule": "Closest represented analogue",
+      "membership_confidence": "Very low",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Very low",
+      "evidence": [
+        "source definitions",
+        "FAO tuna ecology",
+        "catch classification"
+      ],
+      "reason": "Neither species is a source member. Bigeye adult/small compartments are a weak Thunnus analogue: FAO records deeper use by albacore and bluefin/bigeye, but species, temperature and maturity thresholds differ. Yellowfin/skipjack and generic forage are excluded from this explicit closest-analogue assumption. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    },
+    {
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+        "taxon": "Xiphias gladius"
+      },
+      "old": [
+        {
+          "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+          "taxon": "Xiphias gladius",
+          "group": "Swordfish",
+          "weight": 1,
+          "confidence": "assumed",
+          "evidence": "Allain et al. (2007), Table 1 PDF9 definitions and Table 5 PDF14 fisheries landings (t/km2/year); selected option1 canonical JSON export and Selected model groups/Groups catch, verified equal except baby SKJ missing/default.",
+          "explanation": "model_catch_proxy: Swordfish: Large Xiphias gladius. [Table 1, PDF p9; group names aligned to Table 6.] | Small Billfish: Small billfish, same species as large groups Swordfish and Other Billfish. [Table 1, PDF p9; group names aligned to Table 6.]. Explicit assumed allocation; historical model catch composition is not observed regional/year catch-size composition. One constant mapping per selected model-region pair applies across retained years and catch bases.; No gear or mesh inference; SAU functional-group maximum size is not a caught-fish measurement.; Source geography differs from the regional catch polygon; existing model diagnostic/provisional restrictions remain.; Small pool is explicit source/model zero; adult weight 1 is a model-catch proxy, not evidence that all regional fish are adult. Small pooled group includes other adult taxa, so zero is carried as historical-pool proxy only.. See PPR / Allocation assumptions."
+        }
+      ],
+      "adopted": [
+        {
+          "id": 1,
+          "name": "Swordfish",
+          "weight": 1.0,
+          "raw_catch": 7.14e-05,
+          "biomass": 0.0036,
+          "loaded_catch": 7.14e-05,
+          "catch_state": "source numeric positive"
+        },
+        {
+          "id": 9,
+          "name": "Small Billfish",
+          "weight": 0.0,
+          "raw_catch": 0.0,
+          "biomass": 0.0106,
+          "loaded_catch": 0,
+          "catch_state": "source numeric zero"
+        }
+      ],
+      "membership_rule": "Explicit source assignment",
+      "membership_confidence": "High",
+      "allocation_rule": "Source-model catch proportions",
+      "allocation_confidence": "Medium",
+      "overall_confidence": "Medium",
+      "evidence": [
+        "source definitions",
+        "catch classification"
+      ],
+      "reason": "Xiphias gladius is explicitly assigned to Swordfish and its small stage. Historical warm-pool model landings composition assumed transferable to this regional taxon and all years/bases. Genuine printed zero candidates retained."
+    }
+  ],
+  "classic_reference": {
+    "year": 2019,
+    "catch_basis": "landings",
+    "unit": "tonnes C",
+    "taxa": 23,
+    "total_catch_tonnes": 536128.1483922402,
+    "simple_chain_ppr_tC": 157858508.51530254,
+    "formula": "unchanged saved classic wet-weight coefficient × regional catch /9 once",
+    "missing_tl_or_coefficient_taxa": [],
+    "unknown_annual_contribution_taxa": [],
+    "confidence_summary": [
+      {
+        "label": "High",
+        "confidence": "High",
+        "taxa": 2,
+        "catch_tonnes": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_tC": 0.0,
+        "ppr_percentage": 0.0
+      },
+      {
+        "label": "Medium",
+        "confidence": "Medium",
+        "taxa": 14,
+        "catch_tonnes": 523429.96868368046,
+        "catch_percentage": 97.63150288850912,
+        "ppr_tC": 155856790.32832623,
+        "ppr_percentage": 98.73195420012328
+      },
+      {
+        "label": "Low",
+        "confidence": "Low",
+        "taxa": 0,
+        "catch_tonnes": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_tC": 0.0,
+        "ppr_percentage": 0.0
+      },
+      {
+        "label": "Very low",
+        "confidence": "Very low",
+        "taxa": 7,
+        "catch_tonnes": 12698.179708559699,
+        "catch_percentage": 2.3684971114908713,
+        "ppr_tC": 2001718.1869763215,
+        "ppr_percentage": 1.2680457998767158
+      },
+      {
+        "label": "Unresolved",
+        "confidence": "Unresolved",
+        "taxa": 0,
+        "catch_tonnes": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_tC": 0.0,
+        "ppr_percentage": 0.0
+      }
+    ],
+    "membership_summary": [
+      {
+        "label": "Explicit source assignment",
+        "confidence": "High",
+        "taxa": 7,
+        "catch_tonnes": 522344.0871818485,
+        "catch_percentage": 97.4289614802491,
+        "ppr_tC": 155470980.82276124,
+        "ppr_percentage": 98.48755210283146
+      },
+      {
+        "label": "Closest represented analogue",
+        "confidence": "Very low",
+        "taxa": 3,
+        "catch_tonnes": 9257.2399463406,
+        "catch_percentage": 1.7266841843879182,
+        "ppr_tC": 1916125.9138405412,
+        "ppr_percentage": 1.213824919456144
+      },
+      {
+        "label": "Verified synonym",
+        "confidence": "High",
+        "taxa": 2,
+        "catch_tonnes": 524.8293467255,
+        "catch_percentage": 0.0978925184770426,
+        "ppr_tC": 202507.93039973933,
+        "ppr_percentage": 0.12828445695095905
+      },
+      {
+        "label": "Unambiguous documented group fit",
+        "confidence": "High",
+        "taxa": 5,
+        "catch_tonnes": 561.0521551065,
+        "catch_percentage": 0.10464888978297499,
+        "ppr_tC": 183301.57516525028,
+        "ppr_percentage": 0.11611764034086343
+      },
+      {
+        "label": "Broad-category approximation",
+        "confidence": "Very low",
+        "taxa": 4,
+        "catch_tonnes": 3440.9397622191,
+        "catch_percentage": 0.6418129271029529,
+        "ppr_tC": 85592.27313578018,
+        "ppr_percentage": 0.0542208804205717
+      },
+      {
+        "label": "Assumed eligible group set",
+        "confidence": "Medium",
+        "taxa": 2,
+        "catch_tonnes": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_tC": 0.0,
+        "ppr_percentage": 0.0
+      }
+    ],
+    "allocation_summary": [
+      {
+        "label": "Source-model catch proportions",
+        "confidence": "Medium",
+        "taxa": 17,
+        "catch_tonnes": 532687.2086300211,
+        "catch_percentage": 99.35818707289705,
+        "ppr_tC": 157772916.24216676,
+        "ppr_percentage": 99.94577911957943
+      },
+      {
+        "label": "Approved model-biomass fallback",
+        "confidence": "Medium",
+        "taxa": 4,
+        "catch_tonnes": 3440.9397622191,
+        "catch_percentage": 0.6418129271029529,
+        "ppr_tC": 85592.27313578018,
+        "ppr_percentage": 0.0542208804205717
+      },
+      {
+        "label": "No split required",
+        "confidence": "High",
+        "taxa": 2,
+        "catch_tonnes": 0.0,
+        "catch_percentage": 0.0,
+        "ppr_tC": 0.0,
+        "ppr_percentage": 0.0
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "method": "GE",
+      "matrix_file": "reused_diagnostics/SPPR_GE.csv",
+      "matrix_sha256": "e2d6a933baa3e77cfb42448ecb00930853e7bfc1c5cf0b33e34f3e6a7a22f746",
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_ids": [
+        32,
+        31,
+        30,
+        29
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Small phyto",
+        "Large phyto"
+      ],
+      "shape": [
+        32,
+        4
+      ],
+      "all_finite": true,
+      "negative_entries": [],
+      "aggregate_max_abs_difference": 7.275957614183426e-12,
+      "direct": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": false,
+          "p_max_rel_residual": 0.007279402209226768,
+          "q_max_rel_residual": 0.00046102880658427267,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 2.220446049250313e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 21,
+          "total_catch": 0.05402029999999999,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.6369143539727922,
+          "b_converges": true,
+          "rho_living": 0.5467665518138085,
+          "living_converges": true,
+          "sppr_det": {
+            "31": 2.580260999739747
+          },
+          "max_sppr_det": 2.580260999739747,
+          "max_sppr_group": {
+            "seq": 4,
+            "tl": 5.500979585206764,
+            "sppr": 77535.12997024151,
+            "inv_te": 10.0
+          },
+          "max_tl_group": {
+            "seq": 2,
+            "tl": 5.527371025227983,
+            "sppr": 42634.58393655722,
+            "inv_te": 8.333333333333332
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": false,
+          "inflow": 1097.9547,
+          "outflow": 1096.880264817201,
+          "rel_gap": 0.0009785787909092304
+        },
+        "footprint": {
+          "ppr_all": 560.2590047738723,
+          "ppr_inner": 560.2590047738723,
+          "ppr_pp_only": 163.861495457781,
+          "npp": 1097.9547,
+          "ppr2npp": 0.5102751550440764,
+          "ppr2npp_pp_only": 0.1492424919332109
+        },
+        "config": {
+          "TE_option": "GE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "single_detritus",
+          "would_pool": false,
+          "model": "WCPO_Warm_Pool_Option1 (mixed_periods)"
+        },
+        "warnings": [
+          "model input mass-balance residual 0.00728 exceeds 0.0001"
+        ]
+      },
+      "model_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "settings": {
+        "underdetermined": true,
+        "zero_catch": true,
+        "zero_biomass_accum": false,
+        "default_gs": true,
+        "weight_flow": 1.0,
+        "weight_guess": 1.0,
+        "DC_tol": 0.001,
+        "normalize_DC": true
+      },
+      "engine_hashes": {
+        "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+        "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+      }
+    },
+    {
+      "method": "TE",
+      "matrix_file": "reused_diagnostics/SPPR_TE.csv",
+      "matrix_sha256": "83b955458eb8c7a9d780d5f145c2035b0225a080c7de664b0e32a00a42862df0",
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_ids": [
+        32,
+        31,
+        30,
+        29
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Small phyto",
+        "Large phyto"
+      ],
+      "shape": [
+        32,
+        4
+      ],
+      "all_finite": true,
+      "negative_entries": [],
+      "aggregate_max_abs_difference": 4.656612873077393e-10,
+      "direct": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": false,
+          "p_max_rel_residual": 0.007279402209226768,
+          "q_max_rel_residual": 0.00046102880658427267,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 2.220446049250313e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 21,
+          "total_catch": 0.05402029999999999,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "WARN",
+          "solve_error": null,
+          "b": 0.0,
+          "b_converges": true,
+          "rho_living": 0.8243062833674004,
+          "living_converges": true,
+          "sppr_det": {
+            "31": 0.2525088613454653
+          },
+          "max_sppr_det": 0.2525088613454653,
+          "max_sppr_group": {
+            "seq": 10,
+            "tl": 5.214346156695408,
+            "sppr": 1575774.7091260627,
+            "inv_te": 232.55813953488348
+          },
+          "max_tl_group": {
+            "seq": 2,
+            "tl": 5.527371025227983,
+            "sppr": 673964.1817244635,
+            "inv_te": 111.11111111111116
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": false,
+          "inflow": 1097.9547,
+          "outflow": 1096.4757421844597,
+          "rel_gap": 0.0013470116895900148
+        },
+        "footprint": {
+          "ppr_all": 1000.8140966883949,
+          "ppr_inner": 1000.8140966883949,
+          "ppr_pp_only": 810.1507354613606,
+          "npp": 1097.9547,
+          "ppr2npp": 0.9115258550178754,
+          "ppr2npp_pp_only": 0.7378726421603373
+        },
+        "config": {
+          "TE_option": "TE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": null,
+          "would_pool": false,
+          "model": "WCPO_Warm_Pool_Option1 (mixed_periods)"
+        },
+        "warnings": [
+          "model input mass-balance residual 0.00728 exceeds 0.0001",
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "rho(A_LL)=0.8243 is within 0.3 of divergence (max SPPR 1.58e+06 at group 10 (Small Sharks), TL 5.21)"
+        ]
+      },
+      "model_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "settings": {
+        "underdetermined": true,
+        "zero_catch": true,
+        "zero_biomass_accum": false,
+        "default_gs": true,
+        "weight_flow": 1.0,
+        "weight_guess": 1.0,
+        "DC_tol": 0.001,
+        "normalize_DC": true
+      },
+      "engine_hashes": {
+        "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+        "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+      }
+    },
+    {
+      "method": "With Egestion",
+      "matrix_file": "reused_diagnostics/SPPR_With_Egestion.csv",
+      "matrix_sha256": "cdd8c6458cc842c6ffcb11c218fd8ca833f973ae306dcdef6dd7bb3a282a166c",
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_ids": [
+        32,
+        31,
+        30,
+        29
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Small phyto",
+        "Large phyto"
+      ],
+      "shape": [
+        32,
+        4
+      ],
+      "all_finite": true,
+      "negative_entries": [],
+      "aggregate_max_abs_difference": 3.637978807091713e-12,
+      "direct": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": false,
+          "p_max_rel_residual": 0.007279402209226768,
+          "q_max_rel_residual": 0.00046102880658427267,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 2.220446049250313e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 21,
+          "total_catch": 0.05402029999999999,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "WARN",
+          "solve_error": null,
+          "b": 0.7625526898332379,
+          "b_converges": true,
+          "rho_living": 0.4374132414510465,
+          "living_converges": true,
+          "sppr_det": {
+            "31": 4.546573358216663
+          },
+          "max_sppr_det": 4.546573358216663,
+          "max_sppr_group": {
+            "seq": 4,
+            "tl": 5.500979585206764,
+            "sppr": 16197.525329368054,
+            "inv_te": 8.000000000000002
+          },
+          "max_tl_group": {
+            "seq": 2,
+            "tl": 5.527371025227983,
+            "sppr": 10651.86810639437,
+            "inv_te": 6.666666666666666
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": false,
+          "inflow": 1097.9547,
+          "outflow": 1097.6854353053386,
+          "rel_gap": 0.00024524208026195226
+        },
+        "footprint": {
+          "ppr_all": 152.11941958938405,
+          "ppr_inner": 152.11941958938405,
+          "ppr_pp_only": 21.880340489110615,
+          "npp": 1097.9547,
+          "ppr2npp": 0.1385479925441223,
+          "ppr2npp_pp_only": 0.019928272531745266
+        },
+        "config": {
+          "TE_option": "With Egestion",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "single_detritus",
+          "would_pool": false,
+          "model": "WCPO_Warm_Pool_Option1 (mixed_periods)"
+        },
+        "warnings": [
+          "model input mass-balance residual 0.00728 exceeds 0.0001",
+          "b=0.7626 is within 0.3 of divergence (max sppr_det 4.55 PP-units per unit detritus)"
+        ]
+      },
+      "model_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "settings": {
+        "underdetermined": true,
+        "zero_catch": true,
+        "zero_biomass_accum": false,
+        "default_gs": true,
+        "weight_flow": 1.0,
+        "weight_guess": 1.0,
+        "DC_tol": 0.001,
+        "normalize_DC": true
+      },
+      "engine_hashes": {
+        "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+        "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+      }
+    }
+  ],
+  "diagnostic_reuse": {
+    "fresh_solver_run": false,
+    "date_of_original_exact_run": "2026-09-28",
+    "retained_copy_manifest": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/reused_diagnostics/copy_manifest.json",
+    "identity_evidence": "Exact accepted canonical input SHA; exact settings/configurations and engine hashes; independently checked all 32 × 4 matrices with named row/source axes; source aggregates match unchanged saved regional Group SPPR",
+    "limitations": "All GE/TE/With Egestion WARN and strict model balance false; source reconstruction FAIL is distinct; no fresh solver, Monte Carlo, parameter changes or normalization was performed."
+  },
+  "verification_evidence": {
+    "accepted_input_check": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/accepted_input_verification.json",
+    "arithmetic_and_relocation": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/verification.json",
+    "artifact_links_and_values": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/artifact_verification.json",
+    "template_and_manual_field_fidelity": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/document_fidelity.json",
+    "all_pages_and_sheets_visual_qa": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/visual_qa.json",
+    "annual_cells_checked": 19320,
+    "ratio_cells_checked": 37800,
+    "all_44_docx_xlsx_hyperlinks_blue_underlined": true,
+    "all_relative_local_link_targets_existing_and_actually_relocated": true,
+    "render_limitation": "Packaged DOCX renderer lacked soffice.exe; owned hidden read-only Word instance exported six-page PDF, then PyMuPDF rasterized and every page inspected. Final XLSX reimported/artifact-tool rendered; all 23 mapping rows and 14 source rows inspected.",
+    "residual_fish_scope_followup.json": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/residual_fish_scope_followup.json",
+      "sha256": "3aec71215d9bfaafb17dc8257097253605972e63e003c583fd3405172037f7c1",
+      "bytes": 159741
+    },
+    "residual_scope_independent_QA.json": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/residual_scope_independent_QA.json",
+      "sha256": "bababeb7aac929347bd590ae94666686e84cbbd850b7fd14d2aca5b1f028e1f7",
+      "bytes": 21350
+    },
+    "residual_fish_method_exposure.json": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/residual_fish_method_exposure.json",
+      "sha256": "e74181436252065385edf25770c0d28e88bef0c5eb5e51ca8639b90cf0a919fa"
+    },
+    "qa/residual_scope/visual_acceptance.json": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/residual_scope/visual_acceptance.json",
+      "sha256": "df6d13714d875c070c6a202022ec8cd84b60f4d4406fa48f653ccae1289f63e3"
+    }
+  },
+  "delivered_artifacts": {
+    "report": "regions/HS_071/Model_validation_941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods).docx",
+    "appendix": "regions/HS_071/HS071_taxon_mapping_appendix.xlsx",
+    "regional_workbook": "regions/HS_071/HS_071.xlsx",
+    "report_template_version": 7,
+    "report_pages": 6,
+    "appendix_mapping_columns": 7,
+    "appendix_taxa": 23,
+    "appendix_source_rows": 16,
+    "file_manifest": [
+      {
+        "path": "regions/HS_071/HS_071.xlsx",
+        "sha256": "51861f2a403630ff27ce7fc97e66718cc09e6c423326babbcadab5146463bbb4",
+        "bytes": 608215
+      },
+      {
+        "path": "regions/HS_071/Model_validation_941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods).docx",
+        "sha256": "1131fe722dff90943b63449887eebe71e360d2cd90b1cfa82ef8e81c63b11365",
+        "bytes": 445494
+      },
+      {
+        "path": "regions/HS_071/HS071_taxon_mapping_appendix.xlsx",
+        "sha256": "293a1cf64bc318ab9ffa2dbc9a7214d8f3385903bca71b1960771ff9a82d2e20",
+        "bytes": 14518
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/taxon_audit.json",
+        "sha256": "a02c39b841ad5928856412e40ce8fcf89f7fcc4e1c2f643951c51fd7f80d8425",
+        "bytes": 181330
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/source_review.md",
+        "sha256": "78d59e5baaf280182f64fe7aafc1273f911fb7929f3aea9972cfd17ee3f7594c",
+        "bytes": 10607
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/diagnostics_verification.json",
+        "sha256": "455ea6a874e0269ba17fea16653557dc981903b76567bb468c267984c0381400",
+        "bytes": 12024
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/verification.json",
+        "sha256": "71275e04df6cd239f122b0fe656f2b126b2acdc47141e1f3b23c66b020b41a58",
+        "bytes": 18542
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/accepted_input_verification.json",
+        "sha256": "642553f4db0285bbb73d466e1845a9a53108387e49b1010664fd382c091c2b20",
+        "bytes": 1069
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/geographic_estimate.json",
+        "sha256": "32cc3c0be55311942b8a11bfba390e377378879d4ee3fea214b4e8edb333d083",
+        "bytes": 1225
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/visual_qa.json",
+        "sha256": "b2ea496b64fee8ac71d9019a04ae1657fb0b774491a7d6ec18840c0c076ca58b",
+        "bytes": 1700
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/document_fidelity.json",
+        "sha256": "574603bcda47a99e4782268d97d779f0d4adc06e086ab8046a8825b891b9ad2c",
+        "bytes": 616
+      },
+      {
+        "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/artifact_verification.json",
+        "sha256": "0c78aa90a24612afcf9ba7a459ced51a9eb502d3fb8a809cc42158d71355add4",
+        "bytes": 14516
+      }
+    ],
+    "hashes": {
+      "Model_validation_941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods).docx": "1131fe722dff90943b63449887eebe71e360d2cd90b1cfa82ef8e81c63b11365",
+      "HS071_taxon_mapping_appendix.xlsx": "293a1cf64bc318ab9ffa2dbc9a7214d8f3385903bca71b1960771ff9a82d2e20"
+    }
+  },
+  "proposed_shared_changes": [
+    {
+      "sheet": "Models & coverage",
+      "table": "Models",
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)"
+      },
+      "field": "availability",
+      "expected_old_value": "Selected adopted option1 D_fixed_M0; GE/TE/With Egestion WARN; regional calculations pending",
+      "proposed_value": "Selected accepted option1 D_fixed_M0; exact GE/TE/With Egestion WARN retained; all 23 labels reviewed, mappings and regional calculations refreshed 2026-09-30",
+      "evidence": "taxon_audit.json; verification.json; diagnostics_verification.json"
+    },
+    {
+      "sheet": "Models & coverage",
+      "table": "Models",
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)"
+      },
+      "field": "target_coverage_ratio",
+      "expected_old_value": 0.5757807943325609,
+      "proposed_value": 0.5757808107671248,
+      "evidence": "geographic_estimate.json; repaired SAU HighSeas region 71; source fixed rectangle"
+    },
+    {
+      "sheet": "Models & coverage",
+      "table": "Models",
+      "key": {
+        "unit_id": "HS_071",
+        "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)"
+      },
+      "field": "coverage_note",
+      "expected_old_value": "Study rectangle intersection with regional polygon; pelagic proxy, not catch coverage. Exact source and edited juvenile rows documented in SELECTION_AND_PROVENANCE.json.",
+      "proposed_value": "Approximate Western Central Pacific high-seas overlap A 57.6%; B 11.1–13.0% due published 26.964 million km² versus land-excluded coordinate-domain 22.9927 million km² denominator. Pelagic proxy; substantial region lies outside fixed source rectangle, and geographic overlap does not establish catch composition. Accepted juvenile edits and strict balance warning retained.",
+      "evidence": "geographic_estimate.json; source_review.md"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "target_coverage_ratio",
+      "expected_old_value": null,
+      "proposed_value": 0.5757808107671248,
+      "evidence": "geographic_estimate.json; fixed source rectangle and regional HighSeas polygon"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "model_years",
+      "expected_old_value": "2005–2006",
+      "proposed_value": "mixed input periods: 1993–2002 skipjack/forage, 1995–2004 yellowfin/bigeye/bycatch, 2001–2007 diet; 2005–2006 assessment editions",
+      "evidence": "Original source extraction audit and source_review.md; assessment editions are not model years"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "loadability_evidence",
+      "expected_old_value": "regions/HS_071/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/SELECTION_REPORT.md",
+      "proposed_value": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/source_review.md",
+      "evidence": "Exact accepted input/source/loader distinction and retained direct results; no quality-score tuning"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "documentation_evidence",
+      "expected_old_value": null,
+      "proposed_value": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/reports_index.md",
+      "evidence": "Retained source/diagnostic/mapping evidence index"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "loadability_class",
+      "expected_old_value": "D — readable source recovered; reconstruction not audited",
+      "proposed_value": "D — reconstructed source audited; selected accepted experimental Option1 remains provisional",
+      "evidence": "Source reconstruction FAIL; selected D_fixed_M0 WARN/strict mass balance false; native author file absent"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "full_model_loadable",
+      "expected_old_value": "Not load-tested in this project",
+      "proposed_value": "Source reconstruction loads with FAIL; selected user-adopted D_fixed_M0 loads with WARN; strict mass balance false",
+      "evidence": "Original source audit and exact accepted direct/configuration verification; no new solver run"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "extraction_readiness",
+      "expected_old_value": "high",
+      "proposed_value": "source_extracted_with_unknowns",
+      "evidence": "Final source tables, eight imports, ordinary-compartment multistanza approximation and missing/default fields documented"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "quality_rationale",
+      "expected_old_value": "Newly recovered readable source; full parameter and diet completeness has not been audited. Provisional loadability 20/55, documentation 10/20; geographic and recency components retained. Bibliographic/spatial correction:  Primary WCPFC landing lists downloadable SC3_EB_IP8.pdf. Bounds explicitly 110–180°E and 15°N–15°S; not blanket western-central Pacific EEZ coverage. Primary 42-page 2007 report Section 2.2 explicitly states fixed 110–180 E,15 N–15 S; Section 2.3 states 31 final functional groups. Do not conflate with later 44-group 140–180 E/10 N–15 S warm-pool models. Report includes parameter, diet and catch tables; no native model file verified.",
+      "proposed_value": "Readable original 42-page 2007 source has been extracted and audited: 31 final groups, parameters, diets, landings, mixed input periods and eight imports retained. Source reconstruction FAIL is separate from selected user-adopted juvenile PB/EE Option1 WARN; strict mass balance remains false. Missing raw catches are not printed zeros; native multistanza and loader/detritus assumptions remain. All 23 regional labels reviewed with explicit weak analogues and assumed historical catch/complete-biomass allocation; no observed HS071 stage mass shares recovered. No quality-score changes proposed. Fixed 110–180E/15S–15N pelagic rectangle covers approximately 57.6% of regional polygon; B 11.1–13.0% reflects denominator uncertainty. No native author EwE model recovered.",
+      "evidence": "source_review.md; original final extraction REPORT.md; taxon_audit.json; geographic_estimate.json"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "coverage_note",
+      "expected_old_value": null,
+      "proposed_value": "Approximate Western Central Pacific high-seas overlap A 57.6%; B 11.1–13.0% due published 26.964 million km² versus land-excluded coordinate-domain 22.9927 million km² denominator. Pelagic proxy; substantial region lies outside fixed source rectangle, and geographic overlap does not establish catch composition. Accepted juvenile edits and strict balance warning retained.",
+      "evidence": "geographic_estimate.json; source fixed rectangle, source Figure1 context distinction"
+    },
+    {
+      "sheet": "Papers",
+      "table": "Papers",
+      "key": {
+        "unit_id": "HS_071",
+        "article_id": "WCP-2007__HS_071"
+      },
+      "field": "geometry_method",
+      "expected_old_value": "Published study bounds, approximate rectangle",
+      "proposed_value": "Approximate source-fixed 110–180E/15S–15N rectangle; repaired SAU HighSeas region 71; WGS84 ellipsoidal area densified 0.1 degrees and consistent Natural Earth 1:50 million land exclusion",
+      "evidence": "geographic_estimate.json; input hashes retained; published area used as alternative B denominator"
+    }
+  ],
+  "shared_metadata_review_provenance": {
+    "project_sha256_at_read": "a507e15f53e3668ece998e992c67b515afe0972ef21165ee8d55cd7ef0fd675b",
+    "authenticated_cache_path": "original_research_archive/research/selected_regions_validation_20260930/central_source_metadata_current.json",
+    "cache_sha256": "41bd2be9f401ba8fe3206b4fa4e94108367740ad2eebecc34164bb1c4a95338d",
+    "all_expected_old_values_from_authenticated_UTF8_cache": true,
+    "scores_manual_selection_and_unselected_Griffiths_rows_preserved": true,
+    "central_Model_path_note": "Existing Models model_path uses model.json alias; regional canonical Overview path uses selected-ID JSON. Coordinator normal integration may reconcile path; no model/source identity changed."
+  },
+  "expected_model_reference_annual_rows": [
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 1599919703.7603567,
+      "ppr_tC": 177768855.97337297
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 8357690259.776567,
+      "ppr_tC": 928632251.0862852
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 214228793.88097167,
+      "ppr_tC": 23803199.320107963
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 5469623609.100076,
+      "ppr_tC": 607735956.5666751
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 10322241265.408073,
+      "ppr_tC": 1146915696.1564527
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 1488822308.645866,
+      "ppr_tC": 165424700.96065176
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 5469623609.100076,
+      "ppr_tC": 607735956.5666751
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 10322241265.408073,
+      "ppr_tC": 1146915696.1564527
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "ppr",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 1488822308.645866,
+      "ppr_tC": 165424700.96065176
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "metric": "covered_catch",
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "year": 2019,
+      "value": 536128.1483922402,
+      "ppr_tC": null
+    }
+  ],
+  "expected_reference_PPR_NPP_ratio_rows": [
+    {
+      "model_id": null,
+      "scope": "all",
+      "method": "simple trophic chain",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 28.82849636892493
+    },
+    {
+      "model_id": null,
+      "scope": "all",
+      "method": "simple trophic chain",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 61.8375098394766
+    },
+    {
+      "model_id": null,
+      "scope": "all",
+      "method": "simple trophic chain",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 35.48982037163362
+    },
+    {
+      "model_id": null,
+      "scope": "all",
+      "method": "simple trophic chain",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 41.93796223346664
+    },
+    {
+      "model_id": null,
+      "scope": "all",
+      "method": "simple trophic chain",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 21.51349004899987
+    },
+    {
+      "model_id": null,
+      "scope": "all",
+      "method": "simple trophic chain",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 35.48982037163362
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 32.46457138824121
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 69.6369393312767
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 39.96607357755589
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 47.227505430125
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 24.22693936471924
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 39.96607357755589
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 169.58903090049418
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 363.7707368699537
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 208.77551734351547
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 246.70791990322445
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 126.55713575925812
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 208.77551734351547
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 4.346996887418387
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 9.324366396287802
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 5.351445899787735
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 6.323749562258135
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 3.2439802993442197
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 5.351445899787735
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 110.98618618615129
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 238.06685206551577
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 136.6314691225112
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 161.45602688208757
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 82.82430625365474
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 136.6314691225112
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 209.45247293340643
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 449.27835257768
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 257.8500989324491
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 304.69885724098765
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 156.30553999508828
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 257.8500989324491
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 30.21025243319304
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 64.80139505660634
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 37.19085513566488
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 43.948057831154586
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 22.544636278701258
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 37.19085513566488
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 110.98618618615129
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 238.06685206551577
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 136.6314691225112
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 161.45602688208757
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 82.82430625365474
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_GE",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 136.6314691225112
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 209.45247293340643
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 449.27835257768
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 257.8500989324491
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 304.69885724098765
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 156.30553999508828
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 257.8500989324491
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_antoinemorel_tC_yr",
+      "year": 2019,
+      "value_percent": 30.21025243319304
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_vgpm_tC_yr",
+      "year": 2019,
+      "value_percent": 64.80139505660634
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_eppley_tC_yr",
+      "year": 2019,
+      "value_percent": 37.19085513566488
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cbpm_tC_yr",
+      "year": 2019,
+      "value_percent": 43.948057831154586
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "npp_cafe_tC_yr",
+      "year": 2019,
+      "value_percent": 22.544636278701258
+    },
+    {
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "catch_basis": "landings",
+      "unidentified": "method",
+      "npp_method": "ens_median_tC_yr",
+      "year": 2019,
+      "value_percent": 37.19085513566488
+    }
+  ],
+  "expected_browser_values": [
+    {
+      "unit_id": "HS_071",
+      "model_id": "",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "all",
+      "method": "simple trophic chain",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "ok",
+      "ppr_tC": 157858508.51530254
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "PP",
+      "method": "new_GE",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 177768855.97337297
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "PP",
+      "method": "new_TE_EEfix",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 928632251.0862852
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "PP",
+      "method": "new_WithEgestion",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 23803199.320107963
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "all",
+      "method": "new_GE",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 607735956.5666751
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "all",
+      "method": "new_TE_EEfix",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 1146915696.1564527
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "all",
+      "method": "new_WithEgestion",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 165424700.96065176
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "inner",
+      "method": "new_GE",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 607735956.5666751
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "inner",
+      "method": "new_TE_EEfix",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 1146915696.1564527
+    },
+    {
+      "unit_id": "HS_071",
+      "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+      "year": 2019,
+      "catch_basis": "landings",
+      "unit": "tonnes C",
+      "scope": "inner",
+      "method": "new_WithEgestion",
+      "unidentified": "method",
+      "taxon_filter": null,
+      "group_filter": null,
+      "status": "provisional: direct WARN; experimental surrogate; strict mass balance false; validation pending; assumed size/stage allocations; see allocation ledger",
+      "ppr_tC": 165424700.96065176
+    }
+  ],
+  "geographic_estimate": {
+    "boundary_properties": {
+      "title": "Pacific, Western Central",
+      "long_title": null,
+      "region_id": 71,
+      "region": "highseas",
+      "geometry_repaired": true
+    },
+    "region_area_km2": 5192783.027698588,
+    "study_rectangle_wet_area_km2": 22992690.46455834,
+    "intersection_km2": 2989904.821826058,
+    "A_region_in_study_percentage": 57.578081076712486,
+    "B_study_in_region_percentage": 13.003718840275747,
+    "B_using_published_26964000_km2_percentage": 11.088506237301802,
+    "study_area_published_km2": 26964000,
+    "study_bounds": [
+      110,
+      -15,
+      180,
+      15
+    ],
+    "method": "WGS84 ellipsoidal polygon area, coordinate-linear densification ≤0.1 degree; Natural Earth 1:50m land removed consistently. Study domain is Section 2.2 PDF7 fixed rectangle, distinct from warm-pool Figure1 PDF3. Approximate due SAU repaired high-seas polygon, coarse land, and published-area disagreement.",
+    "input_hashes": {
+      "common_reference_data\\geography\\HighSeas.geojson": "e69e075876dc450dc02d42aab94d8e0473467eb7beaa850fd733265fe0d43b63",
+      "common_reference_data\\geography\\basemaps\\ne_50m_land.geojson": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b"
+    }
+  },
+  "transferable_lessons": [
+    {
+      "lesson": "Broad pelagic catch must review all residual fish-bearing final pools, including 24 and 26; depth or provider Medium size category alone does not exclude them. Mixed invertebrate composition weakens Very low approximation. Dedicated separately named taxa excluded only as a disclosed reporting assumption.",
+      "evidence": "Allain 2007 Table 1 PDF9 names Myctophidae/Maurolicus/Sternoptyx in 24 and Paralepididae/Scopelarchidae/Diretmidae/Chiasmodontidae in 26; 25 has mollusc/crustacean representatives; taxon_audit Marine pelagic fishes not identified; source_review.md",
+      "affected_siblings": "EEZ_941/EEZ_598; already communicated and coordinator-adopted"
+    },
+    {
+      "lesson": "Raw -9999 export loaded as zero is missing catch, not observed zero. Reject incomplete catch vector for broad/new multisets and use complete accepted biomass only under explicit composition/catchability assumption; preserve genuine source zeros and disclosed infant SKJ historical uncaught exception separately.",
+      "evidence": "Allain 2007 Table 5 PDF14 versus final Table 1; canonical raw JSON; allocation ledger"
+    },
+    {
+      "lesson": "HS071-specific southern bluefin requires independent Very low analogue rationale; temperate/deep ecology and species/maturity mismatch remain even with zero reference catch.",
+      "evidence": "CCSBT primary southern bluefin page read 2026-09-30; FAO tuna biology; Thunnus maccoyii taxon_audit entry"
+    }
+  ],
+  "reusable_helpers": {
+    "document": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/build_document.py",
+    "appendix": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/build_appendix.mjs",
+    "native_links": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/native_links.py",
+    "regional_adoption": "regions/HS_071/build_validation.py",
+    "geography": "regions/HS_071/geography_validation.py",
+    "verification": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/qa/verify_region.py",
+    "all_text_JSON_reads_writes_UTF8": true,
+    "reuse_limitations": "Report/mapping/reporting scope and geography are HS071-specific. Final source diagnostics reusable only for exact accepted input/settings identity; no generic EEZ candidate or boundary transfer."
+  },
+  "remaining_coordinator_tasks": [
+    "Re-read latest Project; apply desired keyed source metadata proposals after expected-old-value and hash guard.",
+    "Consolidate reviewed regional outputs and generate shared data payload, preserving scientific provisional restrictions.",
+    "Exercise actual browser controls for HS071/year2019/landings/tonnesC and all scopes/methods/unidentified settings; reconcile against expected saved values.",
+    "Graph/Git/staging/commit/push and whole-project verification remain coordinator-owned."
+  ],
+  "scientific_limits": [
+    "Selected Option1 remains WARN for all 3 methods; strict model mass balance and strict PP budget flag false.",
+    "31 final ecological groups plus synthetic diet_import; no recovered native author EwE database; ordinary-compartment translation does not verify native multistanza behavior.",
+    "Accepted juvenile PB/EE edits and loader conventions differ from source; all retained without restoration or balancing.",
+    "No observed regional all-fleet caught-mass stage composition recovered; all split weights are fixed historical assumed catch or complete-biomass proportions.",
+    "Very low membership analogues include absent southern/albacore/Pacific bluefin, broad fish/family categories and omitted ray/skate contributions; numerical resolution does not establish biological approval.",
+    "Study fixed rectangle/published area disagree; geographic overlap uncertain and does not imply catch representativeness.",
+    "Historical size-impact table explicitly historical; no new sensitivity interval claimed."
+  ],
+  "descendants": [],
+  "genuine_blockers": [],
+  "elasmobranch_scope_followup": {
+    "path": "regions\\HS_071\\validation_reports\\941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)\\elasmobranch_scope_followup.json",
+    "sha256": "2d6709a180145a9b68952eae8c6cb61dbaf34de98e528fc451e626770ddbac61",
+    "prior_handoff_sha256": "9ad03b09988ad1494cb945dd9f33122bb794e48aaa30e0d77150a965a27ba63a",
+    "rationale_only": true,
+    "mappings_weights_confidence_and_scientific_numbers_unchanged": true,
+    "shared_reintegration_pending_coordinator": true,
+    "all_scientific_tables_and_numerical_mappings_exactly_unchanged": true,
+    "complete_before_after_in_memory_calculations_identical": true,
+    "targeted_appendix_row_visual_check": "passed",
+    "effective_blue_underlined_links_and_relocation": "passed",
+    "regional_validation_freshness": "passed after documented numerical equivalence; existing result hash retained",
+    "prior_receipts": "Earlier numerical/matrix/artifact receipts retain their historical execution/file hashes. Current identities and exact numerical reuse proof are in this follow-up evidence; no broad taxon review or new solver execution was performed.",
+    "bytes": 18374
+  },
+  "candidate_completeness": {
+    "broad_pelagic_fish": {
+      "included": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        20,
+        22,
+        24,
+        26
+      ],
+      "excluded_dedicated_cartilaginous": [
+        3,
+        4,
+        10
+      ],
+      "excluded_nonfish": [
+        15,
+        18,
+        19,
+        21,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "named_category_exclusion_status": "Former separate-reporting exclusion superseded: it did not establish absence. Named bony stages are now included. Mixed 24/26 remain whole-pool uncertainty."
+    },
+    "broad_marine_fish": {
+      "included": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        20,
+        22,
+        24,
+        26
+      ],
+      "excluded_dedicated_cartilaginous": [
+        3,
+        4,
+        10
+      ],
+      "excluded_nonfish": [
+        15,
+        18,
+        19,
+        21,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "named_category_exclusion_status": "Former separate-reporting exclusion superseded: it did not establish absence. Named bony stages are now included. Mixed 24/26 remain whole-pool uncertainty."
+    }
+  },
+  "residual_fish_scope_current_release": {
+    "status": "complete; ownership released",
+    "date": "2026-09-30",
+    "prior_handoff_sha256": "ad13e2cb756a81cb9bc26df4163bfd04a22d07beba8451fb7fbee261417a5d1d",
+    "changed_target_labels": [
+      "Marine fishes not identified",
+      "Marine pelagic fishes not identified"
+    ],
+    "eligible_group_ids": [
+      1,
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      20,
+      22,
+      24,
+      26
+    ],
+    "evidence": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/residual_fish_scope_followup.json",
+      "sha256": "3aec71215d9bfaafb17dc8257097253605972e63e003c583fd3405172037f7c1",
+      "bytes": 159741
+    },
+    "independent_QA": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/residual_scope_independent_QA.json",
+      "sha256": "bababeb7aac929347bd590ae94666686e84cbbd850b7fd14d2aca5b1f028e1f7",
+      "bytes": 21350
+    },
+    "actual_recalculation": {
+      "function": "tools/regional.py recalculate",
+      "code_sha256": "8c1041824bc9ebd80426eacea78783a408d5662a04883eb66f2b281f035638d0",
+      "Group_SPPR_table_sha256_preserved": "3138cb9eed903eff4d48552f77da18d7e3a7b5b719a46ca24ade7af099d7d28d",
+      "accepted_model_sha256_preserved": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "full_source_matrices_and_diagnostic_statuses_reused_unchanged": true,
+      "Classic_Annual_TL_coefficients_and_independent_bounds_exactly_retained": true,
+      "all_non_target_matching_exactly_preserved": true,
+      "workbook_cells_changed": 10549,
+      "OOXML_nonworksheet_parts_preserved": true,
+      "new_candidate_rows": "PPR Matching and Allocation assumptions expanded by inserting styled rows; all other table values are independently authenticated."
+    },
+    "prior_receipt_interpretation": "Earlier solver/verification identities are historical. This current source-supported follow-up supersedes target mapping results; no historical result was promoted to current freshness.",
+    "shared_actions_pending": "Coordinator integration, current browser controls, Project/cache/pages and Git.",
+    "duplicate_browser_controls": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/residual_scope_browser_control_refresh.json",
+      "sha256": "7923d428750cfe6fc286e9dd9d9b86ce6cf75808225cd6e4a2be8b4ca7ea75e6"
+    }
+  },
+  "xml_cell_order_current_release": {
+    "status": "complete; ownership released",
+    "prior_release": {
+      "workbook_sha256": "d4902b2454f007c00922daa57c30835cc43b118d2c09e285da87a4c5b45272a7",
+      "handoff_sha256": "18ae9114834d7f06b75deba9e830807de44f5ff2cce7ed24a95bb27e155cb15c",
+      "interpretation": "Historical previous release had correct complete XML values but noncanonical cell order; only serialization is superseded."
+    },
+    "proof": {
+      "path": "regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/xml_cell_order_followup.json",
+      "sha256": "2549f864de70faab48f50943da592c215277157db6336937464f56f15e8c79e0"
+    },
+    "current_workbook_sha256": "51861f2a403630ff27ce7fc97e66718cc09e6c423326babbcadab5146463bbb4",
+    "input_sha256_unchanged": "d4a658bbe97a79a6d2a066b2c4bced50c07af7370887bebc1b221ab0687e4887",
+    "result_sha256_unchanged": "7c1d57e70bcf1a2cdf04b129cd699f6a34c96338875d05c1551c9210211c6263",
+    "DOCX_appendix_unchanged": true,
+    "scientific_mapping_diagnostic_runtime_values_exact": true,
+    "fresh_unpatched_canonical_reader_and_validate_region": "PASS",
+    "no_solver_or_numeric_rerun": true,
+    "shared_pending": "Coordinator workbook-hash consolidation; no shared files mutated."
+  }
+}

@@ -101,6 +101,7 @@ In rough order of yield:
 - the **supplement**, especially for guild-structured models. The East China Sea membership
   table is a `.docx` data sheet, not a table in the PDF. A `.docx` is a zip of XML, so
   `zipfile` plus `word/document.xml` reads it when `python-docx` is unavailable
+- supplementary trait or indicator-input tables, when the methods explicitly link their taxa to the selected baseline groups. Such a table may expand a short illustrative member list. Verify group/version identity, survey periods and whether stage headings are combined; taxon traits or within-group catch contributions do not automatically give allocation shares between model stages
 - the diet composition matrix — inspect prey identities and trophic context, but do not treat what a group eats as evidence of which taxa belong to that predator group
 - the methods section, where groups are usually justified as they are introduced
 - figure captions and table footnotes
@@ -146,7 +147,21 @@ Read the operative group criteria: taxon, habitat, depth, species maximum size v
 
 Use provider common names, functional/commercial categories and the regional species universe to interpret a catch label; retain the provider record as evidence. A fisheries reporting category may be narrower than the entire global taxonomic order or family. Neither the label alone nor provider metadata alone proves all biological criteria. Test relevant regional exceptions, not only global outliers. Resolve historical family usage with source members and authoritative taxonomy before declaring a modern-name contradiction.
 
+Resolve the reporting rank when an authority returns several exact-name records. Do not select the first response merely because its spelling matches. For example, WoRMS returns a genus misspelling called Scaridae (AphiaID 398089, accepted as Calotomus) as well as the historical family Scaridae (AphiaID 125557, superseded by Scarinae). The fisheries category “Parrotfishes” refers to the family usage; retain that historical-rank bridge and the accepted record separately. Preserve raw responses, record the selected rank and identifier, and reassess the regional source definition before changing membership, weights or confidence. A corrected citation alone does not justify changing numerical results.
+
+Check each label's explanation independently when several labels share a candidate set. For example, Elasmobranchii does not include chimaeras, even if it shares a provisional allocation with Chondrichthyes. A source guild mixing sharks and chimaeras can still be a shark candidate; disclose its pooled-composition mismatch without expanding the catch label's membership. Verify any provider-specific departure explicitly.
+
+Keep broad and narrow cephalopod reporting labels distinct. Pelagic argonaut examples within Octopoda do not establish membership for benthic Octopus or Octopodidae. Conversely, a provider Sepiida category explicitly named “Cuttlefishes, bobtail squids” cannot be restricted using only benthic Sepia/Sepiella accounts: some adult bobtails are pelagic. Check the actual reporting union and local source pools; distinguish a weak ecological analogue from observed local membership. See the retained `cephalopod_reporting_scope_lesson.json` in the selected-region validation study for primary evidence and completed-review applicability.
+
+Check a provider's reporting-code bridge before interpreting a residual label as every member of the ordinary English category. SAU keys 100039/100139/100239/100339 are ISSCAAP 39; the corresponding FAO marine/finfish/groundfish/pelagic nei entries are Osteichthyes, distinct from sharks/rays/chimaeras in group 38. Use that bony-fish reporting scope unless documented local/provider evidence establishes a departure. Dedicated cartilaginous groups are excluded; a mixed source pool may remain through its actual eligible bony members. Composition and ecological transfer can still be Very low confidence. See [FAO capture classifications](https://www.fao.org/fishery/docs/STAT/by_FishArea/2001/c27a.pdf) and the [retained provider bridge and applicability review](../../../../../original_research_archive/research/selected_regions_validation_20260930/verification/residual_fish_reporting_scope_review.json).
+
+Provider functional-group metadata is ecological aggregation evidence, not by itself an exhaustive taxonomic or habitat boundary. For example, the current API classifies both marine-fish and finfish residuals as Medium demersals while their verified reporting names support broader bony-fish scope. Where broad names and functional metadata differ, record the uncertainty and any chosen ecological proxy explicitly. The invertebrate categories require actual local group members and life-stage evidence; a demersal proxy is not proof that every pelagic component is absent. See the [SAU methods, printed page 19](https://s3-us-west-2.amazonaws.com/sau-methods-docs/reconstruction-allocation/Methods-Catch-tab-Apr-29-2016.pdf) and [retained counterexample and applicability review](../../../../../original_research_archive/research/selected_regions_validation_20260930/verification/invertebrate_reporting_scope_review.json).
+
+For broad residual reporting labels, the presence of a separate named catch category does not establish that its species are absent from the unidentified category. Use actual source membership and local reporting evidence when defining exclusions. A provider functional tag alone is not an exhaustive boundary: generic marine-fish and finfish categories can include named, pelagic and bathyal bony groups. Preserve independently supported habitat, stage and geographic exclusions; a broad label is not permission to use every group indiscriminately. Record the complete eligible set, genuine zeros, composition proxy and fixed-transfer assumptions.
+
 Keep spatial/temporal applicability distinct from membership. A broad pelagic guild may include an offshore species even if the shelf model's coefficient transfer remains uncertain. Conversely, a concrete habitat/depth mismatch or competing group warrants reduced membership confidence. Do not infer an undocumented merger of source pools from a shortened group name; compare the selected version's definitions and parameter/catch tables, and preserve unresolved structure as a limitation.
+
+Read mixed-guild definitions for every relevant organism type before closing a candidate set. In the WCPO final model, highly migrant bathypelagic forage contains both fish and squid, and bathypelagic forage also contains fish: these can matter to broad fish or mollusc labels even though their group names do not name those taxa. The migrant bathypelagic pool has a different listed composition. Verify the exact source/version and label scope; do not copy this regional example as a universal group list. A provider maximum-size category is not an observed caught-size distribution. Explain why a mixed or deep-water pool is included or excluded, and keep uncertain membership and composition explicit.
 
 Retain review evidence and exact source locators alongside taxonomy. Confidence-only revisions must preserve group IDs and numerical weights. Keep proposed group-set corrections explicit until authorized adoption; assess confidence for the currently adopted mapping in the meantime.
 
@@ -158,6 +173,11 @@ Before leaving a focal-model mapping unresolved or relying on a weak analogue, c
 
 The taxonomy artifact has a row for every group, including `not documented`
 where appropriate: `Taxonomy.xlsx` for an extraction folder, or
-`<model-stem>.taxonomy.csv` for a JSON-only model. The database JSON has been rebuilt
-or patched through the applicable route. After the requested SPPR run, inspect
-`groups_df` for the recorded `taxon_descr` values. For an adopted model, carry the verified membership into regional Selected model groups and use it in PPR / Matching. Follow [regional calculation](regional-calculation.md) for authorized dependent refreshes; no legacy work-order file is required.
+`<model-stem>.taxonomy.csv` for a JSON-only model. Rebuild or patch database JSON only
+when the requested extraction/conversion scope authorizes it. A review that protects
+accepted model inputs retains those inputs and records taxonomy/membership evidence
+in companion artifacts and PPR / Matching; it does not rewrite source parameters or
+replace faithful source descriptions with inferred catch assignments. After a requested
+SPPR run, inspect `groups_df` for the recorded `taxon_descr` values and document any
+source/runtime distinction. Follow [regional calculation](regional-calculation.md)
+for authorized dependent refreshes; no legacy work-order file is required.

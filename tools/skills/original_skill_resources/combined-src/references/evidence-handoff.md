@@ -1,5 +1,9 @@
 # Evidence, execution and adoption contract
 
+Honor any explicit acceptance of existing manual scientific parameters across all stages. Preserve the accepted source/runtime values and conventions, including biomass, P/B, Q/B, EE, diet, biomass accumulation and balancing parameters; record discrepancies from published sources without restoring or rebalancing them. Mapping corrections and dependent reruns do not authorize parameter repairs. Retain a before/after comparison of protected inputs alongside adopted mapping changes.
+
+Read and write retained JSON/text with an explicit matching encoding (normally UTF-8); Windows locale defaults can corrupt source taxonomy, accents and punctuation while leaving numerical values unchanged. Compare source text as well as scalar parameters after inventory restoration. Diagnose the original bytes before correcting text; do not apply a global replacement to accepted or historical source files.
+
 Read this contract with the requested stage reference. It governs evidence and handoff completeness, not model selection or scientific algorithms. It does not require a new transformation-chain archive, balanced-state retention, a different calculator state, or numerical repairs. Preserve existing source evidence and ordinary input/settings provenance.
 
 ## Explain the run and respect existing authorization
@@ -33,6 +37,8 @@ Create a negative-entry table keyed by method, matrix, source column ID/name and
 ## Source, geography and arithmetic context
 
 Retain citation/DOI/accession, exact source version/hash, printed and PDF page/table/cell locators, competing table versions and selection rationale. Distinguish publication date, modeled period and catch year. Keep the selected-model study figure/caption and region-boundary identity, period applicability, area/polygon/trace evidence where available. For overlap, identify method, landmarks, uncertainty and both denominators: A = overlap/region and B = overlap/study area. A picture or filename does not prove measured coverage.
+
+For reconstructed coast-following boundaries, compare the ordered path with the original figure and retain representative inside/outside water control points. Polygon validity and land clipping alone do not detect a misplaced coastal edge excluding a channel or bay. A corrected trace requires updated areas and displayed geometry, with its source and approximation limits preserved.
 
 Freeze the assessed catch universe, including zero rows, exact taxon join keys, available versus assessed catch bases, TL/coefficient source/snapshot, method/TE, native/displayed units, missing masks and unresolved inclusion rule. Retain unrounded numerators/denominators and source-to-result reconciliation for the chosen year/basis. Wet-weight PPR converts to carbon by division by nine exactly once. Unknown coefficients stay unknown even for zero catch, but the annual PPR contribution of genuine recorded zero catch is zero. Positive catch with an unknown coefficient has unknown PPR; do not confuse the coefficient availability mask with the annual-contribution availability mask. These are evidence extracts of authoritative tables, not replacement configuration.
 

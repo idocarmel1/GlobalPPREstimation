@@ -1,0 +1,1 @@
+Native-source QA copied unchanged from the independently owned scratch review. All recorded original hashes and repository paths are historical evidence. The four external primary files are retained beside the ledgers with identical bytes; use their relative basenames here for portable access. This review is source/mapping QA, not scientific model approval.

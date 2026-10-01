@@ -1,0 +1,42 @@
+{
+  "old_git_revision": "01bed58f^",
+  "change_commit": "01bed58f5b1bd0ac1afefd311a7d9b9ae3b9518c",
+  "path": "tools/scientific_code/PPREstimation/ModelData.py",
+  "old_sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+  "current_sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+  "ast_changed_functions": [
+    "ModelData.__init__",
+    "ModelData._init_from_json_filepath",
+    "ModelData.load_json_dict_static"
+  ],
+  "ast_added_functions": [
+    "ModelData._resolve_json_identity"
+  ],
+  "ast_removed_functions": [],
+  "ast_identical_functions": [
+    "ModelData._finalize_det_fate",
+    "ModelData._init_from_model_number",
+    "ModelData._parse_filename",
+    "ModelData.get_DC",
+    "ModelData.get_groups_df",
+    "ModelData.get_seq2name",
+    "ModelData.get_species_groups",
+    "ModelData.validate_DC",
+    "ModelData.validate_det_fate",
+    "SpeciesGroup.from_dict",
+    "SpeciesGroup.to_df_row",
+    "SpeciesGroupLegacy.__str__",
+    "SpeciesGroupLegacy.from_dict",
+    "SpeciesGroupLegacy.to_df_row",
+    "get_DC",
+    "get_model_data",
+    "get_model_diet_data",
+    "get_model_metadata",
+    "get_seq2name",
+    "load_json_dict",
+    "read_json_SpeciesGroup_list"
+  ],
+  "review": "Constructor supports explicit name/year override; JSON loader resolves identity for canonical filenames, guards missing group list and reads UTF-8-sig. Numerical group/diet/detritus extraction functions are unchanged. Legacy filename parsing has first priority, preserving legacy model identity. PPRCalculator uses model identity in diagnostics labels, not scientific equations.",
+  "reuse_condition": "This code review is not by itself a per-model numerical proof. A region may reuse exact accepted historical full matrices/settings after checking protected input identity and current loaded groups/DC/det_fate against retained or old-loader state. Engine hashes remain different and must be stated honestly.",
+  "diff_evidence": "original_research_archive/research/selected_regions_validation_20260930/verification/ModelData_identity_loading_change.diff"
+}

@@ -1,96 +1,480 @@
-# Knowledge graph: single combined skill refresh — 2026-09-28
+# All 23 selected-region graph refresh
 
-The current graph indexes the final consolidation into **one active project skill**, `tools/skills/original_skill_resources/combined-src/SKILL.md` (`ecopath-paper-to-ppr`). Its preparation, recovery, reconstruction audit, taxonomy, diagnostics, regional calculation and project integration documents are internal references. The preserved Claude/Codex distributions and their multi-skill builders are historical resources; their presence does not make them active project entry points. No personal installed copy is claimed updated.
+The exact portable corpus contains 466 files (203 documents and 263 code files), approximately 519,583 words. This bounded graph is an index, not an exhaustive copy of every retained scientific artifact.
 
-The working-tree refresh is based on commit `dbd094391c0ebb794a115dd86325853be21e141a`. Exact source hashes establish content freshness. Scope: **402 selected files, 454,279 words, 3,673 nodes, 6,444 edge pairs, 17 hyperedges and 262 communities**. Ten changed/new documents were semantically extracted. Six obsolete active-source paths were removed from the live allowlist and manifest; their hashes remain in refresh_audit.json as retirement evidence. The smaller graph results from replacing retired instruction entities, not deleting unchanged scientific evidence.
+This refresh re-extracted 66 documents in three native GPT 6.1 Sol xhigh agents and 19 code files with local Graphify AST extraction. All 46 regional review/index documents are included. Unchanged source evidence, separately attributed relationships and hyperedges were retained. Former anchors explicitly identify historical source bytes.
 
-All 3,614 unchanged-source node attributes, 6,487 separately attributed relationships and 14 hyperedges were preserved. Six prior concepts are retained only because unchanged historical evidence refers to their IDs. These anchors are explicitly labelled `Former reference`, have `authority=former`, and retain historical path/hash/location separately from a null live source path. They must not be interpreted as current instructions. The earlier regional extraction, selection and diagnostic findings remain unchanged, including the final 23-of-25 selection snapshot and unresolved scientific caveats.
+Scientific manual inputs remain accepted. Mapping corrections and confidence revisions are evidence-based; diagnostic failure, calculation availability, source availability and approval remain separate. The current unified paper-to-PPR skill and validation guide govern workflow; archived documents retain historical authority only.
 
-## Verification and limits
+Full-byte source freshness includes frontmatter. Graphify manifest hashes are supplementary. Edge-pair topology is used for visualization while canonical JSON preserves every evidence record. External import stubs identify referenced symbols only and do not claim their implementation was read.
 
-All 402 source/manifest hashes, every graph endpoint and 44 local links in the changed documents passed. The HTML node/edge payload counts match the graph and inline JavaScript passes syntax checking. Seven focused retrieval checks pass for the combined entry, requested-stage boundaries, online recovery, direct diagnostics, historical distributions, regional selections and the Mediterranean routing block. These checks do not claim browser interaction or general semantic-search accuracy. Graphify's generic phrase `single active project skill` retrieves unrelated Active SPPR concepts; use the exact node ID below or the requested-stage phrase for the combined workflow.
+[Source hashes](source_hashes.json) · [Graph](graph.json) · [Verification](completion_verification.json) · [Audit](refresh_audit.json)
 
-No scientific computation, parameter repair, workbook/model selection, map rebuild or independent online search was performed in this graph refresh. Original papers, raw data and generated map payloads remain outside the selected semantic scope; retained reports and code provide evidence and contracts. Source/runtime defaults, diagnostic failure and user adoption remain separate. Online recovery instructions preserve source lineage and a bounded search record rather than assuming an unsuccessful search proves data absence. Project diagnostics remain the requested direct GE, TE and With Egestion options, excluding global.
+## Source inventory
 
-Semantic extraction used the host agent. Measured token usage and monetary cost are unavailable and recorded as such. Benchmark figures estimate context sizes only. No new API key was required. Temporary build artifacts are removed after verification; intentional caches remain local and ignored.
-
-```text
-graphify query "combined_src_skill_ecopath_paper_to_ppr_single_active_project_skill" --graph tools/knowledge_graph/graph.json
-graphify query "Requested-stage boundaries within one pipeline skill" --graph tools/knowledge_graph/graph.json
-graphify query "Missing data online recovery reference" --graph tools/knowledge_graph/graph.json
-graphify query "Full direct diagnose_sppr three-method contract" --graph tools/knowledge_graph/graph.json
-graphify query "Historical Claude Codex distributions and multi-skill builders" --graph tools/knowledge_graph/graph.json
-```
-
-Evidence: completion_verification.json, refresh_audit.json, source_hashes.json and manifest.json. The following sections are historical refresh records. Their references to three active skills describe the former arrangement and are superseded by the single combined entry above.
-
----
-
-# Knowledge graph completion refresh — 2026-09-28
-
-The current graph indexes the final regional selection review, extraction lessons, active workflow revisions and changed registry/map adapter code in the working tree based on commit `e7ec04a426c6090196357c7c11ac717ecab63f4a`. Exact source hashes, rather than commit identity alone, establish freshness. This refresh contains **402 explicitly selected files, 455,045 words, 3,682 nodes, 6,460 edge pairs, 18 hyperedges and 275 communities**. The corpus remains below the broad-scan warning thresholds. No broad raw-data scan was performed.
-
-## Current evidence and scope
-
-The 18 new regional and comparison reports cover the final 23-of-25 model-selection snapshot, Pacific WCP option1/Griffiths comparison, California, Falklands, North Sea, Celtic Sea, Mediterranean, Benguela, Visayan Sea, Java Sea, Kuroshio and Sea of Japan. Historical preselection statements are explicitly distinguished from the latest selection summary. Model extraction, numerical runnability, diagnostic health, user adoption and regional integration remain separate concepts. Graph inclusion is not a scientific validation or endorsement of a selected failing model.
-
-Seven active documents were semantically re-extracted: README, all three current SKILL.md files, and the missing-data-recovery, reconstruction-audit and direct-diagnostics references. Online recovery is represented as an evidence search with source/version lineage and a bounded search log; a failed search does not prove worldwide absence of data. The project-specific direct diagnostic options remain GE, TE and With Egestion, excluding global. Source values, derived parameters, authorized experimental repairs and constructor defaults remain distinct. Preserved original skill resources were not edited or represented as the current project instructions.
-
-Eight current code files were parsed, including atlas all-catch ranks, paper/native-model file discovery, workbook/updater changes and focused workflow checks. The final adapter revision excludes administrative retrieval metadata, invalidates inherited verification when source bytes change, and recalculates file-presence flags after removal. AST import endpoints were resolved to known modules where unique; an otherwise missing explicit imported-module endpoint was represented from its actual import evidence. Dependency internals were not parsed.
-
-All 3,470 unchanged-source node records, 6,245 separately attributed relationships and 12 unchanged-source hyperedges were preserved. Changed files were re-extracted, and 51 uniquely matched entities kept their prior IDs. Six old entities needed by unchanged evidence remain flagged `retained_for_unchanged_source_evidence`; these are historical-reference anchors, not claims that their former instructions are current. No source was intentionally deleted. The exact delta is in refresh_audit.json, source scope in .graphifyignore, and portable content hashes in source_hashes.json and manifest.json.
-
-## Verification and limits
-
-completion_verification.json records source and manifest hashes, graph endpoints, unchanged evidence/attributes, HTML payload parity, inline JavaScript syntax and named-concept retrieval results. These checks do not claim browser interaction coverage. No scientific model, PPR equation, parameter set, workbook or regional selection was changed by this graph refresh. Raw PDFs, source model JSON/data tables, workbooks, generated map payloads and giant corpora are outside the selected semantic scope; representative retained reports and current code document their contracts and scientific limitations. The graph does not constitute an independent re-extraction of all original papers or an online source search.
-
-Semantic extraction used the host agent because no Gemini key was configured. Measured semantic token counts and monetary cost are unavailable in the host tools, and cost.json records this honestly. Benchmark context sizes are estimates only, not measured savings or answer-quality evidence. Temporary build fragments are removed after verification; intentional caches remain excluded from Git.
-
-Query from the repository root:
-
-```text
-graphify query "Regional model selection review" --graph tools/knowledge_graph/graph.json
-graphify query "Missing data online recovery" --graph tools/knowledge_graph/graph.json
-graphify query "LME049 Watari pooled detritus 2013 diagnostics" --graph tools/knowledge_graph/graph.json
-graphify query "LME026 Mediterranean routing" --graph tools/knowledge_graph/graph.json
-graphify query "Source faithful reconstruction" --graph tools/knowledge_graph/graph.json
-```
-
-The following sections preserve earlier refresh history. Their counts and then-current behavior describe those earlier snapshots, not the current totals above.
-
----
-
-# Earlier graph refresh history — 2026-09-28
-
-This graph indexes the NPP reorganization and subsequent archive cleanup working tree, based on commit 6cac3d5c195e4c0fc98966208dd997ad6d66016e. Its explicit source corpus contains 378 files and 431,059 words. .graphifyignore contains the selected file allowlist; source_hashes.json and manifest.json record portable repository-relative paths and exact indexed content hashes. Commit identity alone does not establish freshness.
-
-The archive cleanup remapped 69 previously indexed legacy sources to named scientific research folders or the required current archive-layout module. Every remapped source matches its previous SHA-256. No indexed source was intentionally deleted. Obsolete published HTML shells and previous graph/interface snapshots were outside this selected corpus; those files were removed, and this report does not claim they remain preserved. Historical research documents retain their original text and path strings as historical evidence. Current source_file attributes point to actual retained paths, with no references into removed legacy or reorganization_history directories.
-
-Scientific evidence from the earlier graph remains: all 3,481 preceding node identifiers survive, and all relationships attributable to unchanged source files were preserved, including separate evidence on shared endpoints and scientific caveats. 3,360 unchanged-source node records passed attribute comparisons after path remapping. Changed current code and guides were re-extracted or re-reviewed; their former behavior is not represented as current behavior. File-node IDs were matched by unique source/entity/type when the current Graphify parser used a different naming convention.
-
-Current graph: 3,557 nodes, 6,335 edge pairs, 15 hyperedges and 255 communities. This archive update parsed 10 changed/new code files and reviewed seven changed/new documents; it also extracted two explicit code-level provenance concepts and the dynamic archive-layout call. The literal source allowlist was classified and word-counted using Graphify without walking excluded raw/cache trees. Research-source locations were remapped using common_reference_data/provenance/archive_relocation.csv. refresh_audit.json records the exact changed and relocated sources.
-
-Current NPP code is under tools/scientific_code/NPPExtraction, its original numerical-reference ZIP is under reference, and its shared source catalog is common_reference_data/npp/source_catalog.json. Original satellite bytes remain versioned with Git LFS under common_reference_data/npp/raw. Decoded/work caches and unadopted runtime outputs are separate rebuildable products. Adopted results require retained versioned configuration, executed code, source hashes and portable provenance links before workbook publication. Source verification and a plan are distinct from a full raster recomputation.
-
-The current atlas adapter reads compressed reference data from common_reference_data/atlas_source_context. The context README and current code explain exact historical payload preservation, current workbook authority, numerical parity checks, and source-path resolution through the migration and relocation ledgers. The compressed JSON, raw satellite files, source catalogs, large checksum manifests, workbooks and generated atlas pages are excluded from semantic parsing. Their data contracts are represented through reviewed documentation and code. Historical source strings in frozen scientific workbooks can be resolved without recreating obsolete directories.
-
-Graph JSON, HTML, labels, audit report, incremental manifest, source hashes and context-size estimates were regenerated. Source paths, all edge/hyperedge endpoints, unchanged evidence, byte-identical relocations and manifest hashes were checked. HTML node/edge payload counts match the graph; its JavaScript passed a syntax check, and three named-concept retrieval queries passed. This is not a browser-interaction test. No scientific NPP/PPR algorithm was run by this graph refresh. Graph presence does not establish scientific validity; the eight ambiguous relationships and source-attributed scientific limitations remain visible.
-
-Measured semantic tokens and monetary cost are unavailable from the host agent tools and are recorded as unavailable in cost.json. Benchmark context sizes are estimates rather than measured savings or answer-quality results. Temporary extraction artifacts are removed after verification; pre-existing intentional local caches remain excluded from Git.
-
-Query from the repository root:
-
-```text
-graphify query "Retained atlas source context" --graph tools/knowledge_graph/graph.json
-graphify query "Scientific archive cleanup and relocation" --graph tools/knowledge_graph/graph.json
-graphify query "Verified fresh clone NPP source reuse" --graph tools/knowledge_graph/graph.json
-graphify query "catch consumption mean transfer efficiency" --graph tools/knowledge_graph/graph.json
-```
-
-Future refreshes should preserve scientific evidence, honor the explicit source scope, write outputs here, and verify content hashes and endpoints against the current retained locations. Frozen historical commands are source evidence; the root README and current project skills define the active workflow.
-
-Final code-only follow-up: tools/build_html.py now emits LF text/CSV output and test_html_adapter.py verifies that embedded CRLF source values remain unchanged. Both sources were re-parsed; all 3,508 prior node IDs and all other source evidence survived. Final source hashes, HTML payload/syntax and named-concept queries passed.
-
-Basemap follow-up: current documentation and four code sources now cover the bundled display-only Natural Earth land background, its explicit linked_layout replacement, and non-browser Node smoke assertions. Original layout template files remain preserved; generated basemap initialization changes narrowly, while scientific data/boundaries and scientific interactions remain separate. Leaflet and fonts still load online. Raw land GeoJSON and its provenance JSON are excluded from semantic parsing. All 3,509 preceding node IDs and all other-source evidence survived; final source/manifest hashes, graph HTML payload/syntax, and three retrieval queries passed. These automated checks do not claim browser interaction coverage.
-
-Street-map follow-up: two documents and seven code sources now describe HTTP(S)-only OpenStreetMap street detail through the read-only localhost launcher, authentic page referrers, manual simple-map selection, and one-time tile-error fallback. Direct file opening uses bundled land without street requests; Leaflet and fonts remain online. These current conditional rules supersede the earlier bundled-only rendering behavior. The Windows launcher wrapper is represented through current documentation and Python code, not parsed as a separate source. Raw land GeoJSON/provenance remain excluded. All 3,529 preceding node IDs and other-source evidence survived; the renamed basemap test keeps its prior ID while its label and evidence reflect its expanded protocol/fallback checks. Final source/manifest hashes, graph HTML payload/syntax, and three retrieval queries passed. No browser interaction or user visual approval is claimed by this graph refresh.
+- `README.md`
+- `common_reference_data/atlas_source_context/README.md`
+- `common_reference_data/npp/README.md`
+- `original_research_archive/research/atlas_development_2026_09/README.md`
+- `original_research_archive/research/atlas_development_2026_09/atlas/__init__.py`
+- `original_research_archive/research/atlas_development_2026_09/atlas/catalog.py`
+- `original_research_archive/research/atlas_development_2026_09/atlas/core.py`
+- `original_research_archive/research/atlas_development_2026_09/atlas/files.py`
+- `original_research_archive/research/atlas_development_2026_09/atlas/network_controls.html`
+- `original_research_archive/research/atlas_development_2026_09/atlas/network_view.js`
+- `original_research_archive/research/atlas_development_2026_09/atlas/render.py`
+- `original_research_archive/research/atlas_development_2026_09/atlas/time_series.html`
+- `original_research_archive/research/atlas_development_2026_09/atlas/time_series_view.js`
+- `original_research_archive/research/atlas_development_2026_09/build_atlas.py`
+- `original_research_archive/research/atlas_development_2026_09/discover_alternates.py`
+- `original_research_archive/research/atlas_development_2026_09/discover_supplements.py`
+- `original_research_archive/research/atlas_development_2026_09/docs/integration-plan.md`
+- `original_research_archive/research/atlas_development_2026_09/docs/lme-expansion-report.md`
+- `original_research_archive/research/atlas_development_2026_09/download_noaa.py`
+- `original_research_archive/research/atlas_development_2026_09/download_sources.py`
+- `original_research_archive/research/atlas_development_2026_09/inputs/original_generator.py`
+- `original_research_archive/research/atlas_development_2026_09/package_atlas.py`
+- `original_research_archive/research/atlas_development_2026_09/prepare_inputs.py`
+- `original_research_archive/research/atlas_development_2026_09/recover_archive.py`
+- `original_research_archive/research/atlas_development_2026_09/requirements.txt`
+- `original_research_archive/research/atlas_development_2026_09/retrieve_lme_updates.py`
+- `original_research_archive/research/atlas_development_2026_09/tests/test_archived_pdf.py`
+- `original_research_archive/research/atlas_development_2026_09/tests/test_core.py`
+- `original_research_archive/research/atlas_development_2026_09/tests/test_files.py`
+- `original_research_archive/research/atlas_development_2026_09/verify_atlas.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/DESIGN.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/EXECUTION_PLAN.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/INTEGRATION_PROPOSAL.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/METHODS_AND_FINDINGS.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/NUMERICAL_NOTES.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/README.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/results/source_evidence.md`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/baseline.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/experimental_engine/ModelData.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/experimental_engine/PPRCalculator.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/experimental_engine/utils.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/external_audit.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/ledger.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/metrics.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/render_report.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/run_study.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/scenarios.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/src/uncertainty.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_adapter.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_analytic_controls.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_engine_controls.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_external_audit.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_paired_metrics.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_report_renderer.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_routing.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_study_outputs.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/tests/test_uncertainty.py`
+- `original_research_archive/research/discard_sensitivity_2026_09_10/verification/source_pages/audit_sources.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/EXECUTION_STATE.md`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/FINAL_HANDOFF.md`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/METHODS_AND_FINDINGS.md`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/README.md`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/RESPONSE_INTERFACE.md`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/SELECTION_POLICY.md`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/audit_completed.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/audit_inputs.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/audit_saved_differences.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/baseline.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/catalog.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/check_completed_baselines.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/experimental_engine/ModelData.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/experimental_engine/PPRCalculator.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/experimental_engine/utils.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/finalize_delivery.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/findings.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/finish_pipeline.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/ledger.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/metrics.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/preview_report.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/provenance.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/render_report.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/run_all.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/run_replacements.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/run_study.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/scenarios.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/screen.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/snapshot.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/snapshot_workbooks.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/static_checks.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/summarize.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/verify_browser_observations.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/src/verify_outputs.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/tests/test_adapter.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/tests/test_analytic_controls.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/tests/test_engine_controls.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/tests/test_expansion.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/tests/test_paired_metrics.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/tests/test_routing.py`
+- `original_research_archive/research/discard_sensitivity_expanded_2026_09_10/verification/selection_policy_v1.md`
+- `original_research_archive/research/regional_baseline_2026_09/README.md`
+- `original_research_archive/research/regional_selection_review_20260928/CONVERSATION_SUMMARY.md`
+- `original_research_archive/research/regional_selection_review_20260928/PIPELINE_LESSONS.md`
+- `original_research_archive/research/selected_regions_validation_20260930/final_validation_status.md`
+- `original_research_archive/research/selected_regions_validation_20260930/finalize_review_coordination.py`
+- `original_research_archive/research/selected_regions_validation_20260930/graph_evidence_merge.py`
+- `original_research_archive/research/selected_regions_validation_20260930/regional_lead_brief.md`
+- `original_research_archive/research/selected_regions_validation_20260930/verify_final_browser_observations.py`
+- `original_research_archive/research/selected_regions_validation_20260930/verify_final_page_relocation.py`
+- `original_research_archive/research/selected_regions_validation_20260930/verify_final_trends_outputs.js`
+- `original_research_archive/research/selected_regions_validation_20260930/verify_integrated_regional_tables.py`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/compare.py`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/consumption_compare.py`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/consumption_report.md`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/geometric_compare.py`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/geometric_report.md`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/methodology.md`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/positive_te_compare.py`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/positive_te_report.md`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/report.md`
+- `original_research_archive/research/te_mean_comparison_2026_09_11/results.md`
+- `original_research_archive/research/warm_pool_candidate_review_20260928/GRIFFITHS_VS_WCP_OPTION1.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/CODEX_TAKEOVER.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/HANDOFF.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/INTEGRATION_COMPLETION.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/MEAN_TE_REFRESH_2026_09_11.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/NEW_PAPER_VALIDATION.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/baseline-tests.txt`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/final-verification.txt`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/plans/2026-09-05-projects-integration.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/plans/2026-09-07-agent-skill-layout.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/plans/2026-09-07-finish-integration.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/plans/2026-09-07-multiple-ppr-curves.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/plans/2026-09-07-ppr-time-series.md`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/ppre-provenance.txt`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/redundancy-verdicts.txt`
+- `original_research_archive/research/workflow_development_2026_09/docs/superpowers/specs/2026-09-05-projects-integration-design.md`
+- `original_research_archive/research/workflow_development_2026_09/tests/test_mapping_arithmetic.py`
+- `original_research_archive/research/workflow_development_2026_09/tests/test_ppr_scopes.py`
+- `original_research_archive/research/workflow_development_2026_09/tests/test_run_sppr_encoding.py`
+- `original_research_archive/research/workflow_development_2026_09/tests/test_skill_distribution.py`
+- `original_research_archive/research/workflow_development_2026_09/tests/test_time_series_export.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/apply_taxonomy.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/build_ecosystem_data.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/build_model_selection.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/build_model_workbook.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/build_network_atlas.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/build_promotion_manifest.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/build_time_series.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/compare_mappings.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/fix_stale_group_ppr_rows.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/make_eval_root.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/migrate_group_columns.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/migrate_validation_checks.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/promote_release.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/record_resolutions.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/run_sppr.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/run_workbook_exports.ps1`
+- `original_research_archive/research/workflow_development_2026_09/tools/test_verify_redundant.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/update_knowledge_graph.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/verify_model_workbook.py`
+- `original_research_archive/research/workflow_development_2026_09/tools/verify_redundant.py`
+- `regions/EEZ_598/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/reports_index.md`
+- `regions/EEZ_598/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/source_review.md`
+- `regions/EEZ_941/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/SELECTION_REPORT.md`
+- `regions/EEZ_941/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/reports_index.md`
+- `regions/EEZ_941/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/source_review.md`
+- `regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/reports_index.md`
+- `regions/HS_071/validation_reports/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/source_review.md`
+- `regions/HS_077/validation_reports/077HS_1_Eastern_tropical_Pacific_(1993-1997)/reports_index.md`
+- `regions/HS_077/validation_reports/077HS_1_Eastern_tropical_Pacific_(1993-1997)/source_review.md`
+- `regions/LME_003/models/CAL-2016_California_Current_2000-2014/diagnostics/DIRECT_SPPR_REPORT.md`
+- `regions/LME_003/models/CAL-2016_California_Current_2000-2014/selected_pipeline/SELECTED_REGIONAL_REPORT.md`
+- `regions/LME_003/validation_reports/CAL-2016_California_Current_2000-2014/reports_index.md`
+- `regions/LME_003/validation_reports/CAL-2016_California_Current_2000-2014/source_review.md`
+- `regions/LME_013/models/13_2_Northern_Humboldt_Current_(1995-1998)/source_evidence/mapping/13_2_Northern_Humboldt_Current_(1995-1998).MODEL_PROFILE.md`
+- `regions/LME_013/models/13_2_Northern_Humboldt_Current_(1995-1998)/source_evidence/mapping/13_2_Northern_Humboldt_Current_(1995-1998).notes.md`
+- `regions/LME_013/models/13_2_Northern_Humboldt_Current_(1995-1998)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/reports_index.md`
+- `regions/LME_013/validation_reports/13_1_Chilean_Patagonia_(1980)/source_review.md`
+- `regions/LME_014/models/PAT2024_FalklandShelf_2020_native/selection_report.md`
+- `regions/LME_014/validation_reports/PAT2024_FalklandShelf_2020_native/reports_index.md`
+- `regions/LME_014/validation_reports/PAT2024_FalklandShelf_2020_native/source_review.md`
+- `regions/LME_022/models/extraction_review_20260928/EXTRACTION_AND_SPPR_REPORT.md`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/MODEL_PROFILE.md`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/extraction/20251990_East_Coast_of_Scotland_1991-1995/MASS_BALANCE.md`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/extraction/20251990_East_Coast_of_Scotland_1991-1995/REPORT.md`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/extraction/MASTER_INDEX.md`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/reproduce/audit_north_sea.py`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/reproduce/extract_north_sea.py`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/reproduce/map_north_sea.py`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/reproduce/prepare_eval.py`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/reproduce/run.py`
+- `regions/LME_022/models/validation/source_evidence/validation/NS-2025_ECS-1990s/reproduce/verify_scopes_independently.py`
+- `regions/LME_022/validation_reports/22_20251990_East_Coast_of_Scotland_(1991-1995)/reports_index.md`
+- `regions/LME_022/validation_reports/22_20251990_East_Coast_of_Scotland_(1991-1995)/source_review.md`
+- `regions/LME_024/models/extraction_review_20260928/authorized_routing_experiment/REPORT.md`
+- `regions/LME_024/validation_reports/Hernvann_2020_Celtic_Sea_1985/reports_index.md`
+- `regions/LME_024/validation_reports/Hernvann_2020_Celtic_Sea_1985/source_review.md`
+- `regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/DIRECT_SPPR_REPORT.md`
+- `regions/LME_026/validation_reports/Piroddi_2022_Mediterranean_1995/reports_index.md`
+- `regions/LME_026/validation_reports/Piroddi_2022_Mediterranean_1995/source_review.md`
+- `regions/LME_027/validation_reports/27_118_Northwest_Africa_(1987)/reports_index.md`
+- `regions/LME_027/validation_reports/27_118_Northwest_Africa_(1987)/source_review.md`
+- `regions/LME_028/models/28_646_Guinea_(1998)/source_evidence/mapping/28_646_Guinea_(1998).notes.md`
+- `regions/LME_028/models/28_646_Guinea_(1998)/source_evidence/mapping/MODEL_PROFILE.md`
+- `regions/LME_028/models/28_646_Guinea_(1998)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_028/models/28_646_Guinea_(1998)/source_evidence/validation/combined-skill-comparison/28_646_Guinea_(1998).notes.md`
+- `regions/LME_028/models/28_646_Guinea_(1998)/source_evidence/validation/combined-skill-comparison/COMBINED_ARM_REPORT.md`
+- `regions/LME_028/models/28_646_Guinea_(1998)/source_evidence/validation/combined-skill-comparison/README.md`
+- `regions/LME_028/validation_reports/28_646_Guinea_(1998)/reports_index.md`
+- `regions/LME_028/validation_reports/28_646_Guinea_(1998)/source_review.md`
+- `regions/LME_029/models/BEN2020_Southern_Benguela_1978/diagnostics/DIRECT_SPPR_REPORT.md`
+- `regions/LME_029/validation_reports/BEN2020_Southern_Benguela_1978/reports_index.md`
+- `regions/LME_029/validation_reports/BEN2020_Southern_Benguela_1978/source_review.md`
+- `regions/LME_032/models/32_1_Arabian_Sea_off_Karnataka_(2000)/source_evidence/mapping/32_1_Arabian_Sea_off_Karnataka_(2000).MODEL_PROFILE.md`
+- `regions/LME_032/models/32_1_Arabian_Sea_off_Karnataka_(2000)/source_evidence/mapping/32_1_Arabian_Sea_off_Karnataka_(2000).notes.md`
+- `regions/LME_032/models/32_1_Arabian_Sea_off_Karnataka_(2000)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_032/validation_reports/32_1_Arabian_Sea_off_Karnataka_(2000)/reports_index.md`
+- `regions/LME_032/validation_reports/32_1_Arabian_Sea_off_Karnataka_(2000)/source_review.md`
+- `regions/LME_034/models/34_1_Bay_of_Bengal_(1978)/source_evidence/mapping/34_1_Bay_of_Bengal_(1978).notes.md`
+- `regions/LME_034/models/34_1_Bay_of_Bengal_(1978)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_034/validation_reports/34_1_Bay_of_Bengal_(1978)/reports_index.md`
+- `regions/LME_034/validation_reports/34_1_Bay_of_Bengal_(1978)/source_review.md`
+- `regions/LME_035/models/35_412_Gulf_of_Thailande_(1963)/source_evidence/mapping/35_412_Gulf_of_Thailande_(1963).notes.md`
+- `regions/LME_035/models/35_412_Gulf_of_Thailande_(1963)/source_evidence/mapping/MODEL_PROFILE.md`
+- `regions/LME_035/models/35_412_Gulf_of_Thailande_(1963)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_035/validation_reports/35_412_Gulf_of_Thailande_(1963)/reports_index.md`
+- `regions/LME_035/validation_reports/35_412_Gulf_of_Thailande_(1963)/source_review.md`
+- `regions/LME_036/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/source_evidence/mapping/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s).MODEL_PROFILE.md`
+- `regions/LME_036/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/source_evidence/mapping/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s).notes.md`
+- `regions/LME_036/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/source_evidence/mapping/36_2_South_China_Sea_SCS-2007_Northern_South_China_Sea_(1970s).MODEL_PROFILE.md`
+- `regions/LME_036/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/source_evidence/mapping/36_2_South_China_Sea_SCS-2007_Northern_South_China_Sea_(1970s).notes.md`
+- `regions/LME_036/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_036/validation_reports/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/reports_index.md`
+- `regions/LME_036/validation_reports/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/selected_regions_review_20260930/audit_schema.md`
+- `regions/LME_036/validation_reports/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/source_review.md`
+- `regions/LME_037/models/Bacalso2026_Visayan_Sea_1997_baseline/diagnostics/DIRECT_SPPR_REPORT.md`
+- `regions/LME_037/models/extraction_review_20260928/DIET_SOURCE_SEARCH_REPORT.md`
+- `regions/LME_037/reports_index.md`
+- `regions/LME_037/validation_reports/Bacalso2026_Visayan_Sea_1997_baseline/source_review.md`
+- `regions/LME_038/models/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/SELECTED_MODEL_REPORT.md`
+- `regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/reports_index.md`
+- `regions/LME_038/validation_reports/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/source_review.md`
+- `regions/LME_047/models/47_2_East_China_Sea_(2018)/source_evidence/mapping/47_1_East_China_Sea_(1997).notes.md`
+- `regions/LME_047/models/47_2_East_China_Sea_(2018)/source_evidence/mapping/47_2_East_China_Sea_(2018).notes.md`
+- `regions/LME_047/models/47_2_East_China_Sea_(2018)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_047/validation_reports/47_2_East_China_Sea_(2018)/reports_index.md`
+- `regions/LME_047/validation_reports/47_2_East_China_Sea_(2018)/source_review.md`
+- `regions/LME_049/models/49_2019201301_Watari_Detritus_Pooled_Experiment_(2013)/evidence/DECISIONS_AND_LIMITATIONS.md`
+- `regions/LME_049/models/extraction_review_20260928/SPPR_DIAGNOSTICS_REPORT.md`
+- `regions/LME_049/validation_reports/49_2019201301_Watari_Detritus_Pooled_Experiment_(2013)/reports_index.md`
+- `regions/LME_049/validation_reports/49_2019201301_Watari_Detritus_Pooled_Experiment_(2013)/source_review.md`
+- `regions/LME_050/models/extraction_review_20260928/SPPR_DIAGNOSTICS_REPORT.md`
+- `regions/LME_050/models/extraction_review_20260928/matching_improvement_review/MATCHING_IMPROVEMENT_REPORT.md`
+- `regions/LME_050/validation_reports/50_502013_Coastal_Kyoto_Inoue_(2013)/reports_index.md`
+- `regions/LME_050/validation_reports/50_502013_Coastal_Kyoto_Inoue_(2013)/source_review.md`
+- `regions/LME_052/models/52_1_Sea_of_Okhotsk_NE_(1980)/source_evidence/mapping/52_1_Sea_of_Okhotsk_NE_(1980).notes.md`
+- `regions/LME_052/models/52_1_Sea_of_Okhotsk_NE_(1980)/source_evidence/mapping/MODEL_PROFILE.md`
+- `regions/LME_052/models/52_1_Sea_of_Okhotsk_NE_(1980)/source_evidence/mapping/WORK_ORDER.md`
+- `regions/LME_052/reports_index.md`
+- `regions/LME_052/validation_reports/52_1_Sea_of_Okhotsk_NE_(1980)/source_review.md`
+- `tools/atlas_ranks.py`
+- `tools/build_html.py`
+- `tools/format_workbooks.py`
+- `tools/index_candidates.py`
+- `tools/map_basemap.js`
+- `tools/migrate.py`
+- `tools/open_map.py`
+- `tools/original_atlas_data.py`
+- `tools/original_html_layout/archive_layout.py`
+- `tools/original_html_layout/calculation_modules/annual_npp.js`
+- `tools/original_html_layout/calculation_modules/discard_sensitivity.js`
+- `tools/original_html_layout/calculation_modules/group_metrics.js`
+- `tools/original_html_layout/calculation_modules/network_metrics.js`
+- `tools/original_html_layout/calculation_modules/time_series_metrics.js`
+- `tools/original_html_layout/calculation_modules/time_series_npp.js`
+- `tools/provisional_display.py`
+- `tools/regional.py`
+- `tools/run_npp.py`
+- `tools/run_region.py`
+- `tools/scientific_code/NPPExtraction/ANNUAL.md`
+- `tools/scientific_code/NPPExtraction/METHODS.md`
+- `tools/scientific_code/NPPExtraction/README.md`
+- `tools/scientific_code/NPPExtraction/config.example.yaml`
+- `tools/scientific_code/NPPExtraction/npp/__init__.py`
+- `tools/scientific_code/NPPExtraction/npp/aggregate.py`
+- `tools/scientific_code/NPPExtraction/npp/annual.py`
+- `tools/scientific_code/NPPExtraction/npp/benthic.py`
+- `tools/scientific_code/NPPExtraction/npp/cli.py`
+- `tools/scientific_code/NPPExtraction/npp/config.py`
+- `tools/scientific_code/NPPExtraction/npp/ensemble.py`
+- `tools/scientific_code/NPPExtraction/npp/fill.py`
+- `tools/scientific_code/NPPExtraction/npp/grids.py`
+- `tools/scientific_code/NPPExtraction/npp/http.py`
+- `tools/scientific_code/NPPExtraction/npp/log.py`
+- `tools/scientific_code/NPPExtraction/npp/overlap.py`
+- `tools/scientific_code/NPPExtraction/npp/regions.py`
+- `tools/scientific_code/NPPExtraction/npp/report.py`
+- `tools/scientific_code/NPPExtraction/npp/solar.py`
+- `tools/scientific_code/NPPExtraction/npp/sources/__init__.py`
+- `tools/scientific_code/NPPExtraction/npp/sources/copernicus.py`
+- `tools/scientific_code/NPPExtraction/npp/sources/osu.py`
+- `tools/scientific_code/NPPExtraction/npp/workbook.py`
+- `tools/scientific_code/NPPExtraction/reference/summary_2019_validated.txt`
+- `tools/scientific_code/NPPExtraction/requirements-lock.txt`
+- `tools/scientific_code/NPPExtraction/requirements.txt`
+- `tools/scientific_code/NPPExtraction/tests/test_annual.py`
+- `tools/scientific_code/NPPExtraction/tests/test_memory_parity.py`
+- `tools/scientific_code/NPPExtraction/tests/test_runtime_layout.py`
+- `tools/scientific_code/NPPExtraction/tests/test_smoke.py`
+- `tools/scientific_code/NPPExtraction/tests/test_validation.py`
+- `tools/scientific_code/PPREstimation/CLAUDE.md`
+- `tools/scientific_code/PPREstimation/ModelData.py`
+- `tools/scientific_code/PPREstimation/PPRCalculator.py`
+- `tools/scientific_code/PPREstimation/README.md`
+- `tools/scientific_code/PPREstimation/create_PPRS_excel.py`
+- `tools/scientific_code/PPREstimation/information/SPPR_Methods.md`
+- `tools/scientific_code/PPREstimation/information/USER_GUIDE.md`
+- `tools/scientific_code/PPREstimation/tests/test_create_pprs_excel.py`
+- `tools/scientific_code/PPREstimation/tests/test_diagnose_sppr.py`
+- `tools/scientific_code/PPREstimation/tests/test_monte_carlo_sppr.py`
+- `tools/scientific_code/PPREstimation/utils.py`
+- `tools/scientific_code/SeaAroundUsExtraction/EEZ_README.md`
+- `tools/scientific_code/SeaAroundUsExtraction/README.md`
+- `tools/scientific_code/SeaAroundUsExtraction/build_eez_notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/build_global_notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/build_global_te005_notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/build_notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/config/eez.yml`
+- `tools/scientific_code/SeaAroundUsExtraction/config/global.yml`
+- `tools/scientific_code/SeaAroundUsExtraction/config/global_eez_comparison.yml`
+- `tools/scientific_code/SeaAroundUsExtraction/config/global_te005.yml`
+- `tools/scientific_code/SeaAroundUsExtraction/config/pilot.yml`
+- `tools/scientific_code/SeaAroundUsExtraction/download_data.py`
+- `tools/scientific_code/SeaAroundUsExtraction/download_eez_data.py`
+- `tools/scientific_code/SeaAroundUsExtraction/download_global_data.py`
+- `tools/scientific_code/SeaAroundUsExtraction/requirements.txt`
+- `tools/scientific_code/SeaAroundUsExtraction/run_eez_pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/run_global_pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/run_global_te005_pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/run_pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/__init__.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/annual_catch.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/calculations.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/download.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/eez_spatial.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/ingest.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/matching.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/provenance.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/spatial.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/validation.py`
+- `tools/scientific_code/SeaAroundUsExtraction/src/ppr_pipeline/years.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/conftest.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_annual_catch.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_build_delivery_manifest.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_calculations.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_download.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_comparison.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_execution.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_packaging.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_provenance.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_release_validation.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_spatial.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_summary.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_workbook.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_eez_years.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_ingest.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_matching.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_notebook.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_pipeline.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_provenance.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_scope_args.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_spatial.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_validation.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_workbook_metadata.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tests/test_years.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/build_delivery_manifest.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/build_eez_spatial.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/build_global_package.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/build_provenance.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/build_workbooks.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/eez_execution.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/eez_workbook.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/package_eez_release.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/run_distillation.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/scope_args.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/validate_eez_release.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/validate_te005_release.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/verify_global_workbooks.py`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/verify_workbooks.mjs`
+- `tools/scientific_code/SeaAroundUsExtraction/tools/workbook_metadata.mjs`
+- `tools/scientific_helpers/ppr_scopes.py`
+- `tools/skills/ecopath-model-validation/SKILL.md`
+- `tools/skills/ecopath-model-validation/agents/openai.yaml`
+- `tools/skills/ecopath-model-validation/references/acceptance-checks.md`
+- `tools/skills/ecopath-model-validation/references/document-production.md`
+- `tools/skills/ecopath-model-validation/references/evidence-and-calculations.md`
+- `tools/skills/original_skill_resources/README.md`
+- `tools/skills/original_skill_resources/build_combined_skill.py`
+- `tools/skills/original_skill_resources/build_skill.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/SKILL.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/ecopath-model.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/output-formats.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/parameter-conventions.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/pdf-extraction.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/prose-extraction.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/source-bundle.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/references/table-layouts.md`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/requirements.txt`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/check_environment.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/database_json.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/massbalance_check.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/pdf_backend.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/pdfgrid.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/prose_sweep.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/render_pdf_page.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/rotate_pdf.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/validate.py`
+- `tools/skills/original_skill_resources/claude/ecopath-extraction/scripts/write_outputs.py`
+- `tools/skills/original_skill_resources/claude/ecopath-paper-to-ppr/SKILL.md`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/SKILL.md`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/references/coarse-taxa-playbook.md`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/references/model-structures.md`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/references/output-format.md`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/scripts/mapping_io.py`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/scripts/prepare_mapping.py`
+- `tools/skills/original_skill_resources/claude/ewe-species-to-group-mapper/scripts/validate_mapping.py`
+- `tools/skills/original_skill_resources/codex/ecopath-extraction/SKILL.md`
+- `tools/skills/original_skill_resources/codex/ecopath-extraction/agents/openai.yaml`
+- `tools/skills/original_skill_resources/codex/ecopath-extraction/references/workflow.md`
+- `tools/skills/original_skill_resources/codex/ecopath-paper-to-ppr/SKILL.md`
+- `tools/skills/original_skill_resources/codex/ecopath-paper-to-ppr/agents/openai.yaml`
+- `tools/skills/original_skill_resources/codex/ecopath-paper-to-ppr/references/workflow.md`
+- `tools/skills/original_skill_resources/codex/ewe-species-to-group-mapper/SKILL.md`
+- `tools/skills/original_skill_resources/codex/ewe-species-to-group-mapper/agents/openai.yaml`
+- `tools/skills/original_skill_resources/codex/ewe-species-to-group-mapper/references/workflow.md`
+- `tools/skills/original_skill_resources/combined-src/SKILL.md`
+- `tools/skills/original_skill_resources/combined-src/references/direct-diagnostics.md`
+- `tools/skills/original_skill_resources/combined-src/references/evidence-handoff.md`
+- `tools/skills/original_skill_resources/combined-src/references/group-taxonomy.md`
+- `tools/skills/original_skill_resources/combined-src/references/missing-data-recovery.md`
+- `tools/skills/original_skill_resources/combined-src/references/model-preparation.md`
+- `tools/skills/original_skill_resources/combined-src/references/project-integration.md`
+- `tools/skills/original_skill_resources/combined-src/references/reconstruction-audit.md`
+- `tools/skills/original_skill_resources/combined-src/references/regional-calculation.md`
+- `tools/skills/original_skill_resources/combined-src/references/size-stage-allocations.md`
+- `tools/skills/original_skill_resources/combined-src/scripts/write_taxonomy.py`
+- `tools/templates/Model_validation_template_instructions.md`
+- `tools/update_project.py`
+- `tools/verify_html.py`
+- `tools/verify_migration.py`
+- `tools/verify_npp_sources.py`
+- `tools/workbooks.py`
+- `tools/workflow_checks/check_basemap.js`
+- `tools/workflow_checks/compare_original_html.js`
+- `tools/workflow_checks/test_atlas_ranks.py`
+- `tools/workflow_checks/test_html_adapter.py`
+- `tools/workflow_checks/test_map_server.py`
+- `tools/workflow_checks/test_npp_sources.py`
+- `tools/workflow_checks/test_paper_files.py`
+- `tools/workflow_checks/test_retention_ledger.py`
+- `tools/workflow_checks/test_workflow.py`

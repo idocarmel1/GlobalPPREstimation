@@ -31,6 +31,23 @@ def reconcile_paper_files(root,papers):
     model_extensions={'.json','.ewe','.ewemdb','.eweaccdb','.mdb','.accdb'}
     extensions={'.pdf','.doc','.docx','.xls','.xlsx','.zip','.csv','.tif','.tiff','.png','.jpg','.jpeg'}|model_extensions
     administrative={'metadata.json','retrieval.json','source-facts.json','accession_retrieval.json','supplement_retrieval_log.json'}
+    # A paper folder may retain a different publication for source context.
+    # Reviewed roles are bound to exact bytes; filename/PDF presence alone cannot
+    # establish that a related publication is the missing focal article.
+    source_paths=SourcePaths(root)
+    role_path=root/'common_reference_data/paper_file_roles.json'
+    reviewed_roles={}
+    if role_path.is_file():
+        role_data=json.loads(role_path.read_text(encoding='utf-8'))
+        if role_data.get('schema_version')!=1:raise ValueError('Unknown reviewed paper-file role schema')
+        for item in role_data['files']:
+            resolved=source_paths.resolve(item['path'])
+            if resolved is None:continue
+            target=(root/resolved).resolve()
+            if not target.is_relative_to(root) or target in reviewed_roles:raise ValueError('Invalid or duplicate reviewed source-file path')
+            if item['role'] not in {'main','supplement','model','source','context'}:raise ValueError('Unknown reviewed source-file role')
+            if not item.get('sha256') or not item.get('evidence'):raise ValueError('Reviewed source-file role lacks identity/evidence')
+            reviewed_roles[target]=item
     fingerprints={}
     def fingerprint(path):
         if path not in fingerprints:fingerprints[path]=(sha(path),path.stat().st_size)
@@ -41,6 +58,13 @@ def reconcile_paper_files(root,papers):
     for paper in papers:
         source_id=paper.get('source_article_id') or paper['article_id'].split('__')[0]
         folder=root/'regions'/paper['unit_id']/'papers'/source_id
+        candidate_folders=[folder]
+        if paper.get('article_dir'):
+            declared=source_paths.resolve(paper['article_dir'])
+            if declared is not None:
+                declared=(root/declared).resolve()
+                if not declared.is_relative_to(root):raise ValueError('Declared article folder is outside the repository')
+                candidate_folders.insert(0,declared)
         found={}
         for record in paper.get('material_files',[]):
             path=(root/'interactive_map'/record['relative_path']).resolve()
@@ -58,7 +82,9 @@ def reconcile_paper_files(root,papers):
                 found[path]=current
         # A single publication can support multiple regional entries. Reuse its
         # exact source ID when that region has no original files of its own.
-        folders=[folder] if folder.is_dir() and any(p.is_file() and p.name not in administrative and p.suffix.lower() in extensions and p.stat().st_size for p in folder.iterdir()) else source_folders.get(source_id,[])
+        folders=[directory for directory in dict.fromkeys(candidate_folders) if directory.is_dir()
+                 and any(p.is_file() and p.name not in administrative and p.suffix.lower() in extensions and p.stat().st_size for p in directory.iterdir())]
+        if not folders:folders=source_folders.get(source_id,[])
         for directory in folders:
             for path in sorted(directory.iterdir()):
                 if not path.is_file() or path.name in administrative or path.suffix.lower() not in extensions or not path.stat().st_size:continue
@@ -72,6 +98,16 @@ def reconcile_paper_files(root,papers):
                              'sha256':current_hash,'size_bytes':current_size}
         material=[]
         for path,record in found.items():
+            review=reviewed_roles.get(path)
+            if review:
+                if record['sha256']==review['sha256']:
+                    record.update(role=review['role'],file_label=review['file_label'],
+                                  role_evidence=review['evidence'])
+                else:
+                    record.update(role='source',file_label='Source file '+path.suffix[1:].upper(),
+                                  identity_status='not_reassessed',status='local_file_present',
+                                  validation='Source bytes changed since the reviewed file-role assessment; focal article identity is not established.')
+                    record.pop('role_evidence',None)
             record.update({'relative_path':'../'+path.relative_to(root).as_posix(),'article_id':paper['article_id'],'unit_id':paper['unit_id']})
             material.append(record)
         paper['material_files']=material
@@ -86,8 +122,9 @@ def reconcile_paper_files(root,papers):
             # The numeric quality score is a historical scientific assessment,
             # not something that can be recomputed from file existence alone.
             stale='E — no verified downloadable file'
-            if stale in paper.get('loadability_class','') or stale in paper.get('quality_rationale',''):
+            if stale in (paper.get('loadability_class') or ''):
                 paper['loadability_class']='Local sources available; model loadability not reassessed'
+            if stale in (paper.get('quality_rationale') or ''):
                 paper['quality_rationale']='Historical score (not reassessed after local file discovery). '+paper.get('quality_rationale','').replace(stale+'. ','').replace(stale,'')
 
 class SourcePaths:
@@ -195,7 +232,9 @@ def detail_from_book(book,unit,model_id):
             'b_converges':r.get('divergence_b_converges'),'living_converges':r.get('divergence_living_converges'),'balanced':r.get('model_input_is_model_balanced'),
             'config':{k[7:]:v for k,v in r.items() if k.startswith('config_')}}
     mc={r['method']:{k:r.get(k) for k in ['n_samples','n_accepted']} for r in records(book,'Diagnostics','mc_diagnostics')}
-    model={'id':model_id,'label':model_id.replace('_',' '),'verified':bool(any(assign.values()) and tc),'scopes':scopes,'group_data':gd,'health':health,'mc_diagnostics':mc}
+    # The atlas flag enables mapping/group controls; coefficient availability is
+    # checked separately by each method. It is not scientific model approval.
+    model={'id':model_id,'label':model_id.replace('_',' '),'verified':bool(any(assign.values())),'scopes':scopes,'group_data':gd,'health':health,'mc_diagnostics':mc}
     return inp,model
 
 def review_flags(book):

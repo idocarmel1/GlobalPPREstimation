@@ -1,0 +1,44 @@
+test_declared_article_folder_is_discovered_when_source_id_is_an_alias (tools.workflow_checks.test_paper_files.PaperFileTests.test_declared_article_folder_is_discovered_when_source_id_is_an_alias) ... FAIL
+test_declared_article_folder_follows_relocation_and_rejects_escape (tools.workflow_checks.test_paper_files.PaperFileTests.test_declared_article_folder_follows_relocation_and_rejects_escape) ... FAIL
+test_file_discovery_preserves_a_specific_current_loadability_assessment (tools.workflow_checks.test_paper_files.PaperFileTests.test_file_discovery_preserves_a_specific_current_loadability_assessment) ... FAIL
+
+======================================================================
+FAIL: test_declared_article_folder_is_discovered_when_source_id_is_an_alias (tools.workflow_checks.test_paper_files.PaperFileTests.test_declared_article_folder_is_discovered_when_source_id_is_an_alias)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\.codex\worktrees\e5f1\GlobalPPREstimation\tools\workflow_checks\test_paper_files.py", line 15, in test_declared_article_folder_is_discovered_when_source_id_is_an_alias
+    self.assertEqual(paper['main_file_status'],'local_file_present')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'not_found' != 'local_file_present'
+- not_found
++ local_file_present
+
+
+======================================================================
+FAIL: test_declared_article_folder_follows_relocation_and_rejects_escape (tools.workflow_checks.test_paper_files.PaperFileTests.test_declared_article_folder_follows_relocation_and_rejects_escape)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\.codex\worktrees\e5f1\GlobalPPREstimation\tools\workflow_checks\test_paper_files.py", line 26, in test_declared_article_folder_follows_relocation_and_rejects_escape
+    self.assertEqual(paper['main_file_status'],'local_file_present')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'not_found' != 'local_file_present'
+- not_found
++ local_file_present
+
+
+======================================================================
+FAIL: test_file_discovery_preserves_a_specific_current_loadability_assessment (tools.workflow_checks.test_paper_files.PaperFileTests.test_file_discovery_preserves_a_specific_current_loadability_assessment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\.codex\worktrees\e5f1\GlobalPPREstimation\tools\workflow_checks\test_paper_files.py", line 38, in test_file_discovery_preserves_a_specific_current_loadability_assessment
+    self.assertEqual(paper['loadability_class'],assessment)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Local sources available; model loadability not reassessed' != 'Printed source fails strict admission; accepted derived model selected'
+- Local sources available; model loadability not reassessed
++ Printed source fails strict admission; accepted derived model selected
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.026s
+
+FAILED (failures=3)

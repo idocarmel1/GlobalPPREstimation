@@ -7,6 +7,31 @@ from build_html import atomic_text,linked_layout
 from workbooks import YEARS
 
 class HtmlAdapterTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('node'), 'Node required for calculation boundary')
+    def test_reviewed_source_mapping_without_coefficients_keeps_group_controls(self):
+        book={
+            'Catch':{'Catch':(['taxon','catch_basis','unidentified',*YEARS],[['fish','landings',False,*([1.]*70)]])},
+            'Classic PPR':{'Taxa':(['taxon','tl','sppr'],[['fish',2.,90.]])},
+            'Selected model groups':{'Groups':(['group_name'],[['Fish'],['Producer']]),'Group SPPR':(['model_id','group','scope','method','sppr'],[])},
+            'PPR':{'Matching':(['model_id','taxon','group','weight'],[['m','fish','Fish',1.]])},
+            'Diagnostics':{'model_health':(['config_TE_option','status'],[['GE','NOT_RUN']])}}
+        inputs,model=detail_from_book(book,'U','m')
+        self.assertTrue(model['verified'],'Verified mapping controls must not require invented coefficients')
+        self.assertEqual(model['group_data']['methods'],[])
+        self.assertEqual(model['group_data']['mappings'],[[[0,1.]]])
+        self.assertEqual(model['health']['GE']['status'],'NOT_RUN')
+        payload={'unit':{**inputs,'models':[model]},'state':{'unit_id':'U','mode':'ppr','scope':'all','year':2019,'catch_basis':'landings','unidentified':'method','group_selections':{'U::m':['Fish']}}}
+        script="""const fs=require('node:fs'),assert=require('node:assert/strict');
+const metrics=require(process.argv[1]),p=JSON.parse(fs.readFileSync(0,'utf8'));
+const blocked=metrics.evaluate(p.unit,0,{...p.state,method:'new_GE'});
+assert.equal(blocked.value,null);assert.doesNotMatch(blocked.status,/Mapping workbook not verified/);
+const classic=metrics.evaluate(p.unit,0,{...p.state,method:'simple trophic chain'});
+assert.equal(classic.value,10);assert.equal(classic.group_selection.active,true);
+"""
+        module=Path(__file__).resolve().parents[1]/'original_html_layout/calculation_modules/network_metrics.js'
+        result=subprocess.run([shutil.which('node'),'-e',script,str(module)],input=json.dumps(payload),capture_output=True,text=True,encoding='utf-8')
+        self.assertEqual(result.returncode,0,result.stderr)
+
     def test_flattened_diagnostic_config_keeps_method_identity(self):
         book={'Diagnostics':{'model_health':(['config_TE_option','status','divergence_b','divergence_rho_living','model_input_is_model_balanced','balance_is_balanced'],[['TE','FAIL',1.2,1.1,False,False]])}}
         _,model=detail_from_book(book,'U','m')

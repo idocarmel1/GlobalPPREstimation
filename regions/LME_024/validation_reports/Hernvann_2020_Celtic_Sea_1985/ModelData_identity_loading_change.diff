@@ -1,0 +1,155 @@
+diff --git a/tools/scientific_code/PPREstimation/ModelData.py b/tools/scientific_code/PPREstimation/ModelData.py
+index 76fd68f6..8dd2c58f 100644
+--- a/tools/scientific_code/PPREstimation/ModelData.py
++++ b/tools/scientific_code/PPREstimation/ModelData.py
+@@ -210,7 +210,8 @@ class ModelData:
+       * ``model_number``, ``model_name``, ``model_country``, ``model_year``, ``lme``: metadata.
+     """
+ 
+-    def __init__(self, model_input: int | str) -> None:
++    def __init__(self, model_input: int | str, *, model_name: str | None = None,
++                 model_year: str | int | None = None) -> None:
+         """Initialize ModelData from either a model_number (int) or json_filepath (str).
+ 
+         Dispatches to the correct loader based on the runtime type of the argument.
+@@ -221,6 +222,11 @@ class ModelData:
+                   :meth:`_init_from_model_number`.
+                 * ``str`` — a path to a per-model JSON file; loads via
+                   :meth:`_init_from_json_filepath`.
++            model_name (str | None): Optional explicit name, overriding the
++                identity inferred from the file or bundled model.
++            model_year (str | int | None): Optional explicit year or period
++                (e.g. ``"1995-1998"`` or ``"2000s"``), stored as a string.
++                Omitted fields retain their inferred values.
+ 
+         Returns:
+             None: The instance is populated in place.
+@@ -236,11 +242,16 @@ class ModelData:
+             self._init_from_json_filepath(model_input)
+         else:
+             raise TypeError(f"model_input must be int or str, got {type(model_input)}")
++        if model_name is not None:
++            self.model_name = model_name
++        if model_year is not None:
++            self.model_year = str(model_year)
+ 
+     def _init_from_json_filepath(self, json_filepath: str) -> None:
+         """Initialize ModelData from a per-model JSON file (new API).
+ 
+-        Parses model metadata out of the filename, loads the JSON, builds the group
++        Loads the JSON, resolves model identity from the filename, model directory
++        or explicit JSON metadata, builds the group
+         parameter table and the diet/detritus matrices, then injects a synthetic
+         "diet_import" group (an extra sequence index that represents imported diet
+         as if it were an external prey source) into all three structures so that
+@@ -250,20 +261,20 @@ class ModelData:
+         Example: ``227_227_Iceland_(1950).json`` or ``13_10013_Humboldt_Current_(1980).json``
+ 
+         Args:
+-            json_filepath (str): Path to the per-model JSON file. Its stem must
+-                follow the ``{first_number}_{model_number}_{name}_({year})`` convention.
++            json_filepath (str): Path to a legacy named JSON or a canonical
++                ``models/<model_id>/model.json`` file. Missing identity fields
++                remain NaN; explicit nonnumeric model identifiers are preserved.
+ 
+         Returns:
+             None: Populates ``self`` attributes in place (``model_number``,
+                 ``model_name``, ``model_country``, ``model_year``, ``data_json``,
+                 ``groups_data``, ``lme``, ``seq2name``, ``name2seq``, ``DC``, ``det_fate``).
+         """
+-        # Parse filepath
+         filepath = Path(json_filepath)
+-        filename_no_ext = filepath.stem  # e.g., "227_Iceland_(1950)"
+-
+-        # Extract model_number, model_name, and model_year from filename
+-        self.model_number, self.model_name, self.model_year = self._parse_filename(filename_no_ext)
++        self.data_json = ModelData.load_json_dict_static(str(filepath))
++        if not isinstance(self.data_json, dict) or not self.data_json.get('group'):
++            raise ValueError(f"Expected an Ecopath model with a non-empty 'group' list: {filepath}")
++        self.model_number, self.model_name, self.model_year = self._resolve_json_identity(filepath, self.data_json)
+ 
+         # Country is not available from the JSON, set to NaN
+         self.model_country = np.nan
+@@ -275,7 +286,6 @@ class ModelData:
+ 
+         # Read the raw model dict, extract the cleaned per-group records, then
+         # fold them into a parameter DataFrame plus the per-group diet_import series.
+-        self.data_json = ModelData.load_json_dict_static(str(json_filepath))
+         species_groups = ModelData.get_species_groups(self.data_json)
+         self.groups_data, diet_import = ModelData.get_groups_df(species_groups)
+ 
+@@ -656,6 +666,65 @@ class ModelData:
+             DC = DC.div(DC.sum(axis=1), axis=0).fillna(0)
+         return DC
+ 
++    @classmethod
++    def _resolve_json_identity(cls, filepath: Path, data: dict) -> tuple[Any, str, Any]:
++        """Keep legacy identities; resolve canonical files without inventing IDs.
++
++        Legacy named files and two-number model folders retain their historical
++        identity. Otherwise use metadata, extraction_metadata, source_metadata,
++        then top-level identity fields. The enclosing models/<id> directory also
++        covers diagnostic copies below a model. A label supplies a fallback name
++        and its final year/period token; unavailable numbers/years remain NaN.
++        """
++        try:
++            return cls._parse_filename(filepath.stem)
++        except ValueError:
++            pass
++
++        label = filepath.stem
++        if label.lower() == 'model':
++            label = filepath.parent.name
++            for parent in filepath.parents:
++                if parent.parent.name.lower() == 'models':
++                    label = parent.name
++                    break
++        # Repository collision suffixes are hashes, not part of a model period.
++        label = re.sub(r'(?<=\))_[0-9a-fA-F]{8}$', '', label)
++        if re.match(r'^\d+_\d+_', label):
++            try:
++                return cls._parse_filename(label)
++            except ValueError:
++                pass
++
++        sources = [data.get(key) for key in ('metadata', 'extraction_metadata', 'source_metadata')]
++        sources = [source for source in sources if isinstance(source, dict)] + [data]
++
++        def first_value(*keys):
++            for source in sources:
++                for key in keys:
++                    value = source.get(key)
++                    if isinstance(value, (str, int, float)) and not isinstance(value, bool):
++                        if str(value).strip() not in ('', '-9999') and not pd.isna(value):
++                            return value
++            return None
++
++        number = first_value('model_number', 'model_id')
++        if isinstance(number, str) and number.isdecimal():
++            number = int(number)
++        name = first_value('model_name')
++        year = first_value('model_year', 'baseline_year', 'period')
++        period = re.search(r'\(([^)]+)\)$', label)
++        if period is None:
++            # Use the last standalone year, not a publication year in an author ID.
++            periods = list(re.finditer(r'(?:^|_)((?:18|19|20)\d{2}s?(?:[-\u2013](?:18|19|20)\d{2})?)(?=_|$)', label))
++            period = periods[-1] if periods else None
++        if year is None and period is not None:
++            year = period.group(1)
++        if name is None:
++            name = label[:period.start()].rstrip('_') if period is not None else label
++            name = name or label
++        return number if number is not None else np.nan, str(name), str(year) if year is not None else np.nan
++
+     @staticmethod
+     def _parse_filename(filename_no_ext: str) -> tuple[int, str, str]:
+         """Parse a model filename stem into (model_number, model_name, model_year).
+@@ -718,7 +787,7 @@ class ModelData:
+         Returns:
+             dict: The parsed JSON content (for model files, the model dict).
+         """
+-        with open(filepath, 'r') as json_file:
++        with open(filepath, 'r', encoding='utf-8-sig') as json_file:
+             return json.load(json_file)
+ 
+     @classmethod

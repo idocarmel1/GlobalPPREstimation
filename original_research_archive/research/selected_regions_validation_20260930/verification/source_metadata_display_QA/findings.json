@@ -1,0 +1,68 @@
+{
+  "review_status": "Changes requested for two reproduced P2 guard gaps; current actual contextual source cases pass",
+  "scope": "Read-only review of reviewed paper insertion, existing field/geometry compatibility, and exact-byte contextual file roles. No pipeline writer or production workbook/region mutation.",
+  "final_model_approval": "provisional",
+  "reviewed_source_sha256": {
+    "original_research_archive/research/selected_regions_validation_20260930/apply_reviewed_metadata.py": "c08415baf5265030a66ba6f678adfcc105c2113e557527fb0f5c23fa460aacb4",
+    "original_research_archive/research/selected_regions_validation_20260930/test_reviewed_source_insert.py": "32d323c541f47edfdf814289910b050ecd202ab8d668bb1c75eb76eefb0d137f",
+    "tools/original_atlas_data.py": "706d71817cc3121d073d564355ef6d3733b2f71e8935b7c782b81572a1cb4aaa",
+    "tools/workflow_checks/test_paper_files.py": "8473b630291a3569577818e9fa79fc21373b7952f272b95fc341cbd1ad0c9e44",
+    "common_reference_data/paper_file_roles.json": "28e9d554e75e744d56a61a435438b849e0c5cf658184724efe51067a980070cd",
+    "regions/LME_035/validation_reports/35_412_Gulf_of_Thailande_(1963)/central_metadata_proposals.json": "98b1a71ab238ee718c6c8411f64db66b1277d768e5a7984e85a51610ba662613",
+    "original_research_archive/research/selected_regions_validation_20260930/verification/contextual_source_file_roles.json": "a6fbda7482b8bbc2a04a3be046d8600337f477d2357aeac17a4a22caa388e5b6"
+  },
+  "tests": [
+    {
+      "command": "python -m unittest test_reviewed_source_insert test_metadata_roundtrip test_coordinator_metadata test_reviewed_geometry -v",
+      "working_directory": "original_research_archive/research/selected_regions_validation_20260930",
+      "result": "14 tests passed; exit 0"
+    },
+    {
+      "command": "python -m unittest tools.workflow_checks.test_paper_files tools.workflow_checks.test_html_adapter -v",
+      "result": "26 tests passed; exit 0"
+    },
+    {
+      "command": "python original_research_archive/research/selected_regions_validation_20260930/work/qa_source_metadata_display/qa_probes.py",
+      "result": "exit 0; reproduced both findings and passed current actual context-file checks",
+      "evidence": "probe_results.json"
+    }
+  ],
+  "findings": [
+    {
+      "id": "QA-METADATA-1",
+      "severity": "P2",
+      "file": "original_research_archive/research/selected_regions_validation_20260930/apply_reviewed_metadata.py",
+      "lines": [142, 156],
+      "title": "Recheck every reviewed input after backup before saving",
+      "problem": "The full input hash loop precedes copy2. After backup creation only Project.xlsx is rechecked. A regional handoff or plan/replacement file changed during backup can therefore still authorize the central save.",
+      "reproduction": "qa_probes.py metadata_case(True) uses a copy2 hook that completes the backup then replaces a hash-bound regional handoff. apply() returns without error and saves the new paper record while the handoff no longer matches its reviewed SHA256.",
+      "minimal_change": "Repeat the full checks.items() hash loop after copy2 immediately before write_book; add a synthetic handoff-change-during-backup rejection regression.",
+      "current_real_case": "No actual stale handoff observed; the finding concerns an unguarded before-save interval."
+    },
+    {
+      "id": "QA-SOURCE-1",
+      "severity": "P2",
+      "file": "tools/original_atlas_data.py",
+      "lines": [43, 89, 324, 326],
+      "title": "Apply relocation resolution to registry paths",
+      "problem": "datasets() resolves historical material_files paths through SourcePaths, but the role registry indexes raw paths. After a provenance-ledger relocation, the exact same contextual bytes at the resolved path bypass the review and can retain or acquire role main.",
+      "reproduction": "qa_probes.py context_cases() renames related.pdf to renamed-related.pdf with an archive_relocation.csv entry, rewrites an existing main material_files path, then reconciles against the unchanged registry. The file remains main and main_file_status becomes local_file_present although its bytes match the contextual review.",
+      "minimal_change": "Resolve role-registry paths through the existing SourcePaths(root).resolve mechanism before indexing; preserve containment, duplicate/conflict, and exact-hash guards; handle deliberately removed paths explicitly. Add a relocated-context regression.",
+      "current_real_case": "Both current registered files hash-match and remain context with main_file_status not_found."
+    }
+  ],
+  "confirmed_behavior": {
+    "record_insert": "Six end-to-end tests confirm explicit absence, article-ID duplicate rejection across units, unknown field/key disagreement rejection, Papers-only insertion, dry-run immutability, exact inserted-row reversal and unrelated-value preservation. In-memory accumulation also rejects repeated inserts for the same article ID.",
+    "existing_paths": "Existing metadata serialization and geometry insert/replace/remove tests pass with unrelated rows/chunks preserved.",
+    "proposal_compatibility": "The central source snapshot exactly matched the live Project.xlsx hash at review. Its unique selected-model row matches all eight expected-old values, Christensen-1998__LME_035 is absent, and every proposed new-record field exists in the current Papers schema.",
+    "existing_material_files": "Synthetic existing main records are overridden to context while exact unchanged provenance remains; repeated reconciliation is idempotent. Changed bytes downgrade to source/not_reassessed, remove role_evidence, retain the prior hash, and leave main_file_status not_found.",
+    "shared_source_reuse": "Synthetic second-region reuse of the exact reviewed physical source retains context and does not advertise a focal PDF. Existing shared-source regression passes.",
+    "actual035": "Pauly-Chuenpagdee-2003.pdf SHA256 61f58863ac7f21a290bcd7533217b0876a5dc38c3cf3a7fe05b512ae0baacd37: context, link exists, main_file_status not_found.",
+    "actual027": "Morissette_2008_preliminary.pdf SHA256 df048fc739052751bc1c51b0e4fa59723a1ccfce34ae78b513ec0878924c3cf7: context, link exists, main_file_status not_found."
+  },
+  "remaining_gaps": [
+    "Root should rerun focused tests and the two reproductions after fixes, recording the resulting source hashes; this review binds to the hashes above.",
+    "Central proposal adoption and final built-map/archive browser verification belong to the root and were not performed by this read-only reviewer.",
+    "Author HTML availability and original PDF403 were accepted as supplied source context; no new scientific fidelity or whole-pipeline assessment was undertaken."
+  ]
+}

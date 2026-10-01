@@ -1,0 +1,60 @@
+{
+  "sparse_matching_insert_C_D": "PASS; canonical and fast readers agree and retain E/F/G",
+  "numeric_column_order_A_C_Z_AA_AB": "PASS",
+  "fixture_sha256": "69e7a6cb830519e08fc69c1c11bbc639836b00f5a3fba309774fcf9c606cd8fa",
+  "fixture_rows": [
+    {
+      "part": "xl/worksheets/sheet1.xml",
+      "row": 1,
+      "ordered_addresses": [
+        "A1",
+        "B1"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet1.xml",
+      "row": 2,
+      "ordered_addresses": [
+        "A2",
+        "B2",
+        "C2",
+        "D2",
+        "E2",
+        "F2",
+        "G2"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet1.xml",
+      "row": 3,
+      "ordered_addresses": [
+        "A3",
+        "B3",
+        "C3",
+        "D3",
+        "E3",
+        "F3",
+        "G3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet2.xml",
+      "row": 1,
+      "ordered_addresses": [
+        "A1",
+        "C1",
+        "Z1",
+        "AA1",
+        "AB1"
+      ]
+    }
+  ],
+  "patched_code_sha256": "9bf4a27643fc6598f83d765e768c100b9e48afdf0972b2f2e7ecc53871526a49",
+  "red_green_verification": {
+    "red": "Temporarily restoring the real legacy append insertion causes test_xml_order_patcher.py to fail on numeric cell order A/C/Z/AA/AB. No regional workbook was touched by this regression experiment.",
+    "green": "Restoring numeric-column insertion makes the complete fixture pass, including unchanged canonical E/F/G values.",
+    "test_script": "test_xml_order_patcher.py",
+    "test_script_sha256": "baec9fe548cc1071b3b24688559dfcc23cb33e44645b6bb6bc17b24f622bb1dd",
+    "fixture_sha256": "95c7d052690effd278413bb866f4e84d267af4c5f1921691d2048c51347c8aa7"
+  }
+}
