@@ -5,6 +5,7 @@ from workbooks import sha,records
 from original_atlas_data import datasets,add_group_efficiencies
 from provisional_display import provisional_layout
 from researcher_review import reviewed_layout,approved_review,register_review,table_rows
+from map_cumulative_ppr import cumulative_ppr_layout
 
 DISPLAY_FIELDS=['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']
 LINK_UPDATES={"../data/unidentified_taxa.json":"data/unidentified_taxa.json"}
@@ -23,7 +24,7 @@ def linked_layout(template):
         template=template.replace('zoomControl:true,minZoom:1}',
             "zoomControl:true,minZoom:1,maxZoom:['http:','https:'].includes(location.protocol)?18:10}",1)
         template=template.replace(OSM_BASEMAP,basemap,1)
-    return reviewed_layout(provisional_layout(template))
+    return cumulative_ppr_layout(reviewed_layout(provisional_layout(template)))
 
 def atomic_text(path,text):
     path.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(dir=path.parent,suffix=path.suffix);os.close(fd)
