@@ -80,8 +80,8 @@ class ResearcherReviewTests(unittest.TestCase):
         self.assertEqual([s['heading'] for s in summary['sections']], HEADINGS)
         self.assertIn('rounding errors.\nmax error',summary['sections'][0]['rows'][0]['text'])
         self.assertIn('rho_living = 0.32\n', summary['sections'][1]['rows'][0]['text'])
-        self.assertIn('GE<0.01%', summary['sections'][2]['rows'][0]['text'])
-        self.assertEqual(summary['sections'][4]['table'][1], ['High', '142', '39.0208%', '31.8829%'])
+        self.assertIn('GE<0.010%', summary['sections'][2]['rows'][0]['text'])
+        self.assertEqual(summary['sections'][4]['table'][1], ['High', '142', '39%', '32%'])
         self.assertTrue(any('2019 landings' in p for p in summary['sections'][4]['reference']))
         self.assertEqual(summary['note'], NOTE)
 

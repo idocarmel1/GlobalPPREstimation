@@ -16,7 +16,10 @@ assert(model.researcher_review);assert.deepEqual(model.researcher_review,sm.rese
 assert.equal(model.researcher_review.status,'Validated by researcher');
 assert.equal(model.display_ppr_excluded_group_ids.length,4);
 assert.deepEqual(model.researcher_review.sections.map(s=>s.heading),['Model extraction notes','GE and TE diagnostics','Groups excluded from displayed PPR','Geographic fit','Taxon mapping confidence']);
-assert.equal(model.researcher_review.sections[4].table[1][3],'31.8829%');
+const root=require('node:path').resolve(__dirname,'../..');
+assert.equal(model.researcher_review.report_sha256,require('node:crypto').createHash('sha256')
+  .update(fs.readFileSync(require('node:path').join(root,model.researcher_review.report_path))).digest('hex'));
+assert.equal(model.researcher_review.sections[4].table[1][3],'32%');
 assert(model.researcher_review.sections[4].reference.some(p=>p.includes('2019 landings')));
 const start=map.indexOf('/* Shared annual denominator lookup.'),ctx={};vm.createContext(ctx);vm.runInContext(map.slice(start,map.indexOf('/* Rank the full chosen geography;',start)),ctx);
 const metrics=vm.runInContext('PPRMetrics',ctx);
