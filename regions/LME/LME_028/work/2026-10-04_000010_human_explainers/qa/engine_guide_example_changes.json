@@ -1,0 +1,30 @@
+{
+  "source": "explainers/PPREstimation/USER_GUIDE.md",
+  "changes": [
+    {
+      "before": "| `model_input` | `int` | **Legacy API**: a model number; data is pulled from the bundled `real_models/SpeciesGroups.json` / diet data. |",
+      "after": "| `model_input` | `int` | Integer-registry API, requiring separately supplied registry/diet data. Those datasets are unavailable in this checkout; use a canonical JSON path for current project models. |"
+    },
+    {
+      "before": "> **Project ownership:** current regional models live under the grouped region/paper/model or regional EcoBase layout in structure.md. Shared engine source models under real_models/ are reference inputs; toy-model examples are engine tests, not regional candidates.",
+      "after": "> **Project model inputs:** current models live under the grouped region/paper/model or regional EcoBase layout in [project layout](../structure.md). Use the canonical `model.json` path from the selected model. The engine's integer registry and old Iceland/Humboldt example datasets are not supplied here. Toy models illustrate the API; they are not regional candidates."
+    },
+    {
+      "before": "model = PPRCalculator(model_number)        # e.g. PPRCalculator(227)\r\nmodel = PPRCalculator(\"real_models/EwE_jsons/227_227_Iceland_(1950).json\")",
+      "after": "# model_json: string path to the chosen canonical model.json.\r\n# audited_settings: actual recorded loader/calculator settings for that model.\r\nmodel = PPRCalculator(model_json, **audited_settings)"
+    },
+    {
+      "before": "md = ModelData(\"real_models/EwE_jsons/13_10013_Humboldt_Current_(1995-2004).json\")\r\n  model = PPRCalculator.from_modeldata(md)",
+      "after": "md = ModelData(model_json)\r\n  model = PPRCalculator.from_modeldata(md, **audited_settings)"
+    },
+    {
+      "before": "# 1. Load and complete a model.\r\nmodel = PPRCalculator(227)",
+      "after": "# 1. Use the chosen canonical JSON and its actual audited settings.\r\nmodel = PPRCalculator(model_json, **audited_settings)"
+    },
+    {
+      "before": "## 9. End-to-end example\r\n\r\n```python",
+      "after": "## 9. End-to-end example\r\n\r\nThis is a library illustration covering several scientific methods. Supply `model_json` and `audited_settings` as described in section 4. Apply only the methods/configurations appropriate to the model and your research scope; openness sensitivity and Monte Carlo are separate from an ordinary regional refresh. Construction can fail, as explained in [current limitations](../limitations.md). This example does not adopt results into regional workbooks.\r\n\r\n```python"
+    }
+  ],
+  "scope": "Unavailable example dataset paths and input applicability only; no scientific equations, diagnostic thresholds, solver options or numerical execution changed."
+}

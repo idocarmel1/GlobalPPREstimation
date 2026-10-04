@@ -3,22 +3,49 @@ import argparse,hashlib,json,re,subprocess
 from pathlib import Path
 from pipeline import ROOT,GRAPH,PROV,RUN,load,save,sha,now,assert_sources
 
-def template_hash(html):
+def template_hash(html, include_hyperedges=True):
     masked=html
+    def data_only(match):
+        value=json.loads(match.group(2))
+        assert isinstance(value,list),'Native graph binding is not a JSON array'
+        return match.group(1)+'PAYLOAD'+match.group(3)
     for name,next_name in [('RAW_NODES','RAW_EDGES'),('RAW_EDGES','LEGEND')]:
-        masked,count=re.subn(r'(const '+name+r' = )\[.*?\](;\nconst '+next_name+r' = )',r'\1PAYLOAD\2',masked,count=1,flags=re.S)
+        masked,count=re.subn(r'(const '+name+r' = )(\[.*?\])(;\nconst '+next_name+r' = )',data_only,masked,count=1,flags=re.S)
         assert count==1,name
-    masked,count=re.subn(r'(const LEGEND = )\[.*?\](;\n)',r'\1PAYLOAD\2',masked,count=1,flags=re.S)
+    masked,count=re.subn(r'(const LEGEND = )(\[.*?\])(;\n)',data_only,masked,count=1,flags=re.S)
     assert count==1
-    masked,count=re.subn(r'(<div id="stats">).*?(</div>)',r'\1GRAPH_COUNTS\2',masked,count=1,flags=re.S)
+    masked,count=re.subn(r'(<div id="stats">)\d+ nodes &middot; \d+ edges &middot; \d+ communities(</div>)',r'\1GRAPH_COUNTS\2',masked,count=1)
     assert count==1
+    if include_hyperedges:
+        masked,count=re.subn(r'(const hyperedges = )(\[.*?\])(;\n// afterDrawing)',data_only,masked,count=1,flags=re.S)
+        assert count==1,'Unexpected native hyperedge data binding'
     return hashlib.sha256(masked.encode('utf8')).hexdigest()
 
 def browser_template_baseline():
     proof=load(PROV/'browser_verification.json')
     assert proof['html_sha256']==sha(GRAPH/'graph.html'),'Browser-tested artifact already changed'
-    save(PROV/'browser_template_baseline.json',{'checked_at':now(),'browser_tested_html_sha256':proof['html_sha256'],'browser_tested_graph_sha256':proof['graph_sha256'],'template_sha256':template_hash((GRAPH/'graph.html').read_text('utf8')),'masking':'Only native RAW_NODES, RAW_EDGES, LEGEND JSON payloads and graph-count footer are replaced. All HTML, CSS, JavaScript functions and dependency tags remain in the template hash.'})
+    save(PROV/'browser_template_baseline.json',{'checked_at':now(),'browser_tested_html_sha256':proof['html_sha256'],'browser_tested_graph_sha256':proof['graph_sha256'],'template_sha256':template_hash((GRAPH/'graph.html').read_text('utf8')),'masking':'Only native RAW_NODES, RAW_EDGES, LEGEND and hyperedges JSON payloads and graph-count footer are replaced. All HTML, CSS, JavaScript functions and dependency tags remain in the template hash.'})
     print('Exact browser-tested HTML script/template baseline retained')
+
+def browser_template_payload_baseline():
+    """Recover the exact prior tested artifact to include its fourth data binding."""
+    baseline=load(PROV/'browser_template_baseline.json')
+    proof=load(PROV/'browser_verification.json')
+    tested=subprocess.check_output(['git','show','768dffbe:tools/knowledge_graph/graph.html'],cwd=ROOT)
+    assert hashlib.sha256(tested).hexdigest()==proof['html_sha256']==baseline['browser_tested_html_sha256']
+    html=tested.decode('utf8').replace('\r\n','\n')
+    prior_three=baseline.get('prior_three_payload_template_sha256',baseline['template_sha256'])
+    assert template_hash(html,include_hyperedges=False)==prior_three
+    if 'prior_three_payload_template_sha256' in baseline:
+        assert template_hash(html)==baseline['template_sha256']
+    baseline.update({'checked_at':now(),'prior_three_payload_template_sha256':prior_three,
+                     'template_sha256':template_hash(html),'tested_artifact_recovered_from':'768dffbe:tools/knowledge_graph/graph.html',
+                     'tested_artifact_full_sha256_matches_actual_browser_proof':True,
+                     'masked_bindings_validated_as_strict_json_arrays':True,'masked_footer_validated_as_plain_count_markup':True,
+                     'masking':'Only native RAW_NODES, RAW_EDGES, LEGEND and hyperedges JSON payloads and graph-count footer are replaced. All HTML, CSS, JavaScript functions and dependency tags remain in the template hash.',
+                     'reason':'The native hyperedges JSON is graph data; the prior three-payload mask left that data binding unmasked. Recovery checks the exact previously browser-tested full artifact before adjusting the data-only mask.'})
+    save(PROV/'browser_template_baseline.json',baseline)
+    print('Exact prior tested artifact recovered; all four native JSON data bindings masked')
 
 def browser_delta():
     baseline=load(PROV/'browser_template_baseline.json')
@@ -27,7 +54,9 @@ def browser_delta():
     static=load(PROV/'html_static_verification.json')
     assert static['pass'] and static['html_sha256']==sha(GRAPH/'graph.html')
     graph=load(GRAPH/'graph.json')
-    save(PROV/'html_delta_verification.json',{'checked_at':now(),'pass':True,'current_html_sha256':sha(GRAPH/'graph.html'),'current_graph_sha256':sha(GRAPH/'graph.json'),'browser_tested_html_sha256':baseline['browser_tested_html_sha256'],'template_sha256':current,'script_template_unchanged':True,'current_payload_syntax_endpoint_id_checks':True,'current_nodes':len(graph['nodes']),'current_pairs':len(graph['links']),'current_communities':len(graph['communities']),'limitation':'Actual full browser interaction is preserved against the initial tested artifact. Subsequent bounded plan delta changed only verified data/legend/count payload; no new browser interaction or current-HTML screenshot is invented.'})
+    assert static['hyperedge_payload_matches_json']
+    assert static['legend_payload_matches_json'] and static['stats_plain_counts_match_json']
+    save(PROV/'html_delta_verification.json',{'checked_at':now(),'pass':True,'current_html_sha256':sha(GRAPH/'graph.html'),'current_graph_sha256':sha(GRAPH/'graph.json'),'browser_tested_html_sha256':baseline['browser_tested_html_sha256'],'template_sha256':current,'script_template_unchanged':True,'current_payload_syntax_endpoint_id_checks':True,'current_hyperedge_payload_matches_json':True,'current_nodes':len(graph['nodes']),'current_pairs':len(graph['links']),'current_communities':len(graph['communities']),'limitation':'Actual full browser interaction is preserved against the initial tested artifact. The bounded current-source delta changed only verified JSON data/legend/count payloads; no new browser interaction or current-HTML screenshot is invented.'})
     print('Bounded HTML data delta PASS: exact tested script/template unchanged; current static payload verified')
 
 def syntax():
@@ -47,8 +76,19 @@ def syntax():
     assert len(edges)==len(graph['links'])
     assert all(e['from'] in ids and e['to'] in ids for e in edges)
     assert all('historical' in n and 'source_location' in n for n in nodes)
+    match=re.search(r'const hyperedges = (\[.*?\]);\n// afterDrawing',html,re.S)
+    assert match,'Unexpected installed hyperedge payload format'
+    hyperedges=json.loads(match.group(1))
+    assert hyperedges==graph.get('hyperedges',[]),'HTML hyperedge data differs from graph JSON'
+    legend=json.loads(re.search(r'const LEGEND = (\[.*?\]);\n',html,re.S).group(1))
+    assert len(legend)==len(graph['communities'])
+    assert {str(item['cid']) for item in legend}==set(graph['communities'])
+    for item in legend:
+        community=graph['communities'][str(item['cid'])]
+        assert item['label']==community['label'] and item['count']==len(community['members'])
+    assert f'<div id="stats">{len(nodes)} nodes &middot; {len(edges)} edges &middot; {len(legend)} communities</div>' in html
     assert 'onclick="focusNode(${esc(JSON.stringify(nid))})"' in html
-    save(PROV/'html_static_verification.json',{'checked_at':now(),'pass':True,'html_sha256':sha(GRAPH/'graph.html'),'node_syntax_check':True,'payload_node_ids_match_json':True,'payload_edge_count_matches_json':True,'all_payload_endpoints_valid':True,'historical_and_source_attributes_present':True,'neighbor_attribute_id_encoding':True,'browser_interaction':'Separately required; static syntax validation does not establish interactive behavior.'})
+    save(PROV/'html_static_verification.json',{'checked_at':now(),'pass':True,'html_sha256':sha(GRAPH/'graph.html'),'node_syntax_check':True,'payload_node_ids_match_json':True,'payload_edge_count_matches_json':True,'all_payload_endpoints_valid':True,'hyperedge_payload_matches_json':True,'legend_payload_matches_json':True,'stats_plain_counts_match_json':True,'historical_and_source_attributes_present':True,'neighbor_attribute_id_encoding':True,'browser_interaction':'Separately required; static syntax validation does not establish interactive behavior.'})
     print(f'HTML syntax and exact payload: {len(nodes)} nodes, {len(edges)} pairs')
 
 def probes():
@@ -125,5 +165,5 @@ def relabel():
     print(f'{len(labels)} current communities mapped to actual prior member evidence')
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['syntax','probes','usage','add_scope','relabel','browser_template_baseline','browser_delta'])
+    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['syntax','probes','usage','add_scope','relabel','browser_template_baseline','browser_template_payload_baseline','browser_delta'])
     globals()[parser.parse_args().action]()

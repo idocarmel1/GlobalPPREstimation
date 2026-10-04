@@ -2,7 +2,7 @@
 
 Open **Project.xlsx** for publication/model metadata, review records and generated regional summaries. Open **regions/<type>/<unit_id>/<unit_id>.xlsx** to work on a region. Double-click **interactive_map/Open map.cmd** for the map, or run `python tools/cli/map.py`. The launcher serves read-only files on this computer at 127.0.0.1; direct file opening uses the bundled land background.
 
-Read [structure.md](explainers/structure.md) for the authoritative directory and ownership contract and [workflow.md](explainers/workflow.md) for operations. The [reorganization plan and execution record](explainers/plans/project_reorganization_plan.md) document agreements, verification, deviations and unresolved limitations. [Skill-efficiency ideas](explainers/plans/skill_efficiency_ideas.md) are reserved for the fresh follow-up chat.
+The [reader guides](explainers/README.md) explain the [project layout](explainers/structure.md), [regional workflow](explainers/workflow.md), scientific methods and [current limitations](explainers/limitations.md). Agent operating rules are maintained separately in [explainers/agents/project_contract.md](explainers/agents/project_contract.md).
 
 ## Selecting an existing model
 
@@ -16,7 +16,7 @@ Refresh derives the path and shortcut, saves a full outgoing workbook snapshot u
 
 Find the selected model through the generated `selected_model.lnk`. Its single `model.json` and adjacent `model_notes.md` describe the scientific input and documented departures. Current review artifacts use `model_validation/validation.docx` and `taxon_mapping.xlsx`; its complete saved workbook is `results/regional_snapshot.xlsx`. Shortcuts are local, ignored navigation files and must be regenerated after a move/clone.
 
-Adding a new paper/model requires actual source metadata and scientific registration once. Paper models live under that paper’s `models/`; JSON-only EcoBase candidates use regional `ecobase/`. Discovery never supplies missing citations or coverage. Use the [pipeline skill](tools/skills/paper-to-ppr/SKILL.md) for authorized scientific stages and the [validation skill](tools/skills/ecopath-model-validation/SKILL.md) for reports/review. Both follow root project_contract. Work uses the fixed run folders in structure.md.
+Adding a new paper/model requires actual source metadata and scientific registration once. Paper models live under that paper’s `models/`; JSON-only EcoBase candidates use regional `ecobase/`. Discovery never supplies missing citations or coverage. Use the [pipeline skill](tools/skills/paper-to-ppr/SKILL.md) for authorized scientific stages and the [validation skill](tools/skills/ecopath-model-validation/SKILL.md) for reports/review. Both follow root project_contract. Work uses the fixed run folders described in the [agent project contract](explainers/agents/project_contract.md).
 
 ## Runtime and commands
 

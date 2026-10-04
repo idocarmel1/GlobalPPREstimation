@@ -9,7 +9,7 @@ Use this active pipeline skill for a complete chain or a requested operation. Re
 
 ## Route before detailed reading
 
-Choose the requested operation using the shared [operation and dependency contract](references/operation-contract.md). Read root [AGENTS.md project_contract](../../../AGENTS.md#project_contract), [README](../../../README.md), [structure](../../../explainers/structure.md) and [workflow](../../../explainers/workflow.md) before modifying project content. An unchanged contract already read in this context need not be repeated; new contexts read it. Read only the route's additional references and relevant saved inputs.
+Choose the requested operation using the shared [operation and dependency contract](references/operation-contract.md). Read root [AGENTS.md project_contract](../../../AGENTS.md#project_contract), [README](../../../README.md), [agent project contract](../../../explainers/agents/project_contract.md) before modifying project content. An unchanged contract already read in this context need not be repeated; new contexts read it. Read only the route's additional references and relevant saved inputs.
 
 | Request | Route |
 |---|---|

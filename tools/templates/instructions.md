@@ -1,6 +1,6 @@
 # Model validation template filling guide
 
-Template version 8, 1 October 2026; percentage display updated 2 October 2026. Use with [validation.docx](validation.docx) and the authoritative [structure contract](../../explainers/structure.md).
+Template version 8, 1 October 2026; percentage display updated 2 October 2026. Use with [validation.docx](validation.docx) and the authoritative [structure contract](../../explainers/agents/project_contract.md).
 
 This guide accompanies the reusable template. It is not a skill and is not part of the filled report. The layout reflects the final researcher-signed LME032, LME034 and LME036 reports, compared with the original automatically authored LME036 report and earlier template. Use their structure and concise presentation, not their regional decisions or values. Examples below illustrate rules; they are not newly verified classifications or results.
 

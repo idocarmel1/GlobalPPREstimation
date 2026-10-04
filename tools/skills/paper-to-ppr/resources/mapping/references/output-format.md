@@ -1,6 +1,6 @@
 # Mapping records and supporting evidence
 
-Regional PPR / Matching is the adopted mapping authority. Use the [regional contract](../../../references/regional-calculation.md) and [structure](../../../../../../explainers/structure.md). CSV transcriptions/proposals are evidence until authorized adoption, not a second mapping registry. Former data/<unit>/mapping, top10, builder and selection-workbook paths are obsolete.
+Regional PPR / Matching is the adopted mapping authority. Use the [regional contract](../../../references/regional-calculation.md) and [agent project contract](../../../../../../explainers/agents/project_contract.md). CSV transcriptions/proposals are evidence until authorized adoption, not a second mapping registry. Former data/<unit>/mapping, top10, builder and selection-workbook paths are obsolete.
 
 ## Adopted rows
 

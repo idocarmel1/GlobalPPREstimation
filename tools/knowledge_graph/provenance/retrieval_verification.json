@@ -1,10 +1,124 @@
 {
-  "checked_at": "2026-10-04T20:21:04.176543+00:00",
+  "checked_at": "2026-10-04T21:10:44.893977+00:00",
   "pass": true,
-  "graph_sha256": "f00879d097512a2cd9a79868ccbbd399c6be8cf35a9965e7ab116b19d27ddd44",
+  "graph_sha256": "6ba7ed79d271760c552f4edf03e9d20ca8475958ae84fe01bf47f0ce0156c2cd",
   "probes": [
     {
-      "name": "mapping",
+      "name": "human_index",
+      "question": "Guides to the project",
+      "command": [
+        "graphify",
+        "query",
+        "Guides to the project",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "expected_current_source": "explainers/README.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_human_index.txt",
+      "output_sha256": "ddac8ee11f501ec58e5fdcc2b6f3759096b23c19bd0b0c21c42ed850a0dc90fc",
+      "characters": 24194
+    },
+    {
+      "name": "human_layout",
+      "question": "Where to find things",
+      "command": [
+        "graphify",
+        "query",
+        "Where to find things",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "expected_current_source": "explainers/structure.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_human_layout.txt",
+      "output_sha256": "22cda42b8178be1e333943ad9e073de6f131fd267cbb2a237f67c19e230b4129",
+      "characters": 24207
+    },
+    {
+      "name": "human_workflow",
+      "question": "Working with a region",
+      "command": [
+        "graphify",
+        "query",
+        "Working with a region",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "expected_current_source": "explainers/workflow.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_human_workflow.txt",
+      "output_sha256": "e1c8f37b88e069116f9a0415641a6bab9696251cc12b2a723d2f7a878eb69074",
+      "characters": 13341
+    },
+    {
+      "name": "human_validation",
+      "question": "Validation reports and researcher decisions",
+      "command": [
+        "graphify",
+        "query",
+        "Validation reports and researcher decisions",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "expected_current_source": "explainers/validation.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_human_validation.txt",
+      "output_sha256": "85babd4a2599554997e045777c00aede1bc2a160792999cdf73a303327d537b7",
+      "characters": 11722
+    },
+    {
+      "name": "agent_contract",
+      "question": "Project operating contract for agents",
+      "command": [
+        "graphify",
+        "query",
+        "Project operating contract for agents",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "expected_current_source": "explainers/agents/project_contract.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_agent_contract.txt",
+      "output_sha256": "cff62dca1aaba9a47b8d36efc6a3c17ca5e7a98469826d80b6f08cb346739080",
+      "characters": 24199
+    },
+    {
+      "name": "current_limitations",
+      "question": "Current limitations and what they mean",
+      "command": [
+        "graphify",
+        "query",
+        "Current limitations and what they mean",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "expected_current_source": "explainers/limitations.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_current_limitations.txt",
+      "output_sha256": "f0f3522e3da6bf7fccdebb0480c2ec34a9e7fb2593011b744069748d1f789e0e",
+      "characters": 24166
+    },
+    {
+      "name": "shared_mapping",
       "question": "One mapping stage per pipeline run",
       "command": [
         "graphify",
@@ -16,155 +130,14 @@
         "8000"
       ],
       "exit_code": 0,
-      "output_file": "probe_efficiency_mapping.txt",
-      "output_sha256": "8baf0eca65bc1af62907db776053ada727f03fc645d41fcab399c928101622ea",
-      "required_visible_anchors": [
-        "operation-contract.md",
-        "Ecopath model validation",
-        "Ecopath paper to regional PPR"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      "expected_current_source": "tools/skills/paper-to-ppr/references/operation-contract.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_shared_mapping.txt",
+      "output_sha256": "c6a068127ef0c3f7f40159d0137175fc6ac628cd929ced2483149d1898cb5219",
+      "characters": 18308
     },
     {
-      "name": "freshness",
-      "question": "Mixed-version publication rejection",
-      "command": [
-        "graphify",
-        "query",
-        "Mixed-version publication rejection",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "8000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_efficiency_freshness.txt",
-      "output_sha256": "90b81e032b66eff93b16ced13951265cc7465ce9242e0edc6ec5ed8820017696",
-      "required_visible_anchors": [
-        "operation-contract.md",
-        "Operation-local read session"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
-    },
-    {
-      "name": "read_session",
-      "question": "ReadSession content hashes publication guard",
-      "command": [
-        "graphify",
-        "query",
-        "ReadSession content hashes publication guard",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "8000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_efficiency_read_session.txt",
-      "output_sha256": "9255f9655e78b66cde0a810d230415751c29296a2435840d5e96e6a858afb04d",
-      "required_visible_anchors": [
-        "workbooks/read_session.py",
-        "assert_unchanged"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
-    },
-    {
-      "name": "validation",
-      "question": "Full model validation workflow",
-      "command": [
-        "graphify",
-        "query",
-        "Full model validation workflow",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "8000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_efficiency_validation.txt",
-      "output_sha256": "53b047087a73967c04eeeea4925e82c2b944dedeeb49ac4d51ff4c6d1aca5b89",
-      "required_visible_anchors": [
-        "references/full-validation.md",
-        "Ecopath model validation"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
-    },
-    {
-      "name": "paper",
-      "question": "Ecopath paper to regional PPR",
-      "command": [
-        "graphify",
-        "query",
-        "Ecopath paper to regional PPR",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "8000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_efficiency_paper.txt",
-      "output_sha256": "6d77facd5dd9e6afc2bb619e6ae261e5cc4d86215a2e5880a84e0c40a141a375",
-      "required_visible_anchors": [
-        "paper-to-ppr/SKILL.md",
-        "Selection loadability readiness and researcher approval separation"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": true,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
-    },
-    {
-      "name": "structure",
-      "question": "Grouped region paper model layout",
-      "command": [
-        "graphify",
-        "query",
-        "Grouped region paper model layout",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "8000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_efficiency_structure.txt",
-      "output_sha256": "b66c15c39b1e84ad76489d94679c8b531e575ced8d426c067390fe2560450225",
-      "required_visible_anchors": [
-        "explainers/structure.md"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
-    },
-    {
-      "name": "refresh",
-      "question": "One-command regional refresh",
-      "command": [
-        "graphify",
-        "query",
-        "One-command regional refresh",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "8000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_efficiency_refresh.txt",
-      "output_sha256": "bcdfc05385fcb2b1f93f17e5fd79eb5bd71f9b23fcf5bb682ff5b72139c5ec0d",
-      "required_visible_anchors": [
-        "explainers/structure.md"
-      ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
-    },
-    {
-      "name": "restore",
+      "name": "current_restoration",
       "question": "Selective compatible restoration",
       "command": [
         "graphify",
@@ -176,16 +149,222 @@
         "8000"
       ],
       "exit_code": 0,
-      "output_file": "probe_efficiency_restore.txt",
-      "output_sha256": "7089963e13378998c691f98cd7c125cdf404b58f3ba47ce59210bfd495f0ac88",
-      "required_visible_anchors": [
-        "explainers/structure.md"
+      "expected_current_source": "explainers/agents/project_contract.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_current_restoration.txt",
+      "output_sha256": "41c98a3a27a6d68bcb58397be41e76890aad0455bbbdefd90c714f427f563112",
+      "characters": 8066
+    },
+    {
+      "name": "current_snapshot",
+      "question": "Full regional workbook snapshot",
+      "command": [
+        "graphify",
+        "query",
+        "Full regional workbook snapshot",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
       ],
-      "all_required_anchors_present": true,
-      "budget_notice_present": false,
-      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      "exit_code": 0,
+      "expected_current_source": "explainers/agents/project_contract.md",
+      "concept_and_source_present": true,
+      "output_file": "probe_human_current_snapshot.txt",
+      "output_sha256": "21b5478759413f20a0939cf3bc843ec188121b7de6785e0f24d6e7793701c4c5",
+      "characters": 9587
     }
   ],
-  "review": "Root checked exact concept/source anchors in actual installed CLI output against the current graph. Earlier baseline probe files are historical; these eight probes supersede their completion status.",
-  "limits": "The initial informal budget1800 probes had truncated output. A first final-script attempt incorrectly expected the code class within the freshness concept neighborhood; its actual neighbor is Operation-local read session. A separate direct code query now checks ReadSession. Final budget8000 probes verify required visible anchors only; neither whole-graph traversal nor scientific validity is inferred."
+  "prior_verified_suite": {
+    "checked_at": "2026-10-04T20:21:04.176543+00:00",
+    "pass": true,
+    "graph_sha256": "f00879d097512a2cd9a79868ccbbd399c6be8cf35a9965e7ab116b19d27ddd44",
+    "probes": [
+      {
+        "name": "mapping",
+        "question": "One mapping stage per pipeline run",
+        "command": [
+          "graphify",
+          "query",
+          "One mapping stage per pipeline run",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_mapping.txt",
+        "output_sha256": "8baf0eca65bc1af62907db776053ada727f03fc645d41fcab399c928101622ea",
+        "required_visible_anchors": [
+          "operation-contract.md",
+          "Ecopath model validation",
+          "Ecopath paper to regional PPR"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "freshness",
+        "question": "Mixed-version publication rejection",
+        "command": [
+          "graphify",
+          "query",
+          "Mixed-version publication rejection",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_freshness.txt",
+        "output_sha256": "90b81e032b66eff93b16ced13951265cc7465ce9242e0edc6ec5ed8820017696",
+        "required_visible_anchors": [
+          "operation-contract.md",
+          "Operation-local read session"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "read_session",
+        "question": "ReadSession content hashes publication guard",
+        "command": [
+          "graphify",
+          "query",
+          "ReadSession content hashes publication guard",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_read_session.txt",
+        "output_sha256": "9255f9655e78b66cde0a810d230415751c29296a2435840d5e96e6a858afb04d",
+        "required_visible_anchors": [
+          "workbooks/read_session.py",
+          "assert_unchanged"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "validation",
+        "question": "Full model validation workflow",
+        "command": [
+          "graphify",
+          "query",
+          "Full model validation workflow",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_validation.txt",
+        "output_sha256": "53b047087a73967c04eeeea4925e82c2b944dedeeb49ac4d51ff4c6d1aca5b89",
+        "required_visible_anchors": [
+          "references/full-validation.md",
+          "Ecopath model validation"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "paper",
+        "question": "Ecopath paper to regional PPR",
+        "command": [
+          "graphify",
+          "query",
+          "Ecopath paper to regional PPR",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_paper.txt",
+        "output_sha256": "6d77facd5dd9e6afc2bb619e6ae261e5cc4d86215a2e5880a84e0c40a141a375",
+        "required_visible_anchors": [
+          "paper-to-ppr/SKILL.md",
+          "Selection loadability readiness and researcher approval separation"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": true,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "structure",
+        "question": "Grouped region paper model layout",
+        "command": [
+          "graphify",
+          "query",
+          "Grouped region paper model layout",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_structure.txt",
+        "output_sha256": "b66c15c39b1e84ad76489d94679c8b531e575ced8d426c067390fe2560450225",
+        "required_visible_anchors": [
+          "explainers/structure.md"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "refresh",
+        "question": "One-command regional refresh",
+        "command": [
+          "graphify",
+          "query",
+          "One-command regional refresh",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_refresh.txt",
+        "output_sha256": "bcdfc05385fcb2b1f93f17e5fd79eb5bd71f9b23fcf5bb682ff5b72139c5ec0d",
+        "required_visible_anchors": [
+          "explainers/structure.md"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      },
+      {
+        "name": "restore",
+        "question": "Selective compatible restoration",
+        "command": [
+          "graphify",
+          "query",
+          "Selective compatible restoration",
+          "--graph",
+          "tools/knowledge_graph/graph.json",
+          "--budget",
+          "8000"
+        ],
+        "exit_code": 0,
+        "output_file": "probe_efficiency_restore.txt",
+        "output_sha256": "7089963e13378998c691f98cd7c125cdf404b58f3ba47ce59210bfd495f0ac88",
+        "required_visible_anchors": [
+          "explainers/structure.md"
+        ],
+        "all_required_anchors_present": true,
+        "budget_notice_present": false,
+        "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+      }
+    ],
+    "review": "Root checked exact concept/source anchors in actual installed CLI output against the current graph. Earlier baseline probe files are historical; these eight probes supersede their completion status.",
+    "limits": "The initial informal budget1800 probes had truncated output. A first final-script attempt incorrectly expected the code class within the freshness concept neighborhood; its actual neighbor is Operation-local read session. A separate direct code query now checks ReadSession. Final budget8000 probes verify required visible anchors only; neither whole-graph traversal nor scientific validity is inferred."
+  },
+  "scope": "Nine actual installed CLI queries retrieve named current concepts and their correct human or agent source. This is bounded source navigation, not a full traversal or scientific verification."
 }

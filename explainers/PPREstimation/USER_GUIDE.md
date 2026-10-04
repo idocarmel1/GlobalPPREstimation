@@ -1,6 +1,6 @@
 # User Guide: `ModelData` and `PPRCalculator`
 
-This is scientific engine/API background. Read the [structure contract](../structure.md), [model loading note](../model_loading.md), [current parameters](../sppr_parameters.md) and [direct-diagnostics contract](../../tools/skills/paper-to-ppr/references/direct-diagnostics.md) before executing project work. The ordinary direct route remains GE/TE/With Egestion; global/Monte Carlo examples below require separately authorized scope. Engine toy/legacy data examples do not define regional discovery or selection. Source behavior and actual model-specific provenance govern every result.
+This is scientific engine/API background. Read the [project layout](../structure.md), [model loading note](../model_loading.md), [current parameters](../sppr_parameters.md) and [direct-diagnostics contract](../../tools/skills/paper-to-ppr/references/direct-diagnostics.md) before executing project work. The ordinary direct route remains GE/TE/With Egestion; global/Monte Carlo examples below require separately authorized scope. Engine toy/legacy data examples do not define regional discovery or selection. Source behavior and actual model-specific provenance govern every result.
 
 The workbook exporter and atlas provide catch and consumption variants of both
 global-mean families. `SPPR_1995_TEmean` and `Ulanowicz_globalTEmean` use consumption
@@ -109,11 +109,11 @@ md = ModelData(model_input)
 
 | Parameter | Type | Meaning |
 |-----------|------|---------|
-| `model_input` | `int` | **Legacy API**: a model number; data is pulled from the bundled `real_models/SpeciesGroups.json` / diet data. |
+| `model_input` | `int` | Integer-registry API, requiring separately supplied registry/diet data. Those datasets are unavailable in this checkout; use a canonical JSON path for current project models. |
 | `model_input` | `str` | Path to a supported Ecopath JSON, including the canonical paper-owned or EcoBase `model.json`. Legacy two-number filenames retain their historical identity; canonical files resolve identity from their model directory and explicit metadata. Unknown number/year remain unknown rather than inferred provenance. |
 | `model_name`, `model_year` | optional keyword | Explicit caller-provided identity labels; record their actual source and do not use them to invent a publication period. |
 
-> **Project ownership:** current regional models live under the grouped region/paper/model or regional EcoBase layout in structure.md. Shared engine source models under real_models/ are reference inputs; toy-model examples are engine tests, not regional candidates.
+> **Project model inputs:** current models live under the grouped region/paper/model or regional EcoBase layout in [project layout](../structure.md). Use the canonical `model.json` path from the selected model. The engine's integer registry and old Iceland/Humboldt example datasets are not supplied here. Toy models illustrate the API; they are not regional candidates.
 
 **Returns:** `None` (populates the instance in place).
 **Raises:** `TypeError` if `model_input` is neither `int` nor `str`; `ValueError` if no group matches a
@@ -157,8 +157,9 @@ and then offers the SPPR methods. Completion does not guarantee a balanced food 
 ```python
 from PPRCalculator import PPRCalculator
 
-model = PPRCalculator(model_number)        # e.g. PPRCalculator(227)
-model = PPRCalculator("real_models/EwE_jsons/227_227_Iceland_(1950).json")
+# model_json: string path to the chosen canonical model.json.
+# audited_settings: actual recorded loader/calculator settings for that model.
+model = PPRCalculator(model_json, **audited_settings)
 ```
 
 **`PPRCalculator(model_number, underdetermined=False, zero_catch=True, zero_biomass_accum=True,
@@ -187,8 +188,8 @@ default_gs=True, weight_flow=1.0, weight_guess=1.0, normalize_DC=False, DC_tol=0
 
   ```python
   from ModelData import ModelData
-  md = ModelData("real_models/EwE_jsons/13_10013_Humboldt_Current_(1995-2004).json")
-  model = PPRCalculator.from_modeldata(md)
+  md = ModelData(model_json)
+  model = PPRCalculator.from_modeldata(md, **audited_settings)
   ```
 
 - **`PPRCalculator.from_dict(data_dict, ...)`** → `PPRCalculator`. Rebuild from a dict of pre-existing
@@ -759,11 +760,13 @@ named = PPRCalculator.rename_results(sppr, model.seq2name)
 
 ## 9. End-to-end example
 
+This is a library illustration covering several scientific methods. Supply `model_json` and `audited_settings` as described in section 4. Apply only the methods/configurations appropriate to the model and your research scope; openness sensitivity and Monte Carlo are separate from an ordinary regional refresh. Construction can fail, as explained in [current limitations](../limitations.md). This example does not adopt results into regional workbooks.
+
 ```python
 from PPRCalculator import PPRCalculator
 
-# 1. Load and complete a model.
-model = PPRCalculator(227)
+# 1. Use the chosen canonical JSON and its actual audited settings.
+model = PPRCalculator(model_json, **audited_settings)
 
 # 2. Inspect it.
 print("groups:", model.n_groups)

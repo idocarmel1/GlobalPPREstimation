@@ -299,6 +299,8 @@ def export():
     assert_current_citations(extraction['nodes'] + extraction['edges'] + extraction.get('hyperedges', []), corpus)
     assert_endpoints(extraction)
     dispositions=load(PROV/'refresh_dispositions.json')
+    retired=dispositions.get('explicitly_retired_plan_relationships',0)
+    retirement_note=(f' {retired} relationships referring to user-retired planning concepts were explicitly excluded from current scope; exact original records and reasons are in the documentation work QA. All remaining eligible reused records are preserved.' if retired else '')
     labels={int(k):v for k,v in load(PROV/'community_labels.json').items()}
     communities={int(k):v for k,v in analysis['communities'].items()}
     assert set(labels)==set(communities), 'Every community needs a human-readable label'
@@ -332,6 +334,7 @@ def export():
     report=generate(G,communities,score_all(G,communities),labels,god_nodes(G),surprising_connections(G,communities),detection,{'input':0,'output':0},'.',suggested_questions=suggest_questions(G,communities,labels),built_at_commit=base)
     report=re.sub(r'^- Token cost:.*$', '- Token cost: unavailable; the host agent tools did not expose actual input/output usage.',report,flags=re.M)
     report+='\n\nThe graph indexes the explicit curated scope in [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Freshness uses full source SHA256 hashes, including frontmatter; it is not evidence of scientific readiness or researcher approval. Every independently attributed relationship is retained in each JSON link’s `evidence` array, while clustering and HTML use one edge per node pair. Historical research nodes and edges are marked `historical`. Bounded skill-efficiency trials are recorded separately in the model-local work QA; they do not establish full pipeline equivalence.\n'
+    report+=retirement_note+'\n'
     (GRAPH/'GRAPH_REPORT.md').write_text(report,encoding='utf8')
     to_html(G,communities,str(GRAPH/'graph.html'),community_labels=labels,node_limit=5000 if G.number_of_nodes()>5000 else None)
     if G.number_of_nodes()<=5000:
@@ -369,7 +372,7 @@ The graph is an architectural and evidence index. Model selection, loadability, 
 
 The scope excludes dependency trees, temporary work/QA copies, raw binary scientific data, publication binaries, XLSX/DOCX packages, runtime products, obsolete extraction packages, graph self-content and frozen research implementation/test detail. Native publication/workbook evidence is accessed through indexed model notes and source review references; this graph does not claim an exhaustive extraction of those binaries. Historical research is represented by its guides/findings. The exact allowlist is [.graphifyignore](../../.graphifyignore); no second graph directory is used.
 
-Semantic evidence for {dispositions['semantic_reuse_count']} unchanged documents was reused only after full-byte/source-ID eligibility checks; {dispositions['semantic_changed_or_new']} documents requiring fresh extraction were re-extracted by writable agents using the installed Graphify extraction prompt. Every independently attributed reused edge record is preserved. AST extraction used the installed deterministic extractor and its content cache on every current scoped code file. AST rationale fragments were folded into rationale attributes; explicitly imported external names remain citation-backed stubs whose implementations are outside scope. The installed AST extractor may qualify IDs with the source path only when actual same-stem IDs collide; those are extractor identities, not invented semantic duplicates.
+Semantic evidence for {dispositions['semantic_reuse_count']} unchanged documents was reused only after full-byte/source-ID eligibility checks; {dispositions['semantic_changed_or_new']} documents requiring fresh extraction were re-extracted by writable agents using the installed Graphify extraction prompt. Every independently attributed retained reused edge record is preserved.{retirement_note} AST extraction used the installed deterministic extractor and its content cache on every current scoped code file. AST rationale fragments were folded into rationale attributes; explicitly imported external names remain citation-backed stubs whose implementations are outside scope. The installed AST extractor may qualify IDs with the source path only when actual same-stem IDs collide; those are extractor identities, not invented semantic duplicates.
 
 [Source hashes](provenance/source_hashes.json), [prior-source dispositions](provenance/refresh_dispositions.json), [merge dispositions](provenance/merge_dispositions.json), [semantic validation](provenance/semantic_validation.json) and [extraction method](provenance/extraction_method.json) provide the audit trail. Actual token usage and monetary cost are unavailable. Bounded efficiency traces and scientific replication limits are recorded in `regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/`; this graph excludes those temporary trial artifacts.
 

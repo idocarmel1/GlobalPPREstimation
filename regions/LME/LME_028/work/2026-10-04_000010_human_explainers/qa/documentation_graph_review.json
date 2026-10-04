@@ -1,0 +1,104 @@
+{
+  "review_type": "Independent bounded code and evidence review of documentation graph refresh",
+  "reviewed_at_utc": "2026-10-04T21:00:28.369124+00:00",
+  "baseline_commit": "768dffbee84c014e07850f88f042983caa186a41",
+  "baseline_to_working_tree": "New run-local retirement/reconciliation scripts and reporting-only pipeline.py delta",
+  "scope": "Read-only code/evidence review; this QA JSON is the only reviewer write. No graph mutations, pipeline reruns, scientific binary reads, scientific source edits, fresh semantic extraction output review, or broad suites.",
+  "status": "passed_code_and_record_preservation_review",
+  "findings": [],
+  "reviewed_sha256": {
+    "regions/LME/LME_028/work/2026-10-04_000010_human_explainers/code/retire_graph_plan_links.py": "862597ace27dab7cd1fc843df348b275adde92b2c542ed4641a56e507044e021",
+    "regions/LME/LME_028/work/2026-10-04_000010_human_explainers/code/reconcile_graph_endpoints.py": "ad3cdb805698b0b65a7b50dab56374900a4261c0e0ad2f3113f113e768a87da2",
+    "regions/LME/LME_028/work/2026-10-04_000010_human_explainers/qa/retired_graph_relationships.json": "f4acecbbd08597f5696724efd94985be244f41c4784bdd97e050baa6e18e8baf",
+    "tools/knowledge_graph/provenance/pipeline.py": "a9f684e7a4f8da381c2991bc828184c10831ce1699fb2b938288298b7353b3ca",
+    "tools/knowledge_graph/provenance/refresh_dispositions.json": "a9e907b6e21072c529944412a8883111266c5b1554306e441de71716f88836f8",
+    "tools/knowledge_graph/provenance/.runtime/reused_semantic.json": "3ba501a977d0cacd815705962656c9504b32e37e8fbe7236939b73bd6ad2f419"
+  },
+  "reviewed_line_ranges": {
+    "regions/LME/LME_028/work/2026-10-04_000010_human_explainers/code/retire_graph_plan_links.py": "1-41",
+    "regions/LME/LME_028/work/2026-10-04_000010_human_explainers/code/reconcile_graph_endpoints.py": "1-69",
+    "tools/knowledge_graph/provenance/pipeline.py": "export diff at 299-303,334-337,372-375"
+  },
+  "deliberate_retirement": {
+    "exact_relationship_count": 3,
+    "retired_concept_ids": [
+      "plans_skill_efficiency_ideas_proposed_reusable_mechanical_checks",
+      "plans_skill_efficiency_ideas_reuse",
+      "plans_skill_efficiency_implementation_plan_blind_source_extraction"
+    ],
+    "reason": "User explicitly replaced the legacy plans with current human guides and agent instructions. These records point to absent planning concepts and are recorded as a current graph scope exception.",
+    "exact_original_records_preserved_in": "regions/LME/LME_028/work/2026-10-04_000010_human_explainers/qa/retired_graph_relationships.json",
+    "all_three_exact_records_match_published_graph": true,
+    "all_three_current_supporting_source_hashes_match_original_evidence": [
+      {
+        "source_file": "regions/EEZ/EEZ_598/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review/reports_index.md",
+        "sha256": "32bc7a78828ab75da78a501c517f715b59fede5a5d696a4b73adb525705cb052",
+        "current_hash_matches_original_evidence": true
+      },
+      {
+        "source_file": "explainers/sppr_methods.md",
+        "sha256": "062485eb0dee917542087636f9b918c576f7b777ad21bb0b6317f420ce01e553",
+        "current_hash_matches_original_evidence": true
+      },
+      {
+        "source_file": "tools/skills/paper-to-ppr/references/operation-contract.md",
+        "sha256": "b4d4c67ce31cc9c74e8c27967854a91c5821ea9e8eec00706fe166d86376e566",
+        "current_hash_matches_original_evidence": true
+      }
+    ],
+    "retired_records_disjoint_from_current_reused_records": true,
+    "before_edge_records": 1207,
+    "retained_edge_records": 1204,
+    "retained_hyperedges": 23,
+    "no_retired_node_or_hyperedge_endpoints_in_reused_payload": true,
+    "retirement_fixture": "Reconstructed 1207-edge payload in memory from the pre-reconciliation snapshot: exactly3 matches; filtering restores every current edge record and all23 hyperedges exactly.",
+    "scientific_source_mutation": "No source writes in retirement or reconciliation scripts; supporting source files are read only for full SHA256 checks. No project-wide protected-artifact check was rerun by this reviewer."
+  },
+  "published_evidence_preservation": {
+    "baseline_independent_edge_records": 5946,
+    "baseline_hyperedges": 24,
+    "all_1204_retained_records_exact_multiset_subset_of_baseline_after_reversing_new_layer": true,
+    "all_23_retained_hyperedges_exact_multiset_subset_of_baseline": true,
+    "retained_edges_with_prior_endpoint_reconciliation_metadata": 6,
+    "new_current_endpoint_layers_reversed_exactly": {
+      "edges": 17,
+      "hyperedges": 0
+    },
+    "prior_metadata_preserved_in_full_record_baseline_comparison": true,
+    "prior_proof_retained_by_new_script": "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/graph_endpoint_reconciliation.json"
+  },
+  "in_memory_endpoint_checks": {
+    "successful_cases": 2,
+    "rejected_cases": 4,
+    "cases": [
+      "Preserve legacy original_source/original_target and endpoint_reconciliation metadata; append reversible edge/hyperedge history",
+      "Preserve an existing history layer and append a second reversible layer",
+      "Missing required resolution rejects before any save",
+      "Stale source hash rejects before any save",
+      "Wrong current source location rejects before any save",
+      "Unsupported disposition rejects before any save"
+    ],
+    "rejected_case_writes": 0,
+    "source_binding": "Resolution must match a fresh fragment node source_file/source_location, a supported disposition and the full current source hash in the frozen corpus.",
+    "preservation_guard": "Counts stay fixed and reversing only the newly appended history layer must reproduce every original record exactly before saving.",
+    "method": "AST-extracted main with mocked load/sha/save; no execution of actual graph-writing scripts."
+  },
+  "pipeline_reporting_review": {
+    "changed_functions": [
+      "export"
+    ],
+    "python_ast_parse_files": 3,
+    "functional_collection_merge_or_graph_schema_changes": false,
+    "report_and_scope_disclose": "Three deliberately excluded plan relationships, exact original records/reasons in work QA, all remaining eligible reused records preserved.",
+    "scope_exception_truthful_for_current_counts": true,
+    "scientific_readiness_or_full_pipeline_equivalence_claimed_by_delta": false
+  },
+  "execution_and_measurement_limits": {
+    "pending_reference_metadata_count": 32,
+    "reconciliation_observed_during_review": "Runtime gained17 reversible edge history layers during this review. Current record reversibility was checked; actual fresh endpoint semantic support was not reviewed.",
+    "actual_current_endpoint_source_semantics_outside_this_review": true,
+    "canonical_export_and_post_merge_record_preservation_outside_this_review": true,
+    "html_interaction_evidence": "Prior browser-tested template may support interaction reuse; current payload syntax/template/CLI checks remain separate. No fresh screenshot or current browser interaction was performed or claimed by this reviewer.",
+    "independent_verification_counts": "6 mocked endpoint cases,1 reconstructed retirement case,3 Python AST parses, full-record published subset/reversibility checks,3 supporting Markdown SHA256 comparisons. No root dependency-suite or protected-artifact counts claimed."
+  }
+}

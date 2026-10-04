@@ -9,7 +9,7 @@ Create or update the requested review artifact or review information for one exa
 
 ## Route before detailed reading
 
-Use the shared [operation and dependency contract](../paper-to-ppr/references/operation-contract.md). Read root [AGENTS.md project_contract](../../../AGENTS.md#project_contract), [README](../../../README.md), [structure](../../../explainers/structure.md) and [workflow](../../../explainers/workflow.md) before edits. Reuse an unchanged contract already read in this context; new contexts read it. Resolve this directory as `skill_root`, root as the ancestor containing Project.xlsx, and links from their containing file.
+Use the shared [operation and dependency contract](../paper-to-ppr/references/operation-contract.md). Read root [AGENTS.md project_contract](../../../AGENTS.md#project_contract), [README](../../../README.md), [agent project contract](../../../explainers/agents/project_contract.md) before edits. Reuse an unchanged contract already read in this context; new contexts read it. Resolve this directory as `skill_root`, root as the ancestor containing Project.xlsx, and links from their containing file.
 
 | Request | Additional reading and work |
 |---|---|
@@ -46,4 +46,4 @@ A request to draft or revise this skill/template ends with that artifact for rev
 
 ## Authoritative output ownership
 
-Read [structure.md](../../../explainers/structure.md) under root project_contract before editing. Each exact model owns model_validation/validation.docx, taxon_mapping.xlsx and evidence/. Canonical model.json and model_notes.md are adjacent in that model. Keep departures and their evidence in model_notes.md and link them from the extraction row. Use the regional workbook and `python tools/cli/region.py refresh --region regions/<type>/<unit>` for an authorized selection change. Preserve complete model-local snapshots, researcher edits, uncertainty and current independent tables; no legacy extraction payloads or authority sidecars.
+Read [the agent project contract](../../../explainers/agents/project_contract.md) under root project_contract before editing. Each exact model owns model_validation/validation.docx, taxon_mapping.xlsx and evidence/. Canonical model.json and model_notes.md are adjacent in that model. Keep departures and their evidence in model_notes.md and link them from the extraction row. Use the regional workbook and `python tools/cli/region.py refresh --region regions/<type>/<unit>` for an authorized selection change. Preserve complete model-local snapshots, researcher edits, uncertainty and current independent tables; no legacy extraction payloads or authority sidecars.
