@@ -1,0 +1,48 @@
+{
+  "tolerance": {
+    "atol": 1e-12,
+    "rtol": 0
+  },
+  "canonical_changed": false,
+  "all_complete_input_bytes_identical_before_after": true,
+  "actual_retained_settings": {
+    "zero_catch": false,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "underdetermined": false,
+    "normalize_DC": false
+  },
+  "canonical_sha256_before": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e",
+  "canonical_sha256_after": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e",
+  "retained_artifact_hashes": {
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/26_2602022_Mediterranean_Piroddi_(1995).json": "40a7d003fefc4f19c0c931856928086c09f851abac541e4b3a58110e1ac98eb0",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/26_2602022_Mediterranean_Piroddi_Source_(1995).json": "c4f398bd0cf9b16cc6c8bb60c9192637ce5bb8b4b956d00989b76fc197c573f1",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/diagnostics_results.json": "529314c8ee687ca4e711b81ca4b81d00b480730762924014ee3c250fa013358e",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/DIRECT_SPPR_REPORT.md": "a6fd451528bbd4d6cb62b96802f84296b3d9e4cf06b215b485b8e05d4dcd843b",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_audit.json": "4a6403e2045f1472b254f9f429457ef2d74007f9e1046c4cdc88246fa4174410",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_detritus_fate.csv": "45d1bde587358eabccd3961dbcdfa45a6cfcb24b24c1d36f2366b43c9d9aa152",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_diet.csv": "3151defa864e606996996ddcc80020d537ef88d9e0fea0652b29218ec9c229da",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/loader_groups_before_defaults.csv": "88dd061dea180b08f76f93839d28ad2044dcc829f5eed65b69d44a4406687052",
+    "regions/LME_026/models/Piroddi_2022_Mediterranean_1995/diagnostics/staging_transformations.json": "b10a82ab2e912f90129bad510411cb19df4b3bafad29582694e62f5bc0eb4e3f"
+  },
+  "source_vs_saved_loader_diet_cells": 4680,
+  "max_source_saved_loader_abs_difference": 0.0,
+  "equivalent_within_tolerance": true,
+  "comparison_basis": "No canonical/staged input, settings, group parameters, routing or complete loaded state changed. Source-vs-saved ModelData diet compared cellwise; no new PPRCalculator run. Retained calculator construction is EXCEPTION, so no completed normalized calculator state or SPPR coefficients exists. Runtime normalization remains permitted on a separate copy.",
+  "retained_construction": {
+    "strict_source": {
+      "status": "EXCEPTION",
+      "type": "ValueError",
+      "exception": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_026\\extraction_review_20260928\\audit_diagnostics.py\", line 39, in <module>\n    calc=PPRCalculator.from_modeldata(data,underdetermined=False,normalize_DC=False,**settings)\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 598, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].\n"
+    },
+    "documented_loader_defaults": {
+      "status": "EXCEPTION",
+      "type": "ValueError",
+      "exception": "det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_026\\extraction_review_20260928\\audit_diagnostics.py\", line 39, in <module>\n    calc=PPRCalculator.from_modeldata(data,underdetermined=False,normalize_DC=False,**settings)\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 179, in from_modeldata\n    ModelData.validate_det_fate(instance._det_fate, instance._groups_df)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\ModelData.py\", line 598, in validate_det_fate\n    raise ValueError(\n    ...<3 lines>...\n    )\nValueError: det_fate carries no detritus routing for any living group. For a multi-DET model the per-pool split cannot be inferred -- supply DetritusFate data for model with detritus groups [70, 71].\n"
+    }
+  },
+  "fresh_scientific_runs_performed": false,
+  "needed_refresh_scope": []
+}

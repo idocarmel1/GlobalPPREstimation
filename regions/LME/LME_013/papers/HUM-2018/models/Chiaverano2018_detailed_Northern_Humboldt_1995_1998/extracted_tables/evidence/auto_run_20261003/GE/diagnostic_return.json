@@ -1,0 +1,95 @@
+{
+  "status": "FAIL",
+  "model_input": {
+    "status": "FAIL",
+    "is_model_balanced": false,
+    "p_max_rel_residual": 4219.15750763535,
+    "q_max_rel_residual": 843.8315359765764,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 2.220446049250313e-16,
+    "n_negative_catch": 0,
+    "n_zero_catch": 22,
+    "total_catch": 35.5395489180725,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 5,
+    "n_ee_marginal": 1,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      35,
+      34,
+      33,
+      32,
+      31
+    ],
+    "ee_marginal_groups": [
+      7
+    ]
+  },
+  "divergence": {
+    "status": "FAIL",
+    "solve_error": null,
+    "b": 1.59176568425259,
+    "b_converges": false,
+    "rho_living": 0.7,
+    "living_converges": true,
+    "sppr_det": {
+      "36": 6.10370815911851,
+      "37": 6.10370815911851,
+      "38": 6.10370815911851,
+      "39": 6.10370815911851
+    },
+    "max_sppr_det": 6.10370815911851,
+    "max_sppr_group": {
+      "seq": 31,
+      "tl": 3.8984436333758534,
+      "sppr": 220732.16581630218,
+      "inv_te": 1525.000034086407
+    },
+    "max_tl_group": {
+      "seq": 30,
+      "tl": 4.447238103051863,
+      "sppr": 4195.506859329449,
+      "inv_te": 6.666666176093461
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": true,
+    "near_singular_te": [
+      31
+    ]
+  },
+  "balance": {
+    "status": "FAIL",
+    "is_balanced": false,
+    "inflow": 11310.477371346196,
+    "outflow": 13167.489567587258,
+    "rel_gap": 0.1641851298819261
+  },
+  "footprint": {
+    "ppr_all": 8517.658983839245,
+    "ppr_inner": 8504.926634603287,
+    "ppr_pp_only": 1836.2669164220374,
+    "npp": 11273.056447505951,
+    "ppr2npp": 0.7544472676250029,
+    "ppr2npp_pp_only": 0.16288988926586034
+  },
+  "config": {
+    "TE_option": "GE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "auto",
+    "explicit_TE": false,
+    "method": "pooled_detritus_scaling",
+    "would_pool": true,
+    "model": "Northern Humboldt Current (1995-1998)"
+  },
+  "warnings": [
+    "model input not mass-balanced: max relative residual 4.22e+03 exceeds fail threshold 0.1",
+    "5 group(s) with EE=0 (all production is non-predatory death): 35 (Leatherback turtle), 34 (Green sea turtle), 33 (Cetaceans), 32 (Pinnipeds), 31 (Seabirds). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "1 group(s) with 0 < EE < 0.001: 7 (Chrysaora plocamia). Their SPPR ~ 1/te is near-singular",
+    "detritus recycling diverges: b=1.592 >= 1; the SPPR returned is not a convergent sum",
+    "1 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [31]",
+    "PP balance gap 16.419% exceeds fail threshold 5.0%"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "timestamp_UTC": "2026-10-03T19:04:19.257322+00:00",
+  "model_id": "52_GM2019_Fig9_Pelagic_balanced_(2000-2014)",
+  "build": {
+    "command": "python tools/build_html.py --workbook Project.xlsx --output interactive_map/index.html --region LME_052",
+    "exit_code": 0,
+    "stdout": "Checked HTML detail inputs: LME_052\nOriginal-format pages rebuilt: interactive_map/index.html, trends.html and archive/index.html"
+  },
+  "verify": {
+    "command": "python tools/verify_html.py --workbook Project.xlsx --html interactive_map/index.html",
+    "exit_code": 0,
+    "annual_cells_verified": 2071230,
+    "stdout": "Map/time-series layouts match the templates with file-link, basemap and provisional-display adapters; 2071230 annual cells and NPP match Project.xlsx; selected models, source files and archive page verified"
+  },
+  "sha256": {
+    "Project.xlsx": "5c56849498f799d8987227cc082b3450318522879f6bcbe4435be425e040f44a",
+    "interactive_map/index.html": "cd8a24a60c8e9e6758904ad1616eed257cf3ebcaf5a4872f2c5ef0a78570e569",
+    "interactive_map/trends.html": "0fc70d73f46871cb7f488d577b1050939fb19180fcc00dc63c61bdcb775fd4a0",
+    "interactive_map/archive/index.html": "a787f8d7073c1478e9736de861bebda7831b56e7ecea11bbb93d9abc95ee173b",
+    "interactive_map/data/articles.csv": "c8c8e9763cb6232b5e80fc8402c65237b68761b87dbc3e019ba81555e9c01457",
+    "interactive_map/data/files.csv": "45ed7922b2f775cfdc504757b6df23e3d4fe60b4ba6c656a9711595750b95ee9",
+    "common_reference_data/paper_file_roles.json": "c6cfc0702b85859e0285af042483a8a63670e17d6770e812270b89eb5496d8d0"
+  },
+  "checks": {
+    "file_roles_hash_matches_guarded_registration": true,
+    "final_browser_and_payload_verification_passed": true,
+    "browser_uses_final_Project": true,
+    "browser_uses_final_map_and_trends": true,
+    "subsequent_layout_refresh_preserves_all_science_and_passes_verifier": true
+  },
+  "passed": true,
+  "subsequent_standard_layout_refresh": {
+    "schema_version": 1,
+    "reason": "Scope time-series group exclusion caption to displayed ecosystems while preserving all stored settings and all scientific payloads.",
+    "execution": [
+      {
+        "command": [
+          "C:\\Users\\idoca\\miniconda3\\python.exe",
+          "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\build_html.py",
+          "--workbook",
+          "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\Project.xlsx",
+          "--output",
+          "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\interactive_map\\index.html",
+          "--layout-only"
+        ],
+        "exit_code": 0,
+        "stdout": "Map and trends layouts refreshed; embedded data preserved; project fingerprint preserved.\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\idoca\\miniconda3\\python.exe",
+          "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\verify_html.py",
+          "--workbook",
+          "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\Project.xlsx",
+          "--html",
+          "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\interactive_map\\index.html"
+        ],
+        "exit_code": 0,
+        "stdout": "Map/time-series layouts match the templates with file-link, basemap and provisional-display adapters; 2071230 annual cells and NPP match Project.xlsx; selected models, source files and archive page verified\n",
+        "stderr": ""
+      }
+    ],
+    "protected_before": {
+      "Project.xlsx": "5c56849498f799d8987227cc082b3450318522879f6bcbe4435be425e040f44a",
+      "regions/LME_052/LME_052.xlsx": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+      "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/model.json": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656",
+      "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_index.json": "c22dbc130886699f67c1a0026a2cef97c7a971f80be91d2e821a144a16bd295f",
+      "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_completeness.json": "1f7ae77ddb6ea9b5ae4c10e4ae9b34d84075a4290b939be2b4cdc2316b33dac1",
+      "common_reference_data/paper_file_roles.json": "c6cfc0702b85859e0285af042483a8a63670e17d6770e812270b89eb5496d8d0"
+    },
+    "protected_after": {
+      "Project.xlsx": "5c56849498f799d8987227cc082b3450318522879f6bcbe4435be425e040f44a",
+      "regions/LME_052/LME_052.xlsx": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+      "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/model.json": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656",
+      "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_index.json": "c22dbc130886699f67c1a0026a2cef97c7a971f80be91d2e821a144a16bd295f",
+      "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_completeness.json": "1f7ae77ddb6ea9b5ae4c10e4ae9b34d84075a4290b939be2b4cdc2316b33dac1",
+      "common_reference_data/paper_file_roles.json": "c6cfc0702b85859e0285af042483a8a63670e17d6770e812270b89eb5496d8d0"
+    },
+    "scientific_payload_hashes_before": {
+      "index.html": "3b05b0896d6c75f63592904213f62fbb5c6a836e31c5756fb3310f433aa11b70",
+      "trends.html": "8de385c7f34f9787eec08fd2852f30a77e0b08965099cfc6d6d46e45f8febd2a"
+    },
+    "scientific_payload_hashes_after": {
+      "index.html": "3b05b0896d6c75f63592904213f62fbb5c6a836e31c5756fb3310f433aa11b70",
+      "trends.html": "8de385c7f34f9787eec08fd2852f30a77e0b08965099cfc6d6d46e45f8febd2a"
+    },
+    "final_page_sha256": {
+      "index.html": "cd8a24a60c8e9e6758904ad1616eed257cf3ebcaf5a4872f2c5ef0a78570e569",
+      "trends.html": "0fc70d73f46871cb7f488d577b1050939fb19180fcc00dc63c61bdcb775fd4a0"
+    },
+    "checks": {
+      "standard_layout_refresh_and_verifier_pass": true,
+      "all_protected_files_byte_identical": true,
+      "all_embedded_scientific_payloads_identical": true
+    },
+    "passed": true
+  }
+}

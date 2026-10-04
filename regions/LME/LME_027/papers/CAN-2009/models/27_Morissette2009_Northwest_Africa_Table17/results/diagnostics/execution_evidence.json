@@ -1,0 +1,62 @@
+{
+  "variant": "official_EcoBase118_same_model_source_audited",
+  "input": "../computational_inputs/official_EcoBase118.json",
+  "input_sha256": "3db5c47da982ec22e2921698061a5a8b027be542db69bc4e29653deb87983320",
+  "native_source_sha256": "f79f2bddaedbc9080d718e338295502db3ef6e8fdd21810771e6e44b5ada522c",
+  "constructor": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": false
+  },
+  "diagnostic_options": {
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0
+  },
+  "effective_diagnostic_signature": "(TE_option: 'str' = 'GE', *, short: 'bool' = False, flat: 'bool' = False, thresholds: 'Optional[dict]' = None, return_sppr: 'bool' = False, **sppr_kwargs) -> 'dict | tuple[dict, pd.DataFrame, pd.DataFrame, pd.DataFrame]'",
+  "thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "python": "3.13.9",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "constructor_warnings": [
+    "2 group(s) route less than 100% of their flow_to_det to detritus; the remainder is treated as export out of the system: 5 (Sei whales), 4 (Brydes whales)."
+  ],
+  "diagnostic_warnings": {
+    "GE": [],
+    "TE": [
+      "10 group(s) have TE=0 because EE=0 (M0=p): 11 (Seabirds), 9 (Killer whales), 8 (Sperm whales), 7 (Beaked whales), 6 (Baleen whales), 5 (Sei whales), 4 (Brydes whales), 3 (Humpback whales), 2 (Fin whales), 1 (Minke whales). Their consumed PP is re-credited to detritus (fix_EE_0_cases=True) so the TE SPPR stays PP-balanced.",
+      "1 group(s) have near-zero TE (0 < EE << 1): 17 (Coastal tunas). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+    ],
+    "With Egestion": []
+  },
+  "reload_state_equal": true,
+  "state_unchanged_by_diagnostics": true,
+  "native_groups_equal_selected_canonical": true,
+  "BA_normalization_compensation": "Disabled explicitly to preserve the previously accepted constructor behavior; no new biological BA repair.",
+  "matrix_semantics": "SPPR rows are recipient native group IDs, columns basal source IDs. Ratios are PP equivalent per biomass, wet-weight; source27 Detritus,28 synthetic Import,24 Benthic producers,26 Phytoplankton.",
+  "canonical_source_separation": "Paper-only model.json remains incomplete and is not the computational input. Native supplementation does not establish an independent replacement model."
+}

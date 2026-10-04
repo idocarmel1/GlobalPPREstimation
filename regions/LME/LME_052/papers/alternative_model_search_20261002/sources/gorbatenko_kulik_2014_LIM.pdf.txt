@@ -1,0 +1,324 @@
+
+--- PDF PAGE 1 ---
+Carbon flows through 
+Gadidae species 
+in the ecosystem 
+of the Northeastern part 
+of the Sea of Okhotsk 
+estimated in a carbon flow 
+mass balance model
+Konstantin M. Gorbatenko, 
+Vladimir V. Kulik (vladimir.kulik@tinro-center.ru),
+Artem E. Lazshentsev, 
+Alexander V. Zavolokin and Victor A. Nadtochy
+
+--- PDF PAGE 2 ---
+Data
+• Konstantin M. Gorbatenko managed the collection of stable isotope ratios 
+of nitrogen, share of bio-carbon in the dry weight and share of water in the wet 
+weight. 
+• Vladimir V. Kulik corrected the estimates of zooplankton made by Anatoly F. 
+Volkov for the epipelagic layer (0-200 m) to include deeper layers down to the 
+bottom, calculated the average annual abundance of macrofauna species and 
+tuned LIM.
+• Artem E. Lazshentsev calculated mean ratios of food items by different size 
+groups of every species (which then were used as the starting points to make
+the possible limits), 
+• Alexander V. Zavolokin calculated the average abundance of salmon and jellyfish 
+species
+• Victor A. Nadtochy provided estimates of abundance of benthos species 
+as taxon groups
+• Valeriy N. Koblikov Calculated the average abundance of big decapoda species
+
+--- PDF PAGE 3 ---
+Territorial 
+boundaries
+Isobaths, m
+Biostatistical
+regions
+Trawls
+Pelagic
+At the bottom
+Position 
+of trawling 
+stations
+
+--- PDF PAGE 4 ---
+Dominant species or higher taxons included in the foodweb:
+Euphausiacea: Euphausia pacifica, Thysanoessa inermis, Thysanoessa longipes and Thysanoessa raschii ;
+Mysidacea ;
+Amphipoda: Themisto libellula and Themisto pacifica ;
+Copepoda: Calanus glacialis, Eucalanus bungii, Metridia okhotensis, Neocalanus cristatus, Neocalanus plumchrus, 
+Bradyidius pacificus and Pareuchaeta japonica ;
+Chaetognatha: Sagitta elegans ;
+Pteropoda: Clione limacine and Limacina helicina ;
+Oikopleura ;
+Coelenterata: 11 species ;
++ 1 macrophyte component (from 8 sps.) ;
++ 26 benthic taxon groups ;
++ 13 decapoda species ;
++ 46 fish species and their size groups ;
++ 4 groups of birds ;
++ 5 seal species ;
++ 7 whale species ;
++ 2 fisheries blocks + 1 block to represent wastes from processing of the catches
++ base blocks, export block etc.
+Initial total sum of components with seasonal differentiation was equal to 166.
+
+--- PDF PAGE 5 ---
+Methods
+All the rest of the methods of estimating abundance were traditional for our specialists (at TINRO-Centre) and thus many 
+times published (basically its arithmetic mean of kg per sq. km multiplied on the area of the bioregion, except Decapoda sps.)
+# At First the GAM model was optimized for each member of the collection in the “sp” data.frame:
+if (length(unique(sp$years)) > 4) {
+formula1 <- kgkm2 ~ s(X, Y, k=50) + s(Ln_Htr, k=4) + s(Y2k, k=4)
+selpred <- dtpred}
+if (length(unique(sp$years)) %in% 2:4){
+formula1 <- kgkm2 ~ s(X, Y, k=50) + s(Ln_Htr, k=4) + charyears
+selpred <- droplevels(subset(dtpred, charyears %in% levels(sp$charyears))) }
+if (length(unique(sp$years)) == 1) {
+formula1 <- kgkm2 ~ s(X, Y, k=20) + s(Ln_Htr, k=4)
+selpred <- droplevels(subset(dtpred, charyears %in% levels(sp$charyears))) }
+sp.tw1 <- gam(formula1, family = tw(theta = -1.5, a=1.1, b=1.9), data = sp)
+# Then each model was used to predict abundance on the grid with centers on 10km*10km mesh, 
+# from 25 m depth down the bottom with 25m step for 10 years. Finally those values were 
+# averaged and converted into mmol C per square m. 
+For each fish and squid species and its size group abundance was estimated as follows 
+(below is the part of a loop in R language with loaded mgcv library)
+
+--- PDF PAGE 6 ---
+It was useful to solve not only the default mass balance, but also 
+an additional mass balances based e.g. on stable isotope data. 
+See e.g. where isotope mixing model succeeded in reducing the uncertainty 
+of the food web model solution: 
+van Oevelen, D., Soetaert, K., Middelburg, J., Herman, P., Moodley, L., Hamels, I., 
+Moens, T., Heip, C., 
+“Carbon flows through a benthic food web: 
+integrating biomass, isotope and tracer data”
+2006. Journal of Marine Research 64, 453–482
+Motivation to make foodweb with additional massbalance on isotope ratio data
+
+--- PDF PAGE 7 ---
+Verbally, a linear mixing model (used by van Oevelen et. al.) assumes that 
+the isotope value of a consumer is a flow-weighted average of its resources. 
+Mathematically this is represented by:
+3.4‰
+Basic form of carbon flow.
+
+--- PDF PAGE 8 ---
+The LIM package (for R language) offers a simplification for the input file 
+(with the help of ### MARKER section and Massbalance function). 
+Thus instead of writing many lines of code for only one equation you can 
+use e.g.:
+Massbalance(TherC60__) = -flowto(TherC60__)*FracN
+From the LIM documentation:
+
+--- PDF PAGE 9 ---
+Units : Fluxes: mmol C/m2/d
+ Standing stocks: mmol C/m2
+#####################################################################
+## PARAMETERS
+! Minagawa and Wada 1988, trophic fractionation
+FracN = 3.4 ! {‰}
+! Altabet, pg 168 in Particle Flux in the Ocean
+FracBACT = 1.35 ! {‰} ! Bacteria
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!-- General
+minAE = 0.10
+maxAE = 0.90 
+minPE = 0.10
+maxPE = 0.80
+!-- Bacteria
+minBGE = 0.20
+maxBGE = 0.45
+The heading of the input file for the setup of LIM
+Respiration constraints were calculated from the mean individual weight of each 
+size group of each species.
+To reduce the uncertainty of unknowns flows were also constrained by the 
+limits, based on diet studies.
+
+--- PDF PAGE 10 ---
+The results from the first run were disappointing
+180 components for 166 equations with 3994 inequalities to find 2034 flows
+names first run
+residuals 107
+solution 3759
+GPP 57.08
+flows to gadidae 1.198
+%GPP 2.1%
+flows to gadidae
+without undefined 
+plankton sps. 0.936
+%GPP 1.6%
+the sum of residuals of equalities and violated inequalities
+the value of the minimised quadratic function 
+at the solution
+The most unrealistic values were in seasonal divisions and 
+various groups of minor plankton species aggregated 
+together.
+So, we decided to redistribute total plankton biomasses 
+between major dominant species as if they represented 
+100% and not 90% and also we removed seasonal division.
+Thus we decreased the number of components (parameters) 
+and consequently the number of unknowns (flows)
+
+--- PDF PAGE 11 ---
+The number of flows 
+and constraints for 
+them increased due to 
+the need of separating 
+previously aggregated 
+flows from birds, whales 
+and seals to the 
+dominant plankton 
+species, while 
+previously they were 
+“feeding” on the 
+“various or total” 
+plankton groups with 
+averaged isotopic ratios.
+δ C →
+δ N ↑
+Circles are scaled as biomasses,
+but for comparative purpose plankton 
+biomasses are for 0
+-200 m layer
+Components 
+without ratios of 
+stable isotopes of 
+Nitrogen or Carbon
+are far outside
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+
+--- PDF PAGE 12 ---
+Basically the foodweb with higher level of aggregation of nodes should be solvable and there are publications by the first author 
+based on different method, where flows are calculated from the mean of food intake ratios. 
+Therefore, we compared what we would loose if we chose e.g. families of plankton species instead of species.
+We found out that we were loosing the accuracy of trophic level determination.
+Correlation between estimated trophic levels from the LIM (without additional massbalance on stable isotope of nitrogen ratios 
+and plankton nodes at the level of species) with trophic levels from stable isotope ratios of nitrogen
+ correlation std.err t.value p.value
+ 0.42 0.084 5 2e-06
+Correlation between estimated trophic levels from the LIM (with additional massbalance on stable isotope of nitrogen ratios 
+and plankton nodes at the level of species) with trophic levels from stable isotope ratios of nitrogen
+ correlation std.err t.value p.value
+ 0.68 0.068 10 2.5e-17
+Correlation between estimated trophic levels from the LIM (with additional massbalance on stable isotope of nitrogen ratios 
+and plankton nodes at the level of Families) with trophic levels from stable isotope ratios of nitrogen
+ correlation std.err t.value p.value
+ -0.1 0.11 -0.95 0.34
+That is why we decided to work further with nodes of plankton at the level of species
+
+--- PDF PAGE 13 ---
+158 components for 131 equations with 4664 inequalities to find 2214 flows
+min vf33 vf48 vf18 avg max
+residuals 166 163 163 163 164 175
+solution 6133 6133 6133 6133 6133 6133
+GPP 19.027 57.08 57.08 57.08 57.08 570.8
+flows to gadidae 1.627 1.627 1.627 1.627 1.627 1.627
+%GPP 8.6% 2.9% 2.9% 2.9% 2.9% 0.3%
+3 best by residuals from runif (min,max,80) biomasses. 
+Fish and squid limits were between 
+(trimmed mean-mad) and (mean+mad*3) 
+from predicted by GAMs grids
+The sum of estimated flows to Gadidae spp. stays the same even in the situation of random 
+parameters of fish and squid biomasses. We suppose, that ratios of stable isotope of nitrogen, 
+which constrain every 20 cm group of every fish species and every plankton species, play a very 
+big role in determination of flows.
+New structure has less components, but the level of complexity became higher as well as solution and residuals 
+
+--- PDF PAGE 14 ---
+Sensitivity to changes in all biomass parameters
+# best trial Va53 Va26 Va55
+residuals 401.219 389.465 353.052
+solution 2000 3201 3367
+GPP 32.5006 41.2334 42.0708
+flows to gadidae 0.88 1.175 1.116
+%GPP 2.7% 2.8% 2.7%
+# best trial V79 V221 V124
+residuals 1034 721 690
+solution 211 428 2320
+GPP 10.3007 14.445 34.2919
+flows to gadidae 0.245 0.326 0.829
+%GPP 2.4% 2.3% 2.4%
+80 Va trials varied biomass parameters 
+uniformly random 
+between Mean/3.3 and Mean*10 
+EXCEPT fish and squid, 
+which limits were between 
+(trimmed mean-mad) and 
+(mean+mad*3) from predicted by 
+GAMs grids 
+240 V trials varied biomass parameters 
+uniformly random between the same 
+minimums as in Va but twice less and 
+the same maximums as in Va but twice 
+bigger.
+
+--- PDF PAGE 15 ---
+Looking through the biomass parameters which had relatively lowest residuals
+(which include deviations from the constraint boundaries) we discovered that many of them have biological sense:
+e.g. compared to the first configuration highly underestimated was Sagitta elegans and the least changes 
+were in Pteropoda species. This fact let us suppose that the reason was in the catchability coefficients 
+used in the process of estimating biomasses. So, we decided to look into possible biomasses leading 
+to decrease of residuals with the goal of diagnosing possible errors in the mean estimates of biomasses.
+Therefore, we started double fitting procedure: genopt on biomass parameters and limSolve on flows.
+Minimum, the best from random search
+(V79, V124, V221, Va26, Va53, Va55),
+mean and maximum biomass parameters were used as collection of parents 
+for genetic and simulated annealing optimizer
+(Burns Statistics (2012). BurStMisc: Burns Statistics miscellaneous. 
+R package version 1.00. http://CRAN.R-project.org/package=BurStMisc)
+This optimization procedure let us understand that seasonal differentiation was not a very good idea. 
+Finally, we averaged seasonally different groups upto the annual basis and their values of stable isotope ratios also.
+Again we started genopt with parents from minimum, maximum and mean values of biomasses. 
+This time some minimum was found very quickly (after 70 births), but, unfortunately, 
+the foodweb stayed with the solution much bigger than 0.
+
+--- PDF PAGE 16 ---
+After 100 of births with several dozens of random hopes we got that new flows were more than 2 times less, 
+comparing to the average biomasses in the following edges:
+fname name perc
+MICRO->LIMH LimHMicro 6%
+POC->EXPORT POCout 15%
+THEP->RHIP1220 RHip1220TheP 19%
+FORAM->PANOCH PanOchForam 19%
+THEL->HEMIPAPI HemiPapiTheL 29%
+THEP->CARR1020 CarR1020TheP 31%
+LEUROSHM->SEALRING SealRingLeuroShm 39%
+GONATJUV->EUMSOLD EumSoldGonatJuv 43%
+CLUP1420->GADM60__ GadM60__Clup1420 46%
+MALL0611->CARR2040 CarR2040Mall0611 47%
+And we got that new flows were more than 2 times higher, 
+comparing to the average biomasses in the following edges:
+fname name perc
+PARPLAT->FISHERIES FisheriesParPlat 204%
+POLYCH->PANOCH PanOchPolych 209%
+LIMH->JPINK jPinkLimH 212%
+LIMH->ETCBIRDS etcBirdsLimH 302%
+ISOPOD->PANLON PanLonIsopod 361%
+BORB0408->SFFULMAR sfFulmarBorB0408 362%
+ASTER->BOTN2040 BotN2040Aster 386%
+GONATJUV->SFFULMAR sfFulmarGonatJuv 616%
+LAEQUIS->GADM4060 GadM4060LAequis 1676%
+
+--- PDF PAGE 17 ---
+The conclusion
+The proposed foodweb model is not operational, yet (because it did not converge to 0), 
+but it is useful for diagnostic purposes.
+It can help us to highlight possible errors in estimates of mean biomasses and due to the 
+use of stable isotope ratio constraints it is useful for diet studies.
+The first run showed that the sum of flows from defined plankton species to Gadidae
+species was around 1.6% from PP or 2.1% with undefined plankton species, but during 
+optimization of biomass parameters the share was even higher.
+Further work is planned to include additional constraints from stable isotope ratios of 
+carbon.

@@ -1,0 +1,81 @@
+..C:\Users\idoca\miniconda3\Lib\site-packages\openpyxl\worksheet\worksheet.py:581: UserWarning: In write-only mode you must add table columns manually
+  warn("In write-only mode you must add table columns manually")
+Map and trends layouts refreshed; embedded data preserved; project fingerprint preserved.
+.................................................C:\Users\idoca\miniconda3\Lib\site-packages\openpyxl\worksheet\worksheet.py:581: UserWarning: In write-only mode you must add table columns manually
+  warn("In write-only mode you must add table columns manually")
+Map and trends researcher metadata refreshed; all other embedded data preserved.
+Updated 1 regions; central source metadata preserved.
+Updated 1 regions; central source metadata preserved.
+Updated 1 regions; central source metadata preserved.
+....F..FFF.........................................
+======================================================================
+FAIL: test_actual_absent_seabirds_with_explicit_empty_exclusions_preserves_source_and_applies_none (test_researcher_review_absent_exclusion.AbsentExclusionTests.test_actual_absent_seabirds_with_explicit_empty_exclusions_preserves_source_and_applies_none)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_researcher_review_absent_exclusion.py", line 47, in test_actual_absent_seabirds_with_explicit_empty_exclusions_preserves_source_and_applies_none
+    self.assertIn('seabirds (GE<0.01%',summary['sections'][2]['rows'][0]['text'])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'seabirds (GE<0.01%' not found in 'No groups were removed from the calculation.'
+
+======================================================================
+FAIL: test_exact_review_identity_text_and_region_specific_appendix (test_researcher_review_lme032.KarnatakaReviewTests.test_exact_review_identity_text_and_region_specific_appendix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_researcher_review_lme032.py", line 43, in test_exact_review_identity_text_and_region_specific_appendix
+    self.assertEqual(summary['sections'][4]['table'][2], ['Medium','205','48.5275%','64.2253%'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['Medium', '205', '49%', '64%'] != ['Medium', '205', '48.5275%', '64.2253%']
+
+First differing element 2:
+'49%'
+'48.5275%'
+
+- ['Medium', '205', '49%', '64%']
+?                     ^
+
++ ['Medium', '205', '48.5275%', '64.2253%']
+?                     ^^^^^^       +++++
+
+
+======================================================================
+FAIL: test_existing_assignment_table_matches_current_regional_appendix (test_researcher_review_lme032.KarnatakaReviewTests.test_existing_assignment_table_matches_current_regional_appendix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_researcher_review_lme032.py", line 67, in test_existing_assignment_table_matches_current_regional_appendix
+    self.assertEqual(actual[1:], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [['Ta[62 chars], '51%'], ['Explicit source member or member o[602 chars]6%']] != [['Ta[62 chars], '51.2386%'], ['Explicit source member or mem[630 chars]3%']]
+
+First differing element 0:
+['Taxonomic extension from named source representatives', 'Medium', '51%']
+['Taxonomic extension from named source representatives', 'Medium', '51.2386%']
+
+Diff is 1857 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_only_new_table_changes_word_content_and_covers_all_very_low_taxa (test_researcher_review_lme032.KarnatakaReviewTests.test_only_new_table_changes_word_content_and_covers_all_very_low_taxa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_researcher_review_lme032.py", line 22, in test_only_new_table_changes_word_content_and_covers_all_very_low_taxa
+    self.assertEqual(changed,['word/document.xml'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['word/document.xml', 'word/settings.xml', 'docProps/core.xml[17 chars]xml'] != ['word/document.xml']
+
+First list contains 3 additional elements.
+First extra element 1:
+'word/settings.xml'
+
+- ['word/document.xml',
+?                     ^
+
++ ['word/document.xml']
+?                     ^
+
+-  'word/settings.xml',
+-  'docProps/core.xml',
+-  'docProps/app.xml']
+
+----------------------------------------------------------------------
+Ran 102 tests in 81.842s
+
+FAILED (failures=4)

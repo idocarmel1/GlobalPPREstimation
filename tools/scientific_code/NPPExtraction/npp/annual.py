@@ -50,13 +50,12 @@ def archive_grid(root: Path, missing: list | None = None) -> list[tuple[str, int
     """Actual catch years; retain the historical layout for callers reproducing it."""
     rows = []
     missing = missing if missing is not None else []
-    current = (Path(root) / "regions").is_dir()
-    region_root = Path(root) / ("regions" if current else "PPRAtlas/archive/regions")
-    for p in sorted(region_root.iterdir()):
+    from tools.project_core.registry.discovery import discover_regions
+    for workbook in discover_regions(root).values():
+        p=workbook.parent
         if not p.is_dir() or not re.fullmatch(r"(?:LME|EEZ|HS)_\d+", p.name):
             continue
-        catch = (p / "raw" / (p.name + ".csv.gz") if current else
-                 Path(root) / "SeaAroundUsExtraction/data/catch_by_taxon_year" / (p.name + ".csv.gz"))
+        catch = p / "raw" / "catch" / (p.name + ".csv.gz")
         if not catch.exists():
             missing.append({"unit_id": p.name, "status": "no_catch", "reason": "catch file absent"})
             continue
@@ -189,7 +188,7 @@ def prepare_regions(root, grid, raw, work):
         if not ids:
             continue
         layers.append(layer)
-        full = raw / f"sau_{layer}_full.geojson"
+        full = raw / 'geography' / f"sau_{layer}_full.geojson"
         if not full.exists():
             download_geojson(layer, full)
         fc = json.loads(full.read_text(encoding="utf-8"))
@@ -417,8 +416,8 @@ def main(argv=None):
     region_root = root / "regions"
     if region_root.is_dir():
         # NPP depends on region geometry, independently of catch availability.
-        units = [p.name for p in sorted(region_root.iterdir())
-                 if p.is_dir() and re.fullmatch(r"(?:LME|EEZ|HS)_\d+", p.name)]
+        from tools.project_core.registry.discovery import discover_regions
+        units = list(discover_regions(root))
         grid = sorted(set(grid) | {(unit, year) for unit in units for year in years})
     values = {}
     canonical = output / "annual_npp.csv"

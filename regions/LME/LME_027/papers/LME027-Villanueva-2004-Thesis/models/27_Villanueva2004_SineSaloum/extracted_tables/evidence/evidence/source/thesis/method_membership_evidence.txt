@@ -1,0 +1,4249 @@
+=== PDF PAGE 66 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+42
+ 
+ 
+ 
+ 
+DAP = (Aire Abondance - Aire Biomasse)/ln s 
+ 
+ 
+(3) 
+ 
+ 
+ 
+L’indice DAP est compris entre –1 et +1. Les valeurs élevées indiquant des conditions 
+de stress.  
+ 
+En considérant les deux courbes de Warwick (1986), McManus et Pauly (1990) ont 
+proposé d’introduire un paramètre que nous appellerons « Shannon equitability parameter » 
+(SEP) pour estimer la proportion des diversités en abondance et biomasse qui s’écrit de 2 
+façons : 
+ 
+ 
+ 
+SEP = E biomasse / E nombres 
+ 
+ 
+ 
+ 
+(4) 
+ou encore  
+ 
+ 
+ 
+SEP = H’ biomasse / H’nombres 
+ 
+ 
+ 
+ 
+(5) 
+ 
+car le nombre d’espèces dans un échantillon est le même que l’on considère les abondances ou 
+les biomasses. L’influence d’une sous-estimation du nombre d’espèces sur cet indice est 
+moindre que celle encourue avec l’indice de Shannon-Weiner9 (H’) de Pielou (1977). 
+ 
+Pour le calcul de cet indice, les abondances sont traitées comme les biomasses et il est 
+possible de comparer des indices de diversité et d’équitabilité calculés avec des abondances 
+et/ou des biomasses. Il existe une corrélation très étroite, bien montrée par McManus et Pauly 
+(1990) entre DAP et loge SEP. 
+ 
+3.3. L’approche des relations trophiques: le modèle et le logiciel Ecopath 
+ 
+3.3.1. Concepts de base  
+ 
+ 
+L'outil méthodologique de base des recherches sur les relations trophiques proposé ici 
+sont le modèle et le logiciel associé Ecopath originellement dus à Polovina (1984) mais très 
+largement développé depuis par Villy Christensen et Daniel Pauly (voir par exemple 
+Christensen et Pauly 1993) et, depuis 1997 par les mêmes auteurs en collaboration avec Carl 
+Walters (Walters et al. 1997 ; 1999 ; 2000). Les communautés présentes dans l’écosystème sont 
+réparties en compartiments (ou groupes) ayant des caractéristiques biologiques communes 
+(démographie, régime alimentaire, distribution spatiale). 
+ 
+ 
+                                                          
+9 L’indice le plus utilisé pour calculer la régularité E (on parle d’équitabilité) de la biodiversité spécifique s’exprime 
+de la manière suivante : 
+ 
+ E = H’/log s, 
+ 
+ 
+où  
+ 
+ 
+ 
+  
+           S 
+ 
+ 
+ 
+ 
+ 
+H’ = - Pi log Pi  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+         i =1 
+avec  
+ 
+ 
+ 
+ 
+Pi = Xi/N 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Dans ces équations, S est le nombre d’espèces de l’assemblage considéré, Pi est la proportion de l’effectif 
+de l’espèce i dans l’assemblage. H’ est une quantité positive prenant une valeur nulle lorsqu’une seule espèce est 
+présente et une valeur maximale (H’max = log S) lorsque toutes les espèces ont la même abondance. L’équitabilité 
+(ou régularité) d’un assemblage multispécifique est le rapport entre cette quantité H’ et le logarithme de la richesse 
+spécifique. Xi est l’abondance de l’espèce i et N est le nombre total d’individus présents dans l’échantillon toutes 
+espèces confondues. 
+ 
+ 
+
+
+=== PDF PAGE 67 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+43
+L'équation de base, qui s’applique alors à chaque compartiment du modèle, est la 
+suivante (Polovina 1984 ; Christensen et Pauly 1992) : 
+ 
+ 
+ 
+ 
+ 
+Bi * P/Bi * EEi = ∑ Bj* Q/Bj* DCij + Yi        
+ 
+ 
+ 
+(6)  
+      
+ 
+Cette équation signifie que la biomasse d'un certain compartiment i, multipliée par son 
+rapport production sur biomasse (P/B) et par un facteur appelé rendement écotrophique (EE), 
+est égal à la somme « sigma » des biomasses consommées par tous les prédateurs j de ce 
+compartiment i multipliée par la consommation relative de nourriture (Q/B) du prédateur j et 
+par la fraction que le compartiment i constitue dans le régime alimentaire de ce même 
+prédateur j. A ceci s'ajoute, éventuellement, la production exploitée (Yi). Cette équation n'est 
+vraie que s'il y a équilibre ; ceci est l’hypothèse de départ (voir aussi le site Web 
+http://www.ecopath.org/ pour une description plus détaillée). Comme suggéré par les 
+promoteurs d’Ecopath, les unités adoptées au cours de la présente étude sont les t.km-² et t.km-
+².an-1 (Christensen et al. 2000). 
+ 
+La première étape de la mise en œuvre d’Ecopath est l’identification des groupes que 
+l’on considère comme important pour le fonctionnement trophique de l’écosystème. Le 
+groupement des espèces a été effectué selon les indications de Yodzis et Winemiller (1999), de 
+Christensen et al. (2000) et de Christensen et Walters (2004). Un compartiment, dans un milieu 
+pauvre en espèces, peut être réduit à une seule espèce (abondante dans l’écosystème ou dans 
+les captures, ou jugée très importante du point de vue écologique). Dans un milieu à forte 
+biodiversité nous avons regroupé plusieurs espèces dans un même compartiment en 
+recherchant une certaine homogénéité pour établir ce compartiment. En effet, il faut que les 
+populations le composant présentent des caractéristiques très similaires entre elles (taille 
+adulte, alimentation, paramètres de mortalité, habitat). Ces populations doivent être 
+caractérisées par une même « trophodynamique » (Yodzis et Winemiller 1999).  
+ 
+Á ce stade de notre questionnement, les données à caractère essentiellement qualitatif 
+issues d’entretiens et conversations avec de nombreux spécialistes se sont révélées 
+primordiales pour comprendre le fonctionnement des assemblages biologiques de chaque 
+milieu. La démarche ainsi adoptée consiste à comprendre les particularités des organismes 
+biologiques pour dégager un certain nombre de constantes qui ont permis de définir 
+l’organisation des différents groupes et d’identifier l’espèce clef représentant au mieux le 
+groupe considéré. 
+ 
+Dans tous les milieux étudiés ici, l’utilisation de données directement issue des 
+observations de terrain a été privilégiée. Il faut aussi mentionner la contribution souvent 
+déterminante des échanges d’informations avec des spécialistes de différents groupes. En 
+outre les informations bibliographiques ainsi que les données disponibles dans « Fishbase » 
+(Froese et Pauly 2004) ont été utilisées dans de rares cas pour compléter les informations 
+nécessaires.  
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 68 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+44
+3.3.2. L’entrée des valeurs des paramètres de base  
+ 
+3.3.2.1. La démographie des populations : l’évaluation du rapport P/B 
+ 
+ 
+Les données ont été préparées et analysé en utilisant le logiciel FiSAT (Gayanilo et al. 
+2002) selon les indications de ces auteurs. Nous avons considéré 27 espèces avec 3 834 424 
+individus recensés en utilisant une senne de plage provenant de la pêche collective pour Ébrié 
+entre 1980-1981 (Écoutin 1992) et 45 espèces avec 28 841 individus de la pêche artisanale pour 
+l’estuaire de Gambie entre 2001-2002 (Ndiaye et al. 2003). 
+ 
+ 
+En Gambie, les données concernent des espèces capturées en utilisant différents engins 
+mais nous avons considéré préférentiellement les captures aux filets maillants et par le filet de 
+crevettes « killi10 » lorsque les données de pêches aux filets maillants étaient insuffisantes. De 
+façon générale, la pêche collective ou artisanale a été utilisée préférentiellement aux données 
+de pêches expérimentales car l’intervalle de tailles était plus large et les individus sont plus 
+nombreux par espèces. Dans le cas où les bases ne contenaient pas des échantillons suffisants, 
+nous avons employé les données des pêches expérimentales comme sources complémentaires 
+d’information. Cela a été le cas pour certaines espèces considérées dans la lagune Ébrié et 
+Gambie. Pour le Sine-Saloum et le lac Nokoué, nous ne disposons pas des données collectives 
+et nous avons utilisé les données de pêches expérimentales évoquées plus haut. En outre, nous 
+avons participé à la collecte d’échantillons de terrain tant auprès des pêcheurs que pendant les 
+campagnes d’échantillonnage sur le lac Nokoué (Niyonkuru et al. 2003). 
+ 
+ 
+Allen (1971) a démontré qu’en situation d'équilibre, quand la croissance peut être 
+représentée par l'équation de von Bertalanffy (1938) et lorsque la diminution d'effectif d'une 
+cohorte avec l'âge est décrite par une courbe exponentielle négative, le rapport 
+Production/Biomasse (P/B) est égal à la mortalité totale Z telle que la définissent les 
+biologistes des pêches. Ces derniers utilisent pratiquement tous la courbe de von Bertalanffy 
+en longueur, comme en poids, pour représenter la croissance des poissons (Moreau 1987 ; de 
+Merona et al. 1988). Nous avons mesuré la mortalité totale à l’aide du logiciel FISAT (Gayanilo 
+et al. 2002) qui emploie pour cela des distributions de fréquences de tailles à condition de 
+connaître les paramètres de croissance qui ont été eux-mêmes déterminés à l’aide de ce même 
+logiciel. En résumé, ce dernier identifie la progression de modes dans une série d’échantillons 
+et l’ajuste du mieux possible à l’équation de croissance de von Bertalanffy11.  
+ 
+ 
+Il a été alors possible de calculer le coefficient instantané de mortalité totale apparente 
+Z qui obéit à la relation habituelle : 
+ 
+ 
+ 
+Nt+1 = Nt e-Z*(t+1-t1) 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+(7) 
+                                                          
+10 Ce filet à poche est le seul engin utilisé dans le Sine-Saloum où les courants sont faibles. Il a une 
+ouverture de 4 m sur 1 m et une ouverture de maille de 16 mm et est tiré par deux hommes (Bousso 
+1991 ; 1994 ; 1996).. 
+ 
+11 L’équation de von Bertalanffy est exprimée ainsi lt = L∞ [1-e -K (t-to )] où lt = Longueur à l'âge t ; L∞ = 
+longueur asymptotique de la population en admettant que les poissons continuent de grossir 
+indéfiniment ;K = le coefficient de croissance et to = l'âge à la taille zéro c'est-à-dire l’abscisse du point 
+d'intersection de la courbe avec l'axe des âges (Moreau 1987).. 
+
+
+=== PDF PAGE 69 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+45
+par la méthode des courbes de captures selon les longueurs (Pauly 1983). Cette méthode est 
+une transposition de la méthode des courbes de capture par âge (Ricker 1975) et elle permet 
+l'utilisation directe des histogrammes de fréquence de tailles dans l'évaluation de la mortalité 
+Z. 
+ 
+La mortalité naturelle M a été calculée par la méthode de Pauly (1980) qui repose sur les 
+relations entre M, K, L et la température du milieu, ou 
+ 
+ 
+ 
+log M = a + b log  W + c log  k + d log  T (log décimaux)  
+ 
+(8) 
+ 
+avec a = -0,21 ; b = -0,0824 ; c = 0,6757 ; d = 0,4627. 
+Le coefficient de corrélation multiple est de 0,85. 
+ 
+Connaissant Z et M, Les coefficients de mortalité de pêche F ont été obtenus par 
+différence. Pour les populations de poissons pour lesquels la mise en œuvre de FISAT n’était 
+pas possible, nous avons calculé les paramètres de croissance à l’aide des relations de Merona 
+(1983)12 ou de Froese et Binohlan (2000)13 et la mortalité Z par la méthode de Lévêque et al. 
+(1977)14. 
+ 
+3.3.2.2. Le régime alimentaire (DC) 
+ 
+L'ensemble des valeurs de DCij de l'équation (6) représente le régime alimentaire pour 
+lequel il est nécessaire de réaliser une matrice. Cette dernière doit incorporer tous les éléments 
+du modèle et ne peut incorporer que ceux-là. La manière d'exprimer la composition du bol 
+alimentaire est très variable selon les auteurs mais il faut utiliser les proportions relatives en 
+volume ou en poids des constituants du régime alimentaire. Pour cela il faut avoir recours aux 
+analyses de contenus stomacaux. 
+ 
+Les estomacs des poissons des espèces les plus abondantes ont donc été prélevés afin 
+d’étudier la composition du bol alimentaire et de ses variations éventuelles avec l’âge du 
+poisson et la saison, selon les méthodes habituelles (Hynes 1950 ; Hellawell et Abel 1971 ; 
+Lauzanne 1978). Ceci a été fait à Ébrié par les équipes de l’IRD dans le courant de années 80 et 
+par l’Université d’Abobo-Adjamé (Côte d’Ivoire) plus récemment. Sur la Gambie et le Sine-
+Saloum, ces analyses du régime alimentaire ont été l’œuvre de Diouf (1996) et J.-J. Albaret 
+(IRD, comm. pers.). Sur le lac Nokoué, nous avons, nous même, participé aux travaux 
+nécessaires entre 2001 et 2003.  
+ 
+Les informations complémentaires sur le régime alimentaire des poissons ont été 
+obtenues à partir de Longhurst (1957), Bainbridge (1963), Whitehead (1969), Reynolds (1970), 
+Odum et Heald (1972), Fagade et Olaniyan (1972 ; 1973 ; 1974), Onyia (1973), Nordille et Kelso 
+(1975), Payne (1976 ; 1978), Pauly (1976), Virnstein (1977), Ikusemiju et al. (1979), Whitfield 
+(1980), Blay et Eyeson (1982), Thiero Yatabary (1983), Marais (1984), de Sylva (1985), Van 
+                                                          
+12 L’estimation du paramètre de la croissance K à partir de la longueur standard asymptotique (en mm) 
+est exprimée ainsi K = 155/ L∞   
+13 L’estimation de la longévité à partir du coefficient de croissance K est tmax = 3/K. 
+14 La relation entre P/B et longévité (tmax) est exprimée ainsi Z ou P/B = 5,5/ tmax où tmax est l’âge 
+maximum ou longévité d’une population. 
+
+
+=== PDF PAGE 70 ===
+Chapitre 3 
+______________________________________________________________________________________ 
+ 
+46
+Maren (1985), Whitehead et al. (1985), Albaret et Legendre (1986), Blaber (1986), Marcus 
+(1986), Romer et McLachlan (1986), Hickley et Bailey (1987), Longhurst et Pauly (1987), 
+Pauly et al. (1988), Whitehead et al. (1988), Rabarison-Andriamirado et Caverivière 
+(1989), Njork (1990), Anyangwa (1991), Meyer et Smale (1991), Palomares (1991), Diouf 
+(1992), Laë (1992), Thiagarajan et al. (1992), King (1993), Nakamura et Perin (1993), 
+Albaret (1994), Sene (1994), Sierra et al. (1994), Winemiller et Kelso-Winemiller (1994 ; 
+1996), Baran (1995), Blay (1995), Lalèyè (1995), N’Diaye (1995), Derbal et Kara (1996), 
+Diouf (1996), Adité et Winemiller (1997), Caverivière et Andriamirado (1997), Lévêque 
+(1997 ; 1999), Piet et Guruge (1997), Koranteng et al. (1998), Etim et al. (1999), Ngom 
+(2000), Diomandé et al. (2001), Villanueva et al. (2002 ; 2004), Charles-Dominique et 
+Albaret (2003), Diallo et al. (2003), Mendy (2003), Lalèyè et al. (2003b) ; Kone et Teugels 
+(2003), Samb et Mendy (2003) et Froese et Pauly (2004). Les matrices des régimes 
+alimentaires ainsi obtenues figurent en annexe II. 
+ 
+3.3.2.3. La consommation relative de nourriture (Q/B) 
+ 
+Q/B est la consommation annuelle relative de nourriture c'est à dire la quantité 
+consommée Q par unité de biomasse B. Pauly et Palomares (1987) en donnent une 
+expression mathématique complète énoncée ci-dessous : 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(9) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+où  
+Nt  
+= 
+le nombre des poissons d’âges t, 
+ 
+Wt 
+= 
+le poids (g) à l’âge t, 
+ 
+K1(t) 
+= 
+le coefficient de conversion de la nourriture à l’âge t, 
+ 
+tr 
+= 
+l’âge (an-1) de recrutement dans la population considérée, et 
+ 
+tmax 
+= 
+l’âge (an-1) maximal observé. 
+ 
+ 
+Dans l’expression de Q/B, il est tenu compte du fait que, dans une population de 
+poissons en équilibre, il existe toujours plus d'individus jeunes consommant beaucoup 
+de nourriture par rapport à leur poids que de poissons âgés relativement moins 
+exigeants. 
+ 
+Le premier problème est donc d'estimer la ration journalière d'individus de taille 
+et d'âge connus sachant que le calcul de Q/B sera d'autant plus précis que la ration 
+journalière sera connue pour des poissons d'une taille et d'un poids connus eux même 
+avec précision. Pour cela, il faut utiliser une approche basée sur l'analyse du cycle de 24 
+heures du contenu stomacal rendue possible grâce au logiciel MAXIMs (Jarre et al. 1990). 
+Dans le cadre du présent travail, une version de MAXIMs a été mise au point pour un 
+environnement Windows (95 et au-dessus), ceci pour remplacer l’ancienne version 
+fonctionnant sous MS-DOS, distribuée par l’ICLARM15 suite aux travaux de Jarre et al. 
+(1990).    
+                                                           
+15 « International Centre of Living Aquatic Resources and Management » (ICLARM), actuellement 
+« Worldfish Centre » à Pénang, Malaisie 
+Q/B =
+tmax
+tr
+dw
+Nt
+dt
+K1(t)
+WtNtdt
+∫
+tmax
+tr∫
+Q/B =
+tmax
+tr
+dw
+Nt
+dt
+K1(t)
+WtNtdt
+∫
+tmax
+tr∫
+
+
+=== PDF PAGE 71 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+47
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+L’estimation de la ration journalière de nourriture repose sur la connaissance des 
+variations journalières du poids du contenu de l’estomac de poissons d’une taille donnée. Des 
+captures ont été effectuées toutes les 3 heures, sur 24 heures avec des engins de pêches actifs 
+amenant la collecte des poissons immédiatement après leur capture (épervier, senne de plage, 
+etc.). Lors de chaque capture, nous avons disposé d’une douzaine de poissons. Parmi ces 
+derniers, des individus de tailles identiques ont été sélectionnés de façon très stricte. 
+ 
+ 
+Les figures 3.7 a et b donnent, à titre d’exemple, les résultats obtenus pour les 
+populations d’Hemichromis fasciatus (Peters 1857) et de Tilapia guineensis (Günther 1862) du lac 
+Nokoué (Lalèyè et al. 2003b). Nous noterons que Tilapia guineensis s’alimente une fois par jour 
+et Hemichromis fasciatus deux fois, comme la plupart des ichtyophages ou zoophages. 
+ 
+La seconde étape consiste à extrapoler une ou plusieurs estimations de la ration 
+journalière valable(s) seulement pour une ou certaines classes de tailles ou d’âges, à 
+l’ensemble de la population équilibrée. Ensuite nous avons calculé Q/B grâce à la relation (9) 
+indiquée plus haut (Pauly et Palomares 1987) qui a été appliquée à une grande quantité de 
+populations de poissons des eaux tempérées et tropicales, notamment par Palomares et Pauly 
+(1989) et Palomares (1991).  
+ 
+L’ensemble de cette procédure n’a pu être mise en œuvre que de façon très limitée et 
+par nos soins sur le lac Nokoué (Lalèyè et al. 2003b). Pour les autres populations, le modèle 
+prédictif récent de Palomares et Pauly (1998) a été utilisé. Il s’écrit : 
+ 
+log(Q/B) = 5,847 + 0,280 log Z – 0,152 log W∞ - 1,360 T’ + 0,062 + 0,510h + 0,390d   
+ (10) 
+ 
+Le logarithme décimal de différents paramètres est utilisé. 
+Q/B: la quantité recherchée ; 
+W∞: le poids frais asymptotique (en grammes) pour la population étudiée, (obtenu à 
+l’aide de la relation poids longueur pour la longueur asymptotique) ; 
+T’: un paramètre incorporant la température moyenne annuelle (en °C) du milieu 
+étudié ; 
+AR : l'indice d'activité destiné à rendre compte de l'activité des poissons et de leurs 
+besoins nutritionnels associés. Il s’agit du rapport entre le carré de la hauteur de la nageoire 
+caudale et sa surface. Nous l’avons mesuré nous même sur les populations de poisson du 
+Figure 3.7. Le rythme de la prise de nourriture chez deux cichlidés, (a) Hemichromis fasciatus et (b) 
+Tilapia guineensis, dans le lac Nokoué (lignes courbes : valeurs ajustées ; points : valeurs. 
+0
+0,01
+0,02
+0,03
+0,04
+0,05
+0,06
+0,07
+0
+5
+10
+15
+20
+Temps (h)
+Contenus stomacaux (g)
+courbe
+ajustée
+valeur
+observée
+0
+0,01
+0,02
+0,03
+0,04
+0,05
+0,06
+0,07
+0
+5
+10
+15
+20
+a.
+b.
+0
+0,1
+0,2
+0,3
+0,4
+0,5
+0,6
+0
+5
+10
+15
+20
+é
+0
+0,1
+0,2
+0,3
+0,4
+0,5
+0,6
+0
+5
+10
+15
+20
+Contenus stomacaux (g)
+é
+0
+0,01
+0,02
+0,03
+0,04
+0,05
+0,06
+0,07
+0
+5
+10
+15
+20
+Temps (h)
+a.
+b.
+0
+0,01
+0,02
+0,03
+0,04
+0,05
+0,06
+0,07
+0
+5
+10
+15
+20
+Temps (h)
+Contenus stomacaux (g)
+courbe
+ajustée
+valeur
+observée
+0
+0,01
+0,02
+0,03
+0,04
+0,05
+0,06
+0,07
+0
+5
+10
+15
+20
+a.
+b.
+0
+0,1
+0,2
+0,3
+0,4
+0,5
+0,6
+0
+5
+10
+15
+20
+é
+0
+0,1
+0,2
+0,3
+0,4
+0,5
+0,6
+0
+5
+10
+15
+20
+Contenus stomacaux (g)
+é
+0
+0,01
+0,02
+0,03
+0,04
+0,05
+0,06
+0,07
+0
+5
+10
+15
+20
+Temps (h)
+a.
+b.
+
+
+=== PDF PAGE 72 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+48
+Sine-Saloum et de la Gambie. Quand nécessaire, cet indice est disponible dans « Fishbase » 
+(Froese et Pauly 2004). Naturellement, cet index ne s'applique qu'aux poissons se propulsant 
+essentiellement avec la nageoire caudale (Palomares et Pauly 1998).  
+ 
+Finalement, les paramètres h, d et p (et non leur logarithme décimal) rendent compte 
+du régime alimentaire : 
+h = 1 pour un herbivore ( d = 0 et p = 0 ) ; 
+d = 1 pour un détritivore ( H = 0 et P = 0 ). 
+ 
+3.3.2.4. La production exploitée (Y) 
+ 
+ 
+Il s'agit en fait de la prédation exercée par l'homme. Elle est exprimée dans les mêmes 
+unités que les autres flux de biomasses et productions du modèle, ici, ce sont des t.km-².an-1. 
+Les données employées sont les statistiques de capture par espèce ou groupe d'espèces 
+constituant un compartiment. Dans tous les cas, ces statistiques concernent les années pour 
+lesquelles nous avons disposé simultanément de données biologiques. Pour la lagune Ébrié, 
+nous avons considéré la capture annuelle (Y) indiquée par Écoutin et al. (1994). Nous avons 
+collecté les statistiques des pêches sur le lac Nokoué pour les années 2000 et 2001 auprès du 
+Département de la pêche à Cotonou (Bénin). Pour la Rivière Gambie, les estimations des 
+captures annuelles de la pêche artisanale pour 2002 et 2003 nous ont été communiquées par R. 
+Laë (IRD). Dans le cas de l’estuaire du Sine- Saloum, il a fallu calculer les captures à partir des 
+estimations de biomasses évoquées plus bas par la relation Y = B (Biomasse) * F (mortalité par 
+pêche). Plusieurs collègues ont vérifié pour nous la pertinence des résultats obtenus (L. Tito de 
+Morais, IRD, comm. pers.). 
+ 
+3.3.2.5. Le rendement écotrophique (EE)  
+ 
+EE est le rendement écotrophique, c'est à dire la fraction de la production totale d'un 
+compartiment i qui est consommée par tous ses prédateurs (consommateurs) au sein de 
+l'écosystème ou exportée (par la pêche ou les émigrations). La quantité 1 - EEi  est donc la 
+fraction de la production d'un compartiment qui rejoint le compartiment des détritus faute 
+d'être consommée. Le concept de EE est assez simple, mais l'estimation en est difficile. Quand 
+un modèle de type Ecopath est construit, EEi  ne peut être estimé que si tous les autres 
+paramètres sont connus ; sinon, il faut lui donner une valeur vraisemblable compte tenu du 
+niveau d'exploitation et/ou de prédation connu ou soupçonné pour le groupe considéré. 
+Généralement EE est compris entre 0,50 et 0,95 (Ricker 1969). Lorsque, dans de rares cas, EE a 
+dû être entré dans le modèle, les avis des scientifiques connaissant les milieux, l’intensité de 
+l’exploitation des poissons (espèces recherchées par les pêcheurs, espèce capturée 
+accidentellement) la possibilité de prédation sur cette espèce (en partie liée à la morphologie, à 
+la distribution spatiale) ont été très précieux. 
+ 
+3.3.2.6. La biomasse (B) 
+ 
+ 
+Sur le Delta du Saloum, des mesures de biomasse ont été effectuées à l’aide d’une 
+senne comme celle décrite plus haut. Les estimations obtenues à la senne sont dans la quasi-
+totalité des cas sous estimées. Il est alors nécessaire d’avoir recours à la méthode dite des 
+« évaluations corrigées » (Daget 1971). Pour cela on fait une hypothèse jugée prudente sur 
+
+
+=== PDF PAGE 73 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+49
+l’efficacité de la senne, c’est à dire le rapport entre la capture elle-même et l’abondance réelle 
+du peuplement dont elle est issue. Nous sommes, alors, amené à supposer que cette efficacité 
+est constante, toutes espèces confondues, malgré les possibilités d’échappement pouvant 
+varier d’une espèce à l’autre en fonction de la morphologie et du comportement en présence 
+de la senne. Moreau (1979) a été confronté à cette difficulté avec une senne de plage de même 
+dimension que celle de l’IRD et mise en œuvre à partir de la rive et non d’une embarcation. 
+Grâce à la méthode de De Lury (Laurent et Lamarque 1974 ; Laurent 1978) il a pu estimer 
+l’efficacité de la senne à 60 %. Dans les conditions du Sine-Saloum, la senne étant manœuvrée 
+à partir d’une embarcation, il est vraisemblable qu’un échappement important survient lors de 
+la fin des opérations de pêche. Une efficacité de 50% est alors plus vraisemblable. Connaissant 
+la surface encerclée par la senne et la quantité de poissons capturés, il suffit alors de la doubler 
+pour obtenir la biomasse rapportée à cette surface.  
+ 
+ 
+Dans les autres milieux, la biomasse (t.km-²). a été calculée par la relation B = Y/F ou Y 
+est la production exploitée (t.km-².an-1) du groupe considéré et F la mortalité par pêche évaluée 
+comme dit plus haut. 
+ 
+3.3.3. Quelques paramètres et indices calculés grâce à l’Ecopath 
+ 
+3.3.3.1. Paramètres relatifs au fonctionnement global des écosystèmes 
+ 
+3.3.3.1.a. Les niveaux trophiques caractérisés par des nombres entiers  
+ 
+ 
+Les niveaux trophiques sont d’abord calculés par Ecopath comme des nombres 
+décimaux intégrant à la fois le niveau trophique de chaque proie et sa contribution au régime 
+alimentaire du groupe considéré. Ecopath permet ensuite de répartir la totalité de 
+l’écosystème en niveaux trophiques exprimés par des entiers, sensu Lindeman, selon une 
+suggestion de Ulanowicz (1995).  
+ 
+3.3.3.2.b. Rendement des transferts  
+ 
+ 
+Pour chaque niveau trophique exprimé par un nombre entier, cet indice est la rapport 
+entre le somme des ’exportations et des flux venant du niveau trophique inférieur vers le 
+suivant, et les transfert totaux à ce niveau trophique (Christensen et al. 2000 ; Christensen et 
+Walters 2004).  
+ 
+3.3.3.3.c. Les impacts trophiques combinés (ITC) 
+ 
+ 
+Cette analyse est inspirée de la méthode de Leontief (1951) qui a permis de montrer les 
+effets de certains facteurs sur l’économie américaine, grâce à une « analyse d’entrée-sortie » 
+basée sur le concept de matrice de Leontief. Cette analyse est destinée à mettre en évidence les 
+impacts directs et indirects de la prédation et de la compétition des divers groupes. Les 
+interactions entre les groupes sont calculées à partir d’un matrice n * n, où le jème élément 
+représente le groupe origine de l’impact j sur le groupe cible i de l’impact et dont la biomasse 
+est susceptible d’être modifiée. L’équation de base est : 
+ 
+ 
+ 
+ITCji = DCji – FCij 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(11) 
+
+
+=== PDF PAGE 76 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+52
+ 
+3.3.3.2.d. L'indice de recyclage de Finn (IF) 
+ 
+ 
+Initialement conçu par Finn (1976), cet indice est la proportion de transferts totaux 
+recyclés dans l’écosystème (Ulanowicz 1986 ; Christensen et al. 2000 ; Christensen et Walters 
+2004).  
+ 
+3.3.3.2.e. Le rapport « ascendency » - capacité (A/C) 
+ 
+ 
+C’est le rapport entre l’« ascendency » (A), sensu Ulanowicz (1980 ; 1986 ; 1997), et la 
+capacité (C). Cette dernière est une mesure de la limite supérieure théorique possible du 
+développement de l’écosystème (Ulanowicz 1986). L’« ascendency » (A) est une mesure de 
+croissance ou du niveau d’évolution actuel (c.-à-d. taille, âge) et de développement (c.-à-d. 
+l’organisation) des liens dans un réseau (Ulanowicz 1980). La fraction de capacité non 
+expliquée par l’« ascendency » s'appelle l’« overhead » (Ø) ou énergie en réserve (Monaco et 
+Ulanowicz 1997). L’« ascendency » relative (A/C) est une mesure du rendement du réseau 
+(Christensen et al. 2000 ; Christensen et Walters 2004) Il existe une corrélation négative entre ce 
+rapport et la maturité (Christensen 1995).  
+ 
+ 
+3.3.4. La connaissance des autres communautés vivantes aquatiques 
+ 
+Outre les poissons, les groupes suivants ont été incorporés dans les modèles en raison 
+de leur importance dans les écosystèmes considérés. Des groupes très exploités : crevettes, 
+crabes et autres invertébrés benthiques séparés en macrobenthos et méiobenthos (larves, 
+annélides, insectes) recherchés par de nombreuses populations zoophages, le zooplancton, 
+proie préférée de certaines espèces mais aussi des jeunes, le phytoplancton, les producteurs 
+benthiques ou « phytobenthos » et les détritus, composants essentiels de la chaîne trophique.  
+ 
+L’analyse du régime alimentaire de quelques organismes benthiques (mollusques, 
+décapodes, etc.) a été faite au Lac Nokoué par Ghonossou (2002). Les informations 
+complémentaires concernant la composition des régimes alimentaires des autres organismes et 
+des autres milieux ont été obtenues à partir de Odum et Heald (1975), Virnstein (1977), Sultan 
+Ali et al. (1983), Lhomme et Garcia (1984), Van Maren (1985), Oddo (1986), Longhurst et Pauly 
+(1987), Maslin et Bouvet (1988), Johnsson et Tiselius (1990), Diouf (1991), Zabi et Le Lœuff 
+(1992 ; 1993 ; 1994), Le Lœuff et Zabi (1993), Arreguín-Sánchez et al. (1993a et b), Guiral et 
+N’Da Étien (1994), Lhomme (1994), Pagano et Saint-Jean (1994), Gismervil et Andersen (1997) 
+Le Lœuff et Intes (1998), Manickchand-Heileman et al. (1998) ; Guiral et al. (1999), Kouassi 
+(2001), Pagano et al. (2003), Zetina-Rejón et al. (2003) et Jensen et Verschoor (2004). Voir annexe 
+II. 
+ 
+3.3.4.1. Les macrocrustacés  
+ 
+ 
+Il s’agit, dans cette étude, des crevettes et des crabes. Nous les avons séparés en deux 
+groupes distincts car, dans tous les milieux considérés, ils sont devenus très importants ces 
+dernières années (Le Reste 1994 ; Guiral et al. 1999 ; Laë et al. 2004) et les connaissances sur leur 
+biologie dans chaque milieu permettent de calculer les paramètres biologiques nécessaires 
+pour la modélisation Ecopath.  
+
+
+=== PDF PAGE 77 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+53
+Dans tous les milieux abordés ici, les Macrocrustacés sont principalement des crevettes, 
+Penaeus duorarum (Burkenroad 1939) et P. notialis (Pérez Farfante 1967) et des espèces de 
+Macrobrachium, et des crabes tels que les espèces de Callinectes (Zabi et Le Lœuff 1992 et 1993 ; 
+Guiral et N’Da Étien 1994 ; Guiral et al.1999). 
+ 
+3.3.4.1.a. Crevettes 
+ 
+Au Sine-Saloum et en lagune Ébrié l’occurrence et les variations spatio-temporelles 
+d’abondance de Peneaus notialis, ont été étudiées par Le Reste (1994). Par ailleurs, la biologie et 
+l’écologie de P. notialis ont été étudiées au Sénégal par plusieurs auteurs notamment Garcia 
+(1977), Lhomme (1981 ; 1984), Lhomme et Garcia (1984), Le Reste (1982 ; 1987 ; 1992) et Le 
+Reste et Collart-Ordinetz (1987).  
+ 
+Les données de Lhomme et Garcia (1984) dans le fleuve Sénégal ont été utilisées pour 
+calculer la mortalité totale et naturelle de l’espèce dominante dans le Siné-Saloum : Penaeus 
+duorarum. Les coefficients de mortalité totale ont été calculés par : 
+ 
+ 
+  
+ 
+ 
+Z = ln (Nt + 1/ Nt) 
+ 
+ 
+ 
+ 
+ 
+ 
+(13) 
+ 
+La biologie de P. notialis a été étudiée par Garcia (1977) et Lhomme (1994) dans la 
+lagune Ébrié. Son travail a indiqué les variations de la mortalité naturelle (M) selon la saison. Il 
+a utilisé la méthode de Silliman pour estimer la mortalité naturelle (M) à 2,04 et 3,84 (moyenne 
+de 2,88) et du coefficient de capturabilité, q = 0,000069 par jour de pêche. La mortalité par 
+pêche, pour la période de son observation a varié de 1,80 à 1,92 (1,86 en moyenne) an-1. La 
+valeur moyenne de la mortalité naturelle n’est pas loin de la valeur obtenue dans le Golfe du 
+Mexique (entre 2,4 et 6,5 an-1) à partir des autres méthodes indépendantes (Ramírez-Rodríguez 
+et Arreguín-Sánchez 2003).  
+ 
+ 
+En Gambie la biologie et l’écologie des crevettes ont été étudiées par Van Maren (1985). 
+Au Lac Nokoué, les crevettes ont été peu étudiées. Leur exploitation dans ces deux milieux, 
+par contre, ne cesse d’augmenter et nous observons même une forte pression de pêche ces 
+dernières années (Van Maren 1985 ; Laë et al. 2004 ; Département des Pêches du Bénin à 
+Cotonou, comm. pers.). 
+ 
+3.3.4.1.b. Crabes 
+ 
+ 
+Les crabes considérés sont les Portunidés présents dans tous les milieux étudiés ici, 
+notamment Callinectes amnicola (De Rochebrune 1883) et C. pallidus (De Rochebrune 1883) (Van 
+Maren 1985 ; Zabi et Le Lœuff 1992 ; 1993 ; Guiral et N’Da Étien 1994) . Pour les crabes, les 
+données de Lhomme (1994) dans la lagune Ébrié et de Gnohossou (2002) dans le lac Nokoué 
+ont été employées. En absence de valeurs de P/B des crabes, nous avons employé l’équation 
+proposée par Banse et Mosher (1980) pour l’estimation de ce paramètre. L’équation s’écrit 
+ainsi : 
+ 
+ 
+ 
+ 
+P/B = 0,6457 W-0,37 
+ 
+ 
+ 
+ 
+ 
+ 
+(14) 
+ 
+
+
+=== PDF PAGE 78 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+54
+où W est le poids (g) frais moyen des individus. Le facteur de conversion entre le poids sec et 
+le poids frais pour Callinectes est: poids sec = 29,9% poids frais (Thayer et al. 1973). 
+ 
+ 
+Le Q/B (6,285) pour les crabes de la lagune Ébrié a été adopté de Zetina-Rejón et al. 
+(2003) tandis que la valeur proposée par Arreguín-Sánchez et al. (1993a) a été employée dans le 
+cas du lac Nokoué. Le régime alimentaire de ce groupe pour les deux modèles a été basé sur 
+l'étude de Zetina-Rejón et al. (2003) (Annexe II). Dans tous les autres écosystèmes, Q/B a été 
+entré à partir d'Arreguín-Sánchez (1993b). Des informations additionnelles sur les régimes 
+alimentaires ont été obtenues à partir des études par Virnstein (1977), Oddo (1986), Arreguín-
+Sánchez et al. (1993a et b), Lhomme (1994) ; Guiral et al. (1999) et Cannicci et al. (2002) (Annexe 
+II). 
+ 
+3.3.4.2. Les populations benthiques 
+ 
+3.3.4.2.a. Macrobenthos  
+ 
+ 
+Il s’agit essentiellement des mollusques. Les facteurs de conversion indiqués par 
+Ricciardi et Bourget (1998) entre le poids sec (Ps) et le poids frais (Pf) en grammes pour les 
+différents groupes ou espèces considérés ont été utilisés ; ce sont les suivants :  
+ 
+Bivalve et gastropodes Ps = 8,7 % Pf ; 
+ 
+Polychètes : Ps = 19,9 % Pf ; 
+Amphipodes : Ps = 20,7 % Pf ; 
+ 
+ 
+ 
+Nous avons considéré le bivalve, Corbula trigona (Hinds 1843), comme représentatif de 
+ce groupe car sa biologie est très étudiée dans les milieux margino-littoraux de l’Afrique de 
+l’Ouest.  
+ 
+ 
+Selon Maslin (1986) pour C. trigona, la relation liant le poids sec des parties molles (Ps) 
+à la largeur de la coquille (l en mm) est décrite par l’équation : 
+ 
+ 
+ 
+ 
+Ps= 0,0168* l 28577  
+ 
+ 
+ 
+ 
+ 
+ 
+(15) 
+ 
+ 
+Ainsi, Gomez (1983) a étudié une population de Corbula trigona en lagune Ébrié 
+pendant l’année 1976 et a obtenu une estimation de la biomasse moyenne (poids sec décalcifié) 
+de 84,15 g.m-² avec une production de 358 g.m-².an-1.  
+ 
+ 
+Dans le lac Ahémé (Bénin) Maslin (1986) a estimé une biomasse moyenne de 14,0g.m-² 
+avec une production moyenne de 42,0 g.m-².an-1 (Guiral et al. 1999) que nous avons utilisé pour 
+le modèle Nokoué. 
+ 
+ 
+En cas d’indisponibilité des données concernant la biologie des espèces les plus 
+représentatives de ce groupe, nous avons employé les informations à partir d’Arreguín-
+Sánchez et al. (1993a). 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 79 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+55
+3.3.4.2.b. Meiobenthos 
+ 
+La biologie du peuplement meiobenthique est très peu connue dans l’estuaire du Sine-
+Saloum. Nous avons donc adopté les valeurs indiquées par Arreguín-Sánchez et al. 1993a et b. 
+ 
+ 
+Nous n’avons pas non plus d’information sur ce groupe dans l’estuaire de la Gambie. 
+Nous avons préféré adopter des valeurs calculées sur un autre milieu semblable : la lagune 
+Terminos (Golfe du Mexique). Nous avons donc, adopté 10,383 et 48,763 an-1 comme valeurs 
+respectives de P/B et Q/B (Manickchand-Heileman et al. 1998). 
+ 
+ 
+Le facteur de conversion entre le poids sec et le poids frais pour les différents groupes 
+de microfaune benthique est, i.e. amphipodes : Ps = 20,7 % Pf (Ricciardi et Bourget 1998). 
+ 
+Sur la lagune Ébrié, les informations adoptées sont dues à Guiral et N’Da Étien (1994). 
+La valeur de P/B (28,00) a été prise d'Arreguín-Sánchez et al. (1993a).  
+ 
+Au lac Nokoué, des estimations de biomasses ont été réalisées par nos soins et par 
+Gnohossou (2002) en 2000 et 2001 par des études de colonisation de substrats artificiels. Le 
+rapport P/B a été pris d'Arreguín-Sánchez et al. (1993a). Le Q/B (10,68 an-1) a été adopté de 
+Zetina-Rejón et al. (2003). 
+ 
+3.3.4.3. Le zooplancton et les microcrustacés 
+ 
+ 
+Pour le zooplancton, le poids frais est calculé à partir du facteur de conversion proposé 
+par Lauzanne (1978) : Ps = 0,11 Pf. 
+ 
+ 
+En lagune Ébrié, la croissance de la phase copépodite est exponentielle avec un taux de 
+0,58 µg de PS.µg-1.j-1 et les variations de durée et de poids des stades peuvent être dues à 
+l’influence de la nourriture (Pagano et Saint-Jean 1983).  
+ 
+La production journalière (P en mgPs.m-3.j-1) a été calculée sur la lagune Ébrié par 
+Pagano et Saint Jean (1994) par la méthode des croissances cumulées :  
+ 
+ 
+ 
+P = BN * GN + BC * GC + BF * GF 
+ 
+ 
+ 
+ 
+(16) 
+ 
+où BN, BC et BF sont les biomasses (mg Ps.m-3) de l’ensemble des nauplii, des copépodites et 
+des femelles; GN, GC et GF étant les taux de croissance en poids au cours de la phase 
+copépodite (µg.µg-1.j-1) correspondants (Pagano et Saint-Jean 1994). La valeur de P/B proposée 
+chez Acartia clausi (Giesbrecht 1889), considéré comme espèce représentative du milieu, est 
+obtenue par la relation :  
+ 
+ 
+ 
+ 
+ 
+Log P/B = -0,377 * log WM – 1,288 
+ 
+ 
+ 
+ 
+(17) 
+ 
+ 
+ 
+ 
+où WM en µg Ps est le poids individuel, nous admettons que l’augmentation de P/B (j-1) 
+observée est inversement proportionnelle à la diminution du poids individuel moyen (Pagano 
+et Saint-Jean 1994). 
+
+
+=== PDF PAGE 80 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+56
+La biomasse a été mesurée à divers emplacements, de 1981 à 1985 par Pagano et Saint-
+Jean (1994) dans la lagune Ébrié. Une biomasse moyenne a été estimée 2,74 t.km-² et le rapport 
+P/B a été évalué à 65,0 an-1. Les copépodes dominent le zooplancton dans les secteurs 
+estuariens.  
+ 
+Dans l’estuaire du Sine-Saloum, le rapport P/B estimé est de 50,0 an-1 et Q/B de 150,0 
+an-1. Ces valeurs sont calculées à partir des estimations de Diouf (1996).  
+ 
+La biomasse (B=5,0 t.km-²) et la mortalité totale (P/B = 30,0 an-1) de la communauté 
+zooplanctonique dans le fleuve Gambie ont été estimées selon les indications de Healey et al. 
+(1985). Les données de Samb et Mendy (2003) qui représentent la côte du système Sine-
+Gambien semblent un peu élevées. C’est pourquoi nous avons choisi d’utiliser les 
+informations de Healey et al. (1985) qui ressemblent plus aux valeurs couramment observées 
+dans ce type de milieu comme dans l’étude d’Arreguín-Sánchez et al. (1993a). La 
+consommation relative de nourriture (Q/B =120 an-1) a été également tirée d’Arreguín-
+Sánchez et al. (1993a ; b).  
+ 
+Dans le lac Nokoué, le zooplancton est connu grâce au travail de Gnohossou (2002). Le 
+rapport P/B qui est de 30,094 an-1, a été estimé à partir du même travail. 
+ 
+Pour la lagune Ébrié, les indications de Pagano et Saint-Jean (1994) et Pagano et al. 
+(2003) ont été prises en compte pour le régime alimentaire de ce groupe. Pour tous les autres 
+modèles, les données sont basées sur les observations de Binet (1978) et Kouassi (2001). 
+ 
+La consommation relative de nourriture Q/B a été fixée à 268,20 an-1 (Pagano et Saint-
+Jean 1994 ; Kouassi 2001) pour la lagune Ébrié, et à 120,00 an-1 pour le lac Nokoué (Arreguín-
+Sánchez et al. 1993a, b) comme dans l’estuaire de la Gambie. 
+ 
+3.3.4.4. Le Phytoplancton et la production primaire  
+ 
+3.3.4.4.a. Phytoplancton 
+ 
+Dans le delta du Sine-Saloum, les concentrations moyennes de chlorophylle totale 
+indiquées par Diouf (1996) sont respectivement entre 0,8 et 2,4 µg.l-1 et 3 µg.l-1 pendant la 
+saison froide et la saison chaude pluvieuse, respectivement. Cette teneur diminue de l’aval 
+vers l’amont dans le Bandiala et Diomboss tandis que dans le Saloum, aucune tendance n’est 
+visible quant à l’évolution spatiale des concentrations de chlorophylle totale (Dia 1985 ; Diouf 
+1996). 
+ 
+Dans l’estuaire de la Gambie, Healey et al. (1985) ont calculé une biomasse (B) moyenne 
+annuelle de 6,0 t.km-² et une mortalité totale (P/B) moyenne de 96,85 an-1. 
+ 
+Dans la lagune Ébrié, à la fin des années 70s, la production a été estimée par Dufour 
+(1994) à 54 g C.m-².an-1 ou 540 g Pf.m-².an-1. La production primaire annuelle adoptée pour le 
+modèle de la lagune Ébrié est celle de Dufour pour le début des années 80 (Dufour, 1994): 
+253,35 g C.m-²-.an-1. La biomasse calculée est de 22,35 t.km-² et le P/B de 93,49 an-1. 
+ 
+
+
+=== PDF PAGE 81 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+57
+Au lac Nokoué, la production primaire (1182,60 g C.m-²) a été adoptée d’Adounvo et al. 
+(2003). Toutefois, ce chiffre inclut également le phytobenthos. La biomasse de phytoplancton 
+dans le lac Nokoué a été estimée par Adounvo et al. (2003) à la suite de collectes d’échantillons 
+opérées tous les 3 mois de 2001 à 2003. Nous avons participé a certains de ces 
+échantillonnages. La biomasse calculée est de 29,20 t.km-² et une mortalité totale de 270,00. 
+ 
+Un outil conçu par Capblanc et Dauta (1999) nommé « Photosynthesis simulator 
+version 2,1 » a été utilisé pour la détermination de la biomasse phytoplanctonique et de la 
+production primaire quand celle-ci était inconnue. 
+ 
+3.3.4.4.b. Phytobenthos  
+ 
+ 
+Nous disposons de très peu d’information sur la production primaire benthique des 
+milieux considérés ici. Au Sine-saloum, aucune étude sur la production du phytobenthos n’a 
+été faite. Nous avons considéré les indications d’Arreguín-Sánchez et al. (1993a et b). 
+ 
+ 
+Comme dans le Sine-Saloum, aucune étude précise n’existe sur l’estuaire de la Gambie. 
+Nous avons donc considéré les valeurs proposées par Mendy (2003) qui a estimé la biomasse 
+moyenne annuelle à 10,50 t.km-² et le P/B de 15,00 an-1. 
+ 
+Sur la lagune Ébrié, selon les indications de Dufour (1994), la production des algues 
+benthiques est de 10 à 12% de celle du phytoplancton. Nous avons donc estimé les valeurs 
+suivantes : B = 6,48 t.km-² et le P/B à 83,33 an-1. 
+ 
+ 
+Au Lac Nokoué, nous avons considéré que la production phytobenthique est de 10 à 12 
+% de la production phytoplanctonique comme dit par Dufour (1994). Nous avons donc calculé 
+une valeur de la biomasse de 14,60 t.km-² comme nous l’avons fait pour Ébrié à partir de 
+données d’Adounvo et al. (2003). Pour P/B, nous avons retenu la valeur de 270,00 an-1 comme 
+pour le groupe du phytoplancton.  
+ 
+3.3.4.5. Les détritus 
+ 
+ 
+Un compartiment des détritus a été systématiquement ajouté ; il est indispensable pour 
+le fonctionnement d’Ecopath et pour l’interprétation des résultats (Christensen et al. 2000). 
+L’estimation de la biomasse de ce groupe a été réalisée à partir de l’équation de Pauly et al. 
+(1993) qui s’écrit : 
+ 
+ 
+ 
+log = -2.41 + 0.954 log10 PP + 0.863 log10 E  
+ 
+ 
+ 
+(18) 
+ 
+où D est le stock du détritus exprimé en g. C.m-², PP est la production primaire en g. C.m-². an-1 
+et E est la profondeur de la zone euphotique en m. 
+ 
+3.3.4.6. Les poissons  
+ 
+ 
+Nous avons donc fait un groupement (Tableau 3.3) selon les indications données plus 
+haut. L’espèce pour laquelle nous disposons du maximum d’informations biologiques et 
+écologiques a été adoptée comme espèce clef (*). Le signe (+) indique la présence de peu 
+
+
+=== PDF PAGE 82 ===
+Chapitre 3 
+ 
+ 
+__________________________________________________________________________________________ 
+ 
+58
+d’informations biologiques disponibles pour estimer les valeurs nécessaires pour la 
+modélisation. 
+ 
+ 
+Tableau 3.3. Groupement des espèces considérées pour chaque milieu étudié. 
+ 
+Nom (Ecopath) 
+Espèces 
+Saloum 
+Gambie 
+Ébrié 
+Nokoué 
+Sphyraenidae 
+Sphyraena afra 
++ 
+* 
+* 
+ 
+  
+Sphyraena guachancho 
+* 
++ 
+ 
+  
+Scomberomorus tritor 
+Scomberomorus tritor 
+* 
++  
++ 
+ + 
+Polydactylus quadrifilis 
+Polydactylus quadrifilis 
+* 
+* 
+* 
+* 
+Autres Polynemidae 
+Galeoides decadactylus 
+* 
+* 
+* 
+ 
+  
+Pentanemus quinquarius 
++ 
++ 
++ 
+ 
+Sciaenidae 
+Pseudotolithus elongatus 
+* 
+* 
+* 
+ 
+  
+Pteroscion peli 
++ 
++ 
++ 
+ 
+Autres Scianidae 
+Pseudotolithus brachygnathus 
++ 
+* 
++ 
+ 
+  
+Pseudotolithus senegalensis 
+* 
++ 
+* 
+ 
+  
+Pseudotolithus typus 
++ 
+ 
++ 
+ 
+Elopidae 
+Elops lacerta 
+* 
+* 
+* 
+* 
+  
+Elops senegalensis 
++ 
++ 
+ 
+ 
+Ariidae 
+Arius heudeloti 
++ 
++ 
+ 
+ 
+  
+Arius latiscutatus 
+* 
+* 
+* 
+ 
+  
+Arius parkii 
++ 
++ 
+ 
+ 
+Haemulidae 
+Pomadasys incisus 
++ 
+ 
++ 
+ 
+  
+Pomadasys jubelini 
+* 
+* 
+* 
+* 
+  
+Pomadasys peroteti 
++ 
++ 
+  
+ 
+  
+Pomadasys rogeri 
++ 
+ 
++ 
+ 
+ 
+Plectorhinchus macrolepis 
++ 
++ 
++ 
+ 
+Psettodidae 
+Chloroscombrus chrysurus 
+* 
++ 
++ 
+ 
+ 
+Psettodes belcheri 
++ 
+ 
+ 
+ 
+Carangidae 
+Decapterus rhonchus 
++ 
+  
++ 
+ 
+  
+Hemicaranx bicolor 
++ 
++ 
++ 
+ 
+  
+Caranx hippos 
+* 
++  
+* 
+*  
+  
+Caranx senegallus 
++ 
+* 
++ 
++ 
+  
+Lichia amia 
++ 
+  
++ 
+ 
+Autres Carangidae 
+Trachinotus goreensis 
+ 
++ 
+  
+ 
+  
+Trachinotus teraia 
+* 
+* 
+* 
+ 
+  
+Trachinotus ovatus 
++ 
+  
++ 
+ 
+Psettodidae 
+Citarichthys stampflii 
+* 
+* 
+* 
+* 
+ 
+Psettodes belcheri 
++ 
+ 
+ 
+ 
+Cynoglossidae 
+Cynoglossus monodi 
++ 
+ 
+ 
+ 
+  
+Cynoglossus senegalensis 
+* 
+* 
+* 
+* 
+Gerreidae 
+Eucinostomus melanopterus 
+* 
+* 
++ 
+* 
+  
+Gerres nigri 
++ 
++ 
+* 
+  
+Ephippidae 
+Chaetodipterus goreensis 
++ 
+ 
+ 
+ 
+  
+Chaetodipterus lippei 
++ 
++ 
+ 
+ 
+  
+Drepane africana 
+* 
+* 
+* 
+ 
+Dasyatidae 
+Dasyatis margarita 
+* 
+* 
+* 
+ 
+  
+Dasyatis margaritella 
++ 
+ 
+ 
+ 
+  
+Rhinobatus (cemiculus) 
+  
++ 
+ 
+ 
+Ilisha africana 
+Ilisha africana 
+* 
+* 
+* 
+ 
+Brachydeuterus auritus 
+Brachydeuterus auritus 
+* 
+* 
+* 
+ 
+Petits poissons forages 
+Eleotris senegalensis 
+ 
+ 
+* 
++ 
+  
+Eleotris vittata 
+ 
++ 
++ 
+* 
+ Gobiidae 
+Gobionellus occidentalis 
+ 
+ 
++ 
+* 
+  
+Porogobius schlegelii 
++ 
++ 
++ 
++ 
+Pellonula leonensis 
+Pellonula leonensis 
+* 
+* 
+* 
+* 
+Poissons malacophages 
+Chrysichthys auratus 
+ 
++ 
++ 
++ 
+  
+Chrysichthys maurus 
+ 
++ 
++ 
+ 
+  
+Chrysichthys nigrodigitatus 
+ 
+* 
+* 
+* 
+ 
+
+
+=== PDF PAGE 83 ===
+Sites d’étude et méthodologie 
+____________________________________________________________________________________________ 
+ 
+59
+Tableau 3.3. Cont.  
+Nom (Ecopath) 
+Espèces 
+Saloum 
+Gambie Ébrié 
+Nokoué 
+Prédateurs de fond 
+Epinephelus aeneus 
+* 
+* 
+* 
+ 
+  
+Cephalopholis nigri 
+ 
++ 
++ 
+ 
+  
+Lutjanus goreensis 
++ 
+ 
+ 
+* 
+  
+Lutjanus dentatus 
+ 
+ 
++ 
+ 
+Hemichromis fasciatus 
+Hemichromis fasciatus 
++ 
++ 
++ 
+* 
+Schilbeidae 
+Schilbe mandibularis 
+ 
++ 
++ 
+  
+  
+Schilbe intermedius 
+ 
++ 
+* 
+ * 
+Belonidae 
+Strongylura senegalensis 
++ 
+* 
+* 
+* 
+  
+Tylosorus acus rafale 
++ 
+ 
+ 
+ 
+  
+Tylosorus crocodilus 
++ 
+ 
+ 
+ 
+  
+Hemiramphus brasiliensis 
+* 
+ 
+ 
+ 
+  
+Hemiramphus picarti 
++ 
++ 
++ 
+* 
+Prédateurs continentaux 
+Hydrocynus brevis 
+ 
++ 
++ 
+ 
+  
+Hydrocynus forskalii 
+ 
+* 
++ 
+ 
+  
+Hepsetus odoe 
+ 
++ 
++ 
+* 
+ 
+Clarias anguillaris 
+ 
++ 
+ 
+ 
+Trichiurus lepturus 
+Trichiurus lepturus 
+* 
+* 
+* 
+  
+Pellonula leonensis 
+Pellonula leonensis 
+* 
+* 
+* 
+* 
+Monodactylus sebae 
+Monodactylus sebae 
+* 
++ 
++ 
++ 
+Ethmalosa fimbriata 
+Ethmalosa fimbriata 
++ 
++ 
++ 
++ 
+Autres Clupéidés 
+Sardinella aurita 
++ 
+  
++ 
+ 
+  
+Sardinella maderensis 
++ 
++ 
++ 
+ 
+Mugilidés 
+Liza dumerili 
++ 
++ 
++ 
+ 
+  
+Liza falcipinnis 
++ 
+* 
++ 
+* 
+  
+Liza grandisquamis 
+* 
++ 
+* 
+ 
+  
+Mugil bananensis 
++ 
++ 
++ 
++ 
+  
+Mugil cephalus 
++ 
++ 
++ 
++ 
+  
+Mugil curema 
++ 
++ 
++ 
+ 
+Tylochromis jentinki 
+Tylochromis jentinki 
+  
+* 
+* 
+ 
+Sarotherodon melanotheron 
+Sarotherodon melanotheron 
+* 
+* 
+* 
+* 
+Tilapia guineensis 
+Tilapia guineensis 
+* 
+* 
+* 
+* 
+Crevettes 
+Penaeus duorarum 
+* 
+* 
+  
+  
+ 
+Penaeus notialis 
+ 
+ 
+* 
+* 
+Crabes 
+Callinectes amnicola 
+ * 
+* 
+*  
+*  
+Macrofaune 
+Anadara senilis 
+* 
++ 
+ 
+ 
+ 
+Corbula trigona 
+ 
+* 
+* 
+* 
+Méiofaune 
+ 
++ 
++ 
++ 
++ 
+Zooplancton 
+Acartia clausi 
+* 
++ 
+* 
++ 
+Zoobenthos 
+ 
+ + 
+ + 
+ + 
+ + 
+Phytoplancton 
+ 
++ 
++ 
++ 
++ 
+Phytobenthos 
+ 
++ 
++ 
++ 
++ 
+Détritus 
+ 
++ 
++ 
++ 
++ 
+Nombre total de groupes considérés 
+ 
+37 
+41 
+42 
+31 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 87 ===
+Caractéristiques des assemblages biologiques 
+__________________________________________________________________________________________ 
+ 
+63
+5 %, sauf dans certaines zones et de façon épisodique au sein des communautés marine et 
+continentale pour les cladocères. Pagano et Saint-Jean (1994) ont observé les variations 
+saisonnières de la biomasse ; celle-ci passe par un maximum pendant la saison sèche (et 
+chaude) mais, localement, cela peut être l’inverse comme dans les zones directement 
+influencées par les apports d’eaux marines ou continentales. Acartia clausi, par exemple, est 
+associé à la baisse de salinité lors de l’enrichissement de la lagune en eaux de pluies tandis 
+qu’à l’opposé, Oithona disparaît alors quasi complètement (Jouffre et al. 1991 ; Kouassi 2001). 
+Dans la lagune, la répartition des copépodes est assez nette. P. hessei, principalement observé 
+dans la zone ouest pendant toute l’année, tend à atteindre son maximum pendant la saison 
+sèche mais il est absent dans la zone estuarienne. Oithona sp, en revanche, domine les zones 
+estuariennes presque toute l’année sauf pendant la crue due aux débits fluviaux de la 
+Comoé. Les variations d’abondance exposées ci-dessus sont maximales près du chenal 
+(Pagano et Saint-Jean 1994). 
+ 
+Au lac Nokoué, Gnohossou (2002) a observé une très grande abondance des rotifères. 
+ 
+4.2.2.2. La faune benthique : crustacés inférieurs  
+ 
+4.2.2.2.a. Le Méiobenthos 
+ 
+Dans cette rubrique, nous avons regroupé les petits crustacés, isopodes et juvéniles 
+des décapodes, des annélides et des polychètes.  
+ 
+Dans le delta du Sine-Saloum le méiobenthos est essentiellement constitué par les 
+Foraminifères et les Ostracodes. Les Foraminifères sont caractérisés par une faible diversité 
+et regroupent 6 espèces dans le Bandiala et le Diomboss et 9 dans les « bolongs » de 
+Ndangane et de Gokheor. Ces espèces se répartissent entre des formes calcaires à affinité 
+marine vers l’amont (Ammonia beccarii, Elphidium sp, Quinqueloculina sp et Triloculina sp) et 
+des formes agglutinées vers l’aval (Ammonia salsum et Gaudryina exilis) avec une espèce 
+calcaire (Ammonia tepida). La composition faunistique semble globalement ne pas varier avec 
+les saisons. Dix-neuf espèces d’Ostracodes à affinité marine ont été répertoriées dont 
+Phlyctocythere hartmanni, Leptocythère sp, Cyprideis mandviensis et Neomonoceratina iddoensis. 
+Cette ostracofaune a tendance à diminuer de l’aval vers l’amont (Diouf 1996).  
+ 
+4.2.2.2.b. Le Macrobenthos 
+ 
+La biodiversité du macrobenthos est assez riche dans toute l’Afrique de l’Ouest. 
+Guiral et al. (1999) indiquent que sa distribution et son abondance dépendent principalement 
+des crues. Nous mettons les mollusques, Bivalves et Gastropodes, ainsi que les annélides, les 
+polychètes, les Echinoides dans ce groupe (Guiral et al. 1999). 
+ 
+En Afrique de l’Ouest, les études concernant l’écobiologie des Gastropodes (Neritina 
+glabrata, Neritina adansoniaca, Neritina rubricata, Pachymelanania fusca, Pachymelanania aurita, 
+Pachymelanania byronensis, Tympanotonus fuscatus, Thais forbesi, T. callifra et des Bivalves 
+(Anadara senilis, Congeria africana, Congerina ornata, Brachyodontes tenuistriatus, Crassostrea, 
+
+
+=== PDF PAGE 132 ===
+Chapitre 6 
+__________________________________________________________________________________________ 
+ 
+108 
+Tableau 6.1. Paramètres biologiques considérés pour les espèces clefs de poissons dans l’estuaire du Sine-
+Saloum. L est la longueur asymptotique, W est le poids asymptotique, K est le coefficient de croissance, 
+A est l’indice d’activité, M est la mortalité naturelle et F la mortalité par la pêche. 
+ 
+ 
+Espèce 
+L 
+(cm FL) 
+W 
+(g) 
+K 
+(an-1) 
+A 
+ 
+M 
+(an-1) 
+F 
+(an-1) 
+1 
+2 
+Sphyraena afra* 
+Scomberomorus tritor 
+76,40 a 
+134,50 g 
+2 697,08 b 
+23 211,56 h 
+0,20 c 
+0,83 g 
+1,56 d 
+4,30 d 
+0,563 e 
+0,341 i 
+1,137 f 
+0,309 f 
+3 
+Polydactylus quadrifilis 
+52,10 a 
+2 010,00 h 
+0,36 c 
+2,12 d 
+1,451 e 
+0,089 f 
+4 
+Galeoides decadactylus*  
+25,00 g 
+318,27 h 
+0,58 g 
+2,88 d 
+1,269 i 
+1,269 f 
+5 
+Pseudotolithus elongatus  
+54,50 g 
+1 474,61 h 
+0,16 g 
+1,21 d 
+0,440 i 
+0,310 f 
+6 
+Pseudotolithus brachygnathus* 
+69,00 g 
+2 858,21 h 
+0,33 g 
+1,21 d 
+0,661 i 
+0,619 f 
+7 
+Elops lacerta* 
+37,00 g 
+654,48 h 
+0,45 g 
+3,00 d 
+0,971 i 
+0,849 f 
+8 
+Arius latiscutatus* 
+55,50 g 
+2 264,86 h 
+0,15 g 
+3,28 d 
+0,420 i 
+2,235 f 
+9 
+Pomadasys jubelini* 
+34,50 g 
+557,49 h 
+0,45 g 
+1,41 d 
+0,287 i 
+0,983 f 
+10 
+Chloroscombrus chrysurus 
+23,50 g 
+25,96 h 
+0,54 g 
+4,04 j 
+1,233 i 
+1,257 f 
+11 
+Caranx hippos* 
+22,24 a 
+143,10 b 
+0,86 c 
+4,05 d 
+1,506 e 
+0,079 f 
+12 
+Trachinotus teraia* 
+51,41 a 
+6 045,52 b 
+0,33 c 
+3,87 d 
+0,605 i 
+0,006 f 
+13 
+Citarichthys stampflii  
+17,24 a 
+48,92 h 
+0,90 c 
+1,09 d 
+1,507 e 
+0,142 f 
+14 
+Cynoglossus senegalensis* 
+25,80 a 
+176,67 h 
+0,66 c 
+0,01 
+1,128 e 
+0,082 f 
+15 
+Eucinostomus melanopterus* 
+22,50 g 
+302,97 h 
+0,33 g 
+2,38 d 
+0,904 i 
+0,686 f 
+16 
+Drepane africana* 
+36,50 g 
+1 669,83 h 
+0,60 g 
+1,80 d 
+1,172 i 
+0,508 f 
+17 
+Dasyatis margarita*  
+58,50 a 
+6 764,39 h 
+0,40 c 
+0,01  
+0,627 e 
+0,106 f 
+18 
+Ilisha africana 
+22,75 g 
+103,39 b 
+0,38 g 
+2,88 j 
+0,991 i 
+0,518 f 
+19 
+Brachydeuterus auritus 
+19,50 g 
+123,02 h 
+0,75 g 
+3,24 d 
+1,610 i 
+3,070 f 
+20 
+Epinephelus aeneus*  
+47,36 a 
+768,03 h 
+0,41 c 
+1,06 j 
+0,730 e 
+0,018 f 
+21 
+Hemiramphus brasiliensis* 
+31,31 a 
+153,47 b 
+0,61 c 
+2,34 j 
+0,988 e 
+0,129 f 
+22 
+Pellonula leonensis  
+10,49 a 
+4,99 b 
+1,68 c 
+2,83 j 
+2,013 e 
+1,067 f 
+23 
+Trichiurus lepturus  
+86,50 g 
+4 757,49 h 
+0,14 g 
+0,01 
+0,346 i 
+0,074 f 
+24 
+Monodactylus sebae 
+17,00 g 
+136,56 h 
+0,70 g 
+3,06 j 
+1,620 i 
+0,290 f 
+25 
+Ethmalosa fimbriata 
+32,00 g 
+590,09 h 
+0,48 g 
+2,88 d 
+1,047 i 
+1,463 f 
+26 
+Sardinella maderensis* 
+24,00 g 
+195,82 h 
+0,50 g 
+3,35 d 
+1,165 i 
+1,885 f 
+27 
+Liza grandisquamis* 
+30,50 g 
+341,98 h 
+0,35 g 
+2,45 d 
+0,863 i 
+0,217 f 
+28 
+Sarotherodon melanotheron 
+22,00 g 
+176,74 h 
+0,60 g 
+1,37 d 
+1,081 i 
+1,135 f 
+29 
+Tilapia guineensis 
+32,50 g 
+345,47 h 
+0,46 g 
+1,37 j 
+1,014 i 
+1,386 f 
+ 
+a. 
+Valeurs issues de la base de données de pêches expérimentales (Diouf 1996 ; Simier et al. 2003) et L calculé par 
+la relation prédictive de Froese et Binohlan (2000) ; 
+b. 
+Valeur calculée à partir de la relation longueur –poids indiquée dans « Fishbase » (Froese et Pauly 2004) ; 
+c. 
+Coefficient de croissance (K) du poisson estimé par la relation prédictive de Merona (1983) ; 
+d. 
+Mesuré et calculé par nos soins à partir d’échantillons capturés in situ ; 
+e. 
+Mortalité naturelle estimée à partir de la relation prédictive de Froese et Binohlan (2000) ; 
+f. 
+Calculé  à partir de la  relation F = Z – M; La mortalité totale (Z) étant la somme de la mortalité naturelle  (M) et 
+de la mortalité par pêche (F) ; 
+g. 
+Valeur calculée grâce au logiciel FiSAT (Gayanilo et al. 2002) ; 
+h. 
+Valeur calculée à partir de la relation longueur – poids indiquée par Écoutin et Albaret (2003) ; 
+i. 
+Valeur obtenue à l’aide de la relation prédictive de Pauly (1980) ; 
+j. 
+Valeur issue de « Fishbase » (Froese et Pauly 2004). 
+ 
+ 
+
+
+=== PDF PAGE 136 ===
+Chapitre 6 
+__________________________________________________________________________________________ 
+ 
+112 
+Pour d’autres espèces, la taille asymptotique la plus faible est observée dans un autre 
+milieu. Il en est ainsi pour Citarichthys stampflii, Cynoglossus senegalensis et Ilisha africana dans le 
+Sine-Saloum où elles souffrent peut-être des salinités élevées (Tableau 6.1).  
+ 
+D’autres espèces ont une longueur maximale similaire dans différents milieux: Galeoides 
+decadactylus, Chloroscombrus chysurus, Pellonula leonensis et Drepane africana, mais assortie à une 
+démographie différente en termes de P/B et de la contribution relative de M et de F dans la valeur 
+de Z.  
+ 
+Pour d’autres groupes enfin, quelquefois présents dans 3 des 4 milieux étudiés, il n’est pas 
+possible de tirer des conclusions nettes. 
+ 
+Sarotherodon melanotheron atteint une petite taille au Sine-Saloum (Tableau 6.1) sans doute 
+en raison de la salinité, hypothèse déjà avancée par Panfili et al. (2004b) qui ont mis en évidence 
+une croissance plus lente chez les poissons de plus d’un an au Sine-Saloum que chez ceux de 
+l’estuaire de la Gambie (Tableau 6.2). 
+ 
+Chez plusieurs espèces présentes en lagune Ébrié et ailleurs, c’est à Ébrié que les individus 
+atteignent les plus grandes tailles comme par exemple chez Sphyraena afra, Arius latiscutatus, 
+Pomadasys jubelini, Trachinotus teraia, Tylochromis lepturus, Hemichromis fasciatus et Tilapia 
+guineensis. Ce milieu était pourtant considéré comme déjà fortement exploité lors des 
+échantillonnages en 1980 et 1981 (Écoutin et al. 1994). 
+ 
+Enfin chez 50 % des espèces au Sine-Saloum, 73 % en Gambie, 62 % en lagune Ébrié et la 
+totalité des espèces du lac Nokoué, la mortalité naturelle dépasse, parfois de beaucoup, la 
+mortalité par pêche. Chez ces populations, la démographie est fortement influencée par la 
+mortalité naturelle et donc, pour de nombreuses espèces, par la prédation.  
+ 
+6.3. Exposé des modèles  
+ 
+En suivant les indications de Yodzis et Winemiller (1999) pour la constitution des groupes, 
+un total of 37, 41, 42 et 31 groupes ont été pris en compte pour Sine-Saloum, Gambie, Ébrié et 
+Nokoué, respectivement. Ainsi, les modèles Ecopath (Christensen et Pauly 1992) ont pu être 
+établis comme résumé dans les tableaux 6.5 à 6.8. Des représentations du fonctionnement 
+trophique des 4 écosystèmes sont schématisées sur les figures 6.1 a à d. Les régimes alimentaires 
+tels qu’exprimés pour l’élaboration de ces modèles figurent dans l’annexe II. Pour comprendre ces 
+modèles et les interpréter nous aborderons de façon comparative différents points clefs des 
+relations trophiques tels que quantifiés par Ecopath. 
+ 
+Les modèles concernant ces quatre milieux tels que construits et utilisables avec le logiciel 
+Ecopath 5 sont disponibles sur demande. Chaque entrée y fait l’objet d’une documentation 
+détaillée. 
+ 
+Il faut d’abord remarquer que le nombre de groupes de poissons considérés est maximum à 
+Ébrié (34) et en Gambie (33), un peu plus faible au Sine-Saloum (29) et minimum au Lac Nokoué 
+(23). C’est dans ce dernier milieu que la diversité est la plus faible et c’est à Ébrié qu’elle est 
+maximale (Chapitre 4). Dans l’identification et le choix des groupes, nous nous sommes référés aux 
+
+
+=== PDF PAGE 137 ===
+L’écologie trophique 
+__________________________________________________________________________________________ 
+ 
+113 
+espèces mais aussi à leur place trophique et dynamique dans l’écosystème comme indiqué plus 
+haut, ceci dans le but d’avoir le maximum de groupes communs à plusieurs écosystèmes à des fins 
+de comparaison. Ainsi 13 groupes sont communs aux 4 écosystèmes et 27 sont communs à au 
+moins 3 milieux. C’est au lac Nokoué que l’on trouve le plus de groupes non rencontrés dans 
+aucun autre écosystème. Le modèle Ébrié ressemble à celui de la Gambie en termes de diversité 
+écologique élevée ainsi que l’on peut le constater par le grand nombre de groupes considérés.  
+ 
+6.3.1. Les ressources exploitées par l’homme  
+ 
+Ces similarités entre les écosystèmes quant à leur faune piscicole étaient déjà perceptibles 
+au chapitre 5 mais les importances relatives en terme de biomasse des divers espèces ou groupes 
+d’espèces communs sont très variables (Tableaux 6.5 à 6.8).  
+ 
+En comparant les quatre écosystèmes, nous remarquons que la biomasse totale de poissons 
+la plus élevée est au lac Nokoué : 134,7 t.km-² contre 9,1 t.km-² dans le Sine-Saloum et en Gambie et 
+9,5 t.km-² en lagune Ébrié. La raison évidente en est le développement des « acadjas », des 
+dispositifs installés à Nokoué par les pêcheurs depuis plus d’un siècle et destinés à constituer à 
+l’aide de branchages des supports artificiels favorisant la production de nourriture pour les 
+poissons avec très peu de prédation (Welcomme 1972 ; 1999 ; Lalèyè et al. 2003a). 
+ 
+D’une façon générale, les petites espèces ne contribuent que peu à la biomasse totale des 
+poissons même si elles sont très abondantes numériquement (cf. annexe I). Ainsi en Gambie, nous 
+notons la faible biomasse de Pseudotolithus elongatus qui peut même paraître sous-estimée dans la 
+mesure où cette espèce a été observée comme très abondante et même dominante (Albaret et al. 
+2004 ; Guillard et al. 2004). Il est probable que les juvéniles de petites tailles soient à l’origine de 
+cette divergence entre biomasse et abondance.  
+ 
+La biomasse estimée de crevettes et de crabes, autres groupes exploités par l’homme est très 
+variable : 4,7 t.km-² au Sine-Saloum ; 7,2 en Gambie ; 5,3 en lagune Ébrié et 38,6 au lac Nokoué. Les 
+rendements écotrophiques de ces groupes ont été dans tous les cas fixés à des valeurs élevés car ils 
+sont très recherchés par les pêcheurs (Laë et al. 2004 ; M. Dème, CRODT, comm. pers.). 
+ 
+Dans les 4 écosystèmes, plusieurs groupes de poissons présentent des valeurs de EE faibles 
+(<0,50). Ces espèces peuvent subir une faible prédation ou n’être capturées que dans la zone 
+estuarienne. C’est le cas pour des espèces telles que Arius spp (en Gambie), Caranx spp, Trachinotus 
+spp, Drepane africana, Dasyatis spp, Hydrocynus spp, Monodactylus sebae. La morphologie de ces 
+poissons diminue d’autant leur vulnérabilité à la predation (J.-M. Écoutin, IRD, comm. pers.). Des 
+rendements écotrophiques élevés, supérieurs à 0,75 sont observés plutôt chez les populations 
+soumises à une forte prédation et/ou connues comme recherchées par la pêche artisanale comme 
+par exemple : Pomadasys jubelini, Brachydeuterus auratus, Eucinostomus melanopterus, Pellonula 
+leonensis, Ethmalosa fimbriata et les Tilapias. Au lac Nokoué, toutefois, de nombreux groupes 
+également présents dans les autres écosystèmes présentent des rendements écotrophiques plus 
+faibles qu’ailleurs.  
+
+
+=== PDF PAGE 138 ===
+Chapitre 6 
+__________________________________________________________________________________________ 
+ 
+114 
+Tableau 6.5. Paramètres entrés et  paramètres estimés (entre parenthèses) par Ecopath pour les groupes 
+considérés dans l’estuaire du Sine-Saloum entre 1991 et 19922. Les groupes de poissons sont indiqués par 
+le nom de l’espèce principale (suivi de *) choisie comme modèle du groupe. L’absence d’astérisque 
+indique que le groupe est formé par une espèce unique. NT est le niveau trophique, B est la biomasse en 
+poids frais (pf), P/B est le rapport production/biomasse, Q/B est la consommation relative de nourriture, 
+EE est le rendement écotrophique, P/Q est le rapport production/consommation et Y est la capture par 
+pêche. 
+ 
+ 
+Groupe  
+NT 
+B (pf) 
+(t.km-²) 
+P/B  
+(an-1) 
+Q/B  
+(an-1) 
+EE 
+P/Q 
+Y (pf) 
+(t.km-²an-1) 
+1 
+Sphyraena guanchancho* 
+(3,7) 
+0,030 a 
+1,700 d 
+8,645 j 
+(0,671) 
+(0,197) 
+0,034 p 
+2 
+Scomberomorus tritor 
+(3,8) 
+0,049 a 
+0,650 e 
+6,821 j 
+(0,495) 
+(0,095) 
+0,015 p 
+3 
+Polydactylus quadrifilis 
+(3,6) 
+0,026 a 
+1,540 d 
+9,272 j 
+(0,099) 
+(0,166) 
+0,002 p 
+4 
+Galeoides decadactylus*  
+(3,4) 
+0,363 a 
+3,280 e 
+16,820 j 
+(0,402) 
+(0,195) 
+0,461 p 
+5 
+Pseudotolithus elongatus  
+(3,5) 
+0,241 a 
+0,750 e 
+6,944 j 
+(0,423) 
+(0,108) 
+0,075 p 
+6 
+Pseudotolithus brachygnathus* 
+(3,6) 
+0,092 a 
+1,280 e 
+7,294 j 
+(0,511) 
+(0,175) 
+0,057 p 
+7 
+Elops lacerta* 
+(3,6) 
+0,056 a 
+1,820 e 
+13,877 j 
+(0,500) 
+(0,131) 
+0,048 p 
+8 
+Arius latiscutatus* 
+(3,4) 
+0,090 a 
+2,655 e 
+7,530 j 
+(0,871) 
+(0,353) 
+0,201 p 
+9 
+Pomadasys jubelini* 
+(3,2) 
+0,174 a 
+1,350 d 
+12,064 j 
+(0,806) 
+(0,112) 
+0,171 p 
+10 
+Chloroscombrus chrysurus 
+(3,2) 
+0,154 a 
+2,490 e 
+19,696 k 
+(0,507) 
+(0,126) 
+0,194 p 
+11 
+Caranx hippos* 
+(3,5) 
+0,019 a 
+1,585 f 
+16,969 j 
+(0,134) 
+(0,093) 
+0,002 p 
+12 
+Trachinotus teraia* 
+(3,3) 
+0,045 a 
+0,611 f 
+8,445 j 
+(0,205) 
+(0,072) 
+- 
+13 
+Citarichthys stampflii  
+(3,6) 
+(0,029) 
+1,649 f 
+14,284 j 
+0,500 o 
+(0,115) 
+0,017 p 
+14 
+Cynoglossus senegalensis* 
+(3,3) 
+(0,039) 
+1,210 f 
+10,346 j 
+0,700 o 
+(0,117) 
+0,017 p 
+15 
+Eucinostomus melanopterus* 
+(3,0) 
+0,098 a 
+1,590 e 
+12,883 j 
+(0,966) 
+(0,123) 
+0,067 p 
+16 
+Drepane africana* 
+(2,8) 
+0,143 a 
+1,680 e 
+9,291 j 
+(0,319) 
+(0,181) 
+0,073 p 
+17 
+Dasyatis margarita*  
+(3,2) 
+0,069 a 
+0,733 f 
+4,613 j 
+(0,215) 
+(0,159) 
+0,007 p 
+18 
+Ilisha africana 
+(3,0) 
+0,426 a 
+1,510 e 
+16,059 k 
+(0,581) 
+(0,094) 
+0,221 p 
+19 
+Brachydeuterus auritus 
+(2,7) 
+0,188 a 
+4,680 e 
+20,509 j 
+(0,738) 
+(0,228) 
+0,577 p 
+20 
+Epinephelus aeneus*  
+(3,2) 
+(0,191) 
+0,748 f 
+6,992 k 
+0,850 o 
+(0,107) 
+0,004 p 
+21 
+Hemiramphus brasiliensis* 
+(2,3) 
+0,035 a 
+1,117 f 
+13,250 k 
+(0,173) 
+(0,084) 
+0,005 p 
+22 
+Pellonula leonensis 
+(3,3) 
+(0,259) 
+3,080 f 
+28,994 j 
+0,700 o 
+(0,106) 
+0,000 p 
+23 
+Trichiurus lepturus  
+(3,2) 
+0,027 a 
+0,420 e 
+4,163 j 
+(0,291) 
+(0,101) 
+0,002 p 
+24 
+Monodactylus sebae 
+(3,2) 
+0,024 a 
+1,910 e 
+16,724 k 
+(0,540) 
+(0,114) 
+0,007 p 
+25 
+Ethmalosa fimbriata 
+(2,6) 
+0,630 a 
+2,510 e 
+13,971 j 
+(0,997) 
+(0,180) 
+0,922 p 
+26 
+Sardinella maderensis* 
+(2,7) 
+2,413 a 
+3,050 e 
+18,975 j 
+(0,658) 
+(0,161) 
+4,549 p 
+27 
+Liza grandisquamis* 
+(2,7) 
+0,426 a 
+1,080 e 
+11,464 j 
+(0,423) 
+(0,094) 
+0,092 p 
+28 
+Sarotherodon melanotheron 
+(2,0) 
+2,719 a 
+2,480 e 
+32,467 j 
+(0,499) 
+(0,076) 
+3,086 p 
+29 
+Tilapia guineensis 
+(2,0) 
+0,073 a 
+2,400 e 
+35,264 k 
+(0,841) 
+(0,068) 
+0,101 p 
+30 
+Crevettes 
+(2,5) 
+(2,815) 
+4,605 g 
+22,000 l 
+0,950 o 
+(0,209) 
+1,050 p 
+31 
+Crabes 
+(2,7) 
+(1,858) 
+2,500 h 
+8,500 l 
+0,800 o 
+(0,294) 
+- 
+32 
+Macrobenthos 
+(2,0) 
+93,000 b 
+1,200 b 
+10,000 b 
+(0,226) 
+(0,120) 
+- 
+33 
+Meiobenthos 
+(2,1) 
+19,600 b 
+4,000 b 
+50,000 m 
+(0,315) 
+(0,080) 
+- 
+34 
+Zooplancton 
+(2,1) 
+20,636 b 
+50,000 i 
+150,000 n 
+(0,307) 
+(0,333) 
+- 
+35 
+Phytoplancton 
+(1,0) 
+82,000 b 
+138,189 h 
+- 
+(0,286) 
+- 
+- 
+36 
+Phytobenthos 
+(1,0) 
+(32,158)   
+15,000 b 
+- 
+0,950 o 
+- 
+- 
+37 
+Détritus 
+(1,0) 
+1,000 c 
+(1,700) 
+- 
+(0,110) 
+- 
+- 
+ 
+(a) Mesuré à partir des pêches expérimentales (Diouf 1996 ; Simier et al. 2003) (cf. chapitre 3) ; (b) D’après Samb et 
+Mendy (2003) ; (c) Basé sur le modèle de prévision de régression multiple en fonction de la production primaire 
+et de la profondeur de la zone euphotique (Pauly et al. 1993) ; (d) Calculé selon Lévêque et al. (1977) ; (e) Basé 
+sur des données des pêches expérimentales (Simier et al. 2003) employant FiSAT (Gayanilo et al. 2002) ; (f) À 
+partir de données récentes de terrain par la relation prédictive de Merona (1983) et Froese et Binohlan (2000) ; 
+(g) Moyenne des valeurs de P/B obtenues par Lhomme et Garcia (1984) de 4,2 et Pauly (1982) de 5,01 ; (h) Selon 
+Abaca-Arenas et Valero-Pacheco 1993 ; (i) D’après Pagano et Saint-Jean (1994) ; (j) Consommation de nourriture 
+obtenue grâce au modèle prédictif de Palomares et Pauly (1998) employant l’indice d’activité mesuré par nos 
+soins ; (k) Consommation de nourriture obtenue grâce au modèle prédictif de Palomares et Pauly (1998) mais 
+l’indice d’activité a été obtenu dans « Fishbase » (Froese et Pauly 2004) ; (l) Q/B adopté d’Arreguín-Sánchez et al. 
+(1993a) ; (m) D’après Chavez et al. (1993) ; (n) D’après Browder 1993 ; (o) Estimé par nos soins ; (p) Estimé en 
+fonction de la biomasse mesurée pour ce groupe et du coefficient de mortalité par pêche, B = Y/F. 
+(b)  
+
+
+=== PDF PAGE 142 ===
+Chapitre 6 
+__________________________________________________________________________________________ 
+ 
+118 
+6.3.2. Les prédateurs du sommet de la chaîne trophique  
+ 
+Au Sine-Saloum, (Tableau 6.5), le niveau trophique calculé le plus élevé (3,9) est celui de 
+Scomberomerus tritor (groupe 2) suivi de Sphyraena guachancho (groupe 1). Les autres prédateurs au 
+sommet de la chaîne trophique (NT de 3,5 à 3,7) sont Polydactylus quadrifilis (groupe 2), 
+Pseudotolithus elongatus et les autres Pseudotolithus (groupes 5 et 6, respectivement), Elops lacerta 
+(groupe 7) Citarichthys stampflii (groupe 13) et Caranx hippos (groupe 11) (Figure 6.1 a).  
+ 
+Il en est de même en Gambie (Tableau 6.6) et en lagune Ébrié (Tableau 6.7), où les 
+Sphyrénidés (groupe 1) sont également considérés comme prédateurs du sommet (NT 3,8). Les 
+autres prédateurs sont Pseudotolithus spp (groupes 4 et 5), Caranx hippos (groupe 10) et Citarichthys 
+stampflii (groupe 12) avec des niveaux trophiques de 3,5 à 3,7. De façon spécifique à la lagune 
+Ébrié, il faut citer Galeoides decadactylus (groupe 3), Pomadasys jubelini (groupe 8) Cynoglossus spp 
+(groupe 13) et Dasyatis spp (groupe 16) au niveau trophique 3.4. 
+ 
+Au lac Nokoué (Tableau 6.8) le niveau trophique le plus élevé (3,5) est celui de Citarichthys 
+stampflii (groupe 5). Ensuite viennent au niveau trophique 3,4, Elops lacerta (groupe 2) Caranx 
+hippos (groupe 4), ainsi que le piscivore continental, Hepsetus odoe, (groupe 13) (Figure 6.1d). Le 
+niveau trophique maximum observé au lac Nokoué est donc plus bas que dans les autres 
+écosystèmes. 
+ 
+Nous notons des similarités quant aux prédateurs du sommet dans ces 4 écosystèmes : 
+Sphyraena spp, Pseudotolithus spp, Caranx hippos, Citarichthys stampflii et Elops lacerta (Tableaux 6.5 à 
+6.8). 
+ 
+6.3.3. L’utilisation des bas niveaux trophiques  
+ 
+Au Sine-Saloum, de faibles rendements écotrophiques ont été observés pour les 
+consommateurs primaires (macrobenthos, meiobenthos et zooplancton), les producteurs primaires 
+(phytoplancton) et les détritus. Ces groupes ne sont pas pleinement utilisés. En Gambie, en 
+revanche, des rendements ecotrophiques élevés ont été estimés pour les groupes appartenant au 
+premier niveau trophique (détritus, phytoplancton) comme pour les consommateurs primaires 
+(Tableau 6.6). Ces diverses sources de nourriture sont peu utilisées en lagune Ébrié, y compris le 
+zooplancton, pourtant constitué surtout de copépodes, qui représentent une importante source 
+potentielle d’énergie en raison de leur forte teneur en lipides (Saint-Jean et Pagano, 1994 ; Domain 
+1999 ; Villanueva et al. 2003). 
+ 
+Le modèle du lac Nokoué diffère des précédents par le fait qu’il est basé sur le détritus dont 
+le rendement écotrophique est très élevé EE (0,940) (Tableau 6.8). Au lac Nokoué, de nombreuses 
+espèces habituellement zoophages se sont révélées détritiphages : C. nigrodigitatus, C. auratus, 
+Trachinotus ovatus, E. fimbriata and L. falcipinnis associées à des vrais détritivores, S. melanotheron et 
+T. guineensis (Adité et Winemiller 1997). En revanche, les producteurs primaires et certains 
+consommateurs primaires comme le zooplancton et le meiobenthos présentent des valeurs de EE 
+faibles indiquant que ces groupes sont sous-utilisés (Villanueva et al. 2003). La faible utilisation du 
+zooplancton peut être expliquée par l’abondance des rotifères observée par Gnohossou (2002). Ces 
+derniers ne seraient que peu consommés. 
+ 
+
+
+=== PDF PAGE 143 ===
+L’écologie trophique 
+__________________________________________________________________________________________ 
+ 
+119 
+D’une façon générale, les valeurs faibles de EE traduisent le fait que les groupes en 
+question reçoivent une grande quantité d’énergie qui n’est pas transférée vers les niveaux 
+trophiques supérieurs. Ainsi EE n’est que de 0,289 pour le phytoplancton du Sine-Saloum avec un 
+P/B élevé (P/B= 138,1) (Tableau 6.5). Nous constatons la même chose (EE = 0,087) pour le 
+phytobenthos de la lagune Ébrié dont le P/B est de 83,3 (Tableau 6.2). Dans le cas du lac Nokoué, la 
+faible utilisation du phytoplancton (EE = 0,302) et du phytobenthos (EE = 0,440) comparée à celle 
+des détritus (0,940) est due à l’abondance des détritivores, principalement Sarotherodon 
+melanotheron (Tableau 6.8) (Villanueva et al. 2003). 
+ 
+6.3.4. L’utilisation de la nourriture  
+ 
+Chez les groupes communs à plusieurs écosystèmes, les consommations relatives de 
+nourritures (Q/B) sont très variables (Tableaux 6.5 à 6.8). Cela est en relation essentiellement avec 
+la démographie et la taille maximale des individus présents. Ainsi note-t-on des valeurs de Q/B 
+plus élevées au Lac Nokoué qu’ailleurs. Ces variations de Q/B et des biomasses des groupes 
+concernées font que ces quatre écosystèmes ont des fonctionnements trophiques différents.  
+ 
+De très grandes variations du rapport P/Q sont observées parmi les poissons dans les 
+quatre modèles. Chez la plupart des groupes les valeurs comprises entre 0,10 et 0,19 sont celles de 
+zooplanctonophages ou zoophages ce qui permet de penser que l’on à faire à une forte proportion 
+de petites espèces ou de juvéniles employant ces milieux comme des nurseries. Des valeurs plus 
+élevées de P/Q chez certains groupes sont en relation avec leur régime piscivore. Dans le cas des 
+crabes, des mollusques, du zoobenthos et du zooplancton, quelques valeurs supérieures à 0,3 
+correspondent aux indications de Christensen et al. (2000) particulièrement pour le zooplancton du 
+Lac Nokoué qui comporte une forte proportion de rotifères (Ghonossou 2002). Une valeur 
+exceptionnellement élevée de P/Q est notée chez Arius spp du Sine-Saloum sans raison apparente. 
+  
+6.3.5. La structure trophique des 4 écosystèmes  
+ 
+Il faut d’abord noter que dans tous les écosystèmes considérés plus des 2/3 des groupes de 
+poissons sont à des niveaux trophiques égaux ou supérieurs à 3 (en fait 80 % des groupes 
+identifiés en Gambie).  
+ 
+Ecopath dispose d’une routine qui décompose l’écosystème en niveaux trophiques 
+exprimés par des nombres entiers. Outre les niveaux usuels (I à IV), Ecopath met en évidence des 
+niveaux trophiques supérieurs, V et au-delà, correspondant à la contribution, dans l’alimentation 
+des prédateurs, de flux trophiques dérives de longues chaînes (Ulanowicz 1995). En effet, certains 
+de ces chaînes font des « détours », c’est-à-dire que elles sont plus de pas ou « steps » (niveaux 
+trophiques) que les prédateurs auxquels elles conduisent. Le nombre de niveaux trophiques du 
+système peut donc être plus élevé que le niveau trophique de prédateur du sommet (D. Pauly, 
+UBC, comm. pers.) de cet écosystème. Ainsi, 7 niveaux trophiques sont identifiés sauf au lac 
+Nokoué qui n’en présente que 6. La chaîne alimentaire du lac Nokoué est donc plus courte que 
+celle des autres milieux. 
+
+
+=== PDF PAGE 235 ===
+Annexe II Régimes alimentaires 
+_____________________________________________________________________ 
+ 
+ 
+211 
+Annexe II. A. Composition du régime alimentaire (%) des différents groupes du modèle Sine-Saloum. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+Proie \ Prédateur 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+1 
+Sphyraena guachancho 
+ 
+ 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2 
+Scromberomorus tritor 
+0,002 
+ 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 
+Polydactylus quadrifilis 
+0,005 
+0,002 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4 
+Galeoides decadactylus 
+0,010 
+0,010 
+0,005 
+ 
+0,005 
+0,001 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5 
+Pseudotolithus elongatus 
+0,005 
+ 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6 
+Pseudotholithus brachygnathus 
+0,005 
+0,005 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7 
+Elops lacerta 
+0,005 
+0,005 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8 
+Arius latiscutatus 
+0,010 
+0,010 
+0,005 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9 
+Pomadasys jubelini 
+0,010 
+0,010 
+0,005 
+ 
+0,005 
+0,002 
+0,002 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+10 
+Chloroscombrus chrysurus 
+0,001 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+11 
+Caranx hippos 
+0,001 
+0,001 
+ 
+ 
+ 
+0,001 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+12 
+Trachinotus teraia 
+0,005 
+0,005 
+0,005 
+ 
+ 
+0,001 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+13 
+Citarichthys stampflii 
+0,005 
+0,005 
+0,005 
+ 
+0,001 
+ 
+0,002 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+14 
+Cynoglossus sengalensis 
+0,010 
+0,010 
+0,005 
+ 
+0,005 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+15 
+Eucinostomus melanopterus 
+0,070 
+0,070 
+0,050 
+ 
+0,005 
+ 
+0,010 
+0,010 
+0,001 
+0,001 
+0,005 
+ 
+ 
+ 
+ 
+ 
+ 
+16 
+Drepane africana 
+0,005 
+0,005 
+ 
+ 
+ 
+0,0010 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+17 
+Dasyatis margarita 
+0,001 
+0,005 
+0,001 
+ 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+18 
+Ilisha africana 
+0,030 
+0,025 
+0,028 
+ 
+0,015 
+0,020 
+0,020 
+0,020 
+0,009 
+0,010 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+19 
+Brachydeuterus auritus 
+0,020 
+0,030 
+0,020 
+ 
+ 
+0,020 
+0,020 
+0,015 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+20 
+Hemichromis fasciatus 
+ 
+ 
+0,030 
+ 
+0,020 
+ 
+ 
+0,020 
+0,010 
+0,010 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+21 
+Hemiramphus brasiliensis 
+0,003 
+0,003 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+22 
+Pellonula leonensis 
+0,020 
+0,065 
+ 
+ 
+ 
+0,050 
+0,129 
+ 
+0,030 
+0,050 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+23 
+Trichiurus lepturus 
+0,002 
+0,002 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+24 
+Monodactylus sebae 
+0,005 
+ 
+0,005 
+ 
+0,005 
+0,010 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+25 
+Ethmalosa fimbriata 
+0,400 
+0,300 
+0,095 
+ 
+0,051 
+0,200 
+0,100 
+0,030 
+0,020 
+0,005 
+0,090 
+ 
+0,050 
+ 
+ 
+ 
+ 
+26 
+Sardinella maderensis 
+0,080 
+0,295 
+0,050 
+ 
+ 
+0,040 
+0,050 
+0,005 
+0,010 
+0,020 
+0,011 
+ 
+0,010 
+ 
+ 
+ 
+ 
+27 
+Liza falcipinnis 
+0,030 
+0,100 
+0,007 
+ 
+0,010 
+ 
+0,010 
+ 
+0,005 
+0,005 
+ 
+ 
+0,005 
+0,010 
+ 
+ 
+ 
+28 
+Sarotherodon melanotheron 
+0,010 
+0,020 
+0,080 
+0,005 
+0,031 
+ 
+0,005 
+0,050 
+0,025 
+0,010 
+ 
+0,005 
+0,010 
+ 
+ 
+ 
+ 
+29 
+Tilapia guineensis 
+0,010 
+0,015 
+ 
+0,005 
+ 
+ 
+0,005 
+ 
+ 
+ 
+ 
+0,005 
+ 
+ 
+ 
+ 
+ 
+30 
+Crevettes 
+0,240 
+ 
+0,266 
+0,400 
+0,411 
+0,350 
+0,550 
+0,200 
+0,110 
+0,255 
+0,442 
+0,315 
+0,500 
+0,110 
+0,240 
+0,100 
+0,500 
+31 
+Crabes 
+ 
+ 
+0,150 
+0,220 
+0,235 
+0,250 
+ 
+0,300 
+0,070 
+ 
+0,270 
+0,200 
+0,425 
+0,220 
+0,050 
+0,050 
+ 
+32 
+Macrobenthos 
+ 
+ 
+ 
+0,120 
+ 
+0,053 
+ 
+0,086 
+0,350 
+ 
+ 
+0,175 
+ 
+0,360 
+0,250 
+0,250 
+0,300 
+33 
+Meiobenthos 
+ 
+ 
+0,150 
+0,100 
+0,102 
+ 
+ 
+0,100 
+0,200 
+0,030 
+0,072 
+0,250 
+ 
+0,200 
+0,200 
+0,050 
+0,150 
+34 
+Zooplancton 
+ 
+ 
+0,034 
+0,150 
+0,097 
+ 
+0,094 
+0,154 
+0,150 
+0,543 
+0,110 
+0,050 
+ 
+0,100 
+0,100 
+0,270 
+ 
+35 
+Phytoplancton 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0,100 
+0,160 
+ 
+36 
+Phytobenthos 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0,050 
+0,065 
+0,030 
+37 
+Détritus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0,010 
+0,010 
+0,060 
+ 
+ 
+ 
+ 
+0,010 
+0,055 
+0,020 
+211
+
+
+=== PDF PAGE 236 ===
+Annexe II Régimes alimentaires 
+___________________________________________________________________________________ 
+ 
+212 
+Annexe II. A. Cont. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+Proie \ Prédateur 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+1 
+Sphyraena guachancho 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2 
+Scromberomorus tritor 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 
+Polydactylus quadrifilis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4 
+Galeoides decadactylus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5 
+Pseudotolithus elongatus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6 
+Pseudotholithus brachygnathus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7 
+Elops lacerta 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8 
+Arius latiscutatus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9 
+Pomadasys jubelini 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+10 
+Chloroscombrus chrysurus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+11 
+Caranx hippos 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+12 
+Trachinotus teraia 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+13 
+Citarichthys stampflii 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+14 
+Cynoglossus sengalensis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+15 
+Eucinostomus melanopterus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+16 
+Drepane africana 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+17 
+Dasyatis margarita 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+18 
+Ilisha africana 
+ 
+ 
+0,010 
+ 
+ 
+ 
+0,002 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+19 
+Brachydeuterus auritus 
+ 
+ 
+0,010 
+ 
+ 
+ 
+0,002 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+20 
+Hemichromis fasciatus 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+21 
+Hemiramphus brasiliensis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+22 
+Pellonula leonensis 
+ 
+ 
+0,100 
+ 
+ 
+0,010 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+23 
+Trichiurus lepturus 
+ 
+ 
+ 
+ 
+ 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+24 
+Monodactylus sebae 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+25 
+Ethmalosa fimbriata 
+ 
+ 
+ 
+ 
+ 
+0,010 
+0,005 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+26 
+Sardinella maderensis 
+ 
+ 
+ 
+ 
+ 
+0,002 
+0,005 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+27 
+Liza falcipinnis 
+ 
+ 
+ 
+ 
+ 
+0,006 
+0,005 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+28 
+Sarotherodon melanotheron 
+ 
+ 
+0,030 
+0,010 
+ 
+0,010 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+29 
+Tilapia guineensis 
+ 
+ 
+ 
+0,005 
+ 
+0,001 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+30 
+Crevettes 
+0,250 
+ 
+0,100 
+ 
+0,300 
+0,100 
+0,100 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+31 
+Crabes 
+ 
+ 
+ 
+ 
+0,100 
+0,100 
+0,100 
+ 
+ 
+ 
+ 
+ 
+ 
+0,005 
+ 
+ 
+ 
+32 
+Macrobenthos 
+0,150 
+ 
+0,200 
+0,150 
+ 
+0,160 
+0,205 
+0,140 
+0,250 
+0,300 
+0,005 
+0,001 
+ 
+0,400 
+ 
+ 
+ 
+33 
+Meiobenthos 
+0,050 
+ 
+0,200 
+0,150 
+ 
+0,150 
+0,030 
+0,010 
+0,050 
+0,050 
+0,005 
+0,001 
+0,100 
+0,200 
+ 
+0,010 
+ 
+34 
+Zooplancton 
+0,350 
+0,700 
+0,350 
+ 
+0,600 
+0,450 
+0,546 
+0,400 
+0,400 
+0,300 
+0,010 
+0,038 
+0,400 
+0,100 
+ 
+0,100 
+0,050 
+35 
+Phytoplancton 
+0,200 
+0,290 
+ 
+0,200 
+ 
+ 
+ 
+0,300 
+0,200 
+0,200 
+0,100 
+0,510 
+0,300 
+0,030 
+0,500 
+0,100 
+0,850 
+36 
+Phytobenthos 
+ 
+ 
+ 
+0,300 
+ 
+ 
+ 
+0,100 
+0,050 
+0,050 
+0,200 
+0,200 
+0,100 
+0,060 
+0,150 
+0,140 
+0,050 
+37 
+Détritus 
+ 
+0,010 
+ 
+0,185 
+ 
+ 
+ 
+0,050 
+0,050 
+0,100 
+0,680 
+0,250 
+0,100 
+0,205 
+0,350 
+0,650 
+0,050 
+212
+

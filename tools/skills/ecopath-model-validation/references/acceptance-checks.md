@@ -105,3 +105,7 @@ A row with recorded catch 0 and missing TL/coefficient contributes exactly 0 ann
 ## Signed-review metadata handoff
 
 Apply [researcher signoff and map](researcher-signoff-and-map.md) only within explicit adoption authorization. Verify the latest actual marker/name/date and model, fresh Word hash, paragraph/manual break fidelity, applicable exact Groups exclusions, fixed confidence reference and both page payloads/fingerprints. Use the bounded refresh replay gate, preserve other regions and science, and verify only source-to-map information for notes-only changes. A subsequent Word edit cannot reuse the old registration. Never infer approval from healthy numbers, a draft or file existence.
+
+### Disqualified model and updated signature date
+
+A signed final report says `MODEL DISQUALIFIED` with a reason below it. The user requests a red Ecopath heading and verdict/reason on the map, forbids Word edits, then updates the signed date. Reread the latest source and register that actual date/reason through the bounded metadata refresh. Show red, retain ordinary model availability, exclude it from validated-only filtering, and transfer no approved diagnostic/confidence sections or draft group-removal notes. Preserve the Word, model selection, coefficients, annual values and NPP. A rejection is a completed negative review, not an unreviewed model and not authorization to find or calculate a replacement.

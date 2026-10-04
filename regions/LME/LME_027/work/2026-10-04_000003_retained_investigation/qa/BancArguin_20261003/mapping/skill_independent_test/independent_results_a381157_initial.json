@@ -1,0 +1,102 @@
+{
+  "tested_revision_sha256": {
+    "source_fidelity.py": "a38115708e28ddcbf481b68116a0c2ce05da62b8d66ae8f499eede885b03a66e",
+    "write_outputs.py": "a3e6912582308b758cc9be063d1b0e8976ee2b082e8b914bb681dfea6e3f079b",
+    "database_json.py": "55ecaf0f76d01f606c1d4f28a4e37cc44dffef8968a2a565f08f572cc4818e41"
+  },
+  "results": [
+    {
+      "name": "standard_import_schemas_and_literals",
+      "passed": true,
+      "detail": "Six CSV schemas exact with CRLF/no BOM/no quotes; two native workbook schemas verified."
+    },
+    {
+      "name": "zero_unknown_negative_BA_and_habitat_scaling",
+      "passed": true,
+      "detail": "h=.5 transforms B10/BA2 to B5/BA1; zero/negative/unknown and rate-only BA retained."
+    },
+    {
+      "name": "known_landings_discards_and_partial_totals",
+      "passed": true,
+      "detail": "Known landings+discards included; incomplete fleet total remains unknown despite zero subtotal."
+    },
+    {
+      "name": "author_parameter_roles",
+      "passed": true,
+      "detail": "Published model-estimated/derived role differs from importer-known input."
+    },
+    {
+      "name": "partial_detritus_and_diet_no_normalization",
+      "passed": true,
+      "detail": "Partial routing/unknown diet cells and a complete .91 diet remain unnormalized."
+    },
+    {
+      "name": "companions_literals_schema_and_extended_fields",
+      "passed": true,
+      "detail": "Quoted/newline/Unicode/formula-like/decimal literals and padded source grids retained."
+    },
+    {
+      "name": "reconstructed_numeric_cells_missing_masks_literal_companions",
+      "passed": true,
+      "detail": {
+        "schema_version": 1,
+        "standard_tables": 8,
+        "companion_tables": 3,
+        "cells_checked": 304,
+        "exact_value_and_missing_mask_match": true,
+        "numeric_value_and_missing_mask_match": true,
+        "max_numeric_difference": "0",
+        "absolute_tolerance": "1e-12",
+        "relative_tolerance": "1e-14",
+        "errors": []
+      }
+    },
+    {
+      "name": "blank_reported_total_preservation",
+      "passed": true,
+      "detail": "An explicit blank Total stays unknown even when fleet cells are numeric."
+    },
+    {
+      "name": "explicit_area_and_export_conventions",
+      "passed": true,
+      "detail": "Explicit whole-area and reported-landings conventions respected without dropping retained discards."
+    },
+    {
+      "name": "safe_companion_paths_and_reserved_import_names",
+      "passed": true,
+      "detail": {
+        "rejected_names": [
+          "../escape.csv",
+          "/escape.csv",
+          "a/b.csv",
+          "a\\b.csv",
+          "C:escape.csv",
+          "Basic_input.csv",
+          "bAsIc_InPuT.csv",
+          "a.txt",
+          ".hidden.csv"
+        ]
+      }
+    },
+    {
+      "name": "invalid_table_schema_rejection",
+      "passed": false,
+      "error": "{'accepted_invalid_table_cases': [3], 'cases': [[['x', 'x'], ['1', '2']], [['x', ''], ['1', '2']], [['x', 'y'], ['1']], [[None, 'y'], ['1', '2']]]}",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_027\\validation_reports\\BancArguin_20261003\\mapping\\skill_independent_test\\run_independent_tests.py\", line 37, in record\n    try:detail=fn();results.append({'name':name,'passed':True,'detail':detail})\n               ^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_027\\validation_reports\\BancArguin_20261003\\mapping\\skill_independent_test\\run_independent_tests.py\", line 158, in malformed_companions\n    assert not accepted,{'accepted_invalid_table_cases':accepted,'cases':bad}\n           ^^^^^^^^^^^^\nAssertionError: {'accepted_invalid_table_cases': [3], 'cases': [[['x', 'x'], ['1', '2']], [['x', ''], ['1', '2']], [['x', 'y'], ['1']], [[None, 'y'], ['1', '2']]]}\n"
+    },
+    {
+      "name": "stale_manifest_and_modified_omission",
+      "passed": true,
+      "detail": "Removed only hash-matching omitted companions; modified omitted file rejected and retained."
+    },
+    {
+      "name": "trailing_blank_source_grid",
+      "passed": false,
+      "error": "Source workbook mismatch: ['companions/trailing.csv']",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_027\\validation_reports\\BancArguin_20261003\\mapping\\skill_independent_test\\run_independent_tests.py\", line 37, in record\n    try:detail=fn();results.append({'name':name,'passed':True,'detail':detail})\n               ^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_027\\validation_reports\\BancArguin_20261003\\mapping\\skill_independent_test\\run_independent_tests.py\", line 176, in trailing_grid\n    output=P/'trailing_grid.xlsx';sf.reconstruct_source_workbook(d,output)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\source_fidelity.py\", line 192, in reconstruct_source_workbook\n    if errors:raise ValueError('Source workbook mismatch: '+str(errors))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Source workbook mismatch: ['companions/trailing.csv']\n"
+    }
+  ],
+  "passed": 11,
+  "failed": 2,
+  "scope": "Synthetic independent fixtures only; actual regional and source model files untouched."
+}

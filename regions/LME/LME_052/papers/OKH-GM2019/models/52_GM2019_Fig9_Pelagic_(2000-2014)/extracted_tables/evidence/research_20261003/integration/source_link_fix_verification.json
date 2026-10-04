@@ -1,0 +1,194 @@
+{
+  "source_resolver_change": {
+    "before": "                    sourcefile=f'regions/{unit}/models/{selected}/sppr_source.xlsx'\n                    if not (root/sourcefile).exists():sourcefile=f'regions/{unit}/models/{selected}/model.json'",
+    "after": "                    declared=o.get('model_path') if refresh else None\n                    registered=model_metadata.get((unit,selected),{}).get('model_path')\n                    native=(path.parent/str(declared) if declared else root/str(registered or f'regions/{unit}/models/{selected}/model.json')).resolve()\n                    sourcefile=native.with_name('sppr_source.xlsx')\n                    if not sourcefile.is_file():sourcefile=native\n                    sourcefile=sourcefile.relative_to(root.resolve()).as_posix()"
+  },
+  "baseline_method": "Only the resolver block is restored in a compiled in-memory copy; shared production file is never reverted.",
+  "adapter_sha256": "1f141865e8f744c3fffd574112fe78e661b4a8a971dc22d281c1e84ac26f8d2b",
+  "regression_fixture_sha256": "1c9d9af7355e5111405eafc01e6d34a9065fa6155e08290ed77321d846e2da29",
+  "checks": {
+    "source_link_regression_red": {
+      "command": [
+        "C:\\Users\\idoca\\miniconda3\\python.exe",
+        "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\integration\\verify_source_link_fix.py",
+        "baseline"
+      ],
+      "exit_code": 1,
+      "log": "source_link_regression_red.log",
+      "summary": [
+        "Ran 5 tests in 6.489s",
+        "FAILED (failures=3)"
+      ],
+      "failures": [
+        {
+          "name": "FAIL: test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads (test_model_source_paths.ModelSourcePathTests.test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads)",
+          "cause": "AssertionError: Lists differ: ['reg[15 chars]dels/m/sppr_source.xlsx', 'regions/LME_001/mod[19 chars]lsx'] != ['reg[15 chars]dels/source/assumption_variants/adopted/sppr_s[85 chars]lsx']"
+        },
+        {
+          "name": "FAIL: test_nested_variant_without_sppr_links_exact_native_model (test_model_source_paths.ModelSourcePathTests.test_nested_variant_without_sppr_links_exact_native_model)",
+          "cause": "AssertionError: Lists differ: ['reg[15 chars]dels/m/sppr_source.xlsx', 'regions/LME_001/mod[19 chars]lsx'] != ['reg[15 chars]dels/source/assumption_variants/adopted/model.[73 chars]son']"
+        },
+        {
+          "name": "FAIL: test_scoped_build_uses_registry_path_for_retained_nested_model (test_model_source_paths.ModelSourcePathTests.test_scoped_build_uses_registry_path_for_retained_nested_model)",
+          "cause": "AssertionError: Lists differ: ['reg[15 chars]dels/m/sppr_source.xlsx', 'regions/LME_001/mod[19 chars]lsx'] != ['reg[15 chars]dels/source/assumption_variants/adopted/sppr_s[85 chars]lsx']"
+        }
+      ]
+    },
+    "source_link_regression_green": {
+      "command": [
+        "C:\\Users\\idoca\\miniconda3\\python.exe",
+        "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\integration\\verify_source_link_fix.py",
+        "current"
+      ],
+      "exit_code": 0,
+      "log": "source_link_regression_green.log",
+      "summary": [
+        "Ran 5 tests in 9.210s",
+        "OK"
+      ],
+      "failures": []
+    },
+    "full_workflow_suite_20261003": {
+      "command": [
+        "C:\\Users\\idoca\\miniconda3\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/workflow_checks",
+        "-v"
+      ],
+      "exit_code": 1,
+      "log": "full_workflow_suite_20261003.log",
+      "summary": [
+        "Ran 116 tests in 90.829s",
+        "FAILED (failures=6, errors=15)"
+      ],
+      "failures": [
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\tools\\\\skills\\\\original_skill_resources\\\\claude\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='0.999')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\tools\\\\skills\\\\original_skill_resources\\\\claude\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='1.001')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\tools\\\\skills\\\\original_skill_resources\\\\claude\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='0.900')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\tools\\\\skills\\\\original_skill_resources\\\\claude\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='1.000')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\.agents\\\\skills\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='0.999')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\.agents\\\\skills\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='1.001')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\.agents\\\\skills\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='0.900')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_converter_retains_rounding_deficit_excess_and_material_deficit (test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\\\Users\\\\idoca\\\\.agents\\\\skills\\\\ecopath-extraction\\\\scripts\\\\database_json.py', total='1.000')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_diet_conversion_preserves_detritus_fate (test_diet_source_preservation.DietPreservationTests.test_diet_conversion_preserves_detritus_fate)",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_explicit_unknown_import_stays_unknown_through_roundtrip (test_diet_source_preservation.DietPreservationTests.test_explicit_unknown_import_stays_unknown_through_roundtrip)",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_numeric_missing_sentinel_imports_stay_unknown (test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\tools\\\\skills\\\\original_skill_resources\\\\claude\\\\ecopath-extraction\\\\scripts\\\\database_json.py', sentinel='-9999.0')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_numeric_missing_sentinel_imports_stay_unknown (test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\tools\\\\skills\\\\original_skill_resources\\\\claude\\\\ecopath-extraction\\\\scripts\\\\database_json.py', sentinel='-9999.000')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_numeric_missing_sentinel_imports_stay_unknown (test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\\\Users\\\\idoca\\\\.agents\\\\skills\\\\ecopath-extraction\\\\scripts\\\\database_json.py', sentinel='-9999.0')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_numeric_missing_sentinel_imports_stay_unknown (test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\\\Users\\\\idoca\\\\.agents\\\\skills\\\\ecopath-extraction\\\\scripts\\\\database_json.py', sentinel='-9999.000')",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "ERROR: test_roundtrip_preserves_raw_cells_and_import (test_diet_source_preservation.DietPreservationTests.test_roundtrip_preserves_raw_cells_and_import)",
+          "cause": "ModuleNotFoundError: No module named 'source_fidelity'"
+        },
+        {
+          "name": "FAIL: test_future_layout_builds_keep_dynamic_cumulative_coverage (test_map_cumulative_ppr.CumulativePprTests.test_future_layout_builds_keep_dynamic_cumulative_coverage)",
+          "cause": "AssertionError: 1 != 0 : evalmachine.<anonymous>:4"
+        },
+        {
+          "name": "FAIL: test_generated_map_uses_entire_set_after_display_filters (test_map_cumulative_ppr.CumulativePprTests.test_generated_map_uses_entire_set_after_display_filters)",
+          "cause": "AssertionError: 1 != 0 : evalmachine.<anonymous>:4"
+        },
+        {
+          "name": "FAIL: test_actual_absent_seabirds_with_explicit_empty_exclusions_preserves_source_and_applies_none (test_researcher_review_absent_exclusion.AbsentExclusionTests.test_actual_absent_seabirds_with_explicit_empty_exclusions_preserves_source_and_applies_none)",
+          "cause": "AssertionError: 'seabirds (GE<0.01%' not found in 'No groups were removed from the calculation.'"
+        },
+        {
+          "name": "FAIL: test_exact_review_identity_text_and_region_specific_appendix (test_researcher_review_lme032.KarnatakaReviewTests.test_exact_review_identity_text_and_region_specific_appendix)",
+          "cause": "AssertionError: Lists differ: ['Medium', '205', '49%', '64%'] != ['Medium', '205', '48.5275%', '64.2253%']"
+        },
+        {
+          "name": "FAIL: test_existing_assignment_table_matches_current_regional_appendix (test_researcher_review_lme032.KarnatakaReviewTests.test_existing_assignment_table_matches_current_regional_appendix)",
+          "cause": "AssertionError: Lists differ: [['Ta[62 chars], '51%'], ['Explicit source member or member o[602 chars]6%']] != [['Ta[62 chars], '51.2386%'], ['Explicit source member or mem[630 chars]3%']]"
+        },
+        {
+          "name": "FAIL: test_only_new_table_changes_word_content_and_covers_all_very_low_taxa (test_researcher_review_lme032.KarnatakaReviewTests.test_only_new_table_changes_word_content_and_covers_all_very_low_taxa)",
+          "cause": "AssertionError: Lists differ: ['word/document.xml', 'word/settings.xml', 'docProps/core.xml[17 chars]xml'] != ['word/document.xml']"
+        }
+      ]
+    }
+  },
+  "protected_before": {
+    "regions/LME_052/LME_052.xlsx": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+    "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/model.json": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656"
+  },
+  "protected_after": {
+    "regions/LME_052/LME_052.xlsx": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+    "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/model.json": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656"
+  },
+  "protected_unchanged": true,
+  "failure_scope": "Full-suite failures are reported as observed; their prior existence is not established by this run. No broader fixes are included.",
+  "observed_full_suite_failure_groups": [
+    {
+      "module": "test_diet_source_preservation",
+      "error_count": 15,
+      "cause": "ModuleNotFoundError: No module named 'source_fidelity' inside database_json.csv_to_json",
+      "relationship_to_patch": "Failing calls run converter modules; they do not execute the changed datasets() source resolver."
+    },
+    {
+      "module": "test_map_cumulative_ppr",
+      "failure_count": 2,
+      "cause": "ReferenceError: PPRResearcherReview is not defined in the extracted JavaScript test context.",
+      "relationship_to_patch": "Failing calls inspect generated/template JavaScript; the changed Python source resolver is not executed."
+    },
+    {
+      "module": "test_researcher_review_absent_exclusion",
+      "failure_count": 1,
+      "cause": "Expected seabirds (GE<0.01% prose; document says No groups were removed from the calculation.",
+      "relationship_to_patch": "Assertion inspects a saved research review document; the changed source resolver is not executed."
+    },
+    {
+      "module": "test_researcher_review_lme032",
+      "failure_count": 3,
+      "cause": "Two assertions expect former percentage precision; one expects only word/document.xml changed but settings/core/app XML also differ.",
+      "relationship_to_patch": "Assertions compare LME032 review documents and archive parts; the changed source resolver is not executed."
+    }
+  ],
+  "prior_failure_existence": "Not established by this audit; these are observed failures outside the modified execution path.",
+  "actual_adopted_sppr_source": "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/sppr_source.xlsx",
+  "actual_adopted_sppr_source_exists": true
+}

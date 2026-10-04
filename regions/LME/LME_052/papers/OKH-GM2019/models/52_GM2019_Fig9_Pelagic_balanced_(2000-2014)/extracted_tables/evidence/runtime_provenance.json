@@ -1,0 +1,77 @@
+{
+  "timestamp_UTC": "2026-10-03T18:15:00.481917+00:00",
+  "interpreter": "C:\\Users\\idoca\\miniconda3\\python.exe",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "scipy": "1.16.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "model_sha256": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656",
+  "engine_sha256": {
+    "PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "execution_scripts_sha256": {
+    "export_and_audit.py": "86c55560e150aee2d24eb62f664b6ee86b1ef4a0dca67d633ab2f7796ead9a37",
+    "final_evidence.py": "c6974314a8d391cdb7971e2504c2ee368d67ae22336f767755724a1a3b84b86d",
+    "reconstruct_and_verify.py": "8e68e3bab7bc1e7d3263d3aec57924fefcd2c61c8d75f36ed352d0bafacc4fec",
+    "verify_reload_consistency.py": "acca93cc6576371df28df65ae21acf22c0487fc3c1530a4c6a2f1cc795eeed40"
+  },
+  "settings": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": false,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "balance_BA_after_DC_normalization": false
+  },
+  "effective_constructor_DC_tol": 0.001,
+  "diagnostic_thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "solver": {
+    "algorithm": "SciPy SLSQP standard apply_lim",
+    "tol": 1e-05,
+    "ftol": 1e-05,
+    "maxiter": 1500,
+    "GS_bounds": [
+      0.1,
+      0.35
+    ],
+    "EE_bounds": [
+      0,
+      0.95
+    ]
+  },
+  "final_flow_tolerance": 1e-08,
+  "roundtrip_tolerance": 1e-12,
+  "scientific_assumptions": "source_to_final_ledger.json",
+  "synthetic_import": {
+    "group_id": 23,
+    "trophic_info": "Import",
+    "B_dummy": 1.0,
+    "biological": false,
+    "PQ": "Actual nativeimportcompletion equals all importedfoodflux; no biological stock claimed"
+  },
+  "reload_consistency": {
+    "evidence": "reload_consistency.json",
+    "retained_diagnostic_state_detritus_BA_tC_km2_year": 242.50886238380988,
+    "all_saved_and_reloaded_values_exactly_reproduced": true,
+    "initialization": "Engine apply_lim uses deterministic coordinated biological x0 and ordered cols_to_solve; no random initialization.",
+    "interpretation": "The earlier approximate 242.537 detritus BA in commentary was stale. Saved frozen-model state and independent reload agree at 242.50886238380988. No repeat-reload nonuniqueness was observed; this does not claim GS is empirically identified.",
+    "regional_coefficient_state": "Regional coefficients use the retained native state and direct method returns. Independent reload checks prove this state is reproducible; they do not substitute coefficients."
+  }
+}

@@ -1,0 +1,137 @@
+[
+  {
+    "id": "sardine_landings_version",
+    "group_id": 9,
+    "field": "landings_commercial",
+    "supplement_value": 5.6513425,
+    "paper_prose_value": 1.4,
+    "source_locations": [
+      "XLS Table A J14",
+      "PDFp3/printedp30 Methods",
+      "PDFp4/printedp31 Table1 Foragefish landings28.13"
+    ],
+    "adopted_native_value": 5.6513425,
+    "status": "unresolved source-version conflict; native supplement preserved",
+    "interpretation": "Paper says sardine landings were reduced from5.65 to1.4 to balance. Native5.6513425+Anchovy22.475495=28.1268375, consistent with printed aggregate28.13. Choosing prose1.4 would be a distinct source-conflict variant; no such variant was run."
+  },
+  {
+    "id": "large_jellyfish_diet_excess",
+    "group_id": 7,
+    "field": "diet_total",
+    "source_value": "1.04499999999999783",
+    "source_locations": [
+      "XLS Table B H4,H7,H8,H9,H39,H43"
+    ],
+    "status": "source total1.045 preserved",
+    "interpretation": "4.5% excess is material. Exact five nonzero stored cells plus zero import; final source and import artifacts never normalized. Runtime normalized copy handled separately by diagnostics."
+  },
+  {
+    "id": "small_gelatinous_production",
+    "group_id": 6,
+    "field": "production_vs_predation",
+    "source_production": 0.005295906167874342,
+    "source_raw_predation": 23.354788444103583,
+    "source_EE": 0.949999988079071,
+    "source_implied_EE": 4409.970211665905,
+    "source_locations": [
+      "XLS Table A C11,D11,E11,H11",
+      "XLS Table B H9,G9",
+      "PDFp4/printedp31 Table1 Smalljellyfish B.01 PB.58 QB2.92",
+      "PDFp8/printedp35 caveats"
+    ],
+    "status": "severe source arithmetic disagreement; no supported repair",
+    "interpretation": "Large jellyfish alone demands23.3497540704 of gelatinous6 versus source gelatinous production.00529590617 t/km²/year. Article caveat says small-jelly biomass surveys need improvement; it supplies no corrected numerical biomass."
+  },
+  {
+    "id": "egg_pool_classification",
+    "group_id": 36,
+    "field": "source_type",
+    "source_locations": [
+      "PDFp3/printedp30 36living groups including eggs",
+      "XLS Table A row41 blankPB/QB",
+      "XLS Table C C13=.25 and row39 fate",
+      "PDFp3/printedp30 egg production assumed25%"
+    ],
+    "status": "explicit operational pool representation",
+    "interpretation": "Source describes eggs as living, but parameter/routing tables encode a nonfeeding pool.25 is a source fraction and is not justified as an annual PB. Operational pp2 is a labeled translation, not a new PB or a true primary-source classification."
+  },
+  {
+    "id": "aggregate_detritus_codes",
+    "fields": [
+      "group_code"
+    ],
+    "source_locations": [
+      "XLS Table E C43:C45",
+      "XLS Table H-agg. production matrix codes24–26",
+      "PDFp4/printedp31 Table1 codes24–26"
+    ],
+    "status": "name-based crosswalk retained, numeric-code conflict unresolved",
+    "interpretation": "TableE/ECOTRAN order:24Pelagicdetritus,25Eggs,26Offal. PrintedTable1:24Eggs,25Offal,26Pelagicdetritus. Names must govern source joins; no silent positional exchange."
+  },
+  {
+    "id": "aggregate_vs_resolved_egg_EE",
+    "group_id": 36,
+    "field": "ee",
+    "resolved_native_value": 0.8843322396278381,
+    "aggregate_printed_value": 0.87,
+    "source_locations": [
+      "XLS Table A H41",
+      "PDFp4/printedp31 Table1 Fish eggs EE.87"
+    ],
+    "status": "variant difference retained",
+    "interpretation": "Resolved EE.8843322396 would display.88, not.87. Printed aggregate is not an exact rounded copy of the detailed source."
+  },
+  {
+    "id": "different_aggregate_fates",
+    "field": "detritus_fate",
+    "source_locations": [
+      "XLS Table C E4=1/F4=0 (Diatoms)",
+      "XLS Table G-aggregate detritus fate E5=0/F5=1 (Largephytoplankton senescence)"
+    ],
+    "status": "different model semantics",
+    "interpretation": "Resolved Ecopath TableC pools generic detritus fate. Aggregated ECOTRAN TableG separates feces, senescence and NH4 excretion; Diatom senescence destination differs. It cannot be substituted as an equivalent source Ecopath fate matrix without a distinct translation."
+  },
+  {
+    "id": "rounded_display_zeros",
+    "fields": [
+      "biomass",
+      "ee",
+      "pq"
+    ],
+    "source_locations": [
+      "XLS Table A C39:C40",
+      "XLS Table A H12",
+      "XLS Table A F36:F38",
+      "PDFp4/printedp31 Table1"
+    ],
+    "status": "native stored nonzero preserved",
+    "interpretation": "Green/leatherbackB.000343/.000162 and largejellyEE.0000611780 display0.00; seabird/mammalPQ also may display0.00. These are not numeric zero."
+  },
+  {
+    "id": "biomass_unit_header",
+    "field": "biomass_units",
+    "source_locations": [
+      "XLS Table A C5",
+      "PDFp3 Eq1 and definition",
+      "PDFp4/printedp31 Table1"
+    ],
+    "status": "printed header retained; dimensional interpretation explicit",
+    "interpretation": "Table header labels B with t km−2 y−1, although Eq1 defines B as stock biomass. Canonical B is t wetweight/km², with source header recorded; no numerical time conversion applied."
+  },
+  {
+    "id": "archive_metadata_stale",
+    "fields": [
+      "title",
+      "model_period",
+      "source_availability"
+    ],
+    "source_locations": [
+      "../../../papers/HUM-2018/README.md",
+      "../../../papers/HUM-2018/metadata.json",
+      "PDFp1 title",
+      "PDFp3 baseline1995–1998"
+    ],
+    "status": "historical files untouched; corrected candidate identity companion",
+    "interpretation": "Old README claims no verified source; actual PDF/XLS/DOCX exist and hashes are retained. Cached1995–2004 is not the focal static averaging period. Full published title and short historical alias retained separately."
+  }
+]

@@ -1,0 +1,761 @@
+{
+  "review_version": 1,
+  "checked_at": "2026-10-04 02:32:08 UTC",
+  "reviewer": "independent semantic review by graph_semantic_b",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "pass": true,
+  "scope": "The five final narrowed CLI traversals address the three requested contracts through current source-specific nodes. Findings were independently checked against current source text, implementation and read-only canonical discovery. This is a source-addressability and semantic-contract review.",
+  "graph": {
+    "path": "tools/knowledge_graph/graph.json",
+    "sha256": "83a107517eb3d7829a29b81fde68ced52d005648f01d97ce68503972076635d7",
+    "nodes": 2550,
+    "pairs": 5539,
+    "hyperedges": 23,
+    "communities": 161,
+    "directed": false,
+    "source_hashes_file": "tools/knowledge_graph/provenance/source_hashes.json",
+    "source_hashes_file_sha256": "a86a08cc58e1ec671c90f203ab9afa1e8f85d3d9fe075a658a80171cb93c276f"
+  },
+  "reviewed_retrieval_manifest": {
+    "path": "tools/knowledge_graph/provenance/retrieval_verification.json",
+    "recorded_graph_sha256": "83a107517eb3d7829a29b81fde68ced52d005648f01d97ce68503972076635d7",
+    "recorded_pass": false,
+    "recorded_status": "Exact concept-anchor CLI traversals completed; relevance/source claims require independent assessment before PASS. Initial broad ranking limitations are retained explicitly.",
+    "assessment_note": "The manifest's pending assessment is preserved. Its initial attempts are not upgraded to PASS by this review."
+  },
+  "method": [
+    "Read all five final probe outputs and all three initial outputs in full; verified their file hashes.",
+    "Resolved every listed final-probe node by its exact label, source file and locator against the actual current graph.",
+    "Read the twelve source files listed below in full; compared their actual byte hashes with both the source manifest and current graph nodes.",
+    "Read the actual discovery, refresh and snapshot implementations; ran only read-only canonical discovery and read LME_028 Overview to verify a concrete current path and selection.",
+    "Did not modify source, code, graph, ranking, scientific inputs or workbooks."
+  ],
+  "suites": [
+    {
+      "name": "structure",
+      "probes": [
+        "structure"
+      ],
+      "verdict": "PASS",
+      "required_graph_nodes": [
+        "explainers_structure_grouped_region_paper_model_layout",
+        "explainers_structure_overview_selection_authority",
+        "agents_project_contract"
+      ],
+      "findings": [
+        {
+          "claim": "Canonical regional units contain a workbook and paper-owned models at regions/{LME,EEZ,HS}/<unit>/papers/<paper>/models/<model>/; JSON-only EcoBase models use the documented regional ecobase/<model>/ exception. Each distinct model has one model.json and adjacent model_notes.md.",
+          "sources": [
+            {
+              "node_id": "explainers_structure_grouped_region_paper_model_layout",
+              "source_file": "explainers/structure.md",
+              "locator": "L5-L11"
+            },
+            {
+              "node_id": "registry_discovery_discover_models",
+              "source_file": "tools/project_core/registry/discovery.py",
+              "locator": "L28-L42"
+            }
+          ],
+          "live_check": {
+            "region_count": 366,
+            "canonical_models": 61,
+            "paper_owned_models": 58,
+            "ecobase_models": 3,
+            "missing_adjacent_notes": [],
+            "LME_028": {
+              "workbook": "regions/LME/LME_028/LME_028.xlsx",
+              "selected_model_id": "28_646_Guinea_(1998)",
+              "generated_model_path": "papers/GUI-2004/models/28_646_Guinea_(1998)/model.json",
+              "selection_rationale": "Geographic transfer: model covers the coast of the country Guinea (111,932 km²), not the whole Guinea Current LME. Regional overlap requires validation.",
+              "results_model_id": "28_646_Guinea_(1998)",
+              "canonical_model": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model.json"
+            }
+          }
+        },
+        {
+          "claim": "The regional Overview is the sole editable authority for selected_model_id and selection_rationale. Generated model_path, Project selection fields, HTML, manifests and shortcuts are derived; Project retains central paper/model metadata and explicit review records.",
+          "sources": [
+            {
+              "node_id": "explainers_structure_overview_selection_authority",
+              "source_file": "explainers/structure.md",
+              "locator": "L26-L30"
+            },
+            {
+              "node_id": "calculations_selection_refresh_region",
+              "source_file": "tools/project_core/calculations/selection.py",
+              "locator": "L64-L76; L99-L100; L141-L153"
+            }
+          ]
+        },
+        {
+          "claim": "The graph explicitly qualifies retained Guinea review wording that calls both Overview and Project selection authorities as historical. The current root structure contract overrides that wording; it does not create a second editable authority.",
+          "sources": [
+            {
+              "node_id": "source_review_reports_index_historical_guinea_central_selection_authority_wording",
+              "source_file": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model_validation/evidence/source_review/reports_index.md",
+              "locator": "L3"
+            },
+            {
+              "node_id": "explainers_structure_overview_selection_authority",
+              "source_file": "explainers/structure.md",
+              "locator": "L26-L30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "refresh_snapshots",
+      "probes": [
+        "refresh",
+        "restore"
+      ],
+      "verdict": "PASS",
+      "required_graph_nodes": [
+        "explainers_structure_one_command_regional_refresh",
+        "explainers_structure_full_regional_workbook_snapshot",
+        "explainers_structure_selective_compatible_restoration"
+      ],
+      "findings": [
+        {
+          "claim": "The single regional refresh reads Overview and resolves an explicitly registered canonical model. It saves outgoing evidence under results_model_id, even when Overview already requests another model; snapshots record both identities.",
+          "sources": [
+            {
+              "node_id": "explainers_structure_one_command_regional_refresh",
+              "source_file": "explainers/structure.md",
+              "locator": "L30-L34"
+            },
+            {
+              "node_id": "calculations_selection_refresh_region",
+              "source_file": "tools/project_core/calculations/selection.py",
+              "locator": "L64-L99"
+            }
+          ]
+        },
+        {
+          "claim": "A snapshot is a complete byte-for-byte workbook copy, preserving all sheets, manual content, formatting and links. Saving checks the source hash and atomically replaces the workbook/manifest pair. Empty pending content cannot overwrite useful numerical evidence. Historical flags and code identity remain actual or explicitly unknown.",
+          "sources": [
+            {
+              "node_id": "explainers_structure_full_regional_workbook_snapshot",
+              "source_file": "explainers/structure.md",
+              "locator": "L32"
+            },
+            {
+              "node_id": "calculations_snapshots_save_snapshot",
+              "source_file": "tools/project_core/calculations/snapshots.py",
+              "locator": "L17-L52"
+            },
+            {
+              "node_id": "calculations_selection_execution_identity",
+              "source_file": "tools/project_core/calculations/selection.py",
+              "locator": "L11-L28"
+            }
+          ]
+        },
+        {
+          "claim": "Restore starts from the current workbook and selectively restores compatible model-dependent groups, coefficients, matching and the named model-diagnostic blocks. Compatibility is tested separately against model/source identity, runtime flags/code, coefficients, model settings and relevant dependencies; unknown execution identity does not authorize numerical reuse.",
+          "sources": [
+            {
+              "node_id": "explainers_structure_selective_compatible_restoration",
+              "source_file": "explainers/structure.md",
+              "locator": "L32-L34"
+            },
+            {
+              "node_id": "calculations_snapshots_inspect_snapshot",
+              "source_file": "tools/project_core/calculations/snapshots.py",
+              "locator": "L54-L100"
+            },
+            {
+              "node_id": "calculations_snapshots_restore_model_tables",
+              "source_file": "tools/project_core/calculations/snapshots.py",
+              "locator": "L102-L126"
+            }
+          ]
+        },
+        {
+          "claim": "Current Overview, independent settings, Catch, Classic PPR, NPP and unrelated human Diagnostics are retained. Authored Allocation assumptions and Mapping review evidence travel with compatible matching, including when execution provenance is unknown; that does not make numerical results reusable. Matching is filtered to current taxa, and independent ratio rows are preserved.",
+          "sources": [
+            {
+              "node_id": "calculations_snapshots_restore_model_tables",
+              "source_file": "tools/project_core/calculations/snapshots.py",
+              "locator": "L104-L126"
+            },
+            {
+              "node_id": "calculations_selection_refresh_region",
+              "source_file": "tools/project_core/calculations/selection.py",
+              "locator": "L110-L138"
+            },
+            {
+              "node_id": "explainers_structure_selective_compatible_restoration",
+              "source_file": "explainers/structure.md",
+              "locator": "L34"
+            }
+          ]
+        },
+        {
+          "claim": "Refresh preserves FAIL, NOT_RUN, provisional and missing-result restrictions. Eligible arithmetic uses retained coefficients without a fresh broad SPPR/Monte Carlo run or invented mappings. Central writes are serialized and technical publication failures are rolled back coherently. Neither a snapshot nor refresh constitutes researcher approval.",
+          "sources": [
+            {
+              "node_id": "explainers_structure_selective_compatible_restoration",
+              "source_file": "explainers/structure.md",
+              "locator": "L32-L34"
+            },
+            {
+              "node_id": "calculations_selection_refresh_region",
+              "source_file": "tools/project_core/calculations/selection.py",
+              "locator": "L77-L82; L120-L178"
+            },
+            {
+              "node_id": "agents_project_contract",
+              "source_file": "AGENTS.md",
+              "locator": "L3-L7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "two_active_skills",
+      "probes": [
+        "paper_skill",
+        "validation_skill"
+      ],
+      "verdict": "PASS_WITH_LIMITATIONS",
+      "required_graph_nodes": [
+        "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+        "ecopath_model_validation_skill_ecopath_model_validation_skill",
+        "paper_to_ppr_skill_selection_loadability_readiness_and_researcher_approval_separation",
+        "explainers_structure_two_active_project_skills",
+        "agents_project_contract"
+      ],
+      "findings": [
+        {
+          "claim": "Both active skill entry points are actual current source nodes. Paper-to-PPR governs the scientific pipeline or an authorized subset: source recovery/extraction, taxonomy, diagnostics, authorized selection, catch matching, eligible PPR/NPP and requested integration. A request for extraction alone does not authorize selection or a numerical repair.",
+          "sources": [
+            {
+              "node_id": "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+              "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+              "locator": "L8-L12; L16-L27"
+            },
+            {
+              "node_id": "explainers_structure_two_active_project_skills",
+              "source_file": "explainers/structure.md",
+              "locator": "L40"
+            }
+          ]
+        },
+        {
+          "claim": "Model-validation produces a review record for one exact region/model version. An ordinary report request uses existing evidence and report arithmetic; it does not authorize extraction/SPPR, changed scientific mappings or parameters, selection, workbook results or project/map refresh. A fresh scientific run outside existing explicit authorization requires scope approval. Signed-review metadata adoption is distinct from drafting and supports positive or negative researcher decisions.",
+          "sources": [
+            {
+              "node_id": "ecopath_model_validation_skill_ecopath_model_validation_skill",
+              "source_file": "tools/skills/ecopath-model-validation/SKILL.md",
+              "locator": "L8; L21; L26-L38; L98-L110"
+            }
+          ]
+        },
+        {
+          "claim": "Both skill files explicitly require the same root project_contract and reading README, structure and workflow before modifying project content. The current structure contract defines their shared ownership, selection and preservation rules.",
+          "sources": [
+            {
+              "node_id": "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+              "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+              "locator": "L10-L12"
+            },
+            {
+              "node_id": "ecopath_model_validation_skill_ecopath_model_validation_skill",
+              "source_file": "tools/skills/ecopath-model-validation/SKILL.md",
+              "locator": "L14-L16; L110"
+            },
+            {
+              "node_id": "agents_project_contract",
+              "source_file": "AGENTS.md",
+              "locator": "L3-L7"
+            }
+          ]
+        },
+        {
+          "claim": "Selection, JSON loadability, numerical readiness and researcher approval remain separate. A selected FAIL/NOT_RUN model can stay selected without valid annual estimates; explicit provisional display retains diagnostic flags and does not fabricate coefficients. Loaded state is distinct from canonical/source evidence. A review report, snapshot, full mapping coverage or successful load is not researcher approval.",
+          "sources": [
+            {
+              "node_id": "paper_to_ppr_skill_selection_loadability_readiness_and_researcher_approval_separation",
+              "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+              "locator": "L27-L39"
+            },
+            {
+              "node_id": "ecopath_model_validation_skill_ecopath_model_validation_skill",
+              "source_file": "tools/skills/ecopath-model-validation/SKILL.md",
+              "locator": "L8; L30-L36; L56; L98-L110"
+            },
+            {
+              "node_id": "28_646_guinea_1998_model_notes_guinea1998_model_notes",
+              "source_file": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model_notes.md",
+              "locator": "L7; L13-L25"
+            }
+          ]
+        }
+      ],
+      "actual_graph_skill_reference": {
+        "source": "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+        "target": "ecopath_model_validation_skill_ecopath_model_validation_skill",
+        "relation": "references",
+        "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+        "source_location": "L8"
+      },
+      "limitation": "Both skill traversals list the actual skill nodes and the separation concept. The paper-skill output clips the remaining edge listing, although all 38 nodes are listed. Shared contract requirements were verified by following current skill source passages; no direct skill-to-AGENTS graph edge or complete skill neighborhood is claimed."
+    }
+  ],
+  "final_probes": [
+    {
+      "name": "structure",
+      "question": "Grouped region paper model layout",
+      "output_file": "tools/knowledge_graph/provenance/probe_structure.txt",
+      "output_sha256": "e5a9d16b3127843a8163cf4e3bc526506dbb0de0802449badafb2c60ace782d5",
+      "budget": 3500,
+      "recorded_exit_code": 0,
+      "output_read_in_full": true,
+      "hash_matches_record": true,
+      "listed_nodes": 20,
+      "all_listed_nodes_resolve_current_graph": true,
+      "truncated": false,
+      "required_semantic_nodes": [
+        "explainers_structure_one_command_regional_refresh",
+        "explainers_structure_full_regional_workbook_snapshot",
+        "agents_project_contract",
+        "explainers_structure_selective_compatible_restoration",
+        "explainers_structure_overview_selection_authority",
+        "explainers_structure_two_active_project_skills",
+        "explainers_structure_grouped_region_paper_model_layout"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "name": "refresh",
+      "question": "One-command regional refresh",
+      "output_file": "tools/knowledge_graph/provenance/probe_refresh.txt",
+      "output_sha256": "3b1ba5f9bc3122dba5fdb8cb038293ac3593d93388a81acc486f9ba678ca38de",
+      "budget": 3500,
+      "recorded_exit_code": 0,
+      "output_read_in_full": true,
+      "hash_matches_record": true,
+      "listed_nodes": 30,
+      "all_listed_nodes_resolve_current_graph": true,
+      "truncated": false,
+      "required_semantic_nodes": [
+        "explainers_structure_one_command_regional_refresh",
+        "explainers_structure_full_regional_workbook_snapshot",
+        "agents_project_contract",
+        "explainers_structure_selective_compatible_restoration",
+        "explainers_structure_overview_selection_authority",
+        "explainers_structure_two_active_project_skills",
+        "explainers_structure_grouped_region_paper_model_layout"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "name": "restore",
+      "question": "Selective compatible restoration",
+      "output_file": "tools/knowledge_graph/provenance/probe_restore.txt",
+      "output_sha256": "31a2fe11bad2dce092caf8217bec4e96069c57cf935ca48d8e827be8f1f5be25",
+      "budget": 3500,
+      "recorded_exit_code": 0,
+      "output_read_in_full": true,
+      "hash_matches_record": true,
+      "listed_nodes": 27,
+      "all_listed_nodes_resolve_current_graph": true,
+      "truncated": false,
+      "required_semantic_nodes": [
+        "explainers_structure_one_command_regional_refresh",
+        "explainers_structure_full_regional_workbook_snapshot",
+        "agents_project_contract",
+        "explainers_structure_overview_selection_authority",
+        "explainers_structure_selective_compatible_restoration",
+        "explainers_structure_two_active_project_skills",
+        "explainers_structure_grouped_region_paper_model_layout"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "name": "paper_skill",
+      "question": "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+      "output_file": "tools/knowledge_graph/provenance/probe_paper_skill.txt",
+      "output_sha256": "c650c4a006ef1fd6f9ceb094f974f986fd6084381097a757e001e6d163960e94",
+      "budget": 3500,
+      "recorded_exit_code": 0,
+      "output_read_in_full": true,
+      "hash_matches_record": true,
+      "listed_nodes": 38,
+      "all_listed_nodes_resolve_current_graph": true,
+      "truncated": true,
+      "required_semantic_nodes": [
+        "ecopath_model_validation_skill_ecopath_model_validation_skill",
+        "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+        "paper_to_ppr_skill_selection_loadability_readiness_and_researcher_approval_separation"
+      ],
+      "verdict": "PASS_WITH_EDGE_LIST_LIMITATION"
+    },
+    {
+      "name": "validation_skill",
+      "question": "Ecopath model validation skill",
+      "output_file": "tools/knowledge_graph/provenance/probe_validation_skill.txt",
+      "output_sha256": "d9a8c7f3febfe2d5277139c41eb174f697606e33bf304a66c9de11e8e37c1725",
+      "budget": 3500,
+      "recorded_exit_code": 0,
+      "output_read_in_full": true,
+      "hash_matches_record": true,
+      "listed_nodes": 35,
+      "all_listed_nodes_resolve_current_graph": true,
+      "truncated": false,
+      "required_semantic_nodes": [
+        "ecopath_model_validation_skill_ecopath_model_validation_skill",
+        "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+        "paper_to_ppr_skill_selection_loadability_readiness_and_researcher_approval_separation"
+      ],
+      "verdict": "PASS"
+    }
+  ],
+  "initial_attempts": [
+    {
+      "name": "structure",
+      "question": "How do canonical regions papers models model_notes form the project structure?",
+      "command": [
+        "graphify",
+        "query",
+        "How do canonical regions papers models model_notes form the project structure?",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "2000"
+      ],
+      "exit_code": 0,
+      "output_file": "tools/knowledge_graph/provenance/probe_initial_structure.txt",
+      "output_sha256": "88ab9cff55fdae84bd80e004111e7768022f8930317676538586c731f7467d31",
+      "review": "Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed.",
+      "output_read_in_full": true,
+      "output_hash_matches_record": true,
+      "verdict": "NON_PASS",
+      "independent_reason": "The broad query retrieved generic regions AST variables rather than the source-specific canonical hierarchy; output was truncated."
+    },
+    {
+      "name": "refresh",
+      "question": "How does refresh_region save_snapshot restore_model_tables preserve model selection and compatible workbook evidence?",
+      "command": [
+        "graphify",
+        "query",
+        "How does refresh_region save_snapshot restore_model_tables preserve model selection and compatible workbook evidence?",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "2000"
+      ],
+      "exit_code": 0,
+      "output_file": "tools/knowledge_graph/provenance/probe_initial_refresh.txt",
+      "output_sha256": "d0f5adc5decee177b000923c81d2c6f1abf3edcafe01053c0eed12a29a293456",
+      "review": "Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed.",
+      "output_read_in_full": true,
+      "output_hash_matches_record": true,
+      "verdict": "NON_PASS",
+      "independent_reason": "The broad query retrieved implementation APIs but clipped the contract semantics needed for the full preservation/restoration question."
+    },
+    {
+      "name": "skills",
+      "question": "How do paper-to-ppr ecopath-model-validation follow project_contract structure.md and separate selection readiness approval?",
+      "command": [
+        "graphify",
+        "query",
+        "How do paper-to-ppr ecopath-model-validation follow project_contract structure.md and separate selection readiness approval?",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "2000"
+      ],
+      "exit_code": 0,
+      "output_file": "tools/knowledge_graph/provenance/probe_initial_skills.txt",
+      "output_sha256": "61a4cad20e0b97365dae1d113eaad0f3d6c30c6c1057cd028ca5d38d8f32b1d8",
+      "review": "Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed.",
+      "output_read_in_full": true,
+      "output_hash_matches_record": true,
+      "verdict": "NON_PASS",
+      "independent_reason": "The broad query showed contract-related seeds but clipped the actual active skill-source coverage."
+    }
+  ],
+  "source_specific_graph_evidence": [
+    {
+      "id": "agents_project_contract",
+      "label": "project_contract",
+      "source_file": "AGENTS.md",
+      "source_location": "L3-L7",
+      "source_sha256": "cfdd24825154bba3e854e4fa7b7c38bccef28d05f4b5ffc99c19c92997e1f866"
+    },
+    {
+      "id": "explainers_structure_grouped_region_paper_model_layout",
+      "label": "Grouped region paper model layout",
+      "source_file": "explainers/structure.md",
+      "source_location": "L5-L11",
+      "source_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+    },
+    {
+      "id": "explainers_structure_overview_selection_authority",
+      "label": "Overview selection authority",
+      "source_file": "explainers/structure.md",
+      "source_location": "L26-L30",
+      "source_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+    },
+    {
+      "id": "explainers_structure_one_command_regional_refresh",
+      "label": "One-command regional refresh",
+      "source_file": "explainers/structure.md",
+      "source_location": "L30-L34",
+      "source_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+    },
+    {
+      "id": "explainers_structure_full_regional_workbook_snapshot",
+      "label": "Full regional workbook snapshot",
+      "source_file": "explainers/structure.md",
+      "source_location": "L32",
+      "source_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+    },
+    {
+      "id": "explainers_structure_selective_compatible_restoration",
+      "label": "Selective compatible restoration",
+      "source_file": "explainers/structure.md",
+      "source_location": "L32-L34",
+      "source_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+    },
+    {
+      "id": "explainers_structure_two_active_project_skills",
+      "label": "Two active project skills",
+      "source_file": "explainers/structure.md",
+      "source_location": "L40",
+      "source_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+    },
+    {
+      "id": "ecopath_model_validation_skill_ecopath_model_validation_skill",
+      "label": "Ecopath model validation skill",
+      "source_file": "tools/skills/ecopath-model-validation/SKILL.md",
+      "source_location": "L1–38; L108–110",
+      "source_sha256": "ce81c93b7c6ed9653541f86de72339b8d7d2cdff57f579f03cc157d050591c6d"
+    },
+    {
+      "id": "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
+      "label": "Paper-to-PPR scientific pipeline skill",
+      "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+      "source_location": "L1–12; L16–42",
+      "source_sha256": "25f9bd9136131ed3715dbae74d9378920ded2c0580beba475e8b5f47654207c9"
+    },
+    {
+      "id": "paper_to_ppr_skill_selection_loadability_readiness_and_researcher_approval_separation",
+      "label": "Selection loadability readiness and researcher approval separation",
+      "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+      "source_location": "L27–39",
+      "source_sha256": "25f9bd9136131ed3715dbae74d9378920ded2c0580beba475e8b5f47654207c9"
+    },
+    {
+      "id": "calculations_selection_execution_identity",
+      "label": "execution_identity()",
+      "source_file": "tools/project_core/calculations/selection.py",
+      "source_location": "L11",
+      "source_sha256": "2b368b80ea37c92c7133335bb831421a719a704d0931eb9d43d79a55715ac34d"
+    },
+    {
+      "id": "calculations_selection_refresh_region",
+      "label": "refresh_region()",
+      "source_file": "tools/project_core/calculations/selection.py",
+      "source_location": "L62",
+      "source_sha256": "2b368b80ea37c92c7133335bb831421a719a704d0931eb9d43d79a55715ac34d"
+    },
+    {
+      "id": "calculations_snapshots_save_snapshot",
+      "label": "save_snapshot()",
+      "source_file": "tools/project_core/calculations/snapshots.py",
+      "source_location": "L17",
+      "source_sha256": "58724f8c8e2bb6f0db833b644ce7defc27835c5fe89ade1df61e7b625b68a3aa"
+    },
+    {
+      "id": "calculations_snapshots_inspect_snapshot",
+      "label": "inspect_snapshot()",
+      "source_file": "tools/project_core/calculations/snapshots.py",
+      "source_location": "L54",
+      "source_sha256": "58724f8c8e2bb6f0db833b644ce7defc27835c5fe89ade1df61e7b625b68a3aa"
+    },
+    {
+      "id": "calculations_snapshots_restore_model_tables",
+      "label": "restore_model_tables()",
+      "source_file": "tools/project_core/calculations/snapshots.py",
+      "source_location": "L102",
+      "source_sha256": "58724f8c8e2bb6f0db833b644ce7defc27835c5fe89ade1df61e7b625b68a3aa"
+    },
+    {
+      "id": "registry_discovery_discover_regions",
+      "label": "discover_regions()",
+      "source_file": "tools/project_core/registry/discovery.py",
+      "source_location": "L15",
+      "source_sha256": "72157d4b6cadff29bd0834b548add39e5ee92e4e5d3b1aa81b5aba2795e6b92f"
+    },
+    {
+      "id": "registry_discovery_discover_models",
+      "label": "discover_models()",
+      "source_file": "tools/project_core/registry/discovery.py",
+      "source_location": "L28",
+      "source_sha256": "72157d4b6cadff29bd0834b548add39e5ee92e4e5d3b1aa81b5aba2795e6b92f"
+    },
+    {
+      "id": "28_646_guinea_1998_model_notes_guinea1998_model_notes",
+      "label": "Guinea1998 model notes",
+      "source_file": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model_notes.md",
+      "source_location": "L1-L38",
+      "source_sha256": "c371f60d24c1cfae2c8d9c91c201be5a5c715c01f00fc3d33412108db15d857d",
+      "rationale": null
+    },
+    {
+      "id": "source_review_reports_index_historical_guinea_central_selection_authority_wording",
+      "label": "Historical Guinea central-selection-authority wording",
+      "source_file": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model_validation/evidence/source_review/reports_index.md",
+      "source_location": "L3",
+      "source_sha256": "89e4a5dd7289b97eb3fc674e4f3061b0300658c86e0bff1dea452a67fefb5af6",
+      "rationale": "The retained review index calls regional Overview and Project.xlsx selection authorities. Current project contract assigns editable choice/rationale only to Overview and derives Project selection fields; historical review wording does not create an additional authority."
+    }
+  ],
+  "reviewed_source_hashes": [
+    {
+      "source_file": "AGENTS.md",
+      "actual_sha256": "cfdd24825154bba3e854e4fa7b7c38bccef28d05f4b5ffc99c19c92997e1f866",
+      "manifest_sha256": "cfdd24825154bba3e854e4fa7b7c38bccef28d05f4b5ffc99c19c92997e1f866",
+      "graph_node_hashes": [
+        "cfdd24825154bba3e854e4fa7b7c38bccef28d05f4b5ffc99c19c92997e1f866"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "README.md",
+      "actual_sha256": "829aee04baa2c068bebca8d948a10212aa6e9b9e04201f1d59982ce3589c0f95",
+      "manifest_sha256": "829aee04baa2c068bebca8d948a10212aa6e9b9e04201f1d59982ce3589c0f95",
+      "graph_node_hashes": [
+        "829aee04baa2c068bebca8d948a10212aa6e9b9e04201f1d59982ce3589c0f95"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "explainers/structure.md",
+      "actual_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d",
+      "manifest_sha256": "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d",
+      "graph_node_hashes": [
+        "ebc6cf716a92a65bad374d6de270121fb3a6e6e381c5cb88ce5ab9ac1977f93d"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "explainers/workflow.md",
+      "actual_sha256": "22099a8c3820a086b5e95e3df759ac76b9a814dea3a818cddd97614613ee0733",
+      "manifest_sha256": "22099a8c3820a086b5e95e3df759ac76b9a814dea3a818cddd97614613ee0733",
+      "graph_node_hashes": [
+        "22099a8c3820a086b5e95e3df759ac76b9a814dea3a818cddd97614613ee0733"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "explainers/model_selection.md",
+      "actual_sha256": "428da6909e2a1fee89ce34aa6d70ba9bcc9106427cda8393498bb8f524d22d00",
+      "manifest_sha256": "428da6909e2a1fee89ce34aa6d70ba9bcc9106427cda8393498bb8f524d22d00",
+      "graph_node_hashes": [
+        "428da6909e2a1fee89ce34aa6d70ba9bcc9106427cda8393498bb8f524d22d00"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "tools/project_core/calculations/selection.py",
+      "actual_sha256": "2b368b80ea37c92c7133335bb831421a719a704d0931eb9d43d79a55715ac34d",
+      "manifest_sha256": "2b368b80ea37c92c7133335bb831421a719a704d0931eb9d43d79a55715ac34d",
+      "graph_node_hashes": [
+        "2b368b80ea37c92c7133335bb831421a719a704d0931eb9d43d79a55715ac34d"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "tools/project_core/calculations/snapshots.py",
+      "actual_sha256": "58724f8c8e2bb6f0db833b644ce7defc27835c5fe89ade1df61e7b625b68a3aa",
+      "manifest_sha256": "58724f8c8e2bb6f0db833b644ce7defc27835c5fe89ade1df61e7b625b68a3aa",
+      "graph_node_hashes": [
+        "58724f8c8e2bb6f0db833b644ce7defc27835c5fe89ade1df61e7b625b68a3aa"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "tools/project_core/registry/discovery.py",
+      "actual_sha256": "72157d4b6cadff29bd0834b548add39e5ee92e4e5d3b1aa81b5aba2795e6b92f",
+      "manifest_sha256": "72157d4b6cadff29bd0834b548add39e5ee92e4e5d3b1aa81b5aba2795e6b92f",
+      "graph_node_hashes": [
+        "72157d4b6cadff29bd0834b548add39e5ee92e4e5d3b1aa81b5aba2795e6b92f"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "tools/skills/paper-to-ppr/SKILL.md",
+      "actual_sha256": "25f9bd9136131ed3715dbae74d9378920ded2c0580beba475e8b5f47654207c9",
+      "manifest_sha256": "25f9bd9136131ed3715dbae74d9378920ded2c0580beba475e8b5f47654207c9",
+      "graph_node_hashes": [
+        "25f9bd9136131ed3715dbae74d9378920ded2c0580beba475e8b5f47654207c9"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "tools/skills/ecopath-model-validation/SKILL.md",
+      "actual_sha256": "ce81c93b7c6ed9653541f86de72339b8d7d2cdff57f579f03cc157d050591c6d",
+      "manifest_sha256": "ce81c93b7c6ed9653541f86de72339b8d7d2cdff57f579f03cc157d050591c6d",
+      "graph_node_hashes": [
+        "ce81c93b7c6ed9653541f86de72339b8d7d2cdff57f579f03cc157d050591c6d"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model_notes.md",
+      "actual_sha256": "c371f60d24c1cfae2c8d9c91c201be5a5c715c01f00fc3d33412108db15d857d",
+      "manifest_sha256": "c371f60d24c1cfae2c8d9c91c201be5a5c715c01f00fc3d33412108db15d857d",
+      "graph_node_hashes": [
+        "c371f60d24c1cfae2c8d9c91c201be5a5c715c01f00fc3d33412108db15d857d"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    },
+    {
+      "source_file": "regions/LME/LME_028/papers/GUI-2004/models/28_646_Guinea_(1998)/model_validation/evidence/source_review/reports_index.md",
+      "actual_sha256": "89e4a5dd7289b97eb3fc674e4f3061b0300658c86e0bff1dea452a67fefb5af6",
+      "manifest_sha256": "89e4a5dd7289b97eb3fc674e4f3061b0300658c86e0bff1dea452a67fefb5af6",
+      "graph_node_hashes": [
+        "89e4a5dd7289b97eb3fc674e4f3061b0300658c86e0bff1dea452a67fefb5af6"
+      ],
+      "read_in_full": true,
+      "hashes_match": true
+    }
+  ],
+  "browser_evidence": {
+    "origin": "Parent/root report of actual browser interaction; not independently repeated by this reviewer",
+    "reported_verdict": "PASS",
+    "reported_communities": 161,
+    "reported_nodes": 2550,
+    "reported_pairs": 5539,
+    "reported_scientific_currency_labels_visible": true,
+    "independent_browser_retest": false
+  },
+  "limitations": [
+    "PASS is scoped to the five final narrowed traversals plus actual current source verification. The three broad initial attempts remain NON_PASS; broad natural-language ranking is not validated.",
+    "The final paper-skill probe uses an exact canonical entity ID and clips the edge list. It establishes source-node retrieval, not complete edge coverage.",
+    "CLI output lists labels, source files, locators and relationships rather than complete source rationale. Source-following was necessary to verify the substantive contract.",
+    "The graph is an undirected pair projection; traversal order is not evidence of execution or ownership direction.",
+    "Twelve relevant source files were independently rehashed, not the entire curated corpus. Read-only discovery inspected all canonical model paths, while workbook selection was checked concretely for LME_028 rather than every regional workbook.",
+    "Implementation inspection and read-only discovery were performed; no refresh, restore mutation, scientific recalculation, browser retest or researcher approval occurred in this review.",
+    "Historical source reviews and frozen studies remain limited to their recorded evidence/version. This review does not certify scientific currency or source fidelity from graph freshness."
+  ],
+  "actual_host_token_usage": null
+}

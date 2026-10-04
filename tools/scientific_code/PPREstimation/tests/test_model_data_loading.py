@@ -10,9 +10,17 @@ import pytest
 ENGINE = Path(__file__).resolve().parents[1]
 PROJECT = ENGINE.parents[2]
 sys.path.insert(0, str(ENGINE))
+sys.path.insert(0, str(PROJECT))
 from ModelData import ModelData
+from tools.project_core.registry.discovery import discover_models, discover_regions
 
-TOY = PROJECT / "common_reference_data/ecobase_library/ToyModels/900_900_Multi_DET_Toy_(2026).json"
+TOY = PROJECT / "common_reference_data/ecobase/source_data/ToyModels/900_900_Multi_DET_Toy_(2026).json"
+CANONICAL_MODELS = [
+    path
+    for workbook in discover_regions(PROJECT).values()
+    for path in discover_models(workbook.parent).values()
+]
+assert CANONICAL_MODELS, "Canonical discovery must exercise actual regional models"
 
 
 def write_model(tmp_path, relative_path, metadata=None):
@@ -37,7 +45,7 @@ def test_canonical_parent_preserves_legacy_identity_and_ecological_data(tmp_path
 @pytest.mark.parametrize("relative_path,expected", [
     ("36_1_South_China_Sea_(2000s)/model.json", (1, "South_China_Sea", "2000s")),
     ("27_118_Northwest_Africa_(1987)_1883ddd3/model.json", (118, "Northwest_Africa", "1987")),
-    ("regions/LME_022/models/22_20251890_East_Coast_of_Scotland_(1890-1895)/converter_normalized_diagnostics/model.json", (20251890, "East_Coast_of_Scotland", "1890-1895")),
+    ("regions/LME/LME_022/papers/NS-2025/models/22_20251890_East_Coast_of_Scotland_(1890-1895)/model.json", (20251890, "East_Coast_of_Scotland", "1890-1895")),
 ])
 def test_canonical_folder_layouts(tmp_path, relative_path, expected):
     model = ModelData(write_model(tmp_path, relative_path))
@@ -108,7 +116,7 @@ def test_metadata_only_extraction_is_not_an_ecopath_model(tmp_path):
         ModelData(str(path))
 
 
-@pytest.mark.parametrize("path", sorted((PROJECT / "regions").glob("*/models/*/model.json")), ids=lambda p: p.parent.name)
+@pytest.mark.parametrize("path", CANONICAL_MODELS, ids=lambda p: p.relative_to(PROJECT / "regions").as_posix())
 def test_all_canonical_regional_models_load(path):
     model = ModelData(str(path))
     assert len(model.groups_data) == len(model.data_json["group"]) + 1

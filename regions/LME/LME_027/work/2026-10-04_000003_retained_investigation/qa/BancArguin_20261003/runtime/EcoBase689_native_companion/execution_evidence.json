@@ -1,0 +1,84 @@
+{
+  "run_id": "BancArguin_20261003",
+  "assessment_id": "EcoBase689_native_companion",
+  "timestamp_utc": "2026-10-03T16:10:00.369017+00:00",
+  "source_relative_to_run": "../ecobase689_native.json",
+  "source_sha256": "2d614bcadf751e4857334e7e2c92b44daa6527447b6a3f81a8a919eff972c5c3",
+  "computational_input_sha256": "2d614bcadf751e4857334e7e2c92b44daa6527447b6a3f81a8a919eff972c5c3",
+  "constructor": {
+    "underdetermined": false,
+    "zero_catch": false,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": false
+  },
+  "diagnostic_options": {
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0
+  },
+  "thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "diagnostic_signature": "(self, TE_option: 'str' = 'GE', *, short: 'bool' = False, flat: 'bool' = False, thresholds: 'Optional[dict]' = None, return_sppr: 'bool' = False, **sppr_kwargs) -> 'dict | tuple[dict, pd.DataFrame, pd.DataFrame, pd.DataFrame]'",
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "3.0.1",
+  "interpretation": "Authoritative but distinct EcoBase689 native parameterization; not a replacement for published Base/M30/P30. Runtime normalization only; no canonical repair. Direct diagnostics resolve whether native evidence supplies a valid equivalent. Candidate comparison only; no regional adoption.",
+  "production_eligible": false,
+  "missing_biology_before_runtime": [
+    {
+      "group_seq": 51,
+      "group_name": "Detritus",
+      "field": "pb"
+    },
+    {
+      "group_seq": 51,
+      "group_name": "Detritus",
+      "field": "qb"
+    }
+  ],
+  "missing_diet_cells": [],
+  "scopes": {
+    "all": "All basal-source columns",
+    "inner": "Excludes synthetic external diet import",
+    "PP": "Primary producer columns only; excludes detritus and imported diet"
+  },
+  "matrix_orientation": "Recipient groups in rows, basal sources in columns; ordered native IDs stored on axes",
+  "units": "Wet-weight primary-production equivalent per unit consumer wet biomass; divide regional PPR by9 once for tonnes carbon",
+  "persisted_reload_state_equal": true,
+  "diagnostics_state_unchanged": false,
+  "diagnostics_state_changed_attributes": [
+    "detritus_resolution_info"
+  ],
+  "scientific_state_unchanged": true,
+  "constructor_admission": "CONSTRUCTED",
+  "warnings": {
+    "constructor": [],
+    "GE": [],
+    "TE": [
+      "2 group(s) have TE=0 because EE=0 (M0=p): 2 (Coastal birds), 1 (Marine mammals). Their consumed PP is re-credited to detritus (fix_EE_0_cases=True) so the TE SPPR stays PP-balanced."
+    ],
+    "With Egestion": []
+  }
+}

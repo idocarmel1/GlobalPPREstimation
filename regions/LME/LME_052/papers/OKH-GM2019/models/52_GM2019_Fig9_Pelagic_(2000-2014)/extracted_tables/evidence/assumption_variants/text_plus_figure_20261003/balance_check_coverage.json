@@ -1,0 +1,199 @@
+{
+  "mandatory_case_ids": [
+    "figure_only",
+    "text_plus_figure"
+  ],
+  "user_instruction": "2026-10-03: later balance checks must also test text+figure extracted diets",
+  "figure_only": {
+    "input": "../researcher_readings_20261003/model.json",
+    "balance_diagnostics_executed": true,
+    "full_balance_passed": false,
+    "carbon_energy_failure_ids": [
+      6,
+      8,
+      14
+    ],
+    "wet_energy_failure_ids": [
+      6,
+      7,
+      8,
+      14
+    ],
+    "predation_excess_ids": [
+      9,
+      10,
+      11,
+      13,
+      16,
+      19
+    ]
+  },
+  "text_plus_figure": {
+    "input": "diet_constraints.json",
+    "partial_energy_diagnostics_executed": true,
+    "source_Q_wet_diagnostics": [
+      {
+        "group_id": 4,
+        "group": "Copepods",
+        "source_Q_wet": "2945",
+        "P_wet_from_B_PB": "1646.16",
+        "R_wet_GS_0p2": "709.84",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.153 / PDF p.11",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 5,
+        "group": "Euphausiids",
+        "source_Q_wet": "1445.6",
+        "P_wet_from_B_PB": "592.870",
+        "R_wet_GS_0p2": "563.610",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.153 / PDF p.11",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 6,
+        "group": "Hyperiids",
+        "source_Q_wet": "152.5",
+        "P_wet_from_B_PB": "69.0300",
+        "R_wet_GS_0p2": "52.9700",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.153 / PDF p.11",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 7,
+        "group": "Chaetognaths",
+        "source_Q_wet": "320",
+        "P_wet_from_B_PB": "256.200",
+        "R_wet_GS_0p2": "-0.200",
+        "nonpositive_wet_residual": true,
+        "source": "2019 prose printed p.153 / PDF p.11",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 10,
+        "group": "Herring",
+        "source_Q_wet": "36.9",
+        "P_wet_from_B_PB": "0.8500",
+        "R_wet_GS_0p2": "28.6700",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.155 / PDF p.13",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 11,
+        "group": "Deep-sea smelt",
+        "source_Q_wet": "10.29",
+        "P_wet_from_B_PB": "0.5220",
+        "R_wet_GS_0p2": "7.7100",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.155 / PDF p.13",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 13,
+        "group": "Capelin",
+        "source_Q_wet": "14.74",
+        "P_wet_from_B_PB": "0.2800",
+        "R_wet_GS_0p2": "11.5120",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.156 / PDF p.14",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 12,
+        "group": "Pollock less than 30 cm",
+        "source_Q_wet": "16.5",
+        "P_wet_from_B_PB": "2.0000",
+        "R_wet_GS_0p2": "11.2000",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.156 / PDF p.14",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      },
+      {
+        "group_id": 15,
+        "group": "Pollock 30-60 cm",
+        "source_Q_wet": "80.8",
+        "P_wet_from_B_PB": "5.96400",
+        "R_wet_GS_0p2": "58.67600",
+        "nonpositive_wet_residual": false,
+        "source": "2019 prose printed p.156 / PDF p.14",
+        "scope": "Source-Q-only wet diagnostic; not a complete hybrid network test"
+      }
+    ],
+    "quantified_text_prey_carbon_lower_bounds": [
+      {
+        "group_id": 4,
+        "known_prey_ids": [
+          1
+        ],
+        "carbon_Q_lower_bound": "113.088",
+        "P_carbon": "117.2",
+        "R_carbon_lower_bound_GS_0p2": "-26.7296",
+        "energy_status": "Indeterminate: remaining prey not quantified",
+        "not_a_negative_respiration_proof": true
+      },
+      {
+        "group_id": 5,
+        "known_prey_ids": [
+          1
+        ],
+        "carbon_Q_lower_bound": "57.02892",
+        "P_carbon": "56.1",
+        "R_carbon_lower_bound_GS_0p2": "-10.476864",
+        "energy_status": "Indeterminate: remaining prey not quantified",
+        "not_a_negative_respiration_proof": true
+      },
+      {
+        "group_id": 7,
+        "known_prey_ids": [
+          4
+        ],
+        "carbon_Q_lower_bound": "20.1",
+        "P_carbon": "12.78",
+        "R_carbon_lower_bound_GS_0p2": "3.30",
+        "energy_status": "Positive even using only quantified text prey",
+        "not_a_negative_respiration_proof": false
+      },
+      {
+        "group_id": 6,
+        "known_prey_ids": [
+          4
+        ],
+        "carbon_Q_lower_bound": "4.049999999999999999999999999678571428571",
+        "P_carbon": "4.752",
+        "R_carbon_lower_bound_GS_0p2": "-1.512000000000000000000000000257142857143",
+        "energy_status": "Indeterminate: remaining prey not quantified",
+        "not_a_negative_respiration_proof": true
+      },
+      {
+        "group_id": 11,
+        "known_prey_ids": [
+          5,
+          4
+        ],
+        "carbon_Q_lower_bound": "0.7466629245283018867924528301886792452830",
+        "P_carbon": "0.06",
+        "R_carbon_lower_bound_GS_0p2": "0.5373303396226415094339622641509433962264",
+        "energy_status": "Positive even using only quantified text prey",
+        "not_a_negative_respiration_proof": false
+      }
+    ],
+    "complete_DC_and_basic_input_checks": "INCOMPLETE",
+    "full_network_predation_EE_detritus_and_native_load_checks": "NOT_RUN: unresolved diets, crosswalks and microbial basics",
+    "full_balance_passed": null,
+    "required_on_resume": true
+  },
+  "verdict": "No complete balanced model. A partial combined test is not a pass.",
+  "source_inputs_unchanged": {
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\assumption_variants\\researcher_readings_20261003\\model.json": "e130316e32fc0dcfb849a86a97b4b3052c3c2da84fbad7e9049d9d0f84b70b80",
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\assumption_variants\\researcher_readings_20261003\\carbon_reconstruction.json": "c6652443fbc82e0f3c77a1e0381dc75db4a22cca93363fa460ac533ff9b330da",
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\assumption_variants\\researcher_readings_20261003\\flow_budget_checks.json": "9434554053376abd34b7fb84482c6167d68af5e25443de416bd273d90d48ef90",
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\text_feeding_audit\\partial_numeric_diets.json": "7cf0b3f584dfeacf804dd61804bc96fbe5974f33f5d816d8259af0749a1b61a7",
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\text_feeding_audit\\primary_prose_feeding_links.json": "3511df63353e742792b759233e9b8391acb6977f8cd2b914b2bedbf8b683d6f6",
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\text_feeding_audit\\candidate_additional_22group_links.json": "d45929da369723f312f016d0418e3ecd4ffb27d00001f90e7781b6ffd50be1e3",
+    "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\article_constraints\\independent_QB_targets.json": "efc42aae7469952e072c73f1e6a679e78bc9924c0d724200b52e6f4744e3bf03"
+  }
+}

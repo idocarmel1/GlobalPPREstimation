@@ -1,0 +1,9 @@
+# Retained chapter variant: 38-group preliminary Sine-Saloum model
+
+Source: Villanueva, Tito de Morais, Weigel and Moreau, "An Ecopath Model of the Sine-Saloum Delta Biosphere Reserve (Senegal)", note in ACP-EU Fisheries Research Report 15, volume 1, chapter pp. 405-414. Cover gives October 2004; the retained colophon says 2005. Exact baseline year is not established. Publication year is not model year.
+
+This is a geographically local, inverse hypersaline estuary model covering a reported 543 km2 about 100 km south of Dakar. It contains 38 groups: 24 fish, ten invertebrate consumers, three producers and one detritus group. No multistanza, explicit life-stage or size divisions are defined. Habitat fractions and paired habitat/whole-area biomass are printed in Table I (PDF5, printed409). Three material biomass-basis inconsistencies and 15 GE versus P/B divided by Q/B discrepancies are preserved in the arithmetic audit. No printed whole-area biomass is supplied for the detritus group.
+
+The chapter states that quantitative diet composition was unavailable and qualitative information was used (PDF4, printed408). No quantitative matrix appears in any of the 13 PDF pages. The database was available on request from the first author. All Table I cells, Table II fleet catches and Table III Ecosim scenario values are retained separately. The scenario is not a substitute for baseline parameters. The 30 tabulated group catch totals and ten fleet totals sum exactly to 32.340 t/km2/year. Catch cells left blank in the source remain blank; groups31-38 are not tabulated for catch.
+
+GS, BA, migration, detritus routing, quantitative diet/imports and separate discard quantities remain unknown. Group membership generally follows the table labels; no exhaustive species list defines the broad pools. This chapter is a separate source parameterization from the preferred thesis model. Its values were not used to fill or repair the thesis.

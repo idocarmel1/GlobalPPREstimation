@@ -1,5 +1,7 @@
 # User Guide: `ModelData` and `PPRCalculator`
 
+This is scientific engine/API background. Read the [structure contract](../structure.md), [model loading note](../model_loading.md), [current parameters](../sppr_parameters.md) and [direct-diagnostics contract](../../tools/skills/paper-to-ppr/references/direct-diagnostics.md) before executing project work. The ordinary direct route remains GE/TE/With Egestion; global/Monte Carlo examples below require separately authorized scope. Engine toy/legacy data examples do not define regional discovery or selection. Source behavior and actual model-specific provenance govern every result.
+
 The workbook exporter and atlas provide catch and consumption variants of both
 global-mean families. `SPPR_1995_TEmean` and `Ulanowicz_globalTEmean` use consumption
 weights; their `_catch` counterparts use model catch, falling back to consumer
@@ -103,19 +105,19 @@ from ModelData import ModelData
 md = ModelData(model_input)
 ```
 
-**`ModelData(model_input: int | str)`**
+**`ModelData(model_input: int | str, *, model_name=None, model_year=None)`**
 
 | Parameter | Type | Meaning |
 |-----------|------|---------|
 | `model_input` | `int` | **Legacy API**: a model number; data is pulled from the bundled `real_models/SpeciesGroups.json` / diet data. |
-| `model_input` | `str` | **New API**: a path to a per-model JSON file, e.g. `"real_models/EwE_jsons/227_227_Iceland_(1950).json"`. The filename stem must follow `{first_number}_{model_number}_{name}_({year})` — **two** leading numeric tokens (the first is a source/grouping id and is discarded; the second is the model id). For single-model files the two numbers are the same (`227_227_...`); for multi-model source files they differ (`13_10013_Humboldt_Current_(1980)`). |
+| `model_input` | `str` | Path to a supported Ecopath JSON, including the canonical paper-owned or EcoBase `model.json`. Legacy two-number filenames retain their historical identity; canonical files resolve identity from their model directory and explicit metadata. Unknown number/year remain unknown rather than inferred provenance. |
+| `model_name`, `model_year` | optional keyword | Explicit caller-provided identity labels; record their actual source and do not use them to invent a publication period. |
 
-> **Where the files live:** real EwE models are JSON files under `real_models/EwE_jsons/`; small
-> hand-built toy models (used in the test notebooks) are under `real_models/ToyModels/`.
+> **Project ownership:** current regional models live under the grouped region/paper/model or regional EcoBase layout in structure.md. Shared engine source models under real_models/ are reference inputs; toy-model examples are engine tests, not regional candidates.
 
 **Returns:** `None` (populates the instance in place).
 **Raises:** `TypeError` if `model_input` is neither `int` nor `str`; `ValueError` if no group matches a
-given model number or the filename can't be parsed.
+given integer model number, or the JSON lacks the supported nonempty group list. A generic canonical filename is supported; missing identity metadata stays missing.
 
 Both paths automatically inject a synthetic **`diet_import`** group (an extra `Import` row/column) so that
 food imported from outside the modeled area can be handled uniformly downstream.
@@ -160,7 +162,7 @@ model = PPRCalculator("real_models/EwE_jsons/227_227_Iceland_(1950).json")
 ```
 
 **`PPRCalculator(model_number, underdetermined=False, zero_catch=True, zero_biomass_accum=True,
-default_gs=True, weight_flow=1.0, weight_guess=1.0)`**
+default_gs=True, weight_flow=1.0, weight_guess=1.0, normalize_DC=False, DC_tol=0.001, balance_BA_after_DC_normalization=True)`**
 
 | Parameter | Type | Default | Ecological / numerical meaning |
 |-----------|------|---------|-------------------------------|
@@ -171,6 +173,9 @@ default_gs=True, weight_flow=1.0, weight_guess=1.0)`**
 | `default_gs` | `bool` | `True` | Assign the textbook **GS = 0.2** (20% of food unassimilated) to regular groups lacking a value. |
 | `weight_flow` | `float` | `1.0` | LIM penalty weight favoring the *smallest total flows* (parsimony). |
 | `weight_guess` | `float` | `1.0` | LIM penalty weight favoring *staying near biologically sensible guesses*. |
+| `normalize_DC` | `bool` | `False` | Normalize an ephemeral runtime diet copy when requested; canonical/source cells remain unchanged. |
+| `DC_tol` | `float` | `0.001` | Runtime diet-row tolerance; source deficits and precision still need evidence. |
+| `balance_BA_after_DC_normalization` | `bool` | `True` | Offset normalization-induced predation in eligible runtime BA only when the raw production identity is already consistent and all counterfactual terms are finite; preserve the transformation ledger and excluded reasons. |
 
 **Returns:** a ready-to-use `PPRCalculator`.
 **Raises:** `Exception` if the model has no detritus (`DET`) group.
@@ -208,9 +213,7 @@ default_gs=True, weight_flow=1.0, weight_guess=1.0)`**
 `apply_lim` solves missing flows per group with predation held fixed during optimization. Afterward it
 rebuilds predation from final consumer consumption, refreshes routed detritus inflows/exports and
 detritus accumulation, then recomputes EE/GS/GE and PB/QB from the final flows. The completed group
-table and runtime vectors use that refreshed state. Known living-group production, mortality and
-accumulation are not adjusted to absorb changed predation: remaining balance residuals must be
-checked with `is_model_balanced()` or diagnostics. This is not a coupled reconstruction of the food web.
+table and runtime vectors use that refreshed state. Known production and mortality remain unchanged. The separately controlled normalization BA offset applies only to eligible originally consistent groups; it is not a general balancer. Remaining residuals must be checked with is_model_balanced() or diagnostics. This is not a coupled reconstruction of the food web.
 
 If optimization fails, a message is printed and the unsolved cells stay missing; initial guesses are
 not written back. Runtime construction subsequently applies its existing fallbacks (most missing
@@ -304,7 +307,7 @@ column. Get the scalar total with `.sum(axis=1).sum()` in either case.
   affect a per-source DataFrame input (a Series is already aggregated over sources).
 
 `get_PPR2NPP_ratio(sppr, only_pp=False)` expresses within-system PPR as a fraction of the system's own NPP.
-See `SPPR_Methods.md` §5 for the full inflow/outflow balance interpretation of this ratio.
+See [sppr_methods.md](../sppr_methods.md) §5 for the full inflow/outflow balance interpretation of this ratio.
 
 ---
 
@@ -315,7 +318,7 @@ All SPPR methods return a `pd.DataFrame` (or `Series`) of SPPR values. The matri
 
 > **Deep reference:** this section is a practical API/usage guide. For the full derivations — the
 > nullspace foundation, the detritus recycling fixed point `sppr_det = a/(1−b)` and its multi-pool
-> `(I − B)x = c` form, the openness transforms, and per-method equations — see `SPPR_Methods.md`
+> `(I − B)x = c` form, the openness transforms, and per-method equations — see [sppr_methods.md](../sppr_methods.md)
 > (§4 covers the flow-network methods and detritus handling in depth).
 
 ### 6.1 Quick reference
@@ -361,8 +364,9 @@ Same idea but interpolates between the two integer trophic levels bracketing a f
 SPPR = (1 − frac)·(1/TE)^(TLint − 1) + frac·(1/TE)^TLint
 ```
 
-**Why:** raising `1/TE` to a non-integer power directly overweights omnivores (Jensen's inequality). The
-interpolation keeps the estimate between the integer-level chains and avoids that bias.
+**Why:** for positive TE, the exponential is convex. At a fractional TL the direct exponent is
+below the straight-line blend of the two integer-level chains (they agree at integer TL).
+This method adopts that discrete-chain mixture; it does not establish an observed diet allocation.
 
 ### 6.3 The network methods
 
@@ -387,8 +391,10 @@ SPPR(group, source) = Σ over paths  Π over edges  A[edge]
 Returns `(SPPR, A, paths_dict)`.
 
 **`SPPR_EwE_Ulanowicz(TE_option, global_TE='mean', use_EE=True)` → `tuple[DataFrame, DataFrame, DataFrame]`.**
-A matrix reformulation that gives the *same* answer as the path sum without enumerating paths. It builds
-`A = DC/TE` (cycles removed), replaces basal rows with identity rows, and solves for the steady state as the
+A cycle-pruned matrix cousin of the path sum. With the same efficiency/options and complete path
+enumeration, the formulations agree on an acyclic web. They need not agree on a cyclic web:
+`SPPR_EwE` sums simple paths, while this method removes cycle edges without renormalizing the
+surviving diet fractions. It builds `A = DC/TE` after pruning, replaces basal rows with identity rows, and solves for the steady state as the
 **nullspace** of `L = A − I` (so `A·x = x`). The nullspace basis is RREF-normalized so each output column is
 anchored to one basal source. Returns `(SPPR, A, L)`.
 **Raises** `ValueError` if no steady state exists (disconnected web).
@@ -403,7 +409,7 @@ L = (I − A)^(-1)
 ```
 
 The PP columns of `L` give per-group SPPR; a balancing detritus SPPR is added back at the end. Returns
-`(SPPR, A, L)`. See `SPPR_Methods.md` §4 (`SPPR_2015`) for the proof that `A = Z/P` is the same matrix as
+`(SPPR, A, L)`. See [sppr_methods.md](../sppr_methods.md) §4 (`SPPR_2015`) for the proof that `A = Z/P` is the same matrix as
 `A = DC/TE`.
 
 ### 6.4 `SPPR_new` — the primary solver
@@ -431,13 +437,13 @@ SPPR_new(TE=None, TE_option='GE', DET_TE_vals=1,
 | Parameter | Type | Default | Meaning |
 |-----------|------|---------|---------|
 | `TE` | `pd.DataFrame \| None` | `None` | An explicit TE matrix (e.g. a Monte-Carlo sample). If `None`, built from `TE_option`. |
-| `TE_option` | `str` | `'GE'` | `'GE'`, `'TE'`, `'With Egestion'`, `'global'` (see §5.1). |
+| `TE_option` | `str` | `'GE'` | GE, TE or With Egestion. Although get_TE supports global, SPPR_new's executable detritus branch currently rejects global; use a supported global method only within authorized scope. |
 | `DET_TE_vals` | `float` | `1` | TE assigned to detritus rows when building the TE matrix. |
 | `det_collapse_mode` | `str` | `'never'` | Detritus stability strategy (see §6.5). |
 | `det_open_mode` | `str` | `'none'` | Detritus openness model (see §6.5). |
 | `det_theta` | `float \| dict` | `1.0` | Detritus availability/retention fraction (see §6.5). |
 | `det_external_sppr` | `float \| dict` | `0.0` | External SPPR for diluted material under `'source_dilution'` (see §6.5). |
-| `fix_EE_0_cases` | `bool` | `True` | Mass-balance fix for the `TE_option='TE'` case: re-credits the PP consumed by `EE=0` dead-end groups to detritus (single-detritus models only; no-op otherwise). See §6.5 and `SPPR_Methods.md` §4. |
+| `fix_EE_0_cases` | `bool` | `True` | Mass-balance fix for the `TE_option='TE'` case: re-credits the PP consumed by `EE=0` dead-end groups to detritus (single-detritus models only; no-op otherwise). See §6.5 and [sppr_methods.md](../sppr_methods.md) §4. |
 
 **Returns** `(SPPR, A, L)`.
 **Raises** `ValueError` (empty nullspace) or `Exception` (bad `TE_option`).
@@ -448,15 +454,15 @@ Detritus is a recycling pool: dead biomass and faeces flow into it, and detritus
 sends energy back up the web. This loop can amplify SPPR without bound if recycling is too strong, so these
 knobs control **how the loop is closed and stabilized**. For the full derivation of the recycling solve
 (the single-pool fixed point `sppr_det = a/(1−b)` and the multi-pool `(I − B)x = c` system) and of each
-openness transform, see `SPPR_Methods.md` §4 (`SPPR_new`).
+openness transform, see [sppr_methods.md](../sppr_methods.md) §4 (`SPPR_new`).
 
 **`det_collapse_mode`** — what to do when the recycling system is numerically unstable:
 
 | Value | Behaviour | When to use |
 |-------|-----------|-------------|
-| `'never'` (default) | Always solve the full coupled detritus system directly. May return **negative** SPPR for unstable models, but **never raises**. The Monte-Carlo samplers rely on this so they can detect and reject unstable draws. | Default; keeps results exact and lets you see instability. |
-| `'auto'` | Solve directly **unless** the system is unstable — spectral radius `ρ(B) ≥ 1` or the matrix is ill-conditioned — in which case fall back to a single pooled detritus scaling. | When you want robust, always-finite results. |
-| `'always'` | Always use the pooled single-scalar detritus scaling. | Quick, very robust approximation. |
+| `'never'` (default) | Always solve the full coupled detritus system directly. May return **negative** SPPR for unstable models, but the recycling block preserves failure/negative output rather than certifying a healthy result. Other solver errors or unavailable matrices remain possible. The Monte-Carlo samplers screen their actual returns. | Default; keeps results exact and lets you see instability. |
+| `'auto'` | Solve directly **unless** the system is unstable — spectral radius `ρ(B) ≥ 1` or the matrix is ill-conditioned — in which case fall back to a single pooled detritus scaling. | Only for an explicitly reviewed pooling approximation; finite or valid results are not guaranteed. |
+| `'always'` | Always use the pooled single-scalar detritus scaling. | Explicit pooling approximation; preserve its distinct scientific assumptions and diagnostics. |
 
 **`det_open_mode`** — how "open" the recycling loop is (how much recycled detritus is actually re-used):
 
@@ -477,7 +483,7 @@ name (`str`). `θ = 1.0` (default) reproduces the fully closed system.
 `EE=0` (all production dies non-predatorily) get `TE=0` and are severed from the nullspace, which leaks the
 PP they consumed and breaks the global PP balance. When `True`, that consumed PP is re-credited to
 detritus. It is only active for **single-detritus** models under `'TE'` (a no-op otherwise) and emits a
-`RuntimeWarning` when `EE=0` groups are present. See `SPPR_Methods.md` §4 for details.
+`RuntimeWarning` when `EE=0` groups are present. See [sppr_methods.md](../sppr_methods.md) §4 for details.
 
 The openness transform applied to the recycling system `(I − B)x = c` is, with θ and `ext` aligned to the
 detritus groups:
@@ -618,7 +624,7 @@ you have not vetted, and to screen Monte-Carlo draws.
 The verdict describes a **configuration, not a model**: `b` depends on `TE_option`, `det_theta` and
 `det_open_mode`, so the same model can be healthy under one configuration and divergent under
 another. The configuration evaluated is echoed back under `report['config']`. For the mathematics of
-the two convergence conditions see `SPPR_Methods.md` §4 (`diagnose_sppr`).
+the two convergence conditions see [sppr_methods.md](../sppr_methods.md) §4 (`diagnose_sppr`).
 
 **Full signature:**
 
@@ -656,7 +662,7 @@ PPR/NPP is a finding about the ecosystem, not a defect in the calculation.
 | `p_max_rel_residual` | `float` | Worst group's relative deviation between recomputed and stored **production**. Every SPPR method assumes `p`, `q`, `M0`, `predation` are mutually consistent. |
 | `q_max_rel_residual` | `float` | The same for **consumption**. Graded via `model_balance_warn` / `model_balance_fail`. |
 | `dc_rows_sum_to_1` | `bool` | Whether every consumer diet row (including `diet_import`) sums to 1 within `dc_row_tol`. Diet fractions must partition intake or `A = DC/TE` misweights every path through that consumer. |
-| `dc_max_deviation` | `float` | Largest observed deviation from 1. `ModelData.validate_DC` already raises at load time at `1e-3`, so the default `dc_row_tol=1e-6` is what makes this informative. |
+| `dc_max_deviation` | `float` | Largest observed deviation from 1. Diet admission depends on actual normalize_DC/DC_tol. Without normalization, excessive deviation raises; normalization records changed runtime rows. The stricter diagnostic dc_row_tol remains a separate check. |
 | `n_negative_catch` | `int` | `PPR = C·SPPR`, so a negative catch gives a negative footprint from a healthy SPPR. `WARN`. |
 | `n_zero_catch` | `int` | Zero-catch groups are normal; counted, not penalised. |
 | `total_catch` | `float` | Summed catch. |

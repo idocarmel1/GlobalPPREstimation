@@ -11,12 +11,14 @@ Produce a concise, evidence-based Word validation record for one region and one 
 
 Resolve this directory as `skill_root`; its third parent is the repository root containing `Project.xlsx`, `regions` and `tools`. Resolve relative links from the file containing them, not the current working directory.
 
+- Follow root [AGENTS.md project_contract](../../../AGENTS.md#project_contract): read [README.md](../../../README.md), [structure.md](../../../explainers/structure.md) and [workflow.md](../../../explainers/workflow.md) before modifying project content.
+- Follow root [AGENTS.md project_contract](../../../AGENTS.md#project_contract): read [README.md](../../../README.md), [structure.md](../../../explainers/structure.md) and [workflow.md](../../../explainers/workflow.md) before modifying project content.
 - Read the [project workbook contract](../../../README.md#workbook-reference).
-- Read the complete [template filling guide](../../templates/Model_validation_template_instructions.md). It owns field definitions, confidence rules M1–M12/W1–W11/C1–C6, examples, denominator conventions, appendix ordering and geographic approximation rules.
-- Use [Model_validation_template.docx](../../templates/Model_validation_template.docx) as the report layout. Do not fork a second template or duplicate the full guide inside this skill.
-- Apply the guide's [portable-link rules](../../templates/Model_validation_template_instructions.md#links-output-and-verification) to reports, appendices and current supporting documents: repository-local links are relative to their containing file so another user can download or clone the repository and retain navigation. Preserve public URLs and internal anchors, and verify relocation.
+- Read the complete [template filling guide](../../templates/instructions.md). It owns field definitions, confidence rules M1–M12/W1–W11/C1–C6, examples, denominator conventions, appendix ordering and geographic approximation rules.
+- Use [validation.docx](../../templates/validation.docx) as the report layout. Do not fork a second template or duplicate the full guide inside this skill.
+- Apply the guide's [portable-link rules](../../templates/instructions.md#links-output-and-verification) to reports, appendices and current supporting documents: repository-local links are relative to their containing file so another user can download or clone the repository and retain navigation. Preserve public URLs and internal anchors, and verify relocation.
 - Read [evidence and calculations](references/evidence-and-calculations.md) before collecting or aggregating evidence, then [document production](references/document-production.md) before authoring. Apply [acceptance checks](references/acceptance-checks.md) before delivery.
-- Consult the [paper-to-PPR entry point](../original_skill_resources/combined-src/SKILL.md) and only the relevant scientific references for interpretation. Its execution commands are not automatically authorized by a validation request.
+- Consult the [paper-to-PPR entry point](../paper-to-ppr/SKILL.md) and only the relevant scientific references for interpretation. Its execution commands are not automatically authorized by a validation request.
 - Use the available documents skill for Word work and the spreadsheets skill for workbook analysis. Load the bundled workspace runtimes before artifact work. If a required capability is absent, use an appropriate available equivalent and disclose the limitation.
 
 Current user instructions and edits govern the task. If an older document or pipeline reference conflicts with this report's agreed format, apply the current template guide. In particular, geographic approximation is allowed and the report has GE and TE rows only.
@@ -25,7 +27,7 @@ When the user accepts existing manual scientific parameters, preserve those inpu
 
 ## Scope and review boundaries
 
-For an explicitly authorized adoption of a researcher-signed final report, follow [researcher signoff and map](references/researcher-signoff-and-map.md): register the actual source and refresh only its review metadata. Signoff and this adoption are distinct from drafting a report.
+For an explicitly authorized adoption of a researcher-signed final report, follow [researcher signoff and map](references/researcher-signoff-and-map.md): register the actual source and refresh only its review metadata. Support both `MODEL VALIDATED` and `MODEL DISQUALIFIED`. A disqualification is a completed negative review: preserve its exact reason and latest signed date, display the Ecopath model heading/name in red, and exclude it from the validated-only filter. It does not authorize scientific recalculation, reselection or adoption of draft group-removal notes. Signoff and this adoption are distinct from drafting a report.
 
 An ordinary validation request authorizes reading relevant permitted evidence, checking sources, performing report arithmetic, preparing supporting review records, and generating the Word report. It does **not** authorize running extraction or SPPR again, changing catch/mappings/weights/TLs, selecting another model, updating workbook results, or refreshing the project/map.
 
@@ -51,7 +53,7 @@ Identify any authorized researcher-edited record. Capture its text, table cells 
 
 ### 2. Establish evidence identity
 
-Read the regional workbook once where practical, the relevant central paper/model records, and exact-model source and diagnostic files. Keep source tables, canonical JSON, computational input, loaded state, and saved diagnostic outputs distinguishable.
+Read the regional workbook once where practical, the relevant central paper/model records, and exact-model source and diagnostic files. Keep source tables, the exact canonical JSON of the reviewed model/variant, ephemeral loaded state, and saved diagnostic outputs distinguishable. Each distinct computational variant has its own single canonical model.json and departure notes; no redundant computational-input JSON is retained.
 
 Check model IDs, group IDs, periods, source scope, method, runtime settings and available provenance. Reuse an existing validation bundle only when its identity matches the current inputs; its presence is not proof of freshness. Use targeted hashes or recorded identities for permitted inputs, not an indiscriminate repository scan.
 
@@ -93,7 +95,7 @@ Use the figure matching this particular model, not another study within the same
 
 ### 7. Produce and verify the report
 
-Apply the [evidence handoff contract](../original_skill_resources/combined-src/references/evidence-handoff.md) and the [approved adoption and denominator checks](references/document-production.md#approved-adoption-and-denominator-checks). Final report classifications, mappings and figures must agree with adopted regional data and the map. If review differs from adoption, keep a keyed discrepancy ledger and label the report a pending-alignment draft; report-only reclassification is not completed validation. Changing data or publishing requires explicit adoption authorization. The evidence index is provenance, not configuration authority.
+Apply the [evidence handoff contract](../paper-to-ppr/references/evidence-handoff.md) and the [approved adoption and denominator checks](references/document-production.md#approved-adoption-and-denominator-checks). Final report classifications, mappings and figures must agree with adopted regional data and the map. If review differs from adoption, keep a keyed discrepancy ledger and label the report a pending-alignment draft; report-only reclassification is not completed validation. Changing data or publishing requires explicit adoption authorization. The evidence index is provenance, not configuration authority.
 
 Follow the document-production reference. Fill a copy of the current template, or minimally update the explicitly authorized edited report. Copy needed evidence without moving originals; retain useful relative links and source IDs. Keep extended method/rule instructions out of the filled report.
 
@@ -102,3 +104,7 @@ Verify count/share arithmetic, mapping completeness, exact source-to-group negat
 After an explicitly authorized researcher signoff adoption, use the [bounded Project/map handoff](references/researcher-signoff-and-map.md); any later Word edit requires fresh registration and source-to-map equality checks. Do not start new scientific validations or a full rebuild for a notes-only sync.
 
 Keep the report scientific and concise: name unresolved taxa and their specific reasons (or state none), flag Very low assignments and their coverage share, and omit skill/integration/test narratives. Deliver the Word file, linked Excel appendix and a short statement of material evidence gaps and checks actually performed. Do not claim fresh extraction, recalculation, approval or a successful regional test unless it happened within the authorized scope. Stop at any user-requested review point.
+
+## Authoritative output ownership
+
+Read [structure.md](../../../explainers/structure.md) under root project_contract before editing. Each exact model owns model_validation/validation.docx, taxon_mapping.xlsx and evidence/. Canonical model.json and model_notes.md are adjacent in that model. Keep departures and their evidence in model_notes.md and link them from the extraction row. Use the regional workbook and `python tools/cli/region.py refresh --region regions/<type>/<unit>` for an authorized selection change. Preserve complete model-local snapshots, researcher edits, uncertainty and current independent tables; no legacy extraction payloads or authority sidecars.

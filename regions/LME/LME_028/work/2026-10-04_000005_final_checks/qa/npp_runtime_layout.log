@@ -1,0 +1,99 @@
+.........................FFF.                                            [100%]
+================================== FAILURES ===================================
+_______________ test_copernicus_read_accepts_unicode_directory ________________
+
+tmp_path = WindowsPath('C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation/regions/LME/LME_028/work/2026-10-04_000005_final_checks/qa/npp_complete_env_temp/test_copernicus_read_accepts_u0')
+
+    def test_copernicus_read_accepts_unicode_directory(tmp_path):
+        import numpy as np
+        from netCDF4 import Dataset
+        from npp.sources import copernicus
+        ascii_path = tmp_path/'source.nc'
+>       with Dataset(str(ascii_path), 'w') as ds:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tools\scientific_code\NPPExtraction\tests\test_annual.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src/netCDF4/_netCDF4.pyx:2521: in netCDF4._netCDF4.Dataset.__init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>   ???
+E   PermissionError: [Errno 13] Permission denied: 'C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_028\\work\\2026-10-04_000005_final_checks\\qa\\npp_complete_env_temp\\test_copernicus_read_accepts_u0\\source.nc'
+
+src/netCDF4/_netCDF4.pyx:2158: PermissionError
+_______ test_osu_read_accepts_unicode_directory_and_closes_native_file ________
+
+tmp_path = WindowsPath('C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation/regions/LME/LME_028/work/2026-10-04_000005_final_checks/qa/npp_complete_env_temp/test_osu_read_accepts_unicode_0')
+
+    def test_osu_read_accepts_unicode_directory_and_closes_native_file(tmp_path):
+        import numpy as np
+        from pyhdf.SD import SD, SDC
+        from npp.sources import osu
+        source = tmp_path/'source.hdf'
+>       handle = SD(str(source), SDC.WRITE | SDC.CREATE)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tools\scientific_code\NPPExtraction\tests\test_annual.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools\scientific_code\NPPExtraction\.venv\Lib\site-packages\pyhdf\SD.py:1429: in __init__
+    _checkErr('SD', id, "cannot open %s" % path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+procName = 'SD', val = -1
+msg = 'cannot open C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_028\\work\\2026-10-04_000005_final_checks\\qa\\npp_complete_env_temp\\test_osu_read_accepts_unicode_0\\source.hdf'
+
+    def _checkErr(procName, val, msg=""):
+    
+        if val is None or (not isinstance(val, str) and val < 0):
+            #_C._HEprint();
+            errCode = _C.HEvalue(1)
+            if errCode != 0:
+                err = "%s (%d): %s" % (procName, errCode, _C.HEstring(errCode))
+            else:
+                err = "%s : %s" % (procName, msg)
+>           raise HDF4Error(err)
+E           pyhdf.error.HDF4Error: SD : cannot open C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_028\work\2026-10-04_000005_final_checks\qa\npp_complete_env_temp\test_osu_read_accepts_unicode_0\source.hdf
+
+tools\scientific_code\NPPExtraction\.venv\Lib\site-packages\pyhdf\error.py:23: HDF4Error
+______ test_decoded_copernicus_cache_is_lossless_and_changes_with_source ______
+
+tmp_path = WindowsPath('C:/Users/idoca/Desktop/אישי/אקדמיה/תואר שני/מחקר/BTN/GlobalPPREstimation/regions/LME/LME_028/work/2026-10-04_000005_final_checks/qa/npp_complete_env_temp/test_decoded_copernicus_cache_0')
+
+    def test_decoded_copernicus_cache_is_lossless_and_changes_with_source(tmp_path):
+        import numpy as np
+        from netCDF4 import Dataset
+        from npp.sources import copernicus
+        raw = tmp_path/'raw'
+        source = copernicus.local_path(raw,2019,1)
+        source.parent.mkdir(parents=True)
+        def write(value):
+            with Dataset(str(source),'w') as ds:
+                for name, n in [('time',1),('lat',1),('lon',2)]: ds.createDimension(name,n)
+                v = ds.createVariable('PP','f4',('time','lat','lon'),fill_value=-9999)
+                v[:] = np.array([[[value,-9999]]],dtype='float32')
+>       write(42.)
+
+tools\scientific_code\NPPExtraction\tests\test_annual.py:197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools\scientific_code\NPPExtraction\tests\test_annual.py:193: in write
+    with Dataset(str(source),'w') as ds:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+src/netCDF4/_netCDF4.pyx:2521: in netCDF4._netCDF4.Dataset.__init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>   ???
+E   PermissionError: [Errno 13] Permission denied: 'C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_028\\work\\2026-10-04_000005_final_checks\\qa\\npp_complete_env_temp\\test_decoded_copernicus_cache_0\\raw\\copernicus\\2019\\20190101-20190131_cmems_obs-oc_glo_bgc-pp_my_l4-multi-4km_P1M.nc'
+
+src/netCDF4/_netCDF4.pyx:2158: PermissionError
+============================== warnings summary ===============================
+tests/test_annual.py::test_copernicus_read_accepts_unicode_directory
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tools\scientific_code\NPPExtraction\tests\test_annual.py::test_copernicus_read_accepts_unicode_directory
+FAILED tools\scientific_code\NPPExtraction\tests\test_annual.py::test_osu_read_accepts_unicode_directory_and_closes_native_file
+FAILED tools\scientific_code\NPPExtraction\tests\test_annual.py::test_decoded_copernicus_cache_is_lossless_and_changes_with_source
+3 failed, 26 passed, 1 warning in 33.91s

@@ -1,0 +1,13 @@
+LME_013 selected model `13_1_Chilean_Patagonia_(1980)` is **verified unnormalized and unchanged**. Before/after SHA-256: `552e5dc426c7731d77593317da6ca3928fc42635672aa55ecc1cdc47b464c9f7`.
+
+Table 4, PDF and printed page 7 of the retained Neira et al. paper supplies 46 nonblank prey proportions and four nonblank imports. Each matches the selected canonical numerically; all 46 prey literals match exactly. Four printed import literals (`0.270`, `0.220`, `0.820`, `0.590`) occur in retained CSV/canonical as `0.27`, `0.22`, `0.82`, `0.59`. This is a trailing-zero precision caveat, not normalization. No values were changed. Source blanks remain separate from zero and unknown import sentinels.
+
+Sea-lion proportions plus import sum exactly to **1.002**. The paper prints a Sum row of `1.000`; that total is inconsistent with its listed entries. The canonical retains the entries. All other feeding consumers' known diet/import subtotals are exactly one. The conclusion comes from cell comparison and conversion history, not the unit totals.
+
+The historical raw converter output is normalized, and its distinct retained identity is recorded in [audit.json](audit.json). The retained `preserve_database.py` adapter restored CSV cells directly before creation of the selected canonical. Canonical copies and extracted tables match the selected diet/import exactly. The adapter was inspected, not executed.
+
+The researcher-maintained DOCX explicitly states that canonical `1.002` is preserved and the accepted runtime normalizes at tolerance `0.001`. Historical runtime cells match division by `1.002` for Sea lions; other feeding rows retain their source values. Runtime normalization remains allowed. Review state is **not established** by this evidence audit, and is separate from runtime permission.
+
+The audit wrote only this evidence folder. All 417 pre-existing regional files stayed byte-identical across its execution. No model, diet table, DOCX, workbook, diagnostic, coefficient, review registration or freshness field was edited. No scientific calculator was run. No model identity or dependent-result staleness changed. Existing absent supplements and unrelated source discrepancies remain as reported previously.
+
+[Cell ledger](cell_ledger.json) contains 208 diet/import coordinates, source and canonical literals, PDF point bounding boxes for stated cells, CSV coordinates and native JSON pointers. [Consumer sums](consumer_sums.json), [runtime comparison](source_runtime_ledger.json), [protected-file hashes](protected_files_verification.json) and [evidence completeness](completeness.json) provide the separate provenance. [The original selected input](../../../model_notes.md#removed-extraction-evidence) is an exact-byte copy.

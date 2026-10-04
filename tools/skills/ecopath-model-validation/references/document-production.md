@@ -1,24 +1,24 @@
 # Produce the validation document
 
-Use the current [Word template](../../../templates/Model_validation_template.docx) and [filling guide](../../../templates/Model_validation_template_instructions.md). This reference covers artifact handling and verification; it does not authorize a scientific run.
+Use the current [Word template](../../../templates/validation.docx) and [filling guide](../../../templates/instructions.md). This reference covers artifact handling and verification; it does not authorize a scientific run.
 
 ## Inputs and output paths
 
 For a new regional record, the default output is:
 
-`regions/<unit_id>/Model_validation_<model_id>.docx`
+`regions/<type>/<unit_id>/papers/<paper_id>/models/<model_id>/model_validation/validation.docx`
 
-Save its final Excel taxon-mapping appendix in `regions/<unit_id>/` as well, beside the report and regional workbook. Link by relative filename; project-root `outputs` is not a final regional deliverable location.
+Save its final Excel taxon-mapping appendix as `taxon_mapping.xlsx` beside the exact model’s `validation.docx`. EcoBase candidates use the same model-local layout under `ecobase/<model_id>/`. Link by relative filename; project-root `outputs` is not a final regional deliverable location.
 
 Supporting evidence belongs under:
 
-`regions/<unit_id>/validation_reports/<model_id>/`
+`regions/<type>/<unit_id>/papers/<paper_id>/models/<model_id>/model_validation/evidence/`
 
 Use an explicit user-specified destination instead when provided. If a destination already contains researcher work, preserve it and use a clearly named review copy unless an in-place update is authorized. Do not silently overwrite a current report with a historical reconstruction. The master template is an input and is not rewritten when filling a regional report.
 
-Keep transient builders, extracted XML, render images, PDFs and QA logs in a task-specific temporary directory. The final deliverables are the Word report and its linked Excel appendix. Do not create a new report-output hierarchy or authoritative status file outside the project's existing conventions.
+Keep transient builders, extracted XML, render images, PDFs and QA logs under the exact model’s `model_validation/work/<run_id>/{code,qa,inputs,outputs}`; promote needed evidence and remove redundant work after verification. The final deliverables are the Word report and its linked Excel appendix. Do not create a new report-output hierarchy or authoritative status file outside the project's existing conventions.
 
-When copying existing evidence into the model's validation folder, copy required linked assets too. Reuse an identical existing copy; avoid overwriting a same-named file with different content. Record source/copy paths and provenance in `reports_index.md` without replacing unrelated entries. A newly authored analysis must be labeled as this review's analysis, not presented as an old source report.
+When copying existing evidence into the model's validation folder, copy required linked assets too. Reuse an identical existing copy; avoid overwriting a same-named file with different content. Record source/copy roles, portable paths and hashes in model_validation/evidence/evidence_index.json without replacing unrelated evidence. This index is provenance, not a separate editable status registry. A newly authored analysis must be labeled as this review's analysis, not presented as an old source report.
 
 ## Preserve the researcher's document
 
@@ -48,7 +48,7 @@ Use one flowing Field / Entry grid without the automatic report's forced split/c
 
 Use a compact first verdict paragraph (`OK`, or a material warning/failure), followed by sign/metric paragraphs and a relevant balance finding when supported. Preserve the researcher's short verdict, rounding and manual breaks; do not expand `OK` into generic diagnostic prose. Round new display values appropriately, retaining full precision in evidence/calculations.
 
-Apply the filling guide's two-significant-digit percentage format to every table, including percentage values in table notes. Keep the percent sign, missing-value meaning, qualifiers and non-percentage numbers. Run `tools/validation_percentage_format.py --check <final.docx>` before delivery and before any authorized signed-review map handoff.
+Apply the filling guide's two-significant-digit percentage format to every table, including percentage values in table notes. Keep the percent sign, missing-value meaning, qualifiers and non-percentage numbers. Run `python tools/project_core/validation/validation_percentage_format.py --check <final.docx>` before delivery and before any authorized signed-review map handoff.
 
 The negative-SPPR findings must pair each source column with its affected groups. Preserve names and IDs even when the list expands the GE or TE cell. If a large list needs a supporting detail table, retain explicit per-column group information in the delivered report or its clearly referenced diagnostic attachment; never reduce the finding to an unpaired count.
 
@@ -72,7 +72,7 @@ Run the packaged DOCX renderer and inspect every page image. If the renderer fai
 
 Check portrait body and separate coverage-section layout, table widths, readable font sizes, repeated headers, source captions, no clipping, no stranded section headings and no accidental blank pages. Table/figure placeholders should be filled or explicitly unavailable; remove template-only prompts from completed automatic fields. Retain meaningful researcher/manual placeholders.
 
-Apply the filling guide's [portable-link rules](../../../templates/Model_validation_template_instructions.md#links-output-and-verification). Verify repository-local targets are stored relative to the containing DOCX/XLSX/supporting document, exist in the versioned repository, and still resolve after relocation. Inspect relationships, hyperlink fields/formulas and Hyperlink Base; preserve web URLs, internal anchors and URI-escaped fragments. A tooltip may display an absolute resolved path even when the stored link is relative. Do not reopen every remote reference merely to claim that formatting links work; distinguish destination verification from evidence retrieval.
+Apply the filling guide's [portable-link rules](../../../templates/instructions.md#links-output-and-verification). Verify repository-local targets are stored relative to the containing DOCX/XLSX/supporting document, exist in the versioned repository, and still resolve after relocation. Inspect relationships, hyperlink fields/formulas and Hyperlink Base; preserve web URLs, internal anchors and URI-escaped fragments. A tooltip may display an absolute resolved path even when the stored link is relative. Do not reopen every remote reference merely to claim that formatting links work; distinguish destination verification from evidence retrieval.
 
 Make all visible hyperlink text blue and underlined in both DOCX and Excel, including linked source labels, internal links and HYPERLINK formulas. Verify effective run/cell formatting rather than relying only on a named Hyperlink style. For styling-only corrections, preserve destinations, researcher content, values, formulas and layout; use brief structural and rendered appearance checks without a scientific rerun.
 

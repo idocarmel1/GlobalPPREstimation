@@ -1,0 +1,9 @@
+# LME_014 selected native diet audit
+
+Verified unnormalized and unchanged relative to the author-supplied native Access database. Exact literals match for all 1152 feeding-consumer prey cells and all 36 group imports in canonical, selected and loader-input JSON; feeding cells also match extraction JSON and CSV numerically. Twenty CSV zero imports use 0 rather than native 0.0. The retained loaded diet matches the same source float values, with normalize_DC=false.
+
+The historical native converter intermediate has 1138 differing/omitted diet/import literals: 867 sparse zero omissions, 47 formatting differences and 224 numeric precision differences of at most 1e-16. The retained extraction script restored native precision and explicit zero records. Native intermediate normalization is not proven; the generic converter can normalize other variants. It is not the selected or canonical identity. No re-extraction, restoration or scientific rerun was performed. The selected input retains its separate coupled missing-B/EE completion.
+
+Nonfeeding native zero rows are not complete diet columns in the canonical schema: producer/detritus missing/unknown placeholders remain explicit in nonfeeding_placeholder_limits.json. These are representation limits, not evidence of feeding-consumer normalization. Published Table S2 has a distinct diet variant, including substantive differences; native binary precision is preserved. Upstream processing before the author native release and researcher approval remain not established.
+
+No new model identity change or runtime change was introduced, so no dependent refresh is required by this audit. Existing diagnostic warnings, selections, parameters, detritus fate, DOCX, workbooks and freshness hashes remain untouched. Protected regional files verified unchanged: 290.

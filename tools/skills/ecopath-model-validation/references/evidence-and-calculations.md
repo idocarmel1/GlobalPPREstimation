@@ -1,12 +1,12 @@
 # Evidence and report calculations
 
-Read with the [template guide](../../../templates/Model_validation_template_instructions.md). The guide defines confidence categories and report fields; this reference explains how to obtain and check their inputs.
+Read with the [template guide](../../../templates/instructions.md). The guide defines confidence categories and report fields; this reference explains how to obtain and check their inputs.
 
 After a bounded workbook XML edit, verify the saved file through the unmodified project reader and freshness checks in a fresh process. Keep worksheet row and cell addresses ascending and unique. An alternate reader can recover out-of-order cells that the actual pipeline reader silently drops; agreement with that alternate reader alone does not establish usable workbook identity. Correct serialization without changing stored scientific values, then recheck canonical input/result hashes and current evidence identities.
 
 ## Locate evidence without changing scientific state
 
-From the repository root, use the read-only `read_book`, `records` and `overview` functions in `tools/workbooks.py`. Workbook sheets contain `@table` blocks, not a single rectangular table per sheet. The reader rejects authoritative formula cells rather than using stale cached values. If reading fails, report the issue and use an explicit, documented read-only investigation; do not save/recalculate the workbook to make it readable.
+From the repository root, use the read-only `read_book`, `records` and `overview` functions in `tools/project_core/workbooks/workbooks.py`. Workbook sheets contain `@table` blocks, not a single rectangular table per sheet. The reader rejects authoritative formula cells rather than using stale cached values. If reading fails, report the issue and use an explicit, documented read-only investigation; do not save/recalculate the workbook to make it readable.
 
 | Evidence | Location and use |
 |---|---|
@@ -23,9 +23,9 @@ From the repository root, use the read-only `read_book`, `records` and `overview
 
 Discover actual files by listing the specified model/paper/report directories and following recorded paths. Do not assume that a generic `sppr_source.xlsx` contains the full contribution matrix merely from its name. Do not execute archived builders or calculators as a way to inspect their outputs.
 
-Check publication identity separately from folder location and file presence. A preliminary report or related chapter retained in the selected article's folder must not be presented as its available original PDF. Preserve the focal-source gap and label contextual material explicitly in the report and shared archive. The atlas uses exact-hash reviewed roles in `common_reference_data/paper_file_roles.json` for such exceptions; changed bytes require a fresh identity assessment.
+Check publication identity separately from folder location and file presence. A preliminary report or related chapter retained in the selected article's folder must not be presented as its available original PDF. Preserve the focal-source gap and label contextual material explicitly in the report and source-role evidence. The atlas uses exact-hash reviewed roles in `common_reference_data/provenance/paper_file_roles.json` for such exceptions; changed bytes require a fresh identity assessment.
 
-The [pipeline reconstruction reference](../../original_skill_resources/combined-src/references/reconstruction-audit.md) distinguishes source, loader and computational state. Use it for source-fidelity interpretation, without running its extraction/conversion stages. The [direct-diagnostics reference](../../original_skill_resources/combined-src/references/direct-diagnostics.md) explains returned outcomes and configuration identity; validation alone does not call the solver.
+The [pipeline reconstruction reference](../../paper-to-ppr/references/reconstruction-audit.md) distinguishes source, loader and computational state. Use it for source-fidelity interpretation, without running its extraction/conversion stages. The [direct-diagnostics reference](../../paper-to-ppr/references/direct-diagnostics.md) explains returned outcomes and configuration identity; validation alone does not call the solver.
 
 ## Exact identity and freshness
 
@@ -100,7 +100,7 @@ The supporting row record needs these semantic fields; an equivalent table struc
 - Membership rule, confidence and evidence; allocation rule, confidence and evidence; transfer assumptions; stored confidence and review confidence.
 - Overall confidence, a concise reason, source IDs and any difference from the stored decision.
 
-Apply the [guide's rules](../../../templates/Model_validation_template_instructions.md#confidence-rules-and-examples) rather than copying historic labels uncritically. A single-group weight of 1 adds no allocation uncertainty, but cannot improve weak membership evidence. Complete resolved weights are nonnegative and sum to 1 within documented numerical tolerance. A clearly erroneous weight total is not repaired by automatic normalization.
+Apply the [guide's rules](../../../templates/instructions.md#confidence-rules-and-examples) rather than copying historic labels uncritically. A single-group weight of 1 adds no allocation uncertainty, but cannot improve weak membership evidence. Complete resolved weights are nonnegative and sum to 1 within documented numerical tolerance. A clearly erroneous weight total is not repaired by automatic normalization.
 
 Search source definitions and authoritative online evidence where needed. Record queries/references and outcomes proportionately; online searching alone does not increase confidence. For stage composition, verify taxon, caught-mass basis, region/fishery, period, stage threshold and catch basis. Unsupported geographic or temporal transfers can lower confidence. Do not infer catch proportions directly from biomass without assessing the assumption.
 

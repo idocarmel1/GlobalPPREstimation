@@ -1,0 +1,232 @@
+--- PDF PAGE 1 ---
+Potential reference points 
+for mean trophic level 
+of macrofauna 
+in the Sea of Okhotsk
+Konstantin M. Gorbatenko
+Vladimir V. Kulik 
+vladimir.kulik@tinro-center.ru
+Artem E. Lazshentsev
+--- PDF PAGE 2 ---
+Trophic level (TL) was determined accordingly to the same method as in:
+Gorbatenko K.M., Kiyashko S.I., Lazshentsev A.E., Nadtochy V.A., Savin A.B. 
+Trophic relationships and bento-pelagic relations on the western Kamchatka shelf 
+by the data of stomach contents and stable isotopes 13С and 15N // 
+Izv. TINRO. — 2013. — Vol. 175. — P. 3–25.
+This method is based on the same assumptions as in:
+Post D.M. 
+Using stable isotopes to estimate trophic position: models, methods, and assumption // 
+Ecology. — 2002. — Vol. 83. — P. 703–718.
+TL
+2 
+- Is stable isotope ratio of nitrogen (15Nc/14Nc) for consumer
+- Is stable isotope ratio of nitrogen (15Nb/14Nb) for the base, 
+which was represented by Eucalanus bungii (6.9 ‰) 
+and Yoldia bartschi (6.7 ‰) with the overall mean = 6.8 ‰
+- Is stable isotope ratio change between each TL, which is 
+assumed to be 3.4 ‰ after Minagawa M. and E. Wada (1984)
+- Is TL for the base, which is 2. Thus 
+TL = (15Nc/14Nc)/3.4
+--- PDF PAGE 3 ---
+3 
+Obviously TL determined by stable isotope ratio of nitrogen depends on season 
+(due to fresh import of nitrogen after spring bloom) 
+and on the age (size of mouth opening) of the consumer.
+We have mean weight (in kg) for every species in every observed catch, 
+that is why we used it to get mean weighted average (muTL) of every catch.
+LOESS with span = 2 by seasons for walleye pollock in the Sea of Okhotsk
+Wet weight, kg
+TL
+Red line – spring, green – summer and blue – autumn
+--- PDF PAGE 4 ---
+4 
+Mean TL of walleye polock was estimated according to season 
+and its weight using cubic regression splines in mgcv package of R language.
+--- PDF PAGE 5 ---
+5 
+We also have sufficient data to distinguish seasonal variations of the TL
+in spring, summer and fall for Clupea pallasii and Leuroglossus schmidti
+But we had to assume that in winter the TL was likely to be in the middle (arithmetic average) between fall and spring.
+In other cases we could not clearly see the significant difference of the TL by seasons.
+But we could regress the TL on weight for the other 9 fish: 
+1. Bathyraja parmifera
+2. Eleginus gracilis
+3. Gadus macrocephalus
+4. Hemilepidotus jordani
+5. Hippoglossus stenolepis
+6. Myoxocephalus polyacanthocephalus
+7. Platichthys stellatus
+8. Reinchardtius hippoglossoides
+9. Sebastolobus macrochir
+and 2 squid species:
+1. Berryteuthis magister
+2. Gonatus madokai
+--- PDF PAGE 6 ---
+6 
+Reinchardtius hippoglossoides 
+TL ~ 4.52 + f(W)
+kg kg
+Berryteuthis magister
+TL ~ 3.82 + f(W)
+Examples of used regressions
+--- PDF PAGE 7 ---
+7 
+The TL of 67 fish, 6 squid and 5 Decapod species was taken as the average without regression on weight
+and we also included 147 species using estimates of TL from www.fishbase.org
+All the other species of macrofauna were occasional and thus we excluded them.
+% of occurrence
+Number of excluded taxons bottom pelagial
+--- PDF PAGE 8 ---
+8 
+Finally we estimated muTL from 9926 trawls (with 1 cm mesh) 
+in the pelagic waters (in 1984-2013) 
+and 
+from 6321 bottom trawls (in 1977-2010). 
+muTL was weighted by kg per square km average of TL in each trawl catch.
+We analyzed spatial and temporal variation of muTL
+using Generalized Additive Models with splines on coordinates, horizon of 
+trawling, years and months 
+(gam function from the mgcv package of R language, 
+finally, with Gaussian errors). 
+--- PDF PAGE 9 ---
+9 
+deviation from the global mean (3.95) of muTL in the pelagic waters
+by years in the Sea of Okhotsk (1984-2013) 
+2008
+linear rate 
+was 0.007±0.001 s.e.
+Parametric coefficients:
+ Estimate Std. Error t value Pr(>|t|) 
+(Intercept) 3.95 0.00249 1586 <2e-16 ***
+muTL in the trawls in the pelagial
+1985
+2001
+2011
+--- PDF PAGE 10 ---
+10
+muTL in the pelagic waters in the space as deviation from the global mean (3.95)
+in the Sea of Okhotsk (1984-2013) 
+0 
+-0.1
+-0.2
+-0.3
++0.1 
++0.2 
+0 
++0.1 
++0.2 
+--- PDF PAGE 11 ---
+11
+muTL in the pelagic waters in the space as deviation from the global mean (2004-2013) 
+in the Sea of Okhotsk considering increase by 0.007 to be linear
+0 
+-0.1
+-0.2
+-0.3
++0.1 
++0.2 0 
++0.1 
++0.2 
++0.1 
+--- PDF PAGE 12 ---
+12
+horizon of trawling, m
+deviation from the global mean (3.95) of muTL in the pelagic waters
+depending on the horizon of trawling in the Sea of Okhotsk (1984-2013) 
+Only the very few stations led 
+to very high uncertainty below 500 m 
+horizon of trawling
+--- PDF PAGE 13 ---
+13
+horizon of trawling, m
+deviation from the global mean of muTL in the pelagic waters (2004-2013) 
+depending on the horizon of trawling in the Sea of Okhotsk
+Only the very 
+few stations 
+led 
+to very high 
+uncertainty 
+below 500 m 
+horizon of 
+trawling
+--- PDF PAGE 14 ---
+14
+deviation from the global mean (3.95) of muTL in the pelagic waters
+depending on the number of month in a year in the Sea of Okhotsk (1984-2013) 
+--- PDF PAGE 15 ---
+15
+deviation from the global mean of muTL in the pelagic waters (2004-2013) 
+depending on the number of month in a year in the Sea of Okhotsk
+--- PDF PAGE 16 ---
+16
+The muTL of the demersal component of the observed
+community stopped declining below the intercept (4.35) 
+in 2005 
+and since then there has been no significant trend.
+muTL in the bottom trawls in the Sea of Okhotsk (1977-2010) 
+???
+NO 
+observations
+Parametric coefficients:
+ Estimate Std. Error t value Pr(>|t|) 
+(Intercept) 4.35 0.00298 1462 <2e-16 ***
+1992
+--- PDF PAGE 17 ---
+17
+muTL in the bottom trawls in the space as deviation from the global mean (4.35)
+in the Sea of Okhotsk (1977-2010) 
+0 -0.1-0.2-0.3
++0.1 
++0.2 
+0 
++0.1 +0.3 
++0.1 
+--- PDF PAGE 18 ---
+18
+deviation from the global mean (4.35) of muTL in the bottom trawls
+depending on the horizon of trawling in the Sea of Okhotsk (1977-2010) 
+Only the very few stations led 
+to very high uncertainty below 1000 m 
+depth of trawling
+--- PDF PAGE 19 ---
+19
+deviation from the global mean (4.35) of muTL in the bottom trawls
+depending on the number of month in a year in the Sea of Okhotsk (1977-2010) 
+--- PDF PAGE 20 ---
+20
+Based on these annual estimates, we conclude that:
+muTL over the last 10 years increased significantly 
+(the rate was about 0.007 per year on the linear scale) 
+in the pelagic waters and it crossed 
+the intercept = 3.95±0.00249 s.e. in 2008. 
+The muTL of the demersal component 
+(of the observed community in the bottom trawls)
+stopped declining below the intercept = 4.35±0.00298 s.e.
+in 2005 and since then there has been no significant trend.
+Conclusion
+Stable isotope ratio of nitrogen (15N/14N) allowed us to explore muTL 
+of animals bigger than 1 cm in catches of the trawls
+including nonlinear connections in space and time as the part of a model.
+--- PDF PAGE 21 ---
+21
+Further work connected with the ToR 
+of the WG-28: 
+Fisheries is considered to be the most 
+important anthropogenic stressor.
+So, can annual total catch be statistically 
+connected with presented variation of 
+muTL?
+--- PDF PAGE 22 ---
+22
+Bottom catch cross-correlated with muTL
+at the bottom is insignificant (with up to 3 years lag):
+ -3 -2 -1 0 1 2 3 
+-0.193 -0.097 -0.016 0.041 0.062 0.075 0.084 
+ -3 -2 -1 0 1 2 3 
+-0.051 -0.084 -0.140 -0.225 -0.230 -0.244 -0.350 
+Pelagic catch cross-correlated with muTL
+In the pelagial is also insignificant (with up to 3 years lag):
+--- PDF PAGE 23 ---
+23
+Special thanks to R Core Team for the work on “R: A Language and Environment for Statistical Computing”
+and author of mgcv Wood, S.N.

@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {FileBlob,SpreadsheetFile} from '@oai/artifact-tool';
+const dir=path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const wb=await SpreadsheetFile.importXlsx(await FileBlob.load(path.resolve(dir,'../../LME013_HUM2018_candidate_taxon_mapping_appendix_20261003.xlsx')));
+const png=await wb.render({sheetName:'Sources',range:'A4:D11',scale:1.5,format:'png'});
+await fs.writeFile(path.join(dir,'auto_run_20261003/qa/appendix_sources.png'),new Uint8Array(await png.arrayBuffer()));
+const map=JSON.parse(await fs.readFile(path.join(dir,'mapping/mapping_review.json'),'utf8'));
+const sorted=[...map.taxa].sort((a,b)=>(b.simple_chain_ppr_tC??-Infinity)-(a.simple_chain_ppr_tC??-Infinity)||a.taxon.localeCompare(b.taxon));
+const longest=sorted.reduce((best,r,i)=>r.reason.length>sorted[best].reason.length?i:best,0)+8;
+const png2=await wb.render({sheetName:'Taxon mappings',range:`A${longest}:G${longest}`,scale:1.5,format:'png'});
+await fs.writeFile(path.join(dir,'auto_run_20261003/qa/appendix_longest_reason.png'),new Uint8Array(await png2.arrayBuffer()));
+console.log('Rendered saved final workbook; longest-reason row',longest);

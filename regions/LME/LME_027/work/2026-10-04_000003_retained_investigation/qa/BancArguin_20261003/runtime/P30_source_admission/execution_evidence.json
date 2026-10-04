@@ -1,0 +1,584 @@
+{
+  "run_id": "BancArguin_20261003",
+  "assessment_id": "P30_source_admission",
+  "timestamp_utc": "2026-10-03T16:14:15.572429+00:00",
+  "source_relative_to_run": "../../../../models/Guenette2014_BancArguin_P30_1991/model.json",
+  "source_sha256": "b819d3a8f3669cc3305bf73038c09dff613655c363a0942458d0f518033f30ff",
+  "computational_input_sha256": "3b0d16b387d7f86e13ad9ef24891d8e7447f23704770a6375019c57899c42cf0",
+  "constructor": {
+    "underdetermined": false,
+    "zero_catch": false,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": false
+  },
+  "diagnostic_options": {
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0
+  },
+  "thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "diagnostic_signature": "(self, TE_option: 'str' = 'GE', *, short: 'bool' = False, flat: 'bool' = False, thresholds: 'Optional[dict]' = None, return_sppr: 'bool' = False, **sppr_kwargs) -> 'dict | tuple[dict, pd.DataFrame, pd.DataFrame, pd.DataFrame]'",
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "3.0.1",
+  "interpretation": "Independent P30 assessment; retain published S8 and inherited baseline parameters but missing variant diets remain unknown. No SPPR or model PPR calculation justified.",
+  "production_eligible": false,
+  "missing_biology_before_runtime": [
+    {
+      "group_seq": 14,
+      "group_name": "Croakers ad",
+      "field": "pb"
+    },
+    {
+      "group_seq": 15,
+      "group_name": "Croakers juv",
+      "field": "pb"
+    },
+    {
+      "group_seq": 16,
+      "group_name": "Seabreams ad",
+      "field": "pb"
+    },
+    {
+      "group_seq": 17,
+      "group_name": "Seabreams juv.",
+      "field": "pb"
+    },
+    {
+      "group_seq": 18,
+      "group_name": "Catfish ad",
+      "field": "pb"
+    },
+    {
+      "group_seq": 19,
+      "group_name": "Catfish juv",
+      "field": "pb"
+    },
+    {
+      "group_seq": 23,
+      "group_name": "Groupers ad",
+      "field": "pb"
+    },
+    {
+      "group_seq": 24,
+      "group_name": "Grouper juv",
+      "field": "pb"
+    },
+    {
+      "group_seq": 25,
+      "group_name": "Sparids ad",
+      "field": "pb"
+    },
+    {
+      "group_seq": 26,
+      "group_name": "Sparids juv",
+      "field": "pb"
+    }
+  ],
+  "missing_diet_cells": [
+    {
+      "consumer_seq": 2,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 3,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 3,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 3,
+      "prey_seq": 45
+    },
+    {
+      "consumer_seq": 3,
+      "prey_seq": 47
+    },
+    {
+      "consumer_seq": 4,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 4,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 4,
+      "prey_seq": 44
+    },
+    {
+      "consumer_seq": 4,
+      "prey_seq": 45
+    },
+    {
+      "consumer_seq": 4,
+      "prey_seq": 46
+    },
+    {
+      "consumer_seq": 4,
+      "prey_seq": 47
+    },
+    {
+      "consumer_seq": 5,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 5,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 42
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 44
+    },
+    {
+      "consumer_seq": 11,
+      "prey_seq": 46
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 42
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 44
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 45
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 46
+    },
+    {
+      "consumer_seq": 12,
+      "prey_seq": 47
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 37
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 43
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 44
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 45
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 46
+    },
+    {
+      "consumer_seq": 13,
+      "prey_seq": 47
+    },
+    {
+      "consumer_seq": 14,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 14,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 14,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 44
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 45
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 46
+    },
+    {
+      "consumer_seq": 15,
+      "prey_seq": 47
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 37
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 42
+    },
+    {
+      "consumer_seq": 16,
+      "prey_seq": 43
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 17,
+      "prey_seq": 42
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 45
+    },
+    {
+      "consumer_seq": 18,
+      "prey_seq": 47
+    },
+    {
+      "consumer_seq": 19,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 19,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 19,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 19,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 19,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 19,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 24,
+      "prey_seq": 32
+    },
+    {
+      "consumer_seq": 24,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 24,
+      "prey_seq": 38
+    },
+    {
+      "consumer_seq": 24,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 33
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 34
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 35
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 36
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 37
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 39
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 40
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 41
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 42
+    },
+    {
+      "consumer_seq": 26,
+      "prey_seq": 43
+    }
+  ],
+  "scopes": {
+    "all": "All basal-source columns",
+    "inner": "Excludes synthetic external diet import",
+    "PP": "Primary producer columns only; excludes detritus and imported diet"
+  },
+  "matrix_orientation": "Recipient groups in rows, basal sources in columns; ordered native IDs stored on axes",
+  "units": "Wet-weight primary-production equivalent per unit consumer wet biomass; divide regional PPR by9 once for tonnes carbon",
+  "constructor_admission": "BLOCKED_BEFORE_MISSING_DIET_COERCION",
+  "warnings": {}
+}

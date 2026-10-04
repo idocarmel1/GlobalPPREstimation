@@ -1,0 +1,5 @@
+# Template contract
+
+Reference: tools/templates/Model_validation_template.docx; SHA256 2a6cb630b4697a87ac310a2a3871891ab189ee0466cef218a28d0b4ff384dbc4
+
+One A4 portrait section, 0.65-inch margins; Calibri11 body, title23, heading1 17, heading2 12. Standard field/entry table10.5-point Calibri, columns1.48/5.49inch. Preserve styles, section geometry and package chrome. Edit the source copy table cells by field label; preserve manual SPPR calculation, Open issues and Review cells. Replace automatic slots; clone coverage table styles for repeated rows. Coverage outside main grid: five confidence rows, separate membership and allocation rule summaries, exact Very low taxa. Replace geographic placeholders with labeled context figures; links relative blue underlined. Do not insert signature or researcher verdict. Template audit JSON retains each edit slot, package inventory and untouched structures. Final rendering may increase pagination naturally; keep widths/fonts and repeated headers. Source remains unchanged.

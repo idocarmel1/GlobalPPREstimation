@@ -1,0 +1,195 @@
+> **Reorganization scope: frozen historical evidence.** This guide retains the original study/release statements, counts, scientific assumptions and execution history. Its former paths or build commands are not the current project workflow. Follow the [current structure contract](../../../../explainers/structure.md) and resolve retained dependencies through the portable source-path ledger before any separately authorized reproduction. Reorganization does not certify old results as current or authorize reruns.
+
+# Sea Around Us PPR pipeline
+
+This project estimates the primary production required (PPR) to sustain Sea
+Around Us reconstructed marine catches. It includes both the validated
+five-region pilot and the completed global-scale run over every Sea Around
+Us-defined Large Marine Ecosystem (LME) and High Seas unit.
+
+Only the approved Pauly-Christensen (1995) trophic-chain method is used, with
+transfer efficiency fixed at `TE = 0.1`:
+
+```text
+SPPR = (1 / TE)^(TL - 1) = 10^(TL - 1)
+PPR  = catch tonnes × SPPR
+```
+
+The original paper's separate wet-weight-to-carbon divisor of 9 is deliberately
+not applied. PPR is therefore labelled in tonnes of primary-production
+equivalent, not tonnes of carbon.
+
+## Completed scope and result
+
+The global run contains 84 spatial units: 66 LMEs and 18 High Seas units. The
+latest year shared by every non-empty catch archive is **2019**. Two official
+units (`HS_018`, Arctic Sea, and `LME_064`, Central Arctic Ocean) have valid Sea
+Around Us ZIP files containing zero-byte CSVs; they are retained with zero catch
+and zero PPR and are explicitly flagged in the year and ingestion audits.
+
+For the frozen 2019 inputs:
+
+| Metric | Result |
+|---|---:|
+| Total catch | 99,115,685.26 tonnes |
+| Total PPR (taxon-level, unbiased; `species.csv`) | 65,252,683,993.89 tonnes primary-production equivalent |
+| LME PPR | 57,876,694,349.93 |
+| High Seas PPR | 7,375,989,643.96 |
+| Catch-weighted TL coverage | 100% of positive catch |
+| Catch reconciliation failures | 0 |
+| `tl_coverage_complete` failures | 0 of 84 units |
+| `group_ppr_within_convexity_bound` failures | 0 of 84 units |
+
+Group PPR (`commercial.csv`, `functional.csv`) is a separate, Jensen-affected
+figure by design - see below. Recomputed directly from the migrated tables,
+summed across all 84 units, group PPR understates the taxon-level total above
+by 22.93% for commercial groups and 16.48% for functional groups.
+
+The largest regional PPR estimate is the South China Sea (`LME_036`) at
+8,070,990,713.09 tonnes primary-production equivalent (12.37% of the 84-unit
+total).
+
+## Catch and trophic-level scope
+
+Catch includes landings plus discards, reported plus unreported, across all
+fishing entities, sectors, gears, and end uses in the downloaded Sea Around Us
+files. Many Sea Around Us rows are species, while some are broader reported
+taxa; the detailed files therefore use “species/taxon” where appropriate.
+
+Trophic levels are assigned in this auditable order:
+
+1. exact scientific-name match to `MeanTL` in the supplied 2020 supplement;
+2. exact taxon match to the same Sea Around Us unit's exploited-organisms table;
+3. mean of at least two supplement species in the same genus;
+4. catch-independent mean of unique matched taxa in the commercial group;
+5. catch-independent mean of unique matched taxa in the functional group;
+6. unmatched, retained with missing TL and PPR.
+
+Every regional species/taxon table records `match_method`, `tl_source`,
+`match_confidence`, and `reference_taxon`. In the completed run, 46.69% of
+positive catch matched the 2020 supplement exactly and 53.31% matched the
+unit-specific Sea Around Us table exactly. No fallback or missing-TL assignment
+was required.
+
+## Group PPR is Jensen-affected by design
+
+Species/taxon PPR (`species.csv`) is calculated first and is the unbiased
+figure: each taxon's own trophic level is exponentiated, then multiplied by
+that taxon's catch. Commercial and functional group tables (`commercial.csv`,
+`functional.csv`) aggregate differently and deliberately: they take the
+catch-weighted mean TL of a group's matched taxa and exponentiate that mean
+once, then multiply by the group's matched catch.
+
+Because `10 ** (TL - 1)` is convex, this catch-weighted-mean aggregation is a
+direct application of Jensen's inequality: group PPR can only ever be less
+than or equal to the sum of its member taxa's PPR, never more. The gap is the
+point - it is what makes the cost of moving from taxa to groups visible, which
+an Ecopath model cannot show on its own because it has no taxon level. The
+unbiased sum is always recoverable from `species.csv` with a `groupby`.
+
+`group_ppr_within_convexity_bound` (in `validation.csv`) asserts exactly this
+one-sided bound - group PPR minus taxon-summed PPR may not exceed floating-point
+noise - for every unit; it holds for all 84 units in this run.
+`tl_coverage_complete` asserts every taxon has a trophic level, which the group
+tables no longer report a coverage fraction for directly.
+
+## Run or reproduce
+
+Use Python 3.11 or newer from this directory:
+
+```powershell
+python -m pip install -r requirements.txt
+python download_global_data.py
+python run_global_pipeline.py
+python build_global_notebook.py
+node tools/build_workbooks.mjs --global
+node tools/verify_workbooks.mjs --global
+```
+
+Downloads are resumable and frozen files are reused by default. To request a
+specific year that is present in every non-empty archive:
+
+```powershell
+python run_global_pipeline.py --year 2018
+python build_global_notebook.py
+```
+
+The original five-region pilot remains reproducible with:
+
+```powershell
+python download_data.py
+python run_pipeline.py
+python build_notebook.py
+node tools/build_workbooks.mjs
+```
+
+## Global outputs
+
+```text
+global_output/
+  PPR_global_summary.xlsx
+  workbook_verification.json
+  spatial/
+    LMEs.geojson
+    HighSeas.geojson
+    spatial_units.csv
+  regional_calculations/
+    <84 regional .xlsx files>
+  tables/
+    global_summary.csv
+    validation.csv
+    tl_coverage.csv
+    ingestion_audit.csv
+    year_availability.csv
+    run_metadata.json
+    units.json
+    regions/<unit_id>/
+      species.csv
+      commercial.csv
+      functional.csv
+      missing_tl.csv
+      validation.csv
+```
+
+The Excel species SPPR/PPR columns and the group aggregation contain live
+formulas. The corresponding CSV values are machine-readable. Once regenerated,
+the executed `notebooks/global_validation.ipynb` report contains the ranking,
+catch reconciliation, matching coverage, group-versus-taxon convexity checks,
+figures, and final assertions.
+
+`global_output/global_validation_executed.ipynb` and `notebooks/global_validation.ipynb`
+were removed from version control: both were executed against the pre-migration
+table schema and referenced `jensen_comparison.csv` and the `commercial_ppr_reconciled`
+/ `functional_ppr_reconciled` / `*_jensen_violations` checks, none of which the current
+pipeline produces. They are regenerated by `build_global_notebook.py` once the tables
+in this directory are next produced by a pipeline run under the current schema.
+
+The complete polygon layers inside `global_output/spatial/` are GeoPandas-ready
+GeoJSON in EPSG:4326. They contain 66 valid LME geometries and 18 valid High Seas
+geometries. The normalized unit index links each geometry to the API region ID.
+
+## Validation gates
+
+The workflow validates:
+
+- archive structure and common-year availability;
+- raw filtered catch against standardized taxon catch;
+- every taxon has a trophic level (`tl_coverage_complete`);
+- group PPR never exceeds the taxon-summed PPR (`group_ppr_within_convexity_bound`),
+  the one-sided bound Jensen's inequality guarantees for the catch-weighted-mean-TL
+  group aggregation;
+- TL matching route, confidence, catch coverage, and missing taxa;
+- workbook formulas after reopening all 85 exported files;
+- polygon feature counts, CRS, and geometry validity.
+
+The current automated suite contains 47 passing tests. All six code cells in the
+executed global notebook completed without errors, and all 85 workbook formula
+error scans are clear.
+
+## Provenance and reuse
+
+`input/provenance.json` records source URLs, byte sizes, and SHA-256 checksums
+for every frozen Sea Around Us input and inspected reference. Source materials
+under the parent project's `sources/` directory remain read-only and are not
+modified. Follow current Sea Around Us citation and licensing requirements when
+redistributing data or publishing results.

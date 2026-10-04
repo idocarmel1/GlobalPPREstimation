@@ -1,0 +1,44 @@
+Modelling the trophic role of marine mammals in tropical areas, L. Morissette et al. 45
+on the model results. A second uncertainty analysis was performed using Ecoranger, a resampling routine
+based on input probability distributions. Finally, the robustness of our models’ structure was tested with
+Ecosim by comparing predicted biomasses with time series of observed data.
+Sensitivity analysis
+A sensitivity routine is included in Ecopath to allow users to explore the effects of uncertainty on the
+model results. The method is quite simple, and consists of plotting relative output changes against relative
+changes in the inputs. The routine varies all basic input parameters (biomass [B], production to biomass
+ratio [P/B], consumption to biomass ratio [Q/B], ecotrophic efficiency [EE]) in steps from -50% to +50%
+for each trophic group of the model, and then checks what effect each of these steps has for each of the
+input parameters on all of the “missing” basic parameters for each group in the system (Christensen et al.
+2000). The output is then given as the proportion of the difference between the estimated and original
+parameter to the original parameter, and converted to a percentage (Christensen et al. 2000). This
+method only re-estimates the parameters for which no data was available, and that were left to be
+estimated by the model, using the mass-balance constraints.
+We conducted a sensitivity analysis for biomass, P/B, Q/B and EE input parameters. Our results suggest
+that the sensitivity of these estimated parameters to a change in input values is relatively low (Appendix
+1). A 50% change in any of the input parameters of any trophic group generated an overall response of
+about 35% in the estimated parameters of other groups. Most of the changes in biomass would have a
+greater effect on the EE of other trophic groups (a 50% change in biomass generates an average 20%
+change in the EE of other trophic groups). In average, a 50% change in input biomass of any trophic group
+generated a response of 30% in the estimated parameters of other groups.
+For P/B ratio, a change in input values is more likely to affect EE parameters (with an average 50% of
+change after a 50% change in P/B). Overall, a 50% change in the P/B inputs of any group would generate
+a response of less than 48% in the estimated parameters of other groups.
+Similarly, for Q/B input values, a 50% change of this value for any group would generate a response of less
+than 25% in the estimated parameters of other trophic groups. The highest impact of a 50% change in
+Q/B is seen in estimating EE (with an average response of 28% difference).
+Finally, a change in EE input values generated an average 38% change in the estimated parameters. The
+most important effect of such change was seen on estimated biomass parameters, with an average 40%
+change after the EE is modified by ± 50%.
+Overall, our sensitivity analysis suggests that potential errors in model results are approximately linearly
+related to potential error in model parameters, etc. This result is consistent with those of Essington
+(2007). This underscores the importance of enhancing the quality of data included in our model.
+‘Ecoranger’ analysis
+To account for the inherent uncertainty of input parameters, a resampling routine called Ecoranger is
+included in the EwE software and accepts input probability distributions for the biomasses, consumption
+and production rates, ecotrophic efficiencies, catch rates, and diet compositions. Ecoranger then draws
+random input variables using the range of possible values for each parameter, and the resulting model is
+then evaluated (based on least sum of squared residuals and physiological and mass-balance constraints)
+(Christensen et al. 2005).
+Starting with the initial model and these setups, 10,000 models were run by Ecoranger, until 200 model
+runs passed the selection criteria, and the best fitting model for the coast of Northwest Africa was used for
+further analysis.

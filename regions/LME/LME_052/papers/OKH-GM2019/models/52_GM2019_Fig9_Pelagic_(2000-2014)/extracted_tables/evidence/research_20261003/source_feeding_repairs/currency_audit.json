@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "stage": "Source feeding recovery, common currency and jellyfish error hypotheses",
+  "source_baseline_preserved": true,
+  "common_currency": "carbon",
+  "reason": "Published Figure9 production and arrows are carbon. Group-specific wet/carbon factors vary greatly, particularly jellyfish285.2 versus copepods14/euphausiids10.6. Wet body production and wet prey food are not a common energy currency.",
+  "carbon_intake_formula": "Q_C=sum(Q_wet_preys / respective_prey_wet_per_carbon)",
+  "incorrect_conversion_to_reject": "Q_C=total_Q_wet / consumer_wet_per_carbon",
+  "jellyfish_production_check": {
+    "source_B_wet_million_t": "4.1",
+    "source_PB_per_year": "10",
+    "source_P_wet_million_t_per_year": "41",
+    "source_factor": "285.2",
+    "implied_P_C": "0.1437587657784011220196353436",
+    "Figure_P_C": "0.144",
+    "production_wet_carbon_pair_internally_consistent": true
+  },
+  "jellyfish_matched_source_prey_lower_bound": {
+    "copepods_wet_thousand_t": "2477.3",
+    "euphausiids_wet_thousand_t": "332.2",
+    "chaetognaths_wet_thousand_t": "25.9",
+    "known_Q_C_million_t_per_year": "0.2095846226415094339622641509",
+    "R_at_GS_0p30_lower_bound": "0.0027092358490566037735849056",
+    "GS_ceiling_using_known_prey_only": "0.3129266919247730348933672487",
+    "unknown_remaining_food_is_not_zero": true,
+    "not_a_complete_diet": true,
+    "source_period": "2006-2014 supporting dissertation, rather than primary2000-2014",
+    "same_period_validation": false,
+    "group_mean_factor_assumptions": "Nominal subtotal conditional on published taxonomic group means applying to actual prey/stages; not an unconditional statistical bound.",
+    "GS_0p30_scope": "Feasible illustration in carbon; source70% concerns calorie assimilation and requires equivalence for carbon GS."
+  },
+  "status": "Partial source feeding eliminates jellyfish carbon intake failure without an invented typo, subject to scope-transfer assumption; full diet/native inputs unresolved.",
+  "repair_adopted": false
+}

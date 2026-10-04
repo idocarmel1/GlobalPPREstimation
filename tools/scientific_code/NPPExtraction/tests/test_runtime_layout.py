@@ -4,23 +4,33 @@ import gzip
 import hashlib
 import io
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+import openpyxl
 
 from npp import annual, config
 
 
 def write_catch(root, unit, years):
-    path = root / 'regions' / unit / 'raw' / f'{unit}.csv.gz'
+    region=root/'regions'/unit.split('_')[0]/unit
+    write_region(region,unit)
+    path = region / 'raw/catch' / f'{unit}.csv.gz'
     path.parent.mkdir(parents=True)
     with gzip.open(path, 'wt') as stream:
         stream.write('unit_id,year\n')
         for year in years:
             stream.write(f'{unit},{year}\n')
     return path
+
+
+def write_region(region,unit):
+    region.mkdir(parents=True,exist_ok=True)
+    workbook=openpyxl.Workbook();workbook.active.append(['unit_id',unit])
+    workbook.save(region/(unit+'.xlsx'));workbook.close()
 
 
 def test_defaults_and_example_config_find_shared_data_from_another_cwd(tmp_path, monkeypatch):
@@ -44,14 +54,14 @@ def test_current_catch_layout_rejects_wrong_identity(tmp_path):
 
 def test_plan_includes_npp_only_regions_and_uses_separate_runtime_output(tmp_path, monkeypatch):
     write_catch(tmp_path, 'LME_001', [1950, 2003])
-    (tmp_path / 'regions/HS_018/raw').mkdir(parents=True)
+    write_region(tmp_path/'regions/HS/HS_018','HS_018')
     output = tmp_path / 'common_reference_data/npp/output'
     output.mkdir(parents=True)
     sources = {model: {'2003': {str(m): 'https://example.invalid/source' for m in range(1, 13)}}
                for model in config.MODELS}
     (output / 'source_catalog.json').write_text(json.dumps({
         'sources': sources, 'metadata': {'errors': {}, 'full_years': {}}}))
-    frozen = tmp_path / 'original_research_archive/research/npp_extraction_2026_09/output/annual_npp.csv'
+    frozen = tmp_path / 'research/npp_extraction_2026_09/results/annual_npp.csv'
     frozen.parent.mkdir(parents=True)
     frozen.write_bytes(b'frozen research results')
     monkeypatch.chdir(tmp_path.parent)
@@ -67,10 +77,27 @@ def test_plan_includes_npp_only_regions_and_uses_separate_runtime_output(tmp_pat
 
 def test_launcher_runs_from_unrelated_directory(tmp_path):
     repo = Path(__file__).resolve().parents[4]
-    result = subprocess.run([sys.executable, str(repo / 'tools/run_npp.py'), '--help'],
+    result = subprocess.run([sys.executable, str(repo / 'tools/cli/npp.py'), '--help'],
                             cwd=tmp_path, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert 'plan' in result.stdout and '--root' in result.stdout
+
+
+def test_launcher_plan_uses_canonical_discovery_from_unrelated_directory(tmp_path):
+    repo=Path(__file__).resolve().parents[4]
+    root=tmp_path/'project';write_region(root/'regions/HS/HS_018','HS_018')
+    catalog=root/'common_reference_data/npp/source_catalog.json';catalog.parent.mkdir(parents=True)
+    sources={model:{'2003':{str(m):'https://example.invalid/source' for m in range(1,13)}}
+             for model in config.MODELS}
+    catalog.write_text(json.dumps({'sources':sources,'metadata':{'errors':{}}}))
+    elsewhere=tmp_path/'elsewhere';elsewhere.mkdir()
+    environment=os.environ.copy();environment.pop('PYTHONPATH',None)
+    result=subprocess.run([sys.executable,str(repo/'tools/cli/npp.py'),'plan','--root',str(root),'--years','2003'],
+                          cwd=elsewhere,env=environment,capture_output=True,text=True,encoding='utf-8')
+    assert result.returncode==0,result.stdout+result.stderr
+    with (catalog.parent/'output/annual_npp.csv').open() as stream:
+        rows=list(csv.DictReader(stream))
+    assert [(r['unit_id'],r['year'],r['status']) for r in rows]==[('HS_018','2003','pending')]
 
 
 def test_plan_without_catalog_stays_offline(tmp_path):
@@ -79,7 +106,7 @@ def test_plan_without_catalog_stays_offline(tmp_path):
 
 
 def test_plan_preserves_previously_extracted_npp_only_years(tmp_path):
-    (tmp_path / 'regions/HS_018/raw').mkdir(parents=True)
+    write_region(tmp_path/'regions/HS/HS_018','HS_018')
     output = tmp_path / 'common_reference_data/npp/output'
     output.mkdir(parents=True)
     sources = {model: {str(y): {str(m): 'url' for m in range(1, 13)} for y in [2003, 2004]}
@@ -104,13 +131,14 @@ def test_preparing_region_selection_does_not_rewrite_shared_geometry(tmp_path, m
     work.mkdir()
     full = {'type': 'FeatureCollection', 'features': [
         {'type': 'Feature', 'properties': {'region_id': n}, 'geometry': None} for n in [1, 2]]}
-    (raw / 'sau_lme_full.geojson').write_text(json.dumps(full))
-    (raw / 'sau_lme.geojson').write_bytes(b'original source selection')
+    (raw/'geography').mkdir()
+    (raw / 'geography/sau_lme_full.geojson').write_text(json.dumps(full))
+    (raw / 'geography/sau_lme.geojson').write_bytes(b'original source selection')
     inputs = []
     # Full rasterization is external to the path/selection contract being tested.
     monkeypatch.setattr(regions, 'build_coverage', lambda path, grid, out: inputs.append(path))
     assert annual.prepare_regions(tmp_path, [('LME_002', 2003)], raw, work) == ['lme']
-    assert (raw / 'sau_lme.geojson').read_bytes() == b'original source selection'
+    assert (raw / 'geography/sau_lme.geojson').read_bytes() == b'original source selection'
     assert all(path == work / 'geometry/sau_lme.geojson' for path in inputs)
     cfg = config.Config(raw_dir=raw, work_dir=work, geometry_dir=work / 'geometry')
     selected = json.loads(cfg.geojson_path('lme').read_text())

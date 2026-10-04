@@ -23,9 +23,11 @@ def test_cache_identity_changes_with_science_and_reference_model():
 
 def test_archive_grid_uses_actual_catch_years_and_rejects_wrong_identity(tmp_path):
     from npp.annual import archive_grid
-    region = tmp_path / 'PPRAtlas/archive/regions/LME_001'
+    import openpyxl
+    region = tmp_path / 'regions/LME/LME_001'
     region.mkdir(parents=True)
-    catch = tmp_path / 'SeaAroundUsExtraction/data/catch_by_taxon_year/LME_001.csv.gz'
+    workbook=openpyxl.Workbook();workbook.save(region/'LME_001.xlsx');workbook.close()
+    catch = region / 'raw/catch/LME_001.csv.gz'
     catch.parent.mkdir(parents=True)
     with gzip.open(catch, 'wt') as f:
         f.write('unit_id,year\nLME_001,1950\nLME_001,1950\nLME_001,2003\n')
@@ -53,7 +55,9 @@ def test_osu_source_html_allows_spaces_around_href():
 
 def test_archive_without_catch_is_reported_separately(tmp_path):
     from npp.annual import archive_grid
-    (tmp_path / 'PPRAtlas/archive/regions/HS_018').mkdir(parents=True)
+    import openpyxl
+    region=tmp_path/'regions/HS/HS_018';region.mkdir(parents=True)
+    workbook=openpyxl.Workbook();workbook.save(region/'HS_018.xlsx');workbook.close()
     missing = []
     assert archive_grid(tmp_path, missing=missing) == []
     assert missing == [{'unit_id': 'HS_018', 'status': 'no_catch', 'reason': 'catch file absent'}]

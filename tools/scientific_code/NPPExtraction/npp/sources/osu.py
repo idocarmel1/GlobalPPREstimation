@@ -56,13 +56,9 @@ def url(model: str, year: int, month: int) -> str:
 
 
 def local_path(raw_dir: Path, model: str, year: int, month: int) -> Path:
-    """Prefers ``raw_dir/osu/``, accepts a flat ``raw_dir/``."""
+    """Canonical source product/year directory."""
     name = local_name(model, year, month)
-    nested = Path(raw_dir) / "osu" / name
-    flat = Path(raw_dir) / name
-    if flat.exists() and not nested.exists():
-        return flat
-    return nested
+    return Path(raw_dir) / model / str(year) / name
 
 
 def fetch(raw_dir: Path, year: int, models=MODELS, timeout: int = 180, retries: int = 4,
@@ -76,7 +72,7 @@ def fetch(raw_dir: Path, year: int, models=MODELS, timeout: int = 180, retries: 
             if existing.exists() and not overwrite:
                 out.append(existing)
                 continue
-            dest = Path(raw_dir) / "osu" / local_name(model, year, month)
+            dest = local_path(raw_dir, model, year, month)
             out.append(download(url(model, year, month), dest, timeout, retries, overwrite))
     return out
 

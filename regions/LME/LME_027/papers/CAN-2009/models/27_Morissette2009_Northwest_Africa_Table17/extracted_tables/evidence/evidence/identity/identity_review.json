@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-03",
+  "candidate_model_id": "27_Morissette2009_Northwest_Africa_Table17",
+  "selected_model_id_preserved": "27_118_Northwest_Africa_(1987)",
+  "conclusion": "Same published Northwest Africa ecological model and balanced living-parameter solution as EcoBase118, represented by rounded/incomplete printed tables and a more precise native record. Not evidence of an independent replacement model. Paper-only reconstruction remains a separate incomplete source representation; no scientific revision is established by newly available final2009 PDF.",
+  "source": {
+    "file": "../../../../papers/FCRR_2009_17-2.pdf.pdf",
+    "sha256": "243afacca6af6f5cbf66169ed34adfd634147d2ef3db715c05bcdd53bbc3a147",
+    "pages": 124,
+    "volume_citation": "Morissette, L., Melgo, J.L., Kaschner, K., and Gerber, L.R. (eds.) (2009). Modelling the trophic role of marine mammals in tropical areas: data requirements, uncertainty, and validation. Fisheries Centre Research Reports17(2),120printed pages.",
+    "chapter_citation": "Morissette, L., Melgo, J.L., Kaschner, K., Gerber, L., and Bamy, I.L. (2009). Food web model and data for studying the interactions between marine mammals and fisheries in the Northwest African ecosystem. Fisheries Centre Research Reports17(2), printed6–52.",
+    "citation_note": "Chapter recommended-citation footnote says6–47 (body); actual chapter includes references through52. EcoBase citation uses6–52. PDF page=printed page+4 for this chapter. No DOI asserted.",
+    "tables": "Final balanced Table17 PDF41/printed37; diet Table18 PDF42–43/printed38–39; membership Table3 PDF18–20/printed14–16.",
+    "version_note": "2009 final published volume retains preliminary-workshop wording onPDF11 but PDF51 explicitly reports additional data added after the2008workshop; availability of final volume does not itself define a new ecological model."
+  },
+  "period": {
+    "baseline_year": 1987,
+    "source_time_description": "Late1980s (abstractPDF10/printed6)",
+    "evidence_beyond_catalog": "Tables1–2 PDF15–16:22of24 native fleet catch entries match1987 catches within1ton after applying the published/native area. Distinctive baseline signature strongly supports1987.",
+    "catch_series": "1987–2004, described PDF12–16",
+    "biomass_effort_time_series": "1986–2007 in the Northwest Africa model fitting discussion/tables; separate from baseline",
+    "input_period_limits": "Parameters and group descriptions combine heterogeneous source periods, including1990s Senegambian data, later surveys and literature transfers.1987 is a nominal baseline, not an assertion that all inputs were measured in that year.",
+    "temporal_transfer_to2019": "Fixed baseline coefficients or mixtures transfer32years forward; do not reconstruct annual ecosystem change."
+  },
+  "comparison": {
+    "canonical_path": "../../../27_118_Northwest_Africa_(1987)/model.json",
+    "canonical_sha256": "4d2152f4836dddcb32e90def39b4d1cf1b3399d168e803173fe2bd524f115bb2",
+    "native_groups_semantically_identical_to_canonical": true,
+    "native_full_record": "ecobase118_official_native.json",
+    "native_xml": "ecobase118_official_input.xml",
+    "native_url": "https://ecobase.ecopath.org/php/webser/soap-client.php?no_model=118",
+    "native_xml_sha256": "f79f2bddaedbc9080d718e338295502db3ef6e8fdd21810771e6e44b5ada522c",
+    "table17_numeric_fields_compared": 128,
+    "table17_match_at_print_precision": 127,
+    "living_fields_compared_and_matching": 126,
+    "sole_scalar_difference": "DetritusEE:Table17 0.3695; native/canonical0. Native detritus representation uses BA; source representations must remain distinct.",
+    "signature_details": "table17_canonical_signature.json",
+    "table18_all644_cells_match_at_print_precision": true,
+    "diet_comparison": "../source_extraction/paper_native_diet_comparison.json",
+    "interpretation": "Identical native group data plus matching living scalars and published diets provide substantially stronger identity evidence than same title/group count alone."
+  },
+  "crosswalk_conflicts": [
+    {
+      "location": "Table3 vs Tables16–18 vs native",
+      "Table3": "6Blue whales,7Sperm,8Killer,9Beaked,10Small cetaceans",
+      "Tables16_18": "6Sperm,7Killer,8Baleen,9Beaked,10Dolphins",
+      "native": "6Baleen,7Beaked,8Sperm,9Killer,10Dolphins",
+      "rule": "Use group names, taxon identity and diet signatures; never reuse raw sequence numbers across tables."
+    },
+    {
+      "location": "Tables1–2",
+      "finding": "Catch headings numbered10–21 map by names to parameter groups12–23.",
+      "rule": "Use names crosswalk."
+    },
+    {
+      "location": "PDF40 balancing narrative vsTable17",
+      "finding": "Dolphin intermediateB prose0.02225 versusTable170.0225; large-pelagicQB prose11.60 versusTable1711.698. Narrative is not silently substituted."
+    },
+    {
+      "location": "PDF38 Benthic producers vsTables16–17",
+      "finding": "NarrativePB15.0 vsTables16/17 andnative107.36. Preserve published balanced-table/native value, flag contradiction."
+    },
+    {
+      "location": "Final Figure1/printed bounds",
+      "finding": "Figure western edge is near CapeVerde longitude and consistent with live native~24.76W; prose says30W. Both extents retained in geographic uncertainty."
+    },
+    {
+      "location": "Table1 local mesopelagic1987",
+      "finding": "Printed5388t vsnative2694.011t; twofold discrepancy."
+    },
+    {
+      "location": "Table2 foreign benthos1987",
+      "finding": "Printed426t vsno native fleet landings entry; nativegroup export includes local catch only."
+    }
+  ],
+  "missing_data_recovery": {
+    "paper_only": "Table18 prints predator columns1–23 only; missing consumer25 diet, GS/BA/routing and other native bookkeeping not reconstructed from blanks.",
+    "official_native": "Recovered complete live official118model. Zooplankton25diet=1toPhytoplankton26; GS0.2, BA0; route1toDetritus27. Other native fields and native fleet catches preserved without rounding/default mutation.",
+    "native_catch_semantics": "27group exports match sum of explicitly typed native total-landings cells within1e−8.54 prop-mort entries are not biomass catches;22 total-landings entries in2fleets; no discard field.",
+    "catch_evidence": "native_fleet_catch_comparison.json",
+    "catch_printed_difference_evidence": "native_vs_printed_1987_catches.json",
+    "recovery_decision": "Official native record can support native computational-input review, retaining existing disqualification. Importing missing fields into paper-only canonical would create a supplemented interpretation and must be explicit. Native exact match allows retained sufficient diagnostics reuse."
+  },
+  "alternatives": [
+    {
+      "name": "Northwest Africa unbalanced Table16",
+      "period": "same late1980s baseline",
+      "relationship": "Initial parameter state in same model-development process, not a distinct ecosystem or validated alternative."
+    },
+    {
+      "name": "2008 preliminary workshop report",
+      "period": "same project/baseline",
+      "relationship": "Earlier source version; retain historically. Final publication now supersedes missing-final-source limitation but does not make canonical118 new."
+    },
+    {
+      "name": "Caribbean chapter (Melgo etal2009), printed53 onward",
+      "period": "catch series1987–2005; no independently confirmed exact baseyear in this limited review",
+      "area": "Caribbean",
+      "relationship": "Distinct29group ecosystem model in same volume; not a Northwest Africa replacement."
+    },
+    {
+      "name": "2010MEPS follow-up: Ecosystem models clarify the trophic role of whales off Northwest Africa",
+      "period": "same broad lineage; source values/ranges vary",
+      "relationship": "Publisher4page supplementTableS1 gives input ranges and diet-source references, not missing full diet matrix. MinkePB0.0099 vs finalTable170.0990 illustrates why it is not silently merged."
+    },
+    {
+      "name": "Guénette etal2014 Banc d’Arguin/Mauritanian shelf1991; Villanueva2004 Sine-Saloum",
+      "relationship": "Distinct retained regional candidates and more local domains; not numerical versions supplied by this report."
+    }
+  ],
+  "geography": {
+    "assessment": "../geography/geographic_assessment.json",
+    "source_figure": "../geography/final_figure1_with_caption.png",
+    "target_image": "../geography/target_region.png",
+    "comparison_image": "../geography/comparison.png",
+    "recommended_short_cell": "A ≈95–100%; B ≈20–35%",
+    "meaning": "A=region covered by study; B=study covered by region. Broad offshore study covers most of shelfLME but much of study is outside it."
+  },
+  "disqualification_preserved": {
+    "review_date": "02/10/2026",
+    "status": "Disqualified by researcher",
+    "reason_exact": "Reason – too strong living compartments recycling due to near-zero EE values (rho_living = 0.99).",
+    "consequence": "New final-source availability and native recovery do not remove the zero/near-zero livingEE pattern or reopen researcher approval. No active selection, accepted parameters or review file edited."
+  },
+  "artifacts_verified": true
+}

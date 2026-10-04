@@ -1,0 +1,185 @@
+{
+  "alignment_passed": true,
+  "scope": "Adopted LME 052 scientific selection, unit-converted regional values and matching map/time-series payload. This is not researcher scientific validation or an assertion about unrelated legacy rows.",
+  "authority": "Root independently verified the adopted frozen model, regional workbook, exact annual/map payload and live browser values, and authorized removal of pending alignment wording.",
+  "model_sha256": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656",
+  "regional_workbook_sha256": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+  "proofs": [
+    {
+      "path": "../../models/52_GM2019_Fig9_Pelagic_(2000-2014)/research_20261003/completion_integration/map_build_execution.json",
+      "sha256": "bd7c58b9c21cce57289dc5ca0192decea654dfcd1278b6cea9cbf5a194796afe",
+      "result": {
+        "command": "python tools/build_html.py --workbook Project.xlsx --output interactive_map/index.html",
+        "exit_code": 0,
+        "stdout": "Checked HTML detail inputs: EEZ_598\r\nChecked HTML detail inputs: EEZ_941\r\nChecked HTML detail inputs: HS_071\r\nChecked HTML detail inputs: HS_077\r\nChecked HTML detail inputs: LME_003\r\nChecked HTML detail inputs: LME_013\r\nChecked HTML detail inputs: LME_014\r\nChecked HTML detail inputs: LME_022\r\nChecked HTML detail inputs: LME_024\r\nChecked HTML detail inputs: LME_026\r\nChecked HTML detail inputs: LME_027\r\nChecked HTML detail inputs: LME_028\r\nChecked HTML detail inputs: LME_029\r\nChecked HTML detail inputs: LME_032\r\nChecked HTML detail inputs: LME_034\r\nChecked HTML detail inputs: LME_035\r\nChecked HTML detail inputs: LME_036\r\nChecked HTML detail inputs: LME_037\r\nChecked HTML detail inputs: LME_038\r\nChecked HTML detail inputs: LME_047\r\nChecked HTML detail inputs: LME_049\r\nChecked HTML detail inputs: LME_050\r\nChecked HTML detail inputs: LME_052\r\nOriginal-format pages rebuilt: C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\interactive_map/index.html, trends.html and archive/index.html\r\n"
+      }
+    },
+    {
+      "path": "../../models/52_GM2019_Fig9_Pelagic_(2000-2014)/research_20261003/completion_integration/map_verification_execution.json",
+      "sha256": "5dc59e0f83142e55daf6b3db61ba0f1ee4b61ab07989b8792619cff07d90f36c",
+      "result": {
+        "command": "python tools/verify_html.py --workbook Project.xlsx --html interactive_map/index.html",
+        "exit_code": 0,
+        "annual_cells_verified": 2071230,
+        "stdout": "Map/time-series layouts match the templates with file-link, basemap and provisional-display adapters; 2071230 annual cells and NPP match Project.xlsx; selected models, source files and archive page verified"
+      }
+    },
+    {
+      "path": "../../models/52_GM2019_Fig9_Pelagic_(2000-2014)/research_20261003/completion_integration/browser_verification.json",
+      "sha256": "fdaec384c1810b436b859e5f0e0b698307835c77c0c445560dbea4d9c303b312",
+      "result": {
+        "schema_version": 1,
+        "model_id": "52_GM2019_Fig9_Pelagic_balanced_(2000-2014)",
+        "project_sha256": "5c56849498f799d8987227cc082b3450318522879f6bcbe4435be425e040f44a",
+        "regional_sha256": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+        "map_sha256": "cd8a24a60c8e9e6758904ad1616eed257cf3ebcaf5a4872f2c5ef0a78570e569",
+        "trends_sha256": "0fc70d73f46871cb7f488d577b1050939fb19180fcc00dc63c61bdcb775fd4a0",
+        "observations_path": "browser_observations.json",
+        "map_comparisons": [
+          {
+            "method": "new_GE",
+            "scope": "all",
+            "computed_tC": 88654224.54917537,
+            "regional_tC": 88654224.54917537,
+            "observed_display": "88,650,000",
+            "rounded_display_matches": true,
+            "regional_matches": true
+          },
+          {
+            "method": "new_TE_EEfix",
+            "scope": "all",
+            "computed_tC": 997128098.1790271,
+            "regional_tC": 997128098.1790271,
+            "observed_display": "997,100,000",
+            "rounded_display_matches": true,
+            "regional_matches": true
+          },
+          {
+            "method": "new_WithEgestion",
+            "scope": "all",
+            "computed_tC": 52242848.06912637,
+            "regional_tC": 52242848.06912637,
+            "observed_display": "52,240,000",
+            "rounded_display_matches": true,
+            "regional_matches": true
+          },
+          {
+            "method": "new_GE",
+            "scope": "PP",
+            "computed_tC": 26665895.68869018,
+            "regional_tC": 26665895.688690178,
+            "observed_display": "26,670,000",
+            "rounded_display_matches": true,
+            "regional_matches": true
+          },
+          {
+            "method": "new_GE",
+            "scope": "inner",
+            "computed_tC": 83453778.99262148,
+            "regional_tC": 83453778.99262148,
+            "observed_display": "83,450,000",
+            "rounded_display_matches": true,
+            "regional_matches": true
+          }
+        ],
+        "time_series_2019_exact_tC": 88654224.54917537,
+        "checks": {
+          "all_observed_map_values_match_regional_and_payload": true,
+          "all_23_groups_included": true,
+          "bacteria_protozoa_and_detritus_visible": true,
+          "zero_researcher_exclusions_for_new_model": true,
+          "other_saved_model_choices_preserved_during_final_checks": true,
+          "all_26_prior_table_preferences_preserved": true,
+          "selected_new_model_persisted": true,
+          "native_diagnostics_WARN_visible": true,
+          "researcher_review_pending_visible": true,
+          "five_JSONs_all_context_not_model": true,
+          "one_original_primary_article": true,
+          "translation_labeled_unofficial": true,
+          "live_source_labels_updated": true,
+          "time_series_chart_rendered": true,
+          "time_series_exclusion_caption_correct": true,
+          "time_series_value_correct": true,
+          "time_series_new_model_carried_in_URL": true,
+          "two_saved_nonempty_screenshots": true,
+          "fresh_project_fingerprint": true
+        },
+        "passed": true
+      }
+    },
+    {
+      "path": "../../models/52_GM2019_Fig9_Pelagic_(2000-2014)/research_20261003/completion_integration/final_layout_refresh.json",
+      "sha256": "6206ae36d2f12df95e09ed1299c072bb70cd367d79161124f36787f88ac0ec73",
+      "result": {
+        "schema_version": 1,
+        "reason": "Scope time-series group exclusion caption to displayed ecosystems while preserving all stored settings and all scientific payloads.",
+        "execution": [
+          {
+            "command": [
+              "C:\\Users\\idoca\\miniconda3\\python.exe",
+              "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\build_html.py",
+              "--workbook",
+              "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\Project.xlsx",
+              "--output",
+              "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\interactive_map\\index.html",
+              "--layout-only"
+            ],
+            "exit_code": 0,
+            "stdout": "Map and trends layouts refreshed; embedded data preserved; project fingerprint preserved.\n",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Users\\idoca\\miniconda3\\python.exe",
+              "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\verify_html.py",
+              "--workbook",
+              "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\Project.xlsx",
+              "--html",
+              "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\interactive_map\\index.html"
+            ],
+            "exit_code": 0,
+            "stdout": "Map/time-series layouts match the templates with file-link, basemap and provisional-display adapters; 2071230 annual cells and NPP match Project.xlsx; selected models, source files and archive page verified\n",
+            "stderr": ""
+          }
+        ],
+        "protected_before": {
+          "Project.xlsx": "5c56849498f799d8987227cc082b3450318522879f6bcbe4435be425e040f44a",
+          "regions/LME_052/LME_052.xlsx": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+          "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/model.json": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656",
+          "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_index.json": "c22dbc130886699f67c1a0026a2cef97c7a971f80be91d2e821a144a16bd295f",
+          "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_completeness.json": "1f7ae77ddb6ea9b5ae4c10e4ae9b34d84075a4290b939be2b4cdc2316b33dac1",
+          "common_reference_data/paper_file_roles.json": "c6cfc0702b85859e0285af042483a8a63670e17d6770e812270b89eb5496d8d0"
+        },
+        "protected_after": {
+          "Project.xlsx": "5c56849498f799d8987227cc082b3450318522879f6bcbe4435be425e040f44a",
+          "regions/LME_052/LME_052.xlsx": "2c0c44fbe624faac77321ceb53ec99ba5b2238271fd85fa62027d9108c03a976",
+          "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/model.json": "9beff5a4e525dcf4253bf83472253c7a4a9f7e7db10379ecef64eb33cd32a656",
+          "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_index.json": "c22dbc130886699f67c1a0026a2cef97c7a971f80be91d2e821a144a16bd295f",
+          "regions/LME_052/models/52_GM2019_Fig9_Pelagic_(2000-2014)/assumption_variants/adopted_balanced_20261003/evidence_completeness.json": "1f7ae77ddb6ea9b5ae4c10e4ae9b34d84075a4290b939be2b4cdc2316b33dac1",
+          "common_reference_data/paper_file_roles.json": "c6cfc0702b85859e0285af042483a8a63670e17d6770e812270b89eb5496d8d0"
+        },
+        "scientific_payload_hashes_before": {
+          "index.html": "3b05b0896d6c75f63592904213f62fbb5c6a836e31c5756fb3310f433aa11b70",
+          "trends.html": "8de385c7f34f9787eec08fd2852f30a77e0b08965099cfc6d6d46e45f8febd2a"
+        },
+        "scientific_payload_hashes_after": {
+          "index.html": "3b05b0896d6c75f63592904213f62fbb5c6a836e31c5756fb3310f433aa11b70",
+          "trends.html": "8de385c7f34f9787eec08fd2852f30a77e0b08965099cfc6d6d46e45f8febd2a"
+        },
+        "final_page_sha256": {
+          "index.html": "cd8a24a60c8e9e6758904ad1616eed257cf3ebcaf5a4872f2c5ef0a78570e569",
+          "trends.html": "0fc70d73f46871cb7f488d577b1050939fb19180fcc00dc63c61bdcb775fd4a0"
+        },
+        "checks": {
+          "standard_layout_refresh_and_verifier_pass": true,
+          "all_protected_files_byte_identical": true,
+          "all_embedded_scientific_payloads_identical": true
+        },
+        "passed": true
+      }
+    }
+  ],
+  "human_validated": false,
+  "annual_map_scientific_use": "provisional",
+  "recorded_utc": "2026-10-03T19:05:10.052827+00:00"
+}

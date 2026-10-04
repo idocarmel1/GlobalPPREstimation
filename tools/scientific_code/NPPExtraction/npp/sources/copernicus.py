@@ -82,13 +82,9 @@ def local_name(year: int, month: int) -> str:
 
 
 def local_path(raw_dir: Path, year: int, month: int) -> Path:
-    """Where the file lives. Prefers ``raw_dir/copernicus/``, accepts a flat ``raw_dir/``."""
+    """Canonical source product/year directory."""
     name = local_name(year, month)
-    nested = Path(raw_dir) / "copernicus" / name
-    flat = Path(raw_dir) / name
-    if flat.exists() and not nested.exists():
-        return flat
-    return nested
+    return Path(raw_dir) / "copernicus" / str(year) / name
 
 
 def fetch(raw_dir: Path, year: int, timeout: int = 180, retries: int = 4, overwrite: bool = False) -> list[Path]:
@@ -103,7 +99,7 @@ def fetch(raw_dir: Path, year: int, timeout: int = 180, retries: int = 4, overwr
     urls = list_year(year, timeout, retries)
     out = []
     for month in range(1, 13):
-        dest = Path(raw_dir) / "copernicus" / local_name(year, month)
+        dest = local_path(raw_dir, year, month)
         existing = local_path(raw_dir, year, month)
         if existing.exists() and not overwrite:
             out.append(existing)

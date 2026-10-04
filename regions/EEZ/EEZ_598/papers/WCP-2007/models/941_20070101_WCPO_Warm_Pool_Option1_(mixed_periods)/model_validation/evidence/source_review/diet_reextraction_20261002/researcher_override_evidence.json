@@ -1,0 +1,161 @@
+{
+  "overview_authority": "regions/EEZ_598/EEZ_598.xlsx / Overview",
+  "word_path": "regions/EEZ_598/Model_validation_941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods).docx",
+  "word_sha256": "fa5ae9451fe52bbe82e11c1d029edb4a1996e9ae205ed5d2bceefc44efd4ae85",
+  "read_only_paragraphs": [
+    "Initial 24-group WCPO warm-pool model and final 31-group source model, both mixed periods and the same broad domain; final adds stages and forage detail. The adopted D_fixed_M0 option1 is an extraction/parameter variant of the final model. Three Ecosim perturbations are scenarios, not distinct Ecopath inputs. Initial model | Final source",
+    "Article: ? — comparative article-selection reason is unrecorded. Model: the recorded selection adopts D_fixed_M0 to preserve juvenile other-mortality flows and improve juvenile production consistency. It remains a surrogate; Griffiths 2019 is deferred for investigation. Recorded rationale",
+    "Initial/final table scope is distinguished. Accepted Small BET/YFT P/B and EE differ from the paper. Source YFT/piscivorous diet sums 0.998/1.002 are normalized by the retained loader. GS exceptions are retained; missing BA is derived for 24 groups. Missing baby/forage catch becomes runtime zero, not observed source zero; detritus EE is forced to 1 and synthetic import is added. Native stanza dynamics are not reproduced. Source and runtime review | Transformation ledger",
+    "[MANUAL — Researcher: calculation choices and reasons]",
+    "Mixed source inputs: skipjack/forage 1993–2002, yellowfin/bigeye/bycatch 1995–2004 and diet 2001–2007; 2005–2006 assessment editions are not model years. Fixed ecosystem coefficients and composition proxies are transferred across 1950–2019; the 2019 estimate is not an annual ecosystem reconstruction.",
+    "The accepted variant retains overall WARN and strict mass balance false (adult BET production residual ≈0.728%); PP-budget status is OK. Original source/native-model validity and author confirmation remain unestablished. Geographic coverage and nonnegative coefficients do not resolve these limitations. Exact diagnostic evidence",
+    "[Researcher: open issues and next actions]",
+    "Researcher name: [name] | review date: [date]",
+    "Historical source landings proportions supply an assumed regional composition; genuine zeros and the accepted infant exception are explicit."
+  ],
+  "accepted_decision_path": "regions/EEZ_598/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/SELECTION_AND_PROVENANCE.json",
+  "accepted_decision": {
+    "unit_id": "EEZ_598",
+    "selected_model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+    "selected": true,
+    "rationale": "USER SELECTED 2026-09-28: WCP-2007 option 1 (D_fixed_M0) for HS_071, EEZ_941 and EEZ_598. Explicit experimental variant preserves juvenile other-mortality flows and changes Small BET P/B to 1.4129713563375232, EE to 0.7898725981469387; Small YFT P/B to 2.5304972811160384, EE to 0.8816702937266387. GE, TE and With Egestion all WARN; PP-budget checks OK, but strict mass balance remains false (adult BET residual 0.727940%). This is an adopted surrogate, not an author-confirmed correction or a region-specific native EwE model. Original source remains preserved. Griffiths 2019 source and pooled variant are retained for later investigation of failures, not selected.",
+    "experimental_source": "regions/EEZ_941/models/941_200701_WCPO_Warm_Pool_Final_(mixed_periods)/balance_investigation/correction_scenarios/D_fixed_M0/941_200701_WCPO_Warm_Pool_Final_(mixed_periods).json",
+    "input_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+    "parameter_changes": [
+      {
+        "seq": 11,
+        "group": "Small BET",
+        "B": 0.00241,
+        "QB": 26.159,
+        "old_PB": 0.834,
+        "new_PB": 1.4129713563375232,
+        "PB_percent_change": 69.42102593975099,
+        "old_EE": 0.644,
+        "new_EE": 0.7898725981469387,
+        "BA": 0.0,
+        "BA_over_B_per_year": 0.0,
+        "old_M0": 0.0007155386399999998,
+        "new_M0": 0.0007155386399999997,
+        "new_P_over_Q": 0.05401473130997069,
+        "normalized_predation": 0.001292222328773431,
+        "raw_source_predation": 0.0012922586,
+        "catch": 0.0013975,
+        "raw_source_diet_solution": {
+          "PB": 1.412986406639004,
+          "EE": 0.7898748363006337,
+          "BA": 0.0
+        },
+        "omitted_fishing_turnover_hypothesis_PB": 1.4138755186721992
+      },
+      {
+        "seq": 12,
+        "group": "Small YFT",
+        "B": 0.0128,
+        "QB": 33.964,
+        "old_PB": 1.983,
+        "new_PB": 2.5304972811160384,
+        "PB_percent_change": 27.609545189916208,
+        "old_EE": 0.849,
+        "new_EE": 0.8816702937266387,
+        "BA": 0.0,
+        "BA_over_B_per_year": 0.0,
+        "old_M0": 0.003832742400000001,
+        "new_M0": 0.0038327424000000015,
+        "new_P_over_Q": 0.0745052785630679,
+        "normalized_predation": 0.021584622798285293,
+        "raw_source_predation": 0.021593107838999998,
+        "catch": 0.006973,
+        "raw_source_diet_solution": {
+          "PB": 2.531160174921875,
+          "EE": 0.8817012834799195,
+          "BA": 0.0
+        },
+        "omitted_fishing_turnover_hypothesis_PB": 2.5277656250000002
+      }
+    ],
+    "diagnostic_summary": {
+      "GE": {
+        "status": "WARN",
+        "model_input_status": "WARN",
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "balance_status": "OK",
+        "PP_relative_gap": 0.0009785787909092304,
+        "ppr_all": 560.2590047738723,
+        "divergence_status": "OK",
+        "n_negative_sources": 0,
+        "juvenile_SPPR": {
+          "11": 18742.832270139104,
+          "12": 16179.501241050195
+        },
+        "warnings": [
+          "model input mass-balance residual 0.00728 exceeds 0.0001"
+        ]
+      },
+      "TE": {
+        "status": "WARN",
+        "model_input_status": "WARN",
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "balance_status": "OK",
+        "PP_relative_gap": 0.0013470116895900148,
+        "ppr_all": 1000.8140966883949,
+        "divergence_status": "WARN",
+        "n_negative_sources": 0,
+        "juvenile_SPPR": {
+          "11": 12113.146275403124,
+          "12": 8805.134342069407
+        },
+        "warnings": [
+          "model input mass-balance residual 0.00728 exceeds 0.0001",
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "rho(A_LL)=0.8243 is within 0.3 of divergence (max SPPR 1.58e+06 at group 10 (Small Sharks), TL 5.21)"
+        ]
+      },
+      "With Egestion": {
+        "status": "WARN",
+        "model_input_status": "WARN",
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "balance_status": "OK",
+        "PP_relative_gap": 0.00024524208026195226,
+        "ppr_all": 152.11941958938405,
+        "divergence_status": "WARN",
+        "n_negative_sources": 0,
+        "juvenile_SPPR": {
+          "11": 4343.886779364558,
+          "12": 4068.481875424795
+        },
+        "warnings": [
+          "model input mass-balance residual 0.00728 exceeds 0.0001",
+          "b=0.7626 is within 0.3 of divergence (max sppr_det 4.55 PP-units per unit detritus)"
+        ]
+      }
+    },
+    "strict_balance": false,
+    "region_coverage": {
+      "intersection_km2": 2398837.591200241,
+      "percent_target_region_covered": 100.0,
+      "percent_gross_model_domain_in_region": 9.384232027143726,
+      "area_refinement_difference_percent": -6.39538086530939e-06
+    },
+    "regional_results_status": "pending; selection does not imply full catch coverage"
+  },
+  "accepted_parameter_values_preserved": [
+    {
+      "seq": "11",
+      "pb": "1.4129713563375232",
+      "ee": "0.7898725981469387",
+      "biomass_accum": "0.0",
+      "biomass_accum_rate": "0"
+    },
+    {
+      "seq": "12",
+      "pb": "2.5304972811160384",
+      "ee": "0.8816702937266387",
+      "biomass_accum": "0.0",
+      "biomass_accum_rate": "0"
+    }
+  ],
+  "diet_specific_correction_found": false
+}

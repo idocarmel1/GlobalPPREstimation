@@ -1,0 +1,1739 @@
+{
+  "schema_version": 1,
+  "run_id": "HUM2018_20261003_complete_candidate_review",
+  "region_id": "LME_013",
+  "model_id": "HUM2018_resolved_native",
+  "variant_id": "native_supplement_unrepaired_separate_runtime_normalization",
+  "source_identity": {
+    "doi": "10.1016/j.pocean.2018.04.009",
+    "canonical_sha256": "748026ab907a54d28a8984cd5664ba35bb923e78d67d3ed98f89fa794d4807b6"
+  },
+  "computational_input_identity": {
+    "path": "source/computational/model.json",
+    "sha256": "c9ddb57d874926cd51a3dff19956ca57b197a1ab973cd96356c9bcc185a04bda",
+    "direct_run_id": "HUM2018_20261003_detailed_source_candidate"
+  },
+  "methods": [
+    "GE",
+    "TE",
+    "With Egestion"
+  ],
+  "required_roles": [
+    "EwE_import_Basic_input.csv",
+    "EwE_import_Biomass_accumulation.csv",
+    "EwE_import_Detritus_fate.csv",
+    "EwE_import_Diet_composition.csv",
+    "EwE_import_Discards.csv",
+    "EwE_import_Landings.csv",
+    "EwE_import_Metadata.xlsx",
+    "EwE_import_TL.xlsx",
+    "GE_A",
+    "GE_L",
+    "GE_SPPR",
+    "TE_A",
+    "TE_L",
+    "TE_SPPR",
+    "With_Egestion_A",
+    "With_Egestion_L",
+    "With_Egestion_SPPR",
+    "all_negative_pairs",
+    "allocation_quantities",
+    "alternative_assessment",
+    "annual_candidate_totals",
+    "arithmetic_verification",
+    "candidate_calculations",
+    "candidate_npp_ratios",
+    "canonical_source",
+    "complete_mapping",
+    "composition_searches",
+    "computational_input",
+    "diagnostic_settings_and_identities",
+    "diagnostics_stage_inventory",
+    "final_acceptance_and_preservation",
+    "full_direct_returns",
+    "geographic_assessment",
+    "linked_excel_appendix",
+    "loader_matrix_transforms",
+    "mapping_stage_inventory",
+    "protected_baseline",
+    "regional_inputs",
+    "rendered_validation",
+    "review_guide",
+    "runtime_normalization",
+    "source_conflicts",
+    "source_round_trip",
+    "source_stage_inventory",
+    "taxon_year_contributions",
+    "taxonomy",
+    "validation_docx"
+  ],
+  "artifacts": [
+    {
+      "role": "linked_excel_appendix",
+      "path": "../../LME013_HUM2018_candidate_taxon_mapping_appendix_20261003.xlsx",
+      "availability": "present",
+      "sha256": "dec9c218328e50e494312d0a0b4d1e425af220126d60c3a9d93ac2053aea3cdc"
+    },
+    {
+      "role": "validation_docx",
+      "path": "../../Model_validation_HUM2018_Northern_Humboldt_candidate_20261003.docx",
+      "availability": "present",
+      "sha256": "58aabe64e837e532c6509dc9882e07533cbf6a554438c20a478d2a1359d91ea7"
+    },
+    {
+      "role": "review_guide",
+      "path": "README.md",
+      "availability": "present",
+      "sha256": "1ed209fc44ab99d92492a9f4601a08c3c09ba9d3c64cfc35d8555cebb1f9d385"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "build_appendix.mjs",
+      "availability": "present",
+      "sha256": "a8352416037b388ff230d9da4da77591423b79b6eac21bfa5f6398db66e51c2f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "build_index.py",
+      "availability": "present",
+      "sha256": "9760671d89f28da2d1e8aa9feec6a35f9be4040c9f7a4df53207ef6fb064fe7e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "build_report.py",
+      "availability": "present",
+      "sha256": "9915b5581757e6c495f0899ce5a6e5ccadd468c9a5e9cb2a94c056f2933f6dde"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "context.json",
+      "availability": "present",
+      "sha256": "f149065cfc61cd71ce49103cde14a431935f312094a2120676c6b2e8f118b36c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/A.csv",
+      "availability": "present",
+      "sha256": "13f5e59af3247b1723d94dbc7ad51fb846f7ebadc45f88fe06b20603b51ee65d"
+    },
+    {
+      "role": "GE_A",
+      "path": "diagnostics/GE/A.npy",
+      "availability": "present",
+      "sha256": "d7a144e1c097f77592067e31c401c36a38b1f283c3eb507c664966ef4e693077"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/A_axes.json",
+      "availability": "present",
+      "sha256": "6cc80b9fbc2fffaf8f63c1eaef868057b4523938f2e5ba60ce50f97ea85c6b2e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/A_masks.npz",
+      "availability": "present",
+      "sha256": "17f48d49fca9d3ecdf48b65af04d0842eaea7f3949d9c622fdc59bc56d79a7b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/L.csv",
+      "availability": "present",
+      "sha256": "4598ea7d67ab8a4ec734affa944a890a2df6c626852063bb10de9bc5d2d1fe3e"
+    },
+    {
+      "role": "GE_L",
+      "path": "diagnostics/GE/L.npy",
+      "availability": "present",
+      "sha256": "33ac935b0756f4f9b21dc29d20fe532b58508b04fcfa26f93118ea0f4fc7e8a1"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/L_axes.json",
+      "availability": "present",
+      "sha256": "6cc80b9fbc2fffaf8f63c1eaef868057b4523938f2e5ba60ce50f97ea85c6b2e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/L_masks.npz",
+      "availability": "present",
+      "sha256": "17f48d49fca9d3ecdf48b65af04d0842eaea7f3949d9c622fdc59bc56d79a7b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/SPPR.csv",
+      "availability": "present",
+      "sha256": "b76fd5ad5a9476246294140d88b237c8883e8efdf4d792048e395ef529646a76"
+    },
+    {
+      "role": "GE_SPPR",
+      "path": "diagnostics/GE/SPPR.npy",
+      "availability": "present",
+      "sha256": "a8786fbf3a9b816bdd46aecbb66e412519b9c7d8d0da3d1bc6971252d833f64d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/SPPR_axes.json",
+      "availability": "present",
+      "sha256": "2365d2c3bd06f8df947532aa7423819c0c29b8f3fc6df03f39914dc17fb8f41b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/SPPR_masks.npz",
+      "availability": "present",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/detritus_resolution_info_lossless.json",
+      "availability": "present",
+      "sha256": "1dbf763bc4ab3f57ceccd06eeed97261a8618a940084ebc628352ac7c45899f6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/diagnostic_return.json",
+      "availability": "present",
+      "sha256": "0242feaa4ae9ec3ab382422c6758bbe8b4636a9a557dd326df5eee95a4ae034f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/full_return.pkl",
+      "availability": "present",
+      "sha256": "013812158000b7d4f16dfec2b5622e8954b3de1a7901cac4e9fc488b7b5ee60f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/full_return_lossless.json",
+      "availability": "present",
+      "sha256": "cc63f2652a8a9d4ef43af15d47be8b2f492960c403bd822cb76ce27132f031d4"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/runtime_after_exact.json",
+      "availability": "present",
+      "sha256": "48792fdedc8a4990104a155483bdce7eafbff30efb1a6f04c7bf49e851b6d878"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/GE/runtime_before_exact.json",
+      "availability": "present",
+      "sha256": "814b830e098e70cd72d517499e32030b1aa7d0e18ed60d55bf0da366fccc56fd"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/REPRODUCE.md",
+      "availability": "present",
+      "sha256": "741879cdb9ac10a51e02db8092ed119b93d9128716689b45680d98ee178dc6b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/A.csv",
+      "availability": "present",
+      "sha256": "11d31ccf9ed04dc184259bb0201d2c797af4f1f4647a30429059fd305376d224"
+    },
+    {
+      "role": "TE_A",
+      "path": "diagnostics/TE/A.npy",
+      "availability": "present",
+      "sha256": "c6a5b50ae328fb92e9df4a9ad7c2b9d76deec315cbe0e804622270d2809a2306"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/A_axes.json",
+      "availability": "present",
+      "sha256": "6cc80b9fbc2fffaf8f63c1eaef868057b4523938f2e5ba60ce50f97ea85c6b2e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/A_masks.npz",
+      "availability": "present",
+      "sha256": "17f48d49fca9d3ecdf48b65af04d0842eaea7f3949d9c622fdc59bc56d79a7b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/L.csv",
+      "availability": "present",
+      "sha256": "a3ab837206c6745809a0b5e13805fbbc9273e8aa756b7993ca55cd3cf4b0bef4"
+    },
+    {
+      "role": "TE_L",
+      "path": "diagnostics/TE/L.npy",
+      "availability": "present",
+      "sha256": "39443c491ba8754c1da72089312a522140984e06d4dce7fb747267a53b563ba2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/L_axes.json",
+      "availability": "present",
+      "sha256": "6cc80b9fbc2fffaf8f63c1eaef868057b4523938f2e5ba60ce50f97ea85c6b2e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/L_masks.npz",
+      "availability": "present",
+      "sha256": "17f48d49fca9d3ecdf48b65af04d0842eaea7f3949d9c622fdc59bc56d79a7b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/SPPR.csv",
+      "availability": "present",
+      "sha256": "b57f08e9f925ede97fbfc394da997fc49d5f8d3c251b2ec8b79f01a4c048c9ff"
+    },
+    {
+      "role": "TE_SPPR",
+      "path": "diagnostics/TE/SPPR.npy",
+      "availability": "present",
+      "sha256": "135194bf709cbcd50faffd5d50769fbad22f0a781b44b2902d6d5381b5a3c53c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/SPPR_axes.json",
+      "availability": "present",
+      "sha256": "2365d2c3bd06f8df947532aa7423819c0c29b8f3fc6df03f39914dc17fb8f41b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/SPPR_masks.npz",
+      "availability": "present",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/detritus_resolution_info_lossless.json",
+      "availability": "present",
+      "sha256": "1dbf763bc4ab3f57ceccd06eeed97261a8618a940084ebc628352ac7c45899f6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/diagnostic_return.json",
+      "availability": "present",
+      "sha256": "c745171a6d21d66fa01b61e4105e48ea7e9acc606545fb8b523b20861eb6c93a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/full_return.pkl",
+      "availability": "present",
+      "sha256": "05417624d72b4792d1396676487bb21e1c69914b22fdb741a01724c2ccf487d7"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/full_return_lossless.json",
+      "availability": "present",
+      "sha256": "c944be59970f63daecb505c5aa97c7c830f54cf5b261cfbfa3619d55e2137a29"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/runtime_after_exact.json",
+      "availability": "present",
+      "sha256": "48792fdedc8a4990104a155483bdce7eafbff30efb1a6f04c7bf49e851b6d878"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/TE/runtime_before_exact.json",
+      "availability": "present",
+      "sha256": "48792fdedc8a4990104a155483bdce7eafbff30efb1a6f04c7bf49e851b6d878"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/A.csv",
+      "availability": "present",
+      "sha256": "aec7054f14c2bbf5c9f576d1716a4b02c787b12b4bff2d349b6668bbb3a07641"
+    },
+    {
+      "role": "With_Egestion_A",
+      "path": "diagnostics/With_Egestion/A.npy",
+      "availability": "present",
+      "sha256": "65c764e9181f0c17e66e9f762b7b135406f1725621f842d454c47db9dc805532"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/A_axes.json",
+      "availability": "present",
+      "sha256": "6cc80b9fbc2fffaf8f63c1eaef868057b4523938f2e5ba60ce50f97ea85c6b2e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/A_masks.npz",
+      "availability": "present",
+      "sha256": "17f48d49fca9d3ecdf48b65af04d0842eaea7f3949d9c622fdc59bc56d79a7b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/L.csv",
+      "availability": "present",
+      "sha256": "edefabdc1cb4a91e6abd108f6eebe3a464288e8f5eb170349988470275d3c947"
+    },
+    {
+      "role": "With_Egestion_L",
+      "path": "diagnostics/With_Egestion/L.npy",
+      "availability": "present",
+      "sha256": "deeff943163301d78d9aa65e3abe1746993e3ea979c0ff9d929733b6ac3d40d6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/L_axes.json",
+      "availability": "present",
+      "sha256": "6cc80b9fbc2fffaf8f63c1eaef868057b4523938f2e5ba60ce50f97ea85c6b2e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/L_masks.npz",
+      "availability": "present",
+      "sha256": "17f48d49fca9d3ecdf48b65af04d0842eaea7f3949d9c622fdc59bc56d79a7b9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/SPPR.csv",
+      "availability": "present",
+      "sha256": "3edf0e0d057dc4ca6b177d640b3e48bf9224ede41ba0ab38f40cbac8b8c05a51"
+    },
+    {
+      "role": "With_Egestion_SPPR",
+      "path": "diagnostics/With_Egestion/SPPR.npy",
+      "availability": "present",
+      "sha256": "7e3355d24163e20803e0ac938adcc6c88b389a611a90d012835cd4fe0f7ab69a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/SPPR_axes.json",
+      "availability": "present",
+      "sha256": "2365d2c3bd06f8df947532aa7423819c0c29b8f3fc6df03f39914dc17fb8f41b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/SPPR_masks.npz",
+      "availability": "present",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/detritus_resolution_info_lossless.json",
+      "availability": "present",
+      "sha256": "1031ae3933b5a877772e9e2efc0973e26967e472fe6c3167c78a787a461544c1"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/diagnostic_return.json",
+      "availability": "present",
+      "sha256": "d711e893c623cf62ed14e168d1e3416d7baeea5754d0f801d69abe720bad1741"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/full_return.pkl",
+      "availability": "present",
+      "sha256": "a1ba74e0f30018a3ae0333ea43509cf1958c033af258d76d3510cd0686549a73"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/full_return_lossless.json",
+      "availability": "present",
+      "sha256": "14a03e7ea7a21d031d8b7e0ac138e401e5181b99ec66cece90e3c12f9e88e50a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/runtime_after_exact.json",
+      "availability": "present",
+      "sha256": "6626977cd1ccdb2ded1d9aa05e0c26293afdc9dcf9bc4c347eb72bbd0931fef8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/With_Egestion/runtime_before_exact.json",
+      "availability": "present",
+      "sha256": "48792fdedc8a4990104a155483bdce7eafbff30efb1a6f04c7bf49e851b6d878"
+    },
+    {
+      "role": "all_negative_pairs",
+      "path": "diagnostics/all_negative_matrix_entries.csv",
+      "availability": "present",
+      "sha256": "a96c32ed53cd0f663c92255dc6b1f2c115ae5509a9bc4795796f457532feda0b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/budget_gap_decomposition.json",
+      "availability": "present",
+      "sha256": "bb2d6e2b89827c3fcf0aa13bd14f3f8fb7cfbdc5aeb96048557f97aed0a23fcf"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/build_evidence_index.py",
+      "availability": "present",
+      "sha256": "87ca2ea72176d28c7e49851bf5f5331627e631d83cd0e3b563424fa7317336d9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/calculate_candidate.py",
+      "availability": "present",
+      "sha256": "f8fa9b42993b55323da6fa138b2eef57c68ba5eb3c19fdeb4afec0c4dfa64cab"
+    },
+    {
+      "role": "candidate_npp_ratios",
+      "path": "diagnostics/candidate_annual_npp_ratios.csv",
+      "availability": "present",
+      "sha256": "d0d94bbd4f1081329cdd0dd9a57ff673cfd99a23726fdce46e820cd81eb85bef"
+    },
+    {
+      "role": "annual_candidate_totals",
+      "path": "diagnostics/candidate_annual_totals.csv",
+      "availability": "present",
+      "sha256": "32a7e49d6fe7549612850d29a5af25048404bac39880e230c01a63824a90ea44"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/candidate_arithmetic_reconciliation.json",
+      "availability": "present",
+      "sha256": "ef50b9dced2cdf09e73c6a54be8ebbe86a46ad51f411fe76be11be72206767e0"
+    },
+    {
+      "role": "arithmetic_verification",
+      "path": "diagnostics/candidate_arithmetic_verification.json",
+      "availability": "present",
+      "sha256": "c903bc6d8a3b5dc62c0c15370d7076dc38c2d605e948461bc553222d0beb3d39"
+    },
+    {
+      "role": "candidate_calculations",
+      "path": "diagnostics/candidate_calculation_manifest.json",
+      "availability": "present",
+      "sha256": "5e69e6cb5cb84e1d39d779a7be29f643f9635d645ab04ce2942a190933a15a1f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/candidate_reference_2019_taxa.csv",
+      "availability": "present",
+      "sha256": "c962d2cca4b06843fca4267230ccbe837b5a653fbd11e7e2c91053ab6b16b02d"
+    },
+    {
+      "role": "taxon_year_contributions",
+      "path": "diagnostics/candidate_taxon_annual.csv.gz",
+      "availability": "present",
+      "sha256": "2d4bc65905c6007ab5bf819dddd37606d3aada7b63766f49d8a04dbeddcdcef2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/complete_loader_matrix_ledger.py",
+      "availability": "present",
+      "sha256": "9b93a6f6a5cda611301b1c9b869d66391ce589a215578c99a5f96c4a2baaf2c3"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/computational_input_exact.json",
+      "availability": "present",
+      "sha256": "c9ddb57d874926cd51a3dff19956ca57b197a1ab973cd96356c9bcc185a04bda"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/diagnostics_completeness.json",
+      "availability": "present",
+      "sha256": "e888b3720f2470012199e0b92c9d03c91ddab71fe8fb9626edd7661d41cef138"
+    },
+    {
+      "role": "diagnostics_stage_inventory",
+      "path": "diagnostics/diagnostics_evidence_index.json",
+      "availability": "present",
+      "sha256": "9ab06f2a2f62db817b60fa3385629c9bdd26b393938050f6e1ef763a9277b4ef"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/direct_reopen_verification.json",
+      "availability": "present",
+      "sha256": "2e94957d5287801badd4f5beb990891915a013d11a7421b3da873a317608303b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/evidence_checker_test_record.json",
+      "availability": "present",
+      "sha256": "1fb359981039d4a81b29645dca0299680a99b69c60e54060b95d0e720262ff50"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/executed_code/ModelData.py",
+      "availability": "present",
+      "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/executed_code/PPRCalculator.py",
+      "availability": "present",
+      "sha256": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/executed_code/calculate_candidate.py",
+      "availability": "present",
+      "sha256": "f8fa9b42993b55323da6fa138b2eef57c68ba5eb3c19fdeb4afec0c4dfa64cab"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/executed_code/run_direct_candidate.py",
+      "availability": "present",
+      "sha256": "841d9ce1a7253efcc17f195a39c31d54bf014aeb2403c7bd3088b7339d9f8789"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/executed_code/utils.py",
+      "availability": "present",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    {
+      "role": "full_direct_returns",
+      "path": "diagnostics/full_direct_report.json",
+      "availability": "present",
+      "sha256": "0c592d54853fbadac177b949b0c2011d8e1d9e637e00057bb528cab0e3779b2b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/full_direct_report.md",
+      "availability": "present",
+      "sha256": "12318ddfb6e78963a5526caad5e13fb5005cdb1b0ade861adf98e3f75877867e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/full_input_field_ledger.json",
+      "availability": "present",
+      "sha256": "3b1cf358f0ee69449b5bd6b12c256cbee15ce05725f39b3dca1774616ac5a058"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/group_scope_coefficients.csv",
+      "availability": "present",
+      "sha256": "b544d092e9e2f47d64d1746bae5ca56ccdab67a9f0d03eedd7a26a8869cdbefb"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/loader_detritus_fate.csv",
+      "availability": "present",
+      "sha256": "ac16807c11b44cf64db55a1bcbaad5c07225e23634077dddeae03e0ff9872b4c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/loader_field_ledger.json",
+      "availability": "present",
+      "sha256": "3dc68cadc3b718040d4588c364a66a5d4fe2d1ff3d0ac8d46b0fdcc2080e970a"
+    },
+    {
+      "role": "loader_matrix_transforms",
+      "path": "diagnostics/loader_matrix_field_ledger.json",
+      "availability": "present",
+      "sha256": "c752287ae42f67e3812b2e27ea8141d2654b9a4fdfc4db9ce29bc0aa1a9aef5a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/method_runtime_state_ledger.json",
+      "availability": "present",
+      "sha256": "96ab16de4c4c4997de3ade35fbaf20ed32f0d91b51356633e01a67e03da6be92"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/methods_summary.json",
+      "availability": "present",
+      "sha256": "bb3a367aa98c867fb94b9af6a6e4ddd6bc5ee04c3003a1469b6453bd58b04cb8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/missing_biological_input_admission.json",
+      "availability": "present",
+      "sha256": "39ec1c0a6503760424c8594d64649322d1ab0d284521fc3e188b067154394a5c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/modeldata_exact.json",
+      "availability": "present",
+      "sha256": "0e1623aca34cc18eee8b9ef4ec947f136b6c5ec1b7c9886c2ded3d04ab4842e9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/modeldata_groups.csv",
+      "availability": "present",
+      "sha256": "9fd371ae582301f2bb1b9d2249d86872797ff40fe56d2fca8e6f5865d7c555be"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/raw_loader_diet.csv",
+      "availability": "present",
+      "sha256": "af800e0d2b82dd2d7afef29221e9b5d7efd98be802b6cd0c8128fc846da60caa"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/retained_matrix_verification.json",
+      "availability": "present",
+      "sha256": "b573e78e4b676a9e91c5e84c3272b63e15f76bf9cebe8ac209a328b73f764d63"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/run_direct_candidate.py",
+      "availability": "present",
+      "sha256": "d51b2ee5f7e6959a5a74dc23d8a41d2bd0a83fcce7ce0675f2a0445477206bc6"
+    },
+    {
+      "role": "diagnostic_settings_and_identities",
+      "path": "diagnostics/run_manifest.json",
+      "availability": "present",
+      "sha256": "145e8a9b898466be5c2fed1dc2f1ed9dc4524d4aee08e2c78e93908a0ac6f0e9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime-requirements.txt",
+      "availability": "present",
+      "sha256": "ab21088f156b97a5f95928b479087082e6731b5c68f9286701da6881f1a34aa5"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_after_methods_lossless.json",
+      "availability": "present",
+      "sha256": "6626977cd1ccdb2ded1d9aa05e0c26293afdc9dcf9bc4c347eb72bbd0931fef8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_before_methods.pkl",
+      "availability": "present",
+      "sha256": "1bc6861cd481d1bb0748150f43e59564b8975ce43600ff63d3f8441f633b2e6e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_before_methods_lossless.json",
+      "availability": "present",
+      "sha256": "814b830e098e70cd72d517499e32030b1aa7d0e18ed60d55bf0da366fccc56fd"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_diet.csv",
+      "availability": "present",
+      "sha256": "90ccf9331a52c2b0d5e54706001cf898c291bbcdffb750f8259f0c5b1587f836"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_group_budget_residuals.csv",
+      "availability": "present",
+      "sha256": "9934e4a55ecd75b55a5c4c9f39cb75bce5e1789054512d29bacbe0739f6d3e27"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_groups.csv",
+      "availability": "present",
+      "sha256": "31e60f2549bcf68a182a279ab298e2af6902ca97b48c592dab055dde43d9854a"
+    },
+    {
+      "role": "runtime_normalization",
+      "path": "diagnostics/runtime_normalization_changed_cells.json",
+      "availability": "present",
+      "sha256": "b35b8342163a723c20549c38e9b933f9f105e8ccd2df3bb950ef5b01fbfa9737"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_normalization_dependent_transformations.json",
+      "availability": "present",
+      "sha256": "aede06367c19bec69c9b4f015419228b31e1c478facaf8d99105dfa584ff0d50"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/runtime_normalization_rows.json",
+      "availability": "present",
+      "sha256": "8942743a119b86add61c920fab3e5eaf163e45a6203773fbba77a9837a7f1ee9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/source_scope_definitions.json",
+      "availability": "present",
+      "sha256": "217b557645d7dd9083a643fce1967c2c33c808aa802be93901542860cce1fad1"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/source_translation_limitations.md",
+      "availability": "present",
+      "sha256": "6dc47e36c5d3ce676e43d64c9cd6fdaa0c594be4bcd779be3d1d7050935b0bc0"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/summarize_direct.py",
+      "availability": "present",
+      "sha256": "eda08dcf7128fe55e1db94bb63529aec3b97bfefd136e402853b7df9f13651f8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/taxon_scope_coefficients.json",
+      "availability": "present",
+      "sha256": "03bf264f86e3c3b6dae846b08fcb9486a8ce63a0b1e8e5ae0e64cfa04c3949f2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/verify_candidate_arithmetic.py",
+      "availability": "present",
+      "sha256": "c695413b4be9a8059872b5ca626dcb9debf9361bfcfb5d585bc3cfe3472fb4d3"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/verify_retained_matrices.py",
+      "availability": "present",
+      "sha256": "b6a588ec9305b2c6618cd091b00d2ff63c0988a7b81026de99be777f36909503"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/warnings.json",
+      "availability": "present",
+      "sha256": "b634e3ec0db86a3d743abb6e7745b482b207b674fe902d1943184df173ffe65b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "diagnostics/weighted_group_budget_residuals.csv",
+      "availability": "present",
+      "sha256": "99630b8ce6548bb10111ea1aef2c0f74973ee9864ea9ca8c62a8ef902845ddb2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "draw_geography.py",
+      "availability": "present",
+      "sha256": "ab1aebd42555b3a6ac8c200346985e8a0f248df110531a39e644f9c49d988d5a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "geography.py",
+      "availability": "present",
+      "sha256": "db9b4e559de979c23f1779839516ad925c5c41bbd5cf9bd32b3263f89cac2354"
+    },
+    {
+      "role": "geographic_assessment",
+      "path": "geography/geographic_assessment.json",
+      "availability": "present",
+      "sha256": "f05813fe3a2406313be976e467696173e249c13e0f0f54b50cae78f08574ca52"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "geography/study_trace.geojson",
+      "availability": "present",
+      "sha256": "8cd0d8cff7cf65065df7feb3c9c1eddf07e31beeaded368c00bc6411a5ce4d6e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "geography/target_region.geojson",
+      "availability": "present",
+      "sha256": "92ee94fb5d699cb241b0c5bc65566bad6a1534e781d10e5650bdf8d5cac0c0a1"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "geography/target_study_comparison.png",
+      "availability": "present",
+      "sha256": "49e83d32751f635efba6a0824b82f957afaae14d7a082c778020d27e55d7bb9f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "inspect_context.py",
+      "availability": "present",
+      "sha256": "5728afb51da94c373eb4e37b1ca772f53bdbf093f91a68bc10f00e7076faae3c"
+    },
+    {
+      "role": "allocation_quantities",
+      "path": "mapping/allocation_ledger.json",
+      "availability": "present",
+      "sha256": "cb925cf497522b8c466291d3bcac13f514b062e167f85fa75a87bba6d88884bf"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/build_mapping.py",
+      "availability": "present",
+      "sha256": "3578306c70da29aa065a1a10fe91f376ab6e2228b5230bdec6a9a34c4cc5ada4"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/build_search_ledger.py",
+      "availability": "present",
+      "sha256": "f0f60dd144f4a848c95288e4ea465976afbfd3c58cb76d6c0271320b02bdf1c2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/catch_universe.csv",
+      "availability": "present",
+      "sha256": "8e44b0ba204ff9989921bbe084873824bd982bd0976cea02819fde2a3baebb41"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/catch_universe.json",
+      "availability": "present",
+      "sha256": "1949d5a9c12c56f52ccbd109933ff881280be2a171529667bb9ea938792cf6c5"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/evidence_completeness.json",
+      "availability": "present",
+      "sha256": "4ef945b35c1639db02584af51eec038748db3a36a53aea8ad9ed6b4335266043"
+    },
+    {
+      "role": "mapping_stage_inventory",
+      "path": "mapping/evidence_index.json",
+      "availability": "present",
+      "sha256": "1e9dd776db0ad763c60db25a96bf5365333f14d5cf6cc4f95199c4fa3ee93620"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/mapping_flat.csv",
+      "availability": "present",
+      "sha256": "bf32cda63d91b8878a8ed5806ce1ec1070b2e0c74c1ce49fa058dfb705b4182f"
+    },
+    {
+      "role": "complete_mapping",
+      "path": "mapping/mapping_review.json",
+      "availability": "present",
+      "sha256": "94d5950524412bff3e0bbfb3c7a94d1c0c45f5115daa182b13e78a5737e3f122"
+    },
+    {
+      "role": "regional_inputs",
+      "path": "mapping/regional_arithmetic_snapshot.json",
+      "availability": "present",
+      "sha256": "46c67af106b75f2473921a08d597ba6c3b92697cba2ffce243fa8ebf583bb4d2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_1.json",
+      "availability": "present",
+      "sha256": "15f84b45ad5f2a7df73efc8348e344d1d20dc6885c4a88310214ee62aa3714c6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_10.json",
+      "availability": "present",
+      "sha256": "ef881fee103afb8c5d90de601e821f2f8e65cd2154ced0bbff81a6ea2aa9f3b6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_11.json",
+      "availability": "present",
+      "sha256": "b6bdac07b0b73f849ad15c7dc69b5a0da206ba5c95aadba8aa1534f57af4d66a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_2.json",
+      "availability": "present",
+      "sha256": "0032e51490dd6aaa097eee002e02880f30080cfbe5b3fc2e7e0db2c5b2e83d25"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_3.json",
+      "availability": "present",
+      "sha256": "cc4e5d922c714cc134d92b6aba4060471cf928d3b9ac1e1cd429621ffeea3095"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_4.json",
+      "availability": "present",
+      "sha256": "917549a94640d21d4aa83f22dde858d9599864e4dba9da7a9184281ed34f84ba"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_5.json",
+      "availability": "present",
+      "sha256": "259891cabbc02cbacd22a90aeeb3d7b175970509a4f518fb4dec94a086e9a9ae"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_6.json",
+      "availability": "present",
+      "sha256": "9af7fc73795708617bd345f2f23ff2382f67f0ea27114ecdbd30394d9e9cd1ac"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_7.json",
+      "availability": "present",
+      "sha256": "6f8cfb59361cec42300da2277475c9d05233e6944057b9498752bee2dca0026b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_8.json",
+      "availability": "present",
+      "sha256": "f5e17427d91a5cec45a53bb69fda3c8f6d4562819e6874bfb7e87f0881ab336a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_batch_9.json",
+      "availability": "present",
+      "sha256": "7fa036def773f35d4a682dc507d7a2686533baa6c1c1c47d4e3d17f1eda21e5d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_final_1.json",
+      "availability": "present",
+      "sha256": "2f5584b0b540e2e4e517dcc5185edeb67dbbd014649fc49d87eb351f2a95645e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_final_2.json",
+      "availability": "present",
+      "sha256": "1fe87a62017d1737cc0e9625e82ad879944a494b5de7054e40b18dcc2e6e4f64"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_final_3.json",
+      "availability": "present",
+      "sha256": "c83a7188c2bee608f0c44f6105b3482199050f4a6f4cc10551d8f39a66fea9f3"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/search_final_4.json",
+      "availability": "present",
+      "sha256": "39f6b337ccfb08a8148edd9ae28042b5743ac6416ce3bd5c078196e33a6e0251"
+    },
+    {
+      "role": "composition_searches",
+      "path": "mapping/search_records.json",
+      "availability": "present",
+      "sha256": "b4dc34115ca42f84dc0032c78d3c67125ce796ebeac5b39ab85cdc9387839d32"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/summary.json",
+      "availability": "present",
+      "sha256": "b3e51a2105331d8ee9ef4701a717bffcabee8955c60b881fb696807c9f03805f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/taxonomy_authority_records.json",
+      "availability": "present",
+      "sha256": "c515c8bece95b4e85e804b1beb90cf19b9c2e52e8928aaa40635b093350f66ea"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/verification.json",
+      "availability": "present",
+      "sha256": "af7fe77c99a6c0d9f720216838adb08b9188f93050f3090d9756fe1d3bc76804"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "mapping/verify_mapping.py",
+      "availability": "present",
+      "sha256": "48da05ca784f080ce21f7b3ff56e2eacbf196f01b3a732c3c0a751f3f255831a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "patch_appendix_links.py",
+      "availability": "present",
+      "sha256": "6e32d816370069650693eae24beb2b9df06cff71169de77020eeab518c3226a4"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "probe_artifact.mjs",
+      "availability": "present",
+      "sha256": "df1837ebf71a0eef231113842d0daeb2bedac95f1a2d078b23afc46ce286eaca"
+    },
+    {
+      "role": "protected_baseline",
+      "path": "protected_baseline.json",
+      "availability": "present",
+      "sha256": "19e17176ddaf8c327438057729f593a228143c73ade90d3399d6e5860966dad2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/artifact_verification.json",
+      "availability": "present",
+      "sha256": "a0feb1d00d28aff75bca8184a9fff8f8291d6513fb5ea114ffa118f099f586f0"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/bottom.png",
+      "availability": "present",
+      "sha256": "86185360219afd552279046d0e2ae03b6ee48b2fbdf0be3814ae09d6d2975ae3"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/middle.png",
+      "availability": "present",
+      "sha256": "bbc82a32f13a83a342f24e8ba2e70b5ebb1b8b490173a701b6f8a109bbec614d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/saved_longest_reason.png",
+      "availability": "present",
+      "sha256": "9dbebbd3e546faccc1a3126bbbc8cc996c1946e4342801edbcf5a256e0dd184b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/saved_sources.png",
+      "availability": "present",
+      "sha256": "c09682205f15ee615acb7e57bfc14cb753b4d295709e5ae701be43f74dd57bd2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/sources.png",
+      "availability": "present",
+      "sha256": "28fa549df94d12871ed86d957f378d1693dd6da5c384e8b5a1c5e31851f5cae6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix/top.png",
+      "availability": "present",
+      "sha256": "0275e35feb3a0416b1132247f55edc82f659474400b247dca95f18eef59a0198"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/appendix_links.json",
+      "availability": "present",
+      "sha256": "2c8494683e31f6d49734f89ba26713034421c79ba93ab4ebcf7b5747f9e01f54"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/artifact.md",
+      "availability": "present",
+      "sha256": "4d8d3bb7994dff92a34dff9fbfff1b89b598ae055eea09c103a2d65b42ccdc0b"
+    },
+    {
+      "role": "rendered_validation",
+      "path": "qa/candidate_validation.pdf",
+      "availability": "present",
+      "sha256": "2125dd79f68927b1f59f93deec9eeb097dc86339306393db3e23ae3f2f09e92d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_01.png",
+      "availability": "present",
+      "sha256": "34f037881b9676ebff6fd37651340897221e3d778ca2bd22c1ea1390a9d20fbb"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_02.png",
+      "availability": "present",
+      "sha256": "f700fc45a830f75b71efad611abad3abc5d0c9d1f35f84fdf5bc86741362d933"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_03.png",
+      "availability": "present",
+      "sha256": "2201b8bf3826952169c7edd3e21d8c5c93ddb37fd0b44411614c8db2f137314d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_04.png",
+      "availability": "present",
+      "sha256": "31f47cec95c5cc41327fb8fb5fd4b5f4f3f4e5b538c8321383d4fb0ee7404216"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_05.png",
+      "availability": "present",
+      "sha256": "315f041d9c9bf3cd3b757ab88d742fd3299d2b63cf829f4090f7d7cca95061df"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_06.png",
+      "availability": "present",
+      "sha256": "5be917991b7e7f311cb64f2f9f51984c064309a8b2dabdd15f4e7a0341de346c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/candidate_validation_page_07.png",
+      "availability": "present",
+      "sha256": "6c74ec337f27c2dfb3b03dfb71671f722668696bc2944ece88cde95995879c64"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "qa/document_fidelity.json",
+      "availability": "present",
+      "sha256": "2118529567fb6f76466aa53f03e682c12794cb840944a39442472b667531cb36"
+    },
+    {
+      "role": "final_acceptance_and_preservation",
+      "path": "qa/final_verification.json",
+      "availability": "present",
+      "sha256": "4aabc7f20c45fa096ddd539a0cb1e053d86669e9e72631a182d5bded414d9471"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "render_saved_appendix.mjs",
+      "availability": "present",
+      "sha256": "9799c3dadd261636714a115893a574628a4ac932995eac39192b3f867d638472"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/AGGREGATION_CROSSWALK.json",
+      "availability": "present",
+      "sha256": "0ce606a23c90dae58bd79092a73f545505410b0a5a3c04af5846528eecf6b87e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/MODEL_PROFILE.md",
+      "availability": "present",
+      "sha256": "c1289f602c8eaf3d3f6fa638784c200212067cc3a3441b8148913c5f6e50ed0a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/MODEL_PROFILE.template.md",
+      "availability": "present",
+      "sha256": "c1289f602c8eaf3d3f6fa638784c200212067cc3a3441b8148913c5f6e50ed0a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/README.md",
+      "availability": "present",
+      "sha256": "b412e6479a02cc7b6a021611cae0c35aab801dea04efce07f04e377fe6f7b0d8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/README.template.md",
+      "availability": "present",
+      "sha256": "b412e6479a02cc7b6a021611cae0c35aab801dea04efce07f04e377fe6f7b0d8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/RECOVERY_SEARCH.json",
+      "availability": "present",
+      "sha256": "7685da2c1a4554d88f3ded99670dc22c2777b5a0020cc9a37e32c3faf9d33fe4"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/REPORT.md",
+      "availability": "present",
+      "sha256": "7e249b8f4c65e8ea05dd71863959f73bd79c747ad967b7396d68ccfc21f4d52c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/REPORT.template.md",
+      "availability": "present",
+      "sha256": "7e249b8f4c65e8ea05dd71863959f73bd79c747ad967b7396d68ccfc21f4d52c"
+    },
+    {
+      "role": "source_conflicts",
+      "path": "source/SOURCE_CONFLICTS.json",
+      "availability": "present",
+      "sha256": "f90f00bee0e30a08271a1289837c329dedf89a0e6b7ecc3c98d6e1c45c0b6830"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/SOURCE_IDENTITY.json",
+      "availability": "present",
+      "sha256": "a727bef102ddeed7c5ab30c355c72ed4769fffb2ba10b563b4cb94b6634ebfa2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/aggregated_Table1_printed.csv",
+      "availability": "present",
+      "sha256": "cb2f16b8b96c9a3b0dd611e21dff1f12fb1993dcc34596823a35f59a40a98479"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/aggregated_Table1_printed.json",
+      "availability": "present",
+      "sha256": "8e3f67a6d6b0bcc75b245e2a7b1328da41d19fdbcb28ebd81abe98f2063bc45c"
+    },
+    {
+      "role": "alternative_assessment",
+      "path": "source/aggregated_alternative_source.json",
+      "availability": "present",
+      "sha256": "d61f00f69b1e4bb71f3d08cca67dc297211ff854a9a4a110785ed2844e416297"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/build_candidate.py",
+      "availability": "present",
+      "sha256": "a08402f6edd9f05a3fcffe3d387bdddb4883e2929c35a7493b08d01c3bc15e34"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/build_workbooks.mjs",
+      "availability": "present",
+      "sha256": "176140af3a898e79292f8001fde5a2d2fc2b1d1817d460038a21bb2add9c9119"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/completeness.json",
+      "availability": "present",
+      "sha256": "a62351fb859cf03a1faffe8de4840fe3347e97e6e2c121b0fce57207d0d9c122"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/computational/DISCARD_FLOW_TRANSLATION_LIMIT.json",
+      "availability": "present",
+      "sha256": "8d22ece6adb55c5794ac0b724d0138be42d845d5a376d0cb3a03c2e1f2370cd9"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/computational/TRANSFORMATION_LEDGER.json",
+      "availability": "present",
+      "sha256": "cd0fc4a4bde6e8befe4291ac8944ac2c95349a5ba50df3dc1459f2fe29d6f838"
+    },
+    {
+      "role": "computational_input",
+      "path": "source/computational/model.json",
+      "availability": "present",
+      "sha256": "c9ddb57d874926cd51a3dff19956ca57b197a1ab973cd96356c9bcc185a04bda"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/Metadata-Sheet1.png",
+      "availability": "present",
+      "sha256": "09662956974eee8413885aefed200b6efc8b378f73605490fe950b99c56c8dfd"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/TL-Sheet1.png",
+      "availability": "present",
+      "sha256": "f25702207b03c25ab5c3982efe380ff5b77acdfc6b7b4e2d3c388d00e0a522bf"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/Tam2008-page02.png",
+      "availability": "present",
+      "sha256": "d14503926019760e26c468ea98ed2280dd6b60313215f95f5ba0987e9dc0ab1d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/Tam2008-text.txt",
+      "availability": "present",
+      "sha256": "3f29c34459d747dcc029aa62b9fb47bb1468b7433ce2ff2f9e8ab45813d7b391"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/Tam2008a.pdf",
+      "availability": "present",
+      "sha256": "27c8058a0b86a20c197113fff9e9ce5703a00e794102250f5cee9022305ca9f0"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/Taxonomy-Taxonomy.png",
+      "availability": "present",
+      "sha256": "98bfc40900dd58bfb8fabdc8192ddb280207bc44522a0edaff87091e3667bed3"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/docx_content.json",
+      "availability": "present",
+      "sha256": "9786ba46d104b9f879504bc492a84eb0718d7c1303bf64aeca9cffc04b75c375"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/docx_emf_text.json",
+      "availability": "present",
+      "sha256": "189ba1494145df99028abecb64cc3e7ef0f2a2882bc9acadcbaf3992e0597687"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/docx_media.json",
+      "availability": "present",
+      "sha256": "439c7f5b35fd341a9a736eea981a2c8dfddad6db805a6d1ac58dabdce040e45c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/fresh-resolved-diet-detail.png",
+      "availability": "present",
+      "sha256": "ec18d568b5d56314b0d784d6d55f13191fc52fce804a2ac53d76c09d3b45c944"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/fresh-resolved-fate.png",
+      "availability": "present",
+      "sha256": "e6c07e2c89c35933f45971c869f8a4a5eff2aad172946eec7f426460afb5d751"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/fresh-resolved-parameters.png",
+      "availability": "present",
+      "sha256": "4ff35633b7d18ffecd2d1e5be66c314346e4f293bd678d6e63d783936754c64e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/image1.tiff",
+      "availability": "present",
+      "sha256": "c6e2dab6a9a2b7cdbbf4ddd6b290f05ae1bc957bf07c45871e9649c696672b10"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/image2.png",
+      "availability": "present",
+      "sha256": "7c70db318a8b790500acde1f61bb36d7a9f623a012ca1ef746ff623a7276473b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/image3.tiff",
+      "availability": "present",
+      "sha256": "bee82b27e7f698d2e126ca167c7d958159227913cf91b3643fb1ac0efb812dfa"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/image4.tiff",
+      "availability": "present",
+      "sha256": "9a24260ccfd6f401642693e6782690cd4b1fc1aa35ae4e1f3d832acb9475eac2"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/image5.emf",
+      "availability": "present",
+      "sha256": "166a89494b4daa7ed87558675d4cb2c1b9aa5f20e4fefff3b21707549fbddb9b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/original_sources.json",
+      "availability": "present",
+      "sha256": "50b44c0aa8eb2e1928d475af4e7ebe60868d642e3a71ce4c77136d8d20f2b42e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-01.txt",
+      "availability": "present",
+      "sha256": "802162ce819e5f807e70ebd53274b36e08f7dd5a726037c1dbd1e691e94c840e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-02.png",
+      "availability": "present",
+      "sha256": "2f7b560a23e71c4a5b2b816cdf2e447c34acf73bab5dcaab477dacb03a46159f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-02.txt",
+      "availability": "present",
+      "sha256": "c06805c854346d1a121ca21cf4d2b68919c4c3355bf730a7f6654ee6bc10ff38"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-03.png",
+      "availability": "present",
+      "sha256": "e4b195d4b1a934afe45c1c8caef56ba55cd1d44833d186ce45110c9a63e5cd51"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-03.txt",
+      "availability": "present",
+      "sha256": "2bf95231d798ffec587d8f6ac822c972c268118ebe0be34c023bdafd3d49e33b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-04.png",
+      "availability": "present",
+      "sha256": "f5a29a78d223229f49cfff55f4625c8da9d0c1c4b49862242d7d3b4d12cdf01c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-04.txt",
+      "availability": "present",
+      "sha256": "630358707f313c3e7ee6e5e4ddc28ec51167d6260de9b53f189cce2f849caf05"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-05.txt",
+      "availability": "present",
+      "sha256": "4949cf3e2a253025da7de2fedcea079fe09fa13ea31fe1146023e232f580cc0a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-06.txt",
+      "availability": "present",
+      "sha256": "89a91105887d38e622dcd6395064ebc7aa0269868298217b99b0f18efae5b0e3"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-07.txt",
+      "availability": "present",
+      "sha256": "8f33e391a142d0ea43734269f69e7a9a2ae86440bf170d3f9a6df17ba19a5804"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-08.txt",
+      "availability": "present",
+      "sha256": "bbd11e9de47782ab7c064a15eda0f0e5449b410ad0179cc1b505d9f0056e3e87"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf-page-09.txt",
+      "availability": "present",
+      "sha256": "a2f4525ba17aaa1bb4f8be6806fe2779167976fd5a3ded9221174e3f50cd040c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/pdf_pages_words.json",
+      "availability": "present",
+      "sha256": "0cb92b42f211ba0cdcfd6a09c4ae6f20ca82308339f6806c6166c34f5de82a78"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/reconstructed-Catch.png",
+      "availability": "present",
+      "sha256": "79f43832349f1f94b9f2e703eec83fd04e175dfae879fe9d7660eee9bada0c70"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/reconstructed-Diet.png",
+      "availability": "present",
+      "sha256": "4c296f6533296330e1c03702a7d63605db2b7dc43fb968c677f4005179c434ac"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/reconstructed-Discards.png",
+      "availability": "present",
+      "sha256": "441bf3e2573421ae3aa0cb24b2f1201ac0a351e7cc061d51fafd354308cb0b06"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/reconstructed-Fate.png",
+      "availability": "present",
+      "sha256": "842dfbd0c6e32b4051481b4c20f86d766fb947d16328c784ae8a6edfa62298f0"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/reconstructed-Groups.png",
+      "availability": "present",
+      "sha256": "fabc614e54675433819097342c35c7bf53e2bd43dd785df669b9e2f88b582539"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/study_figure1_crop.png",
+      "availability": "present",
+      "sha256": "50313682eda28ec3d608585ee81aa848608ccb14cc203cf829ae89b42807090c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/evidence/supplement_cells.json",
+      "availability": "present",
+      "sha256": "d37ce49f80d1f7350ef7b394603b617c5d257bc095cb14f563179094a61adb10"
+    },
+    {
+      "role": "source_stage_inventory",
+      "path": "source/evidence_index.json",
+      "availability": "present",
+      "sha256": "7ca2504f8365852c6ad4d0cc2f4aded8507c5d8f310afa2c2f99a19819e14b50"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/extend_roundtrip.py",
+      "availability": "present",
+      "sha256": "a7dd25dd4dc8fba391c36d8b3b1c756f35a14873fed085f5c2861dcf1ba81027"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/extract_sources.ps1",
+      "availability": "present",
+      "sha256": "420f81b6f4316a09877a102a4e3aa6777ad73e3808830c06ca6300a8eb2ef456"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/finalize_source.py",
+      "availability": "present",
+      "sha256": "f851de338c7d301f395c693873283c260fde5ca873a9ad88d134bfe94808d223"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/read_sources.py",
+      "availability": "present",
+      "sha256": "3d628bc397c0c0ec077d665b99d83f7a3b54857ad7b6c3db287abd755c0a2b9e"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/refresh_handoff.py",
+      "availability": "present",
+      "sha256": "31bc2c863f1e6d0ea2dc9228dee18db2a90b7b5808d7439d96a3508617f091f3"
+    },
+    {
+      "role": "EwE_import_Basic_input.csv",
+      "path": "source/resolved_native/Basic_input.csv",
+      "availability": "present",
+      "sha256": "fc8518efe669754f9e3d86a3575a4e53691c56d0777f5d90ff46c2e2a54ec3a4"
+    },
+    {
+      "role": "EwE_import_Biomass_accumulation.csv",
+      "path": "source/resolved_native/Biomass_accumulation.csv",
+      "availability": "present",
+      "sha256": "5616d0e49985b7ad41a950694379f3300324761972a552082d04178d56c35558"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/DIET_SOURCE_SUMS.json",
+      "availability": "present",
+      "sha256": "499e6141888a6d070324dfb446564fe2de1ee0eded26b704f9e67ff4cc469885"
+    },
+    {
+      "role": "EwE_import_Detritus_fate.csv",
+      "path": "source/resolved_native/Detritus_fate.csv",
+      "availability": "present",
+      "sha256": "2a35192014aff392873ad0925c3025f339e33d15696b89df7491c1b74f821552"
+    },
+    {
+      "role": "EwE_import_Diet_composition.csv",
+      "path": "source/resolved_native/Diet_composition.csv",
+      "availability": "present",
+      "sha256": "dee23b8f545a0c5216e35000ed2502815dc05082b5961bf05b6a211c524f81c4"
+    },
+    {
+      "role": "EwE_import_Discards.csv",
+      "path": "source/resolved_native/Discards.csv",
+      "availability": "present",
+      "sha256": "81ce96a49b7c93513e7d1ce85350dbc5836aa390fc33ff45458e6574fbfe350d"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/FIELD_AVAILABILITY.json",
+      "availability": "present",
+      "sha256": "f939badd96d32d5513b0580fb9039487f6b7d7ddedd03e427ab3637ed17a2d80"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/FLEET_DETRITUS_FATE.json",
+      "availability": "present",
+      "sha256": "bfbe1c36155bfad586054c1214a8970790b2f8749cf346314a908661d53c7310"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/GROUP_CATCH_BIOMASS.csv",
+      "availability": "present",
+      "sha256": "cba59b54498c41897c8f36892ca9660d702364ee3f64d3430b19340d8eadeb02"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/GROUP_IDENTITY.json",
+      "availability": "present",
+      "sha256": "dd83bc702e59bbd7beb795273c43e70fa91db08e3de21971710f25a28e21459d"
+    },
+    {
+      "role": "EwE_import_Landings.csv",
+      "path": "source/resolved_native/Landings.csv",
+      "availability": "present",
+      "sha256": "7ba4c4b2995922b8cc5a6213160baeaf55bc2657c7cc23a242bbf8992e8f870e"
+    },
+    {
+      "role": "EwE_import_Metadata.xlsx",
+      "path": "source/resolved_native/Metadata.xlsx",
+      "availability": "present",
+      "sha256": "d8af882a21228fab07fc578dcf7bdccaf0ff7fa51efc669419784b2f51b038c8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/Metadata.xlsx.inspect.ndjson",
+      "availability": "present",
+      "sha256": "665d65140ec1a485af04e11947b1873dea71fca0c0d8485642b2caeeac078667"
+    },
+    {
+      "role": "source_round_trip",
+      "path": "source/resolved_native/ROUND_TRIP_CHECKS.json",
+      "availability": "present",
+      "sha256": "5e5a95837d176829a1262f48b2eedc5a66b003eff65f22705fa9462dd11273ae"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/SOURCE_BUDGET_ARITHMETIC.json",
+      "availability": "present",
+      "sha256": "b1639a05a5059cd07d6830553ba43579eb6c356cf79e263297210124dff84911"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/SOURCE_CELLS.json",
+      "availability": "present",
+      "sha256": "460fea03617a08b13224fa35878af36a13322de0799d0a35ae3a73ba278c7360"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/TAXONOMY_EVIDENCE.csv",
+      "availability": "present",
+      "sha256": "91fd4afde36ca754338bf260c373a22444b249ba66848d99feed9809271a15ee"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/TAXONOMY_EVIDENCE.json",
+      "availability": "present",
+      "sha256": "043e12a882bef9a1e27b14ed65717cd6818bd00c1077d20d1c84cd5e069a7be4"
+    },
+    {
+      "role": "EwE_import_TL.xlsx",
+      "path": "source/resolved_native/TL.xlsx",
+      "availability": "present",
+      "sha256": "da242c7d560fcf2ae91fe5e6103e771362f8552f06e069cfd2c8e6e398642b6c"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/TL.xlsx.inspect.ndjson",
+      "availability": "present",
+      "sha256": "98077877c2f5b25501760423d92eab0e00adbe042ee32a5b755f2715a75a3e3b"
+    },
+    {
+      "role": "taxonomy",
+      "path": "source/resolved_native/Taxonomy.xlsx",
+      "availability": "present",
+      "sha256": "73ed85c70cda33ccb18276f26e56aad7711c1c5909d37b45103144bf71213ccc"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/Taxonomy.xlsx.inspect.ndjson",
+      "availability": "present",
+      "sha256": "5d76b89a77982ac5eb488b571ab2372e16249acab89564ecd13dee3552b20286"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/VALIDATION.txt",
+      "availability": "present",
+      "sha256": "157cc7d787e50ee6ae2b137dbcdc38dec2baa5f748b0cb2da70e0d559992288b"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/extraction.json",
+      "availability": "present",
+      "sha256": "4b5736dfad97b7b42f0ba37adf75425acf3c3a7f97263e7c64ffbdb83f61c44d"
+    },
+    {
+      "role": "canonical_source",
+      "path": "source/resolved_native/model.json",
+      "availability": "present",
+      "sha256": "748026ab907a54d28a8984cd5664ba35bb923e78d67d3ed98f89fa794d4807b6"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/reconstructed.xlsx",
+      "availability": "present",
+      "sha256": "e3710387998f3e08e99c89bc034b195c2860418f0e9b571340d2620ed36b2f4a"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/reconstructed.xlsx.inspect.ndjson",
+      "availability": "present",
+      "sha256": "f79c5c043f939e7b770ecb6b406adf7d279bb657bf66e680c7a651dee0e45cb8"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/resolved_native/taxonomy.csv",
+      "availability": "present",
+      "sha256": "072eb1b6a665f402f3693c0d384dc9478d67d4b388d20bc07461a734a0f5302f"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/verify_and_report.py",
+      "availability": "present",
+      "sha256": "45dbcdd2930fb44416c9eff8636cee2c296a7341f1a72fb8620b65c5b1fb3446"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "source/workbook_payload.json",
+      "availability": "present",
+      "sha256": "2d0fccfccc3509ad6025121bb9c31998f255f0a8a3822b8bd4afc46c4cf77da5"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "verify_final.py",
+      "availability": "present",
+      "sha256": "3e3e15b74630619bdc41be46bd525c252806772914369af96c435e53d7b1ee1c"
+    },
+    {
+      "role": "author_native_EwE_database",
+      "availability": "missing",
+      "reason": "No author-native consistent database/export recovered; source XLS tables preserved separately",
+      "acquisition_status": "bounded sources/recovery examined; not recovered"
+    },
+    {
+      "role": "native_fishery_discard_return_ancestry",
+      "availability": "inapplicable",
+      "reason": "The exact source records quantities and fleet routing, but the current SPPR engine recycling equations do not implement donor-resolved fishery return ancestry. No synthetic external import substituted.",
+      "acquisition_status": "Native evidence retained; unsupported engine representation remains explicit."
+    },
+    {
+      "role": "TE_EE0_detritus_recredit",
+      "availability": "inapplicable",
+      "reason": "Engine fix_EE_0_cases is requested but supports only a single detritus pool; four-pool translation emits an explicit warning and applies no correction.",
+      "acquisition_status": "Actual direct TE warning/return retained."
+    },
+    {
+      "role": "adoption_or_published_regional_PPR",
+      "availability": "inapplicable",
+      "reason": "The task authorizes isolated candidate evidence only; every method returns FAIL and every annual model result remains production-ineligible.",
+      "acquisition_status": "No active model, workbook, Project, map, graph or approval write performed."
+    }
+  ],
+  "reconciliation": {
+    "source_stage_complete": true,
+    "mapping_stage_complete": true,
+    "diagnostic_stage_complete": true,
+    "final_delivery_checks": true,
+    "all_protected_files_unchanged": true,
+    "mapping_hash_matches_final_arithmetic": true,
+    "source_round_trip": true
+  },
+  "production_eligible": false,
+  "limits": "Inventory completion is distinct from scientific validity. Three direct methods returned FAIL; native-flow translation is incomplete; candidate arithmetic remains ineligible. Researcher approval and active adoption are outside this task."
+}

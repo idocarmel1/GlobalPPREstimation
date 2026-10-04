@@ -1,0 +1,50 @@
+7
+Solved physical budgets and scientific limits
+All flows below are tC/km²/yr except EE and GS. The engine's final main model is reloaded from the persisted file and 
+balanced. No failed LIM fallback values or legacy migration-based balanced copy are used. Living BA is 0, detritus BA is 
+positive, all catch/migration values are 0, and all U/M0 flows enter detritus. Detritus residual accumulation of 374.43368 
+million tC/yr is 24.16 times its assumed 15.5 million tC inventory per year. With zero export/import and all M0/U routed to 
+detritus, this is a large nonsteady residual, not measured burial/storage or a stationary stock. Solver values are a 
+consequence of the selected food and stock assumptions, not independently measured author parameters.
+The 12 decimal changes resolve source predation greater than production for squid III, herring, smelt, capelin, squid IV and 
+large pollock. This prevents negative mortality/depletion but materially changes internal predation. Extensive external food 
+preserves total consumer intake; it weakens inference about which local production supports consumers. Scientific 
+validation must assess donor food sources, chemistry, allocation and temporal scope rather than infer validity from 
+algebraic closure.
+Group EE GS BA R U M0
+Phytoplankton (1) 0.352788 0 0 0 0 291.246
+Bacteria (2) 0.943236 0.100304 0 115.159 20.1387 3.71684
+Protozoa (3) 0.932838 0.100472 0 40.1872 7.02781 1.5268
+Copepods (4) 0.225804 0.1 0 30.6851 11.8435 58.7667
+Euphausiids (5) 0.18399 0.1 0 14.9429 5.69745 29.6491
+Hyperiids (6) 0.163002 0.1 0 2.58241 0.628904 2.57605
+Chaetognaths (7) 0.1549 0.1 0 5.19783 1.49723 6.99507
+Salmon (8) 0.310476 0.134209 0 0.00765181 0.0117278 0.0468912
+Squid III (9) 0.707148 0.140756 0 1.00693 0.176088 0.0199154
+Herring (10) 0.536891 0.143004 0 1.60556 0.280775 0.035693
+Deep-sea smelt (11) 0.667199 0.138284 0 0.433021 0.0757253 0.0129327
+Pollock less than 30 cm (12) 0.0797462 0.12639 0 0.611204 0.106885 0.117416
+Capelin (13) 0.911333 0.145448 0 0.707788 0.123776 0.0017228
+Jellyfish (14) 0.232088 0.1 0 0.04337 0.0151816 0.0716187
+Pollock 30-60 cm (15) 0.186441 0.129547 0 2.1832 0.381791 0.310881
+Squid IV (16) 0.60964 0.134465 0 0.515393 0.0901302 0.0252824
+Predatory salmon (17) 0 0.35 0 0.0121762 0.00725389 0.00129534
+Baleen whales (18) 0 0.148152 0 0.117502 0.0205484 0.000647668
+Pollock greater than 60 cm 
+(19)
+0.633333 0.35 0 0.0235725 0.0158316 0.00213731
+Predatory fish (20) 0 0.143856 0 0.0635609 0.0111153 0.00259067
+Predatory mammals (21) 0 0.147418 0 0.0568905 0.00994883 0.000647668
+Detritus (22) 1 0 242.509 0 0 0
+Mandatory baselines and sensitivity outcomes
+Every case uses the actual native runtime. Main balance is an algebraic engine result; physical admissibility independently 
+checks flow signs, EE/GS bounds and the accepted boundaries. Thus the unrepaired text-fed case is rejected even though 
+its main balanced flag is True. F62 = 0.025 gives the same pass/fail classification as the preferred 0.023 in all four structural 
+cases. Raw failed inputs and returns remain available.
+The complete F62 = 0.025 native model balances and all three direct methods remain WARN with finite coefficients. 
+Maximum relative all-source SPPR changes are 2.7% for GE, 3.0% for TE and 2.7% for With Egestion. These maxima cover 
+native groups; the ambiguous route remains tentative.
+Full sensitivity returns and summary | Every group and source-scope comparison
+Case F62 Main balance Physical admissibility Unsolved groups
+figure only 0.023 False False 6, 8, 14
+figure only 0.025 False False 6, 8, 14

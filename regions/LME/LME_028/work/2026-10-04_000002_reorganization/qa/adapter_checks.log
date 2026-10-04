@@ -1,0 +1,328 @@
+FFFFFFFFFFFEFFFFE.F.....E.F........
+======================================================================
+ERROR: test_explicit_unknown_import_stays_unknown_through_roundtrip (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_explicit_unknown_import_stays_unknown_through_roundtrip)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 144, in test_explicit_unknown_import_stays_unknown_through_roundtrip
+    diet = pd.read_excel(workbook, sheet_name='Diet composition').set_index('Prey ID')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 494, in read_excel
+    data = io.parse(
+           ^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 1780, in parse
+    return self._reader.parse(
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 753, in parse
+    sheet = self.get_sheet_by_name(asheetname)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 589, in get_sheet_by_name
+    self.raise_if_bad_sheet_by_name(name)
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 605, in raise_if_bad_sheet_by_name
+    raise ValueError(f"Worksheet named '{name}' not found")
+ValueError: Worksheet named 'Diet composition' not found
+
+======================================================================
+ERROR: test_roundtrip_preserves_raw_cells_and_import (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_roundtrip_preserves_raw_cells_and_import)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 94, in test_roundtrip_preserves_raw_cells_and_import
+    diet = pd.read_excel(workbook, sheet_name='Diet composition').set_index('Prey ID')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 494, in read_excel
+    data = io.parse(
+           ^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 1780, in parse
+    return self._reader.parse(
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 753, in parse
+    sheet = self.get_sheet_by_name(asheetname)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 589, in get_sheet_by_name
+    self.raise_if_bad_sheet_by_name(name)
+  File "C:\Users\idoca\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\pandas\io\excel\_base.py", line 605, in raise_if_bad_sheet_by_name
+    raise ValueError(f"Worksheet named '{name}' not found")
+ValueError: Worksheet named 'Diet composition' not found
+
+======================================================================
+ERROR: test_group_efficiencies_use_current_selection_and_retained_alternative (tools.workflow_checks.maps.test_html_adapter.HtmlAdapterTests.test_group_efficiencies_use_current_selection_and_retained_alternative)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_html_adapter.py", line 36, in test_group_efficiencies_use_current_selection_and_retained_alternative
+    original_atlas_data.add_group_efficiencies(root,units)
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\project_core\maps\original_atlas_data.py", line 33, in add_group_efficiencies
+    regional=region_directory(root,unit_id)/(unit_id+'.xlsx')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\project_core\registry\discovery.py", line 12, in region_directory
+    raise ValueError(f'Invalid region identity: {unit_id}')
+ValueError: Invalid region identity: U
+
+======================================================================
+FAIL: test_future_layout_builds_keep_dynamic_cumulative_coverage (tools.workflow_checks.maps.test_map_cumulative_ppr.CumulativePprTests.test_future_layout_builds_keep_dynamic_cumulative_coverage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_map_cumulative_ppr.py", line 29, in test_future_layout_builds_keep_dynamic_cumulative_coverage
+    self.check_page(page)
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_map_cumulative_ppr.py", line 19, in check_page
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+AssertionError: 1 != 0 : evalmachine.<anonymous>:4
+  if(reviewedOnly&&!PPRResearcherReview.isValidated(network.units[r.unit_id]?.models[chosenModels[r.unit_id]]))return false;
+                    ^
+
+ReferenceError: PPRResearcherReview is not defined
+    at passRegion (evalmachine.<anonymous>:4:21)
+    at Array.filter (<anonymous>)
+    at Object.renderList (evalmachine.<anonymous>:7:11)
+    at shares (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_map_cumulative_ppr.js:29:11)
+    at Object.<anonymous> (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_map_cumulative_ppr.js:57:20)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+
+Node.js v20.20.2
+
+
+======================================================================
+FAIL: test_generated_map_uses_entire_set_after_display_filters (tools.workflow_checks.maps.test_map_cumulative_ppr.CumulativePprTests.test_generated_map_uses_entire_set_after_display_filters)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_map_cumulative_ppr.py", line 22, in test_generated_map_uses_entire_set_after_display_filters
+    self.check_page(Path(__file__).resolve().parents[3] / 'interactive_map/index.html')
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_map_cumulative_ppr.py", line 19, in check_page
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+AssertionError: 1 != 0 : evalmachine.<anonymous>:4
+  if(reviewedOnly&&!PPRResearcherReview.isValidated(network.units[r.unit_id]?.models[chosenModels[r.unit_id]]))return false;
+                    ^
+
+ReferenceError: PPRResearcherReview is not defined
+    at passRegion (evalmachine.<anonymous>:4:21)
+    at Array.filter (<anonymous>)
+    at Object.renderList (evalmachine.<anonymous>:7:11)
+    at shares (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_map_cumulative_ppr.js:29:11)
+    at Object.<anonymous> (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_map_cumulative_ppr.js:57:20)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+
+Node.js v20.20.2
+
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py', total='0.999')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.600', '2': '0.200', '3': '-9999'} != {'1': '0.600', '2': '0.200'}
+- {'1': '0.600', '2': '0.200', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.600', '2': '0.200'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py', total='1.001')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.600', '2': '0.200', '3': '-9999'} != {'1': '0.600', '2': '0.200'}
+- {'1': '0.600', '2': '0.200', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.600', '2': '0.200'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py', total='0.900')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.500', '2': '0.200', '3': '-9999'} != {'1': '0.500', '2': '0.200'}
+- {'1': '0.500', '2': '0.200', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.500', '2': '0.200'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py', total='1.000')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.600', '2': '0.400', '3': '-9999'} != {'1': '0.600', '2': '0.400'}
+- {'1': '0.600', '2': '0.400', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.600', '2': '0.400'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\database_json.py', total='0.999')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.600', '2': '0.200', '3': '-9999'} != {'1': '0.600', '2': '0.200'}
+- {'1': '0.600', '2': '0.200', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.600', '2': '0.200'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\database_json.py', total='1.001')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.600', '2': '0.200', '3': '-9999'} != {'1': '0.600', '2': '0.200'}
+- {'1': '0.600', '2': '0.200', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.600', '2': '0.200'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\database_json.py', total='0.900')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.500', '2': '0.200', '3': '-9999'} != {'1': '0.500', '2': '0.200'}
+- {'1': '0.500', '2': '0.200', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.500', '2': '0.200'}
+
+======================================================================
+FAIL: test_converter_retains_rounding_deficit_excess_and_material_deficit (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_converter_retains_rounding_deficit_excess_and_material_deficit) (script='C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\database_json.py', total='1.000')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 77, in test_converter_retains_rounding_deficit_excess_and_material_deficit
+    self.assertEqual({d['prey_seq']: d['proportion'] for d in group['diet_descr']['diet']},
+AssertionError: {'1': '0.600', '2': '0.400', '3': '-9999'} != {'1': '0.600', '2': '0.400'}
+- {'1': '0.600', '2': '0.400', '3': '-9999'}
+?                            --------------
+
++ {'1': '0.600', '2': '0.400'}
+
+======================================================================
+FAIL: test_diet_conversion_preserves_detritus_fate (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_diet_conversion_preserves_detritus_fate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 128, in test_diet_conversion_preserves_detritus_fate
+    self.assertEqual(diet['3']['proportion'], '0')
+AssertionError: '-9999' != '0'
+- -9999
++ 0
+
+
+======================================================================
+FAIL: test_numeric_missing_sentinel_imports_stay_unknown (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py', sentinel='-9999.0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 159, in test_numeric_missing_sentinel_imports_stay_unknown
+    self.assertEqual(result['group'][0]['diet_imp'], '-9999')
+AssertionError: '-9999.0' != '-9999'
+- -9999.0
+?      --
++ -9999
+
+
+======================================================================
+FAIL: test_numeric_missing_sentinel_imports_stay_unknown (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py', sentinel='-9999.000')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 159, in test_numeric_missing_sentinel_imports_stay_unknown
+    self.assertEqual(result['group'][0]['diet_imp'], '-9999')
+AssertionError: '-9999.000' != '-9999'
+- -9999.000
+?      ----
++ -9999
+
+
+======================================================================
+FAIL: test_numeric_missing_sentinel_imports_stay_unknown (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\database_json.py', sentinel='-9999.0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 159, in test_numeric_missing_sentinel_imports_stay_unknown
+    self.assertEqual(result['group'][0]['diet_imp'], '-9999')
+AssertionError: '-9999.0' != '-9999'
+- -9999.0
+?      --
++ -9999
+
+
+======================================================================
+FAIL: test_numeric_missing_sentinel_imports_stay_unknown (tools.workflow_checks.validation.test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown) (script='C:\\Users\\idoca\\.agents\\skills\\ecopath-extraction\\scripts\\database_json.py', sentinel='-9999.000')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\validation\test_diet_source_preservation.py", line 159, in test_numeric_missing_sentinel_imports_stay_unknown
+    self.assertEqual(result['group'][0]['diet_imp'], '-9999')
+AssertionError: '-9999.000' != '-9999'
+- -9999.000
+?      ----
++ -9999
+
+
+======================================================================
+FAIL: test_basemap_modes_and_failure_fallback (tools.workflow_checks.maps.test_html_adapter.HtmlAdapterTests.test_basemap_modes_and_failure_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_html_adapter.py", line 132, in test_basemap_modes_and_failure_fallback
+    self.assertEqual(result.returncode,0,result.stderr)
+AssertionError: 1 != 0 : node:fs:448
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\common_reference_data\geography\basemaps\ne_50m_land.geojson'
+    at Object.readFileSync (node:fs:448:20)
+    at Object.<anonymous> (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_basemap.js:8:25)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\idoca\\Desktop\\����\\������\\���� ���\\����\\BTN\\GlobalPPREstimation\\tools\\common_reference_data\\geography\\basemaps\\ne_50m_land.geojson'
+}
+
+Node.js v20.20.2
+
+
+======================================================================
+FAIL: test_map_model_switch_preserves_open_selection (tools.workflow_checks.maps.test_html_adapter.HtmlAdapterTests.test_map_model_switch_preserves_open_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\test_html_adapter.py", line 98, in test_map_model_switch_preserves_open_selection
+    self.assertEqual(result.returncode,0,result.stderr)
+AssertionError: 1 != 0 : node:internal/assert/utils:281
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing map lifecycle section: function applyYear(year
+    at section (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_map_model_switch.js:5:3)
+    at Object.<anonymous> (C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\tools\workflow_checks\maps\check_map_model_switch.js:37:17)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '=='
+}
+
+Node.js v20.20.2
+
+
+----------------------------------------------------------------------
+Ran 25 tests in 7.219s
+
+FAILED (failures=17, errors=3)

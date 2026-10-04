@@ -1,0 +1,1304 @@
+{
+  "schema_version": 1,
+  "run_id": "LME_027_BancArguin_20261003",
+  "region_id": "LME_027",
+  "model_id": "Guenette2014_BancArguin_M30_1991",
+  "variant_id": "M30",
+  "source_identity": {
+    "doi": "10.1371/journal.pone.0094742",
+    "canonical_sha256": "2dcba450650eeb8fd20e2dcf96920e02b49b16289875f915b3930a4ad79887be"
+  },
+  "computational_input_identity": {
+    "run_id": "BancArguin_20261003",
+    "assessment_id": "M30_source_admission",
+    "timestamp_utc": "2026-10-03T16:14:11.525861+00:00",
+    "source_relative_to_run": "../../../../models/Guenette2014_BancArguin_M30_1991/model.json",
+    "source_sha256": "2dcba450650eeb8fd20e2dcf96920e02b49b16289875f915b3930a4ad79887be",
+    "computational_input_sha256": "fdf9743e9ac7a21e043635a98da952fbe780737014db713938c1101b308a4f30",
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false
+    },
+    "diagnostic_options": {
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0
+    },
+    "thresholds": {
+      "b_warn": 0.7,
+      "b_fail": 1.0,
+      "rho_living_warn": 0.7,
+      "rho_living_fail": 1.0,
+      "sppr_det_warn": 10.0,
+      "balance_warn": 0.01,
+      "balance_fail": 0.05,
+      "model_balance_warn": 0.0001,
+      "model_balance_fail": 0.1,
+      "dc_row_tol": 1e-06,
+      "ee_marginal": 0.001
+    },
+    "diagnostic_signature": "(self, TE_option: 'str' = 'GE', *, short: 'bool' = False, flat: 'bool' = False, thresholds: 'Optional[dict]' = None, return_sppr: 'bool' = False, **sppr_kwargs) -> 'dict | tuple[dict, pd.DataFrame, pd.DataFrame, pd.DataFrame]'",
+    "engine_hashes": {
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "interpretation": "Independent M30 assessment; retain published S8 and inherited baseline parameters but missing variant diets remain unknown. No SPPR or model PPR calculation justified.",
+    "production_eligible": false,
+    "missing_biology_before_runtime": [
+      {
+        "group_seq": 14,
+        "group_name": "Croakers ad",
+        "field": "pb"
+      },
+      {
+        "group_seq": 15,
+        "group_name": "Croakers juv",
+        "field": "pb"
+      },
+      {
+        "group_seq": 16,
+        "group_name": "Seabreams ad",
+        "field": "pb"
+      },
+      {
+        "group_seq": 17,
+        "group_name": "Seabreams juv.",
+        "field": "pb"
+      },
+      {
+        "group_seq": 18,
+        "group_name": "Catfish ad",
+        "field": "pb"
+      },
+      {
+        "group_seq": 19,
+        "group_name": "Catfish juv",
+        "field": "pb"
+      },
+      {
+        "group_seq": 23,
+        "group_name": "Groupers ad",
+        "field": "pb"
+      },
+      {
+        "group_seq": 24,
+        "group_name": "Grouper juv",
+        "field": "pb"
+      },
+      {
+        "group_seq": 25,
+        "group_name": "Sparids ad",
+        "field": "pb"
+      },
+      {
+        "group_seq": 26,
+        "group_name": "Sparids juv",
+        "field": "pb"
+      }
+    ],
+    "missing_diet_cells": [
+      {
+        "consumer_seq": 2,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 3,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 3,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 3,
+        "prey_seq": 45
+      },
+      {
+        "consumer_seq": 3,
+        "prey_seq": 47
+      },
+      {
+        "consumer_seq": 4,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 4,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 4,
+        "prey_seq": 44
+      },
+      {
+        "consumer_seq": 4,
+        "prey_seq": 45
+      },
+      {
+        "consumer_seq": 4,
+        "prey_seq": 46
+      },
+      {
+        "consumer_seq": 4,
+        "prey_seq": 47
+      },
+      {
+        "consumer_seq": 5,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 5,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 42
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 44
+      },
+      {
+        "consumer_seq": 11,
+        "prey_seq": 46
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 42
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 44
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 45
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 46
+      },
+      {
+        "consumer_seq": 12,
+        "prey_seq": 47
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 37
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 43
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 44
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 45
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 46
+      },
+      {
+        "consumer_seq": 13,
+        "prey_seq": 47
+      },
+      {
+        "consumer_seq": 14,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 14,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 14,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 44
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 45
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 46
+      },
+      {
+        "consumer_seq": 15,
+        "prey_seq": 47
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 37
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 42
+      },
+      {
+        "consumer_seq": 16,
+        "prey_seq": 43
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 17,
+        "prey_seq": 42
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 45
+      },
+      {
+        "consumer_seq": 18,
+        "prey_seq": 47
+      },
+      {
+        "consumer_seq": 19,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 19,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 19,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 19,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 19,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 19,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 24,
+        "prey_seq": 32
+      },
+      {
+        "consumer_seq": 24,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 24,
+        "prey_seq": 38
+      },
+      {
+        "consumer_seq": 24,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 33
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 34
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 35
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 36
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 37
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 39
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 40
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 41
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 42
+      },
+      {
+        "consumer_seq": 26,
+        "prey_seq": 43
+      }
+    ],
+    "scopes": {
+      "all": "All basal-source columns",
+      "inner": "Excludes synthetic external diet import",
+      "PP": "Primary producer columns only; excludes detritus and imported diet"
+    },
+    "matrix_orientation": "Recipient groups in rows, basal sources in columns; ordered native IDs stored on axes",
+    "units": "Wet-weight primary-production equivalent per unit consumer wet biomass; divide regional PPR by9 once for tonnes carbon",
+    "constructor_admission": "BLOCKED_BEFORE_MISSING_DIET_COERCION",
+    "warnings": {}
+  },
+  "methods": [
+    "GE",
+    "TE",
+    "With Egestion"
+  ],
+  "required_roles": [
+    "canonical_source",
+    "extraction_inventory",
+    "taxonomy",
+    "mapping",
+    "DOCX",
+    "Excel_appendix",
+    "geography",
+    "final_verification",
+    "extraction/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991).json",
+    "extraction/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991)_reconstructed.xlsx",
+    "extraction/Basic_input.csv",
+    "extraction/Biomass_accumulation.csv",
+    "extraction/canonical_database.json",
+    "extraction/canonical_reconstructed.xlsx",
+    "extraction/companions/manifest.json",
+    "extraction/companions/Source_catch_totals.csv",
+    "extraction/companions/Source_diet_cell_ledger.csv",
+    "extraction/companions/Source_group_crosswalk.csv",
+    "extraction/companions/Source_model_fields.csv",
+    "extraction/companions/Source_parameter_cell_ledger.csv",
+    "extraction/companions/Source_parameter_roles.csv",
+    "extraction/companions/Source_S1_membership.csv",
+    "extraction/companions/Source_S2_diet_block1.csv",
+    "extraction/companions/Source_S2_diet_block2.csv",
+    "extraction/companions/Source_S2_diet_block3.csv",
+    "extraction/companions/Source_S3_fleet_effort.csv",
+    "extraction/companions/Source_S4_mammals.csv",
+    "extraction/companions/Source_S5_birds.csv",
+    "extraction/companions/Source_S6_benthos.csv",
+    "extraction/companions/Source_S7_time_series.csv",
+    "extraction/companions/Source_S8_formatting.csv",
+    "extraction/companions/Source_S8_scenarios.csv",
+    "extraction/companions/Source_S9_1991_2006_outputs.csv",
+    "extraction/companions/Source_source_conflicts.csv",
+    "extraction/companions/Source_stanzas.csv",
+    "extraction/companions/Source_Table2_cells.csv",
+    "extraction/companions/Source_variant_constraints.csv",
+    "extraction/CONVERSION_RESTORATIONS.json",
+    "extraction/DERIVED_ARITHMETIC.json",
+    "extraction/Detritus_fate.csv",
+    "extraction/DIET_CELL_LEDGER.json",
+    "extraction/Diet_composition.csv",
+    "extraction/DIET_SOURCE_SUMS.json",
+    "extraction/Discards.csv",
+    "extraction/ewe_conversion.log",
+    "extraction/extraction.json",
+    "extraction/EXTRACTION_STATUS.json",
+    "extraction/GROUP_CROSSWALK.json",
+    "extraction/IMPROVED_CONVERTER_LOG.txt",
+    "extraction/IMPROVED_WRITER_LOG.txt",
+    "extraction/Landings.csv",
+    "extraction/MASS_BALANCE.md",
+    "extraction/MASS_BALANCE_CHECK.txt",
+    "extraction/Metadata.xlsx",
+    "extraction/model.json",
+    "extraction/MODEL_PROFILE.md",
+    "extraction/PARAMETER_CELL_LEDGER.json",
+    "extraction/raw_converter/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991).json",
+    "extraction/raw_converter/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991)_reconstructed.xlsx",
+    "extraction/raw_converter/Basic_input.csv",
+    "extraction/raw_converter/Biomass_accumulation.csv",
+    "extraction/raw_converter/Detritus_fate.csv",
+    "extraction/raw_converter/Diet_composition.csv",
+    "extraction/raw_converter/DIET_SOURCE_SUMS.json",
+    "extraction/raw_converter/Discards.csv",
+    "extraction/raw_converter/ewe_conversion.log",
+    "extraction/raw_converter/Landings.csv",
+    "extraction/raw_converter/MASS_BALANCE.md",
+    "extraction/raw_converter/Metadata.xlsx",
+    "extraction/raw_converter/REPORT.md",
+    "extraction/raw_converter/TL.xlsx",
+    "extraction/REPORT.md",
+    "extraction/ROUNDTRIP_CHECK.json",
+    "extraction/SOURCE_CONFLICTS.json",
+    "extraction/SOURCE_FIDELITY_CHECK.json",
+    "extraction/STANZAS.json",
+    "extraction/STOCK_CONVERTER_LOG.txt",
+    "extraction/Taxonomy.xlsx",
+    "extraction/taxonomy_evidence.json",
+    "extraction/TL.xlsx",
+    "extraction/VALIDATION.txt",
+    "extraction/WRITER_LOG.txt",
+    "regional/annual_PPR.csv",
+    "regional/annual_PPR_NPP.csv",
+    "regional/assessment.json",
+    "regional/independent_classic_PPR_NPP.csv",
+    "regional/taxon_coefficients.csv",
+    "source_admission/computational_input.json",
+    "source_admission/DIRECT_DIAGNOSTICS.md",
+    "source_admission/direct_reports.json",
+    "source_admission/direct_solutions.json",
+    "source_admission/execution_evidence.json",
+    "source_admission/group_coefficients.json",
+    "source_admission/negative_entries.json",
+    "source_admission/reconciliation.json",
+    "source_admission/summary.json",
+    "source_admission/transformation_ledger.json"
+  ],
+  "artifacts": [
+    {
+      "role": "canonical_source",
+      "availability": "present",
+      "path": "model.json",
+      "sha256": "2dcba450650eeb8fd20e2dcf96920e02b49b16289875f915b3930a4ad79887be"
+    },
+    {
+      "role": "extraction_inventory",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/extraction/evidence_index.json",
+      "sha256": "ef5c094a651b1833c0a22d5fcb93c70c658ff95c72f7a52f9bf97f4f115c40c5"
+    },
+    {
+      "role": "taxonomy",
+      "availability": "present",
+      "path": "extracted_tables/Taxonomy.xlsx",
+      "sha256": "96aff4346fa541d78773c40487eaba1e80249d38ebaa13580771c3a3ea6cd638"
+    },
+    {
+      "role": "mapping",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/mapping/M30_mapping_evidence.json",
+      "sha256": "02d37af0108664bc55ca8f96cec53ece48d078b73162366811759a67f8bcab22"
+    },
+    {
+      "role": "DOCX",
+      "availability": "present",
+      "path": "../../Model_validation_Guenette2014_BancArguin_M30_1991.docx",
+      "sha256": "57365b04f705ba730fdf545a416ee6b9d0367bf66b8a9590de2915ab0b3064dc"
+    },
+    {
+      "role": "Excel_appendix",
+      "availability": "present",
+      "path": "../../LME027_Guenette2014_M30_taxon_mapping_appendix.xlsx",
+      "sha256": "78ecfb9498751e7604d0685658a3282c220c73942a22621fc951685e8b6b7e12"
+    },
+    {
+      "role": "geography",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/context/geographic_assessment.json",
+      "sha256": "9974b282b2a679430cc4f0fc10fe401dc4de43031d25f781907fcfe5ae631540"
+    },
+    {
+      "role": "final_verification",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/qa/final_verification.json",
+      "sha256": "6cf24e1592f47ead4a70558e3df09e2d928821c83beb9879278cd18ab58066e8"
+    },
+    {
+      "role": "extraction/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991).json",
+      "availability": "present",
+      "path": "extracted_tables/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991).json",
+      "sha256": "2dcba450650eeb8fd20e2dcf96920e02b49b16289875f915b3930a4ad79887be"
+    },
+    {
+      "role": "extraction/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991)_reconstructed.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991)_reconstructed.xlsx",
+      "sha256": "5b8be1720c762053ad42061fd68b9e76b402c1e366ee626606684ced4c57025c"
+    },
+    {
+      "role": "extraction/Basic_input.csv",
+      "availability": "present",
+      "path": "extracted_tables/Basic_input.csv",
+      "sha256": "971cb0d261db84203795d11283636f7fdae269ed7e36819efcc02dbdd8507040"
+    },
+    {
+      "role": "extraction/Biomass_accumulation.csv",
+      "availability": "present",
+      "path": "extracted_tables/Biomass_accumulation.csv",
+      "sha256": "e78b3895383006a93397d4c47dd1b091f6292514873373c28380712c6a88147a"
+    },
+    {
+      "role": "extraction/canonical_database.json",
+      "availability": "present",
+      "path": "extracted_tables/canonical_database.json",
+      "sha256": "2dcba450650eeb8fd20e2dcf96920e02b49b16289875f915b3930a4ad79887be"
+    },
+    {
+      "role": "extraction/canonical_reconstructed.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/canonical_reconstructed.xlsx",
+      "sha256": "5b8be1720c762053ad42061fd68b9e76b402c1e366ee626606684ced4c57025c"
+    },
+    {
+      "role": "extraction/companions/manifest.json",
+      "availability": "present",
+      "path": "extracted_tables/companions/manifest.json",
+      "sha256": "6e9c8308fcb834156ca613870c9e3e1ca2d009967d1a807ee25c64ca15459099"
+    },
+    {
+      "role": "extraction/companions/Source_catch_totals.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_catch_totals.csv",
+      "sha256": "2f1e6aed64917e8aeb43f5d0a23f89886b9b9774e03e33793e269712b646ed95"
+    },
+    {
+      "role": "extraction/companions/Source_diet_cell_ledger.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_diet_cell_ledger.csv",
+      "sha256": "8145bd58b7a31b41048aa5c975e3427968f41bf84e499821d38cbd987c74c35b"
+    },
+    {
+      "role": "extraction/companions/Source_group_crosswalk.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_group_crosswalk.csv",
+      "sha256": "fa44789ef45b3fa04f5e4f4a1340906a8c8593ce9c08035b468e59c8a3f645ac"
+    },
+    {
+      "role": "extraction/companions/Source_model_fields.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_model_fields.csv",
+      "sha256": "dd5fb36f4c1c10aab2f6267f6ec9c2ab1f4f157892022e4052b076bb079bb5aa"
+    },
+    {
+      "role": "extraction/companions/Source_parameter_cell_ledger.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_parameter_cell_ledger.csv",
+      "sha256": "63642cebe9aa9fb40733d61c676cfef6592d845bd8123a563771568350708c11"
+    },
+    {
+      "role": "extraction/companions/Source_parameter_roles.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_parameter_roles.csv",
+      "sha256": "22c3e0334dbba9ff33a1ff56ff8477ea4dda80d3cf265548322405fae4a09050"
+    },
+    {
+      "role": "extraction/companions/Source_S1_membership.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S1_membership.csv",
+      "sha256": "623773d108dd979ac8a929ec8c664bfb606251ea8e2bb984e2805cb12492125d"
+    },
+    {
+      "role": "extraction/companions/Source_S2_diet_block1.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S2_diet_block1.csv",
+      "sha256": "e38f21540103e014bff5511b1475a38026496d8642f5052beab259648f0ab288"
+    },
+    {
+      "role": "extraction/companions/Source_S2_diet_block2.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S2_diet_block2.csv",
+      "sha256": "dc8faf201440fab2fe9b386d9d2b1b40200491319e1a6ed02598d79d068945bd"
+    },
+    {
+      "role": "extraction/companions/Source_S2_diet_block3.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S2_diet_block3.csv",
+      "sha256": "e5de579a969ae9cfc287dd281b8dface72e27386eced72543dc8b454e319757b"
+    },
+    {
+      "role": "extraction/companions/Source_S3_fleet_effort.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S3_fleet_effort.csv",
+      "sha256": "e51e32eac6f0c926a61d3f39fa0a6485e036634c1b2153628dd5811cac313a24"
+    },
+    {
+      "role": "extraction/companions/Source_S4_mammals.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S4_mammals.csv",
+      "sha256": "76c1d122fa11c61b0d09ecab6d7febf3ac407ae69cb4d4a090c031843fa4a869"
+    },
+    {
+      "role": "extraction/companions/Source_S5_birds.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S5_birds.csv",
+      "sha256": "e80a43809db108bef2dae7860cf245cce8f4312153258ad6128ac472ed473a8b"
+    },
+    {
+      "role": "extraction/companions/Source_S6_benthos.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S6_benthos.csv",
+      "sha256": "e8be454f668578a80079ebfc36d62785c1a4e25fee328cf9777167ca01dfda7b"
+    },
+    {
+      "role": "extraction/companions/Source_S7_time_series.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S7_time_series.csv",
+      "sha256": "146cbd29b63f2cb9a05798d581fb6e32694b500a0a580a8d604a5606584c5141"
+    },
+    {
+      "role": "extraction/companions/Source_S8_formatting.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S8_formatting.csv",
+      "sha256": "91622cafbb6a57655a37d13afcba1babe6d7b288966421854812f4713464ba81"
+    },
+    {
+      "role": "extraction/companions/Source_S8_scenarios.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S8_scenarios.csv",
+      "sha256": "ea8e6332877c3bac1878d4f924b3c83cb34162af30cf9553b9f233da915fd4ca"
+    },
+    {
+      "role": "extraction/companions/Source_S9_1991_2006_outputs.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_S9_1991_2006_outputs.csv",
+      "sha256": "7585586b877c009c8fcef268318cc4dbb2246e142f6b3452d8d8aaabd35b2f0a"
+    },
+    {
+      "role": "extraction/companions/Source_source_conflicts.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_source_conflicts.csv",
+      "sha256": "a37d5ea51fad2d026d171343bbebedbf9cf9c17e2c384cc6122f4d39f43cc303"
+    },
+    {
+      "role": "extraction/companions/Source_stanzas.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_stanzas.csv",
+      "sha256": "e676cf7b554f7580ddc6ae675b3ea4cbfe3608c4e4f67ac85b4b7c64dbe68c66"
+    },
+    {
+      "role": "extraction/companions/Source_Table2_cells.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_Table2_cells.csv",
+      "sha256": "09235c16c49b04ca8511f601e00f080310904b4a308995cc5ad14a69c359ce70"
+    },
+    {
+      "role": "extraction/companions/Source_variant_constraints.csv",
+      "availability": "present",
+      "path": "extracted_tables/companions/Source_variant_constraints.csv",
+      "sha256": "9dfc90175d37c07e9590d22c855c0706e71993ac624818e902c0e8968f43d313"
+    },
+    {
+      "role": "extraction/CONVERSION_RESTORATIONS.json",
+      "availability": "present",
+      "path": "extracted_tables/CONVERSION_RESTORATIONS.json",
+      "sha256": "dc2ed5ca1da016a597918f3a211260abbca5d47ffb620d02126365fbe74853df"
+    },
+    {
+      "role": "extraction/DERIVED_ARITHMETIC.json",
+      "availability": "present",
+      "path": "extracted_tables/DERIVED_ARITHMETIC.json",
+      "sha256": "1334d84aede809a34632d7fc25680628f6ef66c0687a9ed52ecf2be29a43b418"
+    },
+    {
+      "role": "extraction/Detritus_fate.csv",
+      "availability": "present",
+      "path": "extracted_tables/Detritus_fate.csv",
+      "sha256": "48fd0b8a8e51148032e930840d3e4e64b5b7f0dddb5b7bef1fa7bf4559a7908c"
+    },
+    {
+      "role": "extraction/DIET_CELL_LEDGER.json",
+      "availability": "present",
+      "path": "extracted_tables/DIET_CELL_LEDGER.json",
+      "sha256": "88d9a0549b84394de546aa35479b354846b0a7e67b0ac1214b0764fb5d21c437"
+    },
+    {
+      "role": "extraction/Diet_composition.csv",
+      "availability": "present",
+      "path": "extracted_tables/Diet_composition.csv",
+      "sha256": "667720351fc16f7854a946bf0b431b5ca5fee0a3201321a6607899f80ab58030"
+    },
+    {
+      "role": "extraction/DIET_SOURCE_SUMS.json",
+      "availability": "present",
+      "path": "extracted_tables/DIET_SOURCE_SUMS.json",
+      "sha256": "31032239bd21a7d7c8bef5d731bba3b1338207283627d5968641a8cf1b51dba6"
+    },
+    {
+      "role": "extraction/Discards.csv",
+      "availability": "present",
+      "path": "extracted_tables/Discards.csv",
+      "sha256": "df85bfce4f40f9467bdd5891ea5de8a784979c7ce15e67b1deaad205801a35a3"
+    },
+    {
+      "role": "extraction/ewe_conversion.log",
+      "availability": "present",
+      "path": "extracted_tables/ewe_conversion.log",
+      "sha256": "aa7fb932b596c5e9169dee916e4b9cf0701a88ab127f21e76cc7130766ed9114"
+    },
+    {
+      "role": "extraction/extraction.json",
+      "availability": "present",
+      "path": "extracted_tables/extraction.json",
+      "sha256": "45f9f8d8576bd58547a269e39b79c128418c8a0ecf1738973381ef9ae20d89d3"
+    },
+    {
+      "role": "extraction/EXTRACTION_STATUS.json",
+      "availability": "present",
+      "path": "extracted_tables/EXTRACTION_STATUS.json",
+      "sha256": "5fe6327d84a7624bc02d41d60a9b346655eabdb9c008e25ef1c18f75e5b765f1"
+    },
+    {
+      "role": "extraction/GROUP_CROSSWALK.json",
+      "availability": "present",
+      "path": "extracted_tables/GROUP_CROSSWALK.json",
+      "sha256": "a55145ffa9058fbac9003f6778790a4b43df007ca1ebaaecdbdcb6f977336d6c"
+    },
+    {
+      "role": "extraction/IMPROVED_CONVERTER_LOG.txt",
+      "availability": "present",
+      "path": "extracted_tables/IMPROVED_CONVERTER_LOG.txt",
+      "sha256": "a456c1d427dfc6899ba04b3959436cf3f6d2352be9d6ee5f0793fb0b5a5aeb9b"
+    },
+    {
+      "role": "extraction/IMPROVED_WRITER_LOG.txt",
+      "availability": "present",
+      "path": "extracted_tables/IMPROVED_WRITER_LOG.txt",
+      "sha256": "6f41161e7dd22968fba243255059fb75fb136d6a2352de8352f1266dc548c3c7"
+    },
+    {
+      "role": "extraction/Landings.csv",
+      "availability": "present",
+      "path": "extracted_tables/Landings.csv",
+      "sha256": "8ec7dfdfa63bbc2e8a94a505e92b0da4a221ca5de9f5f117797bc9db3967155f"
+    },
+    {
+      "role": "extraction/MASS_BALANCE.md",
+      "availability": "present",
+      "path": "extracted_tables/MASS_BALANCE.md",
+      "sha256": "1bf381620092ee5cc03b1fe2a377a4bf4d48ba520ad6f670d0ec79b3767063cf"
+    },
+    {
+      "role": "extraction/MASS_BALANCE_CHECK.txt",
+      "availability": "present",
+      "path": "extracted_tables/MASS_BALANCE_CHECK.txt",
+      "sha256": "aabd2a448a6f65b109b0867a45cab9fa41dbda129872cf5d73142d2271b46a02"
+    },
+    {
+      "role": "extraction/Metadata.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/Metadata.xlsx",
+      "sha256": "0dff264ff740b5355d6b684122519b822b518c786a9428670d1c89b2e96ca472"
+    },
+    {
+      "role": "extraction/model.json",
+      "availability": "present",
+      "path": "extracted_tables/model.json",
+      "sha256": "45f9f8d8576bd58547a269e39b79c128418c8a0ecf1738973381ef9ae20d89d3"
+    },
+    {
+      "role": "extraction/MODEL_PROFILE.md",
+      "availability": "present",
+      "path": "extracted_tables/MODEL_PROFILE.md",
+      "sha256": "4319cb040b18790d99f8d445c27214c427d83e9994724c88a7e1fc582ef15cd5"
+    },
+    {
+      "role": "extraction/PARAMETER_CELL_LEDGER.json",
+      "availability": "present",
+      "path": "extracted_tables/PARAMETER_CELL_LEDGER.json",
+      "sha256": "bb55da0b6403e895040633cb5b317954876da5a063d4117eebcba137f53290b1"
+    },
+    {
+      "role": "extraction/raw_converter/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991).json",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991).json",
+      "sha256": "d3b05659fcd268ec46ccb9d40c6a1530010cb11f1a134036ab21379a5e7acdcc"
+    },
+    {
+      "role": "extraction/raw_converter/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991)_reconstructed.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/27_Canary_Current_Guenette2014_M30_Banc_d_Arguin_and_Mauritanian_Shelf_M30_(1991)_reconstructed.xlsx",
+      "sha256": "7370893922ad3d7bac98218f7292a9bc00fa26f80b737b0391acfade8747d3d1"
+    },
+    {
+      "role": "extraction/raw_converter/Basic_input.csv",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Basic_input.csv",
+      "sha256": "971cb0d261db84203795d11283636f7fdae269ed7e36819efcc02dbdd8507040"
+    },
+    {
+      "role": "extraction/raw_converter/Biomass_accumulation.csv",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Biomass_accumulation.csv",
+      "sha256": "e78b3895383006a93397d4c47dd1b091f6292514873373c28380712c6a88147a"
+    },
+    {
+      "role": "extraction/raw_converter/Detritus_fate.csv",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Detritus_fate.csv",
+      "sha256": "48fd0b8a8e51148032e930840d3e4e64b5b7f0dddb5b7bef1fa7bf4559a7908c"
+    },
+    {
+      "role": "extraction/raw_converter/Diet_composition.csv",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Diet_composition.csv",
+      "sha256": "3925c6cc9e8492624c4f9c71537c3a15de88ba825afc75c02c5d0dac76d1a29d"
+    },
+    {
+      "role": "extraction/raw_converter/DIET_SOURCE_SUMS.json",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/DIET_SOURCE_SUMS.json",
+      "sha256": "b9a372845db8f2990bf80c5840c185bebec76b51606e2deada3f7823a0ec32b5"
+    },
+    {
+      "role": "extraction/raw_converter/Discards.csv",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Discards.csv",
+      "sha256": "df85bfce4f40f9467bdd5891ea5de8a784979c7ce15e67b1deaad205801a35a3"
+    },
+    {
+      "role": "extraction/raw_converter/ewe_conversion.log",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/ewe_conversion.log",
+      "sha256": "a00cd53aedb79fd422e9e4d255a22cbfb0c75b2893ac08df478c7583aeb73506"
+    },
+    {
+      "role": "extraction/raw_converter/Landings.csv",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Landings.csv",
+      "sha256": "8ec7dfdfa63bbc2e8a94a505e92b0da4a221ca5de9f5f117797bc9db3967155f"
+    },
+    {
+      "role": "extraction/raw_converter/MASS_BALANCE.md",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/MASS_BALANCE.md",
+      "sha256": "04282e934bfd8f7fc8f8253e3dfc46d1ff13d5ac4b13c3a2a161a3b1f276c826"
+    },
+    {
+      "role": "extraction/raw_converter/Metadata.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/Metadata.xlsx",
+      "sha256": "00a42e8449965bc020e5882f712cb63b20f76ae09111ee2b06e4f4d4948ee654"
+    },
+    {
+      "role": "extraction/raw_converter/REPORT.md",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/REPORT.md",
+      "sha256": "345aaec69ee4b1f7bc11b29212931c422ea6b8f1f962558f5cfe0959e904ce04"
+    },
+    {
+      "role": "extraction/raw_converter/TL.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/raw_converter/TL.xlsx",
+      "sha256": "b7b4174b39ce0f1cf74f265c92e09c43dd49457aec98b0592a9e375b8bab83f0"
+    },
+    {
+      "role": "extraction/REPORT.md",
+      "availability": "present",
+      "path": "extracted_tables/REPORT.md",
+      "sha256": "575555e03bda11a07ed560a1cfea02314af9e175a4ab74c9ec9ed0de78f6997f"
+    },
+    {
+      "role": "extraction/ROUNDTRIP_CHECK.json",
+      "availability": "present",
+      "path": "extracted_tables/ROUNDTRIP_CHECK.json",
+      "sha256": "1d1f88916d92d56de655f3c4ed7be89d7562b2e73c7471bdb30d5d7e9311b17a"
+    },
+    {
+      "role": "extraction/SOURCE_CONFLICTS.json",
+      "availability": "present",
+      "path": "extracted_tables/SOURCE_CONFLICTS.json",
+      "sha256": "f3ce61dd96b6b5bb1f0a95e10e81d8782c7b5cafef4dafe64aab89c3e881db2b"
+    },
+    {
+      "role": "extraction/SOURCE_FIDELITY_CHECK.json",
+      "availability": "present",
+      "path": "extracted_tables/SOURCE_FIDELITY_CHECK.json",
+      "sha256": "359e2913da17ec36112fb72fa792f637b2e454513b865e3628157f8995391511"
+    },
+    {
+      "role": "extraction/STANZAS.json",
+      "availability": "present",
+      "path": "extracted_tables/STANZAS.json",
+      "sha256": "a4a42e7332b35d0566753dc1554dded5efd6b964b481d829d47ed2c82719a098"
+    },
+    {
+      "role": "extraction/STOCK_CONVERTER_LOG.txt",
+      "availability": "present",
+      "path": "extracted_tables/STOCK_CONVERTER_LOG.txt",
+      "sha256": "cf0297a294993b6e00694cd1498f5523b5a04a8f89507684741cb958337b26c1"
+    },
+    {
+      "role": "extraction/Taxonomy.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/Taxonomy.xlsx",
+      "sha256": "96aff4346fa541d78773c40487eaba1e80249d38ebaa13580771c3a3ea6cd638"
+    },
+    {
+      "role": "extraction/taxonomy_evidence.json",
+      "availability": "present",
+      "path": "extracted_tables/taxonomy_evidence.json",
+      "sha256": "1b03b4592ee481913538078f48ff4927ae7b77d01829b71c30d98924385759fd"
+    },
+    {
+      "role": "extraction/TL.xlsx",
+      "availability": "present",
+      "path": "extracted_tables/TL.xlsx",
+      "sha256": "f392a7ff7cdc5db1da0f2149c545f2d500ac9efd27c904500682c0e8d11952a7"
+    },
+    {
+      "role": "extraction/VALIDATION.txt",
+      "availability": "present",
+      "path": "extracted_tables/VALIDATION.txt",
+      "sha256": "3d1fc5d2ac6cfeaa017eea1c8c3e7572f34c27d312458ed82e06fa4a59017ea4"
+    },
+    {
+      "role": "extraction/WRITER_LOG.txt",
+      "availability": "present",
+      "path": "extracted_tables/WRITER_LOG.txt",
+      "sha256": "abf94449c2e59646436a79d34a55b673309b3f59b5125d04b3601d78c0dbac93"
+    },
+    {
+      "role": "regional/annual_PPR.csv",
+      "availability": "present",
+      "path": "regional_assessment/annual_PPR.csv",
+      "sha256": "6aa13d09dacbcfa310f1b5f45c2b8093ef28e6f9c98466532dcc00086053e48b"
+    },
+    {
+      "role": "regional/annual_PPR_NPP.csv",
+      "availability": "present",
+      "path": "regional_assessment/annual_PPR_NPP.csv",
+      "sha256": "0190ac0bbf0add97c9ba2b71e250b55220d26bdaf43b2cbc377ba30a2e4fa678"
+    },
+    {
+      "role": "regional/assessment.json",
+      "availability": "present",
+      "path": "regional_assessment/assessment.json",
+      "sha256": "c6105a3ad8b5fc20ed570ea2ec4490e9d80fef6de05dd455ef6b656d04e50677"
+    },
+    {
+      "role": "regional/independent_classic_PPR_NPP.csv",
+      "availability": "present",
+      "path": "regional_assessment/independent_classic_PPR_NPP.csv",
+      "sha256": "b76c2a8d3f0902c46e706d95b8ab09c70ed49b6b91255ae0d700e95c8ded1203"
+    },
+    {
+      "role": "regional/taxon_coefficients.csv",
+      "availability": "present",
+      "path": "regional_assessment/taxon_coefficients.csv",
+      "sha256": "9669f3b90f8f02aa460076f21c737c6f58c1abff1e7ece6436d48435fd250833"
+    },
+    {
+      "role": "source_admission/computational_input.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/computational_input.json",
+      "sha256": "fdf9743e9ac7a21e043635a98da952fbe780737014db713938c1101b308a4f30"
+    },
+    {
+      "role": "source_admission/DIRECT_DIAGNOSTICS.md",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/DIRECT_DIAGNOSTICS.md",
+      "sha256": "aa7e6fd95e282c76cb4d2dcf4b96dc5ae5f0b37c4de3194bf812fc1531e9d320"
+    },
+    {
+      "role": "source_admission/direct_reports.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/direct_reports.json",
+      "sha256": "a0db00aebb1f01868a90fbe20e383f0dd40b839b23b2d8c52ab0b715ddd2a680"
+    },
+    {
+      "role": "source_admission/direct_solutions.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/direct_solutions.json",
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "role": "source_admission/execution_evidence.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/execution_evidence.json",
+      "sha256": "b2476592d918f24526b2962bb4cc4badf136a1d2a088c870d0a9b4d7bb89b6a4"
+    },
+    {
+      "role": "source_admission/group_coefficients.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/group_coefficients.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "role": "source_admission/negative_entries.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/negative_entries.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "role": "source_admission/reconciliation.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/reconciliation.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "role": "source_admission/summary.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/summary.json",
+      "sha256": "a0db00aebb1f01868a90fbe20e383f0dd40b839b23b2d8c52ab0b715ddd2a680"
+    },
+    {
+      "role": "source_admission/transformation_ledger.json",
+      "availability": "present",
+      "path": "../../validation_reports/BancArguin_20261003/runtime/M30_source_admission/transformation_ledger.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "role": "validated_source_SPPR_and_regional_model_PPR",
+      "availability": "missing",
+      "reason": "114 unpublished variant diet cells in14consumers; complete independent composition unavailable.",
+      "acquisition_status": "Original article/XLS/DOCX/figures and authoritative EcoBase689 reviewed; no complete verified variant recovered."
+    }
+  ],
+  "reconciliation": {
+    "all_original_publications_unrelated_models_selected_workbook_and_signed_review_unchanged": true,
+    "only_candidate_catalog_and_geography_Project_parts_changed": true,
+    "researcher1987_record_preserved_and_three_current_candidates": true,
+    "Office_links_resolve_after_cleanup": true,
+    "extraction_inventory_valid": true,
+    "mapping_inventory_valid": true,
+    "full_grid_candidate_arithmetic_verified": true,
+    "full_matrices_scopes_masks_flows_verified": true,
+    "final_canonical_diagnostic_and_arithmetic_identities_match": true
+  },
+  "production_eligible": false,
+  "selection_adopted": false,
+  "scientific_parameterization_complete": false,
+  "task_scope": "All feasible requested stages complete, with explicit failed/blocked numerical stages. Candidate-specific evidence does not override Overview/Project selection."
+}

@@ -1,0 +1,7 @@
+# HUM2018 fresh source candidate
+
+Read [REPORT.md](REPORT.md) and [SOURCE_CONFLICTS.json](SOURCE_CONFLICTS.json) first. This isolated candidate preserves native supplement values. Source extraction is complete; ecological production admission fails. Historical workbooks and accepted models were left intact.
+
+The [source canonical JSON](../../../../Chiaverano2018_detailed_Northern_Humboldt_1995_1998__source/model.json) and separate [computational input](../../../model.json) retain distinct identities. The eight EwE imports are six CSV files plus TL.xlsx and Metadata.xlsx in `resolved_native`. Other deliverables are [Taxonomy.xlsx](../../../../Chiaverano2018_detailed_Northern_Humboldt_1995_1998__source/extracted_tables/evidence/Taxonomy.xlsx), [reconstructed.xlsx](../../../../Chiaverano2018_detailed_Northern_Humboldt_1995_1998__source/extracted_tables/evidence/reconstructed.xlsx), [GROUP_CATCH_BIOMASS.csv](../../../../Chiaverano2018_detailed_Northern_Humboldt_1995_1998__source/extracted_tables/evidence/GROUP_CATCH_BIOMASS.csv), and [SOURCE_IDENTITY.json](SOURCE_IDENTITY.json).
+
+Source matrices remain unnormalized. Diagnostic runtime changes have separate ledgers, including diet normalization and the loader's overwrite of eight native detritus-fate cells. The original files remain in the paper folder and are linked relative to each containing artifact. `vendor` contains an isolated xlrd reader; `node_modules` is a junction to the bundled runtime. Builders are reproducibility aids. Rerunning a builder over an executed input requires a new run identity.

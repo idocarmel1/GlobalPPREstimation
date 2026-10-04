@@ -1,0 +1,369 @@
+{
+  "source": {
+    "article": "Gorbatenko and Melnikov (2019), Figure 9",
+    "source_pdf": "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\papers\\OKH-GM2019\\gorbatenko_melnikov_2019.pdf",
+    "pdf_page_1_based": 15,
+    "printed_page": 157,
+    "source_pdf_sha256": "70b73d4341018e3fadb9955e9d19735188f12c8798eaed8921d1812bb6c2b860",
+    "source_image": "C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\audit\\figure9_original.png",
+    "source_image_sha256": "bd9b3fd59ab6365d05bc04c71a8b3f84b6c16539573bb149b4b0415ea37566e0",
+    "source_image_dimensions": [
+      1318,
+      1627
+    ],
+    "coordinates": "Original raster x/y pixels, origin at top left; crop bounds use PIL exclusive right/bottom."
+  },
+  "scope": "Source audit recommendations only. Parent creates any derivative numerical variant. Original baseline is preserved.",
+  "decisions": [
+    {
+      "flow_id": "F77",
+      "decision": "Recommend 15->20, replacing adopted 19->20",
+      "routing_confidence": "high",
+      "numeric_literal": "0,01",
+      "value": "0.01",
+      "evidence": {
+        "flow_id": "F77",
+        "change_type": "source_endpoint_correction",
+        "adopted": {
+          "prey_id": 19,
+          "consumer_id": 20,
+          "routing_status": "tentative"
+        },
+        "proposed": {
+          "prey_id": 15,
+          "consumer_id": 20,
+          "routing_status": "clear"
+        },
+        "literal": "0,01",
+        "value": "0.01",
+        "confidence": "high",
+        "justification": "The green shaft leaves the bottom of medium pollock around (295,1163), bows left through (284,1235), then passes through (300,1320) and (327,1384). It crosses the large-pollock box as a shaft, with no green arrowhead there. Beyond the label gap it continues through (390,1449), (450,1474), and (513,1485), ending in the green arrowhead at the left edge of predatory fish around (559,1484). Thus the large-pollock box is a crossing, not the origin of this curve.",
+        "path_checkpoints": [
+          [
+            295,
+            1163
+          ],
+          [
+            284,
+            1235
+          ],
+          [
+            300,
+            1320
+          ],
+          [
+            327,
+            1384
+          ],
+          [
+            390,
+            1449
+          ],
+          [
+            450,
+            1474
+          ],
+          [
+            513,
+            1485
+          ],
+          [
+            559,
+            1484
+          ]
+        ],
+        "source_crop": "F77_unannotated_source_crop.png",
+        "source_crop_bounds": [
+          140,
+          1080,
+          820,
+          1525
+        ],
+        "diagnostics": [
+          "F77_annotated_path_x3.png",
+          "F77_green_reading_aid_x3.png"
+        ],
+        "adoption": "Proposal only in this audit. Root independently reviewed the crop and communicated agreement; root owns any adoption in a new variant."
+      }
+    },
+    {
+      "flow_id": "F22",
+      "decision": "Confirm same route 5->18",
+      "routing_confidence": "high",
+      "numeric_literal": "0,141",
+      "value": "0.141",
+      "evidence": {
+        "flow_id": "F22",
+        "change_type": "routing_confidence_upgrade_without_endpoint_change",
+        "adopted": {
+          "prey_id": 5,
+          "consumer_id": 18,
+          "routing_status": "tentative"
+        },
+        "proposed": {
+          "prey_id": 5,
+          "consumer_id": 18,
+          "routing_status": "clear"
+        },
+        "literal": "0,141",
+        "value": "0.141",
+        "confidence": "high",
+        "justification": "The inner thin blue curve leaves the euphausiid lower/right attachment, follows the readable 0,141 label near (1260,989), turns left beneath predatory salmon, and ends in the blue arrowhead near (786,1287) at the right edge of the baleen-whale box. The outer blue 0,0075 curve is separate. No blue junction or arrowhead sends the 0,141 curve into jellyfish.",
+        "source_crop": "F22_entire_route_source_native.png",
+        "source_crop_bounds": [
+          540,
+          400,
+          1318,
+          1340
+        ],
+        "endpoint_crop": "F22_whale_endpoint_source_native.png",
+        "endpoint_crop_bounds": [
+          710,
+          1200,
+          960,
+          1340
+        ],
+        "diagnostics": [
+          "F22_entire_route_blue_reading_aid_x2.png"
+        ],
+        "adoption": "Proposal only; baseline ledger is not edited."
+      }
+    },
+    {
+      "flow_id": "F78",
+      "decision": "Retain adopted 15->21 tentative; no endpoint change",
+      "routing_confidence": "tentative",
+      "numeric_literal": "0,05",
+      "numeric_confidence": "high; label shadow is not a trailing 1",
+      "evidence": {
+        "flow_ids": [
+          "F78"
+        ],
+        "issue": "0,05 green diagonal and overlap near predatory fish",
+        "result": "Retain adopted 15->21 as tentative. A shallower green diagonal from medium pollock continues across the predatory-fish box to the separate arrowhead entering the mammal box near (902,1523). A steeper green bow from squid IV ends in the green tip entering predatory fish near (569,1454). The close crossing/head overlap makes the assignment of the 0,05 diagonal insufficient for an upgrade to clear; a 15->20 interpretation would be an explicit alternative only.",
+        "diagnostics": [
+          "F78_label_and_heads_source_x4.png",
+          "F78_continuation_source_x4.png"
+        ]
+      }
+    },
+    {
+      "flow_ids": [
+        "F26",
+        "F47",
+        "F41",
+        "F42",
+        "F52",
+        "F57"
+      ],
+      "decision": "Keep duplicated-pair hypotheses unresolved; no exact substitute endpoint",
+      "routing_confidence": "tentative",
+      "evidence": [
+        {
+          "flow_ids": [
+            "F26",
+            "F47"
+          ],
+          "issue": "Duplicate 6->9 hypothesis",
+          "result": "Unresolved. The upper 0,241 arch and lower 0,021 bow are separate displayed curves. Dense upper/right crossings prevent a secure common squid-III endpoint. Do not treat the duplicate adopted pair as visually validated or replace its endpoint using balance."
+        },
+        {
+          "flow_ids": [
+            "F41",
+            "F42"
+          ],
+          "issue": "Duplicate 10->15 hypothesis",
+          "result": "Unresolved. Around 0,685 an apparent down/right red tip lies near (193,1013), above the medium-pollock box. A shaft can be followed upward through the herring area toward hyperiids, but crossings and detached-looking placement prevent a secure origin/destination substitution. The 0,139 curve descends toward medium pollock; the two adopted herring routes are not independently confirmed as the same pair.",
+          "diagnostics": [
+            "F41_F42_origins_source_x4.png",
+            "F41_F42_pixel_nearest.png"
+          ]
+        },
+        {
+          "flow_ids": [
+            "F52",
+            "F57"
+          ],
+          "issue": "Duplicate 13->15 hypothesis",
+          "result": "Unresolved. 0,57 and 0,024 are visibly distinct labels beside crossing/overlapping lower curves. The 0,024 arrowhead is at the right side of medium pollock, while the 0,57 neighborhood also contains a red diagonal pointing up/right toward capelin and another bow near squid IV. A unique source/endpoint assignment cannot be proven from this crossing.",
+          "diagnostics": [
+            "F52_F57_origins_source_x4.png"
+          ]
+        }
+      ]
+    },
+    {
+      "flow_ids": [
+        "F62",
+        "F67"
+      ],
+      "decision": "Separate human numeric readings from unresolved route confidence",
+      "routing_confidence": "tentative",
+      "evidence": [
+        {
+          "flow_id": "F62",
+          "visual_literal": "0,02X",
+          "visual_reading_status": "final digit overprinted",
+          "preferred_human_reading": "0.023",
+          "human_alternative": "0.025",
+          "human_provenance": "Root conveyed direct user reading on 2026-10-03: 0.02X with final digit 3 or 5, preference 0.023, alternative 0.025 for sensitivity.",
+          "numeric_adoption_recommendation": "Keep these as preferred/alternative human readings, not an exact independent visual reading.",
+          "route_recommendation": "Keep route tentative independently of numeric choice.",
+          "diagnostics": [
+            "F62_label_source_x4.png",
+            "F62_literal_source_x3.png"
+          ]
+        },
+        {
+          "flow_id": "F67",
+          "visual_literal": "0,05",
+          "visual_reading_status": "partly overprinted; compatible with human reading",
+          "human_confirmed_reading": "0.05",
+          "human_provenance": "Root conveyed direct user confirmation F67=0.05 on 2026-10-03.",
+          "numeric_adoption_recommendation": "The new variant can use 0.05 with human-confirmed numeric provenance.",
+          "route_recommendation": "The endpoint/source route remains tentative; numeric confirmation does not resolve it.",
+          "diagnostics": [
+            "F67_label_source_x4.png",
+            "F67_literal_source_x3.png"
+          ]
+        }
+      ]
+    },
+    {
+      "flow_id": "F13",
+      "decision": "Confirm same route 5->6; confidence upgrade recommended",
+      "routing_confidence": "high",
+      "numeric_literal": "0,283",
+      "value": "0.283",
+      "evidence": {
+        "flow_id": "F13",
+        "change_type": "routing_confidence_upgrade_without_endpoint_change",
+        "adopted": {
+          "prey_id": 5,
+          "consumer_id": 6,
+          "routing_status": "tentative"
+        },
+        "proposed": {
+          "prey_id": 5,
+          "consumer_id": 6,
+          "routing_status": "clear"
+        },
+        "literal": "0,283",
+        "value": "0.283",
+        "confidence": "high",
+        "justification": "The thin blue curve begins at the upper/left euphausiid attachment around (804,416), descends left through its 0,283 label near (473,532), crosses the thick copepod-to-chaetognath curve, and ends at the blue arrowhead near (216,766) at the hyperiid top edge. Color and curvature distinguish it from the thick 1,5 and 4,4 euphausiid routes below.",
+        "adoption": "Proposal only; baseline ledger is not edited."
+      }
+    }
+  ],
+  "jellyfish_blue_incoming": {
+    "question": "Is a drawn blue incoming arrow to jellyfish omitted from the adopted ledger?",
+    "result": "No blue arrowhead entering jellyfish was found in the original source.",
+    "confidence": "high for the visible local diagram; bounded negative visual finding, not proof of a complete author diet",
+    "observations": "Blue arrowheads in the local region enter squid III and capelin. The two thin outer blue curves pass outside the jellyfish box and continue downward; the inner 0,141 route ends at baleen whales. No unlabelled blue incoming edge to jellyfish was identified.",
+    "source_crop": "jellyfish_blue_incoming_check_source_native.png",
+    "source_crop_bounds": [
+      800,
+      740,
+      1318,
+      1020
+    ],
+    "diagnostic": "jellyfish_blue_incoming_check_blue_reading_aid_x2.png",
+    "convention": "A genuinely drawn unlabelled arrow must be unknown, not a missing-arrow zero. This audit found no such blue jellyfish edge."
+  },
+  "copepod_smelt_blue_check": {
+    "question": "Does Figure 9 draw a copepod -> deep-sea-smelt feeding arrow, including an unlabelled arrow?",
+    "source": "Original Figure 9, Gorbatenko and Melnikov 2019, PDF p.15 / printed p.157",
+    "result": "No drawn copepod -> smelt blue feeding shaft terminating in a smelt arrowhead was found.",
+    "confidence": "high within the visible original raster; bounded negative visual finding",
+    "copepod_blue_outgoing_inventory": [
+      {
+        "flow_id": "F12",
+        "label": "1,1",
+        "route": [
+          4,
+          10
+        ],
+        "observation": "Outer-left blue curve starts near (249,441), goes around the hyperiid box, and ends at herring near (177,894)."
+      },
+      {
+        "flow_id": "F10",
+        "label": "4,1",
+        "route": [
+          4,
+          6
+        ],
+        "observation": "Blue curve starts near (255,465), bows left through its 4,1 label, and ends at the hyperiid top near (212,766)."
+      },
+      {
+        "flow_id": "F11",
+        "label": "20,1",
+        "route": [
+          4,
+          7
+        ],
+        "observation": "Thick blue shaft leaves copepods near (377,474), bows left and then down/right, and ends at the chaetognath upper-left corner near (382,771)."
+      },
+      {
+        "flow_id": "F18",
+        "label": "0,736",
+        "route": [
+          4,
+          12
+        ],
+        "observation": "Thin blue curve leaves copepods near (500,464), travels down/right past 0,736, and ends at small pollock near (641,894)."
+      }
+    ],
+    "smelt_blue_arrowhead_inventory": [
+      {
+        "flow_id": "F17",
+        "label": "0,448",
+        "route": [
+          5,
+          11
+        ],
+        "observation": "The visible blue feeding head at the smelt top near (379,893) belongs to the thin 0,448 curve, whose upper shaft can be followed to the euphausiid bottom attachment near (929,471). It does not start at copepods."
+      }
+    ],
+    "passing_shaft": {
+      "flow_id": "F15",
+      "label": "4,4",
+      "route": [
+        5,
+        15
+      ],
+      "observation": "A thick blue euphausiid curve passes across/through the left part of the smelt box, then continues below it and ends at medium pollock around (299,1097). No blue arrowhead attaches this passing shaft to smelt. A shaft crossing a box is not independently a feeding endpoint."
+    },
+    "unlabelled_edge_check": "No extra unlabelled blue head entering smelt, and no extra blue branch leaving copepods toward smelt, was identified.",
+    "relationship_to_prose": "The article p.155 prose diet percentages and annual wet consumption motivated this location check only. They were not used to reroute a drawn line. The diagram-only missing-arrow zero for 4->11 is consistent with this bounded visual absence finding; any prose-derived supplementation should carry separate provenance and scope.",
+    "source_crops": [
+      {
+        "file": "copepod_smelt_context_source_native.png",
+        "bounds": [
+          90,
+          390,
+          1090,
+          990
+        ],
+        "exact_native_source_pixels": true
+      },
+      {
+        "file": "smelt_blue_heads_source_native.png",
+        "bounds": [
+          260,
+          820,
+          500,
+          1000
+        ],
+        "exact_native_source_pixels": true
+      }
+    ],
+    "reading_aids": [
+      "copepod_smelt_context_blue_reading_aid_x2.png",
+      "smelt_blue_heads_blue_reading_aid_x4.png"
+    ],
+    "raw_vs_aid": "*_source_native.png contains exact unmodified source pixels. *_source_xN.png is a nearest-neighbor enlargement. *_blue_reading_aid_xN.png analytically isolates blue and dark text pixels and is not source evidence on its own.",
+    "model_edits": "None"
+  },
+  "raw_vs_annotated": "Unannotated *_source_native.png crops preserve source pixels. *_source_xN.png enlarge those pixels. Color-only *_reading_aid_* files and F77_annotated_path_x3.png are diagnostic aids, not independently authoritative source reconstructions."
+}

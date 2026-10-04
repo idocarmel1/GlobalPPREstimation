@@ -1,0 +1,47 @@
+{
+  "regression_exit_code": 0,
+  "before_red_log": "trend_caption_regression_red.log",
+  "after_green_log": "trend_caption_regression_green.log",
+  "fixture_files": [
+    "trend_caption_fixture_index.html",
+    "trend_caption_fixture_trends.html"
+  ],
+  "frozen_template_sha256": {
+    "tools\\original_html_layout\\index.html": "a5b8e49062cde7ef5ea2e6efea8155c35ad8737eeba7a6b1c5fedd65f85d4ed6",
+    "tools\\original_html_layout\\trends.html": "7ea8415d2fbfd84dcf0477a279fdb969771ef8875d6066d7032f5da8c7035ae6"
+  },
+  "frozen_templates_unchanged": true,
+  "science_workbooks_modified": false,
+  "existing_checks": [
+    {
+      "command": [
+        "C:/Users/idoca/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+        "tools/workflow_checks/check_review_presentation.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:/Users/idoca/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+        "tools/workflow_checks/check_researcher_review.js",
+        "regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\completion_integration\\trend_caption_fixture_index.html",
+        "regions\\LME_052\\models\\52_GM2019_Fig9_Pelagic_(2000-2014)\\research_20261003\\completion_integration\\trend_caption_fixture_trends.html"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:/Users/idoca/miniconda3/python.exe",
+        "-m",
+        "unittest",
+        "tools.workflow_checks.test_researcher_review.ResearcherReviewTests.test_layout_uses_shared_filter_and_does_not_edit_frozen_templates",
+        "tools.workflow_checks.test_researcher_review.ResearcherReviewTests.test_review_presentation_removes_legacy_model_prose_and_prefixes",
+        "tools.workflow_checks.test_researcher_review.ResearcherReviewTests.test_layout_only_refresh_preserves_data_and_rejects_stale_fingerprint",
+        "tools.workflow_checks.test_researcher_review_model_boundary"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "existing_checks_log": "trend_caption_existing_checks.log",
+  "passed": true
+}

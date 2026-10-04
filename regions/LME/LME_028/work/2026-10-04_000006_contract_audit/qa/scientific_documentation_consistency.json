@@ -1,0 +1,63 @@
+{
+  "scope": "Documentation-only corrections, no engine or parameter changes",
+  "corrections": [
+    {
+      "document": "explainers/sppr_methods.md",
+      "claim": "Nm is emigration minus immigration, with detritus import subtracted by calculator",
+      "evidence": [
+        "tools/scientific_code/PPREstimation/ModelData.py:995",
+        "tools/scientific_code/PPREstimation/PPRCalculator.py:385"
+      ]
+    },
+    {
+      "document": "explainers/PPREstimation/USER_GUIDE.md",
+      "claim": "Fractional exponent lies below the integer linear interpolation for positive TE; interpolation is an adopted mixture, not observed allocation",
+      "evidence": [
+        "tools/scientific_code/PPREstimation/PPRCalculator.py:1863",
+        "tools/scientific_code/PPREstimation/PPRCalculator.py:1883"
+      ],
+      "numeric_example": {
+        "TL": 3.4,
+        "TE": 0.1,
+        "direct": 251.18864315095797,
+        "blend": 460.0
+      }
+    },
+    {
+      "document": "explainers/PPREstimation/USER_GUIDE.md",
+      "claim": "Acyclic equivalence requires compatible options/complete paths; cycle pruning and simple paths differ",
+      "evidence": [
+        "tools/scientific_code/PPREstimation/PPRCalculator.py:1951",
+        "tools/scientific_code/PPREstimation/PPRCalculator.py:2158",
+        "tools/scientific_code/PPREstimation/PPRCalculator.py:2161"
+      ]
+    },
+    {
+      "document": "tools/skills/paper-to-ppr/resources/extraction/references/parameter-conventions.md",
+      "claim": "At fixed positive production/catch/predation, including negative BA lowers calculated EE relative to BA0; positive BA raises it. Source-only recovery and fidelity limits remain explicit.",
+      "evidence": [
+        "tools/skills/paper-to-ppr/resources/extraction/scripts/massbalance_check.py:190",
+        "tools/skills/paper-to-ppr/resources/extraction/scripts/massbalance_check.py:191",
+        "tools/skills/paper-to-ppr/resources/extraction/procedure.md:167"
+      ],
+      "numeric_example": {
+        "production": 2,
+        "catch_plus_predation": 1,
+        "EE_BA_minus_0_2": 0.4,
+        "EE_BA_zero": 0.5,
+        "EE_BA_plus_0_2": 0.6
+      },
+      "scope": "Descriptions only; unchanged extraction/calculator code and source parameters"
+    }
+  ],
+  "engine_sha256": {
+    "tools\\scientific_code\\PPREstimation\\ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "tools\\scientific_code\\PPREstimation\\PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b"
+  },
+  "guide_consolidation": {
+    "entry_point": "tools/scientific_code/PPREstimation/information/USER_GUIDE.md",
+    "authoritative_body": "explainers/PPREstimation/USER_GUIDE.md",
+    "before_sha256": "8d2705733ae221a1e169ccf053d7077d715ad7197be1b8f5cedc5857097dbc4f",
+    "reason": "Compared both bodies: engine duplicate retained stale filename restrictions, missing constructor options and unsupported solver guarantees; current explainer already contained the method body and reviewed corrections. Preserve navigation through an explicit pointer, not two conflicting authorities."
+  }
+}

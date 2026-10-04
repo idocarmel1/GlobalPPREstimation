@@ -1,0 +1,108 @@
+{
+  "status": "SOURCE_SUPPORTED_ROUTE_AUTHORIZED; INVESTIGATION_IN_PROGRESS",
+  "applies_to": "Isolated candidate model; no selected-model/map/validation edits",
+  "protozoa_factor": {
+    "wet_tonnes_per_carbon_tonne": 10,
+    "status": "Latest user-authorized best estimate, persisted in runtime/conversion_factors.json"
+  },
+  "alternatives": {
+    "A": {
+      "name": "Source-supported carbon feeding reconstruction",
+      "recommended": true,
+      "changes": "Replace deficient Figure diet/intake constraints with prey-specific text and dissertation values, with explicit unresolved remainder allocations and temporal transfer assumptions. Use carbon as common currency.",
+      "groups": {
+        "6": {
+          "2019_text_wet_Q_million_t_per_year": "152.5",
+          "known_copepod_wet_Q": "56.7",
+          "remaining_wet_Q_unallocated": "95.8",
+          "source": "../text_feeding_audit/partial_numeric_diets.json"
+        },
+        "8": {
+          "2018_dissertation_III_species_wet_Q_million_t_per_year": "1.79694",
+          "species": "pink+chum+sockeye",
+          "period": "2000-2014",
+          "limitation": "Complete prey-to-22-group crosswalk and carbon conversion still required",
+          "source": "../article_constraints/followup_salmon_recovery.json"
+        },
+        "14": {
+          "known_matching_prey_carbon_Q_lower_bound_million_tC_per_year": "0.2095846226415094339622641509",
+          "Figure_P_carbon": "0.144",
+          "GS_0p2_known_prey_respiration_lower_bound": "0.0236676981132075471698113207",
+          "period": "2006-2014; original Figure2000-2014",
+          "limitation": "Different period/stocks; complete prey crosswalk still required; small-jelly intake uses expert estimates",
+          "source": "../article_constraints/followup_jellyfish_recovery.json"
+        }
+      }
+    },
+    "B": {
+      "name": "Increase Q with Figure DC fixed",
+      "changes": "Increase deficient consumption and all existing incoming feeding flows proportionately; retain Figure diet composition and zero absent arrows.",
+      "scientific_status": "Explicit assumed numerical repair, not recovered source values",
+      "bounds_table": "numeric_boundaries",
+      "limitation": "May worsen prey production/EE/BA deficits; boundary Q has respiration zero."
+    },
+    "C": {
+      "name": "Decrease production with Figure Q/DC fixed",
+      "changes": "Keep source stock and feeding; reduce P/B to reduce production.",
+      "scientific_status": "Explicit departure from published production",
+      "bounds_table": "numeric_boundaries",
+      "limitation": "May worsen EE/BA deficits; boundary P has respiration zero."
+    }
+  },
+  "numeric_boundaries": [
+    {
+      "group_id": 6,
+      "group": "Hyperiids",
+      "units": "million tC/year",
+      "Figure_P": "4.752",
+      "Figure_Q": "4.383",
+      "B_minimum_Q_at_GS_0p10": "5.28",
+      "B_intake_increase_percent": "20.46543463381245722108145110",
+      "C_maximum_P_at_GS_0p10": "3.9447",
+      "C_production_reduction_percent": "16.98863636363636363636363636",
+      "boundary_respiration": 0,
+      "positive_respiration_requires": "Q strictly above B minimum or P strictly below C maximum"
+    },
+    {
+      "group_id": 8,
+      "group": "Salmon",
+      "units": "million tC/year",
+      "Figure_P": "0.105",
+      "Figure_Q": "0.0731",
+      "B_minimum_Q_at_GS_0p10": "0.1166666666666666666666666667",
+      "B_intake_increase_percent": "59.59872321021431828545371640",
+      "C_maximum_P_at_GS_0p10": "0.06579",
+      "C_production_reduction_percent": "37.34285714285714285714285714",
+      "boundary_respiration": 0,
+      "positive_respiration_requires": "Q strictly above B minimum or P strictly below C maximum"
+    },
+    {
+      "group_id": 14,
+      "group": "Jellyfish",
+      "units": "million tC/year",
+      "Figure_P": "0.144",
+      "Figure_Q": "0.0505",
+      "B_minimum_Q_at_GS_0p10": "0.16",
+      "B_intake_increase_percent": "216.8316831683168316831683168",
+      "C_maximum_P_at_GS_0p10": "0.04545",
+      "C_production_reduction_percent": "68.437500",
+      "boundary_respiration": 0,
+      "positive_respiration_requires": "Q strictly above B minimum or P strictly below C maximum"
+    }
+  ],
+  "remaining_global_blockers": [
+    "Text-plus-figure diet incomplete until unallocated categories and extra prey are handled.",
+    "Individual bacteria/protozoa native B/PB remain absent despite Figure P constraints.",
+    "Detritus wet/carbon conversion remains unknown for wet absolute bacterial Q.",
+    "Free living BA implies optimizer-selected EE/BA rather than source-identified values.",
+    "Tentative Figure routes and F62 alternative remain part of sensitivity checks."
+  ],
+  "complete_GS_EE_vector_available": false,
+  "repairs_applied": false,
+  "researcher_decision": {
+    "preferred": "A wherever source reconstruction solves the problem",
+    "jellyfish_additional_scope": "Investigate likely human writing errors, including wet/carbon mixups",
+    "B_C_general_repairs_authorized": false,
+    "source_corrections_adopted": false
+  }
+}

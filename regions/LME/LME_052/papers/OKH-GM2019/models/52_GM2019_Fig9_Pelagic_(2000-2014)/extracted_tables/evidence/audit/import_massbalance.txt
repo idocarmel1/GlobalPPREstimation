@@ -1,0 +1,50 @@
+  # group                                B      P/B      Q/B      EE  EE calc    P/Q    catch
+  1 Phytoplankton                    40.93      220        -       -        0      -        -
+  2 Bacteria                             -        -        -       -        -      -        -
+  3 Protozoa                             -        -        -       -        -      -        -
+  4 Copepods                         70.14     15.2        -       -    0.221      -        -
+  5 Euphausiids                      38.02     10.1        -       -    0.181      -        -
+  6 Hyperiids                        3.821     11.7    10.24       -    0.171   1.14        -
+  7 Chaetognaths                     27.66        6    6.731       -  0.00963  0.891        -
+  8 Salmon                          0.5181     1.14    1.247       -    0.293  0.914        -
+  9 Squid III                       0.3238      2.5    38.18       -     6.16 0.0655        -
+ 10 Herring                          1.619     0.34    13.42       -     8.68 0.0253        -
+ 11 Deep-sea smelt                   1.166     0.29    2.762       -     2.42  0.105        -
+ 12 Pollock less than 30 cm         0.5181      2.5    20.62       -   0.0801  0.121        -
+ 13 Capelin                         0.5181     0.35    14.25       -     24.4 0.0246        -
+ 14 Jellyfish                        2.655       10   0.1764       -  0.00424   56.7        -
+ 15 Pollock 30-60 cm                 5.518      0.7     7.15       -    0.186 0.0979        -
+ 16 Squid IV                        0.3238      2.5    19.31       -     1.51  0.129        -
+ 17 Predatory salmon               0.01295     0.84    54.37       -        0 0.0155        -
+ 18 Baleen whales                    0.467     0.01        -       -        0      -        -
+ 19 Pollock greater than 60 cm      0.3238      0.2    1.521       -     7.44  0.132        -
+ 20 Predatory fish                 0.07772      0.2    39.93       -        00.00501        -
+ 21 Predatory mammals                0.158     0.03    4.742       -        00.00633        -
+ 22 Detritus                             -        -        -       -        -      -        -
+
+NOTE  1 consumer(s) lack B or Q/B, so predation on their prey is under-counted and the EE check below is a lower bound: 2 (Bacteria)
+NOTE  detritus pools (3): inflow ~1.045e+04, consumption ~0 t/km2/yr, implied EE ~0.000 (indicative — export not separated, and it uses recomputed EE where the paper gave none)
+WARN  group 3 (Protozoa) has a diet column but no diet entries
+WARN  group 4 (Copepods) has a diet column but no diet entries
+WARN  group 5 (Euphausiids) has a diet column but no diet entries
+WARN  group 18 (Baleen whales) has a diet column but no diet entries
+WARN  group 1 (Phytoplankton): only 2 of B/P-B/Q-B/EE given (B, PB) — Ecopath needs three. Sweep the prose for the missing one before accepting this.
+WARN  group 4 (Copepods): only 2 of B/P-B/Q-B/EE given (B, PB) — Ecopath needs three. Sweep the prose for the missing one before accepting this.
+WARN  group 5 (Euphausiids): only 2 of B/P-B/Q-B/EE given (B, PB) — Ecopath needs three. Sweep the prose for the missing one before accepting this.
+WARN  group 17 (Predatory salmon): P/Q = 0.015 outside the usual 0.02-0.5 range — check the P/B and Q/B columns
+WARN  group 18 (Baleen whales): only 2 of B/P-B/Q-B/EE given (B, PB) — Ecopath needs three. Sweep the prose for the missing one before accepting this.
+WARN  group 20 (Predatory fish): P/Q = 0.005 outside the usual 0.02-0.5 range — check the P/B and Q/B columns
+WARN  group 21 (Predatory mammals): P/Q = 0.006 outside the usual 0.02-0.5 range — check the P/B and Q/B columns
+ERROR group 6 (Hyperiids): P/Q = 1.143 with GS = 0.2 implies non-positive respiration (needs P/Q < 0.80)
+ERROR group 7 (Chaetognaths): P/Q = 0.891 with GS = 0.2 implies non-positive respiration (needs P/Q < 0.80)
+ERROR group 8 (Salmon): P/Q = 0.914 with GS = 0.2 implies non-positive respiration (needs P/Q < 0.80)
+ERROR group 9 (Squid III): recomputed EE = 6.158 > 1 — consumption+catch+BA (4.985) exceeds production (0.8096)
+ERROR group 10 (Herring): recomputed EE = 8.675 > 1 — consumption+catch+BA (4.776) exceeds production (0.5505)
+ERROR group 11 (Deep-sea smelt): recomputed EE = 2.423 > 1 — consumption+catch+BA (0.8193) exceeds production (0.3381)
+ERROR group 13 (Capelin): recomputed EE = 24.433 > 1 — consumption+catch+BA (4.431) exceeds production (0.1813)
+ERROR group 14 (Jellyfish): P/Q = 56.700 with GS = 0.2 implies non-positive respiration (needs P/Q < 0.80)
+ERROR group 16 (Squid IV): recomputed EE = 1.509 > 1 — consumption+catch+BA (1.222) exceeds production (0.8096)
+ERROR group 19 (Pollock greater than 60 cm): recomputed EE = 7.444 > 1 — consumption+catch+BA (0.4821) exceeds production (0.06477)
+
+10 error(s), 11 warning(s), 2 note(s)
+Check each error against a rendered image of the source page before changing anything. Do not adjust numbers to make this pass.

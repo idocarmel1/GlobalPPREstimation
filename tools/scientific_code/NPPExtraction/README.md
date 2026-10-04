@@ -24,11 +24,11 @@ After cloning, run `git lfs pull` and `python tools/verify_npp_sources.py` befor
 Decoded rasters, work files and runtime output are ignored rebuildable products.
 
 The published history covers **all 366 ecosystems over 1998–2019**, independently
-of catch or article availability. The [expansion publication proof](../../../original_research_archive/research/npp_extraction_2026_09/output/regional_expansion/publication_verification.json)
+of catch or article availability. The [expansion publication proof](../../../research/npp_extraction_2026_09/results/regional_expansion/publication_verification.json)
 records exact preservation of all 11,310 earlier rows. The earlier
-[`output/extraction_coverage.json`](../../../original_research_archive/research/npp_extraction_2026_09/output/extraction_coverage.json) is the historical
+[`output/extraction_coverage.json`](../../../research/npp_extraction_2026_09/results/extraction_coverage.json) is the historical
 archive-subset audit. The fixed global-atlas union also has all 22 annual records;
-see [its archived definition](../../../original_research_archive/research/workflow_development_2026_09/docs/GLOBAL_ATLAS_NPP_REFERENCE.md).
+see [its archived definition](../../../common_reference_data/provenance/source_paths.csv).
 The 366-region figures and percentages below describe the supplied **2019 reference
 run**, not measured percentages for every year of the expanded annual history.
 

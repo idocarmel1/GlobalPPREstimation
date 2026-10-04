@@ -1,0 +1,271 @@
+Sea of Okhotsk regional model validation
+Field Entry
+Region Sea of Okhotsk | LME_052 | Regional workbook
+Catch source Sea Around Us, 1950–2019 reconstructed catch. Original catch
+Selected article
+Chaikina (2004), A trophic mass-balance model of the Sea of Okhotsk for the 1980s 
+period. BSc thesis, UBC, 49 pages. Original thesis unavailable. A related 2020 chapter 
+documents the earlier model. Thesis listing | Related chapter
+Other known articles
+Radchenko (2015), Characterization of the Sea of Okhotsk Ecosystem Based on 
+Ecosystem Modelling. A 48-group contemporary model is retained as an alternative; full 
+reconstruction is unreviewed. Alternative article
+Selected model
+52_1_Sea_of_Okhotsk_NE_(1980). NE means newly constructed detailed Ecopath (not 
+North East). It is a whole-sea 1980s annual-average model with 29 source groups. 
+Reported area: 1,590,000 km². Accepted model
+Other models from 
+the same article
+The same source also compares a simplified nine-group SD 1980s model derived from 
+the Shuntov–Dulepova food web. NE and SD are model structures, not northeastern and 
+southern subregions. Simplified model
+Selection rationale
+Article — Retained as the broadest located whole-sea model despite incomplete original 
+documentation.
+Model — The detailed NE structure supplies finer biological resolution; existing 
+numerical caveats remain.
+Model extraction
+Diet re-extracted from related-chapter Tables 4a/b as printed: 174 numeric cells and 580 
+blanks. Historical normalization was removed from 74 numerical values; eight consumer 
+totals remain 0.998–1.001. All non-diet parameters and detritus routing are preserved.
+Native Table 1 B/PB/QB/EE values agree where supplied. Native catch fields and the 
+pollock cutoff are absent; export zeros, detritus B=1 and existing defaults/balance 
+remain assumptions.
+Source fidelity
+GE diagnostics
+WARN — living network near divergence; EE = 0 in Seabirds (5) and Sperm whales (3).
+No negative SPPR entries across the basal-source columns.
+rho_living = 0.867166
+b = 0.152044
+Detritus (29): SPPR = 1.251014
+Model and system balance checks pass; native group catch is unavailable.
+Full source matrices | Signed entries
+
+Field Entry
+TE diagnostics
+FAIL — living network diverges (rho_living > 1).
+Negative SPPR: Detritus (29) → Cottidae (14), Other Gadidae (12), Pinnipeds (4), Toothed 
+whales (2).
+Phytoplankton (28) → Cottidae (14), Other Gadidae (12), Pinnipeds (4), Toothed whales 
+(2).
+Phytobenthos (27) → Cottidae (14), Other Gadidae (12), Pinnipeds (4), Toothed whales 
+(2).
+rho_living = 1.025120
+Detritus (29): SPPR = 0.948648
+b = 0 is the TE convention.
+Model and system balance checks pass; they do not resolve living-network divergence.
+Full source matrices | Signed entries
+SPPR calculation
+[MANUAL — Researcher: calculation choices and reasons]
+[Excluded groups, scope and relevant values; other adjustments]
+Geographic fit
+A. Region covered by study: approximately 100% under the intended whole-sea proxy.
+B. Study covered by region: approximately 100% under that proxy.
+Temporal fit
+Static 1980s coefficients and fixed biomass proportions transfer across 1950–2019 
+whole-LME landings, catch and discards. Reference 2019 is roughly three decades later. 
+Seasonal source averaging does not reconstruct annual catch composition or ecosystem 
+change.
+Other
+GE, TE and With Egestion checks on the restored printed diet, normalized only at 
+runtime, reproduce the saved diagnostic grades and coefficients within numerical 
+tolerance. Existing annual results are retained. Whether diet discrepancies are rounding 
+or other errors remains for researcher review; runtime normalization is always allowed.
+With Egestion remains WARN; inherited near-singular Monte Carlo TE and 
+negative/unsupported methods remain historical. Failed TE annual PPR is unavailable.
+Method exposure and signed contributions
+Open issues and next 
+action - Sensitivity test to the simplified SD model.
+Review and 
+reproducibility
+Researcher name: [name] | review date: [date]
+
+Taxon mapping and coverage
+Reference: 2019 landings; all source scope, all reporting labels, no group filter.
+29 source groups (+1 computational import); 151 catch taxa.
+Simple-chain PPR totals 248,368,608.38 t C in 2019.
+20 labels lack a classic coefficient/TL; all have zero 2019 landings and zero annual contribution. Unknown coefficients 
+and TL remain ?.
+Method: protected independent simple trophic-chain coefficients.
+All 151 taxon mappings and descriptive Sources sheet
+Overall confidence Taxa (n) Catch (%) Simple-chain PPR (%)
+High 46 33% 64%
+Medium 56 56% 31%
+Low 2 0.090% 0.36%
+Very low 46 11% 4.2%
+Unresolved 1 0.0051% 0.00050%
+The summary uses the weaker required membership or allocation confidence. The following tables show each 
+component separately.
+Group assignment rules
+Plain-language rule Confidence PPR percentage
+Literal member or verified common-name crosswalk to a named taxonomic 
+source pool.
+High 93%
+Broad reporting union approximated across compatible source pools. Very low 2.8%
+Inferred eligible regional family, depth, habitat or feeding set. Medium 1.8%
+Represented ecological or lineage analogue with substantial mismatch. Very low 1.4%
+Supported ecological extension to a represented feeding or habitat guild. Medium 0.90%
+Partial or conflicting habitat fit with a material source mismatch. Low 0.36%
+Supported extension from a named, closely related regional representative. Medium 0.19%
+No defensible source membership or complete analogue set established. Unresolved 0.00050%
+Membership evidence: native Table 1 and diet, primary taxonomy and regional context and all candidate 
+decisions
+
+Allocation weight rules
+Plain-language rule Confidence PPR percentage
+One reviewed group receives all catch; no numerical split. High 67%
+Complete source biomass after unavailable native catch; fixed composition and 
+equal catchability assumed.
+Medium 33%
+No numerical allocation without established membership. Unresolved 0.00050%
+Weights and assumptions: native group catches are unavailable. Canonical export=0 is not an observed stage 
+fraction. Complete source biomass supplies every multi-group vector at Medium allocation confidence. Pollock 
+supplies 48.9157% of 2019 landings and is allocated 53.874619% adult/nonjuvenile and 46.125381% juvenile, with 
+equal catchability assumed and no recovered cutoff. Fixed 1980s proportions apply across all years and catch bases. 
+Complete candidate vectors
+Each rule percentage is the share of independent simple-chain PPR associated with taxa using that rule.
+Unresolved: Cyprinidae, because unknown freshwater-family composition has no defensible local marine assignment. 
+Its 177.054315 t landings and 1,241.263560 t C simple-chain PPR remain in the totals. Very low: 46 labels, 11.0196% 
+of landings and 4.1872% of simple-chain PPR. Failed TE has signed caught contributions, so ordinary positive 
+confidence shares are unavailable. Flagged appendix rows Method contributors
+Very low decisions
+Affected taxa Why confidence is very low
+Actinopterygii; Marine fishes not 
+identified
+Unobserved species, stage and depth composition spans all represented 
+bony-fish groups 6–19. The reporting functional tag does not restrict the set 
+to demersal fish. Split weights use source biomass with equal catchability 
+assumed; fixed 1980s composition is transferred across catch years and 
+bases.
+Scomber; Scomber japonicus
+Pacific herring provides a coastal schooling pelagic-fish analogue. Scombrid 
+lineage, greater piscivory and slope use differ; literal mackerel membership 
+is absent. Allocation is 100% to herring.
+Bramidae; Carangidae; Decapterus; 
+Isurus; Isurus oxyrinchus; Prionace 
+glauca; Rachycentridae; 
+Rachycentron canadum; 
+Scomberomorus niphonius; Seriola; 
+Seriola dumerili; Seriola lalandi; 
+Sphyraena barracuda; Thunnus 
+alalunga; Thunnus orientalis; 
+Trachurus; Trachurus japonicus; 
+Xiphias gladius
+Source Salmon supplies a mobile marine water-column fish analogue. Its 
+pooled diet is predominantly zooplanktivorous, and it has no species/size 
+inventory establishing a large-pelagic-predator guild. Lineage, size, 
+residency and habitat mismatches remain; each taxon receives 100% in 
+Salmon.
+Cololabis saira
+Capelin provides a schooling pelagic zooplanktivorous analogue. Saury 
+oceanic/migratory ecology and beloniform lineage differ. Allocation is 100% 
+to capelin.
+Cephalopoda; Octopoda
+Squids and carnivorous benthos approximate pelagic and benthic 
+cephalopods. Octopus/cuttlefish/argonaut components are not literal listed 
+squid members; habitat and lineage composition is unknown. Split weights 
+use source biomass with equal catchability assumed; fixed 1980s 
+composition is transferred across catch years and bases.
+
+Affected taxa Why confidence is very low
+Scombridae; Scombroidei
+Herring and Salmon provide coastal-schooling and mobile marine-fish 
+analogues for absent mackerel, tuna, bonito and billfish components. 
+Lineage and historical reporting scope differ; constituent shares are 
+unobserved. Split weights use source biomass with equal catchability 
+assumed; fixed 1980s composition is transferred across catch years and 
+bases.
+Engraulis japonicus
+Pacific Sardine provides a schooling clupeoid plankton-filtering analogue. 
+Engraulid identity differs and the source sardine binomial is unverified. 
+Allocation is 100% to sardine.
+Miscellaneous marine crustaceans
+Crabs and shrimps plus inferred crustacean components of benthos and 
+zooplankton approximate this broad label. Residual pools also contain non￾crustaceans; constituent shares are unknown. Split weights use source 
+biomass with equal catchability assumed; fixed 1980s composition is 
+transferred across catch years and bases.
+Salmonidae
+Source Salmon is not an exhaustive salmonid-family inventory. Trout, char 
+and whitefish introduce unrepresented freshwater habitats and feeding 
+modes into the broad-family approximation.
+Chondrichthyes; Elasmobranchii
+No cartilage compartment is represented. Pollock, Salmon, residual bottom 
+fish and mesopelagic fish form a weak habitat/predatory-fish analogue 
+union; lineage, body form and constituent shares differ. Split weights use 
+source biomass with equal catchability assumed; fixed 1980s composition is 
+transferred across catch years and bases.
+Panulirus; Squillidae
+Crabs and shrimps and Carnivorous invertebrates provide competing 
+benthic crustacean/feeding analogues. No inventory establishes literal 
+lobster or mantis-shrimp membership; lineage, feeding pooling and lobster 
+shallow-water transfer remain uncertain. Split weights use source biomass 
+with equal catchability assumed; fixed 1980s composition is transferred 
+across catch years and bases.
+Miscellaneous aquatic 
+invertebrates
+Unknown composition can span named and residual benthic and pelagic 
+invertebrate guilds. No source inventory or catch composition establishes 
+the broad reporting mixture. Split weights use source biomass with equal 
+catchability assumed; fixed 1980s composition is transferred across catch 
+years and bases.
+Mugil cephalus; Mugilidae; Scaridae
+Other bottom fishes provides a substrate-associated fish analogue. The 
+model lacks a grazing/detritivorous fish group; feeding mode, reef/brackish 
+habitat and lineage differ. Allocation is 100% to this analogue.
+Perciformes
+Historical perch-like reporting crosses present-day taxonomy and habitats. 
+Cottidae, Ammodytidae and residual fish pools are supplemented by 
+herring/Salmon analogues for absent mackerels/jacks; herring is not a 
+literal perch-like member. Split weights use source biomass with equal 
+catchability assumed; fixed 1980s composition is transferred across catch 
+years and bases.
+
+Affected taxa Why confidence is very low
+Mollusca
+Squids and basal/carnivorous benthos approximate clams, seasnails and 
+cephalopods. Residual benthos lacks an exhaustive species list, and whole￾phylum composition is unobserved. Split weights use source biomass with 
+equal catchability assumed; fixed 1980s composition is transferred across 
+catch years and bases.
+Marine pelagic fishes not identified
+Unknown composition is approximated across named pelagic, 
+benthopelagic and mesopelagic fish. Explicit bottom-fish pools are 
+excluded; the remaining union is not a measured catch composition. Split 
+weights use source biomass with equal catchability assumed; fixed 1980s 
+composition is transferred across catch years and bases.
+Mola mola
+Pacific herring provides a pelagic zooplankton/gelatinous-prey fish 
+analogue. Giant size, nonschooling gelatinivory and lineage differ. 
+Allocation is 100% to herring.
+Stromateidae
+Pacific herring provides a schooling pelagic planktivore/gelatinous-prey fish 
+analogue. Family identity, feeding and size differ. Allocation is 100% to 
+herring.
+Chanos chanos
+Pacific Sardine provides a coastal schooling plankton/detritus-feeding 
+analogue. Milkfish lineage, tropical/brackish habitat and body size differ. 
+Allocation is 100% to sardine.
+Batoidea
+Other bottom fishes provides a benthic predatory-fish analogue for 
+skates/rays. The model has no cartilage pool; bony lineage, body form and 
+habitat breadth differ. Allocation is 100% to this analogue.
+Coregonus
+Salmon provides a cold-water salmonid analogue. Freshwater/brackish life 
+histories and feeding differ from the marine stock; the caught aquatic mode 
+is unknown. Allocation is 100% to Salmon.
+
+Geographic evidence screenshots
+R is the Sea Around Us Sea of Okhotsk LME. S is described by the source as the whole sea. The displayed polygon 
+reconstructs that intended domain using R; author GIS and a study-area map are unavailable. Approximate A/B 
+values therefore describe the intended proxy, not measured overlap.
+Region area
+Target LME 052 and intended whole sea proxy
+WGS84 target area: 1,563,743 km². Source reported area: 1,590,000 km². Their area ratio is 98.3486% (target/source); it is 
+not an overlap calculation. No geographic multiplier is applied. Target polygon | Qualified geographic assessment
+
+Study area in the article
+Study area map unavailable native methods excerpt
+Related 2020 chapter PDF25 / printed24. The methods describe the whole sea and report 1,590,000 km². Chapter figures 
+are food-web and simulation/results diagrams, not study-area maps. The excerpt supplies native geographic evidence 
+while preserving the missing-map limitation. Native chapter | Source identity review
+NE denotes the newly constructed detailed Ecopath model. The accepted identifier is retained; no northeastern boundary 
+or original-thesis map is inferred.

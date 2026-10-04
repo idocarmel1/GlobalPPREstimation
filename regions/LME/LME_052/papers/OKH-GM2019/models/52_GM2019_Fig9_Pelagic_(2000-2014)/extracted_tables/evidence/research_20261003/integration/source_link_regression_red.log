@@ -1,0 +1,71 @@
+test_legacy_model_without_registry_path_keeps_existing_source (test_model_source_paths.ModelSourcePathTests.test_legacy_model_without_registry_path_keeps_existing_source) ... C:\Users\idoca\miniconda3\Lib\site-packages\openpyxl\worksheet\worksheet.py:581: UserWarning: In write-only mode you must add table columns manually
+  warn("In write-only mode you must add table columns manually")
+Checked HTML detail inputs: LME_001
+ok
+test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads (test_model_source_paths.ModelSourcePathTests.test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads) ... Checked HTML detail inputs: LME_001
+FAIL
+test_nested_variant_without_sppr_links_exact_native_model (test_model_source_paths.ModelSourcePathTests.test_nested_variant_without_sppr_links_exact_native_model) ... Checked HTML detail inputs: LME_001
+FAIL
+test_retained_model_without_declared_path_keeps_legacy_id_fallback (test_model_source_paths.ModelSourcePathTests.test_retained_model_without_declared_path_keeps_legacy_id_fallback) ... Checked HTML detail inputs: LME_001
+ok
+test_scoped_build_uses_registry_path_for_retained_nested_model (test_model_source_paths.ModelSourcePathTests.test_scoped_build_uses_registry_path_for_retained_nested_model) ... Checked HTML detail inputs: LME_001
+FAIL
+
+======================================================================
+FAIL: test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads (test_model_source_paths.ModelSourcePathTests.test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_model_source_paths.py", line 77, in test_nested_declared_variant_links_its_sppr_sibling_in_both_payloads
+    self.assertEqual(self.generate(root), [expected, expected])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['reg[15 chars]dels/m/sppr_source.xlsx', 'regions/LME_001/mod[19 chars]lsx'] != ['reg[15 chars]dels/source/assumption_variants/adopted/sppr_s[85 chars]lsx']
+
+First differing element 0:
+'regions/LME_001/models/m/sppr_source.xlsx'
+'regions/LME_001/models/source/assumption_variants/adopted/sppr_source.xlsx'
+
+- ['regions/LME_001/models/m/sppr_source.xlsx',
+-  'regions/LME_001/models/m/sppr_source.xlsx']
++ ['regions/LME_001/models/source/assumption_variants/adopted/sppr_source.xlsx',
++  'regions/LME_001/models/source/assumption_variants/adopted/sppr_source.xlsx']
+
+======================================================================
+FAIL: test_nested_variant_without_sppr_links_exact_native_model (test_model_source_paths.ModelSourcePathTests.test_nested_variant_without_sppr_links_exact_native_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_model_source_paths.py", line 83, in test_nested_variant_without_sppr_links_exact_native_model
+    self.assertEqual(self.generate(Path(directory), with_sppr=False), [expected, expected])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['reg[15 chars]dels/m/sppr_source.xlsx', 'regions/LME_001/mod[19 chars]lsx'] != ['reg[15 chars]dels/source/assumption_variants/adopted/model.[73 chars]son']
+
+First differing element 0:
+'regions/LME_001/models/m/sppr_source.xlsx'
+'regions/LME_001/models/source/assumption_variants/adopted/model.json'
+
+- ['regions/LME_001/models/m/sppr_source.xlsx',
+-  'regions/LME_001/models/m/sppr_source.xlsx']
++ ['regions/LME_001/models/source/assumption_variants/adopted/model.json',
++  'regions/LME_001/models/source/assumption_variants/adopted/model.json']
+
+======================================================================
+FAIL: test_scoped_build_uses_registry_path_for_retained_nested_model (test_model_source_paths.ModelSourcePathTests.test_scoped_build_uses_registry_path_for_retained_nested_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\test_model_source_paths.py", line 93, in test_scoped_build_uses_registry_path_for_retained_nested_model
+    self.assertEqual(self.generate(Path(directory), retained=True), [expected, expected])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['reg[15 chars]dels/m/sppr_source.xlsx', 'regions/LME_001/mod[19 chars]lsx'] != ['reg[15 chars]dels/source/assumption_variants/adopted/sppr_s[85 chars]lsx']
+
+First differing element 0:
+'regions/LME_001/models/m/sppr_source.xlsx'
+'regions/LME_001/models/source/assumption_variants/adopted/sppr_source.xlsx'
+
+- ['regions/LME_001/models/m/sppr_source.xlsx',
+-  'regions/LME_001/models/m/sppr_source.xlsx']
++ ['regions/LME_001/models/source/assumption_variants/adopted/sppr_source.xlsx',
++  'regions/LME_001/models/source/assumption_variants/adopted/sppr_source.xlsx']
+
+----------------------------------------------------------------------
+Ran 5 tests in 6.489s
+
+FAILED (failures=3)

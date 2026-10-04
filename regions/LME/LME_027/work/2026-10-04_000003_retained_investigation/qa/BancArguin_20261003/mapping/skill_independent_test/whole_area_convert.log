@@ -1,0 +1,57 @@
+
+--- Running Pipeline Option 1 (Dir -> JSON -> Excel) ---
+
+STDERR
+INFO - Starting conversion for directory: C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\regions\LME_027\validation_reports\BancArguin_20261003\mapping\skill_independent_test\whole_area
+INFO - Output will be saved as: 27_Canary_Current_999_Independent_adversarial_fixture_(1991).json
+INFO - Biomass accumulation loaded for 5 group(s) from Biomass_accumulation.csv
+INFO - Processing group: Fish A (ID: 1)
+INFO -     - BA 2.00 t/km^2/year is per habitat area; scaled by hab area 0.5 to 1 to match the 'biomass' field
+INFO -     - BA rate 0.2/year derived from BA 2.00 / B 10.0 (not stated by the source)
+INFO -     - Biomass accumulation: 1 t/km^2/year, 0.2 /year
+INFO -     - Total Diet + Import sum for Fish A: 0.90000
+WARNING -     - Diet Sum is not 1 (0.90000); preserving source values for review
+INFO -     - Detritus fate sum for Fish A: 0.20000
+WARNING -     - Detritus fate sum is not 1 (0.20000); preserving source values
+INFO - Processing group: Fish B (ID: 2)
+WARNING -     - BA -2.50 given but no biomass, so the BA rate cannot be derived
+INFO -     - Biomass accumulation: -2.50 t/km^2/year, -9999 /year
+INFO -     - Total Diet + Import sum for Fish B: 0.91000
+WARNING -     - Diet Sum is not 1 (0.91000); preserving source values for review
+INFO -     - Detritus fate sum for Fish B: 0.40000 to pools + 0.10000 to Export = 0.50000
+WARNING -     - Detritus fate sum is not 1 (0.50000); preserving source values
+WARNING -     -> VALIDATION CONFLICT: Missing Q/B value, but has diet inputs!
+WARNING -     - Missing EE for Fish B
+INFO - Processing group: Producer (ID: 3)
+INFO -     - BA rate 0.428571/year derived from BA 3.00 / B 7.0 (not stated by the source)
+INFO -     - Biomass accumulation: 3.00 t/km^2/year, 0.428571 /year
+INFO -     -> Identified as Primary Producer (pp = 1).
+WARNING -     - Missing EE for Producer
+INFO - Processing group: Det A (ID: 4)
+INFO -     - BA rate 0/year derived from BA 0 / B 1.0 (not stated by the source)
+INFO -     - Biomass accumulation: 0 t/km^2/year, 0 /year
+INFO -     -> Identified as Detritus group (pp = 2).
+WARNING -     - Missing EE for Det A
+INFO - 
+Success: Output saved to C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\regions\LME_027\validation_reports\BancArguin_20261003\mapping\skill_independent_test\whole_area\27_Canary_Current_999_Independent_adversarial_fixture_(1991).json
+INFO - 
+--- Mass balance check: NOT BALANCED ---
+INFO - BA is unknown (-9999) for 1 of 5 group(s); those groups cannot be decided unless they reconcile without it.
+INFO - NOTE  1 consumer(s) lack B or Q/B, so predation on their prey is under-counted and every recomputed EE below is a lower bound: 2 (Fish B)
+INFO - NOTE  1 group(s) carry all four of B/P-B/Q-B/EE - Ecopath needs three, so one of them is probably a published model estimate rather than an input; record which in REPORT.md: 1 (Fish A)
+INFO - NOTE  detritus pools (2): inflow ~59.2, consumption ~10 t/km^2/year, implied EE ~0.169 (indicative - export is not separated, it uses recomputed EE where the source gave none, and any unknown BA is left out of the flows entirely)
+WARNING - INDET group 1: diet/import has unknown cells; known subtotal 0.9 is not a complete composition
+WARNING - INDET group 2: source P/B is missing or nonpositive; native/stanza production cannot be verified
+WARNING - INDET group 2: unassimilated fraction unknown; indicative checks use a software assumption
+WARNING - INDET group 4: discard removals unknown; reported catch does not establish complete removals
+WARNING - INDET group 5: discard removals unknown; reported catch does not establish complete removals
+WARNING - WARN  group 1 (Fish A): printed EE 0.500 vs recomputed 1.750 (diff 1.250), BA 2.0 carried (absolute or derived internally from source BA rate)
+WARNING - WARN  group 3 (Producer): only 2 of B/P-B/Q-B/EE given (B, P/B) - Ecopath needs three
+ERROR - ERROR group 1 (Fish A): recomputed EE = 1.750 > 1 - catch+BA+predation (3.5) exceeds production (2)
+ERROR - ERROR group 2: complete source diet plus import sum 0.91 is below one
+INFO - 2 error(s), 5 indeterminate, 2 warning(s), 3 note(s)
+INFO - Check each error against a rendered image of the source page before changing anything. Do not adjust numbers to make this pass.
+INFO - An indeterminate group is a prompt to go back to the source for biomass accumulation, not a BA to enter. A BA this check suggested and then validated itself against would prove nothing.
+INFO - Mass balance section written to C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\regions\LME_027\validation_reports\BancArguin_20261003\mapping\skill_independent_test\whole_area\MASS_BALANCE.md
+INFO - Log saved to C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\regions\LME_027\validation_reports\BancArguin_20261003\mapping\skill_independent_test\whole_area\ewe_conversion.log
+INFO - Reading JSON: C:\Users\idoca\Desktop\����\������\���� ���\����\BTN\GlobalPPREstimation\regions\LME_027\validation_reports\BancArguin_20261003\mapping\skill_independent_test\whole_area\27_Canary_Current_999_Independent_adversarial_fixture_(1991).json

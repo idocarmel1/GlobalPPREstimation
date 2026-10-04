@@ -1,0 +1,17 @@
+# Figure 9 source audit
+
+**F77 supports medium pollock -> predatory fish (15 -> 20), replacing 19 -> 20.** Its green shaft starts at medium pollock, passes through the large-pollock box without an arrowhead there, and ends at predatory fish. Confidence: high. Review [unannotated native source crop](F77_unannotated_source_crop.png), bounds `[140,1080,820,1525]`, beside the [annotated diagnostic path](F77_annotated_path_x3.png).
+
+**F22 confirms euphausiids -> baleen whales (5 -> 18).** The inner blue `0,141` curve can be followed to its blue arrowhead at the whale box. Confidence: high. See [whole-route source crop](F22_entire_route_source_native.png), bounds `[540,400,1318,1340]`, and [endpoint crop](F22_whale_endpoint_source_native.png), bounds `[710,1200,960,1340]`. No omitted blue feeding arrowhead into jellyfish was found in the [local source check](jellyfish_blue_incoming_check_source_native.png), bounds `[800,740,1318,1020]`. This is a bounded negative visual finding.
+
+**F78 remains tentative 15 -> 21.** Its literal is `0,05`; the apparent trailing `1` is the white label box's dark shadow. The shallower green diagonal continues across the predatory-fish box toward mammals, while the steeper squid-IV bow ends at a nearby predatory-fish head. Their close crossing/head overlap prevents a confidence upgrade. See [label and heads](F78_label_and_heads_source_native.png) and [continuation](F78_continuation_source_native.png).
+
+**No drawn copepod -> smelt blue feeding arrow was found, labelled or unlabelled.** The four visible copepod blue shafts lead to herring (`1,1`), hyperiids (`4,1`), chaetognaths (`20,1`) and small pollock (`0,736`). The blue smelt head belongs to `0,448` from euphausiids. The thick `4,4` euphausiid shaft passes through the smelt box without a head and continues to medium pollock. See [source context](copepod_smelt_context_source_native.png), bounds `[90,390,1090,990]`, and [smelt heads](smelt_blue_heads_source_native.png), bounds `[260,820,500,1000]`. Confidence: high within the visible raster. The p.155 prose diet figures prompted inspection but were not used to reroute a line; prose-derived supplementation requires separate provenance.
+
+F13 (`0,283`) also supports its existing euphausiid -> hyperiid route with high confidence. F26/F47, F41/F42, F52/F57 and the dense red priority routes remain unresolved; no exact substitute endpoints are proposed. Numeric F62 (`0.023` preferred, `0.025` alternative) and F67 (`0.05` confirmed) are user readings conveyed by the parent, recorded separately from route confidence.
+
+All 21 living production box values match the adopted Figure 9 ledger. Detritus displays no number. Large pollock clearly reads `0,009`, not `0,001`. Figure/Table 3 differences remain preserved.
+
+[route_decisions.json](route_decisions.json) carries concise decisions and confidence. [proposed_route_changes.json](proposed_route_changes.json) retains detailed visual justifications. [production_node_audit.json](production_node_audit.json) holds every node reading; [audit_verification.json](audit_verification.json) verifies exact native source crops.
+
+Native source crops contain unmodified source pixels. Enlargements use nearest-neighbor resampling. Color-only reading aids and annotated paths are diagnostic overlays. The source is Gorbatenko and Melnikov (2019), Figure 9, PDF p.15 / printed p.157. The supporting thesis was viewed only for context; its extra arrows were not imported. No baseline source, ledger, model, CSV, workbook or report was edited.

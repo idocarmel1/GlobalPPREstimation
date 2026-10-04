@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "task": "Task13 late paper-file discovery migration correction",
+  "production": "tools/project_core/maps/original_atlas_data.py:reconcile_paper_files",
+  "root_cause": [
+    "Reviewed role registry remained at obsolete common_reference_data/paper_file_roles.json.",
+    "Source inventory enumerated paper roots instead of canonical sources/; generated manifest received a model-source label.",
+    "Current paper-owned canonical model JSON and model notes were not derived for navigation."
+  ],
+  "changes": [
+    "Use authoritative common_reference_data/provenance/paper_file_roles.json and preserve exact-byte evidence guard.",
+    "Paper inventory follows discover_regions; current models follow discover_models. Original files are immediate canonical sources/ entries; paper root extraction remnants are excluded.",
+    "Retain source manifest with role metadata and explicit Source manifest JSON label; expose current canonical model.json and adjacent model_notes.md separately.",
+    "Keep existing known-file assessment on unchanged bytes; retain previous assessment and downgrade changed/unproven bytes; preserve historical quality score, current specific loadability assessment and missing scientific values.",
+    "Existing 15 fixtures migrated to canonical sources/ and provenance role registry. New realistic canonical fixture checks original/supplement/reviewed context, administrative manifest, model/notes navigation, obsolete root exclusion and idempotency."
+  ],
+  "verification": {
+    "red": {
+      "command": "python -m unittest tools.workflow_checks.maps.test_paper_files.PaperFileTests.test_canonical_sources_manifest_and_current_models_are_navigable_without_reassessment",
+      "exit_code": 1,
+      "result": "Expected failure: five canonical source/model artifact paths absent."
+    },
+    "green": {
+      "runtime": "C:/Users/idoca/miniconda3/python.exe",
+      "command": "python -m unittest tools.workflow_checks.maps.test_paper_files",
+      "tests": 17,
+      "exit_code": 0,
+      "result": "OK",
+      "latest_seconds": 0.916
+    },
+    "diff_check": {
+      "command": "git diff --check -- tools/project_core/maps/original_atlas_data.py tools/workflow_checks/maps/test_paper_files.py",
+      "exit_code": 0
+    }
+  },
+  "scope": "Administrative discovery/label migration only. No scientific parameter changes, quality score reevaluation, fresh source-identity claims, admission/approval inference or efficiency implementation.",
+  "generated_pages": {
+    "status": "Parent-owned focused refresh pending at handoff",
+    "writes_by_this_agent": false,
+    "requirement": "Only paper material_files/presence metadata and derived file inventory may refresh. Preserve all scientific numeric/series/network payload exactly; do not full rebuild.",
+    "relayout_note": "Current --layout-only preserves embedded payload and does not reconcile paper_files or regenerate sources.html; it alone cannot apply this metadata change."
+  }
+}

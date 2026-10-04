@@ -1,0 +1,116 @@
+Alternative Okhotsk model search — 2 October 2026
+
+Decision
+Two genuinely different model lineages were located outside the selected Chaikina 2004/2020 article: Gorbatenko/Melnikov's quantitative pelagic carbon-flow network and Gorbatenko/Kulik/Lazhentsev's northeastern Okhotsk linear inverse model (LIM). The full 2019 paper, both LIM presentations, and four supporting feeding papers have been recovered from their publishers/institutions. No independently verified, complete, operational replacement Ecopath model with a matching full diet matrix was recovered.
+
+The best newer reconstruction candidate is Gorbatenko and Melnikov (2019), with Gorbatenko's 2018 dissertation and the 2016 feeding papers as supporting sources. Calling this an already complete Ecopath replacement would overstate the evidence. It is a different published quantitative food-web study, and its numerical feeding information is useful. A complete whole-community diet matrix and compatible mass balance still need to be established.
+
+1. Gorbatenko K.M. & Melnikov I.V. (2019)
+Trophodynamics of marine organisms in the epipelagic layer of the Okhotsk Sea in 2000s. Izvestiya TINRO 198:143–163.
+DOI: 10.26428/1606-9919-2019-198-143-163
+Publisher landing page: https://izvestiya.tinro-center.ru/jour/article/view/497
+Original PDF: https://izvestiya.tinro-center.ru/jour/article/download/497/467
+Local: gorbatenko_melnikov_2019.pdf (21 pages)
+
+Geography and period: Sea of Okhotsk pelagic community, observations for 2000–2014, chiefly the epipelagic 0–200 m layer (0–bottom at shallower stations). This is not coverage of the entire water column and benthic community. Source and methodological lineage differ from Chaikina's Ecopath models, although some P/B parameters are inherited from Radchenko and other literature.
+
+Recoverable evidence:
+- Printed p.148 / PDF p.6, Table 1: seasonal dominant zooplankton biomass, production and P/B.
+- Printed p.154 / PDF p.12, Table 3: biomass, carbon conversion, P/B and production across trophic components.
+- Printed pp.153–157 / PDF pp.11–15: annual consumption and feeding descriptions, with their source references.
+- Printed p.157 / PDF p.15, Figure 9: numerical carbon flows between named nodes; node labels represent production, not biomass; arrows represent annual food consumption in million tonnes C per year.
+- Printed p.158 / PDF p.16, Figure 10: aggregate production shares, not diets.
+
+Completeness problems to resolve before import:
+- There is no square group-by-group numerical diet table in this paper. Figure 9 is a useful source of numerical links but has dense overlapping arrows, aggregate nodes and a different presentation of some groups than Table 3. Table 3 includes 'other' groups that are not all separate Figure 9 nodes. Absence of a displayed arrow cannot automatically be encoded as a published zero.
+- Microheterotrophs are aggregated in Table 3 but bacteria and protozoa are separated in Figure 9. Compatible biomass and consumption inputs would have to be traced for these subgroups.
+- Pollock 30–60 cm production is 0.537 in Table 3 and 0.59 in Figure 9 (million tC/year). This printed difference needs explanation before the diagram and table are assumed to be the same internally consistent numerical model.
+- Complete consumption inputs, fishery removals and detritus/boundary routing for a matched full Ecopath formulation have not been established. Unknown values must remain unknown.
+- Carbon-based food fractions cannot be copied directly into a wet-weight diet matrix; prey carbon content and a documented conversion are required.
+- No supplementary-material link was exposed in the recovered article HTML; its public JATS export contains metadata/references rather than the article body, figures or tables. The PDF has no embedded attachments.
+
+Assessment: strongest recovered source for an independently reconstructed modern pelagic model; not a verified ready-to-import full LME_052 model. No reconstruction or source-to-EwE conversion was performed in this search.
+
+2. Gorbatenko, Kulik and colleagues (2014–2015), northeastern Okhotsk LIM / EcoTroph
+2014: Carbon flows through Gadidae species in the ecosystem of the Northeastern part of the Sea of Okhotsk estimated in a carbon flow mass balance model.
+https://meetings.pices.int/publications/presentations/PICES-2014/2014-S5/Day2-S5-1125-Kulik.pdf
+Local: gorbatenko_kulik_2014_LIM.pdf (17 pages)
+
+2015: The effects of fishing on ecosystem structure of the Northeastern part of the Okhotsk Sea.
+https://meetings.pices.int/publications/presentations/PICES-2015/2015-S3/S3-1445-Kulik.pdf
+Local: gorbatenko_kulik_2015_LIM_EcoTroph.pdf (27 pages)
+
+This is a real multispecies numerical model, not a pollock-only stock model. It incorporates plankton, benthos, decapods, fishes, squid, mammals, birds and fishing. The 2015 presentation defines the northeastern domain as north of 51 degrees N and east of 150 degrees E, and describes a mean ecosystem for the 2000s. Stable isotope information and diet ranges/posterior constraints are used in the inverse model. These constraints are not themselves a final point-valued diet matrix.
+
+Critical scientific status:
+- 2014 slides show multiple evolving formulations, including 180 and 158 components. They do not provide one complete final input-and-flow export.
+- 2015 PDF p.14 explicitly states that selected components were solved exactly but total balance was far from zero; a solution for the whole system involved unrealistic inverted flows, such as fish being eaten by plankton. This statement was visually inspected.
+- No complete LIM input text, full solved flow table or native model archive is attached to either PDF. Neither PDF has embedded files.
+- The R packages LIM, rgenoud and BurStMisc named in the slides are general software, not evidence that the authors' Okhotsk data were distributed with those packages. The public CRAN LIM mirror tree contains no filename identifying Okhotsk, Kulik, TINRO or Gorbatenko; that check does not establish that every generic example file's content was searched.
+
+Assessment: genuine alternate all-major-species model lineage, but geographically restricted and not operational as presented. Author input files and any later corrected solution would be needed. The ResearchGate identifiers for these presentations are repository/conference identifiers, not evidence of a separate peer-reviewed journal paper.
+
+3. Newer diet evidence recovered in full
+These are original numerical feeding studies, not Radchenko 2015 supplementary files, and not a complete community model by themselves.
+
+Pollock — Gorbatenko & Levitskaya (2016), pp.194–203.
+DOI: 10.26428/1606-9919-2016-185-194-203
+https://izvestiya.tinro-center.ru/jour/article/download/112/113
+Local: gorbatenko_levitskaya_2016_pollock.pdf (10 pages)
+- Table 1, printed p.197 / PDF p.4: daily ration by season and fish size.
+- Table 2, printed p.199 / PDF p.6: seasonal diet percentages for observations averaged over 2000–2014.
+- Table 5, printed p.201 / PDF p.8: seasonal and annual consumption by prey category.
+- The published categories include unresolved 'nekton', 'benthos' and 'other' prey. Splitting them across a new model's groups requires additional evidence. Table 2 provides seasonal group averages, not a separate diet row for every fish size group.
+
+Herring — Gorbatenko & Melnikov (2016), pp.185–193.
+DOI: 10.26428/1606-9919-2016-185-185-193
+https://izvestiya.tinro-center.ru/jour/article/download/111/112
+Local: gorbatenko_melnikov_2016_herring.pdf (9 pages)
+- Table 1, printed p.189 / PDF p.5: seasonal diet percentages, averaged over 2000–2014.
+- Table 2, printed p.191 / PDF p.7: seasonal and annual prey consumption.
+- 'Nekton' and 'other' prey still require documented mapping to model groups.
+
+Euphausiids — Gorbatenko (2016), pp.204–214.
+DOI: 10.26428/1606-9919-2016-185-204-214
+https://izvestiya.tinro-center.ru/jour/article/download/113/114
+Local: gorbatenko_2016_euphausiids.pdf (11 pages)
+- Tables 4–5, printed p.212 / PDF p.9: seasonal diet and annual consumption.
+- The prey category combines phytoplankton and phytodetritus. It cannot be silently split between primary producers and detritus.
+- Biomass/consumption averaging period is 1986–2012; this differs from the 2019 network's stated 2000–2014 period.
+
+Sagitta — Gorbatenko (2016), pp.168–177.
+DOI: 10.26428/1606-9919-2016-184-168-177
+https://izvestiya.tinro-center.ru/jour/article/download/86/87
+Local: gorbatenko_2016_sagitta.pdf (10 pages)
+- Table 4, printed p.174 / PDF p.7: seasonal diet and daily ration.
+- Table 6, printed p.175 / PDF p.8: annual prey consumption.
+- Its long-term biomass period includes 1986–2012, not exclusively 2000–2014.
+
+4. Dissertation and monograph route
+Gorbatenko (2018), Trophodynamics of aquatic organisms in the Sea of Okhotsk, 468-page doctoral dissertation. Full original institutional PDF was recovered in the earlier Radchenko search and remains at:
+../OKH-2015/online_recovery_20261002/gorbatenko_2018_dissertation.pdf
+http://www.imb.dvo.ru/misc/dissertations/images/dissertations/files/gorbatenko/Dissertation_Gorbatenko.pdf
+Chapter 4 supplies detailed feeding data. Chapter 8 presents the pelagic network and a western Kamchatka shelf bottom network; these are different spatial/ecological domains. Figure 8.5 on p.332 compares highly aggregated energy flows for 2000 and 2009. Appendices 56–57 on p.467 give consumption for six nekton groups, not diets of all ecosystem consumers. They do not solve the final 48-group Radchenko diet gap or independently prove completeness of a new full-community model.
+
+A 2022 monograph with the same subject is confirmed by the author's official VNIRO profile and the publisher/distributor record:
+https://science.vniro.ru/ru/tikhookeanskij-filial/item/5288-gorbatenko-konstantin-mikhajlovich
+https://profspo.ru/books/156109
+ISBN 978-5-6045112-4-4. Institutional profile reports 326 pages; electronic distributor reports 327 pages. The latter explicitly requires authenticated access. Its contents were not recovered, so it is a lead rather than a confirmed complete model. No purchase or access-control bypass was attempted.
+
+5. Other routes and exclusions
+- Berdnikov & Sorokina (2012), EwE applications to fish populations in the Barents, Okhotsk, Bering, Caspian and Black seas: a 5-page proceeding at pp.35–39. Confirmed as reference 97 in the primary 2022 marine-model review, but the original proceeding and numerical inputs were not recovered. Its model lineage is therefore unverified; it must not be advertised as a distinct new Okhotsk model.
+  https://physical-oceanography.ru/repository/issues/2022/02/05/
+- Searched the Southern Scientific Centre's full-text archive, public supplementary repository, 2012 publication list and the Ecology/Economy/Informatics journal archive. The latter exposes conference PDFs back to 2013 through conf-durso.ru. Direct access to that old domain returned 403. A corrected Wayback CDX query returned 33 successful archived document URLs; no URL in that returned set identified 2012. This is a bounded check of that URL pattern, not proof that no copy exists elsewhere. An initial malformed CDX request returned 400 and was not treated as a negative finding.
+- Gorbatenko/Kulik's 2014 trophic-reference-point presentation was recovered (kulik2014_trophic_reference.pdf). It gives isotope-derived trophic positions and survey analyses; it is not a full diet/model archive.
+- JOIFEL/okhotsk-pollock-climate-model is a public reproducible 2026 pollock climate/fishing analysis. Its README confirms a single-species biomass study, not a multispecies food-web model.
+  https://github.com/JOIFEL/okhotsk-pollock-climate-model
+- Public GitHub repository searches for Okhotsk, TINRO and Gorbatenko and user searches for Vladimir Kulik did not identify a verified author model repository. The similarly named vkulik and vladimirkulikdev profiles could not be linked to the fisheries author; they were not treated as his repositories. The author was verified instead through ORCID 0000-0003-0920-5312 and its linked official VNIRO profile. The exploratory filename gorbatenko_orcid.json contains Kulik's ORCID record, and kulik_author_page.html is an incorrect exploratory author route returning Oleg Ilyin; neither is evidence about Gorbatenko or the correct Kulik profile. The correct file is kulik_verified_author_page.html.
+- The complete diet matrices in Zavolokin/Radchenko/Naydenko (2016) are western Bering and Pacific Kuril models, not Okhotsk. The Chaikina SD model is already in the selected article's source family. Neither is counted as a new target model.
+- Searches in Russian and English for Ecopath, food-web, linear inverse, diet matrix, trophodynamic and alternative model families did not yield another verified full Okhotsk numerical package. General circulation/plankton models and stock-assessment models do not meet the whole-food-web requirement.
+- Earlier publisher, EcoBase, repository, author/thesis and historical-archive searches for Radchenko 2015 remain documented separately at ../OKH-2015/online_recovery_20261002/search_outcome.txt and search_audit.json. They were not replaced or claimed as successful.
+
+Recommended next evidence
+The most direct route to an existing numerical package is a request to Vladimir V. Kulik for the LIM input files, diet constraints, final solved flows, group definitions and any corrected later version, and to Gorbatenko/Melnikov for the spreadsheet underlying the 2019 Table 3/Figure 9 network. A targeted unsent request draft is saved alongside this report. Kulik's current address is documented on his 2026 Wiley paper: vladimir.kulik@tinro.vniro.ru (DOI 10.1111/fog.70026). No author has been contacted.
+
+Project state
+This search only adds evidence in this new research folder. It does not select a new model, create an import, change Project.xlsx, edit the validation DOCX, or update the map/knowledge graph. The user's review/editing gate for the map remains in force.
