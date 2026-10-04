@@ -1,0 +1,96 @@
+Traversal: BFS depth=2 | Start: ['ReadSession'] | 41 nodes found
+
+NODE pathlib [src=tools/cli/map.py loc=L3 community=0]
+NODE json [src=tools/cli/region.py loc=L2 community=0]
+NODE sys [src=tools/cli/map.py loc=L2 community=0]
+NODE read_book() [src=tools/project_core/workbooks/workbooks.py loc=L35 community=25]
+NODE write_book() [src=tools/project_core/workbooks/workbooks.py loc=L79 community=5]
+NODE tempfile [src=tools/project_core/calculations/run_region.py loc=L2 community=0]
+NODE argparse [src=tools/cli/region.py loc=L2 community=0]
+NODE tools_project_core_workbooks_workbooks [src=tools/cli/region.py loc=L8 community=0]
+NODE refresh_region() [src=tools/project_core/calculations/selection.py loc=L62 community=6]
+NODE unittest [src=tools/skills/paper-to-ppr/scripts/test_assumed_allocation.py loc=L1 community=0]
+NODE sha() [src=tools/project_core/workbooks/workbooks.py loc=L20 community=6]
+NODE copy [src=tools/project_core/calculations/selection.py loc=L2 community=0]
+NODE os [src=tools/project_core/calculations/selection.py loc=L2 community=6]
+NODE test_read_session.py [src=tools/workflow_checks/structure/test_read_session.py loc=L1 community=0]
+NODE project_root() [src=tools/project_core/registry/discovery.py loc=L4 community=2]
+NODE ReadSessionTests [src=tools/workflow_checks/structure/test_read_session.py loc=L15 community=63]
+NODE ReadSession [src=tools/project_core/workbooks/read_session.py loc=L7 community=63]
+NODE region.py [src=tools/cli/region.py loc=L1 community=0]
+NODE tools_project_core_registry_discovery [src=tools/cli/region.py loc=L5 community=2]
+NODE openpyxl [src=tools/project_core/workbooks/workbooks.py loc=L5 community=6]
+NODE subprocess [src=tools/project_core/calculations/selection.py loc=L2 community=0]
+NODE read_session.py [src=tools/project_core/workbooks/read_session.py loc=L1 community=0]
+NODE unittest_mock [src=tools/workflow_checks/selection/test_selection_refresh.py loc=L3 community=5]
+NODE .read() [src=tools/project_core/workbooks/read_session.py loc=L17 community=63]
+NODE runpy [src=tools/cli/map.py loc=L2 community=0]
+NODE .test_changed_bytes_invalidate_even_with_preserved_mtime() [src=tools/workflow_checks/structure/test_read_session.py loc=L58 community=63]
+NODE tools_project_core_calculations_selection [src=tools/cli/region.py loc=L6 community=6]
+NODE .test_selected_sheet_matches_complete_reader() [src=tools/workflow_checks/structure/test_read_session.py loc=L24 community=63]
+NODE .assert_unchanged() [src=tools/project_core/workbooks/read_session.py loc=L39 community=63]
+NODE .test_failed_parser_invocation_is_counted() [src=tools/workflow_checks/structure/test_read_session.py loc=L44 community=63]
+NODE .test_same_size_same_mtime_change_reparses() [src=tools/workflow_checks/structure/test_read_session.py loc=L103 community=63]
+NODE .test_missing_sheet_is_an_error() [src=tools/workflow_checks/structure/test_read_session.py loc=L40 community=63]
+NODE .test_detected_publication_change_remains_invalid_after_restore() [src=tools/workflow_checks/structure/test_read_session.py loc=L92 community=63]
+NODE .setUp() [src=tools/workflow_checks/structure/test_read_session.py loc=L16 community=63]
+NODE .test_unchanged_repeated_reads_parse_once_and_returns_are_independent() [src=tools/workflow_checks/structure/test_read_session.py loc=L50 community=63]
+NODE .test_detected_parse_race_remains_invalid_after_reread() [src=tools/workflow_checks/structure/test_read_session.py loc=L79 community=63]
+NODE tools_project_core_workbooks_read_session [src=tools/cli/region.py loc=L7 community=0]
+NODE .test_publication_recheck_rejects_changed_bytes() [src=tools/workflow_checks/structure/test_read_session.py loc=L73 community=63]
+NODE .test_full_reader_still_rejects_formulas() [src=tools/workflow_checks/structure/test_read_session.py loc=L30 community=63]
+NODE .test_inspect_cli_is_scoped_and_does_not_write() [src=tools/workflow_checks/structure/test_read_session.py loc=L115 community=63]
+NODE .__init__() [src=tools/project_core/workbooks/read_session.py loc=L10 community=63]
+EDGE ReadSession --imports [EXTRACTED context=import]--> region.py
+EDGE ReadSession --contains [EXTRACTED]--> read_session.py
+EDGE ReadSession --imports [EXTRACTED context=import]--> test_read_session.py
+EDGE ReadSession --uses [AMBIGUOUS]--> ReadSessionTests
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_changed_bytes_invalidate_even_with_preserved_mtime()
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_detected_parse_race_remains_invalid_after_reread()
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_detected_publication_change_remains_invalid_after_restore()
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_failed_parser_invocation_is_counted()
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_publication_recheck_rejects_changed_bytes()
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_same_size_same_mtime_change_reparses()
+EDGE ReadSession --calls [EXTRACTED context=call]--> .test_unchanged_repeated_reads_parse_once_and_returns_are_independent()
+EDGE ReadSession --method [EXTRACTED]--> .assert_unchanged()
+EDGE ReadSession --method [EXTRACTED]--> .__init__()
+EDGE ReadSession --method [EXTRACTED]--> .read()
+EDGE region.py --imports [EXTRACTED context=import]--> argparse
+EDGE region.py --imports [EXTRACTED context=import]--> refresh_region()
+EDGE region.py --imports [EXTRACTED context=import]--> json
+EDGE region.py --imports_from [EXTRACTED context=import]--> pathlib
+EDGE region.py --imports [EXTRACTED context=import]--> project_root()
+EDGE region.py --imports [EXTRACTED context=import]--> runpy
+EDGE region.py --imports [EXTRACTED context=import]--> sys
+EDGE region.py --imports_from [EXTRACTED context=import]--> tools_project_core_calculations_selection
+EDGE region.py --imports_from [EXTRACTED context=import]--> tools_project_core_registry_discovery
+EDGE region.py --imports_from [EXTRACTED context=import]--> tools_project_core_workbooks_read_session
+EDGE region.py --imports_from [EXTRACTED context=import]--> tools_project_core_workbooks_workbooks
+EDGE region.py --imports [EXTRACTED context=import]--> sha()
+EDGE .read() --calls [EXTRACTED context=call]--> read_book()
+EDGE .read() --calls [EXTRACTED context=call]--> sha()
+EDGE .assert_unchanged() --calls [EXTRACTED context=call]--> sha()
+EDGE read_session.py --imports [EXTRACTED context=import]--> copy
+EDGE read_session.py --imports_from [EXTRACTED context=import]--> pathlib
+EDGE read_session.py --imports_from [EXTRACTED context=import]--> tools_project_core_workbooks_workbooks
+EDGE read_session.py --imports [EXTRACTED context=import]--> read_book()
+EDGE read_session.py --imports [EXTRACTED context=import]--> sha()
+EDGE .test_changed_bytes_invalidate_even_with_preserved_mtime() --calls [EXTRACTED context=call]--> write_book()
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> read_book()
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> write_book()
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> json
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> openpyxl
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> os
+EDGE test_read_session.py --imports_from [EXTRACTED context=import]--> pathlib
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> subprocess
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> sys
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> tempfile
+EDGE test_read_session.py --imports_from [EXTRACTED context=import]--> tools_project_core_workbooks_read_session
+EDGE test_read_session.py --imports_from [EXTRACTED context=import]--> tools_project_core_workbooks_workbooks
+EDGE test_read_session.py --imports [EXTRACTED context=import]--> unittest
+EDGE test_read_session.py --imports_from [EXTRACTED context=import]--> unittest_mock
+EDGE ReadSessionTests --method [EXTRACTED]--> .setUp()
+EDGE ReadSessionTests --method [EXTRACTED]--> .test_full_reader_still_rejects_formulas()
+EDGE ReadSessionTests --method [EXTRACTED]--> .test_inspect_cli_is_scoped_and_does_not_write()
+EDGE ReadSessionTests --method [EXTRACTED]--> .test_missing_sheet_is_an_error()
+EDGE ReadSessionTests --method [EXTRACTED]--> .test_selected_sheet_matches_complete_reader()

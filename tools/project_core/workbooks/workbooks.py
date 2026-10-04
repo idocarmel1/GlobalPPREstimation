@@ -32,11 +32,19 @@ def digest_tables(tables):
         return v
     return hashlib.sha256(json.dumps(canon(tables), ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
 
-def read_book(path):
+def read_book(path, *, sheets=None):
+    """Read @table blocks; selected sheets are scoped evidence, not full validation."""
+    if isinstance(sheets, str):
+        raise TypeError('sheets must be an iterable of worksheet names, not a string')
+    requested = None if sheets is None else set(sheets)
     w = openpyxl.load_workbook(path, read_only=True, data_only=False)
     result = {}
     try:
+        if requested is not None and requested - set(w.sheetnames):
+            raise ValueError('Missing requested worksheet: ' + ', '.join(sorted(requested - set(w.sheetnames))))
         for s in w:
+            if requested is not None and s.title not in requested:
+                continue
             blocks = {}; name = None; header = None; records = []
             for row in s.values:
                 vals = list(row)

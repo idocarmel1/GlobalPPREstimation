@@ -41,6 +41,21 @@ def assert_sources():
     assert not different, f'Sources changed after final capture: {different}'
     return corpus
 
+def assert_current_citations(items, corpus):
+    """Merged source evidence must be current before canonical export, too."""
+    for item in items:
+        for citation in [item] + item.get('source_evidence', []):
+            sf = relative(citation.get('source_file'))
+            assert sf in corpus['sha256'] and citation.get('source_sha256') == corpus['sha256'][sf], 'Stale reused semantic evidence'
+
+def assert_endpoints(extraction):
+    ids = {node['id'] for node in extraction['nodes']}
+    assert len(ids) == len(extraction['nodes']), 'Duplicate node identity before export'
+    for edge in extraction['edges']:
+        assert edge['source'] in ids and edge['target'] in ids, 'Unresolved edge endpoint before export'
+    for hyperedge in extraction.get('hyperedges', []):
+        assert len(set(hyperedge['nodes'])) >= 3 and all(endpoint in ids for endpoint in hyperedge['nodes']), 'Unresolved or invalid hyperedge before export'
+
 def ast():
     corpus = assert_sources()
     from graphify.extract import extract
@@ -91,7 +106,7 @@ def prompts():
         text = text.replace('CHUNK_NUM',str(i)).replace('TOTAL_CHUNKS',str(len(chunks)))
         text = text.replace('DEEP_MODE','false').replace('CHUNK_PATH',str(RUN/f'chunk_{i:02d}.json'))
         (RUN/f'prompt_{i:02d}.txt').write_text(text+'\n',encoding='utf8')
-    save(PROV/'extraction_method.json', {'started_at':now(),'method':'installed_graphify_ast_and_general_writable_semantic_agents','prompt_source':'~/.agents/skills/graphify/references/extraction-spec.md','prompt_sha256':sha(Path.home()/'.agents/skills/graphify/references/extraction-spec.md'),'deep_mode':False,'semantic_chunks':len(chunks),'semantic_chunk_sizes':[len(c) for c in chunks],'input_tokens':None,'output_tokens':None,'usage_status':'Host collaboration tools do not expose actual token usage. Placeholder zeros in agent fragments are not measurements.','benchmark_status':'Deferred by the user to the fresh skill-efficiency session.'})
+    save(PROV/'extraction_method.json', {'started_at':now(),'method':'installed_graphify_ast_and_general_writable_semantic_agents','prompt_source':'~/.agents/skills/graphify/references/extraction-spec.md','prompt_sha256':sha(Path.home()/'.agents/skills/graphify/references/extraction-spec.md'),'deep_mode':False,'semantic_chunks':len(chunks),'semantic_chunk_sizes':[len(c) for c in chunks],'input_tokens':None,'output_tokens':None,'usage_status':'Host collaboration tools do not expose actual token usage. Placeholder zeros in agent fragments are not measurements.','benchmark_status':'Actual bounded skill-efficiency traces are recorded in the 2026-10-04_000009_skill_efficiency work QA; graph extraction is not a scientific or full-pipeline benchmark.'})
     print(f'{len(chunks)} exact installed-skill prompts written')
 
 def capture_updates():
@@ -123,7 +138,8 @@ def capture_updates():
 def canonicalize_ids():
     from graphify.extract import _make_id
     changes=[]
-    for p in sorted(RUN.glob('chunk_*.json')):
+    chunks=load(PROV/'refresh_dispositions.json')['semantic_chunks']
+    for p in [RUN/f'chunk_{i:02d}.json' for i in range(1,len(chunks)+1)]:
         fragment=load(p)
         mapping={n['id']:_make_id(n['id']) for n in fragment['nodes']}
         assert len(set(mapping.values()))==len(mapping),f'Canonical ID collision in {p.name}'
@@ -143,7 +159,9 @@ def canonicalize_ids():
 def collect():
     corpus = assert_sources()
     chunks = load(PROV/'refresh_dispositions.json')['semantic_chunks']
-    nodes, edges, hypers = [], [], []
+    reused = load(RUN/'reused_semantic.json')
+    assert_current_citations(reused['nodes'] + reused['edges'] + reused.get('hyperedges', []), corpus)
+    nodes, edges, hypers = list(reused['nodes']), list(reused['edges']), list(reused.get('hyperedges', []))
     validation = []
     for i, files in enumerate(chunks,1):
         p = RUN/f'chunk_{i:02d}.json'
@@ -176,7 +194,7 @@ def collect():
         save(p,fragment)
         nodes+=fragment['nodes']; edges+=fragment['edges']; hypers+=fragment.get('hyperedges',[])
         validation.append({'chunk':i,'files':len(files),'nodes':len(fragment['nodes']),'edges':len(fragment['edges']),'hyperedges':len(fragment.get('hyperedges',[])),'fragment_sha256':sha(p),'source_coverage':True,'schema':True,'input_tokens':None,'output_tokens':None})
-    save(PROV/'semantic_validation.json',{'checked_at':now(),'chunks':validation,'pass':True})
+    save(PROV/'semantic_validation.json',{'checked_at':now(),'chunks':validation,'reuse':{'full_hash_checked':True,'sources':load(PROV/'refresh_dispositions.json')['semantic_reuse_count'],'nodes':len(reused['nodes']),'independent_edge_records':len(reused['edges']),'hyperedges':len(reused.get('hyperedges',[]))},'pass':True})
     result={'nodes':nodes,'edges':edges,'hyperedges':hypers,'input_tokens':None,'output_tokens':None}
     save(RUN/'semantic.json',result)
     from graphify.cache import save_semantic_cache
@@ -215,6 +233,9 @@ def merge():
     node_list=[n for n in node_list if n['id'] not in rationale]
     edge_list=[e for e in edge_list if e['source'] not in rationale and e['target'] not in rationale]
     ids={n['id'] for n in node_list}
+    reused = load(RUN/'reused_semantic.json')
+    assert all(e['source'] in ids and e['target'] in ids for e in reused['edges']), 'Unchanged-source relationship endpoint needs explicit fresh reconciliation'
+    assert all(all(n in ids for n in h['nodes']) for h in reused.get('hyperedges', [])), 'Unchanged-source hyperedge endpoint needs explicit fresh reconciliation'
     missing=collections.defaultdict(list)
     for e in edge_list:
         for endpoint in [e['source'],e['target']]:
@@ -263,6 +284,7 @@ def merge():
         if key not in seen:edges.append(e);seen.add(key)
     save(PROV/'merge_dispositions.json',{'rationale_fragments_folded_into_attributes':len(rationale),'unresolved_nonimport_edges_omitted':omitted,'phantom_cross_language_calls_rejected':cross_language,'same_named_entity_multi_source_evidence':collisions,'external_import_stubs':len([n for n in by_id.values() if n.get('external_stub')]),'edge_records':len(edges),'installed_ast_missing_EXTRACTED_scores_set_to_rubric_1':explicit_score_count,'installed_ast_unscored_inferences_marked_ambiguous':ambiguous_score_count,'inference_missingness_policy':'Original INFERRED category and unavailable-score flag are retained; an unscored installed-AST inference is presented as AMBIGUOUS at rubric score0.2 rather than inventing certainty or accepting the exporter default0.5.','library_ghost_deduplication':'Semantic source locations are temporarily hidden during the library basename/label ghost-deduplication pass, then restored exactly. Full deterministic node IDs and all source evidence remain authoritative; unrelated same-basename source notes cannot be silently merged.','input_tokens':None,'output_tokens':None})
     result={'nodes':list(by_id.values()),'edges':edges,'hyperedges':s.get('hyperedges',[]),'input_tokens':None,'output_tokens':None}
+    assert_endpoints(result)
     save(RUN/'extraction.json',result)
     from graphify.cluster import cluster,score_all
     from graphify.analyze import god_nodes,surprising_connections
@@ -274,6 +296,9 @@ def merge():
 
 def export():
     corpus=assert_sources(); extraction=load(RUN/'extraction.json'); analysis=load(RUN/'analysis.json')
+    assert_current_citations(extraction['nodes'] + extraction['edges'] + extraction.get('hyperedges', []), corpus)
+    assert_endpoints(extraction)
+    dispositions=load(PROV/'refresh_dispositions.json')
     labels={int(k):v for k,v in load(PROV/'community_labels.json').items()}
     communities={int(k):v for k,v in analysis['communities'].items()}
     assert set(labels)==set(communities), 'Every community needs a human-readable label'
@@ -306,7 +331,7 @@ def export():
     detection=load(RUN/'detect.json')
     report=generate(G,communities,score_all(G,communities),labels,god_nodes(G),surprising_connections(G,communities),detection,{'input':0,'output':0},'.',suggested_questions=suggest_questions(G,communities,labels),built_at_commit=base)
     report=re.sub(r'^- Token cost:.*$', '- Token cost: unavailable; the host agent tools did not expose actual input/output usage.',report,flags=re.M)
-    report+='\n\nThe graph indexes the explicit curated scope in [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Freshness uses full source SHA256 hashes, including frontmatter; it is not evidence of scientific readiness or researcher approval. Every independently attributed relationship is retained in each JSON link’s `evidence` array, while clustering and HTML use one edge per node pair. Historical research nodes and edges are marked `historical`. The skill-efficiency benchmark is deferred to the separately authorized follow-up session.\n'
+    report+='\n\nThe graph indexes the explicit curated scope in [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Freshness uses full source SHA256 hashes, including frontmatter; it is not evidence of scientific readiness or researcher approval. Every independently attributed relationship is retained in each JSON link’s `evidence` array, while clustering and HTML use one edge per node pair. Historical research nodes and edges are marked `historical`. Bounded skill-efficiency trials are recorded separately in the model-local work QA; they do not establish full pipeline equivalence.\n'
     (GRAPH/'GRAPH_REPORT.md').write_text(report,encoding='utf8')
     to_html(G,communities,str(GRAPH/'graph.html'),community_labels=labels,node_limit=5000 if G.number_of_nodes()>5000 else None)
     if G.number_of_nodes()<=5000:
@@ -344,9 +369,9 @@ The graph is an architectural and evidence index. Model selection, loadability, 
 
 The scope excludes dependency trees, temporary work/QA copies, raw binary scientific data, publication binaries, XLSX/DOCX packages, runtime products, obsolete extraction packages, graph self-content and frozen research implementation/test detail. Native publication/workbook evidence is accessed through indexed model notes and source review references; this graph does not claim an exhaustive extraction of those binaries. Historical research is represented by its guides/findings. The exact allowlist is [.graphifyignore](../../.graphifyignore); no second graph directory is used.
 
-All semantic source files were re-extracted by writable agents using the installed Graphify extraction prompt. None of the old semantic fragments passed the combined full-byte/source-ID/rationale-fragment eligibility check. AST extraction used the installed deterministic extractor on every current scoped code file. AST rationale fragments were folded into rationale attributes; explicitly imported external names remain citation-backed stubs whose implementations are outside scope. The installed AST extractor may qualify IDs with the source path only when actual same-stem IDs collide; those are extractor identities, not invented semantic duplicates.
+Semantic evidence for {dispositions['semantic_reuse_count']} unchanged documents was reused only after full-byte/source-ID eligibility checks; {dispositions['semantic_changed_or_new']} documents requiring fresh extraction were re-extracted by writable agents using the installed Graphify extraction prompt. Every independently attributed reused edge record is preserved. AST extraction used the installed deterministic extractor and its content cache on every current scoped code file. AST rationale fragments were folded into rationale attributes; explicitly imported external names remain citation-backed stubs whose implementations are outside scope. The installed AST extractor may qualify IDs with the source path only when actual same-stem IDs collide; those are extractor identities, not invented semantic duplicates.
 
-[Source hashes](provenance/source_hashes.json), [prior-source dispositions](provenance/refresh_dispositions.json), [merge dispositions](provenance/merge_dispositions.json), [semantic validation](provenance/semantic_validation.json) and [extraction method](provenance/extraction_method.json) provide the audit trail. Actual token usage and monetary cost are unavailable. The skill-efficiency benchmark is deferred under the user’s instruction for this session.
+[Source hashes](provenance/source_hashes.json), [prior-source dispositions](provenance/refresh_dispositions.json), [merge dispositions](provenance/merge_dispositions.json), [semantic validation](provenance/semantic_validation.json) and [extraction method](provenance/extraction_method.json) provide the audit trail. Actual token usage and monetary cost are unavailable. Bounded efficiency traces and scientific replication limits are recorded in `regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/`; this graph excludes those temporary trial artifacts.
 
 Clustering uses {G.number_of_nodes():,} nodes and {G.number_of_edges():,} node pairs. Each graph JSON link retains all its independently attributed `evidence` records ({len(extraction['edges']):,} total); the visualization displays clustering topology. Confidence values preserve the distinction between explicit, inferred and ambiguous relationships. Source existence/full hashes/endpoints and representative retrieval/HTML behavior are recorded in [provenance/completion_verification.json](provenance/completion_verification.json).
 

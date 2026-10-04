@@ -14,6 +14,8 @@ For matching, use the broader mapping definitions below; they supersede stricter
 
 ## Broader mapping definitions and confidence
 
+A pipeline that includes validation has one mapping stage. Apply the shared [single mapping handoff](operation-contract.md#one-mapping-stage-per-pipeline-run): include validation's component-confidence/evidence requirements in that stage, and reuse its exact keyed decisions for calculations, appendix and report.
+
 Sort the report's group-assignment rules by unrounded PPR coverage, highest first. Add a Sum row only if the unrounded total differs from 100% beyond numerical tolerance (1e-8 percentage points), explaining the discrepancy. Omit it when the total is 100%. The Word template and filling guide use the same rule.
 
 Prefer approaching 100% catch coverage with transparent, meaningful approximations over leaving taxa unresolved to preserve certainty. This preference applies to the whole mapping stage, including broad taxonomic labels and geographic/habitat gaps, not only size/stage splits. It does not change source-model definitions or establish model validity.

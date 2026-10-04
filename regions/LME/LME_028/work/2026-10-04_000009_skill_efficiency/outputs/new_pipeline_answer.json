@@ -1,0 +1,71 @@
+{
+  "trial": "revised_pipeline",
+  "context": "isolated cold context; definition-only Explain route",
+  "start_wall_clock_utc": "2026-10-04 05:19:30 UTC",
+  "answer": {
+    "selected_model_id": "The editable regional Overview choice: the model the researcher wants selected. model_path is generated from that choice. Selection alone does not establish calculation readiness or researcher approval.",
+    "results_model_id": "The generated identity of the model behind the saved numerical calculation results. It is recorded with results_model_sha256 and is not an editable selection or approval field. Outgoing results are saved under this actual identity even if a different model has already been selected.",
+    "lme_038_example": "LME_038 selects 38_38003_Java_Sea_normalized_BA_completed_(mid1970s), with a generated model_path under papers/INDO-1999/models/. Its saved Overview has blank results_model_id and results_model_sha256, production_eligible = false, and calculation_status = pending: superseded extraction removed; historical runtime-equivalence bridge no longer verifies; fresh coefficients required. The selected model is therefore a recorded choice, while this Overview does not identify current usable numerical results for that choice. The selection rationale and saved hash fields do not override the pending status.",
+    "scope": "This explains the saved Overview and field definitions. It does not independently assess full-workbook readiness or claim that numerical cells elsewhere are absent."
+  },
+  "saved_overview_evidence": {
+    "unit_id": "LME_038",
+    "selected_model_id": "38_38003_Java_Sea_normalized_BA_completed_(mid1970s)",
+    "model_path": "papers/INDO-1999/models/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/model.json",
+    "results_model_id": null,
+    "results_model_sha256": null,
+    "production_eligible": false,
+    "calculation_status": "pending: superseded extraction removed; historical runtime-equivalence bridge no longer verifies; fresh coefficients required"
+  },
+  "checks": [
+    "Read the current skill and operation contract; chose Explain, with relevant definitions and the named saved Overview only.",
+    "Checked Overview unit_id is LME_038 and preserved the exact selected-model identity.",
+    "Checked results_model_id and results_model_sha256 are missing rather than inferred from selection or historical hashes.",
+    "Checked saved calculation_status is pending and production_eligible is false.",
+    "Kept selection, numerical identity/readiness and researcher approval separate.",
+    "Performed no scientific engine call, regional refresh, selection, adoption, Project.xlsx write or skill modification.",
+    "Validated the answer JSON in memory before its single output write."
+  ],
+  "gaps": [
+    "No missing evidence for the requested saved-field explanation.",
+    "Full-workbook readiness, source-model bytes, historical bridge/code identity, diagnostic results and fresh coefficients were not independently checked; these are outside this read-only task."
+  ],
+  "actual_reads": {
+    "file_content_read_method": "trace_task.py read; PYTHONIOENCODING=utf-8; python -B",
+    "file_content_reads": [
+      "C:/Users/idoca/.codex/plugins/cache/claude-plugins-official/superpowers/6.4.1/skills/using-superpowers/SKILL.md",
+      "AGENTS.md",
+      "README.md",
+      "explainers/structure.md",
+      "explainers/workflow.md",
+      "tools/skills/paper-to-ppr/SKILL.md",
+      "tools/skills/paper-to-ppr/references/operation-contract.md"
+    ],
+    "file_content_read_count": 7,
+    "unique_file_content_read_count": 7,
+    "repeated_file_content_read_count": 0,
+    "workbook_content_read_method": "trace_task.py book --sheet Overview --table Settings --selective",
+    "workbook_reads": [
+      {
+        "path": "regions/LME/LME_038/LME_038.xlsx",
+        "sheet": "Overview",
+        "table": "Settings",
+        "selective": true
+      }
+    ],
+    "workbook_parse_count": 1,
+    "engine_invocation_count": 0,
+    "render_invocation_count": 0,
+    "failures": [],
+    "retries": [],
+    "extra_read_note": "using-superpowers was read once and its SUBAGENT-STOP instructed ignoring that skill for this dispatched task.",
+    "prior_or_other_trial_answers_traces_checkpoints_read": false,
+    "token_telemetry": "unavailable"
+  },
+  "actual_writes": [
+    "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/outputs/new_pipeline_answer.json",
+    "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/new_pipeline_trace.jsonl"
+  ],
+  "trace_path": "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/new_pipeline_trace.jsonl",
+  "end_wall_clock_utc": "2026-10-04T05:21:32.409+00:00"
+}

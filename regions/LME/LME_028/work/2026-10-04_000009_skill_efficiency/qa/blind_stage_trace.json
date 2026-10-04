@@ -1,0 +1,81 @@
+[
+  {
+    "stage": "extract",
+    "started_utc": "2026-10-04T05:45:03.130436+00:00",
+    "ended_utc": "2026-10-04T05:45:03.232377+00:00",
+    "seconds": 0.10193639999488369,
+    "returncode": 0,
+    "command": [
+      "C:\\Users\\idoca\\miniconda3\\python.exe",
+      "-X",
+      "utf8",
+      "regions\\LME\\LME_028\\work\\2026-10-04_000009_skill_efficiency\\code\\blind_extraction\\extract_model.py"
+    ],
+    "log": "evidence/extract.log"
+  },
+  {
+    "stage": "write_imports",
+    "started_utc": "2026-10-04T05:45:03.233146+00:00",
+    "ended_utc": "2026-10-04T05:45:03.756891+00:00",
+    "seconds": 0.5237474000314251,
+    "returncode": 0,
+    "command": [
+      "C:\\Users\\idoca\\miniconda3\\python.exe",
+      "-X",
+      "utf8",
+      "tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\write_outputs.py",
+      "regions\\LME\\LME_028\\work\\2026-10-04_000009_skill_efficiency\\outputs\\blind_extraction\\extraction.json",
+      "--outdir",
+      "regions\\LME\\LME_028\\work\\2026-10-04_000009_skill_efficiency\\outputs\\blind_extraction",
+      "--dir-name",
+      "model_2000s"
+    ],
+    "log": "evidence/write_imports.log"
+  },
+  {
+    "stage": "validate_imports",
+    "started_utc": "2026-10-04T05:45:03.757872+00:00",
+    "ended_utc": "2026-10-04T05:45:04.174444+00:00",
+    "seconds": 0.4165806000237353,
+    "returncode": 0,
+    "command": [
+      "C:\\Users\\idoca\\miniconda3\\python.exe",
+      "-X",
+      "utf8",
+      "tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\validate.py",
+      "regions\\LME\\LME_028\\work\\2026-10-04_000009_skill_efficiency\\outputs\\blind_extraction\\model_2000s"
+    ],
+    "log": "evidence/validate_imports.log"
+  },
+  {
+    "stage": "indicative_mass_balance",
+    "started_utc": "2026-10-04T05:45:04.175515+00:00",
+    "ended_utc": "2026-10-04T05:45:04.242745+00:00",
+    "seconds": 0.06723550002789125,
+    "returncode": 0,
+    "command": [
+      "C:\\Users\\idoca\\miniconda3\\python.exe",
+      "-X",
+      "utf8",
+      "tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\massbalance_check.py",
+      "regions\\LME\\LME_028\\work\\2026-10-04_000009_skill_efficiency\\outputs\\blind_extraction\\model_2000s"
+    ],
+    "log": "evidence/indicative_mass_balance.log"
+  },
+  {
+    "stage": "convert_roundtrip",
+    "started_utc": "2026-10-04T05:45:04.243876+00:00",
+    "ended_utc": "2026-10-04T05:45:10.589536+00:00",
+    "seconds": 6.345669200003613,
+    "returncode": 0,
+    "command": [
+      "C:\\Users\\idoca\\miniconda3\\python.exe",
+      "-X",
+      "utf8",
+      "tools\\skills\\paper-to-ppr\\resources\\extraction\\scripts\\database_json.py",
+      "-d",
+      "regions\\LME\\LME_028\\work\\2026-10-04_000009_skill_efficiency\\outputs\\blind_extraction\\model_2000s"
+    ],
+    "log": "evidence/convert_roundtrip.log"
+  }
+]

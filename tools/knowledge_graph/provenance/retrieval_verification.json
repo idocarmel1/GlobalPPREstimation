@@ -1,74 +1,124 @@
 {
-  "checked_at": "2026-10-04T03:32:01.672265+00:00",
+  "checked_at": "2026-10-04T20:21:04.176543+00:00",
   "pass": true,
-  "graph_sha256": "01a6d383c0a1979f0067f9c77a88f1a8fe4fa357a109c2a551820cadcc214342",
-  "initial_attempts": [
-    {
-      "name": "structure",
-      "question": "How do canonical regions papers models model_notes form the project structure?",
-      "command": [
-        "graphify",
-        "query",
-        "How do canonical regions papers models model_notes form the project structure?",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "2000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_initial_structure.txt",
-      "output_sha256": "88ab9cff55fdae84bd80e004111e7768022f8930317676538586c731f7467d31",
-      "review": "Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed."
-    },
-    {
-      "name": "refresh",
-      "question": "How does refresh_region save_snapshot restore_model_tables preserve model selection and compatible workbook evidence?",
-      "command": [
-        "graphify",
-        "query",
-        "How does refresh_region save_snapshot restore_model_tables preserve model selection and compatible workbook evidence?",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "2000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_initial_refresh.txt",
-      "output_sha256": "d0f5adc5decee177b000923c81d2c6f1abf3edcafe01053c0eed12a29a293456",
-      "review": "Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed."
-    },
-    {
-      "name": "skills",
-      "question": "How do paper-to-ppr ecopath-model-validation follow project_contract structure.md and separate selection readiness approval?",
-      "command": [
-        "graphify",
-        "query",
-        "How do paper-to-ppr ecopath-model-validation follow project_contract structure.md and separate selection readiness approval?",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "2000"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_initial_skills.txt",
-      "output_sha256": "61a4cad20e0b97365dae1d113eaad0f3d6c30c6c1057cd028ca5d38d8f32b1d8",
-      "review": "Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed."
-    }
-  ],
-  "probe_suites": {
-    "structure": [
-      "structure"
-    ],
-    "refresh_snapshots": [
-      "refresh",
-      "restore"
-    ],
-    "two_active_skills": [
-      "paper_skill",
-      "validation_skill"
-    ]
-  },
+  "graph_sha256": "f00879d097512a2cd9a79868ccbbd399c6be8cf35a9965e7ab116b19d27ddd44",
   "probes": [
+    {
+      "name": "mapping",
+      "question": "One mapping stage per pipeline run",
+      "command": [
+        "graphify",
+        "query",
+        "One mapping stage per pipeline run",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "output_file": "probe_efficiency_mapping.txt",
+      "output_sha256": "8baf0eca65bc1af62907db776053ada727f03fc645d41fcab399c928101622ea",
+      "required_visible_anchors": [
+        "operation-contract.md",
+        "Ecopath model validation",
+        "Ecopath paper to regional PPR"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+    },
+    {
+      "name": "freshness",
+      "question": "Mixed-version publication rejection",
+      "command": [
+        "graphify",
+        "query",
+        "Mixed-version publication rejection",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "output_file": "probe_efficiency_freshness.txt",
+      "output_sha256": "90b81e032b66eff93b16ced13951265cc7465ce9242e0edc6ec5ed8820017696",
+      "required_visible_anchors": [
+        "operation-contract.md",
+        "Operation-local read session"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+    },
+    {
+      "name": "read_session",
+      "question": "ReadSession content hashes publication guard",
+      "command": [
+        "graphify",
+        "query",
+        "ReadSession content hashes publication guard",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "output_file": "probe_efficiency_read_session.txt",
+      "output_sha256": "9255f9655e78b66cde0a810d230415751c29296a2435840d5e96e6a858afb04d",
+      "required_visible_anchors": [
+        "workbooks/read_session.py",
+        "assert_unchanged"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+    },
+    {
+      "name": "validation",
+      "question": "Full model validation workflow",
+      "command": [
+        "graphify",
+        "query",
+        "Full model validation workflow",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "output_file": "probe_efficiency_validation.txt",
+      "output_sha256": "53b047087a73967c04eeeea4925e82c2b944dedeeb49ac4d51ff4c6d1aca5b89",
+      "required_visible_anchors": [
+        "references/full-validation.md",
+        "Ecopath model validation"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+    },
+    {
+      "name": "paper",
+      "question": "Ecopath paper to regional PPR",
+      "command": [
+        "graphify",
+        "query",
+        "Ecopath paper to regional PPR",
+        "--graph",
+        "tools/knowledge_graph/graph.json",
+        "--budget",
+        "8000"
+      ],
+      "exit_code": 0,
+      "output_file": "probe_efficiency_paper.txt",
+      "output_sha256": "6d77facd5dd9e6afc2bb619e6ae261e5cc4d86215a2e5880a84e0c40a141a375",
+      "required_visible_anchors": [
+        "paper-to-ppr/SKILL.md",
+        "Selection loadability readiness and researcher approval separation"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": true,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
+    },
     {
       "name": "structure",
       "question": "Grouped region paper model layout",
@@ -79,12 +129,17 @@
         "--graph",
         "tools/knowledge_graph/graph.json",
         "--budget",
-        "3500"
+        "8000"
       ],
       "exit_code": 0,
-      "output_file": "probe_structure.txt",
-      "output_sha256": "f3b5e89efd72ccdbfcb4ae9db5c6720ebbeee152b753b2033098e6d895b8d554",
-      "review": "PASS: graph owner inspected the current narrowed output and its retained required source citations; the parent independently assessed the same required evidence before this bounded plan-only delta."
+      "output_file": "probe_efficiency_structure.txt",
+      "output_sha256": "b66c15c39b1e84ad76489d94679c8b531e575ced8d426c067390fe2560450225",
+      "required_visible_anchors": [
+        "explainers/structure.md"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
     },
     {
       "name": "refresh",
@@ -96,12 +151,17 @@
         "--graph",
         "tools/knowledge_graph/graph.json",
         "--budget",
-        "3500"
+        "8000"
       ],
       "exit_code": 0,
-      "output_file": "probe_refresh.txt",
-      "output_sha256": "772d8f776ca8f576dddc505a038b207ef8108c264a571517b6d3a14df7ac0bc7",
-      "review": "PASS: graph owner inspected the current narrowed output and its retained required source citations; the parent independently assessed the same required evidence before this bounded plan-only delta."
+      "output_file": "probe_efficiency_refresh.txt",
+      "output_sha256": "bcdfc05385fcb2b1f93f17e5fd79eb5bd71f9b23fcf5bb682ff5b72139c5ec0d",
+      "required_visible_anchors": [
+        "explainers/structure.md"
+      ],
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
     },
     {
       "name": "restore",
@@ -113,49 +173,19 @@
         "--graph",
         "tools/knowledge_graph/graph.json",
         "--budget",
-        "3500"
+        "8000"
       ],
       "exit_code": 0,
-      "output_file": "probe_restore.txt",
-      "output_sha256": "cd9c1aedb09d5729d36c7392feb04b7fa5c48f8b2060f4986bdc63f51622a479",
-      "review": "PASS: graph owner inspected the current narrowed output and its retained required source citations; the parent independently assessed the same required evidence before this bounded plan-only delta."
-    },
-    {
-      "name": "paper_skill",
-      "question": "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
-      "command": [
-        "graphify",
-        "query",
-        "paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "3500"
+      "output_file": "probe_efficiency_restore.txt",
+      "output_sha256": "7089963e13378998c691f98cd7c125cdf404b58f3ba47ce59210bfd495f0ac88",
+      "required_visible_anchors": [
+        "explainers/structure.md"
       ],
-      "exit_code": 0,
-      "output_file": "probe_paper_skill.txt",
-      "output_sha256": "8326860bccdf4f90f841081c616c17050876c31fcbee8828383e44fc6a409996",
-      "review": "PASS: graph owner inspected the current narrowed output and its retained required source citations; the parent independently assessed the same required evidence before this bounded plan-only delta."
-    },
-    {
-      "name": "validation_skill",
-      "question": "Ecopath model validation skill",
-      "command": [
-        "graphify",
-        "query",
-        "Ecopath model validation skill",
-        "--graph",
-        "tools/knowledge_graph/graph.json",
-        "--budget",
-        "3500"
-      ],
-      "exit_code": 0,
-      "output_file": "probe_validation_skill.txt",
-      "output_sha256": "df3d4746739a2d8e4f727d0e0787b0db73ceb3f6d271189fa667fb7f6f2eb39a",
-      "review": "PASS: graph owner inspected the current narrowed output and its retained required source citations; the parent independently assessed the same required evidence before this bounded plan-only delta."
+      "all_required_anchors_present": true,
+      "budget_notice_present": false,
+      "scope": "Targeted relevance and current source navigation; no complete-traversal claim."
     }
   ],
-  "status": "PASS for the three required suites using five actual narrowed CLI traversals; current outputs inspected after the bounded semantic delta. Initial broad ranking failures and the clipped trailing paper-skill edges remain explicit limitations; required source nodes are present.",
-  "initial_independent_review": "retrieval_independent_review.json",
-  "current_bounded_assessment_at": "2026-10-04T03:33:20.764868+00:00"
+  "review": "Root checked exact concept/source anchors in actual installed CLI output against the current graph. Earlier baseline probe files are historical; these eight probes supersede their completion status.",
+  "limits": "The initial informal budget1800 probes had truncated output. A first final-script attempt incorrectly expected the code class within the freshness concept neighborhood; its actual neighbor is Operation-local read session. A separate direct code query now checks ReadSession. Final budget8000 probes verify required visible anchors only; neither whole-graph traversal nor scientific validity is inferred."
 }

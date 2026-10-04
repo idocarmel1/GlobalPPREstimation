@@ -1,0 +1,58 @@
+{
+  "trial": "revised_validation_skill",
+  "operation": "definition-only",
+  "started_at_utc": "2026-10-04T05:19:36Z",
+  "evidence_review_finished_at_utc": "2026-10-04T05:20:45Z",
+  "finished_at_utc": "2026-10-04T05:21:20Z",
+  "elapsed_seconds": 104,
+  "elapsed_evidence_review_seconds": 69,
+  "answer": "Simple-chain PPR is catch multiplied by the configured taxon coefficient, with the documented unit conversion where needed. The project evaluates the annual catch first: genuine recorded zero catch gives PPR = 0 even when TL/coefficient is unavailable, because no caught mass contributes PPR. This does not assign or repair the missing TL/coefficient. Positive catch with an unavailable coefficient has unknown PPR, since the required PPR per unit catch is undetermined; report it as unavailable rather than zero. Missing catch also remains unknown. Missing coefficients confined to zero-catch taxa do not make that year's total incomplete; unknown positive-catch contributions require an explicitly labelled known-PPR subtotal. Simple-chain PPR is independent of Ecopath group mapping and GE/TE coefficients.",
+  "definition_sources": [
+    {
+      "path": "README.md",
+      "section": "Workbook reference"
+    },
+    {
+      "path": "tools/templates/instructions.md",
+      "section": "Taxon mapping and coverage summary — Counting and denominator rules; Confidence rule C5"
+    }
+  ],
+  "actual_reads": [
+    "C:/Users/idoca/.codex/plugins/cache/claude-plugins-official/superpowers/6.4.1/skills/using-superpowers/SKILL.md",
+    "AGENTS.md",
+    "README.md",
+    "explainers/structure.md",
+    "explainers/workflow.md",
+    "tools/skills/ecopath-model-validation/SKILL.md",
+    "tools/skills/paper-to-ppr/references/operation-contract.md",
+    "tools/skills/paper-to-ppr/references/regional-calculation.md",
+    "tools/templates/instructions.md"
+  ],
+  "checks": [
+    "Applied revised definition-only route and shared operation contract.",
+    "Confirmed README distinguishes blank/missing values from recorded/calculated zero.",
+    "Confirmed template explicitly evaluates annual catch before missing-coefficient disclosure.",
+    "Confirmed zero-catch missing inputs stay missing and do not make annual PPR incomplete by themselves.",
+    "Confirmed positive-catch missing coefficient and missing catch remain unknown.",
+    "Confirmed independent simple-chain PPR is separate from Ecopath mapping confidence and GE/TE coefficients.",
+    "All file-content reads used the trace harness with PYTHONIOENCODING=utf-8."
+  ],
+  "gaps": [],
+  "metrics": {
+    "file_content_reads": 9,
+    "unique_file_content_reads": 9,
+    "repeated_file_content_reads": 0,
+    "workbook_parses": 0,
+    "scientific_engine_invocations": 0,
+    "rendering_invocations": 0,
+    "command_failures": 0,
+    "retries": 0,
+    "ancillary_cli_invocations": 1,
+    "token_telemetry": "unavailable"
+  },
+  "warnings": [
+    "The tool displayed a truncation warning for the template-guide output; the complete relevant zero/positive/missing-catch definition and C5 rule were visible. No reread was necessary."
+  ],
+  "trace": "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/new_validation_trace.jsonl",
+  "scope": "No workbook reads, generated review artifacts, regional review, scientific runs or live project changes; only this answer/checks/gaps record and its trace."
+}

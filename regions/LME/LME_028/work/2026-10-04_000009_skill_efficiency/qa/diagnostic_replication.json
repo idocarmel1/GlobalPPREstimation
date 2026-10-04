@@ -1,0 +1,2201 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-10-04_000009_skill_efficiency",
+  "model_id": "36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)",
+  "region_id": "LME_036",
+  "trial_kind": "tool_regeneration",
+  "independent_extraction": false,
+  "full_pipeline_replication": false,
+  "adopted": false,
+  "global_or_monte_carlo_executed": false,
+  "policy": {
+    "frozen_before_execution": true,
+    "rtol": 0.0,
+    "atol": 1e-12,
+    "finite_numbers": "absolute difference <= 1e-12; no tolerance relaxation",
+    "axes": "exact unique IDs, names, types, order and synthetic flags",
+    "masks": "exact separate null/NaN/+infinity/-infinity and finite masks",
+    "grades_and_flags": "exact status/component grades, Booleans, counts, config and warning text",
+    "claim": "tool regeneration only; no independent extraction or full pipeline"
+  },
+  "preflight": "diagnostic_replication_preflight.json",
+  "executions": {
+    "exact_historical": {
+      "label": "exact_historical",
+      "constructor": {
+        "underdetermined": true,
+        "zero_biomass_accum": false,
+        "DC_tol": 0.001,
+        "normalize_DC": true,
+        "zero_catch": true,
+        "default_gs": true,
+        "weight_flow": 1.0,
+        "weight_guess": 1.0
+      },
+      "diagnostic_settings": {
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "det_collapse_mode": "never",
+        "TE": null,
+        "DET_TE_vals": 1,
+        "fix_EE_0_cases": true
+      },
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      },
+      "methods": {
+        "GE": {
+          "outcome": "RETURNED",
+          "status": "WARN",
+          "matrices": {
+            "SPPR": {
+              "availability": "present",
+              "shape": [
+                39,
+                4
+              ]
+            },
+            "A": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            },
+            "L": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            }
+          },
+          "seconds": 0.543000600009691
+        },
+        "TE": {
+          "outcome": "RETURNED",
+          "status": "WARN",
+          "matrices": {
+            "SPPR": {
+              "availability": "present",
+              "shape": [
+                39,
+                4
+              ]
+            },
+            "A": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            },
+            "L": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            }
+          },
+          "seconds": 0.4839269000221975
+        },
+        "With Egestion": {
+          "outcome": "RETURNED",
+          "status": "OK",
+          "matrices": {
+            "SPPR": {
+              "availability": "present",
+              "shape": [
+                39,
+                4
+              ]
+            },
+            "A": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            },
+            "L": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            }
+          },
+          "seconds": 0.6509303000057116
+        }
+      },
+      "constructor_invocations": 1,
+      "diagnose_sppr_invocations": 3,
+      "constructor_warnings": [
+        "2 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 33 (Pelagic sharks and rays)=1.0011, 20 (Adult groupers)=0.9990."
+      ],
+      "constructor_seconds": 0.518395499966573,
+      "runtime_before_after": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      },
+      "source_modeldata_before_after": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      },
+      "total_seconds": 2.6852489999728277
+    },
+    "current_compatibility": {
+      "label": "current_compatibility",
+      "constructor": {
+        "underdetermined": true,
+        "zero_biomass_accum": false,
+        "DC_tol": 0.001,
+        "normalize_DC": true,
+        "zero_catch": true,
+        "default_gs": true,
+        "weight_flow": 1.0,
+        "weight_guess": 1.0,
+        "balance_BA_after_DC_normalization": false
+      },
+      "diagnostic_settings": {
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "det_collapse_mode": "never",
+        "TE": null,
+        "DET_TE_vals": 1,
+        "fix_EE_0_cases": true
+      },
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      },
+      "methods": {
+        "GE": {
+          "outcome": "RETURNED",
+          "status": "WARN",
+          "matrices": {
+            "SPPR": {
+              "availability": "present",
+              "shape": [
+                39,
+                4
+              ]
+            },
+            "A": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            },
+            "L": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            }
+          },
+          "seconds": 0.37751189997652546
+        },
+        "TE": {
+          "outcome": "RETURNED",
+          "status": "WARN",
+          "matrices": {
+            "SPPR": {
+              "availability": "present",
+              "shape": [
+                39,
+                4
+              ]
+            },
+            "A": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            },
+            "L": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            }
+          },
+          "seconds": 0.345664200023748
+        },
+        "With Egestion": {
+          "outcome": "RETURNED",
+          "status": "OK",
+          "matrices": {
+            "SPPR": {
+              "availability": "present",
+              "shape": [
+                39,
+                4
+              ]
+            },
+            "A": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            },
+            "L": {
+              "availability": "present",
+              "shape": [
+                39,
+                39
+              ]
+            }
+          },
+          "seconds": 0.4256784000317566
+        }
+      },
+      "constructor_invocations": 1,
+      "diagnose_sppr_invocations": 3,
+      "constructor_warnings": [
+        "2 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 33 (Pelagic sharks and rays)=1.0011, 20 (Adult groupers)=0.9990."
+      ],
+      "constructor_seconds": 0.19176970003172755,
+      "runtime_before_after": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      },
+      "source_modeldata_before_after": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      },
+      "total_seconds": 1.754490400024224
+    }
+  },
+  "processes": {
+    "exact_historical": {
+      "returncode": 0,
+      "wall_seconds": 15.110509900026955,
+      "stdout": "exact_historical GE RETURNED WARN\nexact_historical TE RETURNED WARN\nexact_historical With Egestion RETURNED OK\n",
+      "stderr": ""
+    },
+    "current_compatibility": {
+      "returncode": 0,
+      "wall_seconds": 12.066691700019874,
+      "stdout": "current_compatibility GE RETURNED WARN\ncurrent_compatibility TE RETURNED WARN\ncurrent_compatibility With Egestion RETURNED OK\n",
+      "stderr": ""
+    }
+  },
+  "retained_comparisons": {
+    "exact_historical": {
+      "methods": {
+        "GE": {
+          "execution": {
+            "outcome": "RETURNED",
+            "status": "WARN",
+            "matrices": {
+              "SPPR": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  4
+                ]
+              },
+              "A": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              },
+              "L": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              }
+            },
+            "seconds": 0.543000600009691
+          },
+          "matrices": {
+            "SPPR": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "A": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "L": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            }
+          },
+          "saved_coefficient_scope_sums": {
+            "PP": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 5.4569682106375694e-12,
+              "max_relative_difference": 4.948979964408334e-16,
+              "changed_keys": [
+                ".10",
+                ".12",
+                ".13",
+                ".21",
+                ".22",
+                ".27",
+                ".29",
+                ".30",
+                ".32",
+                ".33",
+                ".34",
+                ".6",
+                ".7",
+                ".9"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 12138.53341182165,
+                  "regenerated": 12138.533411821645
+                }
+              ]
+            },
+            "inner": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 3.637978807091713e-12,
+              "max_relative_difference": 3.4834415062893074e-16,
+              "changed_keys": [
+                ".11",
+                ".12",
+                ".17",
+                ".18",
+                ".19",
+                ".24",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".32",
+                ".34",
+                ".35",
+                ".38",
+                ".4",
+                ".5",
+                ".6"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 21226.41753059845,
+                  "regenerated": 21226.417530598454
+                },
+                {
+                  "key": ".35",
+                  "retained": 12910.88043353363,
+                  "regenerated": 12910.880433533632
+                }
+              ]
+            },
+            "all": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 3.637978807091713e-12,
+              "max_relative_difference": 3.4834415062893074e-16,
+              "changed_keys": [
+                ".11",
+                ".12",
+                ".17",
+                ".18",
+                ".19",
+                ".24",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".32",
+                ".34",
+                ".35",
+                ".38",
+                ".4",
+                ".5",
+                ".6"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 21226.41753059845,
+                  "regenerated": 21226.417530598454
+                },
+                {
+                  "key": ".35",
+                  "retained": 12910.88043353363,
+                  "regenerated": 12910.880433533632
+                }
+              ]
+            }
+          },
+          "matrix_to_report_reconciliation": {
+            "footprint": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 2.842170943040401e-14,
+              "max_relative_difference": 1.22744619034709e-16,
+              "changed_keys": [
+                ".all",
+                ".inner"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "named_detritus_sppr": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            }
+          },
+          "full_report": {
+            "within_frozen_tolerance": true,
+            "exact_equal": true,
+            "max_absolute_difference": 0.0,
+            "max_relative_difference": 0.0,
+            "changed_keys": [],
+            "outside_tolerance_keys": []
+          }
+        },
+        "TE": {
+          "execution": {
+            "outcome": "RETURNED",
+            "status": "WARN",
+            "matrices": {
+              "SPPR": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  4
+                ]
+              },
+              "A": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              },
+              "L": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              }
+            },
+            "seconds": 0.4839269000221975
+          },
+          "matrices": {
+            "SPPR": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "A": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "L": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            }
+          },
+          "saved_coefficient_scope_sums": {
+            "PP": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 4.656612873077393e-10,
+              "max_relative_difference": 4.746505505671306e-16,
+              "changed_keys": [
+                ".10",
+                ".13",
+                ".14",
+                ".17",
+                ".19",
+                ".21",
+                ".24",
+                ".26",
+                ".27",
+                ".28",
+                ".3",
+                ".31",
+                ".34",
+                ".35",
+                ".37",
+                ".6"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 2495268.002849051,
+                  "regenerated": 2495268.0028490513
+                },
+                {
+                  "key": ".35",
+                  "retained": 221785.3142456869,
+                  "regenerated": 221785.31424568692
+                },
+                {
+                  "key": ".37",
+                  "retained": 12943.21885156858,
+                  "regenerated": 12943.218851568581
+                }
+              ]
+            },
+            "inner": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 4.656612873077393e-10,
+              "max_relative_difference": 2.6650358942001845e-16,
+              "changed_keys": [
+                ".16",
+                ".17",
+                ".18",
+                ".21",
+                ".24",
+                ".25",
+                ".26",
+                ".3",
+                ".30",
+                ".31",
+                ".34",
+                ".35",
+                ".37",
+                ".6",
+                ".9"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 3785928.31771222,
+                  "regenerated": 3785928.3177122204
+                },
+                {
+                  "key": ".35",
+                  "retained": 342298.3056408213,
+                  "regenerated": 342298.30564082135
+                },
+                {
+                  "key": ".37",
+                  "retained": 19722.49972157963,
+                  "regenerated": 19722.499721579632
+                }
+              ]
+            },
+            "all": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 4.656612873077393e-10,
+              "max_relative_difference": 2.6650358942001845e-16,
+              "changed_keys": [
+                ".16",
+                ".17",
+                ".18",
+                ".21",
+                ".24",
+                ".25",
+                ".26",
+                ".3",
+                ".30",
+                ".31",
+                ".34",
+                ".35",
+                ".37",
+                ".6",
+                ".9"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 3785928.31771222,
+                  "regenerated": 3785928.3177122204
+                },
+                {
+                  "key": ".35",
+                  "retained": 342298.3056408213,
+                  "regenerated": 342298.30564082135
+                },
+                {
+                  "key": ".37",
+                  "retained": 19722.49972157963,
+                  "regenerated": 19722.499721579632
+                }
+              ]
+            }
+          },
+          "matrix_to_report_reconciliation": {
+            "footprint": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 4.547473508864641e-13,
+              "max_relative_difference": 2.853993972663139e-16,
+              "changed_keys": [
+                ".PP",
+                ".all",
+                ".inner"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "named_detritus_sppr": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            }
+          },
+          "full_report": {
+            "within_frozen_tolerance": true,
+            "exact_equal": true,
+            "max_absolute_difference": 0.0,
+            "max_relative_difference": 0.0,
+            "changed_keys": [],
+            "outside_tolerance_keys": []
+          }
+        },
+        "With Egestion": {
+          "execution": {
+            "outcome": "RETURNED",
+            "status": "OK",
+            "matrices": {
+              "SPPR": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  4
+                ]
+              },
+              "A": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              },
+              "L": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              }
+            },
+            "seconds": 0.6509303000057116
+          },
+          "matrices": {
+            "SPPR": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "A": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "L": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            }
+          },
+          "saved_coefficient_scope_sums": {
+            "PP": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 5.329070518200751e-15,
+              "max_relative_difference": 4.714313485756137e-16,
+              "changed_keys": [
+                ".10",
+                ".11",
+                ".13",
+                ".14",
+                ".15",
+                ".21",
+                ".22",
+                ".24",
+                ".25",
+                ".26",
+                ".27",
+                ".28",
+                ".30",
+                ".32",
+                ".4",
+                ".8",
+                ".9"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "inner": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 2.2737367544323206e-13,
+              "max_relative_difference": 2.2066497818706754e-16,
+              "changed_keys": [
+                ".12",
+                ".13",
+                ".14",
+                ".21",
+                ".22",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".36",
+                ".37",
+                ".4",
+                ".5",
+                ".9"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "all": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 2.2737367544323206e-13,
+              "max_relative_difference": 2.2066497818706754e-16,
+              "changed_keys": [
+                ".12",
+                ".13",
+                ".14",
+                ".21",
+                ".22",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".36",
+                ".37",
+                ".4",
+                ".5",
+                ".9"
+              ],
+              "outside_tolerance_keys": []
+            }
+          },
+          "matrix_to_report_reconciliation": {
+            "footprint": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            },
+            "named_detritus_sppr": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            }
+          },
+          "full_report": {
+            "within_frozen_tolerance": true,
+            "exact_equal": true,
+            "max_absolute_difference": 0.0,
+            "max_relative_difference": 0.0,
+            "changed_keys": [],
+            "outside_tolerance_keys": []
+          }
+        }
+      },
+      "runtime_vs_retained": {
+        "runtime_groups_before.csv": {
+          "within_frozen_tolerance": true,
+          "exact_equal": true,
+          "max_absolute_difference": 0.0,
+          "max_relative_difference": 0.0,
+          "changed_keys": [],
+          "outside_tolerance_keys": []
+        },
+        "runtime_diet.csv": {
+          "within_frozen_tolerance": true,
+          "exact_equal": true,
+          "max_absolute_difference": 0.0,
+          "max_relative_difference": 0.0,
+          "changed_keys": [],
+          "outside_tolerance_keys": []
+        },
+        "runtime_detritus_routing.csv": {
+          "within_frozen_tolerance": true,
+          "exact_equal": true,
+          "max_absolute_difference": 0.0,
+          "max_relative_difference": 0.0,
+          "changed_keys": [],
+          "outside_tolerance_keys": []
+        }
+      }
+    },
+    "current_compatibility": {
+      "methods": {
+        "GE": {
+          "execution": {
+            "outcome": "RETURNED",
+            "status": "WARN",
+            "matrices": {
+              "SPPR": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  4
+                ]
+              },
+              "A": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              },
+              "L": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              }
+            },
+            "seconds": 0.37751189997652546
+          },
+          "matrices": {
+            "SPPR": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "A": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "L": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            }
+          },
+          "saved_coefficient_scope_sums": {
+            "PP": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 5.4569682106375694e-12,
+              "max_relative_difference": 4.948979964408334e-16,
+              "changed_keys": [
+                ".10",
+                ".12",
+                ".13",
+                ".21",
+                ".22",
+                ".27",
+                ".29",
+                ".30",
+                ".32",
+                ".33",
+                ".34",
+                ".6",
+                ".7",
+                ".9"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 12138.53341182165,
+                  "regenerated": 12138.533411821645
+                }
+              ]
+            },
+            "inner": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 3.637978807091713e-12,
+              "max_relative_difference": 3.4834415062893074e-16,
+              "changed_keys": [
+                ".11",
+                ".12",
+                ".17",
+                ".18",
+                ".19",
+                ".24",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".32",
+                ".34",
+                ".35",
+                ".38",
+                ".4",
+                ".5",
+                ".6"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 21226.41753059845,
+                  "regenerated": 21226.417530598454
+                },
+                {
+                  "key": ".35",
+                  "retained": 12910.88043353363,
+                  "regenerated": 12910.880433533632
+                }
+              ]
+            },
+            "all": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 3.637978807091713e-12,
+              "max_relative_difference": 3.4834415062893074e-16,
+              "changed_keys": [
+                ".11",
+                ".12",
+                ".17",
+                ".18",
+                ".19",
+                ".24",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".32",
+                ".34",
+                ".35",
+                ".38",
+                ".4",
+                ".5",
+                ".6"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 21226.41753059845,
+                  "regenerated": 21226.417530598454
+                },
+                {
+                  "key": ".35",
+                  "retained": 12910.88043353363,
+                  "regenerated": 12910.880433533632
+                }
+              ]
+            }
+          },
+          "matrix_to_report_reconciliation": {
+            "footprint": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 2.842170943040401e-14,
+              "max_relative_difference": 1.22744619034709e-16,
+              "changed_keys": [
+                ".all",
+                ".inner"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "named_detritus_sppr": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            }
+          },
+          "full_report": {
+            "within_frozen_tolerance": true,
+            "exact_equal": true,
+            "max_absolute_difference": 0.0,
+            "max_relative_difference": 0.0,
+            "changed_keys": [],
+            "outside_tolerance_keys": []
+          }
+        },
+        "TE": {
+          "execution": {
+            "outcome": "RETURNED",
+            "status": "WARN",
+            "matrices": {
+              "SPPR": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  4
+                ]
+              },
+              "A": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              },
+              "L": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              }
+            },
+            "seconds": 0.345664200023748
+          },
+          "matrices": {
+            "SPPR": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "A": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "L": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            }
+          },
+          "saved_coefficient_scope_sums": {
+            "PP": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 4.656612873077393e-10,
+              "max_relative_difference": 4.746505505671306e-16,
+              "changed_keys": [
+                ".10",
+                ".13",
+                ".14",
+                ".17",
+                ".19",
+                ".21",
+                ".24",
+                ".26",
+                ".27",
+                ".28",
+                ".3",
+                ".31",
+                ".34",
+                ".35",
+                ".37",
+                ".6"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 2495268.002849051,
+                  "regenerated": 2495268.0028490513
+                },
+                {
+                  "key": ".35",
+                  "retained": 221785.3142456869,
+                  "regenerated": 221785.31424568692
+                },
+                {
+                  "key": ".37",
+                  "retained": 12943.21885156858,
+                  "regenerated": 12943.218851568581
+                }
+              ]
+            },
+            "inner": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 4.656612873077393e-10,
+              "max_relative_difference": 2.6650358942001845e-16,
+              "changed_keys": [
+                ".16",
+                ".17",
+                ".18",
+                ".21",
+                ".24",
+                ".25",
+                ".26",
+                ".3",
+                ".30",
+                ".31",
+                ".34",
+                ".35",
+                ".37",
+                ".6",
+                ".9"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 3785928.31771222,
+                  "regenerated": 3785928.3177122204
+                },
+                {
+                  "key": ".35",
+                  "retained": 342298.3056408213,
+                  "regenerated": 342298.30564082135
+                },
+                {
+                  "key": ".37",
+                  "retained": 19722.49972157963,
+                  "regenerated": 19722.499721579632
+                }
+              ]
+            },
+            "all": {
+              "within_frozen_tolerance": false,
+              "exact_equal": false,
+              "max_absolute_difference": 4.656612873077393e-10,
+              "max_relative_difference": 2.6650358942001845e-16,
+              "changed_keys": [
+                ".16",
+                ".17",
+                ".18",
+                ".21",
+                ".24",
+                ".25",
+                ".26",
+                ".3",
+                ".30",
+                ".31",
+                ".34",
+                ".35",
+                ".37",
+                ".6",
+                ".9"
+              ],
+              "outside_tolerance_keys": [
+                {
+                  "key": ".34",
+                  "retained": 3785928.31771222,
+                  "regenerated": 3785928.3177122204
+                },
+                {
+                  "key": ".35",
+                  "retained": 342298.3056408213,
+                  "regenerated": 342298.30564082135
+                },
+                {
+                  "key": ".37",
+                  "retained": 19722.49972157963,
+                  "regenerated": 19722.499721579632
+                }
+              ]
+            }
+          },
+          "matrix_to_report_reconciliation": {
+            "footprint": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 4.547473508864641e-13,
+              "max_relative_difference": 2.853993972663139e-16,
+              "changed_keys": [
+                ".PP",
+                ".all",
+                ".inner"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "named_detritus_sppr": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            }
+          },
+          "full_report": {
+            "within_frozen_tolerance": true,
+            "exact_equal": true,
+            "max_absolute_difference": 0.0,
+            "max_relative_difference": 0.0,
+            "changed_keys": [],
+            "outside_tolerance_keys": []
+          }
+        },
+        "With Egestion": {
+          "execution": {
+            "outcome": "RETURNED",
+            "status": "OK",
+            "matrices": {
+              "SPPR": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  4
+                ]
+              },
+              "A": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              },
+              "L": {
+                "availability": "present",
+                "shape": [
+                  39,
+                  39
+                ]
+              }
+            },
+            "seconds": 0.4256784000317566
+          },
+          "matrices": {
+            "SPPR": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "A": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            },
+            "L": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": [],
+              "axis_uniqueness": true,
+              "dimensions_valid": true,
+              "changed_group_source_keys": []
+            }
+          },
+          "saved_coefficient_scope_sums": {
+            "PP": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 5.329070518200751e-15,
+              "max_relative_difference": 4.714313485756137e-16,
+              "changed_keys": [
+                ".10",
+                ".11",
+                ".13",
+                ".14",
+                ".15",
+                ".21",
+                ".22",
+                ".24",
+                ".25",
+                ".26",
+                ".27",
+                ".28",
+                ".30",
+                ".32",
+                ".4",
+                ".8",
+                ".9"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "inner": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 2.2737367544323206e-13,
+              "max_relative_difference": 2.2066497818706754e-16,
+              "changed_keys": [
+                ".12",
+                ".13",
+                ".14",
+                ".21",
+                ".22",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".36",
+                ".37",
+                ".4",
+                ".5",
+                ".9"
+              ],
+              "outside_tolerance_keys": []
+            },
+            "all": {
+              "within_frozen_tolerance": true,
+              "exact_equal": false,
+              "max_absolute_difference": 2.2737367544323206e-13,
+              "max_relative_difference": 2.2066497818706754e-16,
+              "changed_keys": [
+                ".12",
+                ".13",
+                ".14",
+                ".21",
+                ".22",
+                ".25",
+                ".26",
+                ".27",
+                ".29",
+                ".30",
+                ".36",
+                ".37",
+                ".4",
+                ".5",
+                ".9"
+              ],
+              "outside_tolerance_keys": []
+            }
+          },
+          "matrix_to_report_reconciliation": {
+            "footprint": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            },
+            "named_detritus_sppr": {
+              "within_frozen_tolerance": true,
+              "exact_equal": true,
+              "max_absolute_difference": 0.0,
+              "max_relative_difference": 0.0,
+              "changed_keys": [],
+              "outside_tolerance_keys": []
+            }
+          },
+          "full_report": {
+            "within_frozen_tolerance": true,
+            "exact_equal": true,
+            "max_absolute_difference": 0.0,
+            "max_relative_difference": 0.0,
+            "changed_keys": [],
+            "outside_tolerance_keys": []
+          }
+        }
+      },
+      "runtime_vs_retained": {
+        "runtime_groups_before.csv": {
+          "within_frozen_tolerance": true,
+          "exact_equal": true,
+          "max_absolute_difference": 0.0,
+          "max_relative_difference": 0.0,
+          "changed_keys": [],
+          "outside_tolerance_keys": []
+        },
+        "runtime_diet.csv": {
+          "within_frozen_tolerance": true,
+          "exact_equal": true,
+          "max_absolute_difference": 0.0,
+          "max_relative_difference": 0.0,
+          "changed_keys": [],
+          "outside_tolerance_keys": []
+        },
+        "runtime_detritus_routing.csv": {
+          "within_frozen_tolerance": true,
+          "exact_equal": true,
+          "max_absolute_difference": 0.0,
+          "max_relative_difference": 0.0,
+          "changed_keys": [],
+          "outside_tolerance_keys": []
+        }
+      }
+    }
+  },
+  "historical_vs_current_compatibility": {
+    "GE": {
+      "SPPR": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "A": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "L": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "full_report": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      }
+    },
+    "TE": {
+      "SPPR": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "A": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "L": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "full_report": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      }
+    },
+    "With Egestion": {
+      "SPPR": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "A": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "L": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": [],
+        "axis_uniqueness": true,
+        "dimensions_valid": true,
+        "changed_group_source_keys": []
+      },
+      "full_report": {
+        "within_frozen_tolerance": true,
+        "exact_equal": true,
+        "max_absolute_difference": 0.0,
+        "max_relative_difference": 0.0,
+        "changed_keys": [],
+        "outside_tolerance_keys": []
+      }
+    }
+  },
+  "preservation": {
+    "all_protected_hashes_unchanged": true,
+    "protected_file_count": 57,
+    "before": {
+      "tools/scientific_code/PPREstimation/PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+      "tools/scientific_code/PPREstimation/ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "tools/scientific_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model.json": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_notes.md": "da86b46c3abb7f0af185e69190b8756e3e019b71749847f8a97b343ae70d6126",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/sppr_source.xlsx": "d7d13a26468f1fbbbda74c63848bcd9e227fac9b75d9ae4637d80f5e1d7b5c45",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/inputs/provenance.json": "2ab2dce21b717c8f3dc1463d30710cdbccbccae7f92c0a8a95d2364a6aaa5b61",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/coefficient_comparison.json": "70bf55576ecd422addd6abd889e0b9014cfd1a7fccc99475d8bea1536ddc6743",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/complete_input_identity.json": "c8c496ab5deb508d43ad6584395387e8904035a4364232975314aa2c45f2eaf0",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/constructor_warnings.json": "6feb9346b63ac847d17d2a7e935797e1d9e23dd0f8ff8b2acbdfe67202fda268",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/footprint_reconciliation.json": "503ccf9ccd349a532401f48dee4d40af58aa49c2e4bebec9f6da5654ae50dc1f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_A.json": "ce5644b73955e818c31accc8fdbab827e0321a5874479cc051e78c896c7e1398",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_A_lossless.json": "3e7f5f5711b1516674aae3292defd2f9344b71854c605949e6566d1ab0d734a1",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_L.json": "8c243cf9068f3fef686e9f2a527d44da8bbbed15440647c1eb78b8ea4d795376",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_L_lossless.json": "9a2151998fc961db3ec399dc323c2bc68c47f030de0cfe0cdbcbeea9a78d659e",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_report.json": "0dfdf6dbfac450e565a8ea839b29e5a1d05de82768b8cff277a21f33985241f3",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_sign_checks.json": "3d7f49f0e113073f7fe337462f23ee1d7f51aec18c7e012045350cb885bb0d70",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_SPPR.json": "3decc78cef3e205742e355410f377463af4ce2ac9164c1aaf365c1ce7d811019",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_SPPR_lossless.json": "bad5981350d72f764b8b76a13758f7b19e48ba8bbd30e35bf5c2d9de27a8b47e",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_warnings.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/input_identity.json": "10aa951a91a6cb139e0784568fb70d9cc05944321a762524916ad6ce65a910cd",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/lossless_matrix_checks.json": "9a1d8969e32010733375b3e5828c1d6634fb0e1d54c226b011aabefa817daecb",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/manual_exclusion_discrepancy.json": "042f725f4fee21c57168c720b22f9b94ecc55001bd1f7a54500499512146af6e",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/negative_entry_table.json": "dcac8b1e6b95feda4ffb1fb238889448f38853506148e03cab51706471de3189",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/preservation.json": "82c1eb6052c3c73b6695bb9dbc6cf35b5404602f4642fba368b1200ee7f8a565",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_vs_saved_groups.json": "aa4a76801585cd3a26d18e54e3922fbe5f2cfccf27c9d056aa183e30b9f69e8a",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_A.json": "7107f0cc144871f694a35bb435f7cabd89b220af7f367be1c733f4f0df9c6112",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_A_lossless.json": "34483b9eb9319ab763b38e46902391d29779a9195fa22727a160d455536448d0",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_L.json": "b8e85bd7bc244b9f6dbe0fc8b0496353fe36ee4cc895c4791514d7b3966f426d",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_L_lossless.json": "c51e6ac9eb5aebd6b34d5777ee86092a49fe86fc951ff6cb48b04870168261ec",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_report.json": "2aa83d10a05243b11006be555a3cf403a622d5d3a941189ad53d894892aa6421",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_sign_checks.json": "3d7f49f0e113073f7fe337462f23ee1d7f51aec18c7e012045350cb885bb0d70",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_SPPR.json": "4499ce333be93b97c17925a5c48a4fe712d661e05b1f7e853d8fdd6f6aa56521",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_SPPR_lossless.json": "780e7acd1cd2f3b01299c0aed1fbfcaf5ac9e06ebddc2cf7c14a0d2a0fb7f2d5",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_warnings.json": "a3240e7aa022d1dea933e4a06d6be43c847e1f3a3780086a231fa72adcfbff0a",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_A.json": "b9248204591ae5482622d50b59522b10640a3e7a13dd13d73ec874d7f8d1ce8b",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_A_lossless.json": "a798996d42d013ec1657c65a89c291749100eb8fb3c4c1dc7c53e4bf1906309c",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_L.json": "ea62bf5381a86842b1efcd9e48c18321861d34b0bbfaaba32f742bf825c60629",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_L_lossless.json": "c9655dbb34c8227eca94b88bce1a312b88a3371445bbb5ec45e762d0ceae976c",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_report.json": "b9a7f1455a6cb95ffdbc7d18206debf7c5cb347fcecd9ef4f589fdaf322a6263",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_sign_checks.json": "3d7f49f0e113073f7fe337462f23ee1d7f51aec18c7e012045350cb885bb0d70",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_SPPR.json": "c903f1bddaf24b937e8374ae1be2ee1736e829b7df10961e5de01b6ce3e26a95",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_SPPR_lossless.json": "ef5df14b88bbb6a34c480391f544ddedb5daa5022ee98030e1d3c1abbc2f4b26",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_warnings.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_A.csv": "a302537fff6a7375cf1949c0553316f653c699f84217c22449c913a970304087",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_L.csv": "c6e839d5e5c91fd584f0c100ec6b65004a2f64dfea87505a575cd27bd6a1b8c0",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_SPPR.csv": "f2fac25206db8c8bba9caab660e9c4707c4a578a4d9012b398bb05714556a33b",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_detritus_routing.csv": "6e0359dbe4c83b1fb8c1d3ce41217f3220a986c124a2f78508e2c50c6fab21eb",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_diet.csv": "08f464da7ba136dff372ba27e7b298b50f48b2735cec2f2f2222fb05c755e66b",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_groups_after.csv": "d464a49e4fb82849dd64cb7acb9d7e3525165ab3235cb6da376bc42d47463ec3",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_groups_before.csv": "d464a49e4fb82849dd64cb7acb9d7e3525165ab3235cb6da376bc42d47463ec3",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_A.csv": "7c84e141fc4b90cb486f0654ad29679f6e6640505c1d064bde5345993178c178",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_L.csv": "aac34fdf8b0b2225ca438207754e04ef75d728d02ca6cca46c918da06819ff29",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_SPPR.csv": "18000c6deccdda97654e9eaf51ee0bd8c84d77080fb74481e657671956267a47",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_A.csv": "62e8efdc97e4ee94f6069a0a3630760da12a4674c7476ed381321093b73b5f5d",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_L.csv": "ae40b4a7916e884e717ea0bf6b01874618fec46011cdbdfd706b8e7d058c6097",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_SPPR.csv": "78ac97fad45d44c08a0df1fca8d1659d883eb6595ca51b14ed39c79491e217cd"
+    },
+    "after": {
+      "tools/scientific_code/PPREstimation/PPRCalculator.py": "7e68885b270940d8b410fa84d2a56e74eacbc3b8fbcda33361e4d495805cbf7b",
+      "tools/scientific_code/PPREstimation/ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "tools/scientific_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model.json": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_notes.md": "da86b46c3abb7f0af185e69190b8756e3e019b71749847f8a97b343ae70d6126",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/sppr_source.xlsx": "d7d13a26468f1fbbbda74c63848bcd9e227fac9b75d9ae4637d80f5e1d7b5c45",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/inputs/provenance.json": "2ab2dce21b717c8f3dc1463d30710cdbccbccae7f92c0a8a95d2364a6aaa5b61",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/coefficient_comparison.json": "70bf55576ecd422addd6abd889e0b9014cfd1a7fccc99475d8bea1536ddc6743",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/complete_input_identity.json": "c8c496ab5deb508d43ad6584395387e8904035a4364232975314aa2c45f2eaf0",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/constructor_warnings.json": "6feb9346b63ac847d17d2a7e935797e1d9e23dd0f8ff8b2acbdfe67202fda268",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/footprint_reconciliation.json": "503ccf9ccd349a532401f48dee4d40af58aa49c2e4bebec9f6da5654ae50dc1f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_A.json": "ce5644b73955e818c31accc8fdbab827e0321a5874479cc051e78c896c7e1398",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_A_lossless.json": "3e7f5f5711b1516674aae3292defd2f9344b71854c605949e6566d1ab0d734a1",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_L.json": "8c243cf9068f3fef686e9f2a527d44da8bbbed15440647c1eb78b8ea4d795376",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_L_lossless.json": "9a2151998fc961db3ec399dc323c2bc68c47f030de0cfe0cdbcbeea9a78d659e",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_report.json": "0dfdf6dbfac450e565a8ea839b29e5a1d05de82768b8cff277a21f33985241f3",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_sign_checks.json": "3d7f49f0e113073f7fe337462f23ee1d7f51aec18c7e012045350cb885bb0d70",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_SPPR.json": "3decc78cef3e205742e355410f377463af4ce2ac9164c1aaf365c1ce7d811019",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_SPPR_lossless.json": "bad5981350d72f764b8b76a13758f7b19e48ba8bbd30e35bf5c2d9de27a8b47e",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_warnings.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/input_identity.json": "10aa951a91a6cb139e0784568fb70d9cc05944321a762524916ad6ce65a910cd",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/lossless_matrix_checks.json": "9a1d8969e32010733375b3e5828c1d6634fb0e1d54c226b011aabefa817daecb",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/manual_exclusion_discrepancy.json": "042f725f4fee21c57168c720b22f9b94ecc55001bd1f7a54500499512146af6e",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/negative_entry_table.json": "dcac8b1e6b95feda4ffb1fb238889448f38853506148e03cab51706471de3189",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/preservation.json": "82c1eb6052c3c73b6695bb9dbc6cf35b5404602f4642fba368b1200ee7f8a565",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_vs_saved_groups.json": "aa4a76801585cd3a26d18e54e3922fbe5f2cfccf27c9d056aa183e30b9f69e8a",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_A.json": "7107f0cc144871f694a35bb435f7cabd89b220af7f367be1c733f4f0df9c6112",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_A_lossless.json": "34483b9eb9319ab763b38e46902391d29779a9195fa22727a160d455536448d0",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_L.json": "b8e85bd7bc244b9f6dbe0fc8b0496353fe36ee4cc895c4791514d7b3966f426d",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_L_lossless.json": "c51e6ac9eb5aebd6b34d5777ee86092a49fe86fc951ff6cb48b04870168261ec",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_report.json": "2aa83d10a05243b11006be555a3cf403a622d5d3a941189ad53d894892aa6421",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_sign_checks.json": "3d7f49f0e113073f7fe337462f23ee1d7f51aec18c7e012045350cb885bb0d70",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_SPPR.json": "4499ce333be93b97c17925a5c48a4fe712d661e05b1f7e853d8fdd6f6aa56521",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_SPPR_lossless.json": "780e7acd1cd2f3b01299c0aed1fbfcaf5ac9e06ebddc2cf7c14a0d2a0fb7f2d5",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_warnings.json": "a3240e7aa022d1dea933e4a06d6be43c847e1f3a3780086a231fa72adcfbff0a",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_A.json": "b9248204591ae5482622d50b59522b10640a3e7a13dd13d73ec874d7f8d1ce8b",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_A_lossless.json": "a798996d42d013ec1657c65a89c291749100eb8fb3c4c1dc7c53e4bf1906309c",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_L.json": "ea62bf5381a86842b1efcd9e48c18321861d34b0bbfaaba32f742bf825c60629",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_L_lossless.json": "c9655dbb34c8227eca94b88bce1a312b88a3371445bbb5ec45e762d0ceae976c",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_report.json": "b9a7f1455a6cb95ffdbc7d18206debf7c5cb347fcecd9ef4f589fdaf322a6263",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_sign_checks.json": "3d7f49f0e113073f7fe337462f23ee1d7f51aec18c7e012045350cb885bb0d70",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_SPPR.json": "c903f1bddaf24b937e8374ae1be2ee1736e829b7df10961e5de01b6ce3e26a95",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_SPPR_lossless.json": "ef5df14b88bbb6a34c480391f544ddedb5daa5022ee98030e1d3c1abbc2f4b26",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_warnings.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_A.csv": "a302537fff6a7375cf1949c0553316f653c699f84217c22449c913a970304087",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_L.csv": "c6e839d5e5c91fd584f0c100ec6b65004a2f64dfea87505a575cd27bd6a1b8c0",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/GE_SPPR.csv": "f2fac25206db8c8bba9caab660e9c4707c4a578a4d9012b398bb05714556a33b",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_detritus_routing.csv": "6e0359dbe4c83b1fb8c1d3ce41217f3220a986c124a2f78508e2c50c6fab21eb",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_diet.csv": "08f464da7ba136dff372ba27e7b298b50f48b2735cec2f2f2222fb05c755e66b",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_groups_after.csv": "d464a49e4fb82849dd64cb7acb9d7e3525165ab3235cb6da376bc42d47463ec3",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/runtime_groups_before.csv": "d464a49e4fb82849dd64cb7acb9d7e3525165ab3235cb6da376bc42d47463ec3",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_A.csv": "7c84e141fc4b90cb486f0654ad29679f6e6640505c1d064bde5345993178c178",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_L.csv": "aac34fdf8b0b2225ca438207754e04ef75d728d02ca6cca46c918da06819ff29",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/TE_SPPR.csv": "18000c6deccdda97654e9eaf51ee0bd8c84d77080fb74481e657671956267a47",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_A.csv": "62e8efdc97e4ee94f6069a0a3630760da12a4674c7476ed381321093b73b5f5d",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_L.csv": "ae40b4a7916e884e717ea0bf6b01874618fec46011cdbdfd706b8e7d058c6097",
+      "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/With_Egestion_SPPR.csv": "78ac97fad45d44c08a0df1fca8d1659d883eb6595ca51b14ed39c79491e217cd"
+    }
+  },
+  "temporary_axis_metadata_corrections": [
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/GE_A_lossless.json",
+      "before_sha256": "a9e8bfbdcc2cda0ba255c62bf81afb8fbd5eb19287954bbb04fe55b505ff9278",
+      "after_sha256": "2933987e4acd9da54b23e824f7ea0a34047314cd634bfa96a10fe29de2e60661",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/GE_L_lossless.json",
+      "before_sha256": "a36059eccd8fb39b72ebd30de7b41702570c00aef88da8018f3bfa495d9cd316",
+      "after_sha256": "915229f5ad9e00cb4de4905cd07cf2abb6c3835821263d0e1f8dfe50f85474a9",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/GE_SPPR_lossless.json",
+      "before_sha256": "aa1f00ac000610e3f4920f0dd664a40027c6fc95ab37062de1550a620db7924d",
+      "after_sha256": "8769666a6f1e7789d64f9f6901b4513290c7b38345cb4a55066f15331b85defa",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/TE_A_lossless.json",
+      "before_sha256": "31b962e958305e09762d572364a4584fab388b79600b56e84eb21d14116f287f",
+      "after_sha256": "81cb42b3ff57fe8f27673368e51a4ff29d482946abe479cfb249c7f1dcc6d541",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/TE_L_lossless.json",
+      "before_sha256": "37efb4e55e4922ef8146353fd74c51f6f79eee5eb56cbd03478b3bab8e498a86",
+      "after_sha256": "7fdf7df214fe026dfdd1964043285b2c83e401fa0785fad853aec632834a4522",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/TE_SPPR_lossless.json",
+      "before_sha256": "f4808af37237f7ff14199aa52c0dc748680133230c73e9f7e193ca2d782d3bb9",
+      "after_sha256": "d78edae64a0cc2888de89863254e18d5eeccb95c91a33654531b3999553513ca",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/With_Egestion_A_lossless.json",
+      "before_sha256": "9ca5a02cf8ee75509c3ad3f31e024ba9b5714e6ca1392eaa056a23409b62ad20",
+      "after_sha256": "2a2c0844c105ad444fc749db5bdf1285968d838d5d267b17e4aea3bfad0c6b9e",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/With_Egestion_L_lossless.json",
+      "before_sha256": "464f5829d6b49150328da09ab9db19c44cb07dfbd073620e2bc7eb77eb6fa6d2",
+      "after_sha256": "58fd61fc97c3c185ba7b875cc0c57bc19e0eb583bb91c7a0ade07ee7bba2dc7e",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/exact_historical/With_Egestion_SPPR_lossless.json",
+      "before_sha256": "3179c3e033b42dc214a42a0721d77f5e4dc91abc4c728c07f56cb0c86167dae5",
+      "after_sha256": "236b457af55118312599c76f7bf05f33cd1be5983c40b6a0b30e165c38b54e02",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/GE_A_lossless.json",
+      "before_sha256": "a9e8bfbdcc2cda0ba255c62bf81afb8fbd5eb19287954bbb04fe55b505ff9278",
+      "after_sha256": "2933987e4acd9da54b23e824f7ea0a34047314cd634bfa96a10fe29de2e60661",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/GE_L_lossless.json",
+      "before_sha256": "a36059eccd8fb39b72ebd30de7b41702570c00aef88da8018f3bfa495d9cd316",
+      "after_sha256": "915229f5ad9e00cb4de4905cd07cf2abb6c3835821263d0e1f8dfe50f85474a9",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/GE_SPPR_lossless.json",
+      "before_sha256": "aa1f00ac000610e3f4920f0dd664a40027c6fc95ab37062de1550a620db7924d",
+      "after_sha256": "8769666a6f1e7789d64f9f6901b4513290c7b38345cb4a55066f15331b85defa",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/TE_A_lossless.json",
+      "before_sha256": "31b962e958305e09762d572364a4584fab388b79600b56e84eb21d14116f287f",
+      "after_sha256": "81cb42b3ff57fe8f27673368e51a4ff29d482946abe479cfb249c7f1dcc6d541",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/TE_L_lossless.json",
+      "before_sha256": "37efb4e55e4922ef8146353fd74c51f6f79eee5eb56cbd03478b3bab8e498a86",
+      "after_sha256": "7fdf7df214fe026dfdd1964043285b2c83e401fa0785fad853aec632834a4522",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/TE_SPPR_lossless.json",
+      "before_sha256": "f4808af37237f7ff14199aa52c0dc748680133230c73e9f7e193ca2d782d3bb9",
+      "after_sha256": "d78edae64a0cc2888de89863254e18d5eeccb95c91a33654531b3999553513ca",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/With_Egestion_A_lossless.json",
+      "before_sha256": "9ca5a02cf8ee75509c3ad3f31e024ba9b5714e6ca1392eaa056a23409b62ad20",
+      "after_sha256": "2a2c0844c105ad444fc749db5bdf1285968d838d5d267b17e4aea3bfad0c6b9e",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/With_Egestion_L_lossless.json",
+      "before_sha256": "464f5829d6b49150328da09ab9db19c44cb07dfbd073620e2bc7eb77eb6fa6d2",
+      "after_sha256": "58fd61fc97c3c185ba7b875cc0c57bc19e0eb583bb91c7a0ade07ee7bba2dc7e",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    },
+    {
+      "path": "outputs/direct_diagnostics/current_compatibility/With_Egestion_SPPR_lossless.json",
+      "before_sha256": "3179c3e033b42dc214a42a0721d77f5e4dc91abc4c728c07f56cb0c86167dae5",
+      "after_sha256": "236b457af55118312599c76f7bf05f33cd1be5983c40b6a0b30e165c38b54e02",
+      "changes": [
+        {
+          "axis": "row_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        },
+        {
+          "axis": "column_axis",
+          "group_id": 39,
+          "old": false,
+          "new": true
+        }
+      ],
+      "numeric_values_and_masks_changed": false
+    }
+  ],
+  "measurement": {
+    "total_wall_seconds": 31.27846869995119,
+    "total_wall_seconds_scope": "Original two-engine trial and initial comparison; later metadata/comparison-only rechecks are separate",
+    "comparison_only_recheck_seconds": 0.9318575999932364,
+    "worker_processes": 2,
+    "constructor_invocations": 2,
+    "diagnose_sppr_invocations": 6,
+    "comparison_policy_frozen_before_first_constructor": true,
+    "workbook_parses": 1,
+    "token_telemetry": "unavailable",
+    "context": "warm evidence-reading context; separate cold engine worker processes"
+  },
+  "limitations": [
+    "Exact historical engine bytes are regenerated, not independently reimplemented.",
+    "Current compatibility setting is not a historical recorded flag or adopted default.",
+    "Scientific source discrepancies, WARN restrictions and provisional source applicability remain.",
+    "Any failed comparison remains unresolved; tolerance is unchanged."
+  ],
+  "exact_historical_full_direct_returns_and_runtime_equivalent": true,
+  "exact_historical_saved_coefficient_reconciliation_passed": false,
+  "exact_historical_retained_equivalence_under_frozen_policy": false,
+  "current_compatibility_full_direct_returns_and_runtime_equivalent": true,
+  "current_compatibility_saved_coefficient_reconciliation_passed": false,
+  "current_compatibility_retained_equivalence_under_frozen_policy": false,
+  "all_trials_equivalent_under_frozen_policy": false
+}

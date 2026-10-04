@@ -79,7 +79,9 @@ def prepare(final=False):
  accepted={};rejected={}
  for oldpath,v in candidates.items():
   expected=stem(oldpath)+'_';items=nodes_by.get(oldpath,[])
-  bad=[n for n in items if not n['id'].startswith(expected)or re.search(r'_rationale_\d+$',n['id'])]
+  bad=[n for n in items if not n['id'].startswith(expected)or re.search(r'_rationale_\d+$',n['id'])or
+       any(c.get('source_file')not in hashes or c.get('source_sha256')!=hashes[c['source_file']]
+           for c in n.get('source_evidence',[]))]
   if items and not bad and stem(oldpath)==stem(v['path']):accepted[oldpath]=v
   else:rejected[oldpath]={'path':v['path'],'reason':'No compliant cached semantic fragment, changed source-stem identity, or obsolete rationale-fragment nodes'}
  reused_nodes=[];used_ids=set()
@@ -88,15 +90,26 @@ def prepare(final=False):
    n=copy.deepcopy(node);n['source_file']=v['path'];n.pop('community',None);n.pop('norm_label',None)
    n['historical']=v['path'].startswith('research/');reused_nodes.append(n);used_ids.add(n['id'])
  reused_edges=[]
- for e in old['links']:
+ # Topology links aggregate independently attributed relationships. Reuse
+ # every original evidence record, rather than dropping them into one link.
+ for e in [record for link in old['links'] for record in link.get('evidence',[link])]:
   source=e.get('source_file')
-  if source in accepted and e['source']in used_ids and e['target']in used_ids:
+  if source in accepted:
    n=copy.deepcopy(e);n['source_file']=accepted[source]['path'];reused_edges.append(n)
  reused_hyper=[]
  for h in old.get('hyperedges',[]):
   source=h.get('source_file')
-  if source in accepted and all(n in used_ids for n in h.get('nodes',[])):
+  if source in accepted:
    n=copy.deepcopy(h);n['source_file']=accepted[source]['path'];reused_hyper.append(n)
+ # Cross-source references remain evidence from their unchanged cited source.
+ # Resolve their endpoints against fresh AST/semantic nodes during merge;
+ # never silently discard them because the endpoint's own source changed.
+ referenced={endpoint for e in reused_edges for endpoint in [e['source'],e['target']]}
+ referenced.update(endpoint for h in reused_hyper for endpoint in h['nodes'])
+ pending=referenced-used_ids
+ endpoint_records=[{**{k:n.get(k)for k in ['id','label','source_file','source_location']},
+                    'requires_fresh_semantic_source':n.get('source_file')in docs and n.get('source_file')not in {v['path']for v in accepted.values()}}
+                   for n in old['nodes']if n['id']in pending]
  reused_paths={v['path']for v in accepted.values()};uncached=sorted(docs-reused_paths)
  chunk_count=math.ceil(len(uncached)/22)if uncached else 0
  size,extra=divmod(len(uncached),chunk_count)if chunk_count else(0,0)
@@ -105,7 +118,7 @@ def prepare(final=False):
   count=size+(1 if i<extra else 0);chunks.append(uncached[offset:offset+count]);offset+=count
  save(RUN/'reused_semantic.json',{'nodes':reused_nodes,'edges':reused_edges,'hyperedges':reused_hyper,'input_tokens':None,'output_tokens':None})
  save(PROV/'corpus.json',{'schema_version':1,'status':'final_sources_confirmed'if final else 'provisional_pending_final_sources','files':{'code':sorted(code),'document':sorted(docs)},'sha256':hashes,'total_files':len(scope),'total_words':sum(len((ROOT/p).read_text('utf8',errors='replace').split())for p in scope),'omitted_workflow_checks':sorted(checks-code),'policy':'All current core/CLI/scientific helper/engine implementation;2active skill instructions/resources;61modelnotes; retained curated scientific reviews; current reference guides and historical study purpose/findings. Work/fixtures, dependency trees, raw binaries, obsolete payloads and graph self-content excluded.'})
- save(PROV/'refresh_dispositions.json',{'prior_files':len(oldhash),'decisions':decisions,'reuse_accepted':accepted,'reuse_rejected':rejected,'semantic_reuse_count':len(reused_paths),'semantic_changed_or_new':len(uncached),'semantic_chunks':chunks})
+ save(PROV/'refresh_dispositions.json',{'prior_files':len(oldhash),'decisions':decisions,'reuse_accepted':accepted,'reuse_rejected':rejected,'semantic_reuse_count':len(reused_paths),'semantic_changed_or_new':len(uncached),'semantic_chunks':chunks,'unchanged_source_edge_records':len(reused_edges),'unchanged_source_hyperedges':len(reused_hyper),'pending_endpoint_references':endpoint_records,'pending_endpoint_policy':'Preserve every unchanged-source relationship; verify/re-extract referenced concepts against their current source before final merge. Unresolved endpoints require explicit disposition.'})
  # Gitignore parent inclusion is explicit, so detection does not descend excluded branches.
  dirs=set()
  for p in scope:

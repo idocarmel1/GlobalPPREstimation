@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-04T05:56:33.930459+00:00",
+  "reviewer": "fresh independent review agent /root/efficiency_review",
+  "reviewed_baseline": "85ae543693887a5439fb13ebd84bcb91f8ecc360",
+  "observed_HEAD": "85ae543693887a5439fb13ebd84bcb91f8ecc360",
+  "scope": "Uncommitted reader/CLI/skill-routing changes and selected trial QA, plus the user-required shared mapping stage documentation delta. No blind extraction or fresh mapping-handoff outputs, broad tests, graph writes or live scientific writes.",
+  "reviewed_source_sha256": {
+    "README.md": "e267fb2a2edd4f2244e89064e2ac6c38b7f40761d8d24ce0d90ba524fe677bb4",
+    "tools/cli/region.py": "8db9ffc4e97fb6e12781673aac6d25069649cb9f39092b8228104e0c9b0bb6ad",
+    "tools/project_core/workbooks/workbooks.py": "78782fdc8eea4a9ba88b545e4e0617f18dd0ae33e88cd01bd9a1daa5bc7a1de3",
+    "tools/project_core/workbooks/read_session.py": "fc2a27e10cc751f63b03e49bd39b6b6722255b4fb7821e872d04b83e28f14671",
+    "tools/workflow_checks/structure/test_read_session.py": "0819f488439aa9905c9770745421ef8ebdb6b85c5630b1dfdf1fc21e32cf1193",
+    "explainers/plans/skill_efficiency_implementation_plan.md": "45c5b4a0f10635746e544d35a01c5c6c21bc055d55e30d64822ece64576b5149",
+    "tools/skills/paper-to-ppr/SKILL.md": "7383990fd0b610cca1acc39521f33040fb874d2b2ec09a195a65d8bc0daefe98",
+    "tools/skills/ecopath-model-validation/SKILL.md": "5a4075a9f8343b62d533db0b394c0fa7b5085e5e71369c712d10ef124422a73a",
+    "tools/skills/paper-to-ppr/references/scientific-contract.md": "81ec3669d5dc866a0e4dd39cbc0a22a7c139c61b432f2b16b8aec26e20b99bbd",
+    "tools/skills/paper-to-ppr/references/operation-contract.md": "a0ab9b9240929519a3b9915337620e3b554bdd159e869a83074fc1cf5ee2df5f",
+    "tools/skills/ecopath-model-validation/references/full-validation.md": "3eedf844cac041d3004daefc05dbfe2444a41e3e00b7666c72bef1f195246c06",
+    "tools/skills/paper-to-ppr/references/regional-calculation.md": "643bfa0ad341c302e7ede4db0d0854e2cef26f0b171a851cc3e8af9d69a3e7b7"
+  },
+  "result": "No unresolved Critical, Important or Minor code/spec findings after fixes.",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "Important",
+      "path": "tools/project_core/workbooks/read_session.py",
+      "lines": [
+        32,
+        33,
+        34,
+        44,
+        45,
+        46,
+        47
+      ],
+      "issue": "Detected changes during parsing or assert_unchanged were not permanently latched, allowing the same session to become publishable after a reread/restoration.",
+      "evidence": "Independent temporary-workbook reproductions observed a rejection followed by accepted assert_unchanged with an empty changed-input set.",
+      "disposition": "Resolved by adding the observed path to _changed_inputs in both rejection paths.",
+      "regression_tests": [
+        "test_detected_parse_race_remains_invalid_after_reread",
+        "test_detected_publication_change_remains_invalid_after_restore"
+      ]
+    },
+    {
+      "id": "R2",
+      "severity": "Minor",
+      "path": "tools/project_core/workbooks/read_session.py",
+      "lines": [
+        30,
+        31
+      ],
+      "issue": "parse_count formerly omitted failed parser invocations. Independent formula-rejection reproduction returned read_count=1 and parse_count=0.",
+      "disposition": "Resolved by incrementing parse_count before invoking read_book.",
+      "regression_tests": [
+        "test_failed_parser_invocation_is_counted"
+      ]
+    }
+  ],
+  "independent_verification": {
+    "final_focused_tests": {
+      "command": "python -B -m unittest tools.workflow_checks.structure.test_read_session -v",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "observed_exit_code": 0,
+      "reported_test_seconds": 2.43
+    },
+    "earlier_focused_runs": {
+      "tests_per_run": [
+        8,
+        10
+      ],
+      "all_passed": true,
+      "not_additional_unique_tests": true
+    },
+    "root_dependency_tests": {
+      "reported_count": 52,
+      "executed_by_this_reviewer": false,
+      "excluded_from_reviewer_test_count": true
+    },
+    "whitespace": {
+      "command": "git -c core.whitespace=cr-at-eol diff --check",
+      "observed_exit_code": 0
+    },
+    "moved_workflows": {
+      "full_validation_exact_after_documented_link_rebase": true,
+      "pipeline_scientific_contract_exact_after_documented_link_rebase": true,
+      "comparison": "Exact LF-normalized UTF-8 workflow bytes, including terminal whitespace, after rebasing only containing-file-relative links and removing exactly one documented shared-mapping-handoff preface paragraph. Pipeline scientific-contract content is unchanged from the prior reviewed hash.",
+      "full_validation_workflow_utf8_bytes": 10755,
+      "full_validation_workflow_sha256": "c690175e1b7d46a717cfe5efc9c696a97d1b25b525f958459247f664829dbb79",
+      "documented_addition_checks": [
+        {
+          "path": "tools/skills/paper-to-ppr/SKILL.md",
+          "documented_additions_removed": 1,
+          "removed_utf8_bytes_sha256": "0ccdaa292da56aab328a7209613ecf5f0de0e7194713d137c73943588408c282",
+          "comparison_reference": "previous independently reviewed file bytes",
+          "expected_sha256": "d4cae48f1e9a2a15befc8b88aeac71bb47a176568577065518c2c81535afe9d6",
+          "stripped_bytes_sha256": "d4cae48f1e9a2a15befc8b88aeac71bb47a176568577065518c2c81535afe9d6",
+          "exact_match": true
+        },
+        {
+          "path": "tools/skills/ecopath-model-validation/SKILL.md",
+          "documented_additions_removed": 1,
+          "removed_utf8_bytes_sha256": "5571f845b5925f12ad4ff9585489a56b1c09c44345caf6bca6bee60e86983dd7",
+          "comparison_reference": "previous independently reviewed file bytes",
+          "expected_sha256": "b021928d2ed12c2398c53947d9c27518c25f3423f5f2e4f4357fbc85a1868931",
+          "stripped_bytes_sha256": "b021928d2ed12c2398c53947d9c27518c25f3423f5f2e4f4357fbc85a1868931",
+          "exact_match": true
+        },
+        {
+          "path": "tools/skills/ecopath-model-validation/references/full-validation.md",
+          "documented_additions_removed": 1,
+          "removed_utf8_bytes_sha256": "dae8b065cce57920fc6212098b6724a4653a3dfb0eff7622eb7727c579915a40",
+          "comparison_reference": "previous independently reviewed file bytes",
+          "expected_sha256": "d64a3b828e92f1a3b24254d4bfec2c85189a38404b30d8ec061ee3c13458b230",
+          "stripped_bytes_sha256": "d64a3b828e92f1a3b24254d4bfec2c85189a38404b30d8ec061ee3c13458b230",
+          "exact_match": true
+        },
+        {
+          "path": "tools/skills/paper-to-ppr/references/regional-calculation.md",
+          "documented_additions_removed": 1,
+          "removed_utf8_bytes_sha256": "75b304d8735e52194656c0162fe3f3465bcc2b39cbf1170593ecb3abb4277785",
+          "comparison_reference": "baseline file bytes",
+          "expected_sha256": "05bf1c55e44c1d3b94e793700f7cb06c19c530a40b4d6d5d09424bd416282ba9",
+          "stripped_bytes_sha256": "05bf1c55e44c1d3b94e793700f7cb06c19c530a40b4d6d5d09424bd416282ba9",
+          "exact_match": true
+        }
+      ]
+    },
+    "skill_links": {
+      "local_targets_checked": 69,
+      "missing_targets": [],
+      "anchors_independently_validated": "Four new one-mapping-stage-per-pipeline-run links verified against their exact heading; other anchors not revalidated.",
+      "new_mapping_anchor_checks": [
+        {
+          "source": "tools/skills/paper-to-ppr/SKILL.md",
+          "target": "references/operation-contract.md#one-mapping-stage-per-pipeline-run",
+          "heading_present": true
+        },
+        {
+          "source": "tools/skills/ecopath-model-validation/SKILL.md",
+          "target": "../paper-to-ppr/references/operation-contract.md#one-mapping-stage-per-pipeline-run",
+          "heading_present": true
+        },
+        {
+          "source": "tools/skills/ecopath-model-validation/references/full-validation.md",
+          "target": "../../paper-to-ppr/references/operation-contract.md#one-mapping-stage-per-pipeline-run",
+          "heading_present": true
+        },
+        {
+          "source": "tools/skills/paper-to-ppr/references/regional-calculation.md",
+          "target": "operation-contract.md#one-mapping-stage-per-pipeline-run",
+          "heading_present": true
+        }
+      ]
+    },
+    "active_SKILL_md_files": [
+      "tools/skills/ecopath-model-validation/SKILL.md",
+      "tools/skills/paper-to-ppr/SKILL.md"
+    ],
+    "invariants_reviewed": [
+      "Complete default reader/table/year/formula semantics remain unchanged",
+      "Selected-sheet reads are explicitly scoped and never whole readiness",
+      "Full hashes on every ReadSession.read; same-size/same-mtime invalidation",
+      "Deep-copy returns protect cached originals",
+      "Every observed input change permanently rejects session publication",
+      "Full mandatory scientific workflows retained",
+      "Two active skills; no additional persistent cache or selection registry"
+    ],
+    "reader_and_test_bytes_unchanged_during_documentation_followup": true,
+    "documentation_followup_tests": "No numerical tests rerun: reader, CLI and focused-test source hashes remain identical to the reviewer-verified 11-test run."
+  },
+  "measured_evidence_and_limits": {
+    "workbook_benchmark": {
+      "source": "workbook_read_benchmark.json",
+      "source_sha256": "021a19a5ff8e13e3ff00d67bb755afcbd1d4c2312f3d59590ccefe6cbedaff7e",
+      "review_method": "Inspected recorded benchmark and instrumentation code; did not independently rerun timing benchmark.",
+      "input": "regions/LME/LME_038/LME_038.xlsx",
+      "runtime": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+      "context": "new operation per sample; OS cache uncontrolled; same process, alternating order",
+      "samples": {
+        "full": {
+          "samples": 5,
+          "mean_seconds": 13.812645260011777,
+          "logical_reads_per_sample": 3,
+          "parses_per_sample": 3,
+          "observed_file_opens_per_sample": 3,
+          "all_requested_tables_equal": true
+        },
+        "selective": {
+          "samples": 5,
+          "mean_seconds": 0.09831938002025709,
+          "logical_reads_per_sample": 3,
+          "parses_per_sample": 3,
+          "observed_file_opens_per_sample": 3,
+          "all_requested_tables_equal": true
+        },
+        "session": {
+          "samples": 5,
+          "mean_seconds": 0.04474913999438286,
+          "logical_reads_per_sample": 3,
+          "parses_per_sample": 1,
+          "observed_file_opens_per_sample": 6,
+          "all_requested_tables_equal": true
+        }
+      },
+      "token_telemetry_available": false,
+      "interpretation": "Supports observed savings for this saved Overview task; no claim about full scientific runs."
+    },
+    "word_trial": {
+      "source": "new_word_trial.json",
+      "exact_only_heading_change_observed": true,
+      "environment_knowledge_reused": "Parent supplied verified renderer capability: packaged renderer cannot locate soffice, bundled Python lacks fitz, native Poppler exists, Word COM fallback requires independent hidden Windows PowerShell 5.1 instance. Renderer discovery savings cannot be attributed to skill routing.",
+      "limits": "Renderer discovery/setup savings cannot be attributed to skill routing. Old raw totals include truncation/retry/version-crossing reads. Reviewer inspected structural QA declarations but did not personally render or inspect every Word page; whole-agent wall times are not controlled matched routing measurements."
+    },
+    "diagnostic_replication": {
+      "source": "diagnostic_replication.json",
+      "full_returns_and_runtime_equivalent": {
+        "exact_historical": true,
+        "current_compatibility": true
+      },
+      "saved_coefficient_reconciliation_passed": {
+        "exact_historical": false,
+        "current_compatibility": false
+      },
+      "all_trials_equivalent_under_frozen_policy": false,
+      "classification": "Tool regeneration and saved-evidence comparison, not independent extraction; failed frozen aggregate reconciliation remains incomplete."
+    },
+    "json_only_and_mapping": "Reviewed QA explicitly distinguishes supplied JSON loader consumption and saved-input mapping arithmetic from independent paper extraction/researched mapping.",
+    "scientific_preservation": "Reviewed tracked diff includes README, CLI, reader, two skill entries and regional-calculation guidance; no tracked live scientific artifact modifications were observed. Protected-hash QA was inspected previously; this reviewer did not independently rehash the full live inventory.",
+    "blind_extraction": "Outputs were not read, so no independent extraction verdict is claimed.",
+    "fresh_mapping_handoff": "Documentation reviewed only; fresh handoff-agent outputs remain unread and no measured mapping-reuse result is claimed."
+  },
+  "reviewer_writes": [
+    "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/independent_code_review.json"
+  ],
+  "last_documentation_review_at_utc": "2026-10-04T06:03:14.929398+00:00",
+  "mapping_once_documentation_review": {
+    "result": "No new Critical, Important or Minor finding.",
+    "shared_authority": "tools/skills/paper-to-ppr/references/operation-contract.md:22",
+    "full_universe_and_confidence": "Lines 24 and 28 combine complete catch-taxon universe including zero rows with source membership, exact IDs/weights and separate membership/allocation confidence; validation still checks High/Medium/weak records and all component criteria. Existing full scientific workflow remains exact.",
+    "content_dependencies": "Line 26 requires current hashes of group/source definitions, taxon universe, matching rows, relevant allocation inputs and rules, plus exact keyed decisions/evidence and unresolved/proposed status; current researcher edits/source departures remain inputs. Line 30 requires changed/missing/conflicting dependencies to return only affected decisions to the same stage and mutable inputs to be rechecked before publication.",
+    "adoption_boundary": "Lines 26, 28 and 30 retain proposal status, exclude unadopted proposals from adopted summaries, keep alignment pending and preserve existing interpretation/adoption authorization. Handoff evidence is provenance, not configuration or approval authority.",
+    "duplication": "Both skill entries, regional calculation and full validation link the one shared section. They distinguish resolving mappings from identity/evidence verification and denominator/report arithmetic; an explicitly requested independent audit stays separately labeled.",
+    "preservation_checks": "Only the single documented addition was removed from each of four linked files for byte comparison; no scientific instruction, confidence rule or acceptance requirement was stripped.",
+    "observed_mapping_trial": "Fresh handoff-agent outputs were excluded and not read; no actual 374-taxon/670-row trial or mapping-stage efficiency outcome is claimed by this reviewer."
+  }
+}

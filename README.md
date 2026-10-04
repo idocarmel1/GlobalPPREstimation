@@ -22,6 +22,8 @@ Adding a new paper/model requires actual source metadata and scientific registra
 
 Use Python 3.11+ with openpyxl >=3.1,<4 and numpy >=1.26,<3. New SPPR runs additionally need pandas >=2, scipy >=1.11, sympy >=1.12, igraph >=0.11 and tqdm >=4. Engine-specific optional dependencies remain documented with their engines.
 
+For a read-only explanation or inspection of one saved table, use `python tools/cli/region.py inspect --region regions/LME/LME_038 --sheet Overview --table Settings`. It returns that table and its source hash; it does not assess whole-workbook readiness. Both skills choose the requested operation through their shared [operation and dependency contract](tools/skills/paper-to-ppr/references/operation-contract.md) before reading detailed scientific references. Repeated reads in one Python operation can use the content-checked in-memory read session; existing mutation/publication guards still apply.
+
 ```powershell
 python tools/cli/project.py --region regions/LME/LME_028/LME_028.xlsx
 python tools/cli/project.py --all

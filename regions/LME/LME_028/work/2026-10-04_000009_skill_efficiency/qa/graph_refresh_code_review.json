@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-04T20:04:11.269126+00:00",
+  "reviewer": "Independent reviewer /root/efficiency_review",
+  "reviewed_baseline": "85ae543693887a5439fb13ebd84bcb91f8ecc360",
+  "observed_HEAD": "85ae543693887a5439fb13ebd84bcb91f8ecc360",
+  "scope": "Current graph-refresh script diff relative HEAD, followed by root fixes prompted by this review; additionally the conditional Word parser-summary documentation guard. No Word/mapping trial outputs or blind extraction outputs read. No broad tests, graph pipeline actions, graph exports or scientific writes performed.",
+  "reviewed_source_sha256": {
+    "tools/knowledge_graph/provenance/refresh.py": "9f8433b89d967a6febdba8db687b83f5db788927a4df930049fa6f5cd4dd67f9",
+    "tools/knowledge_graph/provenance/pipeline.py": "c1e560c074f0eef389b6f1ff765bf3c99bd26c32e8e77870f60000ce530bd173",
+    "tools/skills/paper-to-ppr/references/operation-contract.md": "b4d4c67ce31cc9c74e8c27967854a91c5821ea9e8eec00706fe166d86376e566"
+  },
+  "result": "Material script findings resolved by focused checks. Canonical graph export and actual fresh endpoint reconciliation are not verified by this report.",
+  "findings": [
+    {
+      "id": "G1",
+      "severity": "Important",
+      "paths": [
+        "tools/knowledge_graph/provenance/refresh.py:93",
+        "tools/knowledge_graph/provenance/refresh.py:95",
+        "tools/knowledge_graph/provenance/pipeline.py:235"
+      ],
+      "issue": "Initial reuse filter silently removed unchanged-source edge/hyperedge records whose endpoints belonged to changed documents.",
+      "actual_pre_fix_evidence": {
+        "accepted_documents": 160,
+        "accepted_source_independent_edge_records": 1223,
+        "initial_retained_edge_records": 1203,
+        "lost_edge_records": 20,
+        "affected_unchanged_support_sources": 15,
+        "lost_hyperedges": 1,
+        "example": "AGENTS.md L5: agents_project_contract references readme_global_ppr_research; README changed, so the unchanged AGENTS-supported relationship was omitted."
+      },
+      "disposition": "Resolved: all full-hash-supported independent records/hyperedges retained, pending endpoint identities recorded, and every reused endpoint must resolve in complete fresh/reused node IDs before the merge omission loop.",
+      "post_fix_independent_evidence": {
+        "accepted_documents": 160,
+        "reused_edge_records_exactly_preserved": 1223,
+        "reused_hyperedges_exactly_preserved": 21,
+        "pending_endpoint_ids": 13,
+        "method": "Executed actual prepare edge/hyper loops in memory against the current canonical graph; full-record Counter equality and hyperedge equality passed. Missing reused edge/hyper endpoints independently reject before omission."
+      }
+    },
+    {
+      "id": "G2",
+      "severity": "Important",
+      "path": "tools/knowledge_graph/provenance/pipeline.py:44",
+      "issue": "Initial collect freshness guard checked primary citations only; a stale nested source_evidence citation could produce pass=true/full_hash_checked=true before canonical export.",
+      "evidence": "In-memory pre-fix reproduction accepted a current primary hash with stale secondary citation; final verify would reject only after export wrote canonical files. Canonical graph contains one supported multi-source node with three citations; this was a schema regression reproduction, not a claim those actual current citations are stale.",
+      "disposition": "Resolved: prepare eligibility checks secondary citation hashes; assert_current_citations validates primary and nested citations in collect and before export.",
+      "independent_fix_checks": [
+        "Stale nested citation rejects collect before all intercepted save/cache calls",
+        "Stale primary citation rejects before all intercepted save/cache calls",
+        "Current primary and nested citations pass"
+      ]
+    },
+    {
+      "id": "G3",
+      "severity": "Important",
+      "path": "tools/knowledge_graph/provenance/pipeline.py:51",
+      "issue": "Deferred hyperedges could retain absent endpoints through merge and reach export; installed build_from_json stores hyperedges as graph metadata and does not enforce their node membership.",
+      "disposition": "Resolved: assert_endpoints enforces unique node IDs, edge membership, and hyperedge membership/at least three distinct nodes in merge and before canonical export saves. Reused endpoint guards also precede omission.",
+      "independent_fix_checks": [
+        "Valid edge/hyperedge endpoints accepted",
+        "Dangling edge rejected",
+        "Dangling hyperedge rejected",
+        "Short hyperedge rejected",
+        "Citation and endpoint guard calls precede every canonical save in export"
+      ]
+    },
+    {
+      "id": "G4",
+      "severity": "Minor",
+      "path": "tools/knowledge_graph/provenance/pipeline.py",
+      "issue": "semantic_changed_or_new is len(uncached), which may include byte-unchanged documents rejected by source-ID or secondary-citation eligibility. Describing every uncached document as changed/new can misstate the counter.",
+      "disposition": "Resolved wording",
+      "resolved": true
+    }
+  ],
+  "focused_independent_checks": {
+    "broad_test_suites_executed": 0,
+    "actual_record_preservation": "1,223 accepted-source independent edges and21 hyperedges retained exactly;13 pending endpoint identities require fresh reconciliation.",
+    "citation_fixtures": {
+      "cases": 3,
+      "passed": 3,
+      "all_saves_and_cache_calls_intercepted_in_memory": true
+    },
+    "endpoint_fixtures": {
+      "cases": 4,
+      "passed": 4,
+      "all_in_memory": true
+    },
+    "reused_pre_omission_guard_fixtures": {
+      "cases": 3,
+      "passed": 3,
+      "all_in_memory": true
+    },
+    "assigned_chunk_canonicalization": {
+      "cases": 1,
+      "passed": 1,
+      "loads": [
+        "refresh_dispositions.json",
+        "chunk_01.json"
+      ],
+      "obsolete_chunks_not_read": true,
+      "normalized_endpoints": true,
+      "all_saves_intercepted_in_memory": true
+    },
+    "syntax": "Both changed scripts parsed successfully with ast.parse; no bytecode files produced.",
+    "whitespace": {
+      "command": "git -c core.whitespace=cr-at-eol diff --check -- tools/knowledge_graph/provenance/refresh.py tools/knowledge_graph/provenance/pipeline.py",
+      "observed_exit_code": 0
+    },
+    "scope_and_locations": "Scripts keep canonical tools/knowledge_graph and its provenance/.runtime; corpus enumeration excludes graph self-content, trial work/QA, binaries and dependency trees. Reused records keep their original source_location and attributes; actual source hashes/ID eligibility are required. New/current endpoint locations still require the fresh semantic reconciliation record.",
+    "truthful_evidence": "Topology uses one pair while every separately attributed evidence record is flattened/reused/exported separately. Source/node/edge/hyperedge counts derive from actual lists/dispositions; semantic tokens/cost remain unavailable. Bounded benchmarks stay separate from graph extraction and full scientific equivalence.",
+    "reviewer_vs_root_counts": "These are focused in-memory review cases, not the root dependency suite or the prior11 ReadSession tests; no aggregation into those counts."
+  },
+  "word_parser_summary_guard": {
+    "source": "tools/skills/paper-to-ppr/references/operation-contract.md:22",
+    "review_result": "Bounded conditional guard: only edits touching parser-consumed headings/labels require the existing parser summary comparison; an unexpected identity/date/sections/source-reference change blocks adoption as a keyed gap. It authorizes no parser repair, scientific reassessment or source-decision rewrite. Authorized semantic changes retain affected evidence/registration routes.",
+    "trial_limit": "Root reports the isolated heading benchmark changed the parser summary despite package/render preservation; no adoption claimed. Reviewer did not read excluded Word trial outputs or independently run their parser/render; this is explicitly parent-reported evidence."
+  },
+  "remaining_operational_checks": [
+    "Independently re-extract/reconcile all13 pending endpoint concepts against current allowed sources; preserve IDs or record explicit moved-source equivalent remaps, rationale, hashes and current locations.",
+    "Compare complete reused edge/hyperedge signatures through merge/export, accounting for authorized endpoint remaps; absence may not be silently counted as all preserved.",
+    "Run actual final corpus/hash/endpoint/location/integrity checks and retrieval/HTML checks before claiming the canonical graph is refreshed.",
+    "No scientific-readiness, researcher approval or full-pipeline equivalence claim follows from this graph review."
+  ],
+  "reviewer_writes": [
+    "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/graph_refresh_code_review.json"
+  ]
+}

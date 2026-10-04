@@ -1,0 +1,42 @@
+{
+  "trial": "old_pipeline",
+  "start_utc": "2026-10-04 05:12:24 UTC",
+  "end_utc": "2026-10-04 05:15:12 UTC",
+  "answer": "`selected_model_id` is the editable regional choice. `results_model_id` is generated provenance identifying the model behind the current saved calculations; it is not an approval or a promise of readiness. LME_038 selects `38_38003_Java_Sea_normalized_BA_completed_(mid1970s)`, but its saved Overview has blank `results_model_id` and `results_model_sha256`, `production_eligible=false`, and `calculation_status='pending: superseded extraction removed; historical runtime-equivalence bridge no longer verifies; fresh coefficients required'`. The model remains selected while current numerical readiness is pending. A changed selection cannot relabel outgoing results: snapshots are saved under their actual results identity.",
+  "evidence": {
+    "workbook": "regions/LME/LME_038/LME_038.xlsx",
+    "sheet": "Overview",
+    "table": "Settings",
+    "selected_model_id": "38_38003_Java_Sea_normalized_BA_completed_(mid1970s)",
+    "results_model_id": null,
+    "results_model_sha256": null,
+    "production_eligible": false,
+    "calculation_status": "pending: superseded extraction removed; historical runtime-equivalence bridge no longer verifies; fresh coefficients required"
+  },
+  "successful_reads": [
+    "AGENTS.md",
+    "README.md",
+    "explainers/structure.md",
+    "explainers/workflow.md",
+    "tools/skills/paper-to-ppr/SKILL.md",
+    "tools/skills/paper-to-ppr/references/evidence-handoff.md",
+    "tools/skills/paper-to-ppr/references/model-preparation.md",
+    "C:/Users/idoca/.codex/plugins/cache/claude-plugins-official/superpowers/6.4.1/skills/using-superpowers/SKILL.md",
+    "C:/Users/idoca/.codex/plugins/cache/claude-plugins-official/superpowers/6.4.1/skills/verification-before-completion/SKILL.md",
+    "regions/LME/LME_038/LME_038.xlsx:Overview/Settings",
+    "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/outputs/old_pipeline_answer.json (artifact verification)"
+  ],
+  "actual_checks": [
+    "Compared saved selected/results identities, readiness flag and pending reason against the workbook ownership/selection contract.",
+    "Used the mandated full workbook reader, filtered to Overview/Settings.",
+    "No graph query was needed.",
+    "No scientific execution, selection, adoption or live artifact write was performed.",
+    "Reopened the saved answer through the trace reader (exit code 0) and checked its evidence fields."
+  ],
+  "missing_gaps": [
+    "No independent numerical-output or runtime-equivalence verification was performed; the conclusion reports the saved Overview state.",
+    "Initial external skill read failed because the original trace reader rejected outside-project paths; retry after the parent updated the reader succeeded.",
+    "First paper-to-ppr read failed to print under Windows cp1255; UTF-8 output retry succeeded."
+  ],
+  "trace": "regions/LME/LME_028/work/2026-10-04_000009_skill_efficiency/qa/old_pipeline_trace.jsonl"
+}
