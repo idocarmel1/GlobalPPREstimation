@@ -10,7 +10,7 @@
 
 **Specification:** Sections 1–9 of this document record the final agreements. Tasks 1–12 implement the structural migration. Task 13 is the later legacy/documentation audit after the structure is stable. Task 14 refreshes and verifies the knowledge graph against the final state. Task 15 commits and pushes the verified changes. The subsequent skill-efficiency ideas document is `explainers/plans/skill_efficiency_ideas.md` and should be turned into a concrete implementation plan only after this reorganization handoff.
 
-**Plan status:** Planning only. Creating this file does not execute the migration, authorize fresh scientific model adjustments, or certify existing scientific results. No migration or cleanup has been performed by writing this plan.
+**Plan status:** Reorganization implemented; the verified first release is committed and pushed. The final publication record and fresh skill-work handoff are recorded in section 14. Original planning-time statements and earlier execution checkpoints are historical. Reorganization does not certify scientific results or authorize parameter repairs; skill-efficiency implementation belongs to the fresh follow-up conversation.
 
 ## 1. Agreement register and precedence
 
@@ -54,7 +54,7 @@ This plan is saved inside the existing explainers directory to keep planning mat
 - Use native PowerShell file operations with literal, resolved paths. Before recursive moves/deletions, verify every target is within the intended workspace and does not traverse a junction/symlink unexpectedly.
 - Do not add historical aliases, compatibility folder trees, legacy extraction backups, or another archive to the finished layout. Git history can provide recovery without keeping obsolete content in the working project.
 - Empty approved directories may be created by initialization; do not add dozens of placeholder files just to track empty skeletons.
-- The current task is plan creation only. A future implementation must follow its session's authorization, filesystem permissions and repository instructions.
+- The original plan-authoring task did not itself authorize implementation. The subsequent reorganization execution is explicitly authorized by the user and follows the session's filesystem permissions and repository instructions.
 
 ## 3. Final directory tree
 
@@ -600,12 +600,12 @@ Make the five test subdivisions discoverable packages or provide a runner that e
 **Depends on:** Migration verification and Task 14. This is future implementation work explicitly requested as part of this plan. Do not commit or push merely while authoring these plans.
 
 - [x] Inspect current Git status, branch, remotes and upstream. Preserve unrelated user work and existing branch choices. If a new branch is needed, use the repository's agreed policy/default `codex/` prefix; never guess a remote URL, overwrite a remote branch or force-push.
-- [ ] Review the exact final diff and deletion manifest, verify `.gitignore`/LFS behavior, and run the affected tests and graph checks against the actual final files. Confirm model notes, manifests, this plan and the skill-efficiency ideas document are included; exclude caches, temporary copies, secrets and machine-specific shortcuts.
-- [ ] Update this plan's execution record with completed tasks, real verification results, pending scientific states and any explicit audit deferral. Stage only authorized reorganization/plan changes using explicit path lists from the manifest; do not blindly include unrelated modified files.
-- [ ] Run `git diff --cached --check` and inspect the staged file summary/content. Create a descriptive commit, such as `Reorganize regional model workflow and project contract`, after the staged release passes checks. Checkpoint commits are acceptable, but the final commit must contain the verified graph and documentation.
-- [ ] Push the implementation branch to its verified configured remote/upstream using ordinary `git push`; use `git push --set-upstream <verified-remote> <implementation-branch>` only when no upstream exists. Include required Git LFS objects. No force push, history rewrite or automatic merge.
-- [ ] Verify push success and that the remote branch tip matches the local release commit. If credentials, networking, filesystem approval or the remote block publication, retain the local commit and report the exact limitation; do not mark push complete.
-- [ ] Report branch, commit ID, remote destination, graph verification, checks performed and remaining issues. The next planning/implementation agent reads `explainers/plans/skill_efficiency_ideas.md` only after the reorganized state is established; a failed push must be explicitly resolved or accepted as deferred by the user before claiming the requested handoff complete.
+- [x] Review the exact final diff and deletion manifest, verify `.gitignore`/LFS behavior, and run the affected tests and graph checks against the actual final files. Confirm model notes, manifests, this plan and the skill-efficiency ideas document are included; exclude caches, temporary copies, secrets and machine-specific shortcuts.
+- [x] Update this plan's execution record with completed tasks, real verification results, pending scientific states and any explicit audit deferral. Stage only authorized reorganization/plan changes using explicit path lists from the manifest; do not blindly include unrelated modified files.
+- [x] Run `git diff --cached --check` and inspect the staged file summary/content. Create a descriptive commit, such as `Reorganize regional model workflow and project contract`, after the staged release passes checks. Checkpoint commits are acceptable, but the final commit must contain the verified graph and documentation. The retained-baseline whitespace exception is documented below; it is not a passing full-tree check.
+- [x] Push the implementation branch to its verified configured remote/upstream using ordinary `git push`; use `git push --set-upstream <verified-remote> <implementation-branch>` only when no upstream exists. Include required Git LFS objects. No force push, history rewrite or automatic merge.
+- [x] Verify push success and that the remote branch tip matches the local release commit. If credentials, networking, filesystem approval or the remote block publication, retain the local commit and report the exact limitation; do not mark push complete.
+- [x] Report branch, commit ID, remote destination, graph verification, checks performed and remaining issues. The next planning/implementation agent reads `explainers/plans/skill_efficiency_ideas.md` only after the reorganized state is established; a failed push must be explicitly resolved or accepted as deferred by the user before claiming the requested handoff complete.
 
 **Acceptance:** Verified reorganization changes and the current graph are committed and pushed to the intended remote branch; unrelated work is preserved; the next agent has a concrete committed baseline. No PR/merge is required unless separately requested.
 
@@ -661,8 +661,8 @@ The fixture helpers above belong to the indicated snapshot/selection/dedup test 
 - [x] Source hyperlinks, graph endpoints, LFS sources and meaningful workflow checks verified or explicitly reported unavailable.
 - [x] Later comprehensive legacy/consistency audit was performed after structural migration; findings and dispositions are recorded below.
 - [x] Canonical knowledge graph refreshed and verified against the final reorganized state.
-- [ ] Verified reorganization release committed and pushed; local/remote commit identity recorded.
-- [ ] Subsequent skill-efficiency planning receives the committed post-reorganization baseline, with any explicitly deferred items identified.
+- [x] Verified reorganization release committed and pushed; local/remote commit identity recorded.
+- [x] Subsequent skill-efficiency planning receives the committed post-reorganization baseline, with any explicitly deferred items identified.
 
 ## 14. Execution record
 
@@ -775,3 +775,13 @@ Parent browser verification actually searched and selected the layout contract, 
 Final source navigation verification covered165documents and1637current local links with zero broken links, plus eleven individually verified exact evidence links subsequently added to eight model notes. A stale workflow sentence describing the refresh command as under implementation was corrected to cite its completed checks and scientific freshness limits. No operation scope or behavior changed. The final empty root `diet_reextraction_20261002` container was removed only after native containment, reparse and emptiness checks; all of its scientific material had already been relocated.
 
 Publication will use ordinary push to the verified `origin/main`. No efficiency implementation has been performed here. The prepared follow-up context is `regions/LME/LME_028/work/2026-10-04_000002_reorganization/qa/skill_work_handoff.md`; it requires a concrete plan against this actual code, independent scientific replication distinguished from saved-output reuse, matched overhead measurements, retained scientific limitations and isolated benchmarks. Commit/push identity and the new conversation remain pending until actually observed.
+
+### Published release and fresh skill-work handoff
+
+Observed on 2026-10-04: commit `7b2989fa2afce05130a198f67901d94c48cf7eec`, `Reorganize regional model workflow and project contract`, was created on `main` and pushed to the verified configured remote `https://github.com/idocarmel1/GlobalPPREstimation.git`. Both push and subsequent `git ls-remote origin refs/heads/main` succeeded; remote and local tips matched exactly, with a clean working tree. This includes the previously unpushed baseline commit `7cce584e` and does not rewrite history. The successful push uploaded the required Git LFS objects.
+
+Initial ordinary push attempts received HTTP 500 while an overinclusive default sparse pack crossed the remote's 2 GiB push limit. A negotiation attempt also failed without advancing the branch. The successful ordinary fast-forward push used command-local `pack.useSparse=false` and `http.version=HTTP/1.1`, traversing the actual 6,513 required objects instead of the redundant 21,490-object stream. No persistent configuration, source data, security checks or history changed. GitHub accepted the release with nonblocking warnings for four current/evidence HTML files over its recommended 50 MB threshold. Exact push output, remote proof and the handoff identity are in `work/2026-10-04_000002_reorganization/qa/publication_record.json`.
+
+The requested fresh local conversation was created in this same saved project: [Plan and implement scoped skill efficiency](codex://threads/01a104ef-49cc-7df1-9ed8-236969ab61b0). Its initial message supplies the published baseline, both document paths, project contract, detailed handoff record, real verification results and unresolved limitations. It requires a concrete plan against the actual code followed by implementation, independently replicated retained work distinguished from reuse/regeneration, and measured overhead reductions for simple routes. A read-only initial planning barrier prevents competing writes while this session commits the small publication-record and graph delta; the final authorized message supplies the closing published SHA and lifts that barrier. No efficiency changes are implemented in this session.
+
+Reorganization Tasks 1–15 and the substantive preservation/cleanup/consistency/graph requirements are complete for the published release. Scientific limitations remain exactly as recorded: the decimal sentinel receipt defect, apostrophe validator disagreement, eight source construction restrictions, unknown historical snapshot execution provenance, unavailable historical references and LME_038 pending numerical freshness. The final administrative closeout commit will contain this actual publication evidence and a content-re-extracted graph; its SHA is supplied after successful push rather than fabricated inside its own commit. No broad scientific tests are repeated solely for this metadata closure.

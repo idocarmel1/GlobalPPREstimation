@@ -1,6 +1,6 @@
 # Current reorganized knowledge graph
 
-This graph was refreshed at 2026-10-04T02:35:06.389049+00:00 from the full-byte source manifest in [provenance/corpus.json](provenance/corpus.json). It covers 353 explicitly selected supported files (189 code, 164 documents; approximately 262,324 words). All 61 canonical model notes, the project contract/explainers, both active skills and their resources, current core/CLI/scientific helper/engine implementations, retained curated source reviews, reference guides and historical study purpose/findings are included.
+This graph was refreshed at 2026-10-04T03:31:43.138778+00:00 from the full-byte source manifest in [provenance/corpus.json](provenance/corpus.json). It covers 353 explicitly selected supported files (189 code, 164 documents; approximately 262,710 words). All 61 canonical model notes, the project contract/explainers, both active skills and their resources, current core/CLI/scientific helper/engine implementations, retained curated source reviews, reference guides and historical study purpose/findings are included.
 
 The graph is an architectural and evidence index. Model selection, loadability, scientific readiness, diagnostic permission and researcher approval are separate. A relationship extracted from a report does not certify that report’s scientific conclusion. Historical study files retain their original research role and are marked historical, even when their text describes a then-current result.
 
@@ -10,6 +10,6 @@ All semantic source files were re-extracted by writable agents using the install
 
 [Source hashes](provenance/source_hashes.json), [prior-source dispositions](provenance/refresh_dispositions.json), [merge dispositions](provenance/merge_dispositions.json), [semantic validation](provenance/semantic_validation.json) and [extraction method](provenance/extraction_method.json) provide the audit trail. Actual token usage and monetary cost are unavailable. The skill-efficiency benchmark is deferred under the user’s instruction for this session.
 
-Clustering uses 2,553 nodes and 5,544 node pairs. Each graph JSON link retains all its independently attributed `evidence` records (5,699 total); the visualization displays clustering topology. Confidence values preserve the distinction between explicit, inferred and ambiguous relationships. Source existence/full hashes/endpoints and representative retrieval/HTML behavior are recorded in [provenance/completion_verification.json](provenance/completion_verification.json).
+Clustering uses 2,558 nodes and 5,556 node pairs. Each graph JSON link retains all its independently attributed `evidence` records (5,711 total); the visualization displays clustering topology. Confidence values preserve the distinction between explicit, inferred and ambiguous relationships. Source existence/full hashes/endpoints and representative retrieval/HTML behavior are recorded in [provenance/completion_verification.json](provenance/completion_verification.json).
 
 Query only this graph: `graphify query "question" --graph tools/knowledge_graph/graph.json`.

@@ -45,8 +45,6 @@ def close(kind, passages):
         entry['review'] = ('PASS: graph owner inspected the current narrowed output and its '
                            'retained required source citations; the parent independently '
                            'assessed the same required evidence before this bounded plan-only delta.')
-    retrieval.update(pass_=True)
-    retrieval.pop('pass_', None)
     retrieval['pass'] = True
     retrieval['status'] = ('PASS for the three required suites using five actual narrowed CLI '
                            'traversals; current outputs inspected after the bounded semantic delta. '
@@ -108,6 +106,11 @@ def close(kind, passages):
         'latest_semantic_delta': kind,
         'latest_plan_sha256': sha(ROOT / 'explainers/plans/project_reorganization_plan.md')
     })
+    publication_path = PROV / 'publication_delta_verification.json'
+    if publication_path.is_file():
+        publication = load(publication_path)
+        assert publication['pass'] and publication['graph_sha256'] == proof['graph_sha256']
+        proof['publication_delta_verification_file'] = publication_path.name
     save(PROV / 'completion_verification.json', proof)
     print({'pass': True, 'kind': kind, 'nodes': len(graph['nodes']),
            'pairs': len(graph['links']), 'communities': len(graph['communities']),

@@ -116,7 +116,7 @@ def capture_updates():
     previous=load(PROV/'source_updates.json')if(PROV/'source_updates.json').is_file()else {}
     history=previous.get('records',[])+records
     all_changed={r['source_file'] for r in history}
-    save(PROV/'source_updates.json',{'captured_at':now(),'navigation_qa':qa_path,'navigation_qa_sha256':sha(ROOT/qa_path),'documentation_qa':'regions/LME/LME_028/work/2026-10-04_000006_contract_audit/qa/scientific_documentation_consistency.json','records':history,'changed_count':len(all_changed),'latest_capture_changed_count':len(changed),'affected_by_chunk':{str(i):sorted(all_changed&set(c)) for i,c in enumerate(chunks,1)},'status':'Source bytes captured; changed passages still require actual semantic re-extraction.'})
+    save(PROV/'source_updates.json',{'captured_at':now(),'navigation_qa':qa_path,'navigation_qa_sha256':sha(ROOT/qa_path),'documentation_qa':'regions/LME/LME_028/work/2026-10-04_000006_contract_audit/qa/scientific_documentation_consistency.json','records':history,'completion_history':previous.get('completion_history',[]),'changed_count':len(all_changed),'latest_capture_changed_count':len(changed),'affected_by_chunk':{str(i):sorted(all_changed&set(c)) for i,c in enumerate(chunks,1)},'status':'Source bytes captured; changed passages still require actual semantic re-extraction.'})
     detection=load(RUN/'detect.json');detection['total_words']=corpus['total_words'];save(RUN/'detect.json',detection)
     print(f'Captured {len(changed)} explicitly authorized changed sources; ~{corpus["total_words"]} words. No freshness claim yet.')
 
