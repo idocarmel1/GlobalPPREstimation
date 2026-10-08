@@ -3,10 +3,13 @@ from tools.project_core.registry.discovery import project_root, region_directory
 import argparse,copy,csv,html,importlib.util,json,os,re,shutil,tempfile,zipfile
 from pathlib import Path
 from tools.project_core.workbooks.workbooks import sha,records
-from tools.project_core.maps.original_atlas_data import datasets,add_group_efficiencies
+from tools.project_core.maps.original_atlas_data import datasets,add_group_efficiencies,add_group_catch
 from tools.project_core.maps.provisional_display import provisional_layout
 from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,_register_review,table_rows,unavailable_review_model,calculation_review_book,attach_payload_review
 from tools.project_core.maps.map_cumulative_ppr import cumulative_ppr_layout
+from tools.project_core.maps.available_results_layout import available_results_layout
+from tools.project_core.maps.group_catch_layout import group_catch_layout
+from tools.project_core.maps.trend_extras_layout import trend_extras_layout
 
 DISPLAY_FIELDS=['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']
 LINK_UPDATES={"../data/unidentified_taxa.json":"data/unidentified_taxa.json"}
@@ -31,7 +34,8 @@ def linked_layout(template):
         template=template.replace('zoomControl:true,minZoom:1}',
             "zoomControl:true,minZoom:1,maxZoom:['http:','https:'].includes(location.protocol)?18:10}",1)
         template=template.replace(OSM_BASEMAP,basemap,1)
-    return cumulative_ppr_layout(reviewed_layout(provisional_layout(template)))
+    current=cumulative_ppr_layout(reviewed_layout(provisional_layout(template)))
+    return trend_extras_layout(group_catch_layout(available_results_layout(current)))
 
 def atomic_text(path,text):
     path.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(dir=path.parent,suffix=path.suffix);os.close(fd)
@@ -39,11 +43,11 @@ def atomic_text(path,text):
     finally:
         if os.path.exists(tmp):os.unlink(tmp)
 
-def relayout(workbook,directory=None,group_efficiencies=False):
-    """Refresh presentation, optionally adding stored GE/EE to embedded groups."""
+def relayout(workbook,directory=None,group_efficiencies=False,group_catch=False):
+    """Refresh presentation, optionally exposing saved group metadata."""
     directory=directory or workbook.parent/'interactive_map'
     fingerprint=sha(workbook);layouts=Path(__file__).with_name('original_html_layout')
-    outputs=[]
+    outputs=[];catch_sources={}
     for name,variable in [('index.html','DB'),('trends.html','SERIES_DB')]:
         old=(directory/name).read_text(encoding='utf-8')
         recorded=re.search(r'<meta name="ppr-project-sha256" content="([0-9a-f]{64})">',old)
@@ -52,17 +56,23 @@ def relayout(workbook,directory=None,group_efficiencies=False):
         start=old.index('const '+variable+'=')+len('const '+variable+'=')
         payload,end=json.JSONDecoder().raw_decode(old,start)
         value=old[start:end]
-        if group_efficiencies:
+        if group_efficiencies or group_catch:
             units=payload['network']['units'] if variable=='DB' else payload['units']
-            add_group_efficiencies(workbook.parent,units)
+            if group_efficiencies:add_group_efficiencies(workbook.parent,units)
+            if group_catch:
+                for source,digest in add_group_catch(workbook.parent,units).items():
+                    if source in catch_sources and catch_sources[source]!=digest:raise ValueError('Model-catch source changed between pages: '+str(source))
+                    catch_sources[source]=digest
             value=json.dumps(payload,ensure_ascii=False,separators=(',',':'),allow_nan=False).replace('</',r'<\/')
         template=linked_layout((layouts/name).read_text(encoding='utf-8'))
         page=template.replace('__PPR_DATA__',value)
         page=page.replace('</head>',f'<meta name="ppr-project-sha256" content="{fingerprint}"></head>',1)
         outputs.append((directory/name,page))
     if sha(workbook)!=fingerprint:raise ValueError('Project.xlsx changed during layout refresh')
+    if any(sha(path)!=digest for path,digest in catch_sources.items()):raise ValueError('Model-catch source changed before layout publication')
     for path,page in outputs:atomic_text(path,page)
-    print('Map and trends layouts refreshed; '+('stored group GE/EE added; ' if group_efficiencies else 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
+    additions=('stored group GE/EE added; ' if group_efficiencies else '')+('stored group catch metadata added; ' if group_catch else '')
+    print('Map and trends layouts refreshed; '+(additions or 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
 
 def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
     """Publish exact model reviews under the shared writer lock; keep map defaults."""
@@ -194,8 +204,8 @@ def build(workbook,output=None,only_units=None):
     print(f'Original-format pages rebuilt: {directory}/index.html, trends.html and sources.html',flush=True)
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--workbook',type=Path,default=project_root(Path(__file__))/'Project.xlsx');ap.add_argument('--output',type=Path,help='Output directory, or a map filename with sibling trends.html and sources.html');ap.add_argument('--layout-only',action='store_true',help='Refresh map/trends presentation only, retaining data that matches the project fingerprint');ap.add_argument('--group-efficiencies',action='store_true',help='Also expose stored GE/EE during a layout-only refresh');ap.add_argument('--region',nargs='+',help='Refresh only these regional details; retain other displays only when registered selection, workbook hash, annual values and NPP still match');a=ap.parse_args()
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--workbook',type=Path,default=project_root(Path(__file__))/'Project.xlsx');ap.add_argument('--output',type=Path,help='Output directory, or a map filename with sibling trends.html and sources.html');ap.add_argument('--layout-only',action='store_true',help='Refresh map/trends presentation only, retaining data that matches the project fingerprint');ap.add_argument('--group-efficiencies',action='store_true',help='Also expose stored GE/EE during a layout-only refresh');ap.add_argument('--group-catch',action='store_true',help='Also expose saved native group catch and documented unit conversion during a layout-only refresh');ap.add_argument('--region',nargs='+',help='Refresh only these regional details; retain other displays only when registered selection, workbook hash, annual values and NPP still match');a=ap.parse_args()
     if a.layout_only:
         directory=(a.output.parent if a.output and a.output.suffix=='.html' else a.output)
-        relayout(a.workbook.resolve(),directory.resolve() if directory else None,a.group_efficiencies)
+        relayout(a.workbook.resolve(),directory.resolve() if directory else None,a.group_efficiencies,a.group_catch)
     else:build(a.workbook.resolve(),a.output.resolve() if a.output else None,set(a.region) if a.region else None)

@@ -1,0 +1,87 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const base=path.resolve(__dirname,'../../project_core/maps');
+const extrasPath=path.join(base,'trend_extras.js');
+const extras=fs.existsSync(extrasPath)?require(extrasPath):null;
+const metrics=require(path.join(base,'original_html_layout/calculation_modules/time_series_metrics.js'));
+const simple=(ppr,catchValues=[9,9])=>({status:'ok',ppr,catch:catchValues,covered_catch:catchValues});
+const approved={id:'approved',researcher_review:{status:'Validated by researcher'}};
+const pending={id:'pending'},rejected={id:'rejected',researcher_review:{status:'Disqualified by researcher'}};
+const db={years:[2018,2019],ppr_methods:[{id:'simple trophic chain',kind:'taxon',scopes:['all']}],npp_methods:[{id:'npp'}],
+  global_npp:{id:'atlas',unit_ids:['A','B'],values:[200,400]},
+  units:{A:{name:'Alpha',default_model:'approved',models:[approved,pending],simple:simple([90,180]),npp:{npp:[100,200]}},
+    B:{name:'Beta',default_model:'pending',models:[pending,approved],simple:simple([270,360]),npp:{npp:[100,200]}},
+    C:{name:'Gamma',default_model:'rejected',models:[rejected],simple:simple([null,null]),npp:{npp:[100,200]}}}};
+const state={units:['A','B','C'],models:{},methods:['simple trophic chain'],scope:'all',mode:'ppr',npp:'npp',catch_basis:'landings',unidentified:'method'};
+const original=JSON.stringify({db,state});
+// The filter must follow the selected model, without overwriting the user's selection.
+assert.deepEqual(extras?.selectedUnits(db,{...state,review_filter:'validated'})??state.units,['A']);
+assert.deepEqual(extras.selectedUnits(db,{...state,review_filter:'validated',models:{A:'pending',B:'approved'}}),['B']);
+assert.deepEqual(extras.selectedUnits(db,state),['A','B','C']);
+assert.equal(JSON.stringify({db,state}),original);
+const compare=(db,s)=>metrics.compare(db,s);
+const table=extras.table(db,state,2019,compare);
+assert.deepEqual(table.rows.map(r=>r.id),['A','B','C']);
+assert.deepEqual(table.rows.map(r=>r.values[0].value),[20,40,null]);
+assert.equal(table.total.values[0].value,60);
+assert.match(table.rows[2].values[0].reason,/complete annual|available/i);
+assert.deepEqual(extras.table(db,{...state,review_filter:'validated'},2019,compare).rows.map(r=>r.id),['A']);
+const ratio=extras.table(db,{...state,mode:'ratio',npp_scope:'selected'},2019,compare);
+assert.equal(ratio.rows[0].values[0].value,10);
+assert.equal(ratio.rows[1].values[0].value,20);
+assert.equal(ratio.total.values[0].value,15,'Aggregate ratio is ratio of summed PPR/NPP, not sum of regional percentages');
+assert.equal(extras.table(db,state,2018,compare).rows[0].values[0].value,10);
+assert.equal(JSON.stringify({db,state}),original);
+console.log('Validated selected-model filtering and regional table calculations pass.');
+const globalState={...state,units:['A'],mode:'ratio',npp_scope:'global',global_estimate:true,years:[2019]};
+const raw=metrics.compare(db,globalState);
+const scaled=extras.scale?.(db,globalState,raw,metrics.aggregate)??raw;
+assert.equal(scaled.points[0].value,15,'5% selected/global NPP divided by the selected simple-chain share 1/3');
+assert.equal(scaled.points[0].simple_ppr_share,1/3);
+assert.equal(scaled.points[0].npp,400,'The fixed atlas NPP remains the denominator');
+assert.equal(raw.points[0].value,5,'Scaling must not mutate the original result');
+const missingNumerator=extras.scale(db,{...globalState,units:['A','B']},raw,metrics.aggregate).points[0];
+assert.equal(missingNumerator.value,null,'A partial selected-method numerator cannot be a global approximation');
+assert.deepEqual(missingNumerator.selected_method_missing_ids,['B']);
+const incomplete=structuredClone(db);incomplete.units.B.simple.ppr[1]=null;
+const gap=extras.scale(incomplete,globalState,raw,metrics.aggregate).points[0];
+assert.equal(gap.value,null,'Incomplete fixed references never become available subtotals');
+assert.deepEqual(gap.global_simple_missing_ids,['B']);
+assert.match(gap.unavailable_reason,/B/);
+const blocked=structuredClone(db);blocked.units.B.simple.status='NOT_RUN';
+assert.equal(extras.scale(blocked,globalState,raw,metrics.aggregate).points[0].value,null,'A retained number with unavailable reference status is not a complete reference');
+assert.equal(extras.scale(db,{...globalState,units:['C']},raw,metrics.aggregate).points[0].value,null,'A selected region outside the atlas reference is not a geographic share');
+const both=extras.table(db,{...globalState,units:['A','B']},2019,compare,metrics.aggregate);
+assert.deepEqual(both.rows.map(r=>r.values[0].value),[5,10],'Table rows use the full selected-set scale, not a separately inflated region share');
+assert.equal(both.total.values[0].value,15);
+assert.equal(extras.scale(db,{...globalState,global_estimate:false},raw,metrics.aggregate),raw);
+assert.equal(extras.scale(db,{...globalState,baseline:'simple trophic chain'},raw,metrics.aggregate),raw);
+assert.equal(extras.scale(db,{...globalState,mode:'ppr'},raw,metrics.aggregate),raw);
+const zero=structuredClone(db);zero.units.A.simple.ppr[1]=0;
+assert.equal(extras.scale(zero,globalState,raw,metrics.aggregate).points[0].value,null);
+console.log('Global approximation reference completeness, geography, values and table contributions pass.');
+const input=fs.readFileSync(0,'utf8');
+if(input.trim()){
+  const vm=require('node:vm'),page=JSON.parse(input),context={};vm.createContext(context);
+  const start=page.indexOf('/* Additional trend views');
+  vm.runInContext(page.slice(start,page.indexOf('</script>',start)),context);
+  const engine=context.PPRTimeSeries,views=context.PPRTrendExtras;
+  const result=views.scale(db,globalState,engine.compare(db,globalState),engine.aggregate);
+  assert.equal(result.points[0].value,15);
+  const text=engine.comparisonToCSV(result,globalState);
+  const rows=text.trim().split('\n').map(row=>row.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(cell=>cell.startsWith('"')?cell.slice(1,-1).replaceAll('""','"'):cell));
+  assert.equal(rows[0].length,rows[1].length);
+  const row=Object.fromEntries(rows[0].map((key,i)=>[key,rows[1][i]]));
+  assert.equal(row.value,'15');assert.equal(row.unscaled_percent,'5');assert.equal(row.global_approximation,'true');
+  assert.equal(Number(row.selected_simple_share),1/3);assert.equal(row.global_simple_ppr_tC,'60');
+  const json=JSON.parse(engine.comparisonToJSON(result,globalState));
+  assert.equal(json.result.points[0].simple_ppr_share,1/3);
+  const multiDb=structuredClone(db);multiDb.ppr_methods.push({id:'simple2',kind:'taxon',scopes:['all']});
+  const multiState={...globalState,methods:['simple trophic chain','simple2']};
+  const multi=views.scale(multiDb,multiState,engine.compare(multiDb,multiState),engine.aggregate);
+  const multiCSV=engine.comparisonToCSV(multi,multiState);
+  assert.equal(multiCSV.trim().split('\n').length,3);
+  assert.match(multiCSV,/global_approximation_reason/);
+  assert.match(page,/id="globalApproximation"/);assert.match(page,/id="regionTableYear"/);
+  assert.ok(page.indexOf('id="regionReviewFilter"')>page.indexOf('id="openGroupFilter"'),'Existing control order is retained');
+  console.log('Production-linked approximation calculations, controls and CSV/JSON exports pass.');
+}

@@ -35,7 +35,7 @@ assert.equal(metrics.evaluate(unit,0,{...state,group_selections:{'U::m':['Fish']
 if(process.argv[2]){
   assert.equal(groups.evaluate(unit,model,state,['Seabirds']).value,30,'User may include only a researcher-excluded group');
   assert.equal(groups.evaluate(unit,model,state,[]).value,0,'Clear all excludes every group');
-  assert.equal(groups.evaluate(unit,model,state).total_catch,6,'Default review policy preserves the catch denominator');
+  assert.equal(groups.evaluate(unit,model,state).total_catch,3,'Default unchecked groups are excluded from the catch denominator with original weights');
   assert.equal(groups.rows(unit,model,{...state,method:'new_GE'})[1].ppr,30,'Group rows describe the group before selection');
   assert.deepEqual(model.display_ppr_excluded_group_ids,['Seabirds'],'User overrides preserve signed exclusion evidence');
 }
@@ -44,7 +44,7 @@ assert.equal(metrics.evaluate({...unit,models:[plain]},0,state).value,33,'Unrevi
 const annual={status:'ok',ppr:[297],catch:[6],covered_catch:[6]};
 const tm=structuredClone(model);tm.taxon_scopes=tm.scopes;tm.scopes={all:{methods:{new_GE:annual}}};
 const db={years:[2019],ppr_methods:[{id:'new_GE',kind:'model',scopes:['all']}],npp_methods:[],units:{U:{...unit,name:'U',default_model:'m',models:[tm],group_inputs:unit,simple:annual}}};
-const out=trends.aggregate(db,{...state,units:['U']});assert.equal(out.points[0].value,3,'Trends share the display-only exclusions');assert.equal(out.points[0].catch,6);assert.equal(out.points[0].coverage,1);
+const out=trends.aggregate(db,{...state,units:['U']});assert.equal(out.points[0].value,3,'Trends share the display-only exclusions');assert.equal(out.points[0].catch,process.argv[2]?3:6);assert.equal(out.points[0].coverage,1);
 if(process.argv[2]){
   model.scopes.all.status.new_GE='provisional: researcher display retains WARN';
   const preview=metrics.evaluate(unit,0,state);assert.equal(preview.value,3,'Mandatory exclusions retain explicitly authorized provisional availability');assert.match(preview.status,/provisional:/);

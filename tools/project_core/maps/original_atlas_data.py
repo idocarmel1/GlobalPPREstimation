@@ -13,6 +13,128 @@ from tools.project_core.calculations.regional import result_hash,inputs
 from tools.project_core.validation.researcher_review import approved_review,review_display,table_rows,attach_payload_review
 from zipfile import ZipFile
 
+def add_group_catch(root,units):
+    """Expose identity-bound saved catch; return consumed hashes for publication guards."""
+    root=Path(root).resolve();consumed={};staged=[]
+    def consume(path):
+        path=path.resolve();digest=sha(path)
+        if path in consumed and consumed[path]!=digest:raise ValueError('Model-catch source changed while reading: '+str(path))
+        consumed[path]=digest
+        return digest
+    def bound(model,field,path,digest):
+        declared=model.get(field)
+        return bool(declared and model.get(field+'_sha256')==digest and (root/declared).resolve()==path.resolve())
+    def number(value):
+        try:value=float(value)
+        except (TypeError,ValueError):return None
+        return value if finite(value) else None
+    def indexed(rows):
+        result={}
+        for row in rows:
+            name=row.get('group_name')
+            if not name:continue
+            if name in result:raise ValueError('Duplicate model-catch source group: '+name)
+            result[name]=number(row.get('catch'))
+        return result
+    def sheet_rows(book,name):
+        if name not in book:return []
+        rows=iter(book[name].values);headers=next(rows,())
+        return [dict(zip(headers,row)) for row in rows if any(value is not None for value in row)]
+    def evidence(path):
+        return {'path':path.relative_to(root).as_posix(),'sha256':consume(path)}
+    def native_carbon(book,model,native,source):
+        provenance={row.get('field'):row.get('value') for row in sheet_rows(book,'Provenance')}
+        rows=sheet_rows(book,'groups_df');names=[row.get('group_name') for row in rows]
+        expected=[group['id'] for group in model['group_data']['groups']]
+        if not (provenance.get('model_id')==model['id'] and provenance.get('model_sha256')==consume(native)
+                and provenance.get('native_model_currency')=='tC/km2, peryear forflows'
+                and len(names)==len(set(names)) and set(names)==set(expected)
+                and all(row.get('flow_units')=='tC/km2/year' for row in rows)):
+            return False
+        native_values={}
+        for scope in ['all','inner','PP']:
+            scope_rows=sheet_rows(book,'native_C_'+scope)
+            if not scope_rows:continue
+            scope_names=[row.get('group_name') for row in scope_rows]
+            if len(scope_names)!=len(set(scope_names)) or set(scope_names)!=set(expected):
+                raise ValueError('Native carbon coefficient groups do not match: '+str(source))
+            native_values[scope]={row['group_name']:{method:number(row.get(method)) for method in model['group_data'].get('methods',[])} for row in scope_rows}
+        if not native_values:return False
+        for group in model['group_data']['groups']:
+            group['model_catch_sppr']={scope:values[group['id']] for scope,values in native_values.items()}
+        model.update(model_catch_units='t C/km²/year',model_catch_carbon_factor=1,
+                     model_catch_unit_basis={'status':'documented','coefficient_source':'native_C_all/inner/PP; regional SPPR columns are unchanged','sources':[evidence(native),evidence(source)]})
+        return True
+    def wet_density(model,native):
+        # This retained extraction documents both mass currency and annual catch.
+        # A generic Ecopath convention or a regional /9 formula is insufficient.
+        report=native.parent/'extracted_tables/evidence/source/REPORT.md'
+        profile=native.parent/'extracted_tables/evidence/source/MODEL_PROFILE.md'
+        if not report.is_file() or not profile.is_file():return
+        consume(report);consume(profile)
+        report_text=report.read_text(encoding='utf-8');profile_text=profile.read_text(encoding='utf-8')
+        if ('catches are t/km²/year' in report_text and 'Canonical B is interpreted as t wet weight/km²' in report_text
+                and 'Biomass uses wet-weight densities.' in profile_text):
+            model.update(model_catch_units='t wet weight/km²/year',model_catch_carbon_factor=1/9,
+                         model_catch_unit_basis={'status':'documented','coefficient_source':'Saved wet-weight group SPPR','sources':[evidence(native),evidence(report),evidence(profile)]})
+    for unit_id,unit in units.items():
+        models=[model for model in unit.get('models',[]) if model.get('group_data')]
+        if not models:continue
+        region=region_directory(root,unit_id);regional=region/(unit_id+'.xlsx')
+        settings={};current={};regional_hash=None
+        if regional.is_file():
+            regional_hash=consume(regional)
+            with ZipFile(regional) as archive:
+                settings={row.get('field'):row.get('value') for _,row in table_rows(archive,'Overview','Settings')[3]}
+                current=indexed(row for _,row in table_rows(archive,'Selected model groups','Groups')[3])
+        for original in models:
+            model={**original,'group_data':{**original['group_data'],'groups':[dict(group) for group in original['group_data']['groups']]}}
+            staged.append((original,model))
+            model.update(model_catch_units=None,model_catch_carbon_factor=None,
+                         model_catch_unit_basis={'status':'unavailable','reason':'Saved catch and coefficient currency have not been documented together for this model.'})
+            for group in model['group_data']['groups']:
+                group.pop('model_catch_sppr',None);group['model_catch']=None
+            native=resolve_model(region,model['id']);source=native.parent/'sppr_source.xlsx'
+            native_hash=consume(native)
+            current_bound=(model['id']==settings.get('results_model_id') and regional_hash is not None and bound(model,'workbook',regional,regional_hash))
+            if model.get('workbook') and (root/model['workbook']).resolve()==regional.resolve() and not current_bound:
+                model['model_catch_unit_basis']['reason']='Regional catch identity does not match the embedded result model and workbook fingerprint.'
+                continue
+            values=current if current_bound else {}
+            source_bound=False
+            if source.is_file():
+                source_hash=consume(source)
+                source_bound=bound(model,'source',source,source_hash)
+                # Selected regional payloads can predate a source-hash field.
+                # The saved model manifest supplies that exact identity only
+                # when it also matches the actual regional result model/hash.
+                manifest=native.parent/'results/result_manifest.json'
+                if current_bound and not source_bound and manifest.is_file():
+                    consume(manifest);record=json.loads(manifest.read_text(encoding='utf-8'))
+                    source_bound=(record.get('unit_id')==unit_id and record.get('model_id')==model['id']
+                                  and record.get('canonical_model_sha256')==native_hash==settings.get('results_model_sha256')
+                                  and record.get('coefficient_source_sha256')==source_hash)
+                if source_bound:
+                    book=openpyxl.load_workbook(source,read_only=True,data_only=False)
+                    try:
+                        if not current_bound:values=indexed(sheet_rows(book,'groups_df'))
+                        native_carbon(book,model,native,source)
+                    finally:book.close()
+            if not current_bound and not source_bound:
+                model['model_catch_unit_basis']['reason']='Saved catch source identity does not match the embedded coefficient payload.'
+                continue
+            if model['model_catch_carbon_factor'] is None:wet_density(model,native)
+            for group in model['group_data']['groups']:
+                group['model_catch']=values.get(group['id'])
+    for path,digest in consumed.items():
+        if not path.is_file() or sha(path)!=digest:raise ValueError('Model-catch source changed while reading: '+str(path))
+    for original,model in staged:
+        for field in ['model_catch_units','model_catch_carbon_factor','model_catch_unit_basis']:original[field]=model[field]
+        for original_group,group in zip(original['group_data']['groups'],model['group_data']['groups']):
+            original_group['model_catch']=group['model_catch'];original_group.pop('model_catch_sppr',None)
+            if 'model_catch_sppr' in group:original_group['model_catch_sppr']=group['model_catch_sppr']
+    return {str(path):digest for path,digest in consumed.items()}
+
 def add_group_efficiencies(root,units):
     """Expose stored GE/EE without recalculating any existing model values."""
     def number(value):
@@ -248,7 +370,7 @@ def detail_from_book(book,unit,model_id):
     for r in records(book,'PPR','Matching'):
         if r.get('group') in indices:assign[r['taxon']].append([indices[r['group']],r['weight']])
     values={(r['group'],r['scope'],r['method']):r['sppr'] for r in coeff}
-    gd={'groups':[{'id':r['group_name'],'name':r['group_name'],'tl':r.get('tl'),'ge':r.get('ge'),'ee':r.get('ee'),'te':r['ge']*r['ee'] if finite(r.get('ge')) and finite(r.get('ee')) else None} for r in groups],
+    gd={'groups':[{'id':r['group_name'],'name':r['group_name'],'tl':r.get('tl'),'ge':r.get('ge'),'ee':r.get('ee'),'model_catch':r.get('catch') if finite(r.get('catch')) else None,'te':r['ge']*r['ee'] if finite(r.get('ge')) and finite(r.get('ee')) else None} for r in groups],
         'methods':methods,'scopes':{scope:[[values.get((g,scope,m)) for m in methods] for g in group_names] for scope in ['all','inner','PP']},
         'mappings':[assign[t] for t in taxa],'te_definition':'Stored source-group GE × EE; no EE repair or solver recalculation.',
         'provenance':{'workbook':f'regions/{unit.split("_")[0]}/{unit}/{unit}.xlsx','groups_sheet':'Selected model groups','mapping_sheet':'PPR'}}
@@ -445,4 +567,11 @@ def datasets(workbook,only_units=None):
     series=paths.rewrite(series)
     add_group_efficiencies(root,{k:v for k,v in catalog['network']['units'].items() if not only_units or k in only_units})
     add_group_efficiencies(root,{k:v for k,v in series['units'].items() if not only_units or k in only_units})
+    group_sources={}
+    for collection in [catalog['network']['units'],series['units']]:
+        for path,digest in add_group_catch(root,{k:v for k,v in collection.items() if not only_units or k in only_units}).items():
+            if path in group_sources and group_sources[path]!=digest:raise ValueError('Model-catch source changed between payloads: '+path)
+            group_sources[path]=digest
+    for path,digest in group_sources.items():
+        if not Path(path).is_file() or sha(path)!=digest:raise ValueError('Model-catch source changed before payload publication: '+path)
     return catalog,series,project
