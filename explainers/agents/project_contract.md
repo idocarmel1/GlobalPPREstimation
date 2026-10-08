@@ -33,6 +33,8 @@ Keep only the most updated extraction of each distinct model. Determine lineage 
 
 The regional Overview owns editable `selected_model_id` and `selection_rationale`. `model_path` is generated. Project.xlsx owns human paper/model metadata and explicit review records; its selected flags, paths and regional summaries are derived. HTML is generated. No sidecar, shortcut or manifest is an editable selection authority.
 
+In the map, selection sets the model opened by default for each region. It must not filter out other models or prevent switching, reviewing or disqualifying an exact candidate. Reviews belong to `(unit_id, model_id)`. A review-only candidate without calculated results remains selectable with its scientific values unavailable; it never inherits the default model's calculation identity or results.
+
 The single command is `python tools/cli/region.py refresh --region regions/LME/LME_028`. Adding a publication/model requires its scientific registration once; choosing an existing registered model requires only the Overview choice/rationale and refresh. Available model IDs come from canonical discovery. Discovery ignores work copies, snapshots and shortcuts and rejects duplicate identities.
 
 Snapshots are complete byte-for-byte regional workbook copies, including all sheets, manual content, formatting and links. Save outgoing results using `results_model_id` even if Overview already requests another model. Record both identities honestly. Keep one useful snapshot per model; a pending empty workbook cannot replace it. Manifests record actual or explicitly unknown historical flags/code identity, model/source/workbook hashes and separate dependency hashes. They do not confer approval.
@@ -52,7 +54,7 @@ Restore only explicitly compatible model-dependent groups, coefficients, matchin
 - `common_reference_data/geography/{boundaries,basemaps,metadata}/`, `taxonomy/{references,provenance}/`, `ecobase/{source_data,models,provenance}/`, `npp/raw/<product>/<year>/`, `npp/source_manifest.json`, and `atlas_source_context/`: shared reference inputs, with provenance.
 - `common_reference_data/provenance/source_paths.csv` and `paper_file_roles.json`: portable path/disposition and source-role evidence.
 - `interactive_map/{index.html,trends.html,sources.html,Open map.cmd,data/,sources/}`: generated human views.
-- `research/<study_id>/{README.md,inputs,code,results,evidence,work/}`: substantive retained scientific studies. Frozen statements are explicitly historical.
+- `research/{human,agents}/<study_id>/{README.md,inputs,code,results,evidence,work/}`: retained studies organized by purpose and ownership. `human/` holds researcher-owned experiments and method comparisons; `agents/` holds supporting audits, baselines, reviews and integration evidence. Agent assistance does not determine ownership, and placement never confers approval. Keep each study package intact and list it in `research/README.md`. Frozen statements and execution records remain explicitly historical; resolve their original paths through the source ledger.
 
 ## Work, portability and cleanup
 

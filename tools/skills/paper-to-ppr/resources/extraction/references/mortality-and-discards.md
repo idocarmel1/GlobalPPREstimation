@@ -78,6 +78,6 @@ violate a method identity or an existing plausibility check. A fixed-TL benchmar
 routing invariance is not evidence of zero ecological uncertainty.
 
 For the repository's completed four-model experiment and source-specific limits,
-consult `research/discard_sensitivity_2026_09_10/METHODS_AND_FINDINGS.md` and
+consult `research/human/discard_sensitivity_2026_09_10/METHODS_AND_FINDINGS.md` and
 `NUMERICAL_NOTES.md` from the checkout. These findings are model-specific; they do
 not authorize changing other source models or extending atlas coverage.

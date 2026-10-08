@@ -13,9 +13,14 @@ NOTE = ('Following researcher review, seabirds, other mammals, pinnipeds and mar
         'are excluded from displayed PPR. Model loading, diagnostics and saved workbook '
         'calculations retain all groups.')
 
+def removed_groups_text(sppr_text):
+    """Preserve signed wording while accepting calculation/calculations headings."""
+    match = re.search(r'Removed groups from calculations?:\s*(.*)', sppr_text, re.S)
+    return match.group(1) if match else ''
+
 def exclusion_note(sppr_text):
     """Name only groups explicitly removed in the approved report's SPPR field."""
-    removed = sppr_text.partition('Removed groups from calculation:')[2]
+    removed = removed_groups_text(sppr_text)
     groups = [line.split('(', 1)[0].strip().lower() for line in removed.splitlines()
               if '(' in line and line.split('(', 1)[0].strip()]
     # Preserve the original registered closing note for its existing snapshot.
@@ -140,8 +145,8 @@ def read_report(root, report, model_id):
             if len(cells) == 2:
                 fields[text(cells[0])] = {'text': '\n'.join(text(p) for p in cells[1].findall(f'{{{W}}}p')),
                                           'paragraphs': paragraphs(cells[1])}
-    selected = fields.get('Selected model', {}).get('text', '')
-    if not re.match(re.escape(model_id) + r'(?=$|[.;\s])', selected):
+    identities = [fields[label]['text'] for label in ['Selected model', 'Candidate model'] if label in fields]
+    if not identities or any(not re.match(re.escape(model_id) + r'(?=$|[.;\s])', value) for value in identities):
         raise ValueError('Review document identifies a different model')
     manual = fields['Review and reproducibility']['text']
     match = re.search(r'Researcher name:\s*([^|\n]+)\s*\|\s*review date:\s*(\d{2})/(\d{2})/(\d{4})', manual)
@@ -195,6 +200,34 @@ def register_review(project, report, unit_id, model_id, excluded_seq):
     from tools.project_core.registry.writes import central_lock
     with central_lock(Path(project).resolve().parent):return _register_review(project,report,unit_id,model_id,excluded_seq)
 
+def calculation_review_book(root, metadata, book):
+    """Resolve this model's saved inputs independently of the map default."""
+    from tools.project_core.workbooks.workbooks import overview
+    settings = overview(book)
+    identity = settings.get('results_model_id') or settings.get('selected_model_id')
+    if identity == metadata['model_id']:
+        if not settings.get('calculation_input_sha256'):
+            raise ValueError('Review calculation inputs lack their fingerprint')
+        if settings.get('results_model_sha256') and settings['results_model_sha256'] != sha(root / metadata['model_path']):
+            raise ValueError('Review calculation inputs identify a changed canonical model')
+        return book
+    snapshot = (root / metadata['model_path']).resolve().parent / 'results/regional_snapshot.xlsx'
+    if not snapshot.is_relative_to(root) or not snapshot.is_file():
+        raise ValueError('The reviewed model requires its own saved calculation inputs')
+    saved = {}
+    with zipfile.ZipFile(snapshot) as archive:
+        for sheet, table in [('Overview', 'Settings'), ('Selected model groups', 'Groups')]:
+            _, headers, _, rows = table_rows(archive, sheet, table)
+            headers = list(rows[0][1]) if rows else (headers or [])
+            saved.setdefault(sheet, {})[table] = (headers, [[r.get(h) for h in headers] for _, r in rows])
+    settings = overview(saved)
+    identity = settings.get('results_model_id') or settings.get('selected_model_id')
+    if identity != metadata['model_id'] or not settings.get('calculation_input_sha256'):
+        raise ValueError('Saved review calculation inputs identify another model or lack their fingerprint')
+    if settings.get('results_model_sha256') and settings['results_model_sha256'] != sha(root / metadata['model_path']):
+        raise ValueError('Saved review calculation inputs identify a changed canonical model')
+    return saved
+
 def _register_review(project, report, unit_id, model_id, excluded_seq):
     """Extend only the central Models table XML and its native table definition."""
     root = project.resolve().parent
@@ -212,18 +245,25 @@ def _register_review(project, report, unit_id, model_id, excluded_seq):
         _, _, _, settings = table_rows(archive, 'Overview', 'Settings')
         settings = {r['field']: r['value'] for _, r in settings}
         _, _, _, groups = table_rows(archive, 'Selected model groups', 'Groups')
-    if settings.get('selected_model_id') != model_id:
-        raise ValueError('The supplied model is not the current regional selection')
+    name, date, summary = read_report(root, report, model_id)
+    status = summary.get('status', STATUS)
+    input_model_id = settings.get('results_model_id') or settings.get('selected_model_id')
+    source_only = input_model_id != model_id and status == DISQUALIFIED_STATUS
+    if input_model_id != model_id and not source_only:
+        from tools.project_core.workbooks.workbooks import overview, records
+        saved = calculation_review_book(root, model, {})
+        settings = overview(saved)
+        groups = [(None, r) for r in records(saved, 'Selected model groups', 'Groups')]
+    if source_only:
+        summary['review_scope'] = 'model_source'
     exclusions = [r['group_name'] for _, r in groups if int(float(r['seq'])) in excluded_seq]
     if len(exclusions) != len(set(excluded_seq)):
         raise ValueError('Approved group exclusion identifiers do not resolve uniquely')
-    name, date, summary = read_report(root, report, model_id)
-    status = summary.get('status', STATUS)
     if status == DISQUALIFIED_STATUS and excluded_seq:
         raise ValueError('Disqualification does not authorize group exclusions')
     summary['excluded_group_ids'] = exclusions
     if excluded_seq == [] and status == STATUS:
-        removed = summary['sections'][2]['rows'][0]['text'].partition('Removed groups from calculation:')[2]
+        removed = removed_groups_text(summary['sections'][2]['rows'][0]['text'])
         declared = [line.split('(', 1)[0].strip().lstrip('-• ').lower() for line in removed.splitlines()
                     if '(' in line and line.split('(', 1)[0].strip()]
         available = {r['group_name'].strip().lower() for _, r in groups}
@@ -234,7 +274,7 @@ def _register_review(project, report, unit_id, model_id, excluded_seq):
                                'Model loading, diagnostics and saved workbook calculations retain all groups.')
     values = dict(zip(FIELDS, [status, name, date, report.resolve().relative_to(root).as_posix(),
                               sha(report), sha(root / model['model_path']),
-                              settings['calculation_input_sha256'], json.dumps(summary, ensure_ascii=False, separators=(',', ':'))]))
+                              '' if source_only else settings['calculation_input_sha256'], json.dumps(summary, ensure_ascii=False, separators=(',', ':'))]))
     if any(len(str(value)) > 32767 for value in values.values()):
         raise ValueError('Review metadata exceeds Excel cell text limit')
     def put(target, index, value, style):
@@ -317,7 +357,14 @@ def approved_review(root, metadata, book):
     """Require matching source identities before exposing a review or PPR exclusions."""
     if not metadata or metadata.get('researcher_review_status') not in {STATUS, DISQUALIFIED_STATUS}:
         return None
+    summary = json.loads(metadata.get('researcher_review_summary') or '{}')
+    source_only = summary.get('review_scope') == 'model_source'
+    if source_only and (metadata['researcher_review_status'] != DISQUALIFIED_STATUS
+                        or metadata.get('reviewed_calculation_input_sha256') or summary.get('excluded_group_ids')):
+        raise ValueError('A source-only rejection cannot approve calculations or group exclusions')
     for key in FIELDS:
+        if source_only and key == 'reviewed_calculation_input_sha256':
+            continue
         if not metadata.get(key):
             raise ValueError('Incomplete central researcher review: ' + key)
     for field, hashfield in [('validation_report_path', 'validation_report_sha256'), ('model_path', 'reviewed_model_sha256')]:
@@ -325,9 +372,10 @@ def approved_review(root, metadata, book):
         if not path.is_relative_to(root) or not path.is_file() or sha(path) != metadata[hashfield]:
             raise ValueError('Researcher review source changed; review and register the current ' + field)
     from tools.project_core.workbooks.workbooks import overview
-    if overview(book).get('calculation_input_sha256') != metadata['reviewed_calculation_input_sha256']:
-        raise ValueError('Researcher review calculation inputs changed; review the current regional inputs')
-    summary = json.loads(metadata['researcher_review_summary'])
+    if not source_only:
+        book = calculation_review_book(root, metadata, book)
+        if overview(book).get('calculation_input_sha256') != metadata['reviewed_calculation_input_sha256']:
+            raise ValueError('Researcher review calculation inputs changed; review the current regional inputs')
     if summary.get('schema_version') != 1 or summary.get('model_id') != metadata['model_id']:
         raise ValueError('Researcher review snapshot identifies another model or schema')
     name, date, source_summary = read_report(root, root / metadata['validation_report_path'], metadata['model_id'])
@@ -346,17 +394,48 @@ def approved_review(root, metadata, book):
             'review_date': metadata['researcher_review_date'], 'report_path': metadata['validation_report_path'],
             'report_sha256': metadata['validation_report_sha256'], 'model_sha256': metadata['reviewed_model_sha256']}
 
+def unavailable_review_model(metadata, review):
+    """Expose a reviewed source in model controls without inventing calculations."""
+    if review.get('status') not in {STATUS, DISQUALIFIED_STATUS}:
+        raise ValueError('Adding a review-only model requires a verified signed decision')
+    return {'id': metadata['model_id'], 'label': metadata['model_id'], 'verified': False,
+            'scopes': {}, 'source': metadata['model_path'],
+            'researcher_review': copy.deepcopy(review), 'display_ppr_excluded_group_ids': review['excluded_group_ids'][:]}
+
+def attach_payload_review(root, metadata, book, model, review, pending=None):
+    """Bind positive signoff to the exact workbook behind displayed calculations."""
+    if review and review.get('status') == STATUS and (
+            model.get('verified') or model.get('scopes') or model.get('group_data') or model.get('values')):
+        from tools.project_core.workbooks.workbooks import overview
+        settings = overview(book)
+        identity = settings.get('results_model_id') or settings.get('selected_model_id')
+        workbook = (region_directory(root, metadata['unit_id']) / (metadata['unit_id'] + '.xlsx')
+                    if identity == metadata['model_id'] else
+                    (root / metadata['model_path']).resolve().parent / 'results/regional_snapshot.xlsx')
+        if not workbook.is_file() or model.get('workbook_sha256') != sha(workbook):
+            review = None
+            pending = recorded_review_pending(metadata, 'Displayed calculations do not match the reviewed model workbook')
+    for field in ['researcher_review', 'recorded_review_pending', 'display_ppr_excluded_group_ids']:
+        model.pop(field, None)
+    if review:
+        model['researcher_review'] = copy.deepcopy(review)
+        model['display_ppr_excluded_group_ids'] = review['excluded_group_ids'][:]
+    if pending:
+        model['recorded_review_pending'] = copy.deepcopy(pending)
+
+def recorded_review_pending(metadata, reason):
+    return {'recorded_status': metadata.get('researcher_review_status'),
+            'researcher_name': metadata.get('researcher_name'),
+            'review_date': metadata.get('researcher_review_date'),
+            'report_path': metadata.get('validation_report_path'), 'reason': str(reason)}
+
 def review_display(root, metadata, book):
     """Preserve a recorded decision while exposing only currently verified approval."""
     try:return approved_review(root,metadata,book),None
     except ValueError as error:
         # The approval gate remains strict. A stale decision is visible evidence,
         # with no active exclusions, green eligibility or implied new signoff.
-        return None,{'recorded_status':metadata.get('researcher_review_status'),
-                     'researcher_name':metadata.get('researcher_name'),
-                     'review_date':metadata.get('researcher_review_date'),
-                     'report_path':metadata.get('validation_report_path'),
-                     'reason':str(error)}
+        return None,recorded_review_pending(metadata,error)
 
 def reviewed_layout(text):
     """Overlay current review behavior without editing retained historical templates."""
@@ -378,16 +457,32 @@ def reviewed_layout(text):
     end = text.index('/* Compact preferences shared by the two standalone pages.', start)
     from tools.project_core.maps.provisional_display import provisional_layout
     group_source = (directory / 'original_html_layout/calculation_modules/group_metrics.js').read_text(encoding='utf-8')
+    # Signed exclusions are the initial display policy. Explicit browser/URL
+    # selections override that policy without changing the recorded review.
+    selection_start = group_source.index('  function selection(model,ids){')
+    selection_end = group_source.index('  const active=', selection_start)
+    group_source = group_source[:selection_start] + '''  function selection(model,ids){
+    const list=model?.group_data?.groups||[],manual=Array.isArray(ids);
+    const excluded=new Set(model?.display_ppr_excluded_group_ids||[]);
+    const names=new Set(manual?ids:list.filter(g=>!excluded.has(g.id)).map(g=>g.id));
+    const indices=list.flatMap((g,i)=>names.has(g.id)?[i]:[]);
+    const catch_indices=manual?indices:list.map((g,i)=>i);
+    return {ids:indices.map(i=>list[i].id),indices,count:indices.length,total:list.length,
+      catch_indices,requested_ids:catch_indices.map(i=>list[i].id),
+      researcher_excluded:list.filter(g=>excluded.has(g.id)).map(g=>g.id),
+      manual_active:manual&&indices.length<list.length,
+      active:list.length>0&&indices.length<list.length,empty:indices.length===0};
+  }
+''' + group_source[selection_end:]
     text = text[:start] + provisional_layout(group_source) + '\n\n' + text[end:]
-    # Group controls always show the effective PPR selection, while retaining
-    # the original browser-requested selection for other catch metrics.
+    # Checkbox and bulk actions persist exact user choices, including All.
     text = text.replace("function selection(){const {model}=current();return new Set(store.data.selections[key()]??model?.group_data.groups.map(g=>g.id)??[]);}",
-        "function requestedSelection(){const {model}=current();return new Set(store.data.selections[key()]??model?.group_data.groups.map(g=>g.id)??[]);}\n"
         "    function selection(){const {model}=current();return new Set(PPRGroups.selection(model,store.data.selections[key()]).ids);}")
-    text = text.replace("const ids=selection();if(check.checked)", "const ids=requestedSelection();if(check.checked)")
-    text = text.replace("check.checked=selected.has(row.id);check.setAttribute", "check.checked=selected.has(row.id);check.disabled=(current().model?.display_ppr_excluded_group_ids||[]).includes(row.id);check.setAttribute")
     text = text.replace("key==='name'?row.name:finite(row[key])", "key==='name'?row.name+((current().model?.display_ppr_excluded_group_ids||[]).includes(row.id)?' · Excluded from displayed PPR by researcher':''):finite(row[key])")
-    text = text.replace("if(!model)return;const allIds=model.group_data.groups.map(g=>g.id);", "if(!model)return;if(ids.length)ids=[...new Set([...ids,...(model.display_ppr_excluded_group_ids||[])])];const allIds=model.group_data.groups.map(g=>g.id);")
+    text = text.replace("if(ids.length===allIds.length&&allIds.every(id=>ids.includes(id)))", "if(!model.display_ppr_excluded_group_ids?.length&&ids.length===allIds.length&&allIds.every(id=>ids.includes(id)))")
+    text = text.replace("if(ids.size===model.group_data.groups.length)", "if(!model.display_ppr_excluded_group_ids?.length&&ids.size===model.group_data.groups.length)")
+    text = text.replace("prefs.ranges={};delete store.data.selections[key()];notify();loadModel();",
+        "prefs.ranges={};const {model}=current();setSelection(model.group_data.groups.map(g=>g.id));loadModel();")
     text = text.replace("${selected.size} of ${model?.group_data.groups.length||0} groups selected · ${visibleRows().length} matching", "${selected.size} of ${model?.group_data.groups.length||0} groups included in displayed PPR · ${(model?.display_ppr_excluded_group_ids||[]).length} researcher exclusions · ${visibleRows().length} matching")
     text = text.replace("const {unit,model}=current();if(!model)return;const prefs=preferences(),context=getContext();", "const {unit,model}=current();if(!model)return;PPRResearcherReview.decorateName(models,model);const prefs=preferences(),context=getContext();")
     text = text.replace("fill(models,modelList.map(m=>[m.id,m.label||m.id]));", "fill(models,modelList.map(m=>[m.id,m.label||m.id]));for(const option of models.options){PPRResearcherReview.decorateName(option,modelList.find(m=>m.id===option.value));}")

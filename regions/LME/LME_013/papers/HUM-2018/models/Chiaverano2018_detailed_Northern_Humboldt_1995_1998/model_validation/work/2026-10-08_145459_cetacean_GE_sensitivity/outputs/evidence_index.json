@@ -1,0 +1,774 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-10-08_145459_cetacean_GE_sensitivity",
+  "region_id": "LME_013",
+  "model_id": "Chiaverano2018_detailed_Northern_Humboldt_1995_1998",
+  "variant_id": "unadopted_cetacean_GE_sensitivity",
+  "source_identity": {
+    "canonical_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+  },
+  "computational_input_identity": {
+    "constructor": {
+      "underdetermined": true,
+      "zero_catch": true,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": true,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false
+    },
+    "scenarios": [
+      "strict_model_mean",
+      "strict_model_mean",
+      "strict_group_mean",
+      "strict_group_mean",
+      "broad_model_mean",
+      "broad_model_mean"
+    ],
+    "engine": {
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    }
+  },
+  "methods": [
+    "GE"
+  ],
+  "required_roles": [
+    "comparison",
+    "summary",
+    "verification",
+    "diagnostic_evidence",
+    "executed_code"
+  ],
+  "reconciliation": {
+    "cohort_means": true,
+    "matrices_masks_axes": true,
+    "scope_sums": true,
+    "source_preservation": true
+  },
+  "artifacts": [
+    {
+      "role": "comparison",
+      "path": "validated_cetacean_comparison.json",
+      "sha256": "8a479f1345a8d42a4b8b226c3e31894b4eb40dc68492588dd0231769fdd392c4",
+      "availability": "present"
+    },
+    {
+      "role": "summary",
+      "path": "sensitivity_summary.json",
+      "sha256": "70251a65c3ce9f65f605ad488cb5603e28e8369c4af47bd0f846fa051c814c92",
+      "availability": "present"
+    },
+    {
+      "role": "verification",
+      "path": "../qa/verification.json",
+      "sha256": "dbd1a710222e63e033cc11053addfae6790bae23fe6c1a972400e4ee4edcf1f0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/parameter_scenario.json",
+      "sha256": "cb54c39da905a7458c25c50043dac8bc5466d247a28b5727de119a1898ebd5d4",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/A.csv",
+      "sha256": "7b2da3ee59d2151feff06103d56c280fbffa2d28a58e335c14158939023ddd6b",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/A.npy",
+      "sha256": "21238ed24684718bc0eb589c5df3e2d1c3620e8068d21fdb7d44668d8e65f83d",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/A_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/A_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/diagnostic_return.json",
+      "sha256": "df9a2fce4335dd1486de5c924218bddf438547e29a9dd7b34c16d4a070749726",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/full_return.pkl",
+      "sha256": "91fdb86457c9ca817435bf33f9a7238e9bdf1ece04fbdbca627b031e771e2c47",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/full_return_lossless.json",
+      "sha256": "48cbaaa008d2e6c6ee0253b1b91e34a5a654adb64420591dd6c5ba80cee442e6",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/L.csv",
+      "sha256": "8c77d4ffb8dab5fd1e02407fdd760568f1dcc87c2c558c857c9c574056d942ec",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/L.npy",
+      "sha256": "413ea2d388f8e8fb4e05a891a0268a56e4f5badb51f3d21bfba6cd852483d557",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/L_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/L_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/negative_matrix_entries.json",
+      "sha256": "872fb46425580faf817ad2a59754fc229057fb9cc534473899e79c6e17de5719",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/SPPR.csv",
+      "sha256": "ba82db4eed6e0e74a76ffc942077b2dd1f5915134e05558a3f320b430d7db0aa",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/SPPR.npy",
+      "sha256": "40f95587df38e7b04a249f51ca0b1586d921eb428d3ccaf1794ce3218520b53d",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/SPPR_axes.json",
+      "sha256": "6633343cbfc1e4f9a1a28d05d1653056a0aa41f1a2f736228174fe24c62d70d0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/SPPR_masks.npz",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/pooled/warnings.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/runtime_after_lossless.json",
+      "sha256": "19c59174bd119587e6fb2710c8dba178e62696258f06f6b5471fa8b9056e919c",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/runtime_before_lossless.json",
+      "sha256": "5f572fd30eb0def4c77c76cde00306d092a50fc343efac19ad802360529ffdbb",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/A.csv",
+      "sha256": "7b2da3ee59d2151feff06103d56c280fbffa2d28a58e335c14158939023ddd6b",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/A.npy",
+      "sha256": "21238ed24684718bc0eb589c5df3e2d1c3620e8068d21fdb7d44668d8e65f83d",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/A_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/A_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/diagnostic_return.json",
+      "sha256": "7415f967720bd528120a664e1850b2f91764ba3c10241b2bfdeaa9190b2e8dd7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/full_return.pkl",
+      "sha256": "c033be7f8fa225b998cdbcb6cd2ba127596c1f15505169cf72d0419a0fd3d69e",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/full_return_lossless.json",
+      "sha256": "b7a06c576e7dd46ba194d18dd66baab408bcef28ff70537ae63e6db229179731",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/L.csv",
+      "sha256": "8c77d4ffb8dab5fd1e02407fdd760568f1dcc87c2c558c857c9c574056d942ec",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/L.npy",
+      "sha256": "413ea2d388f8e8fb4e05a891a0268a56e4f5badb51f3d21bfba6cd852483d557",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/L_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/L_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/negative_matrix_entries.json",
+      "sha256": "d57fe95a171bd903bd8f8e38216c245ec905090d6b449ce94776c8a861c5bcc0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/SPPR.csv",
+      "sha256": "fd031a36e1d0e5b3f54777c5d4f0a8d510066bbb81bb70f2bebbc82987e436e8",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/SPPR.npy",
+      "sha256": "3d6743ca9495d3279ab7a8220bca33611a9ab72283f225b1b665c97a847fcfd3",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/SPPR_axes.json",
+      "sha256": "6633343cbfc1e4f9a1a28d05d1653056a0aa41f1a2f736228174fe24c62d70d0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/SPPR_masks.npz",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_model_mean/unpooled/warnings.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/parameter_scenario.json",
+      "sha256": "11ddd4523397fb58c1670d215c93b93de57b1cd3a12b97819f3810d095642b4f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/A.csv",
+      "sha256": "0f2eab4663f54c7606a345427e9d96135b8c6e70c6d3005dc609818727f6d77c",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/A.npy",
+      "sha256": "c40daf33cbc17a4e1318cb848a6016aa5f1f021861f6ed4303766f721f146cc5",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/A_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/A_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/diagnostic_return.json",
+      "sha256": "f5f0943d0c3e422bc3c87ad02a9e49557d5a3a77c7ce657bd2c66267d1757f36",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/full_return.pkl",
+      "sha256": "50e6b7fd46b23071d54dc25978d2d00c4a00cd87eee403c6edc10cb8246494ae",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/full_return_lossless.json",
+      "sha256": "357fdae7e825136b5e871a129fb57dcaf3cd64ad6d7c750d2191095eb24393cc",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/L.csv",
+      "sha256": "dd0e9a8d3eace20c55a82384c37b520a989b46c2862b903fe5eafc221b8534f3",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/L.npy",
+      "sha256": "ad2603a3b38cbb6e6d18b64346e4d2f595b47da67536fb488dcde4ede0e3ac66",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/L_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/L_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/negative_matrix_entries.json",
+      "sha256": "872fb46425580faf817ad2a59754fc229057fb9cc534473899e79c6e17de5719",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/SPPR.csv",
+      "sha256": "cdb8c3e8f86570d80ca6f9a0be46ed890ba49d5ca797a2a5b93d10dd7fc6534e",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/SPPR.npy",
+      "sha256": "74b98f05fdf63a1152c0842068a559ea9756596ca8f9cdd50e95e8e82c987e38",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/SPPR_axes.json",
+      "sha256": "6633343cbfc1e4f9a1a28d05d1653056a0aa41f1a2f736228174fe24c62d70d0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/SPPR_masks.npz",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/pooled/warnings.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/runtime_after_lossless.json",
+      "sha256": "138f914a4ae6a50513b23821bd879e7adb1ae164666814eefb87d25ffca5be44",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/runtime_before_lossless.json",
+      "sha256": "a9f8cd9ceb33d040408bda6eb6ac9ab5c22f549f9054ac7dfa8666366c1f51e4",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/A.csv",
+      "sha256": "0f2eab4663f54c7606a345427e9d96135b8c6e70c6d3005dc609818727f6d77c",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/A.npy",
+      "sha256": "c40daf33cbc17a4e1318cb848a6016aa5f1f021861f6ed4303766f721f146cc5",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/A_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/A_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/diagnostic_return.json",
+      "sha256": "dac094644172c0973f795a72475ea8ce5ed9b4d35b5705785e39da37fa7cae2a",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/full_return.pkl",
+      "sha256": "2f4970f8c49f0379fd82bd290ff3626473cdd0d9adf0ae7d435805456f5fefa9",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/full_return_lossless.json",
+      "sha256": "01596099a8613e70b69ec8170ef3e2e02f6da3769f35b7a7d1dfbff462594e82",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/L.csv",
+      "sha256": "dd0e9a8d3eace20c55a82384c37b520a989b46c2862b903fe5eafc221b8534f3",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/L.npy",
+      "sha256": "ad2603a3b38cbb6e6d18b64346e4d2f595b47da67536fb488dcde4ede0e3ac66",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/L_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/L_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/negative_matrix_entries.json",
+      "sha256": "fa56bc167b870e55724509abb7f07c783291d7d4ca7debbb0bb85104a224a44f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/SPPR.csv",
+      "sha256": "d11d37ad46a9e244cb5e9204e36a3e7515168e1a389bfc0e624312db48e35500",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/SPPR.npy",
+      "sha256": "1d2f04d5dd99316de184ddf353c34a8f2eab3546217bc352da66a85420c2663a",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/SPPR_axes.json",
+      "sha256": "6633343cbfc1e4f9a1a28d05d1653056a0aa41f1a2f736228174fe24c62d70d0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/SPPR_masks.npz",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "strict_group_mean/unpooled/warnings.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/parameter_scenario.json",
+      "sha256": "83d61b163c2e2d572e6a0e8afc05c0e5f3f2c07e98d988cfccd890d834fa9198",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/A.csv",
+      "sha256": "334485667076eb8adc5f2b02920eb57c0a94703fe5f6efcce725f7d8c37799c1",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/A.npy",
+      "sha256": "d586cd8582d2463076b5fb6198934d52e8a887fb194e6124faac9909b0a1c90e",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/A_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/A_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/diagnostic_return.json",
+      "sha256": "ef637fbf4efaa325f434601ceb292be4ebb33b57f29ac93bb86fd43f3406fd1b",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/full_return.pkl",
+      "sha256": "e8b442a8324b2fb4da1427c955a1795aacda21e22f3d9e4f7eb01d5bba2e75b9",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/full_return_lossless.json",
+      "sha256": "bcc3ca321d68d4f0ce1073c8b183c54c3f2a20450a1b3c5dbba8605411643140",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/L.csv",
+      "sha256": "af74bfe03285fc7ad4c641d18a2214eda40fd2f708dd416615ab850b59b5af91",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/L.npy",
+      "sha256": "caa5ab68cc7ebd6110927c79ed34974e95783a3adf268582b2993b2ddb37ecbe",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/L_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/L_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/negative_matrix_entries.json",
+      "sha256": "872fb46425580faf817ad2a59754fc229057fb9cc534473899e79c6e17de5719",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/SPPR.csv",
+      "sha256": "0c2167ebe824b67583d4e50525f88d3bdc3b353f37b8118c4a86128fcf48ad28",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/SPPR.npy",
+      "sha256": "b85403a80ede292d89630ddd3a5a11e1e68989f58ce616725678b077cea59671",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/SPPR_axes.json",
+      "sha256": "6633343cbfc1e4f9a1a28d05d1653056a0aa41f1a2f736228174fe24c62d70d0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/SPPR_masks.npz",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/pooled/warnings.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/runtime_after_lossless.json",
+      "sha256": "651bc9376f9664923cb0b376a406b6cd1ade63e45776c7718f0ef62ca8a1f78c",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/runtime_before_lossless.json",
+      "sha256": "7859c7c78913015fa5a1cb7ec9b0ac01bef21e242c9df81898adcc03943666ed",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/A.csv",
+      "sha256": "334485667076eb8adc5f2b02920eb57c0a94703fe5f6efcce725f7d8c37799c1",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/A.npy",
+      "sha256": "d586cd8582d2463076b5fb6198934d52e8a887fb194e6124faac9909b0a1c90e",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/A_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/A_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/diagnostic_return.json",
+      "sha256": "c3ab900f1c5aae1462543ffe7609ef2f9ae6ca48d273c5f899d61ac42b6e9482",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/full_return.pkl",
+      "sha256": "2e254beeaf31444fea899387abd90c5b001547af31d6d46f9621578311cc9556",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/full_return_lossless.json",
+      "sha256": "338e2049fafea42d975366e4ddcfb28aefeccb5f975591793e55eac966d27021",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/L.csv",
+      "sha256": "af74bfe03285fc7ad4c641d18a2214eda40fd2f708dd416615ab850b59b5af91",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/L.npy",
+      "sha256": "caa5ab68cc7ebd6110927c79ed34974e95783a3adf268582b2993b2ddb37ecbe",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/L_axes.json",
+      "sha256": "f56789a859ab188a3ba0cb26b4e4ba21ca7b20382593a0a4def84c2c045195d7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/L_masks.npz",
+      "sha256": "da503d78176de5ea47859dc201ac32229099b4e4e3c40708db8e89c2782aa265",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/negative_matrix_entries.json",
+      "sha256": "4c3f0630ba88392a38d3b407929b91ce40b3366524bf02133183957bf2d6f919",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/SPPR.csv",
+      "sha256": "16c31162f126030bb743e5fbc40cf2d079101034c7e9b5797b7bab715739df72",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/SPPR.npy",
+      "sha256": "67d46879b499e23124ddeef2cbc6cb0400b69100d25161ab80b6c5abe80b2a41",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/SPPR_axes.json",
+      "sha256": "6633343cbfc1e4f9a1a28d05d1653056a0aa41f1a2f736228174fe24c62d70d0",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/SPPR_masks.npz",
+      "sha256": "8ea12b8357fa778e3853957ee7aee4e9e0e2d450f9500fd59768af4e2c00ad52",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_evidence",
+      "path": "broad_model_mean/unpooled/warnings.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "availability": "present"
+    },
+    {
+      "role": "executed_code",
+      "path": "../code/compare_validated.py",
+      "sha256": "f980d6d2e8ce87295903db03e933c2747075d49db0fe64e318273fa2f2baa207",
+      "availability": "present"
+    },
+    {
+      "role": "executed_code",
+      "path": "../code/executed_code/ModelData.py",
+      "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "availability": "present"
+    },
+    {
+      "role": "executed_code",
+      "path": "../code/executed_code/PPRCalculator.py",
+      "sha256": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+      "availability": "present"
+    },
+    {
+      "role": "executed_code",
+      "path": "../code/executed_code/utils.py",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "availability": "present"
+    },
+    {
+      "role": "executed_code",
+      "path": "../code/run_sensitivity.py",
+      "sha256": "87a940ec1313195b22858da9a500bd70c0d6ad54cb468933555cbf11a2216ca8",
+      "availability": "present"
+    },
+    {
+      "role": "executed_code",
+      "path": "../code/verify_sensitivity.py",
+      "sha256": "7318d79b0e6b2a94bc063b77bf531789c52898807efb6d0420e2fd7ed63f364a",
+      "availability": "present"
+    }
+  ]
+}

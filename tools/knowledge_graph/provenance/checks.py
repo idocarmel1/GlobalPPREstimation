@@ -103,7 +103,7 @@ def probes():
             target.write_bytes(original.read_bytes())
             entry=dict(entry,output_file=target.name,output_sha256=sha(target),review='Initial broad ranking/budget limitation: structure retrieved map AST regions variables; refresh retrieved APIs but truncated contract semantics; skills showed contract but truncated actual skill-source nodes. No full retrieval PASS claimed.')
             initial.append(entry)
-    questions=[('structure','Grouped region paper model layout'),('refresh','One-command regional refresh'),('restore','Selective compatible restoration'),('paper_skill','paper_to_ppr_skill_paper_to_ppr_scientific_pipeline_skill'),('validation_skill','Ecopath model validation skill')]
+    questions=[('structure','explainers_structure_regional_paper_and_candidate_layout'),('refresh','One-command regional refresh'),('restore','Selective compatible restoration'),('paper_skill','paper_to_ppr_skill_ecopath_paper_to_regional_ppr'),('validation_skill','ecopath_model_validation_skill_ecopath_model_validation')]
     records=[]
     for key,question in questions:
         args=[str(cli),'query',question,'--graph','tools/knowledge_graph/graph.json','--budget','3500']

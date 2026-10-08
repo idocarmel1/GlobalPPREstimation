@@ -1,0 +1,88 @@
+{
+  "checked_at": "2026-10-08T14:04:06.118187+00:00",
+  "full_workflow": {
+    "command": "python -m unittest discover -s tools/workflow_checks -p test_*.py",
+    "tests_run": 158,
+    "initial_failures": 13,
+    "node_sandbox_failures": 9,
+    "preexisting_importer_subcase_failures": 4
+  },
+  "map_rerun": {
+    "command": "NODE_OPTIONS=--preserve-symlinks --preserve-symlinks-main python -m unittest tools.workflow_checks.maps.test_html_adapter tools.workflow_checks.maps.test_map_cumulative_ppr -v",
+    "tests_run": 19,
+    "pass": true
+  },
+  "remaining_test_failure": {
+    "test": "validation.test_diet_source_preservation.DietPreservationTests.test_numeric_missing_sentinel_imports_stay_unknown",
+    "sentinels": [
+      "-9999.0",
+      "-9999.000"
+    ],
+    "affected_copies": [
+      "repository extraction importer",
+      "identical installed personal extraction importer"
+    ],
+    "test_and_repository_importer_match_HEAD": true,
+    "importer_sha256": "55ecaf0f76d01f606c1d4f28a4e37cc44dffef8968a2a565f08f572cc4818e41",
+    "cause": "The receipt and diet-plus-import sum compare the literal string to -9999, so decimal spellings are not classified as unknown. No importer or scientific input is changed by this administrative refresh."
+  },
+  "whitespace_check": {
+    "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check",
+    "pass": true,
+    "note": "CRLF is preserved under the existing -text byte-provenance policy."
+  },
+  "abandoned_temporary_cleanup": {
+    "path": "tmpq77ap6o8.xlsx",
+    "bytes": 15578081,
+    "sha256": "1645d47ce288f21721a199eb4f7d07918d62d0ab985df13a4b92dc781da16d3b",
+    "reason": "Incomplete XLSX produced by the abandoned central-publication save; matches the documented mkstemp destination/name, is not a valid ZIP workbook, and predates the completed central publication. No active chats or writer lock remain."
+  },
+  "published_artifact_sha256": {
+    "Project.xlsx": "9ebe33aa78a51bdb28cb5dddedd5bfcb75be1c225a7d7aa51b1398399990fb92",
+    "interactive_map/index.html": "4e9dd38b7f55648a6d91693b01e8a3c7d1d80e013c0faa001879d259d3dc1ffa",
+    "interactive_map/trends.html": "348b7adf2396a5a1c33501d2d1ada145b0c796b936f4f656b4d1e23824f38dc6"
+  },
+  "all_other_chats_finished_before_refresh": true,
+  "scientific_scope": "Knowledge-graph refresh and preservation of completed work; no scientific rerun or parameter repair.",
+  "graph_refresh_preserved_published_artifact_bytes": true,
+  "all_other_chats_idle_rechecked_before_publication": true,
+  "snapshot_filesystem_access_repair": {
+    "files": [
+      "regions/HS/HS_077/papers/ETP-2003/models/077HS_1_Eastern_tropical_Pacific_(1993-1997)/results/regional_snapshot.xlsx",
+      "regions/HS/HS_077/papers/ETP-2003/models/077HS_1_Eastern_tropical_Pacific_(1993-1997)/results/result_manifest.json"
+    ],
+    "action": "icacls /inheritance:e restores normal existing parent access; no file contents changed.",
+    "snapshot_sha256": "a77ccfd36c7412f4439b26a3de3d68d92e5ebc127cf41faa8e04829c0b739809",
+    "reason": "Atomic promotion left private protected ACLs readable only to the sandbox owner; publishing Git process could not read the files."
+  },
+  "publication_before_latest_user_request_sha256": {
+    "Project.xlsx": "2d7c52e6a766ad75735dc21ada1d18e83d0bc6d30f95b97df9021db96d192492",
+    "interactive_map/index.html": "d590a0fbf57a75b49246315bfeca890c9147a2fce49abfc9659d9000b23e000b",
+    "interactive_map/trends.html": "2ea2512764a905689eeb3615e1e2d174e561cb576209c23a60a77502f7ffb6e0"
+  },
+  "latest_user_request_review_verification": "revised_humboldt_review_verification.json",
+  "latest_workflow_rerun": {
+    "tests_run": 158,
+    "failures": 5,
+    "preexisting_importer_subcases": 4,
+    "obsolete_disabled_checkbox_assertion": 1,
+    "obsolete_assertion_updated_and_targeted_rerun_pass": true,
+    "all_20_map_tests_pass": true,
+    "generated_map_and_trend_ui_and_numeric_override_checks_pass": true,
+    "node_options": "--preserve-symlinks --preserve-symlinks-main",
+    "note": "New UI regression was added after full discovery loaded that module and verified in the 20-test map rerun. A non-fatal child-output decoding warning occurred during native ACL verification."
+  },
+  "staged_whitespace_scope": {
+    "all_staged_check_exit": 2,
+    "preservation_exception": "Retained source/scientific executed-code evidence contains original whitespace, including CRCRLF captured by prior diagnostic runs; scientific evidence bytes are preserved rather than normalized.",
+    "maintained_surface_scope": [
+      ".gitattributes",
+      ".graphifyignore",
+      "README.md",
+      "explainers",
+      "tools",
+      "interactive_map"
+    ],
+    "generated_report_eof_trimmed": true
+  }
+}

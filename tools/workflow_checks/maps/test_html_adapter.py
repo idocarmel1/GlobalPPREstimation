@@ -7,6 +7,19 @@ from tools.project_core.maps.build_html import atomic_text,linked_layout
 from tools.project_core.workbooks.workbooks import YEARS
 
 class HtmlAdapterTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('node'), 'Node required')
+    def test_user_group_choices_override_signed_defaults_and_preserve_annotations(self):
+        root=Path(__file__).resolve().parents[3]
+        with tempfile.TemporaryDirectory() as directory:
+            pages=[]
+            for name in ['index.html','trends.html']:
+                page=Path(directory)/name
+                atomic_text(page,linked_layout((root/'tools/project_core/maps/original_html_layout'/name).read_text('utf-8')))
+                pages.append(str(page))
+            for script in ['check_review_group_override.js','check_researcher_review.js']:
+                result=subprocess.run([shutil.which('node'),str(Path(__file__).with_name(script)),*pages],capture_output=True,text=True,encoding='utf-8')
+                self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+
     @unittest.skipUnless(shutil.which('node'),'Node required')
     def test_map_researcher_validation_filter(self):
         root=Path(__file__).resolve().parents[3]

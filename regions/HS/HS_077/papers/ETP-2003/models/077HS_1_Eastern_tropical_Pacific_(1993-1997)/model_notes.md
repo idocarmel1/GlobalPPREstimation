@@ -4,7 +4,7 @@
 
 ETP-2003__HS_077
 
-Regional application: `HS_077`. Canonical JSON SHA-256: `9cc8a41414194be6f40f4fafd9d6ed23c38a1c5812acd55e6e39824e783c2998`. The byte-preservation check compares this retained representation with the pre-relocation working state; it is not a fresh extraction or a new approval.
+Regional application: `HS_077`. Current canonical JSON SHA-256: `86cd1a54316e1cdd401e49355a2a75f65f462e15d21c287b55f9894ec54c6e84`. The pre-correction canonical bytes are retained as [original_model.json](original_model.json), SHA-256 `9cc8a41414194be6f40f4fafd9d6ed23c38a1c5812acd55e6e39824e783c2998`, by explicit researcher instruction on 2026-10-08. This original file is the former working representation, not a claim of a pristine independent publication extraction.
 
 ## Modeled period and area
 
@@ -14,11 +14,23 @@ Source PDF p.7 / printed p.137: 20 N–20 S, from 150 W to the approximate Ameri
 
 ## Departures from the publication
 
-Departures have not been independently re-extracted during this administrative task. No additional parameter correction is made. Selected canonical source retained; accepted historical transformed runtime constructed, GE and With Egestion direct OK, TE FAIL; provisional numerical display.
+On 2026-10-08 the researcher explicitly adopted five diet-entry relocations after the bounded source-placement tests. Exact values were preserved; only predator-column assignments changed. All nine material diet totals are now 1.000. Albacore remains 1.001, with no rounding adjustment. The corrected model retains the existing identity at the researcher's explicit request. Author intent remains unconfirmed.
+
+| Prey row / value | Former predator | Corrected predator | Publication locator |
+|---|---|---|---|
+| Small bigeye tuna (22), 0.022 | Large sailfish (11) | Large swordfish (12) | Table 3a, p. 158 / PDF 28, row 22 |
+| Mesopelagic fishes (32), 0.575 | Small marlins (23) | Small bigeye tuna (22) | Table 3a, p. 159 / PDF 29, row 32 |
+| Mesopelagic fishes (32), 0.121 | Small swordfish (25) | Small dorado (26) | Same row |
+| Mesopelagic fishes (32), 0.030 | Small dorado (26) | Small wahoo (27) | Same row |
+| Mesopelagic fishes (32), 0.070 | Small sharks (28) | Miscellaneous piscivores (29) | Same row |
+
+All non-diet fields, diet imports, unknown markers and unrelated diets are unchanged. Source blanks at new destinations become the retained entries; original donor entries are absent after relocation. Dorado's 0.030 is moved out simultaneously with receiving 0.121. See the [misplaced diet entries report](misplaced_diet_entries_report.md) and its exact before/after ledger.
+
+On 2026-10-08, the corrected canonical model and reviewed notebook constructor/default method settings were executed directly for GE, TE and With Egestion. All three current diagnostic grades are WARN; GE and With Egestion pass strict SPPR balance, TE fails that strict check. Current coefficients and regional arithmetic were refreshed and their exact source, engine, runtime and full returns retained in [review refresh evidence](model_validation/work/2026-10-08_151542_review_handoff/outputs/diagnostics/run_manifest.json). Production eligibility remains false; provisional numerical display is retained. Catch, NPP, taxon mappings and the independent classic coefficients are unchanged. Historical sensitivity bounds were invalidated. Ido Carmel signed MODEL VALIDATED on 08/10/2026; the seven named exclusions apply only to displayed PPR, and are registered in Project and the map. The signed Word retains researcher-written historical source/diagnostic descriptions; current scientific discrepancies are recorded here rather than rewriting the signed review.
 
 Existing departure summary retained: ETP 7
 
-The current validation document's Model extraction row records:
+The signed validation document still records the pre-correction input state quoted below; this passage is historical and superseded for the current canonical diet placements:
 
 > Nine material published diet-sum errors are retained in canonical inputs. The accepted historical runtime normalizes ten diets at 0.001 tolerance, including Albacore 1.001; infers missing BA; supplies missing-catch zeros and detritus/import defaults. Source BA and detritus routing remain undocumented. Censored whale EE and fleet catches are distinct from exact zero. No source values were restored or rebalanced.   Reconstruction report  |  Source and runtime review Retained departures and evidence limits:  model notes
 
@@ -26,7 +38,9 @@ Exact publication cells, values or decision provenance absent from retained evid
 
 ## Evidence links
 
-- [Canonical Ecopath representation](model.json)
+- [Corrected canonical Ecopath representation](model.json)
+- [Preserved pre-correction representation](original_model.json)
+- [Misplaced diet entries report](misplaced_diet_entries_report.md)
 - [provenance.json](inputs/provenance.json)
 - [validation.docx](model_validation/validation.docx)
 - [source_review.md](model_validation/evidence/source_review/source_review.md)

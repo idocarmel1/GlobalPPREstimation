@@ -14,12 +14,14 @@ GlobalPPREstimation/
 │   └── agents/                  Operating instructions for agents
 ├── tools/                       Commands, scientific code, skills and templates
 ├── common_reference_data/       Shared geography, taxonomy, EcoBase and NPP inputs
-└── research/                    Scientific studies with their methods and evidence
+└── research/                    Studies and supporting evidence; see research/README.md
+    ├── human/                   Researcher-owned experiments and method comparisons
+    └── agents/                  Supporting audits, baselines, reviews and integration
 ```
 
 ## Inside a region
 
-For example, the regional workbook for the Sulu-Celebes Sea is `regions/LME/LME_028/LME_028.xlsx`. Its folder also contains the papers, candidate models and work relevant to that region.
+For example, the regional workbook for the Guinea Current is `regions/LME/LME_028/LME_028.xlsx`. Its folder also contains the papers, candidate models and work relevant to that region.
 
 ```text
 regions/LME/LME_028/
@@ -79,3 +81,5 @@ A saved snapshot includes all workbook sheets, formatting and links. It is usefu
 `Project.xlsx` and regional workbooks contain editable inputs alongside generated summaries. The [workbook reference](../README.md#workbook-reference) explains which fields to edit. The map and shortcut reflect saved state; they do not select or approve a model themselves. Double-click `interactive_map/Open map.cmd` to open the locally served map. Shortcuts are generated locally and may need regeneration after cloning or moving the project.
 
 Preparation runs use `inputs`, `outputs`, `code` and `qa` subfolders. Source data, current results and review evidence stay with their paper/model; temporary work is not another model archive. Agent placement and preservation rules are in [agents/project_contract.md](agents/project_contract.md).
+
+Research is organized by purpose and ownership, not by who typed the files. [The research index](../research/README.md) lists every retained study. Human research may use agent assistance; placement does not imply scientific approval. Move studies as complete packages and retain historical execution records.

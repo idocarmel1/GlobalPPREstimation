@@ -144,7 +144,7 @@ class ResearcherReviewTests(unittest.TestCase):
         for name in ['index.html','trends.html']:
             path=ROOT/'tools/project_core/maps/original_html_layout'/name; before=path.read_bytes()
             page=linked_layout(before.decode('utf-8'))
-            self.assertIn('catch_indices',page);self.assertIn('check.disabled=',page)
+            self.assertIn('catch_indices',page)
             self.assertIn('Excluded from displayed PPR by researcher',page)
             self.assertIn('researcher-validated-name',page)
             self.assertEqual(path.read_bytes(),before)
@@ -198,7 +198,7 @@ class ResearcherReviewTests(unittest.TestCase):
             write_book(project,changed)
             registered_bytes=project.read_bytes()
             region=root/'regions/LME/LME_001/LME_001.xlsx'
-            write_book(region,{'Overview':{'Settings':(['field','value'],[['selected_model_id','m']])},
+            write_book(region,{'Overview':{'Settings':(['field','value'],[['selected_model_id','m'],['calculation_input_sha256','m-inputs']])},
                               'Selected model groups':{'Groups':(['seq','group_name'],[[1,'Excluded']])}})
             unit={'models':[{'id':'m','values':[1.23456789012345,None,-.000001]}],'catch':[100.00000001]}
             payloads={'DB':{'network':{'units':{'LME_001':unit}}},'SERIES_DB':{'units':{'LME_001':unit}}}
@@ -211,7 +211,7 @@ class ResearcherReviewTests(unittest.TestCase):
             # The registration replay is isolated here; actual Word extraction,
             # source identities and bounded registration are covered above.
             def registration(path,*args):Path(path).write_bytes(registered_bytes)
-            with patch('tools.project_core.maps.build_html.approved_review',return_value=review),patch('tools.project_core.maps.build_html.register_review',side_effect=registration):
+            with patch('tools.project_core.maps.build_html.approved_review',return_value=review),patch('tools.project_core.maps.build_html._register_review',side_effect=registration):
                 refresh_reviews(project,prior,['LME_001'],root)
             for name,variable in [('index.html','DB'),('trends.html','SERIES_DB')]:
                 page=(root/name).read_text(encoding='utf-8');start=page.index('const '+variable+'=')+len('const '+variable+'=')
@@ -225,7 +225,7 @@ class ResearcherReviewTests(unittest.TestCase):
             saved=(root/'index.html').read_bytes()
             changed['Definitions & build']['Scientific'][1][0][0]=2
             write_book(project,changed)
-            with patch('tools.project_core.maps.build_html.approved_review',return_value=review),patch('tools.project_core.maps.build_html.register_review',side_effect=registration):
+            with patch('tools.project_core.maps.build_html.approved_review',return_value=review),patch('tools.project_core.maps.build_html._register_review',side_effect=registration):
                 with self.assertRaisesRegex(ValueError,'beyond the targeted'):
                     refresh_reviews(project,prior,['LME_001'],root)
             self.assertEqual((root/'index.html').read_bytes(),saved)

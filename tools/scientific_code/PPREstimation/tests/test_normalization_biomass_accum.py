@@ -111,7 +111,7 @@ def test_unknown_donor_consumption_cannot_be_treated_as_zero():
 
 def test_real_model_balance_improves_with_exact_sppr_invariance(monkeypatch):
     repo = ENGINE.parents[2]
-    path = repo / "regions/LME_027/models/27_118_Northwest_Africa_(1987)/model.json"
+    path = repo / "regions/LME/LME_027/papers/CAN-2009/models/27_118_Northwest_Africa_(1987)/model.json"
     model = ModelData(str(path))
     before = deepcopy(model.__dict__)
     # Independently run the unchanged normalization/completion pipeline. This
@@ -152,7 +152,7 @@ def test_real_model_balance_improves_with_exact_sppr_invariance(monkeypatch):
 @pytest.mark.parametrize('enabled', [False, True])
 def test_all_loaders_control_new_correction_without_mutating_input(loader, enabled):
     repo = ENGINE.parents[2]
-    path = repo / 'regions/LME_027/models/27_118_Northwest_Africa_(1987)/model.json'
+    path = repo / 'regions/LME/LME_027/papers/CAN-2009/models/27_118_Northwest_Africa_(1987)/model.json'
     model = ModelData(str(path))
     original_groups = model.groups_data.copy(deep=True)
     original_diet = model.DC.copy(deep=True)

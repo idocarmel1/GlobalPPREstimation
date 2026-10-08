@@ -5,7 +5,7 @@ from pathlib import Path
 from tools.project_core.workbooks.workbooks import sha,records
 from tools.project_core.maps.original_atlas_data import datasets,add_group_efficiencies
 from tools.project_core.maps.provisional_display import provisional_layout
-from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,register_review,table_rows
+from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,_register_review,table_rows,unavailable_review_model,calculation_review_book,attach_payload_review
 from tools.project_core.maps.map_cumulative_ppr import cumulative_ppr_layout
 
 DISPLAY_FIELDS=['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']
@@ -64,7 +64,13 @@ def relayout(workbook,directory=None,group_efficiencies=False):
     for path,page in outputs:atomic_text(path,page)
     print('Map and trends layouts refreshed; '+('stored group GE/EE added; ' if group_efficiencies else 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
 
-def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None):
+def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
+    """Publish exact model reviews under the shared writer lock; keep map defaults."""
+    from tools.project_core.registry.writes import central_lock
+    with central_lock(workbook.resolve().parent):
+        return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids)
+
+def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
     """Refresh only registered review metadata after a bounded central registration.
 
     The pre-registration workbook is required evidence that all other central
@@ -76,7 +82,7 @@ def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None):
     # would unnecessarily traverse the complete scientific results archive.
     with zipfile.ZipFile(workbook) as archive:
         newrows={(r['unit_id'],r['model_id']):r for _,r in table_rows(archive,'Models & coverage','Models')[3]}
-    reviews={};registrations=[]
+    reviews={};registrations=[];review_books={}
     for unit_id in unit_ids:
         # The approval gate needs only source identity settings and group IDs;
         # avoid traversing the regional workbook's complete result tables.
@@ -89,11 +95,13 @@ def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None):
                 headers=list(rows[0][1]) if rows else (headers or [])
                 book.setdefault(sheet,{})[table]=(headers,[[r.get(h) for h in headers] for _,r in rows])
         from tools.project_core.workbooks.workbooks import overview
-        model_id=overview(book)['selected_model_id'];key=(unit_id,model_id)
+        model_id=(model_ids or {}).get(unit_id) or overview(book).get('selected_model_id');key=(unit_id,model_id)
         if key not in newrows:raise ValueError('Review refresh cannot add a model')
         review=approved_review(root,newrows[key],book)
         if not review:raise ValueError('Review refresh requires a registered researcher decision: '+unit_id)
         reviews[key]=review
+        review_books[key]=book
+        if review.get('review_scope') != 'model_source':book=calculation_review_book(root,newrows[key],book)
         groups=records(book,'Selected model groups','Groups')
         excluded=review['excluded_group_ids']
         seq=[int(float(r['seq'])) for r in groups if r['group_name'] in excluded]
@@ -109,7 +117,9 @@ def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None):
     try:
         shutil.copyfile(previous_workbook,expected)
         for report,unit_id,model_id,seq in registrations:
-            register_review(Path(expected),report,unit_id,model_id,seq)
+            # Replay writes only this isolated temporary copy; the outer lock
+            # already serializes the real Project and HTML publication.
+            _register_review(Path(expected),report,unit_id,model_id,seq)
         with zipfile.ZipFile(expected) as reference,zipfile.ZipFile(workbook) as current:
             if reference.namelist()!=current.namelist() or any(reference.read(name)!=current.read(name) for name in reference.namelist()):
                 raise ValueError('Central data changed beyond the targeted researcher review metadata; run a full build')
@@ -128,11 +138,16 @@ def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None):
         for (unit_id,model_id),review in reviews.items():
             models=[m for m in units[unit_id]['models'] if m['id']==model_id]
             originals=[m for m in original_units[unit_id]['models'] if m['id']==model_id]
+            if not models:
+                candidate=unavailable_review_model(newrows[(unit_id,model_id)],review)
+                units[unit_id]['models'].append(candidate)
+                original_units[unit_id]['models'].append(copy.deepcopy(candidate))
+                models=[candidate];originals=[original_units[unit_id]['models'][-1]]
             if len(models)!=1:raise ValueError('Embedded model identity is ambiguous: '+unit_id)
-            models[0]['researcher_review']=copy.deepcopy(review)
-            models[0]['display_ppr_excluded_group_ids']=review['excluded_group_ids'][:]
-            for field in ['researcher_review','display_ppr_excluded_group_ids']:
-                originals[0][field]=copy.deepcopy(models[0][field])
+            attach_payload_review(root,newrows[(unit_id,model_id)],review_books[(unit_id,model_id)],models[0],review)
+            for field in ['researcher_review','display_ppr_excluded_group_ids','recorded_review_pending']:
+                originals[0].pop(field,None)
+                if field in models[0]:originals[0][field]=copy.deepcopy(models[0][field])
         if payload!=original:raise ValueError('Review refresh changed unrelated embedded data')
         value=json.dumps(payload,ensure_ascii=False,separators=(',',':'),allow_nan=False).replace('</',r'<\/')
         page=linked_layout((layouts/name).read_text(encoding='utf-8')).replace('__PPR_DATA__',value)

@@ -49,7 +49,7 @@ model, NPP policy, coverage and sensitivity settings. Verify their agreement.
 
 Read [NPPExtraction/ANNUAL.md](../../../../../scientific_code/NPPExtraction/ANNUAL.md) for current engine setup. Current shared originals are common_reference_data/npp/raw/<product>/<year>/ with source_manifest.json; use python tools/workflow_checks/structure/verify_npp_sources.py for actual source bytes and python tools/cli/npp.py plan before an authorized run. Extraction does not adopt values into workbooks. New derived output/cache stays local until its necessary provenance is promoted to versioned evidence.
 
-The retained September 2026 expansion described 366 identities, preserved 11,310 original rows, added 4,398 supported records, reused 14 cells and produced 25,211 rows with 8,050 supported rows plus two historical 2019 cells. These are frozen release facts, not current reorganization verification targets. Its expansion writer and execution snapshots are historical study evidence under research/npp_extraction_2026_09/. Do not execute historical paths against live regional workbooks or recreate old output/data containers.
+The retained September 2026 expansion described 366 identities, preserved 11,310 original rows, added 4,398 supported records, reused 14 cells and produced 25,211 rows with 8,050 supported rows plus two historical 2019 cells. These are frozen release facts, not current reorganization verification targets. Its expansion writer and execution snapshots are historical study evidence under research/agents/npp_extraction_2026_09/. Do not execute historical paths against live regional workbooks or recreate old output/data containers.
 
 Preserve source-specific distinctions in any future reproduction: canonical npp_*_tC_yr fields were regional totals; the historical 2019 reference used scaled_* rather than unscaled npp_* totals. Never scale twice. Validate exact source/configuration/geometry/code provenance for the requested run; use isolated work and current engine instructions, not the obsolete tools/npp_data.py or expansion publication commands.
 
@@ -128,7 +128,7 @@ Maintain current paper source manifests, native input provenance and source role
 ## Transfer discard-routing responses
 
 The original study integration used a separate discard reader. Its retained versioned response input is
-`research/discard_sensitivity_2026_09_10/results/discard_responses.v1.json`.
+`research/human/discard_sensitivity_2026_09_10/results/discard_responses.v1.json`.
 Match model, method, scope, source JSON and upstream SPPR-workbook SHA-256, group
 identity and weighted baseline coefficients. Preserve the existing production
 failure and plausibility gates even if a private scenario has finite numbers.

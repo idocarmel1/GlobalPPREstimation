@@ -41,6 +41,8 @@ Real-group TL is initialized as missing by the JSON parser, then calculated from
 
 `apply_lim()` optimizes **per group**, only missing `q`, `p`, respiration, egestion, `M0` and accumulation. It keeps known flows fixed, conditionally imposes the two balance equations, and conditionally bounds EE to 0–0.95 and GS to 0.10–0.35. Accumulation can be negative. Predation and diets are fixed during optimization. Afterwards, predation is recomputed from final consumer consumption, followed by routed detritus inflows, exports and accumulation, and then efficiency ratios and PB/QB. The group table and runtime vectors therefore reflect the post-LIM flows. This refresh can reveal living-group production residuals; it does not rebalance known biological flows or perform a coupled reconstruction of the food web.
 
+During LIM finalization, EE values with `abs(EE) < 1e-10` become exactly zero by setting runtime `M0 = P` before recomputing detritus flows. Values outside that cutoff and missing values remain unchanged by this precision correction; the input JSON is preserved.
+
 On optimizer failure, the implementation prints a message and leaves unsolved cells missing; it does not write the initial guesses back. Runtime construction subsequently fills most missing flow vectors with zero and missing EE/GE with one. These fallback values require explicit review.
 
 Construction checks balance and creates a separate `balanced_model` copy. Its default adjustment absorbs residuals into growth and net migration while preserving production. The exporter returns the original completed calculator; SPPR uses that object's state unless a caller explicitly substitutes the copy.

@@ -1,0 +1,84 @@
+{
+  "review_tests": {
+    "command": "python -X utf8 -m unittest tools.workflow_checks.validation.test_researcher_disqualification tools.workflow_checks.validation.test_researcher_review tools.workflow_checks.validation.test_researcher_review_absent_exclusion tools.workflow_checks.validation.test_researcher_review_lme032 tools.workflow_checks.validation.test_researcher_review_model_boundary -v",
+    "tests": 24,
+    "exit_code": 0,
+    "result": "OK"
+  },
+  "map_tests": {
+    "command": "python -X utf8 -m unittest discover -s tools/workflow_checks/maps -p test_*.py -v",
+    "node_options": "--preserve-symlinks --preserve-symlinks-main",
+    "tests": 47,
+    "exit_code": 0,
+    "result": "OK"
+  },
+  "generated_page_switch_checks": {
+    "scripts": [
+      "tools/workflow_checks/maps/check_map_model_switch.js",
+      "tools/workflow_checks/maps/check_map_simple_model_switch.js"
+    ],
+    "page": "interactive_map/index.html",
+    "result": "Both passed"
+  },
+  "live_browser": {
+    "url": "http://127.0.0.1:8877/interactive_map/index.html",
+    "region": "LME_027",
+    "default_displayed_model": "27_118_Northwest_Africa_(1987)",
+    "candidate_selectable": "27_Villanueva2004_SineSaloum",
+    "candidate_result": "Unavailable",
+    "candidate_verdict": "MODEL DISQUALIFIED",
+    "candidate_reason": "Reason – unrepresentative geographic fit => low taxa mapping confidence",
+    "candidate_researcher": "Ido Carmel",
+    "candidate_review_date": "2026-10-08",
+    "candidate_selector_color": "rgb(180, 35, 24)",
+    "switch_back_restored_default_result": "14,020,000 t C · 2019 landings · new_GE",
+    "notes": "The display of retained default values does not confer approval or numerical readiness. Existing restrictions and default rejection remain unchanged."
+  },
+  "broader_validation_observation": {
+    "command": "python -X utf8 -m unittest discover -s tools/workflow_checks/validation -p test_*.py -v",
+    "unrelated_failure": "test_numeric_missing_sentinel_imports_stay_unknown: -9999.0 and -9999.000 are not classified as unknown by the existing extraction scripts, in both repository and installed skill copies.",
+    "scope": "Extraction script behavior was not modified by this administrative review/map change."
+  },
+  "diff_check": {
+    "git_core_whitespace": "blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+    "result": "Passed for modified implementation, focused tests and handoff guide. Existing CRLF endings were preserved."
+  },
+  "final_review": {
+    "checked_at_utc": "2026-10-08T10:11:41.279560+00:00",
+    "findings_resolved": [
+      "Positive signoff cannot approve a different retained calculation workbook",
+      "Verified active review clears stale pending warnings"
+    ],
+    "review_tests_rerun": {
+      "tests": 24,
+      "exit_code": 0,
+      "result": "OK"
+    },
+    "map_tests_rerun": {
+      "tests": 47,
+      "exit_code": 0,
+      "result": "OK"
+    },
+    "reviewer_result": "No remaining Critical or Important findings",
+    "project_sha256": "69b7791a9c06bebf1fc77227d369bcfc5958308a68a3f1216153d2c00ede969b",
+    "protected_artifact_sha256": {
+      "regions/LME/LME_027/papers/LME027-Villanueva-2004-Thesis/models/27_Villanueva2004_SineSaloum/model.json": "4ac551c7a5b6c601b401d92912ab5595c4776a076e172302a092232928cae90b",
+      "regions/LME/LME_027/papers/LME027-Villanueva-2004-Thesis/models/27_Villanueva2004_SineSaloum/model_validation/validation.docx": "e14af55d37b47b66693dd51668bc0285cf61d5f569ac07ed7d49815afdf19042",
+      "regions/LME/LME_027/LME_027.xlsx": "2935d86a6e0ae5d4ffb7377ee90b6738ef618b4539516d840133be9af9cf0acf"
+    },
+    "published_pages": {
+      "index.html": {
+        "default_model": "27_118_Northwest_Africa_(1987)",
+        "selectable_candidate": "27_Villanueva2004_SineSaloum",
+        "candidate_status": "Disqualified by researcher",
+        "candidate_scopes": {}
+      },
+      "trends.html": {
+        "default_model": "27_118_Northwest_Africa_(1987)",
+        "selectable_candidate": "27_Villanueva2004_SineSaloum",
+        "candidate_status": "Disqualified by researcher",
+        "candidate_scopes": {}
+      }
+    }
+  }
+}

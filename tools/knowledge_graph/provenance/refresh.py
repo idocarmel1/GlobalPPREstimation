@@ -58,7 +58,8 @@ def prepare(final=False):
  # Retain previously curated current scientific review evidence; no fixture/work copies.
  docs.update(item['path']for item in existing.values()if Path(item['path']).suffix.lower()in DOC and '/model_validation/'in item['path'])
  docs.update(p.relative_to(ROOT).as_posix()for p in files(ROOT/'common_reference_data',DOC)if p.name=='README.md')
- for study in (ROOT/'research').glob('*'):
+ docs.add('research/README.md')
+ for study in [p for owner in ['human','agents'] for p in (ROOT/'research'/owner).glob('*') if p.is_dir()]:
   if(study/'README.md').is_file():docs.add((study/'README.md').relative_to(ROOT).as_posix())
  # Existing substantive study findings/methods remain historical, omitting old implementation/test detail.
  docs.update(item['path']for item in existing.values()if item['path'].startswith('research/')and Path(item['path']).suffix.lower()in DOC and any(word in Path(item['path']).stem.lower()for word in ['method','finding','numerical','source_evidence']))
@@ -88,7 +89,7 @@ def prepare(final=False):
  for oldpath,v in accepted.items():
   for node in nodes_by[oldpath]:
    n=copy.deepcopy(node);n['source_file']=v['path'];n.pop('community',None);n.pop('norm_label',None)
-   n['historical']=v['path'].startswith('research/');reused_nodes.append(n);used_ids.add(n['id'])
+   n['historical']=v['path'].startswith('research/') and v['path']!='research/README.md';reused_nodes.append(n);used_ids.add(n['id'])
  reused_edges=[]
  # Topology links aggregate independently attributed relationships. Reuse
  # every original evidence record, rather than dropping them into one link.

@@ -1,0 +1,1397 @@
+{
+  "scope": "Unadopted correction proposals; no SPPR calculation or source edits.",
+  "settings": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001
+  },
+  "protected_input_hashes": {
+    "regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\model.json": "c9ddb57d874926cd51a3dff19956ca57b197a1ab973cd96356c9bcc185a04bda",
+    "regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\model_notes.md": "f0510445c16ae36b90cbd1eed85211a04732bef403c6413f07799c0e3c9338c2",
+    "regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\model_validation\\validation.docx": "e4aa75bcbbc7310e6de0206345b4725cbd524b0b5f18b78488aaccb31056ac9e",
+    "regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\model_validation\\human_validation_tests.ipynb": "3a4cfea4a0dcf8b65fc052905348bb9bbb2b38cedc32c69ef2bb5f2ca5b078e0",
+    "regions\\LME\\LME_013\\papers\\HUM-2018\\sources\\Supplementary material revised and final.xls": "fd28a9367e20bfc9ed3d136460e22c476155ae5bf61ce75b4b17ebf8a9b7aef2",
+    "regions\\LME\\LME_013\\papers\\HUM-2018\\sources\\1-s2.0-S0079661117303312-main.pdf": "88f2592095d9a29222edd543dec7d45e65d9dff870460c037508a8ad60155aa0"
+  },
+  "protected_inputs_unchanged": true,
+  "matrix_diet_reconstruction": [
+    {
+      "source_cell": "F14",
+      "producer_code": 4,
+      "prey_group_seq": 1,
+      "Acp": 0.0,
+      "Q_prey": 0.0,
+      "Q_jellyfish": 474.00000762939453,
+      "diet_from_Acp_times_Qprey_over_Qjellyfish": null,
+      "interpretation": "Zero direct link"
+    },
+    {
+      "source_cell": "I14",
+      "producer_code": 7,
+      "prey_group_seq": 4,
+      "Acp": 0.107074162237438,
+      "Q_prey": 3010.2500915527344,
+      "Q_jellyfish": 474.00000762939453,
+      "diet_from_Acp_times_Qprey_over_Qjellyfish": 0.6800000031438644,
+      "interpretation": "Singleton living consumer-prey link including physiological partitioning"
+    },
+    {
+      "source_cell": "J14",
+      "producer_code": 8,
+      "prey_group_seq": 5,
+      "Acp": 0.0462539820266713,
+      "Q_prey": 1742.1203678705497,
+      "Q_jellyfish": 474.00000762939453,
+      "diet_from_Acp_times_Qprey_over_Qjellyfish": 0.17000000609026433,
+      "interpretation": "Singleton living consumer-prey link including physiological partitioning"
+    },
+    {
+      "source_cell": "K14",
+      "producer_code": 9,
+      "prey_group_seq": 6,
+      "Acp": 0.0,
+      "Q_prey": 0.026479529758342224,
+      "Q_jellyfish": 474.00000762939453,
+      "diet_from_Acp_times_Qprey_over_Qjellyfish": 0.0,
+      "interpretation": "Zero direct link"
+    }
+  ],
+  "source_sardine_discard_to_landings_ratio": 0.030900000000000004,
+  "scenarios": [
+    {
+      "scenario": "original",
+      "runtime_BA_compensation": true,
+      "balanced": false,
+      "failing_group_seqs": [
+        6,
+        5,
+        4,
+        1
+      ],
+      "sardine_landings": 5.6513425,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 5.82596898325,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.001142779244673875,
+      "warnings": [
+        "4 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952, 7 (Chrysaora plocamia)=1.0450.",
+        "Diet normalization compensated through runtime biomass accumulation for 8 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8469663957866818,
+          "utilization_residual": -3.061724886943324
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "reestimated_EE": 0.8469663957866818,
+          "unutilized_flow": 12.539441007952618
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6855.830743797626,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8886751277632606,
+          "unutilized_flow": 763.2244816299808
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "original",
+      "runtime_BA_compensation": false,
+      "balanced": false,
+      "failing_group_seqs": [
+        6,
+        5,
+        4,
+        1
+      ],
+      "sardine_landings": 5.6513425,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 5.82596898325,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "4 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952, 7 (Chrysaora plocamia)=1.0450."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8469663957866818,
+          "utilization_residual": -3.061724886943324
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "reestimated_EE": 0.8469663957866818,
+          "unutilized_flow": 12.539441007952618
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6855.830743797626,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8886751277632606,
+          "unutilized_flow": 763.2244816299808
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "article_landings_only_fixed_discards",
+      "runtime_BA_compensation": true,
+      "balanced": false,
+      "failing_group_seqs": [
+        9,
+        6,
+        5,
+        4,
+        1
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 1.5746264832499999,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.001142779244673875,
+      "warnings": [
+        "4 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952, 7 (Chrysaora plocamia)=1.0450.",
+        "Diet normalization compensated through runtime biomass accumulation for 8 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8469663957866818,
+          "utilization_residual": -3.061724886943324
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "reestimated_EE": 0.8469663957866818,
+          "unutilized_flow": 12.539441007952618
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6855.830743797626,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8886751277632606,
+          "unutilized_flow": 763.2244816299808
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "article_landings_only_fixed_discards",
+      "runtime_BA_compensation": false,
+      "balanced": false,
+      "failing_group_seqs": [
+        9,
+        6,
+        5,
+        4,
+        1
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 1.5746264832499999,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "4 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952, 7 (Chrysaora plocamia)=1.0450."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8469663957866818,
+          "utilization_residual": -3.061724886943324
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "reestimated_EE": 0.8469663957866818,
+          "unutilized_flow": 12.539441007952618
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6855.830743797626,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8886751277632606,
+          "unutilized_flow": 763.2244816299808
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "article_landings_only_scaled_discards",
+      "runtime_BA_compensation": true,
+      "balanced": false,
+      "failing_group_seqs": [
+        9,
+        6,
+        5,
+        4,
+        1
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.04326,
+      "sardine_total_removals": 1.44326,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.001142779244673875,
+      "warnings": [
+        "4 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952, 7 (Chrysaora plocamia)=1.0450.",
+        "Diet normalization compensated through runtime biomass accumulation for 8 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8469663957866818,
+          "utilization_residual": -3.061724886943324
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.637652427432,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890892195371577,
+          "utilization_residual": -0.00903511876367702
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "reestimated_EE": 0.8469663957866818,
+          "unutilized_flow": 12.539441007952618
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.2889032593224998
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.388633686275
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6855.699377314376,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8886921562412993,
+          "unutilized_flow": 763.0931151467303
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "article_landings_only_scaled_discards",
+      "runtime_BA_compensation": false,
+      "balanced": false,
+      "failing_group_seqs": [
+        9,
+        6,
+        5,
+        4,
+        1
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.04326,
+      "sardine_total_removals": 1.44326,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "4 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952, 7 (Chrysaora plocamia)=1.0450."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8469663957866818,
+          "utilization_residual": -3.061724886943324
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.637652427432,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890892195371577,
+          "utilization_residual": -0.00903511876367702
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 69.39969303004274,
+          "reestimated_EE": 0.8469663957866818,
+          "unutilized_flow": 12.539441007952618
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.2889032593224998
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.388633686275
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6855.699377314376,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8886921562412993,
+          "unutilized_flow": 763.0931151467303
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "production_matrix_diet_only",
+      "runtime_BA_compensation": true,
+      "balanced": true,
+      "failing_group_seqs": [],
+      "sardine_landings": 5.6513425,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 5.82596898325,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.07498141144242254,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952.",
+        "Diet normalization compensated through runtime biomass accumulation for 9 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.769021260307,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8890721755345463,
+          "unutilized_flow": 760.1627590926619
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "production_matrix_diet_only",
+      "runtime_BA_compensation": false,
+      "balanced": true,
+      "failing_group_seqs": [],
+      "sardine_landings": 5.6513425,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 5.82596898325,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.769021260307,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8890721755345463,
+          "unutilized_flow": 760.1627590926619
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_fixed_discards",
+      "runtime_BA_compensation": true,
+      "balanced": false,
+      "failing_group_seqs": [
+        9
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 1.5746264832499999,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.07498141144242254,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952.",
+        "Diet normalization compensated through runtime biomass accumulation for 9 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.769021260307,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8890721755345463,
+          "unutilized_flow": 760.1627590926619
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_fixed_discards",
+      "runtime_BA_compensation": false,
+      "balanced": false,
+      "failing_group_seqs": [
+        9
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 1.5746264832499999,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.7690189106825,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890721758393846,
+          "utilization_residual": -0.12583181603531557
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.769021260307,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8890721755345463,
+          "unutilized_flow": 760.1627590926619
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_scaled_discards",
+      "runtime_BA_compensation": true,
+      "balanced": false,
+      "failing_group_seqs": [
+        9
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.04326,
+      "sardine_total_removals": 1.44326,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.07498141144242254,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952.",
+        "Diet normalization compensated through runtime biomass accumulation for 9 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.637652427432,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890892195371577,
+          "utilization_residual": -0.00903511876367702
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.2889032593224998
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.388633686275
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.637654777057,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8890892192323077,
+          "unutilized_flow": 760.0313926094113
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_scaled_discards",
+      "runtime_BA_compensation": false,
+      "balanced": false,
+      "failing_group_seqs": [
+        9
+      ],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.04326,
+      "sardine_total_removals": 1.44326,
+      "sardine_EE": 0.9700034856796265,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.637652427432,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8890892195371577,
+          "utilization_residual": -0.00903511876367702
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.2889032593224998
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.388633686275
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6852.637654777057,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8890892192323077,
+          "unutilized_flow": 760.0313926094113
+        }
+      ],
+      "sardine_M0": 0.45094358787714506,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_fixed_discards_reestimate_EE",
+      "runtime_BA_compensation": true,
+      "balanced": true,
+      "failing_group_seqs": [],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 1.5746264832499999,
+      "sardine_EE": 0.6872065402096068,
+      "living_max_abs_BA": 0.07498141144242254,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952.",
+        "Diet normalization compensated through runtime biomass accumulation for 9 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.020361845696,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.88852095234667,
+          "utilization_residual": -3.9056605934547406
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.02036419532,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8885209520422097,
+          "unutilized_flow": 764.4141020276747
+        }
+      ],
+      "sardine_M0": 4.702286522890534,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_fixed_discards_reestimate_EE",
+      "runtime_BA_compensation": false,
+      "balanced": true,
+      "failing_group_seqs": [],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.17462648325000002,
+      "sardine_total_removals": 1.5746264832499999,
+      "sardine_EE": 0.6872065402096068,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.020361845696,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.88852095234667,
+          "utilization_residual": -3.9056605934547406
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.4202697425725,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.4202697425725
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.401770334601,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.401770334601
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.02036419532,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8885209520422097,
+          "unutilized_flow": 764.4141020276747
+        }
+      ],
+      "sardine_M0": 4.702286522890534,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_scaled_discards_reestimate_EE",
+      "runtime_BA_compensation": true,
+      "balanced": true,
+      "failing_group_seqs": [],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.04326,
+      "sardine_total_removals": 1.44326,
+      "sardine_EE": 0.6784681154887318,
+      "living_max_abs_BA": 0.07498141144242254,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952.",
+        "Diet normalization compensated through runtime biomass accumulation for 9 Regular/PP group(s); computational closure, not observed biomass change. EE, M0 and detritus flows retained; see diet_normalization_balance_ledger."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.020361845695,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8885209523466701,
+          "utilization_residual": -3.905660593453831
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.2889032593224998
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.388633686275
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.02036419532,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8885209520422097,
+          "unutilized_flow": 764.4141020276747
+        }
+      ],
+      "sardine_M0": 4.833653006140535,
+      "direct_Q_identity_max_residual": 0.0
+    },
+    {
+      "scenario": "matrix_diet_article_landings_scaled_discards_reestimate_EE",
+      "runtime_BA_compensation": false,
+      "balanced": true,
+      "failing_group_seqs": [],
+      "sardine_landings": 1.4,
+      "sardine_discards": 0.04326,
+      "sardine_total_removals": 1.44326,
+      "sardine_EE": 0.6784681154887318,
+      "living_max_abs_BA": 0.0,
+      "warnings": [
+        "3 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 34 (Green sea turtle)=1.0020, 20 (Large hake )=1.0090, 16 (Chub mackerel)=0.9952."
+      ],
+      "native_pool_budget_with_source_EE": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "source_EE": 0.8843322396278381,
+          "EE_implied_by_inflow_and_predation": 0.8843322109525973,
+          "utilization_residual": -2.3496244097032104e-06
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "source_EE": 0.0,
+          "EE_implied_by_inflow_and_predation": 0.0,
+          "utilization_residual": 0.0
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.020361845695,
+          "predation": 6092.606262167646,
+          "source_EE": 0.8890905380249023,
+          "EE_implied_by_inflow_and_predation": 0.8885209523466701,
+          "utilization_residual": -3.905660593453831
+        }
+      ],
+      "native_pool_budget_with_reestimated_EE_zero_BA": [
+        {
+          "group_seq": 36,
+          "inflow": 81.93913403799536,
+          "predation": 72.46141556736166,
+          "reestimated_EE": 0.8843322109525973,
+          "unutilized_flow": 9.477718470633704
+        },
+        {
+          "group_seq": 37,
+          "inflow": 1.2889032593224998,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 1.2889032593224998
+        },
+        {
+          "group_seq": 38,
+          "inflow": 5090.388633686275,
+          "predation": 0.0,
+          "reestimated_EE": 0.0,
+          "unutilized_flow": 5090.388633686275
+        },
+        {
+          "group_seq": 39,
+          "inflow": 6857.02036419532,
+          "predation": 6092.606262167646,
+          "reestimated_EE": 0.8885209520422097,
+          "unutilized_flow": 764.4141020276747
+        }
+      ],
+      "sardine_M0": 4.833653006140535,
+      "direct_Q_identity_max_residual": 0.0
+    }
+  ]
+}

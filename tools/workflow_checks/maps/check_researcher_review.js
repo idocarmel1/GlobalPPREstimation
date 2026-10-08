@@ -18,9 +18,9 @@ const unit={years:[2019],taxa:['split','bird'],models:[model],simple_sppr:[18,27
   unidentified:{taxa:[{name:'bird',simple_sppr:27}]}};
 const state={unit_id:'U',mode:'ppr',scope:'all',year:2019,method:'new_GE',catch_basis:'landings',unidentified:'method'};
 assert.equal(groups.selection(model).count,1,'Mandatory exclusions apply with no saved browser selection');
-assert.equal(groups.selection(model,['Fish','Seabirds']).count,1,'URL or Select all cannot restore excluded group');
+assert.equal(groups.selection(model,['Fish','Seabirds']).count,process.argv[2]?2:1,'Current pages honor explicit inclusion of researcher-excluded groups');
 const before=metrics.evaluate(unit,0,{...state,group_selections:{'U::m':['Fish','Seabirds']}});
-assert.equal(before.value,3,'Only retained weighted PPR is displayed, carbon once');
+assert.equal(before.value,process.argv[2]?33:3,'Explicit full selection restores original weighted PPR, carbon once');
 assert.equal(before.total_catch,6,'Researcher exclusion leaves catch denominator unchanged');
 assert.equal(before.catch,6,'Researcher exclusion leaves covered catch unchanged');
 assert.equal(before.coverage,1,'Researcher exclusion leaves original catch coverage unchanged');
@@ -31,7 +31,14 @@ assert.equal(metrics.evaluate(unit,0,{...state,mode:'b',te:'GE'}).value,.004,'Di
 assert.equal(metrics.evaluate(unit,0,{...state,mode:'rho_living',te:'GE'}).value,.32,'Diagnostic rho is unchanged');
 assert.equal(metrics.evaluate(unit,0,{...state,mode:'npp',npp_data:{years:[2019],values:[100]}}).value,100,'NPP is unchanged');
 assert.equal(metrics.evaluate(unit,0,{...state,mode:'npp_ratio',npp_data:{years:[2019],values:[100]}}).value,3,'PPR/NPP uses filtered PPR and unchanged NPP');
-assert.equal(metrics.evaluate(unit,0,{...state,group_selections:{'U::m':['Fish']}}).total_catch,6,'Stored allowed-only IDs cannot turn researcher exclusions into catch exclusions');
+assert.equal(metrics.evaluate(unit,0,{...state,group_selections:{'U::m':['Fish']}}).total_catch,process.argv[2]?3:6,'An explicit user subset retains its original catch allocation shares');
+if(process.argv[2]){
+  assert.equal(groups.evaluate(unit,model,state,['Seabirds']).value,30,'User may include only a researcher-excluded group');
+  assert.equal(groups.evaluate(unit,model,state,[]).value,0,'Clear all excludes every group');
+  assert.equal(groups.evaluate(unit,model,state).total_catch,6,'Default review policy preserves the catch denominator');
+  assert.equal(groups.rows(unit,model,{...state,method:'new_GE'})[1].ppr,30,'Group rows describe the group before selection');
+  assert.deepEqual(model.display_ppr_excluded_group_ids,['Seabirds'],'User overrides preserve signed exclusion evidence');
+}
 const plain=structuredClone(model);delete plain.display_ppr_excluded_group_ids;
 assert.equal(metrics.evaluate({...unit,models:[plain]},0,state).value,33,'Unreviewed model behavior is unchanged');
 const annual={status:'ok',ppr:[297],catch:[6],covered_catch:[6]};
@@ -42,5 +49,5 @@ if(process.argv[2]){
   model.scopes.all.status.new_GE='provisional: researcher display retains WARN';
   const preview=metrics.evaluate(unit,0,state);assert.equal(preview.value,3,'Mandatory exclusions retain explicitly authorized provisional availability');assert.match(preview.status,/provisional:/);
 }
-console.log('Researcher review filtering passed: immutable exclusions, split weights, unchanged catch/coverage/NPP/diagnostics, simple chain, map/trends, unreviewed behavior.');
+console.log('Researcher review filtering passed: signed defaults, explicit user overrides on current pages, original split weights, catch/coverage/NPP/diagnostics, simple chain, map/trends.');
 

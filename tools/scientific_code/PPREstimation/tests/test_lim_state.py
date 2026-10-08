@@ -96,3 +96,53 @@ def test_failed_optimizer_keeps_missing_consumption_and_runtime_fallback(capsys)
     assert groups.loc[2, "egestion"] == 0.0
     assert model.predation.loc[1] == 0.0
     assert not model.is_model_balanced()[0]
+
+
+@pytest.mark.parametrize("m0, zero_ee", [
+    (1.0, True),
+    (1.0 - 5e-11, True),
+    (1.0 + 5e-11, True),
+    (np.nextafter(1.0 - 1e-10, 1.0), True),
+    (np.nextafter(1.0 + 1e-10, 1.0), True),
+    (1.0 - 1e-10, False),
+    (1.0 + 1e-10, False),
+    (1.0 - 2e-10, False),
+    (1.0 + 2e-10, False),
+    (.8, False),
+    (1.1, False),
+])
+def test_lim_zero_ee_precision_cutoff_keeps_mortality_and_detritus_consistent(m0, zero_ee):
+    seed = seed_state(missing_consumption=False)
+    groups = seed["_groups_df"]
+    groups.loc[2, ["p", "M0"]] = [1.0, m0]
+    # Fully known flows isolate LIM finalization from optimizer variability.
+    groups.loc[3, ["p", "q", "biomass_accum"]] = [1.0, 1.0, 0.0]
+    original = groups.copy(deep=True)
+    calculator = PPRCalculator.__new__(PPRCalculator)
+    calculator.__dict__.update(seed)
+    result = calculator.apply_lim(groups)
+
+    raw_ee = 1.0 - m0
+    assert (abs(raw_ee) < 1e-10) == zero_ee
+    expected_m0 = 1.0 if zero_ee else m0
+    assert result.loc[2, "ee"] == (0.0 if zero_ee else raw_ee)
+    assert result.loc[2, "M0"] == expected_m0
+    assert result.loc[2, "flow_to_det"] == expected_m0 + 4.0
+    assert result.loc[3, "q"] == 2.0 + .5 * (expected_m0 + 4.0)
+    assert result.loc[3, "p"] == result.loc[3, "q"]
+    assert result.loc[2, "det_export"] == .5 * (expected_m0 + 4.0)
+    for column in ("p", "q", "egestion", "respiration", "biomass_accum"):
+        assert result.loc[2, column] == original.loc[2, column]
+    pd.testing.assert_frame_equal(groups, original)
+
+
+def test_lim_toothed_whale_roundoff_is_zero_in_runtime_vectors_and_group_table():
+    seed = seed_state(missing_consumption=False)
+    # Actual HS_077 LIM output before the fix: EE=-1.3322676295501878e-15.
+    seed["_groups_df"].loc[2, ["p", "M0"]] = [.00062, .0006200000000000008]
+    calculator = PPRCalculator.from_dict(seed, underdetermined=True)
+    groups = calculator.get_groups_df()
+    assert calculator.EE.loc[2] == 0.0
+    assert groups.loc[2, "ee"] == 0.0
+    assert calculator.M0.loc[2] == calculator.p.loc[2]
+    assert groups.loc[2, "M0"] == groups.loc[2, "p"]

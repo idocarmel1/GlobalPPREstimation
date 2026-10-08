@@ -1,0 +1,86 @@
+{
+  "status": "WARN",
+  "model_input": {
+    "status": "WARN",
+    "is_model_balanced": true,
+    "p_max_rel_residual": 5.940139240034436e-06,
+    "q_max_rel_residual": 1.6612755662672672e-06,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 2.220446049250313e-16,
+    "n_negative_catch": 0,
+    "n_zero_catch": 13,
+    "total_catch": 0.01639519,
+    "has_catch": true,
+    "has_ee_issues": true,
+    "n_ee0": 1,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [
+      4
+    ],
+    "ee_marginal_groups": []
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.0,
+    "b_converges": true,
+    "rho_living": 0.6272053418305529,
+    "living_converges": true,
+    "sppr_det": {
+      "39": 0.7550399765823486
+    },
+    "max_sppr_det": 0.7550399765823486,
+    "max_sppr_group": {
+      "seq": 1,
+      "tl": 4.681404296704122,
+      "sppr": 879512.8606855953,
+      "inv_te": 3524.678111587983
+    },
+    "max_tl_group": {
+      "seq": 10,
+      "tl": 5.22372383233205,
+      "sppr": 201036.8503048638,
+      "inv_te": 15.599999999999998
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      6,
+      5,
+      2,
+      1
+    ]
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": false,
+    "inflow": 554.13488464,
+    "outflow": 554.144745020945,
+    "rel_gap": 1.7794189137628986e-05
+  },
+  "footprint": {
+    "ppr_all": 328.1777429169111,
+    "ppr_inner": 328.17088752305125,
+    "ppr_pp_only": 328.17088752305125,
+    "npp": 554.122932,
+    "ppr2npp": 0.5922348067035985,
+    "ppr2npp_pp_only": 0.5922348067035985
+  },
+  "config": {
+    "TE_option": "TE",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "det_collapse_mode": "never",
+    "explicit_TE": false,
+    "method": null,
+    "would_pool": false,
+    "model": "Eastern tropical Pacific (1993-1997)"
+  },
+  "warnings": [
+    "1 group(s) with EE=0 (all production is non-predatory death): 4 (Toothed whales). Under TE_option='TE' their TE row is 0, which severs them from the nullspace and leaks the PP they consumed",
+    "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+    "4 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [6, 5, 2, 1]"
+  ]
+}

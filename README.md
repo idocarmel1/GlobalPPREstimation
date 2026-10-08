@@ -37,7 +37,7 @@ Project/map commands operate on saved fresh regional state. They do not extract 
 
 ## Preservation and evidence
 
-The latest extraction of each distinct model is retained; superseded packages are removed. Git history supplies recovery. The portable [source dispositions](common_reference_data/provenance/source_paths.csv) record moves/removals and historical hashes. Substantive frozen studies live under `research/`, with historical statements distinguished from current workflow authority. Administrative relocation makes no parameter repair or renewed scientific approval claim.
+The latest extraction of each distinct model is retained; superseded packages are removed. Git history supplies recovery. The portable [source dispositions](common_reference_data/provenance/source_paths.csv) record moves/removals and historical hashes. Studies live under [research/](research/README.md): researcher-owned experiments in `research/human/` and supporting agent audits, baselines and integration evidence in `research/agents/`, with historical statements distinguished from current workflow authority. Administrative relocation makes no parameter repair or renewed scientific approval claim.
 
 Shared NPP originals use product/year folders and existing Git LFS policy. After cloning use `git lfs install` and `git lfs pull`. The versioned [source manifest](common_reference_data/npp/source_manifest.json) and `python tools/workflow_checks/structure/verify_npp_sources.py` verify full bytes; new extraction outputs do not adopt workbook values automatically.
 

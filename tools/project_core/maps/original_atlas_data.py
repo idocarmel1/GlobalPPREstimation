@@ -10,7 +10,7 @@ from collections import defaultdict
 from tools.project_core.workbooks.workbooks import *
 from tools.project_core.registry.discovery import project_root,region_directory,discover_regions,discover_models,resolve_model
 from tools.project_core.calculations.regional import result_hash,inputs
-from tools.project_core.validation.researcher_review import approved_review,review_display,table_rows
+from tools.project_core.validation.researcher_review import approved_review,review_display,table_rows,attach_payload_review
 from zipfile import ZipFile
 
 def add_group_efficiencies(root,units):
@@ -301,6 +301,25 @@ def verify_retained_unit(region,unit,network_unit,annual,npp):
         if retained!=[r.get(y) for y in YEARS]:raise ValueError(f'{identity}: central annual values changed; include this region in the scoped build')
     if unit.get('npp')!=npp:raise ValueError(f'{identity}: NPP changed; include this region in the scoped build')
 
+def add_source_reviews(root, unit_id, metadata, payloads):
+    """Keep candidate decisions selectable independently of the map default."""
+    for (unit, model_id), row in metadata.items():
+        if unit != unit_id or not row.get('researcher_review_summary'):
+            continue
+        if not row.get('researcher_review_status'):
+            continue
+        review,pending=review_display(root,row,{})
+        for payload in payloads:
+            matches=[m for m in payload['models'] if m['id']==model_id]
+            if len(matches)>1:raise ValueError('Ambiguous reviewed model: '+model_id)
+            if not matches:
+                # A changed source remains visible as a recorded decision,
+                # but never inherits calculations or an active signoff.
+                model={'id':model_id,'label':model_id,'verified':False,'scopes':{},'source':row['model_path']}
+                payload['models'].append(model)
+            else:model=matches[0]
+            attach_payload_review(root,row,{},model,review,pending)
+
 def datasets(workbook,only_units=None):
     root=workbook.parent
     if only_units:
@@ -397,6 +416,8 @@ def datasets(workbook,only_units=None):
                         for treatment in ['method','zero','simple']:
                             band=branch(record,treatment,'landings').get('sensitivity')
                             if band:nm.setdefault('discard_sensitivity',{}).setdefault(scope,{}).setdefault(method,{})[treatment]=band
+        candidate_metadata={key:value for key,value in model_metadata.items() if key[0]==unit and key[1]!=selected}
+        add_source_reviews(root,unit,candidate_metadata,(u,nu))
         nu['default_model']=next((i for i,m in enumerate(nu['models']) if m['id']==selected),None)
         nu['selected_articles']=[r['article_id'] for r in records(project,'Papers','Papers') if r['unit_id']==unit and r.get('selected')]
         if not nu['selected_articles']:nu['selected_articles']=[r['article_id'] for r in records(project,'Papers','Papers') if r['unit_id']==unit]

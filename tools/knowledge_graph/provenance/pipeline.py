@@ -176,7 +176,7 @@ def collect():
             assert n['id'].startswith(stem(sf)+'_') or n['id']==stem(sf), f'Wrong semantic ID: {n["id"]} ({sf})'
             assert not re.search(r'_rationale_\d+$|_chunk\d+$|_c\d+$', n['id']), n['id']
             assert n.get('file_type') in {'code','document','paper','image','rationale','concept'}, n
-            n['_origin']='semantic'; n['historical']=bool(n.get('historical')) or sf.startswith('research/')
+            n['_origin']='semantic'; n['historical']=bool(n.get('historical')) or (sf.startswith('research/') and sf!='research/README.md')
             n['source_sha256']=corpus['sha256'][sf]
             covered.add(sf)
         assert covered==set(files), f'Chunk {i} omitted sources: {set(files)-covered}'
@@ -187,7 +187,7 @@ def collect():
             assert (cf=='EXTRACTED' and sc==1) or (cf=='INFERRED' and sc in [.95,.85,.75,.65,.55]) or (cf=='AMBIGUOUS' and .1<=sc<=.3), f'Invalid confidence rubric {cf} {sc}'
             ends = e['nodes'] if 'nodes' in e else [e['source'],e['target']]
             assert all(n in ids for n in ends), f'Chunk {i} dangling endpoint: {ends}'
-            e['_origin']='semantic'; e['historical']=bool(e.get('historical')) or sf.startswith('research/')
+            e['_origin']='semantic'; e['historical']=bool(e.get('historical')) or (sf.startswith('research/') and sf!='research/README.md')
             e['source_sha256']=corpus['sha256'][sf]
         fragment['input_tokens']=None; fragment['output_tokens']=None
         fragment['usage_status']='Unavailable from host agent tool'
@@ -253,7 +253,7 @@ def merge():
         sf=relative(n.get('source_file')); n['source_file']=sf
         assert sf in corpus['sha256'], f'Node has no indexed current citation: {n}'
         n['source_sha256']=corpus['sha256'][sf]
-        n['historical']=bool(n.get('historical')) or sf.startswith('research/')
+        n['historical']=bool(n.get('historical')) or (sf.startswith('research/') and sf!='research/README.md')
         if '/model_validation/evidence/source_review/' in sf:
             n['scientific_currency']='Not established by graph refresh; consult adjacent model_notes.md and recorded review provenance.'
         if n['id'] not in by_id: by_id[n['id']]=n; continue
@@ -271,7 +271,7 @@ def merge():
         sf=relative(e.get('source_file'))
         assert sf in corpus['sha256'], f'Edge has no indexed current citation: {e}'
         e['source_file']=sf; e['source_sha256']=corpus['sha256'][sf]
-        e['historical']=bool(e.get('historical')) or sf.startswith('research/'); e.setdefault('_origin','ast')
+        e['historical']=bool(e.get('historical')) or (sf.startswith('research/') and sf!='research/README.md'); e.setdefault('_origin','ast')
         if e.get('relation')=='calls':
             left=by_id[e['source']];right=by_id[e['target']]
             langs={Path(left['source_file']).suffix.lower(),Path(right['source_file']).suffix.lower()}
@@ -335,7 +335,7 @@ def export():
     report=re.sub(r'^- Token cost:.*$', '- Token cost: unavailable; the host agent tools did not expose actual input/output usage.',report,flags=re.M)
     report+='\n\nThe graph indexes the explicit curated scope in [REFRESH_SCOPE.md](REFRESH_SCOPE.md). Freshness uses full source SHA256 hashes, including frontmatter; it is not evidence of scientific readiness or researcher approval. Every independently attributed relationship is retained in each JSON link’s `evidence` array, while clustering and HTML use one edge per node pair. Historical research nodes and edges are marked `historical`. Bounded skill-efficiency trials are recorded separately in the model-local work QA; they do not establish full pipeline equivalence.\n'
     report+=retirement_note+'\n'
-    (GRAPH/'GRAPH_REPORT.md').write_text(report,encoding='utf8')
+    (GRAPH/'GRAPH_REPORT.md').write_text(report.rstrip()+'\n',encoding='utf8')
     to_html(G,communities,str(GRAPH/'graph.html'),community_labels=labels,node_limit=5000 if G.number_of_nodes()>5000 else None)
     if G.number_of_nodes()<=5000:
         # Native export omits source currency attributes from its information
@@ -400,7 +400,7 @@ def verify():
             covered.add(sf);citation_count+=1
         if n.get('_origin')=='semantic':
             assert n['id'].startswith(stem(n['source_file'])+'_') or n['id']==stem(n['source_file']),n['id']
-        assert not n['source_file'].startswith('research/') or n.get('historical',False),n
+        assert not n['source_file'].startswith('research/') or n['source_file']=='research/README.md' or n.get('historical',False),n
     assert covered==set(hashes),f'Indexed sources missing node coverage: {set(hashes)-covered}'
     pairs=set();edge_records=0
     for link in graph['links']:
@@ -413,7 +413,7 @@ def verify():
             sf=e['source_file'];assert sf in hashes and e.get('source_sha256')==hashes[sf],e
             assert e.get('confidence') in {'EXTRACTED','INFERRED','AMBIGUOUS'},e
             assert isinstance(e.get('confidence_score'),(int,float)) and 0<=e['confidence_score']<=1,e
-            assert not sf.startswith('research/') or e.get('historical',False),e
+            assert not sf.startswith('research/') or sf=='research/README.md' or e.get('historical',False),e
             edge_records+=1
     for h in graph.get('hyperedges',[]):
         assert len(h['nodes'])>=3 and all(n in ids for n in h['nodes']),h
