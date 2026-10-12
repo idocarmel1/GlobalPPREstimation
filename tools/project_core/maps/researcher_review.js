@@ -41,6 +41,7 @@ const PPRResearcherReview=(()=>{
       parent.appendChild(wrap);return true;
     }
     const status=node('p',review.status+' · '+review.researcher_name+' · '+review.review_date);status.className='researcher-validated-name';wrap.appendChild(status);
+    if(review.diagnostic_scope_note){const scope=node('p',review.diagnostic_scope_note);scope.className='researcher-note';wrap.appendChild(scope);}
     // Adapt the original source snapshot for display without modifying its
     // approved text, identity hashes or centrally stored schema.
     const sections=review.sections.flatMap(section=>section.heading==='GE and TE diagnostics'

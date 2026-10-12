@@ -2,7 +2,9 @@
 
 Apply the [evidence, execution and adoption contract](evidence-handoff.md) to this stage: explain fresh runs and honor existing scoped authorization, retain the applicable portable evidence, and verify completeness before handoff.
 
-This project's default is GE, TE and With Egestion only. Global, broad inventories and Monte Carlo require a broader request. A narrower explicit request controls scope. Reuse retained full returns when exact input/configuration and engine identity meet the request; report formatting need not rerun science.
+A standalone direct-diagnostics request defaults to GE, TE and With Egestion. A narrower explicit request controls that diagnostic scope, and report formatting need not rerun science. This does not define the inventory for validated-model map publication: the [full coverage route](project-integration.md#full-method-coverage-for-validated-models) is already authorized and requires every canonical engine `ALL_METHOD_KEYS` method, including global, legacy, all six symbolic variants and Monte Carlo. Reuse retained full returns when exact input/configuration and engine identity meet the applicable request.
+
+A diagnostic subset must not replace a broader saved coefficient/diagnostic inventory. Preserve compatible methods outside the requested scope. A coverage extension preserves all existing saved methods and runs only missing ones; it is not a request to rerun the reviewed diagnostic methods or replace saved Monte Carlo draws. Resolve genuinely changed scientific dependencies within their affected authorized scope and keep unresolved conflicts explicit. Before publishing a registered researcher-validated model, ensure full canonical coverage independently of the GE/TE report rows or the three direct diagnostic options.
 
 ## Admission and execution
 

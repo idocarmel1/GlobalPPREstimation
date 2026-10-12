@@ -1,6 +1,6 @@
 # SPPR Calculation Methods in `PPRCalculator`
 
-This reference explains the retained scientific engine, not permission to execute every method. The [structure](structure.md), [loading](model_loading.md), [parameter reference](sppr_parameters.md) and [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct-diagnostics.md) govern current project ownership, actual settings and ordinary GE/TE/With Egestion scope. Global and Monte Carlo examples require their own authorization. Historical or unsupported API descriptions below do not establish readiness, validation or provenance.
+This reference explains the retained scientific engine. The [structure](structure.md), [loading](model_loading.md), [parameter reference](sppr_parameters.md) and [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct-diagnostics.md) govern current project ownership, actual settings and standalone GE/TE/With Egestion scope. The authorized [validated-model map coverage](../tools/skills/paper-to-ppr/references/project-integration.md#full-method-coverage-for-validated-models) requires all canonical global, legacy, symbolic and Monte Carlo methods; preserve compatible saved methods and compute only missing coverage entries. Other runs follow their requested scope. Historical or unsupported API descriptions below do not establish readiness, validation or provenance.
 
 This document explains every SPPR (**Specific Primary Production Required**) method exposed by
 `PPRCalculator.py`, the flags and input options each one accepts, and — crucially — the

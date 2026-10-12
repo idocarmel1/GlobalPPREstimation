@@ -6,7 +6,7 @@ Sources: [calculator implementation](../tools/scientific_code/PPREstimation/PPRC
 
 ## Direct validation and the primary solver
 
-The [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct-diagnostics.md) defaults to full `diagnose_sppr()` returns for **GE, TE and With Egestion**. Global, broad method inventories and Monte Carlo require a broader request. Use the already-audited computational input and constructor/settings; stock defaults are not permission to alter a regional reconstruction.
+The [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct-diagnostics.md) defaults to full `diagnose_sppr()` returns for **GE, TE and With Egestion** in a standalone diagnostic request. The separately authorized [validated-model map coverage](../tools/skills/paper-to-ppr/references/project-integration.md#full-method-coverage-for-validated-models) requires every canonical `ALL_METHOD_KEYS` method, including global, legacy, all six symbolic variants and both Monte Carlo methods. Use the already-audited computational input and actual constructor/settings, including `det_collapse`; stock defaults are not permission to alter a regional reconstruction. Coverage completion preserves compatible saved results, including Monte Carlo draws, and computes only missing methods. Deterministic repeats with identical inputs/settings/engine should differ only by numerical roundoff; fresh Monte Carlo samples can produce different estimates.
 
 | `SPPR_new` parameter | API default | Meaning |
 |---|---|---|
@@ -24,12 +24,11 @@ The EE-zero flag changes SPPR accounting; it does **not** repair input EE, fix s
 `diagnose_sppr` defaults to `TE_option='GE'`, `short=False`, `flat=False`, `thresholds=None`, `return_sppr=False`; solver keywords pass through to `SPPR_new`. `short=True` drops configuration, footprint and warnings; `flat=True` flattens sections and replaces lists with counts. `return_sppr=True` returns `(report, SPPR, A, L)` from the internal solve, avoiding another calculation.
 
 ```python
-# calculator has already been constructed with the audited regional settings.
+# Both constructor and per-option method settings come from actual audited provenance.
 for option in ("GE", "TE", "With Egestion"):
     report, sppr, A, L = calculator.diagnose_sppr(
         TE_option=option, short=False, flat=False, return_sppr=True,
-        det_collapse_mode="never", det_open_mode="none",
-        det_theta=1.0, det_external_sppr=0.0,
+        **audited_method_settings[option],
     )
     # Retain the full return and configuration; handle each option independently.
 ```
@@ -49,7 +48,7 @@ A diagnostic grades the **configuration**. Overall status is the worst component
 
 ## Other methods and exporter choices
 
-The broad exporter uses the following variants. Its health rows retain the three direct options and explicitly pin the closed, separate-pool detritus settings above.
+The broad exporter uses the following variants. Its health rows retain the three direct options and explicitly pin the closed, separate-pool detritus settings above. These generic exporter choices do not override actual model-specific settings in coverage completion; an audited `auto` configuration stays `auto` for methods that accept that option.
 
 | Method | API defaults | Exporter choices |
 |---|---|---|

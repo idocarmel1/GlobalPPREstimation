@@ -36,6 +36,28 @@ class SnapshotTests(unittest.TestCase):
         p=save_snapshot(self.path,self.m,result_identity=self.identity);before=p.read_bytes()
         self.b['Selected model groups']['Group SPPR'][1].clear();self.b['PPR']['Annual'][1].clear();write_book(self.path,self.b)
         self.assertIsNone(save_snapshot(self.path,self.m,result_identity=self.identity));self.assertEqual(p.read_bytes(),before)
+    def coverage_snapshot(self):
+        from tools.project_core.workbooks.workbooks import input_hash,update_book
+        from tools.project_core.calculations.regional import set_setting,set_result_hash
+        book=read_book(self.path);set_setting(book,'calculation_input_sha256',input_hash(book));set_result_hash(book);update_book(self.path,book)
+        save_snapshot(self.path,self.m,result_identity=self.identity)
+        manifest=self.m/'results/result_manifest.json';data=json.loads(manifest.read_text())
+        data['method_coverage']={'schema_version':1,'expected_methods':['GE'],'methods':{'GE':{'status':'ok'}}}
+        data['review_extension']={'schema_version':1,'reviewed_methods':['GE'],'original_reviewed_input_sha256':'reviewed-original','current_input_sha256':input_hash(book)}
+        manifest.write_text(json.dumps(data));return manifest,data
+    def test_fresh_selection_snapshot_preserves_method_and_review_evidence(self):
+        from tools.project_core.workbooks.workbooks import update_book
+        from tools.project_core.calculations.regional import set_setting
+        manifest,before=self.coverage_snapshot();book=read_book(self.path)
+        set_setting(book,'selection_rationale','only navigation changed');update_book(self.path,book)
+        save_snapshot(self.path,self.m,result_identity=self.identity);after=json.loads(manifest.read_text())
+        for key in ['method_coverage','review_extension']:self.assertEqual(after[key],before[key])
+        self.assertEqual(after['snapshot_sha256'],sha(self.path))
+    def test_changed_scientific_inputs_do_not_inherit_method_coverage_certificate(self):
+        from tools.project_core.workbooks.workbooks import update_book
+        manifest,_=self.coverage_snapshot();book=read_book(self.path);book['Catch']['Catch'][1][0][2]=9;update_book(self.path,book)
+        save_snapshot(self.path,self.m,result_identity=self.identity);after=json.loads(manifest.read_text())
+        self.assertNotIn('method_coverage',after);self.assertNotIn('review_extension',after)
     def test_corruption_and_model_or_flags_mismatch_reject_numerical_reuse(self):
         p=save_snapshot(self.path,self.m,result_identity=self.identity)
         expected={'effective_flags':{'normalize_DC':False},'code_identity':{'calculator':'known'}}

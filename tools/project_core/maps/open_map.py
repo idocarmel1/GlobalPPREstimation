@@ -112,6 +112,8 @@ def main():
     args = parser.parse_args()
     if not 0 <= args.port <= 65535:
         parser.error('port must be between 0 and 65535')
+    from tools.project_core.maps.build_html import ensure_map_publication
+    ensure_map_publication(ROOT)
     ports = list(range(args.port, min(args.port + 10, 65536))) if args.port else [0]
     server, port = find_or_start(ROOT, ports)
     url = f'http://127.0.0.1:{port}/interactive_map/index.html'

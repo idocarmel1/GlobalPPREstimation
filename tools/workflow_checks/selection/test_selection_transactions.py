@@ -41,9 +41,44 @@ class ReviewRegressions(unittest.TestCase):
         def fail(*args):raise RuntimeError('injected failure')
         with self.assertRaisesRegex(RuntimeError,'injected'):selection.refresh_region(f.root,f.path,publisher=fail)
         self.assertTrue(all(p.read_bytes()==value for p,value in before.items()));self.assertEqual(f.path.read_bytes(),active);self.assertEqual((f.root/'Project.xlsx').read_bytes(),central)
+    def test_failed_publication_rolls_back_nondefault_validated_coverage(self):
+        f=self.f;project=read_book(f.root/'Project.xlsx');header,data=project['Models & coverage']['Models']
+        header.append('researcher_review_status')
+        for row in data:row.append('Validated by researcher' if row[1]=='B' else None)
+        update_book(f.root/'Project.xlsx',project)
+        source=f.models['B']/'sppr_source.xlsx';source.write_bytes(b'original source')
+        snapshot=f.models['B']/'results/regional_snapshot.xlsx';snapshot.parent.mkdir();snapshot.write_bytes(b'original snapshot')
+        manifest=f.models['B']/'results/result_manifest.json';manifest.write_text('{}')
+        evidence=f.models['B']/'results/diagnostics/method_coverage/new.json'
+        def complete(*args,**kwargs):
+            source.write_bytes(b'new source');snapshot.write_bytes(b'new snapshot');manifest.write_text('{"new":true}')
+            evidence.parent.mkdir(parents=True,exist_ok=True);evidence.write_text('new evidence')
+            written=[source,snapshot,manifest,evidence]
+            return {'changed_units':['LME_001'],'models':[],
+                    'written_paths':[str(path) for path in written],
+                    'written_hashes':{str(path):sha(path) for path in written}}
+        protected={path:path.read_bytes() for path in [source,snapshot,manifest,f.path,f.root/'Project.xlsx']}
+        def fail(*args):raise RuntimeError('injected failure after candidate backfill')
+        with patch('tools.project_core.calculations.coverage.ensure_validated_coverage',side_effect=complete):
+            with self.assertRaisesRegex(RuntimeError,'injected'):
+                selection.refresh_region(f.root,f.path,publisher=fail)
+        self.assertEqual({path:path.read_bytes() for path in protected},protected)
+        self.assertFalse(evidence.exists())
     def test_central_updater_obeys_shared_lock(self):
         with selection.central_lock(self.f.root):
             with self.assertRaisesRegex(ValueError,'central writer'):update(self.f.root,[self.f.path])
+    def test_failed_selection_preserves_concurrent_candidate_package_and_new_note(self):
+        f=self.f;self.snapshot();f.select('B')
+        source=f.models['m']/'sppr_source.xlsx'
+        note=f.models['m']/'results/diagnostics/method_coverage/researcher-note.txt'
+        def fail(*args):
+            source.write_bytes(b'concurrent researcher source edit')
+            note.parent.mkdir(parents=True,exist_ok=True);note.write_text('new researcher note')
+            raise RuntimeError('injected publisher failure')
+        with self.assertRaisesRegex(RuntimeError,'concurrent author edits were preserved'):
+            selection.refresh_region(f.root,f.path,publisher=fail)
+        self.assertEqual(source.read_bytes(),b'concurrent researcher source edit')
+        self.assertEqual(note.read_text(),'new researcher note')
     def test_outside_table_note_and_native_columns_preserved(self):
         f=self.f;w=openpyxl.load_workbook(f.path);w['Overview']['D3']='human note';w.save(f.path);w.close();b=read_book(f.path);set_setting(b,'selection_rationale','updated');update_book(f.path,b)
         w=openpyxl.load_workbook(f.path);self.assertEqual(w['Overview']['D3'].value,'human note');w.close();update(f.root,[f.path]);w=openpyxl.load_workbook(f.root/'Project.xlsx')

@@ -8,8 +8,17 @@ from tools.project_core.registry.atlas_ranks import apply_atlas_ranks, ensemble_
 from tools.project_core.registry.writes import central_lock
 
 def update(root, paths, all_regions=False, *, lock_held=False):
-    if lock_held:return _update(root,paths,all_regions)
-    with central_lock(root):return _update(root,paths,all_regions)
+    if not lock_held:
+        with central_lock(root):return update(root,paths,all_regions,lock_held=True)
+    from tools.project_core.calculations.coverage import ensure_validated_coverage
+    from tools.project_core.registry.publication import publication_transaction
+    with publication_transaction(root,paths) as publication:
+        coverage=ensure_validated_coverage(root,lock_held=True)
+        publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
+        affected=[region_directory(root,unit)/(unit+'.xlsx') for unit in coverage['changed_units']]
+        result=_update(root,list(dict.fromkeys([*paths,*affected])),all_regions)
+        publication.checkpoint([root/'Project.xlsx'])
+        return result
 
 def _update(root, paths, all_regions=False):
     project_path=root/'Project.xlsx'; source_hashes={project_path:sha(project_path)};p=read_book(project_path)

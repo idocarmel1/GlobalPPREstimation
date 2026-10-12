@@ -1,11 +1,11 @@
 from tools.project_core.registry.discovery import project_root, region_directory, discover_regions, discover_models, resolve_model
 """Rebuild the original map, time-series and source pages from the project workbooks."""
-import argparse,copy,csv,html,importlib.util,json,os,re,shutil,tempfile,zipfile
+import argparse,copy,csv,hashlib,html,importlib.util,io,json,os,re,shutil,tempfile,zipfile
 from pathlib import Path
 from tools.project_core.workbooks.workbooks import sha,records
 from tools.project_core.maps.original_atlas_data import datasets,add_group_efficiencies,add_group_catch
 from tools.project_core.maps.provisional_display import provisional_layout
-from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,_register_review,table_rows,unavailable_review_model,calculation_review_book,attach_payload_review
+from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,review_display,_register_review,table_rows,unavailable_review_model,calculation_review_book,attach_payload_review
 from tools.project_core.maps.map_cumulative_ppr import cumulative_ppr_layout
 from tools.project_core.maps.available_results_layout import available_results_layout
 from tools.project_core.maps.group_catch_layout import group_catch_layout
@@ -16,6 +16,7 @@ LINK_UPDATES={"../data/unidentified_taxa.json":"data/unidentified_taxa.json"}
 OSM_BASEMAP="L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:10,opacity:.55,attribution:'© OpenStreetMap · Sea Around Us polygons'}).addTo(map);"
 
 def linked_layout(template):
+    template=template.replace('\r\n','\n')
     template=template.replace('Browse article archive','Browse article sources').replace('in the curated article archive','in the curated article inventory')
     # Unrated source assessments carry null scores, which are not zero ratings.
     template=template.replace('${a.quality_score_100}</div>',"${a.quality_score_100??'—'}</div>")
@@ -38,12 +39,32 @@ def linked_layout(template):
     return trend_extras_layout(group_catch_layout(available_results_layout(current)))
 
 def atomic_text(path,text):
+    atomic_bytes(path,text.encode('utf-8'))
+
+def atomic_bytes(path,data):
+    from tools.project_core.registry.publication import publication_write
     path.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(dir=path.parent,suffix=path.suffix);os.close(fd)
-    try:Path(tmp).write_text(text,encoding='utf-8',newline='\n');os.replace(tmp,path)
+    try:
+        Path(tmp).write_bytes(data)
+        with publication_write(path,fingerprint=hashlib.sha256(data).hexdigest()):os.replace(tmp,path)
     finally:
         if os.path.exists(tmp):os.unlink(tmp)
 
 def relayout(workbook,directory=None,group_efficiencies=False,group_catch=False):
+    """Validate retained data first, then complete registered method coverage."""
+    from tools.project_core.registry.writes import central_lock
+    from tools.project_core.registry.publication import publication_transaction
+    workbook=Path(workbook).resolve()
+    with central_lock(workbook.parent):
+        _relayout(workbook,directory,group_efficiencies,group_catch,publish=False)
+        with publication_transaction(workbook.parent) as publication:
+            changed=_prepare_coverage(workbook.parent,publication)
+            if changed:
+                return _build(workbook,directory,changed)
+            return _relayout(workbook,directory,group_efficiencies,group_catch)
+
+
+def _relayout(workbook,directory=None,group_efficiencies=False,group_catch=False,*,publish=True):
     """Refresh presentation, optionally exposing saved group metadata."""
     directory=directory or workbook.parent/'interactive_map'
     fingerprint=sha(workbook);layouts=Path(__file__).with_name('original_html_layout')
@@ -70,6 +91,7 @@ def relayout(workbook,directory=None,group_efficiencies=False,group_catch=False)
         outputs.append((directory/name,page))
     if sha(workbook)!=fingerprint:raise ValueError('Project.xlsx changed during layout refresh')
     if any(sha(path)!=digest for path,digest in catch_sources.items()):raise ValueError('Model-catch source changed before layout publication')
+    if not publish:return
     for path,page in outputs:atomic_text(path,page)
     additions=('stored group GE/EE added; ' if group_efficiencies else '')+('stored group catch metadata added; ' if group_catch else '')
     print('Map and trends layouts refreshed; '+(additions or 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
@@ -77,10 +99,16 @@ def relayout(workbook,directory=None,group_efficiencies=False,group_catch=False)
 def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
     """Publish exact model reviews under the shared writer lock; keep map defaults."""
     from tools.project_core.registry.writes import central_lock
+    from tools.project_core.registry.publication import publication_transaction
     with central_lock(workbook.resolve().parent):
-        return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids)
+        _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,publish=False)
+        with publication_transaction(workbook.resolve().parent) as publication:
+            changed=_prepare_coverage(workbook.resolve().parent,publication)
+            if changed:
+                return _build(workbook,directory,changed|set(unit_ids))
+            return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids)
 
-def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
+def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,publish=True):
     """Refresh only registered review metadata after a bounded central registration.
 
     The pre-registration workbook is required evidence that all other central
@@ -165,10 +193,83 @@ def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_
         outputs.append((directory/name,page))
     if sha(workbook)!=fingerprint or sha(previous_workbook)!=previous_fingerprint:
         raise ValueError('A Project workbook changed during review refresh')
+    if not publish:return
     for path,page in outputs:atomic_text(path,page)
     print('Map and trends researcher metadata refreshed; all other embedded data preserved.',flush=True)
 
-def build(workbook,output=None,only_units=None):
+def _prepare_coverage(root,publication):
+    """Extend authorized model methods before any central/page inputs are read."""
+    from tools.project_core.calculations.coverage import ensure_validated_coverage
+    from tools.project_core.registry.update_project import _update
+    coverage=ensure_validated_coverage(root,lock_held=True)
+    publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
+    changed=set(coverage['changed_units'])
+    if changed:
+        _update(root,[region_directory(root,unit)/(unit+'.xlsx') for unit in sorted(changed)],False)
+        publication.checkpoint([root/'Project.xlsx'])
+    return changed
+
+
+def build(workbook,output=None,only_units=None,*,lock_held=False):
+    from tools.project_core.registry.writes import central_lock
+    workbook=Path(workbook).resolve()
+    if not lock_held:
+        with central_lock(workbook.parent):return build(workbook,output,only_units,lock_held=True)
+    from tools.project_core.registry.publication import publication_transaction
+    with publication_transaction(workbook.parent) as publication:
+        changed=_prepare_coverage(workbook.parent,publication)
+        if only_units:only_units=set(only_units)|changed
+        return _build(workbook,output,only_units)
+
+
+def ensure_map_publication(root):
+    """A launcher may reuse its server only after coverage and pages are current."""
+    from tools.project_core.registry.writes import central_lock
+    from tools.project_core.registry.publication import publication_transaction
+    root=Path(root).resolve();workbook=root/'Project.xlsx';directory=root/'interactive_map'
+    with central_lock(root),publication_transaction(root) as publication:
+        changed=_prepare_coverage(root,publication)
+        fingerprint=sha(workbook)
+        pages=[directory/name for name in ['index.html','trends.html']]
+        current=all(page.is_file() and f'<meta name="ppr-project-sha256" content="{fingerprint}">' in page.read_text(encoding='utf-8') for page in pages)
+        if current and publication.models:
+            changed.update(_stale_reviewed_payload_units(root,directory,publication.models))
+        if changed or not current or not (directory/'sources.html').is_file():
+            _build(workbook,None,changed if changed and all(page.is_file() for page in pages) else None)
+
+
+def _stale_reviewed_payload_units(root,directory,metadata):
+    """Saved calculations and signed sources can change without changing Project."""
+    from tools.project_core.maps.original_atlas_data import embedded
+    catalog,_=embedded(directory/'index.html','DB');series,_=embedded(directory/'trends.html','SERIES_DB')
+    collections=[catalog['network']['units'],series['units']];changed=set();books={}
+    for row in metadata:
+        unit=row['unit_id'];model=row['model_id'];regional=region_directory(root,unit)/(unit+'.xlsx')
+        if unit not in books:
+            with zipfile.ZipFile(regional) as archive:
+                books[unit]={}
+                for sheet,table in [('Overview','Settings'),('Selected model groups','Groups')]:
+                    _,header,_,rows=table_rows(archive,sheet,table)
+                    header=list(rows[0][1]) if rows else (header or [])
+                    books[unit].setdefault(sheet,{})[table]=(header,[[record.get(key) for key in header] for _,record in rows])
+        current=dict(books[unit]['Overview']['Settings'][1])
+        path=regional if current.get('selected_model_id')==model and current.get('results_model_id')==model else (root/row['model_path']).parent/'results/regional_snapshot.xlsx'
+        fingerprint=sha(path) if path.is_file() else None
+        current_review,current_pending=review_display(root,row,books[unit])
+        for collection in collections:
+            saved=next((item for item in collection.get(unit,{}).get('models',[]) if item['id']==model),None)
+            if saved is None or fingerprint is None or saved.get('workbook_sha256')!=fingerprint:
+                changed.add(unit)
+                continue
+            # Recheck the signed model decision independently of calculation
+            # packages. This also repairs pages cached under the old PPR gate.
+            if (saved.get('researcher_review')!=current_review or
+                    saved.get('recorded_review_pending')!=current_pending):
+                changed.add(unit)
+    return changed
+
+
+def _build(workbook,output=None,only_units=None):
     root=workbook.parent;directory=(output.parent if output and output.suffix=='.html' else output) or root/'interactive_map'
     fingerprint=sha(workbook)
     catalog,series,project=datasets(workbook,only_units=only_units) if only_units else datasets(workbook)
@@ -196,11 +297,12 @@ def build(workbook,output=None,only_units=None):
     atomic_text(data/'unidentified_taxa.json',json.dumps({'description':'Current unidentified-catch metadata embedded in these atlas pages.','units':{u:r.get('unidentified') for u,r in catalog['network']['simple_units'].items()}},ensure_ascii=False,separators=(',',':')))
     context=root/'common_reference_data/atlas_source_context'
     for name in ['eez_searches.csv','lme_searches.csv']:
-        shutil.copy2(context/name,data/name)
+        atomic_bytes(data/name,(context/name).read_bytes())
     for name,rr in [('articles.csv',catalog['articles']),('files.csv',catalog.get('files',[]))]:
         headers=list(dict.fromkeys(k for r in rr for k in r))
-        with (data/name).open('w',newline='',encoding='utf-8') as f:
-            w=csv.DictWriter(f,fieldnames=headers,lineterminator='\n');w.writeheader();w.writerows({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()} for r in rr)
+        output=io.StringIO(newline='')
+        w=csv.DictWriter(output,fieldnames=headers,lineterminator='\n');w.writeheader();w.writerows({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()} for r in rr)
+        atomic_text(data/name,output.getvalue())
     print(f'Original-format pages rebuilt: {directory}/index.html, trends.html and sources.html',flush=True)
 
 if __name__=='__main__':

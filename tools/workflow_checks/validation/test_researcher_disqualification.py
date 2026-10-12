@@ -13,7 +13,7 @@ import openpyxl
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from tools.project_core.validation.researcher_review import read_report, register_review, approved_review, review_display, sha
 from tools.project_core.workbooks.workbooks import write_book, read_book, records
-from tools.project_core.maps.build_html import linked_layout, refresh_reviews
+from tools.project_core.maps.build_html import linked_layout, _refresh_reviews as refresh_reviews
 from tools.project_core.maps.original_atlas_data import add_source_reviews
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -76,8 +76,8 @@ class DisqualificationTests(unittest.TestCase):
             self.assertEqual(rebuilt[0]['default_model'], 'default')
             self.assertEqual(rebuilt[0]['models'][1]['researcher_review'], review)
             self.assertFalse(rebuilt[0]['models'][1]['verified'])
-            # A valid signoff for the snapshot cannot approve different retained
-            # calculations. Both candidates remain available in model controls.
+            # The signed model decision does not approve retained calculations;
+            # their separate freshness state cannot revoke the model's decision.
             numerical = {'id':'m', 'verified':True, 'scopes':{'full':{'ppr':[999]}},
                          'workbook_sha256':'different-displayed-workbook',
                          'recorded_review_pending':{'reason':'old warning'}}
@@ -85,9 +85,9 @@ class DisqualificationTests(unittest.TestCase):
             retained = [{'default_model':'default', 'models':[{'id':'default'}, copy.deepcopy(numerical)]},
                         {'default_model':'default', 'models':[{'id':'default'}, copy.deepcopy(matching)]}]
             add_source_reviews(root, 'LME_001', {('LME_001','m'):metadata}, retained)
-            self.assertNotIn('researcher_review', retained[0]['models'][1])
-            self.assertNotIn('display_ppr_excluded_group_ids', retained[0]['models'][1])
-            self.assertEqual(retained[0]['models'][1]['recorded_review_pending']['recorded_status'], 'Validated by researcher')
+            self.assertEqual(retained[0]['models'][1]['researcher_review'], review)
+            self.assertEqual(retained[0]['models'][1]['display_ppr_excluded_group_ids'], ['Fish'])
+            self.assertNotIn('recorded_review_pending', retained[0]['models'][1])
             self.assertEqual(retained[0]['models'][1]['scopes'], numerical['scopes'])
             self.assertEqual(retained[1]['models'][1]['researcher_review'], review)
             self.assertNotIn('recorded_review_pending', retained[1]['models'][1])
@@ -108,18 +108,12 @@ class DisqualificationTests(unittest.TestCase):
                 self.assertEqual(unit['models'][0], {'id':'default'})
                 candidate = unit['models'][1]
                 self.assertEqual(candidate['scopes'], numerical['scopes'])
-                if variable == 'DB':
-                    self.assertNotIn('researcher_review', candidate)
-                    self.assertNotIn('display_ppr_excluded_group_ids', candidate)
-                    self.assertEqual(candidate['recorded_review_pending']['recorded_status'], 'Validated by researcher')
-                else:
-                    self.assertEqual(candidate['researcher_review'], review)
-                    self.assertNotIn('recorded_review_pending', candidate)
+                self.assertEqual(candidate['researcher_review'], review)
+                self.assertNotIn('recorded_review_pending', candidate)
             self.assertEqual({p:sha(p) for p in protected}, protected)
             saved['Overview']['Settings'][1][-1][1] = 'changed-candidate-inputs'
             write_book(snapshot, saved)
-            with self.assertRaisesRegex(ValueError, 'calculation inputs changed'):
-                approved_review(root, metadata, region_book)
+            self.assertEqual(approved_review(root, metadata, region_book), review)
 
     def test_candidate_identity_is_reviewable_and_still_rejects_another_model(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -280,16 +274,11 @@ class DisqualificationTests(unittest.TestCase):
             before=copy.deepcopy(metadata)
             stale_book=copy.deepcopy(region_book)
             stale_book['Overview']['Settings'][1][1][1]='changed-input-hash'
-            with self.assertRaisesRegex(ValueError,'calculation inputs changed'):
-                approved_review(root,metadata,stale_book)
+            self.assertEqual(approved_review(root,metadata,stale_book),review)
             active,pending=review_display(root,metadata,stale_book)
-            self.assertIsNone(active)
-            self.assertEqual(pending['recorded_status'],STATUS)
-            self.assertEqual((pending['researcher_name'],pending['review_date']),('Reviewer','2026-10-02'))
-            self.assertEqual(pending['report_path'],metadata['validation_report_path'])
-            self.assertIn('calculation inputs changed',pending['reason'])
-            self.assertNotIn('excluded_group_ids',pending)
-            self.assertEqual(metadata,before,'Pending presentation preserves the recorded human decision')
+            self.assertEqual(active,review)
+            self.assertIsNone(pending)
+            self.assertEqual(metadata,before,'Calculation changes preserve the recorded human decision')
             write_book(project, read_book(project))
             wb = openpyxl.load_workbook(project, read_only=True)
             try:

@@ -2,8 +2,9 @@
 import copy,json,os,shutil,tempfile,subprocess
 from contextlib import contextmanager
 from pathlib import Path
-from tools.project_core.registry.discovery import resolve_model,discover_models,project_root
+from tools.project_core.registry.discovery import resolve_model,discover_models,project_root,region_directory
 from tools.project_core.registry.writes import central_lock
+from tools.project_core.registry.publication import publication_transaction,publication_write
 from tools.project_core.workbooks.workbooks import *
 from tools.project_core.calculations.regional import recalculate,set_setting,set_result_hash,result_hash
 from tools.project_core.calculations.snapshots import save_snapshot,inspect_snapshot,restore_model_tables,dependencies
@@ -57,7 +58,7 @@ def _shortcut(region,model):
 
 def _publish(root,units):
     from tools.project_core.maps.build_html import build
-    build(root/'Project.xlsx',only_units=set(units))
+    build(root/'Project.xlsx',only_units=set(units),lock_held=True)
 
 def refresh_region(root,region_workbook,*,publisher=None):
     root=Path(root).resolve();path=Path(region_workbook).resolve()
@@ -74,12 +75,8 @@ def refresh_region(root,region_workbook,*,publisher=None):
     registered=[r for r in records(central,'Models & coverage','Models') if (r.get('unit_id'),r.get('model_id'))==(o.get('unit_id'),selected)]
     if len(registered)!=1:raise ValueError('Register this exact regional model once in Project.xlsx; missing or duplicate metadata')
     if any(sha(p)!=value for p,value in source_hashes.items()):raise ValueError('Inputs changed while reading refresh preflight; reread the current workbook')
-    with central_lock(root),tempfile.TemporaryDirectory(dir=path.parent,prefix='.refresh-') as tmp:
-        backup=Path(tmp);protected=[path,root/'Project.xlsx'];maps=root/'interactive_map'
-        if maps.exists():protected+=list(p for p in maps.rglob('*') if p.is_file())
-        before={p:p.read_bytes() for p in protected};prior_pages=set(protected);owned={path:source_hashes[path],root/'Project.xlsx':source_hashes[root/'Project.xlsx']};shortcut=path.parent/'selected_model.lnk';old_shortcut=shortcut.read_bytes() if shortcut.exists() else None
-        packages={d.parent/'results'/name for d in discover_models(path.parent).values() for name in ['regional_snapshot.xlsx','result_manifest.json']}
-        package_before={p:p.read_bytes() if p.exists() else None for p in packages}
+    model_dirs=[source.parent for source in discover_models(path.parent).values()]
+    with central_lock(root),publication_transaction(root,[path],model_dirs) as publication:
         try:
             if any(sha(p)!=value for p,value in source_hashes.items()):raise ValueError('Inputs changed during refresh preflight')
             outgoing=o.get('results_model_id')
@@ -139,7 +136,6 @@ def refresh_region(root,region_workbook,*,publisher=None):
             validate_region(book,path)
             if sha(path)!=source_hashes[path] or sha(root/'Project.xlsx')!=source_hashes[root/'Project.xlsx']:raise ValueError('Authoritative workbooks changed during refresh; current edits preserved')
             update_book(path,book)
-            owned[path]=sha(path)
             # Derived registry fields preserve every centrally authored metadata cell.
             central=read_book(root/'Project.xlsx');h,r=central['Models & coverage']['Models']
             for row in r:
@@ -147,10 +143,17 @@ def refresh_region(root,region_workbook,*,publisher=None):
                 if record.get('unit_id')==o['unit_id'] and record.get('model_id') in discover_models(path.parent):
                     if 'model_path' in h:row[h.index('model_path')]=resolve_model(path.parent,record['model_id']).relative_to(root).as_posix()
             update_book(root/'Project.xlsx',central)
-            owned[root/'Project.xlsx']=sha(root/'Project.xlsx')
+            publication.checkpoint([path,root/'Project.xlsx'])
+            from tools.project_core.calculations.coverage import ensure_validated_coverage
+            coverage=ensure_validated_coverage(root,lock_held=True)
+            publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
+            changed_units={o['unit_id'],*coverage['changed_units']}
+            changed_paths=[region_directory(root,unit)/(unit+'.xlsx') for unit in sorted(changed_units)]
+            book=read_book(path)
             from tools.project_core.registry.update_project import update
-            update(root,[path],lock_held=True);owned[root/'Project.xlsx']=sha(root/'Project.xlsx');(publisher or _publish)(root,[o['unit_id']])
-            shortcut_status=_shortcut(path.parent,model.parent)
+            update(root,changed_paths,lock_held=True);publication.checkpoint([root/'Project.xlsx']);(publisher or _publish)(root,sorted(changed_units))
+            with publication_write(path.parent/'selected_model.lnk'):
+                shortcut_status=_shortcut(path.parent,model.parent)
             if not missing:
                 final_identity=execution_identity(root,model.parent,book,flags=(expected.get('effective_flags') if not unchanged else None))
                 pinned=model.parent/'results/result_manifest.json'
@@ -162,17 +165,4 @@ def refresh_region(root,region_workbook,*,publisher=None):
                 save_snapshot(path,model.parent,result_identity=final_identity)
             return {'unit_id':o['unit_id'],'selected_model_id':selected,'calculation_status':'pending' if missing else 'ready','missing_stages':missing,'shortcut':shortcut_status,'changed_paths':[path.relative_to(root).as_posix(),'Project.xlsx','interactive_map/']}
         except Exception:
-            for p,value in package_before.items():
-                if value is None:p.unlink(missing_ok=True)
-                else:p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(value)
-            conflicts=[]
-            for p,value in before.items():
-                if p in owned and sha(p)!=owned[p]:conflicts.append(p.relative_to(root).as_posix());continue
-                p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(value)
-            if maps.exists():
-                for p in maps.rglob('*'):
-                    if p.is_file() and p not in prior_pages:p.unlink()
-            if old_shortcut is None:shortcut.unlink(missing_ok=True)
-            else:shortcut.write_bytes(old_shortcut)
-            if conflicts:raise RuntimeError('Refresh failed; concurrent author edits were preserved and require reconciliation: '+', '.join(conflicts))
             raise

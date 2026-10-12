@@ -11,7 +11,7 @@ from tools.project_core.workbooks.workbooks import read_book, records, write_boo
 from tools.project_core.calculations.regional import recalculate, set_setting
 from tools.workflow_checks.calculations.test_workflow import fixture
 from tools.project_core.registry.update_project import update
-from tools.project_core.maps.build_html import linked_layout, relayout, refresh_reviews
+from tools.project_core.maps.build_html import linked_layout, _relayout as relayout, _refresh_reviews as refresh_reviews
 
 ROOT = Path(__file__).resolve().parents[3]
 MODEL = '36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)'
@@ -130,7 +130,11 @@ class ResearcherReviewTests(unittest.TestCase):
             self.assertEqual(workbook['Models & coverage']['B3'].font.color.rgb, 'FF187344'); workbook.close()
             context=root/'common_reference_data/atlas_source_context'; context.mkdir(parents=True)
             with gzip.open(context/'catalog.json.gz','wt') as f: json.dump({'curated_region_ids':[]},f)
-            update(root,[region]); refreshed=records(read_book(project),'Models & coverage','Models')[0]
+            # This fixture isolates central metadata preservation; publication
+            # preflight and canonical model discovery have dedicated tests.
+            from tools.project_core.registry.update_project import _update
+            _update(root,[region])
+            refreshed=records(read_book(project),'Models & coverage','Models')[0]
             self.assertEqual({k:refreshed[k] for k in FIELDS}, registered)
             workbook=openpyxl.load_workbook(project,read_only=True)
             self.assertTrue(workbook['Models & coverage']['B3'].font.color.rgb.endswith('187344'));workbook.close()

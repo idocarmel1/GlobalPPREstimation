@@ -18,7 +18,7 @@ Evidence can be reused when its inputs and settings still match. A reused report
 | Loadable | Its canonical JSON can be read; construction can still fail. |
 | Diagnosed | The recorded method/configuration ran and produced its stated health result. |
 | Ready for arithmetic | Required compatible coefficients, matching and inputs are available. |
-| Validated by researcher | An explicit human decision is registered against the reviewed source and input identities. |
+| Validated by researcher | An explicit human decision is registered against the signed source, canonical extraction and reviewed SPPR diagnostics. |
 | Disqualified by researcher | The explicit negative review and reason are registered. |
 
 A folder, successful file load or displayed number does not answer all of these questions. A diagnostic FAIL stays a FAIL, and a provisional display keeps its qualifications even when it contains finite values.
@@ -29,6 +29,6 @@ The researcher decision is made in the actual Word report. A signed final report
 
 After authorized registration, `Project.xlsx` records the review for the exact `(unit_id, model_id)` pair, and the map/trends display it. Validated models have green Ecopath headings/names. Disqualified models have red headings/names, the exact verdict and reason, and are excluded from the validated-only filter. Disqualification preserves selection/results and transfers no approved sections or group exclusions.
 
-Approved group exclusions affect webpage PPR contributions only. Saved catch, SPPR, diagnostics, regional results and NPP remain intact; omitted weights are not reassigned. The report's confidence table retains its reference year and catch basis. Changes to the signed report or relevant model/calculation inputs require a fresh registration check.
+Approved group exclusions affect webpage PPR contributions only. Saved catch, SPPR, diagnostics, regional results and NPP remain intact; omitted weights are not reassigned. The report's confidence table retains its reference year and catch basis. Changes to the signed report or canonical extraction require the appropriate registration/review check. Review applicability retains the registered GE/TE diagnostic prose and explicit configuration conditions; adding methods, Monte Carlo coefficient changes and general calculation/workbook hashes do not revoke the decision. Numerical eligibility and freshness remain separate, and the original review does not approve new method outcomes.
 
 The [signed-review handoff](../tools/skills/ecopath-model-validation/references/researcher-signoff-and-map.md) describes registration. The [validation skill](../tools/skills/ecopath-model-validation/SKILL.md) and [template guide](../tools/templates/instructions.md) contain the detailed preparation and acceptance procedures. Human-authored text, signatures and manual appendix cells stay part of the review evidence.

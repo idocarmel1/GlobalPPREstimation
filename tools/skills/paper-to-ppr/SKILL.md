@@ -19,7 +19,7 @@ Choose the requested operation using the shared [operation and dependency contra
 | Named mapping or confidence | Targeted mapping; only affected decisions/dependencies |
 | Paper/native/JSON extraction | Extraction; requested model/period and applicable taxonomy |
 | Model diagnostics | Direct diagnostics; GE/TE/With Egestion default, full returns |
-| Registry/map publication | Applicable integration scope and existing freshness/serialization guards |
+| Registry/map publication | Applicable integration scope and freshness/serialization guards; normal map loading ensures full canonical coverage for every registered researcher-validated model |
 | Complete paper-to-PPR | Union of applicable scientific stages; finish all authorized stages |
 | Word/report/review task | [Validation skill](../ecopath-model-validation/SKILL.md), its applicable bounded or full route |
 
@@ -35,6 +35,6 @@ Preserve scientific input values, exact model/group/taxon identities, missingnes
 
 Selection, loadability, construction, readiness and researcher approval are separate. Independent Catch/Classic PPR/NPP survive model switches. Existing explicit scientific execution/adoption authorization is respected without asking again; an extraction request does not authorize selection or numerical repairs. Apply continuing exclusions before any read/hash/copy/render. Proposals remain proposals until authorized adoption.
 
-Use content/dependency identity checks and recheck mutable inputs before publication. Serialize central writes and preserve rollback/stale-page guards. Reuse compatible saved material honestly; report only stages actually independently completed or regenerated and name incomplete stages. No broad Monte Carlo follows from a simple action.
+Use content/dependency identity checks and recheck mutable inputs before publication. Serialize central writes and preserve rollback/stale-page guards. Reuse compatible saved material honestly; report only stages actually independently completed or regenerated and name incomplete stages. Standalone diagnostics and report edits retain their requested scope. The explicitly authorized [validated-model coverage route](references/project-integration.md#full-method-coverage-for-validated-models) requires every engine `ALL_METHOD_KEYS` method, including Monte Carlo, when loading the map; preserve compatible saved methods, compute only missing entries, and never replace a full inventory with a diagnostic subset. Coverage/schema upgrades do not authorize new Monte Carlo draws or replacement of reviewed results. Researcher validation remains tied to the signed source, extraction and reviewed SPPR diagnostics; additional method outcomes and numerical freshness are separate.
 
 The detailed scientific resources remain conditional linked references. Their historical paths/exporter commands do not override the current structure and operation contract.

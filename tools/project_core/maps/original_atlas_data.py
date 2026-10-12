@@ -423,18 +423,82 @@ def verify_retained_unit(region,unit,network_unit,annual,npp):
         if retained!=[r.get(y) for y in YEARS]:raise ValueError(f'{identity}: central annual values changed; include this region in the scoped build')
     if unit.get('npp')!=npp:raise ValueError(f'{identity}: NPP changed; include this region in the scoped build')
 
-def add_source_reviews(root, unit_id, metadata, payloads):
+def candidate_result_models(root, metadata, current_book=None):
+    """Read a candidate's current results without borrowing the default model."""
+    model=(root/metadata['model_path']).resolve().parent
+    snapshot=model/'results/regional_snapshot.xlsx'
+    if not snapshot.is_file():return None
+    if not snapshot.is_relative_to(root.resolve()):raise ValueError('Candidate snapshot is outside the project')
+    manifest_path=model/'results/result_manifest.json'
+    if not manifest_path.is_file():
+        saved=read_book(snapshot)
+        if not rows(saved,'Selected model groups','Group SPPR') and not rows(saved,'PPR','Annual'):
+            return None  # Review-only group identity is not a result package.
+        raise ValueError('Candidate numerical snapshot lacks its result manifest')
+    manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+    fingerprint=sha(snapshot)
+    identity=(metadata['unit_id'],metadata['model_id'])
+    if (manifest.get('unit_id'),manifest.get('model_id'))!=identity or manifest.get('snapshot_sha256')!=fingerprint:
+        raise ValueError('Candidate snapshot identity or hash changed: '+metadata['model_id'])
+    book=read_book(snapshot);settings=overview(book)
+    if (settings.get('unit_id'),settings.get('results_model_id'))!=identity:
+        raise ValueError('Candidate snapshot contains another calculation identity')
+    canonical=sha(model/'model.json')
+    if settings.get('results_model_sha256')!=canonical or manifest.get('canonical_model_sha256')!=canonical:
+        raise ValueError('Candidate snapshot canonical model changed')
+    if settings.get('calculation_input_sha256')!=input_hash(book) or settings.get('calculation_result_sha256')!=result_hash(book):
+        raise ValueError('Candidate snapshot calculations are stale')
+    if any(row.get('model_id')!=identity[1] for row in records(book,'PPR','Matching')+records(book,'Selected model groups','Group SPPR')):
+        raise ValueError('Candidate snapshot model tables contain another model')
+    from tools.project_core.calculations.coverage_candidates import candidate_arithmetic_state,independent_dependencies
+    arithmetic_state=candidate_arithmetic_state(book)
+    unavailable=arithmetic_state.get('pending_reason')
+    if current_book is not None:
+        current=independent_dependencies(current_book)
+        if current!=independent_dependencies(book) or (
+                arithmetic_state and arithmetic_state.get('current_dependencies')!=current):
+            unavailable=unavailable or 'Candidate independent regional inputs changed; refresh candidate arithmetic before displaying annual results'
+    detail,network=detail_from_book(book,identity[0],identity[1])
+    source=model/'sppr_source.xlsx'
+    if not source.is_file():source=model/'model.json'
+    workbook=snapshot.relative_to(root).as_posix()
+    network.update({'workbook':workbook,'workbook_sha256':fingerprint,'source':source.relative_to(root).as_posix(),'source_sha256':sha(source),
+                    'review_flags':review_flags(book),'review_note':settings.get('source_note') or settings.get('calculation_status') or ''})
+    network['group_data']['provenance']['workbook']=workbook
+    if unavailable:
+        # Keep the candidate and its source coefficients selectable, while no
+        # browser path can calculate annual PPR from unreviewed allocations.
+        network.update(verified=False,scopes={},arithmetic_unavailable_reason=unavailable,
+                       review_note='Candidate arithmetic unavailable: '+unavailable)
+        network['review_flags'].append('Candidate arithmetic unavailable: '+unavailable)
+    annual_model={key:copy.deepcopy(value) for key,value in network.items() if key!='scopes'}
+    annual_model['taxon_scopes']=copy.deepcopy(network['scopes']);annual_model['scopes']={}
+    annual=[] if unavailable else records(book,'PPR','Annual')
+    for scope,method in dict.fromkeys((row['scope'],row['method']) for row in annual):
+        annual_model['scopes'].setdefault(scope,{'methods':{}})['methods'][method]=fill_annual(
+            [row for row in annual if row['scope']==scope and row['method']==method])
+    if sha(snapshot)!=fingerprint:raise ValueError('Candidate snapshot changed while building the map')
+    return annual_model,network
+
+
+def add_source_reviews(root, unit_id, metadata, payloads, current_book=None, consumed=None):
     """Keep candidate decisions selectable independently of the map default."""
     for (unit, model_id), row in metadata.items():
         if unit != unit_id or not row.get('researcher_review_summary'):
             continue
         if not row.get('researcher_review_status'):
             continue
+        candidate=candidate_result_models(root,row,current_book) if row['researcher_review_status']=='Validated by researcher' else None
+        if candidate and consumed is not None:
+            consumed[root/candidate[0]['workbook']]=candidate[0]['workbook_sha256']
         review,pending=review_display(root,row,{})
-        for payload in payloads:
+        for index,payload in enumerate(payloads):
             matches=[m for m in payload['models'] if m['id']==model_id]
             if len(matches)>1:raise ValueError('Ambiguous reviewed model: '+model_id)
-            if not matches:
+            if candidate:
+                model=copy.deepcopy(candidate[index])
+                payload['models']=[m for m in payload['models'] if m['id']!=model_id]+[model]
+            elif not matches:
                 # A changed source remains visible as a recorded decision,
                 # but never inherits calculations or an active signoff.
                 model={'id':model_id,'label':model_id,'verified':False,'scopes':{},'source':row['model_path']}
@@ -467,7 +531,7 @@ def datasets(workbook,only_units=None):
     npp=defaultdict(dict);npp_meta=defaultdict(dict)
     for r in records(project,'Regional NPP','NPP'):npp[r['unit_id']][r['method']]=[r.get(y) for y in YEARS]
     for r in records(project,'Regional NPP','Provenance'):npp_meta[r['unit_id']][str(r['year'])]=json.loads(r['details'])
-    oldregions={r['unit_id']:r for r in catalog['regions']};newregions=[];series_units={};network_units={};simple_units={}
+    oldregions={r['unit_id']:r for r in catalog['regions']};newregions=[];series_units={};network_units={};simple_units={};candidate_sources={}
     catalog['annual']={str(y):{} for y in YEARS}
     for region in region_rows:
         unit=region['unit_id'];path=root/region['workbook'];selected=region.get('selected_model_id')
@@ -539,7 +603,8 @@ def datasets(workbook,only_units=None):
                             band=branch(record,treatment,'landings').get('sensitivity')
                             if band:nm.setdefault('discard_sensitivity',{}).setdefault(scope,{}).setdefault(method,{})[treatment]=band
         candidate_metadata={key:value for key,value in model_metadata.items() if key[0]==unit and key[1]!=selected}
-        add_source_reviews(root,unit,candidate_metadata,(u,nu))
+        candidate_book=book if refresh and (selected or changed or unit not in series['units']) else None
+        add_source_reviews(root,unit,candidate_metadata,(u,nu),candidate_book,candidate_sources)
         nu['default_model']=next((i for i,m in enumerate(nu['models']) if m['id']==selected),None)
         nu['selected_articles']=[r['article_id'] for r in records(project,'Papers','Papers') if r['unit_id']==unit and r.get('selected')]
         if not nu['selected_articles']:nu['selected_articles']=[r['article_id'] for r in records(project,'Papers','Papers') if r['unit_id']==unit]
@@ -574,4 +639,6 @@ def datasets(workbook,only_units=None):
             group_sources[path]=digest
     for path,digest in group_sources.items():
         if not Path(path).is_file() or sha(path)!=digest:raise ValueError('Model-catch source changed before payload publication: '+path)
+    for path,digest in candidate_sources.items():
+        if not path.is_file() or sha(path)!=digest:raise ValueError('Candidate snapshot changed before payload publication: '+str(path))
     return catalog,series,project

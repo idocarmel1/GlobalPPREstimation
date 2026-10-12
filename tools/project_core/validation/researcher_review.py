@@ -7,6 +7,9 @@ from xml.etree import ElementTree as etree
 
 STATUS = 'Validated by researcher'
 DISQUALIFIED_STATUS = 'Disqualified by researcher'
+REVIEW_SCOPE = 'model_extraction_and_signed_sppr_diagnostics'
+DIAGNOSTIC_SCOPE_NOTE = ('Validation covers the model extraction and SPPR diagnostics in the signed report. '
+                         'Current calculation results and availability are assessed separately.')
 HEADINGS = ['Model extraction notes', 'GE and TE diagnostics',
             'Groups excluded from displayed PPR', 'Geographic fit', 'Taxon mapping confidence']
 NOTE = ('Following researcher review, seabirds, other mammals, pinnipeds and marine turtles '
@@ -201,15 +204,15 @@ def register_review(project, report, unit_id, model_id, excluded_seq):
     with central_lock(Path(project).resolve().parent):return _register_review(project,report,unit_id,model_id,excluded_seq)
 
 def calculation_review_book(root, metadata, book):
-    """Resolve this model's saved inputs independently of the map default."""
+    """Resolve this model's group identities independently of the map default.
+
+    Calculation freshness belongs to the calculation/publication gates. Neither
+    a calculation fingerprint nor a saved result hash defines researcher review.
+    """
     from tools.project_core.workbooks.workbooks import overview
     settings = overview(book)
     identity = settings.get('results_model_id') or settings.get('selected_model_id')
     if identity == metadata['model_id']:
-        if not settings.get('calculation_input_sha256'):
-            raise ValueError('Review calculation inputs lack their fingerprint')
-        if settings.get('results_model_sha256') and settings['results_model_sha256'] != sha(root / metadata['model_path']):
-            raise ValueError('Review calculation inputs identify a changed canonical model')
         return book
     snapshot = (root / metadata['model_path']).resolve().parent / 'results/regional_snapshot.xlsx'
     if not snapshot.is_relative_to(root) or not snapshot.is_file():
@@ -222,10 +225,8 @@ def calculation_review_book(root, metadata, book):
             saved.setdefault(sheet, {})[table] = (headers, [[r.get(h) for h in headers] for _, r in rows])
     settings = overview(saved)
     identity = settings.get('results_model_id') or settings.get('selected_model_id')
-    if identity != metadata['model_id'] or not settings.get('calculation_input_sha256'):
-        raise ValueError('Saved review calculation inputs identify another model or lack their fingerprint')
-    if settings.get('results_model_sha256') and settings['results_model_sha256'] != sha(root / metadata['model_path']):
-        raise ValueError('Saved review calculation inputs identify a changed canonical model')
+    if identity != metadata['model_id']:
+        raise ValueError('Saved review group identities identify another model')
     return saved
 
 def _register_review(project, report, unit_id, model_id, excluded_seq):
@@ -274,7 +275,7 @@ def _register_review(project, report, unit_id, model_id, excluded_seq):
                                'Model loading, diagnostics and saved workbook calculations retain all groups.')
     values = dict(zip(FIELDS, [status, name, date, report.resolve().relative_to(root).as_posix(),
                               sha(report), sha(root / model['model_path']),
-                              '' if source_only else settings['calculation_input_sha256'], json.dumps(summary, ensure_ascii=False, separators=(',', ':'))]))
+                              '' if source_only else settings.get('calculation_input_sha256', ''), json.dumps(summary, ensure_ascii=False, separators=(',', ':'))]))
     if any(len(str(value)) > 32767 for value in values.values()):
         raise ValueError('Review metadata exceeds Excel cell text limit')
     def put(target, index, value, style):
@@ -353,8 +354,54 @@ def _register_review(project, report, unit_id, model_id, excluded_seq):
             os.unlink(temporary)
     return values
 
+def verified_method_extension(root, metadata, book):
+    """Audit whether new method rows retain a recorded calculation-input snapshot.
+
+    This optional calculation-provenance check does not determine researcher
+    validation. It never updates the signed decision or central fingerprint.
+    """
+    from tools.project_core.workbooks.workbooks import input_hash, overview, read_book, records
+    model = (root / metadata['model_path']).resolve().parent
+    if not model.is_relative_to(root.resolve()):
+        raise ValueError('Method extension evidence is outside the project')
+    manifest_path=model/'results/result_manifest.json'
+    try:
+        manifest_bytes=manifest_path.read_bytes()
+        manifest_sha256=hashlib.sha256(manifest_bytes).hexdigest()
+        manifest = json.loads(manifest_bytes.decode('utf-8'))
+        extension = manifest['review_extension']
+        reviewed = extension['reviewed_methods']
+        if extension.get('schema_version') != 1 or not isinstance(reviewed, list) or not reviewed:
+            raise ValueError('Invalid method extension evidence')
+        if not all(isinstance(method, str) and method for method in reviewed) or len(set(reviewed)) != len(reviewed):
+            raise ValueError('Invalid method extension evidence')
+    except (OSError, KeyError, TypeError, json.JSONDecodeError) as error:
+        raise ValueError('Missing or invalid method extension evidence') from error
+    if 'Group SPPR' not in book.get('Selected model groups', {}):
+        # calculation_review_book uses a narrow read for ordinary signoff. An
+        # extension must instead prove every original numerical dependency.
+        book = read_book(model / 'results/regional_snapshot.xlsx')
+    current = input_hash(book)
+    if current != extension.get('current_input_sha256') or current != overview(book).get('calculation_input_sha256'):
+        raise ValueError('Method extension does not match the current calculation inputs')
+    projected = copy.deepcopy(book)
+    header, values = projected['Selected model groups']['Group SPPR']
+    method_index = header.index('method')
+    projected['Selected model groups']['Group SPPR'] = (header, [row for row in values if row[method_index] in reviewed])
+    original = metadata['reviewed_calculation_input_sha256']
+    if extension.get('original_reviewed_input_sha256') != original or input_hash(projected) != original:
+        raise ValueError('Method extension changed the original reviewed inputs')
+    added = sorted({row['method'] for row in records(book, 'Selected model groups', 'Group SPPR')} - set(reviewed))
+    if not added:
+        raise ValueError('Method extension contains no additional methods')
+    if not manifest_path.is_file() or sha(manifest_path)!=manifest_sha256:
+        raise ValueError('Method extension evidence changed during review verification')
+    return {'reviewed_methods': reviewed[:], 'added_methods': added,'evidence_manifest_sha256':manifest_sha256,
+            'note': 'Additional SPPR methods were calculated after this signed review; this calculation-input comparison does not determine researcher validation.'}
+
+
 def approved_review(root, metadata, book):
-    """Require matching source identities before exposing a review or PPR exclusions."""
+    """Verify the signed extraction/diagnostic decision, separately from PPR freshness."""
     if not metadata or metadata.get('researcher_review_status') not in {STATUS, DISQUALIFIED_STATUS}:
         return None
     summary = json.loads(metadata.get('researcher_review_summary') or '{}')
@@ -363,7 +410,7 @@ def approved_review(root, metadata, book):
                         or metadata.get('reviewed_calculation_input_sha256') or summary.get('excluded_group_ids')):
         raise ValueError('A source-only rejection cannot approve calculations or group exclusions')
     for key in FIELDS:
-        if source_only and key == 'reviewed_calculation_input_sha256':
+        if key == 'reviewed_calculation_input_sha256':
             continue
         if not metadata.get(key):
             raise ValueError('Incomplete central researcher review: ' + key)
@@ -371,11 +418,8 @@ def approved_review(root, metadata, book):
         path = (root / metadata[field]).resolve()
         if not path.is_relative_to(root) or not path.is_file() or sha(path) != metadata[hashfield]:
             raise ValueError('Researcher review source changed; review and register the current ' + field)
-    from tools.project_core.workbooks.workbooks import overview
     if not source_only:
         book = calculation_review_book(root, metadata, book)
-        if overview(book).get('calculation_input_sha256') != metadata['reviewed_calculation_input_sha256']:
-            raise ValueError('Researcher review calculation inputs changed; review the current regional inputs')
     if summary.get('schema_version') != 1 or summary.get('model_id') != metadata['model_id']:
         raise ValueError('Researcher review snapshot identifies another model or schema')
     name, date, source_summary = read_report(root, root / metadata['validation_report_path'], metadata['model_id'])
@@ -390,7 +434,8 @@ def approved_review(root, metadata, book):
     group_ids = {r['group_name'] for r in records(book, 'Selected model groups', 'Groups')}
     if not set(summary.get('excluded_group_ids', [])).issubset(group_ids):
         raise ValueError('Researcher PPR exclusions identify unknown current model groups')
-    return {**summary, 'status': status, 'researcher_name': metadata['researcher_name'],
+    return {**summary, **({'review_scope': REVIEW_SCOPE, 'diagnostic_scope_note': DIAGNOSTIC_SCOPE_NOTE} if not source_only else {}),
+            'status': status, 'researcher_name': metadata['researcher_name'],
             'review_date': metadata['researcher_review_date'], 'report_path': metadata['validation_report_path'],
             'report_sha256': metadata['validation_report_sha256'], 'model_sha256': metadata['reviewed_model_sha256']}
 
@@ -403,18 +448,9 @@ def unavailable_review_model(metadata, review):
             'researcher_review': copy.deepcopy(review), 'display_ppr_excluded_group_ids': review['excluded_group_ids'][:]}
 
 def attach_payload_review(root, metadata, book, model, review, pending=None):
-    """Bind positive signoff to the exact workbook behind displayed calculations."""
-    if review and review.get('status') == STATUS and (
-            model.get('verified') or model.get('scopes') or model.get('group_data') or model.get('values')):
-        from tools.project_core.workbooks.workbooks import overview
-        settings = overview(book)
-        identity = settings.get('results_model_id') or settings.get('selected_model_id')
-        workbook = (region_directory(root, metadata['unit_id']) / (metadata['unit_id'] + '.xlsx')
-                    if identity == metadata['model_id'] else
-                    (root / metadata['model_path']).resolve().parent / 'results/regional_snapshot.xlsx')
-        if not workbook.is_file() or model.get('workbook_sha256') != sha(workbook):
-            review = None
-            pending = recorded_review_pending(metadata, 'Displayed calculations do not match the reviewed model workbook')
+    """Attach the exact model's decision without treating it as calculation approval."""
+    if review and model.get('id') != metadata['model_id']:
+        raise ValueError('Researcher review identifies another payload model')
     for field in ['researcher_review', 'recorded_review_pending', 'display_ppr_excluded_group_ids']:
         model.pop(field, None)
     if review:
@@ -433,8 +469,8 @@ def review_display(root, metadata, book):
     """Preserve a recorded decision while exposing only currently verified approval."""
     try:return approved_review(root,metadata,book),None
     except ValueError as error:
-        # The approval gate remains strict. A stale decision is visible evidence,
-        # with no active exclusions, green eligibility or implied new signoff.
+        # Changed signed sources remain visible as a recorded decision without
+        # granting current approval. Calculation manifests are not review proof.
         return None,recorded_review_pending(metadata,error)
 
 def reviewed_layout(text):

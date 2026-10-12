@@ -1,5 +1,5 @@
 """Exact workbook snapshots with conservative, role-specific numerical reuse."""
-import copy, json, os, shutil, tempfile,math
+import copy, hashlib, json, os, shutil, tempfile,math
 from datetime import datetime, timezone
 from pathlib import Path
 from tools.project_core.workbooks.workbooks import read_book, overview, rows, records, sha, digest_tables,finite
@@ -36,6 +36,23 @@ def save_snapshot(workbook_path, model_dir, *, result_identity):
               'effective_flags':result_identity.get('effective_flags'),'code_identity':result_identity.get('code_identity'),
               'provenance_status':result_identity.get('provenance_status','unknown historical execution'),
               'dependencies':dependencies(book),'artifacts':{'snapshot':'regional_snapshot.xlsx','model':'../model.json','coefficients':'../sppr_source.xlsx' if (model/'sppr_source.xlsx').is_file() else None}}
+    # Navigation-only refreshes must not erase a verified complete inventory or
+    # its proof of unchanged original review inputs. Reuse only the exact same
+    # scientific dependencies and execution; never rebind stale evidence.
+    if manifest_path.is_file() and destination.is_file():
+        try:
+            prior_manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+            from tools.project_core.workbooks.workbooks import input_hash
+            from tools.project_core.calculations.regional import result_hash
+            same=all(prior_manifest.get(key)==manifest.get(key) for key in
+                     ['unit_id','model_id','canonical_model_sha256','coefficient_source_sha256','effective_flags','code_identity','dependencies'])
+            fresh=(o.get('calculation_input_sha256')==input_hash(book)
+                   and o.get('calculation_result_sha256')==result_hash(book))
+            if same and fresh and prior_manifest.get('snapshot_sha256')==sha(destination):
+                for key in ['method_coverage','review_extension']:
+                    if key in prior_manifest:manifest[key]=copy.deepcopy(prior_manifest[key])
+        except (OSError,ValueError,TypeError):
+            pass
     before=sha(path)
     with tempfile.TemporaryDirectory(dir=directory,prefix='.snapshot-') as tmp:
         staged=Path(tmp)/destination.name;shutil.copyfile(path,staged)
@@ -43,11 +60,22 @@ def save_snapshot(workbook_path, model_dir, *, result_identity):
         staged_manifest=Path(tmp)/manifest_path.name;staged_manifest.write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
         # Roll back both package members if replacement fails.
         backups={p:p.read_bytes() if p.exists() else None for p in [destination,manifest_path]}
-        try:os.replace(staged,destination);os.replace(staged_manifest,manifest_path)
+        from tools.project_core.registry.publication import publication_write
+        owned={p:sha(p) if p.is_file() else None for p in backups}
+        try:
+            for source,target in [(staged,destination),(staged_manifest,manifest_path)]:
+                produced=sha(source)
+                with publication_write(target,fingerprint=produced):
+                    os.replace(source,target);owned[target]=produced
         except Exception:
+            conflicts=[]
             for p,data in backups.items():
-                if data is None:p.unlink(missing_ok=True)
-                else:p.write_bytes(data)
+                if (sha(p) if p.is_file() else None)!=owned[p]:
+                    conflicts.append(str(p));continue
+                with publication_write(p,fingerprint=hashlib.sha256(data).hexdigest() if data is not None else None):
+                    if data is None:p.unlink(missing_ok=True)
+                    else:p.write_bytes(data)
+            if conflicts:raise RuntimeError('Snapshot failed; concurrent author edits were preserved: '+', '.join(conflicts))
             raise
     return destination
 

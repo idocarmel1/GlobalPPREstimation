@@ -43,7 +43,7 @@ python tools/cli/project.py --region regions/LME/LME_028/LME_028.xlsx
 python -m tools.project_core.maps.build_html --workbook Project.xlsx
 ```
 
-These commands consume saved regional state. A project update rejects stale results, preserves human metadata and review records, and changes generated summaries. Model selection uses its combined `refresh` command above. Signed-review registration uses its own bounded handoff rather than a general rebuild.
+These publication commands first ensure the authorized full method coverage for registered researcher-validated models, preserving compatible saved methods and computing only missing inventory entries, then consume saved regional state. A new coverage schema does not justify rerunning existing methods or replacing saved Monte Carlo draws. A project update rejects stale results, preserves human metadata and review records, and changes generated summaries. Model selection uses its combined `refresh` command above. Signed-review registration uses its own bounded handoff rather than a general rebuild.
 
 ## Add a paper or prepare a review
 
@@ -51,8 +51,8 @@ A new paper/model needs its actual citation and model metadata registered once i
 
 The [paper-to-PPR workflow](../tools/skills/paper-to-ppr/SKILL.md) describes the scientific stages. The [validation guide](validation.md) explains the report, mapping appendix and researcher decision. In a composed pipeline, mapping is resolved once and its same decisions feed arithmetic and validation. Evidence gaps remain explicit.
 
-Fresh direct diagnostics normally cover GE, TE and With Egestion; validation report rows cover GE/TE. Broad method inventories and Monte Carlo are separate scientific work. The current model's source evidence and recorded settings determine the appropriate configuration.
+Standalone direct diagnostics normally cover GE, TE and With Egestion; validation report rows cover GE/TE. These limited diagnostic/report scopes do not replace the full method inventory required for researcher-validated models on the map. That full inventory is authorized and includes the engine's global, legacy, six symbolic and both Monte Carlo methods. The model's source evidence and actual recorded settings determine its configuration.
 
 ## View the result
 
-Double-click `interactive_map/Open map.cmd`, or run `python tools/cli/map.py`. The launcher serves the map on this computer. Inspect the model heading, diagnostic/review flags, source links and displayed year/basis together. A displayed provisional value is available for review and retains its diagnostic qualifications.
+Double-click `interactive_map/Open map.cmd`, or run `python tools/cli/map.py`. Before serving the map on this computer, the launcher checks full canonical SPPR method coverage for every registered researcher-validated model, including nondefault candidates. It preserves compatible saved methods and computes only missing inventory entries, preserving inputs, mappings, selections and signed reviews. Researcher validation remains tied to extraction and reviewed SPPR diagnostics; new method outcomes or Monte Carlo coefficients do not revoke it. Unsupported or failed methods remain explicitly unavailable or retain their permitted diagnostic flags; coverage is not approval of every method. Inspect the model heading, diagnostic/review flags, source links and displayed year/basis together. A displayed provisional value is available for review and retains its diagnostic qualifications.
