@@ -7,13 +7,13 @@ from tools.project_core.calculations.regional import comparison_tables,result_ha
 from tools.project_core.registry.atlas_ranks import apply_atlas_ranks, ensemble_ids
 from tools.project_core.registry.writes import central_lock
 
-def update(root, paths, all_regions=False, *, lock_held=False):
+def update(root, paths, all_regions=False, *, lock_held=False, ee_floor=None, migration_units=None):
     if not lock_held:
-        with central_lock(root):return update(root,paths,all_regions,lock_held=True)
+        with central_lock(root):return update(root,paths,all_regions,lock_held=True,ee_floor=ee_floor,migration_units=migration_units)
     from tools.project_core.calculations.coverage import ensure_validated_coverage
     from tools.project_core.registry.publication import publication_transaction
     with publication_transaction(root,paths) as publication:
-        coverage=ensure_validated_coverage(root,lock_held=True)
+        coverage=ensure_validated_coverage(root,lock_held=True,ee_floor=ee_floor,migration_units=migration_units)
         publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
         affected=[region_directory(root,unit)/(unit+'.xlsx') for unit in coverage['changed_units']]
         result=_update(root,list(dict.fromkeys([*paths,*affected])),all_regions)
@@ -74,9 +74,28 @@ def _update(root, paths, all_regions=False):
     update_book(project_path,p)
     print(f'Updated {len(units)} regions; central source metadata preserved.',flush=True)
 
+def parse_arguments(arguments=None):
+    ap=argparse.ArgumentParser(description=__doc__)
+    g=ap.add_mutually_exclusive_group();g.add_argument('--all',action='store_true');g.add_argument('--region',type=Path,nargs='+')
+    ap.add_argument('--migrate-ee-floor',action='store_true',help='Explicitly migrate registered validated model calculations with preserved baseline evidence')
+    policy=ap.add_mutually_exclusive_group();policy.add_argument('--ee-floor',type=float,default=None);policy.add_argument('--no-ee-floor',action='store_true')
+    ap.add_argument('--root',type=Path,default=project_root(Path(__file__)))
+    result=ap.parse_args(arguments)
+    if not (result.all or result.region or result.migrate_ee_floor):ap.error('Choose --all, --region, or --migrate-ee-floor')
+    if not result.migrate_ee_floor and (result.ee_floor is not None or result.no_ee_floor):ap.error('Floor policy requires --migrate-ee-floor')
+    result.ee_floor=.1 if result.ee_floor is None else result.ee_floor
+    if result.migrate_ee_floor:
+        from tools.project_core.calculations.ee_floor_migration import target_flags
+        try:target_flags({'constructor':{}},not result.no_ee_floor,result.ee_floor,'validation')
+        except ValueError as error:ap.error(str(error))
+    return result
+
+
 if __name__=='__main__':
-    ap=argparse.ArgumentParser(description=__doc__);g=ap.add_mutually_exclusive_group(required=True);g.add_argument('--all',action='store_true');g.add_argument('--region',type=Path,nargs='+');ap.add_argument('--root',type=Path,default=project_root(Path(__file__)));a=ap.parse_args()
+    a=parse_arguments()
     root=a.root.resolve()
     # Only the grouped <type>/<unit>/<unit>.xlsx is a regional calculation input.
-    paths=sorted(discover_regions(root).values()) if a.all else [p.resolve() for p in a.region]
-    update(root,paths,a.all)
+    paths=sorted(discover_regions(root).values()) if a.all else [p.resolve() for p in (a.region or [])]
+    units={p.stem for p in paths} if a.region else None
+    request={'use_ee_floor':not a.no_ee_floor,'ee_floor':a.ee_floor} if a.migrate_ee_floor else None
+    update(root,paths,a.all,ee_floor=request,migration_units=units)

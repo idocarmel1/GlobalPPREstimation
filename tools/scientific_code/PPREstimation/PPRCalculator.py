@@ -40,7 +40,7 @@ DEFAULT_DIAGNOSTIC_THRESHOLDS = {
 class PPRCalculator:
 
     # constructors:
-    def __init__(self, model_number: int | str, underdetermined: bool = False, zero_catch: bool = True, zero_biomass_accum: bool = True, default_gs: bool = True, weight_flow: float = 1.0, weight_guess: float = 1.0, normalize_DC: bool = False, DC_tol: float = 0.001, balance_BA_after_DC_normalization: bool = True) -> None:
+    def __init__(self, model_number: int | str, underdetermined: bool = False, zero_catch: bool = True, zero_biomass_accum: bool = True, default_gs: bool = True, weight_flow: float = 1.0, weight_guess: float = 1.0, normalize_DC: bool = False, DC_tol: float = 0.001, balance_BA_after_DC_normalization: bool = True, use_ee_floor: bool = True, ee_floor: float = 0.1, ee_threshold: float = 0.1) -> None:
         """Primary constructor: build the calculator directly from a model identifier.
 
         Loads a ModelData from the given model number / json filepath, delegates to
@@ -67,6 +67,10 @@ class PPRCalculator:
             balance_BA_after_DC_normalization (bool): compensate normalization-induced
                 predation through eligible runtime BA. Defaults to True; False retains
                 pre-correction BA. Requires changed normalization to have any effect.
+            use_ee_floor (bool): apply the runtime mortality assumption. Defaults to True.
+            ee_floor (float): replacement EE for eligible groups. Defaults to 0.1.
+            ee_threshold (float): select groups whose pre-floor EE is strictly below
+                this value, independently of ee_floor. Defaults to 0.1.
 
         Returns:
             None. Populates self in place.
@@ -82,12 +86,13 @@ class PPRCalculator:
             weight_guess=weight_guess,
             normalize_DC=normalize_DC,
             DC_tol=DC_tol,
-            balance_BA_after_DC_normalization=balance_BA_after_DC_normalization
+            balance_BA_after_DC_normalization=balance_BA_after_DC_normalization,
+            use_ee_floor=use_ee_floor, ee_floor=ee_floor, ee_threshold=ee_threshold
         )
         self.__dict__.update(instance.__dict__)
          
     @classmethod
-    def from_dict(cls, data_dict: dict, underdetermined: bool = False, zero_catch: bool = True, zero_biomass_accum: bool = True, default_gs: bool = True, weight_flow: float = 1.0, weight_guess: float = 1.0, normalize_DC: bool = False, DC_tol: float = 0.001, balance_BA_after_DC_normalization: bool = True) -> "PPRCalculator":
+    def from_dict(cls, data_dict: dict, underdetermined: Optional[bool] = None, zero_catch: Optional[bool] = None, zero_biomass_accum: Optional[bool] = None, default_gs: Optional[bool] = None, weight_flow: Optional[float] = None, weight_guess: Optional[float] = None, normalize_DC: Optional[bool] = None, DC_tol: Optional[float] = None, balance_BA_after_DC_normalization: Optional[bool] = None, use_ee_floor: Optional[bool] = None, ee_floor: Optional[float] = None, ee_threshold: Optional[float] = None) -> "PPRCalculator":
         """Alternative constructor: rebuild an instance from a dict of pre-existing attributes.
 
         Used to reconstruct a calculator from a previously serialized state (e.g. a toy model)
@@ -111,14 +116,52 @@ class PPRCalculator:
             balance_BA_after_DC_normalization (bool): compensate new normalization-induced
                 predation through eligible runtime BA. Defaults to True. False prevents
                 new corrections; it does not undo BA already supplied in data_dict.
+            use_ee_floor (bool): inherit the saved setting when None, otherwise override.
+            ee_floor (float): replacement EE; None inherits the saved value (0.1 if absent).
+            ee_threshold (float): strict pre-floor EE selection cutoff; None inherits
+                the saved value (0.1 if absent). Independent of the replacement ee_floor.
 
         Returns:
             PPRCalculator: a fully built, sorted instance.
         """
         instance = cls.__new__(cls)
-        instance.__dict__.update(data_dict)
+        instance.__dict__.update(deepcopy(data_dict))
+        arguments = dict(underdetermined=underdetermined, zero_catch=zero_catch,
+            zero_biomass_accum=zero_biomass_accum, default_gs=default_gs,
+            weight_flow=weight_flow, weight_guess=weight_guess, normalize_DC=normalize_DC,
+            DC_tol=DC_tol, balance_BA_after_DC_normalization=balance_BA_after_DC_normalization)
+        loader_requested = any(value is not None for value in arguments.values())
+        defaults = dict(underdetermined=False, zero_catch=True, zero_biomass_accum=True,
+            default_gs=True, weight_flow=1., weight_guess=1., normalize_DC=False,
+            DC_tol=.001, balance_BA_after_DC_normalization=True)
+        inherited = getattr(instance, '_initialization_settings', {})
+        arguments = {key: inherited.get(key, defaults[key]) if value is None else value
+                     for key, value in arguments.items()}
+        underdetermined, zero_catch, zero_biomass_accum = (arguments[k] for k in ('underdetermined','zero_catch','zero_biomass_accum'))
+        default_gs, weight_flow, weight_guess = (arguments[k] for k in ('default_gs','weight_flow','weight_guess'))
+        normalize_DC, DC_tol, balance_BA_after_DC_normalization = (arguments[k] for k in ('normalize_DC','DC_tol','balance_BA_after_DC_normalization'))
+        use_ee_floor = (getattr(instance, 'use_ee_floor', True) if use_ee_floor is None else use_ee_floor)
+        ee_floor = (getattr(instance, 'ee_floor', .1) if ee_floor is None else ee_floor)
+        ee_threshold = (getattr(instance, 'ee_threshold', .1) if ee_threshold is None else ee_threshold)
+        cls.validate_ee_floor(use_ee_floor, ee_floor, ee_threshold)
+        if getattr(instance, '_ee_floor_base', None) is not None:
+            # A serialized completed state is already audited. Re-running the
+            # loader would reinterpret effective mortality as source mortality.
+            if not loader_requested:
+                return instance.apply_ee_floor(use_ee_floor, ee_floor, ee_threshold)._sort()
+            # Explicit loader overrides operate on the pre-floor table. The
+            # new sink must never become an input to source completion.
+            for key, value in instance._ee_floor_base.items():
+                setattr(instance, key, deepcopy(value))
+            for key in ('_ee_floor_base','external_mortality_export','balanced_model'):
+                instance.__dict__.pop(key, None)
+            instance.use_ee_floor = False
+        instance._initialization_settings = {**arguments, 'use_ee_floor':use_ee_floor,
+            'ee_floor':ee_floor, 'ee_threshold':ee_threshold}
 
         groups_df = deepcopy(instance._groups_df)
+        if not hasattr(instance, '_source_groups_before_completion'):
+            instance._source_groups_before_completion = groups_df.copy()
         instance.is_underdetermined = underdetermined
 
         raw_DC = instance.get_DC(DET_as_PP=True)
@@ -151,10 +194,10 @@ class PPRCalculator:
         # sort according to seq:
         instance = instance._sort()
         
-        return instance
+        return instance.apply_ee_floor(use_ee_floor, ee_floor, ee_threshold)
 
     @classmethod
-    def from_modeldata(cls, modeldata: ModelData, underdetermined: bool = False, zero_catch: bool = True, zero_biomass_accum: bool = True, default_gs: bool = True, weight_flow: float = 1.0, weight_guess: float = 1.0, normalize_DC: bool = False, DC_tol: float = 0.001, balance_BA_after_DC_normalization: bool = True) -> "PPRCalculator":
+    def from_modeldata(cls, modeldata: ModelData, underdetermined: bool = False, zero_catch: bool = True, zero_biomass_accum: bool = True, default_gs: bool = True, weight_flow: float = 1.0, weight_guess: float = 1.0, normalize_DC: bool = False, DC_tol: float = 0.001, balance_BA_after_DC_normalization: bool = True, use_ee_floor: bool = True, ee_floor: float = 0.1, ee_threshold: float = 0.1) -> "PPRCalculator":
         """Core constructor used by __init__: build the calculator from a loaded ModelData.
 
         Copies the groups table, diet-composition (DC) matrix, detritus-fate matrix and the
@@ -182,6 +225,10 @@ class PPRCalculator:
             balance_BA_after_DC_normalization (bool): allow the computational BA correction
                 for changed normalized diets. Defaults to True. False records
                 ba_balance_disabled and retains pre-correction runtime BA.
+            use_ee_floor (bool): apply the runtime mortality assumption. Defaults to True.
+            ee_floor (float): replacement EE for eligible groups. Defaults to 0.1.
+            ee_threshold (float): strict pre-floor EE selection cutoff, independent of
+                the replacement ee_floor. Defaults to 0.1.
 
         Returns:
             PPRCalculator: a fully built, sorted instance.
@@ -190,6 +237,13 @@ class PPRCalculator:
             Exception: if the model contains no DET (detritus) group.
         """
         instance = cls.__new__(cls)
+        cls.validate_ee_floor(use_ee_floor, ee_floor, ee_threshold)
+        instance._initialization_settings = dict(underdetermined=underdetermined,
+            zero_catch=zero_catch, zero_biomass_accum=zero_biomass_accum,
+            default_gs=default_gs, weight_flow=weight_flow, weight_guess=weight_guess,
+            normalize_DC=normalize_DC, DC_tol=DC_tol,
+            balance_BA_after_DC_normalization=balance_BA_after_DC_normalization,
+            use_ee_floor=use_ee_floor, ee_floor=ee_floor, ee_threshold=ee_threshold)
         instance._model = modeldata
         instance.is_underdetermined = underdetermined
 
@@ -239,7 +293,164 @@ class PPRCalculator:
         # sort:
         instance._sort()
 
-        return instance
+        return instance.apply_ee_floor(use_ee_floor, ee_floor, ee_threshold)
+
+    @staticmethod
+    def validate_ee_floor(use_ee_floor: bool, ee_floor: float, ee_threshold: float = .1) -> None:
+        """Validate configuration even when the floor is explicitly disabled."""
+        if not isinstance(use_ee_floor, (bool, np.bool_)):
+            raise ValueError('use_ee_floor must be Boolean')
+        for name, value in (('ee_floor', ee_floor), ('ee_threshold', ee_threshold)):
+            if (isinstance(value, (bool, np.bool_))
+                    or not isinstance(value, (int, float, np.integer, np.floating))
+                    or not np.isfinite(value) or not 0 <= value <= 1):
+                raise ValueError(f'{name} must be a finite number between 0 and 1')
+
+    def apply_ee_floor(self, use_ee_floor: bool = True, ee_floor: float = .1, ee_threshold: float = .1) -> "PPRCalculator":
+        """Apply one hypothetical mortality export to the completed audited state.
+
+        No SPPR method calls this transformation. Changing the setting restores
+        the saved pre-floor state first; identical application is a no-op.
+        Source and audited pre-floor mortality are distinct from effective flows.
+        Only eligible groups with EE_before_floor < ee_threshold receive ee_floor;
+        groups at or above the selection threshold retain their original EE/M0.
+        Existing eligibility and nonnegative-export checks remain in force.
+        """
+        self.validate_ee_floor(use_ee_floor, ee_floor, ee_threshold)
+        if (getattr(self, '_ee_floor_base', None) is not None
+                and self.use_ee_floor == use_ee_floor and self.ee_floor == ee_floor
+                and getattr(self, 'ee_threshold', None) == ee_threshold):
+            return self
+        fields = ('_groups_df', 'p', 'q', 'growth', 'M0', 'EE', 'det_export')
+        if getattr(self, '_ee_floor_base', None) is None:
+            self._ee_floor_base = {key: deepcopy(getattr(self, key)) for key in fields}
+        else:
+            for key, value in self._ee_floor_base.items():
+                setattr(self, key, deepcopy(value))
+        self.use_ee_floor, self.ee_floor = bool(use_ee_floor), float(ee_floor)
+        self.ee_threshold = float(ee_threshold)
+        self._initialization_settings = {**getattr(self, '_initialization_settings', {}),
+            'use_ee_floor': self.use_ee_floor, 'ee_floor': self.ee_floor,
+            'ee_threshold': self.ee_threshold}
+        df = self._groups_df
+        self.EE_before_floor, self.M0_before_floor = self.EE.copy(), self.M0.copy()
+        source = getattr(getattr(self, '_model', None), 'groups_data',
+                         getattr(self, '_source_groups_before_completion', df))
+        self.source_EE = getattr(self, 'source_EE', source['ee'].reindex(df.index)).copy()
+        self.source_M0 = getattr(self, 'source_M0', source.get('M0', pd.Series(np.nan, index=source.index)).reindex(df.index)).copy()
+        self.external_mortality_export = pd.Series(0., index=self.p.index)
+        entries = []
+        for seq, row in df.iterrows():
+            ee, production, mortality = self.EE[seq], self.p[seq], self.M0[seq]
+            reason = 'unchanged'
+            if not use_ee_floor:
+                reason = 'disabled'
+            elif row['trophic_info'] not in ('Regular', 'PP'):
+                reason = 'excluded_trophic_type'
+            elif row.get('is_synthetic', False) == True or row.get('operational_pool', False) == True:
+                reason = 'excluded_operational_pool'
+            elif row['trophic_info'] == 'Regular' and (
+                    not np.isfinite(self.q[seq]) or self.q[seq] <= 0
+                    or self._DC.loc[seq].sum(skipna=False) <= 0
+                    or not np.isfinite(self._DC.loc[seq]).all()):
+                reason = 'excluded_nonfeeding_pool'
+            elif (not np.isfinite([row['ee'], row['M0'], row['p'], self.source_EE[seq]]).all()
+                  or not 0 <= self.source_EE[seq] <= 1
+                  or not 0 <= ee <= 1 or mortality < 0):
+                reason = 'invalid_or_missing_input'
+            elif production <= 0:
+                reason = 'nonpositive_production'
+            # Completion can recompute EE as 1-M0/P, rounding an unchanged
+            # source EE exactly at the cutoff down by one floating-point step.
+            # Exact agreement of source EE and threshold mortality identifies
+            # that boundary without widening the strict comparison tolerance.
+            elif ee < ee_threshold and not (
+                    self.source_EE[seq] == ee_threshold
+                    and mortality == production*(1-ee_threshold)):
+                effective_m0 = production*(1-ee_floor)
+                exported = mortality-effective_m0
+                if not np.isfinite(exported) or exported < 0:
+                    reason = 'invalid_mortality_export'
+                else:
+                    self.EE.loc[seq] = ee_floor
+                    self.M0.loc[seq] = effective_m0
+                    self.external_mortality_export.loc[seq] = exported
+                    reason = 'applied'
+            entries.append({'group_seq': seq, 'group_name': row['group_name'],
+                'source_EE': self.source_EE[seq], 'source_M0': self.source_M0[seq],
+                'EE_before_floor': ee, 'M0_before_floor': mortality,
+                'EE_effective': self.EE[seq], 'M0_effective': self.M0[seq],
+                'external_mortality_export': self.external_mortality_export[seq],
+                'applied': reason == 'applied', 'reason': reason})
+        self.ee_floor_ledger = pd.DataFrame(entries).set_index('group_seq')
+        applied = self.ee_floor_ledger.index[self.ee_floor_ledger.applied].tolist()
+        if applied:
+            # Keep the loader's routing semantics, including existing missing-
+            # column conventions. This sink never enters the fate matrix.
+            supply = self.M0 + self.egestion
+            fate = getattr(self, '_det_fate', None)
+            for seq in self.get_DET_seq():
+                inflow = ((supply*fate[seq].reindex(supply.index).fillna(0)).sum()
+                          if fate is not None and seq in fate else supply.sum())
+                self.p.loc[seq] = self.q.loc[seq] = inflow
+                # Preserve any prior detritus catch term in the stock identity.
+                self.growth.loc[seq] = inflow-self.predation[seq]-self.net_migration[seq]-self.catch[seq]
+            if fate is not None:
+                shares = fate.sum(axis=1).reindex(supply.index).fillna(1.)
+                self.det_export = ((1-shares).clip(lower=0)*supply).fillna(0)
+            else:
+                self.det_export = pd.Series(0., index=supply.index)
+        if use_ee_floor:
+            self._sync_effective_table()
+        self.ee_floor_info = {'use_ee_floor': bool(use_ee_floor), 'ee_floor': float(ee_floor),
+            'ee_threshold': float(ee_threshold),
+            'affected_groups': [int(s) for s in applied],
+            'external_mortality_export_total': float(self.external_mortality_export.sum()),
+            'negative_detritus_stock_residuals': {str(s): float(self.growth[s])
+                for s in self.get_DET_seq() if self.growth[s] < 0},
+            'assumption': 'Hypothetical non-fishery external mortality sink; not a published parameter correction',
+            'application_stage': 'completed audited initialization',
+            'researcher_approval': 'Original signed review is separate from this calculation assumption'}
+        self.is_balanced = self.is_model_balanced()[0]
+        # Construct a coherent copy for ON, OFF, and a configuration change.
+        self.__dict__.pop('balanced_model', None)
+        ledger = getattr(self, 'diet_normalization_balance_ledger', None)
+        corrected = isinstance(ledger, pd.DataFrame) and 'applied' in ledger and ledger.applied.any()
+        self.balanced_model = (deepcopy(self)._sort() if self.is_balanced and corrected
+                               else self.balance_model(change_production=False))
+        return self._sort()
+
+    def _sync_effective_table(self, for_balancing: bool = False) -> None:
+        """Synchronize transformed/calculated vectors without changing source data."""
+        for column, attribute in {'external_mortality_export':'external_mortality_export',
+                'EE_before_floor':'EE_before_floor', 'M0_before_floor':'M0_before_floor',
+                'source_EE':'source_EE', 'source_M0':'source_M0'}.items():
+            if hasattr(self, attribute):
+                self._groups_df[column] = getattr(self, attribute)
+        affected = self.ee_floor_ledger.index[self.ee_floor_ledger.applied].tolist()
+        if for_balancing:
+            for column, value in {'p':self.p,'q':self.q,'biomass_accum':self.growth,
+                    'M0':self.M0,'predation':self.predation,
+                    'net_migration':self.net_migration+self._groups_df.get('detritus_import',0.)}.items():
+                self._groups_df[column] = value
+        else:
+            self._groups_df.loc[affected, 'ee'] = self.EE.loc[affected]
+            self._groups_df.loc[affected, 'M0'] = self.M0.loc[affected]
+            if affected:
+                det = self.get_DET_seq()
+                for column, value in {'p':self.p, 'q':self.q, 'biomass_accum':self.growth}.items():
+                    self._groups_df.loc[det, column] = value.loc[det]
+                self._groups_df.loc[affected, 'det_export'] = self.det_export.loc[affected]
+                for rate, value in [('pb', self.p), ('qb', self.q)]:
+                    self._groups_df.loc[det, rate] = value.loc[det]/self._groups_df.loc[det,'biomass']
+        changed = list(self._groups_df.index) if for_balancing else affected
+        if changed:
+            self._groups_df.loc[changed,'flow_to_det'] = (self.M0+self.egestion).loc[changed]
+
+    def _with_external_mortality(self, flow: pd.Series) -> pd.Series:
+        """Use exact legacy arithmetic when no new export exists (including OFF)."""
+        sink = getattr(self, 'external_mortality_export', None)
+        return flow+sink if sink is not None and sink.ne(0).any() else flow
 
     def _reconcile_normalized_diet_biomass_accum(
         self, groups_df: pd.DataFrame, raw_DC: pd.DataFrame, normalization_requested: bool,
@@ -837,7 +1048,7 @@ class PPRCalculator:
             recomputed production and consumption per group so callers can inspect the flows.
         """
         # production = catch + predation + growth + net_migration + M0
-        production = self.catch + self.predation + self.growth + self.net_migration + self.M0
+        production = self._with_external_mortality(self.catch + self.predation + self.growth + self.net_migration + self.M0)
         p_is_balanced = all(np.isclose(production, self.p))
 
         # consumpotion = production + egestion + respiration
@@ -871,12 +1082,12 @@ class PPRCalculator:
         while not close_enough:
             balanced_self.growth = (
                 balanced_self.q - (balanced_self.egestion + balanced_self.respiration + 
-                (balanced_self.catch + balanced_self.net_migration + balanced_self.M0 + balanced_self.predation))
+                balanced_self._with_external_mortality(balanced_self.catch + balanced_self.net_migration + balanced_self.M0 + balanced_self.predation))
             )
             if not change_production:
-                balanced_self.net_migration = balanced_self.p - (balanced_self.catch + balanced_self.M0 + balanced_self.predation + balanced_self.growth)
+                balanced_self.net_migration = balanced_self.p - balanced_self._with_external_mortality(balanced_self.catch + balanced_self.M0 + balanced_self.predation + balanced_self.growth)
             else:
-                balanced_self.p = balanced_self.catch + balanced_self.net_migration + balanced_self.M0 + balanced_self.predation + balanced_self.growth
+                balanced_self.p = balanced_self._with_external_mortality(balanced_self.catch + balanced_self.net_migration + balanced_self.M0 + balanced_self.predation + balanced_self.growth)
             predation = balanced_self.get_Z(DET_as_PP=True).sum(axis=0)
             M0 = balanced_self.p * (1 - balanced_self.EE)
             close_enough = (
@@ -887,6 +1098,8 @@ class PPRCalculator:
             balanced_self.M0 = balanced_self.p * (1 - balanced_self.EE)
             balanced_self.n_balance_runs += 1
         
+        if getattr(balanced_self, 'use_ee_floor', False):
+            balanced_self._sync_effective_table(for_balancing=True)
         return balanced_self
     
     def is_sppr_balanced(self, sppr: pd.DataFrame | pd.Series, diet_import_equations: Optional[tuple] = None) -> tuple[bool, float, float]:
@@ -922,7 +1135,7 @@ class PPRCalculator:
 
             basis_seq = list(self.get_PP_seq()) + list(self.get_Import_seq())
             inflow = self.p[basis_seq].sum()
-            outflow = (self.catch + self.growth + self.net_migration).mul(sppr, fill_value=1).sum()
+            outflow = self._with_external_mortality(self.catch + self.growth + self.net_migration).mul(sppr, fill_value=1).sum()
 
             is_balanced = bool(np.isclose(inflow, outflow))
             return is_balanced, inflow, outflow
@@ -945,7 +1158,7 @@ class PPRCalculator:
             inflow_from_diet_import = a.mul(pd.Series(d), fill_value=0).sum()
 
             inflow = inflow_from_within + inflow_from_diet_import
-            outflow = (self.catch + self.growth + self.net_migration).mul(sppr.sum(axis=1), fill_value=1).sum()
+            outflow = self._with_external_mortality(self.catch + self.growth + self.net_migration).mul(sppr.sum(axis=1), fill_value=1).sum()
 
             is_balanced = bool(np.isclose(inflow, outflow))
             return is_balanced, inflow, outflow
@@ -1277,6 +1490,17 @@ class PPRCalculator:
             'ee0_groups': ee0_groups,
             'ee_marginal_groups': ee_marginal_groups,
         }
+        if getattr(self, 'use_ee_floor', False):
+            before = self.EE_before_floor.drop(index=basal_seq, errors='ignore')
+            model_input['diagnostic_basis'] = 'effective calculation runtime'
+            model_input['before_floor_ee0_groups'] = [int(g) for g in before.index[before == 0]]
+            model_input['before_floor_ee_marginal_groups'] = [int(g) for g in before.index[(before > 0) & (before < th['ee_marginal'])]]
+            model_input['external_mortality_export'] = float(self.external_mortality_export.sum())
+            negative_stock = {str(g): float(self.growth[g]) for g in DET_seq if self.growth[g] < 0}
+            model_input['negative_detritus_stock_residuals'] = negative_stock
+            if negative_stock:
+                model_input['status'] = worst(model_input['status'], 'WARN')
+                warns.append('Negative detritus stock residuals remain unexplained limitations, not evidenced source supply: '+str(negative_stock))
 
         # ------------------------------- the solve(s) -----------------------------------
         # One solve supplies every number below. If the caller's configuration raises -- a
@@ -1492,6 +1716,10 @@ class PPRCalculator:
             md = self.get_model()
             report['footprint'] = footprint
             report['config'] = {
+                'use_ee_floor': getattr(self, 'use_ee_floor', False),
+                'ee_floor': getattr(self, 'ee_floor', None),
+                'ee_threshold': getattr(self, 'ee_threshold', None),
+                'ee_floor_assumption': getattr(self, 'ee_floor_info', None),
                 'TE_option': TE_option,
                 'det_open_mode': det_open_mode,
                 'det_theta': sppr_kwargs.get('det_theta', 1.0),
@@ -3219,7 +3447,7 @@ class PPRCalculator:
         sppr_symbolic = sppr_det_vec + sppr_pp
         
         inflow = self.p[self.get_PP_seq()].sum()
-        outflow = ((self.catch + self.growth + self.net_migration)* sppr_symbolic).sum()
+        outflow = (self._with_external_mortality(self.catch + self.growth + self.net_migration)* sppr_symbolic).sum()
 
         sppr_det = float(sm.solve(inflow - outflow, x)[0])
         

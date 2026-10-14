@@ -1,0 +1,3 @@
+# Irish Sea group profile
+
+Baseline1973; Ecosim hindcast1973–2016. Whole Irish Sea model area58,000km2 (ICES Annex3 printed39/PDF46), subregional within LME024; overlap unmeasured. 41 groups in published order: mammals1–3; seabirds4–5 split by high/low discard diet; fish6–27; benthic/crustacean/cephalopod/plankton consumers28–37; seaweed38 and phytoplankton39; discards40 and detritus41. Four species have adult2+/juvenile0–1 stanzas: cod8–9,whiting10–11,haddock12–13,plaice14–15. No spatial group prefixes. Source names retained verbatim. Group taxonomy descriptions were not inferred. See evidence/REPORT.md and companions/Published_stanzas.csv.

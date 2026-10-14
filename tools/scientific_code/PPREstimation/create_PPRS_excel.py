@@ -44,6 +44,11 @@ Defaults to real_models/EwE_jsons -> output/, with a 180 s per-method budget
 from __future__ import annotations
 
 import multiprocessing as mp
+import argparse
+import hashlib
+import inspect
+import json
+import zipfile
 import os
 import sys
 import traceback
@@ -951,11 +956,66 @@ def build_model_tables(model: PPRCalculator, *, method_keys: Optional[Sequence[s
     )
 
 
-def load_model(model_path: str) -> tuple[PPRCalculator, str]:
+def _file_sha256(path) -> str:
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def _export_constructor(use_ee_floor: bool, ee_floor: float) -> dict:
+    PPRCalculator.validate_ee_floor(use_ee_floor, ee_floor)
+    settings = {name: parameter.default for name, parameter in
+                inspect.signature(PPRCalculator.from_modeldata).parameters.items()
+                if parameter.default is not inspect.Parameter.empty}
+    settings.update(underdetermined=True, zero_biomass_accum=False, DC_tol=.001,
+                    normalize_DC=True, use_ee_floor=bool(use_ee_floor), ee_floor=float(ee_floor))
+    return settings
+
+
+def _export_identity(model_path, method_keys, mc_samples, use_ee_floor, ee_floor) -> dict:
+    """Bind resume to actual scientific inputs, settings, code and requested inventory."""
+    engine = Path(__file__).resolve().parent
+    constructor = _export_constructor(use_ee_floor, ee_floor)
+    return {'schema_version': 1, 'canonical_model_sha256': _file_sha256(model_path),
+            'use_ee_floor': bool(use_ee_floor), 'ee_floor': float(ee_floor),
+            'constructor': constructor,
+            'method_keys': list(method_keys), 'mc_samples': mc_samples,
+            'code_identity': {name: _file_sha256(engine / name) for name in
+                ('PPRCalculator.py', 'ModelData.py', 'utils.py', 'create_PPRS_excel.py')}}
+
+
+def _record_execution(tables, model, identity):
+    actual = getattr(model, '_initialization_settings', None)
+    if actual != identity['constructor']:
+        raise ValueError('Exported calculator settings differ from the requested execution identity')
+    tables.notes.loc['execution_identity'] = [json.dumps(identity, sort_keys=True, allow_nan=False), 'recorded']
+    tables.notes.loc['ee_floor_accounting'] = [json.dumps(model.ee_floor_info, sort_keys=True, allow_nan=False), 'recorded']
+
+
+def _resume_matches(path, identity) -> bool:
+    """Historical outputs without explicit floor/execution evidence cannot be relabeled."""
+    try:
+        with pd.ExcelFile(path) as workbook:
+            notes = pd.read_excel(workbook, sheet_name=SHEET_NOTES, index_col=0)
+            if not notes.index.is_unique or 'execution_identity' not in notes.index:
+                return False
+            recorded = json.loads(notes.loc['execution_identity', 'note'])
+            if recorded != identity:
+                return False
+            for sheet in (SHEET_SPPR_ALL, SHEET_SPPR_INNER, SHEET_SPPR_PP):
+                columns = pd.read_excel(workbook, sheet_name=sheet, index_col=0, nrows=0).columns.tolist()
+                if columns != ['group_name', *identity['method_keys']]:
+                    return False
+        return True
+    except (ValueError, KeyError, TypeError, OSError, zipfile.BadZipFile):
+        return False
+
+
+def load_model(model_path: str, *, use_ee_floor: bool = True,
+               ee_floor: float = .1) -> tuple[PPRCalculator, str]:
     """Load one Ecopath JSON into a calculator, returning it with a human-readable label."""
+    constructor = _export_constructor(use_ee_floor, ee_floor)
     model_data = ModelData(model_path)
     model = PPRCalculator.from_modeldata(
-        model_data, underdetermined=True, zero_biomass_accum=False, DC_tol=0.001, normalize_DC=True)
+        model_data, **constructor)
     label = f"{model_data.model_name} ({model_data.model_year})"
     return model, label
 
@@ -993,7 +1053,8 @@ def _autoformat(writer, sheet_name: str, table: pd.DataFrame, n_index_cols: int,
 def write_model_excel(model_path: str, out_dir: str = DEFAULT_OUT_DIR, *,
                       method_keys: Optional[Sequence[str]] = None,
                       mc_samples: int = DEFAULT_MC_SAMPLES,
-                      method_timeout: Optional[float] = DEFAULT_METHOD_TIMEOUT) -> str:
+                      method_timeout: Optional[float] = DEFAULT_METHOD_TIMEOUT,
+                      use_ee_floor: bool = True, ee_floor: float = .1) -> str:
     """Build every table for one model JSON and write it to a single workbook.
 
     Args:
@@ -1006,10 +1067,15 @@ def write_model_excel(model_path: str, out_dir: str = DEFAULT_OUT_DIR, *,
     Returns:
         str: the path of the workbook written.
     """
-    model, label = load_model(model_path)
+    keys = list(ALL_METHOD_KEYS if method_keys is None else method_keys)
+    identity = _export_identity(model_path, keys, mc_samples, use_ee_floor, ee_floor)
+    model, label = load_model(model_path, use_ee_floor=use_ee_floor, ee_floor=ee_floor)
     tables = build_model_tables(model, method_keys=method_keys, mc_samples=mc_samples,
                                 model_label=label, source_file=os.path.basename(model_path),
                                 method_timeout=method_timeout)
+    _record_execution(tables, model, identity)
+    if _export_identity(model_path, keys, mc_samples, use_ee_floor, ee_floor) != identity:
+        raise ValueError('Model or engine inputs changed during export')
     return write_tables_excel(tables, model_path, out_dir)
 
 
@@ -1344,7 +1410,7 @@ def run_directory(json_dir: str = DEFAULT_JSON_DIR, out_dir: str = DEFAULT_OUT_D
                   mc_samples: int = DEFAULT_MC_SAMPLES,
                   resume: bool = False,
                   method_timeout: Optional[float] = DEFAULT_METHOD_TIMEOUT,
-                  silent: bool = False) -> dict:
+                  silent: bool = False, use_ee_floor: bool = True, ee_floor: float = .1) -> dict:
     """Write one workbook per model JSON in `json_dir`, plus a run report.
 
     A model that cannot be loaded, a method that raises, and a method that runs past its time
@@ -1359,9 +1425,8 @@ def run_directory(json_dir: str = DEFAULT_JSON_DIR, out_dir: str = DEFAULT_OUT_D
         out_dir: where the workbooks and the report are written.
         method_keys: which methods to run; defaults to all of them.
         mc_samples: draws per Monte-Carlo method.
-        resume: continue a previous run -- skip any model whose workbook is already in
-            `out_dir`. The report still lists them, marked as skipped, but their per-model
-            detail (health, issues, Monte-Carlo counts) is not re-derived.
+        resume: skip only workbooks recording the same model bytes, floor/constructor
+            settings, engine code, method inventory and Monte-Carlo sample count.
         method_timeout: wall-clock seconds one method (or one diagnose_sppr row) may run for
             before it is killed and recorded as a timeout. None or 0 runs every method in this
             process with no budget, which is the old behaviour.
@@ -1372,6 +1437,7 @@ def run_directory(json_dir: str = DEFAULT_JSON_DIR, out_dir: str = DEFAULT_OUT_D
         'entries'}.
     """
     keys = list(ALL_METHOD_KEYS if method_keys is None else method_keys)
+    _export_constructor(use_ee_floor, ee_floor)  # Validate even OFF or an empty directory.
     paths = sorted(str(p) for p in Path(json_dir).glob("*.json"))
     entries = []
 
@@ -1380,18 +1446,22 @@ def run_directory(json_dir: str = DEFAULT_JSON_DIR, out_dir: str = DEFAULT_OUT_D
         for model_path in tqdm(paths, disable=silent, desc="models"):
             entry = {"source_file": os.path.basename(model_path)}
             existing = os.path.join(out_dir, Path(model_path).stem + ".xlsx")
-            if resume and os.path.exists(existing):
-                entry["skipped"] = True
-                entry["output"] = existing
-                entries.append(entry)
-                continue
             try:
-                model, label = load_model(model_path)
+                identity = _export_identity(model_path, keys, mc_samples, use_ee_floor, ee_floor)
+                if resume and os.path.exists(existing) and _resume_matches(existing, identity):
+                    entry["skipped"] = True
+                    entry["output"] = existing
+                    entries.append(entry)
+                    continue
+                model, label = load_model(model_path, use_ee_floor=use_ee_floor, ee_floor=ee_floor)
                 entry["model_label"] = label
                 tables = build_model_tables(
                     model, method_keys=keys, mc_samples=mc_samples,
                     model_label=label, source_file=entry["source_file"],
                     method_timeout=method_timeout, runner=runner)
+                _record_execution(tables, model, identity)
+                if _export_identity(model_path, keys, mc_samples, use_ee_floor, ee_floor) != identity:
+                    raise ValueError('Model or engine inputs changed during export')
                 entry["output"] = write_tables_excel(tables, model_path, out_dir)
                 entry["issues"] = tables.issues
                 entry["n_methods"] = len(keys)
@@ -1451,17 +1521,25 @@ def _pop_timeout_flag(argv: list) -> Optional[float]:
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
-    argv = list(sys.argv[1:] if argv is None else argv)
-    resume = False
-    for flag in ("--resume", "-r"):
-        if flag in argv:
-            argv.remove(flag)
-            resume = True
-    method_timeout = _pop_timeout_flag(argv)
-    json_dir = argv[0] if argv else DEFAULT_JSON_DIR
-    out_dir = argv[1] if len(argv) > 1 else DEFAULT_OUT_DIR
-
-    summary = run_directory(json_dir, out_dir, resume=resume, method_timeout=method_timeout)
+    parser = argparse.ArgumentParser(description='Export one SPPR workbook per model JSON')
+    parser.add_argument('json_dir', nargs='?', default=DEFAULT_JSON_DIR)
+    parser.add_argument('out_dir', nargs='?', default=DEFAULT_OUT_DIR)
+    parser.add_argument('--resume', '-r', action='store_true')
+    parser.add_argument('--timeout', '-t', default=str(DEFAULT_METHOD_TIMEOUT))
+    floor = parser.add_mutually_exclusive_group()
+    floor.add_argument('--use-ee-floor', dest='use_ee_floor', action='store_true')
+    floor.add_argument('--no-ee-floor', dest='use_ee_floor', action='store_false')
+    parser.set_defaults(use_ee_floor=True)
+    parser.add_argument('--ee-floor', type=float, default=.1)
+    args = parser.parse_args(argv)
+    try:
+        _export_constructor(args.use_ee_floor, args.ee_floor)
+    except ValueError as error:
+        parser.error(str(error))
+    method_timeout = _pop_timeout_flag(['--timeout', args.timeout])
+    json_dir, out_dir = args.json_dir, args.out_dir
+    summary = run_directory(json_dir, out_dir, resume=args.resume, method_timeout=method_timeout,
+                            use_ee_floor=args.use_ee_floor, ee_floor=args.ee_floor)
     print(f"wrote {summary['n_written']}/{summary['n_models']} workbooks to {out_dir}")
     if summary["n_skipped"]:
         print(f"skipped {summary['n_skipped']} model(s) already present (--resume)")
@@ -1478,12 +1556,4 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-    json_dir = os.path.join("real_models", "global_cover_jsons")
-    out_dir = "output/top10"
-
-    run_directory(json_dir=json_dir, out_dir=out_dir, resume=False, silent=False,
-                  method_timeout=DEFAULT_METHOD_TIMEOUT)
-
-    collect_models_excel(models_dir=out_dir)
-
-    # raise SystemExit(main())
+    raise SystemExit(main())

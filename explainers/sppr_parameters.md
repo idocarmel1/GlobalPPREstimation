@@ -4,6 +4,8 @@ SPPR is the production required from basal sources per unit of a group's product
 
 Sources: [calculator implementation](../tools/scientific_code/PPREstimation/PPRCalculator.py), [exporter implementation](../tools/scientific_code/PPREstimation/create_PPRS_excel.py), [User Guide](PPREstimation/USER_GUIDE.md), and [SPPR Methods](sppr_methods.md). The implementations govern exact defaults.
 
+Both calculator constructors default to `use_ee_floor=True, ee_floor=0.1`; explicit OFF preserves the audited baseline. A finite threshold in `[0, 1]` is required, and Booleans are rejected. The floor applies once after audited initialization to eligible real living groups, including primary producers. It changes effective EE/M0 and records the removed mortality as a hypothetical external nonfishery sink. It is not a solver keyword or a catch adjustment. [Model loading](model_loading.md#ee-floor-a-calculation-assumption) explains the state sequence; the [shared floor contract](../tools/skills/paper-to-ppr/references/ee-floor.md) defines accounting, affected-method reruns and evidence.
+
 ## Direct validation and the primary solver
 
 The [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct-diagnostics.md) defaults to full `diagnose_sppr()` returns for **GE, TE and With Egestion** in a standalone diagnostic request. The separately authorized [validated-model map coverage](../tools/skills/paper-to-ppr/references/project-integration.md#full-method-coverage-for-validated-models) requires every canonical `ALL_METHOD_KEYS` method, including global, legacy, all six symbolic variants and both Monte Carlo methods. Use the already-audited computational input and actual constructor/settings, including `det_collapse`; stock defaults are not permission to alter a regional reconstruction. Coverage completion preserves compatible saved results, including Monte Carlo draws, and computes only missing methods. Deterministic repeats with identical inputs/settings/engine should differ only by numerical roundoff; fresh Monte Carlo samples can produce different estimates.
@@ -19,7 +21,7 @@ The [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct
 | `det_external_sppr` | `0.0` | External source coefficient for `'source_dilution'`. |
 | `fix_EE_0_cases` | `True` | Re-credit consumed source burden to detritus for zero-TE/EE=0 dead ends, **only in single-detritus TE models**. |
 
-The EE-zero flag changes SPPR accounting; it does **not** repair input EE, fix small positive EE, or extend that correction to multiple detritus pools. GE/With Egestion use coupled recycling equations; TE uses direct PP/import ancestry. Diet fractions are not renormalized by `SPPR_new`.
+The EE-zero flag changes SPPR accounting; it does **not** repair input EE, fix small positive EE, or extend that correction to multiple detritus pools. It remains distinct from the constructor's EE floor, which changes the effective runtime state before any solver runs. GE/With Egestion use coupled recycling equations; TE uses direct PP/import ancestry. Diet fractions are not renormalized by `SPPR_new`.
 
 `diagnose_sppr` defaults to `TE_option='GE'`, `short=False`, `flat=False`, `thresholds=None`, `return_sppr=False`; solver keywords pass through to `SPPR_new`. `short=True` drops configuration, footprint and warnings; `flat=True` flattens sections and replaces lists with counts. `return_sppr=True` returns `(report, SPPR, A, L)` from the internal solve, avoiding another calculation.
 

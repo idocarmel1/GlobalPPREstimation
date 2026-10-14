@@ -10,6 +10,8 @@ Pipeline calculation and validation use the same mapping decision set. Validatio
 
 Evidence can be reused when its inputs and settings still match. A reused report is different from independently extracting a paper or regenerating numerical diagnostics. Construction failures, unavailable matrices, unknown provenance and proposed changes remain visible in the report. The [current limitations](limitations.md) explain common restrictions.
 
+An adopted [EE floor](model_loading.md#ee-floor-a-calculation-assumption) is a calculation assumption. Canonical source values and the original signed report remain unchanged. Its reviewed diagnostics remain historical supporting evidence; new transformed diagnostics carry their own configuration, status and eligibility. User authorization to calculate or publish the assumption does not correct published parameters or renew researcher approval. Signed verdicts, explicit configuration conditions and group exclusions retain their original scope.
+
 ## Different questions, different states
 
 | State | What it tells you |

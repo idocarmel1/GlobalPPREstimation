@@ -35,6 +35,17 @@ DET_KEYS = ('DET_TE_vals', 'det_collapse_mode', 'det_open_mode', 'det_theta',
 NEGATIVE_TOLERANCE = 1e-10
 ENGINE_FILES = ('ModelData.py', 'PPRCalculator.py', 'utils.py')
 _PINNED_ENGINES = {}
+EE_FLOOR_UPGRADE = 'ee_floor_v1'
+# Exact pre-floor scientific bodies, recorded before the authorized change.
+# This is a bounded compatibility certificate, not a blanket method exemption.
+_EE_FLOOR_PREDECESSORS = {
+    'is_model_balanced': 'fbf6295ffd29e9533460f82c5b59f9fbbab1c7a48ec64b027d4857e48f6a21f5',
+    'balance_model': 'f6686dd5ec7127321da8c213bbc9eb56e44d43443061939a66f2148de88ca5fe',
+    'is_sppr_balanced': '0b408e67ced34318efc7e5aa9cf64d01f40feab578939136b481639ca180f71c',
+    'diagnose_sppr': 'c7905b1a32bed0f522fad6ca76d6fa45faa8de07bd1fd78f92158c98b29f7e00',
+    '_sample_SPPR_new_forced_balance': 'caabfec6d380cb118c9bcd8d1df942e22fbd84b5a473862f67ed3d6ca6970868',
+}
+_EE_FLOOR_ADDITIONS = {'validate_ee_floor', 'apply_ee_floor', '_sync_effective_table', '_with_external_mortality'}
 
 
 def _engine_paths(flags=None, model_path=None):
@@ -66,8 +77,41 @@ def _engine_paths(flags=None, model_path=None):
 
 def engine_identity(flags=None, model_path=None):
     """Hashes of the actual audited engine and the current canonical registry."""
-    return {name: _hash_bytes(path.read_bytes())
-            for name, path in _engine_paths(flags, model_path).items()}
+    identity = {name: _hash_bytes(path.read_bytes())
+                for name, path in _engine_paths(flags, model_path).items()}
+    calculation = _calculation_engine_path(flags, model_path)
+    if calculation is not None:
+        identity['calculation/PPRCalculator.py'] = _hash_bytes(calculation.read_bytes())
+    return identity
+
+
+def _calculation_engine_path(flags=None, model_path=None):
+    flags = flags or {}
+    upgrade = flags.get('calculation_engine_upgrade')
+    if upgrade is None:
+        return None
+    if upgrade != EE_FLOOR_UPGRADE:
+        raise ValueError('Unsupported calculation engine upgrade: '+str(upgrade))
+    relative = flags.get('calculation_engine_source')
+    calculation = ENGINE/'PPRCalculator.py'
+    if relative is not None:
+        if model_path is None or not isinstance(relative, str) or Path(relative).is_absolute():
+            raise ValueError('Invalid model-relative calculation engine source')
+        root = Path(model_path).resolve().parent
+        calculation = (root/relative).resolve()
+        if not calculation.is_relative_to(root):
+            raise ValueError('Calculation engine source outside model')
+    expected = flags.get('calculation_engine_sha256')
+    if (relative is None and model_path is not None and expected
+            and calculation.is_file() and _hash_bytes(calculation.read_bytes()) != expected):
+        # A migrated package retains these exact executed bytes. Resolve only
+        # its recorded hash, never an arbitrary historical or newer engine.
+        retained = Path(model_path).resolve().parent/'results/diagnostics/ee_floor/executed_code'/expected/'PPRCalculator.py'
+        if retained.is_file():
+            calculation = retained
+    if not expected or not calculation.is_file() or _hash_bytes(calculation.read_bytes()) != expected:
+        raise ValueError('Recorded calculation engine hash mismatch or source missing')
+    return calculation
 
 
 def _scientific_ast(path):
@@ -87,6 +131,16 @@ def _scientific_ast(path):
             and node.name not in loader_methods}
 
 
+def _compatible_scientific_ast(archived_path, calculation_path):
+    archived, current = _scientific_ast(archived_path), _scientific_ast(calculation_path)
+    if set(archived)-set(current) or set(current)-set(archived)-_EE_FLOOR_ADDITIONS:
+        return False
+    for name, body in archived.items():
+        if body != current[name] and _hash_bytes(body.encode('utf-8')) != _EE_FLOOR_PREDECESSORS.get(name):
+            return False
+    return True
+
+
 def _isolated_module(path, name, dependencies):
     """Load unmodified audited source with local engine imports, never aliases.
 
@@ -104,14 +158,16 @@ def _isolated_module(path, name, dependencies):
     module.__dict__['__builtins__'] = {**vars(builtins), '__import__': local_import}
     sys.modules[name] = module
     try:
-        exec(compile(path.read_bytes(), str(path), 'exec'), module.__dict__)
+        executed = path.read_bytes()
+        exec(compile(executed, str(path), 'exec'), module.__dict__)
+        module.__dict__['_executed_source_sha256'] = _hash_bytes(executed)
     except BaseException:
         sys.modules.pop(name, None)
         raise
     return module
 
 
-def _engine(flags=None, model_path=None):
+def _audited_engine(flags=None, model_path=None):
     if str(ENGINE) not in sys.path:
         sys.path.insert(0, str(ENGINE))
     import create_PPRS_excel as exporter
@@ -124,7 +180,7 @@ def _engine(flags=None, model_path=None):
         # All calculation methods/helpers must remain the canonical algorithms.
         cache_key = tuple((name, str(paths[name]), identity[name]) for name in ENGINE_FILES)
         if cache_key not in _PINNED_ENGINES:
-            if _scientific_ast(paths['PPRCalculator.py']) != _scientific_ast(ENGINE / 'PPRCalculator.py'):
+            if not _compatible_scientific_ast(paths['PPRCalculator.py'], ENGINE/'PPRCalculator.py'):
                 raise ValueError('Audited engine scientific methods differ from the canonical supported algorithms')
             prefix = '_sppr_audited_' + _hash_bytes(repr(cache_key).encode('utf-8'))
             data = _isolated_module(paths['ModelData.py'], prefix + '_ModelData', {})
@@ -135,6 +191,41 @@ def _engine(flags=None, model_path=None):
                                          calculator.DEFAULT_DIAGNOSTIC_THRESHOLDS)
         return _PINNED_ENGINES[cache_key]
     return exporter, ModelData, PPRCalculator, DEFAULT_DIAGNOSTIC_THRESHOLDS
+
+
+def _engine(flags=None, model_path=None):
+    """Use immutable audited loading, and an explicitly identified calculation upgrade."""
+    calculation_path = _calculation_engine_path(flags, model_path)
+    audited = _audited_engine(flags, model_path)
+    if calculation_path is None:
+        return audited
+    paths = _engine_paths(flags, model_path)
+    if not _compatible_scientific_ast(paths['PPRCalculator.py'], calculation_path):
+        raise ValueError('Audited engine scientific methods differ from the supported EE-floor upgrade')
+    # Explicit upgrades execute the bound source bytes, even when a standard
+    # module was imported before a code update in this Python process.
+    def scientific_module(path):
+        tree = ast.parse(path.read_text(encoding='utf-8-sig'))
+        class Strip(ast.NodeTransformer):
+            def visit_FunctionDef(self, node):
+                self.generic_visit(node)
+                if node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Constant) and isinstance(node.body[0].value.value, str):
+                    node.body = node.body[1:]
+                return node
+        return ast.dump(Strip().visit(tree), include_attributes=False)
+    if scientific_module(calculation_path) != scientific_module(ENGINE/'PPRCalculator.py'):
+        raise ValueError('Calculation engine is not the supported EE-floor implementation')
+    module_key = (str(calculation_path), flags['calculation_engine_sha256'],
+                  tuple((name, str(paths[name]), _hash_bytes(paths[name].read_bytes())) for name in ENGINE_FILES))
+    prefix = '_sppr_calculation_'+_hash_bytes(repr(module_key).encode('utf-8'))
+    if prefix not in sys.modules:
+        dependency_data = sys.modules[audited[1].__module__]
+        dependency_utils = _isolated_module(paths['utils.py'], prefix+'_utils', {})
+        _isolated_module(calculation_path, prefix, {'ModelData': dependency_data, 'utils': dependency_utils})
+    module = sys.modules[prefix]
+    if module._executed_source_sha256 != flags['calculation_engine_sha256']:
+        raise ValueError('Executed calculation engine bytes differ from their recorded hash')
+    return audited[0], audited[1], module.PPRCalculator, module.DEFAULT_DIAGNOSTIC_THRESHOLDS
 
 
 def method_inventory():
@@ -148,11 +239,14 @@ def _defaults(callable_):
 
 
 def _constructor(flags, model_path=None):
-    _, _, calculator, _ = _engine(flags, model_path)
+    _, _, calculator, _ = _audited_engine(flags, model_path)
     supplied = flags.get('constructor')
     if not isinstance(supplied, dict):
         raise ValueError('Audited constructor settings are required; stock loading is not permitted')
     defaults = _defaults(calculator.from_modeldata)
+    if _calculation_engine_path(flags, model_path) is not None:
+        _engine(flags, model_path)[2].validate_ee_floor(supplied.get('use_ee_floor'), supplied.get('ee_floor'))
+        defaults.update(use_ee_floor=True, ee_floor=.1)
     unknown = set(supplied) - set(defaults)
     if unknown:
         raise ValueError(f'Unknown audited constructor settings: {sorted(unknown)}')
@@ -318,7 +412,10 @@ def _runtime(model):
               'growth', 'immigration', 'emigration', 'net_migration', 'respiration',
               'egestion', 'M0', 'det_export', 'EE', 'GE', 'GS', 'TL', 'seq2name',
               'name2seq', 'diet_normalization_rows', 'diet_normalization_balance_ledger',
-              'balance_BA_after_DC_normalization')
+              'balance_BA_after_DC_normalization', 'use_ee_floor', 'ee_floor',
+              'EE_before_floor', 'M0_before_floor', 'source_EE', 'source_M0',
+              'external_mortality_export', 'ee_floor_ledger', 'ee_floor_info', '_ee_floor_base',
+              '_source_groups_before_completion', '_initialization_settings')
     return encode_lossless({k: getattr(model, k) for k in fields if hasattr(model, k)})
 
 
@@ -327,7 +424,17 @@ def _load(model_path, constructor, flags=None):
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter('always')
         source = modeldata(str(model_path))
-        model = calculator.from_modeldata(source, **constructor)
+        if _calculation_engine_path(flags, model_path) is None:
+            model = calculator.from_modeldata(source, **constructor)
+        else:
+            _, _, loader, _ = _audited_engine(flags, model_path)
+            options = {k:v for k,v in constructor.items() if k not in ('use_ee_floor','ee_floor')}
+            if 'use_ee_floor' in inspect.signature(loader.from_modeldata).parameters:
+                options.update(use_ee_floor=False, ee_floor=constructor['ee_floor'])
+            model = loader.from_modeldata(source, **options)
+            model.__class__ = calculator
+            model._initialization_settings = copy.deepcopy(constructor)
+            model.apply_ee_floor(constructor['use_ee_floor'], constructor['ee_floor'])
     source_state = encode_lossless({'groups': source.groups_data, 'diet': source.DC,
                                     'detritus_fate': source.det_fate})
     return model, source_state, [f'{w.category.__name__}: {w.message}' for w in caught]

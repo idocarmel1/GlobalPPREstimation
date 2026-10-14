@@ -1,6 +1,7 @@
+"""Serve the existing atlas read-only on this computer, without refreshing it."""
 from __future__ import annotations
-from tools.project_core.registry.discovery import project_root, region_directory, discover_regions, discover_models, resolve_model
-"""Open the atlas through a read-only server reachable only on this computer."""
+
+from tools.project_core.registry.discovery import project_root
 
 import argparse
 import hashlib
@@ -112,8 +113,8 @@ def main():
     args = parser.parse_args()
     if not 0 <= args.port <= 65535:
         parser.error('port must be between 0 and 65535')
-    from tools.project_core.maps.build_html import ensure_map_publication
-    ensure_map_publication(ROOT)
+    if not (ROOT / 'interactive_map' / 'index.html').is_file():
+        parser.error('Existing interactive_map/index.html is missing; generate the map separately before opening it')
     ports = list(range(args.port, min(args.port + 10, 65536))) if args.port else [0]
     server, port = find_or_start(ROOT, ports)
     url = f'http://127.0.0.1:{port}/interactive_map/index.html'

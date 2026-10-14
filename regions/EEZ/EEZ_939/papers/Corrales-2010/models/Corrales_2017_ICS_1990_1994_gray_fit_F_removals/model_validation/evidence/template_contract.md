@@ -1,0 +1,8 @@
+# Validation template contract
+Reference: ../../../../../../../../../tools/templates/validation.docx
+SHA-256: 2a6cb630b4697a87ac310a2a3871891ab189ee0466cef218a28d0b4ff384dbc4
+Three rendered reference pages inspected; one A4 portrait section.
+Page geometry: width 21.006153 cm, height 29.693306 cm; margins left 1.651000, right 1.651000, top 1.651000, bottom 1.651000 cm. Header/footer distances and all section XML preserved.
+Typography: retained Normal Calibri 11, Title 23, Heading 1 17, Heading 2 12. Source styles, numbering, theme, custom XML, settings and opaque parts are preserve-only. Title and automatic slots are editable; manual SPPR calculation, Open issues and next action, and Review and reproducibility cell XML are unchanged. No fields, content controls, drawings or hyperlinks exist in the source template.
+Flow: flowing main Field/Entry table; additional user-requested mass-balance section using cloned source table styling; separate coverage/confidence and two component-rule tables; Very low decisions; geographic figures. All automatic placeholders are replaced or removed. Exact-model identity and candidate draft state govern the content. Template margins, table grids, heading styles and page patterns remain authoritative.
+Slots: word/document.xml paragraphs 0–24 and main table labels; automatic table body rows may expand. Existing manual cells are preserve-only. Media and hyperlinks may be added; source source/relationship parts stay unchanged except document.xml, its relationships and Content_Types for added media. All other ZIP parts are restored byte-for-byte after object-model editing. No manual cell is signed or populated.

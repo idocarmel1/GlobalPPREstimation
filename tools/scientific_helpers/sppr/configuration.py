@@ -252,6 +252,10 @@ def _from_evidence(record):
     for key in ('method_timeout_seconds', 'method_timeout_overrides_seconds'):
         if key in record:
             flags[key] = copy.deepcopy(record[key])
+    for key in ('calculation_engine_upgrade', 'calculation_engine_sha256',
+                'calculation_engine_source', 'ee_floor_authorization'):
+        if key in record:
+            flags[key] = copy.deepcopy(record[key])
     if hashes:
         flags['engine_source_hashes'] = hashes
     return flags

@@ -26,6 +26,39 @@ FLAGS = {'constructor': {'underdetermined': True, 'zero_catch': True,
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_explicit_floor_upgrade_preserves_archived_loader_and_records_both_engines(self):
+        with tempfile.TemporaryDirectory() as directory:
+            model = Path(directory) / 'model.json'
+            shutil.copy2(TOY, model)
+            original = self._archived_flags(directory)
+            before, _, _ = coverage._load(model, coverage._constructor(original, model), original)
+            flags = copy.deepcopy(original)
+            flags['constructor'].update(use_ee_floor=True, ee_floor=.1)
+            flags['calculation_engine_upgrade'] = 'ee_floor_v1'
+            flags['calculation_engine_sha256'] = coverage._hash_bytes((coverage.ENGINE/'PPRCalculator.py').read_bytes())
+            identity = coverage.engine_identity(flags, model)
+            self.assertEqual(identity['PPRCalculator.py'], original['engine_source_hashes']['PPRCalculator.py'])
+            self.assertEqual(identity['calculation/PPRCalculator.py'], flags['calculation_engine_sha256'])
+            constructor = coverage._constructor(flags, model)
+            self.assertNotIn('balance_BA_after_DC_normalization', constructor)
+            after, _, _ = coverage._load(model, constructor, flags)
+            self.assertIs(type(after), coverage._engine(flags, model)[2])
+            self.assertTrue(after.use_ee_floor)
+            for field in ('catch', 'predation', 'egestion', 'respiration', 'net_migration'):
+                pd.testing.assert_series_equal(getattr(before, field), getattr(after, field))
+            self.assertIn('external_mortality_export', coverage._runtime(after))
+
+    def test_floor_upgrade_rejects_changed_calculation_engine(self):
+        with tempfile.TemporaryDirectory() as directory:
+            model = Path(directory) / 'model.json'
+            shutil.copy2(TOY, model)
+            flags = self._archived_flags(directory)
+            flags['constructor'].update(use_ee_floor=True, ee_floor=.1)
+            flags['calculation_engine_upgrade'] = 'ee_floor_v1'
+            flags['calculation_engine_sha256'] = '0'*64
+            with self.assertRaisesRegex(ValueError, 'calculation engine'):
+                coverage._constructor(flags, model)
+
     def test_diagnostic_table_restores_mapping_keys_and_blanks_nonfinite(self):
         report={'status':'FAIL','divergence':{'b':np.inf,'sppr_det':{7:2.,9:np.nan}},
                 'warnings':('one','two')}

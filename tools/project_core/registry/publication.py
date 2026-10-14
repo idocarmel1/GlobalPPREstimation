@@ -41,6 +41,7 @@ class PublicationBackup:
             self.artifacts.update([model / 'sppr_source.xlsx', model / 'results/regional_snapshot.xlsx',
                                    model / 'results/result_manifest.json'])
             self.generated_directories.append(model / 'results/diagnostics/method_coverage')
+            self.generated_directories.append(model / 'results/diagnostics/ee_floor')
         for directory in self.generated_directories:
             if directory.is_dir():
                 self.artifacts.update(path for path in directory.rglob('*') if path.is_file())

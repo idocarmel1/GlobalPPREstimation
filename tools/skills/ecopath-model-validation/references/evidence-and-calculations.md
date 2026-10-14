@@ -27,6 +27,8 @@ Check publication identity separately from folder location and file presence. A 
 
 The [pipeline reconstruction reference](../../paper-to-ppr/references/reconstruction-audit.md) distinguishes source, loader and computational state. Use it for source-fidelity interpretation, without running its extraction/conversion stages. The [direct-diagnostics reference](../../paper-to-ppr/references/direct-diagnostics.md) explains returned outcomes and configuration identity; validation alone does not call the solver.
 
+For EE-floor evidence, read the [shared accounting reference](../../paper-to-ppr/references/ee-floor.md). Compare source EE/M0, completed pre-floor EE/M0, effective values and the hypothetical nonfishery sink with explicit constructor flags and actual engine provenance. Check fate-routed reduced mortality, detritus residuals and the weighted sink in balance diagnostics; a negative detritus stock residual is a limitation, not evidence of an import. Keep historical signed diagnostics and new transformed diagnostics distinct. Saved review approval does not approve the new assumption or its outcomes; preserve each result's diagnostic/Monte Carlo eligibility and all signed exclusions.
+
 ## Exact identity and freshness
 
 For each result used, record the available model ID, canonical/computational input identity, group-ID mapping, method and source scope, and configuration/engine evidence. Hash permitted exact inputs when useful. Match saved results to those identities; similar filenames and matching group counts are insufficient.

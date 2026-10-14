@@ -37,6 +37,17 @@ def plan_methods(expected, context, saved, row_hashes):
     return pending
 
 
+def _same_context(saved, current):
+    """Adapter metadata alone cannot invalidate compatible numerical evidence."""
+    if not isinstance(saved,dict) or not isinstance(current,dict):return saved==current
+    return {key:value for key,value in saved.items() if key!='adapter_sha256'} == {
+        key:value for key,value in current.items() if key!='adapter_sha256'}
+
+
+def _planning_coverage(coverage,context):
+    return {**coverage,'context':context} if _same_context(coverage.get('context'),context) else coverage
+
+
 def _json(value):
     if isinstance(value, dict):
         return value
@@ -79,6 +90,7 @@ def _arithmetic_identity():
     core = Path(__file__).resolve().parents[1]
     return {name:sha(core/name) for name in
             ('calculations/coverage.py','calculations/coverage_candidates.py',
+             'calculations/ee_floor_migration.py','calculations/ee_floor_execution.py',
              'calculations/regional.py','workbooks/workbooks.py')}
 
 
@@ -90,20 +102,33 @@ def _method_rows(book):
     return result, {key: digest_tables(value) for key, value in result.items()}
 
 
-def _write_json(path, value):
+_UNSET = object()
+
+
+def _write_bytes(path, data, *, expected_sha256=_UNSET):
+    from tools.project_core.workbooks.workbooks import sha
     path.parent.mkdir(parents=True, exist_ok=True)
-    fd, temporary = tempfile.mkstemp(dir=path.parent, suffix='.json'); os.close(fd)
+    before=sha(path) if path.is_file() else None
+    if expected_sha256 is not _UNSET and before!=expected_sha256:
+        raise ValueError('Output changed before replacement: '+str(path))
+    fd, temporary = tempfile.mkstemp(dir=path.parent, suffix=path.suffix); os.close(fd)
     try:
-        Path(temporary).write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf-8')
+        Path(temporary).write_bytes(data)
+        if (sha(path) if path.is_file() else None)!=before:
+            raise ValueError('Output changed during replacement: '+str(path))
         os.replace(temporary, path)
     finally:
         Path(temporary).unlink(missing_ok=True)
 
 
+def _write_json(path, value, *, expected_sha256=_UNSET):
+    _write_bytes(path,json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False).encode('utf-8'),expected_sha256=expected_sha256)
+
+
 def _cached_methods(model_dir, coverage, context, book, expected):
     from tools.project_core.workbooks.workbooks import sha
     _, row_hashes = _method_rows(book)
-    pending = plan_methods(expected, context, coverage, row_hashes)
+    pending = plan_methods(expected, context, _planning_coverage(coverage,context), row_hashes)
     for evidence in coverage.get('execution_evidence',{}).values():
         path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
         if not path.is_relative_to(model_dir.resolve()) or not path.is_file() or sha(path)!=evidence.get('sha256'):
@@ -136,7 +161,7 @@ def _package_cache_valid(model_dir, path, manifest, context, expected):
     if not source.is_file() or sha(source) != manifest.get('coefficient_source_sha256'):
         return False
     hashes = {key:value.get('group_rows_sha256') for key,value in coverage.get('methods', {}).items()}
-    if any(not value for value in hashes.values()) or plan_methods(expected, context, coverage, hashes):
+    if any(not value for value in hashes.values()) or plan_methods(expected, context, _planning_coverage(coverage,context), hashes):
         return False
     references = [coverage['methods'][key].get('evidence') or {} for key in expected]
     references.extend(coverage.get('execution_evidence',{}).values())
@@ -171,17 +196,20 @@ def _source_matches(model_dir, book, expected):
     return True
 
 
-def _update_source(path, book, outcomes):
+def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups=None, expected_sha256=_UNSET):
     """Append missing scoped columns without rewriting retained source cells."""
     import openpyxl
     from xml.etree import ElementTree as etree
     from tools.project_core.validation.researcher_review import sheet_xml, S
-    from tools.project_core.workbooks.workbooks import records, clean
+    from tools.project_core.workbooks.workbooks import records, clean, sha
+    baseline=sha(path) if path.is_file() else None
+    if expected_sha256 is not _UNSET and baseline!=expected_sha256:
+        raise ValueError('Source workbook changed before replacement')
     workbook = openpyxl.load_workbook(path) if path.is_file() else openpyxl.Workbook()
     def formula(cell):
         value = cell.find(f'{{{S}}}f')
         return None if value is None else (value.text, sorted(value.attrib.items()))
-    original_numbers = {}
+    original_numbers = {}; changed_cells = {}; replace_methods = set(replace_methods)
     if path.is_file():
         with zipfile.ZipFile(path) as archive:
             for name in workbook.sheetnames:
@@ -214,18 +242,30 @@ def _update_source(path, book, outcomes):
             if row['scope'] == scope:
                 values.setdefault(row['group'], {})[row['method']] = row['sppr']
         for method in methods:
-            if method in header:
+            if method in header and method not in replace_methods:
                 continue
             added_methods.add(method)
-            column = len(header) + 1; header.append(method)
-            sheet.cell(1,column,method)
+            if method in header:
+                column = header.index(method) + 1
+            else:
+                column = len(header) + 1; header.append(method)
+                sheet.cell(1,column,method)
             for group, coefficients in values.items():
                 if group not in positions:
                     positions[group] = sheet.max_row + 1
                     sheet.cell(positions[group],group_column,group)
                     if 'seq' in header:
                         sheet.cell(positions[group],header.index('seq')+1,sequences.get(group))
-                sheet.cell(positions[group],column,coefficients.get(method))
+                sheet.cell(positions[group],column).value=coefficients.get(method)
+                changed_cells.setdefault(name,set()).add(sheet.cell(positions[group],column).coordinate)
+    if effective_groups is not None:
+        if 'groups_df' in workbook: workbook.remove(workbook['groups_df'])
+        sheet = workbook.create_sheet('groups_df')
+        frame = effective_groups.reset_index()
+        sheet.append(list(frame.columns))
+        for record in frame.itertuples(index=False,name=None):
+            sheet.append([clean(value) for value in record])
+        original_numbers.pop('groups_df',None)
     name = 'method_coverage'
     if name in workbook:
         workbook.remove(workbook[name])
@@ -242,6 +282,12 @@ def _update_source(path, book, outcomes):
             relevant = ({options[key] for key in added_methods if key in options} if name=='model_health'
                         else {key for key in added_methods if key.startswith('MC_')})
             if not relevant:
+                continue
+            if replace_methods:
+                workbook.remove(workbook[name]); sheet=workbook.create_sheet(name)
+                sheet.append(header)
+                for row in values:sheet.append([clean(value) for value in row])
+                original_numbers.pop(name,None)
                 continue
             selected = [row for row in values if any(dict(zip(header,row)).get(key) in relevant
                         for key in ('TE_option','config_TE_option','method'))]
@@ -272,6 +318,7 @@ def _update_source(path, book, outcomes):
             for name, values in original_numbers.items():
                 member, sheet = sheet_xml(archive,name); changed = False
                 for cell in sheet.iter(f'{{{S}}}c'):
+                    if cell.get('r') in changed_cells.get(name,set()): continue
                     previous = values.get(cell.get('r'))
                     if previous is None or cell.get('t') not in (None,'n') or formula(cell) != previous[1]: continue
                     value = cell.find(f'{{{S}}}v')
@@ -284,19 +331,21 @@ def _update_source(path, book, outcomes):
                 for info,data in parts: archive.writestr(info,data)
         with zipfile.ZipFile(temporary) as archive:
             if archive.testzip() is not None: raise ValueError('Updated source workbook ZIP failed verification')
+        if (sha(path) if path.is_file() else None)!=baseline:
+            raise ValueError('Source workbook changed during replacement')
         os.replace(temporary, path)
     finally:
         workbook.close(); Path(temporary).unlink(missing_ok=True)
 
 
-def _apply_outcomes(book, model_id, outcomes, pending):
+def _apply_outcomes(book, model_id, outcomes, pending, *, migration=False):
     from tools.project_core.workbooks.workbooks import rows, records, ANNUAL_HEADER, finite, digest_tables
     # Adopting evidence for a saved method is not a new scientific execution.
     # Its coefficients, annual restrictions and diagnostics stay exactly saved.
     pending = [key for key in pending if not outcomes[key].get('preserve_saved')]
     current = rows(book, 'Selected model groups', 'Group SPPR')
     old_status = {(row[1],row[2]):str(row[6]) for row in rows(book,'PPR','Annual')
-                  if row[4]=='method' and row[5]=='ppr'}
+                  if row[3]=='landings' and row[4]=='method' and row[5]=='ppr'}
     unchanged_scopes = {}
     for row in current:
         if row[3] not in pending:
@@ -336,7 +385,13 @@ def _apply_outcomes(book, model_id, outcomes, pending):
             status = outcomes[method].get('annual_status', {}).get(scope, 'unavailable: no scoped outcome')
             executed_status = status
             prior = old_status.get((scope,method),'')
-            if not method.startswith('MC_'):
+            if migration and prior and prior != 'ok':
+                values = outcomes[method].get('scopes',{}).get(scope,{}).values()
+                if prior.startswith('provisional:') and any(finite(value) for value in values):
+                    status = prior if status=='ok' or status in prior else prior+'; refreshed diagnosis: '+status
+                elif not prior.startswith('provisional:'):
+                    status = prior if status=='ok' or status in prior else prior+'; refreshed diagnosis: '+status
+            elif not method.startswith('MC_'):
                 if status == 'ok' and prior.startswith(('FAIL','DIVERGED','NOT_RUN')):
                     status = prior
                 elif (prior.startswith('provisional:') and unchanged_scopes.get((scope,method))
@@ -389,7 +444,7 @@ def _preserved_inputs(book):
                               ('PPR', 'Matching'), ('PPR', 'Allocation assumptions'), ('PPR', 'Mapping review')})])
 
 
-def _arithmetic(book, path, model, flags, original_book=None):
+def _arithmetic(book, path, model, flags, original_book=None, *, migration=False, invalidated_methods=()):
     from tools.project_core.workbooks.workbooks import overview, sha, rows, digest_tables, input_hash
     from tools.project_core.calculations.regional import recalculate, set_setting, set_result_hash, result_hash
     old_overview = copy.deepcopy(overview(book))
@@ -421,7 +476,7 @@ def _arithmetic(book, path, model, flags, original_book=None):
             for row in rows(value,'Selected model groups','Group SPPR'):
                 target.setdefault((row[2],row[3]),[]).append(row)
         unchanged = {key for key in old_groups.keys() & new_groups.keys()
-                     if digest_tables(old_groups[key]) == digest_tables(new_groups[key])}
+                     if key[1] not in invalidated_methods and digest_tables(old_groups[key]) == digest_tables(new_groups[key])}
         previous = overview(original_book)
         input_fresh = not previous.get('calculation_input_sha256') or previous['calculation_input_sha256'] == input_hash(original_book)
         result_fresh = not previous.get('calculation_result_sha256') or previous['calculation_result_sha256'] == result_hash(original_book)
@@ -466,6 +521,9 @@ def _arithmetic(book, path, model, flags, original_book=None):
                         book['PPR']['Annual'][1].append(copy.deepcopy(row))
     for key in ('selected_model_id', 'selection_rationale', 'model_path'):
         set_setting(book, key, old_overview.get(key))
+    if migration and original_book is not None:
+        from tools.project_core.calculations.ee_floor_migration import preserve_restrictions
+        preserve_restrictions(book,original_book)
     set_result_hash(book)
 
 
@@ -548,11 +606,12 @@ def _restore_retained_numbers(path, requested, original):
     return True
 
 
-def _save_calculation(path, book, model, flags, original_book, *, pending_reason=None, on_write=None):
+def _save_calculation(path, book, model, flags, original_book, *, pending_reason=None, on_write=None, before_write=None, migration=False, invalidated_methods=()):
     """Certify persisted tables, including Excel's signed-zero normalization."""
     from tools.project_core.workbooks.workbooks import update_book, read_book, overview, input_hash
     from tools.project_core.calculations.regional import set_result_hash, result_hash
     def save(value):
+        if before_write is not None:before_write()
         update_book(path,value)
         if on_write is not None:on_write()
         if _restore_retained_numbers(path,value,original_book) and on_write is not None:on_write()
@@ -563,7 +622,7 @@ def _save_calculation(path, book, model, flags, original_book, *, pending_reason
             from tools.project_core.calculations.coverage_candidates import suppress_candidate_arithmetic
             suppress_candidate_arithmetic(saved,pending_reason)
         else:
-            _arithmetic(saved,path,model,flags,original_book)
+            _arithmetic(saved,path,model,flags,original_book,migration=migration,invalidated_methods=invalidated_methods)
         saved = save(saved)
     # Rounded tiny negative taxon coefficients can serialize as -0 and reload
     # as integer 0. Hash these actual saved outputs without altering historical
@@ -578,7 +637,7 @@ def _save_calculation(path, book, model, flags, original_book, *, pending_reason
     return saved
 
 
-def _complete_model(root, metadata, expected, *, progress, compute):
+def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=None):
     from tools.project_core.registry.discovery import region_directory, resolve_model
     from tools.project_core.workbooks.workbooks import read_book, overview, sha, input_hash, update_book
     from tools.project_core.calculations.snapshots import dependencies
@@ -609,7 +668,12 @@ def _complete_model(root, metadata, expected, *, progress, compute):
     except ValueError:
         # Legacy settings/sample counts may require the full saved tables.
         flags = None
-    if is_current and manifest.get('method_coverage') and flags is not None:
+    requested_change = False
+    if ee_floor and flags is not None:
+        from tools.project_core.calculations.ee_floor_migration import target_flags
+        from tools.scientific_helpers.sppr.method_coverage import ENGINE
+        requested_change = target_flags(flags,ee_floor['use_ee_floor'],ee_floor['ee_floor'],sha(ENGINE/'PPRCalculator.py')) != flags
+    if is_current and manifest.get('method_coverage') and flags is not None and not requested_change:
         context = _context(root, model, flags)
         if _package_cache_valid(model_dir, path, manifest, context, expected):
             progress(f"{metadata['unit_id']}/{model_dir.name}: reusing complete fresh {len(expected)}-method package")
@@ -633,11 +697,27 @@ def _complete_model(root, metadata, expected, *, progress, compute):
         flags = resolve_audited_configuration(model_dir, book, manifest)
     except ValueError as error:
         flags = None; configuration_error = str(error)
+    migration = None
+    original_context = _context(root, model, flags)
+    if ee_floor:
+        if configuration_error:raise ValueError('EE-floor migration requires audited settings: '+configuration_error)
+        from tools.project_core.calculations.ee_floor_migration import prepare
+        migration = prepare(model,flags,expected,ee_floor)
+        if migration:flags=migration['flags']
     context = _context(root, model, flags)
+    if context.get('code_identity'):
+        from tools.scientific_helpers.sppr.method_coverage import _engine_paths, _calculation_engine_path
+        code_paths=list(_engine_paths(flags,model).values())
+        calculation_path=_calculation_engine_path(flags,model)
+        if calculation_path:code_paths.append(calculation_path)
+        from tools.scientific_helpers.sppr import method_coverage as adapter
+        code_paths.append(Path(adapter.__file__))
+        consumed_hashes.update({code:sha(code) for code in code_paths})
     if configuration_error:
         context['configuration_error'] = configuration_error
     coverage = manifest.get('method_coverage', {})
     pending = _cached_methods(model_dir, coverage, context, book, expected)
+    if migration:pending=list(expected)
     source = model_dir / 'sppr_source.xlsx'
     arithmetic_fresh = settings.get('calculation_input_sha256') == input_hash(book)
     from tools.project_core.calculations.regional import result_hash
@@ -648,7 +728,7 @@ def _complete_model(root, metadata, expected, *, progress, compute):
     package_fresh = (snapshot.is_file() and manifest.get('snapshot_sha256')==sha(snapshot)
                      and manifest.get('snapshot_sha256')==sha(path) and source.is_file()
                      and manifest.get('coefficient_source_sha256')==sha(source))
-    if not pending and arithmetic_fresh and package_fresh and _source_matches(model_dir, book, expected):
+    if not migration and not pending and arithmetic_fresh and package_fresh and _source_matches(model_dir, book, expected):
         progress(f"{metadata['unit_id']}/{model_dir.name}: reusing complete fresh {len(expected)}-method package")
         return False, {'unit_id': metadata['unit_id'], 'model_id': model_dir.name, 'reused': True,
                        'methods': coverage['methods']}
@@ -663,33 +743,76 @@ def _complete_model(root, metadata, expected, *, progress, compute):
     # regional workbook together; signed reports and model inputs are never edited.
     destinations = [source, path, manifest_path, model_dir/'results/regional_snapshot.xlsx']
     evidence_dir = model_dir / 'results/diagnostics/method_coverage'
-    existing_evidence = {p: p.read_bytes() for p in evidence_dir.rglob('*') if p.is_file()} if evidence_dir.exists() else {}
+    floor_dir = model_dir/'results/diagnostics/ee_floor'
+    existing_evidence = {p:p.read_bytes() for directory in (evidence_dir,floor_dir) if directory.exists()
+                         for p in directory.rglob('*') if p.is_file()}
     backups = {p: p.read_bytes() if p.is_file() else None for p in set(destinations)}
     backups.update(existing_evidence)
     owned = {p: sha(p) if p.is_file() else None for p in backups}
     written = set()
     before.update({p:value for p,value in owned.items() if value is not None})
+    def check_inputs():
+        for consumed,fingerprint in before.items():
+            expected_hash=owned.get(consumed,fingerprint)
+            if (sha(consumed) if consumed.is_file() else None)!=expected_hash:
+                raise ValueError('Inputs changed before publication replacement: '+str(consumed))
     evidence_dir.parent.mkdir(parents=True, exist_ok=True)
     staging = tempfile.TemporaryDirectory(dir=evidence_dir.parent, prefix='.method-coverage-')
     staged_dir = Path(staging.name).resolve()
     if not staged_dir.is_relative_to(evidence_dir.parent.resolve()):
         raise ValueError('Evidence staging escaped the model result directory')
     try:
-        outcomes = copy.deepcopy(coverage.get('methods', {})) if coverage.get('context') == context else {}
-        execution_evidence = copy.deepcopy(coverage.get('execution_evidence',{})) if coverage.get('context')==context else {}
+        outcomes = copy.deepcopy(coverage.get('methods', {})) if _same_context(coverage.get('context'),context) else {}
+        execution_evidence = copy.deepcopy(coverage.get('execution_evidence',{})) if _same_context(coverage.get('context'),context) else {}
         promoted_references = []
+        floor_promotions = []
+        baseline = None
+        execution_cache = None
         if pending:
-            from tools.scientific_helpers.sppr.retained_methods import adopt_saved_methods
-            reused = adopt_saved_methods(model_dir, manifest, context, book, staged_dir, pending,
-                                         reviewed_model_sha256=metadata.get('reviewed_model_sha256'))
-            unretained = [key for key in pending if key in saved_method_rows and key not in reused]
+            if migration:
+                from tools.project_core.calculations.ee_floor_migration import save_baseline, retained_outcomes, _write_gzip
+                floor_staging=staged_dir/'ee_floor'; floor_staging.mkdir()
+                baseline=save_baseline(model_dir,{p:backups[p] for p in destinations},manifest,floor_staging)
+                baseline['path']='ee_floor/'+baseline['path']
+                floor_promotions.append(baseline)
+                reused=retained_outcomes(manifest,migration['compatible'],book,staged_dir,context,baseline,
+                                        original_context=original_context,model_dir=model_dir,
+                                        reviewed_model_sha256=metadata.get('reviewed_model_sha256'))
+                record={key:migration[key] for key in ('before_runtime','after_runtime','old_warnings','new_warnings')}
+                from tools.scientific_helpers.sppr.method_coverage import encode_lossless
+                record.update(info=encode_lossless(migration['info']),ledger=encode_lossless(migration['ledger']),
+                              baseline=baseline,original_flags=copy.deepcopy(coverage.get('context',{}).get('flags',manifest.get('effective_flags'))),requested_flags=flags)
+                runtime=_write_gzip(floor_staging/'runtime.json.gz',record);runtime['path']='ee_floor/'+runtime['path']
+                floor_promotions.append(runtime);execution_evidence['ee_floor_migration']=runtime
+                code_hash=__import__('hashlib').sha256(migration['calculation_code']).hexdigest()
+                relative='ee_floor/executed_code/'+code_hash+'/PPRCalculator.py'
+                code=staged_dir/relative;code.parent.mkdir(parents=True);code.write_bytes(migration['calculation_code'])
+                floor_promotions.append({'path':relative,'sha256':code_hash})
+            else:
+                from tools.scientific_helpers.sppr.retained_methods import adopt_saved_methods
+                reused = adopt_saved_methods(model_dir, manifest, context, book, staged_dir, pending,
+                                             reviewed_model_sha256=metadata.get('reviewed_model_sha256'))
+            unretained = [key for key in pending if key in saved_method_rows and key not in reused] if not migration else []
             if unretained:
                 raise ValueError('Saved method evidence needs an explicit scientific refresh; existing results were preserved: '
                                  + ', '.join(unretained))
             if reused:
                 progress(f"{metadata['unit_id']}: retained saved methods without rerunning: {', '.join(reused)}")
             execute = [key for key in pending if key not in reused]
-            calculated = compute(model, flags, execute, staged_dir, progress=progress) if execute else {'methods':{}}
+            if migration and execute:
+                from tools.project_core.calculations.ee_floor_execution import load_execution, save_execution
+                from tools.scientific_helpers.sppr.method_coverage import method_settings
+                execution_settings={key:method_settings(key,flags,model) for key in execute}
+                cached=load_execution(model_dir,context,execute,execution_settings,staged_dir)
+                if cached:
+                    calculated=cached['calculated'];execution_cache=cached['reference']
+                    progress(f"{metadata['unit_id']}: reusing {len(execute)} completed executions from a prior publication attempt")
+                else:
+                    calculated=compute(model,flags,execute,staged_dir,progress=progress)
+                    check_inputs()
+                    execution_cache=save_execution(model_dir,context,execute,execution_settings,calculated,staged_dir)
+            else:
+                calculated=compute(model, flags, execute, staged_dir, progress=progress) if execute else {'methods':{}}
             calculated['methods'].update(reused)
             for key, outcome in calculated['methods'].items():
                 evidence = outcome.get('evidence') or {}
@@ -727,8 +850,18 @@ def _complete_model(root, metadata, expected, *, progress, compute):
                 backups[target] = None; owned[target] = None
             target.parent.mkdir(parents=True, exist_ok=True)
             os.replace(staged, target); owned[target] = sha(target); written.add(target)
-        _apply_outcomes(book, model_dir.name, outcomes, pending)
-        if any(_method_rows(book)[0].get(key) != values for key, values in saved_method_rows.items()):
+        for evidence in floor_promotions:
+            relative=Path(evidence['path']); staged=(staged_dir/relative).resolve()
+            target=(model_dir/'results/diagnostics'/relative).resolve()
+            if not staged.is_relative_to(staged_dir) or not target.is_relative_to(floor_dir.resolve()) or sha(staged)!=evidence['sha256']:
+                raise ValueError('Invalid EE-floor migration evidence')
+            if target not in backups:
+                if target.exists():raise ValueError('EE-floor evidence appeared during calculation')
+                backups[target]=None;owned[target]=None
+            target.parent.mkdir(parents=True,exist_ok=True);os.replace(staged,target);owned[target]=sha(target);written.add(target)
+        _apply_outcomes(book, model_dir.name, outcomes, pending, migration=bool(migration))
+        changed_methods=set(pending)-{key for key,value in outcomes.items() if value.get('preserve_saved')} if migration else set()
+        if any(_method_rows(book)[0].get(key) != values for key, values in saved_method_rows.items() if key not in changed_methods):
             raise ValueError('Method completion attempted to change existing saved coefficients')
         if candidate_pending:
             from tools.project_core.calculations.coverage_candidates import suppress_candidate_arithmetic
@@ -737,27 +870,35 @@ def _complete_model(root, metadata, expected, *, progress, compute):
             if flags is not None:set_setting(book,'effective_loader_flags',json.dumps(flags,ensure_ascii=False))
             suppress_candidate_arithmetic(book,candidate_pending)
         elif pending or not arithmetic_fresh:
-            _arithmetic(book, path, model, flags, original_book)
+            _arithmetic(book, path, model, flags, original_book,migration=bool(migration),invalidated_methods=changed_methods)
+        if migration:
+            from tools.project_core.calculations.ee_floor_migration import add_diagnostics
+            from tools.project_core.calculations.regional import set_setting
+            add_diagnostics(book,migration)
+            set_setting(book,'sppr_engine_hashes',json.dumps({k:v for k,v in context['code_identity'].items() if k!='create_PPRS_excel.py'},ensure_ascii=False))
         if _preserved_inputs(book) != protected:
             raise ValueError('Method completion changed a protected scientific input')
         def record_saved():
             owned[path] = sha(path); written.add(path)
         saved = _save_calculation(path,book,model,flags,original_book,
-                                  pending_reason=candidate_pending,on_write=record_saved)
+                                  pending_reason=candidate_pending,on_write=record_saved,before_write=check_inputs,
+                                  migration=bool(migration),invalidated_methods=changed_methods)
         if _preserved_inputs(saved) != protected:
             raise ValueError('Workbook serialization changed a protected scientific input')
-        if any(_method_rows(saved)[0].get(key) != values for key, values in saved_method_rows.items()):
+        if any(_method_rows(saved)[0].get(key) != values for key, values in saved_method_rows.items() if key not in changed_methods):
             raise ValueError('Workbook serialization changed existing saved coefficients')
         # A complete source is already authoritative. Re-saving it merely to
         # attach coverage metadata could round its original numeric cells.
-        if not _source_matches(model_dir, saved, expected):
-            _update_source(source, saved, outcomes)
+        if migration or not _source_matches(model_dir, saved, expected):
+            check_inputs()
+            _update_source(source, saved, outcomes,replace_methods=changed_methods,
+                           effective_groups=migration['effective_groups'] if migration else None,expected_sha256=owned[source])
             owned[source] = sha(source); written.add(source)
             if not _source_matches(model_dir, saved, expected):
                 raise ValueError('Saved source coefficients conflict with the completed workbook; retained source cells were not replaced')
         snapshot = model_dir / 'results/regional_snapshot.xlsx'
         if path != snapshot:
-            snapshot.parent.mkdir(parents=True, exist_ok=True); snapshot.write_bytes(path.read_bytes())
+            check_inputs();_write_bytes(snapshot,path.read_bytes(),expected_sha256=owned[snapshot])
         owned[snapshot] = sha(snapshot); written.add(snapshot)
         _, row_hashes = _method_rows(saved)
         for key in expected:
@@ -771,6 +912,11 @@ def _complete_model(root, metadata, expected, *, progress, compute):
         if extension:
             extension['current_input_sha256'] = current_input
             manifest['review_extension'] = extension
+        if migration:
+            manifest['ee_floor_migration']={'schema_version':1,'baseline':baseline,
+                'requested_policy':ee_floor,'runtime_evidence':execution_evidence['ee_floor_migration'],
+                'retained_methods':sorted(set(expected)-changed_methods),'executed_methods':sorted(changed_methods),
+                'researcher_approval':'Preserved historical review; migration does not approve changed method outcomes'}
         manifest.update({'schema_version': 1, 'unit_id': metadata['unit_id'], 'model_id': model_dir.name,
                          'snapshot_selected_model_id': overview(saved).get('selected_model_id'),
                          'timestamp': datetime.now(timezone.utc).isoformat(), 'snapshot_sha256': sha(snapshot),
@@ -785,14 +931,15 @@ def _complete_model(root, metadata, expected, *, progress, compute):
                                              'execution_evidence': execution_evidence,
                                              'arithmetic_code_identity': _arithmetic_identity(),
                                              'protected_inputs_sha256': protected}})
-        _write_json(manifest_path, manifest)
+        check_inputs();_write_json(manifest_path, manifest,expected_sha256=owned[manifest_path])
         owned[manifest_path] = sha(manifest_path); written.add(manifest_path)
         if plan_methods(expected, context, manifest['method_coverage'], row_hashes):
             raise ValueError('Incomplete final method inventory')
         return True, {'unit_id':metadata['unit_id'], 'model_id':model_dir.name, 'reused':False,
                       'written_region_path': str(path) if is_current else None,
                       'written_paths': [str(p) for p in written],
-                      'written_hashes': {str(p):owned[p] for p in written}, 'methods':outcomes}
+                      'written_hashes': {str(p):owned[p] for p in written}, 'methods':outcomes,
+                      'execution_cache':execution_cache}
     except Exception:
         conflicts = []
         for destination, data in backups.items():
@@ -810,7 +957,7 @@ def _complete_model(root, metadata, expected, *, progress, compute):
         staging.cleanup()
 
 
-def ensure_validated_coverage(root, *, progress=print, lock_held=False):
+def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor=None, migration_units=None):
     """Complete all exact validated identities without changing model selection.
 
     Central/map callers publish changed_units under their existing writer lock.
@@ -820,7 +967,7 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False):
     root = Path(root).resolve()
     if not lock_held:
         with central_lock(root):
-            return ensure_validated_coverage(root, progress=progress, lock_held=True)
+            return ensure_validated_coverage(root, progress=progress, lock_held=True,ee_floor=ee_floor,migration_units=migration_units)
     from tools.project_core.registry.discovery import region_directory, resolve_model
     from tools.project_core.workbooks.workbooks import sha
     metadata_hash = sha(root/'Project.xlsx')
@@ -839,8 +986,9 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False):
         region = region_directory(root, unit); model = resolve_model(region, model_id).parent
         protected.update([region/(unit+'.xlsx'), model/'sppr_source.xlsx',
                           model/'results/regional_snapshot.xlsx', model/'results/result_manifest.json'])
-        directory = model/'results/diagnostics/method_coverage'; directories.append(directory)
-        if directory.is_dir(): protected.update(p for p in directory.rglob('*') if p.is_file())
+        for kind in ('method_coverage','ee_floor'):
+            directory = model/'results/diagnostics'/kind; directories.append(directory)
+            if directory.is_dir(): protected.update(p for p in directory.rglob('*') if p.is_file())
     backups = {p:p.read_bytes() if p.is_file() else None for p in protected}
     owned = {p:sha(p) if p.is_file() else None for p in protected}
     try:
@@ -852,10 +1000,12 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False):
             current_paths = {region/(unit+'.xlsx'), model_dir/'sppr_source.xlsx',
                              model_dir/'results/regional_snapshot.xlsx', model_dir/'results/result_manifest.json'}
             directory = model_dir/'results/diagnostics/method_coverage'
-            current_paths.update(p for p in protected if p.is_relative_to(directory))
+            floor_directory = model_dir/'results/diagnostics/ee_floor'
+            current_paths.update(p for p in protected if p.is_relative_to(directory) or p.is_relative_to(floor_directory))
             if any((sha(p) if p.is_file() else None) != owned[p] for p in current_paths):
                 raise ValueError('Model package changed during coverage batch: ' + model_id)
-            modified, report = _complete_model(root, indexed[identity], expected, progress=progress, compute=compute_methods)
+            request=ee_floor if migration_units is None or unit in migration_units else None
+            modified, report = _complete_model(root, indexed[identity], expected, progress=progress, compute=compute_methods,ee_floor=request)
             if modified:
                 changed.add(identity[0])
             models.append(report)

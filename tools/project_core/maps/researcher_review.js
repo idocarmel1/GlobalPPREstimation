@@ -19,6 +19,7 @@ const PPRResearcherReview=(()=>{
     parent.appendChild(name);
   }
   function append(parent,model){
+    globalThis.PPREeFloor?.append(parent,model);
     const review=model?.researcher_review;
     if(!review){const saved=model?.recorded_review_pending;const pending=node('p',saved?`${saved.recorded_status} recorded by ${saved.researcher_name||'unknown researcher'} (${saved.review_date||'date unavailable'}). Current verification pending: ${saved.reason}`:'Model not yet validated by researcher');pending.className='researcher-review-pending';parent.appendChild(pending);
       if(model?.validation_document){const report=node('a','Model validation document — pending researcher review');report.href=localLink(model.validation_document);parent.appendChild(report);}

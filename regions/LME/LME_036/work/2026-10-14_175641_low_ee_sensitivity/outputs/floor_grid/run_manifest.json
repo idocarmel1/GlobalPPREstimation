@@ -1,0 +1,118 @@
+{
+  "run_id": "2026-10-14_175641_low_ee_sensitivity",
+  "extension": "EE floor grid",
+  "unit_id": "LME_036",
+  "model_id": "36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)",
+  "source_sha256": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7",
+  "floors": [
+    0.01,
+    0.05,
+    0.1,
+    0.3,
+    0.95
+  ],
+  "methods": [
+    "GE",
+    "TE",
+    "With Egestion"
+  ],
+  "constructor_and_settings": {
+    "constructor": {
+      "underdetermined": true,
+      "zero_biomass_accum": false,
+      "DC_tol": 0.001,
+      "normalize_DC": true,
+      "zero_catch": true,
+      "default_gs": true
+    },
+    "diagnostics": {
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "det_collapse_mode": "never",
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      }
+    },
+    "methods": {},
+    "mc": {
+      "n_samples": 100
+    },
+    "engine_source_hashes": {
+      "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "configuration_evidence": [
+      {
+        "relative_path": "model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/complete_input_identity.json",
+        "sha256": "c8c496ab5deb508d43ad6584395387e8904035a4364232975314aa2c45f2eaf0",
+        "original_source_hash": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/selected_regions_review_20260930/direct_diagnostics/input_identity.json",
+        "sha256": "10aa951a91a6cb139e0784568fb70d9cc05944321a762524916ad6ce65a910cd",
+        "original_source_hash": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7"
+      },
+      {
+        "relative_path": "results/diagnostics/audited_engine/PPRCalculator.py",
+        "sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "original_source_hash": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7"
+      },
+      {
+        "relative_path": "results/diagnostics/audited_engine/engine_copy_provenance.json",
+        "sha256": "40072cab9aafd303911f8dff96c1c69eaca039f43e8049e7dd3598dd5002d5a2",
+        "original_source_hash": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7"
+      }
+    ],
+    "engine_sources": {
+      "PPRCalculator.py": "results/diagnostics/audited_engine/PPRCalculator.py"
+    }
+  },
+  "engine_identity": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "create_PPRS_excel.py": "86fafff4d66fa81d960c69a4971d9de6cb5a5125f50631530c277213c6771032"
+  },
+  "experiment_code_sha256": "3d0d0a89a92df62a592ec5c56f85e02cf377527c3029d3ca513cdb5807f065ba",
+  "adapter_sha256": "21839c339dbca3fd1a9b7e3fe89675294ef303ce537595f3fab23f2d0cdb046a",
+  "baseline_runtime_exact": true,
+  "loading_warnings": [
+    "RuntimeWarning: 2 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 33 (Pelagic sharks and rays)=1.0011, 20 (Adult groupers)=0.9990."
+  ],
+  "protected_input_hashes": {
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model.json": "9a199f06809165104ed59b9fb53cb48e6bb9cd0439be081dc518da26a681cfc7",
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_notes.md": "da86b46c3abb7f0af185e69190b8756e3e019b71749847f8a97b343ae70d6126",
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/results/result_manifest.json": "4b00f93823c885f011fbfa8f1b78b923ef583c68620c19d84ad9f7de7b56a162",
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/results/regional_snapshot.xlsx": "7946366365a3544b5fba01224a04e9ce88c172d9f25b7228dda886e10117b7cf",
+    "regions/LME/LME_036/LME_036.xlsx": "7946366365a3544b5fba01224a04e9ce88c172d9f25b7228dda886e10117b7cf",
+    "Project.xlsx": "03a76a820c0606f8788856ee11f6ac145ce23754b36e62fe561c1ed448de8602",
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/validation.docx": "26f1d6f308c4424cf51bd975e2a6849ee4fc898eb61ac8ea90117b46fba37483"
+  },
+  "protected_inputs_unchanged": {
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model.json": true,
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_notes.md": true,
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/results/result_manifest.json": true,
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/results/regional_snapshot.xlsx": true,
+    "regions/LME/LME_036/LME_036.xlsx": true,
+    "Project.xlsx": true,
+    "regions/LME/LME_036/papers/SCS-2007/models/36_1_South_China_Sea_SCS-2007_Northern_South_China_Sea_(2000s)/model_validation/validation.docx": true
+  },
+  "elapsed_seconds": 74.27871322631836,
+  "basis": "2019 landings, all mapped groups, original allocation weights; wet PPR / 9 = tC",
+  "source_fidelity": "Canonical inputs unchanged. Floors and external mortality are unadopted experimental assumptions.",
+  "native_vs_extended_balance_reported_separately": true,
+  "outcome_count": 15,
+  "failed_outcomes": 0
+}

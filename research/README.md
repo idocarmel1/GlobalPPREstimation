@@ -13,6 +13,7 @@ Current scientific inputs, results and validation reports remain model-local und
 | agents | [catch_extraction_baseline_2026_09](agents/catch_extraction_baseline_2026_09) |
 | agents | [diet_reextraction_20261002](agents/diet_reextraction_20261002) |
 | agents | [diet_source_audit_20261002](agents/diet_source_audit_20261002) |
+| agents | [ewe_key_run_inventory_20261014](agents/ewe_key_run_inventory_20261014/README.md) |
 | agents | [npp_extraction_2026_09](agents/npp_extraction_2026_09/README.md) |
 | agents | [regional_baseline_2026_09](agents/regional_baseline_2026_09/README.md) |
 | agents | [regional_ge_integration_20260928](agents/regional_ge_integration_20260928) |

@@ -135,20 +135,69 @@ def add_group_catch(root,units):
             if 'model_catch_sppr' in group:original_group['model_catch_sppr']=group['model_catch_sppr']
     return {str(path):digest for path,digest in consumed.items()}
 
+def _parameter_number(value):
+    if isinstance(value,bool):return None
+    try:value=float(value)
+    except (TypeError,ValueError):return None
+    return value if math.isfinite(value) else None
+
+
+def _group_efficiencies(source_rows,ledger_rows=()):
+    """Keep source, completed and effective values distinct; never calculate a floor."""
+    ledger={}
+    for row in ledger_rows:
+        name=row.get('group_name')
+        if not name:continue
+        if name in ledger:raise ValueError('Duplicate EE-floor ledger group: '+name)
+        ledger[name]=row
+    result={}
+    for row in source_rows:
+        name=row.get('group_name')
+        if not name:continue
+        if name in result:raise ValueError('Duplicate efficiency source group: '+name)
+        saved=ledger.get(name,{})
+        def value(field,fallback=None):
+            return _parameter_number(saved.get(field,row.get(field,fallback)))
+        ge=_parameter_number(row.get('ge'));ee=value('EE_effective',row.get('ee'))
+        result[name]={'ge':ge,'ee':ee,'source_ee':value('source_EE',row.get('ee')),
+            'source_m0':value('source_M0'),
+            'ee_before_floor':value('EE_before_floor'),'m0_before_floor':value('M0_before_floor'),
+            'm0_effective':value('M0_effective',row.get('M0',row.get('m0'))),
+            'external_mortality_export':value('external_mortality_export'),
+            'ee_floor_applied':saved.get('applied'),'ee_floor_reason':saved.get('reason'),
+            'te':ge*ee if ge is not None and ee is not None else None}
+    return result
+
+
+def calculation_provenance(book):
+    """Export recorded calculation settings, without inferring historical defaults."""
+    settings=overview(book)
+    raw=settings.get('effective_loader_flags')
+    flags=json.loads(raw) if isinstance(raw,str) and raw else (raw or {})
+    if not isinstance(flags,dict):raise ValueError('Effective loader flags must be an object')
+    constructor=flags.get('constructor') or {}
+    summary={row.get('field'):row.get('value') for row in records(book,'Diagnostics','EE floor')}
+    enabled=constructor.get('use_ee_floor',settings.get('use_ee_floor',summary.get('use_ee_floor')))
+    if settings.get('det_collapse_mode') is None and enabled is None:return None
+    provenance={key:settings.get(key) for key in
+        ['model_path','det_collapse_mode','sppr_configuration','sppr_constructor',
+         'computational_input_sha256','canonical_source_sha256','sppr_engine_hashes',
+         'diagnostic_manifest','production_eligible','missing_value_policy']}
+    if raw:provenance['effective_loader_flags']=copy.deepcopy(flags)
+    if enabled is not None:
+        if not isinstance(enabled,bool):raise ValueError('Recorded use_ee_floor must be Boolean')
+        threshold=constructor.get('ee_floor',settings.get('ee_floor',summary.get('ee_floor')))
+        provenance.update(use_ee_floor=enabled,ee_floor=_parameter_number(threshold))
+        for key in ['assumption','affected_group_count','external_mortality_export_total','provenance']:
+            if key in summary:provenance[key]=summary[key]
+        for key in ['calculation_engine_upgrade','calculation_engine_sha256','calculation_engine_source']:
+            if key in flags:provenance[key]=copy.deepcopy(flags[key])
+            elif key in settings:provenance[key]=settings[key]
+    return provenance
+
+
 def add_group_efficiencies(root,units):
-    """Expose stored GE/EE without recalculating any existing model values."""
-    def number(value):
-        try: value=float(value)
-        except (TypeError,ValueError): return None
-        return value if math.isfinite(value) else None
-    def indexed(rows):
-        result={}
-        for row in rows:
-            name=row.get('group_name')
-            if not name:continue
-            if name in result:raise ValueError('Duplicate efficiency source group: '+name)
-            result[name]={key:number(row.get(key)) for key in ['ge','ee']}
-        return result
+    """Expose stored source/effective GE/EE without recalculating model values."""
     for unit_id,unit in units.items():
         models=[m for m in unit.get('models',[]) if m.get('group_data')]
         if not models:continue
@@ -157,8 +206,11 @@ def add_group_efficiencies(root,units):
         if regional.is_file():
             with ZipFile(regional) as archive:
                 settings={r.get('field'):r.get('value') for _,r in table_rows(archive,'Overview','Settings')[3]}
-                selected=settings.get('selected_model_id')
-                current=indexed(r for _,r in table_rows(archive,'Selected model groups','Groups')[3])
+                selected=settings.get('results_model_id') or settings.get('selected_model_id')
+                try:ledger=[r for _,r in table_rows(archive,'Diagnostics','EE floor groups')[3]]
+                except StopIteration:ledger=[]  # Historical workbooks may have no Diagnostics sheet.
+                current=_group_efficiencies((r for _,r in table_rows(archive,'Selected model groups','Groups')[3]),
+                                            ledger)
         for model in models:
             values=current if model['id']==selected else {}
             if model['id']!=selected:
@@ -167,10 +219,17 @@ def add_group_efficiencies(root,units):
                     book=openpyxl.load_workbook(source,read_only=True,data_only=False)
                     try:
                         rows=iter(book['groups_df'].values);headers=next(rows)
-                        values=indexed(dict(zip(headers,row)) for row in rows)
+                        values=_group_efficiencies(dict(zip(headers,row)) for row in rows)
                     finally:book.close()
             for group in model['group_data']['groups']:
-                group.update(values.get(group['id'],{'ge':None,'ee':None}))
+                # Model-local snapshots already carry the ledger paired with
+                # these coefficients; a source export cannot replace it.
+                if model.get('calculation_provenance',{}).get('use_ee_floor') is not None and 'ee_before_floor' in group:
+                    continue
+                value=values.get(group['id'],{'ge':None,'ee':None})
+                if value.get('ee_before_floor') is not None or value.get('external_mortality_export') is not None:
+                    group.update(value)
+                else:group.update({key:value.get(key) for key in ['ge','ee']})
 
 def embedded(path,variable):
     text=Path(path).read_text(encoding='utf-8');start=text.index('const '+variable+'=')+len('const '+variable+'=')
@@ -370,9 +429,12 @@ def detail_from_book(book,unit,model_id):
     for r in records(book,'PPR','Matching'):
         if r.get('group') in indices:assign[r['taxon']].append([indices[r['group']],r['weight']])
     values={(r['group'],r['scope'],r['method']):r['sppr'] for r in coeff}
-    gd={'groups':[{'id':r['group_name'],'name':r['group_name'],'tl':r.get('tl'),'ge':r.get('ge'),'ee':r.get('ee'),'model_catch':r.get('catch') if finite(r.get('catch')) else None,'te':r['ge']*r['ee'] if finite(r.get('ge')) and finite(r.get('ee')) else None} for r in groups],
+    efficiencies=_group_efficiencies(groups,records(book,'Diagnostics','EE floor groups'))
+    gd={'groups':[{'id':r['group_name'],'name':r['group_name'],'tl':r.get('tl'),
+                  **efficiencies[r['group_name']],
+                  'model_catch':r.get('catch') if finite(r.get('catch')) else None} for r in groups],
         'methods':methods,'scopes':{scope:[[values.get((g,scope,m)) for m in methods] for g in group_names] for scope in ['all','inner','PP']},
-        'mappings':[assign[t] for t in taxa],'te_definition':'Stored source-group GE × EE; no EE repair or solver recalculation.',
+        'mappings':[assign[t] for t in taxa],'te_definition':'Stored GE × saved effective EE where recorded; source EE retained separately. No browser recalculation of model parameters.',
         'provenance':{'workbook':f'regions/{unit.split("_")[0]}/{unit}/{unit}.xlsx','groups_sheet':'Selected model groups','mapping_sheet':'PPR'}}
     statuses={(r['scope'],r['method']):r['status'] for r in records(book,'PPR','Annual') if r['metric']=='ppr' and r['catch_basis']=='landings' and r['unidentified']=='method'}
     tc={(r['taxon'],r['scope'],r['method']):r['sppr'] for r in records(book,'PPR','Taxon SPPR')}
@@ -392,6 +454,8 @@ def detail_from_book(book,unit,model_id):
     # The atlas flag enables mapping/group controls; coefficient availability is
     # checked separately by each method. It is not scientific model approval.
     model={'id':model_id,'label':model_id.replace('_',' '),'verified':bool(any(assign.values())),'scopes':scopes,'group_data':gd,'health':health,'mc_diagnostics':mc}
+    provenance=calculation_provenance(book)
+    if provenance is not None:model['calculation_provenance']=provenance
     return inp,model
 
 def review_flags(book):
@@ -584,11 +648,9 @@ def datasets(workbook,only_units=None):
                     document=model_metadata.get((unit,selected),{}).get('validation_report_path')
                     if document and not model_metadata.get((unit,selected),{}).get('researcher_review_status') and (root/document).is_file():
                         model['validation_document']=document
-                    if overview(book).get('det_collapse_mode') is not None:
-                        model['calculation_provenance']={key:overview(book).get(key) for key in
-                            ['model_path','det_collapse_mode','sppr_configuration','sppr_constructor',
-                             'computational_input_sha256','canonical_source_sha256','sppr_engine_hashes',
-                             'diagnostic_manifest','production_eligible','missing_value_policy']}
+                    provenance=calculation_provenance(book)
+                    model.pop('calculation_provenance',None)
+                    if provenance is not None:model['calculation_provenance']=provenance
                     for field in ['researcher_review','display_ppr_excluded_group_ids','recorded_review_pending']:model.pop(field,None)
                     review,pending=review_display(root,model_metadata.get((unit,selected)),book)
                     if review:

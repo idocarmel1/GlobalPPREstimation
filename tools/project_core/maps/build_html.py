@@ -10,6 +10,8 @@ from tools.project_core.maps.map_cumulative_ppr import cumulative_ppr_layout
 from tools.project_core.maps.available_results_layout import available_results_layout
 from tools.project_core.maps.group_catch_layout import group_catch_layout
 from tools.project_core.maps.trend_extras_layout import trend_extras_layout
+from tools.project_core.maps.group_contributions_layout import group_contributions_layout
+from tools.project_core.maps.ee_floor_layout import ee_floor_layout,source_provenance_layout
 
 DISPLAY_FIELDS=['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']
 LINK_UPDATES={"../data/unidentified_taxa.json":"data/unidentified_taxa.json"}
@@ -36,7 +38,7 @@ def linked_layout(template):
             "zoomControl:true,minZoom:1,maxZoom:['http:','https:'].includes(location.protocol)?18:10}",1)
         template=template.replace(OSM_BASEMAP,basemap,1)
     current=cumulative_ppr_layout(reviewed_layout(provisional_layout(template)))
-    return trend_extras_layout(group_catch_layout(available_results_layout(current)))
+    return ee_floor_layout(group_contributions_layout(trend_extras_layout(group_catch_layout(available_results_layout(current)))))
 
 def atomic_text(path,text):
     atomic_bytes(path,text.encode('utf-8'))
@@ -291,7 +293,7 @@ def _build(workbook,output=None,only_units=None):
         atomic_text(directory/name,page)
         if name=='index.html' and output and output.suffix=='.html' and output.name!='index.html':atomic_text(output,page)
     spec=importlib.util.spec_from_file_location('original_archive_layout',layouts/'archive_layout.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-    atomic_text(directory/'sources.html',module.archive_index(catalog).replace('Quality: None/100.', 'Quality: not rated.'))
+    atomic_text(directory/'sources.html',source_provenance_layout(module.archive_index(catalog),catalog).replace('Quality: None/100.', 'Quality: not rated.'))
     # Preserve the original download links, using current metadata where appropriate.
     data=directory/'data';data.mkdir(exist_ok=True)
     atomic_text(data/'unidentified_taxa.json',json.dumps({'description':'Current unidentified-catch metadata embedded in these atlas pages.','units':{u:r.get('unidentified') for u,r in catalog['network']['simple_units'].items()}},ensure_ascii=False,separators=(',',':')))

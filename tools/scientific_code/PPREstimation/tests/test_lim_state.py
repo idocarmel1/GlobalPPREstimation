@@ -140,7 +140,9 @@ def test_lim_toothed_whale_roundoff_is_zero_in_runtime_vectors_and_group_table()
     seed = seed_state(missing_consumption=False)
     # Actual HS_077 LIM output before the fix: EE=-1.3322676295501878e-15.
     seed["_groups_df"].loc[2, ["p", "M0"]] = [.00062, .0006200000000000008]
-    calculator = PPRCalculator.from_dict(seed, underdetermined=True)
+    # This check isolates the audited LIM roundoff behavior before any
+    # optional post-initialization EE-floor transformation.
+    calculator = PPRCalculator.from_dict(seed, underdetermined=True, use_ee_floor=False)
     groups = calculator.get_groups_df()
     assert calculator.EE.loc[2] == 0.0
     assert groups.loc[2, "ee"] == 0.0

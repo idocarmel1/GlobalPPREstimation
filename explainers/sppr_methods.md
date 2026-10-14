@@ -47,8 +47,9 @@ All methods draw on the same underlying quantities, unpacked from the Ecopath mo
 | `p` | production | total production of a group (biomass produced per unit time) |
 | `q` | consumption | total food eaten by a group |
 | `M0` | non-predatory mortality flow | production dying of causes other than predation/fishing → routed to detritus |
+| `X` | `external_mortality_export` | hypothetical mortality removed from detritus by the runtime EE floor; an external nonfishery sink, separate from catch |
 | `egestion` | egestion `U` | unassimilated food (faeces) → routed to detritus |
-| `EE` | ecotrophic efficiency | the fraction of production **not routed to detritus** — i.e. used within the system or exported: eaten by predators, caught, accumulated as biomass, or net-migrated. `EE = (predation + catch + BA + Nm)/p = (p − M0)/p`. Its complement `M0/p` is the fraction that dies non-predatorily to detritus. |
+| `EE` | ecotrophic efficiency | before the runtime floor, the fraction of production used/exported/accumulated/migrated rather than dying to detritus: `EE = (predation + catch + BA + Nm)/p = (p − M0)/p`. Effective EE additionally counts the explicit hypothetical external sink described below. |
 | `GE` | gross efficiency = `p/q` | how efficiently consumed food becomes production |
 | `catch` | catch `C` | the harvest we are attributing a PPR cost to |
 | `BA` | biomass accumulation (`growth`) | net change in standing biomass over the period |
@@ -64,13 +65,48 @@ predation can expose a production-balance residual. Completion is not a coupled 
 If optimization fails, unsolved cells remain missing rather than receiving the initial guesses;
 `_fill_properties` then applies its existing runtime fallbacks. Check the resulting state and diagnostics.
 
-The two Ecopath mass-balance identities tie these together, per group:
+Before the runtime floor, the two Ecopath mass-balance identities tie these together, per group:
 
 $$ q = \text{respiration} + U + p \qquad\qquad p = BA + \text{predation} + C + N_m + M0 $$
 
 so that `EE·p = p − M0 = predation + C + BA + Nm` is exactly the production that leaves a
 group through a route *other* than non-predatory death. This is the quantity `EE` measures, and
 it is what makes `TE = GE·EE` the *fraction transferred up the web* (see below).
+
+### EE floor and the effective runtime state
+
+`PPRCalculator(..., use_ee_floor=True, ee_floor=0.1)` and `from_modeldata` default to
+one floor transformation after completed audited loading/LIM. Explicit OFF preserves the
+preceding audited numerical behavior. The threshold must be finite in `[0, 1]`, excluding
+Booleans, even when OFF. Real living Regular and PP groups with valid finite EE below the
+threshold and positive production are eligible; detritus, synthetic/import and operational
+nonfeeding groups and invalid/missing inputs are excluded.
+
+Source EE must itself be finite and valid in `[0, 1]`; a loader-solved or fallback EE does
+not make an unknown or invalid source value eligible.
+
+With production fixed, `EE_effective=max(EE_before_floor, ee_floor)`,
+`M0_effective=P*(1-EE_effective)`, and
+`X=external_mortality_export=M0_before_floor-M0_effective`. This is a hypothetical
+nonfishery sink, not observed catch or additional predation. The living production identity
+is therefore `P = BA + predation + C + Nm + M0_effective + X`, and
+`EE_effective*P = predation + C + BA + Nm + X`; effective EE no longer describes only
+the previously represented biological/export pathways.
+
+Living biomass, production, consumption, diets, predation, catch, respiration, egestion,
+living accumulation and migration stay fixed. Only reduced `M0_effective + egestion`
+follows the existing detritus fate fractions. Detritus inflows, stock residuals and unrouted
+export are refreshed; a negative stock residual remains a limitation rather than an
+invented source. Both actual SPPR balance branches and forced-balance accounting include
+the SPPR-weighted sink. Fishery PPR and catch weights continue to use catch alone.
+
+Retain source EE/M0 (including unknown source M0), completed pre-floor values, effective
+values and the sink/skips in provenance. `apply_ee_floor` returns the calculator, is a
+no-op for the same configuration, and restores the pre-floor state before a changed
+configuration. `from_dict` preserves an existing completed state's floor settings when
+its optional overrides are omitted. Original signed diagnostics remain historical review
+evidence; new transformed results carry their own status. See [EE-floor accounting](../tools/skills/paper-to-ppr/references/ee-floor.md)
+for archived-loader upgrades, migration and method reuse.
 
 ### Trophic categories (`trophic_info`)
 Groups are classified into four kinds, each with its own `get_*_seq()` accessor:
@@ -90,7 +126,7 @@ next. It is the single most important ecological assumption in every flow-networ
 | `TE_option` | Formula | Ecological meaning |
 |-------------|---------|--------------------|
 | `'GE'` | `p/q` | **Gross growth efficiency** — production per unit consumed. Ignores that not all production is passed on. |
-| `'TE'` | `(p/q)·(1 − M0/p)` | Gross efficiency times the **ecotrophic fraction**: only the part of production that is actually consumed/exported/accumulated/migrated counts as "transferred". Production that dies naturally (`M0`) is treated as lost from the up-web pathway. Equivalent to `GE·EE`. |
+| `'TE'` | `(p/q)·(1 − M0/p)` | Gross efficiency times the **effective ecotrophic fraction**, `GE·EE`. With the floor ON this fraction includes the hypothetical external sink; it is a calculation assumption, not measured additional trophic transfer. Effective mortality `M0` remains outside this fraction. |
 | `'With Egestion'` | `(p/q)·(q/(q−egestion))` | Efficiency computed on **assimilated** intake rather than gross intake, i.e. feces are removed from the denominator so they are accounted separately (they flow to detritus, not up the chain). |
 | `'global'` | one scalar for all groups | A single system-wide TE broadcast to every group — the classic "10% rule" assumption. Controlled by `global_TE`. |
 
@@ -278,9 +314,10 @@ the aggregated SPPR.
 **The balance identity (used to sanity-check every method).** Under mass balance, primary
 production entering the system equals the production leaving it, both measured in SPPR units:
 
-$$ \text{Inflow} = NPP + \text{DietImport} = (\mathbf{N_m} + \mathbf{C} + \mathbf{BA})\cdot\mathbf{SPPR} = \text{Outflow}, $$
+$$ \text{Inflow} = NPP + \text{DietImport} = (\mathbf{N_m} + \mathbf{C} + \mathbf{BA} + \mathbf{X})\cdot\mathbf{SPPR} = \text{Outflow}, $$
 
-which is why `get_PPR2NPP_ratio` computes `C·SPPR / [(Nm+C+BA)·SPPR]`.
+The weighted external sink belongs in the budget outflow; it is zero for floor OFF.
+`get_PPR2NPP_ratio` retains catch × SPPR in its numerator and NPP in its denominator.
 
 ### `SPPR_EwE(TE_option, use_EE=True, return_paths=True, silent=True)`
 ```python
@@ -683,9 +720,9 @@ $$ (1-DC_{i,DI})\cdot\mathrm{DIET\_SPPR}_i = \sum_{k\in\mathcal{X}} DC_{ik}\cdot
 ### `_sample_SPPR_new_forced_balance(TE_option='TE', sppr_det=None)`
 Runs `SPPR_new`, then treats the detritus scaling as a single unknown `x = sppr_det` and solves
 the scalar equation that forces **exact global mass balance** — PP inflow equals the export
-outflow (catch + growth + net migration) weighted by SPPR:
+outflow (catch + growth + net migration + external mortality export) weighted by SPPR:
 
-$$ \sum_{i\in PP} p_i \;=\; \sum_i (C_i + BA_i + N_{m,i})\big(\mathrm{SPPR}^{PP}_i + x\cdot\mathrm{SPPR}^{DET}_i\big), $$
+$$ \sum_{i\in PP} p_i \;=\; \sum_i (C_i + BA_i + N_{m,i} + X_i)\big(\mathrm{SPPR}^{PP}_i + x\cdot\mathrm{SPPR}^{DET}_i\big), $$
 
 which is linear in `x`, so it is solved directly; the detritus columns are then scaled by the
 solved `x`. Returns `(sppr, sppr_det)`. Ecologically, it pins the one free recycling degree of
@@ -983,7 +1020,7 @@ with the configuration.
 
 **`balance`** — `is_sppr_balanced` on the result (§2, *The balance identity*).
 - **`inflow`**, **`outflow`** — primary production entering the system, and the SPPR-weighted
-  export leaving it (`catch + growth + net_migration`).
+  export leaving it (`catch + growth + net_migration + external_mortality_export`).
 - **`rel_gap`** — `|outflow − inflow| / |inflow|`, graded against `balance_warn` / `balance_fail`
   (defaults `1%` / `5%`). An SPPR that converged but does not close the PP budget is arithmetically
   fine and physically wrong.
@@ -1083,15 +1120,15 @@ $$ \frac{PPR}{NPP} = \frac{\mathbf{C}\cdot\mathbf{SPPR}_{\text{inner}}}{\sum_{i\
 **How it relates to the inflow–outflow balance (§4).** Under mass balance, all basal production
 entering the system leaves it, both sides measured in SPPR units. The inner form of that identity is:
 
-$$NPP = (\mathbf{N_m}+\mathbf{C}+\mathbf{BA})\cdot\mathbf{SPPR}_{\text{inner}}$$
+$$NPP = (\mathbf{N_m}+\mathbf{C}+\mathbf{BA}+\mathbf{X})\cdot\mathbf{SPPR}_{\text{inner}}$$
 
-the net primary production equals the total *inner outflow* (catch + biomass accumulation + net migration, each
+the net primary production equals the total *inner outflow* (catch + biomass accumulation + net migration + external mortality export, each
 weighted by the basal production it required). So the denominator $\sum_{i\in PP} p_i$ **is** that
 total outflow, and the numerator $\mathbf{C}\cdot\mathbf{SPPR}_{\text{inner}}$ is precisely the
 **catch's slice** of it. The ratio is therefore the share of the primary-production budget the
 harvest claims:
 
-$$ \frac{PPR}{NPP} = \frac{\mathbf{C}\cdot\mathbf{SPPR}_{\text{inner}}}{(\mathbf{N_m}+\mathbf{C}+\mathbf{BA})\cdot\mathbf{SPPR}_{\text{inner}}}. $$
+$$ \frac{PPR}{NPP} = \frac{\mathbf{C}\cdot\mathbf{SPPR}_{\text{inner}}}{(\mathbf{N_m}+\mathbf{C}+\mathbf{BA}+\mathbf{X})\cdot\mathbf{SPPR}_{\text{inner}}}. $$
 
 With `Nm = 0` (the usual case), the ratio can exceed 1 when biomass is being depleted
 (`BA·SPPR < 0`, so the outflow denominator shrinks below the catch term), and falls below 1 when

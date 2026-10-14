@@ -1,0 +1,43 @@
+# EE-floor calculation evidence: LME_034
+
+Model: `34_1_Bay_of_Bengal_(1978)`. The user authorized implementation, scientific reruns and adoption/publication of EE-floor calculations on 2026-10-14. The saved setting is `use_ee_floor=True`, `ee_floor=0.1`. Explicit OFF restores the audited baseline. This is a hypothetical calculation assumption, not a published parameter correction or a new researcher approval.
+
+The floor is applied once after audited initialization. Source EE/M0 and completed pre-floor EE/M0 remain separate from effective EE/M0. The removed mortality is an explicit nonfishery external sink counted by production and both SPPR balance branches. Only reduced M0 plus unchanged egestion enter the existing detritus fate matrix. Catch, fishery weighting, living biological flows, migration and living biomass accumulation remain preserved. Negative detritus residuals and existing diagnostic restrictions remain limitations.
+
+The audited loader dependencies, model-specific settings and recorded Monte Carlo policies remain recorded in [the result manifest](../../result_manifest.json). Humboldt retains `det_collapse_mode='auto'`. Compatible unaffected methods retain their actual earlier provenance; affected methods were executed with complete return evidence. An inventory outcome can be failed, timed out, restricted or unavailable while the model retains its historical researcher validation. Original signed Word documents and source diagnostics were preserved.
+
+Before/after below: 2019 landings, all sources, all model groups, **million tonnes carbon equivalent**. The native regional Annual `ppr` values are wet-weight equivalent; existing regional ratio and view arithmetic divide by 9. Raw and converted values both remain in the machine-readable report. Researcher exclusions from displayed PPR remain separate and unchanged. Monte Carlo differences include new draws under the recorded unseeded policies where applicable; compatible unaffected Monte Carlo results were not redrawn.
+
+| Method | Before (Mt C) | After (Mt C) | Change | Execution/retention | Scientific availability / restriction |
+|---|---:|---:|---:|---|---|
+| EwE_TE_EE | 249.89405 | Unavailable / restricted | — | timeout | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; refreshed diagnosis: unavailable: timeout; Method exceeded 180 seconds |
+| EwE_TE_noEE | 291.34643 | 287.009884 | -1.48845002% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| MC_new_GE | 242.160931 | 249.691646 | +3.10979777% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| MC_new_TE_EEfix | 504.856281 | 507.434783 | +0.510739674% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| SPPR_1986 | 148.746345 | 148.746345 | +0% | reused | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| SPPR_1995_TE0.1 | 300.492186 | 300.492186 | +0% | reused | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| SPPR_1995_TEmean | 184.858197 | 184.677225 | -0.0978977433% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| SPPR_1995_TEmean_catch | 46.5598916 | 46.5582576 | -0.00350935336% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| SPPR_2015 | 479.116694 | 472.770716 | -1.32451612% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| Ulanowicz_TE | 245.136901 | 241.395415 | -1.52628441% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| Ulanowicz_globalTEmean | 729.297239 | 728.164366 | -0.155337646% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| Ulanowicz_globalTEmean_catch | 93.4275867 | 93.4230008 | -0.00490850592% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| new_GE | 230.612952 | 230.537804 | -0.0325863308% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; diagnostic OK |
+| new_TE_EEfix | 479.116694 | 472.770716 | -1.32451612% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; diagnostic OK |
+| new_TE_noEEfix | 479.116694 | 472.770716 | -1.32451612% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| new_WithEgestion | 89.5614795 | 89.5439915 | -0.0195262867% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; diagnostic OK |
+| sym_GE_asDC | 232.77619 | 232.70039 | -0.0325635589% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| sym_GE_asPP | 230.612952 | 230.537804 | -0.0325863308% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| sym_TE_asDC | -1.73773373e+21 | -1.76380654e+21 | +1.50039166% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; negative source-group SPPR; refreshed diagnosis: FAIL: negative SPPR in a source-model group |
+| sym_TE_asPP | 479.116694 | 472.770716 | -1.32451612% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+| sym_WithEgestion_asDC | 1.49758785e+19 | 1.49758785e+19 | +0% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; negative source-group SPPR; refreshed diagnosis: FAIL: negative SPPR in a source-model group |
+| sym_WithEgestion_asPP | 89.5614795 | 89.5439915 | -0.0195262867% | ok | provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified |
+
+Evidence:
+
+- [Full 22-method manifest](../../result_manifest.json) and [actual method returns](../method_coverage/).
+- [Source/completed/effective runtime ledger](runtime.json.gz); `*.baseline.json.gz` files retain lossless outgoing calculation packages and historical manifests without relabeling them as floor-enabled.
+- [OFF and saved experiment reconciliation](experiment_reconciliation.json.gz). The Eastern Tropical Pacific experiment also floored a group with unknown source EE; the production setting excludes it. Replaying the experiment with the same valid-input eligibility agrees without changing source parameters or tolerances.
+- [Input and result preservation](publication_verification.json.gz), [view/workbook equality](view_verification.json.gz), and [authenticated duplicate-removal receipts](execution_cache_cleanup.json.gz).
+
+Supporting whole-project audit code, original preservation capture, native pre-publication Project.xlsx, test output, browser evidence and the eight-model index are retained under the Humboldt model's `results/diagnostics/ee_floor/verification/` directory. The broader legacy engine test suite remains blocked by absent historical engine-local ToyModels/Black Sea fixture paths; no scientific inputs were substituted. Root `structure.md` remains absent; the applicable structure guide is `explainers/structure.md`.

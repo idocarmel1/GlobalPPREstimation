@@ -2,7 +2,7 @@
 
 `model.json` should represent the extracted model values, with missing values and any accepted corrections or transformations traceable to their evidence. It is not automatically the exact model used in calculations: a selected JSON can already be an accepted transformed variant, and loading changes the in-memory representation further. Each distinct variant owns its single canonical model.json and adjacent model_notes.md under the [project layout](structure.md); no redundant source-model or computational-input JSON accompanies it. The regional selection, input hash, executed code and recorded settings establish which version produced a result. The [project guide](../README.md) and [direct-diagnostics contract](../tools/skills/paper-to-ppr/references/direct-diagnostics.md) require candidate-specific settings; the defaults below are not a universal regional configuration.
 
-The forward sequence is **selected input → parsed groups and flows → deterministic completion → optional LIM → runtime vectors → SPPR**. Inspect both source values and the resulting runtime state.
+The forward sequence is **selected input → parsed groups and flows → deterministic completion → optional LIM → completed audited state → optional EE floor → SPPR**. Inspect source, completed pre-floor and effective runtime values separately.
 
 ## Default settings: what they mean
 
@@ -18,6 +18,7 @@ The [exporter's `load_model()`](../tools/scientific_code/PPREstimation/create_PP
 | `normalize_DC` | `True` | `False` in `from_modeldata()` | Divide every nonzero diet row by its sum, including imported food. This enforces relative diet fractions but changes reported fractions. The bare constructor defaults to normalize_DC=False and passes an explicit request through; it does not normalize unless requested. |
 | `DC_tol` | `0.001` | `0.001` in `from_modeldata()` | Allow 0.001 absolute consumer-row deviation before a warning under normalization, or rejection without it. The code documents rounding as the rationale; a material deficit still needs source review. |
 | `balance_BA_after_DC_normalization` | `True` | `True` | For an eligible living group whose raw production identity is already consistent and whose counterfactual terms are finite, offset normalization-induced predation by the negative delta in runtime biomass accumulation. Other groups retain their original runtime BA and a reason in the transformation ledger. Input ModelData/JSON remains unchanged; this is computational closure, not observed BA. |
+| `use_ee_floor`, `ee_floor` | `True`, `0.1` | `True`, `0.1` | Apply the runtime EE floor once after audited completion. Explicit OFF preserves the preceding numerical behavior; floor thresholds must be finite numbers in `[0, 1]`, excluding Booleans. Historical saved configurations retain their recorded settings rather than inheriting new defaults. |
 
 With normalization enabled, even rows within tolerance are rescaled. An empty consumer row stays zero after normalization; this operation cannot reconstruct missing prey.
 
@@ -46,5 +47,13 @@ During LIM finalization, EE values with `abs(EE) < 1e-10` become exactly zero by
 On optimizer failure, the implementation prints a message and leaves unsolved cells missing; it does not write the initial guesses back. Runtime construction subsequently fills most missing flow vectors with zero and missing EE/GE with one. These fallback values require explicit review.
 
 Construction checks balance and creates a separate `balanced_model` copy. Its default adjustment absorbs residuals into growth and net migration while preserving production. The exporter returns the original completed calculator; SPPR uses that object's state unless a caller explicitly substitutes the copy.
+
+## EE floor: a calculation assumption
+
+After the completed audited initialization, the default floor raises valid EE below 0.1 for eligible real living consumers and primary producers with positive production. Detritus, synthetic/import groups, operational nonfeeding groups and invalid/missing inputs are excluded; unknown or invalid source EE stays excluded even when the loader supplied a runtime value. It sets `M0_effective = P × (1 − EE_effective)` and records `external_mortality_export = M0_before_floor − M0_effective`. This hypothetical nonfishery export preserves living biomass, production, consumption, diets, predation, catch, respiration, egestion, living accumulation and migration. Fishery PPR still uses catch alone.
+
+Reduced mortality plus unchanged egestion follow the existing detritus fate fractions; the removed mortality leaves through the new sink once. Detritus inflows, stock residuals and unrouted export are refreshed. A negative stock residual remains an explicit limitation rather than becoming an invented source. Production and SPPR budget checks include the external sink separately from detritus export. Compare `source_EE`/`source_M0`, `EE_before_floor`/`M0_before_floor` and effective values in the saved ledger.
+
+The [shared EE-floor contract](../tools/skills/paper-to-ppr/references/ee-floor.md) describes migration and provenance. An explicit `calculation_engine_upgrade='ee_floor_v1'` keeps archived loader bytes as the audited base and runs current accounting after initialization, recording both code hashes. Missing historical flags do not establish ON; unsupported pinned ON configurations reject. Original signed diagnostics remain historical review evidence, and new diagnostics have their own eligibility.
 
 Automatic completion or algebraic balance is neither scientific approval nor evidence of the authors' native Ecopath balancing. Compare extracted values, transformed input, runtime changes and diagnostics before interpreting results. The [user guide](PPREstimation/USER_GUIDE.md) and [methods reference](sppr_methods.md) provide background; actual source behavior governs the distinctions above.

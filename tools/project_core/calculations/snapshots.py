@@ -5,7 +5,7 @@ from pathlib import Path
 from tools.project_core.workbooks.workbooks import read_book, overview, rows, records, sha, digest_tables,finite
 
 MODEL_TABLES={'Selected model groups':{'Groups','Group SPPR'},'PPR':{'Matching','Annual','Taxon SPPR','Taxon PPR inspected year'}}
-DIAGNOSTIC_TABLES={'model_health','mc_diagnostics','run_notes'}
+DIAGNOSTIC_TABLES={'model_health','mc_diagnostics','run_notes','Method coverage','EE floor','EE floor groups'}
 
 def dependencies(book):
     o=overview(book)
@@ -49,7 +49,7 @@ def save_snapshot(workbook_path, model_dir, *, result_identity):
             fresh=(o.get('calculation_input_sha256')==input_hash(book)
                    and o.get('calculation_result_sha256')==result_hash(book))
             if same and fresh and prior_manifest.get('snapshot_sha256')==sha(destination):
-                for key in ['method_coverage','review_extension']:
+                for key in ['method_coverage','review_extension','ee_floor_migration']:
                     if key in prior_manifest:manifest[key]=copy.deepcopy(prior_manifest[key])
         except (OSError,ValueError,TypeError):
             pass

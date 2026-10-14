@@ -1,0 +1,452 @@
+line,source_text,role
+1,library(Rpath),published_configuration_not_executed
+2,#### RPATH ####,published_configuration_not_executed
+3,# Parameters,published_configuration_not_executed
+4,"groups <- c(""GreySeal"", ""FishFeedingBirds"", ""JuvCod"", ""AdCod"", ""JuvHerring"",",published_configuration_not_executed
+5,"            ""AdHerring"", ""JuvSprat"", ""AdSprat"", ""JuvFlounder"", ""AdFlounder"",",published_configuration_not_executed
+6,"            ""SaduriaEntemon"", ""MytilusSp"", ""MacomaBalthica"",",published_configuration_not_executed
+7,"            ""OtherMacrozoobenthos"", ""Meiobenthos"", ""Mysids"", ""OtherZooplankton"",",published_configuration_not_executed
+8,"            ""PseudocalanusSp"", ""AcartiaSp"", ""TemoraSp"", ""Phytoplankton"",",published_configuration_not_executed
+9,"            ""Detritus"", ""ACT0018"", ""ACT1824"", ""ACT2440"", ""PAS0012"", ""PAS1218"",",published_configuration_not_executed
+10,"            ""PAS1840"", ""PEL0018"", ""PEL1824"", ""PEL2440"", ""PEL40OO"")",published_configuration_not_executed
+11,"types <- c(rep(0, 20), 1, 2, rep(3, 10))",published_configuration_not_executed
+12,"stgroups <- c(rep(NA, 2), rep(""Cod"", 2), rep(""Herring"", 2), rep(""Sprat"", 2),",published_configuration_not_executed
+13,"              rep(""Flatfish"", 2), rep(NA, 22))",published_configuration_not_executed
+14,"Rpath.parameters <- create.rpath.params(group = groups, type = types,",published_configuration_not_executed
+15,                                        stgroup = stgroups),published_configuration_not_executed
+16,"biomass <- c(0.006, 0.002, 0.3537279, 0.33, 1.021176, 2.72, 4.691991, 4.48,",published_configuration_not_executed
+17,"             0.3816071, 0.463, 2, 10, 45, 11.385, 6.8, NA, 4.006379, 1.930314,",published_configuration_not_executed
+18,"             3.026768, 2.270881, 7.05, 1644.81, rep(NA, 10))",published_configuration_not_executed
+19,"pb <- c(0.1, 0.1, 1.092, 0.885, 0.948, 0.79, 1.605, 1.07, 1.143, 0.762, 1.3,",published_configuration_not_executed
+20,"        1.75, 0.4, 2, 6.17, 5, 30, 7, 25, 25, 200, rep(NA, 11))",published_configuration_not_executed
+21,"qb <- c(16.28, 130, 7.649284, 3.81, 5.627138, 3, 8.705635, 4.63, 9.07962, 4.21,",published_configuration_not_executed
+22,"        5, 8.73, 2, 10, 31.17, 15, 100, 27, 83, 83, rep(NA, 12))",published_configuration_not_executed
+23,"Rpath.parameters$model[, Biomass := biomass]",published_configuration_not_executed
+24,"Rpath.parameters$model[, PB := pb]",published_configuration_not_executed
+25,"Rpath.parameters$model[, QB := qb]",published_configuration_not_executed
+26,"Rpath.parameters$model[Group %in% ""Mysids"", EE := 0.7499999]",published_configuration_not_executed
+27,"Rpath.parameters$model[, BioAcc := c(0.00036, rep(0, 21), rep(NA, 10))]",published_configuration_not_executed
+28,"Rpath.parameters$model[, Unassim := c(0.15, rep(0.2, 2), 0.17, rep(0.2, 16),",published_configuration_not_executed
+29,"                                      rep(0, 2), rep(NA, 10))]",published_configuration_not_executed
+30,"Rpath.parameters$model$DetInput <- c(rep(NA, 21), 0, rep(NA, 10))",published_configuration_not_executed
+31,"Rpath.parameters$model[, Detritus := c(rep(1, 21), 0, rep(1, 10))]",published_configuration_not_executed
+32,# Fishery,published_configuration_not_executed
+33,"ACT0018.l <- c(rep(0, 3), 0.04655146, 0.000964227, 0.01997571, 0.02041084,",published_configuration_not_executed
+34,"               0.02239085, 0.000439406, 0.03830102, rep(0, 12), rep(NA,10))",published_configuration_not_executed
+35,"ACT1824.l <- c(rep(0, 3), 0.0408974, 0.000690529, 0.01430556, 0.02132261,",published_configuration_not_executed
+36,"               0.02339106, 0.000151976, 0.01324718, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+37,"ACT2440.l <- c(rep(0, 3), 0.04313556, 0.000743249, 0.01539775, 0.0166325,",published_configuration_not_executed
+38,"               0.01824598, 0.000713593, 0.06220077, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+39,"PAS0012.l <- c(rep(0, 3), 0.05106486, 0.000447274, 0.01346155, rep(0, 3),",published_configuration_not_executed
+40,"               0.04880729, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+41,"PAS1218.l <- c(rep(0, 3), 0.03198545, 0, 6.7811e-07, rep(0, 3), 0.01100713,",published_configuration_not_executed
+42,"               rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+43,"PAS1840.l <- c(rep(0, 3), 0.03337823, rep(0, 5), 0.004351989, rep(0, 12),",published_configuration_not_executed
+44,"               rep(NA, 10))",published_configuration_not_executed
+45,"PEL0018.l <- c(rep(0, 2), 6.74852e-05, 0.002968224, 1.83938e-05, 0.000833394,",published_configuration_not_executed
+46,"               0.003225667, 0.01538038, 0, 9.76619e-06, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+47,"PEL1824.l <- c(rep(0, 2), 9.13016e-05, 0.005086678, 8.18015e-05, 0.003706335,",published_configuration_not_executed
+48,"               0.003422847, 0.01582962, 0, 0.000312952, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+49,"PEL2440.l <- c(rep(0, 2), 0.000157981, 0.02342807, 0.005151592, 0.2334139,",published_configuration_not_executed
+50,"               0.2251564, 0.8507619, 0, 0.002712224, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+51,"PEL40OO.l <- c(rep(0, 2), 6.16847e-08, 0.000304323, 0.01543218, 0.06277447,",published_configuration_not_executed
+52,"               0.02362915, 0.1140002, rep(0, 14), rep(NA, 10))",published_configuration_not_executed
+53,"Rpath.parameters$model[, ACT0018 := ACT0018.l]",published_configuration_not_executed
+54,"Rpath.parameters$model[, ACT1824 := ACT1824.l]",published_configuration_not_executed
+55,"Rpath.parameters$model[, ACT2440 := ACT2440.l]",published_configuration_not_executed
+56,"Rpath.parameters$model[, PAS0012 := PAS0012.l]",published_configuration_not_executed
+57,"Rpath.parameters$model[, PAS1218 := PAS1218.l]",published_configuration_not_executed
+58,"Rpath.parameters$model[, PAS1840 := PAS1840.l]",published_configuration_not_executed
+59,"Rpath.parameters$model[, PEL0018 := PEL0018.l]",published_configuration_not_executed
+60,"Rpath.parameters$model[, PEL1824 := PEL1824.l]",published_configuration_not_executed
+61,"Rpath.parameters$model[, PEL2440 := PEL2440.l]",published_configuration_not_executed
+62,"Rpath.parameters$model[, PEL40OO := PEL40OO.l]",published_configuration_not_executed
+63,# Discards,published_configuration_not_executed
+64,"ACT0018.d <- c(rep(0, 2), 0.000424188, 0.001106558, rep(0, 4), 0.00260477,",published_configuration_not_executed
+65,"               0.02900947, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+66,"ACT1824.d <- c(rep(0, 2), 0.000376657, 0.001076847, rep(0, 4), 0.00078248,",published_configuration_not_executed
+67,"               0.008714528, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+68,"ACT2440.d <- c(rep(0, 2), 0.000248775, 0.001118913, rep(0, 4), 0.003622325,",published_configuration_not_executed
+69,"               0.04034203, rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+70,"PAS0012.d <- c(rep(0, 2), 5.55097E-05, 0.000497353, rep(0, 5), 0.01116253,",published_configuration_not_executed
+71,"               rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+72,"PAS1218.d <- c(rep(0, 2), 4.63214E-05, 0.000415099, rep(0, 5), 0.002194796,",published_configuration_not_executed
+73,"               rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+74,"PAS1840.d <- c(rep(0, 2), 7.67498E-05, 0.000687742, rep(0, 5), 0.000615467,",published_configuration_not_executed
+75,"               rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+76,"PEL0018.d <- c(rep(0, 2), 3.84098E-05, 3.34277E-05, rep(0, 18), rep(NA, 10))",published_configuration_not_executed
+77,"PEL1824.d <- c(rep(0, 2), 6.19798E-05, 7.36702E-05, rep(0, 18), rep(NA, 10))",published_configuration_not_executed
+78,"PEL2440.d <- c(rep(0, 2), 6.93338E-05, 0.000195279, rep(0, 5), 3.4375E-06,",published_configuration_not_executed
+79,"               rep(0, 12), rep(NA, 10))",published_configuration_not_executed
+80,"PEL40OO.d <- c(rep(0, 2), 1.08246E-06, 8.25504E-06, rep(0, 18), rep(NA, 10))",published_configuration_not_executed
+81,"Rpath.parameters$model[, ACT0018.disc := ACT0018.d]",published_configuration_not_executed
+82,"Rpath.parameters$model[, ACT1824.disc := ACT1824.d]",published_configuration_not_executed
+83,"Rpath.parameters$model[, ACT2440.disc := ACT2440.d]",published_configuration_not_executed
+84,"Rpath.parameters$model[, PAS0012.disc := PAS0012.d]",published_configuration_not_executed
+85,"Rpath.parameters$model[, PAS1218.disc := PAS1218.d]",published_configuration_not_executed
+86,"Rpath.parameters$model[, PAS1840.disc := PAS1840.d]",published_configuration_not_executed
+87,"Rpath.parameters$model[, PEL0018.disc := PEL0018.d]",published_configuration_not_executed
+88,"Rpath.parameters$model[, PEL1824.disc := PEL1824.d]",published_configuration_not_executed
+89,"Rpath.parameters$model[, PEL2440.disc := PEL2440.d]",published_configuration_not_executed
+90,"Rpath.parameters$model[, PEL40OO.disc := PEL40OO.d]",published_configuration_not_executed
+91,# Stanzas,published_configuration_not_executed
+92,"Rpath.parameters$stanzas$stgroups[, VBGF_Ksp := c(0.230000004172325,",published_configuration_not_executed
+93,"                                                  0.430000007152557,",published_configuration_not_executed
+94,"                                                  0.509999990463257,",published_configuration_not_executed
+95,                                                  0.200000002980232)],published_configuration_not_executed
+96,"Rpath.parameters$stanzas$stgroups[, Wmat := c(0.129999995231628,",published_configuration_not_executed
+97,"                                              0.379999995231628,",published_configuration_not_executed
+98,"                                              0.259999990463257,",published_configuration_not_executed
+99,                                              0.100000001490116)],published_configuration_not_executed
+100,"Rpath.parameters$stanzas$stindiv[, First := c(0, 36, 0, 24, 0, 24, 0, 36)]",published_configuration_not_executed
+101,"Rpath.parameters$stanzas$stindiv[, Last := c(35, 400, 23, 400, 23, 400, 35,",published_configuration_not_executed
+102,                                             400)],published_configuration_not_executed
+103,"Rpath.parameters$stanzas$stindiv[, Z := c(1.092, 0.885, 0.948, 0.79,",published_configuration_not_executed
+104,"                                          1.605, 1.07, 1.143, 0.762)]",published_configuration_not_executed
+105,"Rpath.parameters$stanzas$stindiv[, Leading := c(rep(c(F, T), 4))]",published_configuration_not_executed
+106,Rpath.parameters <- rpath.stanzas(Rpath.parameters),published_configuration_not_executed
+107,# Diet,published_configuration_not_executed
+108,"GreySeal.diet <- c(rep(0, 2), 0.07827354, 0.03178926, 0.002591124, 0.375759, 0,",published_configuration_not_executed
+109,"                   0.2067591, 0, 0.03093355, rep(0, 12), 0.2738944)",published_configuration_not_executed
+110,"FishFeedingBirds.diet <- c(rep(0, 6), 0.02, 0.93, rep(0, 14), 0.05)",published_configuration_not_executed
+111,"JuvCod.diet <- c(rep(0, 4), 0.05209047, 0.07938787, 0.1764397, 0.2520024,",published_configuration_not_executed
+112,"                 rep(0, 2), 0.2036188, rep(0, 2), 0.01193309, 0, 0.2145273,",published_configuration_not_executed
+113,"                 0, 0.01000043, rep(0, 5))",published_configuration_not_executed
+114,"AdCod.diet <- c(rep(0, 2), 0.01580723, 0, 0.04505872, 0.4874896, 0.1508785,",published_configuration_not_executed
+115,"                0.1815, 0.03000606, 0, 0.0565, 0, 0.0002534152, 0.002240333,",published_configuration_not_executed
+116,"                0, 0.03045089, rep(0, 7))",published_configuration_not_executed
+117,"JuvHerring.diet <- c(rep(0, 15), 0.1, 0.2, 0.1, 0.1, 0.5, rep(0, 3))",published_configuration_not_executed
+118,"AdHerring.diet <- c(rep(0, 6), 0.01, rep(0, 6), 0.1, 0, 0.25, 0.15, 0.1, 0.02,",published_configuration_not_executed
+119,"                    0.37, rep(0, 3))",published_configuration_not_executed
+120,"JuvSprat.diet <- c(rep(0, 16), 0.39, 0.15, 0.21, 0.25, rep(0, 3))",published_configuration_not_executed
+121,"AdSprat.diet <- c(rep(0, 16), 0.33, 0.17, 0.09, 0.41, rep(0, 3))",published_configuration_not_executed
+122,"JuvFlounder.diet <- c(rep(0, 13), 0.6, 0.1, 0.3, rep(0, 7))",published_configuration_not_executed
+123,"AdFlounder.diet <- c(rep(0, 10), 0.08255491, 0.4532953, 0.3394456, 0.1247042,",published_configuration_not_executed
+124,"                     rep(0, 9))",published_configuration_not_executed
+125,"SaduriaEntemon.diet <- c(rep(0, 13), 0.59761, 0.003984, 0.398406, rep(0, 7))",published_configuration_not_executed
+126,"MytilusSp.diet <- c(rep(0, 20), 0.8, 0.2, 0)",published_configuration_not_executed
+127,"MacomaBalthica.diet <- c(rep(0, 20), 0.4, 0.6, 0)",published_configuration_not_executed
+128,"OtherMacrozoobenthos.diet <- c(rep(0, 13), 0.1, 0.3, rep(0, 6), 0.6, 0)",published_configuration_not_executed
+129,"Meiobenthos.diet <- c(rep(0, 14), 0.02, rep(0, 6 ), 0.98, 0)",published_configuration_not_executed
+130,"Mysids.diet <- c(rep(0, 16), 0.05, 0.05, 0.1, 0.2, 0.3, 0.2, 0.1)",published_configuration_not_executed
+131,"OtherZooplankton.diet <- c(rep(0, 20), 1, rep(0, 2))",published_configuration_not_executed
+132,"PseudocalanusSp.diet <- c(rep(0, 20), 1, rep(0, 2))",published_configuration_not_executed
+133,"AcartiaSp.diet <- c(rep(0, 20), 1, rep(0, 2))",published_configuration_not_executed
+134,"TemoraSp.diet <- c(rep(0, 20), 1, rep(0, 2))",published_configuration_not_executed
+135,"Phytoplankton.diet <- c(rep(NA, 23))",published_configuration_not_executed
+136,"Rpath.parameters$diet[, GreySeal := GreySeal.diet]",published_configuration_not_executed
+137,"Rpath.parameters$diet[, FishFeedingBirds := FishFeedingBirds.diet]",published_configuration_not_executed
+138,"Rpath.parameters$diet[, JuvCod := JuvCod.diet]",published_configuration_not_executed
+139,"Rpath.parameters$diet[, AdCod := AdCod.diet]",published_configuration_not_executed
+140,"Rpath.parameters$diet[, JuvHerring := JuvHerring.diet]",published_configuration_not_executed
+141,"Rpath.parameters$diet[, AdHerring := AdHerring.diet]",published_configuration_not_executed
+142,"Rpath.parameters$diet[, JuvSprat := JuvSprat.diet]",published_configuration_not_executed
+143,"Rpath.parameters$diet[, AdSprat := AdSprat.diet]",published_configuration_not_executed
+144,"Rpath.parameters$diet[, JuvFlounder := JuvFlounder.diet]",published_configuration_not_executed
+145,"Rpath.parameters$diet[, AdFlounder := AdFlounder.diet]",published_configuration_not_executed
+146,"Rpath.parameters$diet[, SaduriaEntemon := SaduriaEntemon.diet]",published_configuration_not_executed
+147,"Rpath.parameters$diet[, MytilusSp := MytilusSp.diet]",published_configuration_not_executed
+148,"Rpath.parameters$diet[, MacomaBalthica := MacomaBalthica.diet]",published_configuration_not_executed
+149,"Rpath.parameters$diet[, OtherMacrozoobenthos := OtherMacrozoobenthos.diet]",published_configuration_not_executed
+150,"Rpath.parameters$diet[, Meiobenthos := Meiobenthos.diet]",published_configuration_not_executed
+151,"Rpath.parameters$diet[, Mysids := Mysids.diet]",published_configuration_not_executed
+152,"Rpath.parameters$diet[, OtherZooplankton := OtherZooplankton.diet]",published_configuration_not_executed
+153,"Rpath.parameters$diet[, PseudocalanusSp := PseudocalanusSp.diet]",published_configuration_not_executed
+154,"Rpath.parameters$diet[, AcartiaSp := AcartiaSp.diet]",published_configuration_not_executed
+155,"Rpath.parameters$diet[, TemoraSp := TemoraSp.diet]",published_configuration_not_executed
+156,"Rpath.parameters$diet[, Phytoplankton := Phytoplankton.diet]",published_configuration_not_executed
+157,check.rpath.params(Rpath.parameters),published_configuration_not_executed
+158,# Rpath model,published_configuration_not_executed
+159,"Rpath.model <- rpath(Rpath.parameters, eco.name = 'Baltic Sea Fishery')",published_configuration_not_executed
+160,#### RSIM ####,published_configuration_not_executed
+161,sim.years <- 500,published_configuration_not_executed
+162,"Rsim.model <- rsim.scenario(Rpath.model, Rpath.parameters, years = 1:sim.years)",published_configuration_not_executed
+163,# VVs,published_configuration_not_executed
+164,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+165,"                              group = ""JuvHerring"", groupto = ""JuvCod"",",published_configuration_not_executed
+166,                              value = 1),published_configuration_not_executed
+167,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+168,"                              group = ""AdHerring"", groupto = ""JuvCod"",",published_configuration_not_executed
+169,                              value = 1),published_configuration_not_executed
+170,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+171,"                              group = ""AdSprat"", groupto = ""JuvCod"",",published_configuration_not_executed
+172,                              value = 1.015069),published_configuration_not_executed
+173,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+174,"                              group = ""SaduriaEntemon"", groupto = ""JuvCod"",",published_configuration_not_executed
+175,                              value = 1E+10),published_configuration_not_executed
+176,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+177,"                              group = ""JuvHerring"", groupto = ""AdCod"",",published_configuration_not_executed
+178,                              value = 1),published_configuration_not_executed
+179,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+180,"                              group = ""AdHerring"", groupto = ""AdCod"",",published_configuration_not_executed
+181,                              value = 1),published_configuration_not_executed
+182,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+183,"                              group = ""JuvSprat"", groupto = ""AdCod"",",published_configuration_not_executed
+184,                              value = 1E+10),published_configuration_not_executed
+185,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+186,"                              group = ""AdSprat"", groupto = ""AdCod"",",published_configuration_not_executed
+187,                              value = 454847.7),published_configuration_not_executed
+188,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+189,"                              group = ""OtherZooplankton"",",published_configuration_not_executed
+190,"                              groupto = ""JuvHerring"",",published_configuration_not_executed
+191,                              value = 1603350),published_configuration_not_executed
+192,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+193,"                              group = ""PseudocalanusSp"",",published_configuration_not_executed
+194,"                              groupto = ""JuvHerring"",",published_configuration_not_executed
+195,                              value = 1.000007),published_configuration_not_executed
+196,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+197,"                              group = ""TemoraSp"",",published_configuration_not_executed
+198,"                              groupto = ""JuvHerring"",",published_configuration_not_executed
+199,                              value = 159664.6),published_configuration_not_executed
+200,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+201,"                              group = ""Mysids"",",published_configuration_not_executed
+202,"                              groupto = ""AdHerring"",",published_configuration_not_executed
+203,                              value = 1E+10),published_configuration_not_executed
+204,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+205,"                              group = ""PseudocalanusSp"",",published_configuration_not_executed
+206,"                              groupto = ""AdHerring"",",published_configuration_not_executed
+207,                              value = 608776.8),published_configuration_not_executed
+208,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+209,"                              group = ""TemoraSp"",",published_configuration_not_executed
+210,"                              groupto = ""AdHerring"",",published_configuration_not_executed
+211,                              value = 3.465625E+07),published_configuration_not_executed
+212,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+213,"                              group = ""TemoraSp"",",published_configuration_not_executed
+214,"                              groupto = ""JuvSprat"",",published_configuration_not_executed
+215,                              value = 1),published_configuration_not_executed
+216,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+217,"                              group = ""OtherMacrozoobenthos"",",published_configuration_not_executed
+218,"                              groupto = ""SaduriaEntemon"",",published_configuration_not_executed
+219,                              value = 1E+10),published_configuration_not_executed
+220,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+221,"                              group = ""Mysids"",",published_configuration_not_executed
+222,"                              groupto = ""SaduriaEntemon"",",published_configuration_not_executed
+223,                              value = 1E+10),published_configuration_not_executed
+224,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+225,"                              group = ""OtherZooplankton"",",published_configuration_not_executed
+226,"                              groupto = ""Mysids"",",published_configuration_not_executed
+227,                              value = 1),published_configuration_not_executed
+228,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+229,"                              group = ""AcartiaSp"",",published_configuration_not_executed
+230,"                              groupto = ""Mysids"",",published_configuration_not_executed
+231,                              value = 1),published_configuration_not_executed
+232,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+233,"                              group = ""Phytoplankton"",",published_configuration_not_executed
+234,"                              groupto = ""Mysids"",",published_configuration_not_executed
+235,                              value = 1),published_configuration_not_executed
+236,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+237,"                              group = ""Detritus"",",published_configuration_not_executed
+238,"                              groupto = ""Mysids"",",published_configuration_not_executed
+239,                              value = 1),published_configuration_not_executed
+240,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+241,"                              group = ""Phytoplankton"",",published_configuration_not_executed
+242,"                              groupto = ""OtherZooplankton"",",published_configuration_not_executed
+243,                              value = 1E+10),published_configuration_not_executed
+244,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+245,"                              group = ""Phytoplankton"",",published_configuration_not_executed
+246,"                              groupto = ""PseudocalanusSp"",",published_configuration_not_executed
+247,                              value = 20.51294),published_configuration_not_executed
+248,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+249,"                              group = ""Phytoplankton"",",published_configuration_not_executed
+250,"                              groupto = ""AcartiaSp"",",published_configuration_not_executed
+251,                              value = 2.105472),published_configuration_not_executed
+252,"Rsim.model <- adjust.scenario(Rsim.model, parameter = ""VV"",",published_configuration_not_executed
+253,"                              group = ""Phytoplankton"",",published_configuration_not_executed
+254,"                              groupto = ""TemoraSp"",",published_configuration_not_executed
+255,                              value = 1),published_configuration_not_executed
+256,# # Effort,published_configuration_not_executed
+257,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+258,"#                              group = ""ACT0018"", sim.year = 1:sim.years,",published_configuration_not_executed
+259,"#                              sim.month = 0,",published_configuration_not_executed
+260,"#                              value = c(1, 0.801506, 0.8285093, 0.523856,",published_configuration_not_executed
+261,"#                                        0.495454, 0.5060846, 0.5728487,",published_configuration_not_executed
+262,"#                                        0.6282578, 0.6998034,",published_configuration_not_executed
+263,"#                                        rep(0.6429319, sim.years)))",published_configuration_not_executed
+264,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+265,"#                              group = ""ACT1824"", sim.year = 1:sim.years,",published_configuration_not_executed
+266,"#                              sim.month = 0,",published_configuration_not_executed
+267,"#                              value = c(1, 0.8626296, 0.9740052, 0.617117,",published_configuration_not_executed
+268,"#                                        0.5097772, 0.4445865, 0.5331612,",published_configuration_not_executed
+269,"#                                        0.5614181, 0.6945872,",published_configuration_not_executed
+270,"#                                        rep(0.65593, sim.years)))",published_configuration_not_executed
+271,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+272,"#                              group = ""ACT2440"", sim.year = 1:sim.years,",published_configuration_not_executed
+273,"#                              sim.month = 0,",published_configuration_not_executed
+274,"#                              value = c(1, 0.7602245, 0.8028268, 0.4842178,",published_configuration_not_executed
+275,"#                                        0.4352735, 0.3822806, 0.4145548,",published_configuration_not_executed
+276,"#                                        0.5021464, 0.534105,",published_configuration_not_executed
+277,"#                                        rep(0.4101246, sim.years)))",published_configuration_not_executed
+278,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+279,"#                              group = ""PAS0012"", sim.year = 1:sim.years,",published_configuration_not_executed
+280,"#                              sim.month = 0,",published_configuration_not_executed
+281,"#                              value = c(1, 0.9044925, 0.8223968,",published_configuration_not_executed
+282,"#                                        0.7229398, 0.656688, 0.64854,",published_configuration_not_executed
+283,"#                                        0.5843078, 0.572095, 0.6155943,",published_configuration_not_executed
+284,"#                                        rep(0.5987266, sim.years)))",published_configuration_not_executed
+285,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+286,"#                              group = ""PAS1218"", sim.year = 1:sim.years,",published_configuration_not_executed
+287,"#                              sim.month = 0,",published_configuration_not_executed
+288,"#                              value = c(1, 0.7475984, 0.716076,",published_configuration_not_executed
+289,"#                                        0.4678181, 0.3006322, 0.2879224,",published_configuration_not_executed
+290,"#                                        0.2564141, 0.1931863, 0.2553373,",published_configuration_not_executed
+291,"#                                        rep(0.1801596, sim.years)))",published_configuration_not_executed
+292,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+293,"#                              group = ""PAS1840"",",published_configuration_not_executed
+294,"#                              sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+295,"#                              value = c(1, 0.4276912, 0.2924765,",published_configuration_not_executed
+296,"#                                        0.2499503, 0.2238991, 0.1944442,",published_configuration_not_executed
+297,"#                                        0.1917399, 0.1724458, 0.1227148,",published_configuration_not_executed
+298,"#                                        rep(0.07997237, sim.years)))",published_configuration_not_executed
+299,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+300,"#                              group = ""PEL0018"",",published_configuration_not_executed
+301,"#                              sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+302,"#                              value = c(1, 0.7950546, 0.6204393,",published_configuration_not_executed
+303,"#                                        0.3762521, 0.3291099, 0.6593255,",published_configuration_not_executed
+304,"#                                        0.6238568, 0.8577416, 1.412984,",published_configuration_not_executed
+305,"#                                        rep(1.587065, sim.years)))",published_configuration_not_executed
+306,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+307,"#                              group = ""PEL1824"",",published_configuration_not_executed
+308,"#                              sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+309,"#                              value = c(1, 1.135785, 1.081941,",published_configuration_not_executed
+310,"#                                        1.081769, 0.6270754, 1.325389,",published_configuration_not_executed
+311,"#                                        1.192106, 1.638697, 1.920583,",published_configuration_not_executed
+312,"#                                        rep(2.601135, sim.years)))",published_configuration_not_executed
+313,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+314,"#                              group = ""PEL2440"",",published_configuration_not_executed
+315,"#                              sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+316,"#                              value = c(1, 0.8242539, 0.7275792,",published_configuration_not_executed
+317,"#                                        0.7363582, 0.5667459, 0.5695906,",published_configuration_not_executed
+318,"#                                        0.490158, 0.4687528, 0.3750999,",published_configuration_not_executed
+319,"#                                        rep(0.3864659, sim.years)))",published_configuration_not_executed
+320,"# Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+321,"#                              group = ""PEL40OO"",",published_configuration_not_executed
+322,"#                              sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+323,"#                              value = c(1, 0.9930536, 1.005373,",published_configuration_not_executed
+324,"#                                        1.09185, 1.13515, 1.186169,",published_configuration_not_executed
+325,"#                                        1.039734, 0.9533734, 0.6396784,",published_configuration_not_executed
+326,"#                                        rep(0.6923758, sim.years)))",published_configuration_not_executed
+327,gearname <-,published_configuration_not_executed
+328,"  colnames(Rsim.model$fishing$ForcedEffort[, 2:ncol(Rsim.model$fishing$ForcedEffort)])",published_configuration_not_executed
+329,for (i in 1:length(gearname)) {,published_configuration_not_executed
+330,"  Rsim.model <<- adjust.fishing(Rsim.model, parameter = ""ForcedEffort"",",published_configuration_not_executed
+331,"                                group = gearname[i], sim.year = 1:sim.years,",published_configuration_not_executed
+332,"                                sim.month = 0, value = 0)",published_configuration_not_executed
+333,},published_configuration_not_executed
+334,# Frate,published_configuration_not_executed
+335,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+336,"                             group = ""JuvCod"", sim.year = 1:sim.years,",published_configuration_not_executed
+337,"                             sim.month = 0,",published_configuration_not_executed
+338,"                             value = c(0.004850723, 0.00401009, 0.004006988,",published_configuration_not_executed
+339,"                                       0.002912952, 0.002372227, 0.002672406,",published_configuration_not_executed
+340,"                                       0.002734797, 0.003128057, 0.00360948,",published_configuration_not_executed
+341,"                                       rep(0.00374565, sim.years)))",published_configuration_not_executed
+342,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+343,"                             group = ""AdCod"", sim.year = 1:sim.years,",published_configuration_not_executed
+344,"                             sim.month = 0,",published_configuration_not_executed
+345,"                             value = c(0.8606467, 0.6712403, 0.6557999,",published_configuration_not_executed
+346,"                                       0.4778628, 0.4044484, 0.399199,",published_configuration_not_executed
+347,"                                       0.4027945, 0.4235261, 0.465305,",published_configuration_not_executed
+348,"                                       rep(0.4342084, sim.years)))",published_configuration_not_executed
+349,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+350,"                             group = ""JuvHerring"", sim.year = 1:sim.years,",published_configuration_not_executed
+351,"                             sim.month = 0,",published_configuration_not_executed
+352,"                             value = c(0.02304128, 0.02156023, 0.0213471,",published_configuration_not_executed
+353,"                                       0.02188938, 0.02148676, 0.02225782,",published_configuration_not_executed
+354,"                                       0.01975114, 0.01850788, 0.01352732,",published_configuration_not_executed
+355,"                                       rep(0.01426122, sim.years)))",published_configuration_not_executed
+356,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+357,"                             group = ""AdHerring"", sim.year = 1:sim.years,",published_configuration_not_executed
+358,"                             sim.month = 0,",published_configuration_not_executed
+359,"                             value = c(0.1337755, 0.1146456, 0.107126,",published_configuration_not_executed
+360,"                                       0.1033898, 0.08782185, 0.08969103,",published_configuration_not_executed
+361,"                                       0.08012354, 0.0779647, 0.06486452,",published_configuration_not_executed
+362,"                                       rep(0.06663042, sim.years)))",published_configuration_not_executed
+363,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+364,"                             group = ""JuvSprat"", sim.year = 1:sim.years,",published_configuration_not_executed
+365,"                             sim.month = 0,",published_configuration_not_executed
+366,"                             value = c(0.06687993, 0.05603178, 0.05206996,",published_configuration_not_executed
+367,"                                       0.04868216, 0.039612, 0.04030403,",published_configuration_not_executed
+368,"                                       0.03644056, 0.036145, 0.03168812,",published_configuration_not_executed
+369,"                                       rep(0.03225251, sim.years)))",published_configuration_not_executed
+370,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+371,"                             group = ""AdSprat"", sim.year = 1:sim.years,",published_configuration_not_executed
+372,"                             sim.month = 0,",published_configuration_not_executed
+373,"                             value = c(0.2366071, 0.2001461, 0.1822011,",published_configuration_not_executed
+374,"                                       0.1805462, 0.1467681, 0.1517046,",published_configuration_not_executed
+375,"                                       0.1332288, 0.1301285, 0.1084464,",published_configuration_not_executed
+376,"                                       rep(0.1139571, sim.years)))",published_configuration_not_executed
+377,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+378,"                             group = ""JuvFlounder"", sim.year = 1:sim.years,",published_configuration_not_executed
+379,"                             sim.month = 0,",published_configuration_not_executed
+380,"                             value = c(0.02178824, 0.01714403, 0.01811623,",published_configuration_not_executed
+381,"                                       0.01119189, 0.01014636, 0.009469409,",published_configuration_not_executed
+382,"                                       0.01058561, 0.01209205, 0.01335201,",published_configuration_not_executed
+383,"                                       rep(0.01139497, sim.years)))",published_configuration_not_executed
+384,"Rsim.model <- adjust.fishing(Rsim.model, parameter = ""ForcedFRate"",",published_configuration_not_executed
+385,"                             group = ""AdFlounder"", sim.year = 1:sim.years,",published_configuration_not_executed
+386,"                             sim.month = 0,",published_configuration_not_executed
+387,"                             value = c(0.5896167, 0.4744886, 0.4795426,",published_configuration_not_executed
+388,"                                       0.3273892, 0.2923977, 0.2778762,",published_configuration_not_executed
+389,"                                       0.2891278, 0.3145123, 0.344834,",published_configuration_not_executed
+390,"                                       rep(0.3030173, sim.years)))",published_configuration_not_executed
+391,,published_configuration_not_executed
+392,# Egg production,published_configuration_not_executed
+393,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedRecs"",",published_configuration_not_executed
+394,"                             group = ""AdHerring"", sim.year = 1:sim.years,",published_configuration_not_executed
+395,"                             sim.month = 0,",published_configuration_not_executed
+396,"                             value = c(1, 1.077727, 1.193518, 1.06507, 1.121166,",published_configuration_not_executed
+397,"                                       1.051862, 1.008342, 1.094405, 1.137283,",published_configuration_not_executed
+398,"                                       1.173944, rep(1.180972, sim.years)))",published_configuration_not_executed
+399,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedRecs"",",published_configuration_not_executed
+400,"                             group = ""AdSprat"", sim.year = 1:sim.years,",published_configuration_not_executed
+401,"                             sim.month = 0,",published_configuration_not_executed
+402,"                             value = c(1, 1.077727, 1.193518, 1.06507, 1.121166,",published_configuration_not_executed
+403,"                                       1.051862, 1.008342, 1.094405, 1.137283,",published_configuration_not_executed
+404,"                                       1.173944, rep(1.180972, sim.years)))",published_configuration_not_executed
+405,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedRecs"",",published_configuration_not_executed
+406,"                             group = ""AdCod"", sim.year = 1:sim.years,",published_configuration_not_executed
+407,"                             sim.month = 0,",published_configuration_not_executed
+408,"                             value = c(1, 0.5492537, 2.021642, 1.013134,",published_configuration_not_executed
+409,"                                       1.727612, 0.9067164, 1.278358, 0.7835821,",published_configuration_not_executed
+410,"                                       0.9004478, 0.8977277,",published_configuration_not_executed
+411,"                                       rep(0.9011803, sim.years)))",published_configuration_not_executed
+412,,published_configuration_not_executed
+413,# Forcing functions,published_configuration_not_executed
+414,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedSearch"",",published_configuration_not_executed
+415,"                             group = ""OtherMacrozoobenthos"",",published_configuration_not_executed
+416,"                             sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+417,"                             value = c(1, 0.5258236, 0.7198213, 0.561654,",published_configuration_not_executed
+418,"                                       0.5543391, 0.8611185, 0.6287283,",published_configuration_not_executed
+419,"                                       0.3989885, 0.8400382,",published_configuration_not_executed
+420,"                                       rep(0.8400382, sim.years)))",published_configuration_not_executed
+421,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedSearch"",",published_configuration_not_executed
+422,"                             group = ""Mysids"",",published_configuration_not_executed
+423,"                             sim.year = 1:sim.years, sim.month = 0,",published_configuration_not_executed
+424,"                             value = c(1, 0.5258236, 0.7198213, 0.561654,",published_configuration_not_executed
+425,"                                       0.5543391, 0.8611185, 0.6287283,",published_configuration_not_executed
+426,"                                       0.3989885, 0.8400382,",published_configuration_not_executed
+427,"                                       rep(0.8400382, sim.years)))",published_configuration_not_executed
+428,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedSearch"",",published_configuration_not_executed
+429,"                             group = ""AcartiaSp"", sim.year = 1:sim.years,",published_configuration_not_executed
+430,"                             sim.month = 0,",published_configuration_not_executed
+431,"                             value = c(1, 0.8247877, 0.8192357, 1.455585,",published_configuration_not_executed
+432,"                                       1.365937, 1.247071, 0.6618223, 0.5600914,",published_configuration_not_executed
+433,"                                       1.009634, rep(0.8255835, sim.years)))",published_configuration_not_executed
+434,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedSearch"",",published_configuration_not_executed
+435,"                             group = ""TemoraSp"", sim.year = 1:sim.years,",published_configuration_not_executed
+436,"                             sim.month = 0,",published_configuration_not_executed
+437,"                             value = c(1, 0.8247877, 0.8192357, 1.455585,",published_configuration_not_executed
+438,"                                       1.365937, 1.247071, 0.6618223, 0.5600914,",published_configuration_not_executed
+439,"                                       1.009634, rep(0.8255835, sim.years)))",published_configuration_not_executed
+440,"Rsim.model <- adjust.forcing(Rsim.model, parameter = ""ForcedPrey"",",published_configuration_not_executed
+441,"                             group = ""Phytoplankton"", sim.year = 1:sim.years,",published_configuration_not_executed
+442,"                             sim.month = 0,",published_configuration_not_executed
+443,"                             value = c(1, 0.9074827, 0.9369552, 1.107766,",published_configuration_not_executed
+444,"                                       1.04327, 1.052554, 0.8505842, 0.9891393,",published_configuration_not_executed
+445,"                                       1.037044, rep(0.9645875, sim.years)))",published_configuration_not_executed
+446,# # Setting integration flags,published_configuration_not_executed
+447,# Rsim.model$params$NoIntegrate <-,published_configuration_not_executed
+448,"#   ifelse(Rsim.model$params$MzeroMort*Rsim.model$params$B_BaseRef > 24,",published_configuration_not_executed
+449,"#          0, Rsim.model$params$spnum)",published_configuration_not_executed
+450,# Running the model,published_configuration_not_executed
+451,"Rsim.run <- rsim.run(Rsim.model, method = ""RK4"", years = 1:sim.years)",published_configuration_not_executed

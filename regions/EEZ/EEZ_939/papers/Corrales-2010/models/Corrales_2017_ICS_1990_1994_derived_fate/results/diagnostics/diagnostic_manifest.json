@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "model_id": "Corrales_2017_ICS_1990_1994_derived_fate",
+  "source_sha256": "413f3663087cd1a4e20a8955baddb97b8a802fc01696058eb1cc80a8d8362238",
+  "timestamp": "2026-10-14T11:14:57.695759+00:00",
+  "constructor": "PPRCalculator.from_modeldata",
+  "constructor_settings": {
+    "underdetermined": false,
+    "zero_catch": true,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": false
+  },
+  "python": "3.13.9 | packaged by conda-forge | (main, Oct 22 2025, 23:12:41) [MSC v.1944 64 bit (AMD64)]",
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "source_gray_cells": "Preserved as -9999; zero conversion occurs only in ModelData.get_DC",
+  "fishery_returns": "Separate ledger retained; current PPR engine does not consume native fleet-discard returns",
+  "methods": {
+    "GE": {
+      "status": "executed",
+      "diagnostics": {
+        "status": "FAIL",
+        "model_input": {
+          "status": "FAIL",
+          "is_model_balanced": false,
+          "p_max_rel_residual": 0.9193424036281179,
+          "q_max_rel_residual": 0.15465573145145906,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 3.3306690738754696e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 27,
+          "total_catch": 0.6799999999999999,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.08948872554011818,
+          "b_converges": true,
+          "rho_living": 0.22995780909874153,
+          "living_converges": true,
+          "sppr_det": {
+            "38": 1.0249423342868205,
+            "39": 0.0
+          },
+          "max_sppr_det": 1.0249423342868205,
+          "max_sppr_group": {
+            "seq": 37,
+            "tl": 4.042778361532699,
+            "sppr": 7611.483449580033,
+            "inv_te": 121.66666666666669
+          },
+          "max_tl_group": {
+            "seq": 33,
+            "tl": 4.07738822863679,
+            "sppr": 222.69137927926474,
+            "inv_te": 8.31764705882353
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "FAIL",
+          "is_balanced": false,
+          "inflow": 246.35791668619922,
+          "outflow": 206.81254272985944,
+          "rel_gap": 0.16052000474866443
+        },
+        "footprint": {
+          "ppr_all": 36.92331814185082,
+          "ppr_inner": 36.92331814185082,
+          "ppr_pp_only": 16.37261220987285,
+          "npp": 246.24759999999998,
+          "ppr2npp": 0.14994387007975235,
+          "ppr2npp_pp_only": 0.06648841332818209
+        },
+        "config": {
+          "TE_option": "GE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "would_pool": false,
+          "model": "Israeli Mediterranean continental shelf (1990–1994)"
+        },
+        "warnings": [
+          "model input not mass-balanced: max relative residual 0.919 exceeds fail threshold 0.1",
+          "PP balance gap 16.052% exceeds fail threshold 5.0%"
+        ]
+      },
+      "return_file": "GE_full_return.json"
+    },
+    "TE": {
+      "status": "executed",
+      "diagnostics": {
+        "status": "FAIL",
+        "model_input": {
+          "status": "FAIL",
+          "is_model_balanced": false,
+          "p_max_rel_residual": 0.9193424036281179,
+          "q_max_rel_residual": 0.15465573145145906,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 3.3306690738754696e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 27,
+          "total_catch": 0.6799999999999999,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.0,
+          "b_converges": true,
+          "rho_living": 0.26988636363636365,
+          "living_converges": true,
+          "sppr_det": {
+            "38": 0.8404155784838436,
+            "39": 0.0
+          },
+          "max_sppr_det": 0.8404155784838436,
+          "max_sppr_group": {
+            "seq": 37,
+            "tl": 4.042778361532699,
+            "sppr": 20029.865739548535,
+            "inv_te": 253.47222222222223
+          },
+          "max_tl_group": {
+            "seq": 33,
+            "tl": 4.07738822863679,
+            "sppr": 317.3967579155273,
+            "inv_te": 9.241830065359476
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "FAIL",
+          "is_balanced": false,
+          "inflow": 246.35791668619922,
+          "outflow": 188.76898781110873,
+          "rel_gap": 0.233761226956814
+        },
+        "footprint": {
+          "ppr_all": 49.46597906218142,
+          "ppr_inner": 49.46597906218142,
+          "ppr_pp_only": 24.174092994947177,
+          "npp": 246.24759999999998,
+          "ppr2npp": 0.20087903013950764,
+          "ppr2npp_pp_only": 0.09816986234565202
+        },
+        "config": {
+          "TE_option": "TE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": null,
+          "would_pool": false,
+          "model": "Israeli Mediterranean continental shelf (1990–1994)"
+        },
+        "warnings": [
+          "model input not mass-balanced: max relative residual 0.919 exceeds fail threshold 0.1",
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "PP balance gap 23.376% exceeds fail threshold 5.0%"
+        ]
+      },
+      "return_file": "TE_full_return.json"
+    },
+    "With Egestion": {
+      "status": "executed",
+      "diagnostics": {
+        "status": "FAIL",
+        "model_input": {
+          "status": "FAIL",
+          "is_model_balanced": false,
+          "p_max_rel_residual": 0.9193424036281179,
+          "q_max_rel_residual": 0.15465573145145906,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 3.3306690738754696e-16,
+          "n_negative_catch": 0,
+          "n_zero_catch": 27,
+          "total_catch": 0.6799999999999999,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": []
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.17721123545544057,
+          "b_converges": true,
+          "rho_living": 0.18396624727899313,
+          "living_converges": true,
+          "sppr_det": {
+            "38": 1.2569169823369477,
+            "39": 0.0
+          },
+          "max_sppr_det": 1.2569169823369477,
+          "max_sppr_group": {
+            "seq": 37,
+            "tl": 4.042778361532699,
+            "sppr": 3162.831279650676,
+            "inv_te": 97.33333333333334
+          },
+          "max_tl_group": {
+            "seq": 33,
+            "tl": 4.07738822863679,
+            "sppr": 106.40291550677307,
+            "inv_te": 6.654117647058824
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "FAIL",
+          "is_balanced": false,
+          "inflow": 246.35791668619922,
+          "outflow": 228.09765652630722,
+          "rel_gap": 0.07412085800007467
+        },
+        "footprint": {
+          "ppr_all": 19.757494980235734,
+          "ppr_inner": 19.757494980235734,
+          "ppr_pp_only": 7.282297236503294,
+          "npp": 246.24759999999998,
+          "ppr2npp": 0.08023426413185646,
+          "ppr2npp_pp_only": 0.029573068880684703
+        },
+        "config": {
+          "TE_option": "With Egestion",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "would_pool": false,
+          "model": "Israeli Mediterranean continental shelf (1990–1994)"
+        },
+        "warnings": [
+          "model input not mass-balanced: max relative residual 0.919 exceeds fail threshold 0.1",
+          "PP balance gap 7.412% exceeds fail threshold 5.0%"
+        ]
+      },
+      "return_file": "With_Egestion_full_return.json"
+    }
+  },
+  "constructor_outcome": "passed",
+  "constructor_warnings": [
+    "14 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 37 (Dolphins)=1.0100, 34 (Large pelagic fishes)=0.9800, 33 (Native medium pelagic fishes)=0.9800, 31 (Horse mackerel)=0.9900, 28 (Demersal sharks)=1.0300, 25 (Demersal fishes (upper slope))=1.0100, 24 (Alien lizardfish)=0.9900, 23 (Earlier alien dem. fishes)=0.9800, 19 (Rocky fishes)=0.9800, 18 (Flatfishes)=1.0100, 16 (Goatfishes)=1.0100, 15 (Mullets)=1.0100, 14 (Benthopelagic cephalopods)=0.9900, 13 (Benthic cephalopods)=0.9900."
+  ]
+}

@@ -15,7 +15,7 @@ modern flow-network solvers that trace production through the full diet matrix, 
 detritus recycling, and support uncertainty propagation. Weighting each group's SPPR by
 its catch yields the ecosystem PPR footprint.
 
-See [`SPPR_Methods.md`](SPPR_Methods.md) for the full method catalog and math.
+See [`SPPR_Methods.md`](information/SPPR_Methods.md) for the full method catalog and math.
 
 ## Project structure
 
@@ -31,7 +31,7 @@ See [`SPPR_Methods.md`](SPPR_Methods.md) for the full method catalog and math.
 from PPRCalculator import PPRCalculator
 
 # Load and mass-balance a model by its number (or JSON filepath).
-model = PPRCalculator(227)
+model = PPRCalculator(227, use_ee_floor=True, ee_floor=0.1)
 
 print("groups:", model.n_groups)
 print("balanced?", model.is_model_balanced()[0])
@@ -63,9 +63,29 @@ print(f"rejected {reject_frac:.0%}: "
       f"{diag['n_rejected_diverged']} diverged, {diag['n_rejected_negative']} negative")
 ```
 
+Both constructors default to `use_ee_floor=True, ee_floor=0.1, ee_threshold=0.1`; pass
+`use_ee_floor=False` to preserve the preceding audited numerical behavior.
+`ee_threshold` selects groups with pre-floor EE strictly below that value;
+`ee_floor` is their replacement EE. For example, `ee_threshold=0.1, ee_floor=0.95`
+sets eligible groups below 0.1 to 0.95, while groups at or above 0.1 retain their EE/M0.
+The existing invalid-input and nonnegative-export checks still apply; a replacement
+requiring an external source instead of a sink is skipped with its diagnostic reason.
+`from_dict` inherits both saved settings unless explicitly overridden. Both settings
+are recorded in initialization and diagnostic configuration. The floor is applied once after
+completed loading/LIM to eligible real living groups, including primary producers. It
+preserves living flows and catch, reduces effective `M0`, and records the removed mortality
+as `external_mortality_export`, a hypothetical nonfishery sink. Reduced mortality plus
+egestion remain fate-routed to detritus, whose inflows/export/stock residuals are refreshed.
+Negative detritus stock residuals remain explicit limitations. Balance accounting includes
+the weighted sink; fishery PPR still weights SPPR by catch alone. Both EE values must be finite
+numbers in `[0, 1]`, excluding Booleans. Preserve source, pre-floor and effective EE/M0 in
+the ledger; floor settings are constructor flags, not SPPR-method flags. The project
+[EE-floor contract](../../skills/paper-to-ppr/references/ee-floor.md) governs migration,
+archived-loader upgrades, dependency-specific reruns and historical review evidence.
+
 ### Batch export
 
-`create_PPRS_excel.py` runs all 19 SPPR method configurations over a directory of models
+`create_PPRS_excel.py` runs the canonical `ALL_METHOD_KEYS` inventory (currently 22 configurations) over a directory of models
 and writes **one workbook per model** into the output directory, alongside a plain-text
 run report listing every warning, skipped method and Monte-Carlo rejection:
 
@@ -149,8 +169,8 @@ installed. Pass `silent=True` in scripts — `create_PPRS_excel.py` already does
 
 ### Known test failures
 
-Running `pytest tests/` currently reports **1 failed, 76 passed, 18 errors**. Both
-issues pre-date the repository integration and are unrelated to it:
+The historical repository-integration run of `pytest tests/` reported
+**1 failed, 76 passed, 18 errors**. This record is not a current EE-floor test result:
 
 - **18 errors** in `tests/test_diagnose_sppr.py` and `tests/test_monte_carlo_sppr.py`
   are `FileNotFoundError`s: their fixture model,
@@ -162,9 +182,10 @@ issues pre-date the repository integration and are unrelated to it:
   make as part of moving files around.
 - **1 failure**, `test_registry_holds_the_nineteen_specified_methods` in
   `tests/test_create_pprs_excel.py`, asserts exactly 19 registered SPPR methods; the
-  registry now holds 20. Pre-existing and unrelated to this integration.
+  registry then held 20. The current canonical inventory holds 22; this historical
+  assertion/result is not the inventory contract.
 
 ## Documentation
 
-- [`SPPR_Methods.md`](SPPR_Methods.md) — deep reference on every SPPR method and the underlying mathematics.
-- [`USER_GUIDE.md`](USER_GUIDE.md) — practical guide to `ModelData` and `PPRCalculator`, with an end-to-end example.
+- [`SPPR_Methods.md`](information/SPPR_Methods.md) — deep reference on every SPPR method and the underlying mathematics.
+- [`USER_GUIDE.md`](information/USER_GUIDE.md) — practical guide to `ModelData` and `PPRCalculator`, with an end-to-end example.

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "requested_scope": "source extraction, import checks, roundtrip and source loading only",
+  "commands": {
+    "import_validation": {
+      "exit_code": 1,
+      "script": "tools/skills/paper-to-ppr/resources/extraction/scripts/validate.py",
+      "script_sha256": "50085eb52700df0db3b001b380e86612a53c0cb4646d833d6f4d8dda0118e37c"
+    },
+    "physical_massbalance": {
+      "exit_code": 0,
+      "script": "tools/skills/paper-to-ppr/resources/extraction/scripts/massbalance_check.py",
+      "script_sha256": "25841143902f235638801c070368b9a17daa2bb6a72f9f1e19622c133ebb01e9"
+    }
+  },
+  "not_executed": [
+    "R scripts",
+    "Ecosim",
+    "SPPR",
+    "Monte Carlo",
+    "selection refresh",
+    "publication"
+  ],
+  "scientific_admission": "not established by extraction",
+  "execution_date": "2026-10-14",
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "rdata_reader": "1.1.0 pure-Python read only; data.table converted to data.frame with retained warnings"
+  },
+  "maintained_tools": {
+    "write_outputs.py": {
+      "path": "tools/skills/paper-to-ppr/resources/extraction/scripts/write_outputs.py",
+      "sha256": "a3e6912582308b758cc9be063d1b0e8976ee2b082e8b914bb681dfea6e3f079b"
+    },
+    "database_json.py": {
+      "path": "tools/skills/paper-to-ppr/resources/extraction/scripts/database_json.py",
+      "sha256": "55ecaf0f76d01f606c1d4f28a4e37cc44dffef8968a2a565f08f572cc4818e41"
+    },
+    "source_fidelity.py": {
+      "path": "tools/skills/paper-to-ppr/resources/extraction/scripts/source_fidelity.py",
+      "sha256": "dad2b65be08aff39df6a4e150bca0bae7210d7d51fa56eed58067e0aee13a4b0"
+    }
+  },
+  "staging_disposition": {
+    "path": "regions/LME/LME_023/work/2026-10-14_163000_baltic_rpath_extraction",
+    "action": "remove temporary writer JSON, duplicate conversion output, work builders and QA copies after promoted evidence checks",
+    "reason": "one canonical model.json; latest-only model extraction"
+  }
+}

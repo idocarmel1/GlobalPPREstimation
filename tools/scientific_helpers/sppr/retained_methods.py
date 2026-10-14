@@ -90,6 +90,9 @@ def _scientific_options(flags):
         else: result[prefix] = value
     if isinstance(flags.get('constructor'), dict):
         flatten(('constructor',), flags['constructor'])
+    for key in ('calculation_engine_upgrade', 'calculation_engine_sha256'):
+        if key in flags:
+            result[(key,)] = flags[key]
     common = flags.get('diagnostics') or {}
     methods = flags.get('methods') or {}
     if not isinstance(common, dict) or not isinstance(methods, dict):
@@ -179,6 +182,12 @@ def adopt_saved_methods(model_dir, manifest, context, book, evidence_dir, expect
         raise ValueError('Saved coefficient rows belong to a different model')
     requested_options = _scientific_options(context.get('flags'))
     historical_flags = manifest.get('effective_flags')
+    floor_keys = {('constructor', 'use_ee_floor'), ('constructor', 'ee_floor'),
+                  ('calculation_engine_upgrade',), ('calculation_engine_sha256',)}
+    requested_floor = {key: value for key, value in requested_options.items() if key in floor_keys}
+    if requested_floor and any(_scientific_options(historical_flags).get(key) != value
+                               for key, value in requested_floor.items()):
+        raise ValueError('Saved EE-floor calculation identity is different or unknown; explicit scientific refresh required')
     for recorded in (historical_flags, overview.get('effective_loader_flags'), overview.get('sppr_configuration')):
         original_options = _scientific_options(recorded)
         changed = [path for path in original_options.keys() & requested_options.keys()
@@ -351,6 +360,11 @@ def _reuse_audited_export(model,manifest,context,book,evidence_dir,expected):
                 for name in ('ModelData.py','PPRCalculator.py','utils.py','create_PPRS_excel.py')):continue
             recorded_constructor=record.get('constructor')
             if not isinstance(recorded_constructor,dict):continue
+            # A historical omission is not evidence that a new default floor
+            # was enabled in the recorded execution.
+            if constructor.get('use_ee_floor') is True and (
+                    recorded_constructor.get('use_ee_floor') is not True or
+                    recorded_constructor.get('ee_floor') != constructor.get('ee_floor')):continue
             if {**_defaults(calculator.from_modeldata),**recorded_constructor}!=constructor:continue
             if record.get('mc_samples')!=flags.get('mc',{}).get('n_samples',exporter.DEFAULT_MC_SAMPLES):continue
             if not record.get('monte_carlo_worker_seed'):continue

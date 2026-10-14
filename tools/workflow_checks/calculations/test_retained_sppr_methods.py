@@ -53,15 +53,18 @@ def fixture(root):
             ws.append([seq,name,value]);rows.append(['model',name,scope,'new_GE',value])
     workbook.save(model/'sppr_source.xlsx');workbook.close()
     source_hash=_hash_bytes((model/'model.json').read_bytes())
-    context={'model_sha256':source_hash,'flags':FLAGS,
+    flags = copy.deepcopy(FLAGS)
+    flags['constructor'] = retained._constructor(flags)
+    flags['constructor']['use_ee_floor'] = False
+    context={'model_sha256':source_hash,'flags':flags,
              'code_identity':{'PPRCalculator.py':'engine','ModelData.py':'loader','utils.py':'utils'},
              'dependencies':{'numpy':'fixture'}}
-    manifest={'canonical_model_sha256':source_hash,'effective_flags':FLAGS,
+    manifest={'canonical_model_sha256':source_hash,'effective_flags':flags,
               'coefficient_source_sha256':_hash_bytes((model/'sppr_source.xlsx').read_bytes()),
               'snapshot_sha256':_hash_bytes((results/'regional_snapshot.xlsx').read_bytes()),
               'code_identity':context['code_identity']}
     run_record={'input_sha256':source_hash,'model_id':'model','engine':context['code_identity'],
-                'constructor':FLAGS['constructor'],'method_call':{'short':False,'flat':False,'return_sppr':True},
+                'constructor':flags['constructor'],'method_call':{'short':False,'flat':False,'return_sppr':True},
                 'thresholds':method_settings('new_GE',FLAGS)['kwargs']['thresholds'],
                 'packages':{'numpy':'fixture'},'constructor_status':'CONSTRUCTED',
                 'source_input_unchanged':True,'persisted_runtime_reload_exact':True,
@@ -99,7 +102,7 @@ class RetainedTests(unittest.TestCase):
             book['PPR']={'Annual':(['model_id','scope','method','catch_basis','unidentified','metric','status'],
                 [['model',scope,key,'landings','method','ppr','ok'] for key in keys for scope in ('all','inner','PP')])}
             record={'canonical_model_sha256':context['model_sha256'],'fresh_sppr_sha256':manifest['coefficient_source_sha256'],
-                'engine_hashes':context['code_identity'],'constructor':copy.deepcopy(FLAGS['constructor']),
+                'engine_hashes':context['code_identity'],'constructor':copy.deepcopy(context['flags']['constructor']),
                 'methods':list(keys),'method_status':dict.fromkeys(keys,'ok'),'mc_samples':100,
                 'final_mc_diagnostics':mc,'monte_carlo_worker_seed':'Unspecified native worker RNG'}
             export=option.parent/'refresh_configuration.json';export.write_text(json.dumps(record))
@@ -173,6 +176,10 @@ class SavedMethodAdoptionTests(unittest.TestCase):
         manifest['code_identity'] = None
         manifest['effective_flags'] = None
         context = copy.deepcopy(context)
+        # Administrative adoption with unknown historical settings must not
+        # claim an EE-floor configuration or a numerical engine upgrade.
+        context['flags']['constructor'].pop('use_ee_floor')
+        context['flags']['constructor'].pop('ee_floor')
         context['adapter_sha256'] = 'new adapter must not trigger existing MC'
         context['dependencies'] = {'numpy': 'changed package metadata'}
         for row in book['Selected model groups']['Group SPPR'][1]:
@@ -242,6 +249,14 @@ class SavedMethodAdoptionTests(unittest.TestCase):
             manifest['effective_flags'] = None
             (model/'model.json').write_text('{"changed":true}')
             with self.assertRaisesRegex(ValueError, 'model'):
+                retained.adopt_saved_methods(model, manifest, context, book, model/'out', ['MC_new_GE'])
+            self.assertFalse((model/'out').exists())
+
+    def test_unknown_historical_floor_cannot_be_adopted_as_enabled(self):
+        with tempfile.TemporaryDirectory() as directory:
+            model, manifest, context, book = self.saved_fixture(directory)
+            context['flags']['constructor'].update(use_ee_floor=True, ee_floor=.1)
+            with self.assertRaisesRegex(ValueError, 'EE-floor calculation identity'):
                 retained.adopt_saved_methods(model, manifest, context, book, model/'out', ['MC_new_GE'])
             self.assertFalse((model/'out').exists())
 

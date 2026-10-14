@@ -9,6 +9,17 @@ from tools.project_core.workbooks.workbooks import *
 from tools.project_core.calculations.regional import recalculate,set_setting,set_result_hash,result_hash
 from tools.project_core.calculations.snapshots import save_snapshot,inspect_snapshot,restore_model_tables,dependencies
 
+def _current_code_identity(root,model_dir,flags=None):
+    if isinstance(flags,str):
+        try:flags=json.loads(flags)
+        except ValueError:flags=None
+    if isinstance(flags,dict) and flags.get('calculation_engine_upgrade')=='ee_floor_v1':
+        from tools.scientific_helpers.sppr.method_coverage import engine_identity
+        return {name:value for name,value in engine_identity(flags,Path(model_dir)/'model.json').items()
+                if name!='create_PPRS_excel.py'}
+    return {name:sha(Path(root)/'tools/scientific_code/PPREstimation'/name)
+            for name in ['ModelData.py','PPRCalculator.py','utils.py']}
+
 def execution_identity(root, model_dir, book=None, *, flags=None):
     explicit_flags=flags is not None
     o=overview(book or {})
@@ -19,7 +30,7 @@ def execution_identity(root, model_dir, book=None, *, flags=None):
                 try:value=json.loads(value)
                 except ValueError:continue
             if isinstance(value,dict):flags=value;break
-    code={name:sha(Path(root)/'tools/scientific_code/PPREstimation'/name) for name in ['ModelData.py','PPRCalculator.py','utils.py']}
+    code=_current_code_identity(root,model_dir,flags)
     recorded=o.get('sppr_engine_hashes')
     if isinstance(recorded,str):
         try:recorded=json.loads(recorded)
@@ -31,7 +42,7 @@ def execution_identity(root, model_dir, book=None, *, flags=None):
 def _clear_model(book):
     for sheet in ['Selected model groups','PPR']:
         book[sheet]={name:(header,[]) for name,(header,data) in book.get(sheet,{}).items()}
-    for table in ['model_health','mc_diagnostics','run_notes']:
+    for table in ['model_health','mc_diagnostics','run_notes','Method coverage','EE floor','EE floor groups']:
         if table in book.get('Diagnostics',{}):book['Diagnostics'][table]=(book['Diagnostics'][table][0],[])
     if 'Ratios' in book.get('PPR–NPP',{}):
         h,r=book['PPR–NPP']['Ratios'];book['PPR–NPP']['Ratios']=(h,[row for row in r if not row[0]])
@@ -100,7 +111,7 @@ def refresh_region(root,region_workbook,*,publisher=None):
             if unchanged and pinned_path.is_file():
                 pinned=json.loads(pinned_path.read_text(encoding='utf-8'))
                 requested=execution_identity(root,model.parent,original)
-                current_code={name:sha(root/'tools/scientific_code/PPREstimation'/name) for name in ['ModelData.py','PPRCalculator.py','utils.py']}
+                current_code=_current_code_identity(root,model.parent,requested.get('effective_flags'))
                 if pinned.get('effective_flags') is not None and requested.get('effective_flags') is not None and pinned['effective_flags']!=requested['effective_flags']:unchanged=False
                 if pinned.get('code_identity') is not None and pinned['code_identity']!=current_code:unchanged=False
             missing=[]
@@ -108,10 +119,10 @@ def refresh_region(root,region_workbook,*,publisher=None):
                 _clear_model(book)
                 manifest=model.parent/'results/result_manifest.json'
                 expected=execution_identity(root,model.parent,original if outgoing==selected else None)
-                expected['code_identity']={name:sha(root/'tools/scientific_code/PPREstimation'/name) for name in ['ModelData.py','PPRCalculator.py','utils.py']}
                 if manifest.is_file() and expected.get('effective_flags') is None:
                     recorded=json.loads(manifest.read_text(encoding='utf-8'))
                     expected['effective_flags']=recorded.get('effective_flags')
+                expected['code_identity']=_current_code_identity(root,model.parent,expected.get('effective_flags'))
                 compatibility=inspect_snapshot(model.parent,book,expected_identity=expected)
                 if compatibility.get('book'):book=restore_model_tables(book,compatibility['book'],compatibility)
                 if compatibility.get('coefficients') and compatibility.get('matching'):

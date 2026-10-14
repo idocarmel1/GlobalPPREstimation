@@ -6,6 +6,8 @@ Read and write retained JSON/text with an explicit matching encoding (normally U
 
 Read this contract with the requested stage reference. It governs evidence and handoff completeness, not model selection or scientific algorithms. It does not require a new transformation-chain archive, balanced-state retention, a different calculator state, or numerical repairs. Preserve existing source evidence and ordinary input/settings provenance.
 
+For an EE-floor run or migration, use the [shared floor reference](ee-floor.md): record explicit floor flags, source/pre-floor/effective EE/M0 and sink/skips, detritus residuals, actual affected-method decisions and both archived-base/current-engine identities when upgraded. Keep original signed review diagnostics historical and read-only; new results have their own status. An authorized calculation assumption does not alter accepted canonical parameters or renew review approval.
+
 ## Explain the run and respect existing authorization
 
 Before a fresh scientific run, finish independent review of saved evidence and explain the unresolved gap, why retained evidence cannot answer it, the smallest sufficient stages, exact model/variant and input identities, constructor and method settings, expected artifacts, estimated runtime/output bounds, and files/results potentially affected. Obtain explicit confirmation before executing an unapproved run. Existing explicit authorization covers the stated scope: explain the concrete setup, then proceed without asking again. A request to review evidence or update a skill alone is not run authorization.

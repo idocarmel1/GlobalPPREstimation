@@ -10,6 +10,7 @@ Availability, numerical validity and researcher approval are separate. Use the s
 | Some original publication/reference files are absent. | Source fidelity cannot be independently established from a JSON or derived table alone. Missing citations or bytes stay missing. |
 | Decimal negative diet sentinels and an apostrophe-sensitive validation case remain known check discrepancies. | Keep their failure dispositions explicit; they are not resolved by folder or instruction changes. |
 | Mapping evidence and descriptive audit metadata can disagree. | Reusing identical group/weight decisions preserves that numerical decision set; complete evidence readiness still requires the conflicting fields to be resolved. |
+| The EE floor introduces a hypothetical external mortality sink. | It is a calculation assumption, not observed export or a correction to source parameters. Reduced detritus supply can leave a negative stock residual; retain that limitation. New diagnostics have their own eligibility and do not inherit the historical signed review. See [model loading](model_loading.md#ee-floor-a-calculation-assumption). |
 
 The [read-only verification summary](../regions/LME/LME_028/work/2026-10-04_000005_final_checks/qa/read_only_final_verification_summary.json) and [construction audit](../regions/LME/LME_028/work/2026-10-04_000005_final_checks/qa/construction_notes_audit.json) record the applicable checks and their scope. These are evidence records, not substitutes for the current model's scientific state.
 

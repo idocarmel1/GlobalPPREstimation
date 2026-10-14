@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "constructor_identity": "PPRCalculator.from_modeldata",
+  "method_identity": "PPRCalculator.diagnose_sppr(short=False, flat=False, return_sppr=True)",
+  "requested_options": [
+    "GE",
+    "TE",
+    "With Egestion"
+  ],
+  "thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "threshold_overrides": null,
+  "negative_entry_tolerance": 1e-12,
+  "source_scope_definitions": {
+    "all": "All retained basal sources including synthetic imported diet, Discards, natural Detritus and both primary producers",
+    "inner": "All basal sources except synthetic imported diet",
+    "PP": "The two primary-producer columns only"
+  },
+  "SPPR_units": "wet-weight primary-production equivalent per wet-weight group production",
+  "SPPR_orientation": "Rows recipient group; columns basal source",
+  "A_L_orientation": "Engine original square group axes retained",
+  "synthetic_import": "One extra computational group, excluded from ecological group count",
+  "restriction": "Finite coefficients retained with actual diagnostic grades; no validated annual adoption"
+}

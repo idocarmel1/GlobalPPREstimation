@@ -1,0 +1,122 @@
+{
+  "unit_id": "LME_034",
+  "model_id": "34_1_Bay_of_Bengal_(1978)",
+  "model_path": "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/model.json",
+  "flags": {
+    "constructor": {
+      "underdetermined": true,
+      "zero_catch": true,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": true,
+      "DC_tol": 0.001
+    },
+    "diagnostics": {
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      }
+    },
+    "methods": {
+      "GE": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "DET_TE_vals": 1.0,
+        "fix_EE_0_cases": true
+      },
+      "TE": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "DET_TE_vals": 1.0,
+        "fix_EE_0_cases": true
+      },
+      "With Egestion": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "DET_TE_vals": 1.0,
+        "fix_EE_0_cases": true
+      }
+    },
+    "mc": {
+      "n_samples": 75
+    },
+    "engine_source_hashes": {
+      "PPRCalculator.py": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "method_timeout_seconds": 180,
+    "method_timeout_overrides_seconds": {
+      "MC_new_GE": 600,
+      "MC_new_TE_EEfix": 600
+    },
+    "configuration_evidence": [
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/GE/runtime_identity.json",
+        "sha256": "a1286c342719091b61cad3e619cdd5067167c5024e93ac15083a327fe284f6af",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/TE/runtime_identity.json",
+        "sha256": "87e163f6f8f18a8386fc64f6db9182c5e792264a393a0c71c3327cd878a8b5fd",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/With_Egestion/runtime_identity.json",
+        "sha256": "7cd5b4aac9d293b1b3dea851602fa383f8273b90077aa6d1fb60f2bca0ada3f2",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/initial_export_configuration.json",
+        "sha256": "4e56a1cbb24546084a4280ad1c39c453b7882e64ad5660604bcd192afa41f446",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/refresh_configuration.json",
+        "sha256": "f5447bc9b6e6a205b600f433b2dfe318e91f15399a416bc1cf57d6e196ec8e28",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/audited_engine/PPRCalculator.py",
+        "sha256": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/audited_engine/engine_copy_provenance.json",
+        "sha256": "8baa7988f0672dc3e100f2144aa6aa0f3eb55b9b47e68a0521949074d7dc5953",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      }
+    ],
+    "engine_sources": {
+      "PPRCalculator.py": "results/diagnostics/audited_engine/PPRCalculator.py"
+    }
+  },
+  "protected_hashes": {
+    "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/model.json": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+    "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/model_notes.md": "b937b288210e93928d536f29169452b10e16c7ffe9368166105d1525eccc98b8",
+    "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/results/result_manifest.json": "87b43d29e256a481180ab8f2cbdb7fabc6b89111048a4cd81809738dc47655c4",
+    "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/results/regional_snapshot.xlsx": "e592b0bc97e7881ea4367ed939341d09136622b2a15266244776b1dac211948c",
+    "regions/LME/LME_034/LME_034.xlsx": "e592b0bc97e7881ea4367ed939341d09136622b2a15266244776b1dac211948c",
+    "Project.xlsx": "03a76a820c0606f8788856ee11f6ac145ce23754b36e62fe561c1ed448de8602",
+    "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/model_validation/validation.docx": "8a3d0c42380d1a6cce8b237a14a05a9f790ad8675d3e662baffe143c2373ee25"
+  },
+  "run_id": "2026-10-14_175641_low_ee_sensitivity",
+  "review_status": "Validated by researcher"
+}
