@@ -1,0 +1,211 @@
+{
+  "source_sha256": "de708e6c5cc58ad835290e1e795cfb23e8f8a683d2eb874494844f1dde64b33c",
+  "all_consumed_inputs_unchanged": true,
+  "state": {
+    "year": 2019,
+    "catch_basis": "catch (landings plus discards), full_precision_catch payload",
+    "unidentified": "method",
+    "source_scope": "all for classic decomposition; separate scopes for new_TE",
+    "model_selection": "default selected models whose published researcher review status is Validated by researcher",
+    "group_selection": "published signed-review default exclusions; no user browser overrides",
+    "simple": "sum catch_i * original allocation_ig * saved simple_sppr_i",
+    "mean_tl_chain": "sum C_g * 10**(weighted_mean_taxon_TL_g-1)",
+    "saved_group_classic": "sum C_g * saved group SPPR_1995_TE0.1 coefficient",
+    "pure_jensen_ratio": "simple / mean_tl_chain",
+    "mean_tl_centering_ratio": "mean_tl_chain / saved_group_classic",
+    "new_sensitivity": "sum C_g * new_TE_g * J_g, where J_g=E_g[10**(TL_i-1)]/10**(E_g[TL_i]-1); hypothetical entire residual TL heterogeneity only, not identified correction"
+  },
+  "aggregate": {
+    "simple": 26261305147.340935,
+    "mean_tl_chain": 21227743514.73881,
+    "saved_group_classic": 14186096797.925653,
+    "catch": 39684336.471269056,
+    "ratio": 1.8512001942057075,
+    "pure_jensen_ratio": 1.2371218414763316,
+    "mean_tl_centering_ratio": 1.496376615577783,
+    "group_count": 165,
+    "region_count": 7,
+    "region_taxon_count": 1693
+  },
+  "2019_browser": {
+    "year": 2019,
+    "ratio": 1.8512001946647207,
+    "ppr_tC": 2917922794.148992,
+    "baseline_ppr_tC": 1576232977.1564605,
+    "catch": 39684336.47126907,
+    "covered_catch": 39684336.47126907,
+    "baseline_covered_catch": 39684336.47126907
+  },
+  "regional": [
+    {
+      "unit_id": "HS_077",
+      "name": "Pacific, Eastern Central",
+      "ratio": 0.6257537982025813,
+      "pure_jensen_ratio": 1.0020198815436947,
+      "mean_tl_centering_ratio": 0.6244923975346234,
+      "included_taxa": 20,
+      "groups_with_positive_catch": 23
+    },
+    {
+      "unit_id": "LME_013",
+      "name": "Humboldt Current",
+      "ratio": 1.7315735972356625,
+      "pure_jensen_ratio": 1.1099155779738776,
+      "mean_tl_centering_ratio": 1.5600948681129474,
+      "included_taxa": 184,
+      "groups_with_positive_catch": 22
+    },
+    {
+      "unit_id": "LME_032",
+      "name": "Arabian Sea",
+      "ratio": 1.4740755096278955,
+      "pure_jensen_ratio": 1.1704804125025283,
+      "mean_tl_centering_ratio": 1.2593764866823103,
+      "included_taxa": 393,
+      "groups_with_positive_catch": 18
+    },
+    {
+      "unit_id": "LME_034",
+      "name": "Bay of Bengal",
+      "ratio": 1.2591249546864727,
+      "pure_jensen_ratio": 1.4514773319387235,
+      "mean_tl_centering_ratio": 0.8674782078785015,
+      "included_taxa": 288,
+      "groups_with_positive_catch": 30
+    },
+    {
+      "unit_id": "LME_035",
+      "name": "Gulf of Thailand",
+      "ratio": 3.4812322598722547,
+      "pure_jensen_ratio": 1.1859572814765862,
+      "mean_tl_centering_ratio": 2.9353774492938878,
+      "included_taxa": 214,
+      "groups_with_positive_catch": 22
+    },
+    {
+      "unit_id": "LME_036",
+      "name": "South China Sea",
+      "ratio": 4.370017526258809,
+      "pure_jensen_ratio": 1.303857868270552,
+      "mean_tl_centering_ratio": 3.351605748297732,
+      "included_taxa": 340,
+      "groups_with_positive_catch": 30
+    },
+    {
+      "unit_id": "LME_047",
+      "name": "East China Sea",
+      "ratio": 3.3904204747484123,
+      "pure_jensen_ratio": 1.3134554765306103,
+      "mean_tl_centering_ratio": 2.5812983655174535,
+      "included_taxa": 254,
+      "groups_with_positive_catch": 20
+    }
+  ],
+  "te_full_residual_sensitivity": {
+    "scope": "all",
+    "method": "new_TE_EEfix",
+    "group_count": 165,
+    "missing_groups": [],
+    "negative_groups": [],
+    "base_tC": 3051528527.3165097,
+    "full_residual_jensen_sensitivity_tC": 3608310468.531145,
+    "factor": 1.1824600151138895,
+    "status": "exploratory full residual TL heterogeneity scenario only; may double-count existing network/path heterogeneity; preserves signed coefficients and is not a corrected scientific estimate"
+  },
+  "te_browser": {
+    "scope": "all",
+    "method": "new_TE_EEfix",
+    "included": [
+      "HS_077",
+      "LME_013",
+      "LME_032",
+      "LME_034",
+      "LME_035",
+      "LME_036",
+      "LME_047"
+    ],
+    "excluded": [],
+    "points": [
+      {
+        "year": 2019,
+        "value": 3051528527.2537293,
+        "ppr": 3051528527.2537293,
+        "npp": null,
+        "catch": 39684336.47126907,
+        "covered_catch": 39684336.47126907,
+        "status": "provisional: diagnostic WARN; strict SPPR balance check failed; provisional: DIRECT TE overall FAIL; balanced model; det_collapse_mode=always; pending researcher review; production-ineligible; provisional: printed input plus researcher Detritus completions; separate runtime normalization; derived biomass accumulation; source fidelity unverified; diagnostic OK; provisional: assumed size/stage allocations; see allocation ledger; provisional: assumed size/stage allocations; see allocation ledger",
+        "retained_numeric_display": false,
+        "catch_basis": "catch",
+        "total_catch_all": 39684336.47126907,
+        "total_discards": 1861112.6163931305,
+        "sensitivity": {
+          "status": "not_assessed",
+          "min_tC": null,
+          "max_tC": null,
+          "lower": null,
+          "upper": null,
+          "reason": "Sensitivity is available for the landings view only.",
+          "discard_fraction": 0.04689791443887568,
+          "hidden": true
+        },
+        "unidentified_catch": 4107277.9215818793,
+        "unidentified_share": 0.10349871729757895,
+        "unidentified_missing_simple_catch": 0,
+        "coverage": 1
+      }
+    ],
+    "reason": ""
+  },
+  "input_checks": [
+    {
+      "unit_id": "HS_077",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 0.0,
+      "max_model_tl_vs_effective_classic_tl_error": 0.15195488616821962,
+      "workbook_matches_published_sha256": true
+    },
+    {
+      "unit_id": "LME_013",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 4.440892098500626e-16,
+      "max_model_tl_vs_effective_classic_tl_error": 0.23997186527100034,
+      "workbook_matches_published_sha256": true
+    },
+    {
+      "unit_id": "LME_032",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 4.440892098500626e-16,
+      "max_model_tl_vs_effective_classic_tl_error": 0.10590800424738323,
+      "workbook_matches_published_sha256": true
+    },
+    {
+      "unit_id": "LME_034",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 4.440892098500626e-16,
+      "max_model_tl_vs_effective_classic_tl_error": 0.17683911714922607,
+      "workbook_matches_published_sha256": true
+    },
+    {
+      "unit_id": "LME_035",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 4.440892098500626e-16,
+      "max_model_tl_vs_effective_classic_tl_error": 0.07534626038781189,
+      "workbook_matches_published_sha256": true
+    },
+    {
+      "unit_id": "LME_036",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 4.440892098500626e-16,
+      "max_model_tl_vs_effective_classic_tl_error": 0.0879112923260581,
+      "workbook_matches_published_sha256": true
+    },
+    {
+      "unit_id": "LME_047",
+      "max_simple_coefficient_relative_error": 0.0,
+      "max_saved_taxon_tl_error": 4.440892098500626e-16,
+      "max_model_tl_vs_effective_classic_tl_error": 0.33726133285478843,
+      "workbook_matches_published_sha256": true
+    }
+  ],
+  "caveat": "Saved raw group TL is not exactly the inverse of the saved SPPR_1995 coefficient; centering factor includes model TL/convention differences, not pure arithmetic mean shift."
+}

@@ -1,5 +1,13 @@
 # 28_646_Guinea_(1998)
 
+## Regional review decision
+
+**Disqualified by researcher — Ido Carmel, 18/10/2026.** [Review report](model_validation/validation.docx).
+
+Amplified aggregated trophic pathways, uncertain catch allocations, and regional extrapolation undermine confidence in this model’s regional PPR application.
+
+The decision concerns full-LME regional PPR suitability. Scientific inputs, saved calculations and diagnostic restrictions are unchanged.
+
 ## Source identity
 
 GUI-2004__LME_028

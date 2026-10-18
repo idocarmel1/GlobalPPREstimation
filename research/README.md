@@ -6,6 +6,8 @@ Each study remains one complete package, with its existing inputs, code, results
 
 Current scientific inputs, results and validation reports remain model-local under `regions/`. New temporary preparation runs use the work locations in [the project contract](../explainers/agents/project_contract.md).
 
+The current validated comparison cohort contains seven model-region pairs following the 18 October 2026 withdrawal of `(LME_028, 28_646_Guinea_(1998))`. The three `20261018_validated7` studies below refit the analyses against that cohort and record their own source hashes. The corresponding 16 October studies retain their dated eight-model results and are not current-cohort estimates. The [updated trophic aggregation analysis](../regions/LME/LME_028/work/2026-10-18_121535_trophic_aggregation_validated7/README.md) supplies the shared catch and scenario evidence.
+
 | Category | Study |
 |---|---|
 | agents | [atlas_development_2026_09](agents/atlas_development_2026_09/README.md) |
@@ -25,6 +27,12 @@ Current scientific inputs, results and validation reports remain model-local und
 | agents | [warm_pool_candidate_review_20260928](agents/warm_pool_candidate_review_20260928) |
 | human | [discard_sensitivity_2026_09_10](human/discard_sensitivity_2026_09_10/README.md) |
 | human | [discard_sensitivity_expanded_2026_09_10](human/discard_sensitivity_expanded_2026_09_10/README.md) |
+| human | [ppr_taxonomic_resolution_20261016](human/ppr_taxonomic_resolution_20261016/README.md) |
+| human | [ppr_taxonomic_resolution_GE_20261016](human/ppr_taxonomic_resolution_GE_20261016/README.md) |
+| human | [sppr_trophic_level_20261016](human/sppr_trophic_level_20261016/README.md) |
+| human | [ppr_taxonomic_resolution_20261018_validated7](human/ppr_taxonomic_resolution_20261018_validated7/README.md) |
+| human | [ppr_taxonomic_resolution_GE_20261018_validated7](human/ppr_taxonomic_resolution_GE_20261018_validated7/README.md) |
+| human | [sppr_trophic_level_20261018_validated7](human/sppr_trophic_level_20261018_validated7/README.md) |
 | human | [te_mean_comparison_2026_09_11](human/te_mean_comparison_2026_09_11) |
 
 The split was adopted on 8 October 2026. `size_allocation_20260929` is supporting mapping/integration evidence under `agents/`. A later ownership change should move the whole package, update this index and record the relocation; it must not duplicate the study.
