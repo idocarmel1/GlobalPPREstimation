@@ -232,7 +232,8 @@ caught.
 
 ### `SPPR_1995(global_TE=0.1)` — Pauly & Christensen (1995)
 ```python
-SPPR_1995(global_TE: str | float = 0.1) -> pd.DataFrame
+SPPR_1995(global_TE: str | float = 0.1, weights: str = 'consumption',
+          *, TE_option: str = 'global') -> pd.DataFrame
 ```
 Same `TE^(1−TL)` form, but uses **each group's own continuous trophic level** rather than one
 catch-average, with a single global TE.
@@ -244,9 +245,66 @@ $$ \mathrm{SPPR}_i = TE^{1-TL_i} = \left(\tfrac{1}{TE}\right)^{TL_i-1}. $$
 
 - **`global_TE`**: the system-wide transfer efficiency — a float (default `0.1`, the 10% rule)
   or `'mean'` (let the model's own efficiencies set it).
+- **`TE_option='aggregated'`**: use the geometric mean of the discrete-level
+  efficiencies II, III and IV returned by `get_aggregated_TE()`. This option ignores
+  `global_TE` and `weights`; the existing `'global'` option retains both arguments.
+  All three efficiencies must be finite and in `(0, 1]`, otherwise it raises rather
+  than dropping a level. The trophic levels in the SPPR exponent are unchanged.
 - **Ecological meaning:** resolves the fact that different harvested groups sit at different
   trophic levels, so a TL-2 shellfish and a TL-4.5 tuna get very different PPR costs. Still
   assumes a uniform efficiency at every step.
+
+### `get_aggregated_TE(levels=(2, 3, 4), *, break_cycles=True)`
+
+This returns a flow table indexed by discrete trophic level, with `TE` as a
+fraction, `consumption`, `predation`, `export`, `respiration`,
+`flow_to_detritus`, and `throughput` in the model's native flow units.
+
+First remove feeding cycles using the same existing flow-removal utility as
+`SPPR_1995`, then normalize the remaining consumer diet rows to obtain
+`D*` (predator rows, prey columns). Set `a[i,1]=1` for PP, DET and the
+calculator's basal Import groups, zero for consumers. Recursively compute
+`a[i,k+1] = sum_j D*[i,j] a[j,k]`. An omnivore contributes fractions of its
+flows to several levels; rounding its mean TL into one bin is incorrect.
+`break_cycles=False` retains feeding cycles as an explicit alternative.
+Unreported higher-level fractions are never renormalized into the requested levels.
+
+For each level `k`, sum the group flows weighted by `a[i,k]`:
+
+$$T_k = F_k + E_k + R_k + D_k, \qquad TE_k=(F_k+E_k)/T_k.$$
+
+Here `F` is consumption by predators after cycle removal, `E` is export,
+`R` is respiration and `D` is routed flow to detritus. The outgoing level-II
+efficiency describes II→III; similarly III→IV and IV→V. This is the
+export-inclusive definition in the [Ecopath manual, section 7.2](https://www.vliz.be/imisdocs/publications/395938.pdf).
+The chosen model summary is
+`TE_aggregated = exp(mean(log([TE_II, TE_III, TE_IV])))`.
+The [1995 figure](https://www.seaaroundus.org/wp-content/uploads/2015/04/PrimaryProductionRequiredToSustainGlobalFisheries.pdf)
+instead pools 140 individual level estimates across 48 models; its reported
+10.13% arithmetic mean is a different summary.
+
+The project explicitly accounts for its existing sinks:
+`E_i = catch_i + net_migration_i + det_export_i + external_mortality_export_i`,
+and `D_i = M0_i + egestion_i - det_export_i`. Thus exported detrital material
+is counted once. Signed net migration remains signed. Biomass accumulation
+is not an export, so throughput need not equal consumption. Missing relevant
+flows propagate and nonpositive throughput yields missing TE; the helper
+retains out-of-range efficiencies for inspection without clipping them.
+
+This is a documented implementation of the published ratio using project
+flows, not an exact reconstruction of the 1995 models or modern EwE output.
+In particular, the current [EwE display code](https://github.com/Official-EwE/Eii.Ecopath/blob/9d91a4d34b5e9500b010f811b47226ff044a3b4f/Sources/EwECustomPlugins/EwENetworkAnalysis/NetworkAnalysis/cNetworkManager.vb#L968)
+uses catch plus predation in the numerator despite the manual's export wording;
+its cycle-removal and imported-food treatment also differ. This calculator
+retains its existing basal Import convention and counts its explicitly recorded
+EE-floor mortality sink as export. Research results must identify those settings.
+
+```python
+levels = calculator.get_aggregated_TE()
+fixed = calculator.SPPR_1995(global_TE=0.1)
+mean = calculator.SPPR_1995(global_TE='mean', weights='consumption')
+aggregated = calculator.SPPR_1995(TE_option='aggregated')
+```
 
 ### `SPPR_1995_TL_fix(global_TE=0.1)`
 ```python

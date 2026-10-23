@@ -34,5 +34,6 @@ The current validated comparison cohort contains seven model-region pairs follow
 | human | [ppr_taxonomic_resolution_GE_20261018_validated7](human/ppr_taxonomic_resolution_GE_20261018_validated7/README.md) |
 | human | [sppr_trophic_level_20261018_validated7](human/sppr_trophic_level_20261018_validated7/README.md) |
 | human | [te_mean_comparison_2026_09_11](human/te_mean_comparison_2026_09_11) |
+| human | [aggregated_transfer_efficiency_20261018](human/aggregated_transfer_efficiency_20261018/README.md) |
 
 The split was adopted on 8 October 2026. `size_allocation_20260929` is supporting mapping/integration evidence under `agents/`. A later ownership change should move the whole package, update this index and record the relocation; it must not duplicate the study.

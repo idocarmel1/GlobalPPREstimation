@@ -1,0 +1,215 @@
+{
+  "source": "common_reference_data/ecobase/models/217_217_Thau_(1980).json",
+  "model_id": "217_217_Thau_(1980)",
+  "source_sha256": "80b2ef99fc903e916f966ca6ee2b9d170fca73d3e8050b6ddf8626585add475e",
+  "stage": "complete",
+  "json_status": "ok",
+  "load_status": "ok",
+  "construction_status": "ok",
+  "aggregation_status": "ok",
+  "flags": {
+    "underdetermined": false,
+    "zero_catch": true,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": true,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "methods": {
+    "fixed_0.1": {
+      "status": "ok",
+      "scalar_TE": 0.1,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 5607.293641152137,
+      "catch_weighted_SPPR": 20.249516597999847,
+      "catch_weighted_status": "ok"
+    },
+    "consumer_mean_Q": {
+      "status": "ok",
+      "scalar_TE": 0.29273876910326246,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 1201.853903806646,
+      "catch_weighted_SPPR": 4.3402329414129,
+      "catch_weighted_status": "ok"
+    },
+    "aggregated_II_IV": {
+      "status": "ok",
+      "scalar_TE": 0.10811146473954875,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 4944.945012627933,
+      "catch_weighted_SPPR": 17.857589153977585,
+      "catch_weighted_status": "ok"
+    }
+  },
+  "elapsed_seconds": 0.297,
+  "source_group_count": 11,
+  "source_units": {},
+  "model_name": "Thau",
+  "model_year": "1980",
+  "group_count": 12,
+  "model_balance_status": true,
+  "initialization_warnings": [],
+  "total_native_catch": 276.90999999999997,
+  "negative_catch_group_count": 0,
+  "missing_catch_group_count": 0,
+  "aggregated_flows": [
+    {
+      "trophic_level": 2,
+      "TE": 0.052639030716830376,
+      "consumption": 13852.024326808598,
+      "predation": 486.8572435750926,
+      "export": 242.29986561837012,
+      "respiration": 6018.358082862271,
+      "flow_to_detritus": 7104.508662941429,
+      "throughput": 13852.023854997162
+    },
+    {
+      "trophic_level": 3,
+      "TE": 0.13869018327945706,
+      "consumption": 486.8572435750926,
+      "predation": 36.82372432727767,
+      "export": 30.69859593252471,
+      "respiration": 309.5580344161067,
+      "flow_to_detritus": 109.77688830391072,
+      "throughput": 486.8572429798198
+    },
+    {
+      "trophic_level": 4,
+      "TE": 0.17308588317708803,
+      "consumption": 36.82372432727766,
+      "predation": 2.8713783044830703,
+      "export": 3.502288528779004,
+      "respiration": 22.01996521817957,
+      "flow_to_detritus": 8.43009219613915,
+      "throughput": 36.8237242475808
+    }
+  ],
+  "aggregation_metadata": {
+    "break_cycles": true,
+    "removed_cyclic_flow": 4815.268783115129,
+    "definition": "export-inclusive Lindeman flow ratio; PP, DET and Import basal"
+  },
+  "aggregated_scalar_valid": true,
+  "aggregated_scalar_TE": 0.10811146473954875,
+  "groups": [
+    {
+      "seq": 12,
+      "name": "diet_import",
+      "trophic_info": "Import",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 11,
+      "name": "Detritus",
+      "trophic_info": "DET",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 10,
+      "name": "Benthic prod.",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 9,
+      "name": "Phytoplankton",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 8,
+      "name": "Zooplankton",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 3.416014910028039,
+      "aggregated_II_IV": 9.249712807139366
+    },
+    {
+      "seq": 7,
+      "name": "Benthos",
+      "trophic_info": "Regular",
+      "native_catch": 1.0,
+      "fixed_0.1": 15.922827933410922,
+      "consumer_mean_Q": 4.37825978362717,
+      "aggregated_II_IV": 14.497919118623022
+    },
+    {
+      "seq": 6,
+      "name": "Molluscs",
+      "trophic_info": "Regular",
+      "native_catch": 267.0,
+      "fixed_0.1": 12.589254117941675,
+      "consumer_mean_Q": 3.862528824103221,
+      "aggregated_II_IV": 11.55423173076884
+    },
+    {
+      "seq": 5,
+      "name": "Atherinids",
+      "trophic_info": "Regular",
+      "native_catch": 0.2,
+      "fixed_0.1": 37.07649955593098,
+      "consumer_mean_Q": 6.872981445112814,
+      "aggregated_II_IV": 32.80579775176879
+    },
+    {
+      "seq": 4,
+      "name": "Young predators",
+      "trophic_info": "Regular",
+      "native_catch": 0.32,
+      "fixed_0.1": 52.5625164728117,
+      "consumer_mean_Q": 8.27970230436754,
+      "aggregated_II_IV": 45.96146196541155
+    },
+    {
+      "seq": 3,
+      "name": "Adult mugilids",
+      "trophic_info": "Regular",
+      "native_catch": 0.18,
+      "fixed_0.1": 21.524189895211215,
+      "consumer_mean_Q": 5.142126912093685,
+      "aggregated_II_IV": 19.39895114133695
+    },
+    {
+      "seq": 2,
+      "name": "Adult predators",
+      "trophic_info": "Regular",
+      "native_catch": 1.21,
+      "fixed_0.1": 144.5228224904869,
+      "consumer_mean_Q": 14.202629669013291,
+      "aggregated_II_IV": 122.11685324302009
+    },
+    {
+      "seq": 1,
+      "name": "Anguille",
+      "trophic_info": "Regular",
+      "native_catch": 7.0,
+      "fixed_0.1": 289.57966987874084,
+      "consumer_mean_Q": 20.57794031676513,
+      "aggregated_II_IV": 238.9921700550355
+    }
+  ],
+  "run_status": "complete",
+  "wall_seconds": 0.312
+}

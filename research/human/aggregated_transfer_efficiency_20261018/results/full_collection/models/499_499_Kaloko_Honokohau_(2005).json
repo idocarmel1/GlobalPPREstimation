@@ -1,0 +1,352 @@
+{
+  "source": "common_reference_data/ecobase/models/499_499_Kaloko_Honokohau_(2005).json",
+  "model_id": "499_499_Kaloko_Honokohau_(2005)",
+  "source_sha256": "53010755544d52e62a840d069230cb9c3d09337b639402486b4de565b1d25d4a",
+  "stage": "complete",
+  "json_status": "ok",
+  "load_status": "ok",
+  "construction_status": "ok",
+  "aggregation_status": "ok",
+  "flags": {
+    "underdetermined": false,
+    "zero_catch": true,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": true,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "methods": {
+    "fixed_0.1": {
+      "status": "ok",
+      "scalar_TE": 0.1,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 24.34434412350473,
+      "catch_weighted_SPPR": 70.15661130693006,
+      "catch_weighted_status": "ok"
+    },
+    "consumer_mean_Q": {
+      "status": "ok",
+      "scalar_TE": 0.07930079396222829,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 39.357489992841415,
+      "catch_weighted_SPPR": 113.42216136265539,
+      "catch_weighted_status": "ok"
+    },
+    "aggregated_II_IV": {
+      "status": "ok",
+      "scalar_TE": 0.061463333349997595,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 67.07435852965718,
+      "catch_weighted_SPPR": 193.2978631978593,
+      "catch_weighted_status": "ok"
+    }
+  },
+  "elapsed_seconds": 0.859,
+  "source_group_count": 26,
+  "source_units": {},
+  "model_name": "Kaloko_Honokohau",
+  "model_year": "2005",
+  "group_count": 27,
+  "model_balance_status": true,
+  "initialization_warnings": [
+    "3 group(s) route less than 100% of their flow_to_det to detritus; the remainder is treated as export out of the system: 23 (Turf algae_LB), 6 (Hawksbills), 4 (Rays)."
+  ],
+  "total_native_catch": 0.347,
+  "negative_catch_group_count": 0,
+  "missing_catch_group_count": 0,
+  "aggregated_flows": [
+    {
+      "trophic_level": 2,
+      "TE": 0.0705435192411956,
+      "consumption": 4916.03305739902,
+      "predation": 339.14834859443835,
+      "export": 7.623041826230747,
+      "respiration": 3177.126929238777,
+      "flow_to_detritus": 1391.810368406169,
+      "throughput": 4915.708688065615
+    },
+    {
+      "trophic_level": 3,
+      "TE": 0.06529894469877817,
+      "consumption": 339.1483485944383,
+      "predation": 20.107108225255466,
+      "export": 2.0369608917188966,
+      "respiration": 237.85200771499336,
+      "flow_to_detritus": 79.12225378002314,
+      "throughput": 339.11833061199087
+    },
+    {
+      "trophic_level": 4,
+      "TE": 0.05040632609969062,
+      "consumption": 20.107108225255473,
+      "predation": 0.7620061216805856,
+      "export": 0.2515339097920782,
+      "respiration": 13.918731176833811,
+      "flow_to_detritus": 5.175126213758067,
+      "throughput": 20.10739742206454
+    }
+  ],
+  "aggregation_metadata": {
+    "break_cycles": true,
+    "removed_cyclic_flow": 56.30585419158342,
+    "definition": "export-inclusive Lindeman flow ratio; PP, DET and Import basal"
+  },
+  "aggregated_scalar_valid": true,
+  "aggregated_scalar_TE": 0.061463333349997595,
+  "groups": [
+    {
+      "seq": 27,
+      "name": "diet_import",
+      "trophic_info": "Import",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 26,
+      "name": "Detritus",
+      "trophic_info": "DET",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 25,
+      "name": "Phytoplankton",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 24,
+      "name": "Zooplankton",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 12.610214224038026,
+      "aggregated_II_IV": 16.269862786412627
+    },
+    {
+      "seq": 23,
+      "name": "Turf algae_LB",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 22,
+      "name": "Turf algae",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 21,
+      "name": "CCA",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 20,
+      "name": "Macroalgae",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 19,
+      "name": "Octocoral",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 22.3872113856834,
+      "consumer_mean_Q": 30.61789483768848,
+      "aggregated_II_IV": 43.18851305311713
+    },
+    {
+      "seq": 18,
+      "name": "Corals",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 31.62277660168379,
+      "consumer_mean_Q": 44.779959528549966,
+      "aggregated_II_IV": 65.62598507679006
+    },
+    {
+      "seq": 17,
+      "name": "Benthic Invts",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 13.388823712910426,
+      "consumer_mean_Q": 17.387241931907237,
+      "aggregated_II_IV": 23.169551129402418
+    },
+    {
+      "seq": 16,
+      "name": "Crown of thorns",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 311.0283668685142,
+      "consumer_mean_Q": 554.4737103685277,
+      "aggregated_II_IV": 1046.496455466444
+    },
+    {
+      "seq": 15,
+      "name": "Urchins",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 10.00345412869918,
+      "consumer_mean_Q": 12.615008757605262,
+      "aggregated_II_IV": 16.276670794335526
+    },
+    {
+      "seq": 14,
+      "name": "Zoo",
+      "trophic_info": "Regular",
+      "native_catch": 0.004,
+      "fixed_0.1": 27.322671492712416,
+      "consumer_mean_Q": 38.12530384561812,
+      "aggregated_II_IV": 54.97699711679725
+    },
+    {
+      "seq": 13,
+      "name": "SIF",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 172.16282069067134,
+      "consumer_mean_Q": 289.1669759190877,
+      "aggregated_II_IV": 511.18833133473413
+    },
+    {
+      "seq": 12,
+      "name": "MIF",
+      "trophic_info": "Regular",
+      "native_catch": 0.13,
+      "fixed_0.1": 119.61223153042305,
+      "consumer_mean_Q": 193.66639621316133,
+      "aggregated_II_IV": 328.83942547514147
+    },
+    {
+      "seq": 11,
+      "name": "Detritivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.018,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 12.610214224038026,
+      "aggregated_II_IV": 16.269862786412627
+    },
+    {
+      "seq": 10,
+      "name": "Corallivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 246.53520184102098,
+      "consumer_mean_Q": 429.33360277417876,
+      "aggregated_II_IV": 789.7390529723756
+    },
+    {
+      "seq": 9,
+      "name": "Herbivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.162,
+      "fixed_0.1": 10.420111454787053,
+      "consumer_mean_Q": 13.19456197397252,
+      "aggregated_II_IV": 17.101499200475555
+    },
+    {
+      "seq": 8,
+      "name": "Piscivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.003,
+      "fixed_0.1": 233.63023649661244,
+      "consumer_mean_Q": 404.6626596373145,
+      "aggregated_II_IV": 739.942432841753
+    },
+    {
+      "seq": 7,
+      "name": "Green sea turtles",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 10.023052380778994,
+      "consumer_mean_Q": 12.642215438526494,
+      "aggregated_II_IV": 16.315307901289074
+    },
+    {
+      "seq": 6,
+      "name": "Hawksbills",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 103.2304276492796,
+      "consumer_mean_Q": 164.6809651831122,
+      "aggregated_II_IV": 275.10231055003055
+    },
+    {
+      "seq": 5,
+      "name": "Sharks and jacks",
+      "trophic_info": "Regular",
+      "native_catch": 0.03,
+      "fixed_0.1": 203.8838191137849,
+      "consumer_mean_Q": 348.328879833993,
+      "aggregated_II_IV": 627.4065843421284
+    },
+    {
+      "seq": 4,
+      "name": "Rays",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 46.06580988636899,
+      "consumer_mean_Q": 67.75140628202848,
+      "aggregated_II_IV": 103.51187463140394
+    },
+    {
+      "seq": 3,
+      "name": "Sea birds",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 46.41115241253487,
+      "consumer_mean_Q": 68.31068856519717,
+      "aggregated_II_IV": 104.45265147034786
+    },
+    {
+      "seq": 2,
+      "name": "Monk seals",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 64.77134488532619,
+      "consumer_mean_Q": 98.58931881752952,
+      "aggregated_II_IV": 156.41560612777005
+    },
+    {
+      "seq": 1,
+      "name": "Spinner dolphins",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 16.921789645619583,
+      "consumer_mean_Q": 22.49978820712256,
+      "aggregated_II_IV": 30.769472310618973
+    }
+  ],
+  "run_status": "complete",
+  "wall_seconds": 0.984
+}

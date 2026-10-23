@@ -1,0 +1,397 @@
+{
+  "source": "common_reference_data/ecobase/models/705_705_Georges_Bank_(1996).json",
+  "model_id": "705_705_Georges_Bank_(1996)",
+  "source_sha256": "b7db7cdf2be0f6a1181e47dabc62fc52235254a5076ef8202043df3892638f82",
+  "stage": "complete",
+  "json_status": "ok",
+  "load_status": "ok",
+  "construction_status": "ok",
+  "aggregation_status": "ok",
+  "flags": {
+    "underdetermined": false,
+    "zero_catch": true,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": true,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "methods": {
+    "fixed_0.1": {
+      "status": "ok",
+      "scalar_TE": 0.1,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 605.5649302401135,
+      "catch_weighted_SPPR": 282.3414534955353,
+      "catch_weighted_status": "ok"
+    },
+    "consumer_mean_Q": {
+      "status": "ok",
+      "scalar_TE": 0.2142520405850769,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 74.90402614225694,
+      "catch_weighted_SPPR": 34.92360696199294,
+      "catch_weighted_status": "ok"
+    },
+    "aggregated_II_IV": {
+      "status": "ok",
+      "scalar_TE": 0.11836496520891934,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 375.53382734889834,
+      "catch_weighted_SPPR": 175.09066551853937,
+      "catch_weighted_status": "ok"
+    }
+  },
+  "elapsed_seconds": 0.875,
+  "source_group_count": 31,
+  "source_units": {},
+  "model_name": "Georges_Bank",
+  "model_year": "1996",
+  "group_count": 32,
+  "model_balance_status": true,
+  "initialization_warnings": [
+    "1 group(s) route less than 100% of their flow_to_det to detritus; the remainder is treated as export out of the system: 8 (Mesopelagics)."
+  ],
+  "total_native_catch": 2.144796390125864,
+  "negative_catch_group_count": 0,
+  "missing_catch_group_count": 0,
+  "aggregated_flows": [
+    {
+      "trophic_level": 2,
+      "TE": 0.16851453236621783,
+      "consumption": 6345.785715230606,
+      "predation": 1068.6435897231308,
+      "export": 0.7305226404856406,
+      "respiration": 3211.9150442099517,
+      "flow_to_detritus": 2064.5974405517145,
+      "throughput": 6345.886597125283
+    },
+    {
+      "trophic_level": 3,
+      "TE": 0.10220305431521257,
+      "consumption": 1068.6435897231308,
+      "predation": 108.33021214434999,
+      "export": 0.894392977275882,
+      "respiration": 500.7318781511426,
+      "flow_to_detritus": 458.7454831553342,
+      "throughput": 1068.7019664281029
+    },
+    {
+      "trophic_level": 4,
+      "TE": 0.09628714064530987,
+      "consumption": 108.33021214435,
+      "predation": 10.00500917491766,
+      "export": 0.4263880287866211,
+      "respiration": 51.24873150015823,
+      "flow_to_detritus": 46.65621957477332,
+      "throughput": 108.33634827863582
+    }
+  ],
+  "aggregation_metadata": {
+    "break_cycles": true,
+    "removed_cyclic_flow": 539.871155242924,
+    "definition": "export-inclusive Lindeman flow ratio; PP, DET and Import basal"
+  },
+  "aggregated_scalar_valid": true,
+  "aggregated_scalar_TE": 0.11836496520891934,
+  "groups": [
+    {
+      "seq": 32,
+      "name": "diet_import",
+      "trophic_info": "Import",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 31,
+      "name": "Detritus-POC",
+      "trophic_info": "DET",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 30,
+      "name": "Discard",
+      "trophic_info": "DET",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 29,
+      "name": "Sea Birds",
+      "trophic_info": "Regular",
+      "native_catch": 0.000143933,
+      "fixed_0.1": 790.3773648079907,
+      "consumer_mean_Q": 86.8697776787425,
+      "aggregated_II_IV": 484.89293072259744
+    },
+    {
+      "seq": 28,
+      "name": "Odontocetes",
+      "trophic_info": "Regular",
+      "native_catch": 1.01886e-08,
+      "fixed_0.1": 2550.045645493996,
+      "consumer_mean_Q": 190.2112436799644,
+      "aggregated_II_IV": 1435.8520681130908
+    },
+    {
+      "seq": 27,
+      "name": "Baleen Whales",
+      "trophic_info": "Regular",
+      "native_catch": 1.24746e-08,
+      "fixed_0.1": 309.14813076809054,
+      "consumer_mean_Q": 46.356252194161286,
+      "aggregated_II_IV": 203.15556291233207
+    },
+    {
+      "seq": 26,
+      "name": "HMS",
+      "trophic_info": "Regular",
+      "native_catch": 0.001021903,
+      "fixed_0.1": 1175.5021438902115,
+      "consumer_mean_Q": 113.29476422575097,
+      "aggregated_II_IV": 700.5060960375648
+    },
+    {
+      "seq": 25,
+      "name": "Sharks- pelagics",
+      "trophic_info": "Regular",
+      "native_catch": 0.003644677,
+      "fixed_0.1": 2636.4164384038418,
+      "consumer_mean_Q": 194.49796531370387,
+      "aggregated_II_IV": 1480.8685299615072
+    },
+    {
+      "seq": 24,
+      "name": "Demersals- piscivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.159433454,
+      "fixed_0.1": 569.1886850435496,
+      "consumer_mean_Q": 69.73859154123961,
+      "aggregated_II_IV": 357.6906991445757
+    },
+    {
+      "seq": 23,
+      "name": "Demersals- omnivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.5330391,
+      "fixed_0.1": 314.73490504462416,
+      "consumer_mean_Q": 46.915092112558575,
+      "aggregated_II_IV": 206.55582810603045
+    },
+    {
+      "seq": 22,
+      "name": "Demersals- benthivores",
+      "trophic_info": "Regular",
+      "native_catch": 0.08456207,
+      "fixed_0.1": 164.21447323800965,
+      "consumer_mean_Q": 30.358232087341765,
+      "aggregated_II_IV": 113.02954336169711
+    },
+    {
+      "seq": 21,
+      "name": "Medium Pelagics- (piscivores &amp; other)",
+      "trophic_info": "Regular",
+      "native_catch": 0.103045747,
+      "fixed_0.1": 2428.9601477553997,
+      "consumer_mean_Q": 184.11970014674557,
+      "aggregated_II_IV": 1372.5531171947139
+    },
+    {
+      "seq": 20,
+      "name": "Small Pelagics- anadromous",
+      "trophic_info": "Regular",
+      "native_catch": 0.0134283034,
+      "fixed_0.1": 184.1245643841687,
+      "consumer_mean_Q": 32.77401945902329,
+      "aggregated_II_IV": 125.67620560336461
+    },
+    {
+      "seq": 19,
+      "name": "Small Pelagics- squid",
+      "trophic_info": "Regular",
+      "native_catch": 0.03309712,
+      "fixed_0.1": 480.3516540194115,
+      "consumer_mean_Q": 62.25358567579426,
+      "aggregated_II_IV": 305.63775840914093
+    },
+    {
+      "seq": 18,
+      "name": "Small Pelagics- other",
+      "trophic_info": "Regular",
+      "native_catch": 0.003389353,
+      "fixed_0.1": 104.00057031373643,
+      "consumer_mean_Q": 22.363936045836812,
+      "aggregated_II_IV": 74.0187866619441
+    },
+    {
+      "seq": 17,
+      "name": "Small Pelagics- commercial",
+      "trophic_info": "Regular",
+      "native_catch": 0.0299004242,
+      "fixed_0.1": 259.5430371596913,
+      "consumer_mean_Q": 41.237015156244894,
+      "aggregated_II_IV": 172.75606643996375
+    },
+    {
+      "seq": 16,
+      "name": "Larval-juv fish- all",
+      "trophic_info": "Regular",
+      "native_catch": 0.299004257,
+      "fixed_0.1": 97.07707433016954,
+      "consumer_mean_Q": 21.356503828008947,
+      "aggregated_II_IV": 69.44063559907772
+    },
+    {
+      "seq": 15,
+      "name": "Shrimp et al.",
+      "trophic_info": "Regular",
+      "native_catch": 0.00022901,
+      "fixed_0.1": 29.021251903671885,
+      "consumer_mean_Q": 9.520655520615236,
+      "aggregated_II_IV": 22.678348407883284
+    },
+    {
+      "seq": 14,
+      "name": "Megabenthos- other",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 82.82095355093801,
+      "consumer_mean_Q": 19.203471066235902,
+      "aggregated_II_IV": 59.9360212043808
+    },
+    {
+      "seq": 13,
+      "name": "Megabenthos- filterers",
+      "trophic_info": "Regular",
+      "native_catch": 0.233054623,
+      "fixed_0.1": 12.02264434617413,
+      "consumer_mean_Q": 5.279600188681003,
+      "aggregated_II_IV": 10.021182497871475
+    },
+    {
+      "seq": 12,
+      "name": "Macrobenthos- other",
+      "trophic_info": "Regular",
+      "native_catch": 0.647801757,
+      "fixed_0.1": 21.037582453586293,
+      "consumer_mean_Q": 7.676857504948256,
+      "aggregated_II_IV": 16.831463365199674
+    },
+    {
+      "seq": 11,
+      "name": "Macrobenthos- molluscs",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 16.39851817183925,
+      "consumer_mean_Q": 6.498235277940988,
+      "aggregated_II_IV": 13.361424299557534
+    },
+    {
+      "seq": 10,
+      "name": "Macrobenthos- crustaceans",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 20.57923372326273,
+      "consumer_mean_Q": 7.564542812040793,
+      "aggregated_II_IV": 16.491332335527222
+    },
+    {
+      "seq": 9,
+      "name": "Macrobenthos- polychaetes",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 20.85556102258137,
+      "consumer_mean_Q": 7.632352516773731,
+      "aggregated_II_IV": 16.69645467858175
+    },
+    {
+      "seq": 8,
+      "name": "Mesopelagics",
+      "trophic_info": "Regular",
+      "native_catch": 3.66416e-12,
+      "fixed_0.1": 151.7707061692019,
+      "consumer_mean_Q": 28.799065992926437,
+      "aggregated_II_IV": 105.06896350121443
+    },
+    {
+      "seq": 7,
+      "name": "Micronekton",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 60.965675143366745,
+      "consumer_mean_Q": 15.644297450068978,
+      "aggregated_II_IV": 45.12069372657652
+    },
+    {
+      "seq": 6,
+      "name": "Gelatinous Zooplankton",
+      "trophic_info": "Regular",
+      "native_catch": 6.35859e-07,
+      "fixed_0.1": 74.75235960123223,
+      "consumer_mean_Q": 17.93063400355776,
+      "aggregated_II_IV": 54.50447264354042
+    },
+    {
+      "seq": 5,
+      "name": "Large Copepods",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 19.768519642067464,
+      "consumer_mean_Q": 7.363833262166308,
+      "aggregated_II_IV": 15.888350320198038
+    },
+    {
+      "seq": 4,
+      "name": "Small copepods",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 12.62283849916834,
+      "consumer_mean_Q": 5.454521694216622,
+      "aggregated_II_IV": 10.483995174463494
+    },
+    {
+      "seq": 3,
+      "name": "Microzooplankton",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 15.215027384370568,
+      "consumer_mean_Q": 6.180579136130973,
+      "aggregated_II_IV": 12.465306886753098
+    },
+    {
+      "seq": 2,
+      "name": "Bacteria",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 4.667400120293893,
+      "aggregated_II_IV": 8.448445857563987
+    },
+    {
+      "seq": 1,
+      "name": "Phytoplankton- Primary Producers",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    }
+  ],
+  "run_status": "complete",
+  "wall_seconds": 0.968
+}

@@ -12,7 +12,8 @@ from PPRCalculator import PPRCalculator
 
 @pytest.fixture
 def toy():
-    return PPRCalculator(str(ROOT / "real_models/ToyModels/900_900_Multi_DET_Toy_(2026).json"))
+    source = ROOT.parents[2] / "common_reference_data/ecobase/source_data/ToyModels/900_900_Multi_DET_Toy_(2026).json"
+    return PPRCalculator(str(source))
 
 
 @pytest.mark.parametrize("as_matrix", [False, True])

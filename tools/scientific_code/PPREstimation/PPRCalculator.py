@@ -1924,6 +1924,118 @@ class PPRCalculator:
         
         return te.sort_index(ascending=False)
     
+    def get_aggregated_TE(self, levels=(2, 3, 4), *, break_cycles: bool = True) -> pd.DataFrame:
+        """Aggregate flows onto discrete trophic levels (Lindeman convention).
+
+        A group can contribute to several levels: a[i,1]=1 for basal PP, DET
+        and Import groups, and a[i,k]=sum_j DC[i,j]*a[j,k-1] for consumers.
+        These are diet-path fractions, not bins of rounded mean trophic level.
+        Feeding cycles are removed by the same existing flow algorithm used by
+        SPPR_1995, then remaining consumer diets are normalized. Set
+        break_cycles=False to retain feeding cycles in the finite-level table.
+        Fractions above the requested levels are never folded back into them.
+
+        At each level, TE=(predation+export)/throughput, following the published
+        Ecopath user's guide, section 'Trophic aggregation'. Throughput is the
+        sum of predation, export, respiration and routed flow to detritus.
+        Export here is catch + signed net migration + detrital export + the
+        calculator's explicit external mortality sink. Routed detritus is
+        M0 + egestion - detrital export, so a sink is never counted twice.
+        Biomass accumulation is not an export or a throughput term.
+
+        This is the published export-inclusive definition with this project's
+        explicit sinks and basal Import convention, not a byte-for-byte EwE
+        replication: current EwE's display uses catch alone in the numerator,
+        and its cycle/import implementation differs. No model is rebalanced.
+
+        Args:
+            levels: distinct integer consumer levels >=2, returned in that order.
+            break_cycles: remove cyclic feeding flows before aggregation (default).
+
+        Returns:
+            DataFrame indexed by trophic_level, with dimensionless TE and flow
+            columns in model-native mass/area/time units. Consumption is the
+            remaining feeding inflow; it need not equal throughput when there
+            is biomass accumulation or imbalance. Nonpositive throughput gives
+            NaN TE. Missing relevant flows propagate; efficiencies outside
+            [0,1] are retained for inspection, not clipped or repaired.
+        """
+        levels = tuple(levels)
+        if (not levels or any(isinstance(k, (bool, np.bool_))
+                             or not isinstance(k, (int, np.integer)) or k < 2
+                             for k in levels) or len(set(levels)) != len(levels)):
+            raise ValueError('levels must be distinct integers >= 2.')
+        if not isinstance(break_cycles, (bool, np.bool_)):
+            raise ValueError('break_cycles must be Boolean.')
+        # Fix axis order before cycle removal; all vector operations align by ID.
+        ids = self._groups_df.index.sort_values(ascending=False)
+        consumers = self.get_Regular_seq()
+        basal = self.get_PP_seq() + self.get_DET_seq() + self.get_Import_seq()
+        if set(consumers + basal) != set(ids):
+            raise ValueError('Aggregated TE requires known trophic types for every group.')
+        dc = self.get_DC(DET_as_PP=True).reindex(index=ids, columns=ids)
+        q = self.q.reindex(consumers)
+        diet = dc.loc[consumers]
+        if (not np.isfinite(diet.to_numpy()).all() or (diet < 0).any().any()
+                or not np.isfinite(q).all() or (q < 0).any()):
+            raise ValueError('Aggregated TE requires finite nonnegative consumer diet and consumption.')
+        if ((diet.sum(axis=1) <= 0) & (q > 0)).any():
+            raise ValueError('Aggregated TE requires a diet for every consuming group.')
+        feeding = pd.DataFrame(0., index=ids, columns=ids)
+        feeding.loc[consumers] = diet.mul(q, axis=0)
+        original_feeding = float(feeding.to_numpy().sum())
+        if break_cycles:
+            feeding = remove_cycles(feeding, new=False)
+        consumption = feeding.sum(axis=1)
+        diet = feeding.div(consumption.replace(0., np.nan), axis=0).fillna(0.)
+        fraction = pd.Series(0., index=ids)
+        fraction.loc[basal] = 1.
+        fractions = {}
+        for level in range(2, max(levels) + 1):
+            fraction = diet.dot(fraction)
+            if level in levels:
+                fractions[level] = fraction.to_numpy(copy=True)
+        allocation = np.array([fractions[k] for k in levels])
+        zero = pd.Series(0., index=ids)
+        det_export = getattr(self, 'det_export', zero).reindex(ids)
+        external = getattr(self, 'external_mortality_export', zero).reindex(ids)
+        flows = {
+            'consumption': consumption,
+            'predation': feeding.sum(axis=0),
+            'export': self.catch.reindex(ids) + self.net_migration.reindex(ids)
+                      + det_export + external,
+            'respiration': self.respiration.reindex(ids),
+            'flow_to_detritus': self.M0.reindex(ids) + self.egestion.reindex(ids) - det_export,
+        }
+        # A disconnected feeding component has no identifiable basal origin.
+        # It must not silently disappear when other components populate II-IV.
+        supported = ids.isin(basal)
+        links = diet.to_numpy() > 0
+        for _ in ids:
+            expanded = supported | np.any(links & supported[None, :], axis=1)
+            if np.array_equal(expanded, supported):
+                break
+            supported = expanded
+        active = self.q.reindex(ids).gt(0) & ids.isin(consumers)
+        for flow in flows.values():
+            active |= flow.ne(0) & ids.isin(consumers)
+        unsupported = ids[active.to_numpy() & ~supported].tolist()
+        if unsupported:
+            raise ValueError('Aggregated TE cannot assign active consumers without a basal '
+                             f'feeding path to trophic levels: {unsupported}')
+        result = pd.DataFrame(index=pd.Index(levels, name='trophic_level'))
+        for name, flow in flows.items():
+            # An unknown flow matters only at levels receiving a positive share.
+            result[name] = np.where(allocation != 0, allocation * flow.to_numpy(), 0.).sum(axis=1)
+        result['throughput'] = result[['predation', 'export', 'respiration',
+                                       'flow_to_detritus']].sum(axis=1, skipna=False)
+        result.insert(0, 'TE', (result.predation + result['export']).div(
+            result.throughput.where(result.throughput > 0)))
+        result.attrs['break_cycles'] = bool(break_cycles)
+        result.attrs['removed_cyclic_flow'] = original_feeding - float(feeding.to_numpy().sum())
+        result.attrs['definition'] = 'export-inclusive Lindeman flow ratio; PP, DET and Import basal'
+        return result
+
     def get_TL(self, break_cycles: bool, DET_as_PP: bool, TE_option: str = 'With Egestion') -> pd.Series:
         """Compute the trophic level of every group via the standard linear-algebra definition.
 
@@ -2077,7 +2189,8 @@ class PPRCalculator:
         SPPR = pd.DataFrame(SPPR, index=self.GE.index, columns=['sppr'])
         return SPPR
     
-    def SPPR_1995(self, global_TE: str | float = 0.1, weights: str = 'consumption') -> pd.DataFrame:
+    def SPPR_1995(self, global_TE: str | float = 0.1, weights: str = 'consumption',
+                  *, TE_option: str = 'global') -> pd.DataFrame:
         """Pauly & Christensen (1995)-style per-group SPPR = TE^(1-TL).
 
         Uses each group's own continuous trophic level together with a single global transfer
@@ -2087,10 +2200,23 @@ class PPRCalculator:
             global_TE (str | float, optional): the global TE; either the literal float or
                 'mean' (consumer-weighted arithmetic mean, see get_TE). Defaults to 0.1.
             weights (str, optional): mean-TE weights; defaults to 'consumption'. Ignored for fixed TE.
+            TE_option (str, keyword-only): 'global' preserves the numeric/mean
+                global_TE behavior. 'aggregated' uses the geometric mean of
+                get_aggregated_TE() at levels II, III and IV, ignoring global_TE
+                and weights. All three efficiencies must be finite and in (0,1].
 
         Returns:
             pd.DataFrame: a single 'sppr' column indexed by group seq.
         """
+        if TE_option == 'aggregated':
+            efficiencies = self.get_aggregated_TE()['TE']
+            invalid = ~np.isfinite(efficiencies) | (efficiencies <= 0) | (efficiencies > 1)
+            if invalid.any():
+                raise ValueError('Aggregated TE requires finite efficiencies in (0, 1] at '
+                                 f'all levels II-IV; invalid levels: {efficiencies[invalid].to_dict()}')
+            global_TE = float(np.exp(np.log(efficiencies).mean()))
+        elif TE_option != 'global':
+            raise ValueError("TE_option must be 'global' or 'aggregated'.")
         TE = self.get_TE(TE_option='global', global_TE=global_TE, as_matrix=False, weights=weights)
         TL = self.get_TL(break_cycles=True, DET_as_PP=True)  # break cylces in DC and force DET to be of TL=1.
         SPPR = TE ** (1 - TL)

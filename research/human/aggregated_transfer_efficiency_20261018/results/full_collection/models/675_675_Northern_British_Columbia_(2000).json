@@ -1,0 +1,593 @@
+{
+  "source": "common_reference_data/ecobase/models/675_675_Northern_British_Columbia_(2000).json",
+  "model_id": "675_675_Northern_British_Columbia_(2000)",
+  "source_sha256": "5282d770101576e218aef9789b84937a69d4d36966ba0335208122e46c3e8fa7",
+  "stage": "complete",
+  "json_status": "ok",
+  "load_status": "ok",
+  "construction_status": "ok",
+  "aggregation_status": "ok",
+  "flags": {
+    "underdetermined": false,
+    "zero_catch": true,
+    "zero_biomass_accum": true,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": true,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "methods": {
+    "fixed_0.1": {
+      "status": "ok",
+      "scalar_TE": 0.1,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 372.0324713662093,
+      "catch_weighted_SPPR": 281.03399631882235,
+      "catch_weighted_status": "ok"
+    },
+    "consumer_mean_Q": {
+      "status": "ok",
+      "scalar_TE": 0.15099976110992092,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 127.18890471106585,
+      "catch_weighted_SPPR": 96.0787268033381,
+      "catch_weighted_status": "ok"
+    },
+    "aggregated_II_IV": {
+      "status": "ok",
+      "scalar_TE": 0.13916758794813391,
+      "nonfinite_sppr_group_count": 0,
+      "negative_sppr_group_count": 0,
+      "native_PPR": 157.06774755831736,
+      "catch_weighted_SPPR": 118.64925829460574,
+      "catch_weighted_status": "ok"
+    }
+  },
+  "elapsed_seconds": 1.813,
+  "source_group_count": 53,
+  "source_units": {},
+  "model_name": "Northern_British_Columbia",
+  "model_year": "2000",
+  "group_count": 54,
+  "model_balance_status": true,
+  "initialization_warnings": [],
+  "total_native_catch": 1.3237988152300002,
+  "negative_catch_group_count": 0,
+  "missing_catch_group_count": 0,
+  "aggregated_flows": [
+    {
+      "trophic_level": 2,
+      "TE": 0.14571834569721467,
+      "consumption": 1773.9731074261463,
+      "predation": 258.22752686772833,
+      "export": 0.2728969885084978,
+      "respiration": 1115.1000033339244,
+      "flow_to_detritus": 400.3726619181235,
+      "throughput": 1773.9730891082845
+    },
+    {
+      "trophic_level": 3,
+      "TE": 0.14737043756926807,
+      "consumption": 258.22752686772833,
+      "predation": 37.43545603814708,
+      "export": 0.6196473140876613,
+      "respiration": 161.25563887601015,
+      "flow_to_detritus": 58.91678277552539,
+      "throughput": 258.22752500377027
+    },
+    {
+      "trophic_level": 4,
+      "TE": 0.1255132846670798,
+      "consumption": 37.43545603814709,
+      "predation": 4.342167816347535,
+      "export": 0.35647924934298053,
+      "respiration": 24.464006048475124,
+      "flow_to_detritus": 8.272803046140687,
+      "throughput": 37.43545616030633
+    }
+  ],
+  "aggregation_metadata": {
+    "break_cycles": true,
+    "removed_cyclic_flow": 13.589502838433873,
+    "definition": "export-inclusive Lindeman flow ratio; PP, DET and Import basal"
+  },
+  "aggregated_scalar_valid": true,
+  "aggregated_scalar_TE": 0.13916758794813391,
+  "groups": [
+    {
+      "seq": 54,
+      "name": "diet_import",
+      "trophic_info": "Import",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 53,
+      "name": "Detritus",
+      "trophic_info": "DET",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 52,
+      "name": "Discards",
+      "trophic_info": "DET",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 51,
+      "name": "Phytoplankton",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 50,
+      "name": "Macrophytes",
+      "trophic_info": "PP",
+      "native_catch": 0.0,
+      "fixed_0.1": 1.0,
+      "consumer_mean_Q": 1.0,
+      "aggregated_II_IV": 1.0
+    },
+    {
+      "seq": 49,
+      "name": "Corals and sponges",
+      "trophic_info": "Regular",
+      "native_catch": 0.002,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 6.622527033483489,
+      "aggregated_II_IV": 7.185581174063949
+    },
+    {
+      "seq": 48,
+      "name": "Copepods",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 6.622527033483489,
+      "aggregated_II_IV": 7.185581174063949
+    },
+    {
+      "seq": 47,
+      "name": "Euphausiids",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 15.84893192461114,
+      "consumer_mean_Q": 9.665592641233774,
+      "aggregated_II_IV": 10.659928208722343
+    },
+    {
+      "seq": 46,
+      "name": "Carnivorous jellyfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.000134,
+      "fixed_0.1": 12.589870895366118,
+      "consumer_mean_Q": 8.000987323958425,
+      "aggregated_II_IV": 8.752382970753507
+    },
+    {
+      "seq": 45,
+      "name": "Infaunal invertebrate detritivores",
+      "trophic_info": "Regular",
+      "native_catch": 3e-06,
+      "fixed_0.1": 10.0,
+      "consumer_mean_Q": 6.622527033483489,
+      "aggregated_II_IV": 7.185581174063949
+    },
+    {
+      "seq": 44,
+      "name": "Infaunal carnivorous invertebrates",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 11.481536214968816,
+      "consumer_mean_Q": 7.417971563951804,
+      "aggregated_II_IV": 8.088157765097451
+    },
+    {
+      "seq": 43,
+      "name": "Epifaunal invertebrates",
+      "trophic_info": "Regular",
+      "native_catch": 0.08024701,
+      "fixed_0.1": 11.481536214968829,
+      "consumer_mean_Q": 7.41797156395181,
+      "aggregated_II_IV": 8.088157765097458
+    },
+    {
+      "seq": 42,
+      "name": "Commercial shrimp",
+      "trophic_info": "Regular",
+      "native_catch": 0.036704,
+      "fixed_0.1": 45.708818961487516,
+      "consumer_mean_Q": 23.062129582502827,
+      "aggregated_II_IV": 26.407467490273635
+    },
+    {
+      "seq": 41,
+      "name": "Small crabs",
+      "trophic_info": "Regular",
+      "native_catch": 3.7e-05,
+      "fixed_0.1": 113.24003632355576,
+      "consumer_mean_Q": 48.571639332884395,
+      "aggregated_II_IV": 57.43448647453977
+    },
+    {
+      "seq": 40,
+      "name": "Large crabs",
+      "trophic_info": "Regular",
+      "native_catch": 0.026825,
+      "fixed_0.1": 71.92572087508226,
+      "consumer_mean_Q": 33.46154807027944,
+      "aggregated_II_IV": 38.935933344366056
+    },
+    {
+      "seq": 39,
+      "name": "Skates",
+      "trophic_info": "Regular",
+      "native_catch": 0.036081,
+      "fixed_0.1": 419.44584833460954,
+      "consumer_mean_Q": 142.32433908903408,
+      "aggregated_II_IV": 176.28768886646895
+    },
+    {
+      "seq": 38,
+      "name": "Shallowwater benthic fish",
+      "trophic_info": "Regular",
+      "native_catch": 0.001236,
+      "fixed_0.1": 394.51980847957805,
+      "consumer_mean_Q": 135.34247872722102,
+      "aggregated_II_IV": 167.27615156936437
+    },
+    {
+      "seq": 37,
+      "name": "Adult lingcod",
+      "trophic_info": "Regular",
+      "native_catch": 0.0212979987,
+      "fixed_0.1": 979.3260928816587,
+      "consumer_mean_Q": 285.5106669338078,
+      "aggregated_II_IV": 364.4309892539315
+    },
+    {
+      "seq": 36,
+      "name": "Juvenile lingcod",
+      "trophic_info": "Regular",
+      "native_catch": 0.0018,
+      "fixed_0.1": 1304.52194866923,
+      "consumer_mean_Q": 361.29300375574155,
+      "aggregated_II_IV": 465.8707211398313
+    },
+    {
+      "seq": 35,
+      "name": "Adult sablefish",
+      "trophic_info": "Regular",
+      "native_catch": 0.044019,
+      "fixed_0.1": 443.4002326151173,
+      "consumer_mean_Q": 148.96432804197215,
+      "aggregated_II_IV": 184.87571190508007
+    },
+    {
+      "seq": 34,
+      "name": "Juvenile sablefish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 193.70394346578573,
+      "consumer_mean_Q": 75.4735839920062,
+      "aggregated_II_IV": 90.95926716484286
+    },
+    {
+      "seq": 33,
+      "name": "Adult Pacific cod",
+      "trophic_info": "Regular",
+      "native_catch": 0.055331,
+      "fixed_0.1": 724.8205497413078,
+      "consumer_mean_Q": 223.00630396302506,
+      "aggregated_II_IV": 281.62969588449766
+    },
+    {
+      "seq": 32,
+      "name": "Juvenile Pacific cod",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 83.13769892742823,
+      "consumer_mean_Q": 37.687708625759235,
+      "aggregated_II_IV": 44.07921407116796
+    },
+    {
+      "seq": 31,
+      "name": "Adult halibut",
+      "trophic_info": "Regular",
+      "native_catch": 0.048909,
+      "fixed_0.1": 902.0071037550422,
+      "consumer_mean_Q": 266.8686332569243,
+      "aggregated_II_IV": 339.6446163514704
+    },
+    {
+      "seq": 30,
+      "name": "Juvenile halibut",
+      "trophic_info": "Regular",
+      "native_catch": 0.031909,
+      "fixed_0.1": 648.8562760840806,
+      "consumer_mean_Q": 203.62949596764417,
+      "aggregated_II_IV": 256.15217945446483
+    },
+    {
+      "seq": 29,
+      "name": "Adult flatfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0600189976,
+      "fixed_0.1": 182.2964760935255,
+      "consumer_mean_Q": 71.80466047020538,
+      "aggregated_II_IV": 86.35161320399257
+    },
+    {
+      "seq": 28,
+      "name": "Juvenile flatfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 144.01984188525864,
+      "consumer_mean_Q": 59.1719624849892,
+      "aggregated_II_IV": 70.56778555666858
+    },
+    {
+      "seq": 27,
+      "name": "Adult turbot",
+      "trophic_info": "Regular",
+      "native_catch": 0.095287,
+      "fixed_0.1": 454.53972053349514,
+      "consumer_mean_Q": 152.03009654958367,
+      "aggregated_II_IV": 188.84653803403071
+    },
+    {
+      "seq": 26,
+      "name": "Juvenile turbot",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 764.7928756432011,
+      "consumer_mean_Q": 233.05474099530642,
+      "aggregated_II_IV": 294.8800762523824
+    },
+    {
+      "seq": 25,
+      "name": "Adult planktivorous rockfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.056065,
+      "fixed_0.1": 292.20406414612205,
+      "consumer_mean_Q": 105.77595323379028,
+      "aggregated_II_IV": 129.34996989212888
+    },
+    {
+      "seq": 24,
+      "name": "Juvenile planktivorous rockfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 125.89254117941674,
+      "consumer_mean_Q": 52.984623608578,
+      "aggregated_II_IV": 62.888319511931805
+    },
+    {
+      "seq": 23,
+      "name": "Adult picivorous rockfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0123390006,
+      "fixed_0.1": 205.7809888298107,
+      "consumer_mean_Q": 79.31596817044795,
+      "aggregated_II_IV": 95.79513536278222
+    },
+    {
+      "seq": 22,
+      "name": "Juvenile picivorous rockfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 180.8839361643758,
+      "consumer_mean_Q": 71.34753779364313,
+      "aggregated_II_IV": 85.77823242990137
+    },
+    {
+      "seq": 21,
+      "name": "Inshore rockfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0104920007,
+      "fixed_0.1": 532.7922678091196,
+      "consumer_mean_Q": 173.2083301686162,
+      "aggregated_II_IV": 216.36797012399626
+    },
+    {
+      "seq": 20,
+      "name": "Adult POP",
+      "trophic_info": "Regular",
+      "native_catch": 0.062084,
+      "fixed_0.1": 159.5363734056345,
+      "consumer_mean_Q": 64.3576417280203,
+      "aggregated_II_IV": 77.03097893279156
+    },
+    {
+      "seq": 19,
+      "name": "Juvenile POP",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 109.6478196143185,
+      "consumer_mean_Q": 47.30297213755062,
+      "aggregated_II_IV": 55.87046369242164
+    },
+    {
+      "seq": 18,
+      "name": "Adult herring",
+      "trophic_info": "Regular",
+      "native_catch": 0.241678,
+      "fixed_0.1": 151.3561248436207,
+      "consumer_mean_Q": 61.6356176967633,
+      "aggregated_II_IV": 73.63544941214015
+    },
+    {
+      "seq": 17,
+      "name": "Juvenile herring",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 104.71285480508995,
+      "consumer_mean_Q": 45.54785761626436,
+      "aggregated_II_IV": 53.7097384834155
+    },
+    {
+      "seq": 16,
+      "name": "Eulachon",
+      "trophic_info": "Regular",
+      "native_catch": 0.00429300033,
+      "fixed_0.1": 111.17426203430526,
+      "consumer_mean_Q": 47.84296265543753,
+      "aggregated_II_IV": 56.535949670058145
+    },
+    {
+      "seq": 15,
+      "name": "Forage fish",
+      "trophic_info": "Regular",
+      "native_catch": 4e-05,
+      "fixed_0.1": 105.44008435090016,
+      "consumer_mean_Q": 45.80741053877318,
+      "aggregated_II_IV": 54.029051520372406
+    },
+    {
+      "seq": 14,
+      "name": "Pollock",
+      "trophic_info": "Regular",
+      "native_catch": 0.009384,
+      "fixed_0.1": 296.8035063560192,
+      "consumer_mean_Q": 107.14101769660172,
+      "aggregated_II_IV": 131.09179812171328
+    },
+    {
+      "seq": 13,
+      "name": "Juvenile pollock",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 143.78151302834664,
+      "consumer_mean_Q": 59.09155613662232,
+      "aggregated_II_IV": 70.46775781903243
+    },
+    {
+      "seq": 12,
+      "name": "Dogfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.0487708,
+      "fixed_0.1": 385.59283962466304,
+      "consumer_mean_Q": 132.8229955876464,
+      "aggregated_II_IV": 164.02910789485873
+    },
+    {
+      "seq": 11,
+      "name": "Ratfish",
+      "trophic_info": "Regular",
+      "native_catch": 0.01153,
+      "fixed_0.1": 255.00684336487623,
+      "consumer_mean_Q": 94.58803160683584,
+      "aggregated_II_IV": 115.11182969398043
+    },
+    {
+      "seq": 10,
+      "name": "Squid",
+      "trophic_info": "Regular",
+      "native_catch": 2.2e-05,
+      "fixed_0.1": 127.97765532640808,
+      "consumer_mean_Q": 53.70406494996828,
+      "aggregated_II_IV": 63.77935409490383
+    },
+    {
+      "seq": 9,
+      "name": "Small squid",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 82.1313197545511,
+      "consumer_mean_Q": 37.31274293253657,
+      "aggregated_II_IV": 43.62182643970084
+    },
+    {
+      "seq": 8,
+      "name": "Chinook salmon",
+      "trophic_info": "Regular",
+      "native_catch": 0.0459610038,
+      "fixed_0.1": 459.24429775014113,
+      "consumer_mean_Q": 153.32082010667614,
+      "aggregated_II_IV": 190.5193394155662
+    },
+    {
+      "seq": 7,
+      "name": "Coho salmon",
+      "trophic_info": "Regular",
+      "native_catch": 0.0496010035,
+      "fixed_0.1": 533.3537198896886,
+      "consumer_mean_Q": 173.35817381470957,
+      "aggregated_II_IV": 216.56323447716966
+    },
+    {
+      "seq": 6,
+      "name": "Transient salmon",
+      "trophic_info": "Regular",
+      "native_catch": 0.2296,
+      "fixed_0.1": 27.542421966604834,
+      "consumer_mean_Q": 15.215139276042835,
+      "aggregated_II_IV": 17.11224376244046
+    },
+    {
+      "seq": 5,
+      "name": "Seabirds",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 387.42619186582806,
+      "consumer_mean_Q": 133.34127201822207,
+      "aggregated_II_IV": 164.69683340736245
+    },
+    {
+      "seq": 4,
+      "name": "Seals, sea lions",
+      "trophic_info": "Regular",
+      "native_catch": 0.0001,
+      "fixed_0.1": 568.7645477668735,
+      "consumer_mean_Q": 182.75320366468168,
+      "aggregated_II_IV": 228.82039898408763
+    },
+    {
+      "seq": 3,
+      "name": "Odontocetae",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 827.2206744507354,
+      "consumer_mean_Q": 248.56296267954664,
+      "aggregated_II_IV": 315.3781129875041
+    },
+    {
+      "seq": 2,
+      "name": "Mysticetae",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 116.27921211791787,
+      "consumer_mean_Q": 49.63936789773278,
+      "aggregated_II_IV": 58.752159745244924
+    },
+    {
+      "seq": 1,
+      "name": "Sea Otters",
+      "trophic_info": "Regular",
+      "native_catch": 0.0,
+      "fixed_0.1": 412.7812494870416,
+      "consumer_mean_Q": 140.46501984111433,
+      "aggregated_II_IV": 173.8859480994273
+    }
+  ],
+  "run_status": "complete",
+  "wall_seconds": 1.86
+}
