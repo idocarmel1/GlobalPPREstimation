@@ -1,0 +1,37 @@
+{
+  "scope": "Map/trends presentation and browser preference repair; no scientific execution",
+  "launcher": {
+    "command": "interactive_map/Open map.cmd",
+    "exit_code": 0,
+    "served_url": "http://127.0.0.1:8881/interactive_map/index.html",
+    "reused_existing_matching_server": true,
+    "launcher_code_changed": false
+  },
+  "browser_acceptance": {
+    "surface": "Supported CUA in-app browser against the server URL returned by Open map.cmd",
+    "LME_022_default_selected_label": "ICES WGSAM2015 North Sea 1991",
+    "LME_022_positive_review_visible": true,
+    "LME_038_ecosystem_label": "Indonesian Sea",
+    "LME_038_model_label": "38 38003 Java Sea normalized BA completed (mid1970s)",
+    "LME_038_positive_review_visible": true,
+    "both_regions_visible_in_validated_map_filter": true,
+    "validated_picker_restores_full_cohort_from_empty_selection": true,
+    "full_validated_cohort_count": 16,
+    "unchecking_North_Sea_changes_to_custom_with_15_selected": true,
+    "custom_subset_survives_reload": true,
+    "selecting_unreviewed_Scotland_excludes_North_Sea": true,
+    "excluded_candidate_override_survives_reload": true,
+    "use_project_model_defaults_restores_ICES_and_16_validated": true,
+    "browser_console_errors_in_both_test_tabs": []
+  },
+  "regressions": {
+    "initial_focused_ui_suite": "8 tests passed",
+    "final_preference_and_picker_suite": "5 tests passed after mixed-version storage repair",
+    "mixed_version_tabs": "Actual frozen v1 and new v2 store event simulation drains without loop; old tab cannot restore stale defaults",
+    "localhost_server": "1 test passed with local socket access; sandbox-only attempt could not reach its socket",
+    "published_controls": "137 available cases passed, plus exact negative review and candidate checks",
+    "saved_payloads": "Before and after payload hashes, Project.xlsx hash and sources.html hash are identical"
+  },
+  "legacy_limitation": "An old map-view override that was already serialized as nondefault cannot be distinguished from a deliberate choice. Use project model defaults clears active overrides; legacy preferences remain recoverable.",
+  "git_delivery": "Public push authorization received. Prior push failed because the GitHub repository exceeded its LFS budget; no hook or LFS-policy bypass attempted."
+}

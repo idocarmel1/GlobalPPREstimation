@@ -12,6 +12,7 @@ from tools.project_core.maps.group_catch_layout import group_catch_layout
 from tools.project_core.maps.trend_extras_layout import trend_extras_layout
 from tools.project_core.maps.group_contributions_layout import group_contributions_layout
 from tools.project_core.maps.ee_floor_layout import ee_floor_layout,source_provenance_layout
+from tools.project_core.maps.model_preferences_layout import model_preferences_layout
 
 DISPLAY_FIELDS=['title','authors','region_name','recommendation','coverage_note','quality_rationale','geometry_note','geometry_method','search_notes','loadability_class','download_failure_reason']
 LINK_UPDATES={"../data/unidentified_taxa.json":"data/unidentified_taxa.json"}
@@ -38,7 +39,7 @@ def linked_layout(template):
             "zoomControl:true,minZoom:1,maxZoom:['http:','https:'].includes(location.protocol)?18:10}",1)
         template=template.replace(OSM_BASEMAP,basemap,1)
     current=cumulative_ppr_layout(reviewed_layout(provisional_layout(template)))
-    return ee_floor_layout(group_contributions_layout(trend_extras_layout(group_catch_layout(available_results_layout(current)))))
+    return model_preferences_layout(ee_floor_layout(group_contributions_layout(trend_extras_layout(group_catch_layout(available_results_layout(current))))))
 
 def atomic_text(path,text):
     atomic_bytes(path,text.encode('utf-8'))

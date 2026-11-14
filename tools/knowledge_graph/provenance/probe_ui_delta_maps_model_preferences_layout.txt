@@ -1,0 +1,13 @@
+Traversal: BFS depth=2 | Start: ['model_preferences_layout.py'] | 6 nodes found
+
+NODE ValueError [src=tools/project_core/registry/publication.py loc=L15 community=32]
+NODE pathlib [src=tools/cli/map.py loc=L3 community=0]
+NODE build_html.py [src=tools/project_core/maps/build_html.py loc=L1 community=19]
+NODE linked_layout() [src=tools/project_core/maps/build_html.py loc=L21 community=17]
+NODE model_preferences_layout() [src=tools/project_core/maps/model_preferences_layout.py loc=L5 community=19]
+NODE model_preferences_layout.py [src=tools/project_core/maps/model_preferences_layout.py loc=L1 community=19]
+EDGE model_preferences_layout.py --contains [EXTRACTED]--> model_preferences_layout()
+EDGE model_preferences_layout.py --imports_from [EXTRACTED context=import]--> pathlib
+EDGE model_preferences_layout() --imports [EXTRACTED context=import]--> build_html.py
+EDGE model_preferences_layout() --calls [EXTRACTED context=call]--> linked_layout()
+EDGE model_preferences_layout() --calls [INFERRED context=call]--> ValueError

@@ -6,14 +6,17 @@
 })(typeof globalThis==='object'?globalThis:this,function(){
   'use strict';
   const finite=v=>typeof v==='number'&&Number.isFinite(v);
-  function selectedUnits(db,state){
-    const ids=[...new Set(state.units||[])];
-    if(state.review_filter!=='validated')return ids;
+  function validatedUnits(db,state,ids=Object.keys(db.units)){
     return ids.filter(id=>{
       const unit=db.units[id],chosen=state.models?.[id]??unit?.default_model;
       const model=typeof chosen==='number'?unit?.models?.[chosen]:unit?.models?.find(m=>m.id===chosen);
       return model?.researcher_review?.status==='Validated by researcher';
     });
+  }
+  function selectedUnits(db,state){
+    if(state.set==='validated')return validatedUnits(db,state);
+    const ids=[...new Set(state.units||[])];
+    return state.review_filter==='validated'?validatedUnits(db,state,ids):ids;
   }
   const scaling=state=>Boolean(state.global_estimate&&state.mode==='ratio'&&state.npp_scope==='global'&&!state.baseline);
   function scale(db,state,result,aggregate,coverageResult=result){
@@ -83,5 +86,5 @@
         .sort((a,b)=>a.name.localeCompare(b.name)||a.id.localeCompare(b.id)),
       total:{name:'Selected set',values:values(units)}};
   }
-  return {selectedUnits,table,scale,scaling,csvHeader,csv};
+  return {validatedUnits,selectedUnits,table,scale,scaling,csvHeader,csv};
 });

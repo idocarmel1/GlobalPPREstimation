@@ -172,7 +172,7 @@ const PPRResearcherReview=(()=>{
 
   <div class="field" id="denominatorField" hidden><label for="denominatorFilter">Divide by method</label><select id="denominatorFilter"></select></div>
 </div>
-<div class="field group-filter-launch"><button id="openGroupFilter" type="button" aria-haspopup="dialog">Choose model groups</button><small id="groupFilterSummary">All model groups included</small></div>
+<div class="field group-filter-launch"><button id="openGroupFilter" type="button" aria-haspopup="dialog">Choose model groups</button><small id="groupFilterSummary">All model groups included</small></div><button id="resetModelChoices" type="button">Use project model defaults</button>
 <div class="field"><label for="mapCatchBasis">Catch used for PPR</label><select id="mapCatchBasis"><option value="landings">Landings only (default)</option><option value="catch">All catch · landings + discards</option><option value="discards">Discards only</option></select></div>
 <div class="field"><label for="mapUnidentified">Unidentified catch treatment</label><select id="mapUnidentified"><option value="method">Selected method’s own SPPR (default)</option><option value="zero">Sensitivity: zero PPR, retain catch</option><option value="simple">Sensitivity: reference-TL simple chain (all sources)</option></select></div>
 <div class="field"><label for="mapUncertainty">Discard-routing sensitivity envelope</label><select id="mapUncertainty"><option value="1">Show where assessed</option><option value="0">Hide envelope</option></select><p class="network-note" id="mapSensitivityHelp">Available for landings only; this is a scenario range, not a confidence interval.</p></div>
@@ -633,38 +633,72 @@ document.querySelector('#kpiArticles').textContent=articles.length;document.quer
 });
 
 
-/* Compact preferences shared by the two standalone pages. No data requests. */
+/* Shared display preferences. Only explicit model choices override project defaults. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupSettings=api;})(globalThis,function(){
   'use strict';
-  const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
+  const object=value=>value&&typeof value==='object'&&!Array.isArray(value);
+  const models=value=>Object.fromEntries(Object.entries(object(value)?value:{}).filter(([,id])=>typeof id==='string'||Number.isInteger(id)));
+  const parse=value=>{try{return JSON.parse(value||'null');}catch{return null;}};
   function clean(value){
-    const data={version:1,selections:{},models:{},tables:{}};
+    const data={version:2,selections:{},models:{},tables:{}};
     if(!object(value))return data;
     if(typeof value.last_unit==='string')data.last_unit=value.last_unit;
-    for(const [key,ids] of Object.entries(value.selections||{}))if(Array.isArray(ids))data.selections[key]=[...new Set(ids.filter(id=>typeof id==='string'))];
-    for(const [key,id] of Object.entries(value.models||{}))if(typeof id==='string')data.models[key]=id;
-    for(const [key,table] of Object.entries(value.tables||{}))if(object(table))data.tables[key]=table;
+    data.selections=Object.fromEntries(Object.entries(value.selections||{}).filter(([,ids])=>Array.isArray(ids)).map(([key,ids])=>[key,[...new Set(ids.filter(id=>typeof id==='string'))]]));
+    data.tables=Object.fromEntries(Object.entries(value.tables||{}).filter(([,table])=>object(table)));
+    data.models=models(value.models);
+    if(object(value.legacy_models))data.legacy_models=models(value.legacy_models);
+    if(object(value.legacy_model_views))data.legacy_model_views={...value.legacy_model_views};
     return data;
   }
-  function create({env=globalThis,view='map'}={}){
+  function create({env=globalThis,view='map',units={}}={}){
     const address=new URL(env.location.href),folder=new URL('.',address).pathname;
-    const key='GlobalPPR:group-settings:v1:'+folder,viewKey=key+':'+view;
-    let data=clean(null),storageAvailable=true;
+    // Old open pages rewrite their v1 store on storage events. Isolate v2 so
+    // they cannot downcast new preferences or start a cross-tab write loop.
+    const legacyKey='GlobalPPR:group-settings:v1:'+folder;
+    const key='GlobalPPR:group-settings:v2:'+folder,viewKey=key+':'+view;
+    let storageAvailable=true;
     const read=k=>{try{return env.localStorage.getItem(k);}catch{storageAvailable=false;return null;}};
-    try{data=clean(JSON.parse(read(key)||'null'));}catch{/* Invalid preferences start with all groups. */}
-    const current=new URLSearchParams(address.search);
-    const params=new URLSearchParams(current.toString()||read(viewKey)||'');
-    if(current.has('group_settings')){
-      try{data=clean(JSON.parse(current.get('group_settings')));}catch{/* A malformed link never executes content. */}
+    const activeRaw=read(key),migrating=activeRaw===null;
+    const sourceKey=migrating?legacyKey:key;
+    const current=new URLSearchParams(address.search),savedView=read(sourceKey+':'+view)||'';
+    const mapView=read(sourceKey+':map')||'',trendView=read(sourceKey+':trends')||'';
+    const normalize=value=>Object.fromEntries(Object.entries(models(value)).flatMap(([id,chosen])=>{
+      const unit=units[id];if(!unit)return [];
+      const defaultId=typeof unit.default_model==='number'?unit.models?.[unit.default_model]?.id:unit.default_model;
+      const model=typeof chosen==='number'?unit.models?.[chosen]:unit.models?.find(m=>m.id===chosen);
+      return model&&model.id!==defaultId?[[id,model.id]]:[];
+    }));
+    function migrate(raw){
+      const data=clean(raw);
+      if(raw&&raw.version!==2){
+        data.legacy_models={...data.legacy_models,...models(raw.models)};
+        data.legacy_model_views={...data.legacy_model_views,map:mapView,trends:trendView};
+        // The old map saved only nondefault choices in models=. The old trends
+        // view copied every shared model, so its models= is not evidence of intent.
+        data.models=models(parse(new URLSearchParams(mapView).get('models')));
+      }
+      data.models=normalize(data.models);return data;
     }
+    let raw=parse(migrating?read(legacyKey):activeRaw);
+    if(current.has('group_settings')){
+      const linked=parse(current.get('group_settings'));if(object(linked))raw=linked;
+    }
+    let data=migrate(raw);
+    if(current.has('models'))data.models=normalize({...data.models,...models(parse(current.get('models')))});
+    const params=new URLSearchParams(current.toString()||savedView);
+    // Stored view URLs are presentation settings; active model intent has one home.
+    const modelParams=p=>{if(Object.keys(store.data.models).length)p.set('models',JSON.stringify(store.data.models));else p.delete('models');return p;};
     const listeners=[];
     const store={data,params,get storageAvailable(){return storageAvailable;},
+      selectModel(id,chosen){store.data.models=normalize({...store.data.models,[id]:chosen});},
+      resetModels(){store.data.models={};store.save();for(const listener of listeners)listener(store.data);},
       save(p){
+        store.data.models=normalize(store.data.models);
         try{
           env.localStorage.setItem(key,JSON.stringify(store.data));storageAvailable=true;
-          if(p){const own=new URLSearchParams(p);own.delete('group_settings');env.localStorage.setItem(viewKey,own.toString());}
+          if(p){const own=modelParams(new URLSearchParams(p));own.delete('group_settings');env.localStorage.setItem(viewKey,own.toString());}
         }catch{storageAvailable=false;}
-        try{if(env.history){const url=new URL(env.location.href);store.attach(url.searchParams);env.history.replaceState(null,'',url.href);}}catch{/* Some local-file browsers restrict history. */}
+        try{if(env.history){const url=new URL(env.location.href);modelParams(url.searchParams);store.attach(url.searchParams);env.history.replaceState(null,'',url.href);}}catch{/* Local-file history may be restricted. */}
         store.shareLinks();
       },
       attach(p){p.set('group_settings',JSON.stringify(store.data));return p;},
@@ -679,15 +713,25 @@ document.querySelector('#kpiArticles').textContent=articles.length;document.quer
       },
       subscribe(listener){listeners.push(listener);}
     };
+    modelParams(params);
+    if(migrating){
+      // Copy presentation settings once; leave every legacy key byte-for-byte intact.
+      for(const [name,value] of [['map',mapView],['trends',trendView]]){
+        if(!value)continue;
+        const own=modelParams(new URLSearchParams(value));own.delete('group_settings');
+        try{env.localStorage.setItem(key+':'+name,own.toString());}catch{storageAvailable=false;}
+      }
+    }
     env.addEventListener?.('storage',event=>{
       if(event.key!==key||!event.newValue)return;
-      try{store.data=clean(JSON.parse(event.newValue));for(const listener of listeners)listener(store.data);}catch{/* Ignore invalid external preferences. */}
+      const incoming=parse(event.newValue);if(!object(incoming))return;
+      store.data=migrate(incoming);for(const listener of listeners)listener(store.data);
     });
-    store.save();
-    return store;
+    store.save();return store;
   }
   return {create,clean};
 });
+
 
 /* Shared group picker. Model data and calculations are embedded by the renderer. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupDialog=api;})(globalThis,function(){
@@ -789,7 +833,7 @@ document.querySelector('#kpiArticles').textContent=articles.length;document.quer
     }
     function loadEcosystem(){const unit=units[ecosystems.value];if(!unit)return;const modelList=unit.models.filter(m=>m.verified&&m.group_data);fill(models,modelList.map(m=>[m.id,m.label||m.id]));for(const option of models.options){PPRResearcherReview.decorateName(option,modelList.find(m=>m.id===option.value));}const defaultId=typeof unit.default_model==='number'?unit.models[unit.default_model]?.id:unit.default_model;const chosen=store.data.models[ecosystems.value]||defaultId;models.value=modelList.some(m=>m.id===chosen)?chosen:modelList[0].id;loadModel();}
     ecosystems.onchange=()=>{store.data.last_unit=ecosystems.value;loadEcosystem();store.save();};
-    models.onchange=()=>{store.data.models[ecosystems.value]=models.value;loadModel();notify();};
+    models.onchange=()=>{store.selectModel(ecosystems.value,models.value);loadModel();notify();};
     methods.onchange=()=>{preferences().method=methods.value;store.save();loadModel();};
     catchSource.onchange=()=>{preferences().catch_source=catchSource.value;loadModel();store.save();};
     catchYear.onchange=()=>{preferences().catch_year=Number(catchYear.value);loadModel();store.save();};
@@ -982,7 +1026,7 @@ if (typeof module !== 'undefined') module.exports = PPRMetrics;
 
 /* Runs after the inherited atlas has initialized its layers. */
 const network = DB.network;
-const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'map'});
+const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'map',units:network.units});
 const mapParams=groupStore?.params||new URLSearchParams(location.search);
 const defaultMethod=['inner','PP'].includes(mapParams.get('scope'))||['ratio','b','rho_living'].includes(mapParams.get('metric'))?'new_GE':'simple trophic chain';
 const metricState = {year:DB.year,scope:['all','inner','PP'].includes(mapParams.get('scope'))?mapParams.get('scope'):'all',mode:['ppr','npp','ratio','npp_ratio','b','rho_living'].includes(mapParams.get('metric'))?mapParams.get('metric'):'ppr',method:mapParams.get('method')||defaultMethod,denominator:mapParams.get('denominator')||'new_TE_EEfix',te:mapParams.get('te')==='TE'?'TE':'GE',
@@ -998,7 +1042,7 @@ const curatedIds=new Set(DB.curated_region_ids||[]);
 const chosenModels = Object.fromEntries(Object.entries(network.units).map(([id,u])=>[id,u.default_model]));
 metricState.group_selections=groupStore?.data.selections||{};
 try{
-  const saved={...JSON.parse(mapParams.get('models')||'{}'),...groupStore?.data.models};
+  const saved={...groupStore?.data.models};
   for(const [id,model] of Object.entries(saved||{})){
     const index=network.units[id]?.models.findIndex(m=>m.id===model);
     if(index>=0)chosenModels[id]=index;
@@ -1193,7 +1237,7 @@ renderDetails = function(r) {
   const reviewModel=modelUnit?.models[idx];
   const sel=panel.querySelector('select');PPRResearcherReview.decorateName(sel,reviewModel);PPRResearcherReview.decorateName(panel.querySelector('label[for="modelFilter"]'),reviewModel);
   if(sel){modelUnit.models.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m.label||m.id.replaceAll('_',' ');PPRResearcherReview.decorateName(o,m);o.selected=i===idx;sel.appendChild(o)});
-    sel.addEventListener('change',()=>{chosenModels[r.unit_id]=Number(sel.value);applyYear(DB.year)});}
+    sel.addEventListener('change',()=>{chosenModels[r.unit_id]=Number(sel.value);groupStore.selectModel(r.unit_id,modelUnit.models[Number(sel.value)].id);applyYear(DB.year)});}
   PPRResearcherReview.append(panel,reviewModel);
   panel.appendChild(trendLink());
   appendResultDownload(panel,r,model,result,unit);
@@ -1251,7 +1295,6 @@ function applyYear(year,{preserveSelection=true}={}) {
   const overrides=Object.fromEntries(Object.entries(chosenModels).filter(([id,index])=>index!==network.units[id].default_model).map(([id,index])=>[id,network.units[id].models[index].id]));
   if(Object.keys(overrides).length)params.set('models',JSON.stringify(overrides));else params.delete('models');
   if(typeof groupStore!=='undefined'&&groupStore){
-    for(const [id,index] of Object.entries(chosenModels))if(network.units[id]?.models[index])groupStore.data.models[id]=network.units[id].models[index].id;
     groupStore.save(params);groupStore.attach(params);groupStore.shareLinks();
     const summary=$('groupFilterSummary');if(summary)summary.textContent=PPRResearcherReview.selectionSummary(typeof network!=='undefined'?network.units:db.units,groupStore.data,typeof network!=='undefined'?undefined:state.units);
   }
@@ -1294,13 +1337,14 @@ const groupDialog=groupStore?PPRGroupDialog.create({
   units:Object.fromEntries(Object.entries(network.units).map(([id,u])=>[id,{...u,name:regionById[id]?.region_name||id}])),store:groupStore,
   getContext:()=>({...metricState,year:DB.year}),onChange:()=>{
     metricState.group_selections=groupStore.data.selections;
-    for(const [id,modelId] of Object.entries(groupStore.data.models)){const index=network.units[id]?.models.findIndex(m=>m.id===modelId);if(index>=0)chosenModels[id]=index;}
+    for(const [id,unit] of Object.entries(network.units)){const index=unit.models.findIndex(m=>m.id===groupStore.data.models[id]);chosenModels[id]=index>=0?index:unit.default_model;}
     applyYear(DB.year);
   }
 }):null;
 if(groupDialog){
+  $('resetModelChoices').addEventListener('click',()=>groupStore.resetModels());
   $('openGroupFilter').addEventListener('click',()=>groupDialog.open(selectedId));
-  groupStore.subscribe(()=>{metricState.group_selections=groupStore.data.selections;for(const [id,modelId] of Object.entries(groupStore.data.models)){const index=network.units[id]?.models.findIndex(m=>m.id===modelId);if(index>=0)chosenModels[id]=index;}applyYear(DB.year);groupDialog.refresh();});
+  groupStore.subscribe(()=>{metricState.group_selections=groupStore.data.selections;for(const [id,unit] of Object.entries(network.units)){const index=unit.models.findIndex(m=>m.id===groupStore.data.models[id]);chosenModels[id]=index>=0?index:unit.default_model;}applyYear(DB.year);groupDialog.refresh();});
 }
 applyYear(DB.year);
 

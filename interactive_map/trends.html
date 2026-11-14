@@ -130,7 +130,7 @@ const PPRResearcherReview=(()=>{
       <div class="field"><label for="nppMethod">NPP calculation</label><select id="nppMethod"></select></div>
       <div class="field"><label for="nppFill">Missing historical NPP</label><select id="nppFill"><option value="observed">Actual annual data only</option><option value="earliest">Use earliest available year for earlier gaps</option></select></div>
       <div class="field treatment"><label for="unidentifiedTreatment">Unidentified catch treatment</label><select id="unidentifiedTreatment"><option value="method">Selected method’s own SPPR (default)</option><option value="zero">Sensitivity: zero PPR, retain catch</option><option value="simple">Sensitivity: reference-TL simple chain (all sources)</option></select></div>
-      <div class="field treatment group-filter-launch"><button id="openGroupFilter" type="button" aria-haspopup="dialog">Choose model groups</button><small id="groupFilterSummary">All model groups included</small></div>
+      <div class="field treatment group-filter-launch"><button id="openGroupFilter" type="button" aria-haspopup="dialog">Choose model groups</button><small id="groupFilterSummary">All model groups included</small></div><button id="resetModelChoices" type="button">Use project model defaults</button>
       <div class="field"><label for="regionReviewFilter">Regions to include</label><select id="regionReviewFilter"><option value="all">All selected regions</option><option value="validated">Selected regions with validated models</option></select></div>
       <div class="field"><label for="groupDisplay">Plot</label><select id="groupDisplay" aria-describedby="groupDisplayNote"><option value="total">Total</option><option value="groups">Top 5 groups + Other</option></select></div>
       <div class="field"><label for="globalApproximation">Global approximation</label><select id="globalApproximation"><option value="0">Off</option><option value="1">Scale by selected simple-chain share</option></select></div>
@@ -342,14 +342,17 @@ const PPRResearcherReview=(()=>{
 })(typeof globalThis==='object'?globalThis:this,function(){
   'use strict';
   const finite=v=>typeof v==='number'&&Number.isFinite(v);
-  function selectedUnits(db,state){
-    const ids=[...new Set(state.units||[])];
-    if(state.review_filter!=='validated')return ids;
+  function validatedUnits(db,state,ids=Object.keys(db.units)){
     return ids.filter(id=>{
       const unit=db.units[id],chosen=state.models?.[id]??unit?.default_model;
       const model=typeof chosen==='number'?unit?.models?.[chosen]:unit?.models?.find(m=>m.id===chosen);
       return model?.researcher_review?.status==='Validated by researcher';
     });
+  }
+  function selectedUnits(db,state){
+    if(state.set==='validated')return validatedUnits(db,state);
+    const ids=[...new Set(state.units||[])];
+    return state.review_filter==='validated'?validatedUnits(db,state,ids):ids;
   }
   const scaling=state=>Boolean(state.global_estimate&&state.mode==='ratio'&&state.npp_scope==='global'&&!state.baseline);
   function scale(db,state,result,aggregate,coverageResult=result){
@@ -419,7 +422,7 @@ const PPRResearcherReview=(()=>{
         .sort((a,b)=>a.name.localeCompare(b.name)||a.id.localeCompare(b.id)),
       total:{name:'Selected set',values:values(units)}};
   }
-  return {selectedUnits,table,scale,scaling,csvHeader,csv};
+  return {validatedUnits,selectedUnits,table,scale,scaling,csvHeader,csv};
 });
 
 /* The region table is a view of the graph's calculation settings. */
@@ -803,38 +806,72 @@ const PPRRegionTable=(()=>{
 });
 
 
-/* Compact preferences shared by the two standalone pages. No data requests. */
+/* Shared display preferences. Only explicit model choices override project defaults. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupSettings=api;})(globalThis,function(){
   'use strict';
-  const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
+  const object=value=>value&&typeof value==='object'&&!Array.isArray(value);
+  const models=value=>Object.fromEntries(Object.entries(object(value)?value:{}).filter(([,id])=>typeof id==='string'||Number.isInteger(id)));
+  const parse=value=>{try{return JSON.parse(value||'null');}catch{return null;}};
   function clean(value){
-    const data={version:1,selections:{},models:{},tables:{}};
+    const data={version:2,selections:{},models:{},tables:{}};
     if(!object(value))return data;
     if(typeof value.last_unit==='string')data.last_unit=value.last_unit;
-    for(const [key,ids] of Object.entries(value.selections||{}))if(Array.isArray(ids))data.selections[key]=[...new Set(ids.filter(id=>typeof id==='string'))];
-    for(const [key,id] of Object.entries(value.models||{}))if(typeof id==='string')data.models[key]=id;
-    for(const [key,table] of Object.entries(value.tables||{}))if(object(table))data.tables[key]=table;
+    data.selections=Object.fromEntries(Object.entries(value.selections||{}).filter(([,ids])=>Array.isArray(ids)).map(([key,ids])=>[key,[...new Set(ids.filter(id=>typeof id==='string'))]]));
+    data.tables=Object.fromEntries(Object.entries(value.tables||{}).filter(([,table])=>object(table)));
+    data.models=models(value.models);
+    if(object(value.legacy_models))data.legacy_models=models(value.legacy_models);
+    if(object(value.legacy_model_views))data.legacy_model_views={...value.legacy_model_views};
     return data;
   }
-  function create({env=globalThis,view='map'}={}){
+  function create({env=globalThis,view='map',units={}}={}){
     const address=new URL(env.location.href),folder=new URL('.',address).pathname;
-    const key='GlobalPPR:group-settings:v1:'+folder,viewKey=key+':'+view;
-    let data=clean(null),storageAvailable=true;
+    // Old open pages rewrite their v1 store on storage events. Isolate v2 so
+    // they cannot downcast new preferences or start a cross-tab write loop.
+    const legacyKey='GlobalPPR:group-settings:v1:'+folder;
+    const key='GlobalPPR:group-settings:v2:'+folder,viewKey=key+':'+view;
+    let storageAvailable=true;
     const read=k=>{try{return env.localStorage.getItem(k);}catch{storageAvailable=false;return null;}};
-    try{data=clean(JSON.parse(read(key)||'null'));}catch{/* Invalid preferences start with all groups. */}
-    const current=new URLSearchParams(address.search);
-    const params=new URLSearchParams(current.toString()||read(viewKey)||'');
-    if(current.has('group_settings')){
-      try{data=clean(JSON.parse(current.get('group_settings')));}catch{/* A malformed link never executes content. */}
+    const activeRaw=read(key),migrating=activeRaw===null;
+    const sourceKey=migrating?legacyKey:key;
+    const current=new URLSearchParams(address.search),savedView=read(sourceKey+':'+view)||'';
+    const mapView=read(sourceKey+':map')||'',trendView=read(sourceKey+':trends')||'';
+    const normalize=value=>Object.fromEntries(Object.entries(models(value)).flatMap(([id,chosen])=>{
+      const unit=units[id];if(!unit)return [];
+      const defaultId=typeof unit.default_model==='number'?unit.models?.[unit.default_model]?.id:unit.default_model;
+      const model=typeof chosen==='number'?unit.models?.[chosen]:unit.models?.find(m=>m.id===chosen);
+      return model&&model.id!==defaultId?[[id,model.id]]:[];
+    }));
+    function migrate(raw){
+      const data=clean(raw);
+      if(raw&&raw.version!==2){
+        data.legacy_models={...data.legacy_models,...models(raw.models)};
+        data.legacy_model_views={...data.legacy_model_views,map:mapView,trends:trendView};
+        // The old map saved only nondefault choices in models=. The old trends
+        // view copied every shared model, so its models= is not evidence of intent.
+        data.models=models(parse(new URLSearchParams(mapView).get('models')));
+      }
+      data.models=normalize(data.models);return data;
     }
+    let raw=parse(migrating?read(legacyKey):activeRaw);
+    if(current.has('group_settings')){
+      const linked=parse(current.get('group_settings'));if(object(linked))raw=linked;
+    }
+    let data=migrate(raw);
+    if(current.has('models'))data.models=normalize({...data.models,...models(parse(current.get('models')))});
+    const params=new URLSearchParams(current.toString()||savedView);
+    // Stored view URLs are presentation settings; active model intent has one home.
+    const modelParams=p=>{if(Object.keys(store.data.models).length)p.set('models',JSON.stringify(store.data.models));else p.delete('models');return p;};
     const listeners=[];
     const store={data,params,get storageAvailable(){return storageAvailable;},
+      selectModel(id,chosen){store.data.models=normalize({...store.data.models,[id]:chosen});},
+      resetModels(){store.data.models={};store.save();for(const listener of listeners)listener(store.data);},
       save(p){
+        store.data.models=normalize(store.data.models);
         try{
           env.localStorage.setItem(key,JSON.stringify(store.data));storageAvailable=true;
-          if(p){const own=new URLSearchParams(p);own.delete('group_settings');env.localStorage.setItem(viewKey,own.toString());}
+          if(p){const own=modelParams(new URLSearchParams(p));own.delete('group_settings');env.localStorage.setItem(viewKey,own.toString());}
         }catch{storageAvailable=false;}
-        try{if(env.history){const url=new URL(env.location.href);store.attach(url.searchParams);env.history.replaceState(null,'',url.href);}}catch{/* Some local-file browsers restrict history. */}
+        try{if(env.history){const url=new URL(env.location.href);modelParams(url.searchParams);store.attach(url.searchParams);env.history.replaceState(null,'',url.href);}}catch{/* Local-file history may be restricted. */}
         store.shareLinks();
       },
       attach(p){p.set('group_settings',JSON.stringify(store.data));return p;},
@@ -849,15 +886,25 @@ const PPRRegionTable=(()=>{
       },
       subscribe(listener){listeners.push(listener);}
     };
+    modelParams(params);
+    if(migrating){
+      // Copy presentation settings once; leave every legacy key byte-for-byte intact.
+      for(const [name,value] of [['map',mapView],['trends',trendView]]){
+        if(!value)continue;
+        const own=modelParams(new URLSearchParams(value));own.delete('group_settings');
+        try{env.localStorage.setItem(key+':'+name,own.toString());}catch{storageAvailable=false;}
+      }
+    }
     env.addEventListener?.('storage',event=>{
       if(event.key!==key||!event.newValue)return;
-      try{store.data=clean(JSON.parse(event.newValue));for(const listener of listeners)listener(store.data);}catch{/* Ignore invalid external preferences. */}
+      const incoming=parse(event.newValue);if(!object(incoming))return;
+      store.data=migrate(incoming);for(const listener of listeners)listener(store.data);
     });
-    store.save();
-    return store;
+    store.save();return store;
   }
   return {create,clean};
 });
+
 
 /* Shared group picker. Model data and calculations are embedded by the renderer. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PPRGroupDialog=api;})(globalThis,function(){
@@ -959,7 +1006,7 @@ const PPRRegionTable=(()=>{
     }
     function loadEcosystem(){const unit=units[ecosystems.value];if(!unit)return;const modelList=unit.models.filter(m=>m.verified&&m.group_data);fill(models,modelList.map(m=>[m.id,m.label||m.id]));for(const option of models.options){PPRResearcherReview.decorateName(option,modelList.find(m=>m.id===option.value));}const defaultId=typeof unit.default_model==='number'?unit.models[unit.default_model]?.id:unit.default_model;const chosen=store.data.models[ecosystems.value]||defaultId;models.value=modelList.some(m=>m.id===chosen)?chosen:modelList[0].id;loadModel();}
     ecosystems.onchange=()=>{store.data.last_unit=ecosystems.value;loadEcosystem();store.save();};
-    models.onchange=()=>{store.data.models[ecosystems.value]=models.value;loadModel();notify();};
+    models.onchange=()=>{store.selectModel(ecosystems.value,models.value);loadModel();notify();};
     methods.onchange=()=>{preferences().method=methods.value;store.save();loadModel();};
     catchSource.onchange=()=>{preferences().catch_source=catchSource.value;loadModel();store.save();};
     catchYear.onchange=()=>{preferences().catch_year=Number(catchYear.value);loadModel();store.save();};
@@ -1319,11 +1366,11 @@ const PPRRegionTable=(()=>{
 (() => {
   'use strict';
   const db=SERIES_DB, $=id=>document.getElementById(id), finite=PPRTimeSeries.finite;
-  const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'trends'});
+  const groupStore=typeof PPRGroupSettings==='undefined'?null:PPRGroupSettings.create({view:'trends',units:db.units});
   const params=groupStore?.params||new URLSearchParams(location.search);
   const initialSet=db.sets.find(s=>s.id===(params.get('set')||'global')) || db.sets[0];
   const initialMethods=params.has('methods')?params.get('methods').split(',').filter(Boolean):params.getAll('method').filter(Boolean);
-  let models={...groupStore?.data.models};try {const parsed=JSON.parse(params.get('models')||'{}');if(parsed && !Array.isArray(parsed) && typeof parsed==='object') models={...parsed,...models};} catch { /* Invalid optional model overrides remain unset. */ }
+  const models={...groupStore?.data.models};
   const state={units:params.has('units')?[...new Set(params.get('units').split(',').filter(Boolean))]:[...initialSet.units],
     set:params.has('units')?'custom':initialSet.id,methods:[...new Set(params.has('methods')?initialMethods:initialMethods.length?initialMethods:['simple trophic chain'])],baseline:params.get('baseline')||null,
     scope:params.get('scope')||'all',mode:['ratio','npp'].includes(params.get('metric'))?params.get('metric'):'ppr',npp_scope:params.get('npp_scope')==='global'?'global':'selected',
@@ -1331,7 +1378,11 @@ const PPRRegionTable=(()=>{
     npp:params.get('npp')||'ens_median_tC_yr',npp_fill:params.get('npp_fill')==='earliest'?'earliest':'observed',unidentified:['zero','simple'].includes(params.get('unidentified'))?params.get('unidentified'):'method',models};
   let result,geometry,focus=Math.max(0,db.years.indexOf(Number(params.get('year')||db.years.at(-1))));
   state.group_selections=groupStore?.data.selections||{};
-  state.review_filter=params.get('region_review')==='validated'?'validated':'all';
+  const ecosystemSets=[...db.sets,{id:'validated',label:'Validated by researcher',note:'Ecosystems whose currently selected model is validated by the researcher. Numerical availability is assessed separately.'}];
+  if(!params.has('units')&&params.get('set')==='validated'){
+    state.set='validated';state.units=PPRTrendExtras.validatedUnits(db,state);
+  }
+  state.review_filter=state.set==='validated'||params.get('region_review')==='validated'?'validated':'all';
   state.table_year=Number(params.get('table_year')||params.get('year')||db.years.at(-1));
   state.global_estimate=params.get('global_estimate')==='1';
   const calculationState=()=>({...state,units:PPRTrendExtras.selectedUnits(db,state)});
@@ -1341,7 +1392,7 @@ const PPRRegionTable=(()=>{
   const methodLabel=id=>id==='npp'?`NPP · ${nppInfo()?.label||state.npp}`:methodInfo(id)?.label||id;
   const relevantMethods=()=>[...new Set([...state.methods,...(state.baseline?[state.baseline]:[])])];
   const hasGroupSubset=()=>state.units.some(id=>{const unit=db.units[id],model=unit?.models.find(m=>m.id===(state.models[id]??unit.default_model));return model&&typeof PPRGroups!=='undefined'&&PPRGroups.active(model,state.group_selections?.[PPRGroups.key(id,model)]);});
-  const usesModels=()=>state.review_filter==='validated'||state.mode!=='npp'&&(relevantMethods().some(id=>methodInfo(id)?.kind==='model')||hasGroupSubset());
+  const usesModels=()=>state.set==='validated'||state.review_filter==='validated'||state.mode!=='npp'&&(relevantMethods().some(id=>methodInfo(id)?.kind==='model')||hasGroupSubset());
   const taxonOnly=()=>relevantMethods().length>0 && relevantMethods().every(id=>methodInfo(id)?.kind==='taxon');
   const hasValues=()=>result.series.some(s=>s.points.some(p=>finite(p.value)));
   const nppInfo=()=>db.npp_methods.find(m=>m.id===state.npp);
@@ -1360,7 +1411,7 @@ const PPRRegionTable=(()=>{
   }
   options($('baselineMethod'),[{id:'',label:'None'},...db.ppr_methods],state.baseline||'');
   options($('nppMethod'),db.npp_methods,state.npp);
-  options($('ecosystemSet'),[...db.sets,{id:'custom',label:'Custom selection'}],state.set);
+  options($('ecosystemSet'),[...ecosystemSets,{id:'custom',label:'Custom selection'}],state.set);
   const yearOptions=db.years.map(year=>({id:String(year),label:String(year)}));
   options($('fromYear'),yearOptions,String(state.from));options($('toYear'),yearOptions,String(state.to));
   $('metric').value=state.mode;$('sourceScope').value=state.scope;$('nppFill').value=state.npp_fill;$('unidentifiedTreatment').value=state.unidentified;
@@ -1387,13 +1438,14 @@ const PPRRegionTable=(()=>{
     p.set('npp_fill',state.npp_fill);p.set('npp_scope',state.npp_scope);
     p.set('unidentified',state.unidentified);
     p.set('catch_basis',state.catch_basis);p.set('uncertainty',state.uncertainty);
-    const overrides=Object.fromEntries(Object.entries(state.models).filter(([id])=>state.units.includes(id)));
+    const overrides=Object.fromEntries(Object.entries(state.models).filter(([id])=>state.set==='validated'||state.units.includes(id)));
     if(Object.keys(overrides).length)p.set('models',JSON.stringify(overrides));
     p.set('year',result.points[focus].year);p.set('from',state.from);p.set('to',state.to);
-    if(groupStore){Object.assign(groupStore.data.models,state.models);groupStore.save(p);groupStore.attach(p);groupStore.shareLinks();}
+    if(groupStore){groupStore.data.models={...state.models};groupStore.save(p);groupStore.attach(p);groupStore.shareLinks();}
     try {history.replaceState(null,'','?'+p.toString());} catch { /* Some local-file browsers restrict history. */ }
   }
   function update() {
+    if(state.set==='validated')state.units=PPRTrendExtras.validatedUnits(db,state);
     const priorYear=result?.points[focus]?.year??Number(params.get('year')||db.years.at(-1));
     state.years=db.years.filter(y=>y>=state.from && y<=state.to);
     state.allow_gaps=state.units.length===1;
@@ -1410,7 +1462,7 @@ const PPRRegionTable=(()=>{
     focus=result.points.findIndex(p=>p.year===priorYear);if(focus<0)focus=result.points.length-1;
     $('inspectYear').max=result.points.length-1;
     const ratio=state.mode==='ratio', nppOnly=state.mode==='npp', globalNPP=ratio&&state.npp_scope==='global', single=state.units.length===1;
-    const name=single?(db.units[state.units[0]]?.name||state.units[0]):db.sets.find(s=>s.id===state.set)?.label||'Custom selection';
+    const name=single?(db.units[state.units[0]]?.name||state.units[0]):ecosystemSets.find(s=>s.id===state.set)?.label||'Custom selection';
     $('selectionTitle').textContent=`${name} · ${state.from}–${state.to}`;
     $('chooseEcosystems').textContent=`${state.units.length} ecosystem${single?'':'s'} · Change`;
     $('pprMethodText').textContent=state.methods.length===1?methodLabel(state.methods[0]):`${state.methods.length} methods selected`;
@@ -1455,7 +1507,7 @@ const PPRRegionTable=(()=>{
     if(nppOnly)$('calculationNote').textContent='NPP = sum of annual regional net primary production in tonnes carbon per year. One curve represents the chosen NPP calculation for the selected ecosystems. NPP is already carbon; no wet-weight conversion or PPR baseline is applied.';
     $('unidentifiedNote').textContent=state.unidentified==='method'?'Unidentified catch uses the selected method’s own SPPR, including its existing mappings.':state.unidentified==='zero'?'Sensitivity: explicitly unidentified / NEI catch is assigned zero PPR; its tonnage remains in total catch and coverage. This is a zero-cost scenario, not an estimated correction.':'Sensitivity: explicitly unidentified / NEI catch uses each taxon’s reference-TL simple-chain SPPR at TE=0.1. Missing reference coefficients remain uncovered. This total-only fallback is available for All sources; it has no PP, detritus or imported-source attribution.';
     $('unidentifiedNote').textContent+=' Only explicit residual labels are classified; named genera and families are retained unless their catch label or common name explicitly says unidentified / NEI. See Coverage and sources for the exact list and classifier.';
-    const set=db.sets.find(s=>s.id===state.set);
+    const set=ecosystemSets.find(s=>s.id===state.set);
     $('setNote').textContent=nppOnly?'Availability depends on annual NPP source data, independently of catch or PPR availability.':single?'':(set?.note||'Sum of selected ecosystems. Regional boundaries may overlap; this sum is not spatially deduplicated.');
     $('emptyState').hidden=hasValues();
     $('emptyReason').textContent=result.reason || (result.excluded.length?`${result.excluded[0].reason} See coverage below, or change the method, model or ecosystem set.`:'Select an ecosystem to plot its annual estimate.');
@@ -1748,16 +1800,17 @@ const PPRRegionTable=(()=>{
       const text=element('span',unit.name);text.appendChild(element('small',`${id} · ${unit.type}${unit.pilot?' · Selected pilot':''}${state.mode!=='npp'&&!unit.simple?.ppr?.some(finite)?' · No catch estimate':''}`));
       label.append(check,text);row.appendChild(label);
       check.addEventListener('change',()=>{if(check.checked)state.units.push(id);else state.units=state.units.filter(v=>v!==id);const scroll=$('ecosystemList').scrollTop;custom();update();renderPicker();$('ecosystemList').scrollTop=scroll;$('pick_'+id).focus({preventScroll:true});});
-      if(network && selected.has(id) && unit.models.length){
+      if(network && (selected.has(id)||state.set==='validated') && unit.models.length){
         const select=element('select');select.setAttribute('aria-label',`Ecopath model for ${unit.name}`);
         options(select,unit.models.map(m=>({id:m.id,label:(m.label||m.id)+(m.verified?'':' · no usable taxon mapping')})),state.models[id]??unit.default_model);
-        select.addEventListener('change',()=>{state.models[id]=select.value;update();});row.appendChild(select);
+        select.addEventListener('change',()=>{groupStore.selectModel(id,select.value);state.models={...groupStore.data.models};update();renderPicker();});row.appendChild(select);
       }
       return row;
     });
     $('ecosystemList').replaceChildren(...(rows.length?rows:[element('p','No ecosystems match your search.')]));
     $('pickerCount').textContent=`${state.units.length} selected · ${rows.length} visible`+(state.review_filter==='validated'?` · ${PPRTrendExtras.selectedUnits(db,state).length} have validated selected models`:'');
     $('pickerNote').textContent=state.mode==='npp'?'NPP uses all selected ecosystems with annual NPP data, including those without catch data or an Ecopath model. A missing annual value leaves a gap for the fixed selection.':network?'Choose one Ecopath model per ecosystem. Failed methods and ecosystems without a verified model are excluded.':'You can select ecosystems without selected articles for the catch-taxon TL estimate. Map pilot coloring is unchanged.';
+    if(state.set==='validated'||state.review_filter==='validated')$('pickerNote').textContent='Only ecosystems whose currently selected model is validated by the researcher enter the graph. Numerical availability is assessed separately. Uncheck ecosystems to make a custom subset; choose Validated by researcher again to restore the full reviewed set.';
   }
   function openPicker(){renderPicker();$('ecosystemDialog').showModal();}
   $('chooseEcosystems').addEventListener('click',openPicker);$('emptyChoose').addEventListener('click',openPicker);
@@ -1766,7 +1819,16 @@ const PPRRegionTable=(()=>{
   $('groupDisplay').addEventListener('change',()=>{state.group_display=$('groupDisplay').value;update();});
   $('globalApproximation').addEventListener('change',()=>{state.global_estimate=$('globalApproximation').value==='1';update();});
   $('regionReviewFilter').addEventListener('change',()=>{state.review_filter=$('regionReviewFilter').value;update();if($('ecosystemDialog').open)renderPicker();});
-  $('ecosystemSet').addEventListener('change',()=>{const set=db.sets.find(s=>s.id===$('ecosystemSet').value);state.set=$('ecosystemSet').value;if(set)state.units=[...set.units];update();renderPicker();});
+  $('ecosystemSet').addEventListener('change',()=>{
+    state.set=$('ecosystemSet').value;
+    if(state.set==='validated'){
+      state.units=PPRTrendExtras.validatedUnits(db,state);
+      state.review_filter='validated';$('regionReviewFilter').value='validated';
+    }else{
+      const set=db.sets.find(s=>s.id===state.set);if(set)state.units=[...set.units];
+    }
+    update();renderPicker();
+  });
   $('selectVisible').addEventListener('click',()=>{state.units=[...new Set([...state.units,...visibleUnits().map(([id])=>id)])];custom();update();renderPicker();});
   $('clearSelection').addEventListener('click',()=>{state.units=[];custom();update();renderPicker();});
   function download(format){
@@ -1778,11 +1840,12 @@ const PPRRegionTable=(()=>{
   new ResizeObserver(()=>{if(result)draw();}).observe($('plotWrap'));
   const groupDialog=groupStore?PPRGroupDialog.create({units:db.units,store:groupStore,
     getContext:()=>({...state,year:result?.points[focus]?.year??db.years[focus],method:state.methods[0]||'simple trophic chain'}),
-    onChange:()=>{state.group_selections=groupStore.data.selections;Object.assign(state.models,groupStore.data.models);update();}
+    onChange:()=>{state.group_selections=groupStore.data.selections;state.models={...groupStore.data.models};update();}
   }):null;
   if(groupDialog){
+    $('resetModelChoices').addEventListener('click',()=>groupStore.resetModels());
     $('openGroupFilter').addEventListener('click',()=>groupDialog.open(state.units.length===1?state.units[0]:undefined));
-    groupStore.subscribe(()=>{state.group_selections=groupStore.data.selections;Object.assign(state.models,groupStore.data.models);update();groupDialog.refresh();});
+    groupStore.subscribe(()=>{state.group_selections=groupStore.data.selections;state.models={...groupStore.data.models};update();groupDialog.refresh();});
   }
   regionTable=PPRRegionTable.create({db,getState:()=>state,
     calculate:year=>PPRTrendExtras.table(db,state,year,PPRTimeSeries.compare,PPRTimeSeries.aggregate),methodLabel,save:saveURL});
