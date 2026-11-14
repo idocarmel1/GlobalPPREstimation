@@ -38,9 +38,15 @@ def source_provenance_layout(text,catalog):
             for label,path in [('Saved calculation settings and EE-floor ledger',model.get('workbook')),
                                ('Calculator source export',model.get('source'))]:
                 if path:links.append(f'<a href="{escape("../"+path,quote=True)}">{label}</a>')
+            assumption = ('Hypothetical external nonfishery mortality sink; excluded from catch and fishery PPR.'
+                          if enabled else 'No EE floor is applied in this saved calculation.')
+            review_note = ('The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report. Other method results retain their own diagnostic status.'
+                           if model.get('researcher_review') else
+                           'The recorded researcher review is awaiting current verification.'
+                           if model.get('recorded_review_pending') else
+                           'No verified researcher review is recorded for this model.')
             parts.append('<p><b>'+escape(model.get('label') or model['id'])+'</b> · '+escape(setting)+'. '
-                         +'Hypothetical external nonfishery mortality sink; excluded from catch and fishery PPR. '
-                         +'Existing signed researcher reviews retain their original scope and do not approve this changed calculation assumption or transformed diagnostics.'
+                         +assumption+' '+review_note
                          +(' '+ ' · '.join(links) if links else '')+'</p>')
         if not parts:continue
         anchor='<small>'+escape(unit_id)+' · '

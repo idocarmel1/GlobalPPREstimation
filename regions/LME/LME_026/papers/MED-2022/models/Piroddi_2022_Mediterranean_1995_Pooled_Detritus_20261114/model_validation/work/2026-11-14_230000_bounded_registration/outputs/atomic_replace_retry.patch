@@ -1,0 +1,35 @@
+--- a/tools/project_core/maps/build_html.py
++++ b/tools/project_core/maps/build_html.py
+@@ -45,12 +45,31 @@
+ 
+ def atomic_bytes(path,data):
+     from tools.project_core.registry.publication import publication_write
++    import time
++    path=Path(path)
++    def fingerprint():return sha(path) if path.is_file() else None
++    original=fingerprint();expected=hashlib.sha256(data).hexdigest()
+     path.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(dir=path.parent,suffix=path.suffix);os.close(fd)
+     try:
+         Path(tmp).write_bytes(data)
+-        with publication_write(path,fingerprint=hashlib.sha256(data).hexdigest()):os.replace(tmp,path)
++        for attempt in range(6):
++            replaced=False
++            try:
++                with publication_write(path,fingerprint=expected):
++                    if fingerprint()!=original:raise ValueError('Publication target changed during replacement retry: '+str(path))
++                    os.replace(tmp,path)
++                    replaced=True
++                break
++            except PermissionError as error:
++                # Retry only failed Windows replacements, never a post-write
++                # guard failure, a changed target, or another permission error.
++                if replaced:raise
++                if fingerprint()!=original:raise ValueError('Publication target changed during replacement retry: '+str(path)) from error
++                if getattr(error,'winerror',None) not in {5,32,33} or attempt==5:raise
++                time.sleep(.2*(2**attempt))
+     finally:
+         if os.path.exists(tmp):os.unlink(tmp)
++
+ 
+ def relayout(workbook,directory=None,group_efficiencies=False,group_catch=False):
+     """Refresh saved-data presentation without scientific method inventory."""

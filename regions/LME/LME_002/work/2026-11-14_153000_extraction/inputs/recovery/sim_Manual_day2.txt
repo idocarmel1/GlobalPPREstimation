@@ -1,0 +1,156 @@
+
+Command line options:
+
+ -M[x] 
+ Run mode x (x is 1 or 2 letter code).  Possible modes:
+   [o] One run:  Do one run (mainly for testing)
+   [f] Fitting:  Find max liklihood fit to data
+   [e] Sense Generate:  Generate a number of random ecosystems and 
+	     filter by non-death criterion.  Save surviving ecosystems in 
+			 binary format files.
+   [i] Sense Report:  Take surviving ecosystems from previously
+	     generated sense set and report statistics (e.g. for making 
+			 quartiles) 
+   
+ -O[path]/[file]  
+   Set output path and filename base
+ 
+ -I[path]/[file]
+   For runmodes that take input files, input file path and filename base
+ 
+ -S[n] 
+   Number [n] of random ecosystems to generate per thread
+ 
+ -B[n]  
+   Years to run [n] in checking for system collapse for the sense 
+	 generate [e] mode
+ 
+ -R[n] 
+   Set random seed for code.  Unique values are 0 to 511 (anything 
+	 outside this range is taken modulus 512)
+ 
+ -A[f]
+   Multiply biomass by area multiplier f to scale output files (e.g. 
+	 convert to tons or carbon).  Doesn't affect calculations, only
+	 output units.
+
+ -V Adjust functional response defaults with suboptions as follows:
+ 
+ -Vv[f] Set range of variance for vulnerability parameters to [f], on
+        log scale (default is f=6.0, max for practical purposes 6.0).
+ 
+ -Vx[f] Set default vulnerability for all groups (in absense of input
+        parameter file).  Default=2.0 (also EwE default)
+
+ -Vd[f] Set default handling time for all groups (in absense of input
+        parameter file).  Default=1000.0 (also EwE default)
+
+ -Vh[f] Is satiation (handling time) independent  (f=1.0) or pooled
+        (f=0.0).  Default is 1.0, which is OPPOSITE of EwE default of 
+				0.0.
+				
+ -Vs[f] Is predator density dependence (vulnerability) independent 
+	      (f=1.0) or pooled (f=0.0) or in-between? Default is 1.0, 
+				also EwE default.
+
+ -C[file]
+   Read in climate from .csv formatted [Climate file]
+ 
+ -J[file]
+   Read in juvenile parameters from .csv formatted [Juvenile file]
+ 
+ -F[file]
+   Read in timeseries fitting data from .csv formatted [Fitting file]
+ 
+ -P[file]
+   Read in functional response values (e.g. vulnerabilities) from .csv 
+	 formatted vector [Vector fitting file]
+ 
+ -K[file]
+   Read in fitting control .csv file (e.g. turn fitting on and off 
+	 specific parameters for phased fitting) [Vector control file]
+
+FILE NOTES
+VECTOR FILE
+     P0 - PB 
+     P1 - Mzero
+     P2 - PreyHandle
+     P3 - PredHandle 
+     P4 - PreyX
+     P5 - PredX   
+     P6 - PreyExp
+     P7 - PredExp
+
+FISHING FORCING FILE
+                 TypeCode      ApplyTo                  
+Relative Bio           0      Species
+Effort forcing         3      Gear    
+F rate forcing         4      Species, Gear, or Gear*1000+Species (auto-detects)
+Catch Fitting          6      Species
+Eggs fitting         102    For stanzas, juvenile or adult number
+Biomass Forcing       -1     Species
+Forced Catch by gear 103     Gear*1000+species, or species for clean catch
+[*renorm column needs merging, will change codes slightly]
+
+ 
+ TODO
+ 1.  Free us from the header file - use an evv-style format
+ 2.  Juvenile fold in to above
+ 3.  Check bugs in sense runs!
+ 4.  Better notation of parameter input/output (scale and units)
+ 5.  Better notation (cataloging) of output file
+ 6.  Implement "back to path" balance
+ 8.  Describe (improve?) Forcing Function methods
+ 9.  Add above command line switches (Pruns, measure month, Discard Limit)
+10.  Smoother passing between Viz, Excel, this format
+12.  Document input file structure and codes - cause it to spit out
+     file structure on demand
+13.  Check for missing folder: 
+   struct stat st;
+   if(stat("/tmp",&st) == 0)
+        printf(" /tmp is present\n"); 
+14. Restrict bad switch entry.
+FixCam's sec-3 error
+
+Remark:  No commas in group names allowed
+
+
+Spreadsheet adds
+    Immigration
+    Emmigration
+    Emmigration rate
+    BA
+    BA rate
+    Aggregation
+    Stanzas in spreadsheet    
+    Fix Detritus import
+    Fix Detritus EE?
+    
+ 
+Larger Adds
+     How to "not care" if a species goes extinct?
+     Mediation
+     R interface		      
+
+
+
+
+
+[NOT IMPLEMENTED YET]
+
+ -N[n] set PRUNS (number of threads, doesn't work in MPI (cluster) 
+       version (default 1)
+ -T[n] set MEASURE MONTH to value between 1 and 12 (default 6)
+ -H[f] set DISCARD LIMIT for discarding an ecosystem to be between 
+       1/H and H times Ecopath start (default 1000.0)
+
+  -E[file] THIS IS THE ECOSYSTEM
+
+ -Ys   #define PATH_YEAR_START    1990
+ -Ye   #define PATH_YEAR_END      1993
+
+ -Yt Years to run
+ 
+  -v
+  --help
+  --version     

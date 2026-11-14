@@ -1,0 +1,62 @@
+........................................................................ [ 17%]
+....s....sss...ss.s.ss.......sssFs.s.................................... [ 35%]
+........................................................................ [ 53%]
+........................................................................ [ 71%]
+.....................................................s......ss..s....... [ 88%]
+............................................F                            [100%]
+================================== FAILURES ===================================
+______________________ test_flat_report_is_single_level _______________________
+
+toy = <PPRCalculator.PPRCalculator object at 0x000001DE121D3E50>
+
+    def test_flat_report_is_single_level(toy):
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            report = toy.diagnose_sppr(flat=True)
+>       assert not any(isinstance(v, (dict, list, tuple)) for v in report.values())
+E       assert not True
+E        +  where True = any(<generator object test_flat_report_is_single_level.<locals>.<genexpr> at 0x000001DE12231030>)
+
+tools\scientific_code\PPREstimation\tests\test_diagnose_sppr.py:382: AssertionError
+___ test_flat_diagnostics_recurses_into_assumption_ledger_and_counts_lists ____
+
+    def test_flat_diagnostics_recurses_into_assumption_ledger_and_counts_lists():
+        report = {
+            'config': {'ee_floor_assumption': {
+                'affected_groups': [], 'negative_detritus_stock_residuals': {},
+                'nested': {'groups': [3, 4], 'enabled': True}}},
+            'divergence': {'b': .25, 'sppr_det': {1: 1.5}},
+            'warnings': ['example'],
+        }
+>       assert PPRCalculator._flatten_diagnostics(report) == {
+            'config_ee_floor_assumption_n_affected_groups': 0,
+            'config_ee_floor_assumption_nested_n_groups': 2,
+            'config_ee_floor_assumption_nested_enabled': True,
+            'divergence_b': .25, 'divergence_sppr_det_1': 1.5, 'n_warnings': 1,
+        }
+E       AssertionError: assert {'config_ee_f...b': 0.25, ...} == {'config_ee_f...b': 0.25, ...}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Left contains 3 more items:
+E         {'config_ee_floor_assumption_affected_groups': [],
+E          'config_ee_floor_assumption_negative_detritus_stock_residuals': {},
+E          'config_ee_floor_assumption_nested': {'enabled': True, 'groups': [3, 4]}}
+E         Right contains 3 more items:...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+tools\scientific_code\PPREstimation\tests\test_source_accounting.py:217: AssertionError
+============================== warnings summary ===============================
+tools/scientific_code/PPREstimation/tests/test_ee_floor.py::test_diet_import_branch_counts_the_sink_on_actual_symbolic_return
+tools/scientific_code/PPREstimation/tests/test_ee_floor.py::test_diet_import_branch_counts_the_sink_on_actual_symbolic_return
+tools/scientific_code/PPREstimation/tests/test_ee_floor.py::test_diet_import_branch_counts_the_sink_on_actual_symbolic_return
+tools/scientific_code/PPREstimation/tests/test_ee_floor.py::test_diet_import_branch_counts_the_sink_on_actual_symbolic_return
+tools/scientific_code/PPREstimation/tests/test_source_accounting.py::test_symbolic_import_export_values_entire_diet_including_external_prey
+  C:\Users\idoca\.codex\worktrees\lme022-loader-fix\GlobalPPREstimation\tools\scientific_code\PPREstimation\PPRCalculator.py:1260: RuntimeWarning: cannot determine truth value of Relational: DIET_SPPR_Consumer < DIET_SPPR_Imports, sort order is undefined for incomparable objects.
+    inflow_from_diet_import = a.mul(pd.Series(d), fill_value=0).sum()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tools/scientific_code/PPREstimation/tests/test_diagnose_sppr.py::test_flat_report_is_single_level
+FAILED tools/scientific_code/PPREstimation/tests/test_source_accounting.py::test_flat_diagnostics_recurses_into_assumption_ledger_and_counts_lists
+2 failed, 385 passed, 18 skipped, 5 warnings in 496.44s (0:08:16)

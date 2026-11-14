@@ -1,0 +1,2703 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "model_id": "ICES_WGSAM2015_North_Sea_1991",
+    "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+    "variant_id": "current_standard_loader_nonfeeding_import_structural_zero_ee_floor_0.1",
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": false,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "flags": {
+      "constructor": {
+        "underdetermined": false,
+        "zero_catch": false,
+        "zero_biomass_accum": false,
+        "default_gs": false,
+        "normalize_DC": false,
+        "DC_tol": 0.001,
+        "balance_BA_after_DC_normalization": false,
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1
+      },
+      "diagnostics": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1,
+        "det_external_sppr": 0
+      },
+      "method_timeout_seconds": 180
+    },
+    "engine_hashes": {
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "PPRCalculator.py": "4c8ec0d0c275c6053892b89d526c7191f1c7755376ff1785cc3cb7dfb2ea7a4a",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "create_PPRS_excel.py": "1b327cd0ae3887010b68f7265a24fecefd1bc00d54ba54cd026c22162f3a6737"
+    },
+    "adaptation": "Exactly four nonfeeding DC synthetic-import cells (66–69,70) NaN→0 on an ephemeral copy. Source missingness is preserved. No producer fate/routing/TL/BA/canonical edits.",
+    "original_attempt": "../summary.json"
+  },
+  "constructor_status": "ready",
+  "methods": [
+    {
+      "method": "new_GE",
+      "execution_status": "ok",
+      "reason": "FAIL: negative SPPR in a source-model group",
+      "diagnostic": {
+        "status": "FAIL",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "dc_rows_sum_to_1": false,
+          "dc_max_deviation": 8.325029999978195e-05,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "total_catch": 4.558171985857613,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "diagnostic_basis": "effective calculation runtime",
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "negative_detritus_stock_residuals": {
+            "67": -609.8768074793328,
+            "68": -806.8160598509414,
+            "69": -0.4958617386195999
+          }
+        },
+        "divergence": {
+          "status": "FAIL",
+          "solve_error": null,
+          "b": 1.555279932052498,
+          "b_converges": false,
+          "rho_living": 0.2894427191062622,
+          "living_converges": true,
+          "sppr_det": {
+            "type": "mapping",
+            "items": [
+              [
+                67,
+                -0.1537225525710884
+              ],
+              [
+                68,
+                -0.4355955637434745
+              ],
+              [
+                69,
+                0.0
+              ]
+            ]
+          },
+          "max_sppr_det": 0.0,
+          "max_sppr_group": {
+            "seq": 2,
+            "tl": 4.564281310863093,
+            "sppr": 6671.767081238264,
+            "inv_te": 881.5000000000001
+          },
+          "max_tl_group": {
+            "seq": 3,
+            "tl": 4.872802065679302,
+            "sppr": -1639.1772642313372,
+            "inv_te": 298.2444444444444
+          },
+          "n_negative_sources": 2,
+          "expect_negatives": true,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "FAIL",
+          "is_balanced": false,
+          "inflow": 2150.010358224,
+          "outflow": 455.4171431884733,
+          "rel_gap": 0.7881790934418255
+        },
+        "footprint": {
+          "ppr_all": 13.414550012517651,
+          "ppr_inner": 13.414550012517637,
+          "ppr_pp_only": 77.27761157272967,
+          "npp": 2150.00025,
+          "ppr2npp": 0.006239324861714615,
+          "ppr2npp_pp_only": 0.03594307097067997
+        },
+        "config": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "ee_floor_assumption": {
+            "use_ee_floor": true,
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {
+              "67": -609.8768074793328,
+              "68": -806.8160598509414,
+              "69": -0.4958617386195999
+            },
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "application_stage": "completed audited initialization",
+            "researcher_approval": "Original signed review is separate from this calculation assumption"
+          },
+          "TE_option": "GE",
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "det_external_sppr": 0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "would_pool": false,
+          "model": "North Sea Rpath port (1991)"
+        },
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "Negative detritus stock residuals remain unexplained limitations, not evidenced source supply: {'67': -609.8768074793328, '68': -806.8160598509414, '69': -0.4958617386195999}",
+          "detritus recycling diverges: b=1.555 >= 1; the SPPR returned is not a convergent sum",
+          "2 basal source column(s) contain negative SPPR",
+          "PP balance gap 78.818% exceeds fail threshold 5.0%"
+        ]
+      },
+      "negative_entries": [
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 68,
+          "group_name": "DetritusPOMSediment",
+          "value": -0.4355955637434745,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 67,
+          "group_name": "DetritusDOMWaterColumn",
+          "value": -0.1537225525710884,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 65,
+          "group_name": "DivingSeabirds",
+          "value": -630.0476929427945,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 65,
+          "group_name": "DivingSeabirds",
+          "value": -166.44711492964998,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 64,
+          "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+          "value": -0.286721130565325,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 64,
+          "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+          "value": -0.2568528726504262,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 63,
+          "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+          "value": -0.725073628256543,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 63,
+          "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+          "value": -0.14107449444815076,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 62,
+          "group_name": "Meiofauna",
+          "value": -2.743149278004792,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 62,
+          "group_name": "Meiofauna",
+          "value": -0.4600255253744046,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 61,
+          "group_name": "SessileEpifauna",
+          "value": -1.439119520722112,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 61,
+          "group_name": "SessileEpifauna",
+          "value": -0.8989850542764916,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 60,
+          "group_name": "SmallInfaunaPolychaetes",
+          "value": -3.211828049121189,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 60,
+          "group_name": "SmallInfaunaPolychaetes",
+          "value": -0.6453386124144223,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 59,
+          "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+          "value": -2.681243579360006,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 59,
+          "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+          "value": -0.5728735842426338,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 58,
+          "group_name": "Shrimp",
+          "value": -2.069530152580669,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 58,
+          "group_name": "Shrimp",
+          "value": -0.4877322290714041,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 57,
+          "group_name": "InfaunalMacrobenthos",
+          "value": -3.1687864621552055,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 57,
+          "group_name": "InfaunalMacrobenthos",
+          "value": -0.6570771691489555,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 56,
+          "group_name": "EpifaunalMacrobenthosMobileGrazers",
+          "value": -11.581968627486978,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 56,
+          "group_name": "EpifaunalMacrobenthosMobileGrazers",
+          "value": -2.4591508698929365,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 55,
+          "group_name": "Nephrops",
+          "value": -10.381080224840208,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 55,
+          "group_name": "Nephrops",
+          "value": -2.5036416374431836,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 54,
+          "group_name": "LargeCrabs",
+          "value": -25.263277929319838,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 54,
+          "group_name": "LargeCrabs",
+          "value": -5.607698949601553,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 53,
+          "group_name": "GelatinousZooplankton",
+          "value": -2.668364529733043,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 53,
+          "group_name": "GelatinousZooplankton",
+          "value": -0.9276575484559711,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 52,
+          "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+          "value": -0.046748010418259524,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 52,
+          "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+          "value": -0.06694164541655132,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 51,
+          "group_name": "CarnivorousZooplankton",
+          "value": -1.2523247259878445,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 51,
+          "group_name": "CarnivorousZooplankton",
+          "value": -0.5151752113987185,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 50,
+          "group_name": "FishLarvae",
+          "value": -0.18699204167303815,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 50,
+          "group_name": "FishLarvae",
+          "value": -0.2677665816662053,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 49,
+          "group_name": "SquidAndCuttlefish",
+          "value": -11.154094593717094,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 49,
+          "group_name": "SquidAndCuttlefish",
+          "value": -2.93647543271512,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 48,
+          "group_name": "MiscellaneousFilterfeedingPelagicFish",
+          "value": -2.286852268511823,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 48,
+          "group_name": "MiscellaneousFilterfeedingPelagicFish",
+          "value": -0.7572991157245501,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 47,
+          "group_name": "SmallDemersalFish",
+          "value": -16.513596178651692,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 47,
+          "group_name": "SmallDemersalFish",
+          "value": -3.7136965727825326,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 46,
+          "group_name": "LargeDemersalFish",
+          "value": -12.996533369900584,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 46,
+          "group_name": "LargeDemersalFish",
+          "value": -3.7388575493397584,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 45,
+          "group_name": "CatfishWolfFish",
+          "value": -38.2948527811621,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 45,
+          "group_name": "CatfishWolfFish",
+          "value": -8.188349562855583,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 44,
+          "group_name": "Dragonets",
+          "value": -18.808086309628848,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 44,
+          "group_name": "Dragonets",
+          "value": -3.9287716538087367,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 43,
+          "group_name": "Halibut",
+          "value": -144.23149437930888,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 43,
+          "group_name": "Halibut",
+          "value": -35.186068676327906,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 42,
+          "group_name": "Megrim",
+          "value": -20.52741733774723,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 42,
+          "group_name": "Megrim",
+          "value": -5.14395460760378,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 41,
+          "group_name": "Turbot",
+          "value": -23.638239341832474,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 41,
+          "group_name": "Turbot",
+          "value": -5.363390929850684,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 40,
+          "group_name": "Witch",
+          "value": -17.820273577783826,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 40,
+          "group_name": "Witch",
+          "value": -3.7521785592511563,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 39,
+          "group_name": "LemonSole",
+          "value": -16.479930579218042,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 39,
+          "group_name": "LemonSole",
+          "value": -3.957142772312538,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 38,
+          "group_name": "Sole",
+          "value": -12.709862069827404,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 38,
+          "group_name": "Sole",
+          "value": -2.4350773032859623,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 37,
+          "group_name": "Flounder",
+          "value": -31.621727505153515,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 37,
+          "group_name": "Flounder",
+          "value": -7.157139358043446,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 36,
+          "group_name": "LongRoughDab",
+          "value": -42.394707238226964,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 36,
+          "group_name": "LongRoughDab",
+          "value": -9.088960032210101,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 35,
+          "group_name": "Dab",
+          "value": -31.834001191174263,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 35,
+          "group_name": "Dab",
+          "value": -6.770901976577141,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 34,
+          "group_name": "Plaice",
+          "value": -17.15265803374423,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 34,
+          "group_name": "Plaice",
+          "value": -3.6236674961934243,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 33,
+          "group_name": "Sandeels",
+          "value": -2.1215448870482123,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 33,
+          "group_name": "Sandeels",
+          "value": -0.5587302517995475,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 32,
+          "group_name": "HorseMackerel",
+          "value": -15.727559737241773,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 32,
+          "group_name": "HorseMackerel",
+          "value": -4.7881694152672,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 31,
+          "group_name": "Mackerel",
+          "value": -5.200525998629216,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 31,
+          "group_name": "Mackerel",
+          "value": -1.518146715801133,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 30,
+          "group_name": "Sprat",
+          "value": -0.15300541795842976,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 30,
+          "group_name": "Sprat",
+          "value": -0.18349992412234117,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 29,
+          "group_name": "AduHerring",
+          "value": -2.570926472657917,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 29,
+          "group_name": "AduHerring",
+          "value": -1.171813482831992,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 28,
+          "group_name": "JuvHerring",
+          "value": -4.516543316689731,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 28,
+          "group_name": "JuvHerring",
+          "value": -1.899215601787344,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 27,
+          "group_name": "Gurnards",
+          "value": -26.282044619488133,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 27,
+          "group_name": "Gurnards",
+          "value": -6.10553836668662,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 26,
+          "group_name": "Monkfish",
+          "value": -30.19242101544563,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 26,
+          "group_name": "Monkfish",
+          "value": -7.443049819120949,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 25,
+          "group_name": "OtherSmallGadoids",
+          "value": -8.960726767866294,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 25,
+          "group_name": "OtherSmallGadoids",
+          "value": -2.0033744885326845,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 24,
+          "group_name": "OtherLargeGadoids",
+          "value": -13.976209346488579,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 24,
+          "group_name": "OtherLargeGadoids",
+          "value": -3.813900082781558,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 23,
+          "group_name": "NorwayPout",
+          "value": -2.5510111548089665,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 23,
+          "group_name": "NorwayPout",
+          "value": -0.7609550097831111,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 22,
+          "group_name": "BlueWhiting",
+          "value": -6.5139913997933006,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 22,
+          "group_name": "BlueWhiting",
+          "value": -2.0647838859427288,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 21,
+          "group_name": "Hake",
+          "value": -19.818460700542648,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 21,
+          "group_name": "Hake",
+          "value": -5.92226754087828,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 20,
+          "group_name": "AduSaithe",
+          "value": -12.266696389072294,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 20,
+          "group_name": "AduSaithe",
+          "value": -3.895405387352033,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 19,
+          "group_name": "JuvSaithe",
+          "value": -12.457172386045903,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 19,
+          "group_name": "JuvSaithe",
+          "value": -4.155788937465676,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 18,
+          "group_name": "AduHaddock",
+          "value": -11.184888497633214,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 18,
+          "group_name": "AduHaddock",
+          "value": -2.5667400184028515,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 17,
+          "group_name": "JuvHaddock",
+          "value": -17.72665679082803,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 17,
+          "group_name": "JuvHaddock",
+          "value": -3.948197482566158,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 16,
+          "group_name": "AduWhiting",
+          "value": -27.863034645760003,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 16,
+          "group_name": "AduWhiting",
+          "value": -7.018841924040263,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 15,
+          "group_name": "JuvWhiting",
+          "value": -33.38741603232046,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 15,
+          "group_name": "JuvWhiting",
+          "value": -8.00329567867178,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 14,
+          "group_name": "AduCod",
+          "value": -54.338406856647495,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 14,
+          "group_name": "AduCod",
+          "value": -12.232572455282906,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 13,
+          "group_name": "JuvCod",
+          "value": -31.295887339739256,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 13,
+          "group_name": "JuvCod",
+          "value": -7.238155854399172,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 12,
+          "group_name": "SkateCuckooRay",
+          "value": -34.422763984783145,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 12,
+          "group_name": "SkateCuckooRay",
+          "value": -7.8116618767677775,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 11,
+          "group_name": "ThornbackAndSpottedRay",
+          "value": -42.65175039573821,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 11,
+          "group_name": "ThornbackAndSpottedRay",
+          "value": -9.439426308518925,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 10,
+          "group_name": "StarryRayOthers",
+          "value": -20.5530154365078,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 10,
+          "group_name": "StarryRayOthers",
+          "value": -4.653358316636176,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 9,
+          "group_name": "JuvenileRays",
+          "value": -14.225442896601846,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 9,
+          "group_name": "JuvenileRays",
+          "value": -3.208613994220288,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 8,
+          "group_name": "SmallSharks",
+          "value": -55.14561072502364,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 8,
+          "group_name": "SmallSharks",
+          "value": -12.408545556790218,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 7,
+          "group_name": "LargePiscivorousSharks",
+          "value": -56.65431384415648,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 7,
+          "group_name": "LargePiscivorousSharks",
+          "value": -13.47231932205897,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 6,
+          "group_name": "Spurdog",
+          "value": -41.999271128971095,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 6,
+          "group_name": "Spurdog",
+          "value": -10.791632169841671,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 5,
+          "group_name": "JuvenileSharks",
+          "value": -36.417492395619895,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 5,
+          "group_name": "JuvenileSharks",
+          "value": -8.37300883705308,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 4,
+          "group_name": "SurfaceFeedingSeabirds",
+          "value": -844.6819950842929,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 4,
+          "group_name": "SurfaceFeedingSeabirds",
+          "value": -220.00542621287155,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 3,
+          "group_name": "Seals",
+          "value": -4947.70996087104,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 3,
+          "group_name": "Seals",
+          "value": -1157.0058288954262,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 2,
+          "group_name": "ToothedWhales",
+          "value": -6715.603188088893,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 2,
+          "group_name": "ToothedWhales",
+          "value": -1795.45317454553,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 1,
+          "group_name": "BaleenWhales",
+          "value": -1459.398155550289,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 1,
+          "group_name": "BaleenWhales",
+          "value": -462.4054785796332,
+          "comparison_tolerance": 0
+        }
+      ],
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "negative_source_count": 2,
+        "diagnostic_negative_count": 2,
+        "mask_counts": {
+          "null": 0,
+          "nan": 0,
+          "positive_infinity": 0,
+          "negative_infinity": 0
+        },
+        "unique_axes": true
+      },
+      "exception": null,
+      "reconciliation": {
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true,
+        "rtol": 1e-12,
+        "atol": 1e-12
+      },
+      "annual_status": {
+        "all": "FAIL: negative SPPR in a source-model group",
+        "inner": "FAIL: negative SPPR in a source-model group",
+        "PP": "FAIL: negative SPPR in a source-model group"
+      },
+      "evidence": {
+        "path": "new_GE.json.gz",
+        "sha256": "404a6ee27e2b20f17a78d8451f36d14a6f2d67284f26edb9baea3d2cef2a3931",
+        "availability": "present"
+      }
+    },
+    {
+      "method": "new_TE_EEfix",
+      "execution_status": "ok",
+      "reason": "FAIL: configuration diagnostic",
+      "diagnostic": {
+        "status": "FAIL",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "dc_rows_sum_to_1": false,
+          "dc_max_deviation": 8.325029999978195e-05,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "total_catch": 4.558171985857613,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "diagnostic_basis": "effective calculation runtime",
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "negative_detritus_stock_residuals": {
+            "67": -609.8768074793328,
+            "68": -806.8160598509414,
+            "69": -0.4958617386195999
+          }
+        },
+        "divergence": {
+          "status": "WARN",
+          "solve_error": null,
+          "b": 0.0,
+          "b_converges": true,
+          "rho_living": 0.5734463993696682,
+          "living_converges": true,
+          "sppr_det": {
+            "type": "mapping",
+            "items": [
+              [
+                67,
+                0.0
+              ],
+              [
+                68,
+                0.0
+              ],
+              [
+                69,
+                0.0
+              ]
+            ]
+          },
+          "max_sppr_det": 0.0,
+          "max_sppr_group": {
+            "seq": 2,
+            "tl": 4.564281310863093,
+            "sppr": 551971.0262036015,
+            "inv_te": 8815.000000000004
+          },
+          "max_tl_group": {
+            "seq": 3,
+            "tl": 4.872802065679302,
+            "sppr": 202008.24383127,
+            "inv_te": 2982.4444444444453
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        "balance": {
+          "status": "FAIL",
+          "is_balanced": false,
+          "inflow": 2150.010358224,
+          "outflow": 455.41714318826723,
+          "rel_gap": 0.7881790934419213
+        },
+        "footprint": {
+          "ppr_all": 367.7471573132479,
+          "ppr_inner": 367.74715731324784,
+          "ppr_pp_only": 367.7471573132479,
+          "npp": 2150.00025,
+          "ppr2npp": 0.17104516955904905,
+          "ppr2npp_pp_only": 0.17104516955904908
+        },
+        "config": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "ee_floor_assumption": {
+            "use_ee_floor": true,
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {
+              "67": -609.8768074793328,
+              "68": -806.8160598509414,
+              "69": -0.4958617386195999
+            },
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "application_stage": "completed audited initialization",
+            "researcher_approval": "Original signed review is separate from this calculation assumption"
+          },
+          "TE_option": "TE",
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "det_external_sppr": 0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": null,
+          "would_pool": false,
+          "model": "North Sea Rpath port (1991)"
+        },
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "Negative detritus stock residuals remain unexplained limitations, not evidenced source supply: {'67': -609.8768074793328, '68': -806.8160598509414, '69': -0.4958617386195999}",
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "5 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [65, 4, 3, 2, 1]",
+          "PP balance gap 78.818% exceeds fail threshold 5.0%"
+        ]
+      },
+      "negative_entries": [],
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "negative_source_count": 0,
+        "diagnostic_negative_count": 0,
+        "mask_counts": {
+          "null": 0,
+          "nan": 0,
+          "positive_infinity": 0,
+          "negative_infinity": 0
+        },
+        "unique_axes": true
+      },
+      "exception": null,
+      "reconciliation": {
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true,
+        "rtol": 1e-12,
+        "atol": 1e-12
+      },
+      "annual_status": {
+        "all": "FAIL: configuration diagnostic",
+        "inner": "FAIL: configuration diagnostic",
+        "PP": "FAIL: configuration diagnostic"
+      },
+      "evidence": {
+        "path": "new_TE_EEfix.json.gz",
+        "sha256": "9bfce015240973994d7e09392af64b094ec3fa2bc1378052d68cd34fd6b555ca",
+        "availability": "present"
+      }
+    },
+    {
+      "method": "new_WithEgestion",
+      "execution_status": "ok",
+      "reason": "FAIL: negative SPPR in a source-model group",
+      "diagnostic": {
+        "status": "FAIL",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "dc_rows_sum_to_1": false,
+          "dc_max_deviation": 8.325029999978195e-05,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "total_catch": 4.558171985857613,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "diagnostic_basis": "effective calculation runtime",
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "negative_detritus_stock_residuals": {
+            "67": -609.8768074793328,
+            "68": -806.8160598509414,
+            "69": -0.4958617386195999
+          }
+        },
+        "divergence": {
+          "status": "FAIL",
+          "solve_error": null,
+          "b": 1.6227480948177888,
+          "b_converges": false,
+          "rho_living": 0.22945022049471692,
+          "living_converges": true,
+          "sppr_det": {
+            "type": "mapping",
+            "items": [
+              [
+                67,
+                -0.19173777570571543
+              ],
+              [
+                68,
+                -0.4079460866908749
+              ],
+              [
+                69,
+                0.0
+              ]
+            ]
+          },
+          "max_sppr_det": 0.0,
+          "max_sppr_group": {
+            "seq": 2,
+            "tl": 4.564281310863093,
+            "sppr": 2654.7320442433565,
+            "inv_te": 705.2000000000002
+          },
+          "max_tl_group": {
+            "seq": 3,
+            "tl": 4.872802065679302,
+            "sppr": -123.21142363084186,
+            "inv_te": 238.59555555555553
+          },
+          "n_negative_sources": 2,
+          "expect_negatives": true,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "FAIL",
+          "is_balanced": false,
+          "inflow": 2150.010358224,
+          "outflow": 455.4171431885133,
+          "rel_gap": 0.7881790934418068
+        },
+        "footprint": {
+          "ppr_all": 10.98490927021847,
+          "ppr_inner": 10.98490927021847,
+          "ppr_pp_only": 29.67564242331787,
+          "npp": 2150.00025,
+          "ppr2npp": 0.005109259531583064,
+          "ppr2npp_pp_only": 0.013802622777982408
+        },
+        "config": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "ee_floor_assumption": {
+            "use_ee_floor": true,
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {
+              "67": -609.8768074793328,
+              "68": -806.8160598509414,
+              "69": -0.4958617386195999
+            },
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "application_stage": "completed audited initialization",
+            "researcher_approval": "Original signed review is separate from this calculation assumption"
+          },
+          "TE_option": "With Egestion",
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "det_external_sppr": 0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "would_pool": false,
+          "model": "North Sea Rpath port (1991)"
+        },
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "Negative detritus stock residuals remain unexplained limitations, not evidenced source supply: {'67': -609.8768074793328, '68': -806.8160598509414, '69': -0.4958617386195999}",
+          "detritus recycling diverges: b=1.623 >= 1; the SPPR returned is not a convergent sum",
+          "2 basal source column(s) contain negative SPPR",
+          "PP balance gap 78.818% exceeds fail threshold 5.0%"
+        ]
+      },
+      "negative_entries": [
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 68,
+          "group_name": "DetritusPOMSediment",
+          "value": -0.4079460866908749,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 67,
+          "group_name": "DetritusDOMWaterColumn",
+          "value": -0.19173777570571543,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 65,
+          "group_name": "DivingSeabirds",
+          "value": -183.99277797695274,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 65,
+          "group_name": "DivingSeabirds",
+          "value": -60.628550058445946,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 64,
+          "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+          "value": -0.1665986873170488,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 64,
+          "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+          "value": -0.2060096882188257,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 63,
+          "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+          "value": -0.42557968493572296,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 63,
+          "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+          "value": -0.0959627134281813,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 62,
+          "group_name": "Meiofauna",
+          "value": -1.3359132701332241,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 62,
+          "group_name": "Meiofauna",
+          "value": -0.23990678357045328,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 61,
+          "group_name": "SessileEpifauna",
+          "value": -0.7928331938404365,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 61,
+          "group_name": "SessileEpifauna",
+          "value": -0.576827127012712,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 60,
+          "group_name": "SmallInfaunaPolychaetes",
+          "value": -1.4170400498409237,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 60,
+          "group_name": "SmallInfaunaPolychaetes",
+          "value": -0.34902231899581265,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 59,
+          "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+          "value": -1.2056317897789635,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 59,
+          "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+          "value": -0.3045628502898491,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 58,
+          "group_name": "Shrimp",
+          "value": -0.8327725160292836,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 58,
+          "group_name": "Shrimp",
+          "value": -0.24134910401683116,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 57,
+          "group_name": "InfaunalMacrobenthos",
+          "value": -1.4059269594010304,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 57,
+          "group_name": "InfaunalMacrobenthos",
+          "value": -0.34706223221294474,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 56,
+          "group_name": "EpifaunalMacrobenthosMobileGrazers",
+          "value": -4.080683720291468,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 56,
+          "group_name": "EpifaunalMacrobenthosMobileGrazers",
+          "value": -1.0584014882801052,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 55,
+          "group_name": "Nephrops",
+          "value": -3.816258649050292,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 55,
+          "group_name": "Nephrops",
+          "value": -1.1423442044883128,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 54,
+          "group_name": "LargeCrabs",
+          "value": -7.73778488623094,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 54,
+          "group_name": "LargeCrabs",
+          "value": -2.1245160581808964,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 53,
+          "group_name": "GelatinousZooplankton",
+          "value": -0.7005104905314918,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 53,
+          "group_name": "GelatinousZooplankton",
+          "value": -0.3326016666040482,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 52,
+          "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+          "value": -0.016840954261397322,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 52,
+          "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+          "value": -0.0402070805923721,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 51,
+          "group_name": "CarnivorousZooplankton",
+          "value": -0.4342890097930743,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 51,
+          "group_name": "CarnivorousZooplankton",
+          "value": -0.2399718193787414,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 50,
+          "group_name": "FishLarvae",
+          "value": -0.053891053636471446,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 50,
+          "group_name": "FishLarvae",
+          "value": -0.12866265789559073,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 49,
+          "group_name": "SquidAndCuttlefish",
+          "value": -2.775479395707833,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 49,
+          "group_name": "SquidAndCuttlefish",
+          "value": -0.919278446807771,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 48,
+          "group_name": "MiscellaneousFilterfeedingPelagicFish",
+          "value": -0.6082219298144849,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 48,
+          "group_name": "MiscellaneousFilterfeedingPelagicFish",
+          "value": -0.2721366147111069,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 47,
+          "group_name": "SmallDemersalFish",
+          "value": -4.405810283832005,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 47,
+          "group_name": "SmallDemersalFish",
+          "value": -1.2047051836111944,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 46,
+          "group_name": "LargeDemersalFish",
+          "value": -3.274635356523804,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 46,
+          "group_name": "LargeDemersalFish",
+          "value": -1.2323460977705687,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 45,
+          "group_name": "CatfishWolfFish",
+          "value": -10.729915687453826,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 45,
+          "group_name": "CatfishWolfFish",
+          "value": -2.802460443320751,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 44,
+          "group_name": "Dragonets",
+          "value": -6.175865415270511,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 44,
+          "group_name": "Dragonets",
+          "value": -1.5594158433093197,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 43,
+          "group_name": "Halibut",
+          "value": -33.93728933322251,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 43,
+          "group_name": "Halibut",
+          "value": -10.325972903177576,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 42,
+          "group_name": "Megrim",
+          "value": -4.993399956911541,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 42,
+          "group_name": "Megrim",
+          "value": -1.576222812248063,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 41,
+          "group_name": "Turbot",
+          "value": -5.697979809536482,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 41,
+          "group_name": "Turbot",
+          "value": -1.5840799797766232,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 40,
+          "group_name": "Witch",
+          "value": -5.559062803518148,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 40,
+          "group_name": "Witch",
+          "value": -1.4318891128974787,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 39,
+          "group_name": "LemonSole",
+          "value": -5.695562936462417,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 39,
+          "group_name": "LemonSole",
+          "value": -1.7130772329605668,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 38,
+          "group_name": "Sole",
+          "value": -4.503510535109922,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 38,
+          "group_name": "Sole",
+          "value": -0.9959229170815211,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 37,
+          "group_name": "Flounder",
+          "value": -8.418011037521296,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 37,
+          "group_name": "Flounder",
+          "value": -2.3503448401184373,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 36,
+          "group_name": "LongRoughDab",
+          "value": -12.005603349662483,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 36,
+          "group_name": "LongRoughDab",
+          "value": -3.1209516952180008,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 35,
+          "group_name": "Dab",
+          "value": -9.860949545152575,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 35,
+          "group_name": "Dab",
+          "value": -2.5394792237894026,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 34,
+          "group_name": "Plaice",
+          "value": -5.550671934749032,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 34,
+          "group_name": "Plaice",
+          "value": -1.4227286739634795,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 33,
+          "group_name": "Sandeels",
+          "value": -0.7446134630049617,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 33,
+          "group_name": "Sandeels",
+          "value": -0.24620812538829817,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 32,
+          "group_name": "HorseMackerel",
+          "value": -4.041513530294521,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 32,
+          "group_name": "HorseMackerel",
+          "value": -1.6115600036597355,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 31,
+          "group_name": "Mackerel",
+          "value": -1.50506711194921,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 31,
+          "group_name": "Mackerel",
+          "value": -0.5796588827513192,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 30,
+          "group_name": "Sprat",
+          "value": -0.05582466586089266,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 30,
+          "group_name": "Sprat",
+          "value": -0.09775713115849817,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 29,
+          "group_name": "AduHerring",
+          "value": -0.7397388040726898,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 29,
+          "group_name": "AduHerring",
+          "value": -0.46628978729167647,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 28,
+          "group_name": "JuvHerring",
+          "value": -1.3568425403813615,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 28,
+          "group_name": "JuvHerring",
+          "value": -0.7644195360758109,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 27,
+          "group_name": "Gurnards",
+          "value": -6.595616265012127,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 27,
+          "group_name": "Gurnards",
+          "value": -1.886600272923923,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 26,
+          "group_name": "Monkfish",
+          "value": -6.643326048373581,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 26,
+          "group_name": "Monkfish",
+          "value": -2.0397833098404243,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 25,
+          "group_name": "OtherSmallGadoids",
+          "value": -2.638205356118549,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 25,
+          "group_name": "OtherSmallGadoids",
+          "value": -0.7234952676997142,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 24,
+          "group_name": "OtherLargeGadoids",
+          "value": -3.2068388219071036,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 24,
+          "group_name": "OtherLargeGadoids",
+          "value": -1.1093134039892205,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 23,
+          "group_name": "NorwayPout",
+          "value": -0.839793315256907,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 23,
+          "group_name": "NorwayPout",
+          "value": -0.30909508829055693,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 22,
+          "group_name": "BlueWhiting",
+          "value": -1.8326340540564767,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 22,
+          "group_name": "BlueWhiting",
+          "value": -0.7504540687663436,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 21,
+          "group_name": "Hake",
+          "value": -4.32870725775778,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 21,
+          "group_name": "Hake",
+          "value": -1.6782737702969128,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 20,
+          "group_name": "AduSaithe",
+          "value": -2.9287240608968097,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 20,
+          "group_name": "AduSaithe",
+          "value": -1.2116324851304612,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 19,
+          "group_name": "JuvSaithe",
+          "value": -3.2949576294972482,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 19,
+          "group_name": "JuvSaithe",
+          "value": -1.4440197388277378,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 18,
+          "group_name": "AduHaddock",
+          "value": -3.1972988476281947,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 18,
+          "group_name": "AduHaddock",
+          "value": -0.8994891929108675,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 17,
+          "group_name": "JuvHaddock",
+          "value": -5.198610441760838,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 17,
+          "group_name": "JuvHaddock",
+          "value": -1.4093364502558696,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 16,
+          "group_name": "AduWhiting",
+          "value": -7.041745715577163,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 16,
+          "group_name": "AduWhiting",
+          "value": -2.2182180347978404,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 15,
+          "group_name": "JuvWhiting",
+          "value": -8.872928177857323,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 15,
+          "group_name": "JuvWhiting",
+          "value": -2.6251738893415877,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 14,
+          "group_name": "AduCod",
+          "value": -13.079434791439438,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 14,
+          "group_name": "AduCod",
+          "value": -3.5979748658537067,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 13,
+          "group_name": "JuvCod",
+          "value": -8.041704225981086,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 13,
+          "group_name": "JuvCod",
+          "value": -2.2848235494418434,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 12,
+          "group_name": "SkateCuckooRay",
+          "value": -9.029067891457286,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 12,
+          "group_name": "SkateCuckooRay",
+          "value": -2.5078005000453802,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 11,
+          "group_name": "ThornbackAndSpottedRay",
+          "value": -10.759875539467817,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 11,
+          "group_name": "ThornbackAndSpottedRay",
+          "value": -2.928251637678144,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 10,
+          "group_name": "StarryRayOthers",
+          "value": -5.2889349618602095,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 10,
+          "group_name": "StarryRayOthers",
+          "value": -1.4695576786650928,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 9,
+          "group_name": "JuvenileRays",
+          "value": -3.933110505398787,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 9,
+          "group_name": "JuvenileRays",
+          "value": -1.0869285570428668,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 8,
+          "group_name": "SmallSharks",
+          "value": -14.834189612492926,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 8,
+          "group_name": "SmallSharks",
+          "value": -4.072527546499158,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 7,
+          "group_name": "LargePiscivorousSharks",
+          "value": -12.694531642768784,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 7,
+          "group_name": "LargePiscivorousSharks",
+          "value": -3.7211209254864324,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 6,
+          "group_name": "Spurdog",
+          "value": -9.380056525399672,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 6,
+          "group_name": "Spurdog",
+          "value": -3.0245475736690723,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 5,
+          "group_name": "JuvenileSharks",
+          "value": -9.973164884863209,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 5,
+          "group_name": "JuvenileSharks",
+          "value": -2.8014913123904748,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 4,
+          "group_name": "SurfaceFeedingSeabirds",
+          "value": -205.7540453901759,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 4,
+          "group_name": "SurfaceFeedingSeabirds",
+          "value": -68.2474240894908,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 3,
+          "group_name": "Seals",
+          "value": -1079.9079884494981,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 3,
+          "group_name": "Seals",
+          "value": -309.35545704074354,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 2,
+          "group_name": "ToothedWhales",
+          "value": -1451.7525120622315,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 2,
+          "group_name": "ToothedWhales",
+          "value": -491.18189221311405,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 68,
+          "source_name": "DetritusPOMSediment",
+          "group_id": 1,
+          "group_name": "BaleenWhales",
+          "value": -358.1572889588594,
+          "comparison_tolerance": 0
+        },
+        {
+          "source_id": 67,
+          "source_name": "DetritusDOMWaterColumn",
+          "group_id": 1,
+          "group_name": "BaleenWhales",
+          "value": -147.3199204161501,
+          "comparison_tolerance": 0
+        }
+      ],
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "negative_source_count": 2,
+        "diagnostic_negative_count": 2,
+        "mask_counts": {
+          "null": 0,
+          "nan": 0,
+          "positive_infinity": 0,
+          "negative_infinity": 0
+        },
+        "unique_axes": true
+      },
+      "exception": null,
+      "reconciliation": {
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true,
+        "rtol": 1e-12,
+        "atol": 1e-12
+      },
+      "annual_status": {
+        "all": "FAIL: negative SPPR in a source-model group",
+        "inner": "FAIL: negative SPPR in a source-model group",
+        "PP": "FAIL: negative SPPR in a source-model group"
+      },
+      "evidence": {
+        "path": "new_WithEgestion.json.gz",
+        "sha256": "41fd7739e51787b5be7bb527ebcf29b06415e549bc4ea286b59c6fd10ca4bdc1",
+        "availability": "present"
+      }
+    }
+  ],
+  "canonical_unchanged": true
+}

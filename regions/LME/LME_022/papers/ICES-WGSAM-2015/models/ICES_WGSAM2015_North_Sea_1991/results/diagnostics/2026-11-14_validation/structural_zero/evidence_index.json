@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-11-14_160000_validation_structural_zero",
+  "region_id": "LME_022",
+  "model_id": "ICES_WGSAM2015_North_Sea_1991",
+  "variant_id": "current_standard_loader_nonfeeding_import_structural_zero_ee_floor_0.1",
+  "source_identity": {
+    "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a"
+  },
+  "computational_input_identity": {
+    "model_id": "ICES_WGSAM2015_North_Sea_1991",
+    "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+    "variant_id": "current_standard_loader_nonfeeding_import_structural_zero_ee_floor_0.1",
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": false,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "flags": {
+      "constructor": {
+        "underdetermined": false,
+        "zero_catch": false,
+        "zero_biomass_accum": false,
+        "default_gs": false,
+        "normalize_DC": false,
+        "DC_tol": 0.001,
+        "balance_BA_after_DC_normalization": false,
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1
+      },
+      "diagnostics": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1,
+        "det_external_sppr": 0
+      },
+      "method_timeout_seconds": 180
+    },
+    "engine_hashes": {
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "PPRCalculator.py": "4c8ec0d0c275c6053892b89d526c7191f1c7755376ff1785cc3cb7dfb2ea7a4a",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "create_PPRS_excel.py": "1b327cd0ae3887010b68f7265a24fecefd1bc00d54ba54cd026c22162f3a6737"
+    },
+    "adaptation": "Exactly four nonfeeding DC synthetic-import cells (66–69,70) NaN→0 on an ephemeral copy. Source missingness is preserved. No producer fate/routing/TL/BA/canonical edits.",
+    "original_attempt": "../summary.json"
+  },
+  "methods": [
+    "new_GE",
+    "new_TE_EEfix",
+    "new_WithEgestion"
+  ],
+  "required_roles": [
+    "canonical_model",
+    "constructor",
+    "direct_GE",
+    "direct_TE",
+    "direct_WithEgestion",
+    "negative_entries",
+    "negative_groups",
+    "report_ready",
+    "summary",
+    "adaptation_verification"
+  ],
+  "artifacts": [
+    {
+      "path": "../../../../model.json",
+      "role": "canonical_model",
+      "availability": "present",
+      "sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a"
+    },
+    {
+      "path": "constructor.json.gz",
+      "role": "constructor",
+      "availability": "present",
+      "sha256": "1c897ac581fffbc018c8c07e12e6e0266a8a9b168e5d67b94b089a0583dcba92"
+    },
+    {
+      "path": "new_GE.json.gz",
+      "role": "direct_GE",
+      "availability": "present",
+      "sha256": "404a6ee27e2b20f17a78d8451f36d14a6f2d67284f26edb9baea3d2cef2a3931"
+    },
+    {
+      "path": "new_TE_EEfix.json.gz",
+      "role": "direct_TE",
+      "availability": "present",
+      "sha256": "9bfce015240973994d7e09392af64b094ec3fa2bc1378052d68cd34fd6b555ca"
+    },
+    {
+      "path": "new_WithEgestion.json.gz",
+      "role": "direct_WithEgestion",
+      "availability": "present",
+      "sha256": "41fd7739e51787b5be7bb527ebcf29b06415e549bc4ea286b59c6fd10ca4bdc1"
+    },
+    {
+      "path": "negative_entries.tsv",
+      "role": "negative_entries",
+      "availability": "present",
+      "sha256": "064675c8e00bc3fedd757b1b059eee1c2c231a7acf39317c5e297b94c0deb0d2"
+    },
+    {
+      "path": "negative_source_groups.json",
+      "role": "negative_groups",
+      "availability": "present",
+      "sha256": "e8612b67adca36ff90e1323efd31018615db236f6c1f8a8b686a20ab03f4bb91"
+    },
+    {
+      "path": "report_ready.json",
+      "role": "report_ready",
+      "availability": "present",
+      "sha256": "415bd17898b3cc5e26ecd522dbc8d9b8ceae4740118a12e28bdc17468452b85c"
+    },
+    {
+      "path": "summary.json",
+      "role": "summary",
+      "availability": "present",
+      "sha256": "50093802e2781e76779f84f93bb48a28aca654edb57763a4f15dafa753e769ff"
+    },
+    {
+      "role": "adaptation_verification",
+      "path": "adaptation_verification.json",
+      "sha256": "447037febc7f822c5fece62da1b77e952d5bb1208c634398af16b9df7b95d76b",
+      "availability": "present"
+    }
+  ],
+  "reconciliation": {
+    "canonical_unchanged": true,
+    "all_requested_methods_returned": true,
+    "all_source_matrices_unique_finite": true,
+    "negative_counts_match": true,
+    "scope_sums_match": true,
+    "raw_modeldata_groups_preserved": true,
+    "raw_modeldata_fate_preserved": true,
+    "four_declared_nonfeeding_cells_only": true,
+    "protected_runtime_fields_identical": true,
+    "derived_group_changes_TL_only": true
+  }
+}

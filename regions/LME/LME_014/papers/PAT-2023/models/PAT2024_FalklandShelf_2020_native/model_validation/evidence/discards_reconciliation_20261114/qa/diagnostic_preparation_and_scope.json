@@ -1,0 +1,20 @@
+{
+  "run_id": "2026-11-14_152912_discards_reconciliation",
+  "preparation_attempt": {
+    "stage": "restore completed state and apply floor, before any GE/TE call",
+    "outcome": "AttributeError: older serialized state omitted n_balance_runs bookkeeping counter",
+    "resolution": "Initialized n_balance_runs=0 in the model-local runner; no shared engine or scientific parameter change",
+    "scientific_method_calls_in_failed_attempt": 0
+  },
+  "completed_scope": {
+    "scenarios": ["control_no_returns", "source_exact_returns_to_36"],
+    "methods_per_scenario": ["GE", "TE"],
+    "method_calls": 4,
+    "floor": "ON 0.1, threshold 0.1; applied once per fresh restored scenario",
+    "source_BA0_check": "Arithmetic comparison holding canonical catch/export mapping fixed; no extra solve and not a diagnosis of the original native Ecopath model",
+    "native_Export_boundary": "Native EcopathGroup.Export is recorded separately. Its negative value for Discards is not converted to an observed import or fishery catch; canonical group.export remains unchanged.",
+    "detritus_BA_boundary": "Audited legacy closure BA is retained in the restored pre-floor state. The pinned EE-floor implementation intentionally recomputes effective detritus BA as stock residual. Native source BA=0, audited pre-floor closure BA, and floor-effective residual are distinct provenance layers; this is not classified as an engine defect or a pending patch.",
+    "units_boundary": "Source paper/S4 report t/km² for the 2020 model; annual flow comparisons are expressed as t/km²/year. The wet-weight wording in the executed runner's pool-budget metadata identifies the project's assumed runtime convention, not an independently verified explicit source biomass-type statement. The executed runner and numerical return bytes are preserved unchanged; human-facing values should use t/km²/year with this source/convention distinction.",
+    "publication": "No canonical model, selected workbook, coefficient workbook, snapshot, review adoption, Project, map or trends update"
+  }
+}

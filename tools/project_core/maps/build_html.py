@@ -5,7 +5,7 @@ from pathlib import Path
 from tools.project_core.workbooks.workbooks import sha,records
 from tools.project_core.maps.original_atlas_data import datasets,add_group_efficiencies,add_group_catch
 from tools.project_core.maps.provisional_display import provisional_layout
-from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,review_display,_register_review,table_rows,unavailable_review_model,calculation_review_book,attach_payload_review
+from tools.project_core.validation.researcher_review import reviewed_layout,approved_review,review_display,_register_review,table_rows,unavailable_review_model,calculation_review_book,attach_payload_review,review_group_sequences
 from tools.project_core.maps.map_cumulative_ppr import cumulative_ppr_layout
 from tools.project_core.maps.available_results_layout import available_results_layout
 from tools.project_core.maps.group_catch_layout import group_catch_layout
@@ -45,24 +45,40 @@ def atomic_text(path,text):
 
 def atomic_bytes(path,data):
     from tools.project_core.registry.publication import publication_write
+    import time
+    path=Path(path)
+    def fingerprint():return sha(path) if path.is_file() else None
+    original=fingerprint();expected=hashlib.sha256(data).hexdigest()
     path.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(dir=path.parent,suffix=path.suffix);os.close(fd)
     try:
         Path(tmp).write_bytes(data)
-        with publication_write(path,fingerprint=hashlib.sha256(data).hexdigest()):os.replace(tmp,path)
+        for attempt in range(6):
+            replaced=False
+            try:
+                with publication_write(path,fingerprint=expected):
+                    if fingerprint()!=original:raise ValueError('Publication target changed during replacement retry: '+str(path))
+                    os.replace(tmp,path)
+                    replaced=True
+                break
+            except PermissionError as error:
+                # Retry only failed Windows replacements, never a post-write
+                # guard failure, a changed target, or another permission error.
+                if replaced:raise
+                if fingerprint()!=original:raise ValueError('Publication target changed during replacement retry: '+str(path)) from error
+                if getattr(error,'winerror',None) not in {5,32,33} or attempt==5:raise
+                time.sleep(.2*(2**attempt))
     finally:
         if os.path.exists(tmp):os.unlink(tmp)
 
+
 def relayout(workbook,directory=None,group_efficiencies=False,group_catch=False):
-    """Validate retained data first, then complete registered method coverage."""
+    """Refresh saved-data presentation without scientific method inventory."""
     from tools.project_core.registry.writes import central_lock
     from tools.project_core.registry.publication import publication_transaction
     workbook=Path(workbook).resolve()
     with central_lock(workbook.parent):
         _relayout(workbook,directory,group_efficiencies,group_catch,publish=False)
         with publication_transaction(workbook.parent) as publication:
-            changed=_prepare_coverage(workbook.parent,publication)
-            if changed:
-                return _build(workbook,directory,changed)
             return _relayout(workbook,directory,group_efficiencies,group_catch)
 
 
@@ -98,19 +114,16 @@ def _relayout(workbook,directory=None,group_efficiencies=False,group_catch=False
     additions=('stored group GE/EE added; ' if group_efficiencies else '')+('stored group catch metadata added; ' if group_catch else '')
     print('Map and trends layouts refreshed; '+(additions or 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
 
-def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
+def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,model_pairs=None,candidate_rows=()):
     """Publish exact model reviews under the shared writer lock; keep map defaults."""
     from tools.project_core.registry.writes import central_lock
     from tools.project_core.registry.publication import publication_transaction
     with central_lock(workbook.resolve().parent):
-        _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,publish=False)
+        _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,model_pairs=model_pairs,candidate_rows=candidate_rows,publish=False)
         with publication_transaction(workbook.resolve().parent) as publication:
-            changed=_prepare_coverage(workbook.resolve().parent,publication)
-            if changed:
-                return _build(workbook,directory,changed|set(unit_ids))
-            return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids)
+            return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,model_pairs=model_pairs,candidate_rows=candidate_rows)
 
-def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,publish=True):
+def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,model_pairs=None,candidate_rows=(),publish=True):
     """Refresh only registered review metadata after a bounded central registration.
 
     The pre-registration workbook is required evidence that all other central
@@ -122,8 +135,18 @@ def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_
     # would unnecessarily traverse the complete scientific results archive.
     with zipfile.ZipFile(workbook) as archive:
         newrows={(r['unit_id'],r['model_id']):r for _,r in table_rows(archive,'Models & coverage','Models')[3]}
+    if model_pairs is not None:
+        if unit_ids or model_ids:raise ValueError('Use exact model_pairs or legacy unit_ids/model_ids, not both')
+        pairs=[tuple(pair) for pair in model_pairs]
+        if any(len(pair)!=2 or not all(isinstance(v,str) and v for v in pair) for pair in pairs):raise ValueError('Invalid exact review pair')
+    else:
+        pairs=[(unit,(model_ids or {}).get(unit)) for unit in unit_ids]
+    if not pairs or len(set(pairs))!=len(pairs):raise ValueError('Require unique nonempty review scope')
+    candidate_keys=[(item['row']['unit_id'],item['row']['model_id']) for item in candidate_rows]
+    if len(set(candidate_keys))!=len(candidate_keys) or not set(candidate_keys)<=set(pairs):
+        raise ValueError('Candidate insertions must be unique exact reviewed pairs')
     reviews={};registrations=[];review_books={}
-    for unit_id in unit_ids:
+    for unit_id,requested_model_id in pairs:
         # The approval gate needs only source identity settings and group IDs;
         # avoid traversing the regional workbook's complete result tables.
         book={}
@@ -135,7 +158,7 @@ def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_
                 headers=list(rows[0][1]) if rows else (headers or [])
                 book.setdefault(sheet,{})[table]=(headers,[[r.get(h) for h in headers] for _,r in rows])
         from tools.project_core.workbooks.workbooks import overview
-        model_id=(model_ids or {}).get(unit_id) or overview(book).get('selected_model_id');key=(unit_id,model_id)
+        model_id=requested_model_id or overview(book).get('selected_model_id');key=(unit_id,model_id)
         if key not in newrows:raise ValueError('Review refresh cannot add a model')
         review=approved_review(root,newrows[key],book)
         if not review:raise ValueError('Review refresh requires a registered researcher decision: '+unit_id)
@@ -144,7 +167,8 @@ def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_
         if review.get('review_scope') != 'model_source':book=calculation_review_book(root,newrows[key],book)
         groups=records(book,'Selected model groups','Groups')
         excluded=review['excluded_group_ids']
-        seq=[int(float(r['seq'])) for r in groups if r['group_name'] in excluded]
+        identities=review_group_sequences(groups) if excluded else {}
+        seq=[value for name,value in identities.items() if name in excluded]
         if len(seq)!=len(excluded):raise ValueError('Approved exclusions do not resolve uniquely')
         registrations.append((root/newrows[key]['validation_report_path'],unit_id,model_id,seq))
     # Replay the exact bounded registration against the prior workbook, then
@@ -156,6 +180,12 @@ def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_
     fd,expected=tempfile.mkstemp(prefix='.review-refresh-',suffix='.xlsx',dir=root);os.close(fd)
     try:
         shutil.copyfile(previous_workbook,expected)
+        from tools.project_core.registry.review_candidates import add_review_candidate
+        for item in candidate_rows:
+            key=(item['row']['unit_id'],item['row']['model_id'])
+            if reviews[key].get('status')!='Disqualified by researcher' or reviews[key].get('review_scope')!='model_source':
+                raise ValueError('New review-only candidate requires a source-only disqualification')
+            add_review_candidate(Path(expected),root,item['row'],item['canonical_sha256'])
         for report,unit_id,model_id,seq in registrations:
             # Replay writes only this isolated temporary copy; the outer lock
             # already serializes the real Project and HTML publication.
@@ -199,11 +229,11 @@ def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_
     for path,page in outputs:atomic_text(path,page)
     print('Map and trends researcher metadata refreshed; all other embedded data preserved.',flush=True)
 
-def _prepare_coverage(root,publication):
-    """Extend authorized model methods before any central/page inputs are read."""
+def _prepare_coverage(root,publication,*,units=None,model_pairs=None,all_validated=False):
+    """Explicit scoped scientific route, separate from saved-data rendering."""
     from tools.project_core.calculations.coverage import ensure_validated_coverage
     from tools.project_core.registry.update_project import _update
-    coverage=ensure_validated_coverage(root,lock_held=True)
+    coverage=ensure_validated_coverage(root,lock_held=True,units=units,model_pairs=model_pairs,all_validated=all_validated)
     publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
     changed=set(coverage['changed_units'])
     if changed:
@@ -219,23 +249,24 @@ def build(workbook,output=None,only_units=None,*,lock_held=False):
         with central_lock(workbook.parent):return build(workbook,output,only_units,lock_held=True)
     from tools.project_core.registry.publication import publication_transaction
     with publication_transaction(workbook.parent) as publication:
-        changed=_prepare_coverage(workbook.parent,publication)
-        if only_units:only_units=set(only_units)|changed
         return _build(workbook,output,only_units)
 
 
 def ensure_map_publication(root):
-    """A launcher may reuse its server only after coverage and pages are current."""
+    """Refresh saved publication data when needed; never run scientific inventory."""
     from tools.project_core.registry.writes import central_lock
     from tools.project_core.registry.publication import publication_transaction
     root=Path(root).resolve();workbook=root/'Project.xlsx';directory=root/'interactive_map'
     with central_lock(root),publication_transaction(root) as publication:
-        changed=_prepare_coverage(root,publication)
+        changed=set()
         fingerprint=sha(workbook)
         pages=[directory/name for name in ['index.html','trends.html']]
         current=all(page.is_file() and f'<meta name="ppr-project-sha256" content="{fingerprint}">' in page.read_text(encoding='utf-8') for page in pages)
-        if current and publication.models:
-            changed.update(_stale_reviewed_payload_units(root,directory,publication.models))
+        if current:
+            with zipfile.ZipFile(workbook) as archive:
+                reviewed=[row for _,row in table_rows(archive,'Models & coverage','Models')[3]
+                          if row.get('researcher_review_status') == 'Validated by researcher']
+            if reviewed:changed.update(_stale_reviewed_payload_units(root,directory,reviewed))
         if changed or not current or not (directory/'sources.html').is_file():
             _build(workbook,None,changed if changed and all(page.is_file() for page in pages) else None)
 

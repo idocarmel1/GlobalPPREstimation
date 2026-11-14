@@ -1,0 +1,42 @@
+{
+  "fields": {
+    "Model extraction": "Source reconciliation and round-trip checks support the deposited Rpath port. Missing source inputs were completed only from deposited outputs: biomass for 8 groups, Q/B for 11 and EE for 61. Static source budgets balance, with five P/Q range warnings.\nThe repaired shared loader retains published phytoplankton routing, explicit zero detritus-fate rows, source TL and catch. Four missing import-diet cells for nonfeeding groups use a documented structural-zero convention. No source parameters or diets were changed.\nPublished fleet discards return 0.49945 t/km²/year to Discards (69). Accounting now includes their donor PPR once and separates internal returns from external removals. The former negative detritus coefficients and large PP-budget failure disappear under the stated runtime assumptions.",
+    "GE diagnostics": "WARN — convergent and balanced, with high detritus cost and recycling sensitivity.\nNo negative entries; all 350 values in the complete 70 × 5 source matrix are finite.\nrho_living = 0.28944; b = 0.88221.\nDetritus SPPR: DetritusDOMWaterColumn (67) = 3.4625; DetritusPOMSediment (68) = 5.3449; Discards (69) = 440.27.\nPP-budget relative gap = 1.24 × 10⁻¹³. Unnormalized source diet sums differ from 1 by up to 8.33 × 10⁻⁵, exceeding the diagnostic tolerance.",
+    "TE diagnostics": "WARN — convergent and balanced, with high detritus cost and near-zero transfer efficiencies.\nNo negative entries; all 350 values in the complete 70 × 5 source matrix are finite.\nrho_living = 0.57345; b = 0.15550 for the coupled discard-return system.\nDetritus SPPR: DOM (67) = 0.42946; POM (68) = 0.44308; Discards (69) = 816.39. PP-budget relative gap = 4.59 × 10⁻¹⁴.\nNear-zero TE: BaleenWhales (1), ToothedWhales (2), Seals (3), SurfaceFeedingSeabirds (4) and DivingSeabirds (65). The source diet-sum warning also remains.",
+    "Other": "With Egestion: WARN; no negative or nonfinite entries. rho_living = 0.22945; b = 0.91516. Detritus SPPR: DOM (67) = 5.5808, POM (68) = 7.1126, Discards (69) = 182.04. PP-budget relative gap = 5.18 × 10⁻¹⁴; high detritus cost and recycling sensitivity remain.\nAll three runs use EE floor 0.1: a hypothetical external nonfishery sink of 1.9837 t/km²/year across eight living groups. Source BA remains zero; effective detritus stock residuals are DOM 152.69, POM 125.21 and Discards 0.003590 t/km²/year. This runtime closure and detritus EE = 1 convention are not observed accumulation or recovered native export. No diet normalization, pooling or open-detritus adjustment was used."
+  },
+  "recommendation": "Recommend retaining ICES North Sea 1991 as the selected candidate for further validation. The repaired implementation now converges with finite, nonnegative results and a closed PP budget in all three methods, and its declared domain covers substantially more of LME_022 than Scotland. This supersedes the provisional Scotland preference based on the faulty ICES runtime. ICES still has material sensitivity warnings, runtime closure assumptions, no exact-model catch mapping and no recovered native Key Run database; it is not yet ready for an approved regional PPR estimate.",
+  "comparison_rows": [
+    [
+      "Spatial and temporal fit",
+      "1991; approximately 87% of LME_022 covered by the declared ICES domain.",
+      "1991–1995; approximately 40% of LME_022 covered. Source-map sensitivity: 37–42%; subregional Scottish shelf/fleet domain."
+    ],
+    [
+      "Source interpretation",
+      "69 ecological groups. Deposited port differs from the native Key Run. Source parameters retained; shared routing and discard-return accounting repaired. Runtime EE-floor closure remains an assumption.",
+      "25 ecological groups. Saved runtime uses diet normalization, GS defaults and residual BA completion. Source landings exclude discards, while regional total catch includes them."
+    ],
+    [
+      "GE",
+      "Fresh WARN. All 350 source–group entries finite and nonnegative. rho_living = 0.28944; b = 0.88221. PP budget closes; high detritus cost and recycling sensitivity remain.",
+      "Saved OK. No negative entries in the full 26 × 3 source matrix. rho_living = 0.2121; b = 0.06995; Detritus (25) SPPR = 1.0833."
+    ],
+    [
+      "TE",
+      "Fresh WARN. All 350 source–group entries finite and nonnegative. rho_living = 0.57345; b = 0.15550. PP budget closes; high Discards cost and five near-zero TE groups remain.",
+      "Saved FAIL, reproduced in a separate reconstruction; rho_living = 1.1128. Negative pairs: Phytoplankton (1) → Seabirds (22), −1,916,160.32; Detritus (25) → Seabirds (22), −460,709.19. Detritus (25) SPPR = 0.81045. The unfished seabird row remains part of the diagnostic."
+    ],
+    [
+      "Regional mapping",
+      "No adopted crosswalk or allocation retained for any of 384 catch labels. All remain unassessed in this appendix.",
+      "Existing appendix covers the same 384 labels: 99 High, 160 Medium, 3 Low, 110 Very low and 12 Unresolved. Its decisions belong to this comparator only. Very low decisions account for 3.8% of simple-chain PPR; unresolved labels account for 0.0034%."
+    ],
+    [
+      "With Egestion and readiness",
+      "Fresh WARN; finite, nonnegative and balanced. b = 0.91516 signals recycling sensitivity. Regional Ecopath PPR remains unavailable without exact-model mapping and assessment of the runtime assumptions.",
+      "Saved With Egestion OK. A separate trial removed seabird self-feeding and redistributed its diet: TE became WARN (rho_living = 0.27574; no negatives), with a remaining 1.7% PP-budget gap. This changed-diet trial is separate from the canonical baseline."
+    ]
+  ],
+  "comparison_note": "The candidates were not tested under common settings. Scotland retains its historical configured results; a separate reconstruction and diet-change trial are distinguished above. ICES uses the repaired shared engine and EE floor 0.1. This report update does not change selection or register a researcher decision. Three other registered models were screened only: Scotland 1890–1895 and two Mackinson 2007 representations. "
+}

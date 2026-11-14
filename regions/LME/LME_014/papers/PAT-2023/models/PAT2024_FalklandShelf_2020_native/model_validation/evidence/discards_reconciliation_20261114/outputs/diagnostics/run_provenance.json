@@ -1,0 +1,53 @@
+{
+  "run_id": "2026-11-14_152912_discards_reconciliation",
+  "timestamp": "2026-11-14T15:40:50.344671+00:00",
+  "model_id": "PAT2024_FalklandShelf_2020_native",
+  "canonical_model_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+  "prior_state_path": "../../../../evidence/ee_floor_on_review/initialization_and_floor.json",
+  "prior_state_sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+  "source_ledger_path": "../source/source_fisheries_ledger.json",
+  "source_ledger_sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+  "engine_hashes": {
+    "PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+    "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "engine_paths": {
+    "PPRCalculator.py": "../../code/engine/PPRCalculator.py",
+    "ModelData.py": "../../code/engine/ModelData.py",
+    "utils.py": "../../code/engine/utils.py"
+  },
+  "script_path": "../../code/run_discard_comparison.py",
+  "script_sha256": "af00d4607ec44730400d4c9509f8b81519212dddb92781d66dcf514f55eedf24",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "effective_thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "diagnostic_settings": {
+    "short": false,
+    "flat": false,
+    "return_sppr": true,
+    "det_collapse_mode": "never",
+    "det_open_mode": "none"
+  },
+  "floor": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "applications_per_scenario": 1
+  },
+  "scope": "GE/TE no-return and native source-return comparisons only; no model/workbook/report/Project/map/trends adoption"
+}

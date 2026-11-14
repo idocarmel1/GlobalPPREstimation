@@ -1,0 +1,49 @@
+{
+  "title": "North Sea ICES model validation draft",
+  "comparison_intro": "Both candidates now have convergent, finite, nonnegative results in all three reviewed formulations. ICES represents more of the North Sea, while the corrected Scotland variant has fewer diagnostic warnings and a signed researcher review. Their settings and runtime assumptions differ, so the diagnostic grades alone do not establish which model is preferable. The ICES mapping below is a proposal for review; the existing selection is not a new joint choice.",
+  "comparison_rows": [
+    [
+      "Spatial and temporal fit",
+      "1991; approximately 87% of LME_022 covered by the declared ICES domain. Applying it to 2019 catch transfers a 28-year-old baseline.",
+      "1991–1995; approximately 37–42% of LME_022 covered. The Scottish shelf/fleet domain is narrower than the regional catch universe."
+    ],
+    [
+      "Source and runtime assumptions",
+      "69 ecological groups. Deposited Rpath port differs from the unavailable native Key Run. Source parameters retained; EE floor 0.1 and effective detritus stock residuals remain runtime assumptions.",
+      "25 ecological groups. Source JSON retained. Authorized derived variant removes only seabird self-feeding, redistributes the remaining prey and recomputes 13 proven loader-derived biomass-accumulation entries. Source landings exclude discards."
+    ],
+    [
+      "GE",
+      "WARN; no negative or nonfinite source–group entries. rho_living = 0.28944; b = 0.88221. PP budget closes; high detritus cost and recycling sensitivity remain.",
+      "Corrected variant: OK; no negative or nonfinite source–group entries. rho_living = 0.21209. Both strict balance checks pass."
+    ],
+    [
+      "TE",
+      "WARN; no negative or nonfinite source–group entries. rho_living = 0.57345. High Discards cost and near-zero TE in five bird/mammal groups remain.",
+      "Corrected variant: WARN; rho_living = 0.27574. No negative or nonfinite entries; both strict balance checks pass. Near-zero TE remains for Seabirds, Seals and Cetaceans."
+    ],
+    [
+      "Regional mapping",
+      "MAPPING_SUMMARY_PENDING",
+      "384 labels: 99 High, 160 Medium, 3 Low, 110 Very low and 12 Unresolved. Very low decisions account for 3.8% of simple-chain PPR; unresolved labels account for 0.0034%. These are Scotland-specific decisions."
+    ],
+    [
+      "With Egestion",
+      "WARN; finite, nonnegative and PP-balanced. rho_living = 0.22945; b = 0.91516. Recycling sensitivity remains.",
+      "Corrected variant: OK; finite and nonnegative. rho_living = 0.16967. Both strict balance checks pass."
+    ],
+    [
+      "Researcher review",
+      "Awaiting researcher review of this report and proposed mappings.",
+      "Ido Carmel signed MODEL VALIDATED on 14/11/2026. Groups removed from calculation: Seabirds, Seals, Cetaceans. Exact reason: All due to GE<0.01."
+    ]
+  ],
+  "comparison_note": "Scotland's corrected diagnostics use the pinned historical engine with the EE floor OFF and retain every group; they precede the signed exclusions. ICES uses the repaired engine with the EE floor ON at 0.1. The Scotland signature does not show that those groups were deleted from the trophic network or that saved coefficients changed. Broader geography, source fidelity, sensitivity and mapping confidence should be weighed together after this ICES review.",
+  "fields": {
+    "GE diagnostics": "WARN — convergent, with high detritus cost and recycling sensitivity.\nNo negative SPPR entries across the basal-source columns; all 350 entries are finite.\nrho_living = 0.28944; b = 0.88221.\nDetritus SPPR: DetritusDOMWaterColumn (67) = 3.4625; DetritusPOMSediment (68) = 5.3449; Discards (69) = 440.27.\nPP budget closes (relative gap 1.24 × 10⁻¹³). Source diet sums differ from 1 by up to 8.33 × 10⁻⁵; the stricter diet-sum check does not pass.",
+    "TE diagnostics": "WARN — convergent, with high detritus cost and near-zero transfer efficiencies.\nNo negative SPPR entries across the basal-source columns; all 350 entries are finite.\nrho_living = 0.57345; b = 0.15550 for the coupled discard-return system.\nDetritus SPPR: DOM (67) = 0.42946; POM (68) = 0.44308; Discards (69) = 816.39. PP budget closes (relative gap 4.59 × 10⁻¹⁴).\nNear-zero TE: BaleenWhales (1), ToothedWhales (2), Seals (3), SurfaceFeedingSeabirds (4) and DivingSeabirds (65). The source diet-sum warning also remains.",
+    "Temporal fit": "Static base state: 1991; the report's time-series calibration spans 1991–2013. Applying the port to 2019 catch is a 28-year transfer of the baseline food web. Proposed model-catch allocations also transfer the 1991 composition to 2019 and would remain assumptions across the 1950–2019 catch series.",
+    "Other": "With Egestion: WARN; no negative or nonfinite entries. rho_living = 0.22945; b = 0.91516. Detritus SPPR: DOM (67) = 5.5808, POM (68) = 7.1126, Discards (69) = 182.04. PP-budget relative gap = 5.18 × 10⁻¹⁴; high detritus cost and recycling sensitivity remain.\nBoth strict balance checks pass for all three methods. All three runs use EE floor 0.1: a hypothetical external nonfishery sink of 1.9837 t/km²/year across eight living groups. Source BA remains zero; effective detritus stock residuals are DOM 152.69, POM 125.21 and Discards 0.003590 t/km²/year. This runtime closure and detritus EE = 1 convention are not observed accumulation or recovered native export. No diet normalization, pooling or open-detritus adjustment was used."
+  },
+  "proposal_label": "Pending-alignment draft: the following confidence summaries describe proposed ICES mappings. No ICES mappings are adopted in the regional workbook."
+}

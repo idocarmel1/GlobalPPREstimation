@@ -1,0 +1,207 @@
+{
+  "method_key": "new_TE_EEfix",
+  "execution_status": "returned",
+  "overall_status": "WARN",
+  "rho_living": 0.5620959658114131,
+  "b": 0.0,
+  "b_note": "TE convention, not evidence of absent recycling",
+  "detritus_sppr": [
+    {
+      "id": 93,
+      "name": "Detritus",
+      "sppr": 0.7789102600417561
+    }
+  ],
+  "negative_source_group_pairs": [],
+  "negative_source_columns": 0,
+  "nonfinite_entries": 0,
+  "matrix_shape": [
+    94,
+    3
+  ],
+  "source_columns": [
+    {
+      "id": 94,
+      "name": "diet_import"
+    },
+    {
+      "id": 93,
+      "name": "Detritus"
+    },
+    {
+      "id": 1,
+      "name": "phytoplankton"
+    }
+  ],
+  "model_input": {
+    "status": "OK",
+    "is_model_balanced": true,
+    "p_max_rel_residual": 4.3394468967112197e-16,
+    "q_max_rel_residual": 2.1926925158451112e-16,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 3.000000026176508e-09,
+    "n_negative_catch": 0,
+    "n_zero_catch": 59,
+    "total_catch": 2.1728714398,
+    "has_catch": true,
+    "has_ee_issues": false,
+    "n_ee0": 0,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [],
+    "ee_marginal_groups": [],
+    "diagnostic_basis": "effective calculation runtime",
+    "before_floor_ee0_groups": [
+      92,
+      91,
+      90,
+      89,
+      88,
+      87,
+      86,
+      80,
+      72,
+      71,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ],
+    "before_floor_ee_marginal_groups": [],
+    "external_mortality_export": 0.0039384086902333115,
+    "negative_detritus_stock_residuals": {}
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": true,
+    "inflow": 4028.2120682244563,
+    "outflow": 4028.2120682244545,
+    "rel_gap": 4.515624730620564e-16
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.0,
+    "b_converges": true,
+    "rho_living": 0.5620959658114131,
+    "living_converges": true,
+    "sppr_det": {
+      "type": "mapping",
+      "items": [
+        [
+          93,
+          0.7789102600417561
+        ]
+      ]
+    },
+    "max_sppr_det": 0.7789102600417561,
+    "max_sppr_group": {
+      "seq": 71,
+      "tl": 2.4954859981485153,
+      "sppr": 88875816.6278773,
+      "inv_te": 5851.838754002114
+    },
+    "max_tl_group": {
+      "seq": 77,
+      "tl": 4.399872432010036,
+      "sppr": 1054890.4747685331,
+      "inv_te": 1762.3563493356726
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      92,
+      91,
+      90,
+      89,
+      88,
+      87,
+      86,
+      85,
+      84,
+      83,
+      82,
+      77,
+      76,
+      75,
+      74,
+      72,
+      71,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ]
+  },
+  "warnings": [
+    "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+    "28 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 77, 76, 75, 74, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]"
+  ],
+  "strict_flags": {
+    "is_model_balanced": true,
+    "is_sppr_balanced": true,
+    "living_converges": true,
+    "b_converges": true
+  },
+  "sppr_weighted_external_sink_by_scope": {
+    "all": 988.8803879826892,
+    "inner": 980.3919978991382,
+    "PP": 744.7185390308188
+  },
+  "footprint_reconciliation": {
+    "ppr_all": {
+      "from_saved_source_sums_and_unchanged_catch": 1139.4618195885255,
+      "direct_report": 1139.4618195885255
+    },
+    "ppr_inner": {
+      "from_saved_source_sums_and_unchanged_catch": 1137.4520946718492,
+      "direct_report": 1137.4520946718494
+    },
+    "ppr_pp_only": {
+      "from_saved_source_sums_and_unchanged_catch": 866.1207924053697,
+      "direct_report": 866.1207924053696
+    }
+  },
+  "state_unchanged_by_method": true,
+  "full_return": "TE_full_return.json.gz",
+  "elapsed_seconds": 61.255358800059184,
+  "call": {
+    "TE_option": "TE",
+    "short": false,
+    "flat": false,
+    "return_sppr": true,
+    "thresholds": {
+      "b_warn": 0.7,
+      "b_fail": 1.0,
+      "rho_living_warn": 0.7,
+      "rho_living_fail": 1.0,
+      "sppr_det_warn": 10.0,
+      "balance_warn": 0.01,
+      "balance_fail": 0.05,
+      "model_balance_warn": 0.0001,
+      "model_balance_fail": 0.1,
+      "dc_row_tol": 1e-06,
+      "ee_marginal": 0.001
+    },
+    "DET_TE_vals": 1,
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "fix_EE_0_cases": true
+  }
+}

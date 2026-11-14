@@ -1,0 +1,411 @@
+{
+  "model_id": "50_502013_Coastal_Kyoto_Inoue_(2013)",
+  "canonical_sha256": "a3b008c0add95db106f9e10cf90907cc7f1f9d2ab1425cbf615745142e27330e",
+  "source": "regions/LME/LME_050/papers/SOJ-2023/models/50_502013_Coastal_Kyoto_Inoue_(2013)/model.json",
+  "new_evidence": "regions/LME/LME_050/papers/SOJ-2023/models/50_502013_Coastal_Kyoto_Inoue_(2013)/model_validation/evidence/ee_floor_on",
+  "execution_description": "Fresh current-engine direct GE/TE diagnostics after verified OFF initialization parity; not an ee_floor_v1 pinned-engine upgrade or proof of algorithm equivalence",
+  "historical_ee_floor_provenance": "not recorded; archived engine predates floor support",
+  "current_ee_floor_v1_compatibility": false,
+  "flags": {
+    "constructor": {
+      "underdetermined": true,
+      "zero_catch": true,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "DC_tol": 0.001,
+      "normalize_DC": true,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1,
+      "refresh_missing_biomass_accum": false
+    },
+    "diagnostics": {
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0
+    },
+    "method_timeout_seconds": 180.0
+  },
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "b3286abb1749b7b760a8198c4c2d269eed88ca352f5858fa8499c76cf2756105",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1"
+  },
+  "floor_info": {
+    "affected_groups": [
+      34,
+      30,
+      22
+    ],
+    "application_stage": "completed audited initialization",
+    "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "external_mortality_export_total": 0.2645200000000001,
+    "negative_detritus_stock_residuals": {},
+    "researcher_approval": "Original signed review is separate from this calculation assumption",
+    "use_ee_floor": true
+  },
+  "methods": {
+    "GE": {
+      "execution_status": "ok",
+      "reason": "",
+      "diagnostic": {
+        "balance": {
+          "inflow": 1844.312981010216,
+          "is_balanced": true,
+          "outflow": 1844.312990343126,
+          "rel_gap": 5.060372216350646e-09,
+          "status": "OK"
+        },
+        "config": {
+          "TE_option": "GE",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0.0,
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              34,
+              30,
+              22
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 0.2645200000000001,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "single_detritus",
+          "model": "Coastal_Kyoto_Inoue (2013)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "divergence": {
+          "b": 0.030557407678224173,
+          "b_converges": true,
+          "expect_negatives": false,
+          "living_converges": true,
+          "max_sppr_det": 1.3598920240747432,
+          "max_sppr_group": {
+            "inv_te": 12.846153846153845,
+            "seq": 11,
+            "sppr": 88.4349235807123,
+            "tl": 2.977351154913768
+          },
+          "max_tl_group": {
+            "inv_te": 4.035714285714285,
+            "seq": 12,
+            "sppr": 23.89161913674325,
+            "tl": 3.208475247524752
+          },
+          "n_negative_sources": 0,
+          "near_singular_te": [],
+          "rho_living": 0.1060445412871091,
+          "solve_error": null,
+          "sppr_det": {
+            "40": 1.3598920240747432
+          },
+          "status": "OK"
+        },
+        "footprint": {
+          "npp": 1801.7325999999998,
+          "ppr2npp": 0.037663476485241446,
+          "ppr2npp_pp_only": 0.036134810617973134,
+          "ppr_all": 83.09541016607079,
+          "ppr_inner": 67.85951341279292,
+          "ppr_pp_only": 65.10526628522834
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            30
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 2.220446049250313e-16,
+          "dc_rows_sum_to_1": true,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 0.2645200000000001,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 13,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 5.962865252844114e-07,
+          "q_max_rel_residual": 9.540584404550583e-08,
+          "status": "OK",
+          "total_catch": 3.999627
+        },
+        "status": "OK",
+        "warnings": []
+      },
+      "evidence": "new_GE.json.gz",
+      "matrix_check": {
+        "shape": [
+          41,
+          3
+        ],
+        "row_ids": [
+          41,
+          40,
+          39,
+          38,
+          37,
+          36,
+          35,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "source_ids": [
+          41,
+          40,
+          39
+        ],
+        "all_entries_finite": true,
+        "strict_negative_tolerance": 0.0,
+        "negative_pairs": [],
+        "negative_source_count": 0,
+        "matrix_minimum": 0.0,
+        "matrix_maximum": 50.85298914440945,
+        "negative_source_count_agrees_with_diagnostic": true
+      },
+      "detritus_sppr_named": [
+        {
+          "id": "40",
+          "name": "Detritus",
+          "sppr": 1.3598920240747432
+        }
+      ],
+      "negative_pairs": []
+    },
+    "TE": {
+      "execution_status": "ok",
+      "reason": "",
+      "diagnostic": {
+        "balance": {
+          "inflow": 1844.312981010216,
+          "is_balanced": true,
+          "outflow": 1844.3132328186477,
+          "rel_gap": 1.3653237514745383e-07,
+          "status": "OK"
+        },
+        "config": {
+          "TE_option": "TE",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0.0,
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              34,
+              30,
+              22
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 0.2645200000000001,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": null,
+          "model": "Coastal_Kyoto_Inoue (2013)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "divergence": {
+          "b": 0.0,
+          "b_converges": true,
+          "expect_negatives": false,
+          "living_converges": true,
+          "max_sppr_det": 0.6730282167674374,
+          "max_sppr_group": {
+            "inv_te": 30.14403292181069,
+            "seq": 8,
+            "sppr": 2530.2613663251063,
+            "tl": 2.7202337589303607
+          },
+          "max_tl_group": {
+            "inv_te": 5.310150375939849,
+            "seq": 12,
+            "sppr": 141.07942369402974,
+            "tl": 3.208475247524752
+          },
+          "n_negative_sources": 0,
+          "near_singular_te": [],
+          "rho_living": 0.2461420246947113,
+          "solve_error": null,
+          "sppr_det": {
+            "40": 0.6730282167674374
+          },
+          "status": "OK"
+        },
+        "footprint": {
+          "npp": 1801.7325999999998,
+          "ppr2npp": 0.4987370704853712,
+          "ppr2npp_pp_only": 0.48785146303305177,
+          "ppr_all": 940.7179563206728,
+          "ppr_inner": 898.590838721991,
+          "ppr_pp_only": 878.9778849043441
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            30
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 2.220446049250313e-16,
+          "dc_rows_sum_to_1": true,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 0.2645200000000001,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 13,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 5.962865252844114e-07,
+          "q_max_rel_residual": 9.540584404550583e-08,
+          "status": "OK",
+          "total_catch": 3.999627
+        },
+        "status": "OK",
+        "warnings": [
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)"
+        ]
+      },
+      "evidence": "new_TE_EEfix.json.gz",
+      "matrix_check": {
+        "shape": [
+          41,
+          3
+        ],
+        "row_ids": [
+          41,
+          40,
+          39,
+          38,
+          37,
+          36,
+          35,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "source_ids": [
+          41,
+          40,
+          39
+        ],
+        "all_entries_finite": true,
+        "strict_negative_tolerance": 0.0,
+        "negative_pairs": [],
+        "negative_source_count": 0,
+        "matrix_minimum": 0.0,
+        "matrix_maximum": 2394.552402796769,
+        "negative_source_count_agrees_with_diagnostic": true
+      },
+      "detritus_sppr_named": [
+        {
+          "id": "40",
+          "name": "Detritus",
+          "sppr": 0.6730282167674374
+        }
+      ],
+      "negative_pairs": []
+    }
+  },
+  "source_scopes": {
+    "all": "All basal-source contributions",
+    "inner": "All except synthetic Import",
+    "PP": "All except synthetic Import and detritus"
+  },
+  "adoption": "Report evidence only; no workbook, map, trends, selection or researcher review registration changes"
+}

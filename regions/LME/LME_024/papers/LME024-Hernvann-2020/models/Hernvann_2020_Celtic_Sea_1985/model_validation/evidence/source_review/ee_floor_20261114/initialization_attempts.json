@@ -1,0 +1,13 @@
+[
+  {
+    "stage": "pre_floor_preflight",
+    "executed_runner_sha256": "87045055884add7b274257fdb0dcce0a6e3586a63d64142b96c79c0c43680177",
+    "outcome": "AssertionError",
+    "reason": "Native _initialize_discard_returns reindexes columns to current group ordering [54,53] with column-axis name group_seq; historical return matrix is [53,54] with unnamed axis. Values and native all-flows Z match by group labels.",
+    "old_check": "same(historical.discard_return,current._discard_returns)",
+    "new_check": "assert set(historical.discard_return.columns)==set(current._discard_returns.columns)\nassert_frame_equal(historical.discard_return,current._discard_returns.reindex(index=historical.discard_return.index,columns=historical.discard_return.columns),check_exact=True,check_names=False)\nchecks['return_matrix_values_exact_after_explicit_label_alignment']=True",
+    "scientific_floor_applied": false,
+    "methods_executed": [],
+    "resolution": "Require equal identity sets, align only the comparison copy by those labels, compare exact cell values and missing masks. Runtime matrices unchanged."
+  }
+]

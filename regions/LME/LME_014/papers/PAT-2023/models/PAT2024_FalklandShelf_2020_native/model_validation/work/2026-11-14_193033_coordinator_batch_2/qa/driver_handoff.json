@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "Authored and statically reviewed; execution deferred to the next chat at the human request",
+  "timestamp_utc": "2026-11-14T18:18:57.073825+00:00",
+  "driver_path": "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/model_validation/work/2026-11-14_193033_coordinator_batch_2/code/combined_publication.py",
+  "driver_sha256": "aec8e65baa17d0c6a593aa536c6e6746b58bf2ed7d4ff7f1c9657ec3319be868",
+  "static_validation": {
+    "AST_syntax_passed": true,
+    "independent_reviewer": "scoped_coverage",
+    "independent_static_review": "PASS; no actionable driver issue",
+    "driver_import_or_execution_performed": false,
+    "preflight_performed": false,
+    "production_performed": false
+  },
+  "exact_scope": [
+    "LME_003",
+    "LME_014",
+    "LME_037"
+  ],
+  "gate_order": [
+    "LME_003",
+    "LME_014",
+    "LME_037"
+  ],
+  "remaining_registration": [
+    "LME_014",
+    "LME_037"
+  ],
+  "excluded_from_batch": [
+    "LME_026",
+    "LME_022"
+  ],
+  "pinned_promotion_count": 19,
+  "project_baseline_sha256": "9a3951c5e4342c3b8cc0ab2c0feccff9962aac3f91daf600e7a18a38e4c2e06b",
+  "expected_current_project_sha256": "c9fb86a34119987348e7a4e89536cd154209ee8d7fc8769a8e1791c3db48ef9c",
+  "blocking_prerequisite": {
+    "unit_id": "LME_037",
+    "kind": "Supported page provenance does not recognize authenticated flattened saved flags",
+    "evidence": "Overview effective_loader_flags has no constructor member, but explicitly records use_ee_floor=true, ee_floor=1.0, ee_threshold=0.1, stock_adapter_reconstructible=false. No standalone use_ee_floor/ee_floor settings and no Diagnostics/EE floor table.",
+    "current_behavior": "original_atlas_data.calculation_provenance reads nested constructor or standalone settings/summary and therefore omits this explicit flattened floor configuration; driver candidate semantics must fail until this is fixed.",
+    "smallest_proposed_change": "Read explicitly recorded flattened flags when nested constructor is absent; do not infer defaults or alter scientific values. A separate bounded shared-helper compatibility fix is required.",
+    "must_preserve": "LME037 regional and snapshot bytes SHA f8b78a3ca0bc1303f3b3a41cf1944c704df1a635a7c709246ec3a83057c94965; actual floor is 1.0 and eligibility threshold is 0.1, not a standard floor of 0.1."
+  },
+  "critical_assumptions": [
+    "Current Project remains the pinned already-LME003-registered workbook, and existing page fingerprints remain the pinned pre-batch baseline. Driver rejects changed identities.",
+    "All three reviewed wrapper/plan hashes and staged source bytes remain unchanged. Pins are embedded in the driver.",
+    "Static review is not an executed preflight. The next chat must run the isolated-copy --preflight after resolving LME037 provenance, inspect QA, then decide when to execute --publish within existing authorization.",
+    "No 22-method inventory, cache-completeness claim, fresh solve, MC, or constructor-floor assumption for LME003 is allowed.",
+    "Root reported current working-tree shared parser fixes for Review date capitalization (12 tests pass) and numbered near-zero TE list parsing (11 tests pass); this agent did not edit those parsers or rerun their tests."
+  ],
+  "entrypoints": {
+    "preflight": "python -B regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/model_validation/work/2026-11-14_193033_coordinator_batch_2/code/combined_publication.py --preflight",
+    "production": "python -B regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/model_validation/work/2026-11-14_193033_coordinator_batch_2/code/combined_publication.py --publish"
+  },
+  "qa_outputs": [
+    "qa/combined_preflight.json",
+    "qa/combined_publication.json"
+  ],
+  "progress_reporting": "UTC timestamp, elapsed seconds, per-stage status and exact failure stage",
+  "handoff_only": true
+}

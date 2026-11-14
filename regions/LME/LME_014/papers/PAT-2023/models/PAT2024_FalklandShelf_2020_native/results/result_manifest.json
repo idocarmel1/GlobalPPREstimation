@@ -3,25 +3,960 @@
   "unit_id": "LME_014",
   "model_id": "PAT2024_FalklandShelf_2020_native",
   "snapshot_selected_model_id": "PAT2024_FalklandShelf_2020_native",
-  "timestamp": "2026-10-03T23:03:47.725220+00:00",
-  "snapshot_sha256": "bfb742e13723c5523eab95cb32c3c175f93f2652877f0dee7c08545685954dbb",
+  "timestamp": "2026-11-14T17:55:45.363598+00:00",
   "canonical_model_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
   "present_canonical_model_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
-  "coefficient_source_sha256": "ade9217cf08d00f34346855cb53711e3a84c5daaac7a8474fd54ecd7edfadce6",
-  "effective_flags": null,
-  "code_identity": null,
-  "provenance_status": "unknown historical execution",
+  "snapshot_sha256": "b61e6984454d449f133198ee530c3f2e8543a4ab5b08ccfc27cff50676c21719",
+  "coefficient_source_sha256": "c0bc897066e1ffb918b66d6938f1fcb0facc7372bfda700ac9e544dafc5f277f",
+  "effective_flags": {
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": true,
+      "zero_biomass_accum": true,
+      "default_gs": true,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "diagnostics": {
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      }
+    },
+    "methods": {
+      "GE": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none"
+      },
+      "TE": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none"
+      }
+    },
+    "engine_sources": {
+      "PPRCalculator.py": "model_validation/evidence/discards_reconciliation_20261114/code/engine/PPRCalculator.py",
+      "ModelData.py": "model_validation/evidence/discards_reconciliation_20261114/code/engine/ModelData.py",
+      "utils.py": "model_validation/evidence/discards_reconciliation_20261114/code/engine/utils.py"
+    },
+    "engine_source_hashes": {
+      "PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+      "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "configuration_evidence": [
+      {
+        "relative_path": "model.json",
+        "sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/engine/ModelData.py",
+        "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/engine/PPRCalculator.py",
+        "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/engine/utils.py",
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/run_discard_comparison.py",
+        "sha256": "af00d4607ec44730400d4c9509f8b81519212dddb92781d66dcf514f55eedf24",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/run_provenance.json",
+        "sha256": "18cf62c4c54763b40fe05e47f034b3118a62bf732e8757d48efa4ee1bd6c5365",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+        "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/GE_full_return.json",
+        "sha256": "94b1f1cfeb03196293d67877b7b5dce51ac42e4c0fca1fb1eb262f6fe52c718a",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+        "sha256": "c92230f52720eea391d6a0582ecb0ff8d34febfebd53df43dd62dbab00491233",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/TE_full_return.json",
+        "sha256": "4e7e6d4c42026175b1df13baba0d8f18c4c9b942e856834bdc09113cd4c076f8",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_return_matrix.json",
+        "sha256": "da83f53d368e5b3e9a163d87c36ee0c7ee2de3651e995aef05be16c0a862c4d7",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/source/source_fisheries_ledger.json",
+        "sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/ee_floor_on_review/initialization_and_floor.json",
+        "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/evidence/researcher_review_20261114/adoption_handoff.json",
+        "sha256": "ac7dbd7962a319e3b1209e45d1ba9e8efae33e7660b758483fa9322735001464",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      },
+      {
+        "relative_path": "model_validation/validation.docx",
+        "sha256": "2854655b494fc8d9220c86962da02f043d9f1180a86dc9bb77d310787af072be",
+        "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+      }
+    ],
+    "runtime_initialization": {
+      "kind": "retained_scenario",
+      "configuration_id": "source_exact_returns_to_36",
+      "reexecution_supported": false,
+      "description": "Restored authenticated completed initialization; no loader rerun.",
+      "constructor_role": "Recorded completed initialization settings; this adoption does not invoke a loader",
+      "executed_runner": {
+        "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/run_discard_comparison.py",
+        "sha256": "af00d4607ec44730400d4c9509f8b81519212dddb92781d66dcf514f55eedf24"
+      },
+      "states": {
+        "audited_initialization": {
+          "relative_path": "model_validation/evidence/ee_floor_on_review/initialization_and_floor.json",
+          "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+          "json_pointer": null
+        },
+        "source_reconciled_pre_floor": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+          "sha256": "c92230f52720eea391d6a0582ecb0ff8d34febfebd53df43dd62dbab00491233",
+          "json_pointer": "/runtime"
+        },
+        "effective_runtime": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+          "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+          "json_pointer": "/runtime"
+        },
+        "effective_37_group_metadata": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+          "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+          "json_pointer": "/runtime/_groups_df"
+        },
+        "floor_ledger": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+          "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+          "json_pointer": "/runtime/ee_floor_ledger"
+        },
+        "floor_info": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+          "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+          "json_pointer": "/runtime/ee_floor_info"
+        },
+        "source_return_matrix": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_return_matrix.json",
+          "sha256": "da83f53d368e5b3e9a163d87c36ee0c7ee2de3651e995aef05be16c0a862c4d7",
+          "json_pointer": "/matrix"
+        },
+        "effective_return_matrix": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+          "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+          "json_pointer": "/runtime/_discard_returns"
+        },
+        "source_fisheries_ledger": {
+          "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/source/source_fisheries_ledger.json",
+          "sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+          "json_pointer": null
+        }
+      },
+      "fishery_return_destination": 36,
+      "fishery_return_total": 0.005859524956463247,
+      "floor_applications": 1,
+      "detritus_ids": [
+        35,
+        36
+      ]
+    }
+  },
+  "code_identity": {
+    "PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+    "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "provenance_status": "Authenticated retained GE/TE source_exact_returns_to_36 runtime; WithEgestion NOT_RUN here, original 111 coefficients archived with unknown historical execution identity; no engine equivalence or full inventory claim",
   "dependencies": {
     "catch": "d18725b468756546ab843c35f53d09babd11d0e0285b794c874c1a6ebe1740bc",
     "classic": "e6a56c5353a22db626043474457f2f959eee3c9f23a4026b60d21bb008282566",
     "npp": "3f54064a6ed8ff6c6757bb304839d4d932fb76acf81419ac713c19ea90230cd9",
     "matching": "7a6578b0f5e7b39bc7fa95a9c0df0343bed3c36e3596f5b53843b29b7a3eee99",
-    "groups": "da15b48295ff7c631d1264aa45a4c1260968407fdeaf58dfccee9c1a25d6f136",
+    "groups": "10d7f3cb2df88db64262f5625cd42f0fb670862ee02a589500c7b3074120ec47",
     "settings": "67b93aec94de97da5d2dffcd02aa558dd08216b4c15127182af54bcd2c4a4b3e"
   },
   "artifacts": {
     "snapshot": "regional_snapshot.xlsx",
     "model": "../model.json",
     "coefficients": "../sppr_source.xlsx"
+  },
+  "historical_package_backup": {
+    "regions/LME/LME_014/LME_014.xlsx": {
+      "relative_path": "model_validation/work/2026-11-14_193100_retained_adoption/inputs/pre_adoption/LME_014.xlsx",
+      "sha256": "0ee927120e19a7a0668efa144278fedb56f335b52cecf3ae4e6e089119c0037a"
+    },
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/sppr_source.xlsx": {
+      "relative_path": "model_validation/work/2026-11-14_193100_retained_adoption/inputs/pre_adoption/sppr_source.xlsx",
+      "sha256": "ade9217cf08d00f34346855cb53711e3a84c5daaac7a8474fd54ecd7edfadce6"
+    },
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/results/regional_snapshot.xlsx": {
+      "relative_path": "model_validation/work/2026-11-14_193100_retained_adoption/inputs/pre_adoption/regional_snapshot.xlsx",
+      "sha256": "bfb742e13723c5523eab95cb32c3c175f93f2652877f0dee7c08545685954dbb"
+    },
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/results/result_manifest.json": {
+      "relative_path": "model_validation/work/2026-11-14_193100_retained_adoption/inputs/pre_adoption/result_manifest.json",
+      "sha256": "702e08e0439eebda26cc6c9152666ca7602040c4afc9c58bf5270d8cd2254a56"
+    },
+    "historical_WithEgestion": {
+      "relative_path": "model_validation/work/2026-11-14_193100_retained_adoption/inputs/pre_adoption/historical_WithEgestion.json",
+      "sha256": "4042d7dec84758fb42f75125baa93d7d8bde8d609608c97c5b741fdb1f41a20b"
+    }
+  },
+  "retained_adoption": {
+    "handoff": {
+      "relative_path": "model_validation/evidence/researcher_review_20261114/adoption_handoff.json",
+      "sha256": "ac7dbd7962a319e3b1209e45d1ba9e8efae33e7660b758483fa9322735001464"
+    },
+    "approved_configuration": "source_exact_returns_to_36",
+    "executed_runtime_provenance": {
+      "path": "../discards_reconciliation_20261114/outputs/diagnostics/run_provenance.json",
+      "sha256": "18cf62c4c54763b40fe05e47f034b3118a62bf732e8757d48efa4ee1bd6c5365"
+    },
+    "provenance_path_base": "model_validation/evidence/researcher_review_20261114",
+    "context_roles": {
+      "method_coverage.context": "Current retained-evidence verification and arithmetic environment; not an SPPR execution claim",
+      "method_coverage.context.code_identity.create_PPRS_excel.py": "Current registry identity only; not the executed scientific runner",
+      "executed_numeric_engine": "code_identity plus handoff executed_runner and saved full-return provenance"
+    },
+    "source_group_metadata_preserved": true,
+    "runtime_group_metadata": {
+      "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+      "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+      "json_pointer": "/runtime/_groups_df"
+    },
+    "full_inventory_claim": false,
+    "stock_engine_equivalence_claim": false,
+    "scientific_execution_performed": false,
+    "counts": {
+      "imported_GE_TE": 222,
+      "changed_GE_TE_exact": 166,
+      "historical_WithE": 111,
+      "effective_groups": 37,
+      "floor_groups": 8,
+      "stock_constructor_and_loader_blocked": true
+    }
+  },
+  "method_coverage": {
+    "schema_version": 1,
+    "scope": "Only retained approved GE/TE and explicit current WithE unavailability; no full inventory",
+    "expected_methods": [
+      "new_GE",
+      "new_TE_EEfix",
+      "new_WithEgestion"
+    ],
+    "context": {
+      "model_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+      "flags": {
+        "constructor": {
+          "underdetermined": false,
+          "zero_catch": true,
+          "zero_biomass_accum": true,
+          "default_gs": true,
+          "normalize_DC": false,
+          "DC_tol": 0.001,
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1
+        },
+        "diagnostics": {
+          "det_collapse_mode": "never",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "thresholds": {
+            "b_warn": 0.7,
+            "b_fail": 1.0,
+            "rho_living_warn": 0.7,
+            "rho_living_fail": 1.0,
+            "sppr_det_warn": 10.0,
+            "balance_warn": 0.01,
+            "balance_fail": 0.05,
+            "model_balance_warn": 0.0001,
+            "model_balance_fail": 0.1,
+            "dc_row_tol": 1e-06,
+            "ee_marginal": 0.001
+          }
+        },
+        "methods": {
+          "GE": {
+            "det_collapse_mode": "never",
+            "det_open_mode": "none"
+          },
+          "TE": {
+            "det_collapse_mode": "never",
+            "det_open_mode": "none"
+          }
+        },
+        "engine_sources": {
+          "PPRCalculator.py": "model_validation/evidence/discards_reconciliation_20261114/code/engine/PPRCalculator.py",
+          "ModelData.py": "model_validation/evidence/discards_reconciliation_20261114/code/engine/ModelData.py",
+          "utils.py": "model_validation/evidence/discards_reconciliation_20261114/code/engine/utils.py"
+        },
+        "engine_source_hashes": {
+          "PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+          "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+          "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+        },
+        "configuration_evidence": [
+          {
+            "relative_path": "model.json",
+            "sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/engine/ModelData.py",
+            "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/engine/PPRCalculator.py",
+            "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/engine/utils.py",
+            "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/run_discard_comparison.py",
+            "sha256": "af00d4607ec44730400d4c9509f8b81519212dddb92781d66dcf514f55eedf24",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/run_provenance.json",
+            "sha256": "18cf62c4c54763b40fe05e47f034b3118a62bf732e8757d48efa4ee1bd6c5365",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+            "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/GE_full_return.json",
+            "sha256": "94b1f1cfeb03196293d67877b7b5dce51ac42e4c0fca1fb1eb262f6fe52c718a",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+            "sha256": "c92230f52720eea391d6a0582ecb0ff8d34febfebd53df43dd62dbab00491233",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/TE_full_return.json",
+            "sha256": "4e7e6d4c42026175b1df13baba0d8f18c4c9b942e856834bdc09113cd4c076f8",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_return_matrix.json",
+            "sha256": "da83f53d368e5b3e9a163d87c36ee0c7ee2de3651e995aef05be16c0a862c4d7",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/source/source_fisheries_ledger.json",
+            "sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/ee_floor_on_review/initialization_and_floor.json",
+            "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/evidence/researcher_review_20261114/adoption_handoff.json",
+            "sha256": "ac7dbd7962a319e3b1209e45d1ba9e8efae33e7660b758483fa9322735001464",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          },
+          {
+            "relative_path": "model_validation/validation.docx",
+            "sha256": "2854655b494fc8d9220c86962da02f043d9f1180a86dc9bb77d310787af072be",
+            "original_source_hash": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+          }
+        ],
+        "runtime_initialization": {
+          "kind": "retained_scenario",
+          "configuration_id": "source_exact_returns_to_36",
+          "reexecution_supported": false,
+          "description": "Restored authenticated completed initialization; no loader rerun.",
+          "constructor_role": "Recorded completed initialization settings; this adoption does not invoke a loader",
+          "executed_runner": {
+            "relative_path": "model_validation/evidence/discards_reconciliation_20261114/code/run_discard_comparison.py",
+            "sha256": "af00d4607ec44730400d4c9509f8b81519212dddb92781d66dcf514f55eedf24"
+          },
+          "states": {
+            "audited_initialization": {
+              "relative_path": "model_validation/evidence/ee_floor_on_review/initialization_and_floor.json",
+              "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+              "json_pointer": null
+            },
+            "source_reconciled_pre_floor": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+              "sha256": "c92230f52720eea391d6a0582ecb0ff8d34febfebd53df43dd62dbab00491233",
+              "json_pointer": "/runtime"
+            },
+            "effective_runtime": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+              "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+              "json_pointer": "/runtime"
+            },
+            "effective_37_group_metadata": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+              "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+              "json_pointer": "/runtime/_groups_df"
+            },
+            "floor_ledger": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+              "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+              "json_pointer": "/runtime/ee_floor_ledger"
+            },
+            "floor_info": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+              "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+              "json_pointer": "/runtime/ee_floor_info"
+            },
+            "source_return_matrix": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_return_matrix.json",
+              "sha256": "da83f53d368e5b3e9a163d87c36ee0c7ee2de3651e995aef05be16c0a862c4d7",
+              "json_pointer": "/matrix"
+            },
+            "effective_return_matrix": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+              "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+              "json_pointer": "/runtime/_discard_returns"
+            },
+            "source_fisheries_ledger": {
+              "relative_path": "model_validation/evidence/discards_reconciliation_20261114/outputs/source/source_fisheries_ledger.json",
+              "sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+              "json_pointer": null
+            }
+          },
+          "fishery_return_destination": 36,
+          "fishery_return_total": 0.005859524956463247,
+          "floor_applications": 1,
+          "detritus_ids": [
+            35,
+            36
+          ]
+        }
+      },
+      "code_identity": {
+        "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+        "PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+        "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1"
+      },
+      "adapter_sha256": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905",
+      "dependencies": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "sympy": "1.14.0",
+        "igraph": "1.0.0"
+      }
+    },
+    "methods": {
+      "new_GE": {
+        "status": "reused",
+        "reason": "Authenticated retained GE/TE full return; no fresh scientific execution; original diagnosis WARN",
+        "scopes": {
+          "all": {
+            "Baleen Whales": 43.7102299731536,
+            "Benthic Crustaceans": 13.401652286717704,
+            "Blue Whiting": 28.692602073131773,
+            "Dogfish": 447.69700334249416,
+            "Flounder": 43.34090470770468,
+            "Grenadier": 143.3394177441934,
+            "Hake Austral": 342.83569040815854,
+            "Hake Common": 78.62754254715772,
+            "Hoki": 53.61402076466143,
+            "I. argentinus": 12.44087232349409,
+            "Jellyfish": 8.987215237659576,
+            "Kelp": 1.0,
+            "Kingclip": 268.8697594982581,
+            "Large Demersal Fish": 155.0771756227449,
+            "Large Zoobenthos": 17.775155860388246,
+            "D. gahi ASC": 24.791006599446924,
+            "D. gahi SSC": 22.633278395338742,
+            "Myctophidae": 11.054894721892053,
+            "Octopods": 12.759503750038299,
+            "Pelagic Fish": 35.838819879402244,
+            "Penguins": 935.5932308231681,
+            "Phytoplankton": 1.0,
+            "Red Cod": 142.5070590490422,
+            "Rock Cod": 39.86760856150887,
+            "Seabirds": 576.4986411691808,
+            "Seals and Sea Lion": 1507.144711556867,
+            "Sharks": 1504.7022252270178,
+            "Skates": 101.45059722980248,
+            "Small Demersal Fish": 108.89272826344249,
+            "Small Zoobenthos": 4.901076401704012,
+            "Squid": 49.29964632187365,
+            "Toothed Whales and Dolphins": 392.56719166293806,
+            "Toothfish juv": 107.30234934670986,
+            "Zooplankton": 3.7742428205042087,
+            "Discards": 0.0,
+            "Detritus": 1.0915585657472304,
+            "diet_import": 1.0
+          },
+          "inner": {
+            "Baleen Whales": 43.7102299731536,
+            "Benthic Crustaceans": 13.401652286717704,
+            "Blue Whiting": 27.982532809965843,
+            "Dogfish": 434.2105082918055,
+            "Flounder": 42.84879344582739,
+            "Grenadier": 136.86555775624234,
+            "Hake Austral": 322.535611106857,
+            "Hake Common": 70.79194405903118,
+            "Hoki": 48.199824994765834,
+            "I. argentinus": 11.080898339086051,
+            "Jellyfish": 8.987215237659576,
+            "Kelp": 1.0,
+            "Kingclip": 252.5099286084044,
+            "Large Demersal Fish": 151.41301980963388,
+            "Large Zoobenthos": 17.775155860388246,
+            "D. gahi ASC": 21.72507785868512,
+            "D. gahi SSC": 20.176044886105156,
+            "Myctophidae": 7.846499755702787,
+            "Octopods": 12.201521922729354,
+            "Pelagic Fish": 35.838819879402244,
+            "Penguins": 872.4784057989964,
+            "Phytoplankton": 1.0,
+            "Red Cod": 137.22099852699344,
+            "Rock Cod": 39.00110658511164,
+            "Seabirds": 507.808135070232,
+            "Seals and Sea Lion": 1408.6737401106016,
+            "Sharks": 1394.8935835072323,
+            "Skates": 98.26651169522496,
+            "Small Demersal Fish": 107.42417901045951,
+            "Small Zoobenthos": 4.901076401704012,
+            "Squid": 46.631843869430256,
+            "Toothed Whales and Dolphins": 342.5648932231916,
+            "Toothfish juv": 103.99165139818325,
+            "Zooplankton": 3.7742428205042087,
+            "Discards": 0.0,
+            "Detritus": 1.0915585657472304,
+            "diet_import": 0.0
+          },
+          "PP": {
+            "Baleen Whales": 39.117497429438,
+            "Benthic Crustaceans": 6.904715353175983,
+            "Blue Whiting": 22.1481594913865,
+            "Dogfish": 257.3876058621631,
+            "Flounder": 24.137486758710047,
+            "Grenadier": 71.27597514472929,
+            "Hake Austral": 174.39765744563087,
+            "Hake Common": 45.898901411672306,
+            "Hoki": 28.372294405369136,
+            "I. argentinus": 7.760919158503528,
+            "Jellyfish": 7.916947970780831,
+            "Kelp": 1.0,
+            "Kingclip": 154.6288853753763,
+            "Large Demersal Fish": 85.37490818474517,
+            "Large Zoobenthos": 13.230302867629963,
+            "D. gahi ASC": 14.661413493028926,
+            "D. gahi SSC": 13.608333253715454,
+            "Myctophidae": 3.302168731758162,
+            "Octopods": 4.675041998022879,
+            "Pelagic Fish": 32.774261863214065,
+            "Penguins": 499.8856961417917,
+            "Phytoplankton": 1.0,
+            "Red Cod": 75.84441654427341,
+            "Rock Cod": 29.752171420486942,
+            "Seabirds": 326.0806179444312,
+            "Seals and Sea Lion": 978.4517636520751,
+            "Sharks": 952.623660968224,
+            "Skates": 55.29733263986555,
+            "Small Demersal Fish": 57.53041843718968,
+            "Small Zoobenthos": 1.3240069000467463,
+            "Squid": 27.942322331314188,
+            "Toothed Whales and Dolphins": 222.77945470833149,
+            "Toothfish juv": 58.93334120978052,
+            "Zooplankton": 3.365999910831451,
+            "Discards": 0.0,
+            "Detritus": 0.0,
+            "diet_import": 0.0
+          }
+        },
+        "annual_status": {
+          "all": "provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1",
+          "inner": "provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1",
+          "PP": "provisional: assumed size/stage allocations; see allocation ledger; refreshed diagnosis: provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1"
+        },
+        "retained_diagnostics_flat": {
+          "TE_option": "GE",
+          "status": "WARN",
+          "model_input_status": "WARN",
+          "model_input_is_model_balanced": true,
+          "model_input_p_max_rel_residual": 1.6724311166010748e-14,
+          "model_input_q_max_rel_residual": 1.0816376129758058e-15,
+          "model_input_dc_rows_sum_to_1": true,
+          "model_input_dc_max_deviation": 1.1856172932311893e-07,
+          "model_input_n_negative_catch": 0,
+          "model_input_n_zero_catch": 9,
+          "model_input_total_catch": 0.9408370594280631,
+          "model_input_has_catch": true,
+          "model_input_has_ee_issues": false,
+          "model_input_n_ee0": 0,
+          "model_input_n_ee_marginal": 0,
+          "model_input_n_ee_gt_1": 0,
+          "model_input_n_ee0_groups": 0,
+          "model_input_n_ee_marginal_groups": 0,
+          "model_input_diagnostic_basis": "effective calculation runtime",
+          "model_input_n_before_floor_ee0_groups": 1,
+          "model_input_n_before_floor_ee_marginal_groups": 0,
+          "model_input_external_mortality_export": 65.52118784337331,
+          "model_input_negative_detritus_stock_residuals_35": -0.20750363203745528,
+          "divergence_status": "OK",
+          "divergence_solve_error": null,
+          "divergence_b": 0.03885877929538839,
+          "divergence_b_converges": true,
+          "divergence_rho_living": 0.28190652555469514,
+          "divergence_living_converges": true,
+          "divergence_sppr_det_type": "mapping",
+          "divergence_sppr_det_n_items": 2,
+          "divergence_max_sppr_det": 1.0915585657472304,
+          "divergence_max_sppr_group_seq": 26,
+          "divergence_max_sppr_group_tl": 2.9951467706556603,
+          "divergence_max_sppr_group_sppr": 1507.144711556867,
+          "divergence_max_sppr_group_inv_te": 43.59499866373839,
+          "divergence_max_tl_group_seq": 33,
+          "divergence_max_tl_group_tl": 3.7240484677664725,
+          "divergence_max_tl_group_sppr": 107.30234934670986,
+          "divergence_max_tl_group_inv_te": 1.7094017721021928,
+          "divergence_n_negative_sources": 0,
+          "divergence_expect_negatives": false,
+          "divergence_n_near_singular_te": 0,
+          "balance_status": "OK",
+          "balance_is_balanced": true,
+          "balance_inflow": 971.6366492204323,
+          "balance_outflow": 971.6366492204327,
+          "balance_rel_gap": 3.510165177883e-16,
+          "footprint_ppr_all": 35.611467012724624,
+          "footprint_ppr_inner": 32.16418306316697,
+          "footprint_ppr_pp_only": 20.88586345794278,
+          "footprint_npp": 960.4455346019244,
+          "footprint_ppr2npp": 0.03348881524708015,
+          "footprint_ppr2npp_pp_only": 0.021746015474577992,
+          "config_use_ee_floor": true,
+          "config_ee_floor": 0.1,
+          "config_ee_threshold": 0.1,
+          "config_ee_floor_assumption_use_ee_floor": true,
+          "config_ee_floor_assumption_ee_floor": 0.1,
+          "config_ee_floor_assumption_ee_threshold": 0.1,
+          "config_ee_floor_assumption_n_affected_groups": 8,
+          "config_ee_floor_assumption_external_mortality_export_total": 65.52118784337331,
+          "config_ee_floor_assumption_negative_detritus_stock_residuals_35": -0.20750363203745528,
+          "config_ee_floor_assumption_assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+          "config_ee_floor_assumption_application_stage": "completed audited initialization",
+          "config_ee_floor_assumption_researcher_approval": "Original signed review is separate from this calculation assumption",
+          "config_TE_option": "GE",
+          "config_det_open_mode": "none",
+          "config_det_theta": 1.0,
+          "config_det_external_sppr": 0.0,
+          "config_det_collapse_mode": "never",
+          "config_explicit_TE": false,
+          "config_method": "multi_detritus",
+          "config_would_pool": false,
+          "config_model": "PAT2024_FalklandShelf_2020_native (2020)",
+          "n_warnings": 1
+        },
+        "evidence": {
+          "path": "retained_adoption_20261114/new_GE.json",
+          "sha256": "6ba0abc8d5aa0ec560d73ed9a4c3fb0af882ca7a8890500147d3d8a258157056",
+          "availability": "present"
+        },
+        "evidence_kind": "authenticated_retained_runtime_adoption",
+        "execution_annual_status": {
+          "PP": "provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1"
+        },
+        "group_rows_sha256": "938d60761f09d363b1f04eec2085f809618eeec4ffc405aee8faa7254edb0d1b"
+      },
+      "new_TE_EEfix": {
+        "status": "reused",
+        "reason": "Authenticated retained GE/TE full return; no fresh scientific execution; original diagnosis WARN",
+        "scopes": {
+          "all": {
+            "Baleen Whales": 610.0292325713976,
+            "Benthic Crustaceans": 19.295400318826704,
+            "Blue Whiting": 45.89392701228704,
+            "Dogfish": 6694.530631276282,
+            "Flounder": 610.2463069985718,
+            "Grenadier": 251.6751295175366,
+            "Hake Austral": 2335.8967671026508,
+            "Hake Common": 199.60650391036572,
+            "Hoki": 76.38337591643948,
+            "I. argentinus": 59.12394501043789,
+            "Jellyfish": 13.21831156044487,
+            "Kelp": 1.0,
+            "Kingclip": 456.62102651765906,
+            "Large Demersal Fish": 295.506456872566,
+            "Large Zoobenthos": 33.81091189821343,
+            "D. gahi ASC": 36.48394984370142,
+            "D. gahi SSC": 33.06095115597688,
+            "Myctophidae": 12.030005782570871,
+            "Octopods": 17.11343361414083,
+            "Pelagic Fish": 49.843585414029,
+            "Penguins": 2999.162228751745,
+            "Phytoplankton": 1.0,
+            "Red Cod": 250.87551609808912,
+            "Rock Cod": 57.440767803969074,
+            "Seabirds": 15827.119077851796,
+            "Seals and Sea Lion": 46409.27909992005,
+            "Sharks": 399525.3309755933,
+            "Skates": 193.19283493675877,
+            "Small Demersal Fish": 158.15375562522647,
+            "Small Zoobenthos": 6.303040993575145,
+            "Squid": 85.57464002962968,
+            "Toothed Whales and Dolphins": 9722.88044242812,
+            "Toothfish juv": 208.2676627950793,
+            "Zooplankton": 5.311371176039081,
+            "Discards": 0.0,
+            "Detritus": 0.9410691011626124,
+            "diet_import": 1.0
+          },
+          "inner": {
+            "Baleen Whales": 610.0292325713976,
+            "Benthic Crustaceans": 19.295400318826704,
+            "Blue Whiting": 45.00996098703287,
+            "Dogfish": 6535.136115492596,
+            "Flounder": 605.0432298861671,
+            "Grenadier": 243.54241870384703,
+            "Hake Austral": 2232.1372982978573,
+            "Hake Common": 184.3836160556149,
+            "Hoki": 70.6241078213045,
+            "I. argentinus": 54.399848932186444,
+            "Jellyfish": 13.21831156044487,
+            "Kelp": 1.0,
+            "Kingclip": 435.8769753864611,
+            "Large Demersal Fish": 289.7313262056368,
+            "Large Zoobenthos": 33.81091189821343,
+            "D. gahi ASC": 32.87895734184214,
+            "D. gahi SSC": 30.21202312673028,
+            "Myctophidae": 8.756133431810557,
+            "Octopods": 16.51409760613778,
+            "Pelagic Fish": 49.843585414029,
+            "Penguins": 2846.9377553692207,
+            "Phytoplankton": 1.0,
+            "Red Cod": 241.3558756660646,
+            "Rock Cod": 56.399673560961695,
+            "Seabirds": 14489.872742912223,
+            "Seals and Sea Lion": 43629.464370433816,
+            "Sharks": 374321.28992296034,
+            "Skates": 188.30544839106759,
+            "Small Demersal Fish": 156.57147463156807,
+            "Small Zoobenthos": 6.303040993575145,
+            "Squid": 81.7384675982346,
+            "Toothed Whales and Dolphins": 8859.30740232842,
+            "Toothfish juv": 203.36595772271093,
+            "Zooplankton": 5.311371176039081,
+            "Discards": 0.0,
+            "Detritus": 0.9410691011626124,
+            "diet_import": 0.0
+          },
+          "PP": {
+            "Baleen Whales": 553.4642582045378,
+            "Benthic Crustaceans": 11.821963071679622,
+            "Blue Whiting": 36.84588957469456,
+            "Dogfish": 4399.713834868091,
+            "Flounder": 393.6823610173443,
+            "Grenadier": 150.17043313316117,
+            "Hake Austral": 1429.336562481338,
+            "Hake Common": 135.14744047840594,
+            "Hoki": 47.53786671617762,
+            "I. argentinus": 41.048922748424076,
+            "Jellyfish": 11.844538298891445,
+            "Kelp": 1.0,
+            "Kingclip": 300.6457500352033,
+            "Large Demersal Fish": 189.24241271816078,
+            "Large Zoobenthos": 27.079588080866806,
+            "D. gahi ASC": 24.59990969900553,
+            "D. gahi SSC": 22.54537806687171,
+            "Myctophidae": 4.626888123211107,
+            "Octopods": 8.15698859631577,
+            "Pelagic Fish": 45.87276136840913,
+            "Penguins": 1900.2546843069106,
+            "Phytoplankton": 1.0,
+            "Red Cod": 159.98776519357088,
+            "Rock Cod": 45.6430128129569,
+            "Seabirds": 10606.387724067125,
+            "Seals and Sea Lion": 31734.89998447316,
+            "Sharks": 272449.77052183077,
+            "Skates": 122.85527128626208,
+            "Small Demersal Fish": 98.33510084923294,
+            "Small Zoobenthos": 2.486287435436012,
+            "Squid": 56.11776927932502,
+            "Toothed Whales and Dolphins": 6512.309440078993,
+            "Toothfish juv": 133.0888488918535,
+            "Zooplankton": 4.80857138307727,
+            "Discards": 0.0,
+            "Detritus": 0.0,
+            "diet_import": 0.0
+          }
+        },
+        "annual_status": {
+          "all": "provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1",
+          "inner": "provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1",
+          "PP": "provisional: assumed size/stage allocations; see allocation ledger; GE/TE WARN: separate Discards35 residual -0.20750363203745528; approved source returns once to Detritus36; EE floor ON 0.1"
+        },
+        "retained_diagnostics_flat": {
+          "TE_option": "TE",
+          "status": "WARN",
+          "model_input_status": "WARN",
+          "model_input_is_model_balanced": true,
+          "model_input_p_max_rel_residual": 1.6724311166010748e-14,
+          "model_input_q_max_rel_residual": 1.0816376129758058e-15,
+          "model_input_dc_rows_sum_to_1": true,
+          "model_input_dc_max_deviation": 1.1856172932311893e-07,
+          "model_input_n_negative_catch": 0,
+          "model_input_n_zero_catch": 9,
+          "model_input_total_catch": 0.9408370594280631,
+          "model_input_has_catch": true,
+          "model_input_has_ee_issues": false,
+          "model_input_n_ee0": 0,
+          "model_input_n_ee_marginal": 0,
+          "model_input_n_ee_gt_1": 0,
+          "model_input_n_ee0_groups": 0,
+          "model_input_n_ee_marginal_groups": 0,
+          "model_input_diagnostic_basis": "effective calculation runtime",
+          "model_input_n_before_floor_ee0_groups": 1,
+          "model_input_n_before_floor_ee_marginal_groups": 0,
+          "model_input_external_mortality_export": 65.52118784337331,
+          "model_input_negative_detritus_stock_residuals_35": -0.20750363203745528,
+          "divergence_status": "OK",
+          "divergence_solve_error": null,
+          "divergence_b": 0.001467371595623809,
+          "divergence_b_converges": true,
+          "divergence_rho_living": 0.30979371310957526,
+          "divergence_living_converges": true,
+          "divergence_sppr_det_type": "mapping",
+          "divergence_sppr_det_n_items": 2,
+          "divergence_max_sppr_det": 0.9410691011626124,
+          "divergence_max_sppr_group_seq": 27,
+          "divergence_max_sppr_group_tl": 2.8602631395354616,
+          "divergence_max_sppr_group_sppr": 399525.3309755933,
+          "divergence_max_sppr_group_inv_te": 106.25000535510503,
+          "divergence_max_tl_group_seq": 33,
+          "divergence_max_tl_group_tl": 3.7240484677664725,
+          "divergence_max_tl_group_sppr": 208.2676627950793,
+          "divergence_max_tl_group_inv_te": 2.011060851946783,
+          "divergence_n_negative_sources": 0,
+          "divergence_expect_negatives": false,
+          "divergence_n_near_singular_te": 0,
+          "balance_status": "OK",
+          "balance_is_balanced": true,
+          "balance_inflow": 971.6366492204323,
+          "balance_outflow": 971.6366492204323,
+          "balance_rel_gap": 0.0,
+          "footprint_ppr_all": 89.4135556062374,
+          "footprint_ppr_inner": 82.84500792107036,
+          "footprint_ppr_pp_only": 60.48699980450715,
+          "footprint_npp": 960.4455346019244,
+          "footprint_ppr2npp": 0.08625685157191877,
+          "footprint_ppr2npp_pp_only": 0.06297806343550463,
+          "config_use_ee_floor": true,
+          "config_ee_floor": 0.1,
+          "config_ee_threshold": 0.1,
+          "config_ee_floor_assumption_use_ee_floor": true,
+          "config_ee_floor_assumption_ee_floor": 0.1,
+          "config_ee_floor_assumption_ee_threshold": 0.1,
+          "config_ee_floor_assumption_n_affected_groups": 8,
+          "config_ee_floor_assumption_external_mortality_export_total": 65.52118784337331,
+          "config_ee_floor_assumption_negative_detritus_stock_residuals_35": -0.20750363203745528,
+          "config_ee_floor_assumption_assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+          "config_ee_floor_assumption_application_stage": "completed audited initialization",
+          "config_ee_floor_assumption_researcher_approval": "Original signed review is separate from this calculation assumption",
+          "config_TE_option": "TE",
+          "config_det_open_mode": "none",
+          "config_det_theta": 1.0,
+          "config_det_external_sppr": 0.0,
+          "config_det_collapse_mode": "never",
+          "config_explicit_TE": false,
+          "config_method": "multi_detritus",
+          "config_would_pool": false,
+          "config_model": "PAT2024_FalklandShelf_2020_native (2020)",
+          "n_warnings": 1
+        },
+        "evidence": {
+          "path": "retained_adoption_20261114/new_TE_EEfix.json",
+          "sha256": "29dc13f6d023d31939791688c8fbff0c52593f80f7acd99b08b3bc66978dfd29",
+          "availability": "present"
+        },
+        "evidence_kind": "authenticated_retained_runtime_adoption",
+        "group_rows_sha256": "ab0862e9e439459fd46494d80bac867d306facf262a8806b8a5681aaf7006a27"
+      },
+      "new_WithEgestion": {
+        "status": "NOT_RUN",
+        "reason": "NOT_RUN for approved source_exact_returns_to_36 runtime; original 111 WithEgestion coefficients and diagnostics are historical, not approved for this runtime, and retained exactly in the linked pre-adoption archive. No new solve or Monte Carlo was performed.",
+        "scopes": {
+          "all": {},
+          "inner": {},
+          "PP": {}
+        },
+        "annual_status": {
+          "all": "unavailable: NOT_RUN for approved source_exact_returns_to_36 runtime; original 111 WithEgestion coefficients and diagnostics are historical, not approved for this runtime, and retained exactly in the linked pre-adoption archive. No new solve or Monte Carlo was performed.",
+          "inner": "unavailable: NOT_RUN for approved source_exact_returns_to_36 runtime; original 111 WithEgestion coefficients and diagnostics are historical, not approved for this runtime, and retained exactly in the linked pre-adoption archive. No new solve or Monte Carlo was performed.",
+          "PP": "unavailable: NOT_RUN for approved source_exact_returns_to_36 runtime; original 111 WithEgestion coefficients and diagnostics are historical, not approved for this runtime, and retained exactly in the linked pre-adoption archive. No new solve or Monte Carlo was performed."
+        },
+        "evidence": {
+          "path": "retained_adoption_20261114/new_WithEgestion.json",
+          "sha256": "fef0da3e80dd47cd880c36ee5bdac9c3fcabe193ad045a11923d2fb062a9606d",
+          "availability": "present"
+        },
+        "evidence_kind": "historical_method_unavailable_in_current_runtime",
+        "group_rows_sha256": "41b4740706bf51c4d30508af592f9b2288350d8d583daa3abca1ff2bfd7b1e38"
+      }
+    },
+    "execution_evidence": {},
+    "arithmetic_code_identity": {
+      "calculations/coverage.py": "3c8fab7a6613ce6c5c2ec5b4e104aee8ef166615e0a5350792af609fa766a2c2",
+      "calculations/coverage_candidates.py": "13ec80b37a6ca9db0ffe4c4d5dbe976bae754c59eb8a7bd115b013a1d6a37577",
+      "calculations/ee_floor_migration.py": "c15cf338169264c817af2d6abc2b76ff0c143b07a9f1eec488e60dd5d32062a0",
+      "calculations/ee_floor_execution.py": "d5803f30f412fdbbd8a2626c395ed2a964a22b7dc57c37a423b646c3e4b9a040",
+      "calculations/regional.py": "65ea3deb0433fbafaeff31a3881dc0e1abf6274557c586210694e16f7210932f",
+      "workbooks/workbooks.py": "78782fdc8eea4a9ba88b545e4e0617f18dd0ae33e88cd01bd9a1daa5bc7a1de3"
+    },
+    "protected_inputs_sha256": "b921afbb539af8fa58b5b914a9dd629da24d9b270124ca201bb1eb1c0c881b6e"
   }
 }

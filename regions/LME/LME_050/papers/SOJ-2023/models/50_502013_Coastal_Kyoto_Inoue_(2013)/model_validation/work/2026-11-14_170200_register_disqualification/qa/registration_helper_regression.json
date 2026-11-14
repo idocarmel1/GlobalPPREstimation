@@ -1,0 +1,14 @@
+{
+  "root_cause": "The registrar evaluated legacy seq identifiers for an empty exclusion list; this regional workbook uses group_seq.",
+  "fix": "Skip identifier resolution when no exclusions are requested. Nonempty exclusion behavior is unchanged.",
+  "red_regression": "Confirmed KeyError: seq with group_seq fixture before the fix.",
+  "verification": "PASS",
+  "tests": 18,
+  "elapsed_seconds": 68.569,
+  "modules": [
+    "test_researcher_disqualification",
+    "test_researcher_review_absent_exclusion",
+    "test_review_scope"
+  ],
+  "fixture_scope": "Temporary workbooks and pages only; no actual map/trends publication."
+}

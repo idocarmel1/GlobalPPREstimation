@@ -1,0 +1,81 @@
+
+Command line options:
+
+ -M[x] 
+ Run mode x (x is 1 or 2 letter code).  Possible modes:
+   [o] One run:  Do one run (mainly for testing)
+   [f] Fitting:  Find max liklihood fit to data
+   [e] Sense Generate:  Generate a number of random ecosystems 
+	     and filter by non-death criterion.  Save surviving
+			 ecosystems in binary format files.
+   [i] Sense Report:  Take surviving ecosystems from previously
+	     generated sense set and report statistics (e.g. for
+			 making 95% CIs) 
+   
+ -O[path]/[file]  
+ set output path and filename base
+ 
+ -I[path]/[file]
+ for runmodes that take input files, input file path
+ 
+ -S[n] 
+ number [n] of random ecosystems to generate
+ 
+ -B[y]  
+ Years to run [y] in checking for system collapse for the sense generate [e]
+ mode
+ 
+ -R[n] 
+ Set random seed for code.  Unique values are 0 to 511
+ (anything outside this range is modulus 512)
+ 
+ -A[f]
+ Multiply biomass by area multiplier f to scale output
+ files (e.g. convert to tons or carbon)
+ 
+  -Vv[f]
+ 
+ -C[file]
+ Read in climate from .csv formatted [Climate file]
+ 
+ -J[file]
+ Read in juvenile parameters from .csv formatted [Juvenile file]
+ 
+ -F[file]
+ Read in timeseries fitting data from .csv formatted [Fitting file]
+ 
+ -P[file]
+ Read in functional response values (e.g. vulnerabilities)
+ from .csv formatted vector [Vector fitting file]
+ 
+ -K[file]
+ Read in fitting control .csv file (e.g. turn fitting on and 
+ off specific parameters for phased fitting) [Vector control file]
+ 
+ (Specify default behaviors for these)
+ Priorities from this workshop
+ 	1. Mediation
+  2. Annotate forcing function equations
+  
+  1.  Bettter data tracking
+  2.  Check for folder missing?
+  
+  SENSE notes
+     How to "not care" if a species goes extinct?
+     
+     VECTOR FILE
+     - All vectors are shown as deviations from initial center
+     P0 - PB 
+     P1 - Mzero
+     P2 - PreyHandle
+     P3 - PredHandle 
+     P4 - PreyX
+     P5 - PredX   
+     P6 - PreyExp
+     P7 - PredExp
+
+struct stat st;
+if(stat("/tmp",&st) == 0)
+        printf(" /tmp is present\n");
+
+     

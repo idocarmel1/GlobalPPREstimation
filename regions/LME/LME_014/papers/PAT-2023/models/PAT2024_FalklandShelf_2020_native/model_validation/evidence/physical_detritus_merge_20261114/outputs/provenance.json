@@ -1,0 +1,67 @@
+{
+  "variant_id": "PAT2024_FalklandShelf_2020_native__physical_merge_35_36_ee_floor_on",
+  "started_utc": "2026-11-14T16:39:13.391198+00:00",
+  "finished_utc": "2026-11-14T16:40:06.329389+00:00",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "engine_sha256": {
+    "PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+    "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "engine_location": "../../evidence/discards_reconciliation_20261114/code/engine",
+  "inputs": {
+    "canonical": {
+      "path": "../../../model.json",
+      "sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+    },
+    "pre_floor": {
+      "path": "../../evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+      "sha256": "c92230f52720eea391d6a0582ecb0ff8d34febfebd53df43dd62dbab00491233"
+    },
+    "separate_effective": {
+      "path": "../../evidence/discards_reconciliation_20261114/outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+      "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be"
+    },
+    "source_initialization": {
+      "path": "../../evidence/ee_floor_on_review/initialization_and_floor.json",
+      "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d"
+    }
+  },
+  "executed_runner": {
+    "path": "code/run_physical_merge.py",
+    "sha256": "48c03bfb6648637863e6a74faf64b3eb637d52b0981a88511b209745609c0ad8"
+  },
+  "methods": [
+    "GE",
+    "TE"
+  ],
+  "new_diagnostic_calls": 2,
+  "floor_application_count": 1,
+  "restored_persisted_scenario_for_calls": true,
+  "effective_state_sha256": "07f5f47ee16e4d184b8b2e8c023ae072c3a2cde567ee7e1cece272024f994fae",
+  "thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  },
+  "options": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "det_collapse_mode": "never",
+    "det_open_mode": "none"
+  },
+  "units": "Source model mass/area/year; t/km² during 2020, wet versus dry mass not explicitly established.",
+  "adoption": "None; canonical model, workbooks, map, trends, source views and researcher review preserved."
+}

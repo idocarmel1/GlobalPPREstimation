@@ -1,0 +1,1392 @@
+{
+  "model_id": "ICES_WGSAM2015_North_Sea_1991",
+  "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+  "canonical_unchanged": true,
+  "flags": {
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": false,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "diagnostics": {
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1,
+      "det_external_sppr": 0
+    },
+    "method_timeout_seconds": 180
+  },
+  "methods": [
+    {
+      "method": "new_GE",
+      "execution_status": "failed",
+      "reason": "Method execution or evidence reconciliation failed: KeyError: '[67, 68, 69] not found in axis'",
+      "diagnostic": {},
+      "exception": {
+        "message": "'[67, 68, 69] not found in axis'",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 543, in _run\n    result = getattr(model, settings['target'])(**settings['kwargs'])\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 1517, in diagnose_sppr\n    SPPR, A, L = self.SPPR_new(TE_option=TE_option, **sppr_kwargs)\n                 ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 3046, in SPPR_new\n    non_DET_sppr = SPPR.drop(columns=DET_seq).sum(axis=1)\n                   ~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\frame.py\", line 5603, in drop\n    return super().drop(\n           ~~~~~~~~~~~~^\n        labels=labels,\n        ^^^^^^^^^^^^^^\n    ...<5 lines>...\n        errors=errors,\n        ^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\generic.py\", line 4810, in drop\n    obj = obj._drop_axis(labels, axis, level=level, errors=errors)\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\generic.py\", line 4852, in _drop_axis\n    new_axis = axis.drop(labels, errors=errors)\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\indexes\\base.py\", line 7136, in drop\n    raise KeyError(f\"{labels[mask].tolist()} not found in axis\")\nKeyError: '[67, 68, 69] not found in axis'\n",
+        "type": "KeyError"
+      },
+      "constructor_outcome": null,
+      "negative_entries": [],
+      "matrix_checks": {},
+      "runtime_before_sha256": null,
+      "runtime_after_sha256": null,
+      "reconciliation": null,
+      "annual_status": {
+        "PP": "unavailable: failed",
+        "all": "unavailable: failed",
+        "inner": "unavailable: failed"
+      }
+    },
+    {
+      "method": "new_TE_EEfix",
+      "execution_status": "failed",
+      "reason": "Method execution or evidence reconciliation failed: KeyError: '[67, 68, 69] not found in axis'",
+      "diagnostic": {},
+      "exception": {
+        "message": "'[67, 68, 69] not found in axis'",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 543, in _run\n    result = getattr(model, settings['target'])(**settings['kwargs'])\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 1517, in diagnose_sppr\n    SPPR, A, L = self.SPPR_new(TE_option=TE_option, **sppr_kwargs)\n                 ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 3046, in SPPR_new\n    non_DET_sppr = SPPR.drop(columns=DET_seq).sum(axis=1)\n                   ~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\frame.py\", line 5603, in drop\n    return super().drop(\n           ~~~~~~~~~~~~^\n        labels=labels,\n        ^^^^^^^^^^^^^^\n    ...<5 lines>...\n        errors=errors,\n        ^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\generic.py\", line 4810, in drop\n    obj = obj._drop_axis(labels, axis, level=level, errors=errors)\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\generic.py\", line 4852, in _drop_axis\n    new_axis = axis.drop(labels, errors=errors)\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\indexes\\base.py\", line 7136, in drop\n    raise KeyError(f\"{labels[mask].tolist()} not found in axis\")\nKeyError: '[67, 68, 69] not found in axis'\n",
+        "type": "KeyError"
+      },
+      "constructor_outcome": null,
+      "negative_entries": [],
+      "matrix_checks": {},
+      "runtime_before_sha256": null,
+      "runtime_after_sha256": null,
+      "reconciliation": null,
+      "annual_status": {
+        "PP": "unavailable: failed",
+        "all": "unavailable: failed",
+        "inner": "unavailable: failed"
+      }
+    },
+    {
+      "method": "new_WithEgestion",
+      "execution_status": "failed",
+      "reason": "Method execution or evidence reconciliation failed: KeyError: '[67, 68, 69] not found in axis'",
+      "diagnostic": {},
+      "exception": {
+        "message": "'[67, 68, 69] not found in axis'",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 543, in _run\n    result = getattr(model, settings['target'])(**settings['kwargs'])\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 1517, in diagnose_sppr\n    SPPR, A, L = self.SPPR_new(TE_option=TE_option, **sppr_kwargs)\n                 ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_code\\PPREstimation\\PPRCalculator.py\", line 3046, in SPPR_new\n    non_DET_sppr = SPPR.drop(columns=DET_seq).sum(axis=1)\n                   ~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\frame.py\", line 5603, in drop\n    return super().drop(\n           ~~~~~~~~~~~~^\n        labels=labels,\n        ^^^^^^^^^^^^^^\n    ...<5 lines>...\n        errors=errors,\n        ^^^^^^^^^^^^^^\n    )\n    ^\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\generic.py\", line 4810, in drop\n    obj = obj._drop_axis(labels, axis, level=level, errors=errors)\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\generic.py\", line 4852, in _drop_axis\n    new_axis = axis.drop(labels, errors=errors)\n  File \"C:\\Users\\idoca\\miniconda3\\Lib\\site-packages\\pandas\\core\\indexes\\base.py\", line 7136, in drop\n    raise KeyError(f\"{labels[mask].tolist()} not found in axis\")\nKeyError: '[67, 68, 69] not found in axis'\n",
+        "type": "KeyError"
+      },
+      "constructor_outcome": null,
+      "negative_entries": [],
+      "matrix_checks": {},
+      "runtime_before_sha256": null,
+      "runtime_after_sha256": null,
+      "reconciliation": null,
+      "annual_status": {
+        "PP": "unavailable: failed",
+        "all": "unavailable: failed",
+        "inner": "unavailable: failed"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "constructor.json.gz",
+      "sha256": "410945f3a99067c0bbec281e36622fc5f9c8b199e4488c093718ace3a204fb94",
+      "bytes": 50854
+    },
+    {
+      "path": "method_coverage.json.gz",
+      "sha256": "5cf6b72c3dd5479eecf80b6efc5093e8914f831f5e1bed1815b333b2ea7c20f4",
+      "bytes": 3136
+    },
+    {
+      "path": "new_GE.json.gz",
+      "sha256": "eead416f5f6143335c1f998511e9702d3ac7df17b851b967baba9f0b0af5a183",
+      "bytes": 76901
+    },
+    {
+      "path": "new_TE_EEfix.json.gz",
+      "sha256": "cac22bc143f7548c56a855323f394bb6d55f52c09811cbbf6256bcfd7d8f2324",
+      "bytes": 76905
+    },
+    {
+      "path": "new_WithEgestion.json.gz",
+      "sha256": "f954f2c861fc9c50a2cce7b469441c18681ebaaec44f9a7b278ba941d0d1d788",
+      "bytes": 76915
+    },
+    {
+      "path": "run_manifest.json",
+      "sha256": "655717dca1ee68ac0f16823f05fcf9daac5e4a87cb7ada6190804a5c1aa08bba",
+      "bytes": 22989
+    },
+    {
+      "path": "source_loader_audit.json",
+      "sha256": "f1b64951d2281a05750aec432d01a8ae879c5d76a9e747581ab5f34bbf62bc5d",
+      "bytes": 175008
+    }
+  ],
+  "source_loader_changes": {
+    "scalar": [
+      {
+        "group_id": 1,
+        "group_name": "BaleenWhales",
+        "field": "tl",
+        "source_literal": "4.44413559065295",
+        "source_value": 4.44413559065295,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 1,
+        "group_name": "BaleenWhales",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 2,
+        "group_name": "ToothedWhales",
+        "field": "tl",
+        "source_literal": "4.643493161579813",
+        "source_value": 4.643493161579813,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 2,
+        "group_name": "ToothedWhales",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 3,
+        "group_name": "Seals",
+        "field": "tl",
+        "source_literal": "4.971814383310784",
+        "source_value": 4.971814383310784,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 3,
+        "group_name": "Seals",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 4,
+        "group_name": "SurfaceFeedingSeabirds",
+        "field": "tl",
+        "source_literal": "3.206712175506502",
+        "source_value": 3.206712175506502,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 4,
+        "group_name": "SurfaceFeedingSeabirds",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 5,
+        "group_name": "JuvenileSharks",
+        "field": "tl",
+        "source_literal": "4.281124114780691",
+        "source_value": 4.281124114780691,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 5,
+        "group_name": "JuvenileSharks",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 6,
+        "group_name": "Spurdog",
+        "field": "tl",
+        "source_literal": "4.749381109588659",
+        "source_value": 4.749381109588659,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 6,
+        "group_name": "Spurdog",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 7,
+        "group_name": "LargePiscivorousSharks",
+        "field": "tl",
+        "source_literal": "4.917281577507326",
+        "source_value": 4.917281577507326,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 7,
+        "group_name": "LargePiscivorousSharks",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 8,
+        "group_name": "SmallSharks",
+        "field": "tl",
+        "source_literal": "4.334317289774737",
+        "source_value": 4.334317289774737,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 8,
+        "group_name": "SmallSharks",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 9,
+        "group_name": "JuvenileRays",
+        "field": "tl",
+        "source_literal": "4.230534377838997",
+        "source_value": 4.230534377838997,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 9,
+        "group_name": "JuvenileRays",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 10,
+        "group_name": "StarryRayOthers",
+        "field": "tl",
+        "source_literal": "4.426442800528893",
+        "source_value": 4.426442800528893,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 10,
+        "group_name": "StarryRayOthers",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 11,
+        "group_name": "ThornbackAndSpottedRay",
+        "field": "tl",
+        "source_literal": "4.493829378047361",
+        "source_value": 4.493829378047361,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 11,
+        "group_name": "ThornbackAndSpottedRay",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 12,
+        "group_name": "SkateCuckooRay",
+        "field": "tl",
+        "source_literal": "4.425250993509188",
+        "source_value": 4.425250993509188,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 12,
+        "group_name": "SkateCuckooRay",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 13,
+        "group_name": "JuvCod",
+        "field": "tl",
+        "source_literal": "4.234496462637925",
+        "source_value": 4.234496462637925,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 13,
+        "group_name": "JuvCod",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 14,
+        "group_name": "AduCod",
+        "field": "tl",
+        "source_literal": "4.781163930272152",
+        "source_value": 4.781163930272152,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 14,
+        "group_name": "AduCod",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 15,
+        "group_name": "JuvWhiting",
+        "field": "tl",
+        "source_literal": "4.25363986158794",
+        "source_value": 4.25363986158794,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 15,
+        "group_name": "JuvWhiting",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 16,
+        "group_name": "AduWhiting",
+        "field": "tl",
+        "source_literal": "4.359753880656248",
+        "source_value": 4.359753880656248,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 16,
+        "group_name": "AduWhiting",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 17,
+        "group_name": "JuvHaddock",
+        "field": "tl",
+        "source_literal": "4.056952911440118",
+        "source_value": 4.056952911440118,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 17,
+        "group_name": "JuvHaddock",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 18,
+        "group_name": "AduHaddock",
+        "field": "tl",
+        "source_literal": "4.265044408036794",
+        "source_value": 4.265044408036794,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 18,
+        "group_name": "AduHaddock",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 19,
+        "group_name": "JuvSaithe",
+        "field": "tl",
+        "source_literal": "4.021687234950847",
+        "source_value": 4.021687234950847,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 19,
+        "group_name": "JuvSaithe",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 20,
+        "group_name": "AduSaithe",
+        "field": "tl",
+        "source_literal": "4.336964226933505",
+        "source_value": 4.336964226933505,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 20,
+        "group_name": "AduSaithe",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 21,
+        "group_name": "Hake",
+        "field": "tl",
+        "source_literal": "4.900159017677687",
+        "source_value": 4.900159017677687,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 21,
+        "group_name": "Hake",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 22,
+        "group_name": "BlueWhiting",
+        "field": "tl",
+        "source_literal": "4.093892041624745",
+        "source_value": 4.093892041624745,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 22,
+        "group_name": "BlueWhiting",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 23,
+        "group_name": "NorwayPout",
+        "field": "tl",
+        "source_literal": "3.58622638004556",
+        "source_value": 3.58622638004556,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 23,
+        "group_name": "NorwayPout",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 24,
+        "group_name": "OtherLargeGadoids",
+        "field": "tl",
+        "source_literal": "4.512902108434374",
+        "source_value": 4.512902108434374,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 24,
+        "group_name": "OtherLargeGadoids",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 25,
+        "group_name": "OtherSmallGadoids",
+        "field": "tl",
+        "source_literal": "3.80402992559613",
+        "source_value": 3.80402992559613,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 25,
+        "group_name": "OtherSmallGadoids",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 26,
+        "group_name": "Monkfish",
+        "field": "tl",
+        "source_literal": "4.82331654216422",
+        "source_value": 4.82331654216422,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 26,
+        "group_name": "Monkfish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 27,
+        "group_name": "Gurnards",
+        "field": "tl",
+        "source_literal": "4.437681830880324",
+        "source_value": 4.437681830880324,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 27,
+        "group_name": "Gurnards",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 28,
+        "group_name": "JuvHerring",
+        "field": "tl",
+        "source_literal": "3.420451953217965",
+        "source_value": 3.420451953217965,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 28,
+        "group_name": "JuvHerring",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 29,
+        "group_name": "AduHerring",
+        "field": "tl",
+        "source_literal": "3.436442726596725",
+        "source_value": 3.436442726596725,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 29,
+        "group_name": "AduHerring",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 30,
+        "group_name": "Sprat",
+        "field": "tl",
+        "source_literal": "2.95940594059406",
+        "source_value": 2.95940594059406,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 30,
+        "group_name": "Sprat",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 31,
+        "group_name": "Mackerel",
+        "field": "tl",
+        "source_literal": "3.893439980264754",
+        "source_value": 3.893439980264754,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 31,
+        "group_name": "Mackerel",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 32,
+        "group_name": "HorseMackerel",
+        "field": "tl",
+        "source_literal": "4.275754337446666",
+        "source_value": 4.275754337446666,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 32,
+        "group_name": "HorseMackerel",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 33,
+        "group_name": "Sandeels",
+        "field": "tl",
+        "source_literal": "3.345035706466558",
+        "source_value": 3.345035706466558,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 33,
+        "group_name": "Sandeels",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 34,
+        "group_name": "Plaice",
+        "field": "tl",
+        "source_literal": "3.981833583899392",
+        "source_value": 3.981833583899392,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 34,
+        "group_name": "Plaice",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 35,
+        "group_name": "Dab",
+        "field": "tl",
+        "source_literal": "4.001119986639775",
+        "source_value": 4.001119986639775,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 35,
+        "group_name": "Dab",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 36,
+        "group_name": "LongRoughDab",
+        "field": "tl",
+        "source_literal": "4.165862366604091",
+        "source_value": 4.165862366604091,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 36,
+        "group_name": "LongRoughDab",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 37,
+        "group_name": "Flounder",
+        "field": "tl",
+        "source_literal": "4.376760872840224",
+        "source_value": 4.376760872840224,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 37,
+        "group_name": "Flounder",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 38,
+        "group_name": "Sole",
+        "field": "tl",
+        "source_literal": "3.99796354294786",
+        "source_value": 3.99796354294786,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 38,
+        "group_name": "Sole",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 39,
+        "group_name": "LemonSole",
+        "field": "tl",
+        "source_literal": "3.938266774123666",
+        "source_value": 3.938266774123666,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 39,
+        "group_name": "LemonSole",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 40,
+        "group_name": "Witch",
+        "field": "tl",
+        "source_literal": "4.045729433999234",
+        "source_value": 4.045729433999234,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 40,
+        "group_name": "Witch",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 41,
+        "group_name": "Turbot",
+        "field": "tl",
+        "source_literal": "4.528122757889363",
+        "source_value": 4.528122757889363,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 41,
+        "group_name": "Turbot",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 42,
+        "group_name": "Megrim",
+        "field": "tl",
+        "source_literal": "4.452011983006963",
+        "source_value": 4.452011983006963,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 42,
+        "group_name": "Megrim",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 43,
+        "group_name": "Halibut",
+        "field": "tl",
+        "source_literal": "4.511377504692526",
+        "source_value": 4.511377504692526,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 43,
+        "group_name": "Halibut",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 44,
+        "group_name": "Dragonets",
+        "field": "tl",
+        "source_literal": "3.97373228261467",
+        "source_value": 3.97373228261467,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 44,
+        "group_name": "Dragonets",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 45,
+        "group_name": "CatfishWolfFish",
+        "field": "tl",
+        "source_literal": "4.272294708697816",
+        "source_value": 4.272294708697816,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 45,
+        "group_name": "CatfishWolfFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 46,
+        "group_name": "LargeDemersalFish",
+        "field": "tl",
+        "source_literal": "4.206515011063736",
+        "source_value": 4.206515011063736,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 46,
+        "group_name": "LargeDemersalFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 47,
+        "group_name": "SmallDemersalFish",
+        "field": "tl",
+        "source_literal": "4.20896565090306",
+        "source_value": 4.20896565090306,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 47,
+        "group_name": "SmallDemersalFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 48,
+        "group_name": "MiscellaneousFilterfeedingPelagicFish",
+        "field": "tl",
+        "source_literal": "3.432474960467292",
+        "source_value": 3.432474960467292,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 48,
+        "group_name": "MiscellaneousFilterfeedingPelagicFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 49,
+        "group_name": "SquidAndCuttlefish",
+        "field": "tl",
+        "source_literal": "3.823970016327654",
+        "source_value": 3.823970016327654,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 49,
+        "group_name": "SquidAndCuttlefish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 50,
+        "group_name": "FishLarvae",
+        "field": "tl",
+        "source_literal": "2.845544554455446",
+        "source_value": 2.845544554455446,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 50,
+        "group_name": "FishLarvae",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 51,
+        "group_name": "CarnivorousZooplankton",
+        "field": "tl",
+        "source_literal": "3.228234510127153",
+        "source_value": 3.228234510127153,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 51,
+        "group_name": "CarnivorousZooplankton",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 52,
+        "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+        "field": "tl",
+        "source_literal": "2.056930693069307",
+        "source_value": 2.056930693069307,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 52,
+        "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 53,
+        "group_name": "GelatinousZooplankton",
+        "field": "tl",
+        "source_literal": "3.573685514122483",
+        "source_value": 3.573685514122483,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 53,
+        "group_name": "GelatinousZooplankton",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 54,
+        "group_name": "LargeCrabs",
+        "field": "tl",
+        "source_literal": "3.758976228135259",
+        "source_value": 3.758976228135259,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 54,
+        "group_name": "LargeCrabs",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 55,
+        "group_name": "Nephrops",
+        "field": "tl",
+        "source_literal": "3.502652176668592",
+        "source_value": 3.502652176668592,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 55,
+        "group_name": "Nephrops",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 56,
+        "group_name": "EpifaunalMacrobenthosMobileGrazers",
+        "field": "tl",
+        "source_literal": "3.310289928446315",
+        "source_value": 3.310289928446315,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 56,
+        "group_name": "EpifaunalMacrobenthosMobileGrazers",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 57,
+        "group_name": "InfaunalMacrobenthos",
+        "field": "tl",
+        "source_literal": "2.869772403982931",
+        "source_value": 2.869772403982931,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 57,
+        "group_name": "InfaunalMacrobenthos",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 58,
+        "group_name": "Shrimp",
+        "field": "tl",
+        "source_literal": "3.05295766768893",
+        "source_value": 3.05295766768893,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 58,
+        "group_name": "Shrimp",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 59,
+        "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+        "field": "tl",
+        "source_literal": "2.893229863526893",
+        "source_value": 2.893229863526893,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 59,
+        "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 60,
+        "group_name": "SmallInfaunaPolychaetes",
+        "field": "tl",
+        "source_literal": "2.954142782699322",
+        "source_value": 2.954142782699322,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 60,
+        "group_name": "SmallInfaunaPolychaetes",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 61,
+        "group_name": "SessileEpifauna",
+        "field": "tl",
+        "source_literal": "2.797029702970297",
+        "source_value": 2.797029702970297,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 61,
+        "group_name": "SessileEpifauna",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 62,
+        "group_name": "Meiofauna",
+        "field": "tl",
+        "source_literal": "3.029702970297029",
+        "source_value": 3.029702970297029,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 62,
+        "group_name": "Meiofauna",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 63,
+        "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+        "field": "tl",
+        "source_literal": "2.237623762376237",
+        "source_value": 2.237623762376237,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 63,
+        "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 64,
+        "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+        "field": "tl",
+        "source_literal": "2.138613861386139",
+        "source_value": 2.138613861386139,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 64,
+        "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 65,
+        "group_name": "DivingSeabirds",
+        "field": "tl",
+        "source_literal": "4.061121908749922",
+        "source_value": 4.061121908749922,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 65,
+        "group_name": "DivingSeabirds",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 66,
+        "group_name": "Phytoplankton",
+        "field": "tl",
+        "source_literal": "1.0",
+        "source_value": 1.0,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 66,
+        "group_name": "Phytoplankton",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 67,
+        "group_name": "DetritusDOMWaterColumn",
+        "field": "tl",
+        "source_literal": "1.0",
+        "source_value": 1.0,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 68,
+        "group_name": "DetritusPOMSediment",
+        "field": "tl",
+        "source_literal": "1.0",
+        "source_value": 1.0,
+        "loaded_value": null,
+        "changed": true
+      },
+      {
+        "group_id": 69,
+        "group_name": "Discards",
+        "field": "tl",
+        "source_literal": "1.0",
+        "source_value": 1.0,
+        "loaded_value": null,
+        "changed": true
+      }
+    ],
+    "routing": [
+      {
+        "group_id": 66,
+        "group_name": "Phytoplankton",
+        "pool_id": 67,
+        "source_fraction": 0.45,
+        "loaded_fraction": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 66,
+        "group_name": "Phytoplankton",
+        "pool_id": 68,
+        "source_fraction": 0.55,
+        "loaded_fraction": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 67,
+        "group_name": "DetritusDOMWaterColumn",
+        "pool_id": 67,
+        "source_fraction": 0.0,
+        "loaded_fraction": 1.0,
+        "changed": true
+      },
+      {
+        "group_id": 68,
+        "group_name": "DetritusPOMSediment",
+        "pool_id": 68,
+        "source_fraction": 0.0,
+        "loaded_fraction": 1.0,
+        "changed": true
+      },
+      {
+        "group_id": 69,
+        "group_name": "Discards",
+        "pool_id": 69,
+        "source_fraction": 0.0,
+        "loaded_fraction": 1.0,
+        "changed": true
+      }
+    ]
+  }
+}

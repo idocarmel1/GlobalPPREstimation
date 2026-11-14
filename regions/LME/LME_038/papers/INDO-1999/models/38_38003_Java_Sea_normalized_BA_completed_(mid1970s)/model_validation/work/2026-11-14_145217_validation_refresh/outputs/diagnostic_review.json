@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-14",
+  "unit_id": "LME_038",
+  "model_id": "38_38003_Java_Sea_normalized_BA_completed_(mid1970s)",
+  "current_canonical_sha256": "dae4aa0106a4c47d7db6fa9764791e656d1ba75ae0e1756e6d20ec202180c9ba",
+  "current_diagnostic_package": "../../../../results/diagnostics/validation_20261114",
+  "current_methods": [
+    {
+      "method": "GE",
+      "status": "OK",
+      "shape": [
+        29,
+        4
+      ],
+      "row_ids": [
+        29,
+        28,
+        2,
+        1,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3
+      ],
+      "source_ids": [
+        29,
+        28,
+        2,
+        1
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Phytoplankton",
+        "Benthic producers"
+      ],
+      "finite_entries": 116,
+      "negative_entries": [],
+      "negative_source_columns": 0,
+      "rho_living": 0.40177282572772766,
+      "b": 0.24546091892281988,
+      "detritus_sppr": {
+        "28": 1.3149477189033476
+      },
+      "warnings": [],
+      "balance": {
+        "status": "OK",
+        "is_balanced": true,
+        "inflow": 2379.1949999999997,
+        "outflow": 2379.1949999999997,
+        "rel_gap": 0.0
+      }
+    },
+    {
+      "method": "TE",
+      "status": "WARN",
+      "shape": [
+        29,
+        4
+      ],
+      "row_ids": [
+        29,
+        28,
+        2,
+        1,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3
+      ],
+      "source_ids": [
+        29,
+        28,
+        2,
+        1
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Phytoplankton",
+        "Benthic producers"
+      ],
+      "finite_entries": 116,
+      "negative_entries": [],
+      "negative_source_columns": 0,
+      "rho_living": 0.6212993432707216,
+      "b": 0.0,
+      "detritus_sppr": {
+        "28": 0.7738986707116795
+      },
+      "warnings": [
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "1 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [27]"
+      ],
+      "balance": {
+        "status": "OK",
+        "is_balanced": true,
+        "inflow": 2379.1949999999997,
+        "outflow": 2379.1950000000006,
+        "rel_gap": 3.8226992817861854e-16
+      }
+    },
+    {
+      "method": "With Egestion",
+      "status": "OK",
+      "shape": [
+        29,
+        4
+      ],
+      "row_ids": [
+        29,
+        28,
+        2,
+        1,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3
+      ],
+      "source_ids": [
+        29,
+        28,
+        2,
+        1
+      ],
+      "source_names": [
+        "diet_import",
+        "Detritus",
+        "Phytoplankton",
+        "Benthic producers"
+      ],
+      "finite_entries": 116,
+      "negative_entries": [],
+      "negative_source_columns": 0,
+      "rho_living": 0.32141826058218276,
+      "b": 0.25453495920175423,
+      "detritus_sppr": {
+        "28": 1.341832446044723
+      },
+      "warnings": [],
+      "balance": {
+        "status": "OK",
+        "is_balanced": true,
+        "inflow": 2379.1949999999997,
+        "outflow": 2379.1950000000006,
+        "rel_gap": 3.8226992817861854e-16
+      }
+    }
+  ],
+  "historical_input_sha256": "db0bc803ea5a068e346b82df8d8b4e4b13f8351bf61103c6507997cb6996ae35",
+  "historical_findings": "Retained matrices independently inspected before the newly authorized current-input run; 29 recipients and 4 source columns per method, no nonfinite or negative contributions. Historical direct-engine hashes verified.",
+  "current_finding": "Fresh current-input GE/TE/With Egestion diagnostics now establish this exact pinned baseline configuration; no reliance on the broken historical runtime certificate is needed for the report's diagnostic rows.",
+  "scientific_limits": [
+    "Macrozoobenthos raw diet sums to 0.660; runtime normalization scales its six nonzero cells by 1/0.660 without identifying the missing 0.340.",
+    "The 28 prior accepted BA completions remain computational rather than measured stock changes.",
+    "Detritus EE changes from source-loaded 0.264 to runtime 1.0 under the recorded loader convention.",
+    "The pinned engine has no EE-floor transformation; these results do not describe the current engine's default floor-enabled configuration.",
+    "TE reports near-zero transfer efficiency for Marine mammals (27), with all-source SPPR 269815.0941253361; b=0 is a TE formulation convention, not evidence of absent physical recycling.",
+    "No fresh whole-matrix primary-source extraction audit was performed.",
+    "The regional workbook remains pending because no numerical adoption, arithmetic, project registration or map refresh was performed."
+  ],
+  "report_ready": {
+    "GE": "OK. No negative SPPR entries across the basal-source columns. rho_living = 0.402; recycling b = 0.245; Detritus (28) SPPR = 1.315. The saved balance check passes.",
+    "TE": "WARN. No negative SPPR entries across the basal-source columns. rho_living = 0.621; Detritus (28) SPPR = 0.774. Marine mammals (27) has near-zero transfer efficiency and all-source SPPR about 269,815; the saved balance check passes. TE's reported b = 0 is a formulation convention.",
+    "timing_configuration": "Fresh diagnostics of the current canonical input use the audited baseline engine with runtime diet normalization and no EE-floor transformation; regional results have not been adopted."
+  },
+  "rerun_recommendation": "No further GE/TE/With Egestion run is needed for this report. Publishing new regional results would require separately authorized compatible coefficient adoption and dependent arithmetic; full publication coverage is outside this report-only run.",
+  "checks": {
+    "accepted_BA_preserved_at_1e_12": true,
+    "GE_footprint_reconciles": true,
+    "GE_negative_count_reconciles": true,
+    "GE_detritus_SPPR_reconciles": true,
+    "TE_footprint_reconciles": true,
+    "TE_negative_count_reconciles": true,
+    "TE_detritus_SPPR_reconciles": true,
+    "With Egestion_footprint_reconciles": true,
+    "With Egestion_negative_count_reconciles": true,
+    "With Egestion_detritus_SPPR_reconciles": true,
+    "methods_preserved_runtime_state": true,
+    "canonical_input_unchanged": true,
+    "engine_unchanged": true,
+    "canonical_hash_current": true,
+    "all_canonical_group_names_retained": true,
+    "pinned_code_hashes_current": true,
+    "executed_script_hash_current": true,
+    "reopened_unique_axes_names_dimensions_and_masks": true,
+    "reopened_coefficients_footprints_and_negative_pairings_reconciled": true,
+    "all_requested_methods_returned": true,
+    "historical_numeric_runtime_matches_at_1e_12": true,
+    "historical_returned_matrices_match_at_1e_12": true,
+    "historical_diagnostic_returns_exactly_equal": true
+  }
+}

@@ -1,0 +1,869 @@
+{
+  "existing": {
+    "sha256": "ffc6a5b3bcdbd5b1076188d389475d5ed294928a2f993a65fb509d0ad2c31e05",
+    "elements": [
+      {
+        "i": 0,
+        "tag": "p",
+        "text": "North Sea model validation draft"
+      },
+      {
+        "i": 1,
+        "table": [
+          [
+            "Field",
+            "Entry"
+          ],
+          [
+            "Region",
+            "North Sea — LME_022.Regional workbook"
+          ],
+          [
+            "Catch source",
+            "Sea Around Us regional catch, 1950–2019. Review reference: 2019 total catch, including landings and discards. Retained regional inputs; source release date not recorded.Retained catch source"
+          ],
+          [
+            "Selected article",
+            "ICES (2016). Report of the Working Group on Multispecies Assessment Methods (WGSAM), 9–13 November 2015. Annex 6, North Sea Key Run, printed pp. 102–206. The deposited Rpath port is a distinct source snapshot; the report is comparison evidence.ICES WGSAM report"
+          ],
+          [
+            "Other known articles",
+            "Saygu et al. (2025), Historical ecosystem models can serve as a baseline for indicator-based assessment: the North Sea. Its 1991–1995 Scotland model is compared below.Mackinson and Daskalov (2007), An ecosystem model of the North Sea to support an ecosystem approach to fisheries management: description and parameterisation.Mackinson (2014), Building an Ecopath with Ecosim model of the North Sea.Hill et al. (2021), Modelling the trophic interaction, structure, and function of the northern North Sea food web: Ecopath Technical Report.Pint et al. (2024), Ecopath model of the Southern Bight of the North Sea (version 3). These inventory sources were not additional full validations.Saygu et al. 2025 article"
+          ],
+          [
+            "Selected model",
+            "ICES_WGSAM2015_North_Sea_1991. Deposited North Sea Rpath port, static 1991 base state; ICES divisions IVa–IVc. 69 source ecological groups and 11 fleets. Five juvenile/adult stock pairs. The accepted native EwE Key Run database is unavailable.Canonical model"
+          ],
+          [
+            "Other models from the same article",
+            "The accepted native configuration named Keyrun 2015_NorthSea1991_12Jan16.eweaccdb differs materially from this port and is not available locally. The contextual 2018 management-plan application has 10 fleets, versus 11 in the deposited port; it is not interchangeable."
+          ],
+          [
+            "Selection rationale",
+            "Article — No separate article-choice rationale is recorded.Model — The researcher selected this published North Sea 1991 Rpath snapshot on 14/10/2026 because its static mass-balance checks pass. Recorded limitations include its difference from the native EwE Key Run, source routing restrictions and loader departures. Numerical readiness and researcher approval were not established."
+          ],
+          [
+            "Model extraction",
+            "Source reconciliation and round-trip checks support the deposited Rpath port. Missing source inputs were completed only from deposited outputs: biomass for 8 groups, Q/B for 11 and EE for 61. Static source budgets balance, with five P/Q range warnings.The repaired shared loader retains published phytoplankton routing, explicit zero detritus-fate rows, source TL and catch. Four missing import-diet cells for nonfeeding groups use a documented structural-zero convention. No source parameters or diets were changed.Published fleet discards return 0.49945 t/km²/year to Discards (69). Accounting now includes their donor PPR once and separates internal returns from external removals. The former negative detritus coefficients and large PP-budget failure disappear under the stated runtime assumptions.Source departures and evidence"
+          ],
+          [
+            "GE diagnostics",
+            "WARN — convergent and balanced, with high detritus cost and recycling sensitivity.No negative entries; all 350 values in the complete 70 × 5 source matrix are finite.rho_living = 0.28944; b = 0.88221.Detritus SPPR: DetritusDOMWaterColumn (67) = 3.4625; DetritusPOMSediment (68) = 5.3449; Discards (69) = 440.27.PP-budget relative gap = 1.24 × 10⁻¹³. Unnormalized source diet sums differ from 1 by up to 8.33 × 10⁻⁵, exceeding the diagnostic tolerance.Three-method diagnostics in the appendixFull diagnostic results and runtime evidence"
+          ],
+          [
+            "TE diagnostics",
+            "WARN — convergent and balanced, with high detritus cost and near-zero transfer efficiencies.No negative entries; all 350 values in the complete 70 × 5 source matrix are finite.rho_living = 0.57345; b = 0.15550 for the coupled discard-return system.Detritus SPPR: DOM (67) = 0.42946; POM (68) = 0.44308; Discards (69) = 816.39. PP-budget relative gap = 4.59 × 10⁻¹⁴.Near-zero TE: BaleenWhales (1), ToothedWhales (2), Seals (3), SurfaceFeedingSeabirds (4) and DivingSeabirds (65). The source diet-sum warning also remains."
+          ],
+          [
+            "SPPR calculation",
+            "[Researcher calculation choices and notes]"
+          ],
+          [
+            "Geographic fit",
+            "A. Region covered by study: approximately 87%.B. Study area covered by region: approximately 99–100%."
+          ],
+          [
+            "Temporal fit",
+            "Static base state: 1991; the report's time-series calibration spans 1991–2013. Applying the port to 2019 catch is a 28-year transfer of the baseline food web, not a calibrated 2019 reconstruction. A future fixed allocation would need its own temporal justification."
+          ],
+          [
+            "Other",
+            "With Egestion: WARN; no negative or nonfinite entries. rho_living = 0.22945; b = 0.91516. Detritus SPPR: DOM (67) = 5.5808, POM (68) = 7.1126, Discards (69) = 182.04. PP-budget relative gap = 5.18 × 10⁻¹⁴; high detritus cost and recycling sensitivity remain.All three runs use EE floor 0.1: a hypothetical external nonfishery sink of 1.9837 t/km²/year across eight living groups. Source BA remains zero; effective detritus stock residuals are DOM 152.69, POM 125.21 and Discards 0.003590 t/km²/year. This runtime closure and detritus EE = 1 convention are not observed accumulation or recovered native export. No diet normalization, pooling or open-detritus adjustment was used."
+          ],
+          [
+            "Open issues and next action",
+            ""
+          ],
+          [
+            "Review and reproducibility",
+            "Researcher name: ____________________Review date: ____/____/________"
+          ]
+        ]
+      },
+      {
+        "i": 2,
+        "tag": "p",
+        "text": "Comparison of the two candidates"
+      },
+      {
+        "i": 3,
+        "tag": "p",
+        "text": "Recommend retaining ICES North Sea 1991 as the selected candidate for further validation. The repaired implementation now converges with finite, nonnegative results and a closed PP budget in all three methods, and its declared domain covers substantially more of LME_022 than Scotland. This supersedes the provisional Scotland preference based on the faulty ICES runtime. ICES still has material sensitivity warnings, runtime closure assumptions, no exact-model catch mapping and no recovered native Key Run database; it is not yet ready for an approved regional PPR estimate."
+      },
+      {
+        "i": 4,
+        "table": [
+          [
+            "Assessment",
+            "ICES North Sea 1991",
+            "East Coast Scotland 1991–1995"
+          ],
+          [
+            "Spatial and temporal fit",
+            "1991; approximately 87% of LME_022 covered by the declared ICES domain.",
+            "1991–1995; approximately 40% of LME_022 covered. Source-map sensitivity: 37–42%; subregional Scottish shelf/fleet domain."
+          ],
+          [
+            "Source interpretation",
+            "69 ecological groups. Deposited port differs from the native Key Run. Source parameters retained; shared routing and discard-return accounting repaired. Runtime EE-floor closure remains an assumption.",
+            "25 ecological groups. Saved runtime uses diet normalization, GS defaults and residual BA completion. Source landings exclude discards, while regional total catch includes them."
+          ],
+          [
+            "GE",
+            "Fresh WARN. All 350 source–group entries finite and nonnegative. rho_living = 0.28944; b = 0.88221. PP budget closes; high detritus cost and recycling sensitivity remain.",
+            "Saved OK. No negative entries in the full 26 × 3 source matrix. rho_living = 0.2121; b = 0.06995; Detritus (25) SPPR = 1.0833."
+          ],
+          [
+            "TE",
+            "Fresh WARN. All 350 source–group entries finite and nonnegative. rho_living = 0.57345; b = 0.15550. PP budget closes; high Discards cost and five near-zero TE groups remain.",
+            "Saved FAIL, reproduced in a separate reconstruction; rho_living = 1.1128. Negative pairs: Phytoplankton (1) → Seabirds (22), −1,916,160.32; Detritus (25) → Seabirds (22), −460,709.19. Detritus (25) SPPR = 0.81045. The unfished seabird row remains part of the diagnostic."
+          ],
+          [
+            "Regional mapping",
+            "No adopted crosswalk or allocation retained for any of 384 catch labels. All remain unassessed in this appendix.",
+            "Existing appendix covers the same 384 labels: 99 High, 160 Medium, 3 Low, 110 Very low and 12 Unresolved. Its decisions belong to this comparator only. Very low decisions account for 3.8% of simple-chain PPR; unresolved labels account for 0.0034%."
+          ],
+          [
+            "With Egestion and readiness",
+            "Fresh WARN; finite, nonnegative and balanced. b = 0.91516 signals recycling sensitivity. Regional Ecopath PPR remains unavailable without exact-model mapping and assessment of the runtime assumptions.",
+            "Saved With Egestion OK. A separate trial removed seabird self-feeding and redistributed its diet: TE became WARN (rho_living = 0.27574; no negatives), with a remaining 1.7% PP-budget gap. This changed-diet trial is separate from the canonical baseline."
+          ]
+        ]
+      },
+      {
+        "i": 5,
+        "tag": "p",
+        "text": "The candidates were not tested under common settings. Scotland retains its historical configured results; a separate reconstruction and diet-change trial are distinguished above. ICES uses the repaired shared engine and EE floor 0.1. This report update does not change selection or register a researcher decision. Three other registered models were screened only: Scotland 1890–1895 and two Mackinson 2007 representations.  Detailed comparison evidence Scotland report"
+      },
+      {
+        "i": 6,
+        "tag": "p",
+        "text": "Taxon mapping and coverage"
+      },
+      {
+        "i": 7,
+        "tag": "p",
+        "text": "Reference: 2019 total catch (landings plus discards); all recorded catch labels, including zero-catch labels."
+      },
+      {
+        "i": 8,
+        "tag": "p",
+        "text": "69 source ecological groups; 384 catch taxa. A synthetic import group is separate from the source inventory."
+      },
+      {
+        "i": 9,
+        "tag": "p",
+        "text": "Simple-chain PPR totals 188,909,421 t C in 2019."
+      },
+      {
+        "i": 10,
+        "tag": "p",
+        "text": "All 72 labels with missing TL/coefficient have zero recorded catch and contribute zero annual PPR. The 2019 total is complete; their coefficients remain unknown."
+      },
+      {
+        "i": 11,
+        "tag": "p",
+        "text": "Method: simple trophic chain."
+      },
+      {
+        "i": 12,
+        "tag": "p",
+        "text": "Excel taxon appendix and descriptive Sources sheet: All 384 taxa and source references"
+      },
+      {
+        "i": 13,
+        "table": [
+          [
+            "Overall confidence",
+            "Taxa (n)",
+            "Catch (%)",
+            "Simple-chain PPR (%)"
+          ],
+          [
+            "High",
+            "0",
+            "0%",
+            "0%"
+          ],
+          [
+            "Medium",
+            "0",
+            "0%",
+            "0%"
+          ],
+          [
+            "Low",
+            "0",
+            "0%",
+            "0%"
+          ],
+          [
+            "Very low",
+            "0",
+            "0%",
+            "0%"
+          ],
+          [
+            "Unresolved",
+            "384",
+            "100%",
+            "100%"
+          ]
+        ]
+      },
+      {
+        "i": 14,
+        "tag": "p",
+        "text": "Overall confidence uses the weaker required membership or allocation component."
+      },
+      {
+        "i": 15,
+        "tag": "p",
+        "text": "Group assignment rules"
+      },
+      {
+        "i": 16,
+        "table": [
+          [
+            "Plain-language rule",
+            "Confidence",
+            "PPR percentage"
+          ],
+          [
+            "No selected-model assignment retained",
+            "Unresolved",
+            "100%"
+          ]
+        ]
+      },
+      {
+        "i": 17,
+        "tag": "p",
+        "text": "Membership evidence: the source has 69 groups but no retained catch-taxon crosswalk. Exact-model assignments remain unassessed. Source group inventory"
+      },
+      {
+        "i": 18,
+        "tag": "p",
+        "text": "Allocation weight rules"
+      },
+      {
+        "i": 19,
+        "table": [
+          [
+            "Plain-language rule",
+            "Confidence",
+            "PPR percentage"
+          ],
+          [
+            "No selected-model allocation retained",
+            "Unresolved",
+            "100%"
+          ]
+        ]
+      },
+      {
+        "i": 20,
+        "tag": "p",
+        "text": "Weights and assumptions: no exact-model allocations are retained. The Scotland mappings cannot be transferred without a group-definition crosswalk and separate weight evidence."
+      },
+      {
+        "i": 21,
+        "tag": "p",
+        "text": "Each percentage is the independent simple-chain PPR associated with taxa using that rule."
+      },
+      {
+        "i": 22,
+        "tag": "p",
+        "text": "Unresolved: all 384 taxa, individually named in the linked appendix, because no selected-model assignment or allocation is retained. This is an evidence gap, not a finding that biological mapping is impossible. No Very low decisions have been assessed or adopted."
+      },
+      {
+        "i": 23,
+        "tag": "p",
+        "text": "Geographic evidence"
+      },
+      {
+        "i": 24,
+        "tag": "p",
+        "text": "R is the North Sea LME. S is the union of official ICES divisions IVa, IVb and IVc, reconstructed from the area statement in Annex 6. It is a proxy for the modeled domain, not a model-specific boundary polygon, which was not supplied."
+      },
+      {
+        "i": 25,
+        "tag": "p",
+        "text": "Region and study domain"
+      },
+      {
+        "i": 26,
+        "table": [
+          [
+            "North Sea LME and reconstructed ICES divisions IVa–IVc"
+          ],
+          [
+            ""
+          ]
+        ]
+      },
+      {
+        "i": 27,
+        "tag": "p",
+        "text": "Figure 1. Repository LME_022 boundary and official ICES division union in a common equal-area display. WGS84 geodesic intersection gives A = 86.53% and B = 98.86%; applying a common Natural Earth 1:50 million land mask gives A = 87.14% and B = 99.63%. These boundary treatments support the approximate ranges in the main table. Boundary analysis"
+      },
+      {
+        "i": 28,
+        "tag": "p",
+        "text": "Study domain in the source report"
+      },
+      {
+        "i": 29,
+        "table": [
+          [
+            "ICES WGSAM report Annex 6 area statement"
+          ],
+          [
+            ""
+          ]
+        ]
+      },
+      {
+        "i": 30,
+        "tag": "p",
+        "text": "Figure 2. ICES WGSAM report, Annex 6, printed page 102 / PDF page 104. The area statement identifies North Sea ICES divisions IVa, IVb and IVc; the stated time range describes the report calibration rather than a 2019 base model. ICES report (PDF page 104)"
+      },
+      {
+        "i": 31,
+        "tag": "p",
+        "text": "The study-domain map above is this review's geographic reconstruction. No model-specific boundary polygon was supplied or recovered. The downloaded official divisions are not an archived model-period boundary. Differences in northern and eastern boundaries and coastline resolution prevent treating the estimate as exact coverage of the native model."
+      },
+      {
+        "i": 32,
+        "tag": "sectPr",
+        "text": ""
+      }
+    ],
+    "parts": {
+      "[Content_Types].xml": "1a1b7bf7aeab6ab754ba491b21600be5de0b06b910a5e1034eed09dfba6f5f1e",
+      "_rels/.rels": "a9ae57efe9186f07d48303bcac5d54c7e359bf3f503939c03ad2954e5c59a5c4",
+      "docProps/core.xml": "5a3b546b5af8bdccbae779209403b8b3ab8b640aae4ab07f1684f5eee5868a52",
+      "docProps/app.xml": "be664981c3141cddfc59362beb287ebf20d0773660e2dd6faac5968a5930a081",
+      "word/document.xml": "facad30759e458444fe949fc4d8db189709de21434fd21f2a533fa0d038ca295",
+      "word/_rels/document.xml.rels": "f144d669b017dd22e5bdcb86b2792768ffcb52e2486be16555d9b8887844c964",
+      "word/styles.xml": "a467711883ebab028df4cc16a4a7b455ee757abb25b598a2fcc39462bccaf83e",
+      "word/stylesWithEffects.xml": "463ae0928cf0d84775dbf8cf18d6c3029f6707c81bf590f6d6dd8757a5e93f15",
+      "word/settings.xml": "51a0d348fe85965c66e4748a03c3c0d055d78455514f03cb121c334af7d73689",
+      "word/webSettings.xml": "349d36de7434d09f86987ff671d8814964a0588c1e630c06e562cda7e75e9f95",
+      "word/fontTable.xml": "79385fb7f60247507ecaffc292e9ebd52ea0657b8634f629ba6fccc54011d6bb",
+      "word/theme/theme1.xml": "e3a8ab7db9ca7afca56f5f2820a56e8b660016c647773555b060b0a02ac76941",
+      "customXml/item1.xml": "a86086ffc5d8e83ebd6c71a55d1d2efaa31b137977f5f3a752366e1023612144",
+      "customXml/_rels/item1.xml.rels": "1ca6c9a64edcebe24ee703a54403611b322d96da33371779e742d2d3f7ed7a6c",
+      "customXml/itemProps1.xml": "c542307b13ec29a8b546217bb37936ab4822e044b265d2952985ec3d6afed24e",
+      "word/numbering.xml": "70976f19cbcd896e51890859fe6ecb3467a5a7ad0c040160fedc5a1993cb09ce",
+      "word/media/image1.png": "0c7d8384fa0d5493adfb47b2e4b6078c8fb20fd1cf82b669a8d7944f2b41ce83",
+      "word/media/image2.png": "8e56492b1bbf06ebeea86c5c8e6285584ca51eff74ed497bb1af96738f397bd9",
+      "docProps/thumbnail.jpeg": "96367138dc44ce09bf2c8f0f8e49348a1478d2c5c0af69bbc2bbc38b63cdcead"
+    },
+    "relationships": [
+      {
+        "Id": "rId3",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles",
+        "Target": "styles.xml"
+      },
+      {
+        "Id": "rId4",
+        "Type": "http://schemas.microsoft.com/office/2007/relationships/stylesWithEffects",
+        "Target": "stylesWithEffects.xml"
+      },
+      {
+        "Id": "rId5",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings",
+        "Target": "settings.xml"
+      },
+      {
+        "Id": "rId6",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings",
+        "Target": "webSettings.xml"
+      },
+      {
+        "Id": "rId7",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable",
+        "Target": "fontTable.xml"
+      },
+      {
+        "Id": "rId8",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
+        "Target": "theme/theme1.xml"
+      },
+      {
+        "Id": "rId1",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml",
+        "Target": "../customXml/item1.xml"
+      },
+      {
+        "Id": "rId2",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering",
+        "Target": "numbering.xml"
+      },
+      {
+        "Id": "rId9",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../../../../../LME_022.xlsx",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId10",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../../../../../raw/catch/LME_022-catch.zip",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId11",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../../../sources/ICES_WGSAM_2015.pdf",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId12",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "https://doi.org/10.3389/fmars.2025.1646031",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId13",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../model.json",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId14",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../model_notes.md",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId15",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "taxon_mapping.xlsx",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId16",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../results/diagnostics/2026-11-14_loader_repair/report_ready.json",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId17",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "evidence/source_review/candidate_review_loader_repair.json",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId18",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../../../../NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/validation.docx",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId19",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+        "Target": "media/image1.png"
+      },
+      {
+        "Id": "rId20",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "evidence/geography/geographic_assessment.json",
+        "TargetMode": "External"
+      },
+      {
+        "Id": "rId21",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+        "Target": "media/image2.png"
+      },
+      {
+        "Id": "rId22",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        "Target": "../../../sources/ICES_WGSAM_2015.pdf#page=104",
+        "TargetMode": "External"
+      }
+    ],
+    "parser": {
+      "expected_unsigned_error": "The report needs an explicit researcher identity, date and one unambiguous decision"
+    }
+  },
+  "template": {
+    "sha256": "2a6cb630b4697a87ac310a2a3871891ab189ee0466cef218a28d0b4ff384dbc4",
+    "elements": [
+      {
+        "i": 0,
+        "tag": "p",
+        "text": "[Region name] model validation"
+      },
+      {
+        "i": 1,
+        "table": [
+          [
+            "Field",
+            "Entry"
+          ],
+          [
+            "Region",
+            "[Region name | identifier | Regional workbook]"
+          ],
+          [
+            "Catch source",
+            "[Provider; catch years; catch basis; date/version][Region | Catch files]"
+          ],
+          [
+            "Selected article",
+            "[Authors (year). Title.][DOI | Paper PDF | Paper folder]"
+          ],
+          [
+            "Other known articles",
+            "[Author/year; short title; useful DOI or local record, one entry per article]"
+          ],
+          [
+            "Selected model",
+            "[Exact model ID/name; period; domain; source groups][Folder | JSON | Saved runtime, if relevant]"
+          ],
+          [
+            "Other models from the same article",
+            "[Other model: period; area; distinguishing features, one entry per model]"
+          ],
+          [
+            "Selection rationale",
+            "Article - [documented reason, or ?]Model - [documented reason, or ?]"
+          ],
+          [
+            "Model extraction",
+            "[Material source conflicts and treatment | Useful reconstruction/conflict links][Diet discrepancy and treatment; missing/default GS; derived BA; other material changes, where relevant]"
+          ],
+          [
+            "GE diagnostics",
+            "[Evidence-based verdict][Negative SPPR finding; each affected source and group by name/ID when present]rho_living = [value]b = [value]Detritus [pool name/ID]: SPPR = [value][Material balance finding, if relevant]"
+          ],
+          [
+            "TE diagnostics",
+            "[Evidence-based verdict][Negative SPPR finding; each affected source and group by name/ID when present]rho_living = [value]Detritus [pool name/ID]: SPPR = [value][Material balance finding, if relevant]"
+          ],
+          [
+            "SPPR calculation",
+            "[Researcher calculation choices and notes]"
+          ],
+          [
+            "Geographic fit",
+            "A. Region covered by study: [approximate value or range]%.B. Study area covered by region: [approximate value or range]%."
+          ],
+          [
+            "Temporal fit",
+            "[Model period; catch years; material implications of transferring fixed coefficients or weights]"
+          ],
+          [
+            "Other",
+            ""
+          ],
+          [
+            "Open issues and next action",
+            ""
+          ],
+          [
+            "Review and reproducibility",
+            "Researcher name: [name] | review date: [dd/mm/yyyy]"
+          ]
+        ]
+      },
+      {
+        "i": 2,
+        "tag": "p",
+        "text": "\n"
+      },
+      {
+        "i": 3,
+        "tag": "p",
+        "text": "Taxon mapping and coverage"
+      },
+      {
+        "i": 4,
+        "tag": "p",
+        "text": "Reference: [year and catch basis]; [source scope and taxon/group filters]."
+      },
+      {
+        "i": 5,
+        "tag": "p",
+        "text": "[n] source groups [+ computational imports separately]; [n] catch taxa."
+      },
+      {
+        "i": 6,
+        "tag": "p",
+        "text": "Simple-chain PPR totals [value] t C in [year]."
+      },
+      {
+        "i": 7,
+        "tag": "p",
+        "text": "[Missing TL/coefficient note only when needed; distinguish zero catch from unknown annual PPR.]"
+      },
+      {
+        "i": 8,
+        "tag": "p",
+        "text": "Method: [simple-chain method name]."
+      },
+      {
+        "i": 9,
+        "tag": "p",
+        "text": "Excel taxon appendix and descriptive Sources sheet: [relative hyperlink]."
+      },
+      {
+        "i": 10,
+        "table": [
+          [
+            "Overall confidence",
+            "Taxa (n)",
+            "Catch (%)",
+            "Simple-chain PPR (%)"
+          ],
+          [
+            "High",
+            "[n]",
+            "[%]",
+            "[%]"
+          ],
+          [
+            "Medium",
+            "[n]",
+            "[%]",
+            "[%]"
+          ],
+          [
+            "Low",
+            "[n]",
+            "[%]",
+            "[%]"
+          ],
+          [
+            "Very low",
+            "[n]",
+            "[%]",
+            "[%]"
+          ],
+          [
+            "Unresolved",
+            "[n]",
+            "[%]",
+            "[%]"
+          ]
+        ]
+      },
+      {
+        "i": 11,
+        "tag": "p",
+        "text": "Overall confidence uses the weaker required membership or allocation component."
+      },
+      {
+        "i": 12,
+        "tag": "p",
+        "text": "Group assignment rules"
+      },
+      {
+        "i": 13,
+        "table": [
+          [
+            "Plain-language rule",
+            "Confidence",
+            "PPR percentage"
+          ],
+          [
+            "[Actual rules, highest PPR share first]",
+            "[Level]",
+            "[%]"
+          ]
+        ]
+      },
+      {
+        "i": 14,
+        "tag": "p",
+        "text": "Membership evidence: [concise descriptive sources and useful links]."
+      },
+      {
+        "i": 15,
+        "tag": "p",
+        "text": "Allocation weight rules"
+      },
+      {
+        "i": 16,
+        "table": [
+          [
+            "Plain-language rule",
+            "Confidence",
+            "PPR percentage"
+          ],
+          [
+            "[Actual allocation rule in full words]",
+            "[Level]",
+            "[%]"
+          ]
+        ]
+      },
+      {
+        "i": 17,
+        "tag": "p",
+        "text": "Weights and assumptions: [actual basis and material transfer assumptions; source links]."
+      },
+      {
+        "i": 18,
+        "tag": "p",
+        "text": "Each percentage is the independent simple-chain PPR associated with taxa using that rule."
+      },
+      {
+        "i": 19,
+        "tag": "p",
+        "text": "Unresolved taxa: [names and short reasons, or none]. [n] Very low decisions cover [%] of catch and [%] of simple-chain PPR."
+      },
+      {
+        "i": 20,
+        "tag": "p",
+        "text": "Very low decisions"
+      },
+      {
+        "i": 21,
+        "table": [
+          [
+            "Affected taxa",
+            "Why confidence is very low"
+          ],
+          [
+            "[Exact taxa sharing one evidenced reason]",
+            "[Region/model-specific composition, analogue or allocation uncertainty]"
+          ]
+        ]
+      },
+      {
+        "i": 22,
+        "tag": "p",
+        "text": "\n"
+      },
+      {
+        "i": 23,
+        "tag": "p",
+        "text": "Geographic evidence screenshots"
+      },
+      {
+        "i": 24,
+        "tag": "p",
+        "text": "Target region R and selected model study area S. [Overlap method and approximation, if applicable.]"
+      },
+      {
+        "i": 25,
+        "tag": "p",
+        "text": "Region area"
+      },
+      {
+        "i": 26,
+        "table": [
+          [
+            "Target region boundary"
+          ],
+          [
+            "[Insert readable boundary image]\n\n\n\n"
+          ]
+        ]
+      },
+      {
+        "i": 27,
+        "tag": "p",
+        "text": "[Region name/ID; boundary source/version | Source | Image]"
+      },
+      {
+        "i": 28,
+        "tag": "p",
+        "text": "Study area in the article"
+      },
+      {
+        "i": 29,
+        "table": [
+          [
+            "Study boundary for the selected model"
+          ],
+          [
+            "[Insert readable boundary image]\n\n\n\n"
+          ]
+        ]
+      },
+      {
+        "i": 30,
+        "tag": "p",
+        "text": "[Article; figure/page; represented model area | Source PDF | Image]"
+      },
+      {
+        "i": 31,
+        "tag": "p",
+        "text": "[If a figure is unavailable, state the missing source or reason.]"
+      },
+      {
+        "i": 32,
+        "tag": "sectPr",
+        "text": ""
+      }
+    ],
+    "parts": {
+      "[Content_Types].xml": "66c84fb7a6aa3c4ead49f895e4a7044df1fb57de1ed76d09b2686e91f5bed5b4",
+      "_rels/.rels": "a9ae57efe9186f07d48303bcac5d54c7e359bf3f503939c03ad2954e5c59a5c4",
+      "docProps/core.xml": "5a3b546b5af8bdccbae779209403b8b3ab8b640aae4ab07f1684f5eee5868a52",
+      "docProps/app.xml": "be664981c3141cddfc59362beb287ebf20d0773660e2dd6faac5968a5930a081",
+      "word/document.xml": "192dcfb76f6721c089058b81ca02a919a788f8e112ec0f338af8c7b12d93586b",
+      "word/_rels/document.xml.rels": "1e7f0eb144a98e199249314f61ff32a8de2a27e56d8e9ee6b524e1c6b235d377",
+      "word/styles.xml": "a467711883ebab028df4cc16a4a7b455ee757abb25b598a2fcc39462bccaf83e",
+      "word/stylesWithEffects.xml": "463ae0928cf0d84775dbf8cf18d6c3029f6707c81bf590f6d6dd8757a5e93f15",
+      "word/settings.xml": "51a0d348fe85965c66e4748a03c3c0d055d78455514f03cb121c334af7d73689",
+      "word/webSettings.xml": "349d36de7434d09f86987ff671d8814964a0588c1e630c06e562cda7e75e9f95",
+      "word/fontTable.xml": "79385fb7f60247507ecaffc292e9ebd52ea0657b8634f629ba6fccc54011d6bb",
+      "word/theme/theme1.xml": "e3a8ab7db9ca7afca56f5f2820a56e8b660016c647773555b060b0a02ac76941",
+      "customXml/item1.xml": "a86086ffc5d8e83ebd6c71a55d1d2efaa31b137977f5f3a752366e1023612144",
+      "customXml/_rels/item1.xml.rels": "1ca6c9a64edcebe24ee703a54403611b322d96da33371779e742d2d3f7ed7a6c",
+      "customXml/itemProps1.xml": "c542307b13ec29a8b546217bb37936ab4822e044b265d2952985ec3d6afed24e",
+      "word/numbering.xml": "70976f19cbcd896e51890859fe6ecb3467a5a7ad0c040160fedc5a1993cb09ce",
+      "docProps/thumbnail.jpeg": "96367138dc44ce09bf2c8f0f8e49348a1478d2c5c0af69bbc2bbc38b63cdcead"
+    },
+    "relationships": [
+      {
+        "Id": "rId3",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles",
+        "Target": "styles.xml"
+      },
+      {
+        "Id": "rId4",
+        "Type": "http://schemas.microsoft.com/office/2007/relationships/stylesWithEffects",
+        "Target": "stylesWithEffects.xml"
+      },
+      {
+        "Id": "rId5",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings",
+        "Target": "settings.xml"
+      },
+      {
+        "Id": "rId6",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings",
+        "Target": "webSettings.xml"
+      },
+      {
+        "Id": "rId7",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable",
+        "Target": "fontTable.xml"
+      },
+      {
+        "Id": "rId8",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
+        "Target": "theme/theme1.xml"
+      },
+      {
+        "Id": "rId1",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml",
+        "Target": "../customXml/item1.xml"
+      },
+      {
+        "Id": "rId2",
+        "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering",
+        "Target": "numbering.xml"
+      }
+    ],
+    "parser": {
+      "expected_unsigned_error": "Review document identifies a different model"
+    }
+  }
+}

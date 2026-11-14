@@ -15,6 +15,24 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 
+def scoped_validated_metadata(metadata, *, units=None, model_pairs=None, all_validated=False):
+    """Choose explicit scientific targets before discovery or package reads.
+
+    Omitted/empty scope means no scientific work. Unit and exact-pair filters
+    intersect when both are supplied; a full audit cannot also have a filter.
+    """
+    if all_validated and (units is not None or model_pairs is not None):
+        raise ValueError('Full validated scope cannot be combined with a narrow scope')
+    units = None if units is None else set(units)
+    pairs = None if model_pairs is None else {tuple(pair) for pair in model_pairs}
+    if not all_validated and units is None and pairs is None:
+        return []
+    return [row for row in metadata
+            if row.get('researcher_review_status') == 'Validated by researcher'
+            and (units is None or row.get('unit_id') in units)
+            and (pairs is None or (row.get('unit_id'), row.get('model_id')) in pairs)]
+
+
 def validated_identities(metadata):
     identities = [(r['unit_id'], r['model_id']) for r in metadata
                   if r.get('researcher_review_status') == 'Validated by researcher']
@@ -957,21 +975,34 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
         staging.cleanup()
 
 
-def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor=None, migration_units=None):
-    """Complete all exact validated identities without changing model selection.
+def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor=None,
+                              migration_units=None, units=None, model_pairs=None,
+                              all_validated=False):
+    """Complete only explicitly scoped identities without changing selection.
 
     Central/map callers publish changed_units under their existing writer lock.
     This function writes only model packages and their current regional workbook.
+    Full-project inventory requires all_validated=True. Empty or omitted scope
+    does no metadata, adapter, discovery, backup or scientific work.
     """
+    if migration_units is not None:
+        migration_units = set(migration_units)
+        units = migration_units if units is None else set(units) & migration_units
+    units = None if units is None else set(units)
+    model_pairs = None if model_pairs is None else {tuple(pair) for pair in model_pairs}
+    scoped_validated_metadata([], units=units, model_pairs=model_pairs, all_validated=all_validated)
+    if not all_validated and ((units is None and model_pairs is None) or units == set() or model_pairs == set()):
+        return {'changed_units': [], 'models': [], 'written_paths': [], 'written_hashes': {}}
     from tools.project_core.registry.writes import central_lock
     root = Path(root).resolve()
     if not lock_held:
         with central_lock(root):
-            return ensure_validated_coverage(root, progress=progress, lock_held=True,ee_floor=ee_floor,migration_units=migration_units)
+            return ensure_validated_coverage(root, progress=progress, lock_held=True,ee_floor=ee_floor,
+                migration_units=migration_units,units=units,model_pairs=model_pairs,all_validated=all_validated)
     from tools.project_core.registry.discovery import region_directory, resolve_model
     from tools.project_core.workbooks.workbooks import sha
     metadata_hash = sha(root/'Project.xlsx')
-    metadata = _metadata(root)
+    metadata = scoped_validated_metadata(_metadata(root), units=units, model_pairs=model_pairs, all_validated=all_validated)
     if sha(root/'Project.xlsx')!=metadata_hash:
         raise ValueError('Project model registration changed while loading coverage identities')
     indexed = {(r['unit_id'], r['model_id']): r for r in metadata}

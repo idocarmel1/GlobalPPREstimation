@@ -74,6 +74,41 @@ class EeFloorViewsTests(unittest.TestCase):
         self.assertNotIn('calculation_provenance', model)
         self.assertEqual(model['group_data']['groups'][0]['ee'], .02)
 
+    def test_explicit_flat_historical_flags_without_diagnostic_table(self):
+        for enabled in (True, False):
+            flags = {'use_ee_floor': enabled, 'ee_floor': 1.0, 'ee_threshold': .1}
+            book = {'Overview': {'Settings': (['field', 'value'], [
+                ['effective_loader_flags', json.dumps(flags)]])}}
+            before = copy.deepcopy(book)
+            result = original_atlas_data.calculation_provenance(book)
+            self.assertIsNotNone(result)
+            self.assertIs(result['use_ee_floor'], enabled)
+            self.assertEqual(result['ee_floor'], 1.0)
+            self.assertEqual(result['effective_loader_flags'], flags)
+            self.assertEqual(book, before)
+
+    def test_nested_flags_take_precedence_over_flat_flags(self):
+        flags = {'use_ee_floor': True, 'ee_floor': 1.0,
+                 'constructor': {'use_ee_floor': False, 'ee_floor': .2}}
+        book = {'Overview': {'Settings': (['field', 'value'], [
+            ['effective_loader_flags', json.dumps(flags)]])}}
+        result = original_atlas_data.calculation_provenance(book)
+        self.assertIs(result['use_ee_floor'], False)
+        self.assertEqual(result['ee_floor'], .2)
+        flags['constructor'] = {}
+        book['Overview']['Settings'][1][0][1] = json.dumps(flags)
+        self.assertIsNone(original_atlas_data.calculation_provenance(book))
+
+    def test_flat_flags_do_not_infer_missing_or_accept_malformed_enable(self):
+        for flags in ({'ee_floor': 1.0}, {'use_ee_floor': 'true', 'ee_floor': 1.0}):
+            book = {'Overview': {'Settings': (['field', 'value'], [
+                ['effective_loader_flags', json.dumps(flags)]])}}
+            if 'use_ee_floor' not in flags:
+                self.assertIsNone(original_atlas_data.calculation_provenance(book))
+            else:
+                with self.assertRaisesRegex(ValueError, 'must be Boolean'):
+                    original_atlas_data.calculation_provenance(book)
+
     def test_completed_mortality_is_not_relabelled_as_an_unknown_original_source(self):
         book = {'Selected model groups': {'Groups': (['group_name', 'ee', 'M0'], [['fish group', .02, 19.6]])}}
         _, model = original_atlas_data.detail_from_book(book, 'LME_001', 'm')
@@ -147,6 +182,36 @@ class EeFloorViewsTests(unittest.TestCase):
         self.assertIn('href="../regions/LME/LME_001/papers/P/models/candidate/results/regional_snapshot.xlsx"', updated)
         self.assertIn('href="../regions/LME/LME_001/papers/P/models/candidate/sppr_source.xlsx"', updated)
         self.assertIn('<p>Retained source prose</p>', updated)
+
+    def test_source_view_distinguishes_floor_and_review_states_without_mutation(self):
+        approved = {'id': 'approved', 'label': 'Reviewed ON', 'calculation_provenance': {'use_ee_floor': True, 'ee_floor': .1},
+                    'researcher_review': {'status': 'Validated by researcher', 'report_path': 'report.docx'}}
+        pending = {'id': 'pending', 'label': 'Pending ON', 'calculation_provenance': {'use_ee_floor': True, 'ee_floor': .1},
+                   'recorded_review_pending': {'recorded_status': 'Validated by researcher', 'reason': 'Source changed'}}
+        unsigned = {'id': 'unsigned', 'label': 'Unreviewed OFF', 'calculation_provenance': {'use_ee_floor': False, 'ee_floor': .1}}
+        for model, expected, forbidden in [
+            (approved, 'The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report. Other method results retain their own diagnostic status.',
+             ['does not approve this changed', 'awaiting current verification', 'No verified researcher review']),
+            (pending, 'The recorded researcher review is awaiting current verification.',
+             ['The signed researcher review applies', 'No verified researcher review']),
+            (unsigned, 'No verified researcher review is recorded for this model.',
+             ['The signed researcher review applies', 'awaiting current verification'])]:
+            with self.subTest(model=model['id']):
+                catalog = {'regions': [{'unit_id': 'LME_001'}],
+                           'network': {'units': {'LME_001': {'models': [model]}}}}
+                before = copy.deepcopy(catalog)
+                page = '<details><summary>Region <small>LME_001 · 0 studies</small></summary><p>Retained source prose</p></details>'
+                updated = source_provenance_layout(page, catalog)
+                self.assertIn(expected, updated)
+                for text in forbidden: self.assertNotIn(text, updated)
+                if model['calculation_provenance']['use_ee_floor']:
+                    self.assertIn('Hypothetical external nonfishery mortality sink; excluded from catch and fishery PPR.', updated)
+                    self.assertNotIn('No EE floor is applied', updated)
+                else:
+                    self.assertIn('No EE floor is applied in this saved calculation.', updated)
+                    self.assertNotIn('Hypothetical external nonfishery mortality sink', updated)
+                self.assertEqual(catalog, before, 'Prose rendering cannot mutate approval or calculation payloads')
+                self.assertIn('<p>Retained source prose</p>', updated)
 
     @unittest.skipUnless(shutil.which('node'), 'Node required for display/export checks')
     def test_generated_pages_show_settings_without_changing_review_and_exports(self):

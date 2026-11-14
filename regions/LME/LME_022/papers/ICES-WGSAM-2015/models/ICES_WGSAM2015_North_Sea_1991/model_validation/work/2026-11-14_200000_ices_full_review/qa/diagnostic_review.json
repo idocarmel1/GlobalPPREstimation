@@ -1,0 +1,1992 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-14T15:54:26.363762+00:00",
+  "operation": "Read-only saved diagnostic/source review and report arithmetic; no constructor, solver, source extraction, adoption or publication executed.",
+  "unit_id": "LME_022",
+  "selected_model": {
+    "workbook": "regions/LME/LME_022/LME_022.xlsx",
+    "workbook_sha256": "60830e20d8751993c4eb0e87a3f08e7a26ddf7e942da45d73d84e76e3fbff829",
+    "reader": "tools.project_core.workbooks.workbooks.read_book/overview",
+    "canonical_discovery": "tools.project_core.registry.discovery.discover_models",
+    "overview": {
+      "unit_id": "LME_022",
+      "region_name": "North Sea",
+      "region_type": "LME",
+      "selected_model_id": "ICES_WGSAM2015_North_Sea_1991",
+      "selection_rationale": "User selected this North Sea 1991 published Rpath snapshot on 2026-10-14 because its static mass-balance checks pass. It materially differs from the accepted native EwE key run; source routing restrictions and loader departures remain. Researcher approval and Ecopath PPR readiness are not established.",
+      "model_path": "papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model.json",
+      "results_model_id": null,
+      "results_model_sha256": null,
+      "selected_paper_ids": null,
+      "production_eligible": false,
+      "catch_basis": "catch",
+      "transfer_efficiency": 0.1,
+      "taxon_detail_year": 2019,
+      "source_note": "Partial results only. East-coast Scotland 1991–1995 coefficients applied to North Sea 1950–2019 catch, including discards although source model excludes them. Not a whole-region ecosystem reconstruction. Canonical source preserved; runtime diet normalization, GS defaults and residual BA completion documented. Unsupported catch stays missing.",
+      "calculation_status": "pending: [Errno 2] No such file or directory: 'C:\\\\Users\\\\idoca\\\\Desktop\\\\אישי\\\\אקדמיה\\\\תואר שני\\\\מחקר\\\\BTN\\\\GlobalPPREstimation\\\\regions\\\\LME\\\\LME_022\\\\papers\\\\ICES-WGSAM-2015\\\\models\\\\ICES_WGSAM2015_North_Sea_1991\\\\results\\\\result_manifest.json'",
+      "source_region_workbook": "original_research_archive/legacy/data/LME_022/LME_022.xlsx",
+      "npp_policy": "Annual observed support; unsupported years stay blank; no earliest-year proxy by default",
+      "calculation_input_sha256": "dcce2e24e5de9718c8c810fc65f38e2fdbd63cf3f72f81e26e884521ad01cb38",
+      "calculation_result_sha256": "bdb9262f11b5c71035a41ecfc3399b761b225bb6fed85c67c49b6729c853a6d4",
+      "effective_loader_flags": null,
+      "sppr_configuration": null,
+      "sppr_engine_hashes": null
+    },
+    "discovered_models": {
+      "ICES_WGSAM2015_North_Sea_1991": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model.json",
+      "22_20071991_North_Sea_report_Table_3.3_(1991)": "regions/LME/LME_022/papers/LME022-Mackinson-2007/models/22_20071991_North_Sea_report_Table_3.3_(1991)/model.json",
+      "457_457_North_Sea_(1991)": "regions/LME/LME_022/papers/LME022-Mackinson-2007/models/457_457_North_Sea_(1991)/model.json",
+      "22_20251890_East_Coast_of_Scotland_(1890-1895)": "regions/LME/LME_022/papers/NS-2025/models/22_20251890_East_Coast_of_Scotland_(1890-1895)/model.json",
+      "22_20251990_East_Coast_of_Scotland_(1991-1995)": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model.json"
+    }
+  },
+  "ices": {
+    "model_id": "ICES_WGSAM2015_North_Sea_1991",
+    "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+    "canonical_metadata": {
+      "LME": "22 North Sea",
+      "model_number": "ICES_WGSAM2015_North_Sea_1991",
+      "model_name": "North Sea Rpath port",
+      "model_year": 1991,
+      "model_id": "ICES_WGSAM2015_North_Sea_1991",
+      "biomass_basis": "whole_model_area",
+      "ba_basis": "whole_model_area",
+      "source_framework": "published Rpath port snapshot; materially differs from ICES accepted native configuration",
+      "variant_id": "published_Rpath_port_snapshot_materially_different_from_ICES_accepted_native_configuration",
+      "accepted_native_equivalence": "unavailable; identified material parameter differences"
+    },
+    "configuration_identity": {
+      "adapter_sha256": "1c4f165256116513841b819609de85fdd9c8f2adf9f38e85651c79c8a06423f7",
+      "constructor": {
+        "DC_tol": 0.001,
+        "balance_BA_after_DC_normalization": false,
+        "default_gs": false,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1,
+        "normalize_DC": false,
+        "underdetermined": false,
+        "use_ee_floor": true,
+        "weight_flow": 1.0,
+        "weight_guess": 1.0,
+        "zero_biomass_accum": false,
+        "zero_catch": false
+      },
+      "engine_hashes": {
+        "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+        "PPRCalculator.py": "ee34361a2048c78301b1d8a5172d25c37d77034b9e67c77b7a6794d5ce784b51",
+        "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+        "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+      },
+      "environment": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "flags": {
+        "constructor": {
+          "DC_tol": 0.001,
+          "balance_BA_after_DC_normalization": false,
+          "default_gs": false,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "normalize_DC": false,
+          "underdetermined": false,
+          "use_ee_floor": true,
+          "zero_biomass_accum": false,
+          "zero_catch": false
+        },
+        "diagnostics": {
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1
+        },
+        "method_timeout_seconds": 180
+      },
+      "model_id": "ICES_WGSAM2015_North_Sea_1991",
+      "model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+      "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+      "code_commit": "38cb75d066c5f78d47ba20fc6ab8545a9a6d5c69",
+      "clean_tracked_code_verified": true,
+      "variant_id": "committed_global_source_fidelity_loader_accounting_ee_floor_0.1"
+    },
+    "run_manifest": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/run_manifest.json",
+    "historical_failures_superseded": "2026-11-14_validation and old_structural_zero evidence used faulty runtime; they do not describe the loader-repair configuration.",
+    "constructor_status": "ready",
+    "constructor_warnings": [
+      "RuntimeWarning: 3 group(s) route less than 100% of their flow_to_det to detritus; the remainder is treated as export out of the system: 69 (Discards), 68 (DetritusPOMSediment), 67 (DetritusDOMWaterColumn)."
+    ],
+    "methods": [
+      {
+        "method": "new_GE",
+        "display_method": "GE",
+        "execution_status": "ok",
+        "diagnostic_status": "WARN",
+        "input_status": "WARN",
+        "divergence_status": "WARN",
+        "rho_living": 0.2894427191062622,
+        "b": 0.8822051250081107,
+        "detritus_sppr": [
+          {
+            "id": 67,
+            "name": "DetritusDOMWaterColumn",
+            "sppr": 3.462493358284118
+          },
+          {
+            "id": 68,
+            "name": "DetritusPOMSediment",
+            "sppr": 5.344873625432921
+          },
+          {
+            "id": 69,
+            "name": "Discards",
+            "sppr": 440.27445855458177
+          }
+        ],
+        "saved_balance_flags": {
+          "model_input.is_model_balanced": true,
+          "balance.is_balanced": true
+        },
+        "balance": {
+          "inflow": 2150.010358224,
+          "is_balanced": true,
+          "outflow": 2150.0103582242664,
+          "rel_gap": 1.239444947788965e-13,
+          "status": "OK"
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 8.325029999978195e-05,
+          "dc_rows_sum_to_1": false,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "status": "WARN",
+          "total_catch": 4.558171985857613
+        },
+        "matrix_verification": {
+          "orientation": "recipient groups by basal sources",
+          "shape": [
+            70,
+            5
+          ],
+          "row_ids": [
+            70,
+            69,
+            68,
+            67,
+            66,
+            65,
+            64,
+            63,
+            62,
+            61,
+            60,
+            59,
+            58,
+            57,
+            56,
+            55,
+            54,
+            53,
+            52,
+            51,
+            50,
+            49,
+            48,
+            47,
+            46,
+            45,
+            44,
+            43,
+            42,
+            41,
+            40,
+            39,
+            38,
+            37,
+            36,
+            35,
+            34,
+            33,
+            32,
+            31,
+            30,
+            29,
+            28,
+            27,
+            26,
+            25,
+            24,
+            23,
+            22,
+            21,
+            20,
+            19,
+            18,
+            17,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "source_ids": [
+            70,
+            69,
+            68,
+            67,
+            66
+          ],
+          "source_names": [
+            "diet_import",
+            "Discards",
+            "DetritusPOMSediment",
+            "DetritusDOMWaterColumn",
+            "Phytoplankton"
+          ],
+          "unique_axes": true,
+          "all_canonical_recipients_present": true,
+          "negative_entries": [],
+          "negative_source_count": 0,
+          "nonfinite_entries": [],
+          "mask_counts": {
+            "nan": 0,
+            "negative_infinity": 0,
+            "null": 0,
+            "positive_infinity": 0
+          },
+          "finite_cells": 350
+        },
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "b=0.8822 is within 0.3 of divergence (max sppr_det 440 PP-units per unit detritus)",
+          "max sppr_det=440 >= 10: converged, but detritus is implausibly expensive"
+        ],
+        "execution_warnings": [],
+        "near_zero_te_groups": [],
+        "config": {
+          "TE_option": "GE",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "model": "North Sea Rpath port (1991)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "runtime_before_after_equal": true,
+        "matrix_scope_reconciliation_retained": {
+          "atol": 1e-12,
+          "rtol": 1e-12,
+          "scope_sums_verified": true,
+          "source_matrix_masks_verified": true,
+          "unique_axes": true
+        },
+        "source_file": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_GE.json.gz",
+        "strict_model_balanced": true,
+        "strict_sppr_balanced": true,
+        "all_source_coefficient_definition": {
+          "meaning": "Sum across all five basal-source columns in each recipient row, including synthetic dietary-import source; units wet-weight PP equivalent per wet-weight recipient.",
+          "stored_location": "scopes.all, keyed by exact group name",
+          "maximum_row_sum_discrepancy": 1.4551915228366852e-11,
+          "source_ids": [
+            70,
+            69,
+            68,
+            67,
+            66
+          ]
+        },
+        "report_ready_prose": "GE: WARN. No negative SPPR entries across the basal-source columns; all 350 entries are finite. Strict model and SPPR balance are true; diet rows separately deviate from one by up to 8.32503e-05. rho_living = 0.28944272; b = 0.88220513. DetritusDOMWaterColumn (67) SPPR = 3.46249336; DetritusPOMSediment (68) SPPR = 5.34487363; Discards (69) SPPR = 440.27445855."
+      },
+      {
+        "method": "new_TE_EEfix",
+        "display_method": "TE",
+        "execution_status": "ok",
+        "diagnostic_status": "WARN",
+        "input_status": "WARN",
+        "divergence_status": "WARN",
+        "rho_living": 0.5734463993696682,
+        "b": 0.1554967742366123,
+        "detritus_sppr": [
+          {
+            "id": 67,
+            "name": "DetritusDOMWaterColumn",
+            "sppr": 0.4294643281019556
+          },
+          {
+            "id": 68,
+            "name": "DetritusPOMSediment",
+            "sppr": 0.4430838363796164
+          },
+          {
+            "id": 69,
+            "name": "Discards",
+            "sppr": 816.3858058146532
+          }
+        ],
+        "saved_balance_flags": {
+          "model_input.is_model_balanced": true,
+          "balance.is_balanced": true
+        },
+        "balance": {
+          "inflow": 2150.010358224,
+          "is_balanced": true,
+          "outflow": 2150.0103582240986,
+          "rel_gap": 4.589753475600775e-14,
+          "status": "OK"
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 8.325029999978195e-05,
+          "dc_rows_sum_to_1": false,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "status": "WARN",
+          "total_catch": 4.558171985857613
+        },
+        "matrix_verification": {
+          "orientation": "recipient groups by basal sources",
+          "shape": [
+            70,
+            5
+          ],
+          "row_ids": [
+            70,
+            69,
+            68,
+            67,
+            66,
+            65,
+            64,
+            63,
+            62,
+            61,
+            60,
+            59,
+            58,
+            57,
+            56,
+            55,
+            54,
+            53,
+            52,
+            51,
+            50,
+            49,
+            48,
+            47,
+            46,
+            45,
+            44,
+            43,
+            42,
+            41,
+            40,
+            39,
+            38,
+            37,
+            36,
+            35,
+            34,
+            33,
+            32,
+            31,
+            30,
+            29,
+            28,
+            27,
+            26,
+            25,
+            24,
+            23,
+            22,
+            21,
+            20,
+            19,
+            18,
+            17,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "source_ids": [
+            70,
+            69,
+            68,
+            67,
+            66
+          ],
+          "source_names": [
+            "diet_import",
+            "Discards",
+            "DetritusPOMSediment",
+            "DetritusDOMWaterColumn",
+            "Phytoplankton"
+          ],
+          "unique_axes": true,
+          "all_canonical_recipients_present": true,
+          "negative_entries": [],
+          "negative_source_count": 0,
+          "nonfinite_entries": [],
+          "mask_counts": {
+            "nan": 0,
+            "negative_infinity": 0,
+            "null": 0,
+            "positive_infinity": 0
+          },
+          "finite_cells": 350
+        },
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "max sppr_det=816 >= 10: converged, but detritus is implausibly expensive",
+          "5 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [65, 4, 3, 2, 1]"
+        ],
+        "execution_warnings": [],
+        "near_zero_te_groups": [
+          {
+            "id": 65,
+            "name": "DivingSeabirds"
+          },
+          {
+            "id": 4,
+            "name": "SurfaceFeedingSeabirds"
+          },
+          {
+            "id": 3,
+            "name": "Seals"
+          },
+          {
+            "id": 2,
+            "name": "ToothedWhales"
+          },
+          {
+            "id": 1,
+            "name": "BaleenWhales"
+          }
+        ],
+        "config": {
+          "TE_option": "TE",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "model": "North Sea Rpath port (1991)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "runtime_before_after_equal": true,
+        "matrix_scope_reconciliation_retained": {
+          "atol": 1e-12,
+          "rtol": 1e-12,
+          "scope_sums_verified": true,
+          "source_matrix_masks_verified": true,
+          "unique_axes": true
+        },
+        "source_file": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_TE_EEfix.json.gz",
+        "strict_model_balanced": true,
+        "strict_sppr_balanced": true,
+        "all_source_coefficient_definition": {
+          "meaning": "Sum across all five basal-source columns in each recipient row, including synthetic dietary-import source; units wet-weight PP equivalent per wet-weight recipient.",
+          "stored_location": "scopes.all, keyed by exact group name",
+          "maximum_row_sum_discrepancy": 2.3283064365386963e-10,
+          "source_ids": [
+            70,
+            69,
+            68,
+            67,
+            66
+          ]
+        },
+        "report_ready_prose": "TE: WARN. No negative SPPR entries across the basal-source columns; all 350 entries are finite. Strict model and SPPR balance are true; diet rows separately deviate from one by up to 8.32503e-05. rho_living = 0.57344640; b = 0.15549677. DetritusDOMWaterColumn (67) SPPR = 0.42946433; DetritusPOMSediment (68) SPPR = 0.44308384; Discards (69) SPPR = 816.38580581."
+      },
+      {
+        "method": "new_WithEgestion",
+        "display_method": "With Egestion",
+        "execution_status": "ok",
+        "diagnostic_status": "WARN",
+        "input_status": "WARN",
+        "divergence_status": "WARN",
+        "rho_living": 0.22945022049471692,
+        "b": 0.9151607499042561,
+        "detritus_sppr": [
+          {
+            "id": 67,
+            "name": "DetritusDOMWaterColumn",
+            "sppr": 5.580806053974749
+          },
+          {
+            "id": 68,
+            "name": "DetritusPOMSediment",
+            "sppr": 7.112556342678172
+          },
+          {
+            "id": 69,
+            "name": "Discards",
+            "sppr": 182.03671954514908
+          }
+        ],
+        "saved_balance_flags": {
+          "model_input.is_model_balanced": true,
+          "balance.is_balanced": true
+        },
+        "balance": {
+          "inflow": 2150.010358224,
+          "is_balanced": true,
+          "outflow": 2150.0103582241113,
+          "rel_gap": 5.1819797305170045e-14,
+          "status": "OK"
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 8.325029999978195e-05,
+          "dc_rows_sum_to_1": false,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "status": "WARN",
+          "total_catch": 4.558171985857613
+        },
+        "matrix_verification": {
+          "orientation": "recipient groups by basal sources",
+          "shape": [
+            70,
+            5
+          ],
+          "row_ids": [
+            70,
+            69,
+            68,
+            67,
+            66,
+            65,
+            64,
+            63,
+            62,
+            61,
+            60,
+            59,
+            58,
+            57,
+            56,
+            55,
+            54,
+            53,
+            52,
+            51,
+            50,
+            49,
+            48,
+            47,
+            46,
+            45,
+            44,
+            43,
+            42,
+            41,
+            40,
+            39,
+            38,
+            37,
+            36,
+            35,
+            34,
+            33,
+            32,
+            31,
+            30,
+            29,
+            28,
+            27,
+            26,
+            25,
+            24,
+            23,
+            22,
+            21,
+            20,
+            19,
+            18,
+            17,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "source_ids": [
+            70,
+            69,
+            68,
+            67,
+            66
+          ],
+          "source_names": [
+            "diet_import",
+            "Discards",
+            "DetritusPOMSediment",
+            "DetritusDOMWaterColumn",
+            "Phytoplankton"
+          ],
+          "unique_axes": true,
+          "all_canonical_recipients_present": true,
+          "negative_entries": [],
+          "negative_source_count": 0,
+          "nonfinite_entries": [],
+          "mask_counts": {
+            "nan": 0,
+            "negative_infinity": 0,
+            "null": 0,
+            "positive_infinity": 0
+          },
+          "finite_cells": 350
+        },
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "b=0.9152 is within 0.3 of divergence (max sppr_det 182 PP-units per unit detritus)",
+          "max sppr_det=182 >= 10: converged, but detritus is implausibly expensive"
+        ],
+        "execution_warnings": [],
+        "near_zero_te_groups": [],
+        "config": {
+          "TE_option": "With Egestion",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "model": "North Sea Rpath port (1991)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "runtime_before_after_equal": true,
+        "matrix_scope_reconciliation_retained": {
+          "atol": 1e-12,
+          "rtol": 1e-12,
+          "scope_sums_verified": true,
+          "source_matrix_masks_verified": true,
+          "unique_axes": true
+        },
+        "source_file": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_WithEgestion.json.gz",
+        "strict_model_balanced": true,
+        "strict_sppr_balanced": true,
+        "all_source_coefficient_definition": {
+          "meaning": "Sum across all five basal-source columns in each recipient row, including synthetic dietary-import source; units wet-weight PP equivalent per wet-weight recipient.",
+          "stored_location": "scopes.all, keyed by exact group name",
+          "maximum_row_sum_discrepancy": 3.637978807091713e-12,
+          "source_ids": [
+            70,
+            69,
+            68,
+            67,
+            66
+          ]
+        },
+        "report_ready_prose": "With Egestion: WARN. No negative SPPR entries across the basal-source columns; all 350 entries are finite. Strict model and SPPR balance are true; diet rows separately deviate from one by up to 8.32503e-05. rho_living = 0.22945022; b = 0.91516075. DetritusDOMWaterColumn (67) SPPR = 5.58080605; DetritusPOMSediment (68) SPPR = 7.11255634; Discards (69) SPPR = 182.03671955."
+      }
+    ],
+    "runtime_accounting": {
+      "source_checks": {
+        "known_consumer_diet_cells_exact": 4550,
+        "known_fate_cells_exact": 207,
+        "source_ba_preserved_before_floor_all_69": true,
+        "source_ee_and_tl_preserved_in_source_table_all_69": true,
+        "source_catch_preserved_all_69": true,
+        "canonical_hash_unchanged": true
+      },
+      "producer_routing": {
+        "66": {
+          "67": 0.45,
+          "68": 0.55,
+          "69": 0.0
+        }
+      },
+      "detritus_routing": {
+        "67": {
+          "67": 0.0,
+          "68": 0.0,
+          "69": 0.0
+        },
+        "68": {
+          "67": 0.0,
+          "68": 0.0,
+          "69": 0.0
+        },
+        "69": {
+          "67": 0.0,
+          "68": 0.0,
+          "69": 0.0
+        }
+      },
+      "catch": {
+        "source_total_removals": 4.558171985857613,
+        "internal_return_total": 0.49945138066811684,
+        "external_catch_total": 4.058720605189497,
+        "return_by_pool": {
+          "67": 0.0,
+          "68": 0.0,
+          "69": 0.49945138066811684
+        },
+        "catch_based_footprint_uses_source_total_removals": true
+      },
+      "floor": {
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1,
+        "external_mortality_export_total": 1.983704066273114,
+        "affected_groups": [
+          {
+            "id": 65,
+            "name": "DivingSeabirds",
+            "source_EE": 0.0,
+            "effective_EE": 0.1,
+            "external_mortality_export": 0.00018000000000000004
+          },
+          {
+            "id": 61,
+            "name": "SessileEpifauna",
+            "source_EE": 0.028438289588090988,
+            "effective_EE": 0.1,
+            "external_mortality_export": 1.953634694245114
+          },
+          {
+            "id": 10,
+            "name": "StarryRayOthers",
+            "source_EE": 0.04986552629059828,
+            "effective_EE": 0.1,
+            "external_mortality_export": 0.01290461353279998
+          },
+          {
+            "id": 9,
+            "name": "JuvenileRays",
+            "source_EE": 0.005600641705110809,
+            "effective_EE": 0.1,
+            "external_mortality_export": 0.016697358495200015
+          },
+          {
+            "id": 4,
+            "name": "SurfaceFeedingSeabirds",
+            "source_EE": 0.0,
+            "effective_EE": 0.1,
+            "external_mortality_export": 4.7400000000000014e-05
+          },
+          {
+            "id": 3,
+            "name": "Seals",
+            "source_EE": 0.0,
+            "effective_EE": 0.1,
+            "external_mortality_export": 7.200000000000002e-05
+          },
+          {
+            "id": 2,
+            "name": "ToothedWhales",
+            "source_EE": 0.0,
+            "effective_EE": 0.1,
+            "external_mortality_export": 3.400000000000001e-05
+          },
+          {
+            "id": 1,
+            "name": "BaleenWhales",
+            "source_EE": 0.0,
+            "effective_EE": 0.1,
+            "external_mortality_export": 0.000134
+          }
+        ]
+      },
+      "detritus": [
+        {
+          "id": 67,
+          "name": "DetritusDOMWaterColumn",
+          "source_BA": 0.0,
+          "pre_floor_BA": 0.0,
+          "effective_BA": 152.69013928662457,
+          "source_EE": 0.9137013592419194,
+          "pre_floor_operational_EE": 1.0,
+          "effective_EE": 1.0,
+          "effective_inflow": 1775.6234845771007,
+          "predation": 1622.9333452904762,
+          "derived_stock_residual": 152.69013928662457
+        },
+        {
+          "id": 68,
+          "name": "DetritusPOMSediment",
+          "source_BA": 0.0,
+          "pre_floor_BA": 0.0,
+          "effective_BA": 125.21020841856216,
+          "source_EE": 0.9398548309697918,
+          "pre_floor_operational_EE": 1.0,
+          "effective_EE": 1.0,
+          "effective_inflow": 2103.4986874831084,
+          "predation": 1978.2884790645462,
+          "derived_stock_residual": 125.21020841856216
+        },
+        {
+          "id": 69,
+          "name": "Discards",
+          "source_BA": 0.0,
+          "pre_floor_BA": 0.0,
+          "effective_BA": 0.0035896420485169167,
+          "source_EE": 0.9928128298620078,
+          "pre_floor_operational_EE": 1.0,
+          "effective_EE": 1.0,
+          "effective_inflow": 0.49945138066811684,
+          "predation": 0.4958617386195999,
+          "derived_stock_residual": 0.0035896420485169167
+        }
+      ],
+      "runtime_assumption": "Post-floor DET BA is a derived stock closure and operational DET EE is 1; neither is an author-reported parameter correction or an observed export. Native detritus export remains unspecified. Runtime balance does not prove native equivalence.",
+      "physical_production_max_absolute_residual": 1.8189894035458565e-12,
+      "physical_consumption_max_absolute_residual": 1.8189894035458565e-12
+    },
+    "b_interpretation": "GE and With Egestion include natural mortality and internal catch-return recycling; TE now has an actual coupled catch-return recycling matrix. Its old b=0 was a no-return convention, not a measured comparison value.",
+    "source_loader_interpretation": [
+      "Global source-preserving loader/accounting correction; normal maintained loader with no model-local adaptation.",
+      "Standalone source routing, including explicit zeros, is read by the repaired shared loader; field-by-field reconciliation is retained.",
+      "Source parameters and missingness remain canonical; only documented nonfeeding structural diet conventions apply in runtime.",
+      "Known detritus BA is retained before the EE floor. The floor retains its established effective detritus-stock closure, which is not observed accumulation or a recovered native export. Operational detritus EE=1 remains a calculation convention.",
+      "No LIM, invented catch/BA/GS default, runtime diet normalization, or normalization-induced BA correction is requested.",
+      "EE floor ON at .1 is an explicit current runtime assumption; it is not source correction or approval."
+    ],
+    "source_context": {
+      "publication": {
+        "article_id": "ICES-WGSAM-2015__LME_022",
+        "source_article_id": "ICES-WGSAM-2015",
+        "unit_id": "LME_022",
+        "region_name": "North Sea",
+        "authors": "ICES",
+        "publication_year": 2016,
+        "title": "Report of the Working Group on Multispecies Assessment Methods (WGSAM), 9–13 November 2015",
+        "doi": null,
+        "landing_page": "https://www.ices.dk/community/groups/Pages/WGSAM.aspx",
+        "model_years": "1991–2013",
+        "functional_groups": 69,
+        "key_run_year": 2015,
+        "modeled_footprint": "ICES divisions IVa, IVb and IVc",
+        "coverage_note": "whole North Sea model footprint; exact overlap with LME boundary not measured",
+        "target_coverage_ratio": null,
+        "extraction_readiness": "canonical source snapshot and eight standard import tables created; diagnostics retained; downstream readiness not approved",
+        "model_file_status": "canonical model.json available; accepted native EwE database not obtained",
+        "proposed_model_id": "ICES_WGSAM2015_North_Sea_1991",
+        "central_registration_status": "not applied; map and selection updates remain on hold at user request",
+        "main_file_status": "verified full PDF bytes",
+        "related_material_role": "contextual, not automatically identical parameterization",
+        "source_locators": "Annex 6, printed pp. 102–206; accepted native database listed on pp. 172 and 196",
+        "canonical_model_path": "models/ICES_WGSAM2015_North_Sea_1991/model.json",
+        "canonical_source_identity": "published North Sea Rpath port snapshot; materially different from accepted native EwE configuration",
+        "accepted_native_equivalence": "not established"
+      },
+      "static_year": 1991,
+      "calibration_years": "1991-2013",
+      "ecological_groups": 69,
+      "fleets": 11,
+      "native_key_run_database_available": false,
+      "accepted_native_equivalence": false,
+      "material_examples": [
+        "JuvCod QB 8.011734205608454 in port versus report current 4.96",
+        "AduCod QB 3.5 in port versus report current 2.17",
+        "JuvHerring EE 0.9723237996650456 in port versus report current 0.89"
+      ],
+      "notes_source": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_notes.md",
+      "notes_timing_limitation": "Notes contain historical pre-repair no-diagnostics and loader-departure statements. Latest loader-repair evidence supersedes these specific runtime observations; source fidelity/version distinctions remain applicable."
+    },
+    "geography": {
+      "target": "LME_022",
+      "study_proxy": "ICES divisions IVa, IVb, IVc",
+      "source_passage": "ICES WGSAM Report 2015 Annex 6, printed p.102 / PDF p.104: Area structure North Sea ICES division IVa,b,c",
+      "area_method": "WGS84 ellipsoidal polygon area; oriented rings; intersection of official coast-clipped ICES union with canonical target",
+      "digital_boundary_comparison": {
+        "target_area_km2": 699165.7878743997,
+        "study_area_km2": 611927.2130421457,
+        "intersection_km2": 604963.1898541618,
+        "A_percent": 86.52642911681475,
+        "B_percent": 98.86195236303304
+      },
+      "common_land_mask_sensitivity": {
+        "target_area_km2": 690204.7956403776,
+        "study_area_km2": 603642.6868174612,
+        "intersection_km2": 601426.1468002654,
+        "A_percent": 87.137346856922,
+        "B_percent": 99.63280595199755
+      },
+      "report_A": "approximately 87%",
+      "report_B": "approximately 99-100%",
+      "interpretation": "Broad whole-North-Sea coverage, larger than East Coast Scotland subset. Residual differences reflect domain limits and independently generalized coastlines.",
+      "qualifications": [
+        "Report divisions identify the footprint; this is not a recovered native model spatial grid.",
+        "Official GIS was downloaded on the review date; no archived 1991/model-specific polygon is available.",
+        "A single common Natural Earth 1:50m land mask produces A=87.14%, B=99.63%; raw official coast-clipped comparison gives A=86.53%, B=98.86%.",
+        "Ranges reflect rounded boundary/coastline interpretation, not statistical confidence intervals.",
+        "The declared footprint pertains to the source model lineage. Material port parameter differences prevent assuming accepted native Key Run numerical equivalence.",
+        "Annex text search found declared divisions and a temperature-input bounding box, but no study-boundary map; source passage and explicitly labelled digital reconstruction retained."
+      ],
+      "official_metadata_url": "https://gis.ices.dk/geonetwork/srv/api/records/c784a0a3-752f-4b50-b02f-f225f6c815eb?language=all",
+      "official_query_url": "https://gis.ices.dk/gis/rest/services/ICES_reference_layers/ICES_Areas/MapServer/0/query?f=geojson&where=SubArea%3D%274%27&outFields=%2A&outSR=4326&returnGeometry=true",
+      "assets": [
+        {
+          "path": "common_reference_data/geography/boundaries/LMEs.geojson",
+          "sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423"
+        },
+        {
+          "path": "common_reference_data/geography/basemaps/ne_50m_land.geojson",
+          "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/ices_divisions_IVa_IVb_IVc.geojson",
+          "sha256": "3eee9352113683bfd5c0cb3a0616cc26bbdbe0b79e4b53dae830b3a53ef11fa6"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/target_region.geojson",
+          "sha256": "290a8d161688a23a1fbc821b7e8130cccb1a09b226ea3d3e492272950de17a3e"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/study_area_union.geojson",
+          "sha256": "91bcc99219fd487a4409cc96fb3ec245d1f2c934fcdd8be6f6c952e408beede7"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/target_and_study_overlap.png",
+          "sha256": "0c7d8384fa0d5493adfb47b2e4b6078c8fb20fd1cf82b669a8d7944f2b41ce83"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_report_page104.png",
+          "sha256": "89ead7182d41836d3cbd07656d56f928e42de01cc1b19c7cfbb8a23f778814de"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_area_passage.txt",
+          "sha256": "88d9bc4c7b640aa83fb2705da0537b1ac4c369b9cbe3c878071473b27a85fa61"
+        },
+        {
+          "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_area_passage.png",
+          "sha256": "8e56492b1bbf06ebeea86c5c8e6285584ca51eff74ed497bb1af96738f397bd9"
+        }
+      ],
+      "visual_QA": {
+        "source_report_page104": "inspected, legible",
+        "source_area_passage": "inspected, legible",
+        "target_and_study_overlap": "inspected separately"
+      }
+    },
+    "geography_visual_review": "Inspected target_and_study_overlap.png: readable labeled regional and declared-division proxy; source_area_passage.txt confirms IVa,b,c; no new area calculation.",
+    "strict_flag_definition_verification": {
+      "executed_commit": "38cb75d066c5f78d47ba20fc6ab8545a9a6d5c69",
+      "git_blob_sha256s": {
+        "git_blob": "ee34361a2048c78301b1d8a5172d25c37d77034b9e67c77b7a6794d5ce784b51",
+        "git_blob_as_crlf": "0a7bb0c1001dd91f85f3cd7624a1e551c0384e52ce702aa8c41f616fc3b508ea"
+      },
+      "matches_saved_executed_engine_sha256": true,
+      "model_flag": "diagnose_sppr.model_input.is_model_balanced is directly is_model_balanced()[0]; production np.isclose defaults and consumption np.isclose(atol=1e-6). Diet-sum warning is a separate flag.",
+      "sppr_flag": "diagnose_sppr.balance.is_balanced is directly is_sppr_balanced(sppr_total, TE_option=TE_option)[0], np.isclose(inflow,outflow).",
+      "no_engine_method_or_solver_called": true
+    }
+  },
+  "scotland": {
+    "model_id": "22_20251990_East_Coast_of_Scotland_(1991-1995)",
+    "canonical_model_sha256": "5cda503a847a6ea9bdcda077c184ac20119e0d8b47b064f93b72b72e3d7df691",
+    "variant_id": "seabird_no_self_loop_proportional_prey_derived_ba",
+    "run_manifest": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/run_manifest.json",
+    "runtime_variant_status": "Retained corrected runtime variant; canonical scientific JSON unchanged. Matrices precede signed group exclusions and retain all 25 ecological groups plus synthetic import.",
+    "use_ee_floor": false,
+    "historical_engine_sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "intervention": "Remove seabird self-loop, proportionally redistribute remaining diet including detritus, refresh predation and 13 provenance-proven derived BA fields; no wholesale group removal in matrices.",
+    "methods": [
+      {
+        "method": "GE",
+        "diagnostic_status": "OK",
+        "rho_living": 0.21208967414456642,
+        "b": 0.0698576437258916,
+        "detritus_sppr": [
+          {
+            "id": 25,
+            "name": "Detritus",
+            "sppr": 1.0828711378491187
+          }
+        ],
+        "strict_model_balanced": true,
+        "strict_sppr_balanced": true,
+        "strict_flag_source": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/comparison.json",
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 2145.0,
+          "outflow": 2145.0,
+          "rel_gap": 0.0
+        },
+        "warnings": [],
+        "matrix_verification": {
+          "orientation": "recipient groups by basal sources",
+          "shape": [
+            26,
+            3
+          ],
+          "row_ids": [
+            26,
+            25,
+            1,
+            24,
+            23,
+            22,
+            21,
+            20,
+            19,
+            18,
+            17,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2
+          ],
+          "source_ids": [
+            26,
+            25,
+            1
+          ],
+          "source_names": [
+            "diet_import",
+            "Detritus",
+            "Phytoplankton"
+          ],
+          "unique_axes": true,
+          "all_canonical_recipients_present": true,
+          "negative_entries": [],
+          "negative_source_count": 0,
+          "nonfinite_entries": [],
+          "mask_counts": {
+            "null": 0,
+            "nan": 0,
+            "positive_infinity": 0,
+            "negative_infinity": 0
+          },
+          "finite_cells": 78
+        },
+        "runtime_warnings": [],
+        "options": {
+          "det_collapse_mode": "never",
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "det_external_sppr": 0,
+          "fix_EE_0_cases": true
+        },
+        "scientific_state_unchanged_by_diagnostic": true,
+        "source_file": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_GE.json"
+      },
+      {
+        "method": "TE",
+        "diagnostic_status": "WARN",
+        "rho_living": 0.2757420229532071,
+        "b": 0.0,
+        "detritus_sppr": [
+          {
+            "id": 25,
+            "name": "Detritus",
+            "sppr": 0.8104489294778254
+          }
+        ],
+        "strict_model_balanced": true,
+        "strict_sppr_balanced": true,
+        "strict_flag_source": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/comparison.json",
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 2145.0,
+          "outflow": 2145.0000000000005,
+          "rel_gap": 2.1200342698669656e-16
+        },
+        "warnings": [
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]"
+        ],
+        "matrix_verification": {
+          "orientation": "recipient groups by basal sources",
+          "shape": [
+            26,
+            3
+          ],
+          "row_ids": [
+            26,
+            25,
+            1,
+            24,
+            23,
+            22,
+            21,
+            20,
+            19,
+            18,
+            17,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2
+          ],
+          "source_ids": [
+            26,
+            25,
+            1
+          ],
+          "source_names": [
+            "diet_import",
+            "Detritus",
+            "Phytoplankton"
+          ],
+          "unique_axes": true,
+          "all_canonical_recipients_present": true,
+          "negative_entries": [],
+          "negative_source_count": 0,
+          "nonfinite_entries": [],
+          "mask_counts": {
+            "null": 0,
+            "nan": 0,
+            "positive_infinity": 0,
+            "negative_infinity": 0
+          },
+          "finite_cells": 78
+        },
+        "runtime_warnings": [
+          "3 group(s) have near-zero TE (0 < EE << 1): 24 (Cetaceans), 23 (Seals), 22 (Seabirds). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+        ],
+        "options": {
+          "det_collapse_mode": "never",
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "det_external_sppr": 0,
+          "fix_EE_0_cases": true
+        },
+        "scientific_state_unchanged_by_diagnostic": true,
+        "source_file": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_TE.json"
+      },
+      {
+        "method": "With Egestion",
+        "diagnostic_status": "OK",
+        "rho_living": 0.16967173931565332,
+        "b": 0.09711476293526844,
+        "detritus_sppr": [
+          {
+            "id": 25,
+            "name": "Detritus",
+            "sppr": 1.2093390220288438
+          }
+        ],
+        "strict_model_balanced": true,
+        "strict_sppr_balanced": true,
+        "strict_flag_source": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/comparison.json",
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 2145.0,
+          "outflow": 2145.0,
+          "rel_gap": 0.0
+        },
+        "warnings": [],
+        "matrix_verification": {
+          "orientation": "recipient groups by basal sources",
+          "shape": [
+            26,
+            3
+          ],
+          "row_ids": [
+            26,
+            25,
+            1,
+            24,
+            23,
+            22,
+            21,
+            20,
+            19,
+            18,
+            17,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2
+          ],
+          "source_ids": [
+            26,
+            25,
+            1
+          ],
+          "source_names": [
+            "diet_import",
+            "Detritus",
+            "Phytoplankton"
+          ],
+          "unique_axes": true,
+          "all_canonical_recipients_present": true,
+          "negative_entries": [],
+          "negative_source_count": 0,
+          "nonfinite_entries": [],
+          "mask_counts": {
+            "null": 0,
+            "nan": 0,
+            "positive_infinity": 0,
+            "negative_infinity": 0
+          },
+          "finite_cells": 78
+        },
+        "runtime_warnings": [],
+        "options": {
+          "det_collapse_mode": "never",
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "det_external_sppr": 0,
+          "fix_EE_0_cases": true
+        },
+        "scientific_state_unchanged_by_diagnostic": true,
+        "source_file": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_With_Egestion.json"
+      }
+    ],
+    "signed_word": {
+      "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/validation.docx",
+      "exists": true,
+      "sha256": "500a5734b3e6de8924af64c5b0abf59ed0c368f91fd1b817dabda4ff79e3fbf5",
+      "bytes": 849858
+    },
+    "appendix": {
+      "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/taxon_mapping.xlsx",
+      "exists": true,
+      "sha256": "c3cbe2fd6ba79229dbfb446ab196a5f39b00eed3705c3540da56e3dc8b6a091c",
+      "bytes": 47031
+    },
+    "exact_signed_text": [
+      {
+        "paragraph_index": 37,
+        "text": "Groups removed from calculation:"
+      },
+      {
+        "paragraph_index": 38,
+        "text": "Seabirds"
+      },
+      {
+        "paragraph_index": 39,
+        "text": "Seals"
+      },
+      {
+        "paragraph_index": 40,
+        "text": "Cetaceans"
+      },
+      {
+        "paragraph_index": 41,
+        "text": "All due to GE<0.01"
+      },
+      {
+        "paragraph_index": 54,
+        "text": "Researcher name: Ido Carmel| review date: 14/11/2026"
+      },
+      {
+        "paragraph_index": 56,
+        "text": "MODEL VALIDATED"
+      }
+    ],
+    "geography": {
+      "source_pdf_sha256": "aa2228c7174b72641f07a4ff6c613970a520ebdc9f044f13e1164254ae842ea8",
+      "source_locators": [
+        "Figure1/PDF3",
+        "Methods2.1/PDF3"
+      ],
+      "source_trace_pixels_2x": [
+        [
+          878,
+          228
+        ],
+        [
+          926,
+          228
+        ],
+        [
+          960,
+          438
+        ],
+        [
+          852,
+          438
+        ],
+        [
+          834,
+          403
+        ],
+        [
+          840,
+          370
+        ],
+        [
+          811,
+          352
+        ],
+        [
+          814,
+          308
+        ],
+        [
+          844,
+          260
+        ],
+        [
+          878,
+          228
+        ]
+      ],
+      "control_points": "longitude0 x875,5E x962; latitude62 y228,60 y289.5",
+      "target_boundary_sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+      "land_boundary_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "old_article_footprint_sha256": "d375ace5990baae8e74869d60b86581785a057ce26ae3dfeb0de5d7f245036c0",
+      "old_geometry": {
+        "type": "Feature",
+        "properties": {
+          "geometry_method": "reported/inferred bounding box shown against the target polygon",
+          "geometry_confidence": "medium"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -4,
+                55.8
+              ],
+              [
+                1,
+                55.8
+              ],
+              [
+                1,
+                61
+              ],
+              [
+                -4,
+                61
+              ],
+              [
+                -4,
+                55.8
+              ]
+            ]
+          ]
+        }
+      },
+      "old_geometry_problem": "Inherited rectangle -4..1E,55.8..61N conflicts with source red outline extending near62N and east near5E; includes land and is not the historical shelf study shape.",
+      "reconstructed_study_area_km2": 276921.0021594073,
+      "target_area_km2": 699165.7878743997,
+      "intersection_km2": 276486.97208946676,
+      "A_region_covered_by_study_percent": 39.54526621361738,
+      "B_study_covered_by_region_percent": 99.8432657449034,
+      "provisional_A_range_percent": [
+        37,
+        42
+      ],
+      "provisional_B_range_percent": [
+        99,
+        100
+      ],
+      "range_basis": "±0.1-degree outline sensitivity with identical land mask; rounded approximate ranges, not statistical intervals.",
+      "geometry_confidence": "low",
+      "method": "Manual source-map trace in WGS84 coordinates, independent land subtraction and geodesic areas; separate A=overlap/target and B=overlap/study.",
+      "limitations": "Coarse source map grid/red outline and1:50m coast mask; historical fishing grounds/400m shelf condition not exactly recovered. Target boundary remains distinct.",
+      "reconstruction_sha256": "7b680080392938d6afca48fcf2f82c51c1c26eff1f9c0d5fb87871c13c03f94e"
+    }
+  },
+  "comparison_limitations": [
+    "Not a controlled common-settings comparison: ICES uses repaired engine and EE floor 0.1; Scotland uses restored archived historical engine with EE floor OFF and corrected seabird-diet/derived-BA variant.",
+    "ICES TE b is a coupled catch-return recycling metric; Scotland historical TE b=0 is the no-detritus-recycling convention. Do not rank recycling by these b values across implementations.",
+    "Latest Scotland retained variant is GE OK, TE WARN, With Egestion OK. Earlier Scotland baseline FAIL and 1.669% diet-only PP gap are superseded for this corrected variant.",
+    "Scotland signature excludes Seabirds, Seals and Cetaceans because GE<0.01; retained diagnostics do not implement these exclusions. No post-exclusion diagnostic matrix was established by this review.",
+    "ICES declared domain covers about 87% of LME_022 versus Scotland about 40% (37-42% source-map sensitivity), but geographic advantage does not establish scientific validity.",
+    "ICES port differs materially from unavailable accepted native Key Run; convergence and PP closure do not resolve this or the EE-floor/effective detritus assumptions.",
+    "Taxon mapping review is owned by the parallel mapping stage; no ICES or Scotland mappings/weights were changed or reassessed here."
+  ],
+  "hash_verification": {
+    "recorded_source_and_diagnostic_files": [
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/constructor.json.gz",
+        "exists": true,
+        "sha256": "d8174e8700d060af5a0b4953907de351b107141330ea0259551da1afef52dc42",
+        "bytes": 62885,
+        "expected_sha256": "d8174e8700d060af5a0b4953907de351b107141330ea0259551da1afef52dc42",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/method_coverage.json.gz",
+        "exists": true,
+        "sha256": "eb8910bf0dece1952b7bd91ab868a84f014b02c53a97ae74bf63cdf5c9356f1a",
+        "bytes": 9630,
+        "expected_sha256": "eb8910bf0dece1952b7bd91ab868a84f014b02c53a97ae74bf63cdf5c9356f1a",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_GE.json.gz",
+        "exists": true,
+        "sha256": "ae9cef3d6e5017a077d97667b920833aa4b7ef2a5edef2beb57c47ee1e8e0487",
+        "bytes": 124281,
+        "expected_sha256": "ae9cef3d6e5017a077d97667b920833aa4b7ef2a5edef2beb57c47ee1e8e0487",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_TE_EEfix.json.gz",
+        "exists": true,
+        "sha256": "3bb0c42d27aa89ef82ec4413740c385bd908cecd3eb706e9df24b3ba141cb243",
+        "bytes": 128314,
+        "expected_sha256": "3bb0c42d27aa89ef82ec4413740c385bd908cecd3eb706e9df24b3ba141cb243",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_WithEgestion.json.gz",
+        "exists": true,
+        "sha256": "d75859546f028e5ce49ee73567b726e36d64c4a95dca14ac54abb13d7c193804",
+        "bytes": 124381,
+        "expected_sha256": "d75859546f028e5ce49ee73567b726e36d64c4a95dca14ac54abb13d7c193804",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/run_manifest.json",
+        "exists": true,
+        "sha256": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07",
+        "bytes": 75979,
+        "expected_sha256": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/source_loader_audit.json",
+        "exists": true,
+        "sha256": "2c18860383224ff37bd99579af4e285c4d4f490fae0cad3de1fb25d72b890534",
+        "bytes": 226638,
+        "expected_sha256": "2c18860383224ff37bd99579af4e285c4d4f490fae0cad3de1fb25d72b890534",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/summary.json",
+        "exists": true,
+        "sha256": "b7c57f5e5702c0b1ea24e774e47582e523d26bd3893296637255026c01e133a1",
+        "bytes": 34046,
+        "expected_sha256": "b7c57f5e5702c0b1ea24e774e47582e523d26bd3893296637255026c01e133a1",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/run_manifest.json",
+        "exists": true,
+        "sha256": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07",
+        "bytes": 75979,
+        "expected_sha256": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/constructor.json.gz",
+        "exists": true,
+        "sha256": "d8174e8700d060af5a0b4953907de351b107141330ea0259551da1afef52dc42",
+        "bytes": 62885,
+        "expected_sha256": "d8174e8700d060af5a0b4953907de351b107141330ea0259551da1afef52dc42",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_GE.json.gz",
+        "exists": true,
+        "sha256": "ae9cef3d6e5017a077d97667b920833aa4b7ef2a5edef2beb57c47ee1e8e0487",
+        "bytes": 124281,
+        "expected_sha256": "ae9cef3d6e5017a077d97667b920833aa4b7ef2a5edef2beb57c47ee1e8e0487",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_TE_EEfix.json.gz",
+        "exists": true,
+        "sha256": "3bb0c42d27aa89ef82ec4413740c385bd908cecd3eb706e9df24b3ba141cb243",
+        "bytes": 128314,
+        "expected_sha256": "3bb0c42d27aa89ef82ec4413740c385bd908cecd3eb706e9df24b3ba141cb243",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_WithEgestion.json.gz",
+        "exists": true,
+        "sha256": "d75859546f028e5ce49ee73567b726e36d64c4a95dca14ac54abb13d7c193804",
+        "bytes": 124381,
+        "expected_sha256": "d75859546f028e5ce49ee73567b726e36d64c4a95dca14ac54abb13d7c193804",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model.json",
+        "exists": true,
+        "sha256": "5cda503a847a6ea9bdcda077c184ac20119e0d8b47b064f93b72b72e3d7df691",
+        "bytes": 60134,
+        "expected_sha256": "5cda503a847a6ea9bdcda077c184ac20119e0d8b47b064f93b72b72e3d7df691",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/sppr_source.xlsx",
+        "exists": true,
+        "sha256": "22964abbea82f5f9337f4ba8b48b96319651cbc43101cc5a4f8c2c28546a32f5",
+        "bytes": 41774,
+        "expected_sha256": "22964abbea82f5f9337f4ba8b48b96319651cbc43101cc5a4f8c2c28546a32f5",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/regional_snapshot.xlsx",
+        "exists": true,
+        "sha256": "bd6d84c7bef986e2af2d12b382d74715f1456ebbf8d3bd6b45a0c574c35f5438",
+        "bytes": 1248436,
+        "expected_sha256": "bd6d84c7bef986e2af2d12b382d74715f1456ebbf8d3bd6b45a0c574c35f5438",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/diet_reextraction_20261002/archive_by_sha256/cad6ee682425931cd209e04aad408f86f409a548c3079ce41536ed32d33dd3bb/computational_state.json",
+        "exists": true,
+        "sha256": "cad6ee682425931cd209e04aad408f86f409a548c3079ce41536ed32d33dd3bb",
+        "bytes": 1030055,
+        "expected_sha256": "cad6ee682425931cd209e04aad408f86f409a548c3079ce41536ed32d33dd3bb",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/diet_reextraction_20261002/archive_by_sha256/889379c97fdf6750a717378c11677ee824196f06e3f5cde293a2bed9290d4fd7/runtime_verification.json",
+        "exists": true,
+        "sha256": "889379c97fdf6750a717378c11677ee824196f06e3f5cde293a2bed9290d4fd7",
+        "bytes": 4032,
+        "expected_sha256": "889379c97fdf6750a717378c11677ee824196f06e3f5cde293a2bed9290d4fd7",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/matrix_inspection.json",
+        "exists": true,
+        "sha256": "ba8448d9106f31eee4caf0f2d647c095a2f0705f53fb0baef8ef16ab2814a9c6",
+        "bytes": 18767,
+        "expected_sha256": "ba8448d9106f31eee4caf0f2d647c095a2f0705f53fb0baef8ef16ab2814a9c6",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/diagnostic_code/PPREstimation/PPRCalculator.py",
+        "exists": true,
+        "sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "bytes": 188707,
+        "expected_sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/diagnostic_code/PPREstimation/ModelData.py",
+        "exists": true,
+        "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+        "bytes": 53389,
+        "expected_sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/diagnostic_code/PPREstimation/utils.py",
+        "exists": true,
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "bytes": 7960,
+        "expected_sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/LOADER_TRANSFORMATIONS.csv",
+        "exists": true,
+        "sha256": "7fef0bab65778fb13ac0d4bbe33cdb8753907165f0be2334c8e944e39c3830ed",
+        "bytes": 4701,
+        "expected_sha256": "7fef0bab65778fb13ac0d4bbe33cdb8753907165f0be2334c8e944e39c3830ed",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/ICES_WGSAM_2015.pdf",
+        "exists": true,
+        "sha256": "c0c75a7db2e8ef61ef0198c1ed2817fdd67b23ccdcf48117c17c9bc5e53c88da",
+        "bytes": 5407667,
+        "expected_sha256": "c0c75a7db2e8ef61ef0198c1ed2817fdd67b23ccdcf48117c17c9bc5e53c88da",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/context/Mackinson_2018_North_Sea_plan.pdf",
+        "exists": true,
+        "sha256": "df1c7d1b1d82193420a198d18410d5221c751f69b9f6f073191d40b722d3d85f",
+        "bytes": 17021890,
+        "expected_sha256": "df1c7d1b1d82193420a198d18410d5221c751f69b9f6f073191d40b722d3d85f",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/inputs/native/rpath_port/NorthSeaModel.RData",
+        "exists": true,
+        "sha256": "661ac1fc2ad94c946561e37e8512560f416906265eb2df36a80ffc61107d87bc",
+        "bytes": 18875081,
+        "expected_sha256": "661ac1fc2ad94c946561e37e8512560f416906265eb2df36a80ffc61107d87bc",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/inputs/native/rpath_port/NorthSeaModel_config.R",
+        "exists": true,
+        "sha256": "22a88832aa54a72512c1dd5b0a172bc60b9b184f4282e8ad63fa9b28df5ea9c9",
+        "bytes": 116493,
+        "expected_sha256": "22a88832aa54a72512c1dd5b0a172bc60b9b184f4282e8ad63fa9b28df5ea9c9",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/supplements/EwE-NS_KeyRun 2015 Outputs.zip",
+        "exists": true,
+        "sha256": "087fe10b6d019f051e56e265e0c11a323b945f4e5fd8ec20b47f6fc850d2e607",
+        "bytes": 238756,
+        "expected_sha256": "087fe10b6d019f051e56e265e0c11a323b945f4e5fd8ec20b47f6fc850d2e607",
+        "hash_matches": true
+      }
+    ],
+    "geographic_assets": [
+      {
+        "path": "common_reference_data/geography/boundaries/LMEs.geojson",
+        "exists": true,
+        "sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+        "bytes": 1439041,
+        "expected_sha256": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+        "hash_matches": true
+      },
+      {
+        "path": "common_reference_data/geography/basemaps/ne_50m_land.geojson",
+        "exists": true,
+        "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+        "bytes": 1636166,
+        "expected_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/ices_divisions_IVa_IVb_IVc.geojson",
+        "exists": true,
+        "sha256": "3eee9352113683bfd5c0cb3a0616cc26bbdbe0b79e4b53dae830b3a53ef11fa6",
+        "bytes": 6673565,
+        "expected_sha256": "3eee9352113683bfd5c0cb3a0616cc26bbdbe0b79e4b53dae830b3a53ef11fa6",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/target_region.geojson",
+        "exists": true,
+        "sha256": "290a8d161688a23a1fbc821b7e8130cccb1a09b226ea3d3e492272950de17a3e",
+        "bytes": 28603,
+        "expected_sha256": "290a8d161688a23a1fbc821b7e8130cccb1a09b226ea3d3e492272950de17a3e",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/study_area_union.geojson",
+        "exists": true,
+        "sha256": "91bcc99219fd487a4409cc96fb3ec245d1f2c934fcdd8be6f6c952e408beede7",
+        "bytes": 6766652,
+        "expected_sha256": "91bcc99219fd487a4409cc96fb3ec245d1f2c934fcdd8be6f6c952e408beede7",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/target_and_study_overlap.png",
+        "exists": true,
+        "sha256": "0c7d8384fa0d5493adfb47b2e4b6078c8fb20fd1cf82b669a8d7944f2b41ce83",
+        "bytes": 356916,
+        "expected_sha256": "0c7d8384fa0d5493adfb47b2e4b6078c8fb20fd1cf82b669a8d7944f2b41ce83",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_report_page104.png",
+        "exists": true,
+        "sha256": "89ead7182d41836d3cbd07656d56f928e42de01cc1b19c7cfbb8a23f778814de",
+        "bytes": 210382,
+        "expected_sha256": "89ead7182d41836d3cbd07656d56f928e42de01cc1b19c7cfbb8a23f778814de",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_area_passage.txt",
+        "exists": true,
+        "sha256": "88d9bc4c7b640aa83fb2705da0537b1ac4c369b9cbe3c878071473b27a85fa61",
+        "bytes": 1890,
+        "expected_sha256": "88d9bc4c7b640aa83fb2705da0537b1ac4c369b9cbe3c878071473b27a85fa61",
+        "hash_matches": true
+      },
+      {
+        "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_area_passage.png",
+        "exists": true,
+        "sha256": "8e56492b1bbf06ebeea86c5c8e6285584ca51eff74ed497bb1af96738f397bd9",
+        "bytes": 121848,
+        "expected_sha256": "8e56492b1bbf06ebeea86c5c8e6285584ca51eff74ed497bb1af96738f397bd9",
+        "hash_matches": true
+      }
+    ],
+    "current_shared_engine_vs_saved": [
+      {
+        "path": "tools/scientific_code/PPREstimation/ModelData.py",
+        "exists": true,
+        "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+        "bytes": 70194,
+        "expected_sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+        "hash_matches": true
+      },
+      {
+        "path": "tools/scientific_code/PPREstimation/PPRCalculator.py",
+        "exists": true,
+        "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+        "bytes": 237227,
+        "expected_sha256": "ee34361a2048c78301b1d8a5172d25c37d77034b9e67c77b7a6794d5ce784b51",
+        "hash_matches": false
+      },
+      {
+        "path": "tools/scientific_code/PPREstimation/create_PPRS_excel.py",
+        "exists": true,
+        "sha256": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+        "bytes": 72078,
+        "expected_sha256": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+        "hash_matches": true
+      },
+      {
+        "path": "tools/scientific_code/PPREstimation/utils.py",
+        "exists": true,
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "bytes": 7960,
+        "expected_sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "hash_matches": true
+      }
+    ],
+    "engine_note": "Differences, if any, describe current versus executed code only. Saved results retain their executed provenance; this review did not rerun them."
+  },
+  "preservation_checks": {
+    "scotland_word_unchanged_during_review": true,
+    "scotland_appendix_unchanged_during_review": true,
+    "regional_workbook_unchanged_during_read": true,
+    "no_project_regional_map_or_source_writes": true
+  },
+  "read_artifact_hashes": {
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model.json": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model.json": "5cda503a847a6ea9bdcda077c184ac20119e0d8b47b064f93b72b72e3d7df691",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/summary.json": "b7c57f5e5702c0b1ea24e774e47582e523d26bd3893296637255026c01e133a1",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/run_manifest.json": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/report_ready.json": "3d5a6f1c79c3d2ec0eb17cd401c4f45fec763ca0e819685c5a2ee1dc3af7cd2c",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/runtime_accounting_review.json": "ba08d09f2656e6e455003dd456ebd00a0f84cbd10d2727853ecf1fd052b1d9b6",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/constructor.json.gz": "d8174e8700d060af5a0b4953907de351b107141330ea0259551da1afef52dc42",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/source_loader_audit.json": "2c18860383224ff37bd99579af4e285c4d4f490fae0cad3de1fb25d72b890534",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/run_manifest.json": "92a0d3494561986535c6a757dc1e49ef4ec2d052faee862191de5a732cc8a49e",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/comparison.json": "b2e588ff7076cda439b9b61646035114bc2fb9a17886b7442feecf4a01337c21",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/method_coverage.json.gz": "eb8910bf0dece1952b7bd91ab868a84f014b02c53a97ae74bf63cdf5c9356f1a",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_GE.json.gz": "ae9cef3d6e5017a077d97667b920833aa4b7ef2a5edef2beb57c47ee1e8e0487",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_TE_EEfix.json.gz": "3bb0c42d27aa89ef82ec4413740c385bd908cecd3eb706e9df24b3ba141cb243",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/2026-11-14_loader_repair/new_WithEgestion.json.gz": "d75859546f028e5ce49ee73567b726e36d64c4a95dca14ac54abb13d7c193804",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/sppr_source.xlsx": "22964abbea82f5f9337f4ba8b48b96319651cbc43101cc5a4f8c2c28546a32f5",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/regional_snapshot.xlsx": "bd6d84c7bef986e2af2d12b382d74715f1456ebbf8d3bd6b45a0c574c35f5438",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/diet_reextraction_20261002/archive_by_sha256/cad6ee682425931cd209e04aad408f86f409a548c3079ce41536ed32d33dd3bb/computational_state.json": "cad6ee682425931cd209e04aad408f86f409a548c3079ce41536ed32d33dd3bb",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/diet_reextraction_20261002/archive_by_sha256/889379c97fdf6750a717378c11677ee824196f06e3f5cde293a2bed9290d4fd7/runtime_verification.json": "889379c97fdf6750a717378c11677ee824196f06e3f5cde293a2bed9290d4fd7",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/matrix_inspection.json": "ba8448d9106f31eee4caf0f2d647c095a2f0705f53fb0baef8ef16ab2814a9c6",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/diagnostic_code/PPREstimation/PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/diagnostic_code/PPREstimation/ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/diagnostic_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/extracted_tables/evidence/LOADER_TRANSFORMATIONS.csv": "7fef0bab65778fb13ac0d4bbe33cdb8753907165f0be2334c8e944e39c3830ed",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/source_manifest.json": "b38d0e1eed2f28193064e61974ce5edc1a4088fecf793eb6667228f3de08afc9",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/ICES_WGSAM_2015.pdf": "c0c75a7db2e8ef61ef0198c1ed2817fdd67b23ccdcf48117c17c9bc5e53c88da",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/context/Mackinson_2018_North_Sea_plan.pdf": "df1c7d1b1d82193420a198d18410d5221c751f69b9f6f073191d40b722d3d85f",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/inputs/native/rpath_port/NorthSeaModel.RData": "661ac1fc2ad94c946561e37e8512560f416906265eb2df36a80ffc61107d87bc",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/inputs/native/rpath_port/NorthSeaModel_config.R": "22a88832aa54a72512c1dd5b0a172bc60b9b184f4282e8ad63fa9b28df5ea9c9",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/supplements/EwE-NS_KeyRun 2015 Outputs.zip": "087fe10b6d019f051e56e265e0c11a323b945f4e5fd8ec20b47f6fc850d2e607",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_GE.json": "5dc0523b2c5db6a7f04b798e0f11ba1587c5222ab4b8ea00758e970f9f72331a",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_GE_summary.json": "817c10dab9a68c9e2fcec4f14bf5edc9b17a27bf10dc9ee24c28054c694f83e0",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_TE.json": "6ad0898ceadc55ab87bde77d86b0594368ddf85a93b2f48986d66b71afcbc315",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_TE_summary.json": "2ffbb632735c07dc76c0fc6d4b3b699f1c78b2acc09efbaa4cd091e37201e87f",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_With_Egestion.json": "1c5d267bdc8649a885798451a1ce2423c6fa3e175f31413cb113de1a9e5ee57c",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_171200_seabird_derived_ba/outputs/corrected_With_Egestion_summary.json": "2d2bd40d1a4aa4ed2e3c98a4332a9f60c58d5505119367b3b074f73bc9a143d5",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/validation.docx": "500a5734b3e6de8924af64c5b0abf59ed0c368f91fd1b817dabda4ff79e3fbf5",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/taxon_mapping.xlsx": "c3cbe2fd6ba79229dbfb446ab196a5f39b00eed3705c3540da56e3dc8b6a091c",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/geographic_assessment.json": "60e75de7fa641d0bfaa0d6f46690749959494c203ddd08ef09c73468f4350f8a",
+    "common_reference_data/geography/boundaries/LMEs.geojson": "6067aa4280f69b9c2ea260f3ecb07928f77d152814de83b6098623d5e1b3c423",
+    "common_reference_data/geography/basemaps/ne_50m_land.geojson": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/ices_divisions_IVa_IVb_IVc.geojson": "3eee9352113683bfd5c0cb3a0616cc26bbdbe0b79e4b53dae830b3a53ef11fa6",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/target_region.geojson": "290a8d161688a23a1fbc821b7e8130cccb1a09b226ea3d3e492272950de17a3e",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/study_area_union.geojson": "91bcc99219fd487a4409cc96fb3ec245d1f2c934fcdd8be6f6c952e408beede7",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/target_and_study_overlap.png": "0c7d8384fa0d5493adfb47b2e4b6078c8fb20fd1cf82b669a8d7944f2b41ce83",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_report_page104.png": "89ead7182d41836d3cbd07656d56f928e42de01cc1b19c7cfbb8a23f778814de",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_area_passage.txt": "88d9bc4c7b640aa83fb2705da0537b1ac4c369b9cbe3c878071473b27a85fa61",
+    "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/model_validation/evidence/geography/source_area_passage.png": "8e56492b1bbf06ebeea86c5c8e6285584ca51eff74ed497bb1af96738f397bd9",
+    "regions/LME/LME_022/papers/NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/model_validation/evidence/source_review/geography/geographic_assessment.json": "87699736eab03ef61fa522a7b1c2ef99adb91f802d1f636ce227a666e45266f6",
+    "tools/scientific_code/PPREstimation/ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "tools/scientific_code/PPREstimation/PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+    "tools/scientific_code/PPREstimation/create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+    "tools/scientific_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "report_ready_comparison_prose": "The latest ICES loader-repair diagnostics are WARN for GE, TE and With Egestion; all source-resolved entries are finite and nonnegative and both strict balance flags are true. Source diet rounding, expensive Discards-derived production, GE/With Egestion recycling gain and five near-zero TE groups remain material warnings. The latest Scotland corrected runtime variant is GE OK, TE WARN and With Egestion OK, also with both strict balance flags true and no negative/nonfinite matrix entries. Its matrices precede the signed exclusion of Seabirds, Seals and Cetaceans (GE<0.01). This is a comparison of retained configurations, not a common-settings experiment: ICES uses the repaired engine with EE floor 0.1, while Scotland uses the historical engine without the floor. ICES has broader declared geographic coverage (about 87% versus about 40% of LME_022), but its port differs from the unavailable accepted native Key Run and its mortality-floor/effective-detritus closures remain runtime assumptions."
+}

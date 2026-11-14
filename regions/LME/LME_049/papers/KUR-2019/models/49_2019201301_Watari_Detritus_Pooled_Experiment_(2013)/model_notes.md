@@ -36,3 +36,11 @@ Exact publication cells, values or decision provenance absent from retained evid
 ## Removed extraction evidence
 
 Superseded extraction packages and their unique old evidence are removed under the agreed latest-only policy; they are not merged into this package. Original paths, hashes and reasons are metadata in the linked disposition ledger. A link to this paragraph records an unavailable former payload, not replacement evidence or completed scientific verification.
+
+## Review calculation — 14 November 2026
+
+The user authorized a new runtime scenario with EE floor 0.1, seabird (group 3) other mortality and egestion exported outside the modeled food web, final-flow completion of source-missing living biomass accumulation, and formulation-specific external-export accounting. Canonical model.json and the source/extraction inputs remain unchanged. Known source biomass accumulation is protected; the 18 changed living accumulation values are computational closure terms, not observed stock trends. The seabird biomass and published-rate discrepancy is explicitly deferred and remains unresolved.
+
+The new direct diagnostics return GE OK, TE WARN (low transfer efficiency of toothed whales), and With Egestion OK. All three pass strict production-required balance and have no negative basal-source contributions. These findings describe this runtime scenario and do not replace the historical diagnostics described above or establish researcher approval. Regional workbook results, selection, Project.xlsx, map and trends have not been updated. The revised validation report and linked appendix are for researcher review only.
+
+See [scenario settings and provenance](results/diagnostics/ee_floor_seabird_accounting_20261114/outputs/settings.json), [direct diagnostic evidence](results/diagnostics/ee_floor_seabird_accounting_20261114/outputs/summary.json), [comparison with the preceding scenario](results/diagnostics/ee_floor_seabird_accounting_20261114/outputs/previous_scenario_comparison.json), and the [validation report](model_validation/validation.docx).

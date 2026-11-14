@@ -48,6 +48,35 @@ def report_fixture(root, decision='MODEL DISQUALIFIED', reason=REASON, identity_
 
 
 class DisqualificationTests(unittest.TestCase):
+    def test_empty_exclusions_do_not_require_legacy_seq_column(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            report = report_fixture(root)
+            model = root/'regions/LME/LME_001/papers/P/models/m/model.json'
+            model.parent.mkdir(parents=True)
+            model.write_text('{}', encoding='utf-8')
+            regional = root/'regions/LME/LME_001/LME_001.xlsx'
+            region_book = {
+                'Overview': {'Settings': (['field', 'value'], [
+                    ['selected_model_id', 'm'], ['calculation_input_sha256', 'input-hash']])},
+                'Selected model groups': {'Groups': (['group_seq', 'group_name'], [[1, 'Fish']])},
+            }
+            write_book(regional, region_book)
+            project = root/'Project.xlsx'
+            write_book(project, {'Models & coverage': {'Models': (
+                ['unit_id', 'model_id', 'model_path'],
+                [['LME_001', 'm', model.relative_to(root).as_posix()]])}})
+            protected = {path: sha(path) for path in [report, model, regional]}
+            values = register_review(project, report, 'LME_001', 'm', [])
+            summary = json.loads(values['researcher_review_summary'])
+            self.assertEqual(summary['status'], STATUS)
+            self.assertEqual(summary['reason'], REASON)
+            self.assertEqual(summary['sections'], [])
+            self.assertEqual(summary['excluded_group_ids'], [])
+            metadata = records(read_book(project), 'Models & coverage', 'Models')[0]
+            self.assertEqual(approved_review(root, metadata, region_book)['status'], STATUS)
+            self.assertEqual({path: sha(path) for path in protected}, protected)
+
     def test_unselected_validation_uses_own_snapshot_groups_and_freshness(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

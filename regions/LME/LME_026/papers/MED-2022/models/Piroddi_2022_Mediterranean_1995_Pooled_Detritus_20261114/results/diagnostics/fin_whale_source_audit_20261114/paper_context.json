@@ -1,0 +1,319 @@
+{
+  "audit_type": "Independent original-paper and DOCX-supplement source-context review",
+  "status": "COMPLETE",
+  "checked_date": "2026-11-14",
+  "reviewer": "report_qa",
+  "scope": "Read the original retained PDF methods and relevant captions, and the original DOCX XML; check the current publisher page and narrowly scoped correction queries. Numeric XLSX transcription is reviewed separately. No source or model edits and no solver calls.",
+  "sources": [
+    {
+      "path_repository_relative": "regions/LME/LME_026/papers/MED-2022/sources/s41598-022-18017-x-75a92a71.pdf",
+      "sha256": "75a92a71a8925282375920beb6aa5acdea22af658e43d08a6f97363136511fad"
+    },
+    {
+      "path_repository_relative": "regions/LME/LME_026/papers/MED-2022/sources/41598_2022_18017_MOESM2_ESM-7d26163a.docx",
+      "sha256": "7d26163aa9f7868524e4c116940d0ada6ba4162c4a45bbdaaf8b193392aa5e84"
+    }
+  ],
+  "locators": {
+    "pdf_pages": "One-based printed PDF pages; page numbers match file page positions.",
+    "docx_body": "Zero-based index among direct children of word/document.xml w:body, including tables and blank paragraphs; stable source XML locators, not rendered page numbers.",
+    "docx_tables": "Table S2 is second document table, body index69. Row indices include its caption row 0 and header row1; one-based row numbers are also supplied. No new DOCX rendering performed."
+  },
+  "baseline_and_fleet_scope": [
+    {
+      "locator": "Main PDF pp 7-8, Methods / The initial food web model",
+      "finding": "The new baseline represents the entire Mediterranean basin in 1995, with 71 functional groups and up to 10 gear types divided among the four MSFD regions. It modifies an older 1950-2011 model; recalibration and temporal analysis cover 1995-2016.",
+      "interpretation": "A single basin-wide baseline with spatial fleet categories is described, rather than four alternative full-basin catch estimates. Summing distinct gear-region categories is consistent with that description. The narrative alone does not independently verify the original normalization used for every workbook cell."
+    },
+    {
+      "locator": "Main PDF p 8, continuation of The initial food web model; Fig 3 caption",
+      "regions": {
+        "W": "Western Mediterranean Sea",
+        "A": "Adriatic Sea",
+        "I": "Ionian and Central Mediterranean Sea",
+        "E": "Aegean Sea and Levantine Sea"
+      },
+      "finding": "Fleet gear codes describe fishing activities in these divisions; neither this text nor the figure caption instructs dividing their totals by four or treating them as overlapping aggregate columns."
+    },
+    {
+      "locator": "DOCX Table S 2 caption, body 69,row 0",
+      "finding": "The caption calls the input model a 1990 s Ecopath model and separately says biomass references include 1990-2014 Ecosim time-series data. These broader labels are not a replacement for the explicit 1995 baseline in the main paper."
+    },
+    {
+      "locator": "Main PDF pp 8-9, Ecospace subsection and Fig 4 caption",
+      "finding": "The 8 x 8 km spatial grid and depth-specific environmental fields belong to the Ecospace extension. They do not provide a fin-whale count-to-tonnes factor or an instruction to multiply the Ecopath baseline by grid-cell area."
+    }
+  ],
+  "fin_whale_table_s2": {
+    "species": "Balaenoptera physalus",
+    "group_id": 4,
+    "locator": "DOCX body 69 / Table S2 / rows21-26 one-based",
+    "rows": [
+      {
+        "row_index_zero_based": 20,
+        "row_number_one_based": 21,
+        "cells": [
+          "4. Fin whale: Balaenoptera physalus"
+        ]
+      },
+      {
+        "row_index_zero_based": 21,
+        "row_number_one_based": 22,
+        "cells": [
+          "B",
+          "",
+          "10,47,49-51,56,76-82"
+        ]
+      },
+      {
+        "row_index_zero_based": 22,
+        "row_number_one_based": 23,
+        "cells": [
+          "P/B ",
+          "Life history table",
+          "28"
+        ]
+      },
+      {
+        "row_index_zero_based": 23,
+        "row_number_one_based": 24,
+        "cells": [
+          "Q/B",
+          "From modified energy requirement equation: E =aW0.714",
+          "29-31"
+        ]
+      },
+      {
+        "row_index_zero_based": 24,
+        "row_number_one_based": 25,
+        "cells": [
+          "D",
+          "",
+          "50,83-86"
+        ]
+      },
+      {
+        "row_index_zero_based": 25,
+        "row_number_one_based": 26,
+        "cells": [
+          "B-C",
+          "",
+          "38-41"
+        ]
+      }
+    ],
+    "interpretation": "This block supplies methods and bibliographic references, not numeric B, P/B, Q/B, EE, BA, migration, or per-fleet catch values. The B and by-catch method cells are empty. P/B uses a life-history table, while Q/B uses a modified energy-requirement formula. Neither a numeric body weight nor a numeric conversion/area factor is supplied in the block."
+  },
+  "source_reference_groups": {
+    "B": [
+      10,
+      47,
+      49,
+      50,
+      51,
+      56,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82
+    ],
+    "P_B": [
+      28
+    ],
+    "Q_B": [
+      29,
+      30,
+      31
+    ],
+    "diet": [
+      50,
+      83,
+      84,
+      85,
+      86
+    ],
+    "bycatch": [
+      38,
+      39,
+      40,
+      41
+    ]
+  },
+  "source_references": {
+    "10": {
+      "body_element_index_zero_based": 83,
+      "bibliographic_text_as_published": "Laran, S. et al. Seasonal distribution and abundance of cetaceans within French waters-Part I: The North-Western Mediterranean, including the Pelagos sanctuary. Deep Sea Research Part II: Topical Studies in Oceanography (2016)."
+    },
+    "28": {
+      "body_element_index_zero_based": 101,
+      "bibliographic_text_as_published": "Barlow, J. & Boveng, P. Modeling age‐specific mortality for marine mammal populations. Marine Mammal Science 7, 50-65 (1991)."
+    },
+    "29": {
+      "body_element_index_zero_based": 102,
+      "bibliographic_text_as_published": "Pauly, D., Trites, A., Capuli, E. & Christensen, V. Diet composition and trophic levels of marine mammals. ICES Journal of Marine Science: Journal du Conseil 55, 467-481 (1998)."
+    },
+    "30": {
+      "body_element_index_zero_based": 103,
+      "bibliographic_text_as_published": "Hunter, J. A multiple regression model for predicting the energy requirements of marine mammals. MSc degree thesis, University of British Columbia, (2005)."
+    },
+    "31": {
+      "body_element_index_zero_based": 104,
+      "bibliographic_text_as_published": "Pavan, G., Bernuzzi, E., Cozzi, B. & Podestà, M. The national network to monitor marine mammals strandings. Biol.  Mar.  Mediterr.  20  262-226 (2013)."
+    },
+    "38": {
+      "body_element_index_zero_based": 111,
+      "bibliographic_text_as_published": "Ancha, L. Regional by-catch of long-lived species (sea birds, marine mammals and sea turtles) in the Mediterranean and Black Seas. Masters project to be submitted in partial fulfillment of the requirements for the Master of Environmental Management degree in the Nicholas School of the Environment and Earth Sciences of Duke University (2008)."
+    },
+    "39": {
+      "body_element_index_zero_based": 112,
+      "bibliographic_text_as_published": "Di Natale, A. By-catch of Marine Mammals in Tuna and Swordfish Fisheries: the Mediterranean Case. ICES CM (1997)."
+    },
+    "40": {
+      "body_element_index_zero_based": 113,
+      "bibliographic_text_as_published": "Reeves, R. R., McClellan, K. & Werner, T. B. Marine mammal bycatch in gillnet and other entangling net fisheries, 1990 to 2011. Endangered Species Research 20, 71-97 (2013)."
+    },
+    "41": {
+      "body_element_index_zero_based": 114,
+      "bibliographic_text_as_published": "Lewison, R. L. et al. Global patterns of marine mammal, seabird, and sea turtle bycatch reveal taxa-specific and cumulative megafauna hotspots. Proceedings of the National Academy of Sciences 111, 5271-5276 (2014)."
+    },
+    "47": {
+      "body_element_index_zero_based": 120,
+      "bibliographic_text_as_published": "Gannier, A. Summer cetacean popoulation in the Pelagos Marine Sanctuary (northwest Mediterranean): distribution and abundance. Mammalia 70, 17-27 (2006)."
+    },
+    "49": {
+      "body_element_index_zero_based": 122,
+      "bibliographic_text_as_published": "Forcada, J., Notarbartolo di Sciara, G. & Fabbri, F. Abundance of fin whales and striped dolphins summering in the Corso-Ligurian Basin. Mammalia 59, 127-140 (1995)."
+    },
+    "50": {
+      "body_element_index_zero_based": 123,
+      "bibliographic_text_as_published": "Laran, S., Joiris, C., Gannier, A. & Kenney, R. D. Seasonal estimates of densities and predation rates of cetaceans in the Ligurian Sea, northwestern Mediterranean Sea: an initial examination. J Cetacean Res Manag 11, 31-40 (2010)."
+    },
+    "51": {
+      "body_element_index_zero_based": 124,
+      "bibliographic_text_as_published": "Bauer, R. K., Fromentin, J.-M., Demarcq, H., Brisset, B. & Bonhommeau, S. Co-Occurrence and Habitat Use of Fin Whales, Striped Dolphins and Atlantic Bluefin Tuna in the Northwestern Mediterranean Sea. PloS one 10, e0139218 (2015)."
+    },
+    "56": {
+      "body_element_index_zero_based": 129,
+      "bibliographic_text_as_published": "Panigada, S., Lauriano, G., Burt, L., Pierantonio, N. & Donovan, G. Monitoring winter and summer abundance of cetaceans in the Pelagos Sanctuary (northwestern Mediterranean Sea) through aerial surveys. PloS one 6, e22878 (2011)."
+    },
+    "76": {
+      "body_element_index_zero_based": 149,
+      "bibliographic_text_as_published": "Gannier, A. Estimation de l'abondance estivale du Rorqual commun Balaenoptera physalus (Linné, 1758) dans le bassin Liguro-provençal (Méditerranée occidentale).  (1997)."
+    },
+    "77": {
+      "body_element_index_zero_based": 150,
+      "bibliographic_text_as_published": "Forcada, J., Aguilar, A., Hammond, P., Pastor, X. & Aguilar, R. Distribution and abundance of fin whales (Balaenoptera physalus) in the western Mediterranean sea during the summer. Journal of Zoology 238, 23-34 (1996)."
+    },
+    "78": {
+      "body_element_index_zero_based": 151,
+      "bibliographic_text_as_published": "Monestiez, P., Dubroca, L., Bonnin, E., Durbec, J.-P. & Guinet, C. Geostatistical modelling of spatial distribution of Balaenoptera physalus in the Northwestern Mediterranean Sea from sparse count data and heterogeneous observation efforts. Ecological Modelling 193, 615-628 (2006)."
+    },
+    "79": {
+      "body_element_index_zero_based": 152,
+      "bibliographic_text_as_published": "Notarbartolo di Sciara, G., Castellote, M., Druon, J.-N. & Panigada, S. Fin whales, Balaenoptera physalus: At home in a changing Mediterranean Sea? Advances in marine biology 75, 75-101 (2016)."
+    },
+    "80": {
+      "body_element_index_zero_based": 153,
+      "bibliographic_text_as_published": "Notarbartolo di Sciara, G., Zanardelli, M., Jahoda, M., Panigada, S. & Airoldi, S. The fin whale Balaenoptera physalus (L. 1758) in the Mediterranean Sea. Mammal Review 33, 105-150 (2003)."
+    },
+    "81": {
+      "body_element_index_zero_based": 154,
+      "bibliographic_text_as_published": "Notarbartolo di Sciara, G. et al. Cetaceans in the central Mediterranean Sea: distribution and sighting frequencies. Italian Journal of Zoology 60, 131-138 (1993)."
+    },
+    "82": {
+      "body_element_index_zero_based": 155,
+      "bibliographic_text_as_published": "Laran, S. & Gannier, A. Spatial and temporal prediction of fin whale distribution in the northwestern Mediterranean Sea. ICES Journal of Marine Science 65, 1260-1269 (2008)."
+    },
+    "83": {
+      "body_element_index_zero_based": 156,
+      "bibliographic_text_as_published": "Canese, S. et al. The first identified winter feeding ground of fin whales (Balaenoptera physalus) in the Mediterranean Sea. Journal of the Marine Biological Association of the United Kingdom 86, 903-907 (2006)."
+    },
+    "84": {
+      "body_element_index_zero_based": 157,
+      "bibliographic_text_as_published": "Cotté, C., Guinet, C., Taupier-Letage, I., Mate, B. & Petiau, E. Scale-dependent habitat use by a large free-ranging predator, the Mediterranean fin whale. Deep Sea Research Part I: Oceanographic Research Papers 56, 801-811 (2009)."
+    },
+    "85": {
+      "body_element_index_zero_based": 158,
+      "bibliographic_text_as_published": "Bentaleb, I. et al. Foraging ecology of Mediterranean fin whales in a changing environment elucidated by satellite tracking and baleen plate stable isotopes. Marine Ecology Progress Series 438, 285-302 (2011)."
+    },
+    "86": {
+      "body_element_index_zero_based": 159,
+      "bibliographic_text_as_published": "Giménez, J., Gómez‐Campos, E., Borrell, A., Cardona, L. & Aguilar, A. Isotopic evidence of limited exchange between Mediterranean and eastern North Atlantic fin whales. Rapid Communications in Mass Spectrometry 27, 1801-1806 (2013)."
+    }
+  },
+  "units_and_catch_accounting": [
+    {
+      "locator": "DOCX Table S 5, body 871, rows 10 and 11 zero-based (11 and 12 one-based)",
+      "finding": "Total Catch is the sum of landings plus discards for all groups, in t/km2/year. Discards are the discarded catch across groups, also in t/km2/year.",
+      "implication": "The source does not support removing fin-whale discarded catch from donor catch merely because that biomass is returned internally to detritus."
+    },
+    {
+      "locator": "Main PDF p 3 Fig 1 caption; DOCX FigS 6 caption body 904 and FigS 12 caption body 927",
+      "finding": "Published output biomass is t/km2 and catch/discard flows are t/km2/year. These corroborate an annual flow interpretation; they are output-unit statements, not a fully specified recipe for producing the input spreadsheet."
+    },
+    {
+      "locator": "DOCX Table S 2 fin-whale B and B-C rows, plus cited reference titles",
+      "finding": "References include population/abundance studies, life-history mortality, and by-catch studies. No numeric individuals-to-tonnes conversion, area divisor, per-fleet denominator, or overlap correction is given in this fin-whale block.",
+      "limitation": "The original cited studies were not re-extracted; their titles do not justify inventing a conversion factor. The independent XLSX review remains authoritative for exact workbook cells and their caption."
+    }
+  ],
+  "balance_mortality_and_missingness": [
+    {
+      "locator": "DOCX S 1 / Ecopath baseline model, body 4-6",
+      "finding": "The baseline equation balances production against non-predatory loss, predation, catches, net migration and biomass accumulation. It defines EE as the proportion of production used in the system; the non-predatory-loss term is P*(1-EE).",
+      "implication": "Returning discarded catch to detritus does not eliminate its removal from the living fin-whale donor. Low source EE already allocates most production to non-predatory loss under this equation."
+    },
+    {
+      "locator": "DOCX S 1 body 7",
+      "finding": "The authors describe a manual top-down mass-balancing procedure that modified appropriate parameters and refer to the balanced-model inputs.",
+      "limitation": "This claim does not identify a corrected fin-whale value or establish that the published supplemental cells reproduce the original native model under all retained assumptions."
+    },
+    {
+      "locator": "DOCX S 1 body 10-11; Table S 2 caption body 69,row 0; fin-whale P/B row 22",
+      "finding": "The Ecosim text distinguishes non-predation mortality from fishing mortality and includes immigration/emigration. Table S 2 defines z as total mortality, F as fishing mortality and M as natural mortality; fin-whale P/B specifically cites a life-history table.",
+      "implication": "Natural mortality, total mortality and the Ecopath other-mortality flow must not be substituted for one another solely from a shared mortality label."
+    },
+    {
+      "locator": "DOCX S 1 body 4-6 and 10-11; fin-whale Table S 2 rows 20-25; all non-reference DOCX body/table text searched for accumulation/migration",
+      "finding": "BA and migration are defined as model terms, but no fin-whale numeric BA, immigration, emigration or net-migration value was found in the audited PDF/DOCX context.",
+      "implication": "Runtime zero BA/migration cannot be described as observed zeros. Negative BA or net immigration could change an identity in principle, but no published value was located that authorizes such a correction."
+    },
+    {
+      "locator": "DOCX S 4 body 863 and Table S 4 body 865,row 4",
+      "finding": "Fin whale has base dispersal 300, relative dispersal 5 and relative vulnerability 2. The preceding paragraph defines base dispersal as swimming speed in km/year.",
+      "implication": "These Ecospace movement parameters are not fin-whale annual net biomass migration and do not supply a missing Ecopath NM term."
+    }
+  ],
+  "publisher_correction_check": {
+    "url": "https://www.nature.com/articles/s41598-022-18017-x",
+    "doi": "10.1038/s41598-022-18017-x",
+    "version_of_record_date_shown": "2022-11-16",
+    "supplements_shown": [
+      "Supplementary Information 1: XLSX",
+      "Supplementary Information 2: DOCX"
+    ],
+    "checked_locations": [
+      "Current publisher article page, including Additional information and About this article",
+      "Search within publisher page for Correction",
+      "Exact DOI plus correction search",
+      "Exact DOI plus correction and corrigendum searches restricted to nature.com"
+    ],
+    "result": "No correction or corrigendum notice was located by these scoped checks. No alternate corrected fin-whale value was exposed.",
+    "qualification": "This is absence after a scoped publisher/index search, not proof that no unpublished revision, native-model setting, or correction exists anywhere."
+  },
+  "decision": {
+    "numerical_extraction_error_identified_from_pdf_docx": false,
+    "source_supported_parameter_replacement": null,
+    "supports_automatic_parameter_correction": false,
+    "conclusion": "The audited main paper and DOCX do not supply a supported numerical correction for fin whale. They support a single 1995 basin model, region-specific fleet categories and total donor catch including discards. Any inconsistency remaining after exact XLSX transcription checks must be reported as an unresolved incompatibility of the published inputs under the reconstructed conventions; this audit cannot determine whether the source table or missing native conventions caused it.",
+    "rerun_trigger": "Only a demonstrated extraction or mapping error with a cited corrected value would satisfy the user's correction-and-rerun condition. No such error was established by this PDF/DOCX context review."
+  },
+  "verification_limits": [
+    "No new rendering or OCR; original PDF text extraction and source DOCX XML were inspected.",
+    "No original cited-study re-extraction and no author contact.",
+    "No solver call, no source updates, no prior diagnostic-package modifications."
+  ]
+}

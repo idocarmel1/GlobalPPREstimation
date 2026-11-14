@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-14T17:53:38.127108+00:00",
+  "review_scope": "Independent read-only validation of saved receipts and arithmetic; no constructor, diagnostics, solvers, scientific code imports or scientific file edits.",
+  "status": "PASS",
+  "tolerances": {
+    "absolute": 1e-12,
+    "relative": 1e-12,
+    "negative_cell_reporting": 1e-10
+  },
+  "counts": {
+    "assertions": 1932749,
+    "encoded_frames_validated": 536,
+    "encoded_frame_cells_validated": 171446
+  },
+  "artifact_qa_issue_count": 0,
+  "artifact_qa_issues": [],
+  "input_identity": {
+    "schema_version": 1,
+    "region_id": "LME_002",
+    "parent_model_id": "Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49",
+    "variant_model_id": "Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49_native_balance",
+    "parent_path": "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/model.json",
+    "variant_path": "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49_native_balance/model.json",
+    "parent_sha256": "10dfbf57dcc9c1ca2e57460637709a061c9264a7e29bf17e0028fadf4c919125",
+    "variant_sha256": "7d805cb293dc4b1886bd8f57f1f122595a298c129824a6cc1a9eb0cbe3244a32",
+    "code_sha256": {
+      "tools/scientific_code/PPREstimation/ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+      "tools/scientific_code/PPREstimation/PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+      "tools/scientific_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "tools/scientific_code/PPREstimation/create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+      "tools/scientific_helpers/sppr/method_coverage.py": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/code/run_diagnostics.py": "7dc7b36a7ab2cf372094cc4f8294f0715e8fab79e5a2a941882c07817a251aec"
+    },
+    "run_timestamp_utc": "2026-11-14T17:34:22.861742+00:00",
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": false,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "refresh_missing_biomass_accum": false,
+      "use_ee_floor": false,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "effective_floor": {
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "diagnostic_options": {
+      "DET_TE_vals": 1,
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "fix_EE_0_cases": true
+    },
+    "method_timeout_seconds": 180.0,
+    "scope": "Native balance computational variant, direct GE/TE/With Egestion diagnostics and reload verification only; no catch mapping, annual arithmetic, selection, registry or maps.",
+    "interpretation": "Footprints returned by diagnostics use native model catch densities. Aggregate Primary production includes outside production; engine inner/PP labels do not recover a geographically local-production partition.",
+    "environment": {
+      "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+      "executable": "C:\\Users\\idoca\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "numpy": "2.3.4",
+      "pandas": "2.3.3",
+      "scipy": "1.16.3",
+      "sympy": "1.14.0",
+      "igraph": "1.0.0",
+      "tqdm": "4.67.1",
+      "openpyxl": "3.1.5"
+    }
+  },
+  "receipt_sha256": {
+    "initial_GE.json": "53b1f304d43601448675e16bf0a6924b9624e2ea46f9b09b053c7b42bf3fd838",
+    "reload_GE.json": "3622a623ce6268387bb00a6ef63fe964e6f8f40d0dbebde916a24b46cfb0e572",
+    "initial_TE.json": "9e1125660869dd2e5b50737a91cc73cb45112f96f8c1f91932201bc602b2e5dd",
+    "reload_TE.json": "d8c263d3df4a3c165ec62fd1ab60551c06ebf696238a37662c0c8b700aa9819d",
+    "initial_WithEgestion.json": "8990e8f5acc9dc29c5f53a1fb770f4520e293deedb7e52c1c2e7ef4301d87fdf",
+    "reload_WithEgestion.json": "1565136ca70daae26e77e4c4cc0c925b19b82cf55d9cfc116d79d7012ed5063f"
+  },
+  "checker_sha256": "0b452baa7e0b44ae536cfe2fde0eba6db8c3682099409a5030b5b849fb1b2645",
+  "source_EE_floor": {
+    "raw_real_group_unknown_EE_count": 49,
+    "living_ineligible_count": 47,
+    "applied_count": 0,
+    "physical_vectors_unchanged_by_floor": true,
+    "explanation": "Native-computed EE values do not become reported-source EE. The provenance adapter retains raw missingness and does not qualify any living group for the floor."
+  },
+  "constructor_detritus_changes": [
+    {
+      "group_seq": 48,
+      "group_name": "Pelagic detritus",
+      "native_EE": 0.19268220069351938,
+      "runtime_EE": 1.0,
+      "native_PB": 0.5,
+      "runtime_PB": 0.0,
+      "native_B": 3979.854393981717,
+      "runtime_B": 3979.854393981717,
+      "inflow": 1989.9271969908584,
+      "predation": 383.42355153608503,
+      "native_nonutilized_flow": 1606.5036454547735,
+      "runtime_stock_residual": 1606.503645454773,
+      "runtime_M0": 0.0,
+      "runtime_det_export": 0.0,
+      "runtime_known_BA": 0.0,
+      "relative_unclosed_production": 0.8073177993064807
+    },
+    {
+      "group_seq": 49,
+      "group_name": "Benthic detritus",
+      "native_EE": 0.516451574221917,
+      "runtime_EE": 1.0,
+      "native_PB": 0.5,
+      "runtime_PB": 0.0,
+      "native_B": 4135.300165167589,
+      "runtime_B": 4135.300165167589,
+      "inflow": 2067.6500825837943,
+      "predation": 1067.8411400904772,
+      "native_nonutilized_flow": 999.8089424933171,
+      "runtime_stock_residual": 999.8089424933166,
+      "runtime_M0": 0.0,
+      "runtime_det_export": 0.0,
+      "runtime_known_BA": 0.0,
+      "relative_unclosed_production": 0.48354842577808305
+    }
+  ],
+  "independent_runtime_input_residuals": {
+    "max_production_relative": 0.8073177993064805,
+    "max_consumption_relative": 0.8073177993064805,
+    "max_living_absolute": 9.094947017729282e-13,
+    "above_1e_10_absolute": [
+      {
+        "group_seq": 48,
+        "p_absolute": 1606.503645454773,
+        "q_absolute": 1606.503645454773,
+        "p_relative": 0.8073177993064805,
+        "q_relative": 0.8073177993064805
+      },
+      {
+        "group_seq": 49,
+        "p_absolute": 999.8089424933166,
+        "q_absolute": 999.8089424933166,
+        "p_relative": 0.48354842577808294,
+        "q_relative": 0.48354842577808294
+      }
+    ]
+  },
+  "methods": {
+    "GE": {
+      "complete_tuple_shapes": [
+        [
+          50,
+          4
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          50,
+          50
+        ]
+      ],
+      "groups_retained": 49,
+      "synthetic_import_retained": true,
+      "source_columns": [
+        50,
+        49,
+        48,
+        47
+      ],
+      "all_numeric_masks_empty": true,
+      "scope_footprints_independently_reconciled": {
+        "all": 450.30747476608224,
+        "inner": 450.30747476608224,
+        "PP": 151.24233657263636
+      },
+      "footprint_units": "native catch-density basis, t primary-production equivalent km^-2 yr^-1",
+      "SPPR_negative_cells": 0,
+      "A_negative_cells": 0,
+      "L_negative_cells": 46,
+      "overall_scientific_grade": "FAIL",
+      "input_grade": "FAIL",
+      "convergence_grade": "WARN",
+      "living_rho": 0.26659952990268,
+      "detritus_loop_b": 0.4090673647283584,
+      "near_singular_TE_groups": [
+        9,
+        5
+      ],
+      "PP_closure_relative_gap": 1.0058909059110295,
+      "PP_budget_outflow": -26.226039466964746,
+      "independent_reload_comparison": "completed; see artifact_qa_issues for any mismatch"
+    },
+    "TE": {
+      "complete_tuple_shapes": [
+        [
+          50,
+          4
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          50,
+          50
+        ]
+      ],
+      "groups_retained": 49,
+      "synthetic_import_retained": true,
+      "source_columns": [
+        50,
+        49,
+        48,
+        47
+      ],
+      "all_numeric_masks_empty": true,
+      "scope_footprints_independently_reconciled": {
+        "all": 3828.811631806326,
+        "inner": 3828.811631806326,
+        "PP": 1599.3668489069566
+      },
+      "footprint_units": "native catch-density basis, t primary-production equivalent km^-2 yr^-1",
+      "SPPR_negative_cells": 0,
+      "A_negative_cells": 0,
+      "L_negative_cells": 46,
+      "overall_scientific_grade": "FAIL",
+      "input_grade": "FAIL",
+      "convergence_grade": "WARN",
+      "living_rho": 0.9766894020612613,
+      "detritus_loop_b": 0.2672886407947974,
+      "near_singular_TE_groups": [
+        39,
+        35,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "PP_closure_relative_gap": 0.7566896441104767,
+      "PP_budget_outflow": 1083.206401978454,
+      "independent_reload_comparison": "completed; see artifact_qa_issues for any mismatch"
+    },
+    "WithEgestion": {
+      "complete_tuple_shapes": [
+        [
+          50,
+          4
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          50,
+          50
+        ]
+      ],
+      "groups_retained": 49,
+      "synthetic_import_retained": true,
+      "source_columns": [
+        50,
+        49,
+        48,
+        47
+      ],
+      "all_numeric_masks_empty": true,
+      "scope_footprints_independently_reconciled": {
+        "all": 159.20959894361866,
+        "inner": 159.20959894361866,
+        "PP": 59.211975125961224
+      },
+      "footprint_units": "native catch-density basis, t primary-production equivalent km^-2 yr^-1",
+      "SPPR_negative_cells": 0,
+      "A_negative_cells": 0,
+      "L_negative_cells": 46,
+      "overall_scientific_grade": "FAIL",
+      "input_grade": "FAIL",
+      "convergence_grade": "OK",
+      "living_rho": 0.213279623922144,
+      "detritus_loop_b": 0.44064592215477894,
+      "near_singular_TE_groups": [],
+      "PP_closure_relative_gap": 1.0043638559787806,
+      "PP_budget_outflow": -19.427684104302582,
+      "independent_reload_comparison": "completed; see artifact_qa_issues for any mismatch"
+    }
+  },
+  "scientific_failures_separate_from_artifact_qa": [
+    "All three methods return FAIL. This is a retained scientific diagnostic result, not a failed extraction or serialization assertion.",
+    "The runtime constructor preserves known DET BA=0 but changes native DET EE to 1 and removes native non-utilized flow from M0. It records that positive amount as detritus_stock_residual, without adding it to growth/BA or det_export. The two DET groups therefore fail the runtime production and consumption identities; the largest relative residual equals 1 minus native pelagic DET EE.",
+    "All methods pass the two reported convergence bounds and contain no negative SPPR cells; this does not establish PP budget closure. Each method fails its reported PP closure check.",
+    "GE has 2 near-singular TE warnings, TE has 12, and With Egestion has none. The EE floor cannot remedy this while original source EE remains unknown.",
+    "Negative diagonal L entries follow L=A-I and do not imply negative source-resolved SPPR.",
+    "Native catch-density footprints are diagnostic arithmetic, not mapped LME annual PPR estimates. Primary production includes outside production, so engine inner/PP labels do not establish a geographically local production boundary."
+  ]
+}

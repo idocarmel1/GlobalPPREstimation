@@ -1,0 +1,17 @@
+native_field,standard_destination,canonical_destination,units,mapping_status,source_locator
+Biomass,Basic_input.csv,biomass,t/km^2,exact literal/missingness,Ecosense_GOA_base.csv
+PB,Basic_input.csv,pb,year^-1,exact literal/missingness,Ecosense_GOA_base.csv
+QB,Basic_input.csv,qb,year^-1,exact literal/missingness,Ecosense_GOA_base.csv
+EE,Basic_input.csv,ee,dimensionless,exact literal/missingness,Ecosense_GOA_base.csv
+ProdCons,Basic_input.csv,ge,dimensionless,exact literal/missingness,Ecosense_GOA_base.csv
+BioAcc,Biomass_accumulation.csv,biomass_accum,t/km^2/year,exact literal/missingness,Ecosense_GOA_base.csv
+Unassim,Basic_input.csv,gs,dimensionless,exact literal/missingness,Ecosense_GOA_base.csv
+DetInput,Basic_input.csv,detritus_import,t/km^2/year,exact literal/missingness,Ecosense_GOA_base.csv
+F_Fishery,Landings.csv / Fishery/Subsistence,landings_by_fleet,t/km^2/year,"positional mapping in native reader, one fleet",Rpath_ecopath.R landmat
+D_Fishery,Discards.csv / Fishery/Subsistence,discards_by_fleet,t/km^2/year,"positional mapping in native reader, one fleet",Rpath_ecopath.R discardmat
+PelDetFate,Detritus_fate.csv / Pelagic detritus,detritus_fate_by_pool[48],dimensionless,exact; fleet row in companion only,Ecosense_GOA_base.csv
+BenthDetFate,Detritus_fate.csv / Benthic detritus,detritus_fate_by_pool[49],dimensionless,exact; fleet row in companion only,Ecosense_GOA_base.csv
+Type,diet consumer membership; detritus columns,pp,category 0 consumer;1 producer;2 detritus;3 fleet,49 biological groups; fleet retained companion,Ecosense_GOA_base.csv
+diet blank,blank,-9999,dimensionless,source NA preserved; native rpath() sets NA diet to0 on separate working array,Rpath_ecopath.R lines56-57
+Primary production diet column,companion only,diet_imp=0 from Import row; no feeding links,dimensionless,nonfeeding native column entirely blank except Import0,Ecosense_GOA_diet.csv
+Habitat fraction / TL / Z / other mortality / export fate,blank,-9999,various,not supplied by native parameter inputs; no defaults applied,all native CSV inputs inspected

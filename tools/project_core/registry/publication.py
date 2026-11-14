@@ -21,15 +21,23 @@ def _fingerprint(path):
 
 
 class PublicationBackup:
-    def __init__(self, root, extra_region_paths=(), extra_model_dirs=()):
+    def __init__(self, root, extra_region_paths=(), extra_model_dirs=(), *,
+                 units=None, model_pairs=None, all_validated=False):
         self.root = Path(root).resolve()
         self.project = self.root / 'Project.xlsx'
         self.authoritative = {self.project, *(self._path(path) for path in extra_region_paths)}
         self.artifacts = set()
         self.generated_directories = [self.root / 'interactive_map']
-        with ZipFile(self.project) as archive:
-            models = [row for _, row in table_rows(archive, 'Models & coverage', 'Models')[3]
-                      if row.get('researcher_review_status') == 'Validated by researcher']
+        from tools.project_core.calculations.coverage import scoped_validated_metadata
+        units = None if units is None else set(units)
+        model_pairs = None if model_pairs is None else {tuple(pair) for pair in model_pairs}
+        scope = dict(units=units, model_pairs=model_pairs, all_validated=all_validated)
+        scoped_validated_metadata([], **scope)
+        models = []
+        if all_validated or units or model_pairs:
+            with ZipFile(self.project) as archive:
+                models = scoped_validated_metadata(
+                    [row for _, row in table_rows(archive, 'Models & coverage', 'Models')[3]], **scope)
         self.models = models
         model_dirs = {self._path(path) for path in extra_model_dirs}
         for metadata in models:
@@ -106,8 +114,10 @@ class PublicationBackup:
 
 
 @contextmanager
-def publication_transaction(root, extra_region_paths=(), extra_model_dirs=()):
-    backup = PublicationBackup(root, extra_region_paths, extra_model_dirs)
+def publication_transaction(root, extra_region_paths=(), extra_model_dirs=(), *,
+                            units=None, model_pairs=None, all_validated=False):
+    backup = PublicationBackup(root, extra_region_paths, extra_model_dirs,
+        units=units, model_pairs=model_pairs, all_validated=all_validated)
     token = _ACTIVE.set((*_ACTIVE.get(), backup))
     try:
         yield backup

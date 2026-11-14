@@ -1,0 +1,68 @@
+{
+  "timestamp_utc": "2026-11-14T13:41:18.921798+00:00",
+  "pinned_engine_sha256": "4c8ec0d0c275c6053892b89d526c7191f1c7755376ff1785cc3cb7dfb2ea7a4a",
+  "current_engine_sha256_at_execution": "b3286abb1749b7b760a8198c4c2d269eed88ca352f5858fa8499c76cf2756105",
+  "pin_reason": "Isolate floor sensitivity relative to delivered0.1 report; newer concurrent BA/balance changes are excluded",
+  "audited_base_engine_identity": {
+    "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+    "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "calculation/PPRCalculator.py": "4c8ec0d0c275c6053892b89d526c7191f1c7755376ff1785cc3cb7dfb2ea7a4a",
+    "method_coverage.py": "3d6241563df83a708813f8ebf6d13d4cefd9584b291fb0fa0c79f32482d6e74f"
+  },
+  "base_constructor": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "DC_tol": 0.001,
+    "normalize_DC": true
+  },
+  "scoped_compatibility": {
+    "inventory_adapter_admission": "rejected: legacy SPPR_1995 also changed",
+    "direct_scope_admission": "All class methods checked; direct diagnostic dependencies unchanged or exact certified EE-floor predecessor",
+    "added": [
+      "_sync_effective_table",
+      "_with_external_mortality",
+      "apply_ee_floor",
+      "get_aggregated_TE",
+      "validate_ee_floor"
+    ],
+    "removed": [],
+    "changed": [
+      "SPPR_1995",
+      "_sample_SPPR_new_forced_balance",
+      "balance_model",
+      "diagnose_sppr",
+      "is_model_balanced",
+      "is_sppr_balanced"
+    ],
+    "uncertified_excluded_legacy_methods": [
+      "SPPR_1995"
+    ],
+    "excluded_method_callers": {
+      "SPPR_1995": [
+        "get_aggregated_TE"
+      ]
+    },
+    "shared_adapter_or_engine_modified": false
+  },
+  "reference_runtime_equal": true,
+  "requested_methods": [
+    "GE",
+    "TE"
+  ],
+  "configurations": [
+    "OFF",
+    "0.1",
+    "0.2"
+  ],
+  "floor_semantics": "ON uses threshold equal to floor",
+  "warnings": [
+    "RuntimeWarning: 6 consumer group(s) have a diet composition (including diet_import) that does not sum to 1 (tol=0.001): 18 (Epi mollusc)=0.9990, 13 (Small SKJ)=1.0010, 10 (Small Sharks)=1.0010, 8 (Piscivorous fish)=1.0020, 7 (SKJ)=0.9990, 6 (YFT)=0.9980."
+  ],
+  "canonical_model_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+  "script_sha256": "af31cb3391f38662b5e1968aeec424d27a3af93d3f1224edd11f0c4ff25336a3"
+}

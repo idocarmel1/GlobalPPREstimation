@@ -1,0 +1,33 @@
+{
+  "scope": "Independent read-only review of source-native Discards reconciliation and focused GE/TE EE-floor-ON A/B evidence. No solver execution, mapping change or adoption.",
+  "baseline_source": "../../../../evidence/ee_floor_on_review/initialization_and_floor.json",
+  "key_identities": {
+    "35": "Discards",
+    "36": "Detritus",
+    "37": "diet_import"
+  },
+  "saved_baseline_facts": {
+    "completed_before_floor_Discard_35_inflow": 0.0,
+    "completed_before_floor_Discard_35_BA": -0.20750363203745528,
+    "completed_before_floor_Detritus_36_inflow": 905.0394311005689,
+    "completed_before_floor_Detritus_36_BA": 861.7418188352409,
+    "floor_external_sink": 65.52118784337331,
+    "effective_Discard_35_BA": -0.20750363203745528,
+    "effective_Detritus_36_inflow": 839.5182432571955,
+    "effective_Detritus_36_BA": 796.2206309918676,
+    "source_matrix_columns_in_retained_order": [37, 36, 35, 22, 12]
+  },
+  "required_preservation_and_checks": [
+    "Use the same completed-before-floor audited snapshot and pinned current-engine bytes for A and B; retain source, canonical, archived loader, current engine and runner hashes separately.",
+    "Preserve living biomass, P/Q, predation, consumption, respiration, egestion, catch, living BA/migration, diets, group IDs and detritus fate. Only the explicit documented fishery return differs between A and B.",
+    "Verify every native fleet donor/destination and name against canonical/runtime IDs. Native destination 36 is Detritus, not the group named Discards 35; do not route by the word discards alone.",
+    "Persist pre-injection/pre-floor, post-return/pre-floor and post-floor states. Apply floor once after the exact initialization. Require equivalent floor eligibility, per-group sink and total sink when living inputs are unchanged.",
+    "Keep source native BA=0 distinct from legacy loader-derived closure and current post-floor residuals. Negative Discards BA is neither observed accumulation nor an evidenced import. Do not zero it silently in A/B.",
+    "Separate fishery mortality/total-catch weights from internal returned material. B keeps the same catch vector and fishery PPR weights while physical budgets credit each return once. Return is neither external mortality export nor a new basal source.",
+    "Recompute recipient inflow deltas, exact native donor return totals, detritus residual deltas, internal return credits and unchanged catch totals directly from saved arrays, without running a solver.",
+    "Inspect full lossless GE/TE matrices with all 37 recipient groups, exact source columns and masks. Check negative and nonfinite entries before rounding, including unfished groups; reconcile all/inner/PP scopes and catch-weighted footprints.",
+    "Distinguish overall WARN/FAIL, input budget status, strict method balance and component grades. Arithmetic closure or absence of negative source entries does not resolve source-native Discards support.",
+    "A current-engine no-return baseline may differ from earlier saved floor results because engine logic changed. Report such differences with explicit code/state identities rather than attributing them to the return treatment."
+  ],
+  "completion": "Independent source and A/B saved-array verification passed; see source_arithmetic_verification.json and diagnostic_array_verification.json. Native Export trace and its unresolved physical/input-versus-output interpretation are retained in native_export_trace.json. The negative closure magnitude is already stored in the native Export field; no new import is inferred. Floor-effective detritus BA closure is intentional accounting behavior, distinct from native/source BA and legacy completed pre-floor BA."
+}

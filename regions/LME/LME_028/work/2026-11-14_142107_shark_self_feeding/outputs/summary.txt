@@ -1,0 +1,38 @@
+LME_028 shark/ray self-feeding: full-network sensitivity
+Model: 28_646_Guinea_(1998); group 5: Sélaciens L prof.
+2019 regional catch (landings plus discards), original allocations, inner sources; wet-weight PPR / 9 = tonnes carbon.
+Baseline catch: 4,469,154.981144243 tonnes. Original fixed-10% benchmark held constant: 238807554.9039289 tonnes carbon.
+All biological rates, catch, EE, natural mortality, biomass accumulation, migration and detritus fate held fixed. Predation recalculated from the changed diet.
+EE floor ON at 0.1 in every run; zero affected groups and zero added mortality export. Focal group EE is 0.5.
+Raw self-diet was already normalized by the audited loader: removed share = 0.020008327667351278.
+No redistribution: leave other prey shares unchanged, resulting diet sum 97.9991672333%.
+Redistribution: multiply each remaining prey share by 1.0204168343795472; diet sum remains 100%.
+All other network edges unchanged. Each case solves the complete network, including indirect feedback; no Ecopath rebalance or automatic diet renormalization follows the intervention.
+
+TE comparison (regional PPR in tonnes carbon):
+baseline: regional PPR 4,987,401,598.192; change 0.000000%; focal SPPR 630,806.178170; focal share 62.384957%; fixed benchmark ratio 20.884606x; living-network spectral radius 0.717571278; PP balance gap 0.000001%; diagnostic WARN.
+zero_unredistributed: regional PPR 2,685,719,005.386; change -46.149935%; focal SPPR 204,588.738207; focal share 37.573308%; fixed benchmark ratio 11.246374x; living-network spectral radius 0.505975628; PP balance gap 11.955796%; diagnostic FAIL.
+zero_redistributed: regional PPR 2,708,593,522.903; change -45.691289%; focal SPPR 208,824.560439; focal share 38.027346%; fixed benchmark ratio 11.342160x; living-network spectral radius 0.506722381; PP balance gap 11.836977%; diagnostic FAIL.
+
+Other full-network formulations (same 2019 catch and inner scope):
+GE / baseline: 987,158,223.480 tonnes carbon (0.000000%); diagnostic OK.
+With Egestion / baseline: 318,853,052.220 tonnes carbon (0.000000%); diagnostic OK.
+GE / zero_unredistributed: 886,844,340.622 tonnes carbon (-10.161885%); diagnostic FAIL.
+With Egestion / zero_unredistributed: 299,953,127.952 tonnes carbon (-5.927472%); diagnostic FAIL.
+GE / zero_redistributed: 890,893,703.488 tonnes carbon (-9.751681%); diagnostic FAIL.
+With Egestion / zero_redistributed: 301,010,515.259 tonnes carbon (-5.595850%); diagnostic FAIL.
+
+Interpretation:
+Removing the focal loop lowers TE PPR by approximately 46%, but it remains 11.25-11.34 times the unchanged benchmark. Proportional redistribution changes the result only slightly.
+The earlier approximately 41.58% regional reduction held other groups fixed. The present full-network solution includes changes in every connected group and supersedes that conditional estimate for these scenarios.
+Both altered cases converge algebraically, have no negative source coefficients, and improve the living-loop diagnostic; both nonetheless fail overall diagnostics.
+The unredistributed diet has a 2.0008% intake deficit. Redistribution fixes that diet sum, but removing self-predation while holding production, mortality and accumulation fixed still breaks production balance (maximum relative residual 33.3242%). TE PP-budget gaps are 11.9558% and 11.8370%, respectively, above the 5% failure threshold.
+These values are hypothetical fixed-rate sensitivities, not mass-balanced corrected models or publication-ready replacements. No new researcher validation or change of disqualification is implied.
+The benchmark retains original saved coefficients; it is not a recalculated trophic-level benchmark for either altered network.
+The historical comparator excludes Dauphins, Oiseaux and Baleines from regional aggregation; all remain in the network solution. This scope reproduces the prior comparison rather than interpreting current review status as scientific data.
+
+Verification and evidence:
+Executed the exact retained loader and EE-floor engine identified in the result manifest. Current software differs; it was not substituted for the saved baseline engine.
+All three fresh baselines reproduce saved coefficients with maximum relative error below 5e-16. All nine solves independently checked by solving the full linear system numerically.
+Full diagnostic returns, SPPR/A/L matrices, before/after runtime, axes, missingness masks, per-scope coefficients, group changes, negative-entry table, settings and input/code hashes retained in this folder.
+Verified 310 protected files unchanged, including canonical model, existing results, regional workbook, map, review and knowledge graph.

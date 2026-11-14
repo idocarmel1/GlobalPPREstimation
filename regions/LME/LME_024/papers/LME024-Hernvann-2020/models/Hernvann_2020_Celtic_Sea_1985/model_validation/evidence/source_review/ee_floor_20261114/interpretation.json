@@ -1,0 +1,88 @@
+{
+  "configuration": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "floor_scope": {
+    "applied_groups": [
+      {
+        "id": 4,
+        "name": "Toothed cetaceans / Seals",
+        "EE_before": 0,
+        "EE_effective": 0.1,
+        "M0_before": 0.004200000000000001,
+        "M0_effective": 0.003780000000000001,
+        "external_export": 0.0004199999999999998
+      }
+    ],
+    "source_unknowns_preserved": true,
+    "feeding_group_exclusions": [
+      {
+        "id": 3,
+        "name": "Baleen whales",
+        "EE": 0,
+        "missing_runtime_diet_column": 55,
+        "canonical_diet_imp": "-9999",
+        "reason": "Nonfinite diet-import entry fails the eligibility guard. Engine code label excluded_nonfeeding_pool does not imply this animal group is nonfeeding."
+      },
+      {
+        "id": 28,
+        "name": "Boarfish",
+        "EE": 0.07,
+        "missing_runtime_diet_column": 55,
+        "canonical_diet_imp": "-9999",
+        "reason": "Same preserved nonfinite diet-import eligibility guard."
+      }
+    ],
+    "megrim_source_EE": "missing; historically completed runtime EE retained separately; no published value invented"
+  },
+  "worst_input_residual": {
+    "id": 14,
+    "name": "Cod juvenile",
+    "source_PB": "missing",
+    "accepted_historical_completion": "PB=printed P/Q (0.19) * Q/B (5.04) = 0.9576",
+    "B": 0.02,
+    "P": 0.019152,
+    "Q": 0.1008,
+    "catch": 0.007781875,
+    "predation": 0.016230339920103778,
+    "M0": 0.0019152,
+    "BA": 0,
+    "net_migration": 0,
+    "floor_export": 0,
+    "reconstructed_production": 0.025927414920103777,
+    "production_excess": 0.006775414920103778,
+    "production_relative_residual": 0.35377062030617057,
+    "egestion": 0.02016,
+    "respiration": 0.061488,
+    "reconstructed_consumption": 0.10757541492010378,
+    "consumption_relative_residual": 0.06721641785817241,
+    "floor_affects_this_group": false,
+    "interpretation": "Retained source/completion inconsistency; no parameter repair and no assertion of publication error or complete native-stanza reproduction."
+  },
+  "GE": {
+    "scientific_grade": "FAIL",
+    "input": "FAIL",
+    "divergence": "WARN",
+    "balance": "FAIL",
+    "strict_model_balance": false,
+    "strict_SPPR_balance": false,
+    "negative_SPPR_pairs": [],
+    "complete_recipient_universe": 55,
+    "basal_source_count": 5
+  },
+  "TE": {
+    "outcome": "execution_exception",
+    "scientific_grade": null,
+    "reason": "Current native zero-efficiency dead-end re-credit with discard returns is unsupported; no diagnostic object or SPPR/A/L matrix returned.",
+    "not_equivalent_to_historical_exception": "Historical adapter broadly rejected all TE with positive discard returns; current failure is narrower and independently observed."
+  },
+  "independent_review": {
+    "all_axes_and_masks_checked": true,
+    "scope_totals_reconciled": true,
+    "scientific_states_identical_after_each_method": true,
+    "read_only_no_resolve": true
+  },
+  "adoption": "None: review artifacts only; selection, source inputs, regional results, Project.xlsx, map, trends and researcher decision not modified by this task."
+}

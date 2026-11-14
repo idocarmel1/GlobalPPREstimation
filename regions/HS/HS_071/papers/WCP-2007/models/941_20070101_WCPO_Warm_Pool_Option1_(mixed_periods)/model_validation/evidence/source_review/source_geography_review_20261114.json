@@ -1,0 +1,210 @@
+{
+  "review_date": "2026-11-14",
+  "region_id": "HS_071",
+  "selected_model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+  "scope": "Read-only source and geography verification for report preparation. No scientific execution, recalculation, input edit, workbook adoption or review registration.",
+  "identity_checks": [
+    {
+      "path_relative_to_this_file": "../../../../../../../../../../common_reference_data/geography/boundaries/HighSeas.geojson",
+      "expected_sha256": "e69e075876dc450dc02d42aab94d8e0473467eb7beaa850fd733265fe0d43b63",
+      "current_sha256": "e69e075876dc450dc02d42aab94d8e0473467eb7beaa850fd733265fe0d43b63",
+      "matches": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../../../common_reference_data/geography/basemaps/ne_50m_land.geojson",
+      "expected_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "current_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "matches": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../sources/download-0adcf55e.pdf",
+      "expected_sha256": "0adcf55ef7760865786bc2774b1fb147a6461a6fe0b128a943c8fce27c23f52f",
+      "current_sha256": "0adcf55ef7760865786bc2774b1fb147a6461a6fe0b128a943c8fce27c23f52f",
+      "matches": true
+    },
+    {
+      "path_relative_to_this_file": "../../../model.json",
+      "expected_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "current_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "matches": true
+    }
+  ],
+  "geography": {
+    "evidence_relative_to_this_file": "geographic_estimate.json",
+    "reused_calculation": true,
+    "fresh_area_calculation": false,
+    "all_saved_geometry_hashes_match": true,
+    "boundary_relocation": "Historical input key common_reference_data/geography/HighSeas.geojson now resides under geography/boundaries/ with unchanged bytes.",
+    "A_percent": 57.578081076712486,
+    "B_wet_rectangle_percent": 13.003718840275747,
+    "B_published_area_percent": 11.088506237301802,
+    "region_area_km2": 5192783.027698588,
+    "intersection_km2": 2989904.821826058,
+    "study_wet_area_km2": 22992690.46455834,
+    "study_reported_area_km2": 26964000,
+    "study_bounds": [
+      110,
+      -15,
+      180,
+      15
+    ],
+    "method": "WGS84 ellipsoidal polygon area, coordinate-linear densification ≤0.1 degree; Natural Earth 1:50m land removed consistently. Study domain is Section 2.2 PDF7 fixed rectangle, distinct from warm-pool Figure1 PDF3. Approximate due SAU repaired high-seas polygon, coarse land, and published-area disagreement.",
+    "source_confirmation": "Current selected PDF7 Section 2.2 and PDF3 Figure 1 text inspected. Fixed 110-180E,15N-15S domain and reported 26.964 million km2 confirmed. Figure 1 is warm-pool/cold-tongue context rather than the exact GIS polygon.",
+    "interpretation": "A is overlap/HS_071. B is overlap/study. The range expresses alternative domain denominator and boundary uncertainty, not a statistical interval. Substantial HS_071 area lies outside the fixed pelagic model rectangle; spatial overlap does not establish catch composition.",
+    "assets": [
+      {
+        "path_relative_to_this_file": "region_boundary.png",
+        "sha256": "a3c6c84fcdb56443d37bc9e1f28c384efe9ab583bb043df3422cb2133abd6153",
+        "visually_inspected": true
+      },
+      {
+        "path_relative_to_this_file": "study_domain.png",
+        "sha256": "a3c6c84fcdb56443d37bc9e1f28c384efe9ab583bb043df3422cb2133abd6153",
+        "visually_inspected": true
+      },
+      {
+        "path_relative_to_this_file": "article_figure1_crop.png",
+        "sha256": "2382eee12d2c5b10ec58d4c9aed64ef8ff1b38b0d80ac2ce502bd0cc312fd4f4",
+        "visually_inspected": true
+      }
+    ],
+    "asset_note": "region_boundary.png and study_domain.png are byte-identical overlays showing both region and model rectangle. Their identical extent is intentional in the retained builder; original article Figure 1 is the separate crop. All inspected assets are readable."
+  },
+  "source_review_reused": {
+    "current_shared_review": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review/source_geography_review_20261114.json",
+    "sha256": "65b41c7685fa1096cbfabad8a02cfb6798f9231c9ca21633d1726bc548be7477",
+    "selected_pdf_and_model_match": true,
+    "scope": "Source context and unchanged prior extraction audit reused; no repeat all-cell extraction. Current floor diagnostics are separately verified.",
+    "group_scope": "31 final source ecological groups plus one synthetic computational import; initial 24-group model remains a separate source input.",
+    "accepted_departures": {
+      "Small BET": {
+        "pb": 1.4129713563375232,
+        "ee": 0.7898725981469387
+      },
+      "Small YFT": {
+        "pb": 2.5304972811160384,
+        "ee": 0.8816702937266387
+      },
+      "interpretation": "Accepted D_fixed_M0 surrogate preserving juvenile other-mortality flows; not an author-confirmed correction",
+      "current_model_hash_matches_prior_audit": true
+    },
+    "nonunit_source_diets": [
+      {
+        "consumer_seq": "6",
+        "consumer": "YFT",
+        "prey_only_sum": "0.998",
+        "import_literal": "0",
+        "diet_plus_import_sum": "0.998",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "7",
+        "consumer": "SKJ",
+        "prey_only_sum": "0.999",
+        "import_literal": "0",
+        "diet_plus_import_sum": "0.999",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "8",
+        "consumer": "Piscivorous fish",
+        "prey_only_sum": "1.002",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.002",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "10",
+        "consumer": "Small Sharks",
+        "prey_only_sum": "1.001",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.001",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "11",
+        "consumer": "Small BET",
+        "prey_only_sum": "1.00039",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.00039",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "12",
+        "consumer": "Small YFT",
+        "prey_only_sum": "1.000631",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.000631",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "13",
+        "consumer": "Small SKJ",
+        "prey_only_sum": "1.001",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.001",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "18",
+        "consumer": "Epi mollusc",
+        "prey_only_sum": "0.999",
+        "import_literal": "0",
+        "diet_plus_import_sum": "0.999",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      }
+    ],
+    "diet_interpretation": "Canonical printed diet/import values remain unchanged. Prior source cell audit found no mismatches and no canonical normalization. Retained loader normalizes runtime diet; do not call source discrepancies rounding-only. Current runtime should be read from the separately produced EE-floor evidence.",
+    "runtime_departures": "Historical source/runtime review and transformation ledger record 24 missing BA values derived, unknown baby/forage catch converted to runtime zero, detritus EE forced to 1, synthetic import added, native stanza dynamics not reproduced. Current EE-floor run may alter runtime results and retains its own diagnostic identity."
+  },
+  "current_HS071_registered_article_inventory": [
+    {
+      "article_id": "WCP-2007__HS_071",
+      "authors": "Allain et al.",
+      "year": 2007,
+      "title": "An Ecopath with Ecosim model of the Western and Central Pacific Ocean warm-pool pelagic ecosystem",
+      "doi": null,
+      "selected": true
+    },
+    {
+      "article_id": "Griffiths-2019__HS_071",
+      "authors": "Griffiths, S.P.; Allain, V.; Hoyle, S.D.; Lawson, T.A.; Nicol, S.J.",
+      "year": 2019,
+      "title": "Just a FAD? Ecosystem impacts of tuna purse-seine fishing associated with fish aggregating devices in the western Pacific Warm Pool Province",
+      "doi": "10.1111/fog.12389",
+      "selected": false
+    }
+  ],
+  "other_known_related_article": {
+    "authors": "Allain, V.; Griffiths, S.; MacDonald, J.; Wabnitz, C.; Pilling, G.M.; Nicol, S.",
+    "year": 2021,
+    "title": "Tuna fisheries bycatch and climate change in the western tropical Pacific Ocean",
+    "report": "WCPFC-SC17-2021/EB-IP-11",
+    "pdf_relative_to_this_file": "../../../../../../../../../EEZ/EEZ_941/papers/Allain-2021/sources/main.pdf",
+    "sha256": "5cf178ced34dfd5d5d7377fa99453c953839f09d5611e8bd771be89f531dd31c",
+    "source_cover_inspected": true,
+    "relationship": "Known related source retained under EEZ_941; not registered as an HS_071 candidate. May be listed as other known article without implying new selection or adoption.",
+    "source_model_period_and_domain": "PDF4 states 2013 annual average, tropical western/central Pacific 140E-150W and 20N-20S; 65 biological groups and five fisheries."
+  },
+  "temporal": {
+    "forage_biomass": "January 1993 to December 2002, source PDF38",
+    "skipjack_catch": "Annual average 1993-2002, source PDF42",
+    "yellowfin_bigeye_and_bycatch_catch": "Annual average 1995-2004, source PDF42",
+    "diet": "Stomach collections 2001-2007, source PDF39-41",
+    "assessment_editions": "2006 YFT/BET and 2005 SKJ, source PDF40,42; not one shared model year",
+    "report_implication": "Fixed ecosystem coefficients and historical composition proxies transfer across 1950-2019; the 2019 result is not an annual ecosystem reconstruction."
+  },
+  "limitations": [
+    "Source/native EwE validity remains unestablished; accepted Option1 is an experimental surrogate rather than an author-confirmed correction.",
+    "No new geometry or SPPR run performed. Geometry results are reused after matching current inputs.",
+    "Only report provenance written by this review; Project.xlsx and regional scientific inputs left untouched."
+  ]
+}

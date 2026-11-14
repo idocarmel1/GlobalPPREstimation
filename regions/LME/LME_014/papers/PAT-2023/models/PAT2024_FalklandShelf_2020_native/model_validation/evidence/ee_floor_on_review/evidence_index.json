@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-11-14_120000_validation_ee_on",
+  "region_id": "LME_014",
+  "model_id": "PAT2024_FalklandShelf_2020_native",
+  "variant_id": "accepted-native-ee-floor-on-0.1-review",
+  "methods": [
+    "GE",
+    "TE"
+  ],
+  "source_identity": {
+    "canonical_model_path": "../../../model.json",
+    "sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+  },
+  "computational_input_identity": {
+    "canonical_model_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "canonical_model_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+  "required_roles": [
+    "configuration",
+    "initialization-parity",
+    "floor-ledger",
+    "full-direct-returns",
+    "negative-pairings",
+    "review-summary",
+    "protected-inputs",
+    "group-metadata",
+    "matrix-accounting-verification"
+  ],
+  "artifacts": [
+    {
+      "role": "configuration",
+      "path": "run_provenance.json",
+      "sha256": "05c99f9720e106551354d1130f2a94383bc4ab000360f3c90993bda4c2c04966",
+      "availability": "present"
+    },
+    {
+      "role": "initialization-parity",
+      "path": "initialization_parity.json",
+      "sha256": "573987f22e78a090992d992ec7a5a64a5eb8cccd743027e883441c505f8d5ff3",
+      "availability": "present"
+    },
+    {
+      "role": "floor-ledger",
+      "path": "initialization_and_floor.json",
+      "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+      "availability": "present"
+    },
+    {
+      "role": "full-direct-returns",
+      "path": "direct_diagnostics_full.json",
+      "sha256": "2f9395ccdb2ef4b7f142647908f7fed8958663ae4408687dfd60059fdaf4401e",
+      "availability": "present"
+    },
+    {
+      "role": "negative-pairings",
+      "path": "negative_entries.json",
+      "sha256": "652b1f5f8f3dda45e5564e18c4efbefcaa1291c0469ff74cf9f11d3135dc05d6",
+      "availability": "present"
+    },
+    {
+      "role": "review-summary",
+      "path": "review_summary.json",
+      "sha256": "fbe1e75b8f2a98ffa47e197e9bb9aba01cd5c04fbf9a97396b07c9e66e670790",
+      "availability": "present"
+    },
+    {
+      "role": "protected-inputs",
+      "path": "protected_verification.json",
+      "sha256": "a5a1253b0e51f7bd22c675d9eb0bd6d714678fa2641259eb922dfcc9eff5fb36",
+      "availability": "present"
+    },
+    {
+      "role": "group-metadata",
+      "path": "group_metadata.json",
+      "sha256": "2dceb2553e16e28fae323afc8b236cdb478f7c49c59915889cf0a57dc7f0e8e5",
+      "availability": "present"
+    },
+    {
+      "role": "matrix-accounting-verification",
+      "path": "matrix_accounting_verification.json",
+      "sha256": "d8ae3fa1444f975dedb872833124f4f137abf0140c1e12b4b02bd64bb7c415aa",
+      "availability": "present"
+    },
+    {
+      "role": "execution-code",
+      "path": "execution/run_floor_review.py",
+      "sha256": "157476fcd74d6cbe5870f145cb45b1cd9d13a9ccae102662af83b46d099b21f6",
+      "availability": "present"
+    }
+  ],
+  "reconciliation": {
+    "protected_inputs_unchanged": true,
+    "initialization_parity": true,
+    "living_fields_preserved": true,
+    "both_methods_returned": true,
+    "reopened_matrices_and_accounting": true
+  }
+}

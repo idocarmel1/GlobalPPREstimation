@@ -1,0 +1,270 @@
+{
+  "requested_configuration": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": false,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "results": {
+    "GE": {
+      "execution": "returned",
+      "status": "WARN",
+      "divergence": {
+        "status": "OK",
+        "solve_error": null,
+        "b": 0.03855026067646973,
+        "b_converges": true,
+        "rho_living": 0.3334302325581396,
+        "living_converges": true,
+        "sppr_det": {
+          "39": 1.388553149766735
+        },
+        "max_sppr_det": 1.388553149766735,
+        "max_sppr_group": {
+          "seq": 2,
+          "tl": 4.023508207551435,
+          "sppr": 2227.466090046761,
+          "inv_te": 102.0
+        },
+        "max_tl_group": {
+          "seq": 4,
+          "tl": 4.227693165663254,
+          "sppr": 159.64428681297926,
+          "inv_te": 5.615384615384615
+        },
+        "n_negative_sources": 0,
+        "expect_negatives": false,
+        "near_singular_te": []
+      },
+      "balance": {
+        "status": "OK",
+        "is_balanced": false,
+        "inflow": 1506.7714,
+        "outflow": 1507.7891145175186,
+        "rel_gap": 0.0006754272861287853
+      },
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.09180065918020267,
+        "q_max_rel_residual": 0.027540197754060802,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 4.440892098500626e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 18,
+        "total_catch": 1.7200000000000002,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [
+          3
+        ],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0077619999785301114,
+        "negative_detritus_stock_residuals": {}
+      },
+      "warnings": [],
+      "negative_entries": 0,
+      "all_coefficients_finite": true,
+      "weighted_unrouted_M0": 9.15943065767058,
+      "weighted_unrouted_egestion": 2.035429031246554,
+      "additional_budget_audit": {
+        "unrouted_export_addition": 9.15943065767058,
+        "official_signed_gap": 1.0177145175184705,
+        "gap_including_method_specific_unrouted_export": 10.17714517518905,
+        "weighted_local_production_residual": 10.177145175189366,
+        "difference": -3.161915174132446e-13,
+        "not_an_engine_grade": true
+      },
+      "full_return_roundtrip_equal": true
+    },
+    "TE": {
+      "execution": "returned",
+      "status": "WARN",
+      "divergence": {
+        "status": "WARN",
+        "solve_error": null,
+        "b": 0.0,
+        "b_converges": true,
+        "rho_living": 0.5462783830567154,
+        "living_converges": true,
+        "sppr_det": {
+          "39": 0.6466348572777714
+        },
+        "max_sppr_det": 0.6466348572777714,
+        "max_sppr_group": {
+          "seq": 2,
+          "tl": 4.023508207551435,
+          "sppr": 98983.15432208107,
+          "inv_te": 1020.0000000000014
+        },
+        "max_tl_group": {
+          "seq": 4,
+          "tl": 4.227693165663254,
+          "sppr": 7321.45429277394,
+          "inv_te": 56.15384615384617
+        },
+        "n_negative_sources": 0,
+        "expect_negatives": false,
+        "near_singular_te": [
+          2
+        ]
+      },
+      "balance": {
+        "status": "WARN",
+        "is_balanced": false,
+        "inflow": 1506.7714,
+        "outflow": 1555.709405777081,
+        "rel_gap": 0.03247871958352865
+      },
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.09180065918020267,
+        "q_max_rel_residual": 0.027540197754060802,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 4.440892098500626e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 18,
+        "total_catch": 1.7200000000000002,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [
+          3
+        ],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0077619999785301114,
+        "negative_detritus_stock_residuals": {}
+      },
+      "warnings": [
+        "1 group(s) have near-zero TE (0 < EE << 1): 2 (Toothed whales (all)). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+      ],
+      "negative_entries": 0,
+      "all_coefficients_finite": true,
+      "weighted_unrouted_M0": 440.4420519937478,
+      "weighted_unrouted_egestion": 9.787601137185451,
+      "additional_budget_audit": {
+        "unrouted_export_addition": 0.0,
+        "official_signed_gap": 48.93800577708089,
+        "gap_including_method_specific_unrouted_export": 48.93800577708089,
+        "weighted_local_production_residual": 48.938005777080484,
+        "difference": 4.050093593832571e-13,
+        "not_an_engine_grade": true
+      },
+      "full_return_roundtrip_equal": true
+    },
+    "With Egestion": {
+      "execution": "returned",
+      "status": "WARN",
+      "divergence": {
+        "status": "OK",
+        "solve_error": null,
+        "b": 0.044864315216563595,
+        "b_converges": true,
+        "rho_living": 0.2667441860465117,
+        "living_converges": true,
+        "sppr_det": {
+          "39": 1.436033574862637
+        },
+        "max_sppr_det": 1.436033574862637,
+        "max_sppr_group": {
+          "seq": 2,
+          "tl": 4.023508207551435,
+          "sppr": 1002.5909448943673,
+          "inv_te": 81.6
+        },
+        "max_tl_group": {
+          "seq": 4,
+          "tl": 4.227693165663254,
+          "sppr": 66.91262563274455,
+          "inv_te": 4.4923076923076914
+        },
+        "n_negative_sources": 0,
+        "expect_negatives": false,
+        "near_singular_te": []
+      },
+      "balance": {
+        "status": "OK",
+        "is_balanced": false,
+        "inflow": 1506.7714,
+        "outflow": 1507.2382943295206,
+        "rel_gap": 0.00030986407727179327
+      },
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.09180065918020267,
+        "q_max_rel_residual": 0.027540197754060802,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 4.440892098500626e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 18,
+        "total_catch": 1.7200000000000002,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [
+          3
+        ],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0077619999785301114,
+        "negative_detritus_stock_residuals": {}
+      },
+      "warnings": [],
+      "negative_entries": 0,
+      "all_coefficients_finite": true,
+      "weighted_unrouted_M0": 4.202048965685314,
+      "weighted_unrouted_egestion": 1.1672358210837435,
+      "additional_budget_audit": {
+        "unrouted_export_addition": 5.369284786769057,
+        "official_signed_gap": 0.4668943295205281,
+        "gap_including_method_specific_unrouted_export": 5.8361791162895855,
+        "weighted_local_production_residual": 5.836179116289506,
+        "difference": 7.993605777301127e-14,
+        "not_an_engine_grade": true
+      },
+      "full_return_roundtrip_equal": true
+    }
+  },
+  "local_mass_balance": false,
+  "seabird_runtime": {
+    "p": 0.04999999978530111,
+    "q": 0.5000000014803441,
+    "EE": 0.1,
+    "M0": 0.044999999806771,
+    "egestion": 0.10000000010980087,
+    "floor_export": 0.004999999978530109,
+    "other_export": 0.14499999991657186,
+    "to_detritus": 0.0,
+    "TE": 0.009999999927453339
+  },
+  "source_ModelData_unchanged": true,
+  "initial_runtime_unchanged_by_diagnostics": true,
+  "protected_files": 354,
+  "changed_files": [],
+  "adopted": false
+}

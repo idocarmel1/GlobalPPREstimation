@@ -175,7 +175,7 @@ def calculation_provenance(book):
     raw=settings.get('effective_loader_flags')
     flags=json.loads(raw) if isinstance(raw,str) and raw else (raw or {})
     if not isinstance(flags,dict):raise ValueError('Effective loader flags must be an object')
-    constructor=flags.get('constructor') or {}
+    constructor=(flags.get('constructor') or {}) if 'constructor' in flags else flags
     summary={row.get('field'):row.get('value') for row in records(book,'Diagnostics','EE floor')}
     enabled=constructor.get('use_ee_floor',settings.get('use_ee_floor',summary.get('use_ee_floor')))
     if settings.get('det_collapse_mode') is None and enabled is None:return None

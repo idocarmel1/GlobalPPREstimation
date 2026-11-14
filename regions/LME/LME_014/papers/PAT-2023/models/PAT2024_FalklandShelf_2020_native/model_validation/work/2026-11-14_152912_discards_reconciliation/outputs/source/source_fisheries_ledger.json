@@ -1,0 +1,3989 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-11-14_152912_discards_reconciliation",
+  "created_utc": "2026-11-14T15:36:45.456458+00:00",
+  "model_id": "PAT2024_FalklandShelf_2020_native",
+  "source_identity": {
+    "path": "regions/LME/LME_014/papers/PAT-2023/sources/urn_cambridge.org_id_binary_20240209182731895-0513_S0025315423000887_S0025315423000887sup002.eweaccdb",
+    "sha256": "785b0a7b5ccb5f6437d29f48c1ab294f66bca19a35a5aa7f9733bfe19b651baa",
+    "method": "fresh read-only ODBC SELECT from original author database"
+  },
+  "source_hashes": {
+    "regions/LME/LME_014/papers/PAT-2023/sources/urn_cambridge.org_id_binary_20240209182731895-0513_S0025315423000887_S0025315423000887sup002.eweaccdb": "785b0a7b5ccb5f6437d29f48c1ab294f66bca19a35a5aa7f9733bfe19b651baa",
+    "regions/LME/LME_014/papers/PAT-2023/sources/unveiling-the-wasp-waist-structure-of-the--6ddbcdca.pdf": "6ddbcdcafa82dde6202023fa9e7168436024253636c5c26df7a68724d1069497",
+    "regions/LME/LME_014/papers/PAT-2023/sources/S0025315423000887sup003-30b6e11c.docx": "30b6e11cc51d82c53163dd0e390e3c9c592557701ec6390dfe835e2cf00d62f3",
+    "regions/LME/LME_014/papers/PAT-2023/sources/S0025315423000887sup001-20a72b82.csv": "3c3cbce06f3b683c13956afe917972fa780aef4b3ed8b6b0cef6b5ccaa89201b",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/model.json": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/model.json": "151d6005486718dd76ce4343dd5792561c5da40112191dc4db64968ba649592e",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/Basic_input.csv": "f2d3775ca77cd3cb4b2542f4ffbf594d62f2b481ac170681548c05dcc6614ec8",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/Biomass_accumulation.csv": "bec3cb09b37eb1b3dcb74fd1e594f68fe78dcac7d77bae5b7ef22c7e20d20454",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/Detritus_fate.csv": "78d9cd3d263560b5461189e69e98fde9b90781463b16166f67fd94779d3b103e",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/Diet_composition.csv": "49c0135cfe70eaa7233e7e6a96fd143ee6a2b433e23418ab0ff4b70fae15c0ee",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/Discards.csv": "27f4f3532d9ebb00d6185a951a1381554dd6cf0a1f378757e21b11c9f11f5354",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/Landings.csv": "46420c1dec678f4a913f398668777f30b84175dcf08708101c3acd0413a5948a",
+    "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native__source/extracted_tables/taxonomy.csv": "32a6b8151799d4ac97590c86c6b0217f9f481b1f1d1cd61cb7d3b2b06b980d1c"
+  },
+  "units": {
+    "native_model_area_km2": 200000,
+    "native_first_year": 2020,
+    "native_num_years": 1,
+    "source_table_units": "S4 prints t per km2; Methods p.9 states 2020 discards.",
+    "amount_basis": "2020 fishery amount normalized by model area, t/km2; annualized as t/km2/year for this one-year model.",
+    "wet_weight_explicit_in_inspected_source": false,
+    "stock_vs_flow": "Discards B is a source stock-density field equal to annual discarded amount numerically; no residence-time observation is supplied."
+  },
+  "group_crosswalk": [
+    {
+      "group_id": 40,
+      "seq": 1,
+      "name": "Baleen Whales"
+    },
+    {
+      "group_id": 4,
+      "seq": 2,
+      "name": "Benthic Crustaceans"
+    },
+    {
+      "group_id": 5,
+      "seq": 3,
+      "name": "Blue Whiting"
+    },
+    {
+      "group_id": 7,
+      "seq": 4,
+      "name": "Dogfish"
+    },
+    {
+      "group_id": 8,
+      "seq": 5,
+      "name": "Flounder"
+    },
+    {
+      "group_id": 39,
+      "seq": 6,
+      "name": "Grenadier"
+    },
+    {
+      "group_id": 9,
+      "seq": 7,
+      "name": "Hake Austral"
+    },
+    {
+      "group_id": 12,
+      "seq": 8,
+      "name": "Hake Common"
+    },
+    {
+      "group_id": 10,
+      "seq": 9,
+      "name": "Hoki"
+    },
+    {
+      "group_id": 11,
+      "seq": 10,
+      "name": "I. argentinus"
+    },
+    {
+      "group_id": 13,
+      "seq": 11,
+      "name": "Jellyfish"
+    },
+    {
+      "group_id": 44,
+      "seq": 12,
+      "name": "Kelp"
+    },
+    {
+      "group_id": 36,
+      "seq": 13,
+      "name": "Kingclip"
+    },
+    {
+      "group_id": 16,
+      "seq": 14,
+      "name": "Large Demersal Fish"
+    },
+    {
+      "group_id": 42,
+      "seq": 15,
+      "name": "Large Zoobenthos"
+    },
+    {
+      "group_id": 18,
+      "seq": 16,
+      "name": "D. gahi ASC"
+    },
+    {
+      "group_id": 19,
+      "seq": 17,
+      "name": "D. gahi SSC"
+    },
+    {
+      "group_id": 41,
+      "seq": 18,
+      "name": "Myctophidae"
+    },
+    {
+      "group_id": 20,
+      "seq": 19,
+      "name": "Octopods"
+    },
+    {
+      "group_id": 21,
+      "seq": 20,
+      "name": "Pelagic Fish"
+    },
+    {
+      "group_id": 22,
+      "seq": 21,
+      "name": "Penguins"
+    },
+    {
+      "group_id": 23,
+      "seq": 22,
+      "name": "Phytoplankton"
+    },
+    {
+      "group_id": 37,
+      "seq": 23,
+      "name": "Red Cod"
+    },
+    {
+      "group_id": 38,
+      "seq": 24,
+      "name": "Rock Cod"
+    },
+    {
+      "group_id": 25,
+      "seq": 25,
+      "name": "Seabirds"
+    },
+    {
+      "group_id": 26,
+      "seq": 26,
+      "name": "Seals and Sea Lion"
+    },
+    {
+      "group_id": 27,
+      "seq": 27,
+      "name": "Sharks"
+    },
+    {
+      "group_id": 28,
+      "seq": 28,
+      "name": "Skates"
+    },
+    {
+      "group_id": 30,
+      "seq": 29,
+      "name": "Small Demersal Fish"
+    },
+    {
+      "group_id": 31,
+      "seq": 30,
+      "name": "Small Zoobenthos"
+    },
+    {
+      "group_id": 32,
+      "seq": 31,
+      "name": "Squid"
+    },
+    {
+      "group_id": 33,
+      "seq": 32,
+      "name": "Toothed Whales and Dolphins"
+    },
+    {
+      "group_id": 43,
+      "seq": 33,
+      "name": "Toothfish juv"
+    },
+    {
+      "group_id": 35,
+      "seq": 34,
+      "name": "Zooplankton"
+    },
+    {
+      "group_id": 45,
+      "seq": 35,
+      "name": "Discards"
+    },
+    {
+      "group_id": 1,
+      "seq": 36,
+      "name": "Detritus"
+    }
+  ],
+  "rows": [
+    {
+      "donor_group_id": 40,
+      "donor_seq": 1,
+      "donor_name": "Baleen Whales",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 40,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 40,
+      "donor_seq": 1,
+      "donor_name": "Baleen Whales",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 40,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 4,
+      "donor_seq": 2,
+      "donor_name": "Benthic Crustaceans",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 1.7300000365594315e-07,
+      "discards": 0.00015900499420240521,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.00015900499420240521,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.00015900499420240521,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 4,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 4,
+      "donor_seq": 2,
+      "donor_name": "Benthic Crustaceans",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 4,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 5,
+      "donor_seq": 3,
+      "donor_name": "Blue Whiting",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0003190700081177056,
+      "discards": 2.4909999410738237e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 2.4909999410738237e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 2.4909999410738237e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 5,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 5,
+      "donor_seq": 3,
+      "donor_name": "Blue Whiting",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 5,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 7,
+      "donor_seq": 4,
+      "donor_name": "Dogfish",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 2.3770000552758574e-05,
+      "discards": 0.00041181998676620424,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.00041181998676620424,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.00041181998676620424,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 7,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 7,
+      "donor_seq": 4,
+      "donor_name": "Dogfish",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 7,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 8,
+      "donor_seq": 5,
+      "donor_name": "Flounder",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 1.127500036091078e-05,
+      "discards": 2.035000079558813e-06,
+      "discard_mortality": 1.0,
+      "dead_discards": 2.035000079558813e-06,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 2.035000079558813e-06,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 8,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 8,
+      "donor_seq": 5,
+      "donor_name": "Flounder",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 8,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 39,
+      "donor_seq": 6,
+      "donor_name": "Grenadier",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0005530699854716659,
+      "discards": 0.0002831850142683834,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0002831850142683834,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0002831850142683834,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 39,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 39,
+      "donor_seq": 6,
+      "donor_name": "Grenadier",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 39,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 9,
+      "donor_seq": 7,
+      "donor_name": "Hake Austral",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0002699499891605228,
+      "discards": 9.190000128000975e-06,
+      "discard_mortality": 1.0,
+      "dead_discards": 9.190000128000975e-06,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 9.190000128000975e-06,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 9,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 9,
+      "donor_seq": 7,
+      "donor_name": "Hake Austral",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 9,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 12,
+      "donor_seq": 8,
+      "donor_name": "Hake Common",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.21719926595687866,
+      "discards": 0.0004073349991813302,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0004073349991813302,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0004073349991813302,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 12,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 12,
+      "donor_seq": 8,
+      "donor_name": "Hake Common",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 12,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 10,
+      "donor_seq": 9,
+      "donor_name": "Hoki",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.03820979967713356,
+      "discards": 0.0003981949994340539,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0003981949994340539,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0003981949994340539,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 10,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 10,
+      "donor_seq": 9,
+      "donor_name": "Hoki",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 10,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 11,
+      "donor_seq": 10,
+      "donor_name": "I. argentinus",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 9.58500004344387e-06,
+      "discard_mortality": 1.0,
+      "dead_discards": 9.58500004344387e-06,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 9.58500004344387e-06,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 11,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 11,
+      "donor_seq": 10,
+      "donor_name": "I. argentinus",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.3450606167316437,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 11,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 13,
+      "donor_seq": 11,
+      "donor_name": "Jellyfish",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 4.4899998101755045e-06,
+      "discards": 4.4899998101755045e-06,
+      "discard_mortality": 1.0,
+      "dead_discards": 4.4899998101755045e-06,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 4.4899998101755045e-06,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 13,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 13,
+      "donor_seq": 11,
+      "donor_name": "Jellyfish",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 13,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 44,
+      "donor_seq": 12,
+      "donor_name": "Kelp",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 44,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 44,
+      "donor_seq": 12,
+      "donor_name": "Kelp",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 44,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 36,
+      "donor_seq": 13,
+      "donor_name": "Kingclip",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.008235050365328789,
+      "discards": 8.145999890984967e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 8.145999890984967e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 8.145999890984967e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 36,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 36,
+      "donor_seq": 13,
+      "donor_name": "Kingclip",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 36,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 16,
+      "donor_seq": 14,
+      "donor_name": "Large Demersal Fish",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 3.3250000797124812e-06,
+      "discards": 0.0003443899913690984,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0003443899913690984,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0003443899913690984,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 16,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 16,
+      "donor_seq": 14,
+      "donor_name": "Large Demersal Fish",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 16,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 42,
+      "donor_seq": 15,
+      "donor_name": "Large Zoobenthos",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 42,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 42,
+      "donor_seq": 15,
+      "donor_name": "Large Zoobenthos",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 42,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 18,
+      "donor_seq": 16,
+      "donor_name": "D. gahi ASC",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.1500062346458435,
+      "discards": 0.00011738500325009227,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.00011738500325009227,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.00011738500325009227,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 18,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 18,
+      "donor_seq": 16,
+      "donor_name": "D. gahi ASC",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 18,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 19,
+      "donor_seq": 17,
+      "donor_name": "D. gahi SSC",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.1546507477760315,
+      "discards": 9.313999908044934e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 9.313999908044934e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 9.313999908044934e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 19,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 19,
+      "donor_seq": 17,
+      "donor_name": "D. gahi SSC",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 19,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 41,
+      "donor_seq": 18,
+      "donor_name": "Myctophidae",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 41,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 41,
+      "donor_seq": 18,
+      "donor_name": "Myctophidae",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 41,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 20,
+      "donor_seq": 19,
+      "donor_name": "Octopods",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 1.0000000116860974e-07,
+      "discards": 1.0689999726309907e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 1.0689999726309907e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 1.0689999726309907e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 20,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 20,
+      "donor_seq": 19,
+      "donor_name": "Octopods",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 20,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 21,
+      "donor_seq": 20,
+      "donor_name": "Pelagic Fish",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0038223699666559696,
+      "discards": 0.0001246350002475083,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0001246350002475083,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0001246350002475083,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 21,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 21,
+      "donor_seq": 20,
+      "donor_name": "Pelagic Fish",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 21,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 22,
+      "donor_seq": 21,
+      "donor_name": "Penguins",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 6.590000101169835e-09,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 22,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 22,
+      "donor_seq": 21,
+      "donor_name": "Penguins",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 22,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 23,
+      "donor_seq": 22,
+      "donor_name": "Phytoplankton",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 23,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 23,
+      "donor_seq": 22,
+      "donor_name": "Phytoplankton",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 23,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 37,
+      "donor_seq": 23,
+      "donor_name": "Red Cod",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.007052705157548189,
+      "discards": 7.593000191263855e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 7.593000191263855e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 7.593000191263855e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 37,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 37,
+      "donor_seq": 23,
+      "donor_name": "Red Cod",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 37,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 38,
+      "donor_seq": 24,
+      "donor_name": "Rock Cod",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0013357650022953749,
+      "discards": 0.0027301099617034197,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0027301099617034197,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0027301099617034197,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 38,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 38,
+      "donor_seq": 24,
+      "donor_name": "Rock Cod",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 38,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 25,
+      "donor_seq": 25,
+      "donor_name": "Seabirds",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 6.729999881827098e-07,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 25,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 25,
+      "donor_seq": 25,
+      "donor_name": "Seabirds",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 25,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 26,
+      "donor_seq": 26,
+      "donor_name": "Seals and Sea Lion",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 4.640000099698227e-07,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 26,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 26,
+      "donor_seq": 26,
+      "donor_name": "Seals and Sea Lion",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 26,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 27,
+      "donor_seq": 27,
+      "donor_name": "Sharks",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 9.999999974752427e-07,
+      "discard_mortality": 1.0,
+      "dead_discards": 9.999999974752427e-07,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 9.999999974752427e-07,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 27,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 27,
+      "donor_seq": 27,
+      "donor_name": "Sharks",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 27,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 28,
+      "donor_seq": 28,
+      "donor_name": "Skates",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.006671300157904625,
+      "discards": 0.00040761500713415444,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.00040761500713415444,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.00040761500713415444,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 28,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 28,
+      "donor_seq": 28,
+      "donor_name": "Skates",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 28,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 30,
+      "donor_seq": 29,
+      "donor_name": "Small Demersal Fish",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 4.999999858590343e-10,
+      "discards": 3.999500040663406e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 3.999500040663406e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 3.999500040663406e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 30,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 30,
+      "donor_seq": 29,
+      "donor_name": "Small Demersal Fish",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 30,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 31,
+      "donor_seq": 30,
+      "donor_name": "Small Zoobenthos",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.00010414999997010455,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 31,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 31,
+      "donor_seq": 30,
+      "donor_name": "Small Zoobenthos",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 31,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 32,
+      "donor_seq": 31,
+      "donor_name": "Squid",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 1.4999999464748726e-08,
+      "discards": 1.927499943121802e-05,
+      "discard_mortality": 1.0,
+      "dead_discards": 1.927499943121802e-05,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 1.927499943121802e-05,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 32,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 32,
+      "donor_seq": 31,
+      "donor_name": "Squid",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 32,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 33,
+      "donor_seq": 32,
+      "donor_name": "Toothed Whales and Dolphins",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 33,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 33,
+      "donor_seq": 32,
+      "donor_name": "Toothed Whales and Dolphins",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 33,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 43,
+      "donor_seq": 33,
+      "donor_name": "Toothfish juv",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0014431469608098269,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 43,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 43,
+      "donor_seq": 33,
+      "donor_name": "Toothfish juv",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 43,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 35,
+      "donor_seq": 34,
+      "donor_name": "Zooplankton",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.00010414999997010455,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.00010414999997010455,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.00010414999997010455,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 35,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 35,
+      "donor_seq": 34,
+      "donor_name": "Zooplankton",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 35,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 45,
+      "donor_seq": 35,
+      "donor_name": "Discards",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 45,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 45,
+      "donor_seq": 35,
+      "donor_name": "Discards",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 45,
+          "FleetID": 2
+        }
+      }
+    },
+    {
+      "donor_group_id": 1,
+      "donor_seq": 36,
+      "donor_name": "Detritus",
+      "fleet_id": 1,
+      "fleet_name": "Trawling",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 1,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 1,
+          "FleetID": 1
+        }
+      }
+    },
+    {
+      "donor_group_id": 1,
+      "donor_seq": 36,
+      "donor_name": "Detritus",
+      "fleet_id": 2,
+      "fleet_name": "Jigging",
+      "landings": 0.0,
+      "discards": 0.0,
+      "discard_mortality": 1.0,
+      "dead_discards": 0.0,
+      "recipients": [
+        {
+          "recipient_group_id": 45,
+          "recipient_seq": 35,
+          "recipient_name": "Discards",
+          "fraction": 0.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 45
+            }
+          }
+        },
+        {
+          "recipient_group_id": 1,
+          "recipient_seq": 36,
+          "recipient_name": "Detritus",
+          "fraction": 1.0,
+          "amount": 0.0,
+          "source_keys": {
+            "EcopathDiscardFate": {
+              "FleetID": 2,
+              "GroupID": 1
+            }
+          }
+        }
+      ],
+      "source_keys": {
+        "EcopathCatch": {
+          "GroupID": 1,
+          "FleetID": 2
+        }
+      }
+    }
+  ],
+  "totals": {
+    "landings": 0.9349775344715998,
+    "discards": 0.005859524956463247,
+    "dead_discards": 0.005859524956463247,
+    "recipient_inflow": {
+      "35": 0.0,
+      "36": 0.005859524956463247
+    },
+    "discards_accepted_completed_demand": 0.2075036320374553,
+    "demand_to_total_fishery_discards_ratio": 35.41304689018724,
+    "hypothetical_rerouting_to_35_residual": -0.20164410708099206,
+    "hypothetical_rerouting_performed": false
+  },
+  "completeness": {
+    "groups": 36,
+    "fleets": 2,
+    "catch_rows": 72,
+    "all_group_fleet_pairs_present_once": true,
+    "finite_nonnegative_catches": true,
+    "all_discard_mortality_one": true,
+    "fleet_recipient_fractions_sum_one": {
+      "1": true,
+      "2": true
+    },
+    "fresh_groups_equal_retained_primary_audit": true,
+    "fresh_diets_equal_retained_primary_audit": true
+  },
+  "discards_consumers": [
+    {
+      "consumer_group_id": 16,
+      "consumer_seq": 14,
+      "consumer_name": "Large Demersal Fish",
+      "prey_group_id": 45,
+      "prey_seq": 35,
+      "diet_fraction": 0.06920357793569565,
+      "native_biomass": -9999,
+      "native_qb": 2.700000047683716,
+      "accepted_biomass": 0.13941855955080637,
+      "accepted_qb": 2.700000047683716,
+      "accepted_completed_annual_demand": 0.026050310969268003,
+      "demand_calculation": "accepted completed B * unchanged native Q/B * native diet fraction; arithmetic only, no solver",
+      "source_keys": {
+        "EcopathDietComp": {
+          "PredID": 16,
+          "PreyID": 45
+        }
+      }
+    },
+    {
+      "consumer_group_id": 25,
+      "consumer_seq": 25,
+      "consumer_name": "Seabirds",
+      "prey_group_id": 45,
+      "prey_seq": 35,
+      "diet_fraction": 0.12841027975082397,
+      "native_biomass": 0.019999999552965164,
+      "native_qb": 70,
+      "accepted_biomass": 0.019999999552965164,
+      "accepted_qb": 70.0,
+      "accepted_completed_annual_demand": 0.17977438763288278,
+      "demand_calculation": "accepted completed B * unchanged native Q/B * native diet fraction; arithmetic only, no solver",
+      "source_keys": {
+        "EcopathDietComp": {
+          "PredID": 25,
+          "PreyID": 45
+        }
+      }
+    },
+    {
+      "consumer_group_id": 27,
+      "consumer_seq": 27,
+      "consumer_name": "Sharks",
+      "prey_group_id": 45,
+      "prey_seq": 35,
+      "diet_fraction": 0.004388148430734873,
+      "native_biomass": 0.0003000000142492354,
+      "native_qb": 0.8500000238418579,
+      "accepted_biomass": 0.0003000000142492354,
+      "accepted_qb": 0.8500000238418579,
+      "accepted_completed_annual_demand": 1.1189779343724734e-06,
+      "demand_calculation": "accepted completed B * unchanged native Q/B * native diet fraction; arithmetic only, no solver",
+      "source_keys": {
+        "EcopathDietComp": {
+          "PredID": 27,
+          "PreyID": 45
+        }
+      }
+    },
+    {
+      "consumer_group_id": 28,
+      "consumer_seq": 28,
+      "consumer_name": "Skates",
+      "prey_group_id": 45,
+      "prey_seq": 35,
+      "diet_fraction": 0.0052962517365813255,
+      "native_biomass": 0.06647425889968872,
+      "native_qb": 2.0999999046325684,
+      "accepted_biomass": 0.06647425889968872,
+      "accepted_qb": 2.0999999046325684,
+      "accepted_completed_annual_demand": 0.0007393352256089309,
+      "demand_calculation": "accepted completed B * unchanged native Q/B * native diet fraction; arithmetic only, no solver",
+      "source_keys": {
+        "EcopathDietComp": {
+          "PredID": 28,
+          "PreyID": 45
+        }
+      }
+    },
+    {
+      "consumer_group_id": 33,
+      "consumer_seq": 32,
+      "consumer_name": "Toothed Whales and Dolphins",
+      "prey_group_id": 45,
+      "prey_seq": 35,
+      "diet_fraction": 0.04486038163304329,
+      "native_biomass": 0.0020000000949949026,
+      "native_qb": 10.460000038146973,
+      "accepted_biomass": 0.0020000000949949026,
+      "accepted_qb": 10.460000038146973,
+      "accepted_completed_annual_demand": 0.0009384792317612106,
+      "demand_calculation": "accepted completed B * unchanged native Q/B * native diet fraction; arithmetic only, no solver",
+      "source_keys": {
+        "EcopathDietComp": {
+          "PredID": 33,
+          "PreyID": 45
+        }
+      }
+    }
+  ],
+  "native_pool_rows": {
+    "35": {
+      "GroupID": 45,
+      "GroupName": "Discards",
+      "Sequence": 35,
+      "Type": 2,
+      "Biomass": 0.005859524942934513,
+      "Area": 1,
+      "ProdBiom": -9999,
+      "ConsBiom": -9999,
+      "EcoEfficiency": -9999,
+      "OtherMort": -9999,
+      "ProdCons": -9999,
+      "BiomAcc": 0,
+      "BiomAccRate": 0,
+      "Unassim": 0.20000000298023224,
+      "DtImports": 0,
+      "Export": -0.20750363171100616,
+      "Catch": 0,
+      "ImpVar": 0,
+      "GroupIsFish": true,
+      "GroupIsInvert": true,
+      "NonMarketValue": 0,
+      "Respiration": 0,
+      "PoolColor": "00000000",
+      "Immigration": 0,
+      "Emigration": 0,
+      "ProdResp": 0,
+      "RespCons": 0,
+      "RespBiom": 0,
+      "Consumption": 0,
+      "Production": 0,
+      "Unassimilated": 0,
+      "vbK": 0.30000001192092896,
+      "AinLW": -1,
+      "BinLW": -1,
+      "Loo": -1,
+      "Winf": -1,
+      "t0": -9999,
+      "Tcatch": -1,
+      "Tmax": -1,
+      "QmQo": null,
+      "CmCo": null,
+      "EmigRate": 0,
+      "PSDInclude": null
+    },
+    "36": {
+      "GroupID": 1,
+      "GroupName": "Detritus",
+      "Sequence": 36,
+      "Type": 2,
+      "Biomass": -9999,
+      "Area": 1,
+      "ProdBiom": -9999,
+      "ConsBiom": -9999,
+      "EcoEfficiency": 0,
+      "OtherMort": -9999,
+      "ProdCons": -9999,
+      "BiomAcc": 0,
+      "BiomAccRate": 0,
+      "Unassim": 0,
+      "DtImports": 0,
+      "Export": 861.7476196289062,
+      "Catch": 0,
+      "ImpVar": 0,
+      "GroupIsFish": false,
+      "GroupIsInvert": false,
+      "NonMarketValue": 0,
+      "Respiration": 0,
+      "PoolColor": "ff408080",
+      "Immigration": 0,
+      "Emigration": 0,
+      "ProdResp": 0,
+      "RespCons": 0,
+      "RespBiom": 0,
+      "Consumption": 0,
+      "Production": 0,
+      "Unassimilated": 0,
+      "vbK": -1,
+      "AinLW": -1,
+      "BinLW": -1,
+      "Loo": -1,
+      "Winf": -1,
+      "t0": 100,
+      "Tcatch": 0,
+      "Tmax": -1,
+      "QmQo": 0,
+      "CmCo": 0,
+      "EmigRate": 0,
+      "PSDInclude": null
+    }
+  },
+  "source_narrative": [
+    {
+      "locator": "Main PDF p.9, Ecopath Methods",
+      "finding": "Separate Discards prey category for discard feeders/scavengers, such as birds; B equals all fisheries discards in 2020."
+    },
+    {
+      "locator": "Main PDF p.15, Table 4 continuation",
+      "finding": "Discards sequence35 B=0.01 t/km2 after rounding; Detritus sequence36 is separate, EE=0.05. Native Detritus EE=0 differs."
+    },
+    {
+      "locator": "Main PDF p.8, Table 2; separate S2 CSV",
+      "finding": "Detritus category combines POM, detritus and discards; printed and native model structures differ."
+    },
+    {
+      "locator": "Main PDF p.9 Methods and p.12 Results",
+      "finding": "Authors describe PREBAL balancing and call final model balanced; this does not independently verify the current reconstruction."
+    },
+    {
+      "locator": "Main PDF p.16 Discussion",
+      "finding": "Birds feed on vessel fish guts and heads. No annual processing-offal mass or quantified additional supply to group35 is identified in the inspected source."
+    },
+    {
+      "locator": "Main PDF p.9 Methods",
+      "finding": "External diet imports for migratory consumers are described separately; no explicit Discards drawdown, negative BA or detritus import is prescribed."
+    }
+  ],
+  "original_balance_availability": {
+    "fresh_EwE_run_performed": false,
+    "stored_native_export_for_discards": -0.20750363171100616,
+    "stored_native_export_is_finite_negative": true,
+    "stored_export_plus_independent_accepted_demand": 3.2644914549351256e-10,
+    "interpretation": "The native database itself stores negative Export for Discards while native BiomAcc, BiomAccRate and DtImports are zero. This is saved source evidence, not proof of a freshly reproduced native EwE balance or of author intent; input/output status of this saved field requires native-engine inspection.",
+    "dedicated_balance_result_table": "No explicitly named Ecopath result/balance table in complete user-table inventory; EcopathGroup contains saved flow fields.",
+    "table_inventory": [
+      {
+        "name": "Auxillary",
+        "row_count": 1
+      },
+      {
+        "name": "EcopathCatch",
+        "row_count": 72
+      },
+      {
+        "name": "EcopathCatchCode",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathDietComp",
+        "row_count": 1296
+      },
+      {
+        "name": "EcopathDietCompSample",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathDiscardFate",
+        "row_count": 4
+      },
+      {
+        "name": "EcopathFleet",
+        "row_count": 2
+      },
+      {
+        "name": "EcopathGroup",
+        "row_count": 36
+      },
+      {
+        "name": "EcopathGroupCatchSample",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathGroupPedigree",
+        "row_count": 31
+      },
+      {
+        "name": "EcopathGroupSample",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathGroupTaxon",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathModel",
+        "row_count": 1
+      },
+      {
+        "name": "EcopathPSD",
+        "row_count": 1
+      },
+      {
+        "name": "EcopathSample",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathStanzaTaxon",
+        "row_count": 0
+      },
+      {
+        "name": "EcopathTaxon",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimModel",
+        "row_count": 1
+      },
+      {
+        "name": "EcosimScenario",
+        "row_count": 1
+      },
+      {
+        "name": "EcosimScenarioArena",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimScenarioCapacityDrivers",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimScenarioFleet",
+        "row_count": 2
+      },
+      {
+        "name": "EcosimScenarioFleetGroupCatchability",
+        "row_count": 29
+      },
+      {
+        "name": "EcosimScenarioFleetYear",
+        "row_count": 200
+      },
+      {
+        "name": "EcosimScenarioForcingMatrix",
+        "row_count": 245
+      },
+      {
+        "name": "EcosimScenarioGroup",
+        "row_count": 36
+      },
+      {
+        "name": "EcosimScenarioGroupYear",
+        "row_count": 3500
+      },
+      {
+        "name": "EcosimScenarioLandingsShape",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimScenarioMSE",
+        "row_count": 1
+      },
+      {
+        "name": "EcosimScenarioPredPreyShape",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimScenarioQuota",
+        "row_count": 70
+      },
+      {
+        "name": "EcosimScenarioShapeMedWeightsFleet",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimScenarioshapeMedWeightsGroup",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimScenarioshapeMedWeightsLandings",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimShape",
+        "row_count": 2
+      },
+      {
+        "name": "EcosimShapeEggProd",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimShapeFishMort",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimShapeFishRate",
+        "row_count": 2
+      },
+      {
+        "name": "EcosimShapeMediation",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimShapeTime",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimStanzaShape",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimTimeSeries",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimTimeSeriesDataset",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimTimeSeriesFleet",
+        "row_count": 0
+      },
+      {
+        "name": "EcosimTimeSeriesGroup",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenario",
+        "row_count": 1
+      },
+      {
+        "name": "EcospaceScenarioCapacityDrivers",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioDataConnection",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioDriverLayer",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioFleet",
+        "row_count": 2
+      },
+      {
+        "name": "EcospaceScenarioGroup",
+        "row_count": 36
+      },
+      {
+        "name": "EcospaceScenarioGroupHabitat",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioGroupMigration",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioHabitat",
+        "row_count": 1
+      },
+      {
+        "name": "EcospaceScenarioHabitatFishery",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioMonth",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioMPA",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioMPAFishery",
+        "row_count": 0
+      },
+      {
+        "name": "EcospaceScenarioWeightLayer",
+        "row_count": 0
+      },
+      {
+        "name": "EcotracerScenario",
+        "row_count": 0
+      },
+      {
+        "name": "EcotracerScenarioGroup",
+        "row_count": 0
+      },
+      {
+        "name": "Pedigree",
+        "row_count": 37
+      },
+      {
+        "name": "Quote",
+        "row_count": 0
+      },
+      {
+        "name": "Stanza",
+        "row_count": 0
+      },
+      {
+        "name": "StanzaLifeStage",
+        "row_count": 0
+      },
+      {
+        "name": "UpdateLog",
+        "row_count": 2
+      }
+    ]
+  },
+  "scientific_inputs_changed": false,
+  "new_offal_flow_adopted": false,
+  "citations": {
+    "paper_doi": "10.1017/S0025315423000887",
+    "paper_pdf": "regions/LME/LME_014/papers/PAT-2023/sources/unveiling-the-wasp-waist-structure-of-the--6ddbcdca.pdf",
+    "supplement_s4": "regions/LME/LME_014/papers/PAT-2023/sources/S0025315423000887sup003-30b6e11c.docx",
+    "s4_output": "supplement_s4.json",
+    "fresh_native_tables": "native_readonly_tables.json"
+  }
+}

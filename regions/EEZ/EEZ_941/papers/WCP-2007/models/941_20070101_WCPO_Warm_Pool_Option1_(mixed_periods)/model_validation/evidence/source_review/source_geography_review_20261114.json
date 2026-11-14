@@ -1,0 +1,457 @@
+{
+  "review_date": "2026-11-14",
+  "region_id": "EEZ_941",
+  "selected_model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+  "scope": "Read-only source context, temporal and geographic review supporting report preparation; no extraction, parameter repair, workbook adoption or researcher approval",
+  "identity_checks": [
+    {
+      "project_relative_path": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model.json",
+      "retained_expected_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "current_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "matches": true
+    },
+    {
+      "project_relative_path": "regions/EEZ/EEZ_941/papers/WCP-2007/sources/download-0adcf55e.pdf",
+      "retained_expected_sha256": "0adcf55ef7760865786bc2774b1fb147a6461a6fe0b128a943c8fce27c23f52f",
+      "current_sha256": "0adcf55ef7760865786bc2774b1fb147a6461a6fe0b128a943c8fce27c23f52f",
+      "matches": true
+    },
+    {
+      "project_relative_path": "common_reference_data/geography/boundaries/EEZs.geojson",
+      "retained_expected_sha256": "fb7c7d4acb47a7cf51554dde9c10501e6eaa1ed91731d61328c94d10e4304986",
+      "current_sha256": "fb7c7d4acb47a7cf51554dde9c10501e6eaa1ed91731d61328c94d10e4304986",
+      "matches": true
+    },
+    {
+      "project_relative_path": "common_reference_data/geography/basemaps/ne_50m_land.geojson",
+      "retained_expected_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "current_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "matches": true
+    }
+  ],
+  "geography": {
+    "evidence_relative_path": "geographic_estimate.json",
+    "reused_calculation": true,
+    "fresh_area_calculation": false,
+    "all_saved_geometry_input_hashes_match": true,
+    "current_boundary_location_note": "Saved historical geographic_estimate.json key common_reference_data/geography/EEZs.geojson relocated to common_reference_data/geography/boundaries/EEZs.geojson with unchanged bytes",
+    "region_area_km2": 1049740.4209966804,
+    "study_rectangle_wet_area_km2": 22992690.46455834,
+    "intersection_km2": 1046755.9093225244,
+    "A_percent": 99.71569050648517,
+    "B_wet_rectangle_percent": 4.552559479439899,
+    "B_published_area_percent": 3.8820498046377554,
+    "reported_study_area_km2": 26964000,
+    "method": "WGS84 ellipsoidal polygon area, coordinate-linear densification ≤0.1 degree; Natural Earth 1:50m land removed consistently. Study domain is Section 2.2 PDF7 fixed rectangle, distinct from warm-pool Figure1 PDF3. Approximate due SAU repaired EEZ polygon, coarse land, and published-area disagreement.",
+    "source_confirmation": "Original source PDF7 Section 2.2 explicitly gives fixed 110-180E, 15N-15S and 26.964 million km2. Source PDF3 Figure1 is contextual warm-pool/cold-tongue illustration. Both text sections were read in this review.",
+    "interpretation": "A is overlap/EEZ. B is overlap/study domain. The 3.9-4.6% B range expresses denominator and boundary uncertainty, not a confidence interval. Near-complete EEZ overlap does not establish suitability for reef/coastal catches.",
+    "assets": [
+      {
+        "relative_to_review": "region_boundary.png",
+        "sha256": "3561748776c8607872d6346ac58c286016b108b2e7e0a0be930681470b06a37a",
+        "role": "Regional EEZ view with the selected fixed study boundary",
+        "visually_inspected": true,
+        "finding": "Readable axes/caption/context; appropriate to reuse after unchanged geometry/source identity checks"
+      },
+      {
+        "relative_to_review": "study_domain.png",
+        "sha256": "916c920c998221dca08b48e3d2e50c43a5af1c3d0b0e54e10199a7b69f0f27e2",
+        "role": "Selected fixed 110-180E 15S-15N domain and regional boundary",
+        "visually_inspected": true,
+        "finding": "Readable axes/caption/context; appropriate to reuse after unchanged geometry/source identity checks"
+      },
+      {
+        "relative_to_review": "article_figure1_crop.png",
+        "sha256": "2382eee12d2c5b10ec58d4c9aed64ef8ff1b38b0d80ac2ce502bd0cc312fd4f4",
+        "role": "Source Figure 1 PDF3 warm-pool/cold-tongue context; not a digitized precise polygon",
+        "visually_inspected": true,
+        "finding": "Readable axes/caption/context; appropriate to reuse after unchanged geometry/source identity checks"
+      }
+    ]
+  },
+  "source_findings": {
+    "citation": "Allain V, Nicol S, Essington T, Okey T, Olson B, Kirby D (2007). An Ecopath with Ecosim model of the Western and Central Pacific Ocean warm pool pelagic ecosystem. WCPFC-SC3-EB SWG/IP-8. DOI not recorded.",
+    "group_scope": "Final 31 source ecological groups; initial 24-group model and final 31-group model are distinct source inputs. Computational import is not an ecological source group.",
+    "source_locators": {
+      "study_bounds": "PDF7 Section 2.2",
+      "final_group_count": "PDF7 Section 2.3; Table1 PDF9",
+      "final_inputs_and_GS": "Table3 PDF11; final meso/microzooplankton GS confirmed by PDF17 prose",
+      "diets": "Table4 PDF12-13; exact prior cell audit remains matching to current PDF/canonical bytes",
+      "fishery_landings": "Table5 PDF14; temporal definition PDF42",
+      "stanza_limitation": "PDF15 Section 3.2"
+    },
+    "accepted_departures": {
+      "Small BET": {
+        "pb": 1.4129713563375232,
+        "ee": 0.7898725981469387
+      },
+      "Small YFT": {
+        "pb": 2.5304972811160384,
+        "ee": 0.8816702937266387
+      },
+      "interpretation": "Accepted D_fixed_M0 surrogate preserving juvenile other-mortality flows; not an author-confirmed correction",
+      "evidence_relative_path": "diet_reextraction_20261002/accepted_corrections_verification.json",
+      "current_model_hash_matches_prior_audit": true
+    },
+    "nonunit_source_diets": [
+      {
+        "consumer_seq": "6",
+        "consumer": "YFT",
+        "prey_only_sum": "0.998",
+        "import_literal": "0",
+        "diet_plus_import_sum": "0.998",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "7",
+        "consumer": "SKJ",
+        "prey_only_sum": "0.999",
+        "import_literal": "0",
+        "diet_plus_import_sum": "0.999",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "8",
+        "consumer": "Piscivorous fish",
+        "prey_only_sum": "1.002",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.002",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "10",
+        "consumer": "Small Sharks",
+        "prey_only_sum": "1.001",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.001",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "11",
+        "consumer": "Small BET",
+        "prey_only_sum": "1.00039",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.00039",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "12",
+        "consumer": "Small YFT",
+        "prey_only_sum": "1.000631",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.000631",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "13",
+        "consumer": "Small SKJ",
+        "prey_only_sum": "1.001",
+        "import_literal": "0",
+        "diet_plus_import_sum": "1.001",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      },
+      {
+        "consumer_seq": "18",
+        "consumer": "Epi mollusc",
+        "prey_only_sum": "0.999",
+        "import_literal": "0",
+        "diet_plus_import_sum": "0.999",
+        "is_consumer": true,
+        "source_total_is_exact_one": false
+      }
+    ],
+    "diet_interpretation": "Canonical printed diet/import values remain unchanged. Prior source cell audit found no mismatches and no canonical normalization. Retained loader normalizes runtime diet; do not call source discrepancies rounding-only. Current runtime should be read from the separately produced EE-floor evidence.",
+    "GS": "General/initial GS 0.2 in PDF8. Final Table3 PDF11 and PDF17 prose explicitly specify mesozooplankton 0.35 and microzooplankton 0.4.",
+    "runtime_departures_reused": "Historical source/runtime review and transformation ledger record 24 missing BA values derived, unknown baby/forage catch converted to runtime zero, detritus EE forced to 1, synthetic import added, native stanza dynamics not reproduced. Current EE-floor run may alter runtime results and retains its own diagnostic identity.",
+    "no_source_parameter_changes": true
+  },
+  "temporal": {
+    "forage_biomass": "January 1993 to December 2002, source PDF38",
+    "skipjack_catch": "Annual average 1993-2002, source PDF42",
+    "yellowfin_bigeye_and_bycatch_catch": "Annual average 1995-2004, source PDF42",
+    "diet": "Stomach collections 2001-2007, source PDF39-41",
+    "assessment_editions": "2006 YFT/BET and 2005 SKJ, source PDF40,42; not one shared model year",
+    "report_implication": "Fixed ecosystem coefficients and historical composition proxies transfer across 1950-2019; the 2019 result is not an annual ecosystem reconstruction."
+  },
+  "selection_rationale": {
+    "Article": "? Comparative article-selection reason unrecorded",
+    "Model": "Recorded selection adopts D_fixed_M0 to preserve juvenile other-mortality flows and improve juvenile production consistency; Griffiths 2019 deferred for investigation",
+    "preserve_existing_researcher_text": true
+  },
+  "known_article_inventory": [
+    {
+      "paper": "Griffiths et al. 2019",
+      "title": "Just a FAD? Ecosystem impacts of tuna purse-seine fishing associated with fish aggregating devices in the western Pacific Warm Pool Province",
+      "doi": "10.1111/fog.12389",
+      "source_title_verified": true,
+      "source_pdf": "../../../../../../Griffiths-2019/sources/main.pdf"
+    },
+    {
+      "paper": "Allain et al. 2021",
+      "title": "Tuna fisheries bycatch and climate change in the western tropical Pacific Ocean",
+      "report": "WCPFC-SC17-2021/EB-IP-11",
+      "source_title_verified": true,
+      "source_pdf": "../../../../../../Allain-2021/sources/main.pdf",
+      "note": "Known local inventory entry omitted from prior report; title/authors/report identity verified against source cover. Do not imply a fresh comparative model selection.",
+      "source_model_period_domain": "PDF4 directly states average annual situation in 2013; tropical western and central Pacific 140E-150W and 20N-20S."
+    }
+  ],
+  "limitations": [
+    "No fresh extraction performed; unchanged hashes make retained source audits eligible for reuse.",
+    "The single stale navigation link in historical source_review.md was retargeted to the current byte-identical research/agents evidence. Historical scientific prose and all other bytes remain preserved.",
+    "Current EE-floor diagnostics are produced separately and must not be inferred from old source/runtime WARN prose."
+  ],
+  "report_relative_links": {
+    "source_pdf": "../../../sources/download-0adcf55e.pdf",
+    "model_notes": "../model_notes.md",
+    "source_review": "evidence/source_review/source_review.md",
+    "diet_audit": "evidence/source_review/diet_reextraction_20261002/consumer_source_sums.json",
+    "accepted_corrections": "evidence/source_review/diet_reextraction_20261002/accepted_corrections_verification.json",
+    "historical_transformations": "evidence/source_review/evidence/2026-09-28_integration/transformation_ledger.json",
+    "geography": "evidence/source_review/geographic_estimate.json"
+  },
+  "local_reference_check": {
+    "all_named_local_links_resolve": true,
+    "checked_count": 20,
+    "checks": [
+      {
+        "key": "identity_checks/0/project_relative_path",
+        "base": ".",
+        "target": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model.json",
+        "resolves": true
+      },
+      {
+        "key": "identity_checks/1/project_relative_path",
+        "base": ".",
+        "target": "regions/EEZ/EEZ_941/papers/WCP-2007/sources/download-0adcf55e.pdf",
+        "resolves": true
+      },
+      {
+        "key": "identity_checks/2/project_relative_path",
+        "base": ".",
+        "target": "common_reference_data/geography/boundaries/EEZs.geojson",
+        "resolves": true
+      },
+      {
+        "key": "identity_checks/3/project_relative_path",
+        "base": ".",
+        "target": "common_reference_data/geography/basemaps/ne_50m_land.geojson",
+        "resolves": true
+      },
+      {
+        "key": "geography/evidence_relative_path",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "geographic_estimate.json",
+        "resolves": true
+      },
+      {
+        "key": "geography/assets/0/relative_to_review",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "region_boundary.png",
+        "resolves": true
+      },
+      {
+        "key": "geography/assets/1/relative_to_review",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "study_domain.png",
+        "resolves": true
+      },
+      {
+        "key": "geography/assets/2/relative_to_review",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "article_figure1_crop.png",
+        "resolves": true
+      },
+      {
+        "key": "source_findings/accepted_departures/evidence_relative_path",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "diet_reextraction_20261002/accepted_corrections_verification.json",
+        "resolves": true
+      },
+      {
+        "key": "known_article_inventory/0/source_pdf",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "../../../../../../Griffiths-2019/sources/main.pdf",
+        "resolves": true
+      },
+      {
+        "key": "known_article_inventory/1/source_pdf",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "../../../../../../Allain-2021/sources/main.pdf",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/source_pdf",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "../../../sources/download-0adcf55e.pdf",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/model_notes",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "../model_notes.md",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/source_review",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "evidence/source_review/source_review.md",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/diet_audit",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "evidence/source_review/diet_reextraction_20261002/consumer_source_sums.json",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/accepted_corrections",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "evidence/source_review/diet_reextraction_20261002/accepted_corrections_verification.json",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/historical_transformations",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "evidence/source_review/evidence/2026-09-28_integration/transformation_ledger.json",
+        "resolves": true
+      },
+      {
+        "key": "report_relative_links/geography",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation",
+        "target": "evidence/source_review/geographic_estimate.json",
+        "resolves": true
+      },
+      {
+        "key": "source_review_link_repair/source_markdown",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "source_review.md",
+        "resolves": true
+      },
+      {
+        "key": "source_review_link_repair/change/new_relative_target",
+        "base": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review",
+        "target": "../../../../../../../../../../research/agents/selected_regions_validation_20260930/evidence/verification/EEZ_941_pelagic_followup.json",
+        "resolves": true
+      }
+    ],
+    "excluded_historical_path": "The old_relative_target is an explicitly obsolete QA before-value, not a live link. Historical relocation path named inside explanatory prose is also not a live reference."
+  },
+  "source_review_link_repair": {
+    "review_date": "2026-11-14",
+    "scope": "One relative destination only; no scientific text, link labels, other formatting or source data edited",
+    "source_markdown": "source_review.md",
+    "before_sha256": "b264486309a7d3689f3a57ed2489f09e020ffc3c831bb8f06ae11d086663d61f",
+    "after_sha256": "63f7e0da0df7009b22e3c2d96db1d7ca7490454b06215b78c2eeb0a1295a786e",
+    "change": {
+      "label": "coordinator follow-up",
+      "old_relative_target": "../../../../../../../../../../research/selected_regions_validation_20260930/evidence/verification/EEZ_941_pelagic_followup.json",
+      "new_relative_target": "../../../../../../../../../../research/agents/selected_regions_validation_20260930/evidence/verification/EEZ_941_pelagic_followup.json",
+      "target_sha256": "7ce77253d18f4769d8db1b6d37e59442079cee0f463ddc0e1487f8201503cfd2",
+      "source_ledger_confirmation": "common_reference_data/provenance/source_paths.csv line 45099 records research_ownership_relocation with matching before/after hash"
+    },
+    "reverse_patch_restores_all_original_bytes": true,
+    "local_markdown_link_checks": [
+      {
+        "label": "Adopted taxon audit",
+        "target": "taxon_audit.json",
+        "resolves": true
+      },
+      {
+        "label": "appendix",
+        "target": "../../taxon_mapping.xlsx",
+        "resolves": true
+      },
+      {
+        "label": "Allain et al. 2007",
+        "target": "../../../../../sources/download-0adcf55e.pdf#page=9",
+        "resolves": true
+      },
+      {
+        "label": "original extraction audit",
+        "target": "../../../../941_200701_WCPO_Warm_Pool_Final_(mixed_periods)/extracted_tables/REPORT.md",
+        "resolves": true
+      },
+      {
+        "label": "Selected provenance",
+        "target": "../../../extracted_tables/evidence/SELECTION_AND_PROVENANCE.json",
+        "resolves": true
+      },
+      {
+        "label": "Retained direct returns",
+        "target": "evidence/2026-09-28_integration/direct_diagnostics.json",
+        "resolves": true
+      },
+      {
+        "label": "runtime provenance",
+        "target": "evidence/2026-09-28_integration/runtime_verification.json",
+        "resolves": true
+      },
+      {
+        "label": "independent full-matrix verification",
+        "target": "diagnostics_verification.json",
+        "resolves": true
+      },
+      {
+        "label": "candidate ledger",
+        "target": "taxon_audit.json",
+        "resolves": true
+      },
+      {
+        "label": "size-allocation evidence",
+        "target": "../../evidence",
+        "resolves": true
+      },
+      {
+        "label": "Kiribati 2020 report",
+        "target": "online/Kiribati_2020.pdf",
+        "resolves": true
+      },
+      {
+        "label": "pre-completion correction record",
+        "target": "pre_completion_corrections.json",
+        "resolves": true
+      },
+      {
+        "label": "Geographic estimate",
+        "target": "geographic_estimate.json",
+        "resolves": true
+      },
+      {
+        "label": "Arithmetic/protected-table verification",
+        "target": "verification.json",
+        "resolves": true
+      },
+      {
+        "label": "classic preservation evidence",
+        "target": "classic_preservation_verification.json",
+        "resolves": true
+      },
+      {
+        "label": "coordinator follow-up",
+        "target": "../../../../../../../../../../research/agents/selected_regions_validation_20260930/evidence/verification/EEZ_941_pelagic_followup.json",
+        "resolves": true
+      },
+      {
+        "label": "Current keyed mappings and calculation evidence",
+        "target": "residual_fish_scope_followup.json",
+        "resolves": true
+      },
+      {
+        "label": "method-specific exposure",
+        "target": "residual_fish_method_exposure.json",
+        "resolves": true
+      }
+    ],
+    "all_local_markdown_links_resolve": true,
+    "external_urls_unchanged": true,
+    "fragments_unchanged": true
+  }
+}

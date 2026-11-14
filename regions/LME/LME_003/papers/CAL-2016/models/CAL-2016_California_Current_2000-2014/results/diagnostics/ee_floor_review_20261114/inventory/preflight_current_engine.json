@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-14T16:26:32.133362+00:00",
+  "model_id": "CAL-2016_California_Current_2000-2014",
+  "canonical_sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+  "scope": "Configuration preflight only; no model construction or scientific solve",
+  "flags": {
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "normalize_DC": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1
+    },
+    "engine_sources": {
+      "ModelData.py": "extracted_tables/evidence/code/ModelData.py",
+      "PPRCalculator.py": "extracted_tables/evidence/code/PPRCalculator.py",
+      "utils.py": "extracted_tables/evidence/code/utils.py"
+    },
+    "engine_source_hashes": {
+      "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+      "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "calculation_engine_upgrade": "ee_floor_v1",
+    "calculation_engine_sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877"
+  },
+  "current_engine_sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+  "adapter_sha256": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905",
+  "compatible": false,
+  "added_methods": [
+    "_discard_return_matrix",
+    "_external_catch",
+    "_has_discard_returns",
+    "_initialize_discard_returns",
+    "_refresh_missing_biomass_accum",
+    "_require_no_discard_returns",
+    "_sppr_unrouted_export",
+    "_sync_effective_table",
+    "_with_external_mortality",
+    "apply_ee_floor",
+    "get_aggregated_TE",
+    "validate_ee_floor"
+  ],
+  "removed_methods": [],
+  "changed_methods": [
+    {
+      "method": "SPPR_1995",
+      "archived_ast_sha256": "d5bb1a0ecb09d337df3b889ba117a6b669534bdd491e8810791b20bd4a4373be",
+      "certified_predecessor": false
+    },
+    {
+      "method": "SPPR_2015",
+      "archived_ast_sha256": "2877cce7493e465547b9846d05921f29f1a1ad2f3665ee55490c283f1a0d1a78",
+      "certified_predecessor": false
+    },
+    {
+      "method": "SPPR_EwE",
+      "archived_ast_sha256": "226055dfcd681cde1f5666dd5f5c352d22ac0f457c6bd8579b906156724d3825",
+      "certified_predecessor": false
+    },
+    {
+      "method": "SPPR_EwE_Ulanowicz",
+      "archived_ast_sha256": "7f987cfe8ce2604a366ce7b82e9c025c9a37777f4fb161df487ba2e6465e2f31",
+      "certified_predecessor": false
+    },
+    {
+      "method": "SPPR_new",
+      "archived_ast_sha256": "bb8230b27e02630ac93e0aebe85814e8d5a2ad3704ea72402cb21e197567ca22",
+      "certified_predecessor": false
+    },
+    {
+      "method": "SPPR_symbolic",
+      "archived_ast_sha256": "4888a626535e80d34401b0171d24b2addf312fa1666578ea6186e9d8eb26dff0",
+      "certified_predecessor": false
+    },
+    {
+      "method": "_build_det_BC",
+      "archived_ast_sha256": "2350c5948d8fbdafe7866e4afe6b1fd0d73e4c1c799d118e5385cacbe84db3ca",
+      "certified_predecessor": false
+    },
+    {
+      "method": "_collapse_det_scaling",
+      "archived_ast_sha256": "5f26d44ccb94bbd1f44296996ea154654d939bf7d2c545a9cb7b76db0ab4b780",
+      "certified_predecessor": false
+    },
+    {
+      "method": "_flatten_diagnostics",
+      "archived_ast_sha256": "ddbcfa31880435b8b0253faa623198fbd8c0b2996a8f0d814fec1f8aa1ed2906",
+      "certified_predecessor": false
+    },
+    {
+      "method": "_sample_SPPR_new_forced_balance",
+      "archived_ast_sha256": "caabfec6d380cb118c9bcd8d1df942e22fbd84b5a473862f67ed3d6ca6970868",
+      "certified_predecessor": true
+    },
+    {
+      "method": "_solve_det_scaling",
+      "archived_ast_sha256": "71a2bfc27af8ef005f5ced12129a04acbcd0204374fbabddd759e3ff33678af6",
+      "certified_predecessor": false
+    },
+    {
+      "method": "apply_ecopath_defaults",
+      "archived_ast_sha256": "953545d8efc942db77444d7e36ff3739f868fdda4cfb2f52ec4a5779a2d93224",
+      "certified_predecessor": false
+    },
+    {
+      "method": "balance_model",
+      "archived_ast_sha256": "f6686dd5ec7127321da8c213bbc9eb56e44d43443061939a66f2148de88ca5fe",
+      "certified_predecessor": true
+    },
+    {
+      "method": "diagnose_sppr",
+      "archived_ast_sha256": "c7905b1a32bed0f522fad6ca76d6fa45faa8de07bd1fd78f92158c98b29f7e00",
+      "certified_predecessor": true
+    },
+    {
+      "method": "get_Z",
+      "archived_ast_sha256": "d9d473f16865eb75ce8f2f8adce9aa52bbdaeac33934fff2fae7d082843a02f7",
+      "certified_predecessor": false
+    },
+    {
+      "method": "is_model_balanced",
+      "archived_ast_sha256": "fbf6295ffd29e9533460f82c5b59f9fbbab1c7a48ec64b027d4857e48f6a21f5",
+      "certified_predecessor": true
+    },
+    {
+      "method": "is_sppr_balanced",
+      "archived_ast_sha256": "0b408e67ced34318efc7e5aa9cf64d01f40feab578939136b481639ca180f71c",
+      "certified_predecessor": true
+    }
+  ],
+  "unsupported_additions": [
+    "_discard_return_matrix",
+    "_external_catch",
+    "_has_discard_returns",
+    "_initialize_discard_returns",
+    "_refresh_missing_biomass_accum",
+    "_require_no_discard_returns",
+    "_sppr_unrouted_export",
+    "get_aggregated_TE"
+  ],
+  "exception": {
+    "type": "ValueError",
+    "message": "Audited engine scientific methods differ from the canonical supported algorithms",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 256, in _constructor\n    _, _, calculator, _ = _audited_engine(flags, model_path)\n                          ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 184, in _audited_engine\n    raise ValueError('Audited engine scientific methods differ from the canonical supported algorithms')\nValueError: Audited engine scientific methods differ from the canonical supported algorithms\n"
+  },
+  "method_execution": {
+    "GE": "NOT_RUN during compatibility investigation",
+    "TE": "NOT_RUN during compatibility investigation"
+  }
+}

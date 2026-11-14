@@ -1,0 +1,343 @@
+{
+  "review_date": "2026-11-14",
+  "unit_id": "LME_003",
+  "model_id": "CAL-2016_California_Current_2000-2014",
+  "review_scope": "Report and appendix refresh plus explicitly authorized review-only GE/TE diagnostics; no adoption or researcher decision registration",
+  "required_configuration": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1
+  },
+  "required_configuration_evidence": "Available: completed GE and TE diagnostics with EE floor ON at 0.1; both WARN. Full matrices, states, provenance and floor accounting retained under the selected model.",
+  "canonical_model": {
+    "path": "../../../model.json",
+    "sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+  },
+  "source_representation": {
+    "path": "../../../../CAL-2016_California_Current_2000-2014__source/model.json",
+    "sha256": "3813062f7a7f5e153ff383494426d2b56bc956075a445d87955420692bff102b"
+  },
+  "saved_manifest": "../../../results/result_manifest.json",
+  "manifest_limitation": "effective_flags and code_identity are null; provenance_status records unknown historical execution. More specific historical coefficient receipts authenticate archived engine and output bytes, but do not establish ON0.1.",
+  "historical_evidence_only": {
+    "configuration_limit": "Actual archived engine and runner predate EE-floor implementation; these findings are not equivalent to the requested configuration.",
+    "methods": {
+      "GE": {
+        "status": "WARN",
+        "rho_living": 0.45450426854884096,
+        "b": 0.18583401006644024,
+        "detritus": {
+          "group_id": 93,
+          "group_name": "Detritus",
+          "sppr": 1.5136036256769407
+        },
+        "negative_source_group_pairs": [],
+        "nonfinite_entries": 0,
+        "direct_return": "../../../extracted_tables/evidence/ge_direct_return.json",
+        "direct_return_sha256": "5db27566a94d98a6d4c2eb7fd9c2bf3d90e3647c92ef495e50a0979cad676ec9",
+        "matrix": "../../../extracted_tables/evidence/ge_source_resolved_sppr.csv",
+        "matrix_sha256": "62bd1feb128a49a8f868fc7881880a6bd80ae4d1dc94e86612fc9eae6faa675e"
+      },
+      "TE": {
+        "status": "WARN",
+        "rho_living": 0.5620959658114126,
+        "b": 0.0,
+        "b_note": "Method convention; not evidence of absent recycling",
+        "detritus": {
+          "group_id": 93,
+          "group_name": "Detritus",
+          "sppr": 1.1321961430133616
+        },
+        "negative_source_group_pairs": [],
+        "nonfinite_entries": 0,
+        "direct_return": "../../../extracted_tables/evidence/te_direct_return.json",
+        "direct_return_sha256": "1858ca106002b5c67a23e0a4dd84c6a438508d43550a691cc6df2854012ac490",
+        "matrix": "../../../extracted_tables/evidence/te_source_resolved_sppr.csv",
+        "matrix_sha256": "15e769f69599e13c378787bdc42fa271b7b4c03b34b1a14d24128abc91529512"
+      }
+    },
+    "matrix_verification": "Both complete matrices have 94 unique recipient rows and three uniquely identified source columns; all entries checked without excluding unfished groups.",
+    "source_columns": [
+      {
+        "id": 94,
+        "name": "diet_import"
+      },
+      {
+        "id": 93,
+        "name": "Detritus"
+      },
+      {
+        "id": 1,
+        "name": "phytoplankton"
+      }
+    ],
+    "axes_evidence": "diagnostics_verification.json",
+    "archived_code": [
+      {
+        "path": "../../../extracted_tables/evidence/code/ModelData.py",
+        "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e"
+      },
+      {
+        "path": "../../../extracted_tables/evidence/code/PPRCalculator.py",
+        "sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7"
+      },
+      {
+        "path": "../../../extracted_tables/evidence/code/prepare_selected_coefficients.py",
+        "sha256": "64f6b76ffd2b497776efe494e50510ded7c01f32a23193b88d59241af9ed93bb"
+      }
+    ]
+  },
+  "source_fidelity_review": {
+    "current_identity": "The selected canonical JSON contains the accepted author-equation solution. The separate __source representation retains 26 source-unknown B and 67 source-unknown EE values.",
+    "loader_departures": "Consumer GS=0.2, egestion routing to sole detritus, runtime detritus EE=1 and diet_import are conventions, not measured source parameters. Total source Yield includes bycatch/discards without a separate return split.",
+    "diet_audit": "diet_reextraction_20261002/audit_result.json",
+    "diet_finding": "Retained audit: 8742 cells per representation, no differences, no downstream normalization and no researcher diet override; selected model hash still matches. This review reused that audit rather than re-extracting the source.",
+    "researcher_correction_evidence": "diet_reextraction_20261002/researcher_correction_review.json"
+  },
+  "geography_review": {
+    "evidence": "geographic_estimate.json",
+    "region_boundary_current_path": "../../../../../../../../../../common_reference_data/geography/boundaries/LMEs.geojson",
+    "finding": "Existing paper, boundary, reconstruction and land-mask hashes match retained evidence. A approximately 8-13% and B approximately 60-90% remain judgment ranges. The saved geographic record's older boundary path is stale; current boundary bytes match. The inherited source footprint is not independent study GIS.",
+    "source_locators": "Koehn 2016 PDF p2/printed88: averaged 2000-2014; p4/printed90: 302000 km2, northern Vancouver Island to Punta Eugenia, coast to 2000 m isobath; p5/printed91: Figure1."
+  },
+  "researcher_decision": "Not supplied or registered; manual report cells preserved",
+  "authorized_run": {
+    "user_instruction": "Run GE/TE with EE floor ON 0.1",
+    "scope": "Review-only run of unchanged selected canonical model; no regional workbook, Project.xlsx, map or trends update",
+    "configuration": {
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "base_initialization": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "normalize_DC": false
+    },
+    "method_options": {
+      "det_open_mode": "none",
+      "det_theta": 1,
+      "det_external_sppr": 0,
+      "det_collapse_mode": "never",
+      "explicit_TE": false
+    },
+    "route": "Bounded model-local direct diagnostic runner; not the rejected current compute_methods adapter route",
+    "execution_note": "The current adapter rejected this historical engine under its newer compatibility requirements. A permitted model-local direct runner used the unchanged archived loader and authenticated floor-only implementation at the pinned Git commit. No adapter gate or shared engine was modified. A byte-identical temporary historical filename alias and LME identifier supplied loader metadata only; accepted initialization matched retained selected groups.",
+    "preflight_record": "../../../results/diagnostics/ee_floor_review_20261114/inventory/preflight_current_engine.json",
+    "engine_git_commit": "f920c5d27abb405d1d6243546950cb9e212a8534",
+    "actual_engine_sha256": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+    "report_summary": {
+      "path": "../../../results/diagnostics/ee_floor_review_20261114/outputs/report_summary.json",
+      "sha256": "40bf5d8e12f6e62636c7eb323d69472013b84ea07bd6ccf80b7d970442bfe3dd"
+    },
+    "evidence_index": {
+      "path": "../../../results/diagnostics/ee_floor_review_20261114/inventory/evidence_index.json",
+      "sha256": "ea6b4a364f4b31634a6c9562e7e268f0a1187d2f399c77c96de721ac438d826f"
+    },
+    "integrity": {
+      "complete": true,
+      "artifacts_verified": 45,
+      "missing_roles": [],
+      "errors": []
+    },
+    "methods": {
+      "GE": {
+        "overall_status": "WARN",
+        "rho_living": 0.45450426854884096,
+        "b": 0.18385186227762335,
+        "b_note": "detritus recycling loop gain",
+        "detritus_sppr": [
+          {
+            "id": 93,
+            "name": "Detritus",
+            "sppr": 1.503150721810487
+          }
+        ],
+        "negative_source_group_pairs": [],
+        "nonfinite_entries": 0,
+        "matrix_shape": [
+          94,
+          3
+        ],
+        "source_columns": [
+          {
+            "id": 94,
+            "name": "diet_import"
+          },
+          {
+            "id": 93,
+            "name": "Detritus"
+          },
+          {
+            "id": 1,
+            "name": "phytoplankton"
+          }
+        ],
+        "warnings": [
+          "14 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [91, 90, 89, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]"
+        ],
+        "strict_flags": {
+          "is_model_balanced": true,
+          "is_sppr_balanced": true,
+          "living_converges": true,
+          "b_converges": true
+        }
+      },
+      "TE": {
+        "overall_status": "WARN",
+        "rho_living": 0.5620959658114131,
+        "b": 0.0,
+        "b_note": "TE convention, not evidence of absent recycling",
+        "detritus_sppr": [
+          {
+            "id": 93,
+            "name": "Detritus",
+            "sppr": 0.7789102600417561
+          }
+        ],
+        "negative_source_group_pairs": [],
+        "nonfinite_entries": 0,
+        "matrix_shape": [
+          94,
+          3
+        ],
+        "source_columns": [
+          {
+            "id": 94,
+            "name": "diet_import"
+          },
+          {
+            "id": 93,
+            "name": "Detritus"
+          },
+          {
+            "id": 1,
+            "name": "phytoplankton"
+          }
+        ],
+        "warnings": [
+          "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+          "28 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 77, 76, 75, 74, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]"
+        ],
+        "strict_flags": {
+          "is_model_balanced": true,
+          "is_sppr_balanced": true,
+          "living_converges": true,
+          "b_converges": true
+        }
+      }
+    },
+    "floor_accounting": {
+      "floor_info": {
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1,
+        "affected_groups": [
+          92,
+          91,
+          90,
+          89,
+          88,
+          87,
+          86,
+          85,
+          83,
+          82,
+          80,
+          74,
+          72,
+          71,
+          70,
+          69,
+          68,
+          67,
+          66,
+          65,
+          64,
+          63,
+          62,
+          61,
+          60,
+          41
+        ],
+        "external_mortality_export_total": 0.0039384086902333115,
+        "negative_detritus_stock_residuals": {},
+        "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+        "application_stage": "completed audited initialization",
+        "researcher_approval": "Original signed review is separate from this calculation assumption"
+      },
+      "detritus": [
+        {
+          "id": 93,
+          "name": "Detritus",
+          "inflow_before": 3090.0577549536292,
+          "inflow_effective": 3090.053816544939,
+          "fate_routed_effective_mortality_plus_egestion": 3090.053816544939,
+          "fate_routed_removed_mortality": 0.0039384086902333115,
+          "stock_residual_before": 2439.14225525586,
+          "stock_residual_effective": 2439.13831684717,
+          "demand_predation": 650.9154996977691,
+          "catch": 0.0,
+          "net_migration": 0.0,
+          "negative_stock_residual": false
+        }
+      ],
+      "external_mortality_export_total": 0.0039384086902333115,
+      "living_production_residual_max_abs": 4.547473508864641e-13,
+      "protected_living_fields_exactly_equal": {
+        "p": true,
+        "q": true,
+        "catch": true,
+        "predation": true,
+        "growth": true,
+        "immigration": true,
+        "emigration": true,
+        "net_migration": true,
+        "respiration": true,
+        "egestion": true,
+        "GS": true,
+        "GE": true,
+        "TL": true,
+        "biomass": true,
+        "pb": true,
+        "qb": true
+      },
+      "source_tables_unchanged": true,
+      "diet_and_fate_unchanged": true,
+      "completed_state_matches_retained_selected_groups": {
+        "group_name": true,
+        "trophic_info": true,
+        "taxon_descr": true,
+        "tl": true,
+        "ge": true,
+        "ee": true,
+        "catch": true,
+        "biomass": true,
+        "pb": true,
+        "qb": true,
+        "p": true,
+        "q": true,
+        "predation": true,
+        "M0": true,
+        "gs": true,
+        "egestion": true,
+        "respiration": true,
+        "biomass_accum": true,
+        "emigration": true,
+        "immigration": true,
+        "net_migration": true,
+        "flow_to_det": true,
+        "detritus_import": true,
+        "det_export": true
+      },
+      "source_EE_meaning": "EE of the selected accepted canonical author-equation variant, not a publication observation; original publication unknowns are separately retained and do not replace accepted floor eligibility inputs",
+      "source_M0_meaning": "Archived ModelData input-table M0 derived as P*(1-EE); raw other_mort remains -9999 and no observed M0 is claimed",
+      "loader_warnings": [],
+      "floor_warnings": []
+    },
+    "canonical_and_shared_protected_inputs_unchanged": true,
+    "adopted_into_workbook_project_or_map": false,
+    "coefficient_scope": "Existing regional GE/TE coefficients retain their earlier configuration and have not been replaced by the new diagnostics. Appendix PPR shares use the unchanged independent simple-chain method."
+  }
+}

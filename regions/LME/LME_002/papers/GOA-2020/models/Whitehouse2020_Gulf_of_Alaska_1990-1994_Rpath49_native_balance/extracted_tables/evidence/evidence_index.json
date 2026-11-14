@@ -1,0 +1,950 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-11-14_191000_native_balance_diagnostics",
+  "region_id": "LME_002",
+  "model_id": "Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49_native_balance",
+  "variant_id": "pinned_native_Rpath_balance_completion",
+  "source_identity": {
+    "citation": "Whitehouse, G.A. and Aydin, K.Y. (2020). Assessing the sensitivity of three Alaska marine food webs to perturbations: an example of Ecosim simulations using Rpath. Ecological Modelling 429, 109074. https://doi.org/10.1016/j.ecolmodel.2020.109074",
+    "commit": "fe63f6d370d942ff1786f4d649e432fbfb85f81b",
+    "parent_sha256": "10dfbf57dcc9c1ca2e57460637709a061c9264a7e29bf17e0028fadf4c919125"
+  },
+  "computational_input_identity": {
+    "path": "../../model.json",
+    "sha256": "7d805cb293dc4b1886bd8f57f1f122595a298c129824a6cc1a9eb0cbe3244a32"
+  },
+  "methods": [
+    "native Rpath balance",
+    "GE",
+    "TE",
+    "With Egestion",
+    "fresh-process persisted-input reproduction",
+    "independent retained-evidence verification"
+  ],
+  "required_roles": [
+    "canonical_model",
+    "model_notes",
+    "provenance",
+    "diagnostic_result_manifest",
+    "native_inventory",
+    "native_serialized_result",
+    "native_balance_verification",
+    "independent_native_qa",
+    "reproduction_code",
+    "full_diagnostic_return",
+    "diagnostic_reload_return",
+    "diagnostic_configuration",
+    "diagnostic_reconciliation",
+    "independent_diagnostic_qa",
+    "budget_decomposition",
+    "diagnostic_report",
+    "source_runtime_ledger",
+    "executed_diagnostic_code",
+    "roundtrip_verification",
+    "native_variant_ledger",
+    "variant_conversion",
+    "standard_import",
+    "source_companion",
+    "closeout_verification",
+    "parent_canonical_model",
+    "paper_source_manifest",
+    "native_source"
+  ],
+  "artifacts": [
+    {
+      "role": "standard_import",
+      "path": "../Basic_input.csv",
+      "sha256": "8d4a4bf36cb708192126648dc427f5e88305ff31fbe36436b9ad42705fc43912",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../Biomass_accumulation.csv",
+      "sha256": "5db15567138281fb0d9509dbff5805cc71a02616cd7cc193aefadc1ac892cb69",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Aggregation_membership_Table1.csv",
+      "sha256": "fa327256055a80c13b849e7b4cda480c69e638a7a60dcf2f33f4c5c7ba9f4dc6",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Group_label_crosswalk.csv",
+      "sha256": "66c9cd6ded4c1c7cab2cdccf4ba48cb13b257a98001858894e226a576e634ebb",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/manifest.json",
+      "sha256": "af13369fb15bb75eaef1abe7662f5fa2dee5fc020f71c211bec8468b6c8e8e6d",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Native_balance_output.csv",
+      "sha256": "1cf416e6ba69a4b02bfd32f8621fce1e7e087da170ae01daffea30e65779cdc3",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Native_completion_ledger.csv",
+      "sha256": "29596db919e178dff1f5bdd4e8253b7466dadd5c3a7b42a8f9693c2bc2594f1a",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Native_field_mapping.csv",
+      "sha256": "1c11a2996eca847670ce4cf164a868e831feed1227d4984954ab8ff85b404017",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Rpath_diet_native.csv",
+      "sha256": "498627ab600032040c972e14a5dfe62ad646ae5c55c5f42e49a7161e78504261",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Rpath_parameter_model.csv",
+      "sha256": "70d945c859f2b8c9e7b73e97c0f0d8c9d1b4c1235e31de7ce13cb2a5b8fb0d18",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Rpath_parameter_model_native.csv",
+      "sha256": "4dd4e2baa6eeeabe0cc8b327ba46b58c82e6979384decb9014080f2bc806eea2",
+      "availability": "present"
+    },
+    {
+      "role": "source_companion",
+      "path": "../companions/Rpath_pedigree_native.csv",
+      "sha256": "6292dbea6050630e317606cbffe59691b26e92df77f781ab4a2f4ba0e7bb0a15",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../Detritus_fate.csv",
+      "sha256": "e5a49dda5d2e1fb1165d6a7be4ead9fc3321fa52d778f1f4de1e5293ed05ab51",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../Diet_composition.csv",
+      "sha256": "9208eb1f1b408d7e6d5ad23cccf4c079bbf3dccdde19ad5023ac3ed4341d201d",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../Discards.csv",
+      "sha256": "ff9b66cdbd3084a155eb34171c4e02c7af5dc49a5f740d739cb3ec621fa8a2d8",
+      "availability": "present"
+    },
+    {
+      "role": "closeout_verification",
+      "path": "cleanup_receipt.json",
+      "sha256": "5abdb17de634e2d201e54e520e07365bc85ad3ad8d141a0032c0ea9d73b2d906",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "DIET_SOURCE_SUMS.json",
+      "sha256": "bcb55ef32221a5cb420a88bd5b69b17208a451a124036931165608f4d0dc214e",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "ewe_conversion.log",
+      "sha256": "33e94987ddd9671b426802acee2d0e8898112edaf59d7f3df4ade3732299174c",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "MASS_BALANCE.md",
+      "sha256": "d855fe3bd9cf155484dc5f62406048ce29e062ef40e012296722aa393d1b7ecf",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "metadata_update_receipt.json",
+      "sha256": "5baaa95e40488cbc8c6506483ffcc2c6b39860ee1e7354eed627123f1b79a6a6",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/balanced_structure.txt",
+      "sha256": "a16828d87f4af459175cfe426cf51962244adbaafb59f4ac138b239fa4b27edb",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/check_native_independent.py",
+      "sha256": "fcad17d021017bd60fbdd126cb639c826c5b2136642e99c28fa1cd39f397c150",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/native_acquire_dependencies.py",
+      "sha256": "e5d42448a662dfa096369c964b17f379efb660d69f93646cecffe86e7ceeaf9c",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/native_acquire_runtime.py",
+      "sha256": "aa4d75395ab25ed5ba6f6478145ae2f71fa6f833e129a73861fd1d0483457f4d",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/native_balance.R",
+      "sha256": "a4c5670ed474001cdf7339e3774aa15faa30e3ed6389370c15452fcb40f684ba",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/native_handoff.py",
+      "sha256": "07a50921ec12c725b4750dbbb94119aad59b4dfe10bf61542174cf03adfe39ce",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/native_launch.py",
+      "sha256": "f43d4007eaf1ae7079e3f3b1bacba4e7d9b4db86cb6351278946141929e43033",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "native_reproduction/code/native_runtime_probe.py",
+      "sha256": "06a6896cdd2b47e324e0a9dbe42ec8d5814f8f6a60ec77761f71b00aecffd8d6",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/detritus_balance_audit.csv",
+      "sha256": "3ad21e4a718c2e80fa63046ec5809abb590cfa7e2ce0e5302b970b7583c15f0d",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/detritus_fate.csv",
+      "sha256": "513ca769c389cda2a1695de62ccc084819d3fed5a3ee5e872e2652f779c6b37e",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/detritus_fate_with_fleet.csv",
+      "sha256": "a34aefa29ab808197a9a24cafe8692bff40ef8ed54290debe3b474a0cfdc6e6e",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/diet.csv",
+      "sha256": "4e668bdbf0df56ca4543ee3f851aa961cf4ba2984127e54be07b12fe82a36aa2",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/diet_sums.csv",
+      "sha256": "3af054d9619296c0c86c4a7f87fbd9c421c02a530629c723edf7705672948c76",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/discards.csv",
+      "sha256": "8fe570ef21ab220cf01b8e923c161e1987a23eecd6f90ca0538a653d55acb753",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/environment/data.table_DESCRIPTION.txt",
+      "sha256": "6bbfd59745fd7067b8b4f43e69cac4130e839eb557f96868b3687bd23b2eb214",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/environment/data.table_MD5.txt",
+      "sha256": "9d9dcff1d6422a5034cf99e615da860ca01302169baa6e33291c842979ebce4d",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/environment/md5sum.R-4.5.1.txt",
+      "sha256": "9d31a047965c62d9f65730cd8788aade19dc786ee4214288ae3f1998c0f6b4a4",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/environment/runtime_acquisition.json",
+      "sha256": "fd4802b14cc5e173226b95f50f826f38310afa4c079c8d408b1cf9c738abd414",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/environment/unpacker_release.json",
+      "sha256": "e27432ba75458f9de707fb8ec83d2bbf760f29866d964c05fda34481d20859b2",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/groups.csv",
+      "sha256": "e7ae719d6451cf086bf8c8a8d241bfe4ab0c0038aac94011a0f9f32221785e68",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/groups_with_fleet.csv",
+      "sha256": "d3d539e326b6408567ccebbd22f3dea952afa0305f692dba942331349f43b056",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/landings.csv",
+      "sha256": "403ce688539dbe1a483709eef04750a662311a7f96d64068f9a6be8ee2d51005",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/living_A.csv",
+      "sha256": "e63b24529615df481286cc9607c50aac59e36153d41f388ce832955af875c279",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/living_b.csv",
+      "sha256": "06bbbd0b068d5c4a57eebcdbef41fa61fd6a8e4f14106439b12ed5531ce9011f",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/living_balance_audit.csv",
+      "sha256": "3dcdbf63663d17b40ba0d764e60a909ad05ffe7d27afc5941aeaa76a15983f6c",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/metrics.csv",
+      "sha256": "8a2cf5abd081f0373baaf30d167ff667fb906e97672e61135fa89759ebaf48b3",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/NATIVE_BALANCE_REPORT.md",
+      "sha256": "f556a920d60a09f39251f5d773a7dda97c082abeeede01d01b18d0a76b760534",
+      "availability": "present"
+    },
+    {
+      "role": "native_serialized_result",
+      "path": "native_reproduction/native_balanced.rds",
+      "sha256": "1d22f76d980ab5cbe84087d00263850364e629c4000477889dfbdb25cb704309",
+      "availability": "present"
+    },
+    {
+      "role": "native_inventory",
+      "path": "native_reproduction/native_manifest.json",
+      "sha256": "891f3a539ce52f4a8d3de906763f5ea2a73d3e7071898c2640b0c0d83600e591",
+      "availability": "present"
+    },
+    {
+      "role": "native_balance_verification",
+      "path": "native_reproduction/native_summary.json",
+      "sha256": "c8345cdf001db7acc2cc96c95b02acfb61d17ba772c453b0e9da3658b8078a53",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/native_warnings.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/rda_csv_comparison.csv",
+      "sha256": "1f730954e9f110dd80905914a8cfc4ec5ee4955b4d9605432f7ef3c182ba1959",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/rda_structure.txt",
+      "sha256": "9bdb4ddaea2c5224fe9edffe46c9a2405a481759041d7ae0a65e05cc1c692584",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/reader_diet.csv",
+      "sha256": "247c4c4bc3d362c6846e32f06478d37a62983fa4d9e48d3e85608a61209063d2",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/reader_model.csv",
+      "sha256": "9a52637f17b6692283ed85dc7ea01da35d7521ccc6170cc37a52eefdecf37cbc",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/README.md",
+      "sha256": "b9bf50c4c67b27000a40c9be550424c9959da7a1bb18ef78c4331ed4b16b4831",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/session_info.txt",
+      "sha256": "5684a8e9b00c1ae3c7d2eabe756aa4c3adf8296977555478ae28dadab053af43",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/source_runtime_diet_ledger.csv",
+      "sha256": "c035b98cadbb4da4698508f717c50a336559e98c668816c3f96f0885d592cb6e",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/source_runtime_parameter_ledger.csv",
+      "sha256": "1f097adcbd004b2b3cf63c28b2c42bf9501b4df0c4caf6b61adf59f34daa0789",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/cleanup_inventory.json",
+      "sha256": "b663cf69a82e8b6e42409c73e2e87bdcd955113ca46ca5ea752fa8b9ebb26452",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/cleanup_native_temporary.ps1",
+      "sha256": "9bd7aaf3e1961446148eddc7900959df2196bac7268f8b3fc678aa5c00b0d545",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/cleanup_receipt.json",
+      "sha256": "ba07287c5a1bb01f24a69efa9ec693bff358206f0c829d1b65c65c7707ade8c5",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/cleanup_receipt_initial_reporting_failure.json",
+      "sha256": "4812324503260333279b7c8defb944105d1ee844cef996dd924c13ea0e4eec55",
+      "availability": "present"
+    },
+    {
+      "role": "independent_native_qa",
+      "path": "native_reproduction/verification/independent_native_variant_review.json",
+      "sha256": "72a9ded7076a9f130e894185e4743ee635aec65838787055d9c591075ec31389",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/native_execution.json",
+      "sha256": "70bbbc2ff492c1cc55064bc15724487e8c936c9b90844d46951d5155562264fd",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/native_execution.log",
+      "sha256": "dd39f4c6405ada7513ced1d2e6f355dd1b58adfd39bbe0a139e1e7448a9b2f3c",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/python_runtime.json",
+      "sha256": "8b997d873e7e4b792768c5d272d76e7d0f7be4219e206769bee5582182297864",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/setup/native_runtime_probe.log",
+      "sha256": "015340b11ccf0403280eb89e5351306c3fac7c305618f6ad749c954ff723f745",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/setup/native_runtime_probe_fixed.log",
+      "sha256": "e987ac2a1223340aa04f8805a343f62285852d85142e2c1dab08ce31e2f399cf",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/setup/native_startup_failure.json",
+      "sha256": "4c45c118878553252f878fa8fda2379e62094c81e8b267290de52acc492a4be2",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/setup/native_startup_failure.log",
+      "sha256": "ad593acac5d18de5344710827847285c6ea5ae16316f52df1ef889637eb16333",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/setup/native_unpack_runtime.log",
+      "sha256": "a2e12c7e117786564a0938dc1a8e064186c02c157f3de88b5aece9c31428629e",
+      "availability": "present"
+    },
+    {
+      "role": "native_reproduction_evidence",
+      "path": "native_reproduction/verification/verify_cleanup_completion.ps1",
+      "sha256": "8e3cea417d34f28e773c13512af8ead2aedc3d7fe02fb2a4919e988a20461165",
+      "availability": "present"
+    },
+    {
+      "role": "native_variant_ledger",
+      "path": "native_to_variant_ledger.json",
+      "sha256": "a65b915340345943e890b06ee6337f796177631d3223d2043249eec60881c1c4",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "promotion_receipt.json",
+      "sha256": "a5d1e47a72776db45cff066985886ccc88449df00a15d2633cf36c7b0d0d5022",
+      "availability": "present"
+    },
+    {
+      "role": "closeout_verification",
+      "path": "protected_inputs_verification.json",
+      "sha256": "86be69ac3a1bae311bbc785bab61d3ae078715d8a3d022bbd9944ef7104d006e",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/build_variant.py",
+      "sha256": "31b72ff11456ee319753805eb2abed1b3170371bc00ef15a2ef11919566f9154",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/check_diagnostics_independent.py",
+      "sha256": "0b452baa7e0b44ae536cfe2fde0eba6db8c3682099409a5030b5b849fb1b2645",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/database_json.py",
+      "sha256": "55ecaf0f76d01f606c1d4f28a4e37cc44dffef8968a2a565f08f572cc4818e41",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/finalize_handoff.py",
+      "sha256": "a1123215c47715dd28a967c4689cd8f59e708b1b067f1172c44322b1b8e54a6f",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/index_handoff.py",
+      "sha256": "a44f050bbbf83733fd414d85653506c11185d1918f3d676b9dc663659b907730",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/validate.py",
+      "sha256": "50085eb52700df0db3b001b380e86612a53c0cb4646d833d6f4d8dda0118e37c",
+      "availability": "present"
+    },
+    {
+      "role": "reproduction_code",
+      "path": "reproduction_code/write_outputs.py",
+      "sha256": "a3e6912582308b758cc9be063d1b0e8976ee2b082e8b914bb681dfea6e3f079b",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "run_scope.json",
+      "sha256": "25743f90988334f115f4696d846eaa2e159659dc27380af4a433b64c03610ed1",
+      "availability": "present"
+    },
+    {
+      "role": "roundtrip_verification",
+      "path": "SOURCE_FIDELITY_CHECK.json",
+      "sha256": "99049c246671c322fa2791108b3e5d30883bb33d1169fdd675614bb44e1403a2",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "staging_support/code/finalize_staging_cleanup.ps1",
+      "sha256": "39ed0d7521d306b907fb8b7a7b0a6dd5353ecdc35d1bf9dd067f9b4fef488289",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "staging_support/code/promote_native_evidence.py",
+      "sha256": "c6217db39a9549aa99ff726e46f77f6e6bce93fd2b488153d301ef6d409cc014",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "staging_support/qa/native_promotion_receipt.json",
+      "sha256": "9f58000ea9da9b079bb8b0bce0d0e028a3babc05ef92f7f734b0317b727a922b",
+      "availability": "present"
+    },
+    {
+      "role": "variant_conversion",
+      "path": "variant_conversion.json",
+      "sha256": "8a896ec2dae2d5b74b640f5c59540b590c4e80494b922131f60a2065f842d743",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "variant_database_json.log",
+      "sha256": "b0b7acc00410695d34210f2d9b0725d152f4cc8fb7eaa2c1db56041089877e78",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "variant_validate.log",
+      "sha256": "dfe0f56860de29c19a78df503d250fa44087a2f9fa18b7cce53a6e5b0baf9369",
+      "availability": "present"
+    },
+    {
+      "role": "supporting_evidence",
+      "path": "variant_write_outputs.log",
+      "sha256": "e9635bb6fcbf1daadbe510abfde0fd21ee06e8c06b940263db83e9764974e258",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../Landings.csv",
+      "sha256": "fe4cd16bdbbc9ebcd7a7aa22ac136a61e6a7934a1ca1f4b6e7706e0ebc9bcf49",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../Metadata.xlsx",
+      "sha256": "173dccc4c7bdda6fbbbe1e1912b7e4c527b066d5460ad55c31e83e7e4300be3a",
+      "availability": "present"
+    },
+    {
+      "role": "candidate_taxonomy",
+      "path": "../Taxonomy.xlsx",
+      "sha256": "1e2715c12a6642e8fec312f9a1cf66514f78e4c5f1eccc0a9b2e31e4b73c4d48",
+      "availability": "present"
+    },
+    {
+      "role": "standard_import",
+      "path": "../TL.xlsx",
+      "sha256": "e2154ddbb0e6733c837d668ce02412f609fd7a32add11cffa23d614eebf9862b",
+      "availability": "present"
+    },
+    {
+      "role": "provenance",
+      "path": "../../inputs/provenance.json",
+      "sha256": "4582e642f2fb84be04db6906432214a967a7ce03c22659e3b022352b2bb42238",
+      "availability": "present"
+    },
+    {
+      "role": "canonical_model",
+      "path": "../../model.json",
+      "sha256": "7d805cb293dc4b1886bd8f57f1f122595a298c129824a6cc1a9eb0cbe3244a32",
+      "availability": "present"
+    },
+    {
+      "role": "model_notes",
+      "path": "../../model_notes.md",
+      "sha256": "0ef71e39829dd4224478fdcbd2ccecffd2b9d85ee50529e638babdf02b64e069",
+      "availability": "present"
+    },
+    {
+      "role": "source_model_profile",
+      "path": "../../MODEL_PROFILE.md",
+      "sha256": "e8b6a9a1419bfffc656c89d6bfa0ef6a1c4557696675cccc35b673bfb65d7137",
+      "availability": "present"
+    },
+    {
+      "role": "source_runtime_ledger",
+      "path": "../../results/diagnostics/constructor_audit.json",
+      "sha256": "7f920d5762e7ee0ed4674311e3b4839ca787c549bd78396ea798e73f790491a7",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/constructor_reload_verification.json",
+      "sha256": "dac5e7194094a43800736076fd44e5e86f6408f4d2bf4b2ab561200ec065f9ce",
+      "availability": "present"
+    },
+    {
+      "role": "budget_decomposition",
+      "path": "../../results/diagnostics/diagnostic_budget_decomposition.json",
+      "sha256": "85c003468850899670957bc3061a7373b96d72d8419ca23f5b7beeb6538f1644",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_report",
+      "path": "../../results/diagnostics/DIAGNOSTIC_INTERPRETATION.md",
+      "sha256": "87f8089ef96a1b27d4f45d2cb6c8429d2aca89391f3837acba96d413eef3e6fa",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_reconciliation",
+      "path": "../../results/diagnostics/diagnostic_summary.json",
+      "sha256": "a616f8f3d17c698db9a43b4afad565f0c15a4d57bd18e5330f8b92669f7e6583",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_report",
+      "path": "../../results/diagnostics/direct_diagnostics.md",
+      "sha256": "82fe91bff0cfc1b98de283ba79b9d4c2e4c221b57414e7f4c6d2c138232b80e0",
+      "availability": "present"
+    },
+    {
+      "role": "executed_diagnostic_code",
+      "path": "../../results/diagnostics/executed_code/regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/code/run_diagnostics.py",
+      "sha256": "7dc7b36a7ab2cf372094cc4f8294f0715e8fab79e5a2a941882c07817a251aec",
+      "availability": "present"
+    },
+    {
+      "role": "executed_diagnostic_code",
+      "path": "../../results/diagnostics/executed_code/tools/scientific_code/PPREstimation/create_PPRS_excel.py",
+      "sha256": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+      "availability": "present"
+    },
+    {
+      "role": "executed_diagnostic_code",
+      "path": "../../results/diagnostics/executed_code/tools/scientific_code/PPREstimation/ModelData.py",
+      "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+      "availability": "present"
+    },
+    {
+      "role": "executed_diagnostic_code",
+      "path": "../../results/diagnostics/executed_code/tools/scientific_code/PPREstimation/PPRCalculator.py",
+      "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+      "availability": "present"
+    },
+    {
+      "role": "executed_diagnostic_code",
+      "path": "../../results/diagnostics/executed_code/tools/scientific_code/PPREstimation/utils.py",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "availability": "present"
+    },
+    {
+      "role": "executed_diagnostic_code",
+      "path": "../../results/diagnostics/executed_code/tools/scientific_helpers/sppr/method_coverage.py",
+      "sha256": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905",
+      "availability": "present"
+    },
+    {
+      "role": "independent_diagnostic_qa",
+      "path": "../../results/diagnostics/independent_diagnostics_review.json",
+      "sha256": "d13a52d8effb8e7884cd72243e670385e1d7159a150d763e8de3b297cbfb2f23",
+      "availability": "present"
+    },
+    {
+      "role": "full_diagnostic_return",
+      "path": "../../results/diagnostics/initial_GE.json",
+      "sha256": "53b1f304d43601448675e16bf0a6924b9624e2ea46f9b09b053c7b42bf3fd838",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/initial_GE.log",
+      "sha256": "7bf9caaa16f7174de4b49bdf31230731cbf1bab99c0bb9866d981e95d72aea8e",
+      "availability": "present"
+    },
+    {
+      "role": "full_diagnostic_return",
+      "path": "../../results/diagnostics/initial_TE.json",
+      "sha256": "9e1125660869dd2e5b50737a91cc73cb45112f96f8c1f91932201bc602b2e5dd",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/initial_TE.log",
+      "sha256": "94503dd097ce84fbd55085dc07963250a74d5af300058f9ba9c33f767edfccf0",
+      "availability": "present"
+    },
+    {
+      "role": "full_diagnostic_return",
+      "path": "../../results/diagnostics/initial_WithEgestion.json",
+      "sha256": "8990e8f5acc9dc29c5f53a1fb770f4520e293deedb7e52c1c2e7ef4301d87fdf",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/initial_WithEgestion.log",
+      "sha256": "62aaf472005a862243326244dfaca7bb6dd7a4d18ce1804a7b2fa9b6fd5527f9",
+      "availability": "present"
+    },
+    {
+      "role": "source_runtime_ledger",
+      "path": "../../results/diagnostics/matrix_transformation_ledger.json",
+      "sha256": "9ebd91bf54f8701b64fcd52f356bc774de02674fe748bc65e5235e3f035e7a31",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/raw_modeldata_views.json",
+      "sha256": "84d51e77b368789878b4b98def0b6373d76f283138293ed2489f38e674b2fa33",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_reload_return",
+      "path": "../../results/diagnostics/reload_GE.json",
+      "sha256": "3622a623ce6268387bb00a6ef63fe964e6f8f40d0dbebde916a24b46cfb0e572",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/reload_GE.log",
+      "sha256": "3116e4c1f603a884ba68e00998656d3d2aa8b36a8ca92f563048539a583a6bc6",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_reload_return",
+      "path": "../../results/diagnostics/reload_TE.json",
+      "sha256": "d8c263d3df4a3c165ec62fd1ab60551c06ebf696238a37662c0c8b700aa9819d",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/reload_TE.log",
+      "sha256": "bc1cd14fec0e91350cded03adc611ec2f067babb701d018939d2d71e78a0f4ce",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_reload_return",
+      "path": "../../results/diagnostics/reload_WithEgestion.json",
+      "sha256": "1565136ca70daae26e77e4c4cc0c925b19b82cf55d9cfc116d79d7012ed5063f",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/reload_WithEgestion.log",
+      "sha256": "1268ed86e6493db9ceab26dba7fd52cbf2e9b3f2921072456678121dcfe4d90b",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_support",
+      "path": "../../results/diagnostics/REPRODUCE.md",
+      "sha256": "f95896d4abc64c3667c7b747b43a0bd1b388c709c93062d3ded1b42052f3ff03",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_configuration",
+      "path": "../../results/diagnostics/run_identity.json",
+      "sha256": "f01984c9b19733c49cc7f3e99239ebf60b0e5a051e304e4f06f027fcf237c170",
+      "availability": "present"
+    },
+    {
+      "role": "source_runtime_ledger",
+      "path": "../../results/diagnostics/scalar_transformation_ledger.json",
+      "sha256": "79779a0339160bce070fda39524f1208ef3d9ff21ccc369c48083aa803341919",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_result_manifest",
+      "path": "../../results/result_manifest.json",
+      "sha256": "dfab160b6d13bc07a2292d9a8bc6b72f0373b327d674ddeee3542da6cd0b3085",
+      "availability": "present"
+    },
+    {
+      "role": "parent_canonical_model",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/model.json",
+      "sha256": "10dfbf57dcc9c1ca2e57460637709a061c9264a7e29bf17e0028fadf4c919125",
+      "availability": "present"
+    },
+    {
+      "role": "paper_source_manifest",
+      "path": "../../../../source_manifest.json",
+      "sha256": "8483633d189d3d2b0e8a549f4f8272813ed5b16d3170b9bdf4d1f4abf50b3dcd",
+      "availability": "present"
+    },
+    {
+      "role": "candidate_taxonomy_evidence",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/extracted_tables/evidence/candidate_taxonomy_evidence.json",
+      "sha256": "5891c8ce71a4f6dabfb45bd7483633c11450d1048336d246e2ac04e1b62341c4",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_base.csv",
+      "sha256": "fef0e97bb4eb2929ae93fe0b01deed99356bbbbf5e164f750e2f7f439ce5d36a",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_diet.csv",
+      "sha256": "31c7306b54ce56af76bc146f91a79ab77d8bc6eb1c670fa880f7f572a4234475",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_pedigree.csv",
+      "sha256": "ddfbff54afb18fa9eb8b17574a0d11c98a5392e68437275f6b09959f9046b9b8",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense.GOA.rda",
+      "sha256": "090e9e8a5f55675635d0358089fa855b01e4ce9b43112d86ad8687b94cc93afa",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense.GOA.Rd",
+      "sha256": "07e711b2b694cb7e978d2055be1c7ee047dfbabceef97ad4d4fd75973562775c",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Rpath_README.md",
+      "sha256": "21e7834aafee55ae4ddb7f5623e744a7d26bc105959d442454f38f1a16e5d9d8",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Rpath_data.R",
+      "sha256": "38618fa00b98a825c0896240b074d1a25fc0b8679a9431e8c4e89cde543b85ea",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Rpath_param.R",
+      "sha256": "0caae2b8c8472984b79a251c6bf879bae2e8f88229dc75689fe9343c37776c34",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Rpath_ecopath.R",
+      "sha256": "56facffa4583bc9b7e58c48c63381320cb34899553d3107eaf48d64d816f1620",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Rpath_write_functions.R",
+      "sha256": "a3e463788b084dd536efc469336f50ec9e4aeda8fd7a40aefc611132bb4bfa4c",
+      "availability": "present"
+    },
+    {
+      "role": "native_source",
+      "path": "../../../Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Rpath_unbalanced_data.R",
+      "sha256": "b294372ea9cef63b81905f8639acdcb2909911ccf49b0995c7383e2c4dfcf4c5",
+      "availability": "present"
+    },
+    {
+      "role": "publication_pdf",
+      "availability": "missing",
+      "reason": "The numerical native inputs and pinned code are retained. Article indexed text was read in extraction; local article download returned 403 and screenshot retrieval failed.",
+      "acquisition_status": "Unchanged from source extraction; no new acquisition required for this native execution."
+    }
+  ],
+  "reconciliation": {
+    "native_known_inputs_preserved": true,
+    "native_variant_roundtrip": true,
+    "persisted_constructor_state": true,
+    "persisted_full_diagnostic_returns": true,
+    "source_scope_sums": true,
+    "raw_source_EE_floor_exclusions": true,
+    "native_sources_and_regional_workbook_unchanged": true
+  },
+  "scientific_outcomes": {
+    "GE": "FAIL",
+    "TE": "FAIL",
+    "WithEgestion": "FAIL"
+  },
+  "scientific_eligibility": "All three PPR methods FAIL. Reproduced execution and complete evidence do not establish valid annual PPR, LME geographic suitability or researcher approval.",
+  "scope_limits": [
+    "No catch mapping, annual regional PPR, selection, central registry write, map update or researcher signoff.",
+    "Study/LME overlap, local/external production split and candidate taxonomy review remain unresolved."
+  ]
+}

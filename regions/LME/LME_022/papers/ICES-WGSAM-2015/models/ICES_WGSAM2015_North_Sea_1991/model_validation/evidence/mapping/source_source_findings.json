@@ -1,0 +1,54 @@
+{
+  "source_id": "MD2007",
+  "source_url": "https://www.cefas.co.uk/publications/techrep/tech142.pdf",
+  "source_path": "regions/LME/LME_022/papers/LME022-Mackinson-2007/sources/tech142-ead77c0e.pdf",
+  "source_sha256": "ead77c0e849ca62d3ff56b3350026c91439b38423d73cf57af957a8e68c896eb",
+  "retrieved_online": "2026-11-14",
+  "local_bytes_read": "2026-11-14",
+  "source_identity": "Mackinson and Daskalov 2007, Cefas Technical Report142; publication copyright2008; model1991 and1973 predecessor. PDF page=printed page+2 in relevant sections.",
+  "inheritance_evidence": "ICES WGSAM2015 §2.1 Updated model, printed105/PDF107 explicitly identifies the North Sea Ecopath model as originally published by Mackinson and Daskalov2007, first Key Run2011, then updated for fish data, two seabird groups, recent shrimp data, catch compositions of fleets and multistanza parameters. Table2.1 printed106/PDF108 retains predecessor parameter ranges. Read actual context in ices2015_context_pages.json.",
+  "group_changes": [
+    "Original68 groups become69 when seabirds split into SurfaceFeedingSeabirds and DivingSeabirds.",
+    "Original Turbot and brill becomes Turbot in2015 Table2.1, with biomass0.027 versus previous0.054, and in canonical port. Brill therefore requires a disclosed analogy/uncertainty, not assumed unchanged membership.",
+    "Table14.6 calls catches Cephalopods while ecological group is Squid & cuttlefish. Octopus rows have inherited catch accounting support but not a literal focal2015 group-name match.",
+    "Predecessor weights/biomass/catches must not replace focal canonical Rpath fields."
+  ],
+  "conflicts": [
+    {
+      "taxon": "Mullus surmuletus",
+      "biological_definition": "SmallDemersalFish ֲ§13.44 PDF148",
+      "catch_crosswalk": "LargeDemersalFish Table14.6 PDF161",
+      "recommendation": "Record contradiction and lower membership confidence or explicitly select one source role."
+    },
+    {
+      "taxon": "Argentina / Argentina silus / Argentinidae",
+      "biological_definition": "SmallDemersalFish ֲ§13.44 PDF148",
+      "catch_crosswalk": "OtherSmallGadoids Table14.6 PDF158ג€“159, with Silver Smelt to MiscellaneousFilterfeedingPelagicFish PDF162",
+      "recommendation": "Do not claim unique High membership. Record which source role governs proposed placement."
+    },
+    {
+      "taxon": "Coregonus / European whitefish",
+      "catch_crosswalk": "Both MiscellaneousFilterfeedingPelagicFish and OtherLargeGadoids Table14.6 PDF159",
+      "recommendation": "Ambiguous historical row; use justified ecology with downgraded confidence."
+    },
+    {
+      "taxon": "Buccinum / Buccinidae",
+      "biological_definition": "Buccinium example in InfaunalMacrobenthos Table11.6 PDF117",
+      "catch_crosswalk": "Whelks/Buccinidae to EpifaunalMacrobenthos Table14.6 PDF161",
+      "recommendation": "Recognize mobile whelk ecology and preserve conflict."
+    },
+    {
+      "taxon": "Cetorhinus maximus",
+      "catch_crosswalk": "BaleenWhales Table14.6 PDF158",
+      "recommendation": "Historical explicit feeding analogue; never call it whale taxonomic membership. Very low M11 is defensible."
+    }
+  ],
+  "limitations": [
+    "PDF text crosswalk rows preserve original misspellings; canonical-name crosswalk is analyst normalization.",
+    "Broad historical nei rows are accounting shortcuts and not exhaustive sets for present reporting labels.",
+    "Unclassified Esox/Rutilus/Sander rows document no predecessor placement; they do not forbid meaningful explicit low-confidence analogy.",
+    "Pypdf layout extraction excluded rotated table text; source_pages.json was regenerated with ordinary extraction; table146_page158 image visually inspected."
+  ],
+  "ices2015_source_path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/sources/ICES_WGSAM_2015.pdf",
+  "ices2015_source_sha256": "c0c75a7db2e8ef61ef0198c1ed2817fdd67b23ccdcf48117c17c9bc5e53c88da"
+}

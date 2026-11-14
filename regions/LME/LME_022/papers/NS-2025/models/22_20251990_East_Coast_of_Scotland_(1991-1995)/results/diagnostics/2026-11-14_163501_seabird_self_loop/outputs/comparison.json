@@ -1,0 +1,181 @@
+[
+  {
+    "scenario": "baseline",
+    "method": "GE",
+    "overall": "OK",
+    "input_status": "OK",
+    "divergence_status": "OK",
+    "balance_status": "OK",
+    "strict_model_balanced": true,
+    "strict_sppr_balanced": true,
+    "rho": 0.21208967414456642,
+    "recycling_b": 0.06994711631486064,
+    "pp_budget_gap_percent": 0.0,
+    "diet_sum": 0.9999999999999998,
+    "negative_entries": 0,
+    "seabird_total_sppr": 5696.0264352728545,
+    "warnings": []
+  },
+  {
+    "scenario": "baseline",
+    "method": "TE",
+    "overall": "FAIL",
+    "input_status": "OK",
+    "divergence_status": "FAIL",
+    "balance_status": "OK",
+    "strict_model_balanced": true,
+    "strict_sppr_balanced": true,
+    "rho": 1.1127784447112168,
+    "recycling_b": 0.0,
+    "pp_budget_gap_percent": 2.1200342698669657e-14,
+    "diet_sum": 0.9999999999999998,
+    "negative_entries": 2,
+    "seabird_total_sppr": -2376869.511535273,
+    "warnings": [
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "living network diverges: rho(A_LL)=1.113 >= 1; this corrupts the basis B is built from, so b is unreliable",
+      "2 basal source column(s) contain negative SPPR",
+      "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]"
+    ]
+  },
+  {
+    "scenario": "baseline",
+    "method": "With Egestion",
+    "overall": "OK",
+    "input_status": "OK",
+    "divergence_status": "OK",
+    "balance_status": "OK",
+    "strict_model_balanced": true,
+    "strict_sppr_balanced": true,
+    "rho": 0.16967173931565332,
+    "recycling_b": 0.09714913145852609,
+    "pp_budget_gap_percent": 0.0,
+    "diet_sum": 0.9999999999999998,
+    "negative_entries": 0,
+    "seabird_total_sppr": 1960.2791183732475,
+    "warnings": []
+  },
+  {
+    "scenario": "remove_only",
+    "method": "GE",
+    "overall": "WARN",
+    "input_status": "WARN",
+    "divergence_status": "OK",
+    "balance_status": "OK",
+    "strict_model_balanced": false,
+    "strict_sppr_balanced": false,
+    "rho": 0.21208967414456642,
+    "recycling_b": 0.06985712225652821,
+    "pp_budget_gap_percent": 0.03427258790406889,
+    "diet_sum": 0.999799919967987,
+    "negative_entries": 0,
+    "seabird_total_sppr": 5505.341262646752,
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)"
+    ]
+  },
+  {
+    "scenario": "remove_only",
+    "method": "TE",
+    "overall": "WARN",
+    "input_status": "WARN",
+    "divergence_status": "WARN",
+    "balance_status": "WARN",
+    "strict_model_balanced": false,
+    "strict_sppr_balanced": false,
+    "rho": 0.2757420229532071,
+    "recycling_b": 0.0,
+    "pp_budget_gap_percent": 1.668760821524732,
+    "diet_sum": 0.999799919967987,
+    "negative_entries": 0,
+    "seabird_total_sppr": 268059.6467924577,
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]",
+      "PP balance gap 1.669% exceeds 1.0%"
+    ]
+  },
+  {
+    "scenario": "remove_only",
+    "method": "With Egestion",
+    "overall": "WARN",
+    "input_status": "WARN",
+    "divergence_status": "OK",
+    "balance_status": "OK",
+    "strict_model_balanced": false,
+    "strict_sppr_balanced": false,
+    "rho": 0.16967173931565332,
+    "recycling_b": 0.09711451043938973,
+    "pp_budget_gap_percent": 0.011877024597383868,
+    "diet_sum": 0.999799919967987,
+    "negative_entries": 0,
+    "seabird_total_sppr": 1907.853406828096,
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)"
+    ]
+  },
+  {
+    "scenario": "remove_redistribute",
+    "method": "GE",
+    "overall": "WARN",
+    "input_status": "WARN",
+    "divergence_status": "OK",
+    "balance_status": "OK",
+    "strict_model_balanced": false,
+    "strict_sppr_balanced": false,
+    "rho": 0.21208967414456642,
+    "recycling_b": 0.0698576437258916,
+    "pp_budget_gap_percent": 0.034074014956383604,
+    "diet_sum": 1.0,
+    "negative_entries": 0,
+    "seabird_total_sppr": 5506.446079035624,
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001"
+    ]
+  },
+  {
+    "scenario": "remove_redistribute",
+    "method": "TE",
+    "overall": "WARN",
+    "input_status": "WARN",
+    "divergence_status": "WARN",
+    "balance_status": "WARN",
+    "strict_model_balanced": false,
+    "strict_sppr_balanced": false,
+    "rho": 0.2757420229532071,
+    "recycling_b": 0.0,
+    "pp_budget_gap_percent": 1.668794667118878,
+    "diet_sum": 1.0,
+    "negative_entries": 0,
+    "seabird_total_sppr": 268113.2909082857,
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]",
+      "PP balance gap 1.669% exceeds 1.0%"
+    ]
+  },
+  {
+    "scenario": "remove_redistribute",
+    "method": "With Egestion",
+    "overall": "WARN",
+    "input_status": "WARN",
+    "divergence_status": "OK",
+    "balance_status": "OK",
+    "strict_model_balanced": false,
+    "strict_sppr_balanced": false,
+    "rho": 0.16967173931565332,
+    "recycling_b": 0.09711476293526844,
+    "pp_budget_gap_percent": 0.01179040711235492,
+    "diet_sum": 1.0,
+    "negative_entries": 0,
+    "seabird_total_sppr": 1908.2357402357948,
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001"
+    ]
+  }
+]

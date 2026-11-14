@@ -1,0 +1,118 @@
+{
+  "protected_inputs_unchanged": true,
+  "exact_restored_scientific_state_preserved_by_OFF": true,
+  "floor_preserves_living_biology": true,
+  "historical_OFF_parity": {
+    "GE": {
+      "SPPR": {
+        "exact": true,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "within_1e12_tolerance": true
+      },
+      "A": {
+        "exact": true,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "within_1e12_tolerance": true
+      },
+      "L": {
+        "exact": true,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "within_1e12_tolerance": true
+      }
+    },
+    "TE": {
+      "SPPR": {
+        "exact": true,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "within_1e12_tolerance": true
+      },
+      "A": {
+        "exact": true,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "within_1e12_tolerance": true
+      },
+      "L": {
+        "exact": true,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "within_1e12_tolerance": true
+      }
+    }
+  },
+  "diagnostics": {
+    "control_off_GE": {
+      "status": "OK",
+      "rho_living": 0.21208967414456642,
+      "b": 0.0698576437258916,
+      "strict_model_balanced": true,
+      "strict_sppr_balanced": true,
+      "warnings": [],
+      "runtime_warnings": []
+    },
+    "control_off_TE": {
+      "status": "WARN",
+      "rho_living": 0.2757420229532071,
+      "b": 0.0,
+      "strict_model_balanced": true,
+      "strict_sppr_balanced": true,
+      "warnings": [
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]"
+      ],
+      "runtime_warnings": [
+        {
+          "category": "RuntimeWarning",
+          "message": "3 group(s) have near-zero TE (0 < EE << 1): 24 (Cetaceans), 23 (Seals), 22 (Seabirds). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+        }
+      ]
+    },
+    "ee_floor_on_GE": {
+      "status": "OK",
+      "rho_living": 0.21208967414456642,
+      "b": 0.06854528708112659,
+      "strict_model_balanced": true,
+      "strict_sppr_balanced": true,
+      "warnings": [],
+      "runtime_warnings": []
+    },
+    "ee_floor_on_TE": {
+      "status": "WARN",
+      "rho_living": 0.2757420229532071,
+      "b": 0.0,
+      "strict_model_balanced": true,
+      "strict_sppr_balanced": true,
+      "warnings": [
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]"
+      ],
+      "runtime_warnings": [
+        {
+          "category": "RuntimeWarning",
+          "message": "3 group(s) have near-zero TE (0 < EE << 1): 24 (Cetaceans), 23 (Seals), 22 (Seabirds). Their SPPR is near-singular (inherent to the TE method); the detritus SPPR may be inflated and is not corrected by fix_EE_0_cases."
+        }
+      ]
+    }
+  },
+  "floor_info": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "affected_groups": [
+      24,
+      23,
+      22
+    ],
+    "external_mortality_export_total": 0.0005079999999999989,
+    "negative_detritus_stock_residuals": {},
+    "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+    "application_stage": "completed audited initialization",
+    "researcher_approval": "Original signed review is separate from this calculation assumption"
+  },
+  "methods_called": 4,
+  "no_Egestion_rerun": true
+}

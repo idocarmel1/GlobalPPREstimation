@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "region_id": "LME_037",
+  "model_id": "Bacalso2026_Visayan_Sea_1997_baseline",
+  "authority": "The final validation DOCX records the explicit researcher instruction in Validate LME_037; this evidence record is navigation, not a replacement decision authority.",
+  "researcher": "Ido Carmel",
+  "review_date": "2026-11-14",
+  "decision": "MODEL VALIDATED",
+  "report": "../../validation.docx",
+  "report_sha256": "d28f170b249548a4520000affbe6fc68ff2e3ce1c97220f714c857eed88d6c2e",
+  "appendix": "../../taxon_mapping.xlsx",
+  "appendix_sha256": "562bbd227dc008444f41afdceed5486db340dc698a554a16833cec450b0d9bb0",
+  "authorized_runtime_changes": [
+    "Normalize feeding diet rows to sum to one; preserve structural-zero nonfeeding rows.",
+    "Complete missing living biomass accumulation from the final production balance, retaining signed residuals.",
+    "Route all Seabirds nonpredatory mortality to an external nonfishery sink; retain egestion routing.",
+    "Record Seabirds (group 1) as removed from displayed PPR in the SPPR calculation field; keep all ecological groups and matrices.",
+    "Record the explicit verified decision by Ido Carmel dated 14/11/2026, using LME_036 formatting."
+  ],
+  "removed_group_seq": [
+    1
+  ],
+  "removed_group_names": [
+    "Seabirds"
+  ],
+  "source_unchanged_sha256": "a361c3dbf6abef5cedb0d0d480492e55907efde57b573278c5a7db2b7dbaf270",
+  "scientific_result": {
+    "methods": [
+      "new_GE",
+      "new_TE_EEfix",
+      "new_WithEgestion"
+    ],
+    "all_statuses_ok": true,
+    "strict_input_and_global_balance": true,
+    "all_basal_source_coefficients_finite_nonnegative": true,
+    "feeding_diet_rows": 30,
+    "changed_runtime_diet_cells": 99,
+    "living_BA_completions": 32,
+    "negative_BA_residuals": 13,
+    "seabirds_external_M0": 0.000784,
+    "BA_interpretation": "Accounting residuals, not observed stock accumulation or depletion.",
+    "stock_adapter_reconstructible": false,
+    "reproducer": "../../../results/diagnostics/researcher_adjustments_20261114/reproduce.py",
+    "evidence_index": "../../../results/diagnostics/researcher_adjustments_20261114/evidence_index.json",
+    "evidence_index_sha256": "ec86567c3eb9398d86fe158d0af71a89d8b02b1794e94cfef69cb125170ef2f0"
+  },
+  "preservation": {
+    "canonical_source_and_extraction_tables": "unchanged",
+    "reviewed_taxa": 250,
+    "mapping_rows": 431,
+    "catch_classic_PPR_NPP_mapping_and_manual_rationale": "preserved",
+    "geographic_and_allocation_assumptions": "retained",
+    "unsigned_previous_report": "superseded; earlier review record is historical"
+  },
+  "verification": {
+    "document_pages_visually_reviewed": 10,
+    "reviewers": [
+      "source_geography agent",
+      "root agent"
+    ],
+    "signed_report_parser_at_final_path": "passed",
+    "report_local_links": "all resolved at final path",
+    "percentage_format": "passed",
+    "public_saved_workbook_and_snapshot_checks": "passed",
+    "fresh_scientific_solves": 3,
+    "additional_solves_for_final_verification": 0,
+    "appendix_local_links": 15,
+    "post_cleanup_final_file_hashes_and_links": "passed"
+  },
+  "coordinator_handoff": {
+    "requested_by_user": true,
+    "destination_chat": "Shared resources coordinator",
+    "destination_thread_id": "01a1daa4-cbff-7830-8cb0-b8342b49ec5d",
+    "responsibility": "Register this signed review in Project.xlsx and update map and trends using the authenticated retained result package.",
+    "central_registration_or_publication_performed_here": false,
+    "notification_state": "Delivered successfully through the Codex chat messaging tool after all model-local work, checks and cleanup completed. No coordinator completion is asserted.",
+    "notification_date": "2026-11-14"
+  },
+  "cleanup": {
+    "state": "completed",
+    "task_owned_render_directories_removed": 3,
+    "model_local_work_run_removed": true,
+    "removed_work_files": 161,
+    "removed_work_bytes": 24766527,
+    "scientific_reproducer_and_complete_returns_retained": true,
+    "user_Word_processes_untouched": true
+  }
+}

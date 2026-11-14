@@ -34,4 +34,4 @@ The shared integration/browser completion gate remains coordinator-owned. This r
 
 ## Coordinator reconciliation — 1 October 2026
 
-Regional review and shared result reconciliation are complete. Earlier pending coordinator tasks in the regional handoff describe its historical release stage. Current reports, appendices, preserved scientific inputs, limits and verification are indexed in [the 23-region coordinator record](<../../../../../../../../../../research/selected_regions_validation_20260930/evidence/final_validation_status.md>). Scientific approval is not implied; graph and Git closeout are tracked separately.
+Regional review and shared result reconciliation are complete. Earlier pending coordinator tasks in the regional handoff describe its historical release stage. Current reports, appendices, preserved scientific inputs, limits and verification are indexed in [the 23-region coordinator record](<../../../../../../../../../../research/agents/selected_regions_validation_20260930/evidence/final_validation_status.md>). Scientific approval is not implied; graph and Git closeout are tracked separately.

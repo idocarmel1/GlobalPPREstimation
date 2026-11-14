@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-14T15:26:26.606114+00:00",
+  "scope": "Authorized ICES shared-loader/accounting repair and three direct reruns; Scotland retains historical evidence. No researcher decision, model selection or publication changes.",
+  "unit_id": "LME_022",
+  "primary_pair": [
+    "ICES_WGSAM2015_North_Sea_1991",
+    "22_20251990_East_Coast_of_Scotland_(1991-1995)"
+  ],
+  "historical_comparison": {
+    "path": "candidate_review.json",
+    "sha256": "8e7c89259111ae48f8f57a2d4789da46cc7bf8f904b2b23b1a941089574cea6b"
+  },
+  "current_ices_results": {
+    "path": "../../../results/diagnostics/2026-11-14_loader_repair/report_ready.json",
+    "sha256": "3d5a6f1c79c3d2ec0eb17cd401c4f45fec763ca0e819685c5a2ee1dc3af7cd2c"
+  },
+  "code_commit": "38cb75d066c5f78d47ba20fc6ab8545a9a6d5c69",
+  "recommendation": "Recommend retaining ICES North Sea 1991 as the selected candidate for further validation. The repaired implementation now converges with finite, nonnegative results and a closed PP budget in all three methods, and its declared domain covers substantially more of LME_022 than Scotland. This supersedes the provisional Scotland preference based on the faulty ICES runtime. ICES still has material sensitivity warnings, runtime closure assumptions, no exact-model catch mapping and no recovered native Key Run database; it is not yet ready for an approved regional PPR estimate.",
+  "separate_scotland_investigation": [
+    {
+      "path": "../../../../../../NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_163501_seabird_self_loop/outputs/baseline_TE_summary.json",
+      "sha256": "8e6d6fbbc4b329f758fab3b1b57f0ad8909d6d7c91db5a133e72b16edc415e6a"
+    },
+    {
+      "path": "../../../../../../NS-2025/models/22_20251990_East_Coast_of_Scotland_(1991-1995)/results/diagnostics/2026-11-14_163501_seabird_self_loop/outputs/remove_redistribute_TE_summary.json",
+      "sha256": "4175e74120c2f32abaf633f71f52b643d150aa2bc34aaa45c0bcc3abff56be59"
+    }
+  ],
+  "comparison_rows": [
+    {
+      "assessment": "Spatial and temporal fit",
+      "ICES": "1991; approximately 87% of LME_022 covered by the declared ICES domain.",
+      "Scotland": "1991–1995; approximately 40% of LME_022 covered. Source-map sensitivity: 37–42%; subregional Scottish shelf/fleet domain."
+    },
+    {
+      "assessment": "Source interpretation",
+      "ICES": "69 ecological groups. Deposited port differs from the native Key Run. Source parameters retained; shared routing and discard-return accounting repaired. Runtime EE-floor closure remains an assumption.",
+      "Scotland": "25 ecological groups. Saved runtime uses diet normalization, GS defaults and residual BA completion. Source landings exclude discards, while regional total catch includes them."
+    },
+    {
+      "assessment": "GE",
+      "ICES": "Fresh WARN. All 350 source–group entries finite and nonnegative. rho_living = 0.28944; b = 0.88221. PP budget closes; high detritus cost and recycling sensitivity remain.",
+      "Scotland": "Saved OK. No negative entries in the full 26 × 3 source matrix. rho_living = 0.2121; b = 0.06995; Detritus (25) SPPR = 1.0833."
+    },
+    {
+      "assessment": "TE",
+      "ICES": "Fresh WARN. All 350 source–group entries finite and nonnegative. rho_living = 0.57345; b = 0.15550. PP budget closes; high Discards cost and five near-zero TE groups remain.",
+      "Scotland": "Saved FAIL, reproduced in a separate reconstruction; rho_living = 1.1128. Negative pairs: Phytoplankton (1) → Seabirds (22), −1,916,160.32; Detritus (25) → Seabirds (22), −460,709.19. Detritus (25) SPPR = 0.81045. The unfished seabird row remains part of the diagnostic."
+    },
+    {
+      "assessment": "Regional mapping",
+      "ICES": "No adopted crosswalk or allocation retained for any of 384 catch labels. All remain unassessed in this appendix.",
+      "Scotland": "Existing appendix covers the same 384 labels: 99 High, 160 Medium, 3 Low, 110 Very low and 12 Unresolved. Its decisions belong to this comparator only. Very low decisions account for 3.8% of simple-chain PPR; unresolved labels account for 0.0034%."
+    },
+    {
+      "assessment": "With Egestion and readiness",
+      "ICES": "Fresh WARN; finite, nonnegative and balanced. b = 0.91516 signals recycling sensitivity. Regional Ecopath PPR remains unavailable without exact-model mapping and assessment of the runtime assumptions.",
+      "Scotland": "Saved With Egestion OK. A separate trial removed seabird self-feeding and redistributed its diet: TE became WARN (rho_living = 0.27574; no negatives), with a remaining 1.7% PP-budget gap. This changed-diet trial is separate from the canonical baseline."
+    }
+  ],
+  "comparison_note": "The candidates were not tested under common settings. Scotland retains its historical configured results; a separate reconstruction and diet-change trial are distinguished above. ICES uses the repaired shared engine and EE floor 0.1. This report update does not change selection or register a researcher decision. Three other registered models were screened only: Scotland 1890–1895 and two Mackinson 2007 representations. ",
+  "ices_summary": [
+    {
+      "method": "new_GE",
+      "execution_status": "ok",
+      "status": "WARN",
+      "input_status": "WARN",
+      "divergence_status": "WARN",
+      "rho_living": 0.2894427191062622,
+      "b": 0.8822051250081107,
+      "detritus_sppr": {
+        "67": 3.462493358284118,
+        "68": 5.344873625432921,
+        "69": 440.27445855458177
+      },
+      "balance": {
+        "inflow": 2150.010358224,
+        "is_balanced": true,
+        "outflow": 2150.0103582242664,
+        "rel_gap": 1.239444947788965e-13,
+        "status": "OK"
+      },
+      "footprint": {
+        "npp": 2150.00025,
+        "ppr2npp": 0.49353946786457414,
+        "ppr2npp_pp_only": 0.03594307097067997,
+        "ppr_all": 1061.1099792937014,
+        "ppr_inner": 1061.1099792937014,
+        "ppr_pp_only": 77.27761157272967
+      },
+      "warnings": [
+        "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+        "b=0.8822 is within 0.3 of divergence (max sppr_det 440 PP-units per unit detritus)",
+        "max sppr_det=440 >= 10: converged, but detritus is implausibly expensive"
+      ],
+      "near_singular_te": [],
+      "negative_entries": 0,
+      "negative_source_columns": 0,
+      "sign_count_matches_diagnostic": true,
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "finite_cells": 350,
+        "row_ids": [
+          70,
+          69,
+          68,
+          67,
+          66,
+          65,
+          64,
+          63,
+          62,
+          61,
+          60,
+          59,
+          58,
+          57,
+          56,
+          55,
+          54,
+          53,
+          52,
+          51,
+          50,
+          49,
+          48,
+          47,
+          46,
+          45,
+          44,
+          43,
+          42,
+          41,
+          40,
+          39,
+          38,
+          37,
+          36,
+          35,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "source_ids": [
+          70,
+          69,
+          68,
+          67,
+          66
+        ],
+        "unique_axes": true,
+        "mask_counts": {
+          "nan": 0,
+          "negative_infinity": 0,
+          "null": 0,
+          "positive_infinity": 0
+        },
+        "all_canonical_recipient_groups_present": true,
+        "synthetic_import_separate": true,
+        "scope_max_absolute_errors": {
+          "all": 0.0,
+          "inner": 0.0,
+          "PP": 0.0
+        },
+        "rho_living_independently_verified": true,
+        "b_independently_verified": true,
+        "reconstructed_rho_living": 0.2894427190999916,
+        "reconstructed_b": 0.8822051250081105,
+        "detritus_self_consistency_max_abs_error": 4.973799150320701e-14,
+        "pp_balance_independent_outflow": 2150.0103582242664,
+        "runtime_before_after_equal": true
+      },
+      "old_structural_zero": {
+        "status": "FAIL",
+        "b": 1.555279932052498,
+        "negative_entries": 132,
+        "balance_rel_gap": 0.7881790934418255
+      }
+    },
+    {
+      "method": "new_TE_EEfix",
+      "execution_status": "ok",
+      "status": "WARN",
+      "input_status": "WARN",
+      "divergence_status": "WARN",
+      "rho_living": 0.5734463993696682,
+      "b": 0.1554967742366123,
+      "detritus_sppr": {
+        "67": 0.4294643281019556,
+        "68": 0.4430838363796164,
+        "69": 816.3858058146532
+      },
+      "balance": {
+        "inflow": 2150.010358224,
+        "is_balanced": true,
+        "outflow": 2150.0103582240986,
+        "rel_gap": 4.589753475600775e-14,
+        "status": "OK"
+      },
+      "footprint": {
+        "npp": 2150.00025,
+        "ppr2npp": 0.8721247199001841,
+        "ppr2npp_pp_only": 0.17104516955904908,
+        "ppr_all": 1875.0683658165758,
+        "ppr_inner": 1875.0683658165758,
+        "ppr_pp_only": 367.7471573132479
+      },
+      "warnings": [
+        "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+        "max sppr_det=816 >= 10: converged, but detritus is implausibly expensive",
+        "5 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [65, 4, 3, 2, 1]"
+      ],
+      "near_singular_te": [
+        65,
+        4,
+        3,
+        2,
+        1
+      ],
+      "negative_entries": 0,
+      "negative_source_columns": 0,
+      "sign_count_matches_diagnostic": true,
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "finite_cells": 350,
+        "row_ids": [
+          70,
+          69,
+          68,
+          67,
+          66,
+          65,
+          64,
+          63,
+          62,
+          61,
+          60,
+          59,
+          58,
+          57,
+          56,
+          55,
+          54,
+          53,
+          52,
+          51,
+          50,
+          49,
+          48,
+          47,
+          46,
+          45,
+          44,
+          43,
+          42,
+          41,
+          40,
+          39,
+          38,
+          37,
+          36,
+          35,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "source_ids": [
+          70,
+          69,
+          68,
+          67,
+          66
+        ],
+        "unique_axes": true,
+        "mask_counts": {
+          "nan": 0,
+          "negative_infinity": 0,
+          "null": 0,
+          "positive_infinity": 0
+        },
+        "all_canonical_recipient_groups_present": true,
+        "synthetic_import_separate": true,
+        "scope_max_absolute_errors": {
+          "all": 0.0,
+          "inner": 0.0,
+          "PP": 0.0
+        },
+        "rho_living_independently_verified": true,
+        "b_independently_verified": true,
+        "reconstructed_rho_living": 0.5734463993696675,
+        "reconstructed_b": 0.1554967742366123,
+        "detritus_self_consistency_max_abs_error": 1.1102230246251565e-16,
+        "pp_balance_independent_outflow": 2150.0103582240986,
+        "runtime_before_after_equal": true
+      },
+      "old_structural_zero": {
+        "status": "FAIL",
+        "b": 0.0,
+        "negative_entries": 0,
+        "balance_rel_gap": 0.7881790934419213
+      }
+    },
+    {
+      "method": "new_WithEgestion",
+      "execution_status": "ok",
+      "status": "WARN",
+      "input_status": "WARN",
+      "divergence_status": "WARN",
+      "rho_living": 0.22945022049471692,
+      "b": 0.9151607499042561,
+      "detritus_sppr": {
+        "67": 5.580806053974749,
+        "68": 7.112556342678172,
+        "69": 182.03671954514908
+      },
+      "balance": {
+        "inflow": 2150.010358224,
+        "is_balanced": true,
+        "outflow": 2150.0103582241113,
+        "rel_gap": 5.1819797305170045e-14,
+        "status": "OK"
+      },
+      "footprint": {
+        "npp": 2150.00025,
+        "ppr2npp": 0.19771981627543628,
+        "ppr2npp_pp_only": 0.013802622777982408,
+        "ppr_all": 425.09765442214206,
+        "ppr_inner": 425.09765442214206,
+        "ppr_pp_only": 29.67564242331787
+      },
+      "warnings": [
+        "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+        "b=0.9152 is within 0.3 of divergence (max sppr_det 182 PP-units per unit detritus)",
+        "max sppr_det=182 >= 10: converged, but detritus is implausibly expensive"
+      ],
+      "near_singular_te": [],
+      "negative_entries": 0,
+      "negative_source_columns": 0,
+      "sign_count_matches_diagnostic": true,
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "finite_cells": 350,
+        "row_ids": [
+          70,
+          69,
+          68,
+          67,
+          66,
+          65,
+          64,
+          63,
+          62,
+          61,
+          60,
+          59,
+          58,
+          57,
+          56,
+          55,
+          54,
+          53,
+          52,
+          51,
+          50,
+          49,
+          48,
+          47,
+          46,
+          45,
+          44,
+          43,
+          42,
+          41,
+          40,
+          39,
+          38,
+          37,
+          36,
+          35,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "source_ids": [
+          70,
+          69,
+          68,
+          67,
+          66
+        ],
+        "unique_axes": true,
+        "mask_counts": {
+          "nan": 0,
+          "negative_infinity": 0,
+          "null": 0,
+          "positive_infinity": 0
+        },
+        "all_canonical_recipient_groups_present": true,
+        "synthetic_import_separate": true,
+        "scope_max_absolute_errors": {
+          "all": 0.0,
+          "inner": 0.0,
+          "PP": 0.0
+        },
+        "rho_living_independently_verified": true,
+        "b_independently_verified": true,
+        "reconstructed_rho_living": 0.22945022049468777,
+        "reconstructed_b": 0.9151607499042561,
+        "detritus_self_consistency_max_abs_error": 8.881784197001252e-15,
+        "pp_balance_independent_outflow": 2150.0103582241113,
+        "runtime_before_after_equal": true
+      },
+      "old_structural_zero": {
+        "status": "FAIL",
+        "b": 1.6227480948177888,
+        "negative_entries": 132,
+        "balance_rel_gap": 0.7881790934418068
+      }
+    }
+  ],
+  "source_parameters_changed": false,
+  "researcher_decision_registered": false,
+  "runtime_limitations": [
+    "EE floor 0.1 and effective DET-stock closure are explicit calculation assumptions, not recovered source observations.",
+    "High Discards SPPR; GE/With Egestion recycling sensitivity and five near-zero TE groups remain.",
+    "No exact-model taxon assignment/allocation is adopted.",
+    "Rpath port differs from the unavailable accepted native EwE Key Run; Scotland evidence is not a common-settings reproduction."
+  ]
+}

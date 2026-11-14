@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "run_id": "ee_floor_review_20261114",
+  "region_id": "LME_003",
+  "model_id": "CAL-2016_California_Current_2000-2014",
+  "started": "2026-11-14T16:32:42.694542+00:00",
+  "scope": "User-authorized review-only GE and TE diagnostics; no scientific input edits or adoption",
+  "route": "Bounded model-local direct diagnostic runner; not the rejected current compute_methods adapter route",
+  "canonical_input": {
+    "path": "../../../../model.json",
+    "sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+  },
+  "publication_input": {
+    "path": "../../../../../CAL-2016_California_Current_2000-2014__source/model.json",
+    "sha256": "3813062f7a7f5e153ff383494426d2b56bc956075a445d87955420692bff102b"
+  },
+  "constructor": {
+    "underdetermined": false,
+    "zero_catch": false,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001
+  },
+  "floor_configuration": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "method_options": {
+    "DET_TE_vals": 1,
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "fix_EE_0_cases": true
+  },
+  "archived_base_engine_hashes": {
+    "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+    "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "calculation_engine": {
+    "sha256": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+    "git_commit": "f920c5d27abb405d1d6243546950cb9e212a8534",
+    "git_path": "tools/scientific_code/PPREstimation/PPRCalculator.py",
+    "path": "../code/floor/PPRCalculator.py",
+    "upgrade": "ee_floor_v1"
+  },
+  "shared_frozen_hashes": {
+    "tools/scientific_code/PPREstimation/PPRCalculator.py": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+    "tools/scientific_code/PPREstimation/ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "tools/scientific_code/PPREstimation/create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+    "tools/scientific_helpers/sppr/method_coverage.py": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905"
+  },
+  "compatibility": {
+    "archived_to_pinned_floor_ast": true,
+    "archived_to_current_ast": false,
+    "current_gate_bypassed": false,
+    "scientific_code_modified": false
+  },
+  "metadata_alias": {
+    "filename": "3_2016_Author_solved_California_Current_(2000-2014).json",
+    "lme": 3,
+    "role": "Temporary byte-identical canonical input for archived filename parser"
+  },
+  "source_EE_meaning": "EE of the selected accepted canonical author-equation variant, not a publication observation; original publication unknowns are separately retained and do not replace accepted floor eligibility inputs",
+  "source_M0_meaning": "Archived ModelData input-table M0 derived as P*(1-EE); raw other_mort remains -9999 and no observed M0 is claimed",
+  "environment": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "packages": {
+      "numpy": "2.4.6",
+      "pandas": "2.3.3",
+      "scipy": "1.16.3",
+      "sympy": "1.14.0",
+      "igraph": "1.0.0",
+      "tqdm": "4.67.1"
+    }
+  },
+  "diagnostic_thresholds": {
+    "b_warn": 0.7,
+    "b_fail": 1.0,
+    "rho_living_warn": 0.7,
+    "rho_living_fail": 1.0,
+    "sppr_det_warn": 10.0,
+    "balance_warn": 0.01,
+    "balance_fail": 0.05,
+    "model_balance_warn": 0.0001,
+    "model_balance_fail": 0.1,
+    "dc_row_tol": 1e-06,
+    "ee_marginal": 0.001
+  }
+}

@@ -7,13 +7,23 @@ from tools.project_core.calculations.regional import comparison_tables,result_ha
 from tools.project_core.registry.atlas_ranks import apply_atlas_ranks, ensemble_ids
 from tools.project_core.registry.writes import central_lock
 
-def update(root, paths, all_regions=False, *, lock_held=False, ee_floor=None, migration_units=None):
+def update(root, paths, all_regions=False, *, lock_held=False, ee_floor=None,
+           migration_units=None, coverage_units=None, model_pairs=None, all_validated=False):
+    root=Path(root).resolve();paths=list(paths)
+    migration_units=None if migration_units is None else set(migration_units)
+    coverage_units=None if coverage_units is None else set(coverage_units)
+    model_pairs=None if model_pairs is None else {tuple(pair) for pair in model_pairs}
+    if coverage_units is None and model_pairs is None and not all_validated:
+        coverage_units=set(migration_units) if migration_units is not None else (set() if all_regions else {path.stem for path in paths})
+    scope=dict(units=coverage_units,model_pairs=model_pairs,all_validated=all_validated)
     if not lock_held:
-        with central_lock(root):return update(root,paths,all_regions,lock_held=True,ee_floor=ee_floor,migration_units=migration_units)
+        with central_lock(root):return update(root,paths,all_regions,lock_held=True,ee_floor=ee_floor,
+            migration_units=migration_units,coverage_units=coverage_units,model_pairs=model_pairs,all_validated=all_validated)
     from tools.project_core.calculations.coverage import ensure_validated_coverage
     from tools.project_core.registry.publication import publication_transaction
-    with publication_transaction(root,paths) as publication:
-        coverage=ensure_validated_coverage(root,lock_held=True,ee_floor=ee_floor,migration_units=migration_units)
+    with publication_transaction(root,paths,**scope) as publication:
+        coverage=(ensure_validated_coverage(root,lock_held=True,ee_floor=ee_floor,migration_units=migration_units,**scope)
+                  if all_validated or coverage_units or model_pairs else {'changed_units':[]})
         publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
         affected=[region_directory(root,unit)/(unit+'.xlsx') for unit in coverage['changed_units']]
         result=_update(root,list(dict.fromkeys([*paths,*affected])),all_regions)
@@ -77,11 +87,12 @@ def _update(root, paths, all_regions=False):
 def parse_arguments(arguments=None):
     ap=argparse.ArgumentParser(description=__doc__)
     g=ap.add_mutually_exclusive_group();g.add_argument('--all',action='store_true');g.add_argument('--region',type=Path,nargs='+')
+    ap.add_argument('--audit-validated-methods',action='store_true',help='Explicit scientific method inventory; scope to --region when supplied, otherwise all validated pairs')
     ap.add_argument('--migrate-ee-floor',action='store_true',help='Explicitly migrate registered validated model calculations with preserved baseline evidence')
     policy=ap.add_mutually_exclusive_group();policy.add_argument('--ee-floor',type=float,default=None);policy.add_argument('--no-ee-floor',action='store_true')
     ap.add_argument('--root',type=Path,default=project_root(Path(__file__)))
     result=ap.parse_args(arguments)
-    if not (result.all or result.region or result.migrate_ee_floor):ap.error('Choose --all, --region, or --migrate-ee-floor')
+    if not (result.all or result.region or result.migrate_ee_floor or result.audit_validated_methods):ap.error('Choose --all, --region, --audit-validated-methods, or --migrate-ee-floor')
     if not result.migrate_ee_floor and (result.ee_floor is not None or result.no_ee_floor):ap.error('Floor policy requires --migrate-ee-floor')
     result.ee_floor=.1 if result.ee_floor is None else result.ee_floor
     if result.migrate_ee_floor:
@@ -98,4 +109,6 @@ if __name__=='__main__':
     paths=sorted(discover_regions(root).values()) if a.all else [p.resolve() for p in (a.region or [])]
     units={p.stem for p in paths} if a.region else None
     request={'use_ee_floor':not a.no_ee_floor,'ee_floor':a.ee_floor} if a.migrate_ee_floor else None
-    update(root,paths,a.all,ee_floor=request,migration_units=units)
+    full_science=(a.audit_validated_methods or a.migrate_ee_floor) and not a.region
+    update(root,paths,a.all,ee_floor=request,migration_units=units,
+           coverage_units=units,all_validated=full_science)

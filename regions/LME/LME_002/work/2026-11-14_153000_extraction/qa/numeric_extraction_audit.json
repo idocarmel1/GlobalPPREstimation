@@ -1,0 +1,40 @@
+{
+  "source_sha256": "9dadd884031657e9a51741ef32a824083acf93a78c217a3a5b271fe83f3161d3",
+  "model_identity": "Aydin2007_Gulf_of_Alaska_1990-1994",
+  "groups": 133,
+  "consumers": 124,
+  "direct_diets": 85,
+  "basic_values": 665,
+  "numerical_source_fields": "C1 B/EE; C2 PB/QB/TL; C3 retained/discard tonnes; C12-C26 applicable GOA and All diet columns; C28 quality; B8 bird source categories",
+  "group_order": "C1 union order filtered only on GOA B != #N/A; 147 union rows, 133 retained",
+  "visual_inspection": "C1 first two pages, C2 first page, C3 first page; all 14 diet table headers and C16/C22 full tables; B8 full table; C28 first page at 216 DPI (3x72)",
+  "conflicts": [
+    "C1/C2 numerical Mud/Black skate rows vs C3 #N/A catches",
+    "C16 FH.Sole 105.46%, S.Rock sole 106.93% exact printed sums; retained",
+    "C22 Lg.Sculpins 2.61% Yellowfin sole juv and 0.48% N.rock sole juv with no GOA C1/C2 groups; cells retained as unresolved companion, mapped sum 96.92%",
+    "C28 caption 1-8 scale but producers/detritus diet rating 0 published"
+  ],
+  "no_fabrication": "No input zero completion, diet normalization, preference allocation, biomass reconstruction or missing-parameter default applied. Percentage /100 and tonnes /291840 are explicit unit conversions.",
+  "evidence": [
+    {
+      "path": "numeric_cell_evidence.json",
+      "rows": 1017,
+      "sha256": "ccd54a2f0765c4db11f986ca7de06a481ffeb4681f687853643b7eb1dd6dc78b"
+    },
+    {
+      "path": "direct_diet_cell_evidence.json",
+      "rows": 2988,
+      "sha256": "03492b051a63231c2b6c14ee192ca86a8624d52051c31590c572d1873853d407"
+    },
+    {
+      "path": "pedigree_cell_evidence.json",
+      "rows": 1176,
+      "sha256": "b02add6fb5dc1ddba7684f9ce8f4b475d25c4e2aa719eb1f62f0a180cee9e648"
+    },
+    {
+      "path": "seabird_source_cells.json",
+      "rows": 506,
+      "sha256": "acc877cd0c39e8bd91273ca3a59b45888837dbac62a79032d1ba27822b9bfcd5"
+    }
+  ]
+}

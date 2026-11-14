@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "scope": "Independent numeric source-to-writer-to-canonical extraction QA; no PPR or full model scientific review",
+  "reviewed_at": "2026-11-14T18:38:20.173460+02:00",
+  "result": "pass_no_material_blockers",
+  "checks": {
+    "structure": 137,
+    "scalar": 1995,
+    "unknown_non_source_default": 266,
+    "landings": 133,
+    "discards": 133,
+    "fate": 665,
+    "fate_export": 133,
+    "diet": 16492,
+    "import": 124,
+    "embedded_standard_table": 8,
+    "standard_hash": 8,
+    "companion_source_rows": 13,
+    "embedded_companion": 13,
+    "source_basic_literal": 665,
+    "source_direct_numeric": 953,
+    "source_direct_blank": 1893,
+    "source_catch_dictionary": 2,
+    "fidelity_receipt": 2,
+    "tool_pass": 1,
+    "missingness_count": 6,
+    "encoding_bom_only_resolution": 2
+  },
+  "mismatches": [],
+  "groups": 133,
+  "consumers": 124,
+  "known_diet_cells": 1163,
+  "known_detritus_fate_cells": 252,
+  "unknown_counts": {
+    "diet_prey": 15329,
+    "diet_import": 124,
+    "biomass_accumulation": 130,
+    "unassimilated_consumption": 9,
+    "landings_by_group": 8,
+    "discards_by_group": 8
+  },
+  "source_fidelity_receipt": {
+    "schema_version": 1,
+    "standard_tables": 8,
+    "companion_tables": 13,
+    "cells_checked": 116150,
+    "exact_value_and_missing_mask_match": false,
+    "numeric_value_and_missing_mask_match": true,
+    "max_numeric_difference": "3.15789473684210526E-17",
+    "absolute_tolerance": "1e-12",
+    "relative_tolerance": "1e-14",
+    "errors": []
+  },
+  "observed_files": {
+    "writer_input": {
+      "path": "regions/LME/LME_002/work/2026-11-14_153000_extraction/outputs/publication_writer_input.json",
+      "sha256": "322cec0c6f1d0e89531423247e065fe08fd8902fe92372e42382bb14bfe32df7",
+      "modified_at": "2026-11-14T18:30:07.328007+02:00"
+    },
+    "canonical_json": {
+      "path": "regions/LME/LME_002/work/2026-11-14_153000_extraction/outputs/Aydin2007_Gulf_of_Alaska_1990-1994/2_Gulf_of_Alaska_Aydin2007_Gulf_of_Alaska_(1990-1994).json",
+      "sha256": "791a9011ea48ea2e3eb1a8907845452726ad1f7ebdd5ac7416aa5ba7bac4be36",
+      "modified_at": "2026-11-14T18:32:38.737288+02:00"
+    },
+    "source_fidelity_receipt": {
+      "path": "regions/LME/LME_002/work/2026-11-14_153000_extraction/outputs/Aydin2007_Gulf_of_Alaska_1990-1994/SOURCE_FIDELITY_CHECK.json",
+      "sha256": "605d26c912b741162004f963cf0780520cb0c1dc6352732aea6834d0ded8f7e9",
+      "modified_at": "2026-11-14T18:34:24.211719+02:00"
+    },
+    "completed_tools_receipt": {
+      "path": "regions/LME/LME_002/work/2026-11-14_153000_extraction/qa/publication_tools.json",
+      "sha256": "996dc3e66d7844d3a452fb0b554af4079ecbea80102225351e887db5d575017c",
+      "modified_at": "2026-11-14T18:34:25.712608+02:00"
+    }
+  },
+  "corrected_findings": [
+    "Stage-filtered one-member preference pools now retain12 explicit source percentage cells.",
+    "All124consumer import values are explicitly unknown; ten unreported bird/Black skate columns no longer inherit writer default0."
+  ],
+  "preserved_source_limits": [
+    "Preference-pool allocations and bird diets remain unresolved; incomplete columns are not normalized.",
+    "C16 GOA FH.Sole105.46% and S.Rocksole106.93% source sums retained.",
+    "C22 GOA Lg.Sculpins2.61% juvenileYellowfin sole and0.48% juvenileN.rocksole refer to absent GOA groups and remain companion-only.",
+    "Workbook round-trip receipt exact-string flagfalse is bounded numeric serialization difference, max3.15789473684210526E-17; canonical scientific input literals and missing masks compare exactly.",
+    "Import-format residual footer0 is a writer placeholder, not source diet balance evidence."
+  ],
+  "review_limits": [
+    "Focused numeric extraction QA only; taxonomy and prose adjudication are owned by separate source reviewer.",
+    "Read-only review of scientific files; this QA receipt is the only output written.",
+    "No source values normalized, no missing values filled, no canonical promotion performed."
+  ],
+  "encoding_notes": {
+    "utf8_bom_header_only": [
+      "prose_scalars.csv",
+      "Table_B9_split_pool.csv"
+    ],
+    "interpretation": "Leading U+FEFF at start of CSV is recognized as an encoding BOM; all header text and data rows otherwise match source staging exactly."
+  }
+}

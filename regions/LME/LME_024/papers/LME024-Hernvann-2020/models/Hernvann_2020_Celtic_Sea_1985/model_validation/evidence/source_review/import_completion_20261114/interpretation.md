@@ -1,0 +1,11 @@
+# Import completion and diagnostic interpretation
+
+This user-authorized run completes only diet_import (55) for Baleen whales (3) and Boarfish (28) from missing to 0 in the authenticated runtime. Source B2 pp. 14–15 leaves both Import cells blank; no group-specific external-feeding statement was found in the reviewed article or supplement. Raw internal diet sums are 0.999 and 1.000. Existing normalization is preserved; explicit printed imports, including group 4 = 0.026, are not replaced with residuals. Canonical model.json and extracted source tables are unchanged.
+
+The saved historical initialization and source object are authenticated before the two-cell completion. All other pre-floor scientific fields remain exactly equal. EE floor ON at 0.1 is then applied once, with threshold 0.1, to groups 3, 4 and 28. The hypothetical external mortality sink totals 0.0061 model-density units/year. The source/pre-floor detritus accumulation remains evidence; effective residuals are 0.041317649525263817 for Discards (53) and 173.82414410441152 for Detritus (54). No living production, consumption, catch, predation, accumulation, routing or stanza parameter was rebalanced.
+
+TE now returns a complete scientific FAIL instead of the earlier NotImplementedError. Both GE and TE return finite nonnegative 55×5 SPPR matrices and convergent living networks. Both remain FAIL on input mass balance (maximum production residual 35.377062%, juvenile Cod (14)) and global budgets (GE 57.086165%, TE 28.190981%). Discards (53) SPPR remains elevated (GE 525.348; TE 967.123). Baleen whales (3) TE is positive 0.0008385744234800839 and retains a near-zero warning.
+
+These findings describe the exact corrected-import initialization with EE floor ON at 0.1. They do not validate the reconstructed native stanza equations or source precision, and do not approve the model or authorize regional arithmetic. Historical and other-configuration results retain their own identities. No decision, selection, Project.xlsx, map, trends or regional results were changed by this run.
+
+See [execution](execution.json), [completion ledger](import_completion.json), [floor ledger](floor_accounting.json), [full direct reports](direct_diagnostics.md), [matrix review](matrix_review.json), and [earlier authenticated run](../ee_floor_20261114/evidence_index.json).

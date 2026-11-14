@@ -17,15 +17,39 @@ NOTE = ('Following researcher review, seabirds, other mammals, pinnipeds and mar
         'calculations retain all groups.')
 
 def removed_groups_text(sppr_text):
-    """Preserve signed wording while accepting calculation/calculations headings."""
-    match = re.search(r'Removed groups from calculations?:\s*(.*)', sppr_text, re.S)
+    """Preserve signed wording with either removal-heading word order."""
+    match = re.search(r'(?:Removed groups|Groups removed) from calculations?:\s*(.*)', sppr_text, re.S)
     return match.group(1) if match else ''
+
+def removed_group_names(sppr_text):
+    """Read named removals, with optional parenthesized diagnostic details."""
+    lines = removed_groups_text(sppr_text).splitlines()
+    if re.search(r'Groups removed from calculations?:', sppr_text):
+        expanded = []
+        for line in lines:
+            numbered = re.match(r'^\s*Near-zero (?:GE|TE):\s*(.+?)\s*\.?$', line)
+            entries = [re.fullmatch(r'(.+?)\s*\(\d+\)', part.strip())
+                       for part in re.split(r',\s*|\s+and\s+', numbered.group(1))] if numbered else []
+            if entries and all(entries):
+                expanded.extend(entry.group(1).strip() for entry in entries)
+            else:
+                expanded.append(line)
+        lines = expanded
+        # This newly supported heading has no legacy registered summary to retain.
+        # Parentheses such as (all) are part of the exact model group identity;
+        # strip only explicit diagnostic annotations, including the signed dash form.
+        diagnostic = r'(?:GE|TE|SPPR(?:_[A-Za-z]+)?)\s*[=<>:]'
+        names = [re.split(r'\s*(?:\(|[–—-]\s*)(?=' + diagnostic + r')',
+                          line, maxsplit=1, flags=re.I)[0].strip().lstrip('-• ').lower()
+                 for line in lines]
+    else:
+        # Keep existing registered notes byte-compatible for the original heading.
+        names = [line.split('(', 1)[0].strip().lstrip('-• ').lower() for line in lines]
+    return [name for name in names if name]
 
 def exclusion_note(sppr_text):
     """Name only groups explicitly removed in the approved report's SPPR field."""
-    removed = removed_groups_text(sppr_text)
-    groups = [line.split('(', 1)[0].strip().lower() for line in removed.splitlines()
-              if '(' in line and line.split('(', 1)[0].strip()]
+    groups = removed_group_names(sppr_text)
     # Preserve the original registered closing note for its existing snapshot.
     if set(groups) == {'seabirds', 'other mammals', 'pinnipeds', 'marine turtles'}:
         return NOTE
@@ -152,7 +176,7 @@ def read_report(root, report, model_id):
     if not identities or any(not re.match(re.escape(model_id) + r'(?=$|[.;\s])', value) for value in identities):
         raise ValueError('Review document identifies a different model')
     manual = fields['Review and reproducibility']['text']
-    match = re.search(r'Researcher name:\s*([^|\n]+)\s*\|\s*review date:\s*(\d{2})/(\d{2})/(\d{4})', manual)
+    match = re.search(r'Researcher name:\s*([^|\n]+)\s*\|\s*[Rr]eview date:\s*(\d{2})/(\d{2})/(\d{4})', manual)
     decisions = list(re.finditer(r'\bMODEL (VALIDATED|DISQUALIFIED)\b', manual))
     if not match or len(decisions) != 1:
         raise ValueError('The report needs an explicit researcher identity, date and one unambiguous decision')
@@ -202,6 +226,38 @@ def read_report(root, report, model_id):
 def register_review(project, report, unit_id, model_id, excluded_seq):
     from tools.project_core.registry.writes import central_lock
     with central_lock(Path(project).resolve().parent):return _register_review(project,report,unit_id,model_id,excluded_seq)
+
+
+def review_group_sequences(groups):
+    """Resolve exact review names to canonical or legacy integer identifiers.
+
+    A supplied canonical ID cannot be replaced by a conflicting legacy value.
+    Missing, nonintegral and ambiguous identities never authorize exclusions.
+    """
+    from decimal import Decimal, InvalidOperation
+    error = 'Approved group exclusion identifiers do not resolve uniquely'
+    def sequence(value):
+        if value is None or isinstance(value, bool):
+            raise ValueError(error + ': missing or malformed sequence')
+        try:
+            number = Decimal(str(value))
+        except InvalidOperation as exc:
+            raise ValueError(error + ': malformed sequence') from exc
+        if not number.is_finite() or number != number.to_integral_value():
+            raise ValueError(error + ': nonintegral sequence')
+        return int(number)
+    result = {}; used = set()
+    for row in groups:
+        canonical = 'group_seq' in row
+        seq = sequence(row.get('group_seq') if canonical else row.get('seq'))
+        if canonical and 'seq' in row and sequence(row['seq']) != seq:
+            raise ValueError(error + ': conflicting group_seq and seq')
+        name = row.get('group_name')
+        if not isinstance(name, str) or not name.strip() or name in result or seq in used:
+            raise ValueError(error + ': missing or duplicate group identity')
+        result[name] = seq; used.add(seq)
+    return result
+
 
 def calculation_review_book(root, metadata, book):
     """Resolve this model's group identities independently of the map default.
@@ -257,16 +313,15 @@ def _register_review(project, report, unit_id, model_id, excluded_seq):
         groups = [(None, r) for r in records(saved, 'Selected model groups', 'Groups')]
     if source_only:
         summary['review_scope'] = 'model_source'
-    exclusions = [r['group_name'] for _, r in groups if int(float(r['seq'])) in excluded_seq]
+    identities = review_group_sequences(r for _, r in groups) if excluded_seq else {}
+    exclusions = [name for name, seq in identities.items() if seq in excluded_seq]
     if len(exclusions) != len(set(excluded_seq)):
         raise ValueError('Approved group exclusion identifiers do not resolve uniquely')
     if status == DISQUALIFIED_STATUS and excluded_seq:
         raise ValueError('Disqualification does not authorize group exclusions')
     summary['excluded_group_ids'] = exclusions
     if excluded_seq == [] and status == STATUS:
-        removed = removed_groups_text(summary['sections'][2]['rows'][0]['text'])
-        declared = [line.split('(', 1)[0].strip().lstrip('-• ').lower() for line in removed.splitlines()
-                    if '(' in line and line.split('(', 1)[0].strip()]
+        declared = removed_group_names(summary['sections'][2]['rows'][0]['text'])
         available = {r['group_name'].strip().lower() for _, r in groups}
         if declared and not any(name in available for name in declared):
             names = declared[0] if len(declared) == 1 else ', '.join(declared[:-1]) + ' and ' + declared[-1]

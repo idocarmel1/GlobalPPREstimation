@@ -1,0 +1,43 @@
+{
+  "focused_accounting_regressions": {
+    "result": "passed",
+    "count": 16,
+    "command": "python -X utf8 -B -m pytest tools/scientific_code/PPREstimation/tests/test_final_accounting.py -q -p no:cacheprovider --basetemp=regions/LME/LME_049/work/accounting_test_temp_final",
+    "warnings": "3 existing SymPy/Pandas symbol-order RuntimeWarnings"
+  },
+  "exporter_absent_symbolic_import_row": {
+    "result": "passed",
+    "count": 1,
+    "deselected": 16,
+    "command": "python -X utf8 -B -m pytest tools/scientific_code/PPREstimation/tests/test_final_accounting.py -k exporter_preserves -q -p no:cacheprovider --basetemp=regions/LME/LME_049/work/accounting_test_temp_export_call"
+  },
+  "broader_existing_regressions": {
+    "result": "84 existing tests passed",
+    "modules": [
+      "test_lim_state.py",
+      "test_ee_floor.py",
+      "test_normalization_biomass_accum.py"
+    ],
+    "combined_run": "99 passed / 1 failed before the final focused run; failure was new test using nonexistent registry key new_TE, corrected to new_TE_EEfix and passed in final focused run"
+  },
+  "exporter_existing_suite": {
+    "result": "fixture unavailable",
+    "passed": 11,
+    "failed": 3,
+    "errors": 29,
+    "reason": "Missing preexisting real_models/ToyModels/900_900_Multi_DET_Toy_(2026).json; dependent fixture and directory tests cannot run. No replacement scientific fixture invented."
+  },
+  "diff_check": {
+    "command": "git -c core.whitespace=cr-at-eol diff --check -- tools/scientific_code/PPREstimation",
+    "exit_code": 0,
+    "reason": "Preserve repository -text CRLF source files"
+  },
+  "python": "C:/Users/idoca/miniconda3/python.exe -X utf8 -B",
+  "pytest_plugin_autoload_disabled": true,
+  "final_source_hashes": {
+    "tools/scientific_code/PPREstimation/PPRCalculator.py": "b3286abb1749b7b760a8198c4c2d269eed88ca352f5858fa8499c76cf2756105",
+    "tools/scientific_code/PPREstimation/create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+    "tools/scientific_code/PPREstimation/tests/test_final_accounting.py": "128dd34b5b9495fd27e49389942a9d10bc33ec4e59017478c94f9a4ffdb652f3"
+  },
+  "post_diagnostic_exporter_change": "Source create_PPRS_excel.py subsequently drops display-only all-null Import rows before symbolic as_DC budget checks. This does not change method calculation, registered methods, deterministic diagnostics or the immutable executed engine snapshot. Verified by the self-contained exporter test above."
+}

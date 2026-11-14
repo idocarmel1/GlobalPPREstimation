@@ -13,13 +13,18 @@
     const element=(tag,text)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;return e;};
     const wrap=element('div');wrap.className='ee-floor-provenance';
     wrap.appendChild(element('p','Calculation settings · '+setting));
-    let note='The floor assumes a hypothetical external nonfishery mortality sink, excluded from catch and fishery PPR.';
-    if(finite(provenance.affected_group_count))note+=' '+provenance.affected_group_count+' affected groups.';
-    if(finite(provenance.external_mortality_export_total))note+=' External mortality export: '+number(provenance.external_mortality_export_total)+' in saved model flow units.';
+    let note='No EE floor is applied in this saved calculation.';
+    if(provenance.use_ee_floor){
+      note='The floor assumes a hypothetical external nonfishery mortality sink, excluded from catch and fishery PPR.';
+      if(finite(provenance.affected_group_count))note+=' '+provenance.affected_group_count+' affected groups.';
+      if(finite(provenance.external_mortality_export_total))note+=' External mortality export: '+number(provenance.external_mortality_export_total)+' in saved model flow units.';
+    }
     wrap.appendChild(element('p',note));
-    wrap.appendChild(element('p',model.researcher_review||model.recorded_review_pending
-      ?'The signed researcher review retains its original scope and does not approve this changed calculation assumption or transformed diagnostics.'
-      :'This calculation assumption and its transformed diagnostics require separate researcher review.'));
+    wrap.appendChild(element('p',model.researcher_review
+      ?'The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report. Other method results retain their own diagnostic status.'
+      :model.recorded_review_pending
+        ?'The recorded researcher review is awaiting current verification.'
+        :'No verified researcher review is recorded for this model.'));
     const diagnostics=Object.entries(model.health||{}).map(([option,state])=>option+': '+(state.status||'NOT_RUN'));
     if(diagnostics.length)wrap.appendChild(element('p','Current calculation diagnostics: '+diagnostics.join(' · ')));
     if(model.review_flags?.length)wrap.appendChild(element('p','Current calculation restrictions: '+model.review_flags.join(' · ')));

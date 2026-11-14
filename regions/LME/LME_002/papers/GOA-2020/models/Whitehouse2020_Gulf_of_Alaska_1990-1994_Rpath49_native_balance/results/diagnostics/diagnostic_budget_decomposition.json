@@ -1,0 +1,1254 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-14T17:51:11.125224+00:00",
+  "scope": "Read-only arithmetic on existing diagnostic and native-balance outputs. No diagnostic/model solve rerun and no scientific inputs altered.",
+  "diagnostic_status": "diagnostics_completed",
+  "parent_model_id": "Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49",
+  "variant_model_id": "Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49_native_balance",
+  "input_sha256": {
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/diagnostics/diagnostic_summary.json": "a616f8f3d17c698db9a43b4afad565f0c15a4d57bd18e5330f8b92669f7e6583",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/diagnostics/constructor_audit.json": "7f920d5762e7ee0ed4674311e3b4839ca787c549bd78396ea798e73f790491a7",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/detritus_balance_audit.csv": "3ad21e4a718c2e80fa63046ec5809abb590cfa7e2ce0e5302b970b7583c15f0d",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/diagnostics/run_identity.json": "f01984c9b19733c49cc7f3e99239ebf60b0e5a051e304e4f06f027fcf237c170",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/diagnostics/initial_GE.json": "53b1f304d43601448675e16bf0a6924b9624e2ea46f9b09b053c7b42bf3fd838",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/diagnostics/initial_TE.json": "9e1125660869dd2e5b50737a91cc73cb45112f96f8c1f91932201bc602b2e5dd",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/diagnostics/initial_WithEgestion.json": "8990e8f5acc9dc29c5f53a1fb770f4520e293deedb7e52c1c2e7ef4301d87fdf"
+  },
+  "units": {
+    "native_flows": "t/km^2/year in native Ecopath model mass units",
+    "PP_budget_and_catch_footprints": "native model PP-equivalent mass per km^2/year; no annual regional extrapolation or carbon conversion",
+    "sppr": "native model PP-equivalent mass per unit group mass"
+  },
+  "equations": {
+    "native_unused_detritus": "U_d = total native inflow_d - consumption_d",
+    "runtime_production": "Pcalc_i = catch_i + predation_i + growth_i + net_migration_i + M0_i + external_mortality_export_i",
+    "runtime_consumption": "Qcalc_i = Pcalc_i + egestion_i + respiration_i",
+    "group_signed_residual": "Pcalc_i - p_i (or Qcalc_i - q_i)",
+    "group_relative_residual": "abs(recomputed - stored) / max(abs(stored), 1e-12)",
+    "actual_PP_inflow": "I = sum(p_i for PP and Import groups)",
+    "actual_PP_outflow": "O = sum((external_catch + growth + net_migration + external_mortality_export)_i * total_SPPR_i) + sum(formulation-specific unrouted exports_i)",
+    "PP_signed_residual": "O - I",
+    "PP_absolute_relative_gap": "abs(O - I) / abs(I)",
+    "detritus_decomposition": "I - O = sum_d(SPPR_d * U_d) + numerical remainder",
+    "recycling_gain": "b = spectral_radius(diag(theta) @ B), B the method-specific coupled detritus recycling matrix; theta=1 here",
+    "living_gain": "rho_living = spectral_radius(A_LL) for Regular groups, A=DC/TE"
+  },
+  "source_and_floor_provenance": {
+    "raw_source_EE_unknown_count": 49,
+    "living_floor_skipped_count": 47,
+    "floor_applied_count": 0,
+    "physical_vectors_unchanged_by_floor": true,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "detritus": {
+    "48": {
+      "seq": 48,
+      "name": "Pelagic detritus",
+      "native_audit": {
+        "Natural_input": 1989.6630647215993,
+        "Fleet_discard_input": 0.264132269258995,
+        "External_input": 0.0,
+        "Interpool_input": 0.0,
+        "Total_input": 1989.9271969908584,
+        "Consumption": 383.42355153608503,
+        "Native_EE": 0.19268220069351938,
+        "Direct_EE": 0.19268220069351938,
+        "Native_Biomass": 3979.854393981717,
+        "Source_PB": 0.5,
+        "Direct_Biomass": 3979.854393981717,
+        "Residual": 0.0,
+        "Unused_input": 1606.5036454547735
+      },
+      "runtime_EE": 1.0,
+      "runtime_M0": 0.0,
+      "runtime_p": 1989.9271969908582,
+      "runtime_q": 1989.9271969908582,
+      "runtime_predation": 383.4235515360851,
+      "runtime_growth": 0.0,
+      "runtime_net_migration": 0.0,
+      "runtime_det_export": 0.0,
+      "runtime_stock_residual": 1606.503645454773,
+      "runtime_source_EE_missing": true,
+      "native_unused_input_definition": "Total_input - Consumption; native BA is zero; not relabeled as stock accumulation or migration."
+    },
+    "49": {
+      "seq": 49,
+      "name": "Benthic detritus",
+      "native_audit": {
+        "Natural_input": 2067.2384817546267,
+        "Fleet_discard_input": 0.4116008291676884,
+        "External_input": 0.0,
+        "Interpool_input": 0.0,
+        "Total_input": 2067.6500825837943,
+        "Consumption": 1067.8411400904772,
+        "Native_EE": 0.516451574221917,
+        "Direct_EE": 0.516451574221917,
+        "Native_Biomass": 4135.300165167589,
+        "Source_PB": 0.5,
+        "Direct_Biomass": 4135.300165167589,
+        "Residual": 0.0,
+        "Unused_input": 999.8089424933171
+      },
+      "runtime_EE": 1.0,
+      "runtime_M0": 0.0,
+      "runtime_p": 2067.650082583794,
+      "runtime_q": 2067.650082583794,
+      "runtime_predation": 1067.8411400904772,
+      "runtime_growth": 0.0,
+      "runtime_net_migration": 0.0,
+      "runtime_det_export": 0.0,
+      "runtime_stock_residual": 999.8089424933166,
+      "runtime_source_EE_missing": true,
+      "native_unused_input_definition": "Total_input - Consumption; native BA is zero; not relabeled as stock accumulation or migration."
+    }
+  },
+  "runtime_group_residual_summary": {
+    "living_including_PP": {
+      "n": 47,
+      "maxima": {
+        "p_signed_residual": {
+          "seq": 47,
+          "name": "Primary production",
+          "type": "PP",
+          "stored_p": 4451.953547222999,
+          "stored_q": 4451.953547222999,
+          "recomputed_p": 4451.953547223,
+          "recomputed_q": 4451.953547223,
+          "p_signed_residual": 9.094947017729282e-13,
+          "q_signed_residual": 9.094947017729282e-13,
+          "p_relative_residual": 2.0429114817252416e-16,
+          "q_relative_residual": 2.0429114817252416e-16
+        },
+        "q_signed_residual": {
+          "seq": 47,
+          "name": "Primary production",
+          "type": "PP",
+          "stored_p": 4451.953547222999,
+          "stored_q": 4451.953547222999,
+          "recomputed_p": 4451.953547223,
+          "recomputed_q": 4451.953547223,
+          "p_signed_residual": 9.094947017729282e-13,
+          "q_signed_residual": 9.094947017729282e-13,
+          "p_relative_residual": 2.0429114817252416e-16,
+          "q_relative_residual": 2.0429114817252416e-16
+        },
+        "p_relative_residual": {
+          "seq": 12,
+          "name": "Walleye pollock",
+          "type": "Regular",
+          "stored_p": 4.0698442888455,
+          "stored_q": 25.577555921247,
+          "recomputed_p": 4.069844288845498,
+          "recomputed_q": 25.577555921247,
+          "p_signed_residual": -1.7763568394002505e-15,
+          "q_signed_residual": 0.0,
+          "p_relative_residual": 4.364680104024699e-16,
+          "q_relative_residual": 0.0
+        },
+        "q_relative_residual": {
+          "seq": 19,
+          "name": "Eelpouts",
+          "type": "Regular",
+          "stored_p": 0.42777000000000004,
+          "stored_q": 2.13885,
+          "recomputed_p": 0.4277700000000001,
+          "recomputed_q": 2.1388500000000006,
+          "p_signed_residual": 5.551115123125783e-17,
+          "q_signed_residual": 4.440892098500626e-16,
+          "p_relative_residual": 1.2976868698426217e-16,
+          "q_relative_residual": 2.0762989917481945e-16
+        }
+      }
+    },
+    "detritus": {
+      "n": 2,
+      "maxima": {
+        "p_signed_residual": {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "type": "DET",
+          "stored_p": 1989.9271969908582,
+          "stored_q": 1989.9271969908582,
+          "recomputed_p": 383.4235515360851,
+          "recomputed_q": 383.4235515360851,
+          "p_signed_residual": -1606.503645454773,
+          "q_signed_residual": -1606.503645454773,
+          "p_relative_residual": 0.8073177993064805,
+          "q_relative_residual": 0.8073177993064805
+        },
+        "q_signed_residual": {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "type": "DET",
+          "stored_p": 1989.9271969908582,
+          "stored_q": 1989.9271969908582,
+          "recomputed_p": 383.4235515360851,
+          "recomputed_q": 383.4235515360851,
+          "p_signed_residual": -1606.503645454773,
+          "q_signed_residual": -1606.503645454773,
+          "p_relative_residual": 0.8073177993064805,
+          "q_relative_residual": 0.8073177993064805
+        },
+        "p_relative_residual": {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "type": "DET",
+          "stored_p": 1989.9271969908582,
+          "stored_q": 1989.9271969908582,
+          "recomputed_p": 383.4235515360851,
+          "recomputed_q": 383.4235515360851,
+          "p_signed_residual": -1606.503645454773,
+          "q_signed_residual": -1606.503645454773,
+          "p_relative_residual": 0.8073177993064805,
+          "q_relative_residual": 0.8073177993064805
+        },
+        "q_relative_residual": {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "type": "DET",
+          "stored_p": 1989.9271969908582,
+          "stored_q": 1989.9271969908582,
+          "recomputed_p": 383.4235515360851,
+          "recomputed_q": 383.4235515360851,
+          "p_signed_residual": -1606.503645454773,
+          "q_signed_residual": -1606.503645454773,
+          "p_relative_residual": 0.8073177993064805,
+          "q_relative_residual": 0.8073177993064805
+        }
+      }
+    },
+    "diet_import": {
+      "n": 1,
+      "maxima": {
+        "p_signed_residual": {
+          "seq": 50,
+          "name": "diet_import",
+          "type": "Import",
+          "stored_p": -0.0,
+          "stored_q": -0.0,
+          "recomputed_p": 0.0,
+          "recomputed_q": 0.0,
+          "p_signed_residual": 0.0,
+          "q_signed_residual": 0.0,
+          "p_relative_residual": 0.0,
+          "q_relative_residual": 0.0
+        },
+        "q_signed_residual": {
+          "seq": 50,
+          "name": "diet_import",
+          "type": "Import",
+          "stored_p": -0.0,
+          "stored_q": -0.0,
+          "recomputed_p": 0.0,
+          "recomputed_q": 0.0,
+          "p_signed_residual": 0.0,
+          "q_signed_residual": 0.0,
+          "p_relative_residual": 0.0,
+          "q_relative_residual": 0.0
+        },
+        "p_relative_residual": {
+          "seq": 50,
+          "name": "diet_import",
+          "type": "Import",
+          "stored_p": -0.0,
+          "stored_q": -0.0,
+          "recomputed_p": 0.0,
+          "recomputed_q": 0.0,
+          "p_signed_residual": 0.0,
+          "q_signed_residual": 0.0,
+          "p_relative_residual": 0.0,
+          "q_relative_residual": 0.0
+        },
+        "q_relative_residual": {
+          "seq": 50,
+          "name": "diet_import",
+          "type": "Import",
+          "stored_p": -0.0,
+          "stored_q": -0.0,
+          "recomputed_p": 0.0,
+          "recomputed_q": 0.0,
+          "p_signed_residual": 0.0,
+          "q_signed_residual": 0.0,
+          "p_relative_residual": 0.0,
+          "q_relative_residual": 0.0
+        }
+      }
+    }
+  },
+  "runtime_group_residual_ledger": [
+    {
+      "seq": 50,
+      "name": "diet_import",
+      "type": "Import",
+      "stored_p": -0.0,
+      "stored_q": -0.0,
+      "recomputed_p": 0.0,
+      "recomputed_q": 0.0,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 49,
+      "name": "Benthic detritus",
+      "type": "DET",
+      "stored_p": 2067.650082583794,
+      "stored_q": 2067.650082583794,
+      "recomputed_p": 1067.8411400904772,
+      "recomputed_q": 1067.8411400904772,
+      "p_signed_residual": -999.8089424933166,
+      "q_signed_residual": -999.8089424933166,
+      "p_relative_residual": 0.48354842577808294,
+      "q_relative_residual": 0.48354842577808294
+    },
+    {
+      "seq": 48,
+      "name": "Pelagic detritus",
+      "type": "DET",
+      "stored_p": 1989.9271969908582,
+      "stored_q": 1989.9271969908582,
+      "recomputed_p": 383.4235515360851,
+      "recomputed_q": 383.4235515360851,
+      "p_signed_residual": -1606.503645454773,
+      "q_signed_residual": -1606.503645454773,
+      "p_relative_residual": 0.8073177993064805,
+      "q_relative_residual": 0.8073177993064805
+    },
+    {
+      "seq": 47,
+      "name": "Primary production",
+      "type": "PP",
+      "stored_p": 4451.953547222999,
+      "stored_q": 4451.953547222999,
+      "recomputed_p": 4451.953547223,
+      "recomputed_q": 4451.953547223,
+      "p_signed_residual": 9.094947017729282e-13,
+      "q_signed_residual": 9.094947017729282e-13,
+      "p_relative_residual": 2.0429114817252416e-16,
+      "q_relative_residual": 2.0429114817252416e-16
+    },
+    {
+      "seq": 46,
+      "name": "Benthic microbes",
+      "type": "Regular",
+      "stored_p": 264.708804,
+      "stored_q": 756.3107649672,
+      "recomputed_p": 264.708804,
+      "recomputed_q": 756.3107649672,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 45,
+      "name": "Pelagic microbes",
+      "type": "Regular",
+      "stored_p": 447.309325,
+      "stored_q": 1278.0264677850002,
+      "recomputed_p": 447.30932499999994,
+      "recomputed_q": 1278.0264677850002,
+      "p_signed_residual": -5.684341886080802e-14,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.2707854650874542e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 44,
+      "name": "Copepods",
+      "type": "Regular",
+      "stored_p": 131.18099999999998,
+      "stored_q": 606.49349,
+      "recomputed_p": 131.181,
+      "recomputed_q": 606.49349,
+      "p_signed_residual": 2.842170943040401e-14,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 2.1666025895826385e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 43,
+      "name": "Other zooplankton",
+      "type": "Regular",
+      "stored_p": 127.37406478159998,
+      "stored_q": 363.92603651039997,
+      "recomputed_p": 127.37406478159997,
+      "recomputed_q": 363.92603651039997,
+      "p_signed_residual": -1.4210854715202004e-14,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.115678826735131e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 42,
+      "name": "Scyphozoid jellies",
+      "type": "Regular",
+      "stored_p": 0.0968,
+      "stored_q": 0.33,
+      "recomputed_p": 0.0968,
+      "recomputed_q": 0.33,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 41,
+      "name": "Polychaetes",
+      "type": "Regular",
+      "stored_p": 11.65217427,
+      "stored_q": 58.260871349999995,
+      "recomputed_p": 11.65217427,
+      "recomputed_q": 58.260871349999995,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 40,
+      "name": "Bivalves",
+      "type": "Regular",
+      "stored_p": 18.007573999999998,
+      "stored_q": 90.03787,
+      "recomputed_p": 18.007573999999998,
+      "recomputed_q": 90.03787,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 39,
+      "name": "Sponge",
+      "type": "Regular",
+      "stored_p": 0.1075014,
+      "stored_q": 0.537507,
+      "recomputed_p": 0.10750139999999998,
+      "recomputed_q": 0.537507,
+      "p_signed_residual": -1.3877787807814457e-17,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.2909401931337134e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 38,
+      "name": "Benthic urochordate",
+      "type": "Regular",
+      "stored_p": 0.8763839999999999,
+      "stored_q": 4.381919999999999,
+      "recomputed_p": 0.8763839999999998,
+      "recomputed_q": 4.381919999999999,
+      "p_signed_residual": -1.1102230246251565e-16,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.2668225625127303e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 37,
+      "name": "Worms etc.",
+      "type": "Regular",
+      "stored_p": 8.284245067935,
+      "stored_q": 41.421206475359995,
+      "recomputed_p": 8.284245067934998,
+      "recomputed_q": 41.421206475359995,
+      "p_signed_residual": -1.7763568394002505e-15,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 2.1442591628244044e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 36,
+      "name": "Corals and sea pens",
+      "type": "Regular",
+      "stored_p": 0.00028962269804885,
+      "stored_q": 0.0014481132032597998,
+      "recomputed_p": 0.00028962269804885,
+      "recomputed_q": 0.0014481132032597998,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 35,
+      "name": "Anemones",
+      "type": "Regular",
+      "stored_p": 0.08886787,
+      "stored_q": 0.44433935,
+      "recomputed_p": 0.08886787,
+      "recomputed_q": 0.44433935,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 34,
+      "name": "Benthic amphipods",
+      "type": "Regular",
+      "stored_p": 43.4296306,
+      "stored_q": 217.148153,
+      "recomputed_p": 43.42963060000001,
+      "recomputed_q": 217.14815300000004,
+      "p_signed_residual": 7.105427357601002e-15,
+      "q_signed_residual": 2.842170943040401e-14,
+      "p_relative_residual": 1.6360782395420607e-16,
+      "q_relative_residual": 1.3088625916336487e-16
+    },
+    {
+      "seq": 33,
+      "name": "Misc. crustaceans",
+      "type": "Regular",
+      "stored_p": 15.690138600000001,
+      "stored_q": 78.450693,
+      "recomputed_p": 15.690138600000004,
+      "recomputed_q": 78.45069300000002,
+      "p_signed_residual": 3.552713678800501e-15,
+      "q_signed_residual": 1.4210854715202004e-14,
+      "p_relative_residual": 2.2642971928880863e-16,
+      "q_relative_residual": 1.8114377543104692e-16
+    },
+    {
+      "seq": 32,
+      "name": "Snails",
+      "type": "Regular",
+      "stored_p": 1.5636168270000002,
+      "stored_q": 7.8180832711233,
+      "recomputed_p": 1.5636168270000004,
+      "recomputed_q": 7.818083271123301,
+      "p_signed_residual": 2.220446049250313e-16,
+      "q_signed_residual": 8.881784197001252e-16,
+      "p_relative_residual": 1.4200704487879707e-16,
+      "q_relative_residual": 1.1360564845614799e-16
+    },
+    {
+      "seq": 31,
+      "name": "Urchins, dollars, cucumbers",
+      "type": "Regular",
+      "stored_p": 0.9948648600000001,
+      "stored_q": 4.9743243,
+      "recomputed_p": 0.9948648600000001,
+      "recomputed_q": 4.974324300000001,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 8.881784197001252e-16,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 1.7855257641728852e-16
+    },
+    {
+      "seq": 30,
+      "name": "Brittle stars",
+      "type": "Regular",
+      "stored_p": 5.498265409999999,
+      "stored_q": 27.49132705,
+      "recomputed_p": 5.498265409999999,
+      "recomputed_q": 27.49132705,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 29,
+      "name": "Sea stars",
+      "type": "Regular",
+      "stored_p": 0.11557737289999999,
+      "stored_q": 0.5778868644999999,
+      "recomputed_p": 0.11557737289999999,
+      "recomputed_q": 0.5778868644999999,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 28,
+      "name": "Shrimps",
+      "type": "Regular",
+      "stored_p": 12.803644799999999,
+      "stored_q": 53.5708055,
+      "recomputed_p": 12.8036448,
+      "recomputed_q": 53.5708055,
+      "p_signed_residual": 1.7763568394002505e-15,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.3873837232662458e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 27,
+      "name": "Other crabs",
+      "type": "Regular",
+      "stored_p": 4.390788911937601,
+      "stored_q": 20.697217437486,
+      "recomputed_p": 4.390788911937601,
+      "recomputed_q": 20.697217437486,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 26,
+      "name": "Salmon outgoing",
+      "type": "Regular",
+      "stored_p": 0.028123688271640003,
+      "stored_q": 0.2464787868396,
+      "recomputed_p": 0.028123688271640003,
+      "recomputed_q": 0.2464787868396,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 25,
+      "name": "Salmon returning",
+      "type": "Regular",
+      "stored_p": 1.5555279087018,
+      "stored_q": 10.13132228922,
+      "recomputed_p": 1.5555279087018001,
+      "recomputed_q": 10.13132228922,
+      "p_signed_residual": 2.220446049250313e-16,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.4274549732144858e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 24,
+      "name": "Squid",
+      "type": "Regular",
+      "stored_p": 4.0494528,
+      "stored_q": 13.502394180000001,
+      "recomputed_p": 4.049452799999999,
+      "recomputed_q": 13.502394180000001,
+      "p_signed_residual": -8.881784197001252e-16,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 2.193329478244876e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 23,
+      "name": "Octopods",
+      "type": "Regular",
+      "stored_p": 0.62677848,
+      "stored_q": 2.8596768150000003,
+      "recomputed_p": 0.62677848,
+      "recomputed_q": 2.8596768150000003,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 22,
+      "name": "Misc. shallow fish",
+      "type": "Regular",
+      "stored_p": 0.33559572000000004,
+      "stored_q": 1.6779786,
+      "recomputed_p": 0.33559572000000004,
+      "recomputed_q": 1.6779786,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 21,
+      "name": "Other sculpins",
+      "type": "Regular",
+      "stored_p": 0.32674616,
+      "stored_q": 1.6337308,
+      "recomputed_p": 0.32674616,
+      "recomputed_q": 1.6337308,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 20,
+      "name": "Lg.-mouth sculpins",
+      "type": "Regular",
+      "stored_p": 0.035554068,
+      "stored_q": 0.17777034,
+      "recomputed_p": 0.035554068,
+      "recomputed_q": 0.17777034000000003,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 2.7755575615628914e-17,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 1.5613164499561015e-16
+    },
+    {
+      "seq": 19,
+      "name": "Eelpouts",
+      "type": "Regular",
+      "stored_p": 0.42777000000000004,
+      "stored_q": 2.13885,
+      "recomputed_p": 0.4277700000000001,
+      "recomputed_q": 2.1388500000000006,
+      "p_signed_residual": 5.551115123125783e-17,
+      "q_signed_residual": 4.440892098500626e-16,
+      "p_relative_residual": 1.2976868698426217e-16,
+      "q_relative_residual": 2.0762989917481945e-16
+    },
+    {
+      "seq": 18,
+      "name": "Other demersals",
+      "type": "Regular",
+      "stored_p": 0.8249798260968,
+      "stored_q": 10.124004421163999,
+      "recomputed_p": 0.8249798260968,
+      "recomputed_q": 10.124004421163999,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 17,
+      "name": "Skates",
+      "type": "Regular",
+      "stored_p": 0.0383606,
+      "stored_q": 0.383606,
+      "recomputed_p": 0.0383606,
+      "recomputed_q": 0.383606,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 16,
+      "name": "Sm.-mouth flatfish",
+      "type": "Regular",
+      "stored_p": 0.526054838507,
+      "stored_q": 4.7243179834,
+      "recomputed_p": 0.5260548385070001,
+      "recomputed_q": 4.7243179834,
+      "p_signed_residual": 1.1102230246251565e-16,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 2.110470132308047e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 15,
+      "name": "Lg.-mouth flatfish",
+      "type": "Regular",
+      "stored_p": 2.3484059735612,
+      "stored_q": 11.573541970228002,
+      "recomputed_p": 2.3484059735612,
+      "recomputed_q": 11.573541970228,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": -1.7763568394002505e-15,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 1.53484287175852e-16
+    },
+    {
+      "seq": 14,
+      "name": "Pelagic forage fish",
+      "type": "Regular",
+      "stored_p": 11.673411203608,
+      "stored_q": 52.457496409289995,
+      "recomputed_p": 11.673411203608001,
+      "recomputed_q": 52.45749640929,
+      "p_signed_residual": 1.7763568394002505e-15,
+      "q_signed_residual": 7.105427357601002e-15,
+      "p_relative_residual": 1.5217118701782876e-16,
+      "q_relative_residual": 1.354511336599484e-16
+    },
+    {
+      "seq": 13,
+      "name": "Pacific cod",
+      "type": "Regular",
+      "stored_p": 0.8478910958077001,
+      "stored_q": 3.64242071403,
+      "recomputed_p": 0.8478910958077001,
+      "recomputed_q": 3.64242071403,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 12,
+      "name": "Walleye pollock",
+      "type": "Regular",
+      "stored_p": 4.0698442888455,
+      "stored_q": 25.577555921247,
+      "recomputed_p": 4.069844288845498,
+      "recomputed_q": 25.577555921247,
+      "p_signed_residual": -1.7763568394002505e-15,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 4.364680104024699e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 11,
+      "name": "Sharks",
+      "type": "Regular",
+      "stored_p": 0.014235300000000001,
+      "stored_q": 0.5308425934740001,
+      "recomputed_p": 0.014235300000000003,
+      "recomputed_q": 0.5308425934740001,
+      "p_signed_residual": 1.734723475976807e-18,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 1.218606896923006e-16,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 10,
+      "name": "Cormorants",
+      "type": "Regular",
+      "stored_p": 5.53768693751e-05,
+      "stored_q": 0.025468313,
+      "recomputed_p": 5.53768693751e-05,
+      "recomputed_q": 0.025468313,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 9,
+      "name": "Other seabirds",
+      "type": "Regular",
+      "stored_p": 4.330916168917e-05,
+      "stored_q": 0.0505672095,
+      "recomputed_p": 4.330916168917e-05,
+      "recomputed_q": 0.05056720950000001,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 6.938893903907228e-18,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 1.3722121454827812e-16
+    },
+    {
+      "seq": 8,
+      "name": "Alcids planktivorous",
+      "type": "Regular",
+      "stored_p": 5.08029211488e-05,
+      "stored_q": 0.03297184,
+      "recomputed_p": 5.08029211488e-05,
+      "recomputed_q": 0.03297184,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 7,
+      "name": "Larids",
+      "type": "Regular",
+      "stored_p": 0.0001627413975858,
+      "stored_q": 0.1393807128166,
+      "recomputed_p": 0.0001627413975858,
+      "recomputed_q": 0.13938071281660003,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 2.7755575615628914e-17,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 1.991349811228923e-16
+    },
+    {
+      "seq": 6,
+      "name": "Alcids piscivorous",
+      "type": "Regular",
+      "stored_p": 0.0010783038664598,
+      "stored_q": 0.8212529861146,
+      "recomputed_p": 0.0010783038664598,
+      "recomputed_q": 0.8212529861146,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 5,
+      "name": "Procellarids",
+      "type": "Regular",
+      "stored_p": 6.823923951779998e-05,
+      "stored_q": 0.076781035,
+      "recomputed_p": 6.823923951779998e-05,
+      "recomputed_q": 0.076781035,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 4,
+      "name": "Other pinnipeds",
+      "type": "Regular",
+      "stored_p": 0.004092196861324,
+      "stored_q": 1.2318475202748,
+      "recomputed_p": 0.004092196861324,
+      "recomputed_q": 1.2318475202748,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 3,
+      "name": "Other baleen",
+      "type": "Regular",
+      "stored_p": 0.01431460820925,
+      "stored_q": 3.1882599785970003,
+      "recomputed_p": 0.01431460820925,
+      "recomputed_q": 3.1882599785970003,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 2,
+      "name": "Gray whale",
+      "type": "Regular",
+      "stored_p": 0.0035124068591000004,
+      "stored_q": 0.491833965119,
+      "recomputed_p": 0.0035124068591000004,
+      "recomputed_q": 0.491833965119,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    },
+    {
+      "seq": 1,
+      "name": "Toothed whales",
+      "type": "Regular",
+      "stored_p": 0.0029063831519602996,
+      "stored_q": 0.7669241894557,
+      "recomputed_p": 0.0029063831519602996,
+      "recomputed_q": 0.7669241894557,
+      "p_signed_residual": 0.0,
+      "q_signed_residual": 0.0,
+      "p_relative_residual": 0.0,
+      "q_relative_residual": 0.0
+    }
+  ],
+  "methods": {
+    "GE": {
+      "initial_status": "returned",
+      "reload_status": "returned",
+      "reload_matches": true,
+      "overall_grade": "FAIL",
+      "component_grades": {
+        "model_input": "FAIL",
+        "divergence": "WARN",
+        "balance": "FAIL"
+      },
+      "strict_flags": {
+        "is_model_balanced": false,
+        "is_sppr_balanced": false,
+        "b_converges": true,
+        "living_converges": true
+      },
+      "actual_budget": {
+        "inflow": 4451.953547222999,
+        "outflow": -26.226039466964746,
+        "signed_outflow_minus_inflow": -4478.179586689964,
+        "missing_outflow_inflow_minus_outflow": 4478.179586689964,
+        "absolute_relative_gap": 1.0058909059110295,
+        "percent_gap": 100.58909059110294
+      },
+      "detritus_contributions": [
+        {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "sppr": 1.6440119304868739,
+          "native_unused_input": 1606.5036454547735,
+          "runtime_unused_input": 1606.503645454773,
+          "native_weighted_unused_input": 2641.1111594983026,
+          "runtime_weighted_unused_input": 2641.1111594983017
+        },
+        {
+          "seq": 49,
+          "name": "Benthic detritus",
+          "sppr": 1.8374194799762382,
+          "native_unused_input": 999.8089424933171,
+          "runtime_unused_input": 999.8089424933166,
+          "native_weighted_unused_input": 1837.0684271916634,
+          "runtime_weighted_unused_input": 1837.0684271916625
+        }
+      ],
+      "decomposition": {
+        "sum_native_weighted_unused_detritus": 4478.1795866899665,
+        "sum_runtime_weighted_unused_detritus": 4478.179586689965,
+        "actual_gap_minus_native_weighted_unused_detritus": -2.7284841053187847e-12,
+        "actual_gap_minus_runtime_weighted_unused_detritus": -9.094947017729282e-13,
+        "arithmetic_outflow_plus_native_weighted_unused": 4451.953547223002,
+        "arithmetic_only_not_forced_diagnostic": true
+      },
+      "b": 0.4090673647283584,
+      "rho_living": 0.26659952990268,
+      "near_zero_efficiency_groups": [
+        {
+          "seq": 9,
+          "name": "Other seabirds"
+        },
+        {
+          "seq": 5,
+          "name": "Procellarids"
+        }
+      ],
+      "max_sppr_group": {
+        "seq": 5,
+        "tl": 4.614422446307798,
+        "sppr": 191829.4348451434,
+        "inv_te": 1125.1742478749622,
+        "name": "Procellarids"
+      },
+      "n_negative_source_columns": 0,
+      "negative_matrix_entry_counts": {
+        "SPPR": 0,
+        "A": 0,
+        "L": 46
+      },
+      "state_unchanged_during_method": true,
+      "representation_and_scope_reconciliation": true,
+      "native_catch_footprint_snapshot_FAILED_not_annual_eligible": {
+        "ppr_all": 450.30747476608224,
+        "ppr_inner": 450.30747476608224,
+        "ppr_pp_only": 151.24233657263636,
+        "npp": 4451.953547222999,
+        "ppr2npp": 0.1011482869238317,
+        "ppr2npp_pp_only": 0.03397212818336278
+      },
+      "warnings": [
+        "model input not mass-balanced: max relative residual 0.807 exceeds fail threshold 0.1",
+        "2 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [9, 5]",
+        "PP balance gap 100.589% exceeds fail threshold 5.0%"
+      ]
+    },
+    "TE": {
+      "initial_status": "returned",
+      "reload_status": "returned",
+      "reload_matches": true,
+      "overall_grade": "FAIL",
+      "component_grades": {
+        "model_input": "FAIL",
+        "divergence": "WARN",
+        "balance": "FAIL"
+      },
+      "strict_flags": {
+        "is_model_balanced": false,
+        "is_sppr_balanced": false,
+        "b_converges": true,
+        "living_converges": true
+      },
+      "actual_budget": {
+        "inflow": 4451.953547222999,
+        "outflow": 1083.206401978454,
+        "signed_outflow_minus_inflow": -3368.747145244545,
+        "missing_outflow_inflow_minus_outflow": 3368.747145244545,
+        "absolute_relative_gap": 0.7566896441104767,
+        "percent_gap": 75.66896441104767
+      },
+      "detritus_contributions": [
+        {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "sppr": 1.2167191798665116,
+          "native_unused_input": 1606.5036454547735,
+          "runtime_unused_input": 1606.503645454773,
+          "native_weighted_unused_input": 1954.6637979502932,
+          "runtime_weighted_unused_input": 1954.6637979502925
+        },
+        {
+          "seq": 49,
+          "name": "Benthic detritus",
+          "sppr": 1.4143535701610244,
+          "native_unused_input": 999.8089424933171,
+          "runtime_unused_input": 999.8089424933166,
+          "native_weighted_unused_input": 1414.0833472943414,
+          "runtime_weighted_unused_input": 1414.0833472943407
+        }
+      ],
+      "decomposition": {
+        "sum_native_weighted_unused_detritus": 3368.7471452446343,
+        "sum_runtime_weighted_unused_detritus": 3368.7471452446334,
+        "actual_gap_minus_native_weighted_unused_detritus": -8.913048077374697e-11,
+        "actual_gap_minus_runtime_weighted_unused_detritus": -8.822098607197404e-11,
+        "arithmetic_outflow_plus_native_weighted_unused": 4451.953547223088,
+        "arithmetic_only_not_forced_diagnostic": true
+      },
+      "b": 0.2672886407947974,
+      "rho_living": 0.9766894020612613,
+      "near_zero_efficiency_groups": [
+        {
+          "seq": 39,
+          "name": "Sponge"
+        },
+        {
+          "seq": 35,
+          "name": "Anemones"
+        },
+        {
+          "seq": 10,
+          "name": "Cormorants"
+        },
+        {
+          "seq": 9,
+          "name": "Other seabirds"
+        },
+        {
+          "seq": 8,
+          "name": "Alcids planktivorous"
+        },
+        {
+          "seq": 7,
+          "name": "Larids"
+        },
+        {
+          "seq": 6,
+          "name": "Alcids piscivorous"
+        },
+        {
+          "seq": 5,
+          "name": "Procellarids"
+        },
+        {
+          "seq": 4,
+          "name": "Other pinnipeds"
+        },
+        {
+          "seq": 3,
+          "name": "Other baleen"
+        },
+        {
+          "seq": 2,
+          "name": "Gray whale"
+        },
+        {
+          "seq": 1,
+          "name": "Toothed whales"
+        }
+      ],
+      "max_sppr_group": {
+        "seq": 1,
+        "tl": 4.66233080093115,
+        "sppr": 852777853.9355636,
+        "inv_te": 18354.683192912526,
+        "name": "Toothed whales"
+      },
+      "n_negative_source_columns": 0,
+      "negative_matrix_entry_counts": {
+        "SPPR": 0,
+        "A": 0,
+        "L": 46
+      },
+      "state_unchanged_during_method": true,
+      "representation_and_scope_reconciliation": true,
+      "native_catch_footprint_snapshot_FAILED_not_annual_eligible": {
+        "ppr_all": 3828.8116318063253,
+        "ppr_inner": 3828.8116318063257,
+        "ppr_pp_only": 1599.3668489069566,
+        "npp": 4451.953547222999,
+        "ppr2npp": 0.8600295558327711,
+        "ppr2npp_pp_only": 0.3592505698772611
+      },
+      "warnings": [
+        "model input not mass-balanced: max relative residual 0.807 exceeds fail threshold 0.1",
+        "rho(A_LL)=0.9767 is within 0.3 of divergence (max SPPR 8.53e+08 at group 1 (Toothed whales), TL 4.66)",
+        "12 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [39, 35, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
+        "PP balance gap 75.669% exceeds fail threshold 5.0%"
+      ]
+    },
+    "WithEgestion": {
+      "initial_status": "returned",
+      "reload_status": "returned",
+      "reload_matches": true,
+      "overall_grade": "FAIL",
+      "component_grades": {
+        "model_input": "FAIL",
+        "divergence": "OK",
+        "balance": "FAIL"
+      },
+      "strict_flags": {
+        "is_model_balanced": false,
+        "is_sppr_balanced": false,
+        "b_converges": true,
+        "living_converges": true
+      },
+      "actual_budget": {
+        "inflow": 4451.953547222999,
+        "outflow": -19.427684104302582,
+        "signed_outflow_minus_inflow": -4471.381231327302,
+        "missing_outflow_inflow_minus_outflow": 4471.381231327302,
+        "absolute_relative_gap": 1.0043638559787806,
+        "percent_gap": 100.43638559787806
+      },
+      "detritus_contributions": [
+        {
+          "seq": 48,
+          "name": "Pelagic detritus",
+          "sppr": 1.5978036612968898,
+          "native_unused_input": 1606.5036454547735,
+          "runtime_unused_input": 1606.503645454773,
+          "native_weighted_unused_input": 2566.8774065944376,
+          "runtime_weighted_unused_input": 2566.8774065944367
+        },
+        {
+          "seq": 49,
+          "name": "Benthic detritus",
+          "sppr": 1.9048677640184206,
+          "native_unused_input": 999.8089424933171,
+          "runtime_unused_input": 999.8089424933166,
+          "native_weighted_unused_input": 1904.5038247328666,
+          "runtime_weighted_unused_input": 1904.5038247328657
+        }
+      ],
+      "decomposition": {
+        "sum_native_weighted_unused_detritus": 4471.381231327305,
+        "sum_runtime_weighted_unused_detritus": 4471.381231327303,
+        "actual_gap_minus_native_weighted_unused_detritus": -2.7284841053187847e-12,
+        "actual_gap_minus_runtime_weighted_unused_detritus": -9.094947017729282e-13,
+        "arithmetic_outflow_plus_native_weighted_unused": 4451.953547223002,
+        "arithmetic_only_not_forced_diagnostic": true
+      },
+      "b": 0.44064592215477894,
+      "rho_living": 0.213279623922144,
+      "near_zero_efficiency_groups": [],
+      "max_sppr_group": {
+        "seq": 5,
+        "tl": 4.614422446307798,
+        "sppr": 56821.36753124157,
+        "inv_te": 900.1393982999698,
+        "name": "Procellarids"
+      },
+      "n_negative_source_columns": 0,
+      "negative_matrix_entry_counts": {
+        "SPPR": 0,
+        "A": 0,
+        "L": 46
+      },
+      "state_unchanged_during_method": true,
+      "representation_and_scope_reconciliation": true,
+      "native_catch_footprint_snapshot_FAILED_not_annual_eligible": {
+        "ppr_all": 159.20959894361866,
+        "ppr_inner": 159.2095989436187,
+        "ppr_pp_only": 59.211975125961224,
+        "npp": 4451.953547222999,
+        "ppr2npp": 0.03576173858393673,
+        "ppr2npp_pp_only": 0.013300223036445642
+      },
+      "warnings": [
+        "model input not mass-balanced: max relative residual 0.807 exceeds fail threshold 0.1",
+        "PP balance gap 100.436% exceeds fail threshold 5.0%"
+      ]
+    }
+  },
+  "interpretive_limits": [
+    "Every formulation FAILS its actual PP budget and effective-runtime balance check. None of the footprint snapshots is an accepted annual LME PPR estimate.",
+    "The exact PP gaps are accounted for numerically by the omitted weighted native unused detritus input in this run; this does not remove independent GE/TE efficiency warnings.",
+    "The initializer forces DET EE=1, M0=0, while retaining native BA=0 and no explicit DET export. A clean effective EE check does not establish detritus accounting closure.",
+    "No forced/balanced-copy diagnostic was executed or adopted. The algebraic augmented total is not a result from such a diagnostic.",
+    "Original raw EE unknownness is retained in floor eligibility. Native-solved EE did not become source-observed EE.",
+    "The aggregate Primary production combines internal and Outside production, and Pelagic detritus combines external and internal sources. inner/PP-only engine labels cannot restore the lost geographic partition.",
+    "Native source diet_import is zero. all and inner therefore coincide to floating precision, not because all modeled production is geographically local.",
+    "The 1990-1994 shelf domain is 291,840 km^2, not an established complete LME_002 boundary; no annual catch mapping, extrapolation or map update occurred."
+  ]
+}

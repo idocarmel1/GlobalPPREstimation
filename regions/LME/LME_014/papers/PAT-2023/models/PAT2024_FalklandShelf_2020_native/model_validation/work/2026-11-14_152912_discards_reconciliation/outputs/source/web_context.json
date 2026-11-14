@@ -1,0 +1,55 @@
+{
+  "access_date": "2026-11-14",
+  "scope": "Targeted source interpretation only; no new flow amount or parameter adopted",
+  "sources": [
+    {
+      "citation": "Büring et al. (2024), Unveiling the wasp-waist structure of the Falkland shelf ecosystem",
+      "url": "https://doi.org/10.1017/S0025315423000887",
+      "locators": ["Methods, PDF p.9", "Discussion, PDF p.16", "Supplement Table S4"],
+      "findings": [
+        "Discards is a separate prey category for scavengers; its biomass is defined from the total 2020 fishery discards.",
+        "Bird consumption of vessel waste includes fish guts and heads.",
+        "The inspected material does not quantify an additional processing-offal flow that closes the reconstructed supply deficit."
+      ]
+    },
+    {
+      "citation": "Kuepfer et al., online 2022 / volume 2023, Prey-switching to fishery discards does not compensate for poor natural foraging conditions in breeding albatross",
+      "url": "https://doi.org/10.1093/icesjms/fsac069",
+      "read_url": "https://pure.hw.ac.uk/ws/files/83887288/fsac069.pdf",
+      "version": "Publisher PDF in authors' institutional repository, with repository cover sheet",
+      "locators": ["Printed p.2 / PDF p.3: fleet characteristics", "Printed p.4 / PDF p.5: annual indices of prey availability"],
+      "findings": [
+        "Finfish fleets release unwanted fish and processing offal from commercial fish.",
+        "The study estimates relative discard availability using commercial catches, assuming proportionality, particularly for offal.",
+        "This supports checking whether the Ecopath discard ledger and bird-food definition cover the same material; it does not supply an independently measured annual offal input for this model."
+      ],
+      "failed_access": [
+        "Publisher HTML redirected to an inaccessible CDN endpoint in the browsing tool.",
+        "The ISPA repository PDF returned a cache miss; the Heriot-Watt repository copy was read successfully."
+      ]
+    },
+    {
+      "citation": "User Guide for Ecopath with Ecosim: Ecopath Input",
+      "url": "https://pressbooks.bccampus.ca/eweguide/chapter/ecopath-input/",
+      "locators": ["Detritus Fate", "Discard Fate"],
+      "findings": [
+        "Fleet discard fate and natural detritus fate are distinct inputs.",
+        "Unrouted surplus detritus is exported; a dedicated discard pool needs its own incoming discard route."
+      ]
+    },
+    {
+      "citation": "Official EwE source: cEcoPathModel.vb",
+      "url": "https://github.com/Official-EwE/Eii.Ecopath/blob/master/Sources/EwECore/EcoPath/Model/cEcoPathModel.vb",
+      "retained_path": "../../inputs/official_ewe_source/cEcoPathModel.vb",
+      "git_blob_sha1": "c6abb62d3eb1641f6e662b70b975b3a60bc0ec9c",
+      "sha256": "9e43882d9b0476c43e80ceacc70aa3441c000ba26372ba79b2473fa3b5cd6f11",
+      "locators": ["CalcExportOfDetritus, lines705–720", "CalcDCofDetritus, lines726–745", "Fleet input to detritus, line601"],
+      "findings": [
+        "For surplus-fate fractions summing to less than one, detritus Export is calculated as InputToDet minus DetEaten, BA, DetPassedOn and Resp.",
+        "This explains how an unsupplied consumed pool can have a negative calculated Export. It is not evidence of an observed external import."
+      ],
+      "version_limit": "Current official public source read on 2026-11-14; not asserted identical to the original saved 6.6.8.18072 binary or the installed 6.7.0.18865 binary."
+    }
+  ],
+  "interpretation": "The source-stored negative Export and the reconstruction's negative BA describe matching closure deficits through different fields. Explicit fleet returns must still be restored separately and cannot be inferred from that negative Export."
+}

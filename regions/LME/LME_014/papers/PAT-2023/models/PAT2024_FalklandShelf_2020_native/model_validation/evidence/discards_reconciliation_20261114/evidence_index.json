@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-11-14_152912_discards_reconciliation",
+  "region_id": "LME_014",
+  "model_id": "PAT2024_FalklandShelf_2020_native",
+  "variant_id": "audited_completed_floor_on_control_vs_source_exact_fleet_returns",
+  "source_identity": {
+    "path": "regions/LME/LME_014/papers/PAT-2023/sources/urn_cambridge.org_id_binary_20240209182731895-0513_S0025315423000887_S0025315423000887sup002.eweaccdb",
+    "sha256": "785b0a7b5ccb5f6437d29f48c1ab294f66bca19a35a5aa7f9733bfe19b651baa",
+    "method": "fresh read-only ODBC SELECT from original author database"
+  },
+  "computational_input_identity": {
+    "canonical_sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+    "initialization": "audited completed_before_floor state; exact preservation verified",
+    "return_matrix": "native 72-row group/fleet ledger; recipient36 only",
+    "floor": 0.1
+  },
+  "methods": [
+    "GE",
+    "TE"
+  ],
+  "required_roles": [
+    "scientific_interpretation",
+    "source_fisheries",
+    "native_engine_result",
+    "native_verification",
+    "control_GE",
+    "control_TE",
+    "returns_GE",
+    "returns_TE",
+    "independent_diagnostics_verification",
+    "protected_verification",
+    "execution_provenance",
+    "executed_runner",
+    "canonical_input",
+    "original_native_source",
+    "audited_initialization"
+  ],
+  "artifacts": [
+    {
+      "role": "support:code/engine/ModelData.py",
+      "path": "code/engine/ModelData.py",
+      "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+      "availability": "present"
+    },
+    {
+      "role": "support:code/engine/PPRCalculator.py",
+      "path": "code/engine/PPRCalculator.py",
+      "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+      "availability": "present"
+    },
+    {
+      "role": "support:code/engine/utils.py",
+      "path": "code/engine/utils.py",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "availability": "present"
+    },
+    {
+      "role": "support:code/finalize_reconciliation.py",
+      "path": "code/finalize_reconciliation.py",
+      "sha256": "5f9603c0293ac168d2af510c48e98a818baedf2c75f16452ba307a7bce8c49f5",
+      "availability": "present"
+    },
+    {
+      "role": "support:code/native_sdk_probe.ps1",
+      "path": "code/native_sdk_probe.ps1",
+      "sha256": "67774ade65a8e2ef4252691cd20cf60dc62bd7f4f155067736fc59bfeffcf1be",
+      "availability": "present"
+    },
+    {
+      "role": "executed_runner",
+      "path": "code/run_discard_comparison.py",
+      "sha256": "af00d4607ec44730400d4c9509f8b81519212dddb92781d66dcf514f55eedf24",
+      "availability": "present"
+    },
+    {
+      "role": "support:code/source_audit.py",
+      "path": "code/source_audit.py",
+      "sha256": "456d85bab3f9ced56f910baf006cb50c81b540e6d60cd554b3bf357e12b49127",
+      "availability": "present"
+    },
+    {
+      "role": "scientific_interpretation",
+      "path": "discards_reconciliation.md",
+      "sha256": "3ae10a035d5ba858c6a003f83a4ac0913ff98e09e911413f170803458c9242e9",
+      "availability": "present"
+    },
+    {
+      "role": "support:inputs/official_ewe_source/cEcopathDataStructures.vb",
+      "path": "inputs/official_ewe_source/cEcopathDataStructures.vb",
+      "sha256": "6bb41f7eb8071a772ab3b55721b4c243b7210c704821657004bd377bb545380b",
+      "availability": "present"
+    },
+    {
+      "role": "support:inputs/official_ewe_source/cEcoPathModel.vb",
+      "path": "inputs/official_ewe_source/cEcoPathModel.vb",
+      "sha256": "9e43882d9b0476c43e80ceacc70aa3441c000ba26372ba79b2473fa3b5cd6f11",
+      "availability": "present"
+    },
+    {
+      "role": "support:inputs/official_ewe_source/cEcopathResultWriter.vb",
+      "path": "inputs/official_ewe_source/cEcopathResultWriter.vb",
+      "sha256": "55d285bae55d80c74c030096f255cd8fcfbf963bdc42742e81a18952fbb2ba60",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/audited_completed_before_injection.json",
+      "path": "outputs/diagnostics/audited_completed_before_injection.json",
+      "sha256": "a04fb88c2818ac8a50134ec570d3c9d804e58938230b9cca56da911bfc4bdd2a",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/comparison_summary.json",
+      "path": "outputs/diagnostics/comparison_summary.json",
+      "sha256": "746132f3f811404a1cec2917fe9975eea571ca0a7681368703b67ea9c7b328d5",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/control_no_returns/effective_floor_on.json",
+      "path": "outputs/diagnostics/control_no_returns/effective_floor_on.json",
+      "sha256": "6ce2801a255ba715988b85f65df213c68113b0cf9ec4233636c2dcb4627d0315",
+      "availability": "present"
+    },
+    {
+      "role": "control_GE",
+      "path": "outputs/diagnostics/control_no_returns/GE_full_return.json",
+      "sha256": "c560a0fe1bd6739196f4aa118ee049b84b70f0e0c3a917efe335087e19792876",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/control_no_returns/post_returns_before_floor.json",
+      "path": "outputs/diagnostics/control_no_returns/post_returns_before_floor.json",
+      "sha256": "8f58fc3f86927bbaf83447cb13d019b3399b69b1503fe84772f327a1afcac0f3",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/control_no_returns/summary.json",
+      "path": "outputs/diagnostics/control_no_returns/summary.json",
+      "sha256": "d6fb2b99b2b1aaadefffa1aaaed6ba13927bc5d6bf0826633a0b640e43dd222a",
+      "availability": "present"
+    },
+    {
+      "role": "control_TE",
+      "path": "outputs/diagnostics/control_no_returns/TE_full_return.json",
+      "sha256": "fdf05070ba4f82d9e35f7b945706c9f57d86a73517051ccf78a9f57d5ca35976",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/negative_entries.json",
+      "path": "outputs/diagnostics/negative_entries.json",
+      "sha256": "89c403ce234605255e5dd62e3b52e8bd500ffdc0fe52b83dc5a09fe06bddf7b2",
+      "availability": "present"
+    },
+    {
+      "role": "execution_provenance",
+      "path": "outputs/diagnostics/run_provenance.json",
+      "sha256": "18cf62c4c54763b40fe05e47f034b3118a62bf732e8757d48efa4ee1bd6c5365",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+      "path": "outputs/diagnostics/source_exact_returns_to_36/effective_floor_on.json",
+      "sha256": "a63bcb9d34ee7214a6d9931c8cd65326928d2bdec331e7c93eb24c0704d2a7be",
+      "availability": "present"
+    },
+    {
+      "role": "returns_GE",
+      "path": "outputs/diagnostics/source_exact_returns_to_36/GE_full_return.json",
+      "sha256": "94b1f1cfeb03196293d67877b7b5dce51ac42e4c0fca1fb1eb262f6fe52c718a",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+      "path": "outputs/diagnostics/source_exact_returns_to_36/post_returns_before_floor.json",
+      "sha256": "c92230f52720eea391d6a0582ecb0ff8d34febfebd53df43dd62dbab00491233",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/source_exact_returns_to_36/summary.json",
+      "path": "outputs/diagnostics/source_exact_returns_to_36/summary.json",
+      "sha256": "2badbe41d793e1e5ad17c55b842a05ab6dabec0881214078f767c3a96d7dbea9",
+      "availability": "present"
+    },
+    {
+      "role": "returns_TE",
+      "path": "outputs/diagnostics/source_exact_returns_to_36/TE_full_return.json",
+      "sha256": "4e7e6d4c42026175b1df13baba0d8f18c4c9b942e856834bdc09113cd4c076f8",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/diagnostics/source_return_matrix.json",
+      "path": "outputs/diagnostics/source_return_matrix.json",
+      "sha256": "da83f53d368e5b3e9a163d87c36ee0c7ee2de3651e995aef05be16c0a862c4d7",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/native_engine_availability.json",
+      "path": "outputs/source/native_engine_availability.json",
+      "sha256": "7175c0aef3c62ea5fa25054d7367d7143c341dfcc0d01ee1eaeefff301d71ade",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/native_engine_availability_pre_probe.json",
+      "path": "outputs/source/native_engine_availability_pre_probe.json",
+      "sha256": "8a4b7c1db24b4957d2ec9c722ef9e961d80ee7c81bf3566cfda76e86c1551506",
+      "availability": "present"
+    },
+    {
+      "role": "native_verification",
+      "path": "outputs/source/native_probe_verification.json",
+      "sha256": "1caf26b38df7623485b38a6bb392776d3a24d0f2c6d964e91327910cef0ec9d0",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/native_readonly_tables.json",
+      "path": "outputs/source/native_readonly_tables.json",
+      "sha256": "1afa7f7ee4f5bb17a6f60a32ab22e10b1c6a70f65f22d251732219fcd5162982",
+      "availability": "present"
+    },
+    {
+      "role": "native_engine_result",
+      "path": "outputs/source/native_sdk_probe.json",
+      "sha256": "441b80efc4a2aed25c309b502888287a29e57429dc43abbc14a09209f6aaa74b",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/native_sdk_probe_attempt1.json",
+      "path": "outputs/source/native_sdk_probe_attempt1.json",
+      "sha256": "59e27b7c750f5dfe96a099498efe8c526222e2f2c379d56a31c60fbb75c474ea",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/native_sdk_probe_attempt2.json",
+      "path": "outputs/source/native_sdk_probe_attempt2.json",
+      "sha256": "28047b2a81e71d542d05420f631f4da5b8900cd8bd8a017a8b82a5086a56db9b",
+      "availability": "present"
+    },
+    {
+      "role": "source_fisheries",
+      "path": "outputs/source/source_fisheries_ledger.json",
+      "sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/supplement_s4.json",
+      "path": "outputs/source/supplement_s4.json",
+      "sha256": "b1c7095da23716b4f51a8d20577c55edce47c392f6ca841eee98754512f285f9",
+      "availability": "present"
+    },
+    {
+      "role": "support:outputs/source/web_context.json",
+      "path": "outputs/source/web_context.json",
+      "sha256": "0bd8e570349b6af114c0071767de809a8ffcf70b5dedd7ecd1f4d961f7d21f9f",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/diagnostic_preparation_and_scope.json",
+      "path": "qa/diagnostic_preparation_and_scope.json",
+      "sha256": "fa7c8265094871f9186dabafc8c76e16e4f5b070e42ce904e425d016bb3172b7",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/diagnostic_protected_verification.json",
+      "path": "qa/diagnostic_protected_verification.json",
+      "sha256": "f2556dba415aee02fa4ca72aa8e13e755ac546629aa2166fcd6211b46e645b0f",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/independent/design_review.json",
+      "path": "qa/independent/design_review.json",
+      "sha256": "fed94dcd1eb73f9b0359b0696319afba62e17a61d725009a40fd47f052fdbdcf",
+      "availability": "present"
+    },
+    {
+      "role": "independent_diagnostics_verification",
+      "path": "qa/independent/diagnostic_array_verification.json",
+      "sha256": "409774ed22338550bfa06f1a1352ab2104647e1b602d326483a9abceb6dde912",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/independent/native_export_trace.json",
+      "path": "qa/independent/native_export_trace.json",
+      "sha256": "8d6989bb1b5916e627ecc159564d2abc2342f10fe33e2486a8c11c9bdcc68989",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/independent/source_arithmetic_verification.json",
+      "path": "qa/independent/source_arithmetic_verification.json",
+      "sha256": "529d26bf7ad303bf553cbfd9181d5aeb3fb6e34cb6067d84fd413c4933c12ff5",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/independent/verify_saved_outputs.py",
+      "path": "qa/independent/verify_saved_outputs.py",
+      "sha256": "8649582e625f467cc18507d8b3c46fd654f512ec5a1b2914da7f8639dd76bb4c",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/native_execution_receipt.json",
+      "path": "qa/native_execution_receipt.json",
+      "sha256": "29f924532eb2f24c89fcb851a4b46f0fe560a320138f302f2f21d89412c5fb00",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/protected_before.json",
+      "path": "qa/protected_before.json",
+      "sha256": "67be843c33277aa1d18d787f3cd0d7e9245f328f14dedad36e149db33b46f48f",
+      "availability": "present"
+    },
+    {
+      "role": "protected_verification",
+      "path": "qa/protected_final.json",
+      "sha256": "55c9e8dab56ed4bd9f119c703c342f61edef84581db59f413a93339ea00372c7",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/native_read_stderr.txt",
+      "path": "qa/source/native_read_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/native_sdk_policy_gate.json",
+      "path": "qa/source/native_sdk_policy_gate.json",
+      "sha256": "437ac0648287e064895831abd90579570881e1cb4808b57fef19e9dc40950751",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/native_sdk_probe_log.xml",
+      "path": "qa/source/native_sdk_probe_log.xml",
+      "sha256": "54ba6638561941f8a4d6f13d6606b7c44b4f2373f2c161f1ec99c8720a58de6c",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/native_sdk_retry_code_identity.json",
+      "path": "qa/source/native_sdk_retry_code_identity.json",
+      "sha256": "152389210098b460b17b8f0607cbf3efe0ab4a25a62d352180b20e14f77869a6",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/native_sdk_stderr.txt",
+      "path": "qa/source/native_sdk_stderr.txt",
+      "sha256": "7c4fa9019875aff57998af11585977d15fead6633d7a8a1d782fb748250cf351",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/native_sdk_stdout.txt",
+      "path": "qa/source/native_sdk_stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/protected_before.json",
+      "path": "qa/source/protected_before.json",
+      "sha256": "19dacff30468c0b39f37d35b633b845498e251d50caf96539d72ee96d4aeb622",
+      "availability": "present"
+    },
+    {
+      "role": "support:qa/source/source_integrity.json",
+      "path": "qa/source/source_integrity.json",
+      "sha256": "c2c263b05665e7533400d7ac48744e707e7d557c13063b6d7b1f31e5c78db559",
+      "availability": "present"
+    },
+    {
+      "role": "support:result_summary.json",
+      "path": "result_summary.json",
+      "sha256": "66b646a08d9289efe3166dad22d9390341a0ee31958c464959df9e3333a62995",
+      "availability": "present"
+    },
+    {
+      "role": "canonical_input",
+      "path": "../../../model.json",
+      "sha256": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17",
+      "availability": "present"
+    },
+    {
+      "role": "original_native_source",
+      "path": "../../../../../sources/urn_cambridge.org_id_binary_20240209182731895-0513_S0025315423000887_S0025315423000887sup002.eweaccdb",
+      "sha256": "785b0a7b5ccb5f6437d29f48c1ab294f66bca19a35a5aa7f9733bfe19b651baa",
+      "availability": "present"
+    },
+    {
+      "role": "audited_initialization",
+      "path": "../ee_floor_on_review/initialization_and_floor.json",
+      "sha256": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+      "availability": "present"
+    },
+    {
+      "role": "original_EwE_6.6.8_binary",
+      "availability": "missing",
+      "reason": "Exact historical executable was not installed; later installed6.7 assembly used and identified explicitly.",
+      "acquisition_status": "Not acquired; not required to claim this later-version comparison."
+    }
+  ],
+  "reconciliation": {
+    "four_calls_returned": true,
+    "independent_matrix_QA_passed": true,
+    "native_outputs_verified": true,
+    "model_local_protected_files_unchanged": true
+  },
+  "scientific_limit": "Inventory completeness is not scientific approval; unexplained Discards supply remains.",
+  "created_utc": "2026-11-14T15:58:13.910570+00:00"
+}

@@ -1,0 +1,192 @@
+{
+  "method_key": "new_GE",
+  "execution_status": "returned",
+  "overall_status": "WARN",
+  "rho_living": 0.45450426854884096,
+  "b": 0.18385186227762335,
+  "b_note": "detritus recycling loop gain",
+  "detritus_sppr": [
+    {
+      "id": 93,
+      "name": "Detritus",
+      "sppr": 1.503150721810487
+    }
+  ],
+  "negative_source_group_pairs": [],
+  "negative_source_columns": 0,
+  "nonfinite_entries": 0,
+  "matrix_shape": [
+    94,
+    3
+  ],
+  "source_columns": [
+    {
+      "id": 94,
+      "name": "diet_import"
+    },
+    {
+      "id": 93,
+      "name": "Detritus"
+    },
+    {
+      "id": 1,
+      "name": "phytoplankton"
+    }
+  ],
+  "model_input": {
+    "status": "OK",
+    "is_model_balanced": true,
+    "p_max_rel_residual": 4.3394468967112197e-16,
+    "q_max_rel_residual": 2.1926925158451112e-16,
+    "dc_rows_sum_to_1": true,
+    "dc_max_deviation": 3.000000026176508e-09,
+    "n_negative_catch": 0,
+    "n_zero_catch": 59,
+    "total_catch": 2.1728714398,
+    "has_catch": true,
+    "has_ee_issues": false,
+    "n_ee0": 0,
+    "n_ee_marginal": 0,
+    "n_ee_gt_1": 0,
+    "ee0_groups": [],
+    "ee_marginal_groups": [],
+    "diagnostic_basis": "effective calculation runtime",
+    "before_floor_ee0_groups": [
+      92,
+      91,
+      90,
+      89,
+      88,
+      87,
+      86,
+      80,
+      72,
+      71,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ],
+    "before_floor_ee_marginal_groups": [],
+    "external_mortality_export": 0.0039384086902333115,
+    "negative_detritus_stock_residuals": {}
+  },
+  "balance": {
+    "status": "OK",
+    "is_balanced": true,
+    "inflow": 4028.2120682244563,
+    "outflow": 4028.2120682244554,
+    "rel_gap": 2.257812365310282e-16
+  },
+  "divergence": {
+    "status": "WARN",
+    "solve_error": null,
+    "b": 0.18385186227762335,
+    "b_converges": true,
+    "rho_living": 0.45450426854884096,
+    "living_converges": true,
+    "sppr_det": {
+      "type": "mapping",
+      "items": [
+        [
+          93,
+          1.503150721810487
+        ]
+      ]
+    },
+    "max_sppr_det": 1.503150721810487,
+    "max_sppr_group": {
+      "seq": 71,
+      "tl": 2.4954859981485153,
+      "sppr": 972663.4498682612,
+      "inv_te": 585.183875400212
+    },
+    "max_tl_group": {
+      "seq": 77,
+      "tl": 4.399872432010036,
+      "sppr": 84545.8041442984,
+      "inv_te": 419.61904761904754
+    },
+    "n_negative_sources": 0,
+    "expect_negatives": false,
+    "near_singular_te": [
+      91,
+      90,
+      89,
+      70,
+      69,
+      68,
+      67,
+      66,
+      65,
+      64,
+      63,
+      62,
+      61,
+      60
+    ]
+  },
+  "warnings": [
+    "14 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [91, 90, 89, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]"
+  ],
+  "strict_flags": {
+    "is_model_balanced": true,
+    "is_sppr_balanced": true,
+    "living_converges": true,
+    "b_converges": true
+  },
+  "sppr_weighted_external_sink_by_scope": {
+    "all": 26.30354390605979,
+    "inner": 26.04460715085662,
+    "PP": 16.836794007200474
+  },
+  "footprint_reconciliation": {
+    "ppr_all": {
+      "from_saved_source_sums_and_unchanged_catch": 335.5160027539557,
+      "direct_report": 335.5160027539557
+    },
+    "ppr_inner": {
+      "from_saved_source_sums_and_unchanged_catch": 335.15758662806576,
+      "direct_report": 335.1575866280657
+    },
+    "ppr_pp_only": {
+      "from_saved_source_sums_and_unchanged_catch": 219.8994829659262,
+      "direct_report": 219.8994829659262
+    }
+  },
+  "state_unchanged_by_method": true,
+  "full_return": "GE_full_return.json.gz",
+  "elapsed_seconds": 48.341077599907294,
+  "call": {
+    "TE_option": "GE",
+    "short": false,
+    "flat": false,
+    "return_sppr": true,
+    "thresholds": {
+      "b_warn": 0.7,
+      "b_fail": 1.0,
+      "rho_living_warn": 0.7,
+      "rho_living_fail": 1.0,
+      "sppr_det_warn": 10.0,
+      "balance_warn": 0.01,
+      "balance_fail": 0.05,
+      "model_balance_warn": 0.0001,
+      "model_balance_fail": 0.1,
+      "dc_row_tol": 1e-06,
+      "ee_marginal": 0.001
+    },
+    "DET_TE_vals": 1,
+    "det_collapse_mode": "never",
+    "det_open_mode": "none",
+    "det_theta": 1.0,
+    "det_external_sppr": 0.0,
+    "fix_EE_0_cases": true
+  }
+}

@@ -86,8 +86,10 @@ def refresh_region(root,region_workbook,*,publisher=None):
     registered=[r for r in records(central,'Models & coverage','Models') if (r.get('unit_id'),r.get('model_id'))==(o.get('unit_id'),selected)]
     if len(registered)!=1:raise ValueError('Register this exact regional model once in Project.xlsx; missing or duplicate metadata')
     if any(sha(p)!=value for p,value in source_hashes.items()):raise ValueError('Inputs changed while reading refresh preflight; reread the current workbook')
-    model_dirs=[source.parent for source in discover_models(path.parent).values()]
-    with central_lock(root),publication_transaction(root,[path],model_dirs) as publication:
+    model_dirs={model.parent}
+    if o.get('results_model_id'):
+        model_dirs.add(resolve_model(path.parent,o['results_model_id']).parent)
+    with central_lock(root),publication_transaction(root,[path],model_dirs,model_pairs={(o['unit_id'],selected)}) as publication:
         try:
             if any(sha(p)!=value for p,value in source_hashes.items()):raise ValueError('Inputs changed during refresh preflight')
             outgoing=o.get('results_model_id')
@@ -156,13 +158,13 @@ def refresh_region(root,region_workbook,*,publisher=None):
             update_book(root/'Project.xlsx',central)
             publication.checkpoint([path,root/'Project.xlsx'])
             from tools.project_core.calculations.coverage import ensure_validated_coverage
-            coverage=ensure_validated_coverage(root,lock_held=True)
+            coverage=ensure_validated_coverage(root,lock_held=True,model_pairs={(o['unit_id'],selected)})
             publication.checkpoint(coverage.get('written_paths',coverage.get('written_region_paths',[])),fingerprints=coverage.get('written_hashes'))
             changed_units={o['unit_id'],*coverage['changed_units']}
             changed_paths=[region_directory(root,unit)/(unit+'.xlsx') for unit in sorted(changed_units)]
             book=read_book(path)
             from tools.project_core.registry.update_project import update
-            update(root,changed_paths,lock_held=True);publication.checkpoint([root/'Project.xlsx']);(publisher or _publish)(root,sorted(changed_units))
+            update(root,changed_paths,lock_held=True,coverage_units=set());publication.checkpoint([root/'Project.xlsx']);(publisher or _publish)(root,sorted(changed_units))
             with publication_write(path.parent/'selected_model.lnk'):
                 shortcut_status=_shortcut(path.parent,model.parent)
             if not missing:

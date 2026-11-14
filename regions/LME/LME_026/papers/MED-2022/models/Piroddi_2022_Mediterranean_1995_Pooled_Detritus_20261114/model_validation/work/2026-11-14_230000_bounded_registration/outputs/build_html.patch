@@ -1,0 +1,66 @@
+--- a/tools/project_core/maps/build_html.py
++++ b/tools/project_core/maps/build_html.py
+@@ -95,16 +95,16 @@
+     additions=('stored group GE/EE added; ' if group_efficiencies else '')+('stored group catch metadata added; ' if group_catch else '')
+     print('Map and trends layouts refreshed; '+(additions or 'embedded data preserved; ')+'project fingerprint preserved.',flush=True)
+ 
+-def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None):
++def refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,model_pairs=None,candidate_rows=()):
+     """Publish exact model reviews under the shared writer lock; keep map defaults."""
+     from tools.project_core.registry.writes import central_lock
+     from tools.project_core.registry.publication import publication_transaction
+     with central_lock(workbook.resolve().parent):
+-        _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,publish=False)
++        _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,model_pairs=model_pairs,candidate_rows=candidate_rows,publish=False)
+         with publication_transaction(workbook.resolve().parent) as publication:
+-            return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids)
+-
+-def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,publish=True):
++            return _refresh_reviews(workbook,previous_workbook,unit_ids,directory,model_ids=model_ids,model_pairs=model_pairs,candidate_rows=candidate_rows)
++
++def _refresh_reviews(workbook,previous_workbook,unit_ids,directory=None,*,model_ids=None,model_pairs=None,candidate_rows=(),publish=True):
+     """Refresh only registered review metadata after a bounded central registration.
+ 
+     The pre-registration workbook is required evidence that all other central
+@@ -116,8 +116,18 @@
+     # would unnecessarily traverse the complete scientific results archive.
+     with zipfile.ZipFile(workbook) as archive:
+         newrows={(r['unit_id'],r['model_id']):r for _,r in table_rows(archive,'Models & coverage','Models')[3]}
++    if model_pairs is not None:
++        if unit_ids or model_ids:raise ValueError('Use exact model_pairs or legacy unit_ids/model_ids, not both')
++        pairs=[tuple(pair) for pair in model_pairs]
++        if any(len(pair)!=2 or not all(isinstance(v,str) and v for v in pair) for pair in pairs):raise ValueError('Invalid exact review pair')
++    else:
++        pairs=[(unit,(model_ids or {}).get(unit)) for unit in unit_ids]
++    if not pairs or len(set(pairs))!=len(pairs):raise ValueError('Require unique nonempty review scope')
++    candidate_keys=[(item['row']['unit_id'],item['row']['model_id']) for item in candidate_rows]
++    if len(set(candidate_keys))!=len(candidate_keys) or not set(candidate_keys)<=set(pairs):
++        raise ValueError('Candidate insertions must be unique exact reviewed pairs')
+     reviews={};registrations=[];review_books={}
+-    for unit_id in unit_ids:
++    for unit_id,requested_model_id in pairs:
+         # The approval gate needs only source identity settings and group IDs;
+         # avoid traversing the regional workbook's complete result tables.
+         book={}
+@@ -129,7 +139,7 @@
+                 headers=list(rows[0][1]) if rows else (headers or [])
+                 book.setdefault(sheet,{})[table]=(headers,[[r.get(h) for h in headers] for _,r in rows])
+         from tools.project_core.workbooks.workbooks import overview
+-        model_id=(model_ids or {}).get(unit_id) or overview(book).get('selected_model_id');key=(unit_id,model_id)
++        model_id=requested_model_id or overview(book).get('selected_model_id');key=(unit_id,model_id)
+         if key not in newrows:raise ValueError('Review refresh cannot add a model')
+         review=approved_review(root,newrows[key],book)
+         if not review:raise ValueError('Review refresh requires a registered researcher decision: '+unit_id)
+@@ -151,6 +161,12 @@
+     fd,expected=tempfile.mkstemp(prefix='.review-refresh-',suffix='.xlsx',dir=root);os.close(fd)
+     try:
+         shutil.copyfile(previous_workbook,expected)
++        from tools.project_core.registry.review_candidates import add_review_candidate
++        for item in candidate_rows:
++            key=(item['row']['unit_id'],item['row']['model_id'])
++            if reviews[key].get('status')!='Disqualified by researcher' or reviews[key].get('review_scope')!='model_source':
++                raise ValueError('New review-only candidate requires a source-only disqualification')
++            add_review_candidate(Path(expected),root,item['row'],item['canonical_sha256'])
+         for report,unit_id,model_id,seq in registrations:
+             # Replay writes only this isolated temporary copy; the outer lock
+             # already serializes the real Project and HTML publication.

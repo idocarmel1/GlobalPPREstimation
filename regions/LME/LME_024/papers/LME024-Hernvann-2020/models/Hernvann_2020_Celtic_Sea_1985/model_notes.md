@@ -14,6 +14,18 @@ Celtic shelf shallower than 200 m in ICES 7.e/f/g/h/j.2. Approximate Figure 1/PD
 
 ## Departures from the publication
 
+### Current review initialization after import completion (14 November 2026)
+
+The user authorized completing the missing diet-import entries for Baleen whales (3) and Boarfish (28) as 0 and rerunning GE/TE with EE floor ON at 0.1. Supplement B2 (pp. 14–15) has blank Import cells for these groups; no group-specific external-feeding statement was found in the reviewed article or supplement. The completion is applied to the authenticated runtime only, after its existing diet normalization and before the floor. Canonical JSON and extracted source cells remain unchanged. Published explicit imports remain preserved.
+
+The floor now applies to groups 3, 4 and 28. Both GE and TE return full scientific FAIL results; the earlier TE exception is resolved. Both SPPR matrices are finite and nonnegative, but the production residual and global budget failures remain. No production, consumption, catch, predation, biomass, stanza or routing parameters were rebalanced. These are unsigned review results; no decision or regional/project/map/trend adoption occurred.
+
+[Current import-completion evidence](model_validation/evidence/source_review/import_completion_20261114/evidence_index.json) · [Scientific interpretation](model_validation/evidence/source_review/import_completion_20261114/interpretation.md)
+
+### Historical extraction and review context
+
+The following retained narrative describes the earlier initialization and review; current outcomes are stated above.
+
 Departures have not been independently re-extracted during this administrative task. No additional parameter correction is made. User-selected source-faithful 1985 canonical record; strict admission NOT_RUN due rounded diets/missing routing. Accepted normalized-diet/two-pool return adapter tested: GE and With Egestion FAIL, TE_RETURN_UNSUPPORTED. Current provisional regional GE/Egestion numbers retained for research, not production eligible; all 488 exact labels reviewed with fixed allocation and geographic limits.
 
 Existing departure summary retained: Published baseline B2-B4; 54 groups; source-faithful extraction

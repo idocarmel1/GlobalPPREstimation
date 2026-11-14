@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "run_id": "fin_whale_source_audit_20261114",
+  "region_id": "LME_026",
+  "model_id": "Piroddi_2022_Mediterranean_1995_Pooled_Detritus_20261114",
+  "variant_id": "Piroddi_2022_Mediterranean_1995_Pooled_Detritus_20261114",
+  "created_at": "2026-11-14T17:30:32.090970+00:00",
+  "audit_type": "source_recheck_and_interpretation_of_retained_execution",
+  "fresh_scientific_execution": false,
+  "source_identity": {
+    "model_id": "Piroddi_2022_Mediterranean_1995",
+    "model_sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e",
+    "source_files": [
+      {
+        "role": "published_paper_pdf",
+        "path": "../../../../../sources/s41598-022-18017-x-75a92a71.pdf",
+        "sha256": "75a92a71a8925282375920beb6aa5acdea22af658e43d08a6f97363136511fad",
+        "availability": "present"
+      },
+      {
+        "role": "published_parameter_workbook",
+        "path": "../../../../../sources/41598_2022_18017_MOESM1_ESM-75e4d6d3.xlsx",
+        "sha256": "75e4d6d3437d9c1fafe41f8ae936192f6328e0cf4a6c9a2885be3cf297679882",
+        "availability": "present"
+      },
+      {
+        "role": "published_parameter_document",
+        "path": "../../../../../sources/41598_2022_18017_MOESM2_ESM-7d26163a.docx",
+        "sha256": "7d26163aa9f7868524e4c116940d0ada6ba4162c4a45bbdaaf8b193392aa5e84",
+        "availability": "present"
+      }
+    ]
+  },
+  "computational_input_identity": {
+    "model_id": "Piroddi_2022_Mediterranean_1995_Pooled_Detritus_20261114",
+    "model_sha256": "281d8543a165bf67652168cbc47f09db224e51bddb6768e9365f8c52d03ac956",
+    "runtime_initialization": "custom_audited_pooled_discard_bridge",
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": true,
+      "default_gs": true,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "refresh_missing_biomass_accum": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "method_options": {
+      "short": false,
+      "flat": false,
+      "return_sppr": true,
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "fix_EE_0_cases": false
+    },
+    "execution_summary": "../pooled_20261114/outputs/summary.json",
+    "executed_engine": [
+      {
+        "repository_relative_path": "tools/scientific_code/PPREstimation/PPRCalculator.py",
+        "pinned_path": "../pooled_20261114/code/executed_engine/tools/scientific_code/PPREstimation/PPRCalculator.py",
+        "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877"
+      },
+      {
+        "repository_relative_path": "tools/scientific_code/PPREstimation/ModelData.py",
+        "pinned_path": "../pooled_20261114/code/executed_engine/tools/scientific_code/PPREstimation/ModelData.py",
+        "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680"
+      },
+      {
+        "repository_relative_path": "tools/scientific_code/PPREstimation/utils.py",
+        "pinned_path": "../pooled_20261114/code/executed_engine/tools/scientific_code/PPREstimation/utils.py",
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+      },
+      {
+        "repository_relative_path": "tools/scientific_code/PPREstimation/create_PPRS_excel.py",
+        "pinned_path": "../pooled_20261114/code/executed_engine/tools/scientific_code/PPREstimation/create_PPRS_excel.py",
+        "sha256": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1"
+      },
+      {
+        "repository_relative_path": "tools/scientific_helpers/sppr/method_coverage.py",
+        "pinned_path": "../pooled_20261114/code/executed_engine/tools/scientific_helpers/sppr/method_coverage.py",
+        "sha256": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905"
+      }
+    ]
+  },
+  "methods": [
+    "GE",
+    "TE",
+    "With Egestion"
+  ],
+  "required_roles": [
+    "source_cell_audit",
+    "paper_context_audit",
+    "retained_diagnostic_interpretation",
+    "human_readable_findings",
+    "retained_execution_index",
+    "retained_execution_completeness",
+    "original_canonical_model",
+    "published_paper_pdf",
+    "published_parameter_workbook",
+    "published_parameter_document",
+    "derived_canonical_model",
+    "diagnostic_output/ge_lossless_direct_return",
+    "diagnostic_output/te_lossless_direct_return",
+    "diagnostic_output/with_egestion_lossless_direct_return"
+  ],
+  "artifacts": [
+    {
+      "role": "source_cell_audit",
+      "path": "source_cells.json",
+      "sha256": "e2bf48759cee7c107b7967e600e84be49a4b42b3d11889ae9707248f0e31fd52",
+      "availability": "present"
+    },
+    {
+      "role": "paper_context_audit",
+      "path": "paper_context.json",
+      "sha256": "5e7cd150d28b3b6892d9ed38dfcf78e7224e5be73fca8a25db74b78ad4e0fd63",
+      "availability": "present"
+    },
+    {
+      "role": "retained_diagnostic_interpretation",
+      "path": "diagnostic_checks.json",
+      "sha256": "a33270669f694bedcfb8090c49efb11ae133841ced86d94c7d90c16395b2b220",
+      "availability": "present"
+    },
+    {
+      "role": "human_readable_findings",
+      "path": "findings.md",
+      "sha256": "746967a8864cdda3bb71d731881bdf89a04320ca82c9e47976e5c596ec27c82c",
+      "availability": "present"
+    },
+    {
+      "role": "retained_execution_index",
+      "path": "../pooled_20261114/evidence_index.json",
+      "sha256": "8adb6dbcad826d60e3c2ab8b01ecfcc328a327bd379ede4e482e56050273f877",
+      "availability": "present"
+    },
+    {
+      "role": "retained_execution_completeness",
+      "path": "../pooled_20261114/completeness.json",
+      "sha256": "b1820e5ac60647536b1985cc2bdd48b90caf5f362b743e43b1fd40af47c6aaf1",
+      "availability": "present"
+    },
+    {
+      "role": "original_canonical_model",
+      "path": "../../../../Piroddi_2022_Mediterranean_1995/model.json",
+      "sha256": "f038707bf7837962933eec3e6daeae53eb0b9a7f48837763b0ce621edcdc3a9e",
+      "availability": "present"
+    },
+    {
+      "role": "published_paper_pdf",
+      "path": "../../../../../sources/s41598-022-18017-x-75a92a71.pdf",
+      "sha256": "75a92a71a8925282375920beb6aa5acdea22af658e43d08a6f97363136511fad",
+      "availability": "present"
+    },
+    {
+      "role": "published_parameter_workbook",
+      "path": "../../../../../sources/41598_2022_18017_MOESM1_ESM-75e4d6d3.xlsx",
+      "sha256": "75e4d6d3437d9c1fafe41f8ae936192f6328e0cf4a6c9a2885be3cf297679882",
+      "availability": "present"
+    },
+    {
+      "role": "published_parameter_document",
+      "path": "../../../../../sources/41598_2022_18017_MOESM2_ESM-7d26163a.docx",
+      "sha256": "7d26163aa9f7868524e4c116940d0ada6ba4162c4a45bbdaaf8b193392aa5e84",
+      "availability": "present"
+    },
+    {
+      "role": "derived_canonical_model",
+      "path": "../../../model.json",
+      "sha256": "281d8543a165bf67652168cbc47f09db224e51bddb6768e9365f8c52d03ac956",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_output/ge_lossless_direct_return",
+      "path": "../pooled_20261114/outputs/ge/full_return.json",
+      "sha256": "9bbd854342be4a7e335688db118f742b2defb6cdbded83e5263d9c138c657b08",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_output/te_lossless_direct_return",
+      "path": "../pooled_20261114/outputs/te/full_return.json",
+      "sha256": "ad62f0fadb3e1c46c0baa4ffd65335c496fa26abfd025b5804055fe9142e038e",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_output/with_egestion_lossless_direct_return",
+      "path": "../pooled_20261114/outputs/with_egestion/full_return.json",
+      "sha256": "9788b24f23f657feba737ba322e3a6cadf28bd2e8b3cfb7363ce9c5b55bc6cc8",
+      "availability": "present"
+    }
+  ],
+  "reconciliation": {
+    "all_18_source_cell_and_preservation_checks_pass": true,
+    "no_supported_extraction_correction": true,
+    "retained_exact_ee_floor_on_at_0_1": true,
+    "retained_execution_evidence_complete": true,
+    "protected_inputs_and_engine_hashes_unchanged": true,
+    "all_local_findings_links_resolve": true
+  },
+  "retained_execution_verification": {
+    "index_path": "../pooled_20261114/evidence_index.json",
+    "verified_artifact_count": 92,
+    "errors": [],
+    "missing_roles": []
+  },
+  "local_link_count": 7,
+  "scientific_disposition": "GE FAIL; TE FAIL; With Egestion FAIL. Integrity/accounting passes do not confer scientific validation. No model correction and no rerun."
+}

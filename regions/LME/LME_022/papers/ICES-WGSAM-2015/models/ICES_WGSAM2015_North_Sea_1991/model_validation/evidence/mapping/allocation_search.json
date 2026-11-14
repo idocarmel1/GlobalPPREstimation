@@ -1,0 +1,44 @@
+{
+  "reviewed_date": "2026-11-14",
+  "purpose": "Observed caught-mass fractions for the five focal juvenile/adult stocks and shark/skate pools before choosing a model proxy",
+  "queries": [
+    "ICES 2019 North Sea cod catch at age landings discards age0 1 2 haddock whiting saithe herring WGNSSK",
+    "ICES2019 herring North Sea catch at age0 1 HAWG"
+  ],
+  "sources": [
+    {
+      "url": "https://standardgraphs.ices.dk/ViewCharts.aspx?key=13211",
+      "read": "Stock identity and annual landings/discards table",
+      "finding": "Cod stock includes Subarea4, Division7.d, Subdivision20. Annual totals do not identify mass at the exact 24-month stanza threshold and do not isolate LME022."
+    },
+    {
+      "url": "https://standardgraphs.ices.dk/ViewCharts.aspx?key=13422",
+      "read": "Search index; full open timed out",
+      "finding": "North Sea herring stock extends through3.a and7.d. No matched LME-specific caught-mass fraction read."
+    },
+    {
+      "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/234543035/01_HAWG_Report_2020.pdf",
+      "read": "Search index identifies catch-at-age numbers; full PDF fetch failed",
+      "finding": "Numbers require weight-at-age and fishery/area aggregation before mass shares. No fraction inferred from numbers or legal size."
+    },
+    {
+      "url": "https://www.gov.scot/publications/evaluation-multispecies-management-approaches/pages/5/",
+      "read": "Methods and materials, stock/fleet and age-assessment setup",
+      "finding": "Confirms age-structured WGNSSK/STECF input availability but provides no directly applicable LME022 catch-mass split at all five Rpath stage boundaries."
+    }
+  ],
+  "decision": "No compatible measured 2019 LME caught-mass split was recovered in this bounded search. Use exact model1991 landings+discards proportions for independently identified candidates, W4 Medium; this is a historical composition/catchability transfer, not observed 2019 proportions. No claim that underlying ICES age data do not exist.",
+  "stage_source": "extracted_tables/companions/Rpath_stanza_individuals.csv; model1991 groups",
+  "source_stanza_cutoffs_months": {
+    "Cod": 24,
+    "Whiting": 12,
+    "Haddock": 12,
+    "Saithe": 36,
+    "Herring": 12
+  },
+  "other_stage_definitions": {
+    "JuvenileSharks": "predecessor <40cm; length type not specified in passage",
+    "JuvenileRays": "predecessor all skates <30cm; length type not specified in passage"
+  },
+  "cutoff_warning": "Predecessor printed annual age/length labels and focal Rpath month transitions are not interchangeable. Proxy uses focal group catches without constructing a new age/length conversion."
+}

@@ -1,0 +1,1162 @@
+{
+  "model_id": "ICES_WGSAM2015_North_Sea_1991",
+  "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+  "canonical_unchanged": true,
+  "flags": {
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": false,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "diagnostics": {
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1,
+      "det_external_sppr": 0
+    },
+    "method_timeout_seconds": 180
+  },
+  "methods": [
+    {
+      "method": "new_GE",
+      "execution_status": "ok",
+      "reason": "",
+      "diagnostic": {
+        "balance": {
+          "inflow": 2150.010358224,
+          "is_balanced": true,
+          "outflow": 2150.0103582242664,
+          "rel_gap": 1.239444947788965e-13,
+          "status": "OK"
+        },
+        "config": {
+          "TE_option": "GE",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "model": "North Sea Rpath port (1991)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "divergence": {
+          "b": 0.8822051250081107,
+          "b_converges": true,
+          "expect_negatives": false,
+          "living_converges": true,
+          "max_sppr_det": 440.27445855458177,
+          "max_sppr_group": {
+            "inv_te": 881.5000000000001,
+            "seq": 2,
+            "sppr": 145506.45023449525,
+            "tl": 4.564281310863093
+          },
+          "max_tl_group": {
+            "inv_te": 298.2444444444444,
+            "seq": 3,
+            "sppr": 97674.48398673545,
+            "tl": 4.872802065679302
+          },
+          "n_negative_sources": 0,
+          "near_singular_te": [],
+          "rho_living": 0.2894427191062622,
+          "solve_error": null,
+          "sppr_det": {
+            "items": [
+              [
+                67,
+                3.462493358284118
+              ],
+              [
+                68,
+                5.344873625432921
+              ],
+              [
+                69,
+                440.27445855458177
+              ]
+            ],
+            "type": "mapping"
+          },
+          "status": "WARN"
+        },
+        "footprint": {
+          "npp": 2150.00025,
+          "ppr2npp": 0.49353946786457414,
+          "ppr2npp_pp_only": 0.03594307097067997,
+          "ppr_all": 1061.1099792937014,
+          "ppr_inner": 1061.1099792937014,
+          "ppr_pp_only": 77.27761157272967
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 8.325029999978195e-05,
+          "dc_rows_sum_to_1": false,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "status": "WARN",
+          "total_catch": 4.558171985857613
+        },
+        "status": "WARN",
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "b=0.8822 is within 0.3 of divergence (max sppr_det 440 PP-units per unit detritus)",
+          "max sppr_det=440 >= 10: converged, but detritus is implausibly expensive"
+        ]
+      },
+      "exception": null,
+      "constructor_outcome": null,
+      "negative_entries": [],
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "unique_axes": true,
+        "mask_counts": {
+          "nan": 0,
+          "negative_infinity": 0,
+          "null": 0,
+          "positive_infinity": 0
+        },
+        "negative_source_count": 0,
+        "diagnostic_negative_count": 0
+      },
+      "runtime_before_sha256": "01efa4bbae1f372ab48649c85f76ba4d9fea5dce43bd6e466e51dcbec94e2c2c",
+      "runtime_after_sha256": "01efa4bbae1f372ab48649c85f76ba4d9fea5dce43bd6e466e51dcbec94e2c2c",
+      "reconciliation": {
+        "atol": 1e-12,
+        "rtol": 1e-12,
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true
+      },
+      "annual_status": {
+        "PP": "ok",
+        "all": "ok",
+        "inner": "ok"
+      }
+    },
+    {
+      "method": "new_TE_EEfix",
+      "execution_status": "ok",
+      "reason": "",
+      "diagnostic": {
+        "balance": {
+          "inflow": 2150.010358224,
+          "is_balanced": true,
+          "outflow": 2150.0103582240986,
+          "rel_gap": 4.589753475600775e-14,
+          "status": "OK"
+        },
+        "config": {
+          "TE_option": "TE",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "model": "North Sea Rpath port (1991)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "divergence": {
+          "b": 0.1554967742366123,
+          "b_converges": true,
+          "expect_negatives": false,
+          "living_converges": true,
+          "max_sppr_det": 816.3858058146532,
+          "max_sppr_group": {
+            "inv_te": 8815.000000000004,
+            "seq": 2,
+            "sppr": 1787329.7986511402,
+            "tl": 4.564281310863093
+          },
+          "max_tl_group": {
+            "inv_te": 2982.4444444444453,
+            "seq": 3,
+            "sppr": 1596208.1899124815,
+            "tl": 4.872802065679302
+          },
+          "n_negative_sources": 0,
+          "near_singular_te": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "rho_living": 0.5734463993696682,
+          "solve_error": null,
+          "sppr_det": {
+            "items": [
+              [
+                67,
+                0.4294643281019556
+              ],
+              [
+                68,
+                0.4430838363796164
+              ],
+              [
+                69,
+                816.3858058146532
+              ]
+            ],
+            "type": "mapping"
+          },
+          "status": "WARN"
+        },
+        "footprint": {
+          "npp": 2150.00025,
+          "ppr2npp": 0.8721247199001841,
+          "ppr2npp_pp_only": 0.17104516955904908,
+          "ppr_all": 1875.0683658165758,
+          "ppr_inner": 1875.0683658165758,
+          "ppr_pp_only": 367.7471573132479
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 8.325029999978195e-05,
+          "dc_rows_sum_to_1": false,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "status": "WARN",
+          "total_catch": 4.558171985857613
+        },
+        "status": "WARN",
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "max sppr_det=816 >= 10: converged, but detritus is implausibly expensive",
+          "5 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [65, 4, 3, 2, 1]"
+        ]
+      },
+      "exception": null,
+      "constructor_outcome": null,
+      "negative_entries": [],
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "unique_axes": true,
+        "mask_counts": {
+          "nan": 0,
+          "negative_infinity": 0,
+          "null": 0,
+          "positive_infinity": 0
+        },
+        "negative_source_count": 0,
+        "diagnostic_negative_count": 0
+      },
+      "runtime_before_sha256": "01efa4bbae1f372ab48649c85f76ba4d9fea5dce43bd6e466e51dcbec94e2c2c",
+      "runtime_after_sha256": "01efa4bbae1f372ab48649c85f76ba4d9fea5dce43bd6e466e51dcbec94e2c2c",
+      "reconciliation": {
+        "atol": 1e-12,
+        "rtol": 1e-12,
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true
+      },
+      "annual_status": {
+        "PP": "ok",
+        "all": "ok",
+        "inner": "ok"
+      }
+    },
+    {
+      "method": "new_WithEgestion",
+      "execution_status": "ok",
+      "reason": "",
+      "diagnostic": {
+        "balance": {
+          "inflow": 2150.010358224,
+          "is_balanced": true,
+          "outflow": 2150.0103582241113,
+          "rel_gap": 5.1819797305170045e-14,
+          "status": "OK"
+        },
+        "config": {
+          "TE_option": "With Egestion",
+          "det_collapse_mode": "never",
+          "det_external_sppr": 0,
+          "det_open_mode": "none",
+          "det_theta": 1,
+          "ee_floor": 0.1,
+          "ee_floor_assumption": {
+            "affected_groups": [
+              65,
+              61,
+              10,
+              9,
+              4,
+              3,
+              2,
+              1
+            ],
+            "application_stage": "completed audited initialization",
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "external_mortality_export_total": 1.983704066273114,
+            "negative_detritus_stock_residuals": {},
+            "researcher_approval": "Original signed review is separate from this calculation assumption",
+            "use_ee_floor": true
+          },
+          "ee_threshold": 0.1,
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "model": "North Sea Rpath port (1991)",
+          "use_ee_floor": true,
+          "would_pool": false
+        },
+        "divergence": {
+          "b": 0.9151607499042561,
+          "b_converges": true,
+          "expect_negatives": false,
+          "living_converges": true,
+          "max_sppr_det": 182.03671954514908,
+          "max_sppr_group": {
+            "inv_te": 705.2000000000002,
+            "seq": 2,
+            "sppr": 45623.07647961219,
+            "tl": 4.564281310863093
+          },
+          "max_tl_group": {
+            "inv_te": 238.59555555555553,
+            "seq": 3,
+            "sppr": 30344.292354785943,
+            "tl": 4.872802065679302
+          },
+          "n_negative_sources": 0,
+          "near_singular_te": [],
+          "rho_living": 0.22945022049471692,
+          "solve_error": null,
+          "sppr_det": {
+            "items": [
+              [
+                67,
+                5.580806053974749
+              ],
+              [
+                68,
+                7.112556342678172
+              ],
+              [
+                69,
+                182.03671954514908
+              ]
+            ],
+            "type": "mapping"
+          },
+          "status": "WARN"
+        },
+        "footprint": {
+          "npp": 2150.00025,
+          "ppr2npp": 0.19771981627543628,
+          "ppr2npp_pp_only": 0.013802622777982408,
+          "ppr_all": 425.09765442214206,
+          "ppr_inner": 425.09765442214206,
+          "ppr_pp_only": 29.67564242331787
+        },
+        "model_input": {
+          "before_floor_ee0_groups": [
+            65,
+            4,
+            3,
+            2,
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "dc_max_deviation": 8.325029999978195e-05,
+          "dc_rows_sum_to_1": false,
+          "diagnostic_basis": "effective calculation runtime",
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "external_mortality_export": 1.983704066273114,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "is_model_balanced": true,
+          "n_ee0": 0,
+          "n_ee_gt_1": 0,
+          "n_ee_marginal": 0,
+          "n_negative_catch": 0,
+          "n_zero_catch": 24,
+          "negative_detritus_stock_residuals": {},
+          "p_max_rel_residual": 3.3446885006457776e-11,
+          "q_max_rel_residual": 7.2424086257335905e-12,
+          "status": "WARN",
+          "total_catch": 4.558171985857613
+        },
+        "status": "WARN",
+        "warnings": [
+          "diet rows deviate from 1 by up to 8.33e-05 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+          "b=0.9152 is within 0.3 of divergence (max sppr_det 182 PP-units per unit detritus)",
+          "max sppr_det=182 >= 10: converged, but detritus is implausibly expensive"
+        ]
+      },
+      "exception": null,
+      "constructor_outcome": null,
+      "negative_entries": [],
+      "matrix_checks": {
+        "shape": [
+          70,
+          5
+        ],
+        "unique_axes": true,
+        "mask_counts": {
+          "nan": 0,
+          "negative_infinity": 0,
+          "null": 0,
+          "positive_infinity": 0
+        },
+        "negative_source_count": 0,
+        "diagnostic_negative_count": 0
+      },
+      "runtime_before_sha256": "01efa4bbae1f372ab48649c85f76ba4d9fea5dce43bd6e466e51dcbec94e2c2c",
+      "runtime_after_sha256": "01efa4bbae1f372ab48649c85f76ba4d9fea5dce43bd6e466e51dcbec94e2c2c",
+      "reconciliation": {
+        "atol": 1e-12,
+        "rtol": 1e-12,
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true
+      },
+      "annual_status": {
+        "PP": "ok",
+        "all": "ok",
+        "inner": "ok"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "constructor.json.gz",
+      "sha256": "d8174e8700d060af5a0b4953907de351b107141330ea0259551da1afef52dc42",
+      "bytes": 62885
+    },
+    {
+      "path": "method_coverage.json.gz",
+      "sha256": "eb8910bf0dece1952b7bd91ab868a84f014b02c53a97ae74bf63cdf5c9356f1a",
+      "bytes": 9630
+    },
+    {
+      "path": "new_GE.json.gz",
+      "sha256": "ae9cef3d6e5017a077d97667b920833aa4b7ef2a5edef2beb57c47ee1e8e0487",
+      "bytes": 124281
+    },
+    {
+      "path": "new_TE_EEfix.json.gz",
+      "sha256": "3bb0c42d27aa89ef82ec4413740c385bd908cecd3eb706e9df24b3ba141cb243",
+      "bytes": 128314
+    },
+    {
+      "path": "new_WithEgestion.json.gz",
+      "sha256": "d75859546f028e5ce49ee73567b726e36d64c4a95dca14ac54abb13d7c193804",
+      "bytes": 124381
+    },
+    {
+      "path": "run_manifest.json",
+      "sha256": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07",
+      "bytes": 75979
+    },
+    {
+      "path": "source_loader_audit.json",
+      "sha256": "2c18860383224ff37bd99579af4e285c4d4f490fae0cad3de1fb25d72b890534",
+      "bytes": 226638
+    }
+  ],
+  "source_loader_changes": {
+    "scalar": [
+      {
+        "group_id": 1,
+        "group_name": "BaleenWhales",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 2,
+        "group_name": "ToothedWhales",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 3,
+        "group_name": "Seals",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 4,
+        "group_name": "SurfaceFeedingSeabirds",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 5,
+        "group_name": "JuvenileSharks",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 6,
+        "group_name": "Spurdog",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 7,
+        "group_name": "LargePiscivorousSharks",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 8,
+        "group_name": "SmallSharks",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 9,
+        "group_name": "JuvenileRays",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 10,
+        "group_name": "StarryRayOthers",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 11,
+        "group_name": "ThornbackAndSpottedRay",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 12,
+        "group_name": "SkateCuckooRay",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 13,
+        "group_name": "JuvCod",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 14,
+        "group_name": "AduCod",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 15,
+        "group_name": "JuvWhiting",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 16,
+        "group_name": "AduWhiting",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 17,
+        "group_name": "JuvHaddock",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 18,
+        "group_name": "AduHaddock",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 19,
+        "group_name": "JuvSaithe",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 20,
+        "group_name": "AduSaithe",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 21,
+        "group_name": "Hake",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 22,
+        "group_name": "BlueWhiting",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 23,
+        "group_name": "NorwayPout",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 24,
+        "group_name": "OtherLargeGadoids",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 25,
+        "group_name": "OtherSmallGadoids",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 26,
+        "group_name": "Monkfish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 27,
+        "group_name": "Gurnards",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 28,
+        "group_name": "JuvHerring",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 29,
+        "group_name": "AduHerring",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 30,
+        "group_name": "Sprat",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 31,
+        "group_name": "Mackerel",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 32,
+        "group_name": "HorseMackerel",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 33,
+        "group_name": "Sandeels",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 34,
+        "group_name": "Plaice",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 35,
+        "group_name": "Dab",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 36,
+        "group_name": "LongRoughDab",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 37,
+        "group_name": "Flounder",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 38,
+        "group_name": "Sole",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 39,
+        "group_name": "LemonSole",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 40,
+        "group_name": "Witch",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 41,
+        "group_name": "Turbot",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 42,
+        "group_name": "Megrim",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 43,
+        "group_name": "Halibut",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 44,
+        "group_name": "Dragonets",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 45,
+        "group_name": "CatfishWolfFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 46,
+        "group_name": "LargeDemersalFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 47,
+        "group_name": "SmallDemersalFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 48,
+        "group_name": "MiscellaneousFilterfeedingPelagicFish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 49,
+        "group_name": "SquidAndCuttlefish",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 50,
+        "group_name": "FishLarvae",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 51,
+        "group_name": "CarnivorousZooplankton",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 52,
+        "group_name": "HerbivorousAndOmnivorousZooplanktonCopepods",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 53,
+        "group_name": "GelatinousZooplankton",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 54,
+        "group_name": "LargeCrabs",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 55,
+        "group_name": "Nephrops",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 56,
+        "group_name": "EpifaunalMacrobenthosMobileGrazers",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 57,
+        "group_name": "InfaunalMacrobenthos",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 58,
+        "group_name": "Shrimp",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 59,
+        "group_name": "SmallMobileEpifaunaSwarmingCrustaceans",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 60,
+        "group_name": "SmallInfaunaPolychaetes",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 61,
+        "group_name": "SessileEpifauna",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 62,
+        "group_name": "Meiofauna",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 63,
+        "group_name": "BenthicMicrofloraInclBacteriaProtozoa",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 64,
+        "group_name": "PlanktonicMicrofloraInclBacteriaProtozoa",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 65,
+        "group_name": "DivingSeabirds",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      },
+      {
+        "group_id": 66,
+        "group_name": "Phytoplankton",
+        "field": "detritus_import",
+        "source_literal": "-9999",
+        "source_value": null,
+        "loaded_value": 0.0,
+        "changed": true
+      }
+    ],
+    "routing": []
+  }
+}

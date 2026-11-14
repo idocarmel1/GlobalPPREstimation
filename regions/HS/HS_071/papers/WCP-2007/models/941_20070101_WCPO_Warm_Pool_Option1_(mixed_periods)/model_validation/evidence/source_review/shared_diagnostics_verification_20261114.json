@@ -1,0 +1,529 @@
+{
+  "review_date": "2026-11-14",
+  "checked_at_utc": "2026-11-14T13:16:07.085221+00:00",
+  "target_region": "HS_071",
+  "source_run_region": "EEZ_941",
+  "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+  "canonical_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+  "operation": "Read-only reuse verification of retained model-level diagnostics; no solver invocation, no adoption or regional-result migration.",
+  "reuse_supported": true,
+  "identity_checks": {
+    "source_groups_equal": true,
+    "source_DC_equal": true,
+    "source_det_fate_equal": true,
+    "initialized_baseline_groups_equal": true,
+    "initialized_baseline_DC_equal": true,
+    "initialized_baseline_det_fate_equal": true,
+    "historical_settings_preserved": true,
+    "historical_base_engine_hashes_match": true,
+    "source_group_names_ids_equal": true,
+    "engine_bytes_ModelData.py": true,
+    "engine_bytes_PPRCalculator.py": true,
+    "engine_bytes_utils.py": true,
+    "calculation_engine_bytes_match": true
+  },
+  "normalization": "Historical untyped null and typed NaN are compared as the same missing value; row/column identities and all stored scientific values are otherwise compared exactly.",
+  "configuration": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "calculation_engine_upgrade": "ee_floor_v1",
+  "scope_compatibility": {
+    "inventory_adapter_admission": "rejected: legacy SPPR_1995 also changed",
+    "direct_scope_admission": "All class methods checked; direct diagnostic dependencies unchanged or exact certified EE-floor predecessor",
+    "added": [
+      "_sync_effective_table",
+      "_with_external_mortality",
+      "apply_ee_floor",
+      "get_aggregated_TE",
+      "validate_ee_floor"
+    ],
+    "removed": [],
+    "changed": [
+      "SPPR_1995",
+      "_sample_SPPR_new_forced_balance",
+      "balance_model",
+      "diagnose_sppr",
+      "is_model_balanced",
+      "is_sppr_balanced"
+    ],
+    "uncertified_excluded_legacy_methods": [
+      "SPPR_1995"
+    ],
+    "excluded_method_callers": {
+      "SPPR_1995": [
+        "get_aggregated_TE"
+      ]
+    },
+    "shared_adapter_or_engine_modified": false
+  },
+  "methods": {
+    "GE": {
+      "execution_status": "ok",
+      "diagnostic_status": "WARN",
+      "matrix_shape": [
+        32,
+        4
+      ],
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_columns": [
+        {
+          "id": 32,
+          "name": "diet_import",
+          "type": "Import",
+          "synthetic": true
+        },
+        {
+          "id": 31,
+          "name": "Detritus",
+          "type": "DET",
+          "synthetic": false
+        },
+        {
+          "id": 30,
+          "name": "Small phyto",
+          "type": "PP",
+          "synthetic": false
+        },
+        {
+          "id": 29,
+          "name": "Large phyto",
+          "type": "PP",
+          "synthetic": false
+        }
+      ],
+      "all_entries_finite": true,
+      "all_missing_masks_false": true,
+      "negative_tolerance": 0,
+      "negative_source_group_pairings": [],
+      "standalone_adapter_and_raw_return_matrix_equal": true,
+      "all_scope_row_sums_reconciled": true,
+      "max_absolute_sum_difference": 1.8189894035458565e-12,
+      "runtime_unchanged_by_diagnostic": true,
+      "rho_living": 0.5467665518138085,
+      "b": 0.629379721549255,
+      "detritus_sppr": {
+        "type": "mapping",
+        "items": [
+          [
+            31,
+            2.506075940943192
+          ]
+        ]
+      },
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 2.220446049250313e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 21,
+        "total_catch": 0.05402029999999999,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0008174999999999997,
+        "negative_detritus_stock_residuals": {}
+      },
+      "sppr_balance": {
+        "status": "OK",
+        "is_balanced": false,
+        "inflow": 1097.9547,
+        "outflow": 1096.9021126216333,
+        "rel_gap": 0.0009586801517100405
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001"
+      ],
+      "config": {
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1,
+        "ee_floor_assumption": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "affected_groups": [
+            10,
+            3,
+            2,
+            1
+          ],
+          "external_mortality_export_total": 0.0008174999999999997,
+          "negative_detritus_stock_residuals": {},
+          "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+          "application_stage": "completed audited initialization",
+          "researcher_approval": "Original signed review is separate from this calculation assumption"
+        },
+        "TE_option": "GE",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "det_collapse_mode": "never",
+        "explicit_TE": false,
+        "method": "single_detritus",
+        "would_pool": false,
+        "model": "WCPO_Warm_Pool_Option1 (mixed_periods)"
+      }
+    },
+    "TE": {
+      "execution_status": "ok",
+      "diagnostic_status": "WARN",
+      "matrix_shape": [
+        32,
+        4
+      ],
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_columns": [
+        {
+          "id": 32,
+          "name": "diet_import",
+          "type": "Import",
+          "synthetic": true
+        },
+        {
+          "id": 31,
+          "name": "Detritus",
+          "type": "DET",
+          "synthetic": false
+        },
+        {
+          "id": 30,
+          "name": "Small phyto",
+          "type": "PP",
+          "synthetic": false
+        },
+        {
+          "id": 29,
+          "name": "Large phyto",
+          "type": "PP",
+          "synthetic": false
+        }
+      ],
+      "all_entries_finite": true,
+      "all_missing_masks_false": true,
+      "negative_tolerance": 0,
+      "negative_source_group_pairings": [],
+      "standalone_adapter_and_raw_return_matrix_equal": true,
+      "all_scope_row_sums_reconciled": true,
+      "max_absolute_sum_difference": 5.820766091346741e-11,
+      "runtime_unchanged_by_diagnostic": true,
+      "rho_living": 0.7249377689422032,
+      "b": 0.0,
+      "detritus_sppr": {
+        "type": "mapping",
+        "items": [
+          [
+            31,
+            0.2525090684652693
+          ]
+        ]
+      },
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 2.220446049250313e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 21,
+        "total_catch": 0.05402029999999999,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0008174999999999997,
+        "negative_detritus_stock_residuals": {}
+      },
+      "sppr_balance": {
+        "status": "OK",
+        "is_balanced": false,
+        "inflow": 1097.9547,
+        "outflow": 1096.7050820463169,
+        "rel_gap": 0.001138132523758155
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001",
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "rho(A_LL)=0.7249 is within 0.3 of divergence (max SPPR 6.11e+05 at group 9 (Small Billfish), TL 5.15)"
+      ],
+      "config": {
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1,
+        "ee_floor_assumption": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "affected_groups": [
+            10,
+            3,
+            2,
+            1
+          ],
+          "external_mortality_export_total": 0.0008174999999999997,
+          "negative_detritus_stock_residuals": {},
+          "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+          "application_stage": "completed audited initialization",
+          "researcher_approval": "Original signed review is separate from this calculation assumption"
+        },
+        "TE_option": "TE",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "det_collapse_mode": "never",
+        "explicit_TE": false,
+        "method": null,
+        "would_pool": false,
+        "model": "WCPO_Warm_Pool_Option1 (mixed_periods)"
+      }
+    }
+  },
+  "ee_floor": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "affected_groups": [
+      10,
+      3,
+      2,
+      1
+    ],
+    "external_mortality_export_total": 0.0008174999999999997,
+    "negative_detritus_stock_residuals": {},
+    "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+    "application_stage": "completed audited initialization",
+    "researcher_approval": "Original signed review is separate from this calculation assumption"
+  },
+  "applied_ledger_rows": [
+    {
+      "source_M0": 0.0056463,
+      "source_EE": 0.043,
+      "reason": "applied",
+      "group_name": "Small Sharks",
+      "external_mortality_export": 0.0003363000000000003,
+      "applied": true,
+      "M0_effective": 0.00531,
+      "M0_before_floor": 0.0056463,
+      "EE_effective": 0.1,
+      "EE_before_floor": 0.04300000000000004,
+      "group_id": 10
+    },
+    {
+      "source_M0": 0.004651199999999999,
+      "source_EE": 0.031,
+      "reason": "applied",
+      "group_name": "Blue Shark",
+      "external_mortality_export": 0.0003311999999999994,
+      "applied": true,
+      "M0_effective": 0.00432,
+      "M0_before_floor": 0.004651199999999999,
+      "EE_effective": 0.1,
+      "EE_before_floor": 0.031000000000000028,
+      "group_id": 3
+    },
+    {
+      "source_M0": 0.002886,
+      "source_EE": 0.075,
+      "reason": "applied",
+      "group_name": "Other Billfish",
+      "external_mortality_export": 7.799999999999994e-05,
+      "applied": true,
+      "M0_effective": 0.002808,
+      "M0_before_floor": 0.002886,
+      "EE_effective": 0.1,
+      "EE_before_floor": 0.07499999999999996,
+      "group_id": 2
+    },
+    {
+      "source_M0": 0.001368,
+      "source_EE": 0.05,
+      "reason": "applied",
+      "group_name": "Swordfish",
+      "external_mortality_export": 7.200000000000002e-05,
+      "applied": true,
+      "M0_effective": 0.001296,
+      "M0_before_floor": 0.001368,
+      "EE_effective": 0.1,
+      "EE_before_floor": 0.050000000000000044,
+      "group_id": 1
+    }
+  ],
+  "limitations": [
+    "Results are the shared model under explicit EE floor ON 0.1; they are not a recalculation of HS_071 catch/mapping/annual outputs.",
+    "HS_071 current result manifest retains unknown historical flags/code identity; it is not silently relabeled or migrated.",
+    "GE and TE retain WARN and strict balance false. Nonnegative complete matrices do not establish scientific validity.",
+    "No fresh extraction or independent source-cell audit was performed; existing accepted model departures remain.",
+    "Scoped EE-floor engine certification excludes legacy SPPR_1995; this evidence supports the named direct diagnostics, not a full method inventory.",
+    "Model-native footprint values use model catch density and are not HS_071 regional annual PPR."
+  ],
+  "sources": [
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model.json",
+      "sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/ee_floor_ledger.json",
+      "sha256": "13ba187ce0374d6ad19ba2feb20a773c207c99d65ebfe4d1b4023fcf69072111"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/executed_code/PPRCalculator.py",
+      "sha256": "4c8ec0d0c275c6053892b89d526c7191f1c7755376ff1785cc3cb7dfb2ea7a4a"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/group_axes.json",
+      "sha256": "7f8f27f1215bcd1c797439f4c35e2bb6007c7897c0a010d5c0caba06b5e93ead"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_GE_SPPR_matrix.json",
+      "sha256": "300464268dbe3730dac7b388aae4b7b0e297bed59e7aac16fd8914f769d96dfe"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_GE_full_return.json.gz",
+      "sha256": "c1bf1a1cb5731a8e02caa3327fc38504135d22a3d4b5c08cfb045d0dd11feefc"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_TE_EEfix_SPPR_matrix.json",
+      "sha256": "dbe4be3c591ae198bfa4207979b278a27a546e78530a198468b65772f550673d"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_TE_EEfix_full_return.json.gz",
+      "sha256": "ff32e51d7e7b5a0038f092d971307a81edd3a08d91971c8ced46e570c80879e9"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/run_provenance.json",
+      "sha256": "99820a73c9df5221b3bdda154fb0c857484d11d76a985579683594f61a802610"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/runtime_initialized.json.gz",
+      "sha256": "6098c190de460b53291c3d89797cf8c5247fd39145c2c7a76172a8f92922383b"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/source_state.json.gz",
+      "sha256": "a20ff21992620a2bc9280e0068bceb1e48643b484a7a93720997e5c74f920781"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/summary.json",
+      "sha256": "e21556e92a184b48053ddd773e70958904fd037133dad4ae6f5b3e8c753e6c5f"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review/evidence/2026-09-28_integration/engine_snapshot/ModelData.py",
+      "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review/evidence/2026-09-28_integration/engine_snapshot/PPRCalculator.py",
+      "sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7"
+    },
+    {
+      "path": "../../../../../../../../../EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review/evidence/2026-09-28_integration/engine_snapshot/utils.py",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    {
+      "path": "../../../model.json",
+      "sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03"
+    },
+    {
+      "path": "reused_diagnostics/before_state.json",
+      "sha256": "4364c1f8aeecc9826350e356b322c145df55cba9c9f2b86577b6a5f139b227d3"
+    },
+    {
+      "path": "reused_diagnostics/loaded_state.json",
+      "sha256": "19acd2e281c16206e34905b3b169a08b6c1cfd4d2158cb3f77380fe9a9457488"
+    },
+    {
+      "path": "reused_diagnostics/runtime_verification.json",
+      "sha256": "fad612e625b06a6f122a6fb8acadd9b02dc1b2168779f54bff560bf80cb45e0c"
+    }
+  ]
+}

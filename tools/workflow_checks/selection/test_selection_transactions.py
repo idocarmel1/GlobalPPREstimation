@@ -41,16 +41,18 @@ class ReviewRegressions(unittest.TestCase):
         def fail(*args):raise RuntimeError('injected failure')
         with self.assertRaisesRegex(RuntimeError,'injected'):selection.refresh_region(f.root,f.path,publisher=fail)
         self.assertTrue(all(p.read_bytes()==value for p,value in before.items()));self.assertEqual(f.path.read_bytes(),active);self.assertEqual((f.root/'Project.xlsx').read_bytes(),central)
-    def test_failed_publication_rolls_back_nondefault_validated_coverage(self):
+    def test_failed_publication_rolls_back_selected_pair_coverage(self):
         f=self.f;project=read_book(f.root/'Project.xlsx');header,data=project['Models & coverage']['Models']
         header.append('researcher_review_status')
         for row in data:row.append('Validated by researcher' if row[1]=='B' else None)
         update_book(f.root/'Project.xlsx',project)
+        f.select('B')
         source=f.models['B']/'sppr_source.xlsx';source.write_bytes(b'original source')
-        snapshot=f.models['B']/'results/regional_snapshot.xlsx';snapshot.parent.mkdir();snapshot.write_bytes(b'original snapshot')
+        snapshot=f.models['B']/'results/regional_snapshot.xlsx';snapshot.parent.mkdir();snapshot.write_bytes(f.path.read_bytes())
         manifest=f.models['B']/'results/result_manifest.json';manifest.write_text('{}')
         evidence=f.models['B']/'results/diagnostics/method_coverage/new.json'
         def complete(*args,**kwargs):
+            self.assertEqual(kwargs.get('model_pairs'),{('LME_001','B')})
             source.write_bytes(b'new source');snapshot.write_bytes(b'new snapshot');manifest.write_text('{"new":true}')
             evidence.parent.mkdir(parents=True,exist_ok=True);evidence.write_text('new evidence')
             written=[source,snapshot,manifest,evidence]

@@ -9,6 +9,23 @@ MODEL='47_2_East_China_Sea_(2018)'
 W='{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
 
 class ModelBoundaryTests(unittest.TestCase):
+    def test_template_review_date_capitalization_preserves_signed_decision(self):
+        from tools.workflow_checks.validation.test_researcher_disqualification import report_fixture
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for decision in ['MODEL VALIDATED', 'MODEL DISQUALIFIED']:
+                with self.subTest(decision=decision):
+                    report = report_fixture(root, decision=decision)
+                    expected = read_report(root, report, 'm')
+                    with zipfile.ZipFile(report) as archive:
+                        parts = [(info, archive.read(info.filename)) for info in archive.infolist()]
+                    with zipfile.ZipFile(report, 'w') as archive:
+                        for info, data in parts:
+                            if info.filename == 'word/document.xml':
+                                data = data.replace(b'| review date:', b'| Review date:')
+                            archive.writestr(info, data)
+                    self.assertEqual(read_report(root, report, 'm'), expected)
+
     def report(self,root,selected):
         document=E.Element(W+'document');body=E.SubElement(document,W+'body')
         table=E.SubElement(body,W+'tbl')

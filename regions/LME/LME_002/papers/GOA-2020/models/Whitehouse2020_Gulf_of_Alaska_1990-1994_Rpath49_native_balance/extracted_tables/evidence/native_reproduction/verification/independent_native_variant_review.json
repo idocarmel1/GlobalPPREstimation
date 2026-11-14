@@ -1,0 +1,735 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-14T17:34:58.296837+00:00",
+  "review_scope": "Independent Python arithmetic from native source tables, comparing actual Rpath outputs; no PPR solve, tuning, or source changes. Variant checks only if persisted variant exists.",
+  "result": "pass_no_material_mismatches",
+  "checks": {
+    "source_identity": 2,
+    "source_structure": 2,
+    "identity": 8,
+    "source_known_scalar": 389,
+    "native_structural_zero": 50,
+    "source_catch": 49,
+    "native_diet_NA_zero": 2350,
+    "native_fate": 100,
+    "native_fate_real": 98,
+    "native_fishery_matrix": 100,
+    "rank": 1,
+    "independent_living_EE": 47,
+    "living_budget_residual": 47,
+    "independent_DET_B": 2,
+    "independent_DET_EE": 2,
+    "independent_DET_turnover": 2,
+    "DET_production_inflow": 2,
+    "independent_trophic_level": 50,
+    "native_GE": 49,
+    "variant_identity": 51,
+    "variant_scalar": 588,
+    "variant_diet": 2254,
+    "variant_import": 47,
+    "variant_fate": 98,
+    "variant_import_label": 49,
+    "variant_import_basic": 343,
+    "variant_import_catch": 196,
+    "variant_import_BA": 49,
+    "variant_import_fate": 98,
+    "variant_import_diet": 2254,
+    "variant_import_diet_import": 46,
+    "variant_import_TL": 49,
+    "variant_import_metadata": 1,
+    "variant_roundtrip": 2,
+    "input_stability": 10
+  },
+  "failures": [],
+  "tolerances": {
+    "scalar_atol": 1e-12,
+    "rtol": 1e-12,
+    "flow_and_DET_B_atol": 1e-10
+  },
+  "native_source_hashes_and_outputs": {
+    "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_base.csv": "fef0e97bb4eb2929ae93fe0b01deed99356bbbbf5e164f750e2f7f439ce5d36a",
+    "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_diet.csv": "31c7306b54ce56af76bc146f91a79ab77d8bc6eb1c670fa880f7f572a4234475",
+    "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/model.json": "10dfbf57dcc9c1ca2e57460637709a061c9264a7e29bf17e0028fadf4c919125",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/groups.csv": "e7ae719d6451cf086bf8c8a8d241bfe4ab0c0038aac94011a0f9f32221785e68",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/groups_with_fleet.csv": "d3d539e326b6408567ccebbd22f3dea952afa0305f692dba942331349f43b056",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/diet.csv": "4e668bdbf0df56ca4543ee3f851aa961cf4ba2984127e54be07b12fe82a36aa2",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/detritus_fate.csv": "513ca769c389cda2a1695de62ccc084819d3fed5a3ee5e872e2652f779c6b37e",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/detritus_fate_with_fleet.csv": "a34aefa29ab808197a9a24cafe8692bff40ef8ed54290debe3b474a0cfdc6e6e",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/landings.csv": "403ce688539dbe1a483709eef04750a662311a7f96d64068f9a6be8ee2d51005",
+    "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/discards.csv": "8fe570ef21ab220cf01b8e923c161e1987a23eecd6f90ca0538a653d55acb753"
+  },
+  "native_groups": 49,
+  "living_groups": 47,
+  "consumers": 46,
+  "detritus_groups": 2,
+  "native_blank_diet_cells_mapped_to_zero": 1810,
+  "living_equation": "B*PB*EE = source-diet predation + landings + discards + BA",
+  "living_matrix_rank": 47,
+  "living_matrix_condition_number": 102794729.18858796,
+  "living_budget_rows": [
+    {
+      "group": "Toothed whales",
+      "production": 0.0029063831519602996,
+      "predation": 4.080956996931671e-05,
+      "catch": 9.74e-07,
+      "BA": 0.0,
+      "independent_EE": 0.014376483685963597,
+      "native_EE": 0.014376483685963597,
+      "residual": 0.0
+    },
+    {
+      "group": "Gray whale",
+      "production": 0.0035124068591000004,
+      "predation": 0.00015006482307498625,
+      "catch": 8.57e-08,
+      "BA": 0.0,
+      "independent_EE": 0.042748613443221666,
+      "native_EE": 0.042748613443221666,
+      "residual": 0.0
+    },
+    {
+      "group": "Other baleen",
+      "production": 0.01431460820925,
+      "predation": 0.0012364811936918468,
+      "catch": 5.19e-05,
+      "BA": 0.0,
+      "independent_EE": 0.09000464245045169,
+      "native_EE": 0.09000464245045167,
+      "residual": -2.168404344971009e-19
+    },
+    {
+      "group": "Other pinnipeds",
+      "production": 0.004092196861324,
+      "predation": 9.059675450040184e-05,
+      "catch": 9.478899999999999e-05,
+      "BA": 0.0,
+      "independent_EE": 0.045302257145180845,
+      "native_EE": 0.045302257145180845,
+      "residual": 0.0
+    },
+    {
+      "group": "Procellarids",
+      "production": 6.823923951779998e-05,
+      "predation": 2.753917158313206e-05,
+      "catch": 1.43e-06,
+      "BA": 0.0,
+      "independent_EE": 0.42452365805711456,
+      "native_EE": 0.4245236580571146,
+      "residual": 3.3881317890172014e-21
+    },
+    {
+      "group": "Alcids piscivorous",
+      "production": 0.0010783038664598,
+      "predation": 0.0002962539193610519,
+      "catch": 1.54e-05,
+      "BA": 0.0,
+      "independent_EE": 0.2890223517274855,
+      "native_EE": 0.2890223517274855,
+      "residual": 0.0
+    },
+    {
+      "group": "Larids",
+      "production": 0.0001627413975858,
+      "predation": 3.820978027467273e-05,
+      "catch": 1.98e-06,
+      "BA": 0.0,
+      "independent_EE": 0.24695486748222129,
+      "native_EE": 0.24695486748222129,
+      "residual": 0.0
+    },
+    {
+      "group": "Alcids planktivorous",
+      "production": 5.08029211488e-05,
+      "predation": 7.852725647049268e-06,
+      "catch": 4.07e-07,
+      "BA": 0.0,
+      "independent_EE": 0.16258367551064273,
+      "native_EE": 0.16258367551064273,
+      "residual": 0.0
+    },
+    {
+      "group": "Other seabirds",
+      "production": 4.330916168917e-05,
+      "predation": 1.2089015916807488e-05,
+      "catch": 6.27e-07,
+      "BA": 0.0,
+      "independent_EE": 0.2936102990879938,
+      "native_EE": 0.2936102990879938,
+      "residual": 0.0
+    },
+    {
+      "group": "Cormorants",
+      "production": 5.53768693751e-05,
+      "predation": 9.129971596269109e-06,
+      "catch": 4.74e-07,
+      "BA": 0.0,
+      "independent_EE": 0.17342929827281817,
+      "native_EE": 0.17342929827281817,
+      "residual": 0.0
+    },
+    {
+      "group": "Sharks",
+      "production": 0.014235300000000001,
+      "predation": 0.003919142064852123,
+      "catch": 0.006119465,
+      "BA": 0.0,
+      "independent_EE": 0.7051911139808872,
+      "native_EE": 0.7051911139808871,
+      "residual": -1.734723475976807e-18
+    },
+    {
+      "group": "Walleye pollock",
+      "production": 4.0698442888455,
+      "predation": 4.706569893398136,
+      "catch": 0.3428792,
+      "BA": -1.35,
+      "independent_EE": 0.9089903275998711,
+      "native_EE": 0.9089903275998712,
+      "residual": 4.440892098500626e-16
+    },
+    {
+      "group": "Pacific cod",
+      "production": 0.8478910958077001,
+      "predation": 0.27401724933495913,
+      "catch": 0.2508273,
+      "BA": 0.0,
+      "independent_EE": 0.6189999540389003,
+      "native_EE": 0.6189999540389003,
+      "residual": 0.0
+    },
+    {
+      "group": "Pelagic forage fish",
+      "production": 11.673411203608,
+      "predation": 9.394630270101334,
+      "catch": 0.056009003,
+      "BA": -0.11,
+      "independent_EE": 0.8001636462711383,
+      "native_EE": 0.8001636462711383,
+      "residual": 0.0
+    },
+    {
+      "group": "Lg.-mouth flatfish",
+      "production": 2.3484059735612,
+      "predation": 0.4025888723358213,
+      "catch": 0.16639683,
+      "BA": 0.0,
+      "independent_EE": 0.24228592021208015,
+      "native_EE": 0.2422859202120801,
+      "residual": -1.1102230246251565e-16
+    },
+    {
+      "group": "Sm.-mouth flatfish",
+      "production": 0.526054838507,
+      "predation": 0.1732864818067587,
+      "catch": 0.07292791,
+      "BA": 0.0,
+      "independent_EE": 0.4680394015679839,
+      "native_EE": 0.4680394015679839,
+      "residual": 0.0
+    },
+    {
+      "group": "Skates",
+      "production": 0.0383606,
+      "predation": 0.008190140146711617,
+      "catch": 0.014792654999999998,
+      "BA": 0.0,
+      "independent_EE": 0.5991250175104564,
+      "native_EE": 0.5991250175104564,
+      "residual": 0.0
+    },
+    {
+      "group": "Other demersals",
+      "production": 0.8249798260968,
+      "predation": 0.3510012409359,
+      "catch": 0.19344692000000002,
+      "BA": -0.002,
+      "independent_EE": 0.6575290010452343,
+      "native_EE": 0.6575290010452343,
+      "residual": 0.0
+    },
+    {
+      "group": "Eelpouts",
+      "production": 0.42777000000000004,
+      "predation": 0.34219148769677593,
+      "catch": 2.426e-05,
+      "BA": 0.0,
+      "independent_EE": 0.7999994101895315,
+      "native_EE": 0.7999994101895316,
+      "residual": 0.0
+    },
+    {
+      "group": "Lg.-mouth sculpins",
+      "production": 0.035554068,
+      "predation": 0.01959755786022996,
+      "catch": 0.0044485819999999995,
+      "BA": 0.0,
+      "independent_EE": 0.6763259793571289,
+      "native_EE": 0.6763259793571289,
+      "residual": 0.0
+    },
+    {
+      "group": "Other sculpins",
+      "production": 0.32674616,
+      "predation": 0.2613969798747602,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000001587616521,
+      "native_EE": 0.8000001587616521,
+      "residual": 0.0
+    },
+    {
+      "group": "Misc. shallow fish",
+      "production": 0.33559572000000004,
+      "predation": 0.2672370425136969,
+      "catch": 0.00123951,
+      "BA": 0.0,
+      "independent_EE": 0.7999999300160826,
+      "native_EE": 0.7999999300160826,
+      "residual": 0.0
+    },
+    {
+      "group": "Octopods",
+      "production": 0.62677848,
+      "predation": 0.5010897838693497,
+      "catch": 0.000333063,
+      "BA": 0.0,
+      "independent_EE": 0.8000001003055333,
+      "native_EE": 0.8000001003055333,
+      "residual": 0.0
+    },
+    {
+      "group": "Squid",
+      "production": 4.0494528,
+      "predation": 3.239217594189727,
+      "catch": 0.000345107,
+      "BA": 0.0,
+      "independent_EE": 0.8000001138893944,
+      "native_EE": 0.8000001138893944,
+      "residual": 0.0
+    },
+    {
+      "group": "Salmon returning",
+      "production": 1.5555279087018,
+      "predation": 0.45368436707236737,
+      "catch": 0.32019088,
+      "BA": 0.0,
+      "independent_EE": 0.4975000723183565,
+      "native_EE": 0.49750007231835647,
+      "residual": -1.1102230246251565e-16
+    },
+    {
+      "group": "Salmon outgoing",
+      "production": 0.028123688271640003,
+      "predation": 0.0034985007445105837,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.1243969393601365,
+      "native_EE": 0.1243969393601365,
+      "residual": 0.0
+    },
+    {
+      "group": "Other crabs",
+      "production": 4.390788911937601,
+      "predation": 3.5091716881453507,
+      "catch": 0.003849378,
+      "BA": 0.0,
+      "independent_EE": 0.8000888078664429,
+      "native_EE": 0.8000888078664428,
+      "residual": -4.440892098500626e-16
+    },
+    {
+      "group": "Shrimps",
+      "production": 12.803644799999999,
+      "predation": 10.242712614156037,
+      "catch": 0.00020376,
+      "BA": 0.0,
+      "independent_EE": 0.8000000417190609,
+      "native_EE": 0.800000041719061,
+      "residual": 1.7763568394002505e-15
+    },
+    {
+      "group": "Sea stars",
+      "production": 0.11557737289999999,
+      "predation": 0.0537304834251036,
+      "catch": 0.0031157560000000003,
+      "BA": 0.0,
+      "independent_EE": 0.491845747993322,
+      "native_EE": 0.491845747993322,
+      "residual": 0.0
+    },
+    {
+      "group": "Brittle stars",
+      "production": 5.498265409999999,
+      "predation": 1.1073206292892899,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.20139453931695342,
+      "native_EE": 0.20139453931695342,
+      "residual": 0.0
+    },
+    {
+      "group": "Urchins, dollars, cucumbers",
+      "production": 0.9948648600000001,
+      "predation": 0.3484841057698077,
+      "catch": 7.771e-05,
+      "BA": 0.0,
+      "independent_EE": 0.35036096839304154,
+      "native_EE": 0.35036096839304165,
+      "residual": 1.1102230246251565e-16
+    },
+    {
+      "group": "Snails",
+      "production": 1.5636168270000002,
+      "predation": 1.250894234461881,
+      "catch": 3.27e-07,
+      "BA": 0.0,
+      "independent_EE": 0.8000007034088287,
+      "native_EE": 0.8000007034088286,
+      "residual": -2.220446049250313e-16
+    },
+    {
+      "group": "Misc. crustaceans",
+      "production": 15.690138600000001,
+      "predation": 12.552115102236689,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000002691012996,
+      "native_EE": 0.8000002691012994,
+      "residual": -3.552713678800501e-15
+    },
+    {
+      "group": "Benthic amphipods",
+      "production": 43.4296306,
+      "predation": 34.743710733792135,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000001439982806,
+      "native_EE": 0.8000001439982803,
+      "residual": -7.105427357601002e-15
+    },
+    {
+      "group": "Anemones",
+      "production": 0.08886787,
+      "predation": 9.557357122337295e-05,
+      "catch": 7.4309e-05,
+      "BA": 0.0,
+      "independent_EE": 0.0019116309552977128,
+      "native_EE": 0.0019116309552977128,
+      "residual": 0.0
+    },
+    {
+      "group": "Corals and sea pens",
+      "production": 0.00028962269804885,
+      "predation": 7.65038421931036e-06,
+      "catch": 2.728e-05,
+      "BA": 0.0,
+      "independent_EE": 0.12060651480229885,
+      "native_EE": 0.12060651480229884,
+      "residual": 0.0
+    },
+    {
+      "group": "Worms etc.",
+      "production": 8.284245067935,
+      "predation": 6.62739457100942,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.7999998209446283,
+      "native_EE": 0.7999998209446283,
+      "residual": 0.0
+    },
+    {
+      "group": "Benthic urochordate",
+      "production": 0.8763839999999999,
+      "predation": 0.008196548828968066,
+      "catch": 6.744e-06,
+      "BA": 0.0,
+      "independent_EE": 0.009360386347728924,
+      "native_EE": 0.009360386347728926,
+      "residual": 1.734723475976807e-18
+    },
+    {
+      "group": "Sponge",
+      "production": 0.1075014,
+      "predation": 0.00026839490429731133,
+      "catch": 2.1099000000000002e-05,
+      "BA": 0.0,
+      "independent_EE": 0.0026929314808673316,
+      "native_EE": 0.002692931480867332,
+      "residual": 5.421010862427522e-20
+    },
+    {
+      "group": "Bivalves",
+      "production": 18.007573999999998,
+      "predation": 14.405778957275121,
+      "catch": 0.000280681,
+      "BA": 0.0,
+      "independent_EE": 0.8000000243383768,
+      "native_EE": 0.8000000243383769,
+      "residual": 1.7763568394002505e-15
+    },
+    {
+      "group": "Polychaetes",
+      "production": 11.65217427,
+      "predation": 9.321741055635433,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000001407149769,
+      "native_EE": 0.8000001407149769,
+      "residual": 0.0
+    },
+    {
+      "group": "Scyphozoid jellies",
+      "production": 0.0968,
+      "predation": 0.04647816381540291,
+      "catch": 0.00033712499999999997,
+      "BA": 0.0,
+      "independent_EE": 0.4836290166880466,
+      "native_EE": 0.48362901668804653,
+      "residual": -6.938893903907228e-18
+    },
+    {
+      "group": "Other zooplankton",
+      "production": 127.37406478159998,
+      "predation": 101.89926624767769,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000001132286838,
+      "native_EE": 0.8000001132286838,
+      "residual": 0.0
+    },
+    {
+      "group": "Copepods",
+      "production": 131.18099999999998,
+      "predation": 104.94486850061737,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000005221839854,
+      "native_EE": 0.8000005221839853,
+      "residual": -1.4210854715202004e-14
+    },
+    {
+      "group": "Pelagic microbes",
+      "production": 447.309325,
+      "predation": 357.84754799241813,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000001967149201,
+      "native_EE": 0.8000001967149202,
+      "residual": 5.684341886080802e-14
+    },
+    {
+      "group": "Benthic microbes",
+      "production": 264.708804,
+      "predation": 211.76704756237507,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.8000000164799017,
+      "native_EE": 0.8000000164799017,
+      "residual": 0.0
+    },
+    {
+      "group": "Primary production",
+      "production": 4451.953547222999,
+      "predation": 1416.7621450667425,
+      "catch": 0.0,
+      "BA": 0.0,
+      "independent_EE": 0.3182338113007666,
+      "native_EE": 0.3182338113007666,
+      "residual": 0.0
+    }
+  ],
+  "detritus_rows": [
+    {
+      "group": "Pelagic detritus",
+      "natural_M0_and_egestion_input": 1989.6630647215993,
+      "fishery_discard_input": 0.26413226925899497,
+      "inter_detritus_transfer": 0.0,
+      "total_inflow": 1989.9271969908584,
+      "consumer_demand": 383.42355153608503,
+      "independent_EE": 0.19268220069351938,
+      "independent_B": 3979.854393981717,
+      "source_PB": 0.5
+    },
+    {
+      "group": "Benthic detritus",
+      "natural_M0_and_egestion_input": 2067.2384817546267,
+      "fishery_discard_input": 0.41160082916768836,
+      "inter_detritus_transfer": 0.0,
+      "total_inflow": 2067.6500825837943,
+      "consumer_demand": 1067.8411400904772,
+      "independent_EE": 0.516451574221917,
+      "independent_B": 4135.300165167589,
+      "source_PB": 0.5
+    }
+  ],
+  "TL_matrix_rank": 50,
+  "TL_matrix_condition_number": 16.656967536446476,
+  "source_consumer_diet_sums": {
+    "Toothed whales": 1.0000000230000001,
+    "Gray whale": 1.000000008,
+    "Other baleen": 1.00000004,
+    "Other pinnipeds": 0.999999987,
+    "Procellarids": 1.000000137,
+    "Alcids piscivorous": 1.000000012,
+    "Larids": 1.000000057,
+    "Alcids planktivorous": 0.9999999799999999,
+    "Other seabirds": 0.9999999319999999,
+    "Cormorants": 0.9999999610000001,
+    "Sharks": 0.999999999,
+    "Walleye pollock": 1.000000221,
+    "Pacific cod": 1.0000000729999998,
+    "Pelagic forage fish": 1.0,
+    "Lg.-mouth flatfish": 0.9999999249999999,
+    "Sm.-mouth flatfish": 1.0000000908,
+    "Skates": 0.999999992,
+    "Other demersals": 1.0000000279999999,
+    "Eelpouts": 0.9999999929999999,
+    "Lg.-mouth sculpins": 1.000000065,
+    "Other sculpins": 0.99999978,
+    "Misc. shallow fish": 1.000000069,
+    "Octopods": 1.0,
+    "Squid": 1.0,
+    "Salmon returning": 1.0,
+    "Salmon outgoing": 1.0,
+    "Other crabs": 1.000000071,
+    "Shrimps": 1.0,
+    "Sea stars": 1.0,
+    "Brittle stars": 1.0,
+    "Urchins, dollars, cucumbers": 1.0,
+    "Snails": 1.0,
+    "Misc. crustaceans": 1.0,
+    "Benthic amphipods": 1.0,
+    "Anemones": 1.0,
+    "Corals and sea pens": 1.0,
+    "Worms etc.": 0.999999988,
+    "Benthic urochordate": 1.0,
+    "Sponge": 1.0,
+    "Bivalves": 1.0,
+    "Polychaetes": 1.0,
+    "Scyphozoid jellies": 1.000000111,
+    "Other zooplankton": 0.999999997,
+    "Copepods": 1.0,
+    "Pelagic microbes": 1.0,
+    "Benthic microbes": 1.0
+  },
+  "admissibility": {
+    "living_EE_min": 0.0019116309552977128,
+    "living_EE_max": 0.9089903275998711,
+    "living_EE_outside_0_1": [],
+    "detritus_EE": [
+      0.19268220069351938,
+      0.516451574221917
+    ],
+    "finite_nonnegative_B": true
+  },
+  "variant_status": "reviewed",
+  "variant_sha256": "7d805cb293dc4b1886bd8f57f1f122595a298c129824a6cc1a9eb0cbe3244a32",
+  "variant_tables": {
+    "Basic_input.csv": {
+      "present": true,
+      "sha256": "8d4a4bf36cb708192126648dc427f5e88305ff31fbe36436b9ad42705fc43912"
+    },
+    "Diet_composition.csv": {
+      "present": true,
+      "sha256": "9208eb1f1b408d7e6d5ad23cccf4c079bbf3dccdde19ad5023ac3ed4341d201d"
+    },
+    "Landings.csv": {
+      "present": true,
+      "sha256": "fe4cd16bdbbc9ebcd7a7aa22ac136a61e6a7934a1ca1f4b6e7706e0ebc9bcf49"
+    },
+    "Discards.csv": {
+      "present": true,
+      "sha256": "ff9b66cdbd3084a155eb34171c4e02c7af5dc49a5f740d739cb3ec621fa8a2d8"
+    },
+    "Detritus_fate.csv": {
+      "present": true,
+      "sha256": "e5a49dda5d2e1fb1165d6a7be4ead9fc3321fa52d778f1f4de1e5293ed05ab51"
+    },
+    "Biomass_accumulation.csv": {
+      "present": true,
+      "sha256": "5db15567138281fb0d9509dbff5805cc71a02616cd7cc193aefadc1ac892cb69"
+    },
+    "TL.xlsx": {
+      "present": true,
+      "sha256": "e2154ddbb0e6733c837d668ce02412f609fd7a32add11cffa23d614eebf9862b"
+    },
+    "Metadata.xlsx": {
+      "present": true,
+      "sha256": "173dccc4c7bdda6fbbbe1e1912b7e4c527b066d5460ad55c31e83e7e4300be3a"
+    },
+    "source_fidelity": {
+      "schema_version": 1,
+      "standard_tables": 8,
+      "companion_tables": 9,
+      "cells_checked": 28762,
+      "exact_value_and_missing_mask_match": false,
+      "numeric_value_and_missing_mask_match": true,
+      "max_numeric_difference": "4E-13",
+      "absolute_tolerance": "1e-12",
+      "relative_tolerance": "1e-14",
+      "errors": []
+    }
+  },
+  "limits": [
+    "Fidelity/equation verification does not establish geographic applicability, local-versus-external production attribution, catch mapping, or scientific PPR diagnostic eligibility.",
+    "All 49 original EE values are unreported; computed EE values must not be reclassified as source-reported observations in downstream floor eligibility.",
+    "Native fleet detritus fate fractions are retained at their printed values; their tiny residual below one is not renormalized."
+  ],
+  "checker_sha256": "fcad17d021017bd60fbdd126cb639c826c5b2136642e99c28fa1cd39f397c150",
+  "units": {
+    "biomass": "t wet weight/km2",
+    "production_consumption_catch_BA_detritus_flows": "t wet weight/km2/year",
+    "PB_QB": "year^-1",
+    "EE_GE_GS_TL": "dimensionless"
+  },
+  "native_only_review": {
+    "reviewed_at": "2026-11-14T17:32:19.735836+00:00",
+    "result": "pass_no_material_mismatches",
+    "checks": {
+      "source_identity": 2,
+      "identity": 8,
+      "source_known_scalar": 389,
+      "native_structural_zero": 50,
+      "source_catch": 49,
+      "native_diet_NA_zero": 2350,
+      "native_fate": 100,
+      "native_fate_real": 98,
+      "native_fishery_matrix": 100,
+      "rank": 1,
+      "independent_living_EE": 47,
+      "living_budget_residual": 47,
+      "source_structure": 1,
+      "independent_DET_B": 2,
+      "independent_DET_EE": 2,
+      "independent_DET_turnover": 2,
+      "DET_production_inflow": 2,
+      "independent_trophic_level": 50,
+      "native_GE": 49,
+      "input_stability": 10
+    },
+    "failures": [],
+    "native_source_hashes_and_outputs": {
+      "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_base.csv": "fef0e97bb4eb2929ae93fe0b01deed99356bbbbf5e164f750e2f7f439ce5d36a",
+      "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/inputs/native/Ecosense_GOA_diet.csv": "31c7306b54ce56af76bc146f91a79ab77d8bc6eb1c670fa880f7f572a4234475",
+      "regions/LME/LME_002/papers/GOA-2020/models/Whitehouse2020_Gulf_of_Alaska_1990-1994_Rpath49/model.json": "10dfbf57dcc9c1ca2e57460637709a061c9264a7e29bf17e0028fadf4c919125",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/groups.csv": "e7ae719d6451cf086bf8c8a8d241bfe4ab0c0038aac94011a0f9f32221785e68",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/groups_with_fleet.csv": "d3d539e326b6408567ccebbd22f3dea952afa0305f692dba942331349f43b056",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/diet.csv": "4e668bdbf0df56ca4543ee3f851aa961cf4ba2984127e54be07b12fe82a36aa2",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/detritus_fate.csv": "513ca769c389cda2a1695de62ccc084819d3fed5a3ee5e872e2652f779c6b37e",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/detritus_fate_with_fleet.csv": "a34aefa29ab808197a9a24cafe8692bff40ef8ed54290debe3b474a0cfdc6e6e",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/landings.csv": "403ce688539dbe1a483709eef04750a662311a7f96d64068f9a6be8ee2d51005",
+      "regions/LME/LME_002/work/2026-11-14_191000_native_balance_diagnostics/outputs/native_balance/discards.csv": "8fe570ef21ab220cf01b8e923c161e1987a23eecd6f90ca0538a653d55acb753"
+    },
+    "admissibility": {
+      "living_EE_min": 0.0019116309552977128,
+      "living_EE_max": 0.9089903275998711,
+      "living_EE_outside_0_1": [],
+      "detritus_EE": [
+        0.19268220069351938,
+        0.516451574221917
+      ],
+      "finite_nonnegative_B": true
+    },
+    "variant_status": "not_present_yet"
+  }
+}

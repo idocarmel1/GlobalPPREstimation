@@ -1,0 +1,481 @@
+{
+  "scenario": "source_exact_returns_to_36",
+  "pool_budget": [
+    {
+      "pool_id": 35,
+      "pool_name": "Discards",
+      "mortality_inflow": 0.0,
+      "egestion_inflow": 0.0,
+      "fishery_return_inflow": 0.0,
+      "detritus_import": 0.0,
+      "runtime_p": 0.0,
+      "predation_outflow": 0.20750363203745528,
+      "catch_outflow": 0.0,
+      "net_migration_outflow_including_import_convention": 0.0,
+      "detritus_stock_residual": -0.20750363203745528,
+      "runtime_derived_BA": -0.20750363203745528,
+      "source_BA": 0.0,
+      "source_BA_balance_gap": -0.20750363203745528,
+      "units": "t wet weight km^-2 yr^-1",
+      "interpretation": "Runtime BA is inherited/recomputed closure; source BA is separately preserved and is not this residual."
+    },
+    {
+      "pool_id": 36,
+      "pool_name": "Detritus",
+      "mortality_inflow": 799.9944053044838,
+      "egestion_inflow": 39.52383795271174,
+      "fishery_return_inflow": 0.005859524956463247,
+      "detritus_import": 0.0,
+      "runtime_p": 839.524102782152,
+      "predation_outflow": 43.29761226532795,
+      "catch_outflow": 0.0,
+      "net_migration_outflow_including_import_convention": 0.0,
+      "detritus_stock_residual": 796.226490516824,
+      "runtime_derived_BA": 796.226490516824,
+      "source_BA": 0.0,
+      "source_BA_balance_gap": 796.226490516824,
+      "units": "t wet weight km^-2 yr^-1",
+      "interpretation": "Runtime BA is inherited/recomputed closure; source BA is separately preserved and is not this residual."
+    }
+  ],
+  "floor_info": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "affected_groups": [
+      32,
+      27,
+      26,
+      25,
+      12,
+      5,
+      4,
+      1
+    ],
+    "external_mortality_export_total": 65.52118784337331,
+    "negative_detritus_stock_residuals": {
+      "35": -0.20750363203745528
+    },
+    "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+    "application_stage": "completed audited initialization",
+    "researcher_approval": "Original signed review is separate from this calculation assumption"
+  },
+  "input_balance": true,
+  "living_preservation": {
+    "p": true,
+    "q": true,
+    "catch": true,
+    "predation": true,
+    "growth": true,
+    "immigration": true,
+    "emigration": true,
+    "net_migration": true,
+    "respiration": true,
+    "egestion": true,
+    "GE": true,
+    "GS": true,
+    "TL": true,
+    "living_biomass": true,
+    "diet": true,
+    "natural_detritus_fate": true,
+    "entire_catch_vector": true
+  },
+  "methods": [
+    {
+      "method": "GE",
+      "execution": "returned",
+      "diagnostic": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 1.6724311166010748e-14,
+          "q_max_rel_residual": 1.0816376129758058e-15,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 1.1856172932311893e-07,
+          "n_negative_catch": 0,
+          "n_zero_catch": 9,
+          "total_catch": 0.9408370594280631,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "diagnostic_basis": "effective calculation runtime",
+          "before_floor_ee0_groups": [
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "external_mortality_export": 65.52118784337331,
+          "negative_detritus_stock_residuals": {
+            "35": -0.20750363203745528
+          }
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.03885877929538839,
+          "b_converges": true,
+          "rho_living": 0.28190652555469514,
+          "living_converges": true,
+          "sppr_det": {
+            "type": "mapping",
+            "items": [
+              [
+                35,
+                0.0
+              ],
+              [
+                36,
+                1.0915585657472304
+              ]
+            ]
+          },
+          "max_sppr_det": 1.0915585657472304,
+          "max_sppr_group": {
+            "seq": 26,
+            "tl": 2.9951467706556603,
+            "sppr": 1507.144711556867,
+            "inv_te": 43.59499866373839
+          },
+          "max_tl_group": {
+            "seq": 33,
+            "tl": 3.7240484677664725,
+            "sppr": 107.30234934670986,
+            "inv_te": 1.7094017721021928
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 971.6366492204323,
+          "outflow": 971.6366492204327,
+          "rel_gap": 3.510165177883e-16
+        },
+        "footprint": {
+          "ppr_all": 35.611467012724624,
+          "ppr_inner": 32.16418306316697,
+          "ppr_pp_only": 20.88586345794278,
+          "npp": 960.4455346019244,
+          "ppr2npp": 0.03348881524708015,
+          "ppr2npp_pp_only": 0.021746015474577992
+        },
+        "config": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "ee_floor_assumption": {
+            "use_ee_floor": true,
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "affected_groups": [
+              32,
+              27,
+              26,
+              25,
+              12,
+              5,
+              4,
+              1
+            ],
+            "external_mortality_export_total": 65.52118784337331,
+            "negative_detritus_stock_residuals": {
+              "35": -0.20750363203745528
+            },
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "application_stage": "completed audited initialization",
+            "researcher_approval": "Original signed review is separate from this calculation assumption"
+          },
+          "TE_option": "GE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "would_pool": false,
+          "model": "PAT2024_FalklandShelf_2020_native (2020)"
+        },
+        "warnings": [
+          "Negative detritus stock residuals remain unexplained limitations, not evidenced source supply: {'35': -0.20750363203745528}"
+        ]
+      },
+      "weighted_budget": {
+        "total_catch": 35.61146701272462,
+        "internal_return": 0.5377328447476971,
+        "external_catch": 35.07373416797692,
+        "growth": 869.1278459984952,
+        "net_migration": -0.8066092855060996,
+        "det_export": 0.0,
+        "external_mortality_sink": 68.24167833946652,
+        "weighted_outflow": 971.6366492204326,
+        "inflow": 971.6366492204323,
+        "source_BA0_weighted_gap": -869.1278459984952,
+        "source_BA0_outflow_arithmetic_only": 102.50880322193734,
+        "total_equals_external_plus_return": true,
+        "fishery_footprint_retains_total_catch": true
+      },
+      "matrix_check": {
+        "shape": [
+          37,
+          5
+        ],
+        "all_group_ids": [
+          37,
+          36,
+          35,
+          22,
+          12,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "negative_SPPR_count": 0,
+        "nonfinite_SPPR_count": 0,
+        "unfished_recipient_ids": [
+          37,
+          36,
+          35,
+          22,
+          12,
+          32,
+          18,
+          15,
+          1
+        ]
+      }
+    },
+    {
+      "method": "TE",
+      "execution": "returned",
+      "diagnostic": {
+        "status": "WARN",
+        "model_input": {
+          "status": "WARN",
+          "is_model_balanced": true,
+          "p_max_rel_residual": 1.6724311166010748e-14,
+          "q_max_rel_residual": 1.0816376129758058e-15,
+          "dc_rows_sum_to_1": true,
+          "dc_max_deviation": 1.1856172932311893e-07,
+          "n_negative_catch": 0,
+          "n_zero_catch": 9,
+          "total_catch": 0.9408370594280631,
+          "has_catch": true,
+          "has_ee_issues": false,
+          "n_ee0": 0,
+          "n_ee_marginal": 0,
+          "n_ee_gt_1": 0,
+          "ee0_groups": [],
+          "ee_marginal_groups": [],
+          "diagnostic_basis": "effective calculation runtime",
+          "before_floor_ee0_groups": [
+            1
+          ],
+          "before_floor_ee_marginal_groups": [],
+          "external_mortality_export": 65.52118784337331,
+          "negative_detritus_stock_residuals": {
+            "35": -0.20750363203745528
+          }
+        },
+        "divergence": {
+          "status": "OK",
+          "solve_error": null,
+          "b": 0.001467371595623809,
+          "b_converges": true,
+          "rho_living": 0.30979371310957526,
+          "living_converges": true,
+          "sppr_det": {
+            "type": "mapping",
+            "items": [
+              [
+                35,
+                0.0
+              ],
+              [
+                36,
+                0.9410691011626124
+              ]
+            ]
+          },
+          "max_sppr_det": 0.9410691011626124,
+          "max_sppr_group": {
+            "seq": 27,
+            "tl": 2.8602631395354616,
+            "sppr": 399525.3309755933,
+            "inv_te": 106.25000535510503
+          },
+          "max_tl_group": {
+            "seq": 33,
+            "tl": 3.7240484677664725,
+            "sppr": 208.2676627950793,
+            "inv_te": 2.011060851946783
+          },
+          "n_negative_sources": 0,
+          "expect_negatives": false,
+          "near_singular_te": []
+        },
+        "balance": {
+          "status": "OK",
+          "is_balanced": true,
+          "inflow": 971.6366492204323,
+          "outflow": 971.6366492204323,
+          "rel_gap": 0.0
+        },
+        "footprint": {
+          "ppr_all": 89.4135556062374,
+          "ppr_inner": 82.84500792107036,
+          "ppr_pp_only": 60.48699980450715,
+          "npp": 960.4455346019244,
+          "ppr2npp": 0.08625685157191877,
+          "ppr2npp_pp_only": 0.06297806343550463
+        },
+        "config": {
+          "use_ee_floor": true,
+          "ee_floor": 0.1,
+          "ee_threshold": 0.1,
+          "ee_floor_assumption": {
+            "use_ee_floor": true,
+            "ee_floor": 0.1,
+            "ee_threshold": 0.1,
+            "affected_groups": [
+              32,
+              27,
+              26,
+              25,
+              12,
+              5,
+              4,
+              1
+            ],
+            "external_mortality_export_total": 65.52118784337331,
+            "negative_detritus_stock_residuals": {
+              "35": -0.20750363203745528
+            },
+            "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+            "application_stage": "completed audited initialization",
+            "researcher_approval": "Original signed review is separate from this calculation assumption"
+          },
+          "TE_option": "TE",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "det_collapse_mode": "never",
+          "explicit_TE": false,
+          "method": "multi_detritus",
+          "would_pool": false,
+          "model": "PAT2024_FalklandShelf_2020_native (2020)"
+        },
+        "warnings": [
+          "Negative detritus stock residuals remain unexplained limitations, not evidenced source supply: {'35': -0.20750363203745528}"
+        ]
+      },
+      "weighted_budget": {
+        "total_catch": 89.4135556062374,
+        "internal_return": 3.7828736007701673,
+        "external_catch": 85.63068200546722,
+        "growth": 749.3041477525289,
+        "net_migration": -1.3698630914602983,
+        "det_export": 0.0,
+        "external_mortality_sink": 138.07168255389652,
+        "weighted_outflow": 971.6366492204323,
+        "inflow": 971.6366492204323,
+        "source_BA0_weighted_gap": -749.3041477525289,
+        "source_BA0_outflow_arithmetic_only": 222.3325014679034,
+        "total_equals_external_plus_return": true,
+        "fishery_footprint_retains_total_catch": true
+      },
+      "matrix_check": {
+        "shape": [
+          37,
+          5
+        ],
+        "all_group_ids": [
+          37,
+          36,
+          35,
+          22,
+          12,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "negative_SPPR_count": 0,
+        "nonfinite_SPPR_count": 0,
+        "unfished_recipient_ids": [
+          37,
+          36,
+          35,
+          22,
+          12,
+          32,
+          18,
+          15,
+          1
+        ]
+      }
+    }
+  ]
+}

@@ -30,20 +30,20 @@ The ledger describes the transformation at completed audited initialization. A l
 
 ## Configuration migration and method reuse
 
-An authorized migration persists explicit `use_ee_floor` and `ee_floor` in each exact model-region result configuration. Discover registered researcher-validated pairs generically, including nondefault candidates; do not hard-code a regional list. Preserve the rest of each audited configuration, including Humboldt's `det_collapse_mode='auto'`, `balance_BA_after_DC_normalization=False` where recorded, method options and Monte Carlo sample counts.
+An authorized migration persists explicit `use_ee_floor` and `ee_floor` in each exact model-region result configuration. Limit canonical discovery to the requested units or exact pairs before adapter discovery, backups or scientific work, including requested nondefault candidates; an empty scope performs no adapter work. A full-project migration requires an explicit request. Discover within that scope generically rather than hard-coding a regional list. Preserve the rest of each audited configuration, including Humboldt's `det_collapse_mode='auto'`, `balance_BA_after_DC_normalization=False` where recorded, method options and Monte Carlo sample counts.
 
-From the project root, use the authorized migration entry point:
+From the project root, these commands request a project-wide migration and require explicit authorization for that scope:
 
 ```powershell
 python tools/cli/project.py --migrate-ee-floor --ee-floor 0.1
 python tools/cli/project.py --migrate-ee-floor --no-ee-floor
 ```
 
-The first command records ON at the requested threshold (0.1 is also the default); the second explicitly records OFF. Ordinary coverage publication does not silently migrate a historical calculation.
+The first command records ON at the requested threshold (0.1 is also the default); the second explicitly records OFF. For a regional/exact-pair request, pass that scope through the maintained scoped API instead of using an unscoped migration. Ordinary publication, saved-data rendering and review/layout refresh do not silently migrate a historical calculation or trigger a scientific inventory.
 
 Archived loader bytes remain the historical base. An explicit `calculation_engine_upgrade='ee_floor_v1'` runs current accounting after the archived audited initialization and records both base-loader and current-engine hashes. An omitted historical floor flag is unknown historical provenance, not evidence that the floor was ON. Reject a requested ON configuration when its pinned engine cannot implement the floor and no explicit supported upgrade is recorded; never silently ignore it or relabel old results.
 
-Check every engine `ALL_METHOD_KEYS` entry (currently 22). Rerun methods and diagnostics whose actual numerical dependencies changed, including affected Monte Carlo methods within the authorized migration. Preserve compatible unaffected results and their restrictions. Metadata-only changes, broader fingerprints and coverage-schema changes do not justify new Monte Carlo draws. Record fresh draws as fresh results, retain the existing sample count/settings, and do not claim equality with historical draws. Recalculate dependent regional arithmetic, invalidate affected sensitivity bounds, and publish only within the existing authorized adoption scope.
+For an expressly requested full method migration, account for every engine `ALL_METHOD_KEYS` entry (currently 22) within the authorized model scope; a narrower request retains its stated methods and does not expand to other units. Rerun methods and diagnostics whose actual numerical dependencies changed, including affected Monte Carlo methods within the authorized migration. Preserve compatible unaffected results and their restrictions. Metadata-only changes, broader fingerprints, adapter changes and coverage-schema changes do not justify new Monte Carlo draws. An authorized adoption of already authenticated compatible floor results needs no fresh solve. Record fresh draws as fresh results, retain the existing sample count/settings, and do not claim equality with historical draws. Recalculate dependent regional arithmetic, invalidate affected sensitivity bounds, and publish only within the existing authorized adoption scope.
 
 ## Review and evidence boundary
 

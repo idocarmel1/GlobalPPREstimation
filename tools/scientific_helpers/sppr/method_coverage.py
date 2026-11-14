@@ -238,7 +238,21 @@ def _defaults(callable_):
             if name != 'self' and p.default is not inspect.Parameter.empty}
 
 
+def _require_supported_runtime_initialization(flags):
+    """Refuse custom retained scenarios before touching a stock engine/loader."""
+    if flags is None or 'runtime_initialization' not in flags:
+        return
+    initialization = flags['runtime_initialization']
+    if isinstance(initialization, dict) and not initialization:
+        return
+    detail = ('Unsupported retained runtime initialization' if isinstance(initialization, dict)
+              else 'Malformed runtime_initialization declaration')
+    raise ValueError('Configuration unavailable: '+detail+'; use authenticated saved runtime evidence. '
+                     'Stock reconstruction of this scenario is not supported.')
+
+
 def _constructor(flags, model_path=None):
+    _require_supported_runtime_initialization(flags)
     _, _, calculator, _ = _audited_engine(flags, model_path)
     supplied = flags.get('constructor')
     if not isinstance(supplied, dict):
@@ -421,6 +435,7 @@ def _runtime(model):
 
 
 def _load(model_path, constructor, flags=None):
+    _require_supported_runtime_initialization(flags)
     _, modeldata, calculator, _ = _engine(flags, model_path)
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter('always')

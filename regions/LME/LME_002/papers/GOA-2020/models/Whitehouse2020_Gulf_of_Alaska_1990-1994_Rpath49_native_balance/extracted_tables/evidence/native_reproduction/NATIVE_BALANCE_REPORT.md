@@ -1,0 +1,15 @@
+# Native Gulf of Alaska Rpath balance reproduction
+
+The official 49-group Ecosense.GOA parameter set was balanced by the unchanged native reader and Ecopath functions at commit `fe63f6d370d942ff1786f4d649e432fbfb85f81b`. This executed R 4.5.1, data.table 1.18.6.1 and MASS 7.3-65 in an isolated portable runtime; no global R installation was made. The exact archived RDA model, diet and pedigree components agree with the CSV-built parameter object at zero tolerance, including attributes.
+
+The 47 living EE equations have rank 47. The largest absolute living-budget residual is 5.68434e-14 t/km²/year; native EE differs from direct per-group division by at most 2.22045e-16. Both detritus budgets and biomass formulas reconcile with zero recorded difference. All 49 EE values are finite and within [0,1], ranging from 0.0019116309553 to 0.9089903276. No source-known biological rate, biomass, BA, diet or fishery value was fitted or repaired.
+
+Native Rpath converts 1,810 raw diet NA cells to zero on its runtime copy, computes living and detrital EE, derives both detritus biomasses from inflow and the explicit source turnover 0.5/year, and calculates TL. It preserves the source diet sums rather than normalizing them. Group and matrix exports retain exact native names and order; the full 50-row views retain the fleet. CSV numbers use 17 significant digits, and the exact native R object is retained in `native_balanced.rds` with a successful identical-object reload check.
+
+Natural detrital inputs and fishery discard returns are separated in `detritus_balance_audit.csv`. The source fleet fractions sum to 0.9999999 and are retained without adjustment. Source JSON, CSVs, RDA and pinned R files are byte-for-byte unchanged. The matrix condition number is about 1.02795e+08, reflecting large differences in production scale; the diagonal direct-equation check provides an independent numerical reconciliation.
+
+The runtime emitted one package-build warning (data.table was compiled under R 4.5.3); the native balance itself emitted no warnings. An initial environment-only startup failure was traced to unsupported inherited `LC_ALL=C.UTF-8`. A child-process Windows UTF-8 locale resolved Hebrew path handling. The failed startup and diagnostic probes are retained in work QA; R equations and global settings were not changed.
+
+This is a native mass-balance result, not a PPR diagnostic or annual regional estimate. The pinned code includes changes after the 2020 publication; the run identifies its actual source commit and environment. The aggregate still combines internal and outside primary production/detritus, and the historical period, geographic overlap, species mapping and researcher approval limitations remain. No map, selection or registry was changed by this stage.
+
+See `native_summary.json`, `metrics.csv`, `living_balance_audit.csv`, `detritus_balance_audit.csv`, `source_runtime_parameter_ledger.csv`, `source_runtime_diet_ledger.csv` and `rda_csv_comparison.csv` for the numerical evidence.

@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-14T18:20:18.572112+00:00",
+  "unit_id": "LME_022",
+  "model_id": "ICES_WGSAM2015_North_Sea_1991",
+  "status": "read_only_audit_complete_ready_for_bounded_retained_only_staging",
+  "adoption_prepared": false,
+  "adoption_performed": false,
+  "scientific_solve_performed": false,
+  "new_MC_draws": false,
+  "authorization": {
+    "source_chat": "01a1dabb-4107-7d32-bc28-80f6a22b66a5",
+    "actual_human_message_id": "01a1db3d-bf6c-7601-acc0-f0a36871b95d",
+    "actual_human_text": "I've validated the model, and signed it in the docx.\nI want to remove the following groups from PPR calculation:\nBaleenWhales (1), ToothedWhales (2), Seals (3), SurfaceFeedingSeabirds (4) and DivingSeabirds (65).\nlet the coordinator know that.\nthe coordinator may now proceed to updating project.xlsx, the map, and the trends",
+    "no_source_chat_message_sent_by_this_auditor": true,
+    "excluded_ids": [
+      1,
+      2,
+      3,
+      4,
+      65
+    ],
+    "excluded_names": [
+      "BaleenWhales",
+      "ToothedWhales",
+      "Seals",
+      "SurfaceFeedingSeabirds",
+      "DivingSeabirds"
+    ],
+    "policy": "Register explicit display exclusions; retain every ecological group and original source coefficient. Verify displayed historical contributions under project policy."
+  },
+  "pins": {
+    "regional_workbook": {
+      "path": "regions/LME/LME_022/LME_022.xlsx",
+      "sha256": "60830e20d8751993c4eb0e87a3f08e7a26ddf7e942da45d73d84e76e3fbff829"
+    },
+    "canonical_model_sha256": "450e0f43822a34a02d4d26ad71358aeef32af8daaff7fcf07cd95ef2131cf97a",
+    "signed_DOCX_sha256": "aa5516a7d20ddd25ac803b026ea96627a8fd51897b02c675d6aedbb2f1643b90",
+    "taxon_appendix_sha256": "1d2f90b59571e8100136f526c2d88addaa934bb3b0b4d5049462b00135b60603",
+    "mapping_decisions_sha256": "b0be4c37e3f5b1827f2c0e64f08f5cb84a5f963368f71f1fc63e20fe32fe3c81",
+    "primary_evidence_index_sha256": "eb267423f4e9c8c30a0d9366a788e3ab22cb014468591f3eea9bd3621d74f6da",
+    "primary_run_manifest_sha256": "683cd18862b945cf2c559ac20e99641d04997033eadabefcb16b023c6b1aba07"
+  },
+  "primary_retained_package": "results/diagnostics/2026-11-14_loader_repair",
+  "primary_scope": {
+    "source_groups": 69,
+    "runtime_groups": 70,
+    "synthetic_import_id": 70,
+    "basal_columns": [
+      70,
+      69,
+      68,
+      67,
+      66
+    ],
+    "separate_detritus_pools": {
+      "67": "DetritusDOMWaterColumn",
+      "68": "DetritusPOMSediment",
+      "69": "Discards"
+    },
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": false,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": false,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    },
+    "method_options": {
+      "DET_TE_vals": 1,
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1,
+      "det_external_sppr": 0,
+      "fix_EE_0_cases": true
+    },
+    "floor_affected_ids": [
+      65,
+      61,
+      10,
+      9,
+      4,
+      3,
+      2,
+      1
+    ],
+    "external_mortality_export_total": 1.983704066273114
+  },
+  "actual_engine": {
+    "git_commit": "38cb75d066c5f78d47ba20fc6ab8545a9a6d5c69",
+    "hashes": {
+      "ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+      "PPRCalculator.py": "ee34361a2048c78301b1d8a5172d25c37d77034b9e67c77b7a6794d5ce784b51",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1"
+    },
+    "all_four_git_blobs_independently_hashed_and_matched": true,
+    "current_PPRCalculator_differs": true,
+    "model_local_loader_repair_inputs_are_not_the_executed_ModelData_or_PPRCalculator_bytes": true,
+    "guard_requirement": "Pin exact recorded engine bytes from Git in the staged model-local evidence. Do not substitute current engine or similarly named preparation copies. Do not claim reconstruction/equivalence unless proven; a retained-runtime unsupported marker can block future unverified stock reconstruction."
+  },
+  "authenticated_checks": {
+    "primary_index_artifacts": 8,
+    "summary_file_hashes": 7,
+    "validation_evidence_index_current_matches": 91,
+    "validation_evidence_index_only_mismatch": "report entry still binds unsigned generated draft 8f14433a844b7b85c3ff88195c75f0b996d0a8835d088a3095c678cf0fa28954; current signed DOCX has separate authenticated hash above. Preserve draft QA as historical; register actual signed hash.",
+    "all_3_source_matrices_finite_nonnegative": true,
+    "matrix_shape_each": [
+      70,
+      5
+    ],
+    "source_matrix_cells_each": 350,
+    "scope_coefficients_each": 210,
+    "approved_primary_coefficients_total": 630,
+    "all_scope_sums_reconciled": true,
+    "all_method_runtime_before_after_exact_to_constructor": true,
+    "full_return_matrix_numeric_values_axes_dtypes_exact": true,
+    "matrix_metadata_difference_only": "Full-return frame index_names=[null]; normalized source_matrix index_names=[group_seq]. No numeric difference."
+  },
+  "diagnostics": {
+    "new_GE": {
+      "status": "WARN",
+      "rho_living": 0.2894427191062622,
+      "b": 0.8822051250081107,
+      "max_detritus_SPPR": 440.27445855458177
+    },
+    "new_TE_EEfix": {
+      "status": "WARN",
+      "rho_living": 0.5734463993696682,
+      "b": 0.1554967742366123,
+      "max_detritus_SPPR": 816.3858058146532
+    },
+    "new_WithEgestion": {
+      "status": "WARN",
+      "rho_living": 0.22945022049471692,
+      "b": 0.9151607499042561,
+      "max_detritus_SPPR": 182.03671954514908
+    },
+    "all_strict_model_and_SPPR_balances": true,
+    "restrictions": [
+      "Diet rows deviate from1 by8.32503e-5; stricter1e-6 check fails, no normalization performed.",
+      "GE and With Egestion high recycling loop gain; all3 high detritus cost.",
+      "TE near-zero transfer efficiencies at IDs1,2,3,4,65 remain.",
+      "Native accepted Key Run and deposited Rpath port differ; no source-fidelity upgrade implied.",
+      "Floor-derived detritus stock residual is a runtime assumption, not observed biomass accumulation."
+    ]
+  },
+  "mapping": {
+    "path": "model_validation/evidence/mapping/mapping_decisions.json",
+    "taxa": 384,
+    "assignment_rows_including_zero_candidates": 715,
+    "zero_weight_candidates": 88,
+    "unresolved": 0,
+    "all_source_group_names_ids_match": true,
+    "all_weights_finite_nonnegative_sum_to_one": true,
+    "all_6_recorded_input_hashes_match_current": true,
+    "current_catch_taxon_universe_exact": true,
+    "appendix_all384_taxa_confidence_catch_and_classic_PPR_reconciled": true,
+    "missing_classic_TL_or_coefficient_labels": 72,
+    "missing_classic_positive2019catch_labels": 0,
+    "confidence_counts": {
+      "High": 33,
+      "Medium": 249,
+      "Low": 16,
+      "Very low": 86
+    },
+    "2019_catch_tonnes": 2717260.6982051707,
+    "2019_independent_classic_PPR_tC": 188909420.82919472,
+    "historical_exclusion_caveat": {
+      "taxon": "Cetorhinus maximus",
+      "mapped_group_id": 1,
+      "mapped_group_name": "BaleenWhales",
+      "weight": 1.0,
+      "confidence": "Very low",
+      "rationale": "Documented predecessor large-filter-feeder analogue; extreme fish/mammal physiological mismatch retained explicitly.",
+      "2019_catch": 0,
+      "positive_catch_years": 62,
+      "first_positive_year": 1950,
+      "last_positive_year": 2012,
+      "sum_catch_tonnes_1950_2019": 50893.6574923636,
+      "max_annual_catch_tonnes": 5366.6666209834,
+      "required_action": "Keep reviewed mapping/network intact. Test five display exclusions over the whole trend period; do not state the excluded groups have no historical catch allocation."
+    }
+  },
+  "read_only_arithmetic_crosscheck_2019_full_ICES_support_tC": {
+    "new_GE": {
+      "all": 81995672.71006857,
+      "inner": 81995672.71006857,
+      "PP": 6707274.087629048
+    },
+    "new_TE_EEfix": {
+      "all": 142091695.3789536,
+      "inner": 142091695.3789536,
+      "PP": 32052560.001176093
+    },
+    "new_WithEgestion": {
+      "all": 31489630.695036277,
+      "inner": 31489630.695036277,
+      "PP": 2540697.8659069887
+    },
+    "note": "Exact saved mapping weights times retained group coefficients and2019 catch, divided by9 once; regional pipeline rounds taxon SPPR to6 decimals, so reconcile any tiny arithmetic-only difference honestly. These are full ICES support totals, not common-support Scotland-comparison totals."
+  },
+  "current_integration_state": {
+    "already_selected": true,
+    "results_model_id": null,
+    "empty_tables": [
+      "Groups",
+      "Group SPPR",
+      "Matching",
+      "Annual",
+      "Taxon SPPR",
+      "Taxon PPR inspected year",
+      "Mapping review",
+      "Allocation assumptions"
+    ],
+    "source_snapshot_manifest_all_absent": true,
+    "independent_inputs_present": [
+      "Catch1152rows/384taxa/3bases",
+      "Classic Taxa312",
+      "NPP6methods"
+    ],
+    "catch_basis": "catch",
+    "inspected_year": 2019,
+    "stale_metadata": "Overview source_note still describes Scotland; selection_rationale says approval not established. Preserve original wording in pre-adoption archive and distinguish current integration provenance; do not display historical Scotland note as current ICES provenance."
+  },
+  "signature_parser": {
+    "signed_text": "Researcher name: Ido Carmel | Review date: 14/11/2026; MODEL VALIDATED",
+    "initial_read_report_failure_reproduced": true,
+    "cause": "Old regex matched lowercase review date only; actual signed label begins uppercase Review.",
+    "current_read_report_passes": true,
+    "current_regex_uses": "[Rr]eview date",
+    "root_fix_note": "Root reports capitalization and numbered Near-zero TE name fixes with11+12regression tests passed; this auditor did not edit shared parser or signed DOCX.",
+    "parsed_identity": "Ido Carmel",
+    "parsed_date": "2026-11-14"
+  },
+  "smallest_next_stage": [
+    "Create one model-local guarded retained-adoption package; snapshot the current empty/pending regional workbook and record absent source/snapshot/manifest honestly.",
+    "Import exact70runtime Groups,630GE/TE/WithE scope coefficients,3WARN diagnostics, floor summary/ledger and actual pinned engine identity. Keep all source groups and synthetic import.",
+    "Import reviewed384taxon decisions as715keyed Matching rows (including88zero-weight candidates), retain confidence/reasons/rules and source evidence. Do not regenerate taxonomy, weights, scientific matrices or MC.",
+    "Calculate only dependent regional taxon/annual PPR and ratios using existing Catch/Classic/NPP. Preserve independent/manual inputs and missingness; label old Scotland metadata historical.",
+    "Register the actual signed DOCX with explicit five exclusions, publish scoped LME022 Project/map/trends/source views under coordinator lock, and verify exact source-review/default plus whole-period exclusion display. Registration currently cannot resolve the five IDs until Groups exist, so order this bounded transaction around the staged Groups; do not bypass the identifier gate.",
+    "Keep pooled193500 and all Scotland comparison/control packages as sensitivity evidence only; do not promote them as primary."
+  ],
+  "estimated_remaining_minutes": {
+    "guarded_staging_and_independent_QA": 25,
+    "coordinator_registration_and_scoped_publication": 10,
+    "range_total": [
+      30,
+      45
+    ],
+    "basis": "Retained-only import and workbook arithmetic; no scientific execution. Includes one bounded mapping/registration integration and historical exclusion check."
+  }
+}

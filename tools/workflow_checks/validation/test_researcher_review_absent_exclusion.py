@@ -4,8 +4,8 @@ from pathlib import Path
 from xml.etree import ElementTree as E
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[3]))
-from tools.project_core.validation.researcher_review import register_review,sha
-from tools.project_core.workbooks.workbooks import write_book
+from tools.project_core.validation.researcher_review import approved_review,register_review,sha
+from tools.project_core.workbooks.workbooks import read_book,records,write_book
 
 ROOT=Path(__file__).resolve().parents[3]
 MODEL='34_1_Bay_of_Bengal_(1978)'
@@ -46,6 +46,35 @@ class AbsentExclusionTests(unittest.TestCase):
     def put_groups(self,groups):
         write_book(self.region,{'Overview':{'Settings':(['field','value'],[['selected_model_id',MODEL],['calculation_input_sha256','fixture-input']])},
             'Selected model groups':{'Groups':(['seq','group_name'],groups)}})
+
+    def put_bare_removal(self):
+        with zipfile.ZipFile(self.report) as source:
+            parts={name:source.read(name) for name in source.namelist()}
+        document=E.fromstring(parts['word/document.xml'])
+        node=next(t for t in document.iter(W+'t') if (t.text or '').startswith('Removed groups from calculation:'))
+        node.text='Removed groups from calculation:\nMarine mammals'
+        parts['word/document.xml']=E.tostring(document)
+        with zipfile.ZipFile(self.report,'w') as target:
+            for name,data in parts.items():target.writestr(name,data)
+
+    def test_bare_name_registration_matches_exclusion_note_and_signed_source(self):
+        self.put_bare_removal();self.put_groups([[1,'Fish'],[27,'Marine mammals']])
+        report_sha,region_sha=sha(self.report),sha(self.region)
+        register_review(self.project,self.report,'LME_034',MODEL,[27])
+        metadata=records(read_book(self.project),'Models & coverage','Models')[0]
+        review=approved_review(self.root,metadata,read_book(self.region))
+        self.assertEqual(review['excluded_group_ids'],['Marine mammals'])
+        self.assertIn('marine mammals are excluded from displayed PPR',review['note'])
+        self.assertEqual(review['sections'][2]['rows'][0]['text'],'Removed groups from calculation:\nMarine mammals')
+        self.assertEqual((sha(self.report),sha(self.region)),(report_sha,region_sha))
+
+    def test_absent_bare_name_with_explicit_empty_exclusions_has_absence_note(self):
+        self.put_bare_removal()
+        summary=json.loads(register_review(self.project,self.report,'LME_034',MODEL,[])['researcher_review_summary'])
+        self.assertEqual(summary['excluded_group_ids'],[])
+        self.assertIn('notes name marine mammals for exclusion',summary['note'])
+        self.assertIn('contains no matching group',summary['note'])
+        self.assertIn('No model groups are excluded from displayed PPR',summary['note'])
 
     def test_actual_absent_seabirds_with_explicit_empty_exclusions_preserves_source_and_applies_none(self):
         report_sha,region_sha=sha(self.report),sha(self.region)

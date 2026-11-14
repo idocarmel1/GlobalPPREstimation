@@ -1,4 +1,4 @@
-"""Publication preflights include nondefault validated model results."""
+"""Scientific preparation is scoped and saved-data publishing never executes it."""
 import sys
 import tempfile
 import types
@@ -18,13 +18,13 @@ class CoveragePublicationTests(unittest.TestCase):
         self.root = Path(self.temporary.name)
         write_book(self.root / 'Project.xlsx', {'Models & coverage': {'Models': (['unit_id','model_id'],[])}})
         self.events = []
-        self.coverage = types.ModuleType('tools.project_core.calculations.coverage')
+        from tools.project_core.calculations import coverage
+        self.coverage = coverage
         def ensure(root, **kwargs):
-            self.events.append(('coverage', kwargs.get('lock_held')))
+            self.events.append(('coverage', kwargs.get('lock_held'), kwargs.get('units'), kwargs.get('model_pairs')))
             return {'changed_units': ['LME_002'], 'models': {}}
-        self.coverage.ensure_validated_coverage = ensure
         self.addCleanup(patch.stopall)
-        patch.dict(sys.modules, {'tools.project_core.calculations.coverage': self.coverage}).start()
+        patch.object(self.coverage, 'ensure_validated_coverage', side_effect=ensure).start()
         self.region = self.root / 'regions/LME/LME_002/LME_002.xlsx'
         patch.object(update_project, 'region_directory', return_value=self.region.parent).start()
         patch.object(build_html, 'region_directory', return_value=self.region.parent).start()
@@ -33,17 +33,21 @@ class CoveragePublicationTests(unittest.TestCase):
         requested = self.root / 'regions/LME/LME_001/LME_001.xlsx'
         with patch.object(update_project, '_update', side_effect=lambda root, paths, all_regions: self.events.append(('update', list(paths)))):
             update_project.update(self.root, [requested])
-        self.assertEqual(self.events, [('coverage', True), ('update', [requested, self.region])])
+        self.assertEqual(self.events, [('coverage', True, {'LME_001'}, None), ('update', [requested, self.region])])
         self.assertFalse((self.root / '.project-write.lock').exists())
 
-    def test_build_updates_coverage_before_reading_and_expands_scoped_units(self):
+    def test_build_renders_only_requested_saved_units_without_inventory(self):
         with patch.object(update_project, '_update', side_effect=lambda *args: self.events.append(('update',))), \
              patch.object(build_html, '_build', create=True, side_effect=lambda workbook, output, only_units: self.events.append(('build', only_units))):
             build_html.build(self.root / 'Project.xlsx', only_units={'LME_001'})
-        self.assertEqual(self.events, [('coverage', True), ('update',), ('build', {'LME_001', 'LME_002'})])
+        self.assertEqual(self.events, [('build', {'LME_001'})])
+
+    def test_all_saved_consolidation_does_not_request_global_science(self):
+        with patch.object(update_project, '_update'):
+            update_project.update(self.root, [], all_regions=True)
+        self.assertEqual(self.events, [])
 
     def test_fresh_launch_does_not_rebuild_pages(self):
-        self.coverage.ensure_validated_coverage = lambda *args, **kwargs: {'changed_units': [], 'models': {}}
         directory = self.root / 'interactive_map'
         directory.mkdir()
         for name in ['index.html', 'trends.html']:
@@ -53,19 +57,19 @@ class CoveragePublicationTests(unittest.TestCase):
             build_html.ensure_map_publication(self.root)
         build.assert_not_called()
 
-    def test_layout_refresh_cannot_republish_partial_method_packages(self):
-        with patch.object(build_html,'_relayout',create=True,side_effect=lambda *args,**kwargs:self.events.append(('validate-layout',kwargs['publish']))), \
+    def test_layout_refresh_skips_scientific_inventory(self):
+        with patch.object(build_html,'_relayout',create=True,side_effect=lambda *args,**kwargs:self.events.append(('validate-layout',kwargs.get('publish',True)))), \
              patch.object(update_project,'_update',side_effect=lambda *args:self.events.append(('update',))), \
              patch.object(build_html,'_build',side_effect=lambda workbook,output,only_units:self.events.append(('build',only_units))):
             build_html.relayout(self.root/'Project.xlsx')
-        self.assertEqual(self.events,[('validate-layout',False),('coverage',True),('update',),('build',{'LME_002'})])
+        self.assertEqual(self.events,[('validate-layout',False),('validate-layout',True)])
 
-    def test_review_handoff_verifies_exact_diff_before_coverage_then_rebuilds(self):
-        with patch.object(build_html,'_refresh_reviews',side_effect=lambda *args,**kwargs:self.events.append(('verify-review',kwargs['publish']))), \
+    def test_review_handoff_keeps_bounded_gate_and_skips_scientific_inventory(self):
+        with patch.object(build_html,'_refresh_reviews',side_effect=lambda *args,**kwargs:self.events.append(('verify-review',kwargs.get('publish',True)))), \
              patch.object(update_project,'_update',side_effect=lambda *args:self.events.append(('update',))), \
              patch.object(build_html,'_build',side_effect=lambda workbook,output,only_units:self.events.append(('build',only_units))):
             build_html.refresh_reviews(self.root/'Project.xlsx',self.root/'previous.xlsx',['LME_001'])
-        self.assertEqual(self.events,[('verify-review',False),('coverage',True),('update',),('build',{'LME_001','LME_002'})])
+        self.assertEqual(self.events,[('verify-review',False),('verify-review',True)])
 
     def test_invalid_review_handoff_does_not_start_scientific_completion(self):
         with patch.object(build_html,'_refresh_reviews',side_effect=ValueError('unrelated central edits')):

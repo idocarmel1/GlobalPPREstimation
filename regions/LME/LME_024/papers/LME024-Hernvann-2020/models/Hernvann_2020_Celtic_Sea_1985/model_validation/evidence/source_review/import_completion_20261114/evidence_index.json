@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-11-14_175324_LME024_import_completion_GE_TE_ON_0p1",
+  "region_id": "LME_024",
+  "model_id": "Hernvann_2020_Celtic_Sea_1985",
+  "configuration_identity": "authenticated_historical_initialization_import3_28_zero_EE_floor_ON_0p1",
+  "source_identity": {
+    "canonical_model_sha256": "b4ba75b14c47a23b2b97aaacdc4b392f2183679e201942c35f36b910c92b63cf",
+    "canonical_input_preserved": true
+  },
+  "computational_input_identity": {
+    "historical_state_sha256": "99a217b06fc7ad7ab2cc057ba54194ee02d5d3906dd78ee84114c27cca009099",
+    "runner_sha256": "3c2d840b441e530a80b0087af069d97eb1524bf69f05720166c67e55dcf780d9",
+    "pre_floor_state_sha256": "20d8fa51b00923685bd732131fef2d3ae44631bebb0a23306caedefe23c3f3c9",
+    "effective_state_sha256": "97ec427c605e39acd82bafe1de50b3813f0d606997baed31a95c954770e92b78",
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "authorized_import_completion": [
+      {
+        "group": 3,
+        "source": 55,
+        "from": "NaN",
+        "to": 0
+      },
+      {
+        "group": 28,
+        "source": 55,
+        "from": "NaN",
+        "to": 0
+      }
+    ],
+    "initialization": {
+      "historical_state": "faithful_printed_BA_state.pkl",
+      "underdetermined": false,
+      "zero_catch": true,
+      "zero_biomass_accum": true,
+      "default_gs": true,
+      "normalize_DC": false,
+      "historical_separate_diet_normalization": true,
+      "bridge": "deepcopy completed historical state to plain current PPRCalculator; native discard-return validator only; no loader/default/completion rerun",
+      "import_completion": {
+        "groups": [
+          3,
+          28
+        ],
+        "source_column": 55,
+        "value": 0,
+        "application_stage": "after authenticated normalization and before EE floor",
+        "source_inputs_preserved": true,
+        "policy": "published explicit imports take precedence; no external feeding statement found for these groups, so zero under user instruction"
+      },
+      "use_ee_floor": true,
+      "ee_floor": 0.1,
+      "ee_threshold": 0.1
+    }
+  },
+  "methods": [
+    "GE",
+    "TE"
+  ],
+  "outcomes": {
+    "GE": {
+      "execution": "returned",
+      "scientific_status": "FAIL"
+    },
+    "TE": {
+      "execution": "returned",
+      "scientific_status": "FAIL"
+    }
+  },
+  "artifacts": [
+    {
+      "role": "authentication_json",
+      "path": "../ee_floor_20261114/authentication.json",
+      "sha256": "d256632b5698b2d0d6dad9d7b021588e574fd49fee9d6de2c2288835db4de5b1",
+      "availability": "present"
+    },
+    {
+      "role": "code_current_method_coverage_py",
+      "path": "../ee_floor_20261114/code/current/method_coverage.py",
+      "sha256": "f855b88eebeb52d8814b0eb1dc8e9ed37e943fe62ed77d5bec88522b1cf19905",
+      "availability": "present"
+    },
+    {
+      "role": "code_current_ModelData_py",
+      "path": "../ee_floor_20261114/code/current/ModelData.py",
+      "sha256": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+      "availability": "present"
+    },
+    {
+      "role": "current_calculation_code",
+      "path": "../ee_floor_20261114/code/current/PPRCalculator.py",
+      "sha256": "5bd249eb73d61c1db77279a8a527465e4673944f377c40ca9e6100a2da0cc877",
+      "availability": "present"
+    },
+    {
+      "role": "code_current_utils_py",
+      "path": "../ee_floor_20261114/code/current/utils.py",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "availability": "present"
+    },
+    {
+      "role": "code_historical_ModelData_py",
+      "path": "../ee_floor_20261114/code/historical/ModelData.py",
+      "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+      "availability": "present"
+    },
+    {
+      "role": "code_historical_original_hashes_before_json",
+      "path": "../ee_floor_20261114/code/historical/original_hashes_before.json",
+      "sha256": "b221b1700c2e629fe1936f5c5209539c6598bcbbc37bd5041a0387414d47438d",
+      "availability": "present"
+    },
+    {
+      "role": "code_historical_PPRCalculator_py",
+      "path": "../ee_floor_20261114/code/historical/PPRCalculator.py",
+      "sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+      "availability": "present"
+    },
+    {
+      "role": "code_historical_routing_adapter_py",
+      "path": "../ee_floor_20261114/code/historical/routing_adapter.py",
+      "sha256": "074099aaeb4c94e604ba585432e7c8bb3c0a8b9ec0db3965d74b7ded57c47638",
+      "availability": "present"
+    },
+    {
+      "role": "historical_initialization_code",
+      "path": "../ee_floor_20261114/code/historical/run_experiment.py",
+      "sha256": "90c307f6c2e48366039cd98f4de2f909e545467ea1dc8a3244649ba28f36a1f4",
+      "availability": "present"
+    },
+    {
+      "role": "code_historical_utils_py",
+      "path": "../ee_floor_20261114/code/historical/utils.py",
+      "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "availability": "present"
+    },
+    {
+      "role": "code_historical_verification_final_json",
+      "path": "../ee_floor_20261114/code/historical/verification_final.json",
+      "sha256": "99810724be6ac45074f95a9c62aa78cc0dc406b91bac3e652412704d0b5eb19e",
+      "availability": "present"
+    },
+    {
+      "role": "canonical_model",
+      "path": "../../../../model.json",
+      "sha256": "b4ba75b14c47a23b2b97aaacdc4b392f2183679e201942c35f36b910c92b63cf",
+      "availability": "present"
+    },
+    {
+      "role": "historical_completed_state",
+      "path": "../diet_reextraction_20261002/inputs_by_sha256/99a217b06fc7ad7ab2cc057ba54194ee02d5d3906dd78ee84114c27cca009099/faithful_printed_BA_state.pkl",
+      "sha256": "99a217b06fc7ad7ab2cc057ba54194ee02d5d3906dd78ee84114c27cca009099",
+      "availability": "present"
+    },
+    {
+      "role": "code_run_import_completion_py",
+      "path": "code/run_import_completion.py",
+      "sha256": "3c2d840b441e530a80b0087af069d97eb1524bf69f05720166c67e55dcf780d9",
+      "availability": "present"
+    },
+    {
+      "role": "diagnostic_summary_json",
+      "path": "diagnostic_summary.json",
+      "sha256": "bfdb6c41b4363b62bf700153e68fa187be0b878b370da70cda71a2aa4f7ad337",
+      "availability": "present"
+    },
+    {
+      "role": "direct_diagnostics_md",
+      "path": "direct_diagnostics.md",
+      "sha256": "aad0a285556939bb581a138c0ec1858a52fd8d49719aadde48753594f122b6fc",
+      "availability": "present"
+    },
+    {
+      "role": "effective_flow_matrix_json",
+      "path": "effective_flow_matrix.json",
+      "sha256": "cf384b35092cc1740a1aa5bf6a2790ef144fed129b749baae549e49f69d50fb9",
+      "availability": "present"
+    },
+    {
+      "role": "effective_state_json",
+      "path": "effective_state.json",
+      "sha256": "97ec427c605e39acd82bafe1de50b3813f0d606997baed31a95c954770e92b78",
+      "availability": "present"
+    },
+    {
+      "role": "execution_settings",
+      "path": "execution.json",
+      "sha256": "6d7f39ff9ff022d76438fd036506539b268041e50b1c7a97e63ca33615ce0d5d",
+      "availability": "present"
+    },
+    {
+      "role": "execution_stderr_log",
+      "path": "execution.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "present"
+    },
+    {
+      "role": "execution_stdout_log",
+      "path": "execution.stdout.log",
+      "sha256": "784b29d4835225ec5aee8c61633f5a30d8712b4006021853b758b718dcff9180",
+      "availability": "present"
+    },
+    {
+      "role": "floor_accounting_csv",
+      "path": "floor_accounting.csv",
+      "sha256": "e4bf270a41f62071f60bb4bedef17eb03daeeec1a62f85a08394b3d273e22de4",
+      "availability": "present"
+    },
+    {
+      "role": "floor_accounting_json",
+      "path": "floor_accounting.json",
+      "sha256": "3d3d964cddfd51ea41cdb2711d11afe497911b7084f6490c6d922cbf273ce6e3",
+      "availability": "present"
+    },
+    {
+      "role": "GE_A_csv",
+      "path": "GE_A.csv",
+      "sha256": "726676213db7f33276857e080e8c9cfe5981a6402cc470f63d8ff0e4ed93857c",
+      "availability": "present"
+    },
+    {
+      "role": "GE_coefficients_all_csv",
+      "path": "GE_coefficients_all.csv",
+      "sha256": "7e2706c9e842c188198aee3db096a12d946b12858a19147948fb6ba9c7f91727",
+      "availability": "present"
+    },
+    {
+      "role": "GE_coefficient_scopes_json",
+      "path": "GE_coefficient_scopes.json",
+      "sha256": "536b075620eed4217624295e60323620110e2dcb720014473a551fc0ffd4c0c8",
+      "availability": "present"
+    },
+    {
+      "role": "GE_full_return_json",
+      "path": "GE_full_return.json",
+      "sha256": "c90f98ccfca189843db3d02c67f9341c5e56b485af66da72555bb2824e82b5e2",
+      "availability": "present"
+    },
+    {
+      "role": "GE_L_csv",
+      "path": "GE_L.csv",
+      "sha256": "e401b0b7b0dbd1e9e59e87155bbc4d37d77a43e64bd760563debf0226d6e32ff",
+      "availability": "present"
+    },
+    {
+      "role": "GE_post_solve_state_json",
+      "path": "GE_post_solve_state.json",
+      "sha256": "97ec427c605e39acd82bafe1de50b3813f0d606997baed31a95c954770e92b78",
+      "availability": "present"
+    },
+    {
+      "role": "GE_SPPR_csv",
+      "path": "GE_SPPR.csv",
+      "sha256": "16874f9f6392cdcb4d92d4b5bec28b18e4725b75d357a826473696b27174f003",
+      "availability": "present"
+    },
+    {
+      "role": "historical_before_import_state_json",
+      "path": "historical_before_import_state.json",
+      "sha256": "6d775c06b019ee633f6b60942ca7af9bb759d1b42017cabce1208f3766b569c2",
+      "availability": "present"
+    },
+    {
+      "role": "historical_source_model_state_json",
+      "path": "historical_source_model_state.json",
+      "sha256": "df0c2e02a7d7a8eb23ecb0a3a3c87fe6ebd5b36097905e4c3ae3bc2ce15bf7ff",
+      "availability": "present"
+    },
+    {
+      "role": "import_completion_json",
+      "path": "import_completion.json",
+      "sha256": "6d062f363f135778e5ad15dcb19f5efae9819ee7c18dd4e4c9810c8c956623c0",
+      "availability": "present"
+    },
+    {
+      "role": "independent_verification_json",
+      "path": "independent_verification.json",
+      "sha256": "1f282b03f039aeb9f0f66b1ff8623cc6ee3a4d38c43b5a88a747a0e554547837",
+      "availability": "present"
+    },
+    {
+      "role": "initialization_attempts_json",
+      "path": "initialization_attempts.json",
+      "sha256": "084c2132492d21f445cd5d052c59199568ea618070f03229b215af6a8f26ff6d",
+      "availability": "present"
+    },
+    {
+      "role": "interpretation_md",
+      "path": "interpretation.md",
+      "sha256": "e29c4a552f1b413c5632b8cc098182800bffe924afd4e004bb4d9b9a9670b5fb",
+      "availability": "present"
+    },
+    {
+      "role": "matrix_review_json",
+      "path": "matrix_review.json",
+      "sha256": "054fe59ebb12c7162900b7e53170a7fe969807d4228556cab02e1d9207bd1877",
+      "availability": "present"
+    },
+    {
+      "role": "negative_entries_json",
+      "path": "negative_entries.json",
+      "sha256": "02280211b6d2740541edd06b56e69cd55c4511a65d13a7dc791df0bd8ae43f09",
+      "availability": "present"
+    },
+    {
+      "role": "pre_floor_flow_matrix_json",
+      "path": "pre_floor_flow_matrix.json",
+      "sha256": "c46b31f4fcec94d1046e6e43f01eb38413bd12204204a362145476ab54c1ea4d",
+      "availability": "present"
+    },
+    {
+      "role": "pre_floor_state_json",
+      "path": "pre_floor_state.json",
+      "sha256": "20d8fa51b00923685bd732131fef2d3ae44631bebb0a23306caedefe23c3f3c9",
+      "availability": "present"
+    },
+    {
+      "role": "reconciliation_json",
+      "path": "reconciliation.json",
+      "sha256": "005225b193e51e5c0750857470a0977f872fa36230c830e067aced041362804f",
+      "availability": "present"
+    },
+    {
+      "role": "TE_A_csv",
+      "path": "TE_A.csv",
+      "sha256": "7560dc4917cc84e35e6dc59d4e384dc011636f90b0e36dd831c9bee3fca3d16e",
+      "availability": "present"
+    },
+    {
+      "role": "TE_coefficients_all_csv",
+      "path": "TE_coefficients_all.csv",
+      "sha256": "0a5895b475a64f70a415ece55f63f973cdfb36253c8827d1f9a19c1169c42991",
+      "availability": "present"
+    },
+    {
+      "role": "TE_coefficient_scopes_json",
+      "path": "TE_coefficient_scopes.json",
+      "sha256": "8481e59012cf24b597361e351dd421219e7d3a5dbfb973be25962816e401083f",
+      "availability": "present"
+    },
+    {
+      "role": "TE_efficiency_vector_json",
+      "path": "TE_efficiency_vector.json",
+      "sha256": "ec665baa15a16b451a7560126a6ec8546323e747377a6c94ebfc2453e471a082",
+      "availability": "present"
+    },
+    {
+      "role": "TE_full_return_json",
+      "path": "TE_full_return.json",
+      "sha256": "0a684007a4bcbb4455fca7edfd037c5e76da7736f1949a39813e1c311c310441",
+      "availability": "present"
+    },
+    {
+      "role": "TE_L_csv",
+      "path": "TE_L.csv",
+      "sha256": "63b967e58e85b80fac4e6a0838c7b462624d99ff4527edef446137dca9e9ca24",
+      "availability": "present"
+    },
+    {
+      "role": "TE_post_solve_state_json",
+      "path": "TE_post_solve_state.json",
+      "sha256": "97ec427c605e39acd82bafe1de50b3813f0d606997baed31a95c954770e92b78",
+      "availability": "present"
+    },
+    {
+      "role": "TE_SPPR_csv",
+      "path": "TE_SPPR.csv",
+      "sha256": "661114b2a59e8039bbfb0fe93128956bf0856d71d7733f8de1bfce770c4e0e50",
+      "availability": "present"
+    },
+    {
+      "role": "source_main_article",
+      "path": "../../../../../../sources/pdf-fbcccb63.pdf",
+      "sha256": "fbcccb63899e41fc86d5e1fb4e7bbe26e6a4bc3c0f92919f2d561105fdf4b019",
+      "availability": "present"
+    },
+    {
+      "role": "source_supplement_B2",
+      "path": "../../../../../../sources/Data_Sheet_1_TheCelticSeaThroughTimeandSpa-165f24b6.docx",
+      "sha256": "165f24b6381383b9620f2c4c205ed455c02a32322011be4792f6448ac479764f",
+      "availability": "present"
+    },
+    {
+      "role": "source_diet_cell_ledger",
+      "path": "../diet_reextraction_20261002/source_cell_ledger.json",
+      "sha256": "b5440f659bfb624136fe26730b54c89d96bf477db1025230b11a32f2bd514f01",
+      "availability": "present"
+    },
+    {
+      "role": "source_runtime_diet_sums",
+      "path": "../diet_reextraction_20261002/consumer_source_runtime_sums.json",
+      "sha256": "9f047c90349be793e1623007f106626d221ab2d379dddf3d5b456f9b77f6464a",
+      "availability": "present"
+    },
+    {
+      "role": "prior_authentication_evidence_index",
+      "path": "../ee_floor_20261114/evidence_index.json",
+      "sha256": "49ce8cf8d55fa4807971d056d548b471482c5ea4deba2d3c91246fbb2e1f808b",
+      "availability": "present"
+    },
+    {
+      "role": "process_completion",
+      "path": "process_completion.json",
+      "sha256": "6fece4cf86e093103c78826fa08cd4d8befe99fe6d561aa515278d49c4d4dc08",
+      "availability": "present"
+    }
+  ],
+  "decision_registration": false,
+  "shared_mutations": false,
+  "regional_result_adoption": false,
+  "required_roles": [
+    "canonical_model",
+    "historical_completed_state",
+    "current_calculation_code",
+    "historical_initialization_code",
+    "execution_settings",
+    "import_completion_json",
+    "historical_before_import_state_json",
+    "pre_floor_state_json",
+    "effective_state_json",
+    "floor_accounting_json",
+    "GE_full_return_json",
+    "TE_full_return_json",
+    "GE_SPPR_csv",
+    "TE_SPPR_csv",
+    "matrix_review_json"
+  ]
+}

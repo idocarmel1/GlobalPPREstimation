@@ -60,7 +60,7 @@ class PublicationTransactionTests(unittest.TestCase):
     def test_owned_package_rolls_back_but_unrelated_new_evidence_survives(self):
         source,evidence=self.package();other=evidence.with_name('researcher-note.txt')
         with self.assertRaisesRegex(RuntimeError,'page failure'):
-            with publication_transaction(self.root) as transaction:
+            with publication_transaction(self.root, units={'LME_001'}) as transaction:
                 source.write_bytes(b'generated source');evidence.write_text('generated evidence')
                 transaction.checkpoint([source,evidence])
                 other.write_text('concurrent researcher note')
@@ -72,7 +72,7 @@ class PublicationTransactionTests(unittest.TestCase):
     def test_concurrent_edit_to_owned_package_or_new_evidence_is_preserved(self):
         source,evidence=self.package()
         with self.assertRaisesRegex(RuntimeError,'concurrent author edits were preserved'):
-            with publication_transaction(self.root) as transaction:
+            with publication_transaction(self.root, units={'LME_001'}) as transaction:
                 source.write_bytes(b'generated source');evidence.write_text('generated evidence')
                 transaction.checkpoint([source,evidence])
                 source.write_bytes(b'new researcher source');evidence.write_text('new researcher evidence')
@@ -83,7 +83,7 @@ class PublicationTransactionTests(unittest.TestCase):
     def test_produced_hash_does_not_adopt_later_author_edit(self):
         source,evidence=self.package()
         with self.assertRaisesRegex(RuntimeError,'concurrent author edits were preserved'):
-            with publication_transaction(self.root) as transaction:
+            with publication_transaction(self.root, units={'LME_001'}) as transaction:
                 source.write_bytes(b'generated source');produced=sha(source)
                 source.write_bytes(b'new researcher source')
                 transaction.checkpoint([source],fingerprints={str(source):produced})

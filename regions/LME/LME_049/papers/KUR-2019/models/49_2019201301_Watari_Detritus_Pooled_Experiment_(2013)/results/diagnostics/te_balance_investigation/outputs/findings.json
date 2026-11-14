@@ -1,0 +1,90 @@
+{
+  "scope": "Historical selected 39-group Watari configuration. No input, code, workbook, selection or review change; no result adoption.",
+  "causes": {
+    "TE": "Source seabird EE=0 became runtime -4.6629367034256575e-15 during underdetermined optimization. TE=-4.66293666959761e-16 bypasses exact-zero handling and amplifies positive prey requirements into negative coefficients. Seabirds are a terminal consumer, so this need not inflate living spectral radius.",
+    "strict_GE_and_egestion": "Archived loader computed predation while seabird Q was missing (treated as zero), solved Q=0.5000000014803441 later, and never refreshed prey predation. Weighted omitted seabird feeding equals both budget gaps. Ordinary group balance uses stale stored predation and therefore passes.",
+    "strict_TE": "Seabird BA=-2.4079145675966143e-16 multiplied by total SPPR=-2.0990122553775226e17 gives +50.54242187287362, equal to the entire TE budget excess. The other groups sum to PP input.",
+    "MC_interpretation": "No new MC draws. Archived sampler pins nonpositive TE at its deterministic value. Its diverged category includes any FAIL divergence grade, including negative source coefficients; it does not prove spectral radius exceeds one.",
+    "secondary_near_zero_TE": "Toothed whales have source EE=0.01 and TE=0.00009803921568627349 (inverse 10200), causing large positive coefficients; this does not explain the four negative seabird entries.",
+    "current_engine": "Current apply_lim already refreshes predation, snaps abs(EE)<1e-10 to zero with consistent M0, and refreshes PB/QB. No current-engine scientific run or adoption was performed; these code differences do not establish current-model validity."
+  },
+  "budget": {
+    "GE": {
+      "inflow": 1506.7714,
+      "outflow": 1516.9644043662393,
+      "absolute_gap": 10.193004366239165,
+      "gap_percent": 0.6764798141402979,
+      "strict_pass": false,
+      "diagnostic_grade": "OK",
+      "balance_grade": "OK",
+      "weighted_missing_predation": 10.19300436623944,
+      "seabird_BA_weighted": -4.9087767612869395e-14
+    },
+    "TE": {
+      "inflow": 1506.7714,
+      "outflow": 1557.3138218728748,
+      "absolute_gap": 50.542421872874684,
+      "gap_percent": 3.354352350520768,
+      "strict_pass": false,
+      "diagnostic_grade": "FAIL",
+      "balance_grade": "WARN",
+      "weighted_missing_predation": 48.937806222562855,
+      "seabird_BA_weighted": 50.54242187287362
+    },
+    "With Egestion": {
+      "inflow": 1506.7714,
+      "outflow": 1512.612368634439,
+      "absolute_gap": 5.840968634438923,
+      "gap_percent": 0.3876479626862391,
+      "strict_pass": false,
+      "diagnostic_grade": "OK",
+      "balance_grade": "OK",
+      "weighted_missing_predation": 5.840968634439099,
+      "seabird_BA_weighted": -2.2503285649092948e-14
+    }
+  },
+  "verification": {
+    "canonical_hash_matches": true,
+    "replayed_reports_equal_saved": true,
+    "input_runtime_unchanged": true,
+    "all_flow_mismatch_is_seabird_feeding": true,
+    "source_seabird_EE_is_zero": true,
+    "source_biomass_is_missing": true,
+    "seabird_has_no_predators": true,
+    "seabird_has_no_self_feeding": true,
+    "seabird_TE_negative_roundoff": true,
+    "GE_matrix_axes_unique": true,
+    "GE_matrix_shape": true,
+    "GE_finite_matrices": true,
+    "GE_gap_explained_by_predation": true,
+    "GE_scope_reconciliation": true,
+    "TE_matrix_axes_unique": true,
+    "TE_matrix_shape": true,
+    "TE_finite_matrices": true,
+    "TE_bird_row_independently_reproduced": true,
+    "TE_gap_equals_seabird_BA_times_SPPR": true,
+    "TE_other_group_exports_equal_PP_input": true,
+    "TE_scope_reconciliation": true,
+    "With_Egestion_matrix_axes_unique": true,
+    "With_Egestion_matrix_shape": true,
+    "With_Egestion_finite_matrices": true,
+    "With_Egestion_gap_explained_by_predation": true,
+    "With_Egestion_scope_reconciliation": true,
+    "fresh_initialization_no_numeric_differences": true,
+    "fresh_state_differences_only_taxonomy_encoding": true,
+    "exactly_four_negative_entries_all_TE_seabirds": true,
+    "all_preexisting_regional_files_unchanged": true
+  },
+  "fresh_initialization": {
+    "numeric_differences": 0,
+    "taxonomy_encoding_differences": 228,
+    "full_state_identical": false
+  },
+  "source_limitations_retained": [
+    "Seabird source biomass censored; missing biomass and flows completed conditionally.",
+    "Detritus pooling/routing assumption and solved BA remain unvalidated source assumptions.",
+    "This investigation establishes the implementation causes of the archived symptoms, not scientific approval."
+  ],
+  "protected_files_checked": 315,
+  "changed_files": []
+}

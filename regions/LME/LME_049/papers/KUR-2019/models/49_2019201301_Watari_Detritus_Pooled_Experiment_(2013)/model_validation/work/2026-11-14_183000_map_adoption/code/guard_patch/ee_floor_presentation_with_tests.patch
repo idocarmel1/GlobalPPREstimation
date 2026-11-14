@@ -1,0 +1,132 @@
+--- a/tools/project_core/maps/ee_floor.js
++++ b/tools/project_core/maps/ee_floor.js
+@@ -13,13 +13,18 @@
+     const element=(tag,text)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;return e;};
+     const wrap=element('div');wrap.className='ee-floor-provenance';
+     wrap.appendChild(element('p','Calculation settings · '+setting));
+-    let note='The floor assumes a hypothetical external nonfishery mortality sink, excluded from catch and fishery PPR.';
+-    if(finite(provenance.affected_group_count))note+=' '+provenance.affected_group_count+' affected groups.';
+-    if(finite(provenance.external_mortality_export_total))note+=' External mortality export: '+number(provenance.external_mortality_export_total)+' in saved model flow units.';
++    let note='No EE floor is applied in this saved calculation.';
++    if(provenance.use_ee_floor){
++      note='The floor assumes a hypothetical external nonfishery mortality sink, excluded from catch and fishery PPR.';
++      if(finite(provenance.affected_group_count))note+=' '+provenance.affected_group_count+' affected groups.';
++      if(finite(provenance.external_mortality_export_total))note+=' External mortality export: '+number(provenance.external_mortality_export_total)+' in saved model flow units.';
++    }
+     wrap.appendChild(element('p',note));
+-    wrap.appendChild(element('p',model.researcher_review||model.recorded_review_pending
+-      ?'The signed researcher review retains its original scope and does not approve this changed calculation assumption or transformed diagnostics.'
+-      :'This calculation assumption and its transformed diagnostics require separate researcher review.'));
++    wrap.appendChild(element('p',model.researcher_review
++      ?'The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report. Other method results retain their own diagnostic status.'
++      :model.recorded_review_pending
++        ?'The recorded researcher review is awaiting current verification.'
++        :'No verified researcher review is recorded for this model.'));
+     const diagnostics=Object.entries(model.health||{}).map(([option,state])=>option+': '+(state.status||'NOT_RUN'));
+     if(diagnostics.length)wrap.appendChild(element('p','Current calculation diagnostics: '+diagnostics.join(' · ')));
+     if(model.review_flags?.length)wrap.appendChild(element('p','Current calculation restrictions: '+model.review_flags.join(' · ')));
+--- a/tools/project_core/maps/ee_floor_layout.py
++++ b/tools/project_core/maps/ee_floor_layout.py
+@@ -38,9 +38,15 @@
+             for label,path in [('Saved calculation settings and EE-floor ledger',model.get('workbook')),
+                                ('Calculator source export',model.get('source'))]:
+                 if path:links.append(f'<a href="{escape("../"+path,quote=True)}">{label}</a>')
++            assumption = ('Hypothetical external nonfishery mortality sink; excluded from catch and fishery PPR.'
++                          if enabled else 'No EE floor is applied in this saved calculation.')
++            review_note = ('The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report. Other method results retain their own diagnostic status.'
++                           if model.get('researcher_review') else
++                           'The recorded researcher review is awaiting current verification.'
++                           if model.get('recorded_review_pending') else
++                           'No verified researcher review is recorded for this model.')
+             parts.append('<p><b>'+escape(model.get('label') or model['id'])+'</b> · '+escape(setting)+'. '
+-                         +'Hypothetical external nonfishery mortality sink; excluded from catch and fishery PPR. '
+-                         +'Existing signed researcher reviews retain their original scope and do not approve this changed calculation assumption or transformed diagnostics.'
++                         +assumption+' '+review_note
+                          +(' '+ ' · '.join(links) if links else '')+'</p>')
+         if not parts:continue
+         anchor='<small>'+escape(unit_id)+' · '
+--- a/tools/workflow_checks/maps/check_ee_floor_views.js
++++ b/tools/workflow_checks/maps/check_ee_floor_views.js
+@@ -27,7 +27,10 @@
+   const before=JSON.stringify(model),panel=new Element('div');reviewView.append(panel,model);
+   assert.match(panel.textContent,/EE floor ON \(0\.1\)/);
+   assert.match(panel.textContent,/hypothetical.*nonfishery/i);
+-  assert.match(panel.textContent,/does not approve/i);
++  assert.match(panel.textContent,/The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report\. Other method results retain their own diagnostic status\./);
++  assert.doesNotMatch(panel.textContent,/does not approve this changed/);
++  assert.match(panel.textContent,/1 affected groups\./);
++  assert.match(panel.textContent,/External mortality export: 1\.5/);
+   assert.match(panel.textContent,/Current calculation diagnostics: GE: WARN/);
+   assert.match(panel.textContent,/strict SPPR balance false/);
+   assert.match(panel.textContent,/Original FAIL diagnostic prose\nunchanged/);
+@@ -35,12 +38,28 @@
+   assert.equal(JSON.stringify(model),before,'Presentation never changes the signed review or provenance');
+   const unsigned={...model};delete unsigned.researcher_review;
+   const unsignedPanel=new Element('div');reviewView.append(unsignedPanel,unsigned);
+-  assert.match(unsignedPanel.textContent,/require separate researcher review/);
+-  assert.doesNotMatch(unsignedPanel.textContent,/The signed researcher review retains/,'An unreviewed model must not gain a claimed signature');
++  assert.match(unsignedPanel.textContent,/No verified researcher review is recorded for this model\./);
++  assert.doesNotMatch(unsignedPanel.textContent,/The signed researcher review applies/,'An unreviewed model must not gain a claimed signature');
++  const pending={...unsigned,recorded_review_pending:{recorded_status:'Validated by researcher',researcher_name:'R',review_date:'2026-09-01',reason:'The source report changed'}};
++  const pendingBefore=JSON.stringify(pending),pendingPanel=new Element('div');reviewView.append(pendingPanel,pending);
++  assert.match(pendingPanel.textContent,/The recorded researcher review is awaiting current verification\./);
++  assert.doesNotMatch(pendingPanel.textContent,/The signed researcher review applies|No verified researcher review is recorded/);
++  assert.equal(JSON.stringify(pending),pendingBefore,'Pending status and recorded review remain unchanged');
++  const rejected={...model,researcher_review:{...review,status:'Disqualified by researcher',verdict:'Disqualified',reason:'Retained scientific limitation'}};
++  const rejectedBefore=JSON.stringify(rejected),rejectedPanel=new Element('div');reviewView.append(rejectedPanel,rejected);
++  assert.equal(reviewView.isValidated(rejected),false);
++  assert.match(rejectedPanel.textContent,/Disqualified.*Retained scientific limitation/);
++  assert.equal(JSON.stringify(rejected),rejectedBefore,'Presentation cannot reverse a disqualification');
+   const off=structuredClone(model);off.calculation_provenance.use_ee_floor=false;off.calculation_provenance.affected_group_count=0;
+-  const offPanel=new Element('div');reviewView.append(offPanel,off);assert.match(offPanel.textContent,/EE floor OFF/);
++  const offBefore=JSON.stringify(off),offPanel=new Element('div');reviewView.append(offPanel,off);assert.match(offPanel.textContent,/EE floor OFF/);
++  assert.match(offPanel.textContent,/No EE floor is applied in this saved calculation\./);
++  assert.doesNotMatch(offPanel.textContent,/hypothetical external nonfishery mortality sink|affected groups|External mortality export:/i);
++  assert.equal(JSON.stringify(off),offBefore,'Floor-off display leaves saved fields and review unchanged');
+   const noAffected=structuredClone(model);noAffected.calculation_provenance.affected_group_count=0;noAffected.calculation_provenance.external_mortality_export_total=0;
+   const noAffectedPanel=new Element('div');reviewView.append(noAffectedPanel,noAffected);assert.match(noAffectedPanel.textContent,/EE floor ON \(0\.1\)/);
++  assert.match(noAffectedPanel.textContent,/hypothetical external nonfishery mortality sink/i);
++  assert.match(noAffectedPanel.textContent,/0 affected groups\./);
++  assert.match(noAffectedPanel.textContent,/External mortality export: 0 /);
+   const historical={id:'historical'},historicalPanel=new Element('div');reviewView.append(historicalPanel,historical);
+   assert.doesNotMatch(historicalPanel.textContent,/EE floor ON|EE floor OFF/,'Unknown historical floor must not inherit a default');
+   const group={ee:.1,source_ee:.02,source_m0:null,ee_before_floor:.025,m0_before_floor:19.5,m0_effective:18,external_mortality_export:1.5};
+--- a/tools/workflow_checks/maps/test_ee_floor_views.py
++++ b/tools/workflow_checks/maps/test_ee_floor_views.py
+@@ -148,6 +148,36 @@
+         self.assertIn('href="../regions/LME/LME_001/papers/P/models/candidate/sppr_source.xlsx"', updated)
+         self.assertIn('<p>Retained source prose</p>', updated)
+ 
++    def test_source_view_distinguishes_floor_and_review_states_without_mutation(self):
++        approved = {'id': 'approved', 'label': 'Reviewed ON', 'calculation_provenance': {'use_ee_floor': True, 'ee_floor': .1},
++                    'researcher_review': {'status': 'Validated by researcher', 'report_path': 'report.docx'}}
++        pending = {'id': 'pending', 'label': 'Pending ON', 'calculation_provenance': {'use_ee_floor': True, 'ee_floor': .1},
++                   'recorded_review_pending': {'recorded_status': 'Validated by researcher', 'reason': 'Source changed'}}
++        unsigned = {'id': 'unsigned', 'label': 'Unreviewed OFF', 'calculation_provenance': {'use_ee_floor': False, 'ee_floor': .1}}
++        for model, expected, forbidden in [
++            (approved, 'The signed researcher review applies to the model, diagnostics and calculation conditions recorded in its report. Other method results retain their own diagnostic status.',
++             ['does not approve this changed', 'awaiting current verification', 'No verified researcher review']),
++            (pending, 'The recorded researcher review is awaiting current verification.',
++             ['The signed researcher review applies', 'No verified researcher review']),
++            (unsigned, 'No verified researcher review is recorded for this model.',
++             ['The signed researcher review applies', 'awaiting current verification'])]:
++            with self.subTest(model=model['id']):
++                catalog = {'regions': [{'unit_id': 'LME_001'}],
++                           'network': {'units': {'LME_001': {'models': [model]}}}}
++                before = copy.deepcopy(catalog)
++                page = '<details><summary>Region <small>LME_001 · 0 studies</small></summary><p>Retained source prose</p></details>'
++                updated = source_provenance_layout(page, catalog)
++                self.assertIn(expected, updated)
++                for text in forbidden: self.assertNotIn(text, updated)
++                if model['calculation_provenance']['use_ee_floor']:
++                    self.assertIn('Hypothetical external nonfishery mortality sink; excluded from catch and fishery PPR.', updated)
++                    self.assertNotIn('No EE floor is applied', updated)
++                else:
++                    self.assertIn('No EE floor is applied in this saved calculation.', updated)
++                    self.assertNotIn('Hypothetical external nonfishery mortality sink', updated)
++                self.assertEqual(catalog, before, 'Prose rendering cannot mutate approval or calculation payloads')
++                self.assertIn('<p>Retained source prose</p>', updated)
++
+     @unittest.skipUnless(shutil.which('node'), 'Node required for display/export checks')
+     def test_generated_pages_show_settings_without_changing_review_and_exports(self):
+         root = Path(__file__).resolve().parents[3]

@@ -1,0 +1,150 @@
+{
+  "verified_utc": "2026-11-14T15:54:37.435173+00:00",
+  "probe_path": "native_sdk_probe.json",
+  "probe_sha256": "441b80efc4a2aed25c309b502888287a29e57429dc43abbc14a09209f6aaa74b",
+  "raw_native_path": "native_readonly_tables.json",
+  "raw_native_sha256": "1afa7f7ee4f5bb17a6f60a32ab22e10b1c6a70f65f22d251732219fcd5162982",
+  "source_ledger_path": "source_fisheries_ledger.json",
+  "source_ledger_sha256": "be9d3cc56f72dc7e9ccb16d2b5d9ff2a4f48440792fb47050ad957d22d3e5bdd",
+  "source_ledger_unchanged": true,
+  "engine_version": "6.7.0.18858",
+  "core_reported_version": "6.7.0.18858",
+  "original_saved_version": "6.6.8.18072",
+  "engine_assembly_sha256": "0bb3f00ad32de991955bfdcbe031294fd8a06c92255962bd3209674ace96add2",
+  "native_run_return": true,
+  "native_IsModelBalanced": true,
+  "source_unchanged": true,
+  "all_component_autosaves_false": true,
+  "axis_mapping": {
+    "group_arrays": "Index0 is unused; source sequences1..36 index37-element arrays. Group35=Discards nativeGroupID45; group36=Detritus nativeGroupID1.",
+    "DC_dimensions": [
+      38,
+      38
+    ],
+    "DC_orientation_verified": "predator_row_prey_column",
+    "Discard": "fleet-row / group-sequence-column, with unused index0 on each axis",
+    "DiscardFate": "fleet-row / detritus-ordinal-column; ordinal1=sequence35, ordinal2=sequence36, unused index0"
+  },
+  "pools": [
+    {
+      "sequence": 35,
+      "native_group_id": 45,
+      "name": "Discards",
+      "InputToDet": 0,
+      "DetEaten": 0.20750363171100616,
+      "Ex": -0.20750363171100616,
+      "BA": 0,
+      "DetPassedOn": 0,
+      "Respiration": 0,
+      "explicit_DetImport": 0,
+      "stored_source_Export": -0.20750363171100616,
+      "stored_source_EcoEfficiency": -9999,
+      "native_EEOutput": -9999,
+      "native_EEOutputStatus": "NotEditable, Null, Stored",
+      "export_rhs": -0.20750363171100616,
+      "export_equals_original_stored_export_exactly": true,
+      "export_equation_error": 0.0
+    },
+    {
+      "sequence": 36,
+      "native_group_id": 1,
+      "name": "Detritus",
+      "InputToDet": 905.0452270507812,
+      "DetEaten": 43.297607421875,
+      "Ex": 861.7476196289062,
+      "BA": 0,
+      "DetPassedOn": 0,
+      "Respiration": 0,
+      "explicit_DetImport": 0,
+      "stored_source_Export": 861.7476196289062,
+      "stored_source_EcoEfficiency": 0,
+      "native_EEOutput": 0.04784027114510536,
+      "native_EEOutputStatus": "ValueComputed, NotEditable, Stored",
+      "export_rhs": 861.7476196289062,
+      "export_equals_original_stored_export_exactly": true,
+      "export_equation_error": 0.0
+    }
+  ],
+  "source_diet_comparison": {
+    "source_cells": 1296,
+    "orientations_tested": [
+      {
+        "candidate": "predator_row_prey_column",
+        "mismatch_count": 0,
+        "first_mismatches": []
+      },
+      {
+        "candidate": "prey_row_predator_column",
+        "mismatch_count": 546,
+        "first_mismatches": [
+          {
+            "predator_sequence": 1,
+            "prey_sequence": 22,
+            "source": 0.10000000149011612,
+            "native_run": 0
+          },
+          {
+            "predator_sequence": 1,
+            "prey_sequence": 34,
+            "source": 0.8999999761581421,
+            "native_run": 0
+          },
+          {
+            "predator_sequence": 1,
+            "prey_sequence": 36,
+            "source": 0,
+            "native_run": 7.734420250926632e-06
+          }
+        ]
+      }
+    ],
+    "exact_match": true
+  },
+  "source_discard_fate_comparison": [
+    {
+      "fleet_id": 1,
+      "recipient_group_id": 45,
+      "recipient_sequence": 35,
+      "recipient_detritus_ordinal": 1,
+      "native_run_fraction": 0,
+      "source_fraction": 0,
+      "equal": true
+    },
+    {
+      "fleet_id": 1,
+      "recipient_group_id": 1,
+      "recipient_sequence": 36,
+      "recipient_detritus_ordinal": 2,
+      "native_run_fraction": 1,
+      "source_fraction": 1,
+      "equal": true
+    },
+    {
+      "fleet_id": 2,
+      "recipient_group_id": 45,
+      "recipient_sequence": 35,
+      "recipient_detritus_ordinal": 1,
+      "native_run_fraction": 0,
+      "source_fraction": 0,
+      "equal": true
+    },
+    {
+      "fleet_id": 2,
+      "recipient_group_id": 1,
+      "recipient_sequence": 36,
+      "recipient_detritus_ordinal": 2,
+      "native_run_fraction": 1,
+      "source_fraction": 1,
+      "equal": true
+    }
+  ],
+  "source_discard_amount_comparison": {
+    "cells": 72,
+    "all_exact": true
+  },
+  "superseding_interpretation": [
+    "The negative Discards export is reproduced by installed native EwE6.7.0.18858 with BA0 and explicitDetImport0; it was not introduced solely by the Python reconstruction. Native IsModelBalanced returnsTrue despite this negative computed export.",
+    "Native Detritus EEOutput is computed as0.04784027114510536, which rounds to Table4 published0.05. The stored native inputEE0 versus printed0.05 is not evidence of a conflicting final output; this supersedes the earlier pre-probe source-conflict interpretation.",
+    "The probe uses native source settings, not the EE-floor0.1 transformation. It is a fresh native6.7 reproduction; it does not establish execution in the original saved6.6.8 engine, measured external supply, ecological validation, or researcher approval."
+  ]
+}

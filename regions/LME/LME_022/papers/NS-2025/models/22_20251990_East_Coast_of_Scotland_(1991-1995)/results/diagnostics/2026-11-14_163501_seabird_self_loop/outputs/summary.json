@@ -1,0 +1,913 @@
+[
+  {
+    "scenario": "baseline",
+    "method": "GE",
+    "status": "OK",
+    "model_input": {
+      "status": "OK",
+      "is_model_balanced": true,
+      "p_max_rel_residual": 1.3297676663374736e-16,
+      "q_max_rel_residual": 1.9168215204163612e-16,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 3.3306690738754696e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.06994711631486064,
+      "b_converges": true,
+      "rho_living": 0.21208967414456642,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            1.0832908006109492
+          ]
+        ]
+      },
+      "max_sppr_det": 1.0832908006109492,
+      "max_sppr_group": {
+        "seq": 24,
+        "tl": 4.297455684468948,
+        "sppr": 36113.6947095276,
+        "inv_te": 421.49999999999994
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 31956.89760973596,
+        "inv_te": 239.83333333333334
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": true,
+      "inflow": 2145.0,
+      "outflow": 2145.0,
+      "rel_gap": 0.0
+    },
+    "footprint": {
+      "ppr_all": 350.6904413595163,
+      "ppr_inner": 350.6904413595163,
+      "ppr_pp_only": 252.24417967053924,
+      "npp": 2145.0,
+      "ppr2npp": 0.16349204725385375,
+      "ppr2npp_pp_only": 0.11759635415875955
+    },
+    "warnings": [],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          1414.3509927181183
+        ],
+        [
+          1,
+          4281.675442554736
+        ]
+      ]
+    },
+    "seabird_total_sppr": 5696.0264352728545,
+    "diet_sum": 0.9999999999999998,
+    "negative_entry_count": 0,
+    "original_saved_comparison": {
+      "status_matches": true,
+      "rho_matches": true,
+      "source_matrix_matches": true,
+      "max_abs_difference": 0.0,
+      "max_scaled_difference": 0.0
+    },
+    "elapsed_seconds": 0.5504097000230104,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "baseline",
+    "method": "TE",
+    "status": "FAIL",
+    "model_input": {
+      "status": "OK",
+      "is_model_balanced": true,
+      "p_max_rel_residual": 1.3297676663374736e-16,
+      "q_max_rel_residual": 1.9168215204163612e-16,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 3.3306690738754696e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "FAIL",
+      "solve_error": null,
+      "b": 0.0,
+      "b_converges": true,
+      "rho_living": 1.1127784447112168,
+      "living_converges": false,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            0.8104489294778254
+          ]
+        ]
+      },
+      "max_sppr_det": 0.8104489294778254,
+      "max_sppr_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 1798800.354511055,
+        "inv_te": 7994.444444444438
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 1798800.354511055,
+        "inv_te": 7994.444444444438
+      },
+      "n_negative_sources": 2,
+      "expect_negatives": false,
+      "near_singular_te": [
+        24,
+        23,
+        22
+      ]
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": true,
+      "inflow": 2145.0,
+      "outflow": 2144.9999999999995,
+      "rel_gap": 2.1200342698669656e-16
+    },
+    "footprint": {
+      "ppr_all": 771.403743557636,
+      "ppr_inner": 771.4037435576358,
+      "ppr_pp_only": 597.704413299759,
+      "npp": 2145.0,
+      "ppr2npp": 0.3596287848753547,
+      "ppr2npp_pp_only": 0.2786500761304238
+    },
+    "warnings": [
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "living network diverges: rho(A_LL)=1.113 >= 1; this corrupts the basis B is built from, so b is unreliable",
+      "2 basal source column(s) contain negative SPPR",
+      "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          -460709.19237909134
+        ],
+        [
+          1,
+          -1916160.3191561818
+        ]
+      ]
+    },
+    "seabird_total_sppr": -2376869.511535273,
+    "diet_sum": 0.9999999999999998,
+    "negative_entry_count": 2,
+    "original_saved_comparison": {
+      "status_matches": true,
+      "rho_matches": true,
+      "source_matrix_matches": true,
+      "max_abs_difference": 0.0,
+      "max_scaled_difference": 0.0
+    },
+    "elapsed_seconds": 0.28049000003375113,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "baseline",
+    "method": "With Egestion",
+    "status": "OK",
+    "model_input": {
+      "status": "OK",
+      "is_model_balanced": true,
+      "p_max_rel_residual": 1.3297676663374736e-16,
+      "q_max_rel_residual": 1.9168215204163612e-16,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 3.3306690738754696e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.09714913145852609,
+      "b_converges": true,
+      "rho_living": 0.16967173931565332,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            1.2094885030862663
+          ]
+        ]
+      },
+      "max_sppr_det": 1.2094885030862663,
+      "max_sppr_group": {
+        "seq": 24,
+        "tl": 4.297455684468948,
+        "sppr": 11383.30064658265,
+        "inv_te": 337.2
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 9700.708478471675,
+        "inv_te": 191.86666666666667
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": true,
+      "inflow": 2145.0,
+      "outflow": 2145.0,
+      "rel_gap": 0.0
+    },
+    "footprint": {
+      "ppr_all": 136.60572429613853,
+      "ppr_inner": 136.60572429613853,
+      "ppr_pp_only": 89.53303754026888,
+      "npp": 2145.0,
+      "ppr2npp": 0.06368565235251214,
+      "ppr2npp_pp_only": 0.04174034384161719
+    },
+    "warnings": [],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          603.7564961777107
+        ],
+        [
+          1,
+          1356.5226221955368
+        ]
+      ]
+    },
+    "seabird_total_sppr": 1960.2791183732475,
+    "diet_sum": 0.9999999999999998,
+    "negative_entry_count": 0,
+    "original_saved_comparison": {
+      "status_matches": true,
+      "rho_matches": true,
+      "source_matrix_matches": true,
+      "max_abs_difference": 0.0,
+      "max_scaled_difference": 0.0
+    },
+    "elapsed_seconds": 0.44724539993330836,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "remove_only",
+    "method": "GE",
+    "status": "WARN",
+    "model_input": {
+      "status": "WARN",
+      "is_model_balanced": false,
+      "p_max_rel_residual": 0.033383353341336554,
+      "q_max_rel_residual": 0.0002000800320129105,
+      "dc_rows_sum_to_1": false,
+      "dc_max_deviation": 0.00020008003201310576,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.06985712225652821,
+      "b_converges": true,
+      "rho_living": 0.21208967414456642,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            1.0828686921827728
+          ]
+        ]
+      },
+      "max_sppr_det": 1.0828686921827728,
+      "max_sppr_group": {
+        "seq": 24,
+        "tl": 4.297455684468948,
+        "sppr": 36109.73208675435,
+        "inv_te": 421.49999999999994
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 31953.074122328653,
+        "inv_te": 239.83333333333334
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": false,
+      "inflow": 2145.0,
+      "outflow": 2144.2648529894577,
+      "rel_gap": 0.0003427258790406889
+    },
+    "footprint": {
+      "ppr_all": 350.65208139489926,
+      "ppr_inner": 350.65208139489926,
+      "ppr_pp_only": 252.24417967053924,
+      "npp": 2145.0,
+      "ppr2npp": 0.16347416382046584,
+      "ppr2npp_pp_only": 0.11759635415875955
+    },
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          1366.6025042837439
+        ],
+        [
+          1,
+          4138.738758363008
+        ]
+      ]
+    },
+    "seabird_total_sppr": 5505.341262646752,
+    "diet_sum": 0.999799919967987,
+    "negative_entry_count": 0,
+    "original_saved_comparison": null,
+    "elapsed_seconds": 0.34445389988832176,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "remove_only",
+    "method": "TE",
+    "status": "WARN",
+    "model_input": {
+      "status": "WARN",
+      "is_model_balanced": false,
+      "p_max_rel_residual": 0.033383353341336554,
+      "q_max_rel_residual": 0.0002000800320129105,
+      "dc_rows_sum_to_1": false,
+      "dc_max_deviation": 0.00020008003201310576,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "WARN",
+      "solve_error": null,
+      "b": 0.0,
+      "b_converges": true,
+      "rho_living": 0.2757420229532071,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            0.8104489294778254
+          ]
+        ]
+      },
+      "max_sppr_det": 0.8104489294778254,
+      "max_sppr_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 1798800.354511055,
+        "inv_te": 7994.444444444438
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 1798800.354511055,
+        "inv_te": 7994.444444444438
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": [
+        24,
+        23,
+        22
+      ]
+    },
+    "balance": {
+      "status": "WARN",
+      "is_balanced": false,
+      "inflow": 2145.0,
+      "outflow": 2109.2050803782945,
+      "rel_gap": 0.01668760821524732
+    },
+    "footprint": {
+      "ppr_all": 771.403743557636,
+      "ppr_inner": 771.4037435576358,
+      "ppr_pp_only": 597.704413299759,
+      "npp": 2145.0,
+      "ppr2npp": 0.3596287848753547,
+      "ppr2npp_pp_only": 0.2786500761304238
+    },
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)",
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]",
+      "PP balance gap 1.669% exceeds 1.0%"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          51958.0661806747
+        ],
+        [
+          1,
+          216101.580611783
+        ]
+      ]
+    },
+    "seabird_total_sppr": 268059.6467924577,
+    "diet_sum": 0.999799919967987,
+    "negative_entry_count": 0,
+    "original_saved_comparison": null,
+    "elapsed_seconds": 0.40427180007100105,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "remove_only",
+    "method": "With Egestion",
+    "status": "WARN",
+    "model_input": {
+      "status": "WARN",
+      "is_model_balanced": false,
+      "p_max_rel_residual": 0.033383353341336554,
+      "q_max_rel_residual": 0.0002000800320129105,
+      "dc_rows_sum_to_1": false,
+      "dc_max_deviation": 0.00020008003201310576,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.09711451043938973,
+      "b_converges": true,
+      "rho_living": 0.16967173931565332,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            1.2093379238756472
+          ]
+        ]
+      },
+      "max_sppr_det": 1.2093379238756472,
+      "max_sppr_group": {
+        "seq": 24,
+        "tl": 4.297455684468948,
+        "sppr": 11382.813106942767,
+        "inv_te": 337.2
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 9700.25121880706,
+        "inv_te": 191.86666666666667
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": false,
+      "inflow": 2145.0,
+      "outflow": 2144.745237822386,
+      "rel_gap": 0.00011877024597383869
+    },
+    "footprint": {
+      "ppr_all": 136.59986382868033,
+      "ppr_inner": 136.59986382868033,
+      "ppr_pp_only": 89.53303754026888,
+      "npp": 2145.0,
+      "ppr2npp": 0.06368292019985097,
+      "ppr2npp_pp_only": 0.04174034384161719
+    },
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "diet rows deviate from 1 by up to 0.0002 (> 1e-06; ModelData.validate_DC only guards 1e-3)"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          587.5590038423751
+        ],
+        [
+          1,
+          1320.2944029857208
+        ]
+      ]
+    },
+    "seabird_total_sppr": 1907.853406828096,
+    "diet_sum": 0.999799919967987,
+    "negative_entry_count": 0,
+    "original_saved_comparison": null,
+    "elapsed_seconds": 1.4079599000979215,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "remove_redistribute",
+    "method": "GE",
+    "status": "WARN",
+    "model_input": {
+      "status": "WARN",
+      "is_model_balanced": false,
+      "p_max_rel_residual": 0.033383353341336554,
+      "q_max_rel_residual": 0.0002000800320129105,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 2.220446049250313e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.0698576437258916,
+      "b_converges": true,
+      "rho_living": 0.21208967414456642,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            1.0828711378491187
+          ]
+        ]
+      },
+      "max_sppr_det": 1.0828711378491187,
+      "max_sppr_group": {
+        "seq": 24,
+        "tl": 4.297455684468948,
+        "sppr": 36109.75504591013,
+        "inv_te": 421.49999999999994
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 31953.096275343974,
+        "inv_te": 239.83333333333334
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": false,
+      "inflow": 2145.0,
+      "outflow": 2144.2691123791856,
+      "rel_gap": 0.00034074014956383605
+    },
+    "footprint": {
+      "ppr_all": 350.6523036498182,
+      "ppr_inner": 350.6523036498182,
+      "ppr_pp_only": 252.24417967053924,
+      "npp": 2145.0,
+      "ppr2npp": 0.16347426743581267,
+      "ppr2npp_pp_only": 0.11759635415875955
+    },
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          1366.8790759741235
+        ],
+        [
+          1,
+          4139.567003061501
+        ]
+      ]
+    },
+    "seabird_total_sppr": 5506.446079035624,
+    "diet_sum": 1.0,
+    "negative_entry_count": 0,
+    "original_saved_comparison": null,
+    "elapsed_seconds": 0.3796327000018209,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "remove_redistribute",
+    "method": "TE",
+    "status": "WARN",
+    "model_input": {
+      "status": "WARN",
+      "is_model_balanced": false,
+      "p_max_rel_residual": 0.033383353341336554,
+      "q_max_rel_residual": 0.0002000800320129105,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 2.220446049250313e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "WARN",
+      "solve_error": null,
+      "b": 0.0,
+      "b_converges": true,
+      "rho_living": 0.2757420229532071,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            0.8104489294778254
+          ]
+        ]
+      },
+      "max_sppr_det": 0.8104489294778254,
+      "max_sppr_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 1798800.354511055,
+        "inv_te": 7994.444444444438
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 1798800.354511055,
+        "inv_te": 7994.444444444438
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": [
+        24,
+        23,
+        22
+      ]
+    },
+    "balance": {
+      "status": "WARN",
+      "is_balanced": false,
+      "inflow": 2145.0,
+      "outflow": 2109.2043543903,
+      "rel_gap": 0.01668794667118878
+    },
+    "footprint": {
+      "ppr_all": 771.403743557636,
+      "ppr_inner": 771.4037435576358,
+      "ppr_pp_only": 597.704413299759,
+      "npp": 2145.0,
+      "ppr2npp": 0.3596287848753547,
+      "ppr2npp_pp_only": 0.2786500761304238
+    },
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001",
+      "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+      "3 group(s) have near-zero TE (SPPR ~ 1/te is near-singular): [24, 23, 22]",
+      "PP balance gap 1.669% exceeds 1.0%"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          51968.46403262201
+        ],
+        [
+          1,
+          216144.8268756637
+        ]
+      ]
+    },
+    "seabird_total_sppr": 268113.2909082857,
+    "diet_sum": 1.0,
+    "negative_entry_count": 0,
+    "original_saved_comparison": null,
+    "elapsed_seconds": 0.7385370000265539,
+    "scientific_state_unchanged_by_diagnostic": true
+  },
+  {
+    "scenario": "remove_redistribute",
+    "method": "With Egestion",
+    "status": "WARN",
+    "model_input": {
+      "status": "WARN",
+      "is_model_balanced": false,
+      "p_max_rel_residual": 0.033383353341336554,
+      "q_max_rel_residual": 0.0002000800320129105,
+      "dc_rows_sum_to_1": true,
+      "dc_max_deviation": 2.220446049250313e-16,
+      "n_negative_catch": 0,
+      "n_zero_catch": 7,
+      "total_catch": 3.4617151025401,
+      "has_catch": true,
+      "has_ee_issues": false,
+      "n_ee0": 0,
+      "n_ee_marginal": 0,
+      "n_ee_gt_1": 0,
+      "ee0_groups": [],
+      "ee_marginal_groups": []
+    },
+    "divergence": {
+      "status": "OK",
+      "solve_error": null,
+      "b": 0.09711476293526844,
+      "b_converges": true,
+      "rho_living": 0.16967173931565332,
+      "living_converges": true,
+      "sppr_det": {
+        "type": "dict",
+        "items": [
+          [
+            25,
+            1.2093390220288438
+          ]
+        ]
+      },
+      "max_sppr_det": 1.2093390220288438,
+      "max_sppr_group": {
+        "seq": 24,
+        "tl": 4.297455684468948,
+        "sppr": 11382.816662501411,
+        "inv_te": 337.2
+      },
+      "max_tl_group": {
+        "seq": 23,
+        "tl": 4.648534089904361,
+        "sppr": 9700.254553538063,
+        "inv_te": 191.86666666666667
+      },
+      "n_negative_sources": 0,
+      "expect_negatives": false,
+      "near_singular_te": []
+    },
+    "balance": {
+      "status": "OK",
+      "is_balanced": false,
+      "inflow": 2145.0,
+      "outflow": 2144.74709576744,
+      "rel_gap": 0.0001179040711235492
+    },
+    "footprint": {
+      "ppr_all": 136.59990656825272,
+      "ppr_inner": 136.59990656825272,
+      "ppr_pp_only": 89.53303754026888,
+      "npp": 2145.0,
+      "ppr2npp": 0.06368294012505954,
+      "ppr2npp_pp_only": 0.04174034384161719
+    },
+    "warnings": [
+      "model input mass-balance residual 0.0334 exceeds 0.0001"
+    ],
+    "seabird_source_coefficients": {
+      "type": "dict",
+      "items": [
+        [
+          26,
+          0.0
+        ],
+        [
+          25,
+          587.6771198390301
+        ],
+        [
+          1,
+          1320.5586203967646
+        ]
+      ]
+    },
+    "seabird_total_sppr": 1908.2357402357948,
+    "diet_sum": 1.0,
+    "negative_entry_count": 0,
+    "original_saved_comparison": null,
+    "elapsed_seconds": 0.3425078000873327,
+    "scientific_state_unchanged_by_diagnostic": true
+  }
+]

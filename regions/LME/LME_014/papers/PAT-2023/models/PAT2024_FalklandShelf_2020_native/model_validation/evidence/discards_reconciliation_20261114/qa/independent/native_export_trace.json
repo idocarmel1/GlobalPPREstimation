@@ -1,0 +1,67 @@
+{
+  "scope": "Read-only source field and archived-loader trace; no new solve or adoption",
+  "rows": [
+    {
+      "seq": 35,
+      "name": "Discards",
+      "native_GroupID": 45,
+      "native_export": -0.20750363171100616,
+      "native_catch": 0.0,
+      "native_BA": 0.0,
+      "native_DTImports": 0.0,
+      "canonical_export": 0.0,
+      "canonical_BA": 0.0,
+      "canonical_DTImports": 0.0,
+      "runtime_catch": 0.0,
+      "runtime_inflow": 0.0,
+      "runtime_predation": 0.20750363203745528,
+      "runtime_BA": -0.20750363203745528,
+      "native_export_minus_runtime_BA": 3.2644911773793694e-10
+    },
+    {
+      "seq": 36,
+      "name": "Detritus",
+      "native_GroupID": 1,
+      "native_export": 861.7476196289062,
+      "native_catch": 0.0,
+      "native_BA": 0.0,
+      "native_DTImports": 0.0,
+      "canonical_export": 0.0,
+      "canonical_BA": 0.0,
+      "canonical_DTImports": 0.0,
+      "runtime_catch": 0.0,
+      "runtime_inflow": 905.0394311005689,
+      "runtime_predation": 43.29761226532795,
+      "runtime_BA": 861.7418188352409,
+      "native_export_minus_runtime_BA": 0.005800793665343917
+    }
+  ],
+  "trace": [
+    {
+      "source": "model.json and native__source/model.json",
+      "finding": "Both canonical detritus groups store export0, BA0, DTImports0. Native detritus Export is already absent before the ModelData loader."
+    },
+    {
+      "source": "native__source/extracted_tables/evidence/selection_20260928/executed_code/ModelData.py:919",
+      "finding": "Raw export renamed to catch."
+    },
+    {
+      "source": "native__source/extracted_tables/evidence/selection_20260928/executed_code/ModelData.py:314",
+      "finding": "All detritus catch cleared to0."
+    },
+    {
+      "source": "ee_floor_on_review/initialization_and_floor.json",
+      "finding": "Completed runtime sets Discards35 BA to -predation where retained inflow is0; negative numerical closure magnitude already appears in the native Export field."
+    }
+  ],
+  "interpretation": "Stored native Export is evidence of a native term, not proof of measured or author-supplied external material. Its near equality to the loaded detritus residual is compatible with computed source closure; input-versus-output provenance must remain explicit until verified. Native DTImports0 provides no explicit positive import. No new supply is adopted.",
+  "authoritative_context": {
+    "url": "https://pressbooks.bccampus.ca/eweguide/chapter/ecopath-input/",
+    "paraphrase": "The EwE guide distinguishes explicit detritus import, calculated detritus biomass accumulation, surplus detritus fate/export, and fleet discard fate. It does not by itself establish the provenance of this stored database Export value."
+  },
+  "hashes": {
+    "regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\model_validation\\evidence\\source_review\\diet_reextraction_20261002\\primary_readonly_audit_tables.json": "763a7ce64eb77a0477a09269568e0a9f15ff11118e911cbb7a24042b448583e2",
+    "regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\model_validation\\evidence\\ee_floor_on_review\\initialization_and_floor.json": "030a092fa336c0fcfd561d5de0bb3898d6dbd1e2d60f028b2c447365e3d59c2d",
+    "regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\model.json": "9880e521a406974367530ffb06f13392714dba57b9645c38a1b1448926d83d17"
+  }
+}

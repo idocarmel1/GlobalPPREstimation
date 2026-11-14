@@ -1,0 +1,36 @@
+{
+  "production_source_sha256": "3d6241563df83a708813f8ebf6d13d4cefd9584b291fb0fa0c79f32482d6e74f",
+  "production_unchanged": true,
+  "patch_applied": false,
+  "targeted_test_run": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS",
+    "covers": "Both entry points reject custom and malformed markers before engine/path access; absent/empty marker preserves defaults, source state and return contract."
+  },
+  "red_test_run": {
+    "tests": 6,
+    "failures": 22,
+    "errors": 0,
+    "normal_unmarked_tests_passed": 2
+  },
+  "git_apply_check": "PASS for source-only and source-plus-test patches",
+  "adjacent_regression_attempt": {
+    "result": "INTERRUPTED_WITHOUT_RESULT",
+    "reason": "The optional three-suite in-memory candidate run did not finish after several minutes and was stopped; no broader passing claim.",
+    "suites": [
+      "test_audited_configuration",
+      "test_validated_method_coverage",
+      "test_coverage_preservation"
+    ]
+  },
+  "files": {
+    "method_coverage.py": "e225b080cd960873ac4b3b6b0a7bdeec3c00254387b9c1e64dadd360e729004d",
+    "test_runtime_initialization_guard.py": "408d82c5c8c2cb92aebc3187e23a5716cf5e8ee8777674ba7e52175dab9a081f",
+    "runtime_initialization_guard.patch": "0f60df9f1b015863ff2e049c0bff4d620ae241761ed2e3d82272b3832357226a",
+    "runtime_initialization_guard_with_test.patch": "1cb828678e249574518925331f86f7139848487d762fbbb31b5f768efe847dc5"
+  },
+  "production_test_destination": "tools/workflow_checks/calculations/test_runtime_initialization_guard.py",
+  "apply_only_after_active_publisher_finishes": true
+}

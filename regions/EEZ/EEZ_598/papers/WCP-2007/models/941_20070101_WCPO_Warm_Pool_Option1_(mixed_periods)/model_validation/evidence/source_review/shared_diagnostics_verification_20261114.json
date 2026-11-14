@@ -1,0 +1,475 @@
+{
+  "review_date": "2026-11-14",
+  "checked_at_utc": "2026-11-14T14:09:39.120331+00:00",
+  "target_region": "EEZ_598",
+  "source_run_region": "EEZ_941",
+  "model_id": "941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)",
+  "canonical_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+  "operation": "Independent read-only complete saved-matrix check and exact model/configuration evidence reuse; no solver or regional calculation.",
+  "reuse_supported_for_named_model_level_GE_TE_diagnostics": true,
+  "model_identity_checks": [
+    {
+      "path_relative_to_this_file": "../../../model.json",
+      "sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "expected_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model.json",
+      "sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "expected_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../../HS/HS_071/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model.json",
+      "sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "expected_sha256": "328330dc06ed3e96462995f1a04c1bdaa9747468af8bb4d9e4f57196b9cc1b03",
+      "matches_expected": true
+    }
+  ],
+  "canonical_group_ids_names_match_donor_axes": true,
+  "historical_target_constructor_settings_match_donor_base": true,
+  "historical_base_engine_hashes_match_current_saved_bytes": true,
+  "calculation_engine_hash_matches_saved_bytes": true,
+  "configuration": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1
+  },
+  "calculation_engine_upgrade": "ee_floor_v1",
+  "scope_compatibility": {
+    "inventory_adapter_admission": "rejected: legacy SPPR_1995 also changed",
+    "direct_scope_admission": "All class methods checked; direct diagnostic dependencies unchanged or exact certified EE-floor predecessor",
+    "added": [
+      "_sync_effective_table",
+      "_with_external_mortality",
+      "apply_ee_floor",
+      "get_aggregated_TE",
+      "validate_ee_floor"
+    ],
+    "removed": [],
+    "changed": [
+      "SPPR_1995",
+      "_sample_SPPR_new_forced_balance",
+      "balance_model",
+      "diagnose_sppr",
+      "is_model_balanced",
+      "is_sppr_balanced"
+    ],
+    "uncertified_excluded_legacy_methods": [
+      "SPPR_1995"
+    ],
+    "excluded_method_callers": {
+      "SPPR_1995": [
+        "get_aggregated_TE"
+      ]
+    },
+    "shared_adapter_or_engine_modified": false
+  },
+  "methods": {
+    "GE": {
+      "execution_status": "ok",
+      "diagnostic_status": "WARN",
+      "matrix_shape": [
+        32,
+        4
+      ],
+      "all_entries_finite": true,
+      "all_missing_masks_false": true,
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_columns": [
+        {
+          "id": 32,
+          "name": "diet_import",
+          "type": "Import",
+          "synthetic": true
+        },
+        {
+          "id": 31,
+          "name": "Detritus",
+          "type": "DET",
+          "synthetic": false
+        },
+        {
+          "id": 30,
+          "name": "Small phyto",
+          "type": "PP",
+          "synthetic": false
+        },
+        {
+          "id": 29,
+          "name": "Large phyto",
+          "type": "PP",
+          "synthetic": false
+        }
+      ],
+      "negative_source_group_pairings": [],
+      "negative_tolerance": 0,
+      "rho_living": 0.5467665518138085,
+      "b": 0.629379721549255,
+      "detritus_sppr": 2.506075940943192,
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 2.220446049250313e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 21,
+        "total_catch": 0.05402029999999999,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0008174999999999997,
+        "negative_detritus_stock_residuals": {}
+      },
+      "sppr_balance": {
+        "status": "OK",
+        "is_balanced": false,
+        "inflow": 1097.9547,
+        "outflow": 1096.9021126216333,
+        "rel_gap": 0.0009586801517100405
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001"
+      ],
+      "donor_report_text": "WARN — source-model strict mass balance remains false (adult BET production residual about 0.73%). No negative SPPR entries across the basal-source columns. rho_living = 0.546767; b = 0.629380; Detritus (31) SPPR = 2.506076.",
+      "donor_report_values_match_rounded_saved_values": true,
+      "all_inner_PP_scope_sums_reconciled": true
+    },
+    "TE": {
+      "execution_status": "ok",
+      "diagnostic_status": "WARN",
+      "matrix_shape": [
+        32,
+        4
+      ],
+      "all_entries_finite": true,
+      "all_missing_masks_false": true,
+      "row_ids": [
+        32,
+        31,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25,
+        24,
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source_columns": [
+        {
+          "id": 32,
+          "name": "diet_import",
+          "type": "Import",
+          "synthetic": true
+        },
+        {
+          "id": 31,
+          "name": "Detritus",
+          "type": "DET",
+          "synthetic": false
+        },
+        {
+          "id": 30,
+          "name": "Small phyto",
+          "type": "PP",
+          "synthetic": false
+        },
+        {
+          "id": 29,
+          "name": "Large phyto",
+          "type": "PP",
+          "synthetic": false
+        }
+      ],
+      "negative_source_group_pairings": [],
+      "negative_tolerance": 0,
+      "rho_living": 0.7249377689422032,
+      "b": 0.0,
+      "detritus_sppr": 0.2525090684652693,
+      "model_input": {
+        "status": "WARN",
+        "is_model_balanced": false,
+        "p_max_rel_residual": 0.007279402209226768,
+        "q_max_rel_residual": 0.00046102880658427267,
+        "dc_rows_sum_to_1": true,
+        "dc_max_deviation": 2.220446049250313e-16,
+        "n_negative_catch": 0,
+        "n_zero_catch": 21,
+        "total_catch": 0.05402029999999999,
+        "has_catch": true,
+        "has_ee_issues": false,
+        "n_ee0": 0,
+        "n_ee_marginal": 0,
+        "n_ee_gt_1": 0,
+        "ee0_groups": [],
+        "ee_marginal_groups": [],
+        "diagnostic_basis": "effective calculation runtime",
+        "before_floor_ee0_groups": [],
+        "before_floor_ee_marginal_groups": [],
+        "external_mortality_export": 0.0008174999999999997,
+        "negative_detritus_stock_residuals": {}
+      },
+      "sppr_balance": {
+        "status": "OK",
+        "is_balanced": false,
+        "inflow": 1097.9547,
+        "outflow": 1096.7050820463169,
+        "rel_gap": 0.001138132523758155
+      },
+      "warnings": [
+        "model input mass-balance residual 0.00728 exceeds 0.0001",
+        "TE_option='TE' has no detritus recycling matrix: b reported as 0.0 (mortality-derived SPPR is written off as lost)",
+        "rho(A_LL)=0.7249 is within 0.3 of divergence (max SPPR 6.11e+05 at group 9 (Small Billfish), TL 5.15)"
+      ],
+      "donor_report_text": "WARN — source-model strict mass balance remains false (adult BET production residual about 0.73%). Living-network amplification is also flagged. No negative SPPR entries across the basal-source columns. rho_living = 0.724938; Detritus (31) SPPR = 0.252509.",
+      "donor_report_values_match_rounded_saved_values": true,
+      "all_inner_PP_scope_sums_reconciled": true
+    }
+  },
+  "ee_floor": {
+    "use_ee_floor": true,
+    "ee_floor": 0.1,
+    "ee_threshold": 0.1,
+    "affected_groups": [
+      10,
+      3,
+      2,
+      1
+    ],
+    "external_mortality_export_total": 0.0008174999999999997,
+    "negative_detritus_stock_residuals": {},
+    "assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+    "application_stage": "completed audited initialization",
+    "researcher_approval": "Original signed review is separate from this calculation assumption"
+  },
+  "historical_GE": {
+    "b": 0.6369143539727922,
+    "detritus_sppr": {
+      "31": 2.580260999739747
+    },
+    "interpretation": "Prior report evidence, not floor-enabled numbers; no historical result relabeled."
+  },
+  "sources": [
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/summary.json",
+      "sha256": "e21556e92a184b48053ddd773e70958904fd037133dad4ae6f5b3e8c753e6c5f",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/run_provenance.json",
+      "sha256": "99820a73c9df5221b3bdda154fb0c857484d11d76a985579683594f61a802610",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/group_axes.json",
+      "sha256": "7f8f27f1215bcd1c797439f4c35e2bb6007c7897c0a010d5c0caba06b5e93ead",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/ee_floor_ledger.json",
+      "sha256": "13ba187ce0374d6ad19ba2feb20a773c207c99d65ebfe4d1b4023fcf69072111",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/runtime_initialized.json.gz",
+      "sha256": "6098c190de460b53291c3d89797cf8c5247fd39145c2c7a76172a8f92922383b",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/source_state.json.gz",
+      "sha256": "a20ff21992620a2bc9280e0068bceb1e48643b484a7a93720997e5c74f920781",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/validation.docx",
+      "sha256": "b4047efe2a03244542f8f7b68ba69752bb8ba0d3ee712119c842db785660547b",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "diagnostics_verification.json",
+      "sha256": "9a09feb8ee5a653230d1e28762bbd19c90c519cf031340d8953b17e222ab619e",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_GE_SPPR_matrix.json",
+      "sha256": "300464268dbe3730dac7b388aae4b7b0e297bed59e7aac16fd8914f769d96dfe",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_GE_full_return.json.gz",
+      "sha256": "c1bf1a1cb5731a8e02caa3327fc38504135d22a3d4b5c08cfb045d0dd11feefc",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_TE_EEfix_SPPR_matrix.json",
+      "sha256": "dbe4be3c591ae198bfa4207979b278a27a546e78530a198468b65772f550673d",
+      "expected_sha256": null,
+      "matches_expected": null
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_TE_EEfix_full_return.json.gz",
+      "sha256": "ff32e51d7e7b5a0038f092d971307a81edd3a08d91971c8ced46e570c80879e9",
+      "expected_sha256": null,
+      "matches_expected": null
+    }
+  ],
+  "limitations": [
+    "Direct GE/TE reuse is not full inventory certification or an EEZ_598 annual-result migration.",
+    "GE and TE retain WARN and strict balance false. Complete nonnegative matrices are not scientific approval.",
+    "Original researcher reviews and the floor-enabled diagnostic identity remain separate.",
+    "EE floor is a hypothetical nonfishery export assumption; no canonical parameter correction is made."
+  ],
+  "retained_donor_certificate": {
+    "path_relative_to_this_file": "../../../../../../../../../HS/HS_071/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/source_review/shared_diagnostics_verification_20261114.json",
+    "sha256": "19928aaa9d7ac0ac2f2a7f2fdd29ab733fbc49242dff5b4f6432eeb843e5a9ff",
+    "expected_sha256": null,
+    "matches_expected": null
+  },
+  "retained_donor_evidence_hash_checks": [
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/summary.json",
+      "sha256": "e21556e92a184b48053ddd773e70958904fd037133dad4ae6f5b3e8c753e6c5f",
+      "expected_sha256": "e21556e92a184b48053ddd773e70958904fd037133dad4ae6f5b3e8c753e6c5f",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/run_provenance.json",
+      "sha256": "99820a73c9df5221b3bdda154fb0c857484d11d76a985579683594f61a802610",
+      "expected_sha256": "99820a73c9df5221b3bdda154fb0c857484d11d76a985579683594f61a802610",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/group_axes.json",
+      "sha256": "7f8f27f1215bcd1c797439f4c35e2bb6007c7897c0a010d5c0caba06b5e93ead",
+      "expected_sha256": "7f8f27f1215bcd1c797439f4c35e2bb6007c7897c0a010d5c0caba06b5e93ead",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/ee_floor_ledger.json",
+      "sha256": "13ba187ce0374d6ad19ba2feb20a773c207c99d65ebfe4d1b4023fcf69072111",
+      "expected_sha256": "13ba187ce0374d6ad19ba2feb20a773c207c99d65ebfe4d1b4023fcf69072111",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/runtime_initialized.json.gz",
+      "sha256": "6098c190de460b53291c3d89797cf8c5247fd39145c2c7a76172a8f92922383b",
+      "expected_sha256": "6098c190de460b53291c3d89797cf8c5247fd39145c2c7a76172a8f92922383b",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/source_state.json.gz",
+      "sha256": "a20ff21992620a2bc9280e0068bceb1e48643b484a7a93720997e5c74f920781",
+      "expected_sha256": "a20ff21992620a2bc9280e0068bceb1e48643b484a7a93720997e5c74f920781",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_GE_SPPR_matrix.json",
+      "sha256": "300464268dbe3730dac7b388aae4b7b0e297bed59e7aac16fd8914f769d96dfe",
+      "expected_sha256": "300464268dbe3730dac7b388aae4b7b0e297bed59e7aac16fd8914f769d96dfe",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_GE_full_return.json.gz",
+      "sha256": "c1bf1a1cb5731a8e02caa3327fc38504135d22a3d4b5c08cfb045d0dd11feefc",
+      "expected_sha256": "c1bf1a1cb5731a8e02caa3327fc38504135d22a3d4b5c08cfb045d0dd11feefc",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_TE_EEfix_SPPR_matrix.json",
+      "sha256": "dbe4be3c591ae198bfa4207979b278a27a546e78530a198468b65772f550673d",
+      "expected_sha256": "dbe4be3c591ae198bfa4207979b278a27a546e78530a198468b65772f550673d",
+      "matches_expected": true
+    },
+    {
+      "path_relative_to_this_file": "../../../../../../../../EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/model_validation/evidence/ee_floor_on/new_TE_EEfix_full_return.json.gz",
+      "sha256": "ff32e51d7e7b5a0038f092d971307a81edd3a08d91971c8ced46e570c80879e9",
+      "expected_sha256": "ff32e51d7e7b5a0038f092d971307a81edd3a08d91971c8ced46e570c80879e9",
+      "matches_expected": true
+    }
+  ],
+  "retained_donor_evidence_bytes_unchanged": true
+}
