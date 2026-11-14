@@ -22,6 +22,7 @@ Sample counts are kept tiny (2-6) -- these tests must never become a heavy run.
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import sys
 import warnings
 
@@ -32,7 +33,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from PPRCalculator import PPRCalculator  # noqa: E402
 
-TOY = "real_models/ToyModels/900_900_Multi_DET_Toy_(2026).json"
+TOY = str(Path(__file__).resolve().parents[4] /
+          "common_reference_data/ecobase/source_data/ToyModels/900_900_Multi_DET_Toy_(2026).json")
 BLACK_SEA = "real_models/new_EwE_jsons/62_10062_Black_Sea_(1960-1969).json"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -63,6 +65,9 @@ def toy() -> PPRCalculator:
 
 @pytest.fixture(scope="module")
 def black_sea() -> PPRCalculator:
+    if not os.path.isfile(os.path.join(ROOT, BLACK_SEA)):
+        pytest.skip("Historical fixture 62_10062_Black_Sea_(1960-1969).json is unavailable; "
+                    "other Black Sea model identities are not equivalent substitutes")
     return _calc(BLACK_SEA)
 
 

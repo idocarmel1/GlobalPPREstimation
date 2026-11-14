@@ -15,6 +15,7 @@ Models used and why:
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import sys
 import warnings
 
@@ -26,7 +27,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from PPRCalculator import DEFAULT_DIAGNOSTIC_THRESHOLDS, PPRCalculator  # noqa: E402
 
-TOY = "real_models/ToyModels/900_900_Multi_DET_Toy_(2026).json"
+TOY = str(Path(__file__).resolve().parents[4] /
+          "common_reference_data/ecobase/source_data/ToyModels/900_900_Multi_DET_Toy_(2026).json")
 BLACK_SEA = "real_models/new_EwE_jsons/62_10062_Black_Sea_(1960-1969).json"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,6 +56,9 @@ def toy() -> PPRCalculator:
 
 @pytest.fixture(scope="module")
 def black_sea() -> PPRCalculator:
+    if not os.path.isfile(os.path.join(ROOT, BLACK_SEA)):
+        pytest.skip("Historical fixture 62_10062_Black_Sea_(1960-1969).json is unavailable; "
+                    "other Black Sea model identities are not equivalent substitutes")
     return _calc(BLACK_SEA)
 
 
@@ -195,15 +200,16 @@ def test_trophic_levels_are_not_degenerate(black_sea_report):
     assert black_sea_report["divergence"]["max_tl_group"]["tl"] > 1.5
 
 
-def test_tl_attribute_is_populated(black_sea, toy):
+@pytest.mark.parametrize("fixture_name", ["black_sea", "toy"])
+def test_tl_attribute_is_populated(request, fixture_name):
     """Regression: the stored 'tl' column carries a value only for the synthetic import group,
     so PPRCalculator used to fill every real group with 1.0 and self.TL was useless."""
-    for pc in (black_sea, toy):
-        assert pc.TL.max() > 1.0
-        assert pc.TL.notna().all()
-        assert pc.get_groups_df()["tl"].notna().all()
-        expected = pc.get_TL(break_cycles=False, DET_as_PP=True)
-        assert np.allclose(pc.TL.reindex(expected.index), expected)
+    pc = request.getfixturevalue(fixture_name)
+    assert pc.TL.max() > 1.0
+    assert pc.TL.notna().all()
+    assert pc.get_groups_df()["tl"].notna().all()
+    expected = pc.get_TL(break_cycles=False, DET_as_PP=True)
+    assert np.allclose(pc.TL.reindex(expected.index), expected)
 
 
 def test_ee0_warning_names_the_groups(black_sea, black_sea_report):

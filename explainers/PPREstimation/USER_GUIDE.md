@@ -129,6 +129,8 @@ food imported from outside the modeled area can be handled uniformly downstream.
 | `md.groups_data` | `pd.DataFrame` | Per-group ecological parameters, indexed by `group_seq` (descending). |
 | `md.DC` | `pd.DataFrame` | **Diet composition** matrix. `DC[i, j]` = fraction of predator `i`'s diet made up of prey `j`. Rows sum to ~1 for consumers. |
 | `md.det_fate` | `pd.DataFrame` | **Detritus fate** matrix: for each group, the fraction of its dead/egested material routed to each detritus pool. |
+| `md.discard_returns` | `pd.DataFrame` or `None` | Source-backed internal fishery returns: donor-group rows × detritus-pool columns, in absolute flow units. Source catch is unchanged. |
+| `md.discard_returns_metadata` | `dict` | Availability, source locators and unresolved routing for the internal-return matrix. |
 | `md.seq2name` | `dict` | `group_seq -> group_name`. |
 | `md.name2seq` | `dict` | `group_name -> group_seq`. |
 | `md.model_number`, `md.model_name`, `md.model_year`, `md.model_country`, `md.lme` | metadata | Model identity. |
@@ -144,6 +146,12 @@ food imported from outside the modeled area can be handled uniformly downstream.
 > **Ecological note on `DC` vs `det_fate`:** `DC` tells you what each group *eats*; `det_fate` tells you
 > where each group's *waste and dead biomass* goes. Both are needed because detritus is recycled back into
 > the food web, and the recycling loop is what makes the PPR of detritus-feeders non-trivial.
+
+Standalone `detritus_fate_by_pool` is read even for nonfeeding producers and detritus.
+Explicit zero routing is preserved; unknown consumer diet or declared pool fractions are
+not normalized into observations. Missing nonfeeding imported-diet cells use recorded
+structural zeros. Source TL and location metadata are retained. See the detailed
+[loading conventions](../model_loading.md) for legacy defaults and discard-return coverage.
 
 ---
 
@@ -596,7 +604,7 @@ is a red flag about the model or the chosen TE error.
 | Method | Returns | Meaning |
 |--------|---------|---------|
 | `is_model_balanced()` | `(bool, production, consumption)` | Checks the two mass-balance identities hold; returns the recomputed flow Series so you can inspect residuals. |
-| `is_sppr_balanced(sppr, diet_import_equations=None)` | `(bool, inflow, outflow)` | Checks an SPPR result is globally self-consistent: primary-production **inflow** equals the export-weighted **outflow**. Pass `(equations, variables)` from `SPPR_symbolic` to use the diet-import-aware check. |
+| `is_sppr_balanced(sppr, diet_import_equations=None, *, TE_option='GE')` | `(bool, inflow, outflow)` | Checks primary-production inflow against exports in the actual GE, TE or With Egestion formulation. Match `TE_option` to the solver. Pass `(equations, variables)` from a supported symbolic result for the diet-import-aware check. |
 | `balance_model(change_production=False)` | `PPRCalculator` | Returns a deep-copied, exactly mass-balanced version of the model. `change_production=False` absorbs residuals into growth/net_migration (keeping `p` fixed); `True` absorbs them into production. |
 | `diagnose_sppr(TE_option='GE', *, short=False, flat=False, thresholds=None, return_sppr=False, **sppr_kwargs)` | `dict` | One-call trust check for `SPPR_new` output: input-data checks, both convergence conditions, PP balance and the catch footprint, graded `OK` / `WARN` / `FAIL`. See §7.1. |
 
@@ -604,12 +612,18 @@ The global SPPR balance check verifies:
 
 ```
 inflow  = total PP production entering the system
-outflow = Σ (catch + growth + net_migration) · SPPR
+outflow = Σ (catch − internal_discard_returns + growth + net_migration + floor_sink) · SPPR
+          + formulation_specific_unrouted_export
 is_balanced = isclose(inflow, outflow)
 ```
 
-A balanced SPPR means the production you pulled out (as catch, growth, migration) is exactly the production
-that came in as primary production — a strong sanity check on any method.
+Unrouted mortality is valued at donor SPPR for GE; With Egestion also values unrouted
+egestion at the complete diet's SPPR. TE already absorbs consumer mortality into its
+efficiency and counts only basal mortality here. Internal fishery returns carry donor
+SPPR into their receiving detritus pools once; they are not external exports or egestion.
+The exporter checks only results with a known matching formulation; unavailable checks
+for legacy/global/aggregate results are explicit. Budget closure remains separate from
+source fidelity, negative coefficients and convergence.
 
 ### 7.1 `diagnose_sppr` — can I rely on this result?
 
@@ -678,7 +692,7 @@ PPR/NPP is a finding about the ecosystem, not a defect in the calculation.
 | Key | Type | Meaning |
 |-----|------|---------|
 | `status` | `str` | Section verdict. |
-| `b` | `float` | Detritus recycling gain `ρ(diag(θ)·B)`: how much detritus one unit of detritus regenerates through the death→detritus→consumption→death loop (§6.6). Measured **before** the solve-vs-pool decision, so `det_collapse_mode` cannot mask it. `0.0` under `TE_option='TE'`, which has no recycling matrix. |
+| `b` | `float` | Detritus recycling gain `ρ(diag(θ)·B)`, measured before the solve-vs-pool decision. TE with explicit internal discard returns uses its actual coupled recycling matrix; TE without returns retains the `0.0` convention. |
 | `b_converges` | `bool` | `b < 1`. `False` means the returned SPPR is not a convergent sum. |
 | `rho_living` | `float` | `ρ(A_LL)`, the same condition for the living block of `A = DC/TE` — predation cycles and cannibalism. |
 | `living_converges` | `bool` | `rho_living < 1`. `False` corrupts the basis `B` is built from, so `b` becomes meaningless too. |
@@ -697,7 +711,7 @@ PPR/NPP is a finding about the ecosystem, not a defect in the calculation.
 |-----|------|---------|
 | `status` | `str` | Section verdict, from `rel_gap` against `balance_warn` / `balance_fail` (defaults 1% / 5%). |
 | `inflow` | `float` | Primary production entering the system. |
-| `outflow` | `float` | The SPPR-weighted export leaving it: `(catch + growth + net_migration)·SPPR`. |
+| `outflow` | `float` | External catch, growth, migration, floor sink and formulation-specific unrouted exports, in PP-equivalent units; internal discard returns are excluded from external catch. |
 | `rel_gap` | `float` | `\|outflow − inflow\| / \|inflow\|`. An SPPR that converged but does not close the PP budget is arithmetically fine and physically wrong. |
 | `is_balanced` | `bool` | `is_sppr_balanced`'s strict boolean, alongside the gap it comes from. |
 

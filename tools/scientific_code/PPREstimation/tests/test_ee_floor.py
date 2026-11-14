@@ -29,6 +29,8 @@ def state(ee=0., pools=1, fate=1.):
     df.loc[3, ['egestion', 'respiration']] = [20., 70.]
     df.loc[3, 'biomass_accum'] = 10.*ee
     df.loc[2, 'biomass_accum'] = 810.
+    # These toy pools intentionally derive their stock residual; known BA is preserved.
+    df.loc[ids[2:], 'biomass_accum'] = np.nan
     dc = pd.DataFrame(0., index=ids, columns=ids)
     dc.loc[3, 2] = .9
     dc.loc[3, ids[2:]] = .1/pools

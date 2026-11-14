@@ -309,11 +309,25 @@ the other sources. Column `b` of the returned SPPR matrix is `s^b`: the units of
 required, directly and indirectly, to produce one unit of each group. Summing the columns gives
 the aggregated SPPR.
 
-**The balance identity (used to sanity-check every method).** Under mass balance, primary
+**The balance identity (for a known GE/TE/With Egestion formulation).** Under mass balance, primary
 production entering the system equals the production leaving it, both measured in SPPR units:
 
 $$ \text{Inflow} = NPP + \text{DietImport} = (\mathbf{N_m} + \mathbf{C} + \mathbf{BA} + \mathbf{X})\cdot\mathbf{SPPR} = \text{Outflow}, $$
 
+The displayed identity assumes complete natural routing and no internal fishery returns.
+More generally, subtract the explicitly returned catch from external `C` and add
+formulation-specific unrouted exports. Let `R[i,d]` be the source-backed absolute
+discard return from donor `i` to detritus pool `d`, and `u_i=1−sum_d f[i,d]` the
+unrouted natural-loss fraction. External catch is `C_i−sum_d R[i,d]`, while the
+source `catch` vector remains unchanged. Add `sum_i u_i M0_i S_i` under GE;
+With Egestion additionally adds `sum_i u_i U_i (DC S)_i`, including imported prey
+in the complete diet cost. Under TE add only basal PP/Import mortality because
+consumer mortality is already absorbed in TE. These terms are separate from
+the EE-floor sink `X`; counting consumer mortality again under TE is incorrect.
+
+`is_sppr_balanced(..., TE_option=...)` must receive the result's actual formulation.
+The exporter marks balance unavailable for legacy/global/aggregate results without
+an exact registered formulation instead of applying the GE identity by default.
 The weighted external sink belongs in the budget outflow; it is zero for floor OFF.
 `get_PPR2NPP_ratio` retains catch × SPPR in its numerator and NPP in its denominator.
 
@@ -538,7 +552,7 @@ $$ \mathrm{sppr_{det}} = \theta\cdot\frac{\sum_{k\in PP\cup Import} F_{k\to DET}
 
    i.e. detritus is credited only with the genuinely primary material that fell into it, while all
    consumer-derived inflow is uncounted because the `'TE'` convention has already written it off as
-   lost. Note that in this convention, `SPPR_det` is always $\leq$ 1. Here `θ = det_theta` is the availability/retention damping. (The one exception is `EE=0`
+   lost. Without internal fishery returns, in this convention `SPPR_det` is always $\leq$ 1. Here `θ = det_theta` is the availability/retention damping. (The one exception is `EE=0`
    dead-end groups, whose `TE=0` severs them from the nullspace and leaks the PP they consumed;
    `fix_EE_0_cases` re-credits that leak to detritus with a small linear correction.)
 
@@ -582,6 +596,26 @@ So the detritus resolution is a **second linear solve layered on top of the livi
 nullspace**: the nullspace (from `A = DC/TE`) fixes how much of each detritus pool every group
 needs; the `(I − B)x = c` system then converts those pools from "one unit of themselves" into
 primary-production-equivalent values by closing the death→detritus→consumption→death loop.
+
+**Explicit internal discard returns.** Supported Rpath fleet routing supplies a separate
+absolute matrix `R[i,l]`, rather than modifying natural `det_fate` fractions or source
+catch. The physical pool inflow is `q_l=sum_i f[i,l](M0_i+U_i)+sum_i R[i,l]`.
+Add `R[i,l]/q_l` to each donor's mortality weight for GE and With Egestion; returned
+fish carry the donor's own SPPR, not the diet-weighted egestion cost. TE with nonzero
+returns also needs a coupled detritus solve: its weight is
+`(f[i,l] M0_i 1_{i in PP/Import}+R[i,l])/q_l`. Consumer mortality remains excluded.
+Consequently TE can have nonzero recycling gain `b`, and its detritus SPPR need not
+be bounded by one. With no returned flow, the historical direct TE convention and
+its `b=0` interpretation remain unchanged. The same returned flow leaves external
+catch once in the balance check; fishery PPR continues to use the source catch.
+
+These return equations are supported by the three `SPPR_new` formulations. Symbolic
+and flow-based legacy methods without equivalent return equations explicitly reject a model
+with nonzero returns instead of emitting coefficients that omit the internal flow.
+Missing positive-flow return routing is an explicit construction gap, not zero.
+Independent trophic-level benchmarks remain available, with flow-budget checks
+explicitly unavailable. A requested TE zero-efficiency dead-end re-credit combined
+with positive returns is unsupported; it is not silently replaced by another equation.
 
 **Core inputs:**
 - **`TE`** — supply an explicit TE matrix (e.g. a Monte-Carlo sample). If `None`, built from
@@ -718,11 +752,14 @@ $$ (1-DC_{i,DI})\cdot\mathrm{DIET\_SPPR}_i = \sum_{k\in\mathcal{X}} DC_{ik}\cdot
 ### `_sample_SPPR_new_forced_balance(TE_option='TE', sppr_det=None)`
 Runs `SPPR_new`, then treats the detritus scaling as a single unknown `x = sppr_det` and solves
 the scalar equation that forces **exact global mass balance** — PP inflow equals the export
-outflow (catch + growth + net migration + external mortality export) weighted by SPPR:
+outflow (external catch + growth + net migration + external mortality export) weighted by SPPR,
+plus the selected formulation's unrouted-export term:
 
 $$ \sum_{i\in PP} p_i \;=\; \sum_i (C_i + BA_i + N_{m,i} + X_i)\big(\mathrm{SPPR}^{PP}_i + x\cdot\mathrm{SPPR}^{DET}_i\big), $$
 
-which is linear in `x`, so it is solved directly; the detritus columns are then scaled by the
+The displayed equation is the complete-routing, no-return special case. The implementation
+uses the same returned-catch subtraction and unrouted-export valuation as
+`is_sppr_balanced`. The identity remains linear in `x`, so it is solved directly; the detritus columns are then scaled by the
 solved `x`. Returns `(sppr, sppr_det)`. Ecologically, it pins the one free recycling degree of
 freedom so that total primary production in equals total exported production out.
 
@@ -1019,7 +1056,9 @@ with the configuration.
 
 **`balance`** — `is_sppr_balanced` on the result (§2, *The balance identity*).
 - **`inflow`**, **`outflow`** — primary production entering the system, and the SPPR-weighted
-  export leaving it (`catch + growth + net_migration + external_mortality_export`).
+  export leaving it (external catch, growth, net migration, the EE-floor sink and
+  formulation-specific unrouted mortality/egestion). Internal discard returns are
+  excluded from external catch, while the source catch used by fishery PPR is retained.
 - **`rel_gap`** — `|outflow − inflow| / |inflow|`, graded against `balance_warn` / `balance_fail`
   (defaults `1%` / `5%`). An SPPR that converged but does not close the PP budget is arithmetically
   fine and physically wrong.

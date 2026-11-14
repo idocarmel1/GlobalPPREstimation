@@ -15,6 +15,7 @@ Toy layout, relied on below:
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import sys
 import warnings
 
@@ -29,7 +30,8 @@ from ModelData import ModelData  # noqa: E402
 from PPRCalculator import PPRCalculator  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TOY_DIR = os.path.join(ROOT, "real_models", "ToyModels")
+TOY_DIR = str(Path(__file__).resolve().parents[4] /
+              "common_reference_data/ecobase/source_data/ToyModels")
 TOY = os.path.join(TOY_DIR, "900_900_Multi_DET_Toy_(2026).json")
 
 # Cheap, source-resolved + non-source-resolved + no-DET-column methods, so the shape logic is

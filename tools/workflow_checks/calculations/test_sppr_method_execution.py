@@ -7,6 +7,7 @@ import tempfile
 import unittest
 import copy
 import sys
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -26,6 +27,18 @@ FLAGS = {'constructor': {'underdetermined': True, 'zero_catch': True,
 
 
 class EvidenceTests(unittest.TestCase):
+    def test_runtime_evidence_preserves_internal_discard_return_identity(self):
+        returns = pd.DataFrame([[0.25, 0.75], [0., 0.]], index=[8, 3], columns=[21, 22])
+        metadata = {'status': 'complete', 'source': 'explicit fleet routing',
+                    'unresolved': [], 'source_catch_unchanged': True}
+        model = SimpleNamespace(_discard_returns=returns, discard_returns_metadata=metadata)
+        encoded = coverage._runtime(model)
+        self.assertEqual(encoded['_discard_returns']['index'], [8, 3])
+        self.assertEqual(encoded['_discard_returns']['columns'], [21, 22])
+        self.assertEqual(encoded['_discard_returns']['data'], [[0.25, 0.75], [0., 0.]])
+        self.assertEqual(encoded['discard_returns_metadata'], metadata)
+        self.assertEqual(returns.loc[8].sum(), 1.)
+
     def test_explicit_floor_upgrade_preserves_archived_loader_and_records_both_engines(self):
         with tempfile.TemporaryDirectory() as directory:
             model = Path(directory) / 'model.json'

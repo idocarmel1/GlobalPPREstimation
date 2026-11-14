@@ -415,7 +415,8 @@ def _runtime(model):
               'balance_BA_after_DC_normalization', 'use_ee_floor', 'ee_floor',
               'EE_before_floor', 'M0_before_floor', 'source_EE', 'source_M0',
               'external_mortality_export', 'ee_floor_ledger', 'ee_floor_info', '_ee_floor_base',
-              '_source_groups_before_completion', '_initialization_settings')
+              '_source_groups_before_completion', '_initialization_settings',
+              '_discard_returns', 'discard_returns_metadata')
     return encode_lossless({k: getattr(model, k) for k in fields if hasattr(model, k)})
 
 

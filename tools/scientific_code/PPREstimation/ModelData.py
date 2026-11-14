@@ -234,6 +234,8 @@ class ModelData:
         Raises:
             TypeError: If ``model_input`` is neither an ``int`` nor a ``str``.
         """
+        self.discard_returns = None
+        self.discard_returns_metadata = {'status': 'not_supplied', 'unresolved': []}
         if isinstance(model_input, int):
             # Old API: load from pre-existing JSON files by model number
             self._init_from_model_number(model_input)
@@ -276,8 +278,7 @@ class ModelData:
             raise ValueError(f"Expected an Ecopath model with a non-empty 'group' list: {filepath}")
         self.model_number, self.model_name, self.model_year = self._resolve_json_identity(filepath, self.data_json)
 
-        # Country is not available from the JSON, set to NaN
-        self.model_country = np.nan
+        self.lme, self.model_country = self._resolve_json_location(filepath, self.data_json)
 
         # Load JSON data
         # (Type-only annotations below document the intended attribute types.)
@@ -288,8 +289,6 @@ class ModelData:
         # fold them into a parameter DataFrame plus the per-group diet_import series.
         species_groups = ModelData.get_species_groups(self.data_json)
         self.groups_data, diet_import = ModelData.get_groups_df(species_groups)
-
-        self.lme = 13  # Default, could be extracted from metadata if needed
 
         # Build the seq<->name lookups; get_seq2name already appends a 'diet_import' entry,
         # so the maximum sequence index is the synthetic import group's index.
@@ -310,18 +309,157 @@ class ModelData:
         # DC and Detritus fate:
         DC, det_fate = ModelData.get_DC(self.data_json)
         DC.loc[import_seq] = 0  # add import data to DC  (import group eats nothing -> zero row)
+        diet_import = self._nonfeeding_imports(diet_import)
         DC[import_seq] = diet_import  # add import data to DC  (import as a prey column = per-group diet_import)
         # Sort both axes descending so the matrix orientation matches downstream expectations.
         self.DC = DC.sort_index(ascending=False).sort_index(axis=1, ascending=False)
 
         det_fate.loc[import_seq] = 0  # add diet_import to det_fate (zero row for the import group)
         det_seq = self.groups_data.index[self.groups_data['trophic_info'] == 'DET']
-        # Normalize orientation, force the detritus self-identity, and default a fully-missing
-        # (degenerate) single-DET matrix to the closed system. See _finalize_det_fate.
+        # Normalize orientation without overwriting supplied source routing.
         self.det_fate = ModelData._finalize_det_fate(det_fate, self.groups_data)
 
-        # fix export of detritus groups to be 0:
-        self.groups_data.loc[det_seq, 'catch'] = 0
+        # Source-reported exports, including DET exports, remain in groups_data.
+        self.discard_returns, self.discard_returns_metadata = self._read_discard_returns()
+
+    def _read_discard_returns(self) -> tuple[Optional[pd.DataFrame], dict]:
+        """Read explicitly documented Rpath fleet returns, without changing catch.
+
+        The supported source schema pairs group.discards_by_fleet amounts with
+        Type=3 rows in published_companions['Rpath_parameter_model.csv'].rows.
+        Fleet names and DET group-name columns match exactly. Amounts use the
+        source catch-flow units; no normalization, unit conversion or missing
+        routing is inferred. A subunit routing sum leaves an accounting remainder
+        outside the modeled detritus pools, not a new observed export parameter.
+
+        A complete matrix has real donor-group rows and DET columns. Unknown
+        positive-flow routes or unproved total-catch scope return None with an
+        incomplete status, which calculators must reject before computing.
+        """
+        groups = self.data_json['group']
+        info = {'status': 'not_supplied', 'unresolved': [],
+                'schema': 'group.discards_by_fleet + Rpath_parameter_model.csv Type=3',
+                'units': 'same absolute flow units as source group.export',
+                'catch_modified': False,
+                'remainder_interpretation': 'accounting remainder, not source-observed export',
+                'donors': [], 'fleet_routes': {}}
+        if not any('discards_by_fleet' in group for group in groups):
+            return None, info
+        names = [group['group_name'] for group in groups]
+        ids = [int(group['group_seq']) for group in groups]
+        if len(set(names)) != len(names) or len(set(ids)) != len(ids):
+            raise ValueError('Duplicate group identity makes discard routing ambiguous.')
+        pools = {int(group['group_seq']): group['group_name'] for group in groups
+                 if int(float(group['pp'])) == 2}
+        matrix = pd.DataFrame(0., index=ids, columns=list(pools))
+        fleet_names = set()
+        for group in groups:
+            amounts = group.get('discards_by_fleet')
+            if isinstance(amounts, dict):
+                if any(not isinstance(name, str) or not name for name in amounts):
+                    raise ValueError('Discard fleet names must be nonempty strings.')
+                fleet_names.update(amounts)
+            elif amounts is not None:
+                raise ValueError('discards_by_fleet must be a fleet/amount mapping.')
+        info['fleets'] = sorted(fleet_names)
+        amounts_by_donor = {}
+        active_fleets = set()
+        for group, seq in zip(groups, ids):
+            raw = group.get('discards_by_fleet')
+            if not isinstance(raw, dict) or not raw or set(raw) != fleet_names:
+                info['unresolved'].append(f'group {seq}: incomplete donor fleet amounts')
+                continue
+            values = {fleet: self._source_number(amount) for fleet, amount in raw.items()}
+            if any(value < 0 for value in values.values()):
+                raise ValueError(f'Negative discard amount for group {seq}.')
+            if not all(np.isfinite(value) for value in values.values()):
+                info['unresolved'].append(f'group {seq}: missing or nonfinite discard amount')
+                continue
+            total = sum(values.values())
+            catch = self._source_number(group.get('export'))
+            if total > 0 and not np.isfinite(catch):
+                info['unresolved'].append(f'group {seq}: unknown source catch')
+            elif np.isfinite(catch) and total > catch + 1e-9 * max(1., abs(catch)):
+                raise ValueError(f'Discards exceed source catch for group {seq}.')
+            scope = str(group.get('export_scope', '')).partition(';')[0].strip().lower()
+            scope_known = scope in ('landings plus discards', 'landings + discards',
+                                    'landings+discards', 'total catch')
+            landings = group.get('landings_by_fleet')
+            reconciled = False
+            if isinstance(landings, dict) and set(landings) == fleet_names:
+                landed = [self._source_number(value) for value in landings.values()]
+                if any(value < 0 for value in landed):
+                    raise ValueError(f'Negative landing amount for group {seq}.')
+                if all(np.isfinite(value) for value in landed) and np.isfinite(catch):
+                    if not np.isclose(sum(landed) + total, catch, rtol=1e-9, atol=1e-9):
+                        raise ValueError(f'Landings plus discards disagree with source catch for group {seq}.')
+                    reconciled = True
+            if total > 0 and not (scope_known or reconciled):
+                info['unresolved'].append(f'group {seq}: source catch scope does not establish landings plus discards')
+            amounts_by_donor[seq] = values
+            active_fleets.update(fleet for fleet, value in values.items() if value > 0)
+            info['donors'].append({'group_id': seq, 'group_name': group['group_name'],
+                'source_catch': catch if np.isfinite(catch) else None, 'total_discards': total,
+                'catch_scope_evidence': 'landings_plus_discards_reconciliation' if reconciled else
+                                        ('explicit_export_scope' if scope_known else 'zero_discards')})
+
+        routes = {}
+        if active_fleets:
+            companion = self.data_json.get('published_companions', {}).get('Rpath_parameter_model.csv', {})
+            rows = companion.get('rows', []) if isinstance(companion, dict) else []
+            info['routing_source'] = 'published_companions/Rpath_parameter_model.csv'
+            info['routing_source_sha256'] = companion.get('sha256') if isinstance(companion, dict) else None
+            header = rows[0] if rows and isinstance(rows[0], list) else []
+            if len(header) != len(set(header)):
+                raise ValueError('Duplicate Rpath companion columns make discard routing ambiguous.')
+            if not {'Group', 'Type'}.issubset(header):
+                info['unresolved'].append('Missing supported Rpath fleet routing table')
+            else:
+                gi, ti = header.index('Group'), header.index('Type')
+                seen_fleets = set()
+                for row_number, row in enumerate(rows[1:], 2):
+                    if len(row) <= max(gi, ti) or self._source_number(row[ti]) != 3:
+                        continue
+                    fleet = row[gi]
+                    if fleet in seen_fleets:
+                        raise ValueError(f'Duplicate fleet row makes discard routing ambiguous: {fleet}')
+                    seen_fleets.add(fleet)
+                    if fleet not in active_fleets:
+                        continue
+                    fractions = {}
+                    for pool, name in pools.items():
+                        column = header.index(name) if name in header else None
+                        fractions[pool] = (self._source_number(row[column])
+                            if column is not None and column < len(row) else np.nan)
+                    if any(value < 0 or value > 1 for value in fractions.values()):
+                        raise ValueError(f'Invalid discard routing fraction for fleet {fleet}.')
+                    if not all(np.isfinite(value) for value in fractions.values()) or not pools:
+                        info['unresolved'].append(f'fleet {fleet}: missing detritus destination fraction')
+                        continue
+                    if sum(fractions.values()) > 1 + 1e-9:
+                        raise ValueError(f'Overallocated discard routing for fleet {fleet}.')
+                    routes[fleet] = fractions
+                    info['fleet_routes'][fleet] = {'source_row': row_number,
+                        'fractions_by_pool': fractions,
+                        'accounting_remainder_fraction': 1 - sum(fractions.values())}
+                for fleet in sorted(active_fleets - set(routes)):
+                    info['unresolved'].append(f'fleet {fleet}: no complete explicit discard route')
+
+        if info['unresolved']:
+            info['status'] = 'incomplete'
+            return None, info
+        for seq, amounts in amounts_by_donor.items():
+            for fleet, amount in amounts.items():
+                if amount:
+                    for pool, fraction in routes[fleet].items():
+                        matrix.loc[seq, pool] += amount * fraction
+        info['status'] = 'complete'
+        info['total_discards'] = sum(sum(values.values()) for values in amounts_by_donor.values())
+        info['total_returned'] = float(matrix.to_numpy().sum())
+        info['external_discard_remainder'] = info['total_discards'] - info['total_returned']
+        for donor in info['donors']:
+            donor['total_returned'] = float(matrix.loc[donor['group_id']].sum())
+        return matrix.sort_index(ascending=False).sort_index(axis=1, ascending=False), info
 
     def _init_from_model_number(self, model_number: int) -> None:
         """Initialize ModelData from a model number using the bundled legacy data.
@@ -480,14 +618,28 @@ class ModelData:
         # DC and Detritus fate:
         DC, det_fate = get_DC(model_number, model_diet_datas)
         DC.loc[import_seq] = 0  # add import data to DC  (import group eats nothing -> zero row)
+        diet_import = self._nonfeeding_imports(diet_import)
         DC[import_seq] = diet_import  # add import data to DC  (import as a prey column)
         self.DC = DC.sort_index(ascending=False).sort_index(axis=1, ascending=False)
 
         det_fate.loc[import_seq] = 0  # add diet_import to det_fate (zero row)
         det_fate[import_seq] = 0  # add diet_import to det_fate (zero column)
-        # Normalize orientation, force the detritus self-identity, and default a fully-missing
-        # (degenerate) single-DET matrix to the closed system. See _finalize_det_fate.
+        # Apply defaults only where the legacy source supplied no routing.
         self.det_fate = ModelData._finalize_det_fate(det_fate, self.groups_data)
+
+    def _nonfeeding_imports(self, diet_import: pd.Series) -> pd.Series:
+        """Use structural zeros only for missing imported diet of nonfeeding roles.
+
+        The raw JSON remains unchanged. Record the affected groups separately so
+        this operating convention is distinguishable from source-observed zero.
+        Consumer missingness and any supplied positive values are preserved.
+        """
+        result = diet_import.copy()
+        nonfeeding = self.groups_data['trophic_info'].isin(['PP', 'DET', 'Import'])
+        affected = result.index[result.isna() & nonfeeding.reindex(result.index, fill_value=False)]
+        self.diet_import_structural_zeros = list(affected)
+        result.loc[affected] = 0.
+        return result
 
     @staticmethod
     def _finalize_det_fate(det_fate: pd.DataFrame, groups_data: pd.DataFrame, tol: float = 1e-9) -> pd.DataFrame:
@@ -502,15 +654,16 @@ class ModelData:
 
         1. Restrict the columns to the DET groups and 0-fill, dropping any spurious non-detritus
            columns that survived the raw per-prey construction.
-        2. Force the detritus<->detritus sub-block to the identity, so each detritus pool maps to
-           itself by default.
+        2. Use a self-identity only for detritus rows without supplied routing.
+           Explicit zero, cross-pool routing and unknown cells remain unchanged.
         3. Zero the Import group's row (the import pseudo-group produces no detritus; its
            ``flow_to_det`` is 0, so this has no numerical effect but keeps the matrix clean).
         4. Detect a *fully degenerate* matrix -- one where no living (non-import, non-detritus)
            group carries any routing at all, which happens when the source data has no detritus
            fate (e.g. reconstructed models whose raw ``detritus_fate`` is all zero). For a
-           single-DET model this is defaulted to the closed system (every living group routes
-           1.0 to the sole pool); a multi-DET degenerate matrix is left untouched so that
+           single-DET model without supplied living routing this retains the historical closed
+           default; explicit zero routing describes export and is never defaulted. A multi-DET
+           degenerate matrix is left untouched so that
            :meth:`validate_det_fate` raises (the per-pool split cannot be inferred).
 
         Partially populated matrices (some rows summing to <1) are left exactly as given: a row
@@ -532,24 +685,29 @@ class ModelData:
         det_seq = list(groups_data.index[groups_data['trophic_info'] == 'DET'])
         import_seq = list(groups_data.index[groups_data['trophic_info'] == 'Import'])
 
-        # Restrict to detritus-pool columns over the full group index, 0-filling everything else.
-        det_fate = det_fate.reindex(index=groups_data.index, columns=det_seq).fillna(0.0)
-
-        # Force the detritus<->detritus identity block.
-        det_fate.loc[det_seq, :] = 0.0
-        if len(det_seq) > 0:
-            det_fate.loc[det_seq, det_seq] = np.eye(len(det_seq))
+        cells = det_fate.attrs.get('source_routing_cells')
+        supplied = ({seq for seq, pool in cells if pool in det_seq} if cells is not None else
+                    set(det_fate.attrs.get('source_routing_rows',
+                        det_fate.index[det_fate.reindex(columns=det_seq).notna().any(axis=1)])))
+        # get_DC already distinguishes structural absence from declared unknowns.
+        # Reindex only adds structural rows/columns; never fill supplied NaNs.
+        det_fate = det_fate.reindex(index=groups_data.index, columns=det_seq, fill_value=0.0)
+        for seq in det_seq:
+            if seq not in supplied:
+                det_fate.loc[seq, :] = 0.0
+                det_fate.loc[seq, seq] = 1.0
 
         # The import pseudo-group routes nothing to detritus.
         det_fate.loc[import_seq, :] = 0.0
 
         # Degenerate (no routing data at all) -> default single-DET to the closed system.
         living = [s for s in groups_data.index if s not in set(det_seq) and s not in set(import_seq)]
-        if living and (det_fate.loc[living].sum(axis=1) <= tol).all():
+        if living and not supplied.intersection(living) and (det_fate.loc[living].sum(axis=1) <= tol).all():
             if len(det_seq) == 1:
                 det_fate.loc[living, det_seq[0]] = 1.0
             # multi-DET degenerate: leave as-is -> validate_det_fate raises.
 
+        det_fate.attrs['source_routing_rows'] = sorted(supplied)
         return det_fate.sort_index(ascending=False).sort_index(axis=1, ascending=False)
 
     @staticmethod
@@ -589,6 +747,12 @@ class ModelData:
         names = groups_data['group_name'] if 'group_name' in groups_data.columns else pd.Series(dtype=object)
 
         non_import = [s for s in det_fate.index if s not in import_seq]
+        invalid = ~np.isfinite(det_fate.loc[non_import].to_numpy(dtype=float))
+        if invalid.any():
+            raise ValueError('det_fate contains missing or nonfinite source routing fractions; '
+                             'supply the unknown fractions before calculation.')
+        if (det_fate.loc[non_import] < 0).any().any():
+            raise ValueError('det_fate contains negative source routing fractions.')
         rowsums = det_fate.loc[non_import].sum(axis=1)
 
         def _label(seq_list):
@@ -604,7 +768,8 @@ class ModelData:
 
         # Fully degenerate: no living group routes anything (multi-DET missing data).
         living = [s for s in non_import if s not in det_seq]
-        if living and (rowsums.loc[living] <= tol).all():
+        supplied = set(det_fate.attrs.get('source_routing_rows', []))
+        if living and (rowsums.loc[living] <= tol).all() and not set(living).issubset(supplied):
             raise ValueError(
                 "det_fate carries no detritus routing for any living group. For a multi-DET model "
                 "the per-pool split cannot be inferred -- supply DetritusFate data for "
@@ -649,6 +814,9 @@ class ModelData:
         consumer_seq = [s for s in DC.index if s in set(groups_data.index[is_regular])]
         names = groups_data['group_name'] if 'group_name' in groups_data.columns else pd.Series(dtype=object)
 
+        if not np.isfinite(DC.loc[consumer_seq].to_numpy(dtype=float)).all():
+            raise ValueError('Consumer diet contains missing or nonfinite fractions, including diet_import; '
+                             'normalization cannot supply unknown diet values.')
         rowsums = DC.loc[consumer_seq].sum(axis=1)
         bad = [s for s in consumer_seq if abs(rowsums[s] - 1.0) > tol]
         if bad and not normalize:
@@ -665,6 +833,41 @@ class ModelData:
         if normalize:
             DC = DC.div(DC.sum(axis=1), axis=0).fillna(0)
         return DC
+
+    @staticmethod
+    def _resolve_json_location(filepath: Path, data: dict) -> tuple[Any, Any]:
+        """Read location identity without assigning every file to the same LME."""
+        sources = [data.get(key) for key in ('metadata', 'extraction_metadata', 'source_metadata')]
+        sources = [item for item in sources if isinstance(item, dict)] + [data]
+        lme, country = np.nan, np.nan
+        for item in sources:
+            if pd.isna(lme):
+                for key in ('lme', 'LME', 'lme_id', 'unit_id'):
+                    match = re.fullmatch(r'(?:LME[_ -]*)?(\d+)(?:\s+[^\d].*)?', str(item.get(key, '')).strip())
+                    if match:
+                        lme = int(match.group(1))
+                        break
+            if pd.isna(country):
+                for key in ('model_country', 'country'):
+                    value = item.get(key)
+                    if isinstance(value, str) and value.strip() not in ('', '-9999'):
+                        country = value
+                        break
+        if pd.isna(lme):
+            for parent in filepath.parents:
+                match = re.fullmatch(r'LME_(\d+)', parent.name)
+                if parent.parent.name == 'LME' and match:
+                    lme = int(match.group(1))
+                    break
+        return lme, country
+
+    @staticmethod
+    def _source_number(value: Any) -> float:
+        """Parse supported source missing markers without turning unknown into zero."""
+        if value is None or (isinstance(value, str) and not value.strip()):
+            return np.nan
+        result = float(value)
+        return np.nan if result == -9999 else result
 
     @classmethod
     def _resolve_json_identity(cls, filepath: Path, data: dict) -> tuple[Any, str, Any]:
@@ -827,11 +1030,11 @@ class ModelData:
     def get_DC(cls, model_json_dict: dict) -> Optional[tuple[pd.DataFrame, pd.DataFrame]]:
         """Build the diet composition (DC) and detritus fate matrices from a model dict.
 
-        For each group, reads its diet description and produces two square matrices
-        indexed by group sequence: ``DC`` (proportion of each prey in a predator's
-        diet) and ``detritus_fate`` (the detritus-routing fraction associated with
-        each diet entry). Groups with no diet get a single placeholder cell that
-        becomes 0 after the ``fillna``.
+        Read diet composition and independently supplied ``detritus_fate_by_pool``.
+        Explicit pool values take precedence over legacy embedded diet fate per
+        cell, including zero and missing markers. Absent diet pairs are structural
+        zeros; explicit unknown proportions remain NaN. Routing provenance in
+        DataFrame.attrs prevents finalization from replacing supplied zero rows.
 
         Args:
             model_json_dict (dict): The model JSON dict, expected to contain a
@@ -856,6 +1059,10 @@ class ModelData:
 
         DC_dict = {}
         detritus_fate_dict = {}
+        explicit_diet = {}
+        explicit_fate = {}
+        roles_known = all('pp' in g for g in groups)
+        det_seqs = {int(g['group_seq']) for g in groups if 'pp' in g and int(float(g['pp'])) == 2}
 
         for g in groups:
             # Pull the diet list for this group, tolerating missing/empty diet_descr.
@@ -871,12 +1078,39 @@ class ModelData:
                 diet = diet if isinstance(diet, list) else [diet]
                 # Map prey_seq -> proportion and prey_seq -> detritus_fate for this predator.
                 # (prey_seq can arrive as a float-like string, hence int(float(...))).
-                DC_dict[int(g['group_seq'])] = {int(float(d['prey_seq'])): float(d['proportion'].replace('-9999', '0')) for d in diet}
-                detritus_fate_dict[int(g['group_seq'])] = {int(float(d['prey_seq'])): float(d['detritus_fate'].replace('-9999', '0')) for d in diet}
+                seq = int(g['group_seq'])
+                DC_dict[seq] = {int(float(d['prey_seq'])): cls._source_number(d.get('proportion')) for d in diet}
+                explicit_diet.update({(seq, prey): value for prey, value in DC_dict[seq].items()})
+                detritus_fate_dict[seq] = {}
+                for entry in diet:
+                    prey = int(float(entry['prey_seq']))
+                    value = cls._source_number(entry.get('detritus_fate'))
+                    # Non-DET placeholders are irrelevant. A declared unknown
+                    # at a DET target is still unknown, not an absent route.
+                    # Standalone legacy diets can lack roles; finalization then
+                    # selects the actual DET targets using groups_data.
+                    if (not roles_known or prey in det_seqs) and 'detritus_fate' in entry:
+                        detritus_fate_dict[seq][prey] = value
+                        explicit_fate[seq, prey] = value
+
+            seq = int(g['group_seq'])
+            by_pool = g.get('detritus_fate_by_pool')
+            if by_pool is not None:
+                if not isinstance(by_pool, dict):
+                    raise ValueError(f'detritus_fate_by_pool must be a pool/value mapping for group {seq}')
+                for pool, raw in by_pool.items():
+                    pool = int(float(pool))
+                    if roles_known and pool not in det_seqs:
+                        raise ValueError(f'detritus_fate_by_pool for group {seq} names non-DET pool {pool}')
+                    value = cls._source_number(raw)
+                    detritus_fate_dict[seq][pool] = value
+                    explicit_fate[seq, pool] = value
 
         # add missing columns:
         # Build the matrix from {predator: {prey: value}} with predators as the row index.
         DC = pd.DataFrame.from_dict(DC_dict, orient='index').fillna(0)
+        for (seq, prey), value in explicit_diet.items():
+            DC.loc[seq, prey] = value
         # Ensure every group also exists as a column (prey that nobody ate would be absent).
         for g in groups:
             if int(g['group_seq']) not in DC.columns:
@@ -886,6 +1120,12 @@ class ModelData:
         DC = DC.sort_index().sort_index(axis=1)
 
         detritus_fate = pd.DataFrame.from_dict(detritus_fate_dict, orient='index').fillna(0)
+        # Empty row dictionaries must still retain the ecological group axis.
+        detritus_fate = detritus_fate.reindex(index=[int(g['group_seq']) for g in groups], fill_value=0.)
+        for (seq, pool), value in explicit_fate.items():
+            detritus_fate.loc[seq, pool] = value
+        detritus_fate.attrs['source_routing_rows'] = sorted({seq for seq, _ in explicit_fate})
+        detritus_fate.attrs['source_routing_cells'] = sorted(explicit_fate)
         detritus_fate = detritus_fate.sort_index().sort_index(axis=1)
 
         return DC, detritus_fate
@@ -940,9 +1180,9 @@ class ModelData:
                 "trophic_info": (lambda x: ["Regular", "PP", "DET"][int(x)])(float(group_diet_data["pp"])),
                 # detritus_import only meaningful for detritus groups (pp == "2"); else 0.
                 "detritus_import": float(group_diet_data.get("detritus_import", 0)) if group_diet_data["pp"] == "2" else 0,
-                "diet_import": float(group_diet_data.get("diet_imp", np.nan)) if group_diet_data.get("diet_imp", np.nan) != "-9999" else np.nan,
+                "diet_import": cls._source_number(group_diet_data.get("diet_imp")),
                 "taxon_descr": group_diet_data.get("taxon_descr", None),
-                "tl": np.nan,
+                "tl": cls._source_number(group_diet_data.get("tl")),
             }
 
             # flow to det = flow from unassimilated food + flow from other mortality
@@ -1070,47 +1310,9 @@ def get_DC(model_number: int, model_diet_datas: dict) -> Optional[tuple[pd.DataF
             on both axes. Returns ``None`` if the looked-up model is not a dict or has
             no groups.
     """
-    # Look the model up by its string id in the bundled legacy diet data.
-    model = model_diet_datas[str(model_number)]
-    if not isinstance(model, dict):
-        return None
-
-    groups = model.get('group', {})
-    if len(groups) == 0:
-        return None
-
-    DC_dict = {}
-    detritus_fate_dict = {}
-
-    for g in groups:
-        # Pull the diet list for this group, tolerating missing/empty diet_descr.
-        diet_descr = g.get('diet_descr', {})
-        diet_descr = diet_descr if diet_descr else {}
-        diet = diet_descr.get('diet', None)
-        if not diet:
-            # No diet: seed a single self-referential placeholder cell (becomes 0 after fillna).
-            DC_dict[int(g['group_seq'])] = {int(g['group_seq']): None}
-            detritus_fate_dict[int(g['group_seq'])] = {int(g['group_seq']): None}
-        else:
-            # Normalize a single diet dict to a list, then map prey_seq -> proportion / detritus_fate.
-            diet = diet if isinstance(diet, list) else [diet]
-            DC_dict[int(g['group_seq'])] = {int(d['prey_seq']): float(d['proportion']) for d in diet}
-            detritus_fate_dict[int(g['group_seq'])] = {int(d['prey_seq']): float(d['detritus_fate']) for d in diet}
-
-    # add missing columns:
-    # Build the matrix with predators as the row index, then ensure every group is also a column.
-    DC = pd.DataFrame.from_dict(DC_dict, orient='index').fillna(0)
-    for g in groups:
-        if int(g['group_seq']) not in DC.columns:
-            DC[int(g['group_seq'])] = 0
-
-    # Sort both axes so rows and columns share the same ascending group order.
-    DC = DC.sort_index().sort_index(axis=1)
-
-    detritus_fate = pd.DataFrame.from_dict(detritus_fate_dict, orient='index').fillna(0)
-    detritus_fate = detritus_fate.sort_index().sort_index(axis=1)
-
-    return DC, detritus_fate
+    # Both public APIs share the source-aware parser, including canonical pool
+    # routing and the distinction between explicit unknown and structural zero.
+    return ModelData.get_DC(model_diet_datas[str(model_number)])
 
 
 # Load Data (for legacy API):

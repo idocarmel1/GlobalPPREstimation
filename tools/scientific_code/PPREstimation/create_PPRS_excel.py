@@ -173,6 +173,8 @@ class MethodSpec:
     description: str
     run: Callable[..., tuple]
     source_resolved: bool = True
+    balance_TE_option: Optional[str] = None
+    balance_diet_import: bool = False
 
 
 def _first(result):
@@ -207,7 +209,7 @@ def _spec_new(key: str, TE_option, description, **extra) -> MethodSpec:
     return MethodSpec(
         key, description,
         lambda m, mc_samples, t=TE_option, e=extra: (
-            _first(m.SPPR_new(TE_option=t, **e)), {}))
+            _first(m.SPPR_new(TE_option=t, **e)), {}), balance_TE_option=TE_option)
 
 
 def _spec_symbolic(TE_option: str, diet_import_option: str) -> MethodSpec:
@@ -223,7 +225,7 @@ def _spec_symbolic(TE_option: str, diet_import_option: str) -> MethodSpec:
     return MethodSpec(
         f"sym_{label}_{diet_label}",
         f"Symbolic solver, TE_option={TE_option!r}, diet_import_option={diet_import_option!r}.",
-        run)
+        run, balance_TE_option=TE_option, balance_diet_import=diet_import_option == 'as_DC')
 
 
 def _spec_monte_carlo(key: str, TE_option: str, method_kwargs: Optional[dict],
@@ -927,10 +929,23 @@ def build_model_tables(model: PPRCalculator, *, method_keys: Optional[Sequence[s
     for key in keys:
         if key not in results:
             continue
+        spec = SPEC_BY_KEY[key]
+        if spec.balance_TE_option is None:
+            issues.append(_issue('sppr_balance_unavailable',
+                'No exact formulation-specific export identity registered for this '
+                'legacy/global/Monte-Carlo aggregate result.', key))
+            continue
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
-                ok, inflow, outflow = model.is_sppr_balanced(results[key])
+                equations = ((extras[key]['equations'], extras[key]['variables'])
+                             if spec.balance_diet_import else None)
+                # as_DC has no Import recipient row. _to_seq_frame inserts an
+                # all-missing display row, which is not a solved coefficient.
+                balance_result = (results[key].dropna(how='all')
+                                  if spec.balance_diet_import else results[key])
+                ok, inflow, outflow = model.is_sppr_balanced(balance_result, equations,
+                    TE_option=spec.balance_TE_option)
             if not ok:
                 issues.append(_issue(
                     "sppr_balance", f"inflow {inflow:.6g} != outflow {outflow:.6g}", key))

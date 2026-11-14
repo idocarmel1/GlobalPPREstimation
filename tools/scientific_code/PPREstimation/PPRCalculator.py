@@ -164,6 +164,7 @@ class PPRCalculator:
             instance._source_groups_before_completion = groups_df.copy()
         instance.is_underdetermined = underdetermined
 
+        instance._initialize_discard_returns()
         raw_DC = instance.get_DC(DET_as_PP=True)
         instance._DC = raw_DC.copy()
         if normalize_DC:
@@ -176,6 +177,7 @@ class PPRCalculator:
             df=groups_df,
             DC=instance.get_DC(DET_as_PP=True),
             det_fate=getattr(instance, "_det_fate", None),
+            discard_returns=getattr(instance, "_discard_returns", None),
             zero_catch=zero_catch, zero_biomass_accum=zero_biomass_accum, default_gs=default_gs
         )
 
@@ -250,6 +252,11 @@ class PPRCalculator:
         groups_df = instance._model.groups_data.sort_index(ascending=False)
 
         instance._groups_df = groups_df
+        instance._source_groups_before_completion = groups_df.copy()
+        instance._discard_returns = deepcopy(getattr(modeldata, 'discard_returns', None))
+        instance.discard_returns_metadata = deepcopy(getattr(modeldata, 'discard_returns_metadata',
+                                                              {'status': 'not_supplied'}))
+        instance._initialize_discard_returns()
         instance.n_groups = groups_df.shape[0]
 
         # DC and Detritus fate:
@@ -277,6 +284,7 @@ class PPRCalculator:
             df=groups_df,
             DC=instance.get_DC(DET_as_PP=True),
             det_fate=getattr(instance, "_det_fate", None),
+            discard_returns=getattr(instance, "_discard_returns", None),
             zero_catch=zero_catch, zero_biomass_accum=zero_biomass_accum, default_gs=default_gs
         )
 
@@ -294,6 +302,54 @@ class PPRCalculator:
         instance._sort()
 
         return instance.apply_ee_floor(use_ee_floor, ee_floor, ee_threshold)
+
+    def _initialize_discard_returns(self) -> None:
+        """Validate explicit internal catch returns without changing source catch."""
+        metadata = getattr(self, 'discard_returns_metadata', {'status': 'not_supplied'})
+        self.discard_returns_metadata = deepcopy(metadata)
+        if metadata.get('status') == 'incomplete':
+            raise ValueError('Incomplete source discard-return amounts or routing; cannot calculate SPPR')
+        returns = getattr(self, '_discard_returns', None)
+        if returns is None:
+            if metadata.get('status') == 'complete':
+                raise ValueError('Complete discard-return evidence is missing its matrix')
+            return
+        ids = self._groups_df.index
+        det = self._groups_df.index[self._groups_df.trophic_info.eq('DET')]
+        if (not isinstance(returns, pd.DataFrame) or not returns.index.is_unique
+                or not returns.columns.is_unique
+                or not returns.index.isin(ids).all() or not returns.columns.isin(det).all()):
+            raise ValueError('discard_returns requires unique known donor and DET pool identities')
+        values = returns.to_numpy(dtype=float)
+        if not np.isfinite(values).all() or (values < 0).any():
+            raise ValueError('discard_returns must contain finite nonnegative source-backed flows')
+        returns = returns.reindex(index=ids, columns=det, fill_value=0.).astype(float)
+        returned = returns.sum(axis=1)
+        catch = self._groups_df['catch']
+        bad = (returned > 0) & (catch.isna() | (returned > catch + 1e-10))
+        if bad.any():
+            raise ValueError('discard_returns exceeds or lacks known total source catch')
+        self._discard_returns = returns.copy()
+
+    def _discard_return_matrix(self) -> pd.DataFrame:
+        ids = self._groups_df.index
+        det = self.get_DET_seq()
+        returns = getattr(self, '_discard_returns', None)
+        if returns is None:
+            return pd.DataFrame(0., index=ids, columns=det)
+        return returns.reindex(index=ids, columns=det, fill_value=0.)
+
+    def _has_discard_returns(self) -> bool:
+        returns = getattr(self, '_discard_returns', None)
+        return returns is not None and bool((returns.to_numpy() > 0).any())
+
+    def _external_catch(self) -> pd.Series:
+        """External removals only; catch and fishery PPR retain total source catch."""
+        return self.catch - self._discard_return_matrix().sum(axis=1)
+
+    def _require_no_discard_returns(self, method: str) -> None:
+        if self._has_discard_returns():
+            raise NotImplementedError(f'{method} does not support source-backed discard returns; use SPPR_new')
 
     @staticmethod
     def validate_ee_floor(use_ee_floor: bool, ee_floor: float, ee_threshold: float = .1) -> None:
@@ -392,9 +448,11 @@ class PPRCalculator:
             for seq in self.get_DET_seq():
                 inflow = ((supply*fate[seq].reindex(supply.index).fillna(0)).sum()
                           if fate is not None and seq in fate else supply.sum())
+                inflow += self._discard_return_matrix()[seq].sum()
                 self.p.loc[seq] = self.q.loc[seq] = inflow
                 # Preserve any prior detritus catch term in the stock identity.
                 self.growth.loc[seq] = inflow-self.predation[seq]-self.net_migration[seq]-self.catch[seq]
+                self._groups_df.loc[seq, 'detritus_stock_residual'] = self.growth[seq]
             if fate is not None:
                 shares = fate.sum(axis=1).reindex(supply.index).fillna(1.)
                 self.det_export = ((1-shares).clip(lower=0)*supply).fillna(0)
@@ -631,7 +689,7 @@ class PPRCalculator:
             self.balanced_model = self.balance_model(change_production=False)
     
     @classmethod
-    def apply_ecopath_defaults(cls, df: pd.DataFrame, DC: pd.DataFrame, det_fate: Optional[pd.DataFrame] = None, zero_catch: bool = False, zero_biomass_accum: bool = False, default_gs: bool = False) -> pd.DataFrame:
+    def apply_ecopath_defaults(cls, df: pd.DataFrame, DC: pd.DataFrame, det_fate: Optional[pd.DataFrame] = None, zero_catch: bool = False, zero_biomass_accum: bool = False, default_gs: bool = False, discard_returns: Optional[pd.DataFrame] = None) -> pd.DataFrame:
         """Apply standard Ecopath defaults and sync the mass-balance flows with the ratios.
 
         Deterministically completes the per-group parameter table using the Ecopath
@@ -657,10 +715,14 @@ class PPRCalculator:
                 Defaults to False.
             default_gs (bool): if True, regular groups lacking gs get the default 0.2.
                 Defaults to False.
+            discard_returns (Optional[pd.DataFrame]): absolute internal catch flows,
+                donor rows by DET destination columns; never added to source catch.
 
         Returns:
             pd.DataFrame: the completed table with all flow vectors and the ratios
-            ee/ge/gs (and flow_to_det) filled in, sorted by descending seq.
+            ee/ge/gs (and flow_to_det) filled in, sorted by descending seq. Known DET BA
+            remains fixed; detritus_stock_residual separately records the flow-derived stock
+            term, used as BA only when source DET BA is missing.
         """
         df = df.sort_index(ascending=False)
         is_regular = df["trophic_info"] == "Regular"
@@ -668,7 +730,7 @@ class PPRCalculator:
         is_det = df["trophic_info"] == "DET"
         is_pp = df["trophic_info"] == "PP"
 
-        # original_nas = df.isna()
+        source_det_ba_known = is_det & df['biomass_accum'].notna()
 
         # cols with constant value of 0 or 1:
         cols_where_default_is_zero = ['detritus_import', 'immigration', 'emigration', 'net_migration']
@@ -680,8 +742,8 @@ class PPRCalculator:
         fill_dict = {col: 0 for col in cols_where_default_is_zero}
         df = df.fillna(fill_dict)
         df.loc[:, 'biomass'] = df['biomass'].fillna(1)
-        # set biomass_accum for det to nan if it was nan before:
-        df.loc[is_det, 'biomass_accum'] = np.nan
+        # Preserve reported DET BA; only missing DET BA is completed from stock flows.
+        df.loc[is_det & ~source_det_ba_known, 'biomass_accum'] = np.nan
         # set biomass_accum to 0 for Import groups and and catch to 0 for all non-regular groups:
         df.loc[is_import, 'biomass_accum'] = df.loc[is_import, 'biomass_accum'].fillna(0)
         df.loc[~is_regular, 'catch'] = df.loc[~is_regular, 'catch'].fillna(0)
@@ -806,8 +868,12 @@ class PPRCalculator:
                     df.loc[det_j, 'q'] = df['flow_to_det'].sum()
         else:
             df.loc[is_det, 'q'] = df['flow_to_det'].sum()
+        if discard_returns is not None:
+            df.loc[is_det, 'q'] += discard_returns.sum(axis=0).reindex(df.index[is_det], fill_value=0.)
         df.loc[is_det, 'p'] = df.loc[is_det, 'q']
-        df.loc[is_det, 'biomass_accum'] = df.loc[is_det, 'p'] - (df.loc[is_det, 'predation'] + df.loc[is_det, 'net_migration'])
+        residual = df['p'] - df['predation'] - df['net_migration'] - df['catch'] + df['detritus_import']
+        df.loc[is_det, 'detritus_stock_residual'] = residual[is_det]
+        df.loc[is_det & ~source_det_ba_known, 'biomass_accum'] = residual[is_det & ~source_det_ba_known]
 
         # det_export: the portion of each group's flow_to_det (= M0 + egestion) that is NOT routed
         # to any detritus pool, i.e. exported out of the modeled system. Zero in the closed system
@@ -882,8 +948,14 @@ class PPRCalculator:
             else:
                 df_final.loc[det_seqs, 'q'] = df_final['flow_to_det'].sum()
                 df_final['det_export'] = 0.0
+            df_final.loc[det_seqs, 'q'] += self._discard_return_matrix().sum(axis=0).reindex(det_seqs)
             df_final.loc[det_seqs, 'p'] = df_final.loc[det_seqs, 'q']
-            df_final.loc[det_seqs, 'biomass_accum'] = df_final.loc[det_seqs, 'p'] - (df_final.loc[det_seqs, 'predation'] + df_final.loc[det_seqs, 'net_migration'])
+            residual = (df_final['p'] - df_final['predation'] - df_final['net_migration']
+                        - df_final['catch'] + df_final['detritus_import'])
+            df_final.loc[det_seqs, 'detritus_stock_residual'] = residual.loc[det_seqs]
+            source = getattr(self, '_source_groups_before_completion', df)
+            missing_ba = [seq for seq in det_seqs if pd.isna(source.loc[seq, 'biomass_accum'])]
+            df_final.loc[missing_ba, 'biomass_accum'] = residual.loc[missing_ba]
 
             # Derive parameters only after the final detritus p/q are established. Leave
             # unsolved flow cells missing; runtime fallback behavior is unchanged.
@@ -1102,12 +1174,39 @@ class PPRCalculator:
             balanced_self._sync_effective_table(for_balancing=True)
         return balanced_self
     
-    def is_sppr_balanced(self, sppr: pd.DataFrame | pd.Series, diet_import_equations: Optional[tuple] = None) -> tuple[bool, float, float]:
+    def _sppr_unrouted_export(self, sppr: pd.Series, TE_option: str,
+                             diet_sppr: Optional[pd.Series] = None) -> pd.Series:
+        """Value unrouted dead matter in the selected formulation's PP currency.
+
+        GE exports mortality at donor SPPR; With Egestion additionally exports
+        egestion at diet-weighted SPPR. TE already absorbs consumer mortality into
+        efficiency, but basal PP/Import mortality still leaves the pinned source.
+        det_export is physical mass, so multiplying it wholesale by SPPR is wrong.
+        """
+        if TE_option not in ('GE', 'TE', 'With Egestion'):
+            raise ValueError('SPPR export balance requires GE, TE or With Egestion')
+        fate = getattr(self, '_det_fate', None)
+        if fate is None:
+            return sppr * 0.
+        fraction = (1. - fate.sum(axis=1).reindex(sppr.index).fillna(1.)).clip(lower=0.)
+        mortality = self.M0.reindex(sppr.index) * sppr
+        if TE_option == 'TE':
+            basal = list(self.get_PP_seq()) + list(self.get_Import_seq())
+            mortality = mortality.where(mortality.index.isin(basal), 0.)
+        if TE_option == 'With Egestion':
+            if diet_sppr is None:
+                diet = self.get_DC(DET_as_PP=True).reindex(index=sppr.index, columns=sppr.index)
+                diet_sppr = diet @ sppr
+            mortality = mortality + self.egestion.reindex(sppr.index) * diet_sppr.reindex(sppr.index)
+        return fraction * mortality
+
+    def is_sppr_balanced(self, sppr: pd.DataFrame | pd.Series, diet_import_equations: Optional[tuple] = None,
+                         *, TE_option: str = 'GE') -> tuple[bool, float, float]:
         """Check an SPPR result is globally self-consistent (inflow == outflow).
 
         The primary-production inflow into the system must equal the production-required
-        outflow implied by the exports (catch + growth + net_migration) weighted by each
-        group's SPPR.
+        outflow implied by catch, growth, net migration, the floor sink and
+        formulation-specific unrouted mortality/egestion exports.
 
         Two regimes:
           - diet_import_equations is None (the '_old' helper): PP and Import groups form the
@@ -1122,6 +1221,8 @@ class PPRCalculator:
             diet_import_equations (Optional[tuple]): (equations, variables) sympy system from a
                 symbolic SPPR call; if provided the diet-import-aware ('_new') check is used.
                 Defaults to None.
+            TE_option (str): actual result formulation, GE (default), TE or With Egestion.
+                Must match the solver; TE does not count consumer mortality twice.
 
         Returns:
             tuple[bool, float, float]: (is_balanced, inflow, outflow), where is_balanced is
@@ -1135,7 +1236,8 @@ class PPRCalculator:
 
             basis_seq = list(self.get_PP_seq()) + list(self.get_Import_seq())
             inflow = self.p[basis_seq].sum()
-            outflow = self._with_external_mortality(self.catch + self.growth + self.net_migration).mul(sppr, fill_value=1).sum()
+            outflow = self._with_external_mortality(self._external_catch() + self.growth + self.net_migration).mul(sppr, fill_value=1).sum()
+            outflow += self._sppr_unrouted_export(sppr, TE_option).sum()
 
             is_balanced = bool(np.isclose(inflow, outflow))
             return is_balanced, inflow, outflow
@@ -1158,7 +1260,12 @@ class PPRCalculator:
             inflow_from_diet_import = a.mul(pd.Series(d), fill_value=0).sum()
 
             inflow = inflow_from_within + inflow_from_diet_import
-            outflow = self._with_external_mortality(self.catch + self.growth + self.net_migration).mul(sppr.sum(axis=1), fill_value=1).sum()
+            total = sppr.sum(axis=1) if isinstance(sppr, pd.DataFrame) else sppr
+            outflow = self._with_external_mortality(self._external_catch() + self.growth + self.net_migration).mul(total, fill_value=1).sum()
+            # as_DC omits the Import recipient row: DC @ the returned rows alone
+            # drops imported prey. Its solved DIET_SPPR_i is the entire diet cost.
+            diet_sppr = pd.Series({seq: d[r_dict[seq]] for seq in total.index})
+            outflow += self._sppr_unrouted_export(total, TE_option, diet_sppr).sum()
 
             is_balanced = bool(np.isclose(inflow, outflow))
             return is_balanced, inflow, outflow
@@ -1224,22 +1331,19 @@ class PPRCalculator:
             dict: a single-level dict of scalars.
         """
         out: dict = {}
+
+        def visit(path, value):
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    visit((*path, str(key)), child)
+            elif isinstance(value, (list, tuple)):
+                name = '_'.join((*path[:-1], f'n_{path[-1]}'))
+                out[name] = len(value)
+            else:
+                out['_'.join(path)] = value
+
         for section, body in report.items():
-            if not isinstance(body, dict):
-                if isinstance(body, (list, tuple)):
-                    out[f"n_{section}"] = len(body)
-                else:
-                    out[section] = body
-                continue
-            for key, val in body.items():
-                name = f"{section}_{key}"
-                if isinstance(val, dict):
-                    for sub, subval in val.items():
-                        out[f"{name}_{sub}"] = subval
-                elif isinstance(val, (list, tuple)):
-                    out[f"{section}_n_{key}"] = len(val)
-                else:
-                    out[name] = val
+            visit((str(section),), body)
         return out
 
     def diagnose_sppr(self, TE_option: str = 'GE', *, short: bool = False, flat: bool = False,
@@ -1532,9 +1636,9 @@ class PPRCalculator:
             SPPR_diag, A_diag = SPPR, A
             info = getattr(self, 'detritus_resolution_info', {}) or {}
 
-        # TE_option='TE' has no recycling matrix, so there is no b to report and any
-        # detritus_resolution_info still on self belongs to an earlier call.
-        if TE_option == 'TE':
+        # Without internal catch returns, TE has no recycling matrix. Its saved
+        # detritus_resolution_info may then belong to an earlier method call.
+        if TE_option == 'TE' and not self._has_discard_returns():
             info = {}
 
         # ------------------------------- divergence ------------------------------------
@@ -1547,7 +1651,7 @@ class PPRCalculator:
                 'n_negative_sources': None, 'expect_negatives': True, 'near_singular_te': [],
             }
         else:
-            if TE_option == 'TE':
+            if TE_option == 'TE' and not self._has_discard_returns():
                 b = 0.0
                 warns.append("TE_option='TE' has no detritus recycling matrix: b reported as "
                              "0.0 (mortality-derived SPPR is written off as lost)")
@@ -1556,8 +1660,8 @@ class PPRCalculator:
             b_converges = bool(b < th['b_fail'])
 
             # Living block of A: the groups SPPR_new did NOT replace with an identity row, i.e.
-            # everything with a non-empty diet. rho(A_LL) < 1 is their Leontief condition.
-            basal_rows = list(DC.index[DC.sum(axis=1) == 0])
+            # all explicitly Regular groups. rho(A_LL) < 1 is their Leontief condition.
+            basal_rows = self.get_PP_seq() + self.get_DET_seq() + self.get_Import_seq()
             living = [g for g in A_diag.index if g not in basal_rows]
             if living:
                 rho_living = float(
@@ -1680,7 +1784,7 @@ class PPRCalculator:
                          'npp': None, 'ppr2npp': None, 'ppr2npp_pp_only': None}
         else:
             sppr_total = SPPR.sum(axis=1)
-            is_bal, inflow, outflow = self.is_sppr_balanced(sppr_total)
+            is_bal, inflow, outflow = self.is_sppr_balanced(sppr_total, TE_option=TE_option)
             rel_gap = (abs(float(outflow) - float(inflow)) / abs(float(inflow))
                        if inflow else float('nan'))
             if rel_gap > th['balance_fail']:
@@ -1811,6 +1915,8 @@ class PPRCalculator:
         else:
             for det_j in DET_seq:
                 Z.loc[det_j, :] = 0
+        if not DET_as_PP:
+            Z.loc[DET_seq, :] += self._discard_return_matrix().T.reindex(index=DET_seq, columns=Z.columns, fill_value=0.)
         return Z.sort_index(ascending=False).sort_index(ascending=False, axis=1)
     
     def get_DET_seq(self) -> list:
@@ -2272,6 +2378,7 @@ class PPRCalculator:
             matrix DC/TE, and paths_dict maps source -> sink -> list of node-name paths (empty
             dict when return_paths is False).
         """
+        self._require_no_discard_returns('SPPR_EwE')
         def _get_paths_with_safety_valve(g, start_node, terminal_indices, max_paths=1_000_000):
             """
             Increments depth until either all paths are found
@@ -2516,6 +2623,7 @@ class PPRCalculator:
         Raises:
             ValueError: if L has an empty nullspace (no steady-state solution / disconnected).
         """
+        self._require_no_discard_returns('SPPR_EwE_Ulanowicz')
         DC = self.get_DC(DET_as_PP=True)
         DCNoCyc = remove_cycles(DC.copy(), new=False)  # should work on Z instead?
         # zero values of DC where DCNoCyc is 0:
@@ -2527,8 +2635,10 @@ class PPRCalculator:
         
         A = (DC / TE).fillna(0).values
         A[TE.values == 0] = 0
-        for i in range(len(DC)):# Replace producer rows with identity rows
-            if DC.values[i, :].sum() == 0:
+        basal = set(self.get_PP_seq() + self.get_DET_seq() + self.get_Import_seq())
+        for i, seq in enumerate(DC.index):
+            # Nonfeeding identity is structural, even when source placeholders are null.
+            if seq in basal:
                 A[i, :] = sm.zeros(1, len(DC))
                 A[i, i] = 1
         A = pd.DataFrame(A, index=DC.index, columns=DC.columns)
@@ -2580,6 +2690,7 @@ class PPRCalculator:
             (groups x PP+Import sources), the production-normalized transaction matrix A, and
             the production-requirement matrix L = (I - A)^-1.
         """
+        self._require_no_discard_returns('SPPR_2015')
         groups_data = self.get_groups_df()
         production = self.p.copy()
         PP_seq = list(self.get_Import_seq()) + list(self.get_PP_seq())
@@ -2637,8 +2748,11 @@ class PPRCalculator:
             c[l]    = m_eff_l . non_DET_sppr       (production drawn from non-detritus sources)
             B[l, j] = m_eff_l . sppr_basis[det_j]  (recursive dependence on detritus basis j)
 
-        where m_eff_l = M0*fracs/q_l                                 (GE)
-                      = M0*fracs/q_l + DC.T @ (egestion*fracs/q_l)   (With Egestion)
+        where R_l is the source-backed donor catch returned to pool l:
+            m_eff_l = (M0*fracs + R_l)/q_l                         (GE)
+                    + DC.T @ (egestion*fracs/q_l)                  (With Egestion)
+            m_eff_l = (M0_basal*fracs + R_l)/q_l                    (TE).
+        TE excludes consumer mortality already absorbed into its efficiency.
         and fracs = det_fate[:, det_l] is the fraction of each group's flow_to_det reaching
         det_l. In a multi-DET model, a present det_fate matrix lacking a column for det_l means
         nothing feeds det_l -> fracs = 0 (a warning is emitted), NOT whole-flow. For single-DET
@@ -2650,7 +2764,7 @@ class PPRCalculator:
             non_DET_sppr (pd.Series): per-group SPPR contribution from all non-detritus sources.
             DET_seq (list): seq IDs of the detritus groups being solved.
             DC (pd.DataFrame): diet-composition matrix (used for the egestion term).
-            TE_option (str): 'GE' or 'With Egestion'; selects whether the egestion term is added.
+            TE_option (str): GE, TE or With Egestion; selects the PP currency.
 
         Returns:
             tuple[np.ndarray, np.ndarray]: (B, c), the k x k recycling matrix and the length-k
@@ -2673,7 +2787,12 @@ class PPRCalculator:
                 fracs = pd.Series(0.0, index=self.M0.index)
             else:
                 fracs = pd.Series(1.0, index=self.M0.index)
-            m_l = (self.M0 * fracs / q_l).fillna(0)
+            mortality = self.M0
+            if TE_option == 'TE':
+                basal = self.get_PP_seq() + self.get_Import_seq()
+                mortality = mortality.where(mortality.index.isin(basal), 0.)
+            returns = self._discard_return_matrix()[det_l].reindex(self.M0.index)
+            m_l = ((mortality * fracs + returns) / q_l).fillna(0)
             if TE_option == 'With Egestion':
                 e_l = (self.egestion * fracs / q_l).fillna(0)
                 m_eff_l = m_l + DC.T @ e_l
@@ -2740,7 +2859,8 @@ class PPRCalculator:
     @staticmethod
     def _collapse_det_scaling(SPPR: pd.DataFrame, DET_seq: list, non_DET_sppr: pd.Series, M0: pd.Series, egestion: pd.Series, q: pd.Series,
                               flow_to_det: pd.Series, DC: pd.DataFrame, TE_option: str, det_fate: Optional[pd.DataFrame] = None,
-                              theta: Optional[np.ndarray] = None, ext: Optional[np.ndarray] = None, det_open_mode: str = 'none') -> tuple[pd.DataFrame, float, float, float]:
+                              theta: Optional[np.ndarray] = None, ext: Optional[np.ndarray] = None, det_open_mode: str = 'none',
+                              discard_returns: Optional[pd.DataFrame] = None, basal_seq: Optional[list] = None) -> tuple[pd.DataFrame, float, float, float]:
         """Fallback DET scaling: pool all detritus into one compartment and solve a 1-D problem.
 
         Used when the coupled detritus system is unstable. Sums the individual detritus basis
@@ -2790,7 +2910,10 @@ class PPRCalculator:
         else:
             fate_to_modeled = pd.Series(1.0, index=M0.index)
 
-        m_combined = (M0 * fate_to_modeled / q_combined).fillna(0)
+        mortality = M0.where(M0.index.isin(basal_seq or []), 0.) if TE_option == 'TE' else M0
+        returned = (discard_returns.sum(axis=1).reindex(M0.index, fill_value=0.)
+                    if discard_returns is not None else pd.Series(0., index=M0.index))
+        m_combined = ((mortality * fate_to_modeled + returned) / q_combined).fillna(0)
 
         if TE_option == 'With Egestion':
             e_combined = (egestion * fate_to_modeled / q_combined).fillna(0)
@@ -2917,7 +3040,8 @@ class PPRCalculator:
             SPPR, scalar, a_p, b_p = self._collapse_det_scaling(
                 SPPR, DET_seq, non_DET_sppr, self.M0, self.egestion, self.q,
                 flow_to_det, DC, TE_option, det_fate=det_fate,
-                theta=theta, ext=ext, det_open_mode=det_open_mode)
+                theta=theta, ext=ext, det_open_mode=det_open_mode,
+                discard_returns=self._discard_return_matrix(), basal_seq=self.get_PP_seq()+self.get_Import_seq())
             self.detritus_resolution_info = {
                 'method': 'pooled_detritus_scaling', 'reason': reason,
                 'rho_B': rho, 'cond_IminusB': cond,
@@ -3000,11 +3124,22 @@ class PPRCalculator:
         else:
             GE = self.get_TE(TE_option=TE_option, DET_values=DET_TE_vals, as_matrix=True)
 
+        if TE_option == 'TE' and self._has_discard_returns():
+            basal = self.get_PP_seq() + self.get_DET_seq() + self.get_Import_seq()
+            deadends = [seq for seq in GE.index[(GE == 0).all(axis=1)] if seq not in basal]
+            if deadends:
+                if fix_EE_0_cases:
+                    raise NotImplementedError('TE dead-end re-credit with discard returns is not supported')
+                warnings.warn('TE zero-efficiency dead-end PP is dropped with fix_EE_0_cases=False; '
+                              'discard-return coupling does not repair it.', RuntimeWarning)
+
         # calculate A matrix and turn to symbolic matrix:
         A = (DC / GE).fillna(0).values.copy()
         A[GE.values == 0] = 0
-        for i in range(len(DC)):# Replace producer rows with identity rows
-            if DC.values[i, :].sum() == 0:
+        basal = set(self.get_PP_seq() + self.get_DET_seq() + self.get_Import_seq())
+        for i, seq in enumerate(DC.index):
+            # Nonfeeding identity is structural, even when source placeholders are null.
+            if seq in basal:
                 A[i, :] = sm.zeros(1, len(DC))
                 A[i, i] = 1
         A = pd.DataFrame(A, index=DC.index, columns=DC.columns)
@@ -3049,9 +3184,9 @@ class PPRCalculator:
         # GE / With Egestion build the coupled recycling system (I - B) x = c via the shared
         # _build_det_BC helper and resolve it through _solve_det_scaling (which applies the
         # openness transform, decides solve-vs-pool, and scales the DET columns in place).
-        # TE has no recycling matrix, so each DET column is scaled by its direct PP+Import
-        # inflow share, with availability theta applied as a plain multiplier.
-        if TE_option == 'TE':
+        # Without catch returns, TE scales each DET column by direct PP+Import inflow.
+        # Returned utilised production creates a coupled recycling system for TE too.
+        if TE_option == 'TE' and not self._has_discard_returns():
             PP_Import_seq = list(self.get_PP_seq() + self.get_Import_seq())
             theta = self._resolve_det_param(det_theta, DET_seq, 1.0)
             # EE=0 dead-ends: consumer groups whose entire TE row is 0 (te=(p-M0)/q == 0 because
@@ -3123,7 +3258,7 @@ class PPRCalculator:
                 else:
                     m = (inflow / q_l) * theta[i]
                 SPPR[det_l] *= m
-        elif TE_option in ('GE', 'With Egestion'):
+        elif TE_option in ('GE', 'TE', 'With Egestion'):
             B, c_vec = self._build_det_BC(SPPR, non_DET_sppr, DET_seq, DC, TE_option)
             SPPR = self._solve_det_scaling(
                 B, c_vec, DET_seq, SPPR, non_DET_sppr, DC, TE_option,
@@ -3536,6 +3671,7 @@ class PPRCalculator:
             variables) from the selected helper (see _SPPR_symbolic_helper_diet_import_as_DC /
             _as_PP).
         """
+        self._require_no_discard_returns('SPPR_symbolic')
         kwargs = dict(TE=TE, TE_option=TE_option, DET_TE_vals=DET_TE_vals,
                       sppr_det_value=sppr_det_value, det_collapse_mode=det_collapse_mode,
                       det_open_mode=det_open_mode, det_theta=det_theta,
@@ -3573,7 +3709,9 @@ class PPRCalculator:
         sppr_symbolic = sppr_det_vec + sppr_pp
         
         inflow = self.p[self.get_PP_seq()].sum()
-        outflow = (self._with_external_mortality(self.catch + self.growth + self.net_migration)* sppr_symbolic).sum()
+        outflow = (self._with_external_mortality(self._external_catch() + self.growth + self.net_migration)* sppr_symbolic).sum()
+
+        outflow += self._sppr_unrouted_export(sppr_symbolic, TE_option).sum()
 
         sppr_det = float(sm.solve(inflow - outflow, x)[0])
         
