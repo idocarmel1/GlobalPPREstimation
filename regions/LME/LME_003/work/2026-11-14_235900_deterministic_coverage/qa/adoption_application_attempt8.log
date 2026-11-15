@@ -1,0 +1,71 @@
+Preflight HS_077: checking inputs, retained results and execution evidence
+Preflight HS_077: verified 0 requested methods
+Preflight LME_032: checking inputs, retained results and execution evidence
+Preflight LME_032: verified 0 requested methods
+Preflight LME_034: checking inputs, retained results and execution evidence
+Preflight LME_034: verified 1 requested methods
+Preflight LME_035: checking inputs, retained results and execution evidence
+Preflight LME_035: verified 6 requested methods
+Preflight LME_036: checking inputs, retained results and execution evidence
+Preflight LME_036: verified 0 requested methods
+Preflight LME_047: checking inputs, retained results and execution evidence
+Preflight LME_047: verified 0 requested methods
+Preflight LME_038: checking inputs, retained results and execution evidence
+Preflight LME_038: verified 17 requested methods
+Preflight LME_049: checking inputs, retained results and execution evidence
+Preflight LME_049: verified 0 requested methods
+Preflight LME_014: checking inputs, retained results and execution evidence
+Preflight LME_014: verified 18 requested methods
+Preflight LME_003: checking inputs, retained results and execution evidence
+Preflight LME_003: verified 18 requested methods
+Preflight HS_071: checking inputs, retained results and execution evidence
+Preflight HS_071: verified 17 requested methods
+Preflight EEZ_941: checking inputs, retained results and execution evidence
+Preflight EEZ_941: verified 17 requested methods
+Preflight EEZ_598: checking inputs, retained results and execution evidence
+Preflight EEZ_598: verified 17 requested methods
+Preflight LME_037: checking inputs, retained results and execution evidence
+Preflight LME_037: verified 17 requested methods
+Preflight LME_013: checking inputs, retained results and execution evidence
+Preflight LME_013: verified 3 requested methods
+Preflight LME_022: checking inputs, retained results and execution evidence
+Preflight LME_022: verified 17 requested methods
+LME_034/34_1_Bay_of_Bengal_(1978): completing 1 of 1 methods
+LME_034: COMPLETE checkpoint sealed 06a0f5764fb223236340e006a0d198f55b602ecfcca4ff526262f2eb19b10622
+LME_035/35_412_Gulf_of_Thailande_(1963): completing 6 of 6 methods
+LME_035: COMPLETE checkpoint sealed 6ac70935798925b6629ead473995687be986988c385cbe9f2712b87b8cb0fcef
+LME_038/38_38003_Java_Sea_normalized_BA_completed_(mid1970s): completing 11 of 11 methods
+LME_038/38_38003_Java_Sea_normalized_BA_completed_(mid1970s): completing 6 of 6 methods
+LME_038: COMPLETE checkpoint sealed f0c0d757bd9a6472640a7a8d43a3f948067111af6e3d9d160b9aaa291a23e3a8
+LME_014/PAT2024_FalklandShelf_2020_native: completing 12 of 12 methods
+LME_014/PAT2024_FalklandShelf_2020_native: completing 6 of 6 methods
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\registry\publication.py", line 160, in publication_transaction
+    yield backup
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_003\work\2026-11-14_235900_deterministic_coverage\code\adopt_completion.py", line 554, in apply
+    changed, report = coverage._complete_model(ROOT, plan['metadata'], tuple(batch.verified),
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 1123, in _complete_model
+    check_inputs();_write_bytes(snapshot,path.read_bytes(),expected_sha256=owned[snapshot])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 138, in _write_bytes
+    guarded_replace(temporary, path, expected_sha256=before)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\registry\publication.py", line 49, in guarded_replace
+    os.replace(staged, destination)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\results\\tmpvhkdx4uk.xlsx' -> 'C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\results\\regional_snapshot.xlsx'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_003\work\2026-11-14_235900_deterministic_coverage\code\adopt_completion.py", line 636, in <module>
+    main()
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_003\work\2026-11-14_235900_deterministic_coverage\code\adopt_completion.py", line 626, in main
+    result = apply(plans, consumed, immutable, central, review)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_003\work\2026-11-14_235900_deterministic_coverage\code\adopt_completion.py", line 526, in apply
+    with central_lock(ROOT), publication_transaction(ROOT, model_pairs=pairs) as publication:
+  File "C:\Users\idoca\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\registry\publication.py", line 164, in publication_transaction
+    raise PublicationConflictError(str(error)+'; '+str(conflict)) from error
+tools.project_core.registry.publication.PublicationConflictError: [WinError 5] Access is denied: 'C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\results\\tmpvhkdx4uk.xlsx' -> 'C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_014\\papers\\PAT-2023\\models\\PAT2024_FalklandShelf_2020_native\\results\\regional_snapshot.xlsx'; Publication failed; concurrent author edits were preserved: C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_014\LME_014.xlsx, C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\regions\LME\LME_014\papers\PAT-2023\models\PAT2024_FalklandShelf_2020_native\sppr_source.xlsx

@@ -29,6 +29,8 @@ import pandas as pd
 
 
 ENGINE = Path(__file__).resolve().parents[2] / 'scientific_code' / 'PPREstimation'
+# A long-lived process executes this imported revision even if disk changes.
+ADAPTER_SOURCE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 SCOPES = ('all', 'inner', 'PP')
 DET_KEYS = ('DET_TE_vals', 'det_collapse_mode', 'det_open_mode', 'det_theta',
             'det_external_sppr', 'fix_EE_0_cases')
@@ -82,7 +84,64 @@ def engine_identity(flags=None, model_path=None):
     calculation = _calculation_engine_path(flags, model_path)
     if calculation is not None:
         identity['calculation/PPRCalculator.py'] = _hash_bytes(calculation.read_bytes())
+    derivative = _derivative_engine_path(flags, model_path)
+    if derivative is not None:
+        label = ('ewe_path_optimization' if flags['audited_replay'].get('ew_e_optimized') is not None
+                 else 'symbolic_repair')
+        identity[label + '/PPRCalculator.py'] = _hash_bytes(derivative.read_bytes())
     return identity
+
+
+def _derivative_engine_path(flags=None, model_path=None):
+    replay = _validated_replay(flags, model_path)
+    references = {key: replay[key] for key in ('symbolic_repair', 'ew_e_optimized')
+                  if replay and replay.get(key) is not None}
+    if not references:
+        return None
+    if len(references) != 1:
+        raise ValueError('Audited engine derivatives are mutually exclusive; request one per execution')
+    kind, reference = next(iter(references.items()))
+    from .audited_runtime import _local_bytes
+    root = Path(model_path).resolve().parent
+    path, raw = _local_bytes(root, reference, kind)
+    base = _calculation_engine_path(flags, model_path) or _engine_paths(flags, model_path)['PPRCalculator.py']
+    original = base.read_bytes()
+    if _hash_bytes(original) != reference.get('base_sha256'):
+        raise ValueError('Audited derivative base hash mismatch')
+    if kind == 'symbolic_repair':
+        from .symbolic_repairs import repair_symbolic_source
+        if reference.get('repair') not in ('symbolic_repairs_v1', 'symbolic_repairs_v2'):
+            raise ValueError('Unknown audited symbolic repair')
+        derived, _ = repair_symbolic_source(original.decode('utf-8-sig'), repair=reference['repair'])
+    else:
+        from .ewe_path_optimization import REPAIR, repair_ewe_source
+        if reference.get('repair') != REPAIR:
+            raise ValueError('Unknown audited EwE optimization')
+        derived, _ = repair_ewe_source(original.decode('utf-8-sig'))
+    if derived.encode('utf-8') != raw:
+        raise ValueError('Audited derivative differs from the checked transformation')
+    return path
+
+
+def _with_symbolic_repair(engine, flags, model_path):
+    """Load the single explicitly authenticated symbolic or EwE derivative."""
+    path = _derivative_engine_path(flags, model_path)
+    if path is None:
+        return engine
+    digest = _hash_bytes(path.read_bytes())
+    paths = _engine_paths(flags, model_path)
+    cache_key = (str(path), digest, tuple(
+        (name, str(paths[name]), _hash_bytes(paths[name].read_bytes()))
+        for name in ('ModelData.py', 'utils.py')))
+    prefix = '_sppr_derivative_' + _hash_bytes(repr(cache_key).encode('utf-8'))
+    if prefix not in sys.modules:
+        dependency_data = sys.modules[engine[1].__module__]
+        dependency_utils = _isolated_module(paths['utils.py'], prefix+'_utils', {})
+        _isolated_module(path, prefix, {'ModelData': dependency_data, 'utils': dependency_utils})
+    module = sys.modules[prefix]
+    if module._executed_source_sha256 != digest:
+        raise ValueError('Executed derivative hash mismatch')
+    return engine[0], engine[1], module.PPRCalculator, module.DEFAULT_DIAGNOSTIC_THRESHOLDS
 
 
 def _calculation_engine_path(flags=None, model_path=None):
@@ -168,6 +227,7 @@ def _isolated_module(path, name, dependencies):
 
 
 def _audited_engine(flags=None, model_path=None):
+    replay = _validated_replay(flags, model_path)
     if str(ENGINE) not in sys.path:
         sys.path.insert(0, str(ENGINE))
     import create_PPRS_excel as exporter
@@ -179,9 +239,13 @@ def _audited_engine(flags=None, model_path=None):
         # Loader differences are precisely why the archived engine is selected.
         # All calculation methods/helpers must remain the canonical algorithms.
         cache_key = tuple((name, str(paths[name]), identity[name]) for name in ENGINE_FILES)
+        # Explicit replay executes the authenticated historical algorithms as
+        # such; it makes no equivalence claim about today's implementation.
+        # Check admission even on a cache hit, so replay cannot weaken an
+        # ordinary invocation later in the same process.
+        if not replay and not _compatible_scientific_ast(paths['PPRCalculator.py'], ENGINE/'PPRCalculator.py'):
+            raise ValueError('Audited engine scientific methods differ from the canonical supported algorithms')
         if cache_key not in _PINNED_ENGINES:
-            if not _compatible_scientific_ast(paths['PPRCalculator.py'], ENGINE/'PPRCalculator.py'):
-                raise ValueError('Audited engine scientific methods differ from the canonical supported algorithms')
             prefix = '_sppr_audited_' + _hash_bytes(repr(cache_key).encode('utf-8'))
             data = _isolated_module(paths['ModelData.py'], prefix + '_ModelData', {})
             utility = _isolated_module(paths['utils.py'], prefix + '_utils', {})
@@ -195,12 +259,13 @@ def _audited_engine(flags=None, model_path=None):
 
 def _engine(flags=None, model_path=None):
     """Use immutable audited loading, and an explicitly identified calculation upgrade."""
+    replay = _validated_replay(flags, model_path)
     calculation_path = _calculation_engine_path(flags, model_path)
     audited = _audited_engine(flags, model_path)
     if calculation_path is None:
-        return audited
+        return _with_symbolic_repair(audited, flags, model_path)
     paths = _engine_paths(flags, model_path)
-    if not _compatible_scientific_ast(paths['PPRCalculator.py'], calculation_path):
+    if not replay and not _compatible_scientific_ast(paths['PPRCalculator.py'], calculation_path):
         raise ValueError('Audited engine scientific methods differ from the supported EE-floor upgrade')
     # Explicit upgrades execute the bound source bytes, even when a standard
     # module was imported before a code update in this Python process.
@@ -213,7 +278,7 @@ def _engine(flags=None, model_path=None):
                     node.body = node.body[1:]
                 return node
         return ast.dump(Strip().visit(tree), include_attributes=False)
-    if scientific_module(calculation_path) != scientific_module(ENGINE/'PPRCalculator.py'):
+    if not replay and scientific_module(calculation_path) != scientific_module(ENGINE/'PPRCalculator.py'):
         raise ValueError('Calculation engine is not the supported EE-floor implementation')
     module_key = (str(calculation_path), flags['calculation_engine_sha256'],
                   tuple((name, str(paths[name]), _hash_bytes(paths[name].read_bytes())) for name in ENGINE_FILES))
@@ -225,7 +290,8 @@ def _engine(flags=None, model_path=None):
     module = sys.modules[prefix]
     if module._executed_source_sha256 != flags['calculation_engine_sha256']:
         raise ValueError('Executed calculation engine bytes differ from their recorded hash')
-    return audited[0], audited[1], module.PPRCalculator, module.DEFAULT_DIAGNOSTIC_THRESHOLDS
+    return _with_symbolic_repair((audited[0], audited[1], module.PPRCalculator,
+                                 module.DEFAULT_DIAGNOSTIC_THRESHOLDS), flags, model_path)
 
 
 def method_inventory():
@@ -236,6 +302,13 @@ def method_inventory():
 def _defaults(callable_):
     return {name: p.default for name, p in inspect.signature(callable_).parameters.items()
             if name != 'self' and p.default is not inspect.Parameter.empty}
+
+
+def _validated_replay(flags, model_path):
+    if not isinstance(flags, dict) or 'audited_replay' not in flags:
+        return None
+    from .audited_runtime import validate_replay
+    return validate_replay(flags, model_path)
 
 
 def _require_supported_runtime_initialization(flags):
@@ -252,6 +325,12 @@ def _require_supported_runtime_initialization(flags):
 
 
 def _constructor(flags, model_path=None):
+    replay = _validated_replay(flags, model_path)
+    if replay and replay['mode'] == 'completed_runtime':
+        supplied = flags.get('constructor')
+        if not isinstance(supplied, dict) or not supplied:
+            raise ValueError('Audited runtime replay requires recorded constructor settings')
+        return copy.deepcopy(supplied)
     _require_supported_runtime_initialization(flags)
     _, _, calculator, _ = _audited_engine(flags, model_path)
     supplied = flags.get('constructor')
@@ -435,6 +514,10 @@ def _runtime(model):
 
 
 def _load(model_path, constructor, flags=None):
+    replay = _validated_replay(flags, model_path)
+    if replay and replay['mode'] == 'completed_runtime':
+        from .audited_runtime import restore_runtime
+        return restore_runtime(_engine(flags, model_path)[2], flags, model_path)
     _require_supported_runtime_initialization(flags)
     _, modeldata, calculator, _ = _engine(flags, model_path)
     with warnings.catch_warnings(record=True) as caught:
@@ -579,8 +662,12 @@ def _run(model, settings):
             np.random.set_state(state)
 
 
-def _worker(connection, model_path, constructor, flags):
+def _worker(connection, model_path, constructor, flags, adapter_sha256=None):
     try:
+        # None retains call compatibility for already-running older parents;
+        # every invocation from this revision supplies its imported identity.
+        if adapter_sha256 is not None and adapter_sha256 != ADAPTER_SOURCE_SHA256:
+            raise ValueError('Worker adapter revision differs from the parent execution')
         model, source, notices = _load(model_path, constructor, flags)
         connection.send({'status': 'ready', 'source_state': source, 'runtime': _runtime(model),
                          'groups': _group_metadata(model), 'warnings': notices})
@@ -607,6 +694,21 @@ def _save(path, document):
     if gzip.decompress(path.read_bytes()) != raw:
         raise IOError(f'Evidence round trip failed: {path}')
     return {'path': path.name, 'sha256': _hash_bytes(compressed), 'availability': 'present'}
+
+
+def _save_constructor(directory, identity, initial):
+    """A restart or later invocation cannot replace an earlier initialization."""
+    document = {'schema_version': 1, 'identity': identity, 'constructor_outcome': initial}
+    compressed = gzip.compress(_json_bytes(document), mtime=0)
+    digest = _hash_bytes(compressed)
+    path = directory / ('constructor-' + digest + '.json.gz')
+    if path.exists():
+        if path.read_bytes() != compressed:
+            raise ValueError('Immutable constructor evidence changed: ' + str(path))
+    else:
+        with path.open('xb') as stream:
+            stream.write(compressed)
+    return {'path': path.name, 'sha256': digest, 'availability': 'present'}
 
 
 def compute_methods(model_path, flags, method_keys, evidence_dir, progress=print, *, method_timeout=None):
@@ -646,18 +748,18 @@ def compute_methods(model_path, flags, method_keys, evidence_dir, progress=print
     identity = {'model_id': model_path.parent.name, 'model_sha256': _hash_bytes(model_bytes),
                 'flags': encode_lossless(supplied_flags), 'constructor': constructor,
                 'engine_hashes': executed_hashes,
-                'adapter_sha256': _hash_bytes(Path(__file__).read_bytes()),
+                'adapter_sha256': ADAPTER_SOURCE_SHA256,
                 'environment': {'python': sys.version, 'platform': platform.platform(),
                                 'numpy': np.__version__, 'pandas': pd.__version__}}
     answer = {**identity, 'methods': {}, 'groups': [], 'diagnostic_rows': []}
-    process = connection = model = initial = None
+    process = connection = model = None
+    local_initial = local_reference = worker_initial = worker_reference = None
     if configuration_error:
         initial = {'status':'configuration_unavailable', 'exception':configuration_error}
-        answer['constructor_evidence'] = _save(evidence_dir/'constructor.json.gz',
-                    {'schema_version':1,'identity':identity,'constructor_outcome':initial})
+        configuration_reference = _save_constructor(evidence_dir, identity, initial)
 
     def close_worker():
-        nonlocal process, connection
+        nonlocal process, connection, worker_initial, worker_reference
         if process is not None:
             if process.is_alive():
                 process.terminate()
@@ -665,6 +767,7 @@ def compute_methods(model_path, flags, method_keys, evidence_dir, progress=print
         if connection is not None:
             connection.close()
         process = connection = None
+        worker_initial = worker_reference = None
 
     try:
         for key in keys:
@@ -673,29 +776,36 @@ def compute_methods(model_path, flags, method_keys, evidence_dir, progress=print
                 raise ValueError('Method timeout cannot be negative')
             if progress:
                 progress(f'{model_path.parent.name}: {key}')
-            if not configuration_error and (initial is None or (timeout and process is None) or (not timeout and model is None)):
-                if timeout:
+            if configuration_error:
+                constructor_reference = configuration_reference
+            elif timeout:
+                if process is None:
                     parent, child = mp.get_context('spawn').Pipe()
                     process = mp.get_context('spawn').Process(target=_worker,
-                        args=(child,str(model_path),constructor,flags), daemon=True)
+                        args=(child,str(model_path),constructor,flags,ADAPTER_SOURCE_SHA256), daemon=True)
                     try:
                         process.start()
                         child.close()
                         connection = parent
-                        initial = (connection.recv() if connection.poll(300) else
+                        worker_initial = (connection.recv() if connection.poll(300) else
                                    {'status':'constructor_timeout', 'reason':'Constructor exceeded 300 seconds'})
                     except Exception:
-                        initial = {'status':'constructor_failed', 'exception':_error()}
-                else:
+                        worker_initial = {'status':'constructor_failed', 'exception':_error()}
+                    worker_reference = _save_constructor(evidence_dir, identity, worker_initial)
+                initial, constructor_reference = worker_initial, worker_reference
+            else:
+                if model is None:
                     try:
                         model, source, notices = _load(model_path, constructor, flags)
-                        initial = {'status':'ready','source_state':source,'runtime':_runtime(model),
+                        local_initial = {'status':'ready','source_state':source,'runtime':_runtime(model),
                                    'groups':_group_metadata(model),'warnings':notices}
                     except Exception:
-                        initial = {'status':'constructor_failed','exception':_error()}
-                answer['groups'] = initial.get('groups', [])
-                answer['constructor_evidence'] = _save(evidence_dir/'constructor.json.gz',
-                    {'schema_version':1,'identity':identity,'constructor_outcome':initial})
+                        model = None
+                        local_initial = {'status':'constructor_failed','exception':_error()}
+                    local_reference = _save_constructor(evidence_dir, identity, local_initial)
+                initial, constructor_reference = local_initial, local_reference
+            answer['groups'] = initial.get('groups', [])
+            answer['constructor_evidence'] = copy.deepcopy(constructor_reference)
             if initial['status'] != 'ready':
                 outcome = {'status':'NOT_RUN','reason':f"Constructor unavailable: {initial['status']}",
                            'constructor_outcome':initial}
@@ -721,6 +831,7 @@ def compute_methods(model_path, flags, method_keys, evidence_dir, progress=print
             if outcome.get('exception'):
                 outcome['reason'] += ': ' + outcome['exception']['type'] + ': ' + outcome['exception']['message']
             document = {'schema_version':1, 'identity':identity, 'settings':encode_lossless(settings[key]),
+                        'constructor_evidence':copy.deepcopy(constructor_reference),
                         'method_timeout_seconds': timeout,
                         'timestamp':datetime.now(timezone.utc).isoformat(),
                         'groups':answer['groups'], 'matrix_orientation':'recipient groups by basal sources',
@@ -733,6 +844,7 @@ def compute_methods(model_path, flags, method_keys, evidence_dir, progress=print
                 if k not in ('return','source_matrix','runtime_before','runtime_after','rng_before','constructor_outcome')}
             answer['methods'][key]['settings'] = settings[key]
             answer['methods'][key]['evidence'] = evidence
+            answer['methods'][key]['constructor_evidence'] = copy.deepcopy(constructor_reference)
             if outcome.get('diagnostics'):
                 answer['diagnostic_rows'].append({'method':key, **outcome['diagnostics']})
             if model_path.read_bytes() != model_bytes:

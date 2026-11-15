@@ -1,0 +1,1327 @@
+{
+  "model_id": "Chiaverano2018_detailed_Northern_Humboldt_1995_1998",
+  "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+  "flags": {
+    "constructor": {
+      "underdetermined": true,
+      "zero_catch": true,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": true,
+      "DC_tol": 0.001,
+      "balance_BA_after_DC_normalization": false,
+      "use_ee_floor": true,
+      "ee_floor": 0.1
+    },
+    "diagnostics": {
+      "short": false,
+      "flat": false,
+      "return_sppr": true,
+      "DET_TE_vals": 1,
+      "det_collapse_mode": "auto",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "fix_EE_0_cases": true,
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      }
+    },
+    "configuration_evidence": [
+      {
+        "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/run_manifest.json",
+        "sha256": "fecc026d16e6f52cb3fccfb72dbeeba4098fcd2d77211e168d234b48c5ca2820",
+        "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      },
+      {
+        "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+        "sha256": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+        "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      },
+      {
+        "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+        "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+        "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      },
+      {
+        "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py",
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      }
+    ],
+    "engine_sources": {
+      "PPRCalculator.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+      "ModelData.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+      "utils.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py"
+    },
+    "engine_source_hashes": {
+      "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "mc": {
+      "n_samples": 100
+    },
+    "calculation_engine_upgrade": "ee_floor_v1",
+    "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+    "audited_replay": {
+      "schema_version": 1,
+      "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+      "mode": "completed_runtime",
+      "provenance": {
+        "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+        "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+      },
+      "runtime": {
+        "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+        "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7",
+        "keys": [
+          "constructor_outcome",
+          "runtime"
+        ]
+      },
+      "symbolic_repair": {
+        "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_repairs_v2/PPRCalculator.py",
+        "sha256": "e411d33bcbeca9652f89bc62c509d5e40ecb3db1c6718543f840285a91e891c6",
+        "base_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+        "repair": "symbolic_repairs_v2"
+      }
+    },
+    "method_timeout_seconds": 0,
+    "method_timeout_overrides_seconds": {
+      "EwE_TE_EE": 600,
+      "sym_TE_asDC": 300
+    }
+  },
+  "constructor": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "balance_BA_after_DC_normalization": false,
+    "use_ee_floor": true,
+    "ee_floor": 0.1
+  },
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+    "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+    "symbolic_repair/PPRCalculator.py": "e411d33bcbeca9652f89bc62c509d5e40ecb3db1c6718543f840285a91e891c6"
+  },
+  "adapter_sha256": "ca718c0911ac066ea7e5299f5dc0b7b38ccd718b6e22a43a2c06702aabcf3b58",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3"
+  },
+  "methods": {
+    "sym_TE_asDC": {
+      "status": "failed",
+      "reason": "Method execution or evidence reconciliation failed: ValueError: pooled-detritus fallback also diverges (b=5.4380 >= 1). Detrital cycling is too strong for SPPR_new.",
+      "exception": {
+        "type": "ValueError",
+        "message": "pooled-detritus fallback also diverges (b=5.4380 >= 1). Detrital cycling is too strong for SPPR_new.",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 642, in _run\n    result = getattr(model, settings['target'])(**settings['kwargs'])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs_v2\\PPRCalculator.py\", line 3414, in SPPR_symbolic\n    return self._SPPR_symbolic_helper_diet_import_as_DC(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs_v2\\PPRCalculator.py\", line 3352, in _SPPR_symbolic_helper_diet_import_as_DC\n    sppr_mat = self._solve_det_scaling(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs_v2\\PPRCalculator.py\", line 2771, in _solve_det_scaling\n    SPPR, scalar, a_p, b_p = self._collapse_det_scaling(\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs_v2\\PPRCalculator.py\", line 2670, in _collapse_det_scaling\n    raise ValueError(\nValueError: pooled-detritus fallback also diverges (b=5.4380 >= 1). Detrital cycling is too strong for SPPR_new.\n"
+      },
+      "warnings": [],
+      "elapsed_seconds": 17.937000000150874,
+      "scopes": {
+        "all": {},
+        "inner": {},
+        "PP": {}
+      },
+      "annual_status": {
+        "all": "unavailable: failed",
+        "inner": "unavailable: failed",
+        "PP": "unavailable: failed"
+      },
+      "settings": {
+        "method": "sym_TE_asDC",
+        "target": "SPPR_symbolic",
+        "kwargs": {
+          "TE": null,
+          "TE_option": "TE",
+          "diet_import_option": "as_DC",
+          "DET_TE_vals": 1,
+          "sppr_det_value": null,
+          "det_collapse_mode": "auto",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "fix_EE_0_cases": true
+        },
+        "source_resolved": true,
+        "description": "Symbolic solver, TE_option='TE', diet_import_option='as_DC'.",
+        "seed": null,
+        "mc_policy_origin": null
+      },
+      "evidence": {
+        "path": "symbolic_v2/sym_TE_asDC.json.gz",
+        "sha256": "fc04d8ab5fed905b3b71e3f88836a33d9562602a51986bd206b503784a08da19",
+        "availability": "present"
+      },
+      "execution_identity": {
+        "adapter_sha256": "ca718c0911ac066ea7e5299f5dc0b7b38ccd718b6e22a43a2c06702aabcf3b58",
+        "constructor": {
+          "DC_tol": 0.001,
+          "balance_BA_after_DC_normalization": false,
+          "default_gs": true,
+          "ee_floor": 0.1,
+          "normalize_DC": true,
+          "underdetermined": true,
+          "use_ee_floor": true,
+          "weight_flow": 1.0,
+          "weight_guess": 1.0,
+          "zero_biomass_accum": false,
+          "zero_catch": true
+        },
+        "engine_hashes": {
+          "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+          "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+          "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+          "symbolic_repair/PPRCalculator.py": "e411d33bcbeca9652f89bc62c509d5e40ecb3db1c6718543f840285a91e891c6",
+          "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+        },
+        "environment": {
+          "numpy": "2.3.4",
+          "pandas": "2.3.3",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+        },
+        "flags": {
+          "audited_replay": {
+            "mode": "completed_runtime",
+            "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+            "provenance": {
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+            },
+            "runtime": {
+              "keys": [
+                "constructor_outcome",
+                "runtime"
+              ],
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+            },
+            "schema_version": 1,
+            "symbolic_repair": {
+              "base_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_repairs_v2/PPRCalculator.py",
+              "repair": "symbolic_repairs_v2",
+              "sha256": "e411d33bcbeca9652f89bc62c509d5e40ecb3db1c6718543f840285a91e891c6"
+            }
+          },
+          "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "calculation_engine_upgrade": "ee_floor_v1",
+          "configuration_evidence": [
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/run_manifest.json",
+              "sha256": "fecc026d16e6f52cb3fccfb72dbeeba4098fcd2d77211e168d234b48c5ca2820"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+              "sha256": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+              "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py",
+              "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+            }
+          ],
+          "constructor": {
+            "DC_tol": 0.001,
+            "balance_BA_after_DC_normalization": false,
+            "default_gs": true,
+            "ee_floor": 0.1,
+            "normalize_DC": true,
+            "underdetermined": true,
+            "use_ee_floor": true,
+            "weight_flow": 1.0,
+            "weight_guess": 1.0,
+            "zero_biomass_accum": false,
+            "zero_catch": true
+          },
+          "diagnostics": {
+            "DET_TE_vals": 1,
+            "det_collapse_mode": "auto",
+            "det_external_sppr": 0.0,
+            "det_open_mode": "none",
+            "det_theta": 1.0,
+            "fix_EE_0_cases": true,
+            "flat": false,
+            "return_sppr": true,
+            "short": false,
+            "thresholds": {
+              "b_fail": 1.0,
+              "b_warn": 0.7,
+              "balance_fail": 0.05,
+              "balance_warn": 0.01,
+              "dc_row_tol": 1e-06,
+              "ee_marginal": 0.001,
+              "model_balance_fail": 0.1,
+              "model_balance_warn": 0.0001,
+              "rho_living_fail": 1.0,
+              "rho_living_warn": 0.7,
+              "sppr_det_warn": 10.0
+            }
+          },
+          "engine_source_hashes": {
+            "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+            "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+            "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+          },
+          "engine_sources": {
+            "ModelData.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+            "PPRCalculator.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+            "utils.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py"
+          },
+          "mc": {
+            "n_samples": 100
+          },
+          "method_timeout_overrides_seconds": {
+            "EwE_TE_EE": 600,
+            "sym_TE_asDC": 300
+          },
+          "method_timeout_seconds": 0
+        },
+        "model_id": "Chiaverano2018_detailed_Northern_Humboldt_1995_1998",
+        "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      },
+      "constructor_evidence": {
+        "path": "symbolic_v2/constructor.json.gz",
+        "sha256": "825a9d1a36b0e426ee621032d57bd71f09d5e84bcd01899cb3738fc016c11019",
+        "availability": "present"
+      }
+    },
+    "sym_GE_asDC": {
+      "status": "ok",
+      "reason": "FAIL: negative SPPR in a source-model group",
+      "scopes": {
+        "all": {
+          "diet_import": null,
+          "Benthic detritus": 4.974107061617719,
+          "Pelagic detritus": 4.974107061617719,
+          "Fishery offal": 4.974107061617719,
+          "Anchovy eggs": 4.974107061617719,
+          "Leatherback turtle": 1308.1484617657802,
+          "Green sea turtle": 942.1937867231762,
+          "Cetaceans": 83007.26719271683,
+          "Pinnipeds": 38618.86833446525,
+          "Seabirds": 188979.8565501913,
+          "Chondrichthyans": 3547.7973052181355,
+          "Catfish": 395.1259288035204,
+          "Sea robin": 175.65309978404946,
+          "Medium sciaenids": 528.2188160139319,
+          "Medium demersal fish": 345.1607551809546,
+          "Conger": 2309.408143518743,
+          "Butter fishes": 112.46343066955687,
+          "Benthic elasmobranchs": 710.3294626576471,
+          "Small demersal fish": 52.98325505777085,
+          "Flatfish": 1257.4241716572205,
+          "Large hake ": 3306.263416286057,
+          "Medium hake": 800.8967989089773,
+          "Small hake ": 744.659505902265,
+          "Other large pelagic fish": 1214.3973031432188,
+          "Chub mackerel": 835.3416900742599,
+          "Horse mackerel": 538.8143155626603,
+          "Other small pelagic fish": 120.51937024179405,
+          "Other cephalopods": 45.13798522924938,
+          "Jumbo squid": 609.4588639646419,
+          "Mesopelagic fish": 216.83325321301328,
+          "Anchovy ": 116.32891756098557,
+          "Sardine": 151.84383349762638,
+          "Macrobenthos": 44.22366852492348,
+          "Chrysaora plocamia": 63.55048102003735,
+          "Gelatinous zooplankton": 96.39370761673007,
+          "Macrozooplankton": 22.268254905497873,
+          "Mesozooplankton": 18.368721882422136,
+          "Microzooplankton": 33.519940015833754,
+          "Dino/silicoflagellates": 1.0,
+          "Diatoms": 1.0
+        },
+        "inner": {
+          "diet_import": null,
+          "Benthic detritus": 4.974107061617719,
+          "Pelagic detritus": 4.974107061617719,
+          "Fishery offal": 4.974107061617719,
+          "Anchovy eggs": 4.974107061617719,
+          "Leatherback turtle": 1308.1484617657286,
+          "Green sea turtle": 1080.1678755454657,
+          "Cetaceans": 83361.49036622222,
+          "Pinnipeds": 39299.0765600543,
+          "Seabirds": 189237.47968275665,
+          "Chondrichthyans": 3581.1122535330887,
+          "Catfish": 486.1829856453788,
+          "Sea robin": 183.5673659183442,
+          "Medium sciaenids": 594.8161651850083,
+          "Medium demersal fish": 411.4982886096579,
+          "Conger": 2508.1968550006172,
+          "Butter fishes": 134.93117749299574,
+          "Benthic elasmobranchs": 794.8087560573947,
+          "Small demersal fish": 52.98325505777077,
+          "Flatfish": 1429.7423867970726,
+          "Large hake ": 3455.294319612022,
+          "Medium hake": 815.2962868261701,
+          "Small hake ": 763.1604703264547,
+          "Other large pelagic fish": 1218.742406231045,
+          "Chub mackerel": 838.0087424663968,
+          "Horse mackerel": 541.0931994121046,
+          "Other small pelagic fish": 122.39669223574332,
+          "Other cephalopods": 47.322275613642475,
+          "Jumbo squid": 613.3685071875595,
+          "Mesopelagic fish": 216.83325321297826,
+          "Anchovy ": 116.32891757113245,
+          "Sardine": 151.84383349761347,
+          "Macrobenthos": 58.26811685011657,
+          "Chrysaora plocamia": 63.55048102003464,
+          "Gelatinous zooplankton": 96.39370761672683,
+          "Macrozooplankton": 22.26825490549368,
+          "Mesozooplankton": 18.368721882422115,
+          "Microzooplankton": 33.519940015833754,
+          "Dino/silicoflagellates": 1.0,
+          "Diatoms": 1.0
+        },
+        "PP": {
+          "diet_import": null,
+          "Benthic detritus": 0.0,
+          "Pelagic detritus": 0.0,
+          "Fishery offal": 0.0,
+          "Anchovy eggs": 0.0,
+          "Leatherback turtle": 334.417570452917,
+          "Green sea turtle": 129.9458201175869,
+          "Cetaceans": 21171.80435484526,
+          "Pinnipeds": 10248.52603650252,
+          "Seabirds": 50841.0402654257,
+          "Chondrichthyans": 897.312523982794,
+          "Catfish": 27.93755952747196,
+          "Sea robin": 40.0423647527194,
+          "Medium sciaenids": 90.4202376918242,
+          "Medium demersal fish": 38.496304419232004,
+          "Conger": 462.58754318629894,
+          "Butter fishes": 11.76155053643647,
+          "Benthic elasmobranchs": 121.9268815699178,
+          "Small demersal fish": 17.74999889601824,
+          "Flatfish": 194.9146672411475,
+          "Large hake ": 758.5688392558791,
+          "Medium hake": 207.2657765720187,
+          "Small hake ": 182.1555692053382,
+          "Other large pelagic fish": 326.2910047643891,
+          "Chub mackerel": 220.5183866047753,
+          "Horse mackerel": 138.5772357156382,
+          "Other small pelagic fish": 36.5156249999999,
+          "Other cephalopods": 10.92990060467959,
+          "Jumbo squid": 147.19901026807838,
+          "Mesopelagic fish": 50.9254304469728,
+          "Anchovy ": 30.75706672297467,
+          "Sardine": 40.1447488119684,
+          "Macrobenthos": 1.0301956717039111e-13,
+          "Chrysaora plocamia": 16.31493207528549,
+          "Gelatinous zooplankton": 24.43597415709126,
+          "Macrozooplankton": 5.0813005387903,
+          "Mesozooplankton": 5.15625,
+          "Microzooplankton": 5.33333333333333,
+          "Dino/silicoflagellates": 1.0,
+          "Diatoms": 1.0
+        }
+      },
+      "annual_status": {
+        "all": "FAIL: negative SPPR in a source-model group",
+        "inner": "FAIL: negative SPPR in a source-model group",
+        "PP": "FAIL: negative SPPR in a source-model group"
+      },
+      "diagnostics": null,
+      "mc_diagnostics": null,
+      "negative_entries": [
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 34,
+          "recipient_name": "Green sea turtle",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -137.97408882228927,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 33,
+          "recipient_name": "Cetaceans",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -354.2231735053831,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 32,
+          "recipient_name": "Pinnipeds",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -680.2082255890496,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 31,
+          "recipient_name": "Seabirds",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -257.62313256530905,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 30,
+          "recipient_name": "Chondrichthyans",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -33.314948314953284,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 29,
+          "recipient_name": "Catfish",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -91.05705684185833,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 28,
+          "recipient_name": "Sea robin",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -7.914266134294705,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 27,
+          "recipient_name": "Medium sciaenids",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -66.59734917107639,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 26,
+          "recipient_name": "Medium demersal fish",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -66.33753342870331,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 25,
+          "recipient_name": "Conger",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -198.788711481874,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 24,
+          "recipient_name": "Butter fishes",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -22.46774682343887,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 23,
+          "recipient_name": "Benthic elasmobranchs",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -84.47929339974765,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 21,
+          "recipient_name": "Flatfish",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -172.3182151398521,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 20,
+          "recipient_name": "Large hake ",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -149.03090332596526,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 19,
+          "recipient_name": "Medium hake",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -14.39948791719283,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 18,
+          "recipient_name": "Small hake ",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -18.50096442418961,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 17,
+          "recipient_name": "Other large pelagic fish",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -4.345103087826075,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 16,
+          "recipient_name": "Chub mackerel",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -2.6670523921369043,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 15,
+          "recipient_name": "Horse mackerel",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -2.2788838494441706,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 14,
+          "recipient_name": "Other small pelagic fish",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -1.8773219939492651,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 13,
+          "recipient_name": "Other cephalopods",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -2.1842903843930968,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 12,
+          "recipient_name": "Jumbo squid",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -3.909643222917664,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 10,
+          "recipient_name": "Anchovy ",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -1.0146870987890714e-08,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_GE_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 8,
+          "recipient_name": "Macrobenthos",
+          "source_id": 40,
+          "source_name": "diet_import",
+          "value": -14.044448325193086,
+          "tolerance": 1e-10
+        }
+      ],
+      "reconciliation": {
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true,
+        "rtol": 1e-12,
+        "atol": 1e-12
+      },
+      "runtime_before_sha256": "cada567af8a08f62ed7538297e8d8b9a328545f0d1841ea24c652d8f8a4362a9",
+      "runtime_after_sha256": "cada567af8a08f62ed7538297e8d8b9a328545f0d1841ea24c652d8f8a4362a9",
+      "warnings": [],
+      "elapsed_seconds": 127.90600000019185,
+      "settings": {
+        "method": "sym_GE_asDC",
+        "target": "SPPR_symbolic",
+        "kwargs": {
+          "TE": null,
+          "TE_option": "GE",
+          "diet_import_option": "as_DC",
+          "DET_TE_vals": 1,
+          "sppr_det_value": null,
+          "det_collapse_mode": "auto",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "fix_EE_0_cases": true
+        },
+        "source_resolved": true,
+        "description": "Symbolic solver, TE_option='GE', diet_import_option='as_DC'.",
+        "seed": null,
+        "mc_policy_origin": null
+      },
+      "evidence": {
+        "path": "symbolic/sym_GE_asDC.json.gz",
+        "sha256": "bbbc202c4a035fb0f657b037d7c4fc10d9db761e45e4e34df0587540d3a4e440",
+        "availability": "present"
+      },
+      "execution_identity": {
+        "adapter_sha256": "db8c6e9d2beb1d7ac80efad299deba1d77af55b042044d6cb07b0657a07987e3",
+        "constructor": {
+          "DC_tol": 0.001,
+          "balance_BA_after_DC_normalization": false,
+          "default_gs": true,
+          "ee_floor": 0.1,
+          "normalize_DC": true,
+          "underdetermined": true,
+          "use_ee_floor": true,
+          "weight_flow": 1.0,
+          "weight_guess": 1.0,
+          "zero_biomass_accum": false,
+          "zero_catch": true
+        },
+        "engine_hashes": {
+          "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+          "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+          "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+          "symbolic_repair/PPRCalculator.py": "10e197e23462fee329af3a8efe8f748f2a7e21f9e74abbf431aa8836324254c8",
+          "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+        },
+        "environment": {
+          "numpy": "2.3.4",
+          "pandas": "2.3.3",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+        },
+        "flags": {
+          "audited_replay": {
+            "mode": "completed_runtime",
+            "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+            "provenance": {
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+            },
+            "runtime": {
+              "keys": [
+                "constructor_outcome",
+                "runtime"
+              ],
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+            },
+            "schema_version": 1,
+            "symbolic_repair": {
+              "base_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_repairs/PPRCalculator.py",
+              "repair": "symbolic_repairs_v1",
+              "sha256": "10e197e23462fee329af3a8efe8f748f2a7e21f9e74abbf431aa8836324254c8"
+            }
+          },
+          "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "calculation_engine_upgrade": "ee_floor_v1",
+          "configuration_evidence": [
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/run_manifest.json",
+              "sha256": "fecc026d16e6f52cb3fccfb72dbeeba4098fcd2d77211e168d234b48c5ca2820"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+              "sha256": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+              "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py",
+              "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+            }
+          ],
+          "constructor": {
+            "DC_tol": 0.001,
+            "balance_BA_after_DC_normalization": false,
+            "default_gs": true,
+            "ee_floor": 0.1,
+            "normalize_DC": true,
+            "underdetermined": true,
+            "use_ee_floor": true,
+            "weight_flow": 1.0,
+            "weight_guess": 1.0,
+            "zero_biomass_accum": false,
+            "zero_catch": true
+          },
+          "diagnostics": {
+            "DET_TE_vals": 1,
+            "det_collapse_mode": "auto",
+            "det_external_sppr": 0.0,
+            "det_open_mode": "none",
+            "det_theta": 1.0,
+            "fix_EE_0_cases": true,
+            "flat": false,
+            "return_sppr": true,
+            "short": false,
+            "thresholds": {
+              "b_fail": 1.0,
+              "b_warn": 0.7,
+              "balance_fail": 0.05,
+              "balance_warn": 0.01,
+              "dc_row_tol": 1e-06,
+              "ee_marginal": 0.001,
+              "model_balance_fail": 0.1,
+              "model_balance_warn": 0.0001,
+              "rho_living_fail": 1.0,
+              "rho_living_warn": 0.7,
+              "sppr_det_warn": 10.0
+            }
+          },
+          "engine_source_hashes": {
+            "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+            "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+            "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+          },
+          "engine_sources": {
+            "ModelData.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+            "PPRCalculator.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+            "utils.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py"
+          },
+          "mc": {
+            "n_samples": 100
+          },
+          "method_timeout_overrides_seconds": {
+            "EwE_TE_EE": 600,
+            "sym_GE_asDC": 300,
+            "sym_TE_asDC": 300,
+            "sym_WithEgestion_asDC": 300
+          },
+          "method_timeout_seconds": 0
+        },
+        "model_id": "Chiaverano2018_detailed_Northern_Humboldt_1995_1998",
+        "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      },
+      "constructor_evidence": {
+        "path": "symbolic/constructor.json.gz",
+        "sha256": "9549ecd09abaad733ef3d1b72519b6bf47b5e3085cb727e75a0703402561a017",
+        "availability": "present"
+      }
+    },
+    "sym_WithEgestion_asDC": {
+      "status": "failed",
+      "reason": "Method execution or evidence reconciliation failed: ValueError: Detritus collapse has unrepresented nonzero recipient weights: [40]",
+      "exception": {
+        "type": "ValueError",
+        "message": "Detritus collapse has unrepresented nonzero recipient weights: [40]",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\tools\\scientific_helpers\\sppr\\method_coverage.py\", line 629, in _run\n    result = getattr(model, settings['target'])(**settings['kwargs'])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs\\PPRCalculator.py\", line 3414, in SPPR_symbolic\n    return self._SPPR_symbolic_helper_diet_import_as_DC(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs\\PPRCalculator.py\", line 3352, in _SPPR_symbolic_helper_diet_import_as_DC\n    sppr_mat = self._solve_det_scaling(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs\\PPRCalculator.py\", line 2771, in _solve_det_scaling\n    SPPR, scalar, a_p, b_p = self._collapse_det_scaling(\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_013\\papers\\HUM-2018\\models\\Chiaverano2018_detailed_Northern_Humboldt_1995_1998\\results\\diagnostics\\method_coverage\\deterministic_completion_20261114\\executed_repairs\\PPRCalculator.py\", line 2652, in _collapse_det_scaling\n    raise ValueError('Detritus collapse has unrepresented nonzero recipient weights: '\nValueError: Detritus collapse has unrepresented nonzero recipient weights: [40]\n"
+      },
+      "warnings": [],
+      "elapsed_seconds": 156.5470000000205,
+      "scopes": {
+        "all": {},
+        "inner": {},
+        "PP": {}
+      },
+      "annual_status": {
+        "all": "unavailable: failed",
+        "inner": "unavailable: failed",
+        "PP": "unavailable: failed"
+      },
+      "settings": {
+        "method": "sym_WithEgestion_asDC",
+        "target": "SPPR_symbolic",
+        "kwargs": {
+          "TE": null,
+          "TE_option": "With Egestion",
+          "diet_import_option": "as_DC",
+          "DET_TE_vals": 1,
+          "sppr_det_value": null,
+          "det_collapse_mode": "auto",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "fix_EE_0_cases": true
+        },
+        "source_resolved": true,
+        "description": "Symbolic solver, TE_option='With Egestion', diet_import_option='as_DC'.",
+        "seed": null,
+        "mc_policy_origin": null
+      },
+      "evidence": {
+        "path": "symbolic/sym_WithEgestion_asDC.json.gz",
+        "sha256": "0cfb373dadbf9089547afe9e3126a0661febf070677dd6db94283edce1314d80",
+        "availability": "present"
+      },
+      "execution_identity": {
+        "adapter_sha256": "db8c6e9d2beb1d7ac80efad299deba1d77af55b042044d6cb07b0657a07987e3",
+        "constructor": {
+          "DC_tol": 0.001,
+          "balance_BA_after_DC_normalization": false,
+          "default_gs": true,
+          "ee_floor": 0.1,
+          "normalize_DC": true,
+          "underdetermined": true,
+          "use_ee_floor": true,
+          "weight_flow": 1.0,
+          "weight_guess": 1.0,
+          "zero_biomass_accum": false,
+          "zero_catch": true
+        },
+        "engine_hashes": {
+          "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+          "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+          "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+          "symbolic_repair/PPRCalculator.py": "10e197e23462fee329af3a8efe8f748f2a7e21f9e74abbf431aa8836324254c8",
+          "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+        },
+        "environment": {
+          "numpy": "2.3.4",
+          "pandas": "2.3.3",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+        },
+        "flags": {
+          "audited_replay": {
+            "mode": "completed_runtime",
+            "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+            "provenance": {
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+            },
+            "runtime": {
+              "keys": [
+                "constructor_outcome",
+                "runtime"
+              ],
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "2a92849c8600a3f005506f045f7269ea21157d27d50090ffb23abc2fafb9b1b7"
+            },
+            "schema_version": 1,
+            "symbolic_repair": {
+              "base_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_repairs/PPRCalculator.py",
+              "repair": "symbolic_repairs_v1",
+              "sha256": "10e197e23462fee329af3a8efe8f748f2a7e21f9e74abbf431aa8836324254c8"
+            }
+          },
+          "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "calculation_engine_upgrade": "ee_floor_v1",
+          "configuration_evidence": [
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/run_manifest.json",
+              "sha256": "fecc026d16e6f52cb3fccfb72dbeeba4098fcd2d77211e168d234b48c5ca2820"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+              "sha256": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+              "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23"
+            },
+            {
+              "original_source_hash": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7",
+              "relative_path": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py",
+              "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+            }
+          ],
+          "constructor": {
+            "DC_tol": 0.001,
+            "balance_BA_after_DC_normalization": false,
+            "default_gs": true,
+            "ee_floor": 0.1,
+            "normalize_DC": true,
+            "underdetermined": true,
+            "use_ee_floor": true,
+            "weight_flow": 1.0,
+            "weight_guess": 1.0,
+            "zero_biomass_accum": false,
+            "zero_catch": true
+          },
+          "diagnostics": {
+            "DET_TE_vals": 1,
+            "det_collapse_mode": "auto",
+            "det_external_sppr": 0.0,
+            "det_open_mode": "none",
+            "det_theta": 1.0,
+            "fix_EE_0_cases": true,
+            "flat": false,
+            "return_sppr": true,
+            "short": false,
+            "thresholds": {
+              "b_fail": 1.0,
+              "b_warn": 0.7,
+              "balance_fail": 0.05,
+              "balance_warn": 0.01,
+              "dc_row_tol": 1e-06,
+              "ee_marginal": 0.001,
+              "model_balance_fail": 0.1,
+              "model_balance_warn": 0.0001,
+              "rho_living_fail": 1.0,
+              "rho_living_warn": 0.7,
+              "sppr_det_warn": 10.0
+            }
+          },
+          "engine_source_hashes": {
+            "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+            "PPRCalculator.py": "7ba363f0ce2b49e837f6bb38652c8f2ffa832ea617a01a0084e9619679694f21",
+            "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+          },
+          "engine_sources": {
+            "ModelData.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/ModelData.py",
+            "PPRCalculator.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/PPRCalculator.py",
+            "utils.py": "model_validation/work/2026-10-08_151840_auto_review_publication/outputs/auto/executed_code/utils.py"
+          },
+          "mc": {
+            "n_samples": 100
+          },
+          "method_timeout_overrides_seconds": {
+            "EwE_TE_EE": 600,
+            "sym_GE_asDC": 300,
+            "sym_TE_asDC": 300,
+            "sym_WithEgestion_asDC": 300
+          },
+          "method_timeout_seconds": 0
+        },
+        "model_id": "Chiaverano2018_detailed_Northern_Humboldt_1995_1998",
+        "model_sha256": "11cbf610b7d2514085bd0d079b385cf9419e15308493b3a35183673553c5adb7"
+      },
+      "constructor_evidence": {
+        "path": "symbolic/constructor.json.gz",
+        "sha256": "9549ecd09abaad733ef3d1b72519b6bf47b5e3085cb727e75a0703402561a017",
+        "availability": "present"
+      }
+    }
+  },
+  "groups": [
+    {
+      "id": 40,
+      "name": "diet_import",
+      "type": "Import",
+      "synthetic": true
+    },
+    {
+      "id": 39,
+      "name": "Benthic detritus",
+      "type": "DET",
+      "synthetic": false
+    },
+    {
+      "id": 38,
+      "name": "Pelagic detritus",
+      "type": "DET",
+      "synthetic": false
+    },
+    {
+      "id": 37,
+      "name": "Fishery offal",
+      "type": "DET",
+      "synthetic": false
+    },
+    {
+      "id": 36,
+      "name": "Anchovy eggs",
+      "type": "DET",
+      "synthetic": false
+    },
+    {
+      "id": 35,
+      "name": "Leatherback turtle",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 34,
+      "name": "Green sea turtle",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 33,
+      "name": "Cetaceans",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 32,
+      "name": "Pinnipeds",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 31,
+      "name": "Seabirds",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 30,
+      "name": "Chondrichthyans",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 29,
+      "name": "Catfish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 28,
+      "name": "Sea robin",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 27,
+      "name": "Medium sciaenids",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 26,
+      "name": "Medium demersal fish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 25,
+      "name": "Conger",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 24,
+      "name": "Butter fishes",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 23,
+      "name": "Benthic elasmobranchs",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 22,
+      "name": "Small demersal fish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 21,
+      "name": "Flatfish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 20,
+      "name": "Large hake ",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 19,
+      "name": "Medium hake",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 18,
+      "name": "Small hake ",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 17,
+      "name": "Other large pelagic fish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 16,
+      "name": "Chub mackerel",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 15,
+      "name": "Horse mackerel",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 14,
+      "name": "Other small pelagic fish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 13,
+      "name": "Other cephalopods",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 12,
+      "name": "Jumbo squid",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 11,
+      "name": "Mesopelagic fish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 10,
+      "name": "Anchovy ",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 9,
+      "name": "Sardine",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 8,
+      "name": "Macrobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 7,
+      "name": "Chrysaora plocamia",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 6,
+      "name": "Gelatinous zooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 5,
+      "name": "Macrozooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 4,
+      "name": "Mesozooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 3,
+      "name": "Microzooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 2,
+      "name": "Dino/silicoflagellates",
+      "type": "PP",
+      "synthetic": false
+    },
+    {
+      "id": 1,
+      "name": "Diatoms",
+      "type": "PP",
+      "synthetic": false
+    }
+  ],
+  "diagnostic_rows": [],
+  "constructor_evidence": {
+    "path": "symbolic_v2/constructor.json.gz",
+    "sha256": "825a9d1a36b0e426ee621032d57bd71f09d5e84bcd01899cb3738fc016c11019",
+    "availability": "present"
+  },
+  "evidence_index": {
+    "path": "symbolic_v2/method_coverage.json.gz",
+    "sha256": "ff368fe84ee5b33e047deb69d4e94e7bb0b596cc3fbc557f569500351be6659c",
+    "availability": "present"
+  }
+}

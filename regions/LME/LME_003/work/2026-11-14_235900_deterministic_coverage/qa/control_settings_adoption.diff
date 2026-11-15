@@ -1,0 +1,99 @@
+--- before/regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py
++++ after/regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py
+@@ -260,12 +260,27 @@
+             for sheet, table in (('Models & coverage', 'Models'), ('Papers', 'Papers'))}
+ 
+ 
+-def check_control_settings(control, executed):
++def check_control_settings(control, executed, model):
++    """Compare scientific settings, authenticating metadata-only equivalences.
++
++    Return every newly consumed dependency so publication guards retain it.
++    The saved control and execution flags are never changed.
++    """
+     coverage._execution_flags(control, executed)
++    model = Path(model).resolve()
++    consumed = {model: sha(model)}
++
++    def authenticate(ref):
++        path = reference(model.parent, ref)
++        consumed[path] = ref['sha256']
++
+     original_proof=control.get('audited_replay',{}).get('provenance',{})
+     executed_proof=executed.get('audited_replay',{}).get('provenance',{})
+     relocated_proof=bool(original_proof.get('sha256') and
+                          original_proof.get('sha256')==executed_proof.get('sha256'))
++    if relocated_proof and original_proof.get('relative_path') != executed_proof.get('relative_path'):
++        authenticate(original_proof)
++        authenticate(executed_proof)
+     def scientific(flags):
+         flags = copy.deepcopy(flags)
+         for key in ('method_timeout_seconds', 'method_timeout_overrides_seconds'):
+@@ -277,8 +292,57 @@
+             # validated bytes are unchanged; only the model-local path moved.
+             flags['audited_replay']['provenance'].pop('relative_path',None)
+         return flags
+-    if scientific(control) != scientific(executed):
++    original, requested = scientific(control), scientific(executed)
++    old_sources, new_sources = control.get('engine_sources', {}), executed.get('engine_sources', {})
++    authenticated = set()
++
++    def dependency(name):
++        digest = control.get('engine_source_hashes', {}).get(name)
++        if (name not in old_sources or name not in new_sources or not digest
++                or digest != executed.get('engine_source_hashes', {}).get(name)):
++            raise ValueError('Control engine dependency identity differs: ' + name)
++        if name not in authenticated:
++            for sources in (old_sources, new_sources):
++                authenticate({'relative_path': sources[name], 'sha256': digest})
++            authenticated.add(name)
++        return digest
++
++    for name in old_sources.keys() & new_sources.keys():
++        if old_sources[name] == new_sources[name]:
++            continue
++        digest = dependency(name)
++        requested['engine_sources'][name] = old_sources[name]
++        # Only a dependency's path changes; all other evidence fields survive.
++        for flags, sources in ((original, old_sources), (requested, new_sources)):
++            for ref in flags.get('configuration_evidence', []):
++                if ref.get('relative_path') == sources[name]:
++                    if ref.get('sha256') != digest or ref.get('original_source_hash') != consumed[model]:
++                        raise ValueError('Relocated control dependency evidence identity differs')
++                    ref['relative_path'] = old_sources[name]
++
++    old_evidence = original.get('configuration_evidence', [])
++    new_evidence = requested.get('configuration_evidence', [])
++    if old_evidence != new_evidence:
++        kept, position = [], 0
++        for ref in new_evidence:
++            if position < len(old_evidence) and ref == old_evidence[position]:
++                kept.append(ref)
++                position += 1
++                continue
++            names = [name for name, path in original.get('engine_sources', {}).items()
++                     if path == ref.get('relative_path') and name in new_sources]
++            redundant = (set(ref) == {'relative_path', 'sha256', 'original_source_hash'}
++                         and ref.get('original_source_hash') == consumed[model]
++                         and any(ref.get('sha256') == dependency(name) for name in names))
++            if not redundant:
++                kept.append(ref)
++        if 'configuration_evidence' in original or kept:
++            requested['configuration_evidence'] = kept
++        else:
++            requested.pop('configuration_evidence', None)
++    if original != requested:
+         raise ValueError('Cached method runtime/scientific flags differ from its retained GE/TE control')
++    return consumed
+ 
+ 
+ def prepare(units=None):
+@@ -359,7 +423,7 @@
+             groups = {}
+             for key in wanted:
+                 verified = verify_method(model, calculated.parent, key, result['methods'][key])
+-                check_control_settings(control['identity']['flags'], verified['identity']['flags'])
++                immutable.update(check_control_settings(control['identity']['flags'], verified['identity']['flags'], model))
+                 identity_key = (json.dumps(verified['identity'], sort_keys=True)
+                                 + str(verified['constructor_path']) + sha(verified['constructor_path'])
+                                 + str(verified['initialization']['path']) + sha(verified['initialization']['path']))

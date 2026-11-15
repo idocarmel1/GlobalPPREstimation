@@ -54,7 +54,9 @@ class EEFloorExecutionCacheTests(unittest.TestCase):
             def evidence(name):
                 path=staged/name;path.write_bytes(name.encode())
                 return {'path':name,'sha256':sha(path)}
-            calculated={'methods':{'MC_new_GE':{'settings':settings['MC_new_GE'],'evidence':evidence('method.json.gz')}},
+            calculated={'methods':{'MC_new_GE':{'settings':settings['MC_new_GE'],'evidence':evidence('method.json.gz'),
+                        'constructor_evidence':evidence('earlier-constructor.json.gz'),
+                        'runtime_verification_evidence':evidence('separate-verification.json.gz')}},
                         'constructor_evidence':evidence('constructor.json.gz'),'evidence_index':evidence('index.json.gz')}
             reference=helper.save_execution(model,context,['MC_new_GE'],settings,calculated,staged)
             reuse=Path(temporary)/'reuse';reuse.mkdir()

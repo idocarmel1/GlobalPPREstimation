@@ -2,6 +2,9 @@
 from contextlib import contextmanager
 from contextvars import ContextVar
 import hashlib
+import json
+import os
+import time
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -18,6 +21,89 @@ class PublicationConflictError(ValueError, RuntimeError):
 
 def _fingerprint(path):
     return sha(path) if path.is_file() else None
+
+
+def _replacement_access(path):
+    """Diagnose current Windows delete permission and this process's readers."""
+    result = {'delete_access': False, 'own_open_handles': None, 'pid': os.getpid()}
+    if os.name != 'nt' or not path.is_file(): return result
+    import ctypes
+    from ctypes import wintypes as wt
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    kernel.CreateFileW.argtypes = [wt.LPCWSTR, wt.DWORD, wt.DWORD, ctypes.c_void_p, wt.DWORD, wt.DWORD, wt.HANDLE]
+    kernel.CreateFileW.restype = wt.HANDLE
+    kernel.CloseHandle.argtypes = [wt.HANDLE]
+    handle = kernel.CreateFileW(str(path), 0x10000, 7, None, 3, 0, None)
+    if handle == ctypes.c_void_p(-1).value:
+        result['native_error'] = ctypes.get_last_error()
+    else:
+        kernel.CloseHandle(handle); result['delete_access'] = True
+    result['attributes'] = path.stat().st_file_attributes
+    try:
+        import psutil
+        result['own_open_handles'] = [x.path for x in psutil.Process().open_files()
+                                      if os.path.normcase(x.path) == os.path.normcase(str(path))]
+    except (ImportError, OSError):
+        pass
+    return result
+
+
+def guarded_replace(staged, destination, *, expected_sha256):
+    """Replace exact bytes and claim them even if replacement raises afterwards.
+
+    A configured publication journal is flushed before the OS call. Recovery
+    can recognize only the intended postimage, never an arbitrary current file.
+    At most two retries follow a denial, only while native delete access is
+    available, no own reader is open, and exact target/staged hashes still match.
+    """
+    staged, destination = Path(staged).resolve(), Path(destination).resolve()
+    after = _fingerprint(staged)
+    if after is None or _fingerprint(destination) != expected_sha256:
+        raise ValueError('Atomic replacement precondition changed: ' + str(destination))
+    backups = _ACTIVE.get()
+    for backup in backups:
+        backup.before_write(destination)
+        journal = getattr(backup, 'journal_path', None)
+        if journal:
+            record = {'event': 'intent', 'path': destination.relative_to(backup.root).as_posix(),
+                      'before_sha256': expected_sha256, 'after_sha256': after}
+            with Path(journal).open('a', encoding='utf-8') as stream:
+                stream.write(json.dumps(record, sort_keys=True) + '\n')
+                stream.flush(); os.fsync(stream.fileno())
+    if _fingerprint(destination) != expected_sha256 or _fingerprint(staged) != after:
+        raise ValueError('Atomic replacement changed after journaling: ' + str(destination))
+    try:
+        for attempt in range(3):
+            try:
+                os.replace(staged, destination)
+                break
+            except PermissionError as error:
+                # Inspect the live condition before unwinding loses its owner.
+                state = _replacement_access(destination)
+                for backup in backups:
+                    journal = getattr(backup, 'journal_path', None)
+                    if journal:
+                        with Path(journal).open('a', encoding='utf-8') as stream:
+                            stream.write(json.dumps({'event': 'replacement_denial',
+                                'path': destination.relative_to(backup.root).as_posix(),
+                                'attempt': attempt + 1, 'winerror': getattr(error, 'winerror', None),
+                                'access': state}, sort_keys=True) + '\n')
+                            stream.flush(); os.fsync(stream.fileno())
+                if _fingerprint(destination) != expected_sha256 or _fingerprint(staged) != after:
+                    raise ValueError('Atomic replacement changed during denial: ' + str(destination)) from error
+                if attempt == 2 or not state['delete_access'] or state['own_open_handles'] != []:
+                    raise
+                time.sleep(0.15 * (attempt + 1))
+                if _fingerprint(destination) != expected_sha256 or _fingerprint(staged) != after:
+                    raise ValueError('Atomic replacement changed before retry: ' + str(destination)) from error
+    finally:
+        # An OS replacement may have completed before an exception/interrupt.
+        # An external edit after that replacement is deliberately not claimed.
+        if _fingerprint(destination) == after:
+            for backup in backups:
+                backup._claim(destination, after)
+    if _fingerprint(destination) != after:
+        raise ValueError('Atomic output changed after replacement: ' + str(destination))
 
 
 class PublicationBackup:

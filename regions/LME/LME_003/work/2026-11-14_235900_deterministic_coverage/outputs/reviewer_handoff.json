@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "Frozen for user-requested new-chat handoff; no cache patches applied, publication, or commit",
+  "ownership": "All shared source and CAL cache writable ownership returned to root/new chat. No further edits from reviewer.",
+  "source_hashes": {
+    "tools/scientific_helpers/sppr/method_coverage.py": "b36ea4fb0c076d2202f229a01de29b84c7d9d8626f9ecd6909f5467a84956dc1",
+    "tools/project_core/calculations/coverage.py": "77e54b154661a68b51a3cedae09e4a557fcd6458d279cb817329bd772577f631",
+    "tools/project_core/calculations/ee_floor_execution.py": "e7c17b14ca54f00cc3d7aab68f4daa821b75df850a52f32837e797aef6d448ce",
+    "tools/workflow_checks/calculations/test_method_constructor_evidence.py": "09bbce3aedc93fa416a2807ececfccbe8fdadca440caa36e7304230a6551c763",
+    "tools/workflow_checks/calculations/test_coverage_retry.py": "a391ac9a68d697a991711c00f452f64065ff252aa9684e8b32c4e6d407c2c6cf",
+    "tools/workflow_checks/calculations/test_ee_floor_execution_cache.py": "9029e4a814e089da23fd9069d76c76ffd57861faf2bca3053b6d65a263eccae1"
+  },
+  "verification_sources": {
+    "verification_helper": {
+      "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/retrospective_v1/verification_sources/d66b982e9ea1688400bcfb12a543f1b35a5765549913a8c88e874c7e2f3fbfa9-provenance_admission.py",
+      "sha256": "d66b982e9ea1688400bcfb12a543f1b35a5765549913a8c88e874c7e2f3fbfa9",
+      "source_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/provenance_admission.py"
+    },
+    "verification_adapter": {
+      "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/retrospective_v1/verification_sources/b36ea4fb0c076d2202f229a01de29b84c7d9d8626f9ecd6909f5467a84956dc1-method_coverage.py",
+      "sha256": "b36ea4fb0c076d2202f229a01de29b84c7d9d8626f9ecd6909f5467a84956dc1",
+      "source_path": "tools/scientific_helpers/sppr/method_coverage.py"
+    }
+  },
+  "source_custody_path": "regions/LME/LME_003/papers/CAL-2016/models/CAL-2016_California_Current_2000-2014/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/retrospective_v1/verification_sources/source_custody.json",
+  "patch_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/california_v1_initialization_patches.json",
+  "retrospective_session_id": 72168,
+  "retrospective_session_status": "Completed exit0; both original actual runtimes/groups exactly authenticated against pinned completed-runtime replay; no method solver called",
+  "cal_main_cache_sha256_before_patch": "148e5788acae2882e7390a6583d5f050f51c669a6803642f958e1e66fec2021c",
+  "adapter_changes": [
+    "Immutable content-addressed constructor records",
+    "Per-method constructor_evidence in method document and summary",
+    "Separate in-process versus worker initialization state, preserving valid local model after worker failure"
+  ],
+  "coverage_changes": [
+    "Prefix/promote/integrity-check constructor_evidence and runtime_verification_evidence separately",
+    "Deduplicate shared promoted files by path and SHA",
+    "EE-floor execution cache retains all per-method initialization references"
+  ],
+  "tests": {
+    "constructor_regressions": "3 passed in latest focused suite",
+    "adapter_identity": "2 passed in latest focused suite",
+    "local_admission": "4 passed; final two-line helper adjustment for byte-identical copied method and bounded output directory not rerun",
+    "focused_suite": "20 tests:14 passed,6 errors all caused by introduced workbook path shadowing in promotion dedup loop; variable renamed evidence_path after traceback. Final coverage change NOT re-tested because user requested immediate handoff.",
+    "focused_suite_finished_session": 39915,
+    "required_next_command": "Python311 -m unittest tools.workflow_checks.calculations.test_method_constructor_evidence tools.workflow_checks.calculations.test_adapter_execution_identity tools.workflow_checks.calculations.test_coverage_retry tools.workflow_checks.calculations.test_ee_floor_execution_cache -v",
+    "prior_verified_before_constructor_changes": "88 earlier integration/unit tests passed;24 symbolic v1/v2/canonical and replay tests passed; these do not verify newest constructor/coverage changes"
+  },
+  "initialization_api": {
+    "module": "regions\\LME\\LME_003\\work\\2026-11-14_235900_deterministic_coverage\\code\\provenance_admission.py",
+    "function": "verify_initialization(model, cache_dir, key, outcome, document)",
+    "returns": "evidence_kind/path/reference/consumed and limitation for retrospective",
+    "alternate_outcome_field": "runtime_verification_evidence",
+    "ordinary_gate": "Executed methods require ready constructor matching exact actual runtime and groups; NOT_RUN matches actual constructor failure.",
+    "retrospective_scope": "Exactly CAL sym_TE_asPP and sym_GE_asPP, pinned original hashes and completed-runtime SHA. Original failed constructor remains explicitly historical; no fabricated ready constructor."
+  },
+  "parent_driver_integration": "Parent reports adopt_completion.py and run_completion.py integrated helper and distinct evidence refs. Parent owns cache patches and review transaction. Do not blindly replace entire method records; apply supplied two-field outcome patches only after authenticating actual patch output and source custody hashes.",
+  "review_transaction_review": "Single central_lock and outer publication_transaction; scientific adoption/build first with original DOCX; snapshot just-built Project; guarded DOCX promotion and _register_review; strict _refresh_reviews. Parent reports added immutable original-DOCX guard and regional results_model_id check after review feedback.",
+  "canonical_calculator_sha256": "e2db750357d4ed32d748415c7372be0776531928141860e1893d6daeea26fb4a",
+  "remaining": [
+    "Patch JSON is ready. Compare retained source custody hashes against verification_identity, then apply two outcome patches after parent validation. Original main cache remains untouched.",
+    "Re-run failed coverage/EE-floor tests after evidence_path rename; no scientific reruns required",
+    "Run local test_provenance_admission.py again after final helper changes if desired",
+    "Review parent integration and apply patches only once main CAL cache hash matches handoff",
+    "Perform existing all16 read-only adoption preflight, then authorized staged scientific/review transaction in new chat"
+  ],
+  "patch_sha256": "007ae186e9acd02e174572c4e1a99dc8e02e583beabc6f0b06dff878517e15da",
+  "retrospective_evidence": {
+    "path": "retrospective_v1/runtime-verification-51f1772198d32f1d0e7dd21b3316829cb42b124c7c35a310a134b93c7f8492a2.json.gz",
+    "sha256": "51f1772198d32f1d0e7dd21b3316829cb42b124c7c35a310a134b93c7f8492a2",
+    "availability": "present"
+  }
+}

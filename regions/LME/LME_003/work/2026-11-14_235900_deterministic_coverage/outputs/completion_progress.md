@@ -1,0 +1,16 @@
+# Completion execution ledger — completion_plan_high.md
+Task 1: baseline verified: all 1152 paths; no old Python/Excel writers; original pins match. ACL permits modify, attributes normal. Native DELETE-open succeeds before/after two full read_book calls, owned sibling replace succeeds. Unsandboxed Restart Manager reports no holders.
+Ruling: the historical WinError 5 cannot be assigned to a vanished process. No speculative permission change or blind retry. Preserve fail-closed behavior and add exact ownership journaling/checkpoints; record live OS diagnostics if it recurs. This leaves a possible transient failure, whose successful earlier packages will remain reusable.
+Tasks 2–5: pending.
+Pre-flight: Task 2 checkpoints must survive Task 3 publication rollback and Task 4 review failure; cache lies under WORK/outputs, outside model-generated directories and durable preimage inventory. Task 5 cleanup consumes exact new cache/removal inventories.
+Ruling: use this established WORK ledger and frozen baselines, not a second skill workspace or worktree; user explicitly requires existing checkout and one final commit.
+
+Task 1 complete: 1152 paths verified again; handle/ACL probes and fixture cleanup recorded. Task 2 complete: 17 checkpoint, 8 publication transaction, 25 affected-writer tests pass outside sandbox. Independent narrow review findings fixed. Code frozen in checkpoint_implementation_delta.json. No science rerun. Task 3 starting attempt 7.
+
+Attempt 7: failed closed at first checkpoint on original EE-floor reference omitted from bindings; all 1152 rollback paths match. Narrow binding correction RED→GREEN; all 18 tests and 16 original-reference checks pass. Prior frozen checkpoint source and delta retained. Attempt 8 next.
+
+Attempt 8: Bay of Bengal, Thailand, Java Sea COMPLETE. Falkland snapshot WinError5; two exact journal-owned prior-batch files restored, all1152 baseline paths match. 22 checkpoint tests and18 transaction/retry tests pass. Explicit original/current producer certificate authenticates all3 seals without execution; attempt9 will restore them unchanged. Native access/own-handle diagnostics now captured at denial; at most2 retries only with confirmed access and exact hashes.
+
+Tasks 3 and 4 complete: attempt9 published all16, restoring3 sealed packages, completing8 and preserving5 without rebuild. No scientific solver/MC rerun. Approved Humboldt amendment registered with signature/verdict/exclusions intact.
+Task5 verification and cleanup complete: table, HTML (2,995,440 annual cells), defaults, final publication,7 browser checks and6 visual screenshots pass. Exact119 acceptance hashes and7 frozen source hashes rechecked. Retired996 temporary files and252 checkpoint duplicates with52 empty directories; retained compact manifests and all scientific evidence. Cleanup UTF-8 path decoding fixed; transient ledger rename failed before deletion, then passed once native access and original hash were verified. Final staged verification and single local commit are the only remaining actions; no push.
+Final staged gate PASS: 1493 staged files match exact working bytes; 66 current code paths pass whitespace checks; 93 frozen evidence files retain their recorded whitespace. All accepted publication and producer hashes remain unchanged. Single local commit is the final remaining action; no push.

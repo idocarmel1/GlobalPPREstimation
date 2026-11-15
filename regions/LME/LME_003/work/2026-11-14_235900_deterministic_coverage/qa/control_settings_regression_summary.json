@@ -1,0 +1,36 @@
+{
+  "status": "PASS_FOCUSED_REGRESSION_SOURCE_FROZEN",
+  "sources": {
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py": "dd3267ffd4cc24d64f723a01f5794dd4a3723d73dc609a759feead4a747db0fe",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/test_adopt_completion.py": "2d1695e50a1608f983f5e7c77de6dddcf52b91ce7ba1614749f9ce2b7ccf738e"
+  },
+  "red": {
+    "tests": 13,
+    "failures": 2,
+    "scope": "Two positive metadata-equivalence regressions failed against the original full flags comparison; other11 passed.",
+    "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_settings_red.log",
+    "sha256": "4b61c971b86b740f0284eea4cff4782385f78d59e0fdccd1621b06e09068146e"
+  },
+  "green": {
+    "tests": 15,
+    "failures": 0,
+    "exit_code": 0,
+    "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_settings_green.log",
+    "sha256": "69be088b2ef1b864967a5527940fa77724adbebe013f6733e8a41bf3a739ec64"
+  },
+  "changes": [
+    "Compare copied flags only; never edit saved control/execution evidence.",
+    "Authenticate both model-local engine dependency paths against identical declared source hash before normalizing a relocation.",
+    "Ignore only executed-side added evidence with exactly relative_path/sha256/original_source_hash that authenticates a dependency already present in both engine maps.",
+    "Retain other evidence fields and existing evidence order/removal checks; constructor/runtime/scientific differences still reject.",
+    "Authenticate both provenance relocation files instead of trusting declared hash equality alone.",
+    "Return newly consumed dependency paths and hashes into prepare immutable publication guards."
+  ],
+  "checks": [
+    "Both full Python files parse with ast.parse.",
+    "15 cached-adoption/control-provenance tests passed.",
+    "Positive dependency relocation and redundant-evidence cases preserve original flags and return authenticated hashes.",
+    "Negative changed/missing bytes, changed engine hashes/settings/model-binding/annotations, omitted existing evidence and path escape cases reject."
+  ],
+  "remaining": "Coordinator-owned full cohort preflight/audit rerun; no scientific solve or publication performed by this agent."
+}

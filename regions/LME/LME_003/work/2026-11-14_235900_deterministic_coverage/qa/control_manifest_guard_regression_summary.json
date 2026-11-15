@@ -1,0 +1,31 @@
+{
+  "status": "PASS_SOURCE_FROZEN",
+  "source_hashes": {
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/test_adopt_completion.py": "a62491e27ca95e028d3c4fbadea13d62e29ee5cdecb448b5eba2a252ec9a7a71"
+  },
+  "regression_red": {
+    "tests": 1,
+    "failures": 1,
+    "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_red.log",
+    "sha256": "ea98efed341b31b0dd58384736a896cdc192131b6e4ee68af3ef69870a505743"
+  },
+  "focused_green": {
+    "tests": 18,
+    "failures": 0,
+    "exit_code": 0,
+    "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_green.log",
+    "sha256": "6c7b03a6864e7ca8838fd1349ff6aba5ae082e1be27afadc354d755bbcdfb410"
+  },
+  "guard_change": "check_control_settings returns separate consumed and immutable maps. Only a relocated original audited_replay provenance reference resolving exactly to model/results/result_manifest.json can be prewrite-only. Archives and dependencies authenticated in any other role remain immutable. prepare merges both maps into their corresponding existing guards.",
+  "checks": [
+    "Original live manifest mismatch still rejected before any write",
+    "Authorized live manifest update no longer trips immutable guard",
+    "Changed relocated archive still rejected",
+    "Other historical provenance paths remain immutable",
+    "Live manifest authenticated as an engine dependency remains immutable",
+    "All15 prior cached-adoption/control checks still pass",
+    "No saved flags or evidence mutated; original scientific audit retained"
+  ],
+  "no_scientific_execution_or_publication": true
+}

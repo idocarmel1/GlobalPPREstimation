@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-11-15T10:21:57.615Z",
+  "status": "PASS",
+  "test_scope": "Production pages in new isolated headless Chromium contexts; no existing browser session or user profile",
+  "playwright_version": "1.62.1",
+  "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "source_sha256_before": {
+    "Project.xlsx": "0a378c064063636a817ad78b7bab336c894ff7e5fcdc1117785a89b1a1a7382c",
+    "interactive_map/trends.html": "4c3e571abbb0f7a3f68c598e3504eb3c1631029cd91c02ec1bcbfc2ece88bd35",
+    "interactive_map/index.html": "76b645fe4d168961f3e61a77dc4f685b5f9597a7b3de37aa6c9b287aab4429c5"
+  },
+  "checks": [
+    {
+      "name": "Visible fresh-context trend defaults and 57 researcher exclusions",
+      "status": "PASS",
+      "details": {
+        "catchBasis": {
+          "value": "landings",
+          "label": "Landings only (default)"
+        },
+        "uncertainty": {
+          "value": "1",
+          "label": "Show where assessed"
+        },
+        "metric": {
+          "value": "ratio",
+          "label": "PPR / NPP"
+        },
+        "baselineMethod": {
+          "value": "",
+          "label": "None"
+        },
+        "sourceScope": {
+          "value": "all",
+          "label": "All sources"
+        },
+        "nppScope": {
+          "value": "global",
+          "label": "Global atlas NPP"
+        },
+        "nppFill": {
+          "value": "earliest",
+          "label": "Use earliest available year for earlier gaps"
+        },
+        "unidentifiedTreatment": {
+          "value": "method",
+          "label": "Selected method’s own SPPR (default)"
+        },
+        "groupDisplay": {
+          "value": "total",
+          "label": "Total"
+        },
+        "globalApproximation": {
+          "value": "0",
+          "label": "Off"
+        },
+        "regionReviewFilter": {
+          "value": "validated",
+          "label": "Selected regions with validated models"
+        },
+        "fromYear": {
+          "value": "1950",
+          "label": "1950"
+        },
+        "toYear": {
+          "value": "2019",
+          "label": "2019"
+        }
+      }
+    },
+    {
+      "name": "Visible picker contains exactly the sixteen validated ecosystems",
+      "status": "PASS",
+      "details": [
+        "EEZ_598",
+        "EEZ_941",
+        "HS_071",
+        "HS_077",
+        "LME_003",
+        "LME_013",
+        "LME_014",
+        "LME_022",
+        "LME_032",
+        "LME_034",
+        "LME_035",
+        "LME_036",
+        "LME_037",
+        "LME_038",
+        "LME_047",
+        "LME_049"
+      ]
+    },
+    {
+      "name": "Visible method picker contains the requested four methods",
+      "status": "PASS",
+      "details": [
+        {
+          "id": "simple trophic chain",
+          "label": "Trophic chain · catch-taxon TL (TE 0.1)\nCatch-taxon trophic levels · all sources"
+        },
+        {
+          "id": "SPPR_1995_TE0.1",
+          "label": "SPPR_1995_TE0.1 · model TL (TE 0.1)\nEcopath model · all, inner, PP"
+        },
+        {
+          "id": "new_TE_EEfix",
+          "label": "new_TE_EEfix\nEcopath model · all, inner, PP"
+        },
+        {
+          "id": "new_GE",
+          "label": "new_GE\nEcopath model · all, inner, PP"
+        }
+      ]
+    },
+    {
+      "name": "Four production curves render over 1950-2019",
+      "status": "PASS",
+      "details": {
+        "viewBox": "0 0 1218 430",
+        "title": "Landings · PPR as a share of global atlas NPP",
+        "description": "1950 to 2019. 16 ecosystems included. Trophic chain · catch-taxon TL (TE 0.1); SPPR_1995_TE0.1 · model TL (TE 0.1); new_GE; new_TE_EEfix. Use the Inspect year slider to read exact values, or download the plotted data.",
+        "methods": [
+          {
+            "id": "simple trophic chain",
+            "paths": [
+              "M77,355.36047155111555 L93.17391304347827,352.1603963970769 L109.34782608695653,349.52074284656766 L125.52173913043478,349.0503084199376 L141.69565217391306,345.0468923341326 L157.8695652173913,341.0498335282491 L174.04347826086956,338.53822147461494 L190.2173913043478,337.19106138144775 L206.3913043478261,336.8937864157387 L222.56521739130434,332.9670342057947 L238.73913043478262,331.39971894200886 L254.91304347826085,329.3334860020947 L271.0869565217391,326.5271410956429 L287.2608695652174,320.915316917506 L303.4347826086956,319.74393403028694 L319.6086956521739,317.7158011214108 L335.7826086956522,307.4429424930577 L351.95652173913044,300.91745573369855 L368.1304347826087,301.8532890322909 L384.30434782608694,298.3808356380158 L400.47826086956525,292.5262132581937 L416.6521739130435,296.37301648664993 L432.8260869565217,292.3995152266034 L449,287.0407601870834 L465.17391304347825,282.20125975608676 L481.3478260869565,286.25283432361687 L497.5217391304348,280.33298405017604 L513.695652173913,280.1553737032566 L529.8695652173913,274.01058620188155 L546.0434782608695,279.059947575872 L562.2173913043478,279.40052329461423 L578.391304347826,276.9248793606672 L594.5652173913044,273.74205964957844 L610.7391304347826,270.32512499872695 L626.9130434782609,268.96856945431455 L643.0869565217391,266.735974105434 L659.2608695652174,260.74768258039717 L675.4347826086957,254.63623249914787 L691.6086956521739,248.8165301564592 L707.7826086956521,240.71397928139965 L723.9565217391305,237.4971036293315 L740.1304347826086,229.86595773550698 L756.304347826087,229.02794005584587 L772.4782608695652,227.4464238251236 L788.6521739130434,214.49569848105023 L804.8260869565217,204.23020443759597 L821,197.99932231872123 L837.1739130434783,199.32396550395046",
+              "M837.1739130434783,199.32396550395046 L853.3478260869565,195.1799440879259 L869.5217391304349,204.2764583606022 L885.695652173913,204.9812519953666 L901.8695652173913,203.80923757362675 L918.0434782608696,199.95318724633432 L934.2173913043478,201.72399610639854 L950.3913043478261,194.1465827401364 L966.5652173913044,191.7897075799837 L982.7391304347826,186.68766384421406 L998.9130434782609,186.80351888606305 L1015.0869565217391,185.49720582861363 L1031.2608695652175,190.65555502081253 L1047.4347826086955,197.5574851378994 L1063.608695652174,190.07987602018986 L1079.782608695652,175.07812553847512 L1095.9565217391305,172.66329793010053 L1112.1304347826087,164.72199540844164 L1128.304347826087,170.70318995957876 L1144.4782608695652,172.03003087285083 L1160.6521739130435,176.40255936913937 L1176.8260869565217,173.5462200632951 L1193,152.71171536375937"
+            ]
+          },
+          {
+            "id": "SPPR_1995_TE0.1",
+            "paths": [
+              "M77,366.30307048685233 L93.17391304347827,364.75008427816687 L109.34782608695653,363.1485297718819 L125.52173913043478,361.9044660320838 L141.69565217391306,360.68410359221565 L157.8695652173913,360.4321716015109 L174.04347826086956,358.84089954556896 L190.2173913043478,356.78420944089487 L206.3913043478261,356.4249724615384 L222.56521739130434,355.1648286273044 L238.73913043478262,353.7357853243881 L254.91304347826085,351.4324864037854 L271.0869565217391,349.49752526282595 L287.2608695652174,346.758368729903 L303.4347826086956,342.5257461693892 L319.6086956521739,342.2295026969807 L335.7826086956522,334.7965965492013 L351.95652173913044,333.31550026771237 L368.1304347826087,329.5537326173267 L384.30434782608694,325.271552838202 L400.47826086956525,319.18611711300605 L416.6521739130435,322.61409359525123 L432.8260869565217,322.5397003734317 L449,322.38389190535054 L465.17391304347825,312.4055879073092 L481.3478260869565,318.8819933937498 L497.5217391304348,311.0980719677738 L513.695652173913,310.93848609661643 L529.8695652173913,307.78740931361375 L546.0434782608695,314.9136722744517 L562.2173913043478,309.6576229787089 L578.391304347826,306.6554508688633 L594.5652173913044,304.93693719538976 L610.7391304347826,299.6988830020962 L626.9130434782609,298.70531229752936 L643.0869565217391,293.0194579176941 L659.2608695652174,289.8412941872424 L675.4347826086957,287.5414558329997 L691.6086956521739,283.60555099115555 L707.7826086956521,272.40451678538653 L723.9565217391305,270.45225731452285 L740.1304347826086,266.74266475138876 L756.304347826087,267.2129843226778 L772.4782608695652,271.1333000494014 L788.6521739130434,264.5243612277452 L804.8260869565217,261.4471014320301 L821,260.1625540117721 L837.1739130434783,260.0903124536634",
+              "M837.1739130434783,260.0903124536634 L853.3478260869565,253.6374035181809 L869.5217391304349,262.07453360407567 L885.695652173913,254.60887008264058 L901.8695652173913,254.17784228323828 L918.0434782608696,249.0045566097497 L934.2173913043478,253.26265264737384 L950.3913043478261,248.37393269907176 L966.5652173913044,251.40596665763158 L982.7391304347826,246.2647889947818 L998.9130434782609,240.83990265627415 L1015.0869565217391,237.6314859490566 L1031.2608695652175,241.2187632537843 L1047.4347826086955,249.43324042805182 L1063.608695652174,245.82542431886432 L1079.782608695652,229.73541367847727 L1095.9565217391305,231.07252239310685 L1112.1304347826087,229.86270643243907 L1128.304347826087,244.9183811133542 L1144.4782608695652,234.58812694668367 L1160.6521739130435,237.86738651520693 L1176.8260869565217,233.17655856963003 L1193,204.54810876292498"
+            ]
+          },
+          {
+            "id": "new_GE",
+            "paths": [
+              "M77,375.5129027707067 L93.17391304347827,375.3814938053829 L109.34782608695653,374.9682945188243 L125.52173913043478,374.5731578606641 L141.69565217391306,374.2986910606623 L157.8695652173913,373.8851925266013 L174.04347826086956,372.02168024217485 L190.2173913043478,370.2951783802744 L206.3913043478261,370.4787777939554 L222.56521739130434,369.9335872323461 L238.73913043478262,366.97300235486426 L254.91304347826085,365.2964146168833 L271.0869565217391,362.0528350291743 L287.2608695652174,360.95072367196235 L303.4347826086956,356.8399675707578 L319.6086956521739,359.6273798774245 L335.7826086956522,354.5202608822625 L351.95652173913044,354.4418185212673 L368.1304347826087,351.31173484276337 L384.30434782608694,352.35717380486807 L400.47826086956525,346.3466604824429 L416.6521739130435,345.1389786370695 L432.8260869565217,346.58742059403437 L449,345.23330403770336 L465.17391304347825,333.3891699885561 L481.3478260869565,341.06252805777996 L497.5217391304348,332.3404358242665 L513.695652173913,329.17412004841975 L529.8695652173913,324.8815294085207 L546.0434782608695,331.8390069951531 L562.2173913043478,324.73597787132235 L578.391304347826,320.8829249807052 L594.5652173913044,318.3152446665048 L610.7391304347826,311.4958618039055 L626.9130434782609,310.61694050750225 L643.0869565217391,305.36957214874064 L659.2608695652174,306.60731755236225 L675.4347826086957,301.84955549264413 L691.6086956521739,298.48062204550774 L707.7826086956521,279.46201529381943 L723.9565217391305,272.62160192810916 L740.1304347826086,270.43909644748345 L756.304347826087,272.34255980306114 L772.4782608695652,279.4985680840509 L788.6521739130434,272.7865351242285 L804.8260869565217,270.37278263243417 L821,266.74759580801583 L837.1739130434783,262.86414482474504",
+              "M837.1739130434783,262.86414482474504 L853.3478260869565,255.97292842159882 L869.5217391304349,265.41488188124345 L885.695652173913,256.903998437087 L901.8695652173913,256.21439667097036 L918.0434782608696,260.1861823600632 L934.2173913043478,258.0897794543781 L950.3913043478261,252.4611236207833 L966.5652173913044,258.3471663306052 L982.7391304347826,256.67910951339303 L998.9130434782609,249.39655430320735 L1015.0869565217391,238.34465327072735 L1031.2608695652175,251.47997011795553 L1047.4347826086955,257.9695382751186 L1063.608695652174,253.35713514377912 L1079.782608695652,232.02461211912103 L1095.9565217391305,240.65750530889719 L1112.1304347826087,244.67621341514226 L1128.304347826087,261.98509395924214 L1144.4782608695652,243.81324226578133 L1160.6521739130435,243.93825570133185 L1176.8260869565217,244.74906430894555 L1193,224.6836896780618"
+            ]
+          },
+          {
+            "id": "new_TE_EEfix",
+            "paths": [
+              "M77,351.4181039566391 L93.17391304347827,349.39915377494117 L109.34782608695653,344.6500797703915 L125.52173913043478,345.8122186275884 L141.69565217391306,344.99903244168524 L157.8695652173913,343.42146070656224 L174.04347826086956,338.9192720240223 L190.2173913043478,337.28622835022196 L206.3913043478261,335.3727961712274 L222.56521739130434,335.2302081795267 L238.73913043478262,333.66092239685236 L254.91304347826085,332.71570779259304 L271.0869565217391,324.17168891515735 L287.2608695652174,321.28417245292036 L303.4347826086956,317.4379341421013 L319.6086956521739,321.03475173328434 L335.7826086956522,316.67858769788177 L351.95652173913044,312.9978933948294 L368.1304347826087,304.25790857696836 L384.30434782608694,302.12047689645425 L400.47826086956525,293.3634930078368 L416.6521739130435,293.3012515500923 L432.8260869565217,283.8250721370681 L449,280.12679684020395 L465.17391304347825,268.4889285224742 L481.3478260869565,274.42764503949695 L497.5217391304348,254.95921043879258 L513.695652173913,251.9651217702817 L529.8695652173913,245.07438700500748 L546.0434782608695,258.62222210140044 L562.2173913043478,245.19605136066764 L578.391304347826,236.7218382144684 L594.5652173913044,238.54088349666517 L610.7391304347826,231.80756355498548 L626.9130434782609,227.52886505937366 L643.0869565217391,218.24480994430596 L659.2608695652174,207.06572048684214 L675.4347826086957,195.51711599533732 L691.6086956521739,192.08671370507312 L707.7826086956521,170.83211027274092 L723.9565217391305,155.35775075452614 L740.1304347826086,154.08293888190752 L756.304347826087,161.05070154251294 L772.4782608695652,167.16072084121635 L788.6521739130434,159.7125348648666 L804.8260869565217,149.42741432782202 L821,146.51740564622773 L837.1739130434783,130.08984866278757",
+              "M837.1739130434783,130.08984866278757 L853.3478260869565,115.06240563715214 L869.5217391304349,132.82311412550945 L885.695652173913,128.95364062895032 L901.8695652173913,113.55603134977838 L918.0434782608696,119.66107307589216 L934.2173913043478,110.64914611748836 L950.3913043478261,119.82154362963885 L966.5652173913044,129.255963017989 L982.7391304347826,119.10258530359853 L998.9130434782609,115.54150113320827 L1015.0869565217391,106.84135832367141 L1031.2608695652175,111.2228087388518 L1047.4347826086955,125.33219015661402 L1063.608695652174,125.85520592051597 L1079.782608695652,86.88836952466055 L1095.9565217391305,97.240609962481 L1112.1304347826087,93.92226603503988 L1128.304347826087,105.98383590539162 L1144.4782608695652,91.6956537467762 L1160.6521739130435,97.31117909107185 L1176.8260869565217,93.38164318530914 L1193,53.7659811092355"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Humboldt visible review preserves validated pooled GE WARN, TE WARN, and raw GE FAIL distinction",
+      "status": "PASS",
+      "details": {
+        "index": 2,
+        "id": "Chiaverano2018_detailed_Northern_Humboldt_1995_1998",
+        "label": "Chiaverano2018 detailed Northern Humboldt 1995 1998",
+        "health": {
+          "GE": {
+            "b": 1.623572672896729,
+            "rho_living": 0.7,
+            "status": "FAIL",
+            "b_converges": false,
+            "living_converges": true,
+            "balanced": true,
+            "config": {
+              "use_ee_floor": true,
+              "ee_floor": 0.1,
+              "ee_floor_assumption_use_ee_floor": true,
+              "ee_floor_assumption_ee_floor": 0.1,
+              "ee_floor_assumption_affected_groups": "[35,34,33,32,31,25,7]",
+              "ee_floor_assumption_external_mortality_export_total": 12.69086016232336,
+              "ee_floor_assumption_negative_detritus_stock_residuals": "{\"39\":-4337.380254640021}",
+              "ee_floor_assumption_assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+              "ee_floor_assumption_application_stage": "completed audited initialization",
+              "ee_floor_assumption_researcher_approval": "Original signed review is separate from this calculation assumption",
+              "TE_option": "GE",
+              "det_open_mode": "none",
+              "det_theta": 1,
+              "det_external_sppr": 0,
+              "det_collapse_mode": "auto",
+              "explicit_TE": false,
+              "method": "pooled_detritus_scaling",
+              "would_pool": true,
+              "model": "Northern Humboldt Current (1995-1998)"
+            }
+          },
+          "TE": {
+            "b": 0,
+            "rho_living": 0.7316477059387119,
+            "status": "WARN",
+            "b_converges": true,
+            "living_converges": true,
+            "balanced": true,
+            "config": {
+              "use_ee_floor": true,
+              "ee_floor": 0.1,
+              "ee_floor_assumption_use_ee_floor": true,
+              "ee_floor_assumption_ee_floor": 0.1,
+              "ee_floor_assumption_affected_groups": "[35,34,33,32,31,25,7]",
+              "ee_floor_assumption_external_mortality_export_total": 12.69086016232336,
+              "ee_floor_assumption_negative_detritus_stock_residuals": "{\"39\":-4337.380254640021}",
+              "ee_floor_assumption_assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+              "ee_floor_assumption_application_stage": "completed audited initialization",
+              "ee_floor_assumption_researcher_approval": "Original signed review is separate from this calculation assumption",
+              "TE_option": "TE",
+              "det_open_mode": "none",
+              "det_theta": 1,
+              "det_external_sppr": 0,
+              "det_collapse_mode": "auto",
+              "explicit_TE": false,
+              "method": null,
+              "would_pool": false,
+              "model": "Northern Humboldt Current (1995-1998)"
+            }
+          },
+          "With Egestion": {
+            "b": 1.117544754707063,
+            "rho_living": 0.5599999999999999,
+            "status": "FAIL",
+            "b_converges": false,
+            "living_converges": true,
+            "balanced": true,
+            "config": {
+              "use_ee_floor": true,
+              "ee_floor": 0.1,
+              "ee_floor_assumption_use_ee_floor": true,
+              "ee_floor_assumption_ee_floor": 0.1,
+              "ee_floor_assumption_affected_groups": "[35,34,33,32,31,25,7]",
+              "ee_floor_assumption_external_mortality_export_total": 12.69086016232336,
+              "ee_floor_assumption_negative_detritus_stock_residuals": "{\"39\":-4337.380254640021}",
+              "ee_floor_assumption_assumption": "Hypothetical non-fishery external mortality sink; not a published parameter correction",
+              "ee_floor_assumption_application_stage": "completed audited initialization",
+              "ee_floor_assumption_researcher_approval": "Original signed review is separate from this calculation assumption",
+              "TE_option": "With Egestion",
+              "det_open_mode": "none",
+              "det_theta": 1,
+              "det_external_sppr": 0,
+              "det_collapse_mode": "auto",
+              "explicit_TE": false,
+              "method": "pooled_detritus_scaling",
+              "would_pool": true,
+              "model": "Northern Humboldt Current (1995-1998)"
+            }
+          }
+        },
+        "review_status": "Validated by researcher",
+        "excluded": [
+          "Fishery offal",
+          "Pinnipeds",
+          "Seabirds",
+          "Chrysaora plocamia"
+        ],
+        "modelColor": "rgb(24, 115, 68)",
+        "reviewText": "Validated by researcher · Ido Carmel · 2026-10-08\n\nValidation covers the model extraction and SPPR diagnostics in the signed report. Current calculation results and availability are assessed separately.\n\nModel extraction notes\n\nAccepted corrections: Chrysaora plocamia (7) diet is 68% mesozooplankton, 17% macrozooplankton and 15% anchovy eggs, with zero direct diatom/small-gelatinous links. Author Table H I14/J14 reconstructs the 68/17 fractions; F14/K14 are zero and Table B H39 retains the egg fraction. This resolves the contradictory Table B diet totaling 1.045 without changing small-gelatinous biomass.\n\nSardine (9) landings follow the article’s explicit 1.4 t/km2/year correction; reported discards 0.17462648325 remain. Total JSON export is 1.57462648325; estimated EE is recalculated to 0.68720654. Article Table 1 and Scenario III still support the older high-catch branch. These are documented reconstructions/derived corrections, not newly printed author values.\n\nThe corrected model passes mass balance with living BA=0 and normalization compensation disabled. GS retains source assimilation efficiencies. Runtime normalization of the remaining diets is separate; pool EE/BA and detritus-fate identity replacement remain computational transformations. Native fleet discard-return ancestry is unsupported in the SPPR translation.\n\nPublished-source extraction audit | Source conflicts | Prior loader matrix audit\n\nRetained departures and evidence limits:model notes\n\nGE diagnostics\n\nWARN: successful pooled-detritus GE result with EE floor 0.1 and det_collapse_mode='auto'.\n\nPooled groups 36–39: SPPR = 4.9871. No negative entries across any basal-source column or recipient. rho_living = 0.7000; PP budget check: OK.\n\nUnpooled option: FAIL (b = 1.6236 > 1). The saved engine aggregate grade remains FAIL because it carries the unpooled recycling check; it is distinct from the pooled-result WARN reported here. A current pooled b was not retained.\n\nSeabirds (31) remains near-singular. Both current methods retain an unexplained negative Benthic detritus (39) stock residual of −4337.3803. No missing source supply has been invented; budget closure does not establish ecological validity.\n\nCurrent GE full return\n\nHistorical reviewed entry and numerical comparison are retained in the EE floor calculation update at the end of this report.\n\nTE diagnostics\n\nWARN: EE-floor TE result. The PP budget check is now OK (gap = 0.0000077%); the historical result was FAIL with a 14% gap.\n\nNo negative SPPR entries across any basal-source column or recipient. rho_living = 0.7316.\n\nDetritus SPPR: Anchovy eggs (36) = 0.0000; Fishery offal (37) = 0.0000; Pelagic detritus (38) = 0.3050; Benthic detritus (39) = 0.0000.\n\nNear-singular groups remain: Cetaceans (33), Pinnipeds (32) and Seabirds (31). The negative detritus stock residual described above also remains. The five formerly EE=0 living groups and Chrysaora plocamia now have effective EE = 0.1; their source values are unchanged.\n\nSettings retain use_ee_floor=True, ee_floor=0.1, det_collapse_mode='auto' and fix_EE_0_cases=True. TE does not pool in this run. Its b = 0 denotes no detritus recycling matrix, rather than evidence of ecological validity.\n\nCurrent TE full return\n\nHistorical reviewed entry and numerical comparison are retained in the EE floor calculation update at the end of this report.\n\nSPPR Calculation Notes\n\nValidation applies only when collapse_det_mode='auto' is used for all SPPR_new-related calculations (calculator keyword: det_collapse_mode='auto'). Engine diagnostic grades remain unchanged.\n\nRemoved groups from calculations:\n\nFishery offal (EE=0)\n\nPinnipeds (GE<1.0%, EE=0)\n\nSeabirds (GE<0.10%, EE=0)\n\nChrysaora plocamia (EE near-zero)\n\nGeographic fit\n\nApproximate A. Region covered by study: 6.0–8.0%.\nApproximate B. Study covered by region: 90–100%. The northern shelf domain leaves most of this LME outside the model.\n\nBoundary assessment\n\nTaxon mapping confidence\n\nReference: 2019 landings; all recorded labels, all model groups and no taxon exclusions.\n\n39 source ecological groups plus two fleet records and one computational import; 218 catch taxa.\n\nSimple-chain PPR totals 277,099,551.43 t C in 2019.\n\n34 labels lack classic TL/coefficient inputs; all have zero 2019 landings and contribute zero annual PPR. Their coefficients remain unavailable.\n\nMethod: independent simple trophic chain using the saved regional coefficients.\n\nOverall confidence\tTaxa (n)\tCatch (%)\tSimple-chain PPR (%)\nHigh\t70\t87%\t71%\nMedium\t104\t9.4%\t24%\nLow\t17\t0.24%\t0.26%\nVery low\t27\t3.2%\t4.9%\nUnresolved\t0\t0%\t0%\nExcel taxon appendix and Sources\n\nFollowing researcher review, fishery offal, pinnipeds, seabirds and chrysaora plocamia are excluded from displayed PPR. Model loading, diagnostics and saved workbook calculations retain all groups.\n\nResearcher validation report"
+      }
+    },
+    {
+      "name": "Map raw GE diagnostic visibly retains FAIL",
+      "status": "PASS"
+    },
+    {
+      "name": "No browser JavaScript pageerrors",
+      "status": "PASS"
+    }
+  ],
+  "page_errors": [],
+  "request_failures": [],
+  "screenshots": [
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/validated-ecosystems.png",
+      "sha256": "e025f2be1be2946b127be62cceb3dbe3a34970543ab86c989ea5a360c79462f5"
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/selected-methods.png",
+      "sha256": "81136cda59627af706ed703fd8d506bb6dbbf02ea7f281bc09051ff7f153ab05"
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/trends-defaults.png",
+      "sha256": "3ad4191707f6875a5685bc38ffecb4229d2b1afa3aba42a1f8dffdc68ebde640"
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/humboldt-map.png",
+      "sha256": "5edd0f1f9891c51699fc400374fa94e8365c03156741190db7ac5fd1e6a5bbb1"
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/humboldt-review.png",
+      "sha256": "88bb455891fdd9bc939c1df2318ad22a87ca644e2d2a3f03fa78bc220500dd23"
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/humboldt-raw-ge-diagnostic.png",
+      "sha256": "ca85575ea45e4ba905b903e26b9c14c396c2fdea9e52591056aa9b88b082c444"
+    }
+  ],
+  "browser_version": "157.0.8103.51",
+  "source_sha256_after": {
+    "Project.xlsx": "0a378c064063636a817ad78b7bab336c894ff7e5fcdc1117785a89b1a1a7382c",
+    "interactive_map/trends.html": "4c3e571abbb0f7a3f68c598e3504eb3c1631029cd91c02ec1bcbfc2ece88bd35",
+    "interactive_map/index.html": "76b645fe4d168961f3e61a77dc4f685b5f9597a7b3de37aa6c9b287aab4429c5"
+  },
+  "finished_at": "2026-11-15T10:22:27.396Z"
+}

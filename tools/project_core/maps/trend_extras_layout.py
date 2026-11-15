@@ -16,6 +16,15 @@ def trend_extras_layout(text):
                        ['trend_extras.js', 'regional_results_table.js'])
     text = replace_once(text, '<script>/* Shared annual denominator lookup.',
                         '<script>' + script + '\n/* Shared annual denominator lookup.')
+    # Apply presentation defaults only after URL/saved preferences are resolved.
+    # Cohort membership, model choices and researcher exclusions remain data-driven.
+    anchor = '  const initialSet=db.sets.find'
+    text = replace_once(text, anchor, '''  if(!params.has('set')&&!params.has('units'))params.set('set','validated');
+  if(!params.has('methods')&&!params.has('method'))params.set('methods','simple trophic chain,SPPR_1995_TE0.1,new_GE,new_TE_EEfix');
+  for(const [key,value] of Object.entries({metric:'ratio',npp_scope:'global',npp_fill:'earliest',from:db.years[0],to:db.years.at(-1)})){
+    if(!params.has(key))params.set(key,value);
+  }
+''' + anchor)
     anchor = '<div class="field treatment group-filter-launch"><button id="openGroupFilter" type="button" aria-haspopup="dialog">Choose model groups</button><small id="groupFilterSummary">All model groups included</small></div>'
     text = replace_once(text, anchor, anchor + '''
       <div class="field"><label for="regionReviewFilter">Regions to include</label><select id="regionReviewFilter"><option value="all">All selected regions</option><option value="validated">Selected regions with validated models</option></select></div>

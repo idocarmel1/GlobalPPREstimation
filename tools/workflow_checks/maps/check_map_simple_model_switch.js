@@ -23,7 +23,7 @@ const model=id=>({id,verified:true,review_flags:['model-specific review flag'],g
   groups:[{id:'fish',name:'Fish'},{id:'producer',name:'Producer'}],mappings:[[[0,1]]],methods:[method]},
   scopes:{all:{methods:[method],status:{[method]:'ok'},values:[[100]]}}});
 const selectedModels=[model('1970s'),model('2000s')];
-const modelUnit={years:[2019],taxa:['fish'],catch:[[9]],simple_sppr:[100],models:selectedModels};
+const modelUnit={years:[2019],taxa:['fish'],catch:[[9]],simple_sppr:[100],models:selectedModels,default_model:0};
 const simpleUnit={years:[2019],simple:{catch_bases:{catch:{status:'ok',ppr:[900],catch:[9],covered_catch:[9]}}}};
 const selections={'LME_036::2000s':['fish']};
 const context={console,URLSearchParams,
@@ -37,6 +37,10 @@ const context={console,URLSearchParams,
   appendResultDownload(panel,r,model){panel.downloadModel=model;}
 };
 const region={unit_id:'LME_036'};
+const preferences=new Map();
+context.groupStore=require('../../project_core/maps/model_preferences.js').create({units:context.network.units,
+  env:{location:{href:'https://example.test/interactive_map/index.html'},
+    localStorage:{getItem:key=>preferences.get(key)??null,setItem:(key,value)=>preferences.set(key,value)}}});
 context.applyYear=year=>{
   region.networkResult=context.PPRMetrics.evaluate(context.network.units[region.unit_id],context.chosenModels[region.unit_id],
     {...context.metricState,year,unit_id:region.unit_id,simple_unit:context.network.simple_units[region.unit_id]});
@@ -55,6 +59,7 @@ assert.equal(region.networkResult.group_selection.active,true);
 assert.equal(selector().value,'1');
 assert.equal(notes().trim(),'Model not yet validated by researcher');
 switchModel(0);
+assert.equal(context.groupStore.data.models.LME_036,undefined,'Choosing the project default removes a browser override');
 assert.equal(region.networkResult.value,100,'No subset uses the independent simple-chain total');
 assert.equal(region.networkResult.independent_simple,true);
 assert(selector(),'Switching to a model without a group subset must keep the model selector');
@@ -64,6 +69,7 @@ assert.equal(notes().trim(),'Model not yet validated by researcher');
 assert.doesNotMatch(notes(),/model-specific review flag/,'Independent calculations do not inherit model diagnosis flags');
 assert.equal(details.panel.downloadModel,null,'Independent downloads have no computational model');
 switchModel(1);
+assert.equal(context.groupStore.data.models.LME_036,'2000s','Explicit map choices use the shared preference store and stable model ID');
 assert.equal(region.networkResult.value,100);
 assert.equal(region.networkResult.group_selection.active,true,'Switching back restores the saved model group subset');
 assert.deepEqual(region.networkResult.group_selection.ids,['fish']);

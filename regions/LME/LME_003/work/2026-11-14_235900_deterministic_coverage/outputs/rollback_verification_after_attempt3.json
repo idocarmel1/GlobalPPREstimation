@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-15T04:42:49.117203+00:00",
+  "status": "PASS_ROLLBACK",
+  "attempt": 3,
+  "purpose": "Read-only verification of normal transaction rollback after LME014 protected diagnostic mismatch",
+  "observed_attempt_status": {
+    "phase": "FAILED",
+    "timestamp": "2026-11-15T04:40:33.651889+00:00",
+    "supervisor_pid": 21148,
+    "child_pid": 20708,
+    "exit_code": 1,
+    "recovery_manifest": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/tmp/adoption_recovery_attempt3/manifest.json",
+    "recovery_sha256": "7fbcbee28594862f11517ff5cd39a12859040a17b30282d9ed0ac4963b552dd6",
+    "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/adoption_application_attempt3.log"
+  },
+  "observed_failure": "Protected value changed: ('LME_014', 'PAT2024_FalklandShelf_2020_native')/diagnostics/model_health/0/model_input_p_max_rel_residual",
+  "audit": {
+    "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/final_cohort_audit.json",
+    "sha256": "68517d8e42b03ee9fdcb3302b31871aaedcfcecb9f7ed5545d096cb68ccb1015",
+    "protected_files_expected": 980,
+    "protected_files_matching": 980
+  },
+  "durable_recovery": {
+    "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/tmp/adoption_recovery_attempt3/manifest.json",
+    "sha256": "7fbcbee28594862f11517ff5cd39a12859040a17b30282d9ed0ac4963b552dd6",
+    "entries_expected": 1052,
+    "entries_matching": 1052,
+    "retained_without_modification": true
+  },
+  "unified_protected_files_expected": 1152,
+  "differences": [],
+  "central_original_document_and_pages": [
+    {
+      "path": "Project.xlsx",
+      "before_sha256": "11d68cdbc3f06b098f1cadbf6680632da836690b0cde6a8e80176006daef598f",
+      "current_sha256": "11d68cdbc3f06b098f1cadbf6680632da836690b0cde6a8e80176006daef598f",
+      "matches_original": true,
+      "durable_recovery_object_present": true,
+      "durable_recovery_object_hash_verified": true
+    },
+    {
+      "path": "interactive_map/index.html",
+      "before_sha256": "2a70022594197ce418865c089e3bc11698dcdb7e085f12909fb31c0a45ccd608",
+      "current_sha256": "2a70022594197ce418865c089e3bc11698dcdb7e085f12909fb31c0a45ccd608",
+      "matches_original": true,
+      "durable_recovery_object_present": true,
+      "durable_recovery_object_hash_verified": true
+    },
+    {
+      "path": "interactive_map/trends.html",
+      "before_sha256": "12c43527952128320285509af07d60c09cc74926e7a4f78b035dad068355f5dd",
+      "current_sha256": "12c43527952128320285509af07d60c09cc74926e7a4f78b035dad068355f5dd",
+      "matches_original": true,
+      "durable_recovery_object_present": true,
+      "durable_recovery_object_hash_verified": true
+    },
+    {
+      "path": "interactive_map/sources.html",
+      "before_sha256": "ebecb0b1a2aa4e3711e47da09e3cf4249cbf0b437258f4f2cce869dd01f9e916",
+      "current_sha256": "ebecb0b1a2aa4e3711e47da09e3cf4249cbf0b437258f4f2cce869dd01f9e916",
+      "matches_original": true,
+      "durable_recovery_object_present": true,
+      "durable_recovery_object_hash_verified": true
+    },
+    {
+      "path": "regions/LME/LME_013/papers/HUM-2018/models/Chiaverano2018_detailed_Northern_Humboldt_1995_1998/model_validation/validation.docx",
+      "before_sha256": "b356cb1f7891659dd15aae44caf8561c8c122709506234255e3bb7b9f384669d",
+      "current_sha256": "b356cb1f7891659dd15aae44caf8561c8c122709506234255e3bb7b9f384669d",
+      "matches_original": true,
+      "durable_recovery_object_present": true,
+      "durable_recovery_object_hash_verified": true
+    }
+  ],
+  "coordinator": {
+    "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py",
+    "expected_sha256": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+    "current_sha256": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+    "unchanged": true
+  },
+  "evidence": {
+    "status_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/background_adoption_status.json",
+    "status_sha256": "6dd7b767f6a03051bdad8d07c47adeb82854b17cdda76f2b52ecb8496a68218c",
+    "log_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/adoption_application_attempt3.log",
+    "log_sha256": "f6747cca724578754f0e455812096c4f136fc3f3ea4062aa6668cbc3ba8718e7"
+  },
+  "project_registration_status": "Exact original Project bytes; no amended review registration persisted",
+  "canonical_writes_performed": false,
+  "deletions_performed": false,
+  "scientific_execution_performed": false,
+  "scope_note": "Checks original protected files and durable recovery entries, including Project, original Humboldt DOCX and all three generated pages. No automatic restore or recovery-package deletion."
+}

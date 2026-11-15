@@ -1,0 +1,233 @@
+test_later_batch_authenticates_legacy_pair_and_new_named_references (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_later_batch_authenticates_legacy_pair_and_new_named_references) ... ERROR
+test_legacy_single_reference_is_authenticated_without_rewriting (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_legacy_single_reference_is_authenticated_without_rewriting) ... ERROR
+test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) ... 
+  test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value='not a reference') ... ERROR
+  test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value=None) ... ERROR
+  test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value=[]) ... ERROR
+  test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value={'constructor': 'not a reference'}) ... ERROR
+  test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value={'path': 'execution.json', 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a', 'constructor': None}) ... ERROR
+test_named_references_remain_authenticated (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_named_references_remain_authenticated) ... ok
+test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) ... 
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'execution.json', 'sha256': '0000000000000000000000000000000000000000000000000000000000000000'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'missing.json', 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': '../../../outside.json', 'sha256': '9e2a8c67dc3b55808dc81bc22f3e19078793770289ede8dc07757a0895398a48'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'execution.json'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': None, 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': ['execution.json'], 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'}) ... ERROR
+  test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'execution.json', 'sha256': ['0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a']}) ... ERROR
+
+======================================================================
+ERROR: test_later_batch_authenticates_legacy_pair_and_new_named_references (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_later_batch_authenticates_legacy_pair_and_new_named_references)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 56, in test_later_batch_authenticates_legacy_pair_and_new_named_references
+    self.check(mixed, True)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_legacy_single_reference_is_authenticated_without_rewriting (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_legacy_single_reference_is_authenticated_without_rewriting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 49, in test_legacy_single_reference_is_authenticated_without_rewriting
+    self.check(self.original, True)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value='not a reference')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 80, in test_malformed_container_and_named_values_fail_closed
+    self.check(value, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 150, in _cached_methods
+    for evidence in coverage.get('execution_evidence',{}).values():
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'values'
+
+======================================================================
+ERROR: test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 80, in test_malformed_container_and_named_values_fail_closed
+    self.check(value, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 150, in _cached_methods
+    for evidence in coverage.get('execution_evidence',{}).values():
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'values'
+
+======================================================================
+ERROR: test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 80, in test_malformed_container_and_named_values_fail_closed
+    self.check(value, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 150, in _cached_methods
+    for evidence in coverage.get('execution_evidence',{}).values():
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'values'
+
+======================================================================
+ERROR: test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value={'constructor': 'not a reference'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 80, in test_malformed_container_and_named_values_fail_closed
+    self.check(value, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_malformed_container_and_named_values_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_malformed_container_and_named_values_fail_closed) (value={'path': 'execution.json', 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a', 'constructor': None})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 80, in test_malformed_container_and_named_values_fail_closed
+    self.check(value, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'execution.json', 'sha256': '0000000000000000000000000000000000000000000000000000000000000000'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'missing.json', 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': '../../../outside.json', 'sha256': '9e2a8c67dc3b55808dc81bc22f3e19078793770289ede8dc07757a0895398a48'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'execution.json'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': None, 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': ['execution.json'], 'sha256': '0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+======================================================================
+ERROR: test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed (tools.workflow_checks.calculations.test_execution_evidence_references.ExecutionEvidenceReferenceTests.test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed) (reference={'path': 'execution.json', 'sha256': ['0598ce2b9816b001255c70accb3c3436676ed09c95b9bafd7ed9aadd8975f50a']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 74, in test_wrong_hash_missing_file_outside_path_and_missing_keys_fail_closed
+    self.check(reference, False)
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\workflow_checks\calculations\test_execution_evidence_references.py", line 43, in check
+    self.assertEqual(coverage._cached_methods(self.model, saved, self.context, self.book, self.expected),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\idoca\Desktop\אישי\אקדמיה\תואר שני\מחקר\BTN\GlobalPPREstimation\tools\project_core\calculations\coverage.py", line 151, in _cached_methods
+    path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+                                                ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.251s
+
+FAILED (errors=15)

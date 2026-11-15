@@ -1,0 +1,39 @@
+--- regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/inputs/coverage_before_numeric_precision.py
++++ tools/project_core/calculations/coverage.py
+@@ -569,6 +569,8 @@
+ 
+     Python's numeric repr round-trips the desired original value even when the
+     existing XLSX already lost a digit. New or changed rows are never restored.
++    When model-health columns expand or move, only the exact complete prior
++    field projection qualifies; newly added cells are never restored.
+     """
+     from xml.etree import ElementTree as etree
+     from tools.project_core.validation.researcher_review import sheet_xml, column_index, S
+@@ -579,10 +581,23 @@
+     for name, tables in requested.items():
+         for table, (header, values) in tables.items():
+             prior_header, prior_rows = original.get(name, {}).get(table, ([], []))
+-            if prior_header != header: continue
+-            prior = {identity(row) for row in prior_rows}
+-            retained = {index: {column: repr(value) for column, value in enumerate(row, 1) if finite(value)}
+-                        for index, row in enumerate(values) if identity(row) in prior}
++            if prior_header == header:
++                prior = {identity(row) for row in prior_rows}
++                retained = {index: {column: repr(value) for column, value in enumerate(row, 1) if finite(value)}
++                            for index, row in enumerate(values) if identity(row) in prior}
++            elif (name, table) == ('Diagnostics', 'model_health'):
++                old_fields, new_fields = identity(prior_header), identity(header)
++                if (not old_fields or len(set(old_fields)) != len(old_fields)
++                        or len(set(new_fields)) != len(new_fields)
++                        or not set(old_fields).issubset(new_fields)):
++                    continue
++                positions = [new_fields.index(field) for field in old_fields]
++                prior = {identity(row) for row in prior_rows if len(row) == len(prior_header)}
++                retained = {index: {column + 1: repr(row[column]) for column in positions if finite(row[column])}
++                            for index, row in enumerate(values) if len(row) == len(header)
++                            and identity([row[column] for column in positions]) in prior}
++            else:
++                continue
+             retained = {index: cells for index, cells in retained.items() if cells}
+             if retained: wanted.setdefault(name, {})[table] = (header, len(values), retained)
+     if not wanted: return False

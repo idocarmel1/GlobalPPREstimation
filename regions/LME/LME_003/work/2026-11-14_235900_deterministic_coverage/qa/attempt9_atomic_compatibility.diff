@@ -1,0 +1,197 @@
+--- attempt8/tools/project_core/registry/publication.py
++++ attempt9/tools/project_core/registry/publication.py
+@@ -4,6 +4,7 @@
+ import hashlib
+ import json
+ import os
++import time
+ from pathlib import Path
+ from zipfile import ZipFile
+ 
+@@ -22,12 +23,38 @@
+     return sha(path) if path.is_file() else None
+ 
+ 
++def _replacement_access(path):
++    """Diagnose current Windows delete permission and this process's readers."""
++    result = {'delete_access': False, 'own_open_handles': None, 'pid': os.getpid()}
++    if os.name != 'nt' or not path.is_file(): return result
++    import ctypes
++    from ctypes import wintypes as wt
++    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
++    kernel.CreateFileW.argtypes = [wt.LPCWSTR, wt.DWORD, wt.DWORD, ctypes.c_void_p, wt.DWORD, wt.DWORD, wt.HANDLE]
++    kernel.CreateFileW.restype = wt.HANDLE
++    kernel.CloseHandle.argtypes = [wt.HANDLE]
++    handle = kernel.CreateFileW(str(path), 0x10000, 7, None, 3, 0, None)
++    if handle == ctypes.c_void_p(-1).value:
++        result['native_error'] = ctypes.get_last_error()
++    else:
++        kernel.CloseHandle(handle); result['delete_access'] = True
++    result['attributes'] = path.stat().st_file_attributes
++    try:
++        import psutil
++        result['own_open_handles'] = [x.path for x in psutil.Process().open_files()
++                                      if os.path.normcase(x.path) == os.path.normcase(str(path))]
++    except (ImportError, OSError):
++        pass
++    return result
++
++
+ def guarded_replace(staged, destination, *, expected_sha256):
+     """Replace exact bytes and claim them even if replacement raises afterwards.
+ 
+     A configured publication journal is flushed before the OS call. Recovery
+     can recognize only the intended postimage, never an arbitrary current file.
+-    No retries are made for unexplained permission or sharing failures.
++    At most two retries follow a denial, only while native delete access is
++    available, no own reader is open, and exact target/staged hashes still match.
+     """
+     staged, destination = Path(staged).resolve(), Path(destination).resolve()
+     after = _fingerprint(staged)
+@@ -46,7 +73,29 @@
+     if _fingerprint(destination) != expected_sha256 or _fingerprint(staged) != after:
+         raise ValueError('Atomic replacement changed after journaling: ' + str(destination))
+     try:
+-        os.replace(staged, destination)
++        for attempt in range(3):
++            try:
++                os.replace(staged, destination)
++                break
++            except PermissionError as error:
++                # Inspect the live condition before unwinding loses its owner.
++                state = _replacement_access(destination)
++                for backup in backups:
++                    journal = getattr(backup, 'journal_path', None)
++                    if journal:
++                        with Path(journal).open('a', encoding='utf-8') as stream:
++                            stream.write(json.dumps({'event': 'replacement_denial',
++                                'path': destination.relative_to(backup.root).as_posix(),
++                                'attempt': attempt + 1, 'winerror': getattr(error, 'winerror', None),
++                                'access': state}, sort_keys=True) + '\n')
++                            stream.flush(); os.fsync(stream.fileno())
++                if _fingerprint(destination) != expected_sha256 or _fingerprint(staged) != after:
++                    raise ValueError('Atomic replacement changed during denial: ' + str(destination)) from error
++                if attempt == 2 or not state['delete_access'] or state['own_open_handles'] != []:
++                    raise
++                time.sleep(0.15 * (attempt + 1))
++                if _fingerprint(destination) != expected_sha256 or _fingerprint(staged) != after:
++                    raise ValueError('Atomic replacement changed before retry: ' + str(destination)) from error
+     finally:
+         # An OS replacement may have completed before an exception/interrupt.
+         # An external edit after that replacement is deliberately not claimed.
+--- attempt8/tools/project_core/calculations/coverage.py
++++ attempt9/tools/project_core/calculations/coverage.py
+@@ -1170,9 +1170,13 @@
+             if actual != owned[destination]:
+                 conflicts.append(str(destination)); continue
+             if data is None:
+-                destination.unlink(missing_ok=True)
++                from tools.project_core.registry.publication import publication_write
++                with publication_write(destination, fingerprint=None):
++                    destination.unlink(missing_ok=True)
+             else:
+-                destination.parent.mkdir(parents=True, exist_ok=True); destination.write_bytes(data)
++                # Keep the outer transaction's exact ownership synchronized
++                # when this model restores its own prior-batch preimage.
++                _write_bytes(destination, data, expected_sha256=actual)
+         if conflicts:
+             raise RuntimeError('Coverage failed; concurrent edits preserved: ' + ', '.join(conflicts))
+         raise
+--- attempt8/regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/completion_checkpoints.py
++++ attempt9/regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/completion_checkpoints.py
+@@ -172,6 +172,7 @@
+ 
+ def load_model_checkpoint(root, plan, cache_root, bindings):
+     folder = location(cache_root, plan, bindings); seal = folder/'COMPLETE.json'
++    compatible = None
+     if not seal.is_file():
+         # A publication-only repair must not silently rebuild completed models.
+         # Stop for a narrow, explicit producer-compatibility decision instead.
+@@ -184,9 +185,28 @@
+                     old_inputs = {k:v for k,v in old['inputs'].items() if k not in old.get('producer', {})}
+                     new_inputs = {k:v for k,v in bindings['inputs'].items() if k not in bindings.get('producer', {})}
+                     if old_inputs == new_inputs and old.get('producer') != bindings.get('producer'):
+-                        raise RuntimeError('Completed package has changed producer code; record explicit narrow compatibility before reuse: '+str(old_seal))
++                        certificate = Path(cache_root).parent/'checkpoint_producer_compatibility.json'
++                        records = json.loads(certificate.read_bytes()).get('records', []) if certificate.is_file() else []
++                        for record in records:
++                            if record.get('original_producer') != old.get('producer') or record.get('current_producer') != bindings.get('producer'):
++                                continue
++                            if not record.get('reason') or not record.get('verification'): continue
++                            for name, fingerprint in old['producer'].items():
++                                if fingerprint == bindings['producer'].get(name): continue
++                                evidence = record['original_source_evidence'][name]
++                                if digest(safe(root, evidence['path'])) != fingerprint or evidence['sha256'] != fingerprint:
++                                    raise ValueError('Original compatible producer evidence changed')
++                            comparable_old = {**old, 'inputs': old_inputs, 'producer': {}}
++                            comparable_new = {**bindings, 'inputs': new_inputs, 'producer': {}}
++                            if comparable_old != comparable_new: raise ValueError('Compatibility changes more than producer identity')
++                            compatible = {'path': certificate.relative_to(root).as_posix(), 'sha256': digest(certificate)}
++                            folder, seal = candidate, old_seal
++                            break
++                        if not compatible:
++                            raise RuntimeError('Completed package has changed producer code; record explicit narrow compatibility before reuse: '+str(old_seal))
++                        break
+                 except (OSError, ValueError, KeyError, TypeError): continue
+-        return None
++        if not seal.is_file(): return None
+     try:
+         if digest(seal) != (folder/'manifest.sha256').read_text(encoding='ascii'):
+             raise ValueError('Checkpoint seal corrupt')
+@@ -194,7 +214,7 @@
+         manifest = json.loads(seal.read_bytes())
+         if not isinstance(manifest, dict): raise ValueError('Checkpoint seal must be an object')
+         if (manifest.get('schema_version') != 1 or manifest.get('state') != 'COMPLETE'
+-                or manifest.get('identity') != list(plan['pair']) or manifest.get('bindings') != bindings):
++                or manifest.get('identity') != list(plan['pair']) or (manifest.get('bindings') != bindings and not compatible)):
+             raise ValueError('Checkpoint identity/bindings mismatch')
+         seen = set()
+         for entry in manifest['files']:
+@@ -213,7 +233,8 @@
+         for name, expected in manifest.get('references', {}).items():
+             if packaged.get(name, bindings['inputs'].get(name)) != expected:
+                 raise ValueError('Checkpoint referenced evidence was omitted')
+-        return {'folder': folder, 'manifest': manifest, 'seal_sha256': digest(seal)}
++        return {'folder': folder, 'manifest': manifest, 'seal_sha256': digest(seal),
++                'effective_bindings': bindings, 'producer_compatibility': compatible}
+     except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+         print('Rejected checkpoint '+str(plan['pair'])+': '+str(error), flush=True)
+         return None
+@@ -223,7 +244,11 @@
+     from tools.project_core.registry.publication import guarded_replace
+     root = Path(root).resolve(); folder = checkpoint['folder']; manifest = checkpoint['manifest']
+     if digest(folder/'COMPLETE.json') != checkpoint['seal_sha256']: raise ValueError('Checkpoint seal changed')
+-    check_inputs(root, manifest['bindings'])
++    effective = checkpoint.get('effective_bindings', manifest['bindings'])
++    compatibility = checkpoint.get('producer_compatibility')
++    if compatibility and digest(safe(root, compatibility['path'])) != compatibility['sha256']:
++        raise ValueError('Producer compatibility certificate changed')
++    check_inputs(root, effective)
+     # Verify the entire allowlist before making the first change.
+     for entry in manifest['files']:
+         path = safe(root, entry['path'])
+@@ -239,12 +264,13 @@
+             guarded_replace(temporary, path, expected_sha256=entry['before_sha256'])
+         finally:
+             Path(temporary).unlink(missing_ok=True)
+-    check_immutable_inputs(root, manifest['bindings'])
++    check_immutable_inputs(root, effective)
+     for name, expected in manifest.get('references', {}).items():
+         if digest(safe(root, name)) != expected: raise ValueError('Restored evidence hash mismatch')
+     return {'batch_reports': manifest['batch_reports'],
+             'cache_restoration': {'identity': list(plan['pair']), 'seal_sha256': checkpoint['seal_sha256'],
+-                                  'files': len(manifest['files']), 'no_execution': True, 'no_restamping': True}}
++                                  'files': len(manifest['files']), 'no_execution': True, 'no_restamping': True,
++                                  'producer_compatibility': compatibility}}
+ 
+ 
+ def reconcile_ownership(root, journal, baseline, allowlist):
+@@ -255,6 +281,8 @@
+     for line in Path(journal).read_text(encoding='utf-8').splitlines():
+         event = json.loads(line)
+         name = event['path']
++        if event.get('event') == 'replacement_denial' and name in allowlist:
++            continue
+         if event.get('event') != 'intent' or name not in allowlist:
+             raise ValueError('Unexpected ownership journal destination')
+         safe(root, name)

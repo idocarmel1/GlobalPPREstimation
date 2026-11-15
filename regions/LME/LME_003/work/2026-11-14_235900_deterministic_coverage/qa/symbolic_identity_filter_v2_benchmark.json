@@ -1,0 +1,78 @@
+{
+  "purpose": "Bounded helper benchmark; not an attribution profile for a complete Humboldt solve",
+  "python": "3.11.9",
+  "sympy": "1.14.0",
+  "repair": {
+    "schema_version": 1,
+    "repair": "symbolic_repairs_v2",
+    "original_sha256": "3b6d2266b532adb496644c59725fcb86a34923b5a212e38bee0931505f3568f8",
+    "derived_sha256": "e2db750357d4ed32d748415c7372be0776531928141860e1893d6daeea26fb4a",
+    "changes": [
+      "conservative_identity_substitution_filter"
+    ],
+    "changed_methods": [
+      "_eval_symbolic_substitutions"
+    ],
+    "source_preserved": true,
+    "nonzero_unrepresented_recycling": "rejected; no coefficient invented"
+  },
+  "rows": [
+    {
+      "case": "float_identity",
+      "substitution_operation_count": 1,
+      "v1": {
+        "status": "returned",
+        "value": "x + 2.0",
+        "elapsed_seconds": 3.075175100006163
+      },
+      "v2": {
+        "status": "returned",
+        "value": "x + 2.0",
+        "elapsed_seconds": 0.0018574998248368502
+      }
+    },
+    {
+      "case": "zero_value",
+      "substitution_operation_count": 0,
+      "v1": {
+        "status": "returned",
+        "value": "2.00000000000000",
+        "elapsed_seconds": 0.1769958999939263
+      },
+      "v2": {
+        "status": "returned",
+        "value": "2.00000000000000",
+        "elapsed_seconds": 0.0006397000979632139
+      }
+    },
+    {
+      "case": "large_unused_nonidentity",
+      "substitution_operation_count": 240,
+      "v1": {
+        "status": "returned",
+        "value": "3.00000000000000",
+        "elapsed_seconds": 4.346107499906793
+      },
+      "v2": {
+        "status": "returned",
+        "value": "3.00000000000000",
+        "elapsed_seconds": 0.00063699996098876
+      }
+    },
+    {
+      "case": "unknown_cycle",
+      "substitution_operation_count": 0,
+      "v1": {
+        "status": "RecursionError",
+        "note": "Unproven cyclic substitution remains unresolved",
+        "elapsed_seconds": 0.06339349993504584
+      },
+      "v2": {
+        "status": "RecursionError",
+        "note": "Unproven cyclic substitution remains unresolved",
+        "elapsed_seconds": 0.00893260003067553
+      }
+    }
+  ],
+  "conditions": "One call per case; concurrent scientific processes were running; timings are illustrative"
+}

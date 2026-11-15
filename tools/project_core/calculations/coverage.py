@@ -13,6 +13,7 @@ import zipfile
 from datetime import datetime, timezone
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
+from tools.project_core.registry.publication import guarded_replace
 
 
 def scoped_validated_metadata(metadata, *, units=None, model_pairs=None, all_validated=False):
@@ -90,7 +91,7 @@ def _settings_book(path):
 
 def _context(root, model, flags):
     from tools.project_core.workbooks.workbooks import sha
-    from tools.scientific_helpers.sppr.method_coverage import engine_identity
+    from tools.scientific_helpers.sppr.method_coverage import engine_identity, ADAPTER_SOURCE_SHA256
     packages = {}
     for name in ('numpy', 'pandas', 'scipy', 'sympy', 'igraph'):
         try:
@@ -99,7 +100,7 @@ def _context(root, model, flags):
             packages[name] = None
     return {'model_sha256': sha(model), 'flags': flags,
             'code_identity': engine_identity(flags, model),
-            'adapter_sha256': sha(root / 'tools/scientific_helpers/sppr/method_coverage.py'),
+            'adapter_sha256': ADAPTER_SOURCE_SHA256,
             'dependencies': packages}
 
 
@@ -134,7 +135,7 @@ def _write_bytes(path, data, *, expected_sha256=_UNSET):
         Path(temporary).write_bytes(data)
         if (sha(path) if path.is_file() else None)!=before:
             raise ValueError('Output changed during replacement: '+str(path))
-        os.replace(temporary, path)
+        guarded_replace(temporary, path, expected_sha256=before)
     finally:
         Path(temporary).unlink(missing_ok=True)
 
@@ -143,22 +144,39 @@ def _write_json(path, value, *, expected_sha256=_UNSET):
     _write_bytes(path,json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False).encode('utf-8'),expected_sha256=expected_sha256)
 
 
+def _execution_evidence_references(coverage):
+    """Read the original singleton reference alongside later named references."""
+    saved = coverage.get('execution_evidence', {})
+    if not isinstance(saved, dict):
+        return [None]
+    if 'path' in saved or 'sha256' in saved:
+        # Keep the stored mapping intact. Later batches may append named
+        # references while the original path/SHA pair remains exactly saved.
+        return [{key: saved.get(key) for key in ('path', 'sha256')},
+                *[value for key, value in saved.items() if key not in ('path', 'sha256')]]
+    return list(saved.values())
+
+
 def _cached_methods(model_dir, coverage, context, book, expected):
     from tools.project_core.workbooks.workbooks import sha
     _, row_hashes = _method_rows(book)
     pending = plan_methods(expected, context, _planning_coverage(coverage,context), row_hashes)
-    for evidence in coverage.get('execution_evidence',{}).values():
+    for evidence in _execution_evidence_references(coverage):
+        if (not isinstance(evidence, dict) or not isinstance(evidence.get('path'), str)
+                or not evidence['path'] or not isinstance(evidence.get('sha256'), str)):
+            return list(expected)
         path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
         if not path.is_relative_to(model_dir.resolve()) or not path.is_file() or sha(path)!=evidence.get('sha256'):
             return list(expected)
     for key in expected:
         if key in pending:
             continue
-        evidence = coverage['methods'][key].get('evidence') or {}
-        path = (model_dir / 'results/diagnostics' / str(evidence.get('path', ''))).resolve()
-        if (not path.is_relative_to(model_dir.resolve()) or not path.is_file()
-                or sha(path) != evidence.get('sha256')):
-            pending.append(key)
+        for evidence in _method_evidence_references(coverage['methods'][key]):
+            path = (model_dir / 'results/diagnostics' / str(evidence.get('path', ''))).resolve()
+            if (not path.is_relative_to(model_dir.resolve()) or not path.is_file()
+                    or sha(path) != evidence.get('sha256')):
+                pending.append(key)
+                break
     return [key for key in expected if key in pending]
 
 
@@ -181,13 +199,23 @@ def _package_cache_valid(model_dir, path, manifest, context, expected):
     hashes = {key:value.get('group_rows_sha256') for key,value in coverage.get('methods', {}).items()}
     if any(not value for value in hashes.values()) or plan_methods(expected, context, _planning_coverage(coverage,context), hashes):
         return False
-    references = [coverage['methods'][key].get('evidence') or {} for key in expected]
-    references.extend(coverage.get('execution_evidence',{}).values())
+    references = [ref for key in expected for ref in _method_evidence_references(coverage['methods'][key])]
+    references.extend(_execution_evidence_references(coverage))
     for evidence in references:
+        if (not isinstance(evidence, dict) or not isinstance(evidence.get('path'), str)
+                or not evidence['path'] or not isinstance(evidence.get('sha256'), str)):
+            return False
         artifact = (model_dir/'results/diagnostics'/str(evidence.get('path', ''))).resolve()
         if not artifact.is_relative_to(model_dir.resolve()) or not artifact.is_file() or sha(artifact) != evidence.get('sha256'):
             return False
     return True
+
+
+def _method_evidence_references(outcome):
+    """Initialization and retrospective verification remain distinct evidence."""
+    return [outcome.get('evidence') or {}, *[
+        outcome[key] for key in ('constructor_evidence', 'runtime_verification_evidence')
+        if key in outcome]]
 
 
 def _source_matches(model_dir, book, expected):
@@ -228,6 +256,15 @@ def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups
         value = cell.find(f'{{{S}}}f')
         return None if value is None else (value.text, sorted(value.attrib.items()))
     original_numbers = {}; changed_cells = {}; replace_methods = set(replace_methods)
+    original_mc = None
+    def typed_rows(values):
+        return tuple(tuple((type(value).__name__, repr(value)) for value in row) for row in values)
+    if path.is_file() and 'mc_diagnostics' in workbook:
+        saved = openpyxl.load_workbook(path, read_only=True)
+        try:
+            original_mc = {'values': typed_rows(saved['mc_diagnostics'].values)}
+        finally:
+            saved.close()
     if path.is_file():
         with zipfile.ZipFile(path) as archive:
             for name in workbook.sheetnames:
@@ -236,6 +273,10 @@ def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups
                 original_numbers[name] = {cell.get('r'):(cell.find(f'{{{S}}}v').text,formula(cell))
                     for cell in sheet.iter(f'{{{S}}}c') if cell.get('t') in (None,'n')
                     and cell.find(f'{{{S}}}v') is not None}
+                if name == 'mc_diagnostics':
+                    original_mc['dimension'] = sheet.find(f'{{{S}}}dimension').get('ref')
+                    original_mc['empty_rows'] = [row.get('r') for row in
+                        sheet.findall(f'{{{S}}}sheetData/{{{S}}}row') if not len(row)]
     if workbook.sheetnames == ['Sheet']:
         workbook.remove(workbook['Sheet'])
     groups = records(book, 'Selected model groups', 'Groups')
@@ -301,12 +342,6 @@ def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups
                         else {key for key in added_methods if key.startswith('MC_')})
             if not relevant:
                 continue
-            if replace_methods:
-                workbook.remove(workbook[name]); sheet=workbook.create_sheet(name)
-                sheet.append(header)
-                for row in values:sheet.append([clean(value) for value in row])
-                original_numbers.pop(name,None)
-                continue
             selected = [row for row in values if any(dict(zip(header,row)).get(key) in relevant
                         for key in ('TE_option','config_TE_option','method'))]
             sheet = workbook[name]
@@ -316,7 +351,24 @@ def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups
                     existing_header.append(key); sheet.cell(1,len(existing_header),key)
             for row in selected:
                 record = dict(zip(header,row))
-                sheet.append([clean(record.get(key)) for key in existing_header])
+                identity_keys = ('TE_option', 'config_TE_option', 'method')
+                identity = next(record[key] for key in identity_keys if record.get(key) in relevant)
+                replacements = ({options[key] for key in replace_methods if key in options} if name == 'model_health'
+                                else {key for key in replace_methods if key.startswith('MC_')})
+                matches = [index for index in range(2, sheet.max_row + 1)
+                           if any(sheet.cell(index, column + 1).value == identity
+                                  for column, key in enumerate(existing_header) if key in identity_keys)] if identity in replacements else []
+                if len(matches) > 1:
+                    raise ValueError('Saved source has duplicate diagnostic rows: ' + identity)
+                if matches:
+                    # Keep other methods at their existing addresses so their
+                    # original numeric text, formulas and formatting survive.
+                    for column, key in enumerate(existing_header, 1):
+                        cell = sheet.cell(matches[0], column)
+                        cell.value = clean(record.get(key))
+                        changed_cells.setdefault(name, set()).add(cell.coordinate)
+                else:
+                    sheet.append([clean(record.get(key)) for key in existing_header])
         else:
             sheet = workbook.create_sheet(name)
             sheet.append(header)
@@ -329,6 +381,7 @@ def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups
     fd, temporary = tempfile.mkstemp(dir=path.parent, suffix='.xlsx'); os.close(fd)
     try:
         workbook.save(temporary); workbook.close()
+        untouched_mc = original_mc is not None and not any(key.startswith('MC_') for key in added_methods)
         # openpyxl serializes even untouched floats at 16 digits. Restore the
         # original numeric text, including unchanged formula caches, by address.
         with zipfile.ZipFile(temporary) as archive:
@@ -343,20 +396,51 @@ def _update_source(path, book, outcomes, *, replace_methods=(), effective_groups
                     if value is None: value = etree.SubElement(cell,f'{{{S}}}v')
                     if value.text != previous[0]: value.text = previous[0]; changed = True
                 if changed: replacements[member] = etree.tostring(sheet,encoding='utf-8')
+            if untouched_mc:
+                member, sheet = sheet_xml(archive, 'mc_diagnostics')
+                if member in replacements:
+                    sheet = etree.fromstring(replacements[member])
+                # openpyxl drops explicit empty rows and shrinks the dimension
+                # even when MC diagnostics were never requested for editing.
+                # Restore structure only; never reuse old cells or style IDs.
+                sheet.find(f'{{{S}}}dimension').set('ref', original_mc['dimension'])
+                data = sheet.find(f'{{{S}}}sheetData')
+                present = {row.get('r') for row in data}
+                for number in original_mc['empty_rows']:
+                    if number not in present:
+                        data.append(etree.Element(f'{{{S}}}row', {'r': number}))
+                data[:] = sorted(data, key=lambda row: int(row.get('r')))
+                replacements[member] = etree.tostring(sheet, encoding='utf-8')
             parts = [(info,replacements.get(info.filename,archive.read(info.filename))) for info in archive.infolist()]
         if replacements:
             with zipfile.ZipFile(temporary,'w') as archive:
                 for info,data in parts: archive.writestr(info,data)
         with zipfile.ZipFile(temporary) as archive:
             if archive.testzip() is not None: raise ValueError('Updated source workbook ZIP failed verification')
+        if untouched_mc:
+            saved = openpyxl.load_workbook(temporary, read_only=True)
+            try:
+                sheet = saved['mc_diagnostics']
+                if typed_rows(sheet.values) != original_mc['values']:
+                    raise ValueError('Untouched MC diagnostics changed during source replacement')
+                # A restored dimension must not conceal a new nonempty cell.
+                sheet.reset_dimensions()
+                actual = {(row, column): value for row, values in enumerate(typed_rows(sheet.values), 1)
+                          for column, value in enumerate(values, 1) if value != ('NoneType', 'None')}
+                expected = {(row, column): value for row, values in enumerate(original_mc['values'], 1)
+                            for column, value in enumerate(values, 1) if value != ('NoneType', 'None')}
+                if actual != expected:
+                    raise ValueError('Untouched MC diagnostics changed during source replacement')
+            finally:
+                saved.close()
         if (sha(path) if path.is_file() else None)!=baseline:
             raise ValueError('Source workbook changed during replacement')
-        os.replace(temporary, path)
+        guarded_replace(temporary, path, expected_sha256=baseline)
     finally:
         workbook.close(); Path(temporary).unlink(missing_ok=True)
 
 
-def _apply_outcomes(book, model_id, outcomes, pending, *, migration=False):
+def _apply_outcomes(book, model_id, outcomes, pending, *, migration=False, retried_methods=()):
     from tools.project_core.workbooks.workbooks import rows, records, ANNUAL_HEADER, finite, digest_tables
     # Adopting evidence for a saved method is not a new scientific execution.
     # Its coefficients, annual restrictions and diagnostics stay exactly saved.
@@ -409,7 +493,7 @@ def _apply_outcomes(book, model_id, outcomes, pending, *, migration=False):
                     status = prior if status=='ok' or status in prior else prior+'; refreshed diagnosis: '+status
                 elif not prior.startswith('provisional:'):
                     status = prior if status=='ok' or status in prior else prior+'; refreshed diagnosis: '+status
-            elif not method.startswith('MC_'):
+            elif not method.startswith('MC_') and method not in retried_methods:
                 if status == 'ok' and prior.startswith(('FAIL','DIVERGED','NOT_RUN')):
                     status = prior
                 elif (prior.startswith('provisional:') and unchanged_scopes.get((scope,method))
@@ -550,6 +634,8 @@ def _restore_retained_numbers(path, requested, original):
 
     Python's numeric repr round-trips the desired original value even when the
     existing XLSX already lost a digit. New or changed rows are never restored.
+    When model-health columns expand or move, only the exact complete prior
+    field projection qualifies; newly added cells are never restored.
     """
     from xml.etree import ElementTree as etree
     from tools.project_core.validation.researcher_review import sheet_xml, column_index, S
@@ -560,10 +646,23 @@ def _restore_retained_numbers(path, requested, original):
     for name, tables in requested.items():
         for table, (header, values) in tables.items():
             prior_header, prior_rows = original.get(name, {}).get(table, ([], []))
-            if prior_header != header: continue
-            prior = {identity(row) for row in prior_rows}
-            retained = {index: {column: repr(value) for column, value in enumerate(row, 1) if finite(value)}
-                        for index, row in enumerate(values) if identity(row) in prior}
+            if prior_header == header:
+                prior = {identity(row) for row in prior_rows}
+                retained = {index: {column: repr(value) for column, value in enumerate(row, 1) if finite(value)}
+                            for index, row in enumerate(values) if identity(row) in prior}
+            elif (name, table) == ('Diagnostics', 'model_health'):
+                old_fields, new_fields = identity(prior_header), identity(header)
+                if (not old_fields or len(set(old_fields)) != len(old_fields)
+                        or len(set(new_fields)) != len(new_fields)
+                        or not set(old_fields).issubset(new_fields)):
+                    continue
+                positions = [new_fields.index(field) for field in old_fields]
+                prior = {identity(row) for row in prior_rows if len(row) == len(prior_header)}
+                retained = {index: {column + 1: repr(row[column]) for column in positions if finite(row[column])}
+                            for index, row in enumerate(values) if len(row) == len(header)
+                            and identity([row[column] for column in positions]) in prior}
+            else:
+                continue
             retained = {index: cells for index, cells in retained.items() if cells}
             if retained: wanted.setdefault(name, {})[table] = (header, len(values), retained)
     if not wanted: return False
@@ -618,7 +717,7 @@ def _restore_retained_numbers(path, requested, original):
         with zipfile.ZipFile(temporary) as archive:
             if archive.testzip() is not None: raise ValueError('Retained numeric workbook ZIP failed verification')
         if sha(path) != baseline: raise ValueError('Workbook changed during retained numeric preservation')
-        os.replace(temporary, path)
+        guarded_replace(temporary, path, expected_sha256=baseline)
     finally:
         Path(temporary).unlink(missing_ok=True)
     return True
@@ -655,7 +754,44 @@ def _save_calculation(path, book, model, flags, original_book, *, pending_reason
     return saved
 
 
-def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=None):
+def _execution_flags(audited, supplied):
+    """Extend authenticated execution metadata without changing known options."""
+    if supplied is None:
+        return audited
+    if not isinstance(audited, dict) or not isinstance(supplied, dict):
+        raise ValueError('Execution extension requires an audited configuration')
+    from tools.scientific_helpers.sppr.retained_methods import _scientific_options
+    original, requested = _scientific_options(audited), _scientific_options(supplied)
+    changed = [key for key in original if key not in requested or original[key] != requested[key]]
+    if changed:
+        raise ValueError('Execution configuration contradicts or omits audited options: ' +
+                         ', '.join('.'.join(key) for key in sorted(changed)))
+    return copy.deepcopy(supplied)
+
+
+def _recover_execution_configuration(model_dir, book, manifest, supplied):
+    """Authenticate relocated exact dependencies against saved scientific options."""
+    from tools.project_core.workbooks.workbooks import sha, overview
+    from tools.scientific_helpers.sppr.configuration import _validate_evidence, _pin_engine
+    model_dir = Path(model_dir).resolve()
+    fingerprint = sha(model_dir/'model.json')
+    if manifest.get('canonical_model_sha256') != fingerprint:
+        raise ValueError('Dependency recovery requires matching saved model identity')
+    original = manifest.get('effective_flags')
+    result = _execution_flags(original, supplied)
+    settings = overview(book)
+    for key in ('effective_loader_flags', 'sppr_configuration'):
+        recorded = _json(settings.get(key))
+        if recorded.get('constructor'):
+            _execution_flags(recorded, result)
+    if result.get('engine_source_hashes') != original.get('engine_source_hashes'):
+        raise ValueError('Dependency recovery contradicts recorded engine hashes')
+    _validate_evidence(model_dir, result, fingerprint)
+    return _pin_engine(model_dir, result, fingerprint, manifest)
+
+
+def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=None,
+                    retry_unavailable=False, execution_flags=None):
     from tools.project_core.registry.discovery import region_directory, resolve_model
     from tools.project_core.workbooks.workbooks import read_book, overview, sha, input_hash, update_book
     from tools.project_core.calculations.snapshots import dependencies
@@ -691,7 +827,10 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
         from tools.project_core.calculations.ee_floor_migration import target_flags
         from tools.scientific_helpers.sppr.method_coverage import ENGINE
         requested_change = target_flags(flags,ee_floor['use_ee_floor'],ee_floor['ee_floor'],sha(ENGINE/'PPRCalculator.py')) != flags
-    if is_current and manifest.get('method_coverage') and flags is not None and not requested_change:
+    if ee_floor and (retry_unavailable or execution_flags is not None):
+        raise ValueError('Unavailable-method retries and execution extensions cannot accompany an EE-floor migration')
+    if (is_current and manifest.get('method_coverage') and flags is not None and not requested_change
+            and not retry_unavailable and execution_flags is None):
         context = _context(root, model, flags)
         if _package_cache_valid(model_dir, path, manifest, context, expected):
             progress(f"{metadata['unit_id']}/{model_dir.name}: reusing complete fresh {len(expected)}-method package")
@@ -715,8 +854,12 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
         flags = resolve_audited_configuration(model_dir, book, manifest)
     except ValueError as error:
         flags = None; configuration_error = str(error)
+        if execution_flags is not None:
+            flags = _recover_execution_configuration(model_dir, book, manifest, execution_flags)
+            configuration_error = None
     migration = None
     original_context = _context(root, model, flags)
+    flags = _execution_flags(flags, execution_flags)
     if ee_floor:
         if configuration_error:raise ValueError('EE-floor migration requires audited settings: '+configuration_error)
         from tools.project_core.calculations.ee_floor_migration import prepare
@@ -735,8 +878,22 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
         context['configuration_error'] = configuration_error
     coverage = manifest.get('method_coverage', {})
     pending = _cached_methods(model_dir, coverage, context, book, expected)
+    from tools.project_core.workbooks.workbooks import finite
+    existing_rows = _method_rows(book)[0]
+    retry_methods = {key for key in expected if not any(finite(row[4]) for row in existing_rows.get(key, []))} if retry_unavailable else set()
+    pending = [key for key in expected if key in pending or key in retry_methods]
     if migration:pending=list(expected)
     source = model_dir / 'sppr_source.xlsx'
+    if retry_methods and source.is_file():
+        from tools.scientific_helpers.sppr.ppr_scopes import read_scopes
+        for columns, groups in read_scopes(source).values():
+            for key in retry_methods.intersection(columns):
+                index = columns.index(key)
+                if any(finite(values[index]) for values in groups.values()):
+                    raise ValueError('Saved source has finite coefficients for an unavailable workbook method: ' + key)
+        declared_source = manifest.get('coefficient_source_sha256')
+        if declared_source and sha(source) != declared_source:
+            raise ValueError('Saved source artifact identity differs; explicit scientific refresh required')
     arithmetic_fresh = settings.get('calculation_input_sha256') == input_hash(book)
     from tools.project_core.calculations.regional import result_hash
     arithmetic_fresh = arithmetic_fresh and settings.get('calculation_result_sha256') == result_hash(book)
@@ -780,12 +937,19 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
     if not staged_dir.is_relative_to(evidence_dir.parent.resolve()):
         raise ValueError('Evidence staging escaped the model result directory')
     try:
-        outcomes = copy.deepcopy(coverage.get('methods', {})) if _same_context(coverage.get('context'),context) else {}
-        execution_evidence = copy.deepcopy(coverage.get('execution_evidence',{})) if _same_context(coverage.get('context'),context) else {}
+        # A context extension describes new executions, not a rerun of retained
+        # methods. Preserve their original records and execution references.
+        keep_context = not migration or _same_context(coverage.get('context'), context)
+        outcomes = copy.deepcopy(coverage.get('methods', {})) if keep_context else {}
+        execution_evidence = copy.deepcopy(coverage.get('execution_evidence',{})) if keep_context else {}
+        method_contexts = copy.deepcopy(coverage.get('method_contexts', {})) if keep_context else {}
+        for key in outcomes:
+            method_contexts.setdefault(key, copy.deepcopy(coverage.get('context')))
         promoted_references = []
         floor_promotions = []
         baseline = None
         execution_cache = None
+        retained_records = set()
         if pending:
             if migration:
                 from tools.project_core.calculations.ee_floor_migration import save_baseline, retained_outcomes, _write_gzip
@@ -808,15 +972,21 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
                 floor_promotions.append({'path':relative,'sha256':code_hash})
             else:
                 from tools.scientific_helpers.sppr.retained_methods import adopt_saved_methods
-                reused = adopt_saved_methods(model_dir, manifest, context, book, staged_dir, pending,
+                reused = adopt_saved_methods(model_dir, manifest, context, book, staged_dir,
+                                             [key for key in pending if key not in retry_methods],
                                              reviewed_model_sha256=metadata.get('reviewed_model_sha256'))
-            unretained = [key for key in pending if key in saved_method_rows and key not in reused] if not migration else []
+            unretained = [key for key in pending if key in saved_method_rows and key not in reused
+                          and key not in retry_methods] if not migration else []
             if unretained:
                 raise ValueError('Saved method evidence needs an explicit scientific refresh; existing results were preserved: '
                                  + ', '.join(unretained))
             if reused:
                 progress(f"{metadata['unit_id']}: retained saved methods without rerunning: {', '.join(reused)}")
             execute = [key for key in pending if key not in reused]
+            execution_dir = staged_dir
+            if execute and not migration and (coverage.get('methods') or retry_unavailable or execution_flags is not None):
+                execution_dir = staged_dir / ('execution-' + staged_dir.name.removeprefix('.method-coverage-'))
+                execution_dir.mkdir()
             if migration and execute:
                 from tools.project_core.calculations.ee_floor_execution import load_execution, save_execution
                 from tools.scientific_helpers.sppr.method_coverage import method_settings
@@ -830,32 +1000,64 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
                     check_inputs()
                     execution_cache=save_execution(model_dir,context,execute,execution_settings,calculated,staged_dir)
             else:
-                calculated=compute(model, flags, execute, staged_dir, progress=progress) if execute else {'methods':{}}
+                calculated=compute(model, flags, execute, execution_dir, progress=progress) if execute else {'methods':{}}
+            if execution_dir != staged_dir:
+                references = [ref for outcome in calculated['methods'].values()
+                              for ref in _method_evidence_references(outcome)]
+                references += [calculated[key] for key in ('constructor_evidence', 'runtime_verification_evidence', 'evidence_index') if key in calculated]
+                seen_references = set()
+                for evidence in references:
+                    if id(evidence) in seen_references:
+                        continue
+                    seen_references.add(id(evidence))
+                    if evidence.get('path'):
+                        evidence['path'] = execution_dir.name + '/' + str(evidence['path'])
+            # Keep an existing record only while its referenced evidence is
+            # intact. Otherwise the new adoption trace preserves its recorded
+            # outcome and honestly reports missing/changed original evidence.
+            invalid_records = set(_cached_methods(model_dir,
+                {'context': context, 'methods': outcomes}, context, book, tuple(reused)))
+            retained_records = {key for key in reused if not migration and key in outcomes
+                                and key not in invalid_records}
             calculated['methods'].update(reused)
             for key, outcome in calculated['methods'].items():
-                evidence = outcome.get('evidence') or {}
-                if 'path' in evidence and not str(evidence['path']).startswith('method_coverage/'):
-                    evidence['path'] = 'method_coverage/' + evidence['path']
-                promoted_references.append((key,evidence))
+                if key in retained_records:
+                    continue
+                if key in execute:
+                    outcome['execution_context'] = copy.deepcopy(context)
+                    method_contexts[key] = copy.deepcopy(context)
+                else:
+                    method_contexts.setdefault(key, copy.deepcopy(coverage.get('context', context)))
+                for evidence in _method_evidence_references(outcome):
+                    if 'path' in evidence and not str(evidence['path']).startswith('method_coverage/'):
+                        evidence['path'] = 'method_coverage/' + evidence['path']
+                    promoted_references.append((key,evidence))
                 outcomes[key] = outcome
                 if configuration_error:
                     outcomes[key]['reason'] = configuration_error + '; ' + outcomes[key].get('reason', '')
             missing = set(pending) - set(calculated['methods'])
             if missing:
                 raise ValueError('Executor omitted requested method outcomes: ' + ', '.join(sorted(missing)))
-            for key in ('constructor_evidence','evidence_index'):
+            for key in ('constructor_evidence','runtime_verification_evidence','evidence_index'):
                 if key in calculated:
                     evidence = copy.deepcopy(calculated[key])
                     if not str(evidence.get('path','')).startswith('method_coverage/'):
                         evidence['path'] = 'method_coverage/'+evidence['path']
-                    execution_evidence[key] = evidence
+                    reference_key = key if key not in execution_evidence or execution_evidence[key] == evidence else key + ':' + execution_dir.name
+                    execution_evidence[reference_key] = evidence
                     promoted_references.append((key,evidence))
         if (any(sha(p) != fingerprint for p, fingerprint in before.items())
                 or any(p.exists() for p,value in owned.items() if value is None)):
             raise ValueError('Inputs changed during method completion; no mixed input versions published')
         # Only promote exact returned evidence. A concurrent unrelated file is
         # neither owned by this run nor removed by its rollback.
-        for key,evidence in promoted_references:
+        unique_references = {}
+        for key, evidence in promoted_references:
+            evidence_path = evidence.get('path')
+            if evidence_path in unique_references and unique_references[evidence_path][1].get('sha256') != evidence.get('sha256'):
+                raise ValueError('Conflicting returned evidence identities: ' + str(evidence_path))
+            unique_references[evidence_path] = (key, evidence)
+        for key,evidence in unique_references.values():
             relative = Path(str(evidence.get('path', ''))).relative_to('method_coverage')
             staged = (staged_dir / relative).resolve()
             target = (evidence_dir / relative).resolve()
@@ -867,7 +1069,7 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
                     raise ValueError('Method evidence appeared during calculation: ' + str(target))
                 backups[target] = None; owned[target] = None
             target.parent.mkdir(parents=True, exist_ok=True)
-            os.replace(staged, target); owned[target] = sha(target); written.add(target)
+            guarded_replace(staged, target, expected_sha256=owned[target]); owned[target] = sha(target); written.add(target)
         for evidence in floor_promotions:
             relative=Path(evidence['path']); staged=(staged_dir/relative).resolve()
             target=(model_dir/'results/diagnostics'/relative).resolve()
@@ -876,9 +1078,10 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
             if target not in backups:
                 if target.exists():raise ValueError('EE-floor evidence appeared during calculation')
                 backups[target]=None;owned[target]=None
-            target.parent.mkdir(parents=True,exist_ok=True);os.replace(staged,target);owned[target]=sha(target);written.add(target)
-        _apply_outcomes(book, model_dir.name, outcomes, pending, migration=bool(migration))
-        changed_methods=set(pending)-{key for key,value in outcomes.items() if value.get('preserve_saved')} if migration else set()
+            target.parent.mkdir(parents=True,exist_ok=True);guarded_replace(staged,target,expected_sha256=owned[target]);owned[target]=sha(target);written.add(target)
+        applied = [key for key in pending if key not in retained_records]
+        _apply_outcomes(book, model_dir.name, outcomes, applied, migration=bool(migration), retried_methods=retry_methods)
+        changed_methods=set(applied)-{key for key,value in outcomes.items() if value.get('preserve_saved')}
         if any(_method_rows(book)[0].get(key) != values for key, values in saved_method_rows.items() if key not in changed_methods):
             raise ValueError('Method completion attempted to change existing saved coefficients')
         if candidate_pending:
@@ -909,7 +1112,8 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
         # attach coverage metadata could round its original numeric cells.
         if migration or not _source_matches(model_dir, saved, expected):
             check_inputs()
-            _update_source(source, saved, outcomes,replace_methods=changed_methods,
+            replacements = changed_methods if migration else changed_methods.intersection(saved_method_rows)
+            _update_source(source, saved, outcomes,replace_methods=replacements,
                            effective_groups=migration['effective_groups'] if migration else None,expected_sha256=owned[source])
             owned[source] = sha(source); written.add(source)
             if not _source_matches(model_dir, saved, expected):
@@ -946,6 +1150,7 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
                          'artifacts': {'snapshot':'regional_snapshot.xlsx','model':'../model.json','coefficients':'../sppr_source.xlsx'},
                          'method_coverage': {'schema_version': 1, 'expected_methods': list(expected),
                                              'context': context, 'methods': outcomes,
+                                             'method_contexts': method_contexts,
                                              'execution_evidence': execution_evidence,
                                              'arithmetic_code_identity': _arithmetic_identity(),
                                              'protected_inputs_sha256': protected}})
@@ -965,9 +1170,13 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
             if actual != owned[destination]:
                 conflicts.append(str(destination)); continue
             if data is None:
-                destination.unlink(missing_ok=True)
+                from tools.project_core.registry.publication import publication_write
+                with publication_write(destination, fingerprint=None):
+                    destination.unlink(missing_ok=True)
             else:
-                destination.parent.mkdir(parents=True, exist_ok=True); destination.write_bytes(data)
+                # Keep the outer transaction's exact ownership synchronized
+                # when this model restores its own prior-batch preimage.
+                _write_bytes(destination, data, expected_sha256=actual)
         if conflicts:
             raise RuntimeError('Coverage failed; concurrent edits preserved: ' + ', '.join(conflicts))
         raise
@@ -977,7 +1186,8 @@ def _complete_model(root, metadata, expected, *, progress, compute, ee_floor=Non
 
 def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor=None,
                               migration_units=None, units=None, model_pairs=None,
-                              all_validated=False):
+                              all_validated=False, method_keys=None, retry_unavailable=False,
+                              execution_flags_by_pair=None):
     """Complete only explicitly scoped identities without changing selection.
 
     Central/map callers publish changed_units under their existing writer lock.
@@ -985,6 +1195,12 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor
     Full-project inventory requires all_validated=True. Empty or omitted scope
     does no metadata, adapter, discovery, backup or scientific work.
     """
+    if method_keys is not None:
+        if isinstance(method_keys, str):
+            raise ValueError('Method subset must contain canonical method keys')
+        method_keys = tuple(method_keys)
+        if not method_keys:
+            return {'changed_units': [], 'models': [], 'written_paths': [], 'written_hashes': {}}
     if migration_units is not None:
         migration_units = set(migration_units)
         units = migration_units if units is None else set(units) & migration_units
@@ -998,7 +1214,8 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor
     if not lock_held:
         with central_lock(root):
             return ensure_validated_coverage(root, progress=progress, lock_held=True,ee_floor=ee_floor,
-                migration_units=migration_units,units=units,model_pairs=model_pairs,all_validated=all_validated)
+                migration_units=migration_units,units=units,model_pairs=model_pairs,all_validated=all_validated,
+                method_keys=method_keys,retry_unavailable=retry_unavailable,execution_flags_by_pair=execution_flags_by_pair)
     from tools.project_core.registry.discovery import region_directory, resolve_model
     from tools.project_core.workbooks.workbooks import sha
     metadata_hash = sha(root/'Project.xlsx')
@@ -1011,6 +1228,11 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor
         return {'changed_units': [], 'models': []}
     from tools.scientific_helpers.sppr.method_coverage import method_inventory, compute_methods
     expected = method_inventory(); changed = set(); models = []
+    if method_keys is not None:
+        unknown = set(method_keys) - set(expected)
+        if unknown:
+            raise ValueError('Unknown canonical method keys: ' + ', '.join(sorted(unknown)))
+        expected = tuple(key for key in expected if key in method_keys)
     protected = set()
     directories = []
     for unit, model_id in identities:
@@ -1036,7 +1258,9 @@ def ensure_validated_coverage(root, *, progress=print, lock_held=False, ee_floor
             if any((sha(p) if p.is_file() else None) != owned[p] for p in current_paths):
                 raise ValueError('Model package changed during coverage batch: ' + model_id)
             request=ee_floor if migration_units is None or unit in migration_units else None
-            modified, report = _complete_model(root, indexed[identity], expected, progress=progress, compute=compute_methods,ee_floor=request)
+            modified, report = _complete_model(root, indexed[identity], expected, progress=progress, compute=compute_methods,
+                ee_floor=request,retry_unavailable=retry_unavailable,
+                execution_flags=(execution_flags_by_pair or {}).get(identity))
             if modified:
                 changed.add(identity[0])
             models.append(report)

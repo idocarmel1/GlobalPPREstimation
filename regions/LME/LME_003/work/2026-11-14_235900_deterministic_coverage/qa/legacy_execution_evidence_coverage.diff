@@ -1,0 +1,44 @@
+--- regions\LME\LME_003\work\2026-11-14_235900_deterministic_coverage\inputs\coverage_before_legacy_evidence_guard.py
++++ tools\project_core\calculations\coverage.py
+@@ -143,11 +143,27 @@
+     _write_bytes(path,json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False).encode('utf-8'),expected_sha256=expected_sha256)
+ 
+ 
++def _execution_evidence_references(coverage):
++    """Read the original singleton reference alongside later named references."""
++    saved = coverage.get('execution_evidence', {})
++    if not isinstance(saved, dict):
++        return [None]
++    if 'path' in saved or 'sha256' in saved:
++        # Keep the stored mapping intact. Later batches may append named
++        # references while the original path/SHA pair remains exactly saved.
++        return [{key: saved.get(key) for key in ('path', 'sha256')},
++                *[value for key, value in saved.items() if key not in ('path', 'sha256')]]
++    return list(saved.values())
++
++
+ def _cached_methods(model_dir, coverage, context, book, expected):
+     from tools.project_core.workbooks.workbooks import sha
+     _, row_hashes = _method_rows(book)
+     pending = plan_methods(expected, context, _planning_coverage(coverage,context), row_hashes)
+-    for evidence in coverage.get('execution_evidence',{}).values():
++    for evidence in _execution_evidence_references(coverage):
++        if (not isinstance(evidence, dict) or not isinstance(evidence.get('path'), str)
++                or not evidence['path'] or not isinstance(evidence.get('sha256'), str)):
++            return list(expected)
+         path = (model_dir/'results/diagnostics'/str(evidence.get('path',''))).resolve()
+         if not path.is_relative_to(model_dir.resolve()) or not path.is_file() or sha(path)!=evidence.get('sha256'):
+             return list(expected)
+@@ -183,8 +199,11 @@
+     if any(not value for value in hashes.values()) or plan_methods(expected, context, _planning_coverage(coverage,context), hashes):
+         return False
+     references = [ref for key in expected for ref in _method_evidence_references(coverage['methods'][key])]
+-    references.extend(coverage.get('execution_evidence',{}).values())
++    references.extend(_execution_evidence_references(coverage))
+     for evidence in references:
++        if (not isinstance(evidence, dict) or not isinstance(evidence.get('path'), str)
++                or not evidence['path'] or not isinstance(evidence.get('sha256'), str)):
++            return False
+         artifact = (model_dir/'results/diagnostics'/str(evidence.get('path', ''))).resolve()
+         if not artifact.is_relative_to(model_dir.resolve()) or not artifact.is_file() or sha(artifact) != evidence.get('sha256'):
+             return False

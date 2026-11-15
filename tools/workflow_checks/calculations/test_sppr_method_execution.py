@@ -91,12 +91,21 @@ class EvidenceTests(unittest.TestCase):
         engine = Path(directory) / 'engine'
         engine.mkdir()
         shutil.copy2(archived, engine / 'PPRCalculator.py')
+        for name in ('ModelData.py', 'utils.py'):
+            shutil.copy2(coverage.ENGINE/name, engine/name)
         flags = copy.deepcopy(FLAGS)
         flags['constructor'].pop('balance_BA_after_DC_normalization')
-        flags['engine_sources'] = {'PPRCalculator.py': 'engine/PPRCalculator.py'}
-        flags['engine_source_hashes'] = {name: coverage._hash_bytes(
-            ((engine if name == 'PPRCalculator.py' else coverage.ENGINE) / name).read_bytes())
-            for name in ('PPRCalculator.py', 'ModelData.py', 'utils.py')}
+        flags['engine_sources'] = {name: 'engine/'+name for name in coverage.ENGINE_FILES}
+        flags['engine_source_hashes'] = {name: coverage._hash_bytes((engine/name).read_bytes())
+                                         for name in coverage.ENGINE_FILES}
+        provenance = Path(directory)/'archived_fixture.json'
+        provenance.write_text(json.dumps({'role': 'Explicit historical-engine test fixture',
+                                         'engine_hashes': flags['engine_source_hashes']}), encoding='utf-8')
+        flags['audited_replay'] = {
+            'schema_version': 1, 'mode': 'recorded_constructor',
+            'model_sha256': coverage._hash_bytes((Path(directory)/'model.json').read_bytes()),
+            'provenance': {'relative_path': provenance.name,
+                           'sha256': coverage._hash_bytes(provenance.read_bytes())}}
         return flags
 
     def test_archived_engine_keeps_original_defaults_and_isolates_current_module(self):
@@ -110,6 +119,7 @@ class EvidenceTests(unittest.TestCase):
             self.assertNotIn('balance_BA_after_DC_normalization', coverage._constructor(flags, model))
             self.assertIn('balance_BA_after_DC_normalization', coverage._constructor(FLAGS))
             self.assertIs(coverage._engine()[2], current)
+
             self.assertIs(sys.modules['PPRCalculator'].PPRCalculator, current)
             identity = coverage.engine_identity(flags, model)
             self.assertEqual(identity['PPRCalculator.py'], flags['engine_source_hashes']['PPRCalculator.py'])
@@ -120,6 +130,16 @@ class EvidenceTests(unittest.TestCase):
                 self.assertEqual(result['engine_hashes'], identity)
                 self.assertNotIn('balance_BA_after_DC_normalization', result['constructor'])
             self.assertIs(coverage._engine()[2], current)
+
+    def test_ordinary_historical_engine_difference_stays_blocked_after_replay(self):
+        with tempfile.TemporaryDirectory() as directory:
+            model = Path(directory)/'model.json'
+            shutil.copy2(TOY, model)
+            flags = self._archived_flags(directory)
+            coverage._engine(flags, model)
+            del flags['audited_replay']
+            with self.assertRaisesRegex(ValueError, 'scientific methods differ'):
+                coverage._engine(flags, model)
 
     def test_archived_dependency_mismatch_is_explicit_not_run(self):
         with tempfile.TemporaryDirectory() as directory:

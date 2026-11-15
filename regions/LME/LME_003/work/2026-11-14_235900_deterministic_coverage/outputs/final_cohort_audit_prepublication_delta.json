@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-15T00:28:51.415988+00:00",
+  "status": "PASS_PREPUBLICATION_DELTA",
+  "purpose": "Refresh implementation binding after rollback and narrow live-manifest guard correction, reusing unchanged complete scientific audit",
+  "original_audit": {
+    "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/final_cohort_audit.json",
+    "sha256": "68517d8e42b03ee9fdcb3302b31871aaedcfcecb9f7ed5545d096cb68ccb1015",
+    "preserved_unchanged": true
+  },
+  "rollback_verification": {
+    "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/rollback_verification_after_first_adoption.json",
+    "sha256": "25ced1dd175e666cdafd64e34196692050deb54a1c94b15a8ce9f3ebf902a1e9",
+    "status": "PASS_ROLLBACK"
+  },
+  "protected_files_expected": 980,
+  "protected_files_matching": 980,
+  "protected_file_differences": [],
+  "implementation_bindings": [
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/final_cohort_audit.py",
+      "original_audit_sha256": "f758d2b6d61e7654308442986ce78c98ecf2a9432e509cb12955d4ce8c181a6a",
+      "current_sha256": "f758d2b6d61e7654308442986ce78c98ecf2a9432e509cb12955d4ce8c181a6a",
+      "unchanged": true
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py",
+      "original_audit_sha256": "dd3267ffd4cc24d64f723a01f5794dd4a3723d73dc609a759feead4a747db0fe",
+      "current_sha256": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+      "unchanged": false
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/provenance_admission.py",
+      "original_audit_sha256": "d66b982e9ea1688400bcfb12a543f1b35a5765549913a8c88e874c7e2f3fbfa9",
+      "current_sha256": "d66b982e9ea1688400bcfb12a543f1b35a5765549913a8c88e874c7e2f3fbfa9",
+      "unchanged": true
+    }
+  ],
+  "adoption_definition_changes": {
+    "changed": [
+      "check_control_settings",
+      "prepare"
+    ],
+    "added": [],
+    "removed": [],
+    "unchanged": [
+      "CachedBatch",
+      "apply",
+      "assert_retained",
+      "authenticate_identity",
+      "central_state",
+      "check_hashes",
+      "main",
+      "protected_book",
+      "read",
+      "reference",
+      "sha",
+      "source_state",
+      "stamp_actual_execution",
+      "unchanged_projection",
+      "verify_method"
+    ],
+    "baseline_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/adoption_guard_repair_baseline.json",
+    "baseline_sha256": "d6c89ba139387d754b598828d3af195f02389ff53c1e96062591465474e57bf9"
+  },
+  "guard_change": "check_control_settings returns separate consumed and immutable maps. Only a relocated original audited_replay provenance reference resolving exactly to model/results/result_manifest.json can be prewrite-only. Archives and dependencies authenticated in any other role remain immutable. prepare merges both maps into their corresponding existing guards.",
+  "regression_evidence": {
+    "summary_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_regression_summary.json",
+    "summary_sha256": "44ed1a43a00de883f76652a4b630d0c79a747212bb2a4adf359245ce08958790",
+    "red": {
+      "tests": 1,
+      "failures": 1,
+      "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_red.log",
+      "sha256": "ea98efed341b31b0dd58384736a896cdc192131b6e4ee68af3ef69870a505743"
+    },
+    "green": {
+      "tests": 18,
+      "failures": 0,
+      "exit_code": 0,
+      "log": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_green.log",
+      "sha256": "6c7b03a6864e7ca8838fd1349ff6aba5ae082e1be27afadc354d755bbcdfb410"
+    }
+  },
+  "reused_scientific_evidence": {
+    "original_audit_sha256": "68517d8e42b03ee9fdcb3302b31871aaedcfcecb9f7ed5545d096cb68ccb1015",
+    "cohort_counts": {
+      "total": 320,
+      "finite_including_flagged": 294,
+      "finite_flagged_subset": 85,
+      "finite_with_any_scope_restriction": 136,
+      "unsupported_formulation": 24,
+      "scientifically_unavailable": 2
+    },
+    "initialization": {
+      "original_constructor": 146,
+      "retrospective_runtime_authentication": 2
+    },
+    "monte_carlo": {
+      "existing_evidence_files_verified": 24,
+      "absence_preserved_for_units": [
+        "LME_014",
+        "LME_003",
+        "LME_037",
+        "LME_022"
+      ],
+      "draws_rerun": false
+    },
+    "reason": "All980 previously authenticated protected files remain byte-identical; final audit helper, admission helper, authentication and method-return validators, cached adoption, protected workbook/source logic, apply logic and adapter/engine evidence remain unchanged. Only control dependency guard classification and its prepare integration changed."
+  },
+  "proof_file_hashes": {
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/final_cohort_audit.json": "68517d8e42b03ee9fdcb3302b31871aaedcfcecb9f7ed5545d096cb68ccb1015",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/rollback_verification_after_first_adoption.json": "25ced1dd175e666cdafd64e34196692050deb54a1c94b15a8ce9f3ebf902a1e9",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/adoption_guard_repair_baseline.json": "d6c89ba139387d754b598828d3af195f02389ff53c1e96062591465474e57bf9",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_regression_summary.json": "44ed1a43a00de883f76652a4b630d0c79a747212bb2a4adf359245ce08958790",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/test_adopt_completion.py": "a62491e27ca95e028d3c4fbadea13d62e29ee5cdecb448b5eba2a252ec9a7a71",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_red.log": "ea98efed341b31b0dd58384736a896cdc192131b6e4ee68af3ef69870a505743",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/control_manifest_guard_green.log": "6c7b03a6864e7ca8838fd1349ff6aba5ae082e1be27afadc354d755bbcdfb410"
+  },
+  "scientific_execution_performed": false,
+  "canonical_writes_performed": false,
+  "initialization_sweep_repeated": false,
+  "workbook_reparsing_repeated": false,
+  "scope_note": "This refreshes the prepublication implementation binding and protected-byte state. The coordinator still performs its normal fresh prewrite gates and transaction checks."
+}

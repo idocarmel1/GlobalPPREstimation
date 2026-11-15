@@ -1,0 +1,885 @@
+{
+  "model_id": "34_1_Bay_of_Bengal_(1978)",
+  "model_sha256": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+  "flags": {
+    "constructor": {
+      "underdetermined": true,
+      "zero_catch": true,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": true,
+      "DC_tol": 0.001,
+      "use_ee_floor": true,
+      "ee_floor": 0.1
+    },
+    "diagnostics": {
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      }
+    },
+    "methods": {
+      "GE": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "DET_TE_vals": 1.0,
+        "fix_EE_0_cases": true
+      },
+      "TE": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "DET_TE_vals": 1.0,
+        "fix_EE_0_cases": true
+      },
+      "With Egestion": {
+        "det_collapse_mode": "never",
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "DET_TE_vals": 1.0,
+        "fix_EE_0_cases": true
+      }
+    },
+    "mc": {
+      "n_samples": 75
+    },
+    "engine_source_hashes": {
+      "PPRCalculator.py": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "method_timeout_seconds": 0,
+    "method_timeout_overrides_seconds": {
+      "MC_new_GE": 600,
+      "MC_new_TE_EEfix": 600,
+      "EwE_TE_EE": 600
+    },
+    "configuration_evidence": [
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/GE/runtime_identity.json",
+        "sha256": "a1286c342719091b61cad3e619cdd5067167c5024e93ac15083a327fe284f6af",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/TE/runtime_identity.json",
+        "sha256": "87e163f6f8f18a8386fc64f6db9182c5e792264a393a0c71c3327cd878a8b5fd",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/With_Egestion/runtime_identity.json",
+        "sha256": "7cd5b4aac9d293b1b3dea851602fa383f8273b90077aa6d1fb60f2bca0ada3f2",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/initial_export_configuration.json",
+        "sha256": "4e56a1cbb24546084a4280ad1c39c453b7882e64ad5660604bcd192afa41f446",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/refresh_configuration.json",
+        "sha256": "f5447bc9b6e6a205b600f433b2dfe318e91f15399a416bc1cf57d6e196ec8e28",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/audited_engine/PPRCalculator.py",
+        "sha256": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/audited_engine/engine_copy_provenance.json",
+        "sha256": "8baa7988f0672dc3e100f2144aa6aa0f3eb55b9b47e68a0521949074d7dc5953",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_dependencies/ModelData.py",
+        "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_dependencies/engine_copy_provenance.json",
+        "sha256": "4d8e12f3fd64fb769205581ea418777a85c9c33882522893ab35f879bf5b84cf",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      {
+        "relative_path": "results/diagnostics/engine_comparison_20261114/current_engine/utils.py",
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      }
+    ],
+    "engine_sources": {
+      "PPRCalculator.py": "results/diagnostics/audited_engine/PPRCalculator.py",
+      "ModelData.py": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_dependencies/ModelData.py",
+      "utils.py": "results/diagnostics/engine_comparison_20261114/current_engine/utils.py"
+    },
+    "calculation_engine_upgrade": "ee_floor_v1",
+    "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+    "audited_replay": {
+      "schema_version": 1,
+      "model_sha256": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+      "mode": "completed_runtime",
+      "provenance": {
+        "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+        "sha256": "4d76b64d2a13599e31f94239584a60167247d56ee2f40e6b3785798a20943ded"
+      },
+      "runtime": {
+        "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+        "sha256": "4d76b64d2a13599e31f94239584a60167247d56ee2f40e6b3785798a20943ded",
+        "keys": [
+          "constructor_outcome",
+          "runtime"
+        ]
+      },
+      "ew_e_optimized": {
+        "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_ewe_optimization/PPRCalculator.py",
+        "sha256": "8a28ddf4696bdec28f5f33c0cdc9879b113f8051ddb934db95cce784bc3c6043",
+        "base_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+        "repair": "ewe_slow_numeric_fast_v1"
+      }
+    }
+  },
+  "constructor": {
+    "underdetermined": true,
+    "zero_catch": true,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": true,
+    "DC_tol": 0.001,
+    "use_ee_floor": true,
+    "ee_floor": 0.1
+  },
+  "engine_hashes": {
+    "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+    "PPRCalculator.py": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+    "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+    "ewe_path_optimization/PPRCalculator.py": "8a28ddf4696bdec28f5f33c0cdc9879b113f8051ddb934db95cce784bc3c6043"
+  },
+  "adapter_sha256": "ca718c0911ac066ea7e5299f5dc0b7b38ccd718b6e22a43a2c06702aabcf3b58",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3"
+  },
+  "methods": {
+    "EwE_TE_EE": {
+      "status": "ok",
+      "reason": "",
+      "scopes": {
+        "all": {
+          "diet_import": 1.0,
+          "Detritus": 1.0,
+          "Marlins": 2289.371926262423,
+          "Yellowfin tuna": 1666.1529906841276,
+          "Bigeye tuna": 2129.8696513767486,
+          "Benthic plants": 0.4,
+          "3 Phytoplankton": 0.33699999999999997,
+          "2 Phytoplankton": 0.389,
+          "1 Phytoplankton": 0.15300000000000002,
+          "3 Zooplankton": 4.666666666666668,
+          "3 Meiobenthos": 6.666666666666666,
+          "3 Macrobenthos": 19.092288314176248,
+          "3 Crustaceans": 29.60153256704981,
+          "3 SM pisc": 215.7091230222609,
+          "3 SM inv": 79.35466448049847,
+          "3 Milkfish plus": 233.15978564983263,
+          "3 L pisc comm": 556.8100420278839,
+          "3 S pelagics": 68.25597737938548,
+          "3 Carangids": 541.0638772180998,
+          "3 L pisc": 890.1275612161346,
+          "2-3 Indian mackerel": 73.62272695096613,
+          "2-3 Hilsa": 22.40220469847044,
+          "2 Zooplankton": 4.666666666666666,
+          "2 Meiobenthos": 6.666666666666667,
+          "2 Macrobenthos": 26.436768940990397,
+          "2 Crustaceans": 49.38377824998153,
+          "2 SM pisc": 278.1710151956034,
+          "2 SM inv": 122.66942409456495,
+          "2 Milkfish plus": 319.4996927810969,
+          "2 L pisc comm": 678.0908667100992,
+          "2 S pelagics": 112.84639689825019,
+          "2 Carangids": 681.5183283271163,
+          "2 L pisc": 861.0272382652847,
+          "1 Zooplankton": 4.666666666666667,
+          "1 Meiobenthos": 6.666666666666666,
+          "1 Macrobenthos": 20.624472222222224,
+          "1 SM pisc": 235.88424028892732,
+          "1 SM inv": 85.10761036839688,
+          "1 L pisc comm": 624.8976125893391,
+          "1 S pelagics": 60.89835173065437,
+          "1 Carangids": 632.2054590963838,
+          "1 L pisc": 926.0897732518039,
+          "ML bathy": 433.09252256881086,
+          "S bathy": 38.41140529853698,
+          "Cephalopods": 337.1646299441129,
+          "Jellyfish": 25.925925925925945,
+          "Coastal scombrids": 970.8995852778796,
+          "Tuna-like": 1779.3763072766885,
+          "Coastal elasmobranch": 2052.921111972172,
+          "Oceanic sharks": 2878.379402741856
+        },
+        "inner": {
+          "diet_import": 0.0,
+          "Detritus": 1.0,
+          "Marlins": 2288.157273602316,
+          "Yellowfin tuna": 1665.557445593154,
+          "Bigeye tuna": 2128.953103846204,
+          "Benthic plants": 0.4,
+          "3 Phytoplankton": 0.33699999999999997,
+          "2 Phytoplankton": 0.389,
+          "1 Phytoplankton": 0.15300000000000002,
+          "3 Zooplankton": 4.666666666666668,
+          "3 Meiobenthos": 6.666666666666666,
+          "3 Macrobenthos": 19.092288314176248,
+          "3 Crustaceans": 29.60153256704981,
+          "3 SM pisc": 215.60475889840615,
+          "3 SM inv": 79.33887683627448,
+          "3 Milkfish plus": 233.0102404097904,
+          "3 L pisc comm": 556.5555336877445,
+          "3 S pelagics": 68.19961041664952,
+          "3 Carangids": 540.7948930123197,
+          "3 L pisc": 889.5695121868162,
+          "2-3 Indian mackerel": 73.57861342431136,
+          "2-3 Hilsa": 21.676677251215168,
+          "2 Zooplankton": 4.666666666666666,
+          "2 Meiobenthos": 6.666666666666667,
+          "2 Macrobenthos": 26.436768940990397,
+          "2 Crustaceans": 49.38377824998153,
+          "2 SM pisc": 278.0718599202372,
+          "2 SM inv": 122.64758227997636,
+          "2 Milkfish plus": 319.3523034289549,
+          "2 L pisc comm": 677.8529306838552,
+          "2 S pelagics": 112.78625169447255,
+          "2 Carangids": 681.1088911883596,
+          "2 L pisc": 860.598363926783,
+          "1 Zooplankton": 4.666666666666667,
+          "1 Meiobenthos": 6.666666666666666,
+          "1 Macrobenthos": 20.624472222222224,
+          "1 SM pisc": 235.87352215876686,
+          "1 SM inv": 85.10212474699293,
+          "1 L pisc comm": 624.8372040271963,
+          "1 S pelagics": 60.8968360886287,
+          "1 Carangids": 632.1407456123791,
+          "1 L pisc": 925.9659997465392,
+          "ML bathy": 432.9669118521154,
+          "S bathy": 38.41140529853698,
+          "Cephalopods": 337.06290162481685,
+          "Jellyfish": 25.925925925925945,
+          "Coastal scombrids": 970.3808274802898,
+          "Tuna-like": 1778.4335343444666,
+          "Coastal elasmobranch": 2051.1824985663034,
+          "Oceanic sharks": 2876.7170760055787
+        },
+        "PP": {
+          "diet_import": 0.0,
+          "Detritus": 0.0,
+          "Marlins": 1300.0642123320035,
+          "Yellowfin tuna": 960.3849268734853,
+          "Bigeye tuna": 1348.1499487722745,
+          "Benthic plants": 0.4,
+          "3 Phytoplankton": 0.33699999999999997,
+          "2 Phytoplankton": 0.389,
+          "1 Phytoplankton": 0.15300000000000002,
+          "3 Zooplankton": 4.200000000000001,
+          "3 Meiobenthos": 0.0,
+          "3 Macrobenthos": 5.3320000000000025,
+          "3 Crustaceans": 7.000000000000002,
+          "3 SM pisc": 101.00159755650465,
+          "3 SM inv": 30.98722186396273,
+          "3 Milkfish plus": 97.28392887138641,
+          "3 L pisc comm": 291.00778710861005,
+          "3 S pelagics": 36.320413590677596,
+          "3 Carangids": 309.75215642665717,
+          "3 L pisc": 481.49998970182776,
+          "2-3 Indian mackerel": 35.44149092828879,
+          "2-3 Hilsa": 19.717508676178642,
+          "2 Zooplankton": 4.199999999999999,
+          "2 Meiobenthos": 0.0,
+          "2 Macrobenthos": 10.766565693950177,
+          "2 Crustaceans": 18.336328998726923,
+          "2 SM pisc": 146.44303445891885,
+          "2 SM inv": 59.27483917595599,
+          "2 Milkfish plus": 152.3477077794548,
+          "2 L pisc comm": 384.6814949934418,
+          "2 S pelagics": 71.26313023190049,
+          "2 Carangids": 392.43575583873996,
+          "2 L pisc": 507.34324118756206,
+          "1 Zooplankton": 4.2,
+          "1 Meiobenthos": 0.0,
+          "1 Macrobenthos": 5.332000000000001,
+          "1 SM pisc": 132.11274454966014,
+          "1 SM inv": 32.12108161782529,
+          "1 L pisc comm": 373.4932477541553,
+          "1 S pelagics": 33.46939383321923,
+          "1 Carangids": 361.86504694537985,
+          "1 L pisc": 580.8258897804018,
+          "ML bathy": 273.435448402004,
+          "S bathy": 34.57026476868327,
+          "Cephalopods": 196.81335015065673,
+          "Jellyfish": 23.33333333333335,
+          "Coastal scombrids": 536.9209951918814,
+          "Tuna-like": 1029.1218335144963,
+          "Coastal elasmobranch": 1134.9457561235533,
+          "Oceanic sharks": 1672.853658304431
+        }
+      },
+      "annual_status": {
+        "all": "ok",
+        "inner": "ok",
+        "PP": "ok"
+      },
+      "diagnostics": null,
+      "mc_diagnostics": null,
+      "negative_entries": [],
+      "reconciliation": {
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true,
+        "rtol": 1e-12,
+        "atol": 1e-12
+      },
+      "runtime_before_sha256": "2a9150288f4db07a39cfa73df6d8895a5bcafa14a2f7845ae8ad28247432ea7b",
+      "runtime_after_sha256": "2a9150288f4db07a39cfa73df6d8895a5bcafa14a2f7845ae8ad28247432ea7b",
+      "warnings": [],
+      "elapsed_seconds": 321.76599999982864,
+      "settings": {
+        "method": "EwE_TE_EE",
+        "target": "SPPR_EwE",
+        "kwargs": {
+          "TE_option": "TE",
+          "use_EE": true,
+          "return_paths": true,
+          "silent": true,
+          "max_paths": 100000
+        },
+        "source_resolved": true,
+        "description": "EwE path enumeration with EE weighting -- heavy method.",
+        "seed": null,
+        "mc_policy_origin": null
+      },
+      "evidence": {
+        "path": "ewe_optimized/EwE_TE_EE.json.gz",
+        "sha256": "089038501d4c44f826c398789a4eff032b8aa17eb94413be7350385b11b734a6",
+        "availability": "present"
+      },
+      "execution_identity": {
+        "adapter_sha256": "ca718c0911ac066ea7e5299f5dc0b7b38ccd718b6e22a43a2c06702aabcf3b58",
+        "constructor": {
+          "DC_tol": 0.001,
+          "default_gs": true,
+          "ee_floor": 0.1,
+          "normalize_DC": true,
+          "underdetermined": true,
+          "use_ee_floor": true,
+          "weight_flow": 1.0,
+          "weight_guess": 1.0,
+          "zero_biomass_accum": false,
+          "zero_catch": true
+        },
+        "engine_hashes": {
+          "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+          "PPRCalculator.py": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+          "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+          "ewe_path_optimization/PPRCalculator.py": "8a28ddf4696bdec28f5f33c0cdc9879b113f8051ddb934db95cce784bc3c6043",
+          "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+        },
+        "environment": {
+          "numpy": "2.3.4",
+          "pandas": "2.3.3",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+        },
+        "flags": {
+          "audited_replay": {
+            "ew_e_optimized": {
+              "base_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_ewe_optimization/PPRCalculator.py",
+              "repair": "ewe_slow_numeric_fast_v1",
+              "sha256": "8a28ddf4696bdec28f5f33c0cdc9879b113f8051ddb934db95cce784bc3c6043"
+            },
+            "mode": "completed_runtime",
+            "model_sha256": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+            "provenance": {
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "4d76b64d2a13599e31f94239584a60167247d56ee2f40e6b3785798a20943ded"
+            },
+            "runtime": {
+              "keys": [
+                "constructor_outcome",
+                "runtime"
+              ],
+              "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+              "sha256": "4d76b64d2a13599e31f94239584a60167247d56ee2f40e6b3785798a20943ded"
+            },
+            "schema_version": 1
+          },
+          "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+          "calculation_engine_upgrade": "ee_floor_v1",
+          "configuration_evidence": [
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/GE/runtime_identity.json",
+              "sha256": "a1286c342719091b61cad3e619cdd5067167c5024e93ac15083a327fe284f6af"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/TE/runtime_identity.json",
+              "sha256": "87e163f6f8f18a8386fc64f6db9182c5e792264a393a0c71c3327cd878a8b5fd"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/direct_diagnostics/With_Egestion/runtime_identity.json",
+              "sha256": "7cd5b4aac9d293b1b3dea851602fa383f8273b90077aa6d1fb60f2bca0ada3f2"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/initial_export_configuration.json",
+              "sha256": "4e56a1cbb24546084a4280ad1c39c453b7882e64ad5660604bcd192afa41f446"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "model_validation/evidence/source_review/detritus_completion_20261001/refresh_configuration.json",
+              "sha256": "f5447bc9b6e6a205b600f433b2dfe318e91f15399a416bc1cf57d6e196ec8e28"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "results/diagnostics/audited_engine/PPRCalculator.py",
+              "sha256": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "results/diagnostics/audited_engine/engine_copy_provenance.json",
+              "sha256": "8baa7988f0672dc3e100f2144aa6aa0f3eb55b9b47e68a0521949074d7dc5953"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_dependencies/ModelData.py",
+              "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_dependencies/engine_copy_provenance.json",
+              "sha256": "4d8e12f3fd64fb769205581ea418777a85c9c33882522893ab35f879bf5b84cf"
+            },
+            {
+              "original_source_hash": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a",
+              "relative_path": "results/diagnostics/engine_comparison_20261114/current_engine/utils.py",
+              "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+            }
+          ],
+          "constructor": {
+            "DC_tol": 0.001,
+            "default_gs": true,
+            "ee_floor": 0.1,
+            "normalize_DC": true,
+            "underdetermined": true,
+            "use_ee_floor": true,
+            "weight_flow": 1.0,
+            "weight_guess": 1.0,
+            "zero_biomass_accum": false,
+            "zero_catch": true
+          },
+          "diagnostics": {
+            "thresholds": {
+              "b_fail": 1.0,
+              "b_warn": 0.7,
+              "balance_fail": 0.05,
+              "balance_warn": 0.01,
+              "dc_row_tol": 1e-06,
+              "ee_marginal": 0.001,
+              "model_balance_fail": 0.1,
+              "model_balance_warn": 0.0001,
+              "rho_living_fail": 1.0,
+              "rho_living_warn": 0.7,
+              "sppr_det_warn": 10.0
+            }
+          },
+          "engine_source_hashes": {
+            "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+            "PPRCalculator.py": "c0142cb791d079cd40a65202ca8bfdc3cf460e6b6dd9d2b135cf405d41b61759",
+            "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+          },
+          "engine_sources": {
+            "ModelData.py": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_dependencies/ModelData.py",
+            "PPRCalculator.py": "results/diagnostics/audited_engine/PPRCalculator.py",
+            "utils.py": "results/diagnostics/engine_comparison_20261114/current_engine/utils.py"
+          },
+          "mc": {
+            "n_samples": 75
+          },
+          "method_timeout_overrides_seconds": {
+            "EwE_TE_EE": 600,
+            "MC_new_GE": 600,
+            "MC_new_TE_EEfix": 600
+          },
+          "method_timeout_seconds": 0,
+          "methods": {
+            "GE": {
+              "DET_TE_vals": 1.0,
+              "det_collapse_mode": "never",
+              "det_external_sppr": 0.0,
+              "det_open_mode": "none",
+              "det_theta": 1.0,
+              "fix_EE_0_cases": true
+            },
+            "TE": {
+              "DET_TE_vals": 1.0,
+              "det_collapse_mode": "never",
+              "det_external_sppr": 0.0,
+              "det_open_mode": "none",
+              "det_theta": 1.0,
+              "fix_EE_0_cases": true
+            },
+            "With Egestion": {
+              "DET_TE_vals": 1.0,
+              "det_collapse_mode": "never",
+              "det_external_sppr": 0.0,
+              "det_open_mode": "none",
+              "det_theta": 1.0,
+              "fix_EE_0_cases": true
+            }
+          }
+        },
+        "model_id": "34_1_Bay_of_Bengal_(1978)",
+        "model_sha256": "4ef83cb3ef1b725831a849bc07cf2ff4d13a2b0d464dc9db113db45ecde0861a"
+      },
+      "constructor_evidence": {
+        "path": "ewe_optimized/constructor.json.gz",
+        "sha256": "486306a2cf8598a724fcf73a4225b627a0246c47f9f1083258bb33ae09ba6976",
+        "availability": "present"
+      }
+    }
+  },
+  "groups": [
+    {
+      "id": 50,
+      "name": "diet_import",
+      "type": "Import",
+      "synthetic": true
+    },
+    {
+      "id": 49,
+      "name": "Detritus",
+      "type": "DET",
+      "synthetic": false
+    },
+    {
+      "id": 48,
+      "name": "Marlins",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 47,
+      "name": "Yellowfin tuna",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 46,
+      "name": "Bigeye tuna",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 45,
+      "name": "Benthic plants",
+      "type": "PP",
+      "synthetic": false
+    },
+    {
+      "id": 44,
+      "name": "3 Phytoplankton",
+      "type": "PP",
+      "synthetic": false
+    },
+    {
+      "id": 43,
+      "name": "2 Phytoplankton",
+      "type": "PP",
+      "synthetic": false
+    },
+    {
+      "id": 42,
+      "name": "1 Phytoplankton",
+      "type": "PP",
+      "synthetic": false
+    },
+    {
+      "id": 41,
+      "name": "3 Zooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 40,
+      "name": "3 Meiobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 39,
+      "name": "3 Macrobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 38,
+      "name": "3 Crustaceans",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 37,
+      "name": "3 SM pisc",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 36,
+      "name": "3 SM inv",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 35,
+      "name": "3 Milkfish plus",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 34,
+      "name": "3 L pisc comm",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 33,
+      "name": "3 S pelagics",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 32,
+      "name": "3 Carangids",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 31,
+      "name": "3 L pisc",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 30,
+      "name": "2-3 Indian mackerel",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 29,
+      "name": "2-3 Hilsa",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 28,
+      "name": "2 Zooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 27,
+      "name": "2 Meiobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 26,
+      "name": "2 Macrobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 25,
+      "name": "2 Crustaceans",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 24,
+      "name": "2 SM pisc",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 23,
+      "name": "2 SM inv",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 22,
+      "name": "2 Milkfish plus",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 21,
+      "name": "2 L pisc comm",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 20,
+      "name": "2 S pelagics",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 19,
+      "name": "2 Carangids",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 18,
+      "name": "2 L pisc",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 17,
+      "name": "1 Zooplankton",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 16,
+      "name": "1 Meiobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 15,
+      "name": "1 Macrobenthos",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 14,
+      "name": "1 SM pisc",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 13,
+      "name": "1 SM inv",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 12,
+      "name": "1 L pisc comm",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 11,
+      "name": "1 S pelagics",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 10,
+      "name": "1 Carangids",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 9,
+      "name": "1 L pisc",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 8,
+      "name": "ML bathy",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 7,
+      "name": "S bathy",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 6,
+      "name": "Cephalopods",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 5,
+      "name": "Jellyfish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 4,
+      "name": "Coastal scombrids",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 3,
+      "name": "Tuna-like",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 2,
+      "name": "Coastal elasmobranch",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 1,
+      "name": "Oceanic sharks",
+      "type": "Regular",
+      "synthetic": false
+    }
+  ],
+  "diagnostic_rows": [],
+  "constructor_evidence": {
+    "path": "ewe_optimized/constructor.json.gz",
+    "sha256": "486306a2cf8598a724fcf73a4225b627a0246c47f9f1083258bb33ae09ba6976",
+    "availability": "present"
+  },
+  "evidence_index": {
+    "path": "ewe_optimized/method_coverage.json.gz",
+    "sha256": "dc03921879990d0fb568fdb12f684584fe54cb3d3d48a12c964b384738d47d59",
+    "availability": "present"
+  }
+}

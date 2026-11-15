@@ -160,6 +160,7 @@ def update_book(path, book):
     following block; unparsed worksheets and their contents remain untouched.
     """
     import copy
+    from tools.project_core.registry.publication import guarded_replace
     path=Path(path)
     if not path.exists():return write_book(path,book)
     baseline=sha(path);original=read_book(path);w=openpyxl.load_workbook(path)
@@ -212,7 +213,7 @@ def update_book(path, book):
         try:
             w.save(tmp)
             if sha(path)!=baseline:raise ValueError(f'{path}: workbook changed during table update')
-            os.replace(tmp,path)
+            guarded_replace(tmp,path,expected_sha256=baseline)
         finally:
             if os.path.exists(tmp):os.unlink(tmp)
     finally:w.close()

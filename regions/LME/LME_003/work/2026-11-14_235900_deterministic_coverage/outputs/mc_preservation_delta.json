@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-15T05:57:08.415833+00:00",
+  "status": "PASS_PREPUBLICATION_DELTA",
+  "reason": "Preserve untouched MC diagnostic dimensions and explicit empty rows during deterministic cached-source adoption; retain strict value assertions.",
+  "proof_chain": {
+    "original_audit": "outputs/final_cohort_audit.json",
+    "prior_adopter_delta": "outputs/final_cohort_audit_prepublication_delta.json",
+    "prior_precision_delta": "outputs/final_cohort_audit_precision_delta.json",
+    "attempt4_rollback": "outputs/rollback_verification_after_attempt4.json",
+    "durable_recovery_manifest": "tmp/adoption_recovery_attempt3/manifest.json"
+  },
+  "protected_files_expected": 980,
+  "protected_files_unchanged": 980,
+  "unexpected_differences": [],
+  "coverage_source_change": {
+    "path": "tools/project_core/calculations/coverage.py",
+    "before_snapshot_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/inputs/coverage_before_empty_mc_preservation.py",
+    "before_sha256": "d8e0d985fddb63af530b16f78636c55d359c9391f55f54228259e5d02c9251e9",
+    "after_sha256": "5e01c14c65d4cbb0cff01f058559f0c840579ad164698e413ae0e31d027bd775",
+    "changed_definitions": [
+      "_update_source"
+    ],
+    "added_or_removed_definitions": [],
+    "all_other_module_ast_identical": true,
+    "added_lines": 45,
+    "original_lines_deleted_or_replaced": 0,
+    "independent_review": "PASS",
+    "scope": "Only an existing mc_diagnostics sheet with no newly added or replaced MC method receives original dimension and explicit-empty-row restoration. Exact typed rows and all nonempty cells after resetting dimensions are checked before atomic replacement. Existing numeric/formula, ZIP, expected-hash and concurrent-change guards remain. No scientific solver, arithmetic, prior precision logic or retention validator changed."
+  },
+  "adopter_sha256": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+  "complete_assert_retained_unchanged": true,
+  "scientific_adapter": {
+    "path": "tools/scientific_helpers/sppr/method_coverage.py",
+    "sha256": "b36ea4fb0c076d2202f229a01de29b84c7d9d8626f9ecd6909f5467a84956dc1",
+    "unchanged": true
+  },
+  "canonical_scientific_engine_hashes_verified": {
+    "tools/scientific_code/PPREstimation/PPRCalculator.py": "e2db750357d4ed32d748415c7372be0776531928141860e1893d6daeea26fb4a",
+    "tools/scientific_code/PPREstimation/ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "tools/scientific_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "static_cached_method_files_unchanged": [
+    {
+      "path": "regions/LME/LME_034/papers/LME034-Guenette-2013/models/34_1_Bay_of_Bengal_(1978)/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "413df3fd6341af24c9f7ac35836e3449f31e77e8c04f0f67c5115697bfd35470"
+    },
+    {
+      "path": "regions/LME/LME_035/papers/Christensen-1998/models/35_412_Gulf_of_Thailande_(1963)/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "55c72166c941acca627be652a1328813a8b14d909d797e6558ab263d3c68c7cf"
+    },
+    {
+      "path": "regions/LME/LME_038/papers/INDO-1999/models/38_38003_Java_Sea_normalized_BA_completed_(mid1970s)/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "b27a23fe206b9d5956003cfd7ed8223d36830d596b562d6fd2c6259b22278a45"
+    },
+    {
+      "path": "regions/LME/LME_014/papers/PAT-2023/models/PAT2024_FalklandShelf_2020_native/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "1508482ea1dc586c2bf35d9d19b452324bbe9c9eee5b7fd5906d12e31a5fbde2"
+    },
+    {
+      "path": "regions/LME/LME_003/papers/CAL-2016/models/CAL-2016_California_Current_2000-2014/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "7d099e30e278c2f2d07ba670b36347b1747674c4c5e05442cc295ca109d96265"
+    },
+    {
+      "path": "regions/HS/HS_071/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "5af3f92d321ea181b13e125b6605eb94d6af49beb9f0a08fd228b62595bc4fbe"
+    },
+    {
+      "path": "regions/EEZ/EEZ_941/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "fa6fcfae12f9a26b3bd67a0ec4cfb59abe6d77ff150de8eb1e7921ee52e9cba9"
+    },
+    {
+      "path": "regions/EEZ/EEZ_598/papers/WCP-2007/models/941_20070101_WCPO_Warm_Pool_Option1_(mixed_periods)/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "220fc23139800465f387cf621fa6a5832557ecd5b0992b25c9f1c77a7bab0def"
+    },
+    {
+      "path": "regions/LME/LME_037/papers/LME037-Bacalso-2026/models/Bacalso2026_Visayan_Sea_1997_baseline/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "71dfe09cb8ffec9f07be4df11fca29993808bd44a2f8b812b6c23760a7866ddf"
+    },
+    {
+      "path": "regions/LME/LME_013/papers/HUM-2018/models/Chiaverano2018_detailed_Northern_Humboldt_1995_1998/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "0a38b73abd5445f2bcedcbd9921f9e2ad6f0e97508d92d4924be070d9437c03e"
+    },
+    {
+      "path": "regions/LME/LME_022/papers/ICES-WGSAM-2015/models/ICES_WGSAM2015_North_Sea_1991/results/diagnostics/method_coverage/deterministic_completion_20261114/calculated/calculated.json",
+      "sha256": "ea5f636dbea774c4e685584d86ecd51772fd47ccad5fcf6436828c706ce24086"
+    }
+  ],
+  "reused_initialization_admission": {
+    "original_constructor": 146,
+    "retrospective_runtime_authentication": 2
+  },
+  "reused_cohort_counts": {
+    "total": 320,
+    "finite_including_flagged": 294,
+    "finite_flagged_subset": 85,
+    "finite_with_any_scope_restriction": 136,
+    "unsupported_formulation": 24,
+    "scientifically_unavailable": 2
+  },
+  "reused_sppr_1995_te01_all16_finite": true,
+  "reused_monte_carlo": {
+    "existing_evidence_files_verified": 24,
+    "absence_preserved_for_units": [
+      "LME_014",
+      "LME_003",
+      "LME_037",
+      "LME_022"
+    ],
+    "draws_rerun": false
+  },
+  "regression_evidence": {
+    "summary_path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/empty_mc_regression_summary.json",
+    "summary_sha256": "a260e3c7abd520a4dcdb29c5e85026a025f09507b6123812d5ca06bd873914c0",
+    "focused_tests": 30,
+    "focused_log_reports_ok": true,
+    "red_tests": 5,
+    "red_failing_cases": 4,
+    "full_private_lme014": {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/lme014_private_full_adoption.json",
+      "sha256": "f00ed6ac33336d6a23ccb4a570ae644122b93a193180d4ada6544ab57acaf962",
+      "status": "PASS",
+      "batches": 2,
+      "methods_per_batch": [
+        12,
+        6
+      ],
+      "complete_assert_retained_after_each_batch": "PASS",
+      "immutable_hashes_after_each_batch": "PASS",
+      "changed_canonical_inputs": [],
+      "bounded_model_file_count": 468,
+      "skipped_reparse_points": [
+        {
+          "path": "model_validation/work/2026-11-14_120000_validation_ee_on/code/node_modules",
+          "resolved_target": "C:\\Users\\idoca\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules",
+          "attributes": 1040,
+          "reason": "Non-scientific Node dependencies; junction not traversed or copied"
+        }
+      ],
+      "helper_sha256": "66e102b97cf279af59bb50d76322af6ffa706c91a7510bcb01196fa80927380b"
+    },
+    "all_source_projection": {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/all_source_projection_preflight.json",
+      "sha256": "46f0d1442b5edf79ecc930e1cdc13f67f9fc463c00d5773b2deeb3d9fd3323e1",
+      "status": "PASS",
+      "models": 11,
+      "batches": 24,
+      "all_original_source_projections": "PASS",
+      "all_untouched_sheets_exact_typed_values": "PASS",
+      "changed_canonical_inputs": []
+    },
+    "actual_mc_dimension": "A1:H2",
+    "actual_explicit_empty_rows": [
+      "2"
+    ],
+    "actual_original_and_final_typed_mc_state_identical": true,
+    "aborted_initial_fixture_setup_not_used_as_admission": true
+  },
+  "rollback_evidence": {
+    "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/rollback_verification_after_attempt4.json",
+    "sha256": "580fa39aedeab6e5a240ec7dac1f162f78927f1f44de80f49cd886d16b1d5c10",
+    "attempt": 4,
+    "status": "PASS_ROLLBACK",
+    "unified_protected_files_expected": 1152,
+    "differences": []
+  },
+  "durable_recovery": {
+    "manifest_sha256": "7fbcbee28594862f11517ff5cd39a12859040a17b30282d9ed0ac4963b552dd6",
+    "entries": 1052,
+    "preserved_without_modification": true
+  },
+  "proof_file_hashes": {
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/final_cohort_audit.json": "68517d8e42b03ee9fdcb3302b31871aaedcfcecb9f7ed5545d096cb68ccb1015",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/final_cohort_audit_prepublication_delta.json": "7a12eea22d41dc2841e2d3fd387786ef86e7a0fd145e7a0614f99f6ef6611cd7",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/final_cohort_audit_precision_delta.json": "37342631c1a78561fb66477332cbfb9311285d03d75bda6391cca3d6f46c1b4b",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/engine_comparison_final_engine_certification.json": "a7011734fcdf166a8019d91398a5b8a49f7fe1935c2740afff903cc5f9db4728",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/inputs/coverage_before_empty_mc_preservation.py": "d8e0d985fddb63af530b16f78636c55d359c9391f55f54228259e5d02c9251e9",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/adopt_completion.py": "8f5dc02329a3d3381022c2ae344cd17431f31df4026538b512ecabb3dd873cbc",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/empty_mc_regression_summary.json": "a260e3c7abd520a4dcdb29c5e85026a025f09507b6123812d5ca06bd873914c0",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/lme014_private_full_adoption.json": "f00ed6ac33336d6a23ccb4a570ae644122b93a193180d4ada6544ab57acaf962",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/all_source_projection_preflight.json": "46f0d1442b5edf79ecc930e1cdc13f67f9fc463c00d5773b2deeb3d9fd3323e1",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/tmp/adoption_recovery_attempt3/manifest.json": "7fbcbee28594862f11517ff5cd39a12859040a17b30282d9ed0ac4963b552dd6",
+    "tools/project_core/calculations/coverage.py": "5e01c14c65d4cbb0cff01f058559f0c840579ad164698e413ae0e31d027bd775",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/lme014_private_full_adoption.log": "31031863edadc72714ebb91080a66de99b83ee4547d4962b79fd435706a2c940",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/empty_mc_regressions_focused30.log": "2e514ed3c076c28c36130a6eba3134f1c32d6f9ea4671a875b9ffeb3026ca5ef",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/empty_mc_coverage.diff": "10320a3aab74156a43792f9a9ce7ea0835cd42f5df7f79b0e2135f01787654f7",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/lme014_private_copy_cleanup.json": "15da6c3caad7b3c2b09ae2e22a51084a21284295a7ff94c436cbd5aed9ae5ea8",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/empty_mc_regressions_red.log": "4751c7584a8fc80ba363ca75cd606009536850e2d479616d38e2a13863b5241d",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/empty_mc_regressions_green.log": "8e9bcc2667671b5d8d2465087385cc20c31516eede79f7214263c86e2bf2fbdd",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/mc_source_roundtrip_reproduction.json": "0a7f5eed897d2341d4a5270507b9dbbc16f49dd5d1df3c21508b4123b8166739",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/mc_source_roundtrip_reproduction.log": "0a7f5eed897d2341d4a5270507b9dbbc16f49dd5d1df3c21508b4123b8166739",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/lme014_private_full_adoption_attempt1.log": "fa8b03ed95645b84d1b64c7420062ed0a2d31301509d983223113923c6f5e190",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/verify_lme014_private_adoption.py": "66e102b97cf279af59bb50d76322af6ffa706c91a7510bcb01196fa80927380b",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/finalize_empty_mc_evidence.py": "29ec5069bf3c150b5e74276f3e1d5bea69434038b0ef19ef499368b7f352af42",
+    "tools/workflow_checks/calculations/test_source_mc_preservation.py": "32be53f5f09acf8b42e4cc986918c3693a8ec889ac28283d20045190b6e74117",
+    "tools/workflow_checks/calculations/test_retained_diagnostic_numbers.py": "c7ff8000dc2a28a65f8673f2b245dab7a8251262a0b83592c8aae3745f4afab2",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/verify_all_source_projections.py": "b91f40dcf70149c2960f6294cf7b97016415def08fb395da35ba4d84f7e681a5",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/outputs/rollback_verification_after_attempt4.json": "580fa39aedeab6e5a240ec7dac1f162f78927f1f44de80f49cd886d16b1d5c10",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/adoption_application_attempt4.log": "63ef6f79ad7b34153410d0c1508e7c2150794489f5632b359faf444682c0823a",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/final_cohort_audit.py": "f758d2b6d61e7654308442986ce78c98ecf2a9432e509cb12955d4ce8c181a6a",
+    "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/code/provenance_admission.py": "d66b982e9ea1688400bcfb12a543f1b35a5765549913a8c88e874c7e2f3fbfa9",
+    "tools/scientific_helpers/sppr/method_coverage.py": "b36ea4fb0c076d2202f229a01de29b84c7d9d8626f9ecd6909f5467a84956dc1",
+    "tools/scientific_code/PPREstimation/PPRCalculator.py": "e2db750357d4ed32d748415c7372be0776531928141860e1893d6daeea26fb4a",
+    "tools/scientific_code/PPREstimation/ModelData.py": "64c7769ed1494ccadf71dea333765989964ce8c4be9575143b6bc4cbbc6cc680",
+    "tools/scientific_code/PPREstimation/utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+  },
+  "original_audit_reports_preserved": true,
+  "canonical_writes_performed": false,
+  "scientific_execution_performed": false,
+  "initialization_sweep_repeated": false,
+  "saved_workbook_parsing_repeated_by_this_delta_audit": false,
+  "scope_note": "This bounded audit uses JSON, AST and explicit file byte hashes. Authorized private regression fixtures separately exercised saved-workbook adoption. Original scientific admission remains reusable because all 980 protected files, 11 cached outcomes and scientific engine/adapter hashes match. Normal prewrite and transactional gates remain required."
+}

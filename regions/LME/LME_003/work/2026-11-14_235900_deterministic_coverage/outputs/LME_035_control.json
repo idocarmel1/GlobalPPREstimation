@@ -1,0 +1,142 @@
+{
+  "unit_id": "LME_035",
+  "model_id": "35_412_Gulf_of_Thailande_(1963)",
+  "identity": {
+    "model_sha256": "dc6b45d6a5f532a5ebd294b3365e43b8bd74b66ca0dea5a035793fcad8f836e9",
+    "source_sha256": "142a447e172b0f7be2a91d704d50d74203ed851d08d677d412004260e32bdb47",
+    "flags": {
+      "constructor": {
+        "underdetermined": true,
+        "zero_biomass_accum": false,
+        "DC_tol": 0.001,
+        "normalize_DC": true,
+        "use_ee_floor": true,
+        "ee_floor": 0.1
+      },
+      "diagnostics": {
+        "det_open_mode": "none",
+        "det_theta": 1.0,
+        "det_external_sppr": 0.0,
+        "det_collapse_mode": "never"
+      },
+      "methods": {},
+      "mc": {
+        "n_samples": 100
+      },
+      "engine_source_hashes": {
+        "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+        "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+        "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+      },
+      "configuration_evidence": [
+        {
+          "relative_path": "model_validation/evidence/source_review/direct_diagnostics/execution_evidence.json",
+          "sha256": "f939545f623781b6c70cd8c0a45aa2ce1bc385a91675aed456d7917ba977557b",
+          "original_source_hash": "dc6b45d6a5f532a5ebd294b3365e43b8bd74b66ca0dea5a035793fcad8f836e9"
+        },
+        {
+          "relative_path": "model_validation/evidence/source_review/direct_diagnostics/engine/PPRCalculator.py",
+          "sha256": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+          "original_source_hash": "dc6b45d6a5f532a5ebd294b3365e43b8bd74b66ca0dea5a035793fcad8f836e9"
+        },
+        {
+          "relative_path": "model_validation/evidence/source_review/direct_diagnostics/engine/ModelData.py",
+          "sha256": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+          "original_source_hash": "dc6b45d6a5f532a5ebd294b3365e43b8bd74b66ca0dea5a035793fcad8f836e9"
+        },
+        {
+          "relative_path": "model_validation/evidence/source_review/direct_diagnostics/engine/utils.py",
+          "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+          "original_source_hash": "dc6b45d6a5f532a5ebd294b3365e43b8bd74b66ca0dea5a035793fcad8f836e9"
+        }
+      ],
+      "engine_sources": {
+        "PPRCalculator.py": "model_validation/evidence/source_review/direct_diagnostics/engine/PPRCalculator.py",
+        "ModelData.py": "model_validation/evidence/source_review/direct_diagnostics/engine/ModelData.py",
+        "utils.py": "model_validation/evidence/source_review/direct_diagnostics/engine/utils.py"
+      },
+      "calculation_engine_upgrade": "ee_floor_v1",
+      "calculation_engine_sha256": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715",
+      "audited_replay": {
+        "schema_version": 1,
+        "model_sha256": "dc6b45d6a5f532a5ebd294b3365e43b8bd74b66ca0dea5a035793fcad8f836e9",
+        "mode": "completed_runtime",
+        "provenance": {
+          "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+          "sha256": "8904ce61c6556d0dbdc5b60bccff9c956da983f84df7dc187ebcc3c1df4d8019"
+        },
+        "runtime": {
+          "relative_path": "results/diagnostics/method_coverage/constructor.json.gz",
+          "sha256": "8904ce61c6556d0dbdc5b60bccff9c956da983f84df7dc187ebcc3c1df4d8019",
+          "keys": [
+            "constructor_outcome",
+            "runtime"
+          ]
+        }
+      }
+    },
+    "engine_identity": {
+      "ModelData.py": "24a12fb0af33cc4b1976d40b39627c509436e808837aebb46517208e4d285e23",
+      "PPRCalculator.py": "b2bb08f0564c8cd0fcc873eb1c681fd924c3dd113e22d6b388456248fc0162a7",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+      "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+      "calculation/PPRCalculator.py": "b1090ad2f9d5448b45e2c2920594f699208d9271e07731905935039248c60715"
+    }
+  },
+  "passed": true,
+  "comparisons": [
+    {
+      "method": "new_GE",
+      "execution_status": "ok",
+      "reason": "",
+      "exception": null,
+      "checks": [
+        {
+          "scope": "all",
+          "passed": true,
+          "groups": 30,
+          "max_absolute_error": 2.9103830456733704e-11
+        },
+        {
+          "scope": "inner",
+          "passed": true,
+          "groups": 30,
+          "max_absolute_error": 2.9103830456733704e-11
+        },
+        {
+          "scope": "PP",
+          "passed": true,
+          "groups": 30,
+          "max_absolute_error": 5.684341886080802e-14
+        }
+      ]
+    },
+    {
+      "method": "new_TE_EEfix",
+      "execution_status": "ok",
+      "reason": "",
+      "exception": null,
+      "checks": [
+        {
+          "scope": "all",
+          "passed": true,
+          "groups": 30,
+          "max_absolute_error": 4.547473508864641e-13
+        },
+        {
+          "scope": "inner",
+          "passed": true,
+          "groups": 30,
+          "max_absolute_error": 4.547473508864641e-13
+        },
+        {
+          "scope": "PP",
+          "passed": true,
+          "groups": 30,
+          "max_absolute_error": 4.656612873077393e-10
+        }
+      ]
+    }
+  ],
+  "scientific_scope": "Exact retained GE/TE numerical reproduction; existing coefficients unchanged"
+}

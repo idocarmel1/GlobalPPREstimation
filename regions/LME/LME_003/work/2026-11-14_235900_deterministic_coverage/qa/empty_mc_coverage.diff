@@ -1,0 +1,81 @@
+--- regions\LME\LME_003\work\2026-11-14_235900_deterministic_coverage\inputs\coverage_before_empty_mc_preservation.py
++++ tools\project_core\calculations\coverage.py
+@@ -236,6 +236,15 @@
+         value = cell.find(f'{{{S}}}f')
+         return None if value is None else (value.text, sorted(value.attrib.items()))
+     original_numbers = {}; changed_cells = {}; replace_methods = set(replace_methods)
++    original_mc = None
++    def typed_rows(values):
++        return tuple(tuple((type(value).__name__, repr(value)) for value in row) for row in values)
++    if path.is_file() and 'mc_diagnostics' in workbook:
++        saved = openpyxl.load_workbook(path, read_only=True)
++        try:
++            original_mc = {'values': typed_rows(saved['mc_diagnostics'].values)}
++        finally:
++            saved.close()
+     if path.is_file():
+         with zipfile.ZipFile(path) as archive:
+             for name in workbook.sheetnames:
+@@ -244,6 +253,10 @@
+                 original_numbers[name] = {cell.get('r'):(cell.find(f'{{{S}}}v').text,formula(cell))
+                     for cell in sheet.iter(f'{{{S}}}c') if cell.get('t') in (None,'n')
+                     and cell.find(f'{{{S}}}v') is not None}
++                if name == 'mc_diagnostics':
++                    original_mc['dimension'] = sheet.find(f'{{{S}}}dimension').get('ref')
++                    original_mc['empty_rows'] = [row.get('r') for row in
++                        sheet.findall(f'{{{S}}}sheetData/{{{S}}}row') if not len(row)]
+     if workbook.sheetnames == ['Sheet']:
+         workbook.remove(workbook['Sheet'])
+     groups = records(book, 'Selected model groups', 'Groups')
+@@ -348,6 +361,7 @@
+     fd, temporary = tempfile.mkstemp(dir=path.parent, suffix='.xlsx'); os.close(fd)
+     try:
+         workbook.save(temporary); workbook.close()
++        untouched_mc = original_mc is not None and not any(key.startswith('MC_') for key in added_methods)
+         # openpyxl serializes even untouched floats at 16 digits. Restore the
+         # original numeric text, including unchanged formula caches, by address.
+         with zipfile.ZipFile(temporary) as archive:
+@@ -362,12 +376,43 @@
+                     if value is None: value = etree.SubElement(cell,f'{{{S}}}v')
+                     if value.text != previous[0]: value.text = previous[0]; changed = True
+                 if changed: replacements[member] = etree.tostring(sheet,encoding='utf-8')
++            if untouched_mc:
++                member, sheet = sheet_xml(archive, 'mc_diagnostics')
++                if member in replacements:
++                    sheet = etree.fromstring(replacements[member])
++                # openpyxl drops explicit empty rows and shrinks the dimension
++                # even when MC diagnostics were never requested for editing.
++                # Restore structure only; never reuse old cells or style IDs.
++                sheet.find(f'{{{S}}}dimension').set('ref', original_mc['dimension'])
++                data = sheet.find(f'{{{S}}}sheetData')
++                present = {row.get('r') for row in data}
++                for number in original_mc['empty_rows']:
++                    if number not in present:
++                        data.append(etree.Element(f'{{{S}}}row', {'r': number}))
++                data[:] = sorted(data, key=lambda row: int(row.get('r')))
++                replacements[member] = etree.tostring(sheet, encoding='utf-8')
+             parts = [(info,replacements.get(info.filename,archive.read(info.filename))) for info in archive.infolist()]
+         if replacements:
+             with zipfile.ZipFile(temporary,'w') as archive:
+                 for info,data in parts: archive.writestr(info,data)
+         with zipfile.ZipFile(temporary) as archive:
+             if archive.testzip() is not None: raise ValueError('Updated source workbook ZIP failed verification')
++        if untouched_mc:
++            saved = openpyxl.load_workbook(temporary, read_only=True)
++            try:
++                sheet = saved['mc_diagnostics']
++                if typed_rows(sheet.values) != original_mc['values']:
++                    raise ValueError('Untouched MC diagnostics changed during source replacement')
++                # A restored dimension must not conceal a new nonempty cell.
++                sheet.reset_dimensions()
++                actual = {(row, column): value for row, values in enumerate(typed_rows(sheet.values), 1)
++                          for column, value in enumerate(values, 1) if value != ('NoneType', 'None')}
++                expected = {(row, column): value for row, values in enumerate(original_mc['values'], 1)
++                            for column, value in enumerate(values, 1) if value != ('NoneType', 'None')}
++                if actual != expected:
++                    raise ValueError('Untouched MC diagnostics changed during source replacement')
++            finally:
++                saved.close()
+         if (sha(path) if path.is_file() else None)!=baseline:
+             raise ValueError('Source workbook changed during replacement')
+         os.replace(temporary, path)

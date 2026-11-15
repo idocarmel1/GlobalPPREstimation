@@ -2992,6 +2992,17 @@ class PPRCalculator:
 
         SPPR_combined_raw = SPPR[list(DET_seq)].sum(axis=1)
 
+        if not non_DET_sppr.index.equals(SPPR_combined_raw.index):
+            raise ValueError('Detritus basis recipient axes differ')
+        omitted = m_eff.index.difference(non_DET_sppr.index)
+        if len(omitted):
+            weights = m_eff.loc[omitted]
+            if not (np.isfinite(weights).all() and (weights == 0).all()):
+                raise ValueError('Detritus collapse has unrepresented nonzero recipient weights: '
+                                 + repr(omitted.tolist()))
+        if len(non_DET_sppr.index.difference(m_eff.index)):
+            raise ValueError('Detritus collapse is missing recipient weights')
+        m_eff = m_eff.reindex(non_DET_sppr.index)
         a = float(m_eff @ non_DET_sppr)
         b = float(m_eff @ SPPR_combined_raw)
 
@@ -3338,6 +3349,20 @@ class PPRCalculator:
 
         return SPPR, A, L
     
+    def _group_sppr_symbols(self, seq, prefix):
+        """Create one literal symbol per group; punctuation is part of its name."""
+        names = [f'{prefix}_{self.seq2name[s]}'.replace(' ', '_') for s in seq]
+        if len(names) != len(set(names)):
+            raise ValueError('Symbolic group labels must remain distinct after space replacement')
+        return [sm.Symbol(name) for name in names]
+
+    @staticmethod
+    def _eval_symbolic_substitutions(expression, substitutions):
+        """Leave free identity variables free instead of recursing in evalf."""
+        effective = {key: value for key, value in substitutions.items()
+                     if value != key and (value - key).is_zero is not True}
+        return expression.evalf(subs=effective)
+
     def _SPPR_symbolic_helper_diet_import_as_PP(self, TE: Optional[pd.DataFrame], TE_option: str, DET_TE_vals: float, sppr_det_value: Optional[float],
                                                 det_collapse_mode: str = 'never', det_open_mode: str = 'none',
                                                 det_theta: float | dict = 1.0, det_external_sppr: float | dict = 0.0,
@@ -3437,10 +3462,10 @@ class PPRCalculator:
         # solve linear equation:
         index = Regular_seq + DET_seq + Import_seq + PP_seq
         symbols_by_trophic_info = {
-            'Regular': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in Regular_seq]),
-            'DET': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in DET_seq]),
-            'Import': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in Import_seq]),
-            'PP': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in PP_seq]),
+            'Regular': self._group_sppr_symbols(Regular_seq, 'SPPR'),
+            'DET': self._group_sppr_symbols(DET_seq, 'SPPR'),
+            'Import': self._group_sppr_symbols(Import_seq, 'SPPR'),
+            'PP': self._group_sppr_symbols(PP_seq, 'SPPR'),
         }
         ordered_symbols = symbols_by_trophic_info['Regular'] + symbols_by_trophic_info['DET'] \
                         + symbols_by_trophic_info['Import'] + symbols_by_trophic_info['PP']
@@ -3468,7 +3493,7 @@ class PPRCalculator:
         target_free_symbols = symbols_by_trophic_info['DET'] + symbols_by_trophic_info['Import'] + symbols_by_trophic_info['PP']
         sppr = sppr_vec.replace(sol_dict1)
         subs_dict = {v: 1 for v in sppr_vec.squeeze().loc[target_free_seq]}
-        sppr_symbolic = sppr.apply(lambda col: col.map(lambda x: x.evalf(subs=subs_dict) if hasattr(x, 'evalf') else x))
+        sppr_symbolic = sppr.apply(lambda col: col.map(lambda x: self._eval_symbolic_substitutions(x, subs_dict) if hasattr(x, 'evalf') else x))
 
         sppr_mat, _ = sm.linear_eq_to_matrix(sol_tuple1, target_free_symbols)
         sppr_mat = sm.lambdify([], sppr_mat, 'numpy')() # Converts SymPy matrix to NumPy
@@ -3511,7 +3536,7 @@ class PPRCalculator:
             # DEFAULT: keep the proven exact symbolic per-DET scaling (byte-identical to old).
             for det_j in DET_seq:
                 det_sym = sppr_vec.loc[det_j].values.ravel()[0]
-                sppr_mat[det_j] *= float(sol_dict2[det_sym].evalf(subs=subs_dict))
+                sppr_mat[det_j] *= float(self._eval_symbolic_substitutions(sol_dict2[det_sym], subs_dict))
         else:
             # Non-default: build the numeric (I-B)x=c from the symbolic basis sppr_mat and
             # route through the shared openness/stability/collapse solver.
@@ -3612,15 +3637,15 @@ class PPRCalculator:
 
         # define and order symbols:
         index = Regular_seq + DET_seq + PP_seq
-        diet_sppr_symbols = sm.symbols([f'DIET_SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in index])
+        diet_sppr_symbols = self._group_sppr_symbols(index, 'DIET_SPPR')
         diet_sppr_vec = pd.DataFrame(diet_sppr_symbols, index=index, columns=Import_seq)
         A = A.loc[index, :]
 
         # solve linear equation:
         symbols_by_trophic_info = {
-            'Regular': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in Regular_seq]),
-            'DET': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in DET_seq]),
-            'PP': sm.symbols([f'SPPR_{self.seq2name[s]}'.replace(' ', '_') for s in PP_seq]),
+            'Regular': self._group_sppr_symbols(Regular_seq, 'SPPR'),
+            'DET': self._group_sppr_symbols(DET_seq, 'SPPR'),
+            'PP': self._group_sppr_symbols(PP_seq, 'SPPR'),
         }
         ordered_symbols = symbols_by_trophic_info['Regular'] + symbols_by_trophic_info['DET'] \
                         + symbols_by_trophic_info['PP']
@@ -3648,7 +3673,7 @@ class PPRCalculator:
         sppr = sppr_vec.replace(sol_dict1)
         subs_dict_PP = {v: 1 for v in sppr_vec.squeeze().loc[PP_seq]}
         subs_dict = subs_dict_PP | {ds: sol_dict2[ds].subs(subs_dict_PP) for ds in symbols_by_trophic_info['DET']}
-        sppr = sppr.apply(lambda col: col.map(lambda x: x.evalf(subs=subs_dict) if hasattr(x, 'evalf') else x))
+        sppr = sppr.apply(lambda col: col.map(lambda x: self._eval_symbolic_substitutions(x, subs_dict) if hasattr(x, 'evalf') else x))
         equations_di = (DC.loc[index, index] @ sppr).squeeze() + (DC.loc[index, Import_seq] * diet_sppr_vec).squeeze() - diet_sppr_vec.squeeze()
 
         equations_di = equations_di.squeeze().tolist()
@@ -3662,7 +3687,7 @@ class PPRCalculator:
         target_free_seq = PP_seq
         sppr = sppr_vec.replace(sol_dict1)
         subs_dict = {v: 1 for v in sppr_vec.squeeze().loc[PP_seq]} | sol_dict3
-        sppr_symbolic = sppr.apply(lambda col: col.map(lambda x: x.evalf(subs=subs_dict) if hasattr(x, 'evalf') else x))
+        sppr_symbolic = sppr.apply(lambda col: col.map(lambda x: self._eval_symbolic_substitutions(x, subs_dict) if hasattr(x, 'evalf') else x))
 
         target_free_symbols = diet_sppr_symbols + symbols_by_trophic_info['DET'] + symbols_by_trophic_info['PP']
         target_free_seq = DET_seq + PP_seq
@@ -3676,7 +3701,7 @@ class PPRCalculator:
             # DEFAULT: keep the proven exact symbolic per-DET scaling (byte-identical to old).
             for det_j in DET_seq:
                 det_sym = sppr_vec.loc[det_j].values.ravel()[0]
-                sppr_mat[det_j] *= float(sol_dict2[det_sym].evalf(subs=subs_dict))
+                sppr_mat[det_j] *= float(self._eval_symbolic_substitutions(sol_dict2[det_sym], subs_dict))
         else:
             # Non-default: build the numeric (I-B)x=c from the symbolic basis sppr_mat and
             # route through the shared openness/stability/collapse solver. DET columns only;

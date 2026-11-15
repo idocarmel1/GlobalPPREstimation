@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-11-15T10:17:13.867Z",
+  "status": "FAIL",
+  "test_scope": "Production pages in new isolated headless Chromium contexts; no existing browser session or user profile",
+  "playwright_version": "1.62.1",
+  "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "source_sha256_before": {
+    "Project.xlsx": "0a378c064063636a817ad78b7bab336c894ff7e5fcdc1117785a89b1a1a7382c",
+    "interactive_map/trends.html": "4c3e571abbb0f7a3f68c598e3504eb3c1631029cd91c02ec1bcbfc2ece88bd35",
+    "interactive_map/index.html": "76b645fe4d168961f3e61a77dc4f685b5f9597a7b3de37aa6c9b287aab4429c5"
+  },
+  "checks": [
+    {
+      "name": "Visible fresh-context trend defaults and 57 researcher exclusions",
+      "status": "PASS",
+      "details": {
+        "catchBasis": {
+          "value": "landings",
+          "label": "Landings only (default)"
+        },
+        "uncertainty": {
+          "value": "1",
+          "label": "Show where assessed"
+        },
+        "metric": {
+          "value": "ratio",
+          "label": "PPR / NPP"
+        },
+        "baselineMethod": {
+          "value": "",
+          "label": "None"
+        },
+        "sourceScope": {
+          "value": "all",
+          "label": "All sources"
+        },
+        "nppScope": {
+          "value": "global",
+          "label": "Global atlas NPP"
+        },
+        "nppFill": {
+          "value": "earliest",
+          "label": "Use earliest available year for earlier gaps"
+        },
+        "unidentifiedTreatment": {
+          "value": "method",
+          "label": "Selected method’s own SPPR (default)"
+        },
+        "groupDisplay": {
+          "value": "total",
+          "label": "Total"
+        },
+        "globalApproximation": {
+          "value": "0",
+          "label": "Off"
+        },
+        "regionReviewFilter": {
+          "value": "validated",
+          "label": "Selected regions with validated models"
+        },
+        "fromYear": {
+          "value": "1950",
+          "label": "1950"
+        },
+        "toYear": {
+          "value": "2019",
+          "label": "2019"
+        }
+      }
+    },
+    {
+      "name": "Visible picker contains exactly the sixteen validated ecosystems",
+      "status": "PASS",
+      "details": [
+        "EEZ_598",
+        "EEZ_941",
+        "HS_071",
+        "HS_077",
+        "LME_003",
+        "LME_013",
+        "LME_014",
+        "LME_022",
+        "LME_032",
+        "LME_034",
+        "LME_035",
+        "LME_036",
+        "LME_037",
+        "LME_038",
+        "LME_047",
+        "LME_049"
+      ]
+    }
+  ],
+  "page_errors": [],
+  "request_failures": [],
+  "screenshots": [
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/validated-ecosystems.png",
+      "sha256": "e025f2be1be2946b127be62cceb3dbe3a34970543ab86c989ea5a360c79462f5"
+    },
+    {
+      "path": "regions/LME/LME_003/work/2026-11-14_235900_deterministic_coverage/qa/browser/failure.png",
+      "sha256": "5f4e06ad3b110b5be364f3fec1e4f93476425d411ffc338e2fd267eb68bf8fe8"
+    }
+  ],
+  "browser_version": "157.0.8103.51",
+  "error": {
+    "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    'simple trophic chain',\n    'SPPR_1995_TE0.1',\n+   'new_TE_EEfix',\n    'new_GE',\n-   'new_TE_EEfix'\n  ]\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    'simple trophic chain',\n    'SPPR_1995_TE0.1',\n+   'new_TE_EEfix',\n    'new_GE',\n-   'new_TE_EEfix'\n  ]\n\n    at main (C:\\Users\\idoca\\Desktop\\אישי\\אקדמיה\\תואר שני\\מחקר\\BTN\\GlobalPPREstimation\\regions\\LME\\LME_003\\work\\2026-11-14_235900_deterministic_coverage\\code\\verify_browser.cjs:93:12)"
+  },
+  "source_sha256_after": {
+    "Project.xlsx": "0a378c064063636a817ad78b7bab336c894ff7e5fcdc1117785a89b1a1a7382c",
+    "interactive_map/trends.html": "4c3e571abbb0f7a3f68c598e3504eb3c1631029cd91c02ec1bcbfc2ece88bd35",
+    "interactive_map/index.html": "76b645fe4d168961f3e61a77dc4f685b5f9597a7b3de37aa6c9b287aab4429c5"
+  },
+  "finished_at": "2026-11-15T10:17:24.399Z"
+}

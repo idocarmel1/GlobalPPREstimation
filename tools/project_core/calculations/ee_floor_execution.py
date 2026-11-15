@@ -51,7 +51,10 @@ def _references(calculated, methods):
     if set(outcomes) != set(methods):
         raise ValueError('Executed evidence omitted or added requested methods')
     references = [outcomes[key].get('evidence') for key in methods]
-    references.extend(calculated[key] for key in ('constructor_evidence', 'evidence_index')
+    references.extend(outcomes[key][name] for key in methods
+                      for name in ('constructor_evidence', 'runtime_verification_evidence')
+                      if name in outcomes[key])
+    references.extend(calculated[key] for key in ('constructor_evidence', 'runtime_verification_evidence', 'evidence_index')
                       if key in calculated)
     if any(not isinstance(ref, dict) or not ref.get('path') or not ref.get('sha256')
            for ref in references):

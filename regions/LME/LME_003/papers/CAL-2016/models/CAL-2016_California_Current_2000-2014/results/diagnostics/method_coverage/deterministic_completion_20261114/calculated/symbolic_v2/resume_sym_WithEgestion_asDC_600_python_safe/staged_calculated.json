@@ -1,0 +1,1407 @@
+{
+  "model_id": "CAL-2016_California_Current_2000-2014",
+  "model_sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+  "flags": {
+    "constructor": {
+      "underdetermined": false,
+      "zero_catch": false,
+      "zero_biomass_accum": false,
+      "default_gs": true,
+      "weight_flow": 1.0,
+      "weight_guess": 1.0,
+      "normalize_DC": false,
+      "DC_tol": 0.001
+    },
+    "diagnostics": {
+      "DET_TE_vals": 1,
+      "det_collapse_mode": "never",
+      "det_open_mode": "none",
+      "det_theta": 1.0,
+      "det_external_sppr": 0.0,
+      "fix_EE_0_cases": true,
+      "thresholds": {
+        "b_warn": 0.7,
+        "b_fail": 1.0,
+        "rho_living_warn": 0.7,
+        "rho_living_fail": 1.0,
+        "sppr_det_warn": 10.0,
+        "balance_warn": 0.01,
+        "balance_fail": 0.05,
+        "model_balance_warn": 0.0001,
+        "model_balance_fail": 0.1,
+        "dc_row_tol": 1e-06,
+        "ee_marginal": 0.001
+      }
+    },
+    "methods": {},
+    "mc": {},
+    "runtime_initialization": {
+      "reexecution_supported": false,
+      "recipe": "Archived ModelData metadata-alias parsing, accepted author-equation input, default GS and single-detritus initialization, diet_import bookkeeping, then pinned EE floor applied to the completed audited runtime.",
+      "floor_configuration": {
+        "use_ee_floor": true,
+        "ee_floor": 0.1,
+        "ee_threshold": 0.1
+      },
+      "execution_identity": "results/diagnostics/ee_floor_review_20261114/inventory/execution_identity.json",
+      "effective_state": "results/diagnostics/ee_floor_review_20261114/outputs/effective_state.json.gz",
+      "effective_state_sha256": "9da77e757abb1aa3620de70e790f3f58c50e0c2f9a662b59a19f338dfa3eedfc",
+      "current_engine_equivalence": false
+    },
+    "engine_sources": {
+      "ModelData.py": "results/diagnostics/ee_floor_review_20261114/code/audited/ModelData.py",
+      "utils.py": "results/diagnostics/ee_floor_review_20261114/code/audited/utils.py",
+      "PPRCalculator.py": "results/diagnostics/ee_floor_review_20261114/code/floor/PPRCalculator.py"
+    },
+    "engine_source_hashes": {
+      "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+      "PPRCalculator.py": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+      "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+    },
+    "configuration_evidence": [
+      {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/inventory/execution_identity.json",
+        "sha256": "a2f2c46023c21267b286adb9f2300dd69d38aaf77409dba04d28bb8e2e4c57ba",
+        "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+      },
+      {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/outputs/effective_state.json.gz",
+        "sha256": "9da77e757abb1aa3620de70e790f3f58c50e0c2f9a662b59a19f338dfa3eedfc",
+        "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+      },
+      {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/code/audited/ModelData.py",
+        "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+        "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+      },
+      {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/code/audited/utils.py",
+        "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+        "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+      },
+      {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/code/floor/PPRCalculator.py",
+        "sha256": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+        "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+      }
+    ],
+    "audited_replay": {
+      "schema_version": 1,
+      "model_sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+      "mode": "completed_runtime",
+      "provenance": {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/inventory/execution_identity.json",
+        "sha256": "a2f2c46023c21267b286adb9f2300dd69d38aaf77409dba04d28bb8e2e4c57ba"
+      },
+      "runtime": {
+        "relative_path": "results/diagnostics/ee_floor_review_20261114/outputs/effective_state.json.gz",
+        "sha256": "9da77e757abb1aa3620de70e790f3f58c50e0c2f9a662b59a19f338dfa3eedfc",
+        "keys": []
+      },
+      "symbolic_repair": {
+        "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_repairs_v2/PPRCalculator.py",
+        "sha256": "253d65e4e4aab299590657b607e302658ab2ed21cb14e9c19e8c4862d78dfe54",
+        "base_sha256": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+        "repair": "symbolic_repairs_v2"
+      }
+    },
+    "method_timeout_seconds": 600,
+    "method_timeout_overrides_seconds": {
+      "sym_WithEgestion_asDC": 600
+    }
+  },
+  "constructor": {
+    "underdetermined": false,
+    "zero_catch": false,
+    "zero_biomass_accum": false,
+    "default_gs": true,
+    "weight_flow": 1.0,
+    "weight_guess": 1.0,
+    "normalize_DC": false,
+    "DC_tol": 0.001
+  },
+  "engine_hashes": {
+    "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+    "PPRCalculator.py": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+    "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f",
+    "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+    "symbolic_repair/PPRCalculator.py": "253d65e4e4aab299590657b607e302658ab2ed21cb14e9c19e8c4862d78dfe54"
+  },
+  "adapter_sha256": "ca718c0911ac066ea7e5299f5dc0b7b38ccd718b6e22a43a2c06702aabcf3b58",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3"
+  },
+  "methods": {
+    "sym_WithEgestion_asDC": {
+      "status": "ok",
+      "reason": "FAIL: negative SPPR in a source-model group",
+      "scopes": {
+        "all": {
+          "diet_import": null,
+          "Detritus": 1.661849920430793,
+          "Brown Pelican": 11900.035017042126,
+          "Caspian tern": 55315.22630133981,
+          "Pigeon Guillemot": 38116.08832519011,
+          "Murrelet": 42348.48205712432,
+          "Pelagic cormorant": 30859.21051220155,
+          "Double corm.": 23609.727045963864,
+          "Brandt's corm.": 13967.250518054232,
+          "Dolphins": 10515.431913145872,
+          "Gray whale": 2058.0626186462973,
+          "Blue whale": 461.732443287453,
+          "Fur seals": 23166.769644453736,
+          "Adult N. Ele. Seal": 2611.2512198978466,
+          "Juv. Ele. Seal": 2660.7388588045724,
+          "Sea Lions": 9210.380286582022,
+          "Harbor seals": 11351.060753892638,
+          "Sperm whale": 26598.317246860115,
+          "Fin whale": 1332.0143372732784,
+          "Minke whale": 1960.7910363482238,
+          "Humpback whale": 2315.8970584958633,
+          "Porpoises": 22293.986956780558,
+          "Resident Orcas": 58249.94640239204,
+          "Transient Orcas": 1629560.5836967563,
+          "Leach's S. Petrel": 47715.449660304126,
+          "Shearwater": 58146.433982754956,
+          "Fulmar": 89788.16102880373,
+          "Albatross": 54880.522197631275,
+          "Kittiwake": 79059.72927287794,
+          "Western Gull": 27304.655946794202,
+          "Cali. gull": 36765.26561559735,
+          "Tufted Puffin": 55683.364128200395,
+          "Rhino. auklet": 36962.56567435342,
+          "Cassin's auklet": 5229.785537502349,
+          "Common murre": 53163.26054604486,
+          "Sharks": 11920.157865732719,
+          "Skates": 320.6653359320375,
+          "Flatfish": 37.31873463237618,
+          "Longspine thorny.": 144.40340211936143,
+          "Shortspine thorny.": -498.53930038583707,
+          "Slope rock.": 278.9634142889995,
+          "Splitnose rock.": 178.7800830863342,
+          "Widow rock.": 155.87996149965173,
+          "P. Ocean Perch": 238.52585327192577,
+          "Canary rock.": 84.36403030339055,
+          "Dogfish": 870.2496429405708,
+          "Grenadiers": 58.88900774832492,
+          "Salmon": 49.364484199374125,
+          "Albacore": 376.0068755075357,
+          "Sablefish": 365.4453598710891,
+          "Arrowtooth": 209.31613702662156,
+          "Lingcod": 283.12277767187715,
+          "Hake": 42.48652955040326,
+          "Halibut": 159.20865714254805,
+          "Petrale sole": 172.87074840093948,
+          "Shortbelly": 7.797520276449019,
+          "Shelf rock.": 189.93338309661564,
+          "Greenstriped": 273.997999798826,
+          "Yelloweye rock.": 1898.758025453848,
+          "Nearshore rock.": 97.85306272590907,
+          "Black rock.": 315.31049376075885,
+          "Yellowtail rock.": 119.32924743349619,
+          "Juv. thorny.": 34.09815106758213,
+          "Juv. round.": 17.06736291108798,
+          "Juv. flat.": 28.40868998248821,
+          "Juv. hake": 25.22984570460337,
+          "Juv. rock.": 31.84504356828148,
+          "Saury": 18.732106282555186,
+          "Other smelt": 35.03463446429687,
+          "Whitebait smelt": 39.89505989237522,
+          "Sand lance": 24.09214111330415,
+          "Pacific Mackerel": 108.86488574889464,
+          "Herring": 25.294055221803756,
+          "Anchovy": 17.289974840027952,
+          "Sardine": 33.04018013443658,
+          "Market squid": 48.93127162054272,
+          "Other cephal.": 23.06395793095861,
+          "surf perch": 31.866393143539582,
+          "Benthic fish": 52.637617818773876,
+          "mesopelagics": 26.767457834323682,
+          "tanner crb": 28.011710494310734,
+          "Dungeness": 75.12352641848858,
+          "benthic shp": 36.4516894972094,
+          "pandalid shp": 21.329008699790577,
+          "large jellies": 17.19634395956145,
+          "small jellies": 4.305973248470718,
+          "carniv-zoops": 21.52896262895866,
+          "euphausiids": 5.246959582811648,
+          "copepods": 5.4376879618065885,
+          "micro-zoop": 2.7971099522584733,
+          "epibenthic": 15.247544108087197,
+          "amphipods": 7.6910991084759,
+          "infauna": 6.38150369445421,
+          "phytoplankton": 1.0
+        },
+        "inner": {
+          "diet_import": null,
+          "Detritus": 1.661849920430793,
+          "Brown Pelican": 11610.965131616425,
+          "Caspian tern": 50777.627477988426,
+          "Pigeon Guillemot": 36693.506001467555,
+          "Murrelet": 39720.02039704661,
+          "Pelagic cormorant": 25725.03311806106,
+          "Double corm.": 16646.12313626299,
+          "Brandt's corm.": 11820.575374635158,
+          "Dolphins": 8303.615486070325,
+          "Gray whale": 1401.420056356447,
+          "Blue whale": 238.56176251919288,
+          "Fur seals": 12011.76696788039,
+          "Adult N. Ele. Seal": 977.4860088554722,
+          "Juv. Ele. Seal": 1795.3706006893744,
+          "Sea Lions": 8350.504972319073,
+          "Harbor seals": 10649.102902622191,
+          "Sperm whale": 26437.151963203367,
+          "Fin whale": 1298.7016448457355,
+          "Minke whale": 1844.9026304063577,
+          "Humpback whale": 1164.222553381514,
+          "Porpoises": 19242.644568775355,
+          "Resident Orcas": 33857.51224818959,
+          "Transient Orcas": 321528.58604891214,
+          "Leach's S. Petrel": 47697.46423306865,
+          "Shearwater": 31108.874754691955,
+          "Fulmar": 44847.61213181904,
+          "Albatross": 10285.511916292546,
+          "Kittiwake": 40315.61034788942,
+          "Western Gull": 25690.3254402246,
+          "Cali. gull": 21346.469847147964,
+          "Tufted Puffin": 53522.722911369456,
+          "Rhino. auklet": 34907.24899905424,
+          "Cassin's auklet": 4282.138227669254,
+          "Common murre": 54119.16738170126,
+          "Sharks": 8482.487111312505,
+          "Skates": 302.389639363231,
+          "Flatfish": 38.16848712277627,
+          "Longspine thorny.": 83.31700444466419,
+          "Shortspine thorny.": 17.1892935792753,
+          "Slope rock.": 247.54213251785038,
+          "Splitnose rock.": 175.70087132478173,
+          "Widow rock.": 156.80017151392894,
+          "P. Ocean Perch": 236.24801569308195,
+          "Canary rock.": 79.42556025139915,
+          "Dogfish": 883.0695399280722,
+          "Grenadiers": 67.49704269322051,
+          "Salmon": 48.920032446520835,
+          "Albacore": 92.95866714086988,
+          "Sablefish": 317.7878182520095,
+          "Arrowtooth": 198.40384155108083,
+          "Lingcod": 283.2299565817441,
+          "Hake": 42.90566630663048,
+          "Halibut": 122.33429950317272,
+          "Petrale sole": 164.48551828151795,
+          "Shortbelly": 21.09755053517665,
+          "Shelf rock.": 174.72755484485617,
+          "Greenstriped": 242.27549883280653,
+          "Yelloweye rock.": 1615.5776662474327,
+          "Nearshore rock.": 179.7621140039314,
+          "Black rock.": 325.2816455684035,
+          "Yellowtail rock.": 169.7168857375953,
+          "Juv. thorny.": 33.74045206202057,
+          "Juv. round.": 16.961882854603765,
+          "Juv. flat.": 28.768269606165738,
+          "Juv. hake": 23.576329441035398,
+          "Juv. rock.": 31.42086264586616,
+          "Saury": 15.639485337238085,
+          "Other smelt": 33.760594026763115,
+          "Whitebait smelt": 36.518135609740625,
+          "Sand lance": 22.872509682227772,
+          "Pacific Mackerel": 104.57355151402024,
+          "Herring": 24.515489272260304,
+          "Anchovy": 17.995659151528738,
+          "Sardine": 32.96666781882533,
+          "Market squid": 49.93771643733542,
+          "Other cephal.": 22.870480728232504,
+          "surf perch": 30.273653546462622,
+          "Benthic fish": 52.58452708924035,
+          "mesopelagics": 26.77848409854022,
+          "tanner crb": 28.0117104943201,
+          "Dungeness": 73.12632730939637,
+          "benthic shp": 36.46549735476573,
+          "pandalid shp": 21.330910803182714,
+          "large jellies": 17.39447972924804,
+          "small jellies": 4.305973248458793,
+          "carniv-zoops": 21.54481349053383,
+          "euphausiids": 5.246959582813492,
+          "copepods": 5.437687961806914,
+          "micro-zoop": 2.797109952258476,
+          "epibenthic": 15.247544108087196,
+          "amphipods": 7.691099108475903,
+          "infauna": 6.38150369445421,
+          "phytoplankton": 1.0
+        },
+        "PP": {
+          "diet_import": null,
+          "Detritus": 0.0,
+          "Brown Pelican": 9891.53828588216,
+          "Caspian tern": 30813.9867060856,
+          "Pigeon Guillemot": 11572.7945544481,
+          "Murrelet": 28922.0276388843,
+          "Pelagic cormorant": 6199.80135966433,
+          "Double corm.": 6371.59131037103,
+          "Brandt's corm.": 5537.42357128024,
+          "Dolphins": 6379.75675222792,
+          "Gray whale": 208.739834824522,
+          "Blue whale": 222.241066810073,
+          "Fur seals": 8015.58876532882,
+          "Adult N. Ele. Seal": 544.961611251535,
+          "Juv. Ele. Seal": 1090.16383121892,
+          "Sea Lions": 4973.41792529856,
+          "Harbor seals": 4802.81870020708,
+          "Sperm whale": 13606.5391243038,
+          "Fin whale": 1120.15593657664,
+          "Minke whale": 1490.54943818311,
+          "Humpback whale": 999.650782557655,
+          "Porpoises": 12828.1513792731,
+          "Resident Orcas": 17843.3838711761,
+          "Transient Orcas": 176220.600962321,
+          "Leach's S. Petrel": 37233.6343978378,
+          "Shearwater": 24548.6177172315,
+          "Fulmar": 34207.364259998,
+          "Albatross": 7615.74027115274,
+          "Kittiwake": 33625.6557215186,
+          "Western Gull": 18259.8228220519,
+          "Cali. gull": 17635.5566790348,
+          "Tufted Puffin": 31976.8155906235,
+          "Rhino. auklet": 23927.8035965818,
+          "Cassin's auklet": 3561.2109461927,
+          "Common murre": 32774.3757841696,
+          "Sharks": 5252.87483160162,
+          "Skates": 95.3363600209915,
+          "Flatfish": 2.04559956538046,
+          "Longspine thorny.": 17.4936688950242,
+          "Shortspine thorny.": -166.382096118829,
+          "Slope rock.": 177.505701723709,
+          "Splitnose rock.": 150.125070723184,
+          "Widow rock.": 118.821192752112,
+          "P. Ocean Perch": 184.576165676285,
+          "Canary rock.": 68.1618583554966,
+          "Dogfish": 427.150746426214,
+          "Grenadiers": 26.6789892709269,
+          "Salmon": 37.5190510902306,
+          "Albacore": 74.6032891317179,
+          "Sablefish": 100.021540898288,
+          "Arrowtooth": 128.370277385035,
+          "Lingcod": 86.3432621768644,
+          "Hake": 31.3461891141813,
+          "Halibut": 74.3187339188357,
+          "Petrale sole": 24.0890594942082,
+          "Shortbelly": 15.1741377434136,
+          "Shelf rock.": 107.758639437348,
+          "Greenstriped": 131.372083778387,
+          "Yelloweye rock.": 820.569564956763,
+          "Nearshore rock.": 4.47846829693728,
+          "Black rock.": 228.214203139112,
+          "Yellowtail rock.": 129.821111200486,
+          "Juv. thorny.": 28.7475846831589,
+          "Juv. round.": 14.1199985893774,
+          "Juv. flat.": 1.06205384762363,
+          "Juv. hake": 19.5762149473698,
+          "Juv. rock.": 16.7472278617545,
+          "Saury": 8.74305188092008,
+          "Other smelt": 15.8646495061796,
+          "Whitebait smelt": 19.5813010709321,
+          "Sand lance": 13.2039174340859,
+          "Pacific Mackerel": 74.1340198992703,
+          "Herring": 20.7991320558573,
+          "Anchovy": 15.8434901513797,
+          "Sardine": 29.2895786390742,
+          "Market squid": 41.4559590286131,
+          "Other cephal.": 17.384922583423,
+          "surf perch": 4.95027302607691,
+          "Benthic fish": 2.59946034812181,
+          "mesopelagics": 22.6832875726687,
+          "tanner crb": 0.0379757713583559,
+          "Dungeness": 7.81689461938971,
+          "benthic shp": 0.318842753436884,
+          "pandalid shp": 8.05596598909705,
+          "large jellies": 15.3602667203523,
+          "small jellies": 2.53333333333324,
+          "carniv-zoops": 18.2751451471527,
+          "euphausiids": 4.88800000000013,
+          "copepods": 4.64000000000011,
+          "micro-zoop": 1.8,
+          "epibenthic": 0.0804571428571578,
+          "amphipods": 1.0057142857143,
+          "infauna": -3.5056980076955e-14,
+          "phytoplankton": 1.0
+        }
+      },
+      "annual_status": {
+        "all": "FAIL: negative SPPR in a source-model group",
+        "inner": "FAIL: negative SPPR in a source-model group",
+        "PP": "FAIL: negative SPPR in a source-model group"
+      },
+      "diagnostics": null,
+      "mc_diagnostics": null,
+      "negative_entries": [
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 60,
+          "recipient_name": "Common murre",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -955.9068356564072,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 57,
+          "recipient_name": "Flatfish",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.849752490400092,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 55,
+          "recipient_name": "Shortspine thorny.",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -515.7285939651124,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 55,
+          "recipient_name": "Shortspine thorny.",
+          "source_id": 1,
+          "source_name": "phytoplankton",
+          "value": -166.382096118829,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 52,
+          "recipient_name": "Widow rock.",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.9202100142772013,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 49,
+          "recipient_name": "Dogfish",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -12.819896987501409,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 48,
+          "recipient_name": "Grenadiers",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -8.608034944895584,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 43,
+          "recipient_name": "Lingcod",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.10717890986696049,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 42,
+          "recipient_name": "Hake",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.4191367562272116,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 39,
+          "recipient_name": "Shortbelly",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -13.300030258727633,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 35,
+          "recipient_name": "Nearshore rock.",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -81.90905127802233,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 34,
+          "recipient_name": "Black rock.",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -9.971151807644704,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 33,
+          "recipient_name": "Yellowtail rock.",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -50.387638304099106,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 30,
+          "recipient_name": "Juv. flat.",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.3595796236775303,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 21,
+          "recipient_name": "Anchovy",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.7056843115007865,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 19,
+          "recipient_name": "Market squid",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -1.0064448167927005,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 15,
+          "recipient_name": "mesopelagics",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.011026264216535723,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 12,
+          "recipient_name": "benthic shp",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.01380785755632722,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 11,
+          "recipient_name": "pandalid shp",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.0019021033921371767,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 10,
+          "recipient_name": "large jellies",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.19813576968659025,
+          "tolerance": 1e-10
+        },
+        {
+          "method": "sym_WithEgestion_asDC",
+          "matrix": "SPPR",
+          "recipient_id": 8,
+          "recipient_name": "carniv-zoops",
+          "source_id": 94,
+          "source_name": "diet_import",
+          "value": -0.0158508615751709,
+          "tolerance": 1e-10
+        }
+      ],
+      "reconciliation": {
+        "scope_sums_verified": true,
+        "source_matrix_masks_verified": true,
+        "unique_axes": true,
+        "rtol": 1e-12,
+        "atol": 1e-12
+      },
+      "runtime_before_sha256": "ad51b718cb1547d9e29307a37f1a22acad75ec1c399e38c23d1a23d001eb7c7c",
+      "runtime_after_sha256": "ad51b718cb1547d9e29307a37f1a22acad75ec1c399e38c23d1a23d001eb7c7c",
+      "warnings": [],
+      "elapsed_seconds": 335.0779999999795,
+      "settings": {
+        "method": "sym_WithEgestion_asDC",
+        "target": "SPPR_symbolic",
+        "kwargs": {
+          "TE": null,
+          "TE_option": "With Egestion",
+          "diet_import_option": "as_DC",
+          "DET_TE_vals": 1,
+          "sppr_det_value": null,
+          "det_collapse_mode": "never",
+          "det_open_mode": "none",
+          "det_theta": 1.0,
+          "det_external_sppr": 0.0,
+          "fix_EE_0_cases": true
+        },
+        "source_resolved": true,
+        "description": "Symbolic solver, TE_option='With Egestion', diet_import_option='as_DC'.",
+        "seed": null,
+        "mc_policy_origin": null
+      },
+      "evidence": {
+        "path": "sym_WithEgestion_asDC.json.gz",
+        "sha256": "2f9c642a1d1c6d0ac1456173aab0d157c3ab8a775ddc1f90828a894c87339573",
+        "availability": "present"
+      },
+      "execution_identity": {
+        "adapter_sha256": "ca718c0911ac066ea7e5299f5dc0b7b38ccd718b6e22a43a2c06702aabcf3b58",
+        "constructor": {
+          "DC_tol": 0.001,
+          "default_gs": true,
+          "normalize_DC": false,
+          "underdetermined": false,
+          "weight_flow": 1.0,
+          "weight_guess": 1.0,
+          "zero_biomass_accum": false,
+          "zero_catch": false
+        },
+        "engine_hashes": {
+          "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+          "PPRCalculator.py": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+          "create_PPRS_excel.py": "5f94a4d885643e706a57a9e8faa1bf9fa5338e8626831d74dfe59f2d833158a1",
+          "symbolic_repair/PPRCalculator.py": "253d65e4e4aab299590657b607e302658ab2ed21cb14e9c19e8c4862d78dfe54",
+          "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+        },
+        "environment": {
+          "numpy": "2.3.4",
+          "pandas": "2.3.3",
+          "platform": "Windows-10-10.0.26200-SP0",
+          "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+        },
+        "flags": {
+          "audited_replay": {
+            "mode": "completed_runtime",
+            "model_sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+            "provenance": {
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/inventory/execution_identity.json",
+              "sha256": "a2f2c46023c21267b286adb9f2300dd69d38aaf77409dba04d28bb8e2e4c57ba"
+            },
+            "runtime": {
+              "keys": [],
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/outputs/effective_state.json.gz",
+              "sha256": "9da77e757abb1aa3620de70e790f3f58c50e0c2f9a662b59a19f338dfa3eedfc"
+            },
+            "schema_version": 1,
+            "symbolic_repair": {
+              "base_sha256": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+              "relative_path": "results/diagnostics/method_coverage/deterministic_completion_20261114/executed_repairs_v2/PPRCalculator.py",
+              "repair": "symbolic_repairs_v2",
+              "sha256": "253d65e4e4aab299590657b607e302658ab2ed21cb14e9c19e8c4862d78dfe54"
+            }
+          },
+          "configuration_evidence": [
+            {
+              "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/inventory/execution_identity.json",
+              "sha256": "a2f2c46023c21267b286adb9f2300dd69d38aaf77409dba04d28bb8e2e4c57ba"
+            },
+            {
+              "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/outputs/effective_state.json.gz",
+              "sha256": "9da77e757abb1aa3620de70e790f3f58c50e0c2f9a662b59a19f338dfa3eedfc"
+            },
+            {
+              "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/code/audited/ModelData.py",
+              "sha256": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e"
+            },
+            {
+              "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/code/audited/utils.py",
+              "sha256": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+            },
+            {
+              "original_source_hash": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925",
+              "relative_path": "results/diagnostics/ee_floor_review_20261114/code/floor/PPRCalculator.py",
+              "sha256": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e"
+            }
+          ],
+          "constructor": {
+            "DC_tol": 0.001,
+            "default_gs": true,
+            "normalize_DC": false,
+            "underdetermined": false,
+            "weight_flow": 1.0,
+            "weight_guess": 1.0,
+            "zero_biomass_accum": false,
+            "zero_catch": false
+          },
+          "diagnostics": {
+            "DET_TE_vals": 1,
+            "det_collapse_mode": "never",
+            "det_external_sppr": 0.0,
+            "det_open_mode": "none",
+            "det_theta": 1.0,
+            "fix_EE_0_cases": true,
+            "thresholds": {
+              "b_fail": 1.0,
+              "b_warn": 0.7,
+              "balance_fail": 0.05,
+              "balance_warn": 0.01,
+              "dc_row_tol": 1e-06,
+              "ee_marginal": 0.001,
+              "model_balance_fail": 0.1,
+              "model_balance_warn": 0.0001,
+              "rho_living_fail": 1.0,
+              "rho_living_warn": 0.7,
+              "sppr_det_warn": 10.0
+            }
+          },
+          "engine_source_hashes": {
+            "ModelData.py": "36b2da24ee467530b867b18abd12ae478964f9106bafc78f07eb1a6de616f54e",
+            "PPRCalculator.py": "2f23261f9073d08165b8f370b4f9907e2f5b0b7cfc905db6833e30e42146e44e",
+            "utils.py": "817f969850b250d06563cfff2e5d1be0fdf70bacb7a3c4ac317bf69c805ca07f"
+          },
+          "engine_sources": {
+            "ModelData.py": "results/diagnostics/ee_floor_review_20261114/code/audited/ModelData.py",
+            "PPRCalculator.py": "results/diagnostics/ee_floor_review_20261114/code/floor/PPRCalculator.py",
+            "utils.py": "results/diagnostics/ee_floor_review_20261114/code/audited/utils.py"
+          },
+          "mc": {},
+          "method_timeout_overrides_seconds": {
+            "sym_WithEgestion_asDC": 600
+          },
+          "method_timeout_seconds": 600,
+          "methods": {},
+          "runtime_initialization": {
+            "current_engine_equivalence": false,
+            "effective_state": "results/diagnostics/ee_floor_review_20261114/outputs/effective_state.json.gz",
+            "effective_state_sha256": "9da77e757abb1aa3620de70e790f3f58c50e0c2f9a662b59a19f338dfa3eedfc",
+            "execution_identity": "results/diagnostics/ee_floor_review_20261114/inventory/execution_identity.json",
+            "floor_configuration": {
+              "ee_floor": 0.1,
+              "ee_threshold": 0.1,
+              "use_ee_floor": true
+            },
+            "recipe": "Archived ModelData metadata-alias parsing, accepted author-equation input, default GS and single-detritus initialization, diet_import bookkeeping, then pinned EE floor applied to the completed audited runtime.",
+            "reexecution_supported": false
+          }
+        },
+        "model_id": "CAL-2016_California_Current_2000-2014",
+        "model_sha256": "18ed0ba93eb9c95ce305fc03fc36cc189b4cd365d9482fd8be30f398c2508925"
+      },
+      "constructor_evidence": {
+        "path": "constructor.json.gz",
+        "sha256": "68a13c72477a5caf10fca692e42672c76396b3b1cd7a7b19fb8c1428b9525450",
+        "availability": "present"
+      }
+    }
+  },
+  "groups": [
+    {
+      "id": 94,
+      "name": "diet_import",
+      "type": "Import",
+      "synthetic": true
+    },
+    {
+      "id": 93,
+      "name": "Detritus",
+      "type": "DET",
+      "synthetic": false
+    },
+    {
+      "id": 92,
+      "name": "Brown Pelican",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 91,
+      "name": "Caspian tern",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 90,
+      "name": "Pigeon Guillemot",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 89,
+      "name": "Murrelet",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 88,
+      "name": "Pelagic cormorant",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 87,
+      "name": "Double corm.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 86,
+      "name": "Brandt's corm.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 85,
+      "name": "Dolphins",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 84,
+      "name": "Gray whale",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 83,
+      "name": "Blue whale",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 82,
+      "name": "Fur seals",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 81,
+      "name": "Adult N. Ele. Seal",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 80,
+      "name": "Juv. Ele. Seal",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 79,
+      "name": "Sea Lions",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 78,
+      "name": "Harbor seals",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 77,
+      "name": "Sperm whale",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 76,
+      "name": "Fin whale",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 75,
+      "name": "Minke whale",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 74,
+      "name": "Humpback whale",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 73,
+      "name": "Porpoises",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 72,
+      "name": "Resident Orcas",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 71,
+      "name": "Transient Orcas",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 70,
+      "name": "Leach's S. Petrel",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 69,
+      "name": "Shearwater",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 68,
+      "name": "Fulmar",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 67,
+      "name": "Albatross",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 66,
+      "name": "Kittiwake",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 65,
+      "name": "Western Gull",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 64,
+      "name": "Cali. gull",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 63,
+      "name": "Tufted Puffin",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 62,
+      "name": "Rhino. auklet",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 61,
+      "name": "Cassin's auklet",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 60,
+      "name": "Common murre",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 59,
+      "name": "Sharks",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 58,
+      "name": "Skates",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 57,
+      "name": "Flatfish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 56,
+      "name": "Longspine thorny.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 55,
+      "name": "Shortspine thorny.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 54,
+      "name": "Slope rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 53,
+      "name": "Splitnose rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 52,
+      "name": "Widow rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 51,
+      "name": "P. Ocean Perch",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 50,
+      "name": "Canary rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 49,
+      "name": "Dogfish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 48,
+      "name": "Grenadiers",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 47,
+      "name": "Salmon",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 46,
+      "name": "Albacore",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 45,
+      "name": "Sablefish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 44,
+      "name": "Arrowtooth",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 43,
+      "name": "Lingcod",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 42,
+      "name": "Hake",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 41,
+      "name": "Halibut",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 40,
+      "name": "Petrale sole",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 39,
+      "name": "Shortbelly",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 38,
+      "name": "Shelf rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 37,
+      "name": "Greenstriped",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 36,
+      "name": "Yelloweye rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 35,
+      "name": "Nearshore rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 34,
+      "name": "Black rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 33,
+      "name": "Yellowtail rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 32,
+      "name": "Juv. thorny.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 31,
+      "name": "Juv. round.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 30,
+      "name": "Juv. flat.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 29,
+      "name": "Juv. hake",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 28,
+      "name": "Juv. rock.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 27,
+      "name": "Saury",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 26,
+      "name": "Other smelt",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 25,
+      "name": "Whitebait smelt",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 24,
+      "name": "Sand lance",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 23,
+      "name": "Pacific Mackerel",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 22,
+      "name": "Herring",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 21,
+      "name": "Anchovy",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 20,
+      "name": "Sardine",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 19,
+      "name": "Market squid",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 18,
+      "name": "Other cephal.",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 17,
+      "name": "surf perch",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 16,
+      "name": "Benthic fish",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 15,
+      "name": "mesopelagics",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 14,
+      "name": "tanner crb",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 13,
+      "name": "Dungeness",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 12,
+      "name": "benthic shp",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 11,
+      "name": "pandalid shp",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 10,
+      "name": "large jellies",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 9,
+      "name": "small jellies",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 8,
+      "name": "carniv-zoops",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 7,
+      "name": "euphausiids",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 6,
+      "name": "copepods",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 5,
+      "name": "micro-zoop",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 4,
+      "name": "epibenthic",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 3,
+      "name": "amphipods",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 2,
+      "name": "infauna",
+      "type": "Regular",
+      "synthetic": false
+    },
+    {
+      "id": 1,
+      "name": "phytoplankton",
+      "type": "PP",
+      "synthetic": false
+    }
+  ],
+  "diagnostic_rows": [],
+  "constructor_evidence": {
+    "path": "constructor.json.gz",
+    "sha256": "68a13c72477a5caf10fca692e42672c76396b3b1cd7a7b19fb8c1428b9525450",
+    "availability": "present"
+  },
+  "evidence_index": {
+    "path": "method_coverage.json.gz",
+    "sha256": "2e4840679700e0c460dc382d0c603c45a69afbdd1d3982cdf52a218affad1f14",
+    "availability": "present"
+  }
+}

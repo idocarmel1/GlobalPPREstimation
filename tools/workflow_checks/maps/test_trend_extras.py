@@ -7,6 +7,17 @@ from pathlib import Path
 
 class TrendExtrasTests(unittest.TestCase):
     @unittest.skipUnless(shutil.which('node'), 'Node required')
+    def test_default_view_and_explicit_preferences(self):
+        from tools.project_core.maps.build_html import linked_layout
+        root = Path(__file__).resolve().parents[3]
+        page = linked_layout((root / 'tools/project_core/maps/original_html_layout/trends.html').read_text('utf-8'))
+        result = subprocess.run(
+            [shutil.which('node'), str(Path(__file__).with_name('check_trend_defaults.js'))],
+            input=json.dumps(page), capture_output=True, text=True, encoding='utf-8',
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    @unittest.skipUnless(shutil.which('node'), 'Node required')
     def test_validated_ecosystem_preset_and_custom_subset(self):
         from tools.project_core.maps.build_html import linked_layout
         root = Path(__file__).resolve().parents[3]
